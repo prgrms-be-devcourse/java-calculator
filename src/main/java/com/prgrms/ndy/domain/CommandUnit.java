@@ -1,13 +1,12 @@
 package com.prgrms.ndy.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CommandUnit implements Command {
 
     private int size;
-    private List<Double> numbers = new ArrayList<>();
-    private List<Opcode> ops = new ArrayList<>();
+    private final List<Double> numbers = new ArrayList<>();
+    private final List<Opcode> ops = new ArrayList<>();
 
     public static Command of(String expression) {
         CommandUnit commandUnit = new CommandUnit();
@@ -34,16 +33,28 @@ public class CommandUnit implements Command {
         ops.add(opcode);
     }
 
-    public int getSize() {
-        return size;
-    }
-
     @Override
     public Double proc() {
-        Double result = numbers.get(0);
+        Double init = numbers.get(0);
+        Deque<Double> numberQueue = new LinkedList<>();
+        Deque<Opcode> opQueue = new LinkedList<>();
+        numberQueue.addLast(init);
 
         for (int i = 1; i < size; i++) {
-            result = ops.get(i-1).apply(result, numbers.get(i));
+            Opcode op = ops.get(i - 1);
+            Double operandB = numbers.get(i);
+            if (op == Opcode.MUL || op == Opcode.DIV) {
+                Double operandA = numberQueue.pollLast();
+                numberQueue.addLast(op.apply(operandA, operandB));
+            } else {
+                numberQueue.addLast(operandB);
+                opQueue.addLast(op);
+            }
+        }
+
+        Double result = numberQueue.pollFirst();
+        while (!opQueue.isEmpty()) {
+            result = opQueue.pollFirst().apply(result, numberQueue.pollFirst());
         }
 
         return result;
