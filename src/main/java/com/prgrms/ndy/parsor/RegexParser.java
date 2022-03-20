@@ -1,7 +1,7 @@
 package com.prgrms.ndy.parsor;
 
 import com.prgrms.ndy.domain.CommandUnit;
-import com.prgrms.ndy.domain.operation.Opcode;
+import com.prgrms.ndy.domain.Opcode;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;

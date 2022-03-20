@@ -1,7 +1,5 @@
 package com.prgrms.ndy.domain;
 
-import com.prgrms.ndy.domain.operation.Opcode;
-
 import java.util.ArrayList;
 import java.util.List;
 

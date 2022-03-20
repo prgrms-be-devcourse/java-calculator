@@ -1,5 +1,6 @@
 package com.prgrms.ndy.domain.operation;
 
+import com.prgrms.ndy.domain.Opcode;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
 

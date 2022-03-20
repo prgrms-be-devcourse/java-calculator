@@ -1,4 +1,4 @@
-package com.prgrms.ndy.domain.operation;
+package com.prgrms.ndy.domain;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -32,6 +32,6 @@ public enum Opcode {
     }
 
     public Double apply(Double a, Double b) {
-        return op.apply(a,b);
+        return op.apply(a, b);
     }
 }
