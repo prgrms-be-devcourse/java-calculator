@@ -21,28 +21,48 @@ public class Calculator {
     public void run() {
         try {
             do {
-                rw.write("계산식을 입력해주세요. (F를 입력하면 종료됩니다.) : \n");
+                rw.write("1. 조회\n2. 계산\n\n선택 : ");
                 String expr = rw.read();
                 if (expr.equals("F")) {
                     break;
                 }
-                Command command;
+                int type;
                 try {
-                    command = parser.parse(expr);
+                    type = getType(expr);
                 } catch (IllegalArgumentException e) {
-                    rw.write("옳바른 계산식을 입력해주세요.\n");
+                    rw.write("1 or 2 중에 입력해주세요.\n");
                     continue;
                 }
-                rw.write("입력 계산식 :\n");
-                rw.write(command + "\n");
 
-                Number result = command.proc();
-                rw.write("결과 : " + result + "\n\n");
-
-                repository.save(new Calculation(command, result));
+                if (type == 1) {
+                    rw.write("TODO - 구현중입니다.\n");
+                } else if (type == 2) {
+                    procCalculation();
+                }
             } while (true);
         } finally {
             rw.close();
         }
+    }
+
+    private boolean procCalculation() {
+        Command command;
+        try {
+            command = parser.parse(rw.read());
+        } catch (IllegalArgumentException e) {
+            rw.write("옳바른 계산식을 입력해주세요.\n");
+            return false;
+        }
+        Number result = command.proc();
+        rw.write(result + "\n\n");
+
+        repository.save(new Calculation(command, result));
+        return true;
+    }
+
+    private int getType(String requestType) {
+        int type = Integer.parseInt(requestType);
+        if (type < 1 || type > 2) throw new IllegalArgumentException();
+        return type;
     }
 }
