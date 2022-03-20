@@ -8,7 +8,7 @@ import java.util.List;
 public class CommandUnit implements Command {
 
     private int size;
-    private List<? super Number> numbers = new ArrayList<>();
+    private List<Double> numbers = new ArrayList<>();
     private List<Opcode> ops = new ArrayList<>();
 
     public static Command of(String expression) {
@@ -27,7 +27,7 @@ public class CommandUnit implements Command {
     }
 
 
-    public <T extends Number> void addNumber(T number) {
+    public void addNumber(Double number) {
         numbers.add(number);
         size += 1;
     }
@@ -41,8 +41,14 @@ public class CommandUnit implements Command {
     }
 
     @Override
-    public Number proc() {
-        return 0;
+    public Double proc() {
+        Double result = numbers.get(0);
+
+        for (int i = 1; i < size; i++) {
+            result = ops.get(i-1).apply(result, numbers.get(i));
+        }
+
+        return result;
     }
 
     @Override
@@ -59,11 +65,7 @@ public class CommandUnit implements Command {
         return sb.toString();
     }
 
-    public static Number getNumber(String in) {
-        if (in.contains(".")) {
-            return Double.valueOf(in);
-        } else {
-            return Long.valueOf(in);
-        }
+    public static Double getNumber(String in) {
+        return Double.valueOf(in);
     }
 }
