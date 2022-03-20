@@ -7,7 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class RegexParser implements Parser {
+/**
+ * 정규식 기반 파서
+ */
+public class RegexParser extends Parser {
 
     private static final String REGEX_VALIDATION = "^((-?\\d*\\.?\\d+)[\\+\\-\\*\\/])+(-?\\d*\\.?\\d+)$";
     private static final String REGEX_SPLIT = "([P\\+\\-\\*\\/])(-?\\d*\\.?\\d+)";
@@ -21,11 +24,10 @@ public class RegexParser implements Parser {
     }
 
     @Override
-    public CommandUnit parse(String in) {
-        checkIsValidExpression(in);
+    public CommandUnit parseLogic(String expression) {
 
         CommandUnit commandUnit = new CommandUnit();
-        Matcher matcher = splitter.matcher("P" + in);
+        Matcher matcher = splitter.matcher("P" + expression);
         matcher.results().forEach(
                 matchResult -> {
                     addOpcode(commandUnit, matchResult);
@@ -49,7 +51,8 @@ public class RegexParser implements Parser {
         }
     }
 
-    private void checkIsValidExpression(String in) {
+    @Override
+    protected void checkIsValidExpression(String in) {
         if (!validator.matcher(in).matches()) {
             throw new PatternSyntaxException("올바른 표현식이 아닙니다.", null, -1);
         }
