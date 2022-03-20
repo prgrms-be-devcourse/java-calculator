@@ -1,6 +1,7 @@
 package com.prgrms.ndy.parsor;
 
-import com.prgrms.ndy.operation.Opcode;
+import com.prgrms.ndy.domain.CommandUnit;
+import com.prgrms.ndy.domain.operation.Opcode;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -43,12 +44,8 @@ public class RegexParser extends Parser {
     }
 
     private void addNumber(CommandUnit commandUnit, MatchResult mr) {
-        String number = mr.group(2);
-        if (number.contains(".")) {
-            commandUnit.addNumber(Double.valueOf(number));
-        } else {
-            commandUnit.addNumber(Long.valueOf(number));
-        }
+        String numberStr = mr.group(2);
+        commandUnit.addNumber(CommandUnit.getNumber(numberStr));
     }
 
     @Override

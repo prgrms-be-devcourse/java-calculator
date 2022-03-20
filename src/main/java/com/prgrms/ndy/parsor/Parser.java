@@ -1,6 +1,8 @@
 package com.prgrms.ndy.parsor;
 
 
+import com.prgrms.ndy.domain.Command;
+
 public abstract class Parser {
 
     protected abstract void checkIsValidExpression(String in);
@@ -17,4 +19,6 @@ public abstract class Parser {
         checkIsValidExpression(expr);
         return parseLogic(expr);
     }
+
+
 }

@@ -1,17 +1,21 @@
 package com.prgrms.ndy;
 
+import com.prgrms.ndy.domain.Calculation;
+import com.prgrms.ndy.domain.Command;
 import com.prgrms.ndy.io.ReaderWriter;
-import com.prgrms.ndy.parsor.Command;
 import com.prgrms.ndy.parsor.Parser;
+import com.prgrms.ndy.repository.CalculationRepository;
 
 public class Calculator {
 
     private final Parser parser;
     private final ReaderWriter rw;
+    private final CalculationRepository repository;
 
-    public Calculator(Parser parser, ReaderWriter rw) {
+    public Calculator(Parser parser, ReaderWriter rw, CalculationRepository repository) {
         this.parser = parser;
         this.rw = rw;
+        this.repository = repository;
     }
 
     public void run() {
@@ -32,7 +36,10 @@ public class Calculator {
                 rw.write("입력 계산식 :\n");
                 rw.write(command + "\n");
 
-                rw.write("결과 : " + command.proc() + "\n\n");
+                Number result = command.proc();
+                rw.write("결과 : " + result + "\n\n");
+
+                repository.save(new Calculation(command, result));
             } while (true);
         } finally {
             rw.close();

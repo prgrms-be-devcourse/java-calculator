@@ -1,5 +1,6 @@
-package com.prgrms.ndy.parsor;
+package com.prgrms.ndy.domain;
 
 public interface Command {
+
     Number proc();
 }

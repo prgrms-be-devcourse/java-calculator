@@ -20,7 +20,7 @@ public class BufferedReaderWriter implements ReaderWriter {
         try {
             return br.readLine();
         } catch (IOException e) {
-            log.debug("[IOException] - BufferedReaderWriter.read ", e);
+            log.debug("[IOException] ", e);
         }
         return null;
     }
@@ -31,7 +31,7 @@ public class BufferedReaderWriter implements ReaderWriter {
             bw.write(s);
             bw.flush();
         } catch (IOException e) {
-            log.debug("[IOException] - BufferedReaderWriter.write(s = {}) ", s, e);
+            log.debug("[IOException] s : {} ", s, e);
         }
     }
 
@@ -41,7 +41,7 @@ public class BufferedReaderWriter implements ReaderWriter {
             br.close();
             bw.close();
         } catch (IOException e) {
-            log.debug("[IOException] - BufferedReaderWriter.close", e);
+            log.debug("[IOException] ", e);
         }
     }
 }
