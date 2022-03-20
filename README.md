@@ -9,8 +9,9 @@
 
 ## Branch 명명 규칙
 1.  여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
-2.  prgrms-be-devcourse/spring-board 레포로 PR시 branch는 본인 username을 적어주세요 :)  
-base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 'working_branch명'
+2.  prgrms-be-devcourse/spring-board 레포로 PR시 branch는 gituser_id을 적어주세요 :)  
+- base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 `github_id`
+- 이 규칙은 멘토+팀원들과 정하여 진행해주세요 :) 
 - 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
 
 ### 과제를 통해 기대하는 역량
