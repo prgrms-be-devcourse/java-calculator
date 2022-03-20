@@ -1,6 +1,18 @@
 # java_calculator
 자바 계산기 구현 미션 Repository입니다.
 
+## 이곳은 공개 Repo입니다.
+1. 여러분의 포트폴리오로 사용하셔도 됩니다.
+2. 때문에 이 repo를 fork한 뒤
+3. 여러분의 개인 Repo에 작업하며 
+4. 이 Repo에 PR을 보내어 멘토의 코드 리뷰와 피드백을 받으세요.
+
+## Branch 명명 규칙
+1.  여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
+2.  prgrms-be-devcourse/spring-board 레포로 PR시 branch는 본인 username을 적어주세요 :)  
+base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 'working_branch명'
+- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
+
 ### 과제를 통해 기대하는 역량
 
 - 깃허브를 통한 코드리뷰를 경험해보자
@@ -18,3 +30,36 @@
 - [ ]  테스트 코드 구현하기
 - [ ]  계산 이력을 맵으로 데이터 저장기능 만들기(인메모리 DB)
 - (선택) 정규식 사용
+
+### 실행결과(콘솔)
+```
+1. 조회
+2. 계산
+
+선택 : 2
+
+1 + 2
+3
+
+1. 조회
+2. 계산
+
+선택 : 2
+
+1 + 2 * 3
+7
+
+1. 조회
+2. 계산
+
+선택 : 1
+
+1 + 2 = 3
+1 + 2 * 3 = 7
+
+선택 : 2
+
+3 - 2 * 2
+-1
+```
+
