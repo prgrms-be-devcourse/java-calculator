@@ -37,4 +37,10 @@ public class Calculation {
                 .append("createdDate", createdDate)
                 .toString();
     }
+
+    public String display(){
+        return new StringBuilder()
+                .append(command).append('=').append(result)
+                .toString();
+    }
 }

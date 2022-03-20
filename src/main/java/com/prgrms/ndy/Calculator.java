@@ -6,6 +6,8 @@ import com.prgrms.ndy.io.ReaderWriter;
 import com.prgrms.ndy.parsor.Parser;
 import com.prgrms.ndy.repository.CalculationRepository;
 
+import java.util.List;
+
 public class Calculator {
 
     private final Parser parser;
@@ -19,6 +21,7 @@ public class Calculator {
     }
 
     public void run() {
+        repository.clear();
         try {
             do {
                 rw.write("1. 조회\n2. 계산\n\n선택 : ");
@@ -35,7 +38,8 @@ public class Calculator {
                 }
 
                 if (type == 1) {
-                    rw.write("TODO - 구현중입니다.\n");
+                    repository.findAll()
+                            .forEach(c -> rw.write(c.display()+"\n"));
                 } else if (type == 2) {
                     procCalculation();
                 }

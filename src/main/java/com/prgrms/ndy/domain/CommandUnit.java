@@ -23,7 +23,6 @@ public class CommandUnit implements Command {
         return commandUnit;
     }
 
-
     public void addNumber(Double number) {
         numbers.add(number);
         size += 1;

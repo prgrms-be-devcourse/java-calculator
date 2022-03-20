@@ -19,6 +19,4 @@ public abstract class Parser {
         checkIsValidExpression(expr);
         return parseLogic(expr);
     }
-
-
 }
