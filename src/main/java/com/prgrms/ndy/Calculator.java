@@ -6,8 +6,6 @@ import com.prgrms.ndy.io.ReaderWriter;
 import com.prgrms.ndy.parsor.Parser;
 import com.prgrms.ndy.repository.CalculationRepository;
 
-import java.util.List;
-
 public class Calculator {
 
     private final Parser parser;
