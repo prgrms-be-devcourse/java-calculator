@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 
 class ProgramTest {
 
+
   @Test
   void main() {
-    assert 1 == 2;
+    assert Program.calculate("1 + 2 * 4 + 2") == 11;
+    assert Program.calculate("2 * 4 + 4 / 2 + 1") == 11;
   }
 }
