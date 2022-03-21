@@ -19,7 +19,6 @@ public class Calculator {
     }
 
     public void run() {
-        repository.clear();
         try {
             do {
                 rw.write("1. 조회\n2. 계산\n\n선택 : ");
