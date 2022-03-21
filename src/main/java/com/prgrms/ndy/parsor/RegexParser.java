@@ -1,7 +1,7 @@
 package com.prgrms.ndy.parsor;
 
 import com.prgrms.ndy.domain.CommandUnit;
-import com.prgrms.ndy.domain.Opcode;
+import com.prgrms.ndy.domain.Op;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -31,16 +31,16 @@ public class RegexParser extends Parser {
         Matcher matcher = splitter.matcher("P" + expression);
         matcher.results().forEach(
                 matchResult -> {
-                    addOpcode(commandUnit, matchResult);
+                    addOp(commandUnit, matchResult);
                     addNumber(commandUnit, matchResult);
                 }
         );
         return commandUnit;
     }
 
-    private void addOpcode(CommandUnit commandUnit, MatchResult mr) {
-        Opcode.of(mr.group(1).charAt(0))
-                .ifPresent(commandUnit::addOpcode);
+    private void addOp(CommandUnit commandUnit, MatchResult mr) {
+        Op.of(mr.group(1).charAt(0))
+                .ifPresent(commandUnit::addOp);
     }
 
     private void addNumber(CommandUnit commandUnit, MatchResult mr) {

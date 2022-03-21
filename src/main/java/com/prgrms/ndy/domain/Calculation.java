@@ -9,12 +9,12 @@ public class Calculation {
 
     private final Command command;
     private final Number result;
-    private final LocalDateTime createdDate;
+    private final LocalDateTime createdAt;
 
     public Calculation(Command command, Number result) {
         this.command = command;
         this.result = result;
-        this.createdDate = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
     }
 
     public Command getCommand() {
@@ -25,8 +25,8 @@ public class Calculation {
         return result;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Calculation {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("command", command)
                 .append("result", result)
-                .append("createdDate", createdDate)
+                .append("createdAt", createdAt)
                 .toString();
     }
 

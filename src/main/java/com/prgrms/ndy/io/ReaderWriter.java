@@ -1,10 +1,12 @@
 package com.prgrms.ndy.io;
 
+import java.io.IOException;
+
 public interface ReaderWriter extends AutoCloseable {
 
-    String read();
+    String read() throws IOException;
 
-    void write(String s);
+    void write(String s) throws IOException;
 
-    void close();
+    void close() throws IOException;
 }

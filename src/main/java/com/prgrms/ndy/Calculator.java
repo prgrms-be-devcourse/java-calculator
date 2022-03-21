@@ -6,6 +6,8 @@ import com.prgrms.ndy.io.ReaderWriter;
 import com.prgrms.ndy.parsor.Parser;
 import com.prgrms.ndy.repository.CalculationRepository;
 
+import java.io.IOException;
+
 public class Calculator {
 
     private final Parser parser;
@@ -18,7 +20,7 @@ public class Calculator {
         this.repository = repository;
     }
 
-    public void run() {
+    public void run() throws IOException {
         try {
             do {
                 rw.write("1. 조회\n2. 계산\n\n선택 : ");
@@ -26,17 +28,10 @@ public class Calculator {
                 if (expr.equals("F")) {
                     break;
                 }
-                int type;
-                try {
-                    type = getType(expr);
-                } catch (IllegalArgumentException e) {
-                    rw.write("1 or 2 중에 입력해주세요.\n");
-                    continue;
-                }
 
+                int type = getType(expr);
                 if (type == 1) {
-                    repository.findAll()
-                            .forEach(c -> rw.write(c.display()+"\n"));
+                    displayCalculation();
                 } else if (type == 2) {
                     procCalculation();
                 }
@@ -46,19 +41,39 @@ public class Calculator {
         }
     }
 
-    private boolean procCalculation() {
+    private int getType(String expr) throws IOException {
+        int type;
+        try {
+            type = resolveType(expr);
+        } catch (IllegalArgumentException e) {
+            rw.write("1 or 2 중에 입력해주세요.\n");
+            return -1;
+        }
+        return type;
+    }
+
+    private int resolveType(String requestType) {
+        int type = Integer.parseInt(requestType);
+        if (type < 1 || type > 2) throw new IllegalArgumentException();
+        return type;
+    }
+
+    private void displayCalculation() throws IOException {
+        for (Calculation c : repository.findAll()) {
+            rw.write(c.display() + "\n");
+        }
+    }
+
+    private boolean procCalculation() throws IOException {
         Command command;
+        Number result;
         try {
             command = parser.parse(rw.read());
+            result = command.proc();
         } catch (IllegalArgumentException e) {
             rw.write("옳바른 계산식을 입력해주세요.\n");
             return false;
-        }
-
-        Number result;
-        try{
-            result = command.proc();
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             rw.write("0 으로 나눌 수 없습니다.\n");
             return false;
         }
@@ -66,11 +81,5 @@ public class Calculator {
 
         repository.save(new Calculation(command, result));
         return true;
-    }
-
-    private int getType(String requestType) {
-        int type = Integer.parseInt(requestType);
-        if (type < 1 || type > 2) throw new IllegalArgumentException();
-        return type;
     }
 }

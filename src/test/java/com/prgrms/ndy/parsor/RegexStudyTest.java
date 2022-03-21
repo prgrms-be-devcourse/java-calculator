@@ -1,5 +1,7 @@
 package com.prgrms.ndy.parsor;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -8,7 +10,9 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RegexTest {
+@Disabled
+@DisplayName("정규식 학습을 위한 테스트 입니다.")
+class RegexStudyTest {
 
     @ParameterizedTest
     @CsvSource(value = {

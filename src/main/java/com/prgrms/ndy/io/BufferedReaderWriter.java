@@ -16,33 +16,19 @@ public class BufferedReaderWriter implements ReaderWriter {
     }
 
     @Override
-    public String read() {
-        try {
-            return br.readLine();
-        } catch (IOException e) {
-            log.debug("[IOException] ", e);
-        }
-        //Not Reachable
-        return null;
+    public String read() throws IOException {
+        return br.readLine();
     }
 
     @Override
-    public void write(String s) {
-        try {
-            bw.write(s);
-            bw.flush();
-        } catch (IOException e) {
-            log.debug("[IOException] s : {} ", s, e);
-        }
+    public void write(String s) throws IOException {
+        bw.write(s);
+        bw.flush();
     }
 
     @Override
-    public void close() {
-        try {
-            br.close();
-            bw.close();
-        } catch (IOException e) {
-            log.debug("[IOException] ", e);
-        }
+    public void close() throws IOException {
+        br.close();
+        bw.close();
     }
 }
