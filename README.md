@@ -63,4 +63,10 @@
 3 - 2 * 2
 -1
 ```
+### commit convention
 
+- [AngularJS commit conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message)
+
+### java convention
+
+- [google convention](https://google.github.io/styleguide/javaguide.html)
