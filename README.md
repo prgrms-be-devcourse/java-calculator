@@ -1,24 +1,49 @@
 # java_calculator
 자바 계산기 구현 미션 Repository입니다.
 
-## 이곳은 공개 Repo입니다.
-1. 여러분의 포트폴리오로 사용하셔도 됩니다.
-2. 때문에 이 repo를 fork한 뒤
-3. 여러분의 개인 Repo에 작업하며 
-4. 이 Repo에 PR을 보내어 멘토의 코드 리뷰와 피드백을 받으세요.
+## 자바 계산기
+계산기 실행 방법
+main/java/com/programmers/MainClass.java 실행
 
-## Branch 명명 규칙
-1.  여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
-2.  prgrms-be-devcourse/spring-board 레포로 PR시 branch는 gituser_id을 적어주세요 :)  
-- base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 `github_id`
-- 이 규칙은 멘토+팀원들과 정하여 진행해주세요 :) 
-- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
+### Entity
+**CaseData.java**
+- "1 + 2 + 3" 같은 입력값과 결과값을 가지고 있다.
+- 엔티티 관련 로직들을 가지고 있다.
 
-### 과제를 통해 기대하는 역량
+### Repository
+**CaseRepository.java**
+- Repository 인터페이스로 Repository 변경 가능성에 대비하여 생성
 
-- 깃허브를 통한 코드리뷰를 경험해보자
-- 기본적인 테스트 코드 작성 및 활용하는 능력해보자
-- 스스로 OOP를 생각하고 코드로 옮길 수 있는 능력해보자
+**MemoryRepository.java**
+- 메모리 사용저장소 Repository 이다
+- 순서 보장이 되는 store 라는 이름의 LinkedHashMap 메모리 저장소
+- 레포지토리 관련 로직들을 가지고 있다.(데이터 저장 등)
+
+### Service
+**ValidationService.java**
+- MainClass.java 에서 오류 발생을 검증한다.
+- validationNumber function
+  - 초기 입력 숫자 1인지 2인지 validation
+- validationInput function
+  - case0 : 띄어쓰기 안된경우 체크
+  - case1 : 숫자가 입력되었는지 체크
+  - case2 : 사칙 연산 문자열이 들어왔는지 체크case3 : 마지막에 연산자로 끝나는 경우 오류 발생으로 종료시켜버린다.(인덱식한 문제 합이 짝수)(1+2+3+ -> 인경우 index==6)
+
+**CalculationService.java**
+- calculate function
+  - case1 = 숫자 1개만 입력한 경우
+  - case2 = 계산 값을 출력해 준다.
+    - +와-인 경우와 *와/인 케이스를 나눈 후 리스트를 값 , operation, 값 으로 잘라가면서 로직을 구현한다.
+  - 최종적으로 출력 양식을 이쁘게하기 위해 소수 둘째자리까지 반올림한다.
+
+
+## 코드를 짜면서 아쉬웠던 점
+- 계산 로직을 스택으로 짰으면 조금더 코드를 단순하고 짧으며 효율적으로 쓸수 있다고 생각한다.
+- 팩토리 패턴을 구현해보고자 했지만 public static void main(String[] args) 을 사용하면서 에러가 발생해 구현하지 않았다.
+
+
+
+
 
 ### 요구사항
 
