@@ -165,3 +165,7 @@ gradle-app.setting
 
 # Ignore Gradle build output directory
 build
+
+gradlew
+gradle
+gradlew.bat
