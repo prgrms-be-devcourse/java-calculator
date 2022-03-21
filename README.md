@@ -1,7 +1,26 @@
 # java_calculator
 자바 계산기 구현 미션 Repository입니다.
 
+<<<<<<< main
 ### 이곳은 공개 Repo입니다.
+=======
+## 프로젝트 구동전
+
+```
+gradlew
+gradle
+gradlew.bat
+```
+위의 파일을 생성하기 위해
+
+```bash
+gradle wrapper
+```
+
+를 실행해주세요
+
+## 이곳은 공개 Repo입니다.
+>>>>>>> chore: 불필요한 파일 제거
 1. 여러분의 포트폴리오로 사용하셔도 됩니다.
 2. 때문에 이 repo를 fork한 뒤
 3. 여러분의 개인 Repo에 작업하며 
