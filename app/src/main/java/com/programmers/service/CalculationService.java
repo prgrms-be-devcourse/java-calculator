@@ -14,7 +14,7 @@ public class CalculationService {
         if (inputArr.length == 1) {
             return Double.valueOf(inputArr[0]);
         } else {
-            // case 2 = 계산 값을 출력해 준다.
+            // case2 = 계산 값을 출력해 준다.
             int index = 0;
             while (index < inputArr.length-1) {
                 String one = inputArr[index];
