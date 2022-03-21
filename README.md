@@ -1,18 +1,4 @@
-# java_calculator
-자바 계산기 구현 미션 Repository입니다.
-
-## 이곳은 공개 Repo입니다.
-1. 여러분의 포트폴리오로 사용하셔도 됩니다.
-2. 때문에 이 repo를 fork한 뒤
-3. 여러분의 개인 Repo에 작업하며 
-4. 이 Repo에 PR을 보내어 멘토의 코드 리뷰와 피드백을 받으세요.
-
-## Branch 명명 규칙
-1.  여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
-2.  prgrms-be-devcourse/spring-board 레포로 PR시 branch는 gituser_id을 적어주세요 :)  
-- base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 `github_id`
-- 이 규칙은 멘토+팀원들과 정하여 진행해주세요 :) 
-- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
+# 자바 계산기
 
 ### 과제를 통해 기대하는 역량
 
