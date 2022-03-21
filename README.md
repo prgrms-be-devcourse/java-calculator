@@ -41,13 +41,13 @@ main/java/com/programmers/MainClass.java 실행
 test/java/com.programmers/repository<br>
 test/java/com.programmers/service<br>
 
+구현들을 테스트 가능한 구조로 코드작성하였습니다.
 
 ## 코드를 짜면서 아쉬웠던 점
 - 계산 로직을 스택으로 짰으면 조금더 코드를 단순하고 짧으며 효율적으로 쓸수 있다고 생각한다.
 
 
 
-구현들을 테스트 가능한 구조로 코드작성하였습니다.
 
 ### 요구사항
 
