@@ -5,8 +5,6 @@ import com.prgrms.ndy.parsor.RegexParser;
 import com.prgrms.ndy.repository.H2CalculationRepository;
 import org.h2.jdbcx.JdbcDataSource;
 
-import java.sql.SQLException;
-
 public class Application {
 
     public static void main(String[] args) {

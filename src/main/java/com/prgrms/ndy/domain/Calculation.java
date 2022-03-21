@@ -40,7 +40,7 @@ public class Calculation {
 
     public String display(){
         return new StringBuilder()
-                .append(command).append('=').append(result)
+                .append(command).append(" = ").append(result)
                 .toString();
     }
 }
