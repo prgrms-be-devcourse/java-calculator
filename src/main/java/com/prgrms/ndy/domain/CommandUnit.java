@@ -55,7 +55,9 @@ public class CommandUnit implements Command {
         while (!opQueue.isEmpty()) {
             result = opQueue.pollFirst().apply(result, numberQueue.pollFirst());
         }
-
+        if(result.isInfinite()){
+            throw new ArithmeticException("/ by zero");
+        }
         return result;
     }
 

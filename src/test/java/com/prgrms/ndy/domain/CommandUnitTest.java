@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CommandUnitTest {
 
@@ -55,5 +55,13 @@ class CommandUnitTest {
         Double actualResult = commandUnit.proc();
 
         assertThat(actualResult).isCloseTo(expectedResult,OFFSET);
+    }
+
+    @Test
+    void 영으로_나누면_예외를_던진다(){
+        CommandUnit commandUnit = new RegexParser().parseLogic("1/0");
+        assertThatThrownBy(() -> commandUnit.proc())
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessageContaining("/ by zero");
     }
 }

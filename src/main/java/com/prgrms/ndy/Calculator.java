@@ -57,7 +57,14 @@ public class Calculator {
             rw.write("옳바른 계산식을 입력해주세요.\n");
             return false;
         }
-        Number result = command.proc();
+
+        Number result;
+        try{
+            result = command.proc();
+        }catch (ArithmeticException e){
+            rw.write("0 으로 나눌 수 없습니다.\n");
+            return false;
+        }
         rw.write(result + "\n\n");
 
         repository.save(new Calculation(command, result));
