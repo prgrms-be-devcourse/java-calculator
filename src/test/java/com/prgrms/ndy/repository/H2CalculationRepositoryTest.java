@@ -57,8 +57,8 @@ class H2CalculationRepositoryTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-        "1 + 2 + 3 + 4, 10",
-        "-1 - -2 * -3 + 4.8, -2.2",
+        "1.0 + 2.0 + 3.0 + 4.0, 10",
+        "-1.0 - -2.0 * -3.0 + 4.8, -2.2",
     })
     void 하나_저장하고_FindAll(String expr, double result) {
         Command command = parser.parse(expr);
@@ -76,7 +76,7 @@ class H2CalculationRepositoryTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1 + 2 + 3 + 4, 10, -1 - -2 * -3 + 4.8, -2.2",
+            "1.0 + 2.0 + 3.0 + 4.0, 10, -1.0 - -2.0 * -3.0 + 4.8, -2.2",
     })
     void 두개_저장하고_FindAll(String expr1, double result1, String expr2, double result2) {
         Command command1 = parser.parse(expr1);
