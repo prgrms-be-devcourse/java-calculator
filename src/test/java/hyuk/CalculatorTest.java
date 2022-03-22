@@ -54,4 +54,15 @@ public class CalculatorTest {
             .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
 
+    @DisplayName("곱셈 기능 테스트")
+    @Test
+    void multiply() {
+        //given
+        //when
+        int actual = calculator.multiply(5, 5);
+
+        //then
+        assertThat(actual).isEqualTo(25);
+    }
+
 }

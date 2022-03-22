@@ -16,4 +16,8 @@ public class Calculator {
         }
         return firstOperand / secondOperand;
     }
+
+    public int multiply(int firstOperand, int secondOperand) {
+        return firstOperand * secondOperand;
+    }
 }
