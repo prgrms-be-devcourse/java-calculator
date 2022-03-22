@@ -12,19 +12,19 @@ public class CalculateImpl implements Calculate {
 
     @Override
     public Double cal(String[] input) {
-        List<String> operationFirst = new ArrayList<>(Arrays.asList("*", "/"));
-        List<String> operationSecond = new ArrayList<>(Arrays.asList("+", "-"));
+        List<String> operatorMulAndDiv = new ArrayList<>(Arrays.asList("*", "/"));
+        List<String> operatorPlusAndMinus = new ArrayList<>(Arrays.asList("+", "-"));
         List<Double> nums = new ArrayList<>();
         int temp = 1;
 
         for (int i = 0; i < input.length; i++) {
-            if (operationSecond.contains(input[i])) {
+            if (operatorPlusAndMinus.contains(input[i])) {
                 if (input[i] == "-") {
                     temp = -1;
                 } else {
                     temp = 1;
                 }
-            } else if (operationFirst.contains(input[i])) {
+            } else if (operatorMulAndDiv.contains(input[i])) {
                 int lastIndex = nums.size() - 1;
                 Double mulDivResult;
                 if (input[i] == "*") {

@@ -12,34 +12,59 @@ class ValidationTest {
     @Test
     public void validate() throws Exception {
 
-        String[] input1 = {"24", "+", "12", "/", "5", "-", "3", "*", "2"};
-        String[] input2 = {"24", "+", "12", "/", "+", "5", "-", "3", "*", "2"};
-        String[] input3 = {"24", "+", "12", "/", "-", "5", "-", "3", "*", "2"};
-        String[] input4 = {"24", "+", "12", "/", "*", "5", "-", "3", "*", "2"};
-        boolean result1 = validation.validate(input1);
-        boolean result2 = validation.validate(input2);
-        boolean result3 = validation.validate(input3);
-        boolean result4 = validation.validate(input4);
+        String input1 = "24+12/5-3*2";
+        String input2 = "24+12/-5-3*2";
+        String input3 = "24+12/+5-3*2";
+        String input4 = "24+12//5-3*2";
+        String input5 = "24+12/*5-3*2";
+
+        boolean result1 = validation.validateContOp(input1);
+        boolean result2 = validation.validateContOp(input2);
+        boolean result3 = validation.validateContOp(input3);
+        boolean result4 = validation.validateContOp(input4);
+        boolean result5 = validation.validateContOp(input5);
 
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
         assertThat(result3).isFalse();
         assertThat(result4).isFalse();
+        assertThat(result5).isFalse();
+    }
+    @Test
+    public void validateFirstOp() throws Exception {
+        String input1 = "24+12/5-3*2";
+        String input2 = "+24+12/5-3*2";
+        String input3 = "-24+12/5-3*2";
+        String input4 = "*24+12/5-3*2";
+        String input5 = "/24+12/5-3*2";
+
+        boolean result1 = validation.validateFirstOp(input1);
+        boolean result2 = validation.validateFirstOp(input2);
+        boolean result3 = validation.validateFirstOp(input3);
+        boolean result4 = validation.validateFirstOp(input4);
+        boolean result5 = validation.validateFirstOp(input5);
+
+        assertThat(result1).isTrue();
+        assertThat(result2).isTrue();
+        assertThat(result3).isTrue();
+        assertThat(result4).isFalse();
+        assertThat(result5).isFalse();
+
     }
 
     @Test
-    public void validateFirstAndLastOp() throws Exception {
-        String[] input1 = {"24", "+", "12", "/", "5", "-", "3", "*", "2"};
-        String[] input2 = {"24", "+", "12", "/", "5", "-", "3", "*", "2","-"};
-        String[] input3 = {"24", "+", "12", "/", "5", "-", "3", "*", "2","+"};
-        String[] input4 = {"24", "+", "12", "/", "5", "-", "3", "*", "2","*"};
-        String[] input5 = {"24", "+", "12", "/", "5", "-", "3", "*", "2","/"};
+    public void validateLastOp() throws Exception {
+        String input1 = "24+12/5-3*2";
+        String input2 = "24+12/5-3*2-";
+        String input3 = "24+12/5-3*2+";
+        String input4 = "24+12/5-3*2*";
+        String input5 = "24+12/5-3*2/";
 
-        boolean result1 = validation.validateFirstAndLastOp(input1);
-        boolean result2 = validation.validateFirstAndLastOp(input2);
-        boolean result3 = validation.validateFirstAndLastOp(input3);
-        boolean result4 = validation.validateFirstAndLastOp(input4);
-        boolean result5 = validation.validateFirstAndLastOp(input5);
+        boolean result1 = validation.validateLastOp(input1);
+        boolean result2 = validation.validateLastOp(input2);
+        boolean result3 = validation.validateLastOp(input3);
+        boolean result4 = validation.validateLastOp(input4);
+        boolean result5 = validation.validateLastOp(input5);
 
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
