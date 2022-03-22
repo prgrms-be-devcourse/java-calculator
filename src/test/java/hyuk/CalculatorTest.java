@@ -1,6 +1,7 @@
 package hyuk;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,28 @@ public class CalculatorTest {
 
         //then
         assertThat(actual).isEqualTo(-1);
+    }
 
+    @DisplayName("나눗셈 기능 테스트 - 정상 케이스")
+    @Test
+    void divide() {
+        //given
+        //when
+        int actual = calculator.divide(6, 2);
+
+        //then
+        assertThat(actual).isEqualTo(3);
+    }
+
+    @DisplayName("나눗셈 기능 테스트 - x / 0")
+    @Test
+    void divideError() {
+        //given
+        //when
+        //then
+        assertThatThrownBy(() -> calculator.divide(1, 0))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
 
 }
