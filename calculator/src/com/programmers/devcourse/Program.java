@@ -1,13 +1,18 @@
 package com.programmers.devcourse;
 
+import com.programmers.devcourse.calculator.exception.CalculatorException;
+import com.programmers.devcourse.parser.Parser;
+import com.programmers.devcourse.parser.RegexParser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class Program {
+
+  public static Parser parser = new RegexParser();
 
   public static void main(String[] args) throws IOException {
 
@@ -18,13 +23,18 @@ public class Program {
       System.out.println("1. 조회");
       System.out.println("2. 계산\n");
       System.out.print("선택 : ");
-      int mode = Integer.parseInt(br.readLine());
-      System.out.println();
-
-      if (mode > 2) {
+      int mode;
+      try {
+        mode = Integer.parseInt(br.readLine());
+        if (mode > 2) {
+          throw new NumberFormatException("Wrong Number");
+        }
+      } catch (NumberFormatException e) {
         System.out.println("프로그램 종료");
         break;
       }
+      System.out.println();
+
       if (mode == 1) {
         if (resultList.isEmpty()) {
           System.out.println("없음");
@@ -35,7 +45,14 @@ public class Program {
 
       } else if (mode == 2) {
         String expression = br.readLine();
-        int result = calculate(expression);
+        double result;
+        try {
+          result = calculate(expression);
+
+        } catch (CalculatorException e) {
+          System.out.println(e.getMessage());
+          continue;
+        }
         resultList.add(
             expression + " = " + result);
         System.out.println(result);
@@ -46,16 +63,19 @@ public class Program {
     br.close();
   }
 
-  public static int calculate(String expression) {
-    StringTokenizer st = new StringTokenizer(expression);
-    LinkedList<Integer> numList = new LinkedList<>();
+  public static Double calculate(String expression) throws CalculatorException {
+    List<String> tokens;
+    tokens = parser.parse(expression);
+
+    Iterator<String> tokenIterator = tokens.iterator();
+    LinkedList<Double> numList = new LinkedList<>();
     LinkedList<Character> operatorList = new LinkedList<>();
     int i = 0;
 
-    while (st.hasMoreTokens()) {
-      String token = st.nextToken();
+    while (tokenIterator.hasNext()) {
+      String token = tokenIterator.next();
       if (i % 2 == 0) {
-        numList.add(Integer.parseInt(token));
+        numList.add(Double.parseDouble(token));
         i++;
         continue;
       }
@@ -75,7 +95,7 @@ public class Program {
 
       }
     }
-
+    StringBuffer sb = new StringBuffer();
     // 덧셈 뺄셈 연산을 해서 숫자 리스트의 크기를 1로 줄이고 그 값을 반환한다.
     operatorPointer = 0;
     while (operatorPointer < operatorList.size()) {
@@ -89,17 +109,17 @@ public class Program {
     return numList.getFirst();
   }
 
-  private static void traverseAndCalculate(LinkedList<Integer> numList,
+  private static void traverseAndCalculate(LinkedList<Double> numList,
       LinkedList<Character> operatorList, int operatorPointer, char operator) {
-    int first = numList.get(operatorPointer);
-    int second = numList.get(operatorPointer + 1);
-    int result = calculateTwoNumbers(operator, first, second);
+    double first = numList.get(operatorPointer);
+    double second = numList.get(operatorPointer + 1);
+    double result = calculateTwoNumbers(operator, first, second);
     numList.set(operatorPointer, result);
     numList.remove(operatorPointer + 1);
     operatorList.remove(operatorPointer);
   }
 
-  private static int calculateTwoNumbers(char operator, int first, int second) {
+  private static double calculateTwoNumbers(char operator, double first, double second) {
     switch (operator) {
       case '+':
         return first + second;
