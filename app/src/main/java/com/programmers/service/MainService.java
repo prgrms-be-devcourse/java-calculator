@@ -9,7 +9,11 @@ import java.util.Scanner;
 public class MainService {
     private ValidationService validationCase = new ValidationService();
     private CalculationService calculationService = new CalculationService();
-    private CaseRepository caseRepository = new MemoryRepository();
+    private CaseRepository caseRepository;
+
+    public MainService(CaseRepository caseRepository) {
+        this.caseRepository = caseRepository;
+    }
 
     public void playCalculate(){
         Scanner sc = new Scanner(System.in);
