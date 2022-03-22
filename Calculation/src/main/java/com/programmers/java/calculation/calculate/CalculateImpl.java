@@ -30,6 +30,9 @@ public class CalculateImpl implements Calculate {
                 if (input[i] == "*") {
                     mulDivResult = nums.get(lastIndex) * Double.valueOf(input[i + 1]);
                 } else {
+                    if (Integer.valueOf(input[i + 1]) == 0) {
+                        return null;
+                    }
                     mulDivResult = nums.get(lastIndex) / Double.valueOf(input[i + 1]);
                 }
                 nums.set(lastIndex, mulDivResult);
