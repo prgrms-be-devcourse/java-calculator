@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryCalculatorRepository implements CalculatorRepository{
+public class MemoryExpressionRepository implements ExpressionRepository {
     private static Map<Long, String> store = new HashMap<>();
     private static long sequence = 0L;
 
