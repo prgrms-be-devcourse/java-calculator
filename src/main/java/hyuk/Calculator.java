@@ -20,4 +20,5 @@ public class Calculator {
     public int multiply(int firstOperand, int secondOperand) {
         return firstOperand * secondOperand;
     }
+
 }
