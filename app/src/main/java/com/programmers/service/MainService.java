@@ -1,19 +1,17 @@
-package com.programmers;
+package com.programmers.service;
 
 import com.programmers.entity.CaseData;
 import com.programmers.repository.CaseRepository;
 import com.programmers.repository.MemoryRepository;
-import com.programmers.service.CalculationService;
-import com.programmers.service.ValidationService;
+
 import java.util.Scanner;
 
-public class MainClass {
+public class MainService {
+    private ValidationService validationCase = new ValidationService();
+    private CalculationService calculationService = new CalculationService();
+    private CaseRepository caseRepository = new MemoryRepository();
 
-    public static void main(String[] args) {
-        ValidationService validationCase = new ValidationService();
-        CalculationService calculationService = new CalculationService();
-        CaseRepository caseRepository = new MemoryRepository();
-
+    public void playCalculate(){
         Scanner sc = new Scanner(System.in);
         boolean isWorking = true;
         Long id = 0L;
