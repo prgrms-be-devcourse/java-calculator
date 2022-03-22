@@ -11,34 +11,34 @@ import java.util.*;
 public class CalculateImpl implements Calculate {
 
     @Override
-    public Double cal(String[] input) {
+    public Double cal(List<String> input) {
         List<String> operatorMulAndDiv = new ArrayList<>(Arrays.asList("*", "/"));
         List<String> operatorPlusAndMinus = new ArrayList<>(Arrays.asList("+", "-"));
         List<Double> nums = new ArrayList<>();
         int temp = 1;
 
-        for (int i = 0; i < input.length; i++) {
-            if (operatorPlusAndMinus.contains(input[i])) {
-                if (input[i] == "-") {
+        for (int i = 0; i < input.size(); i++) {
+            if (operatorPlusAndMinus.contains(input.get(i))) {
+                if (input.get(i) == "-") {
                     temp = -1;
                 } else {
                     temp = 1;
                 }
-            } else if (operatorMulAndDiv.contains(input[i])) {
+            } else if (operatorMulAndDiv.contains(input.get(i))) {
                 int lastIndex = nums.size() - 1;
                 Double mulDivResult;
-                if (input[i] == "*") {
-                    mulDivResult = nums.get(lastIndex) * Double.valueOf(input[i + 1]);
+                if (input.get(i) == "*") {
+                    mulDivResult = nums.get(lastIndex) * Double.valueOf(input.get(i+1));
                 } else {
-                    if (Integer.valueOf(input[i + 1]) == 0) {
+                    if (Integer.valueOf(input.get(i+1)) == 0) {
                         return null;
                     }
-                    mulDivResult = nums.get(lastIndex) / Double.valueOf(input[i + 1]);
+                    mulDivResult = nums.get(lastIndex) / Double.valueOf(input.get(i+1));
                 }
                 nums.set(lastIndex, mulDivResult);
                 i++;
             } else {
-                Double result = temp * Double.valueOf(input[i]);
+                Double result = temp * Double.valueOf(input.get(i));
                 nums.add(result);
             }
         }
