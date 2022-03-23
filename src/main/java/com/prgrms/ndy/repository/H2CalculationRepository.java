@@ -11,18 +11,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 public class H2CalculationRepository implements CalculationRepository {
 
     private final DataSource dataSource;
-
     public H2CalculationRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
-    public void save(Calculation calculation) {
+    public Optional<Long> save(Calculation calculation) {
         log.info("save : {}", calculation);
 
         try (Connection conn = dataSource.getConnection()) {
@@ -32,10 +32,21 @@ public class H2CalculationRepository implements CalculationRepository {
             statement.setString(2, calculation.getResult().toString());
 
             statement.executeUpdate();
+
+            long id = resolveGeneratedId(statement);
+            calculation.setId(id);
+
+            return Optional.of(id);
         } catch (SQLException e) {
             log.info("save error :", e);
         }
 
+        return Optional.empty();
+    }
+
+    private long resolveGeneratedId(PreparedStatement statement) throws SQLException {
+        return statement.getGeneratedKeys()
+                .getLong("seq");
     }
 
     @Override

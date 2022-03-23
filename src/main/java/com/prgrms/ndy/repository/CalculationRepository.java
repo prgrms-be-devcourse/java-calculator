@@ -3,10 +3,11 @@ package com.prgrms.ndy.repository;
 import com.prgrms.ndy.domain.Calculation;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CalculationRepository {
 
-    void save(Calculation calculation);
+    Optional<Long> save(Calculation calculation);
 
     List<Calculation> findAll();
 
