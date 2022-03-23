@@ -2,6 +2,7 @@ package entity;
 
 import lombok.Getter;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
@@ -24,5 +25,18 @@ public class Expression {
         sb.append(this.input).append(" = ").append(this.result);
 
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        return this.hashCode() == o.hashCode();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, input, result);
     }
 }
