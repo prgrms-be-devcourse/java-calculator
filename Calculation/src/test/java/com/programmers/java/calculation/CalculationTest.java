@@ -71,6 +71,10 @@ class CalculationTest {
         Double result10 = calculation.calculationAndValidate(input10);
         assertThat(result10).isEqualTo(-1);
 
+        String input11 = "a+-2+1";
+        Double result11 = calculation.calculationAndValidate(input11);
+        assertThat(result11).isNull();
+
 
 
 

@@ -3,10 +3,13 @@ package com.programmers.java.calculation;
 import com.programmers.java.calculation.calculate.CalculateBasicImpl;
 import com.programmers.java.calculation.io.Input;
 import com.programmers.java.calculation.io.Output;
+import com.programmers.java.calculation.parse.Parsing;
 import com.programmers.java.calculation.parse.ParsingImpl;
 import com.programmers.java.calculation.parse.ValidationImpl;
 import com.programmers.java.calculation.repository.Repository;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class CalculationService implements Runnable {
@@ -14,6 +17,7 @@ public class CalculationService implements Runnable {
     private final Input input;
     private final Output output;
     private final Repository repository;
+    private final Parsing parsing;
     private final Calculation calTotal = new Calculation(new ParsingImpl(), new ValidationImpl(),new CalculateBasicImpl());
 
     @Override
@@ -33,7 +37,8 @@ public class CalculationService implements Runnable {
                 if (result == null) {
                     output.wrongInput();
                 } else {
-                    removeDot(inputForCal, result);
+                    StringBuilder saveInput = getSaveInput(inputForCal);
+                    removeDot(result, saveInput);
                 }
             } else {
                 output.wrongInput();
@@ -43,14 +48,25 @@ public class CalculationService implements Runnable {
 
     }
 
-    private void removeDot(String inputForCal, Double result) {
+    private void removeDot(Double result, StringBuilder saveInput) {
         int i = result.intValue();
         if (i == result) {
             output.correct(i);
-            repository.save(inputForCal + " = " + i);
+            repository.save(saveInput + "= " + i);
         } else {
             output.correct(result);
-            repository.save(inputForCal + " = " + result);
+            repository.save(saveInput + "= " + result);
         }
     }
+
+    private StringBuilder getSaveInput(String inputForCal) {
+        List<String> list = parsing.makeArray(parsing.removeSpase(inputForCal));
+        StringBuilder saveInput = new StringBuilder();
+        for (String s : list) {
+            saveInput.append(s + " ");
+        }
+        return saveInput;
+    }
+
+
 }
