@@ -11,9 +11,7 @@ public class ParsingImpl implements Parsing{
     @Override
     public String removeSpase(String input) {
 
-        String resultInput = input.replaceAll(" ", "");
-
-        return resultInput;
+        return input.replaceAll(" ", "");
     }
 
     @Override

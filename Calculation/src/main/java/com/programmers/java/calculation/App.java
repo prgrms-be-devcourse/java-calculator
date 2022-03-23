@@ -8,7 +8,8 @@ import com.programmers.java.calculation.repository.RepositoryImpl;
 public class App {
     public static void main(String[] args) {
         Console console = new Console();
-        CalculationService calculationService = new CalculationService(console, console, new RepositoryImpl(),new ParsingImpl());
+        CalculationService calculationService = new CalculationService(console, console,
+                new RepositoryImpl(), new ParsingImpl());
 
         calculationService.run();
 
