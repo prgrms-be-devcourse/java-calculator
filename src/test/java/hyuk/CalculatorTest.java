@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
+import hyuk.entity.Operands;
+import hyuk.entity.Operators;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -79,7 +81,7 @@ public class CalculatorTest {
         //when
         //then
         assertTimeoutPreemptively(Duration.ofMillis(2000),
-            () -> assertThat(calculator.calculate(operands, operators)).isEqualTo(11));
+            () -> assertThat(calculator.calculate(operands, operators).getResult()).isEqualTo(11));
     }
 
 }

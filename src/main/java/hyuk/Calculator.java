@@ -1,5 +1,8 @@
 package hyuk;
 
+import hyuk.entity.Operands;
+import hyuk.entity.Operators;
+import hyuk.entity.Result;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -24,7 +27,7 @@ public class Calculator {
         return firstOperand * secondOperand;
     }
 
-    public int calculate(Operands operands, Operators operators) {
+    public Result calculate(Operands operands, Operators operators) {
         Deque<Integer> operandsStack = new ArrayDeque<>();
         Deque<Character> operatorsStack = new ArrayDeque<>();
 
@@ -86,6 +89,6 @@ public class Calculator {
             operandsStack.addLast(result);
         }
 
-        return operandsStack.getLast();
+        return new Result(operandsStack.getLast());
     }
 }
