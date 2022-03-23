@@ -55,8 +55,9 @@ public class CalculationService implements Runnable {
             output.correct(i);
             repository.save(saveInput + "= " + i);
         } else {
-            output.correct(result);
-            repository.save(saveInput + "= " + result);
+            String format = String.format("%.2f", result);
+            output.correct(format);
+            repository.save(saveInput + "= " + format);
         }
     }
 
