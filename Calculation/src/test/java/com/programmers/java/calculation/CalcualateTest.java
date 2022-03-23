@@ -4,7 +4,7 @@ import com.programmers.java.calculation.calculate.Calculate;
 import com.programmers.java.calculation.calculate.CalculateBasicImpl;
 import com.programmers.java.calculation.parse.Parsing;
 import com.programmers.java.calculation.parse.ValidationImpl;
-import com.programmers.java.calculation.parse.ValidationOp;
+import com.programmers.java.calculation.parse.Validation;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class CalcualateTest {
     }
 
     Parsing parsing = new Parsing();
-    ValidationOp validation = new ValidationImpl();
+    Validation validation = new ValidationImpl();
     Calculate calculate = new CalculateBasicImpl();
 
 

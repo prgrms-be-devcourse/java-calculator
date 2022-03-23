@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ValidationTest {
 
-    ValidationOp validation = new ValidationImpl();
+    Validation validation = new ValidationImpl();
 
     @Test
     public void validate() throws Exception {
@@ -77,7 +77,7 @@ class ValidationTest {
     @Test
     public void validateString() throws Exception {
 
-        ValidationOp validation = new ValidationImpl();
+        Validation validation = new ValidationImpl();
         String input1 = "1+2+4+5+1";
         String input2 = "1a+2+4+5+1";
         boolean result1 = validation.validateString(input1);

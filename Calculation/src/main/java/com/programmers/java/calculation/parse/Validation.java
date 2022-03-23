@@ -1,6 +1,6 @@
 package com.programmers.java.calculation.parse;
 
-public interface ValidationOp {
+public interface Validation {
 
     boolean validateContOp(String input);
 

@@ -14,7 +14,7 @@ public class CalculationService implements Runnable {
     private final Input input;
     private final Output output;
     private final Repository repository;
-    CalTotal calTotal = new CalTotal(new Parsing(), new ValidationImpl(),new CalculateBasicImpl());
+    Calculation calTotal = new Calculation(new Parsing(), new ValidationImpl(),new CalculateBasicImpl());
 
     @Override
     public void run() {

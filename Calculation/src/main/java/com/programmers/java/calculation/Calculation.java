@@ -2,16 +2,16 @@ package com.programmers.java.calculation;
 
 import com.programmers.java.calculation.calculate.Calculate;
 import com.programmers.java.calculation.parse.Parsing;
-import com.programmers.java.calculation.parse.ValidationOp;
+import com.programmers.java.calculation.parse.Validation;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public class CalTotal {
+public class Calculation {
 
     private final Parsing parsing;
-    private final ValidationOp validation;
+    private final Validation validation;
     private final Calculate calculate;
 
     public Double calcalateTotal(String input) {
