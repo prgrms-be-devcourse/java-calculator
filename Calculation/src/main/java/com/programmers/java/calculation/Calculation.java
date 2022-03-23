@@ -24,8 +24,7 @@ public class Calculation {
 
         if (validateTotal(validateString, validateContOp, validateFirstOp, validateLastOp)) {
             List<String> resultList = parsing.makeArray(result1);
-            Double cal = calculate.cal(resultList);
-            return cal;
+            return calculate.cal(resultList);
         } else {
             return null;
         }
