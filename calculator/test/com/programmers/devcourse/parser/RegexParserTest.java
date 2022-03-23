@@ -1,8 +1,8 @@
 package com.programmers.devcourse.parser;
 
-import com.programmers.devcourse.parser.exception.ParserException;
-import com.programmers.devcourse.parser.exception.WrongTokenCountException;
-import com.programmers.devcourse.parser.exception.WrongTokenPositionException;
+import com.programmers.devcourse.exception.parser.ParserException;
+import com.programmers.devcourse.exception.parser.WrongTokenCountException;
+import com.programmers.devcourse.exception.parser.WrongTokenPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class RegexParserTest {
   }
 
   @Test
-  void testParserWhenTargetStringHasNoSpace() throws ParserException {
+  void testParserShouldReturnProperTokenArrayWhenTargetStringHasNoSpace() throws ParserException {
     Parser parser = new RegexParser();
     // test 공백 없이 붙여 넣었을 때
     parsedTokenArray = parser.parse("1+2*3+4.54234").toArray();
@@ -40,7 +40,7 @@ class RegexParserTest {
   }
 
   @Test
-  void testParserWhenInputStringHasSpace() throws ParserException {
+  void testParserShouldReturnProperTokenArrayWhenInputStringHasSpace() throws ParserException {
 
     // 공백이 존재할 때
     parsedTokenArray = parser.parse("5.3 + 4 /6").toArray();
@@ -59,7 +59,7 @@ class RegexParserTest {
   }
 
   @Test()
-  void testParserWhenInputStringHasWrongTokenCount() {
+  void testParserThrowsExceptionWhenInputStringHasWrongTokenCount() {
     Assertions.assertThrows(WrongTokenCountException.class, () -> {
       parser.parse("1+2*");
     });
@@ -67,7 +67,7 @@ class RegexParserTest {
 
 
   @Test()
-  void testParserWhenInputStringHasWrongOrder() {
+  void testParserThrowExceptionWhenInputStringHasWrongOrder() {
     Assertions.assertThrows(WrongTokenPositionException.class, () -> {
       parser.parse("+4+5");
     });

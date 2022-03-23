@@ -1,4 +1,4 @@
-package com.programmers.devcourse.parser.exception;
+package com.programmers.devcourse.exception.parser;
 
 public class WrongTokenPositionException extends
     ParserException {

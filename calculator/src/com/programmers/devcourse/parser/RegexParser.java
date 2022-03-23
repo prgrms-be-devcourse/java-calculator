@@ -1,8 +1,8 @@
 package com.programmers.devcourse.parser;
 
-import com.programmers.devcourse.parser.exception.ParserException;
-import com.programmers.devcourse.parser.exception.WrongTokenCountException;
-import com.programmers.devcourse.parser.exception.WrongTokenPositionException;
+import com.programmers.devcourse.exception.parser.ParserException;
+import com.programmers.devcourse.exception.parser.WrongTokenCountException;
+import com.programmers.devcourse.exception.parser.WrongTokenPositionException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
