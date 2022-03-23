@@ -7,4 +7,7 @@ public interface ValidationOp {
     boolean validateFirstOp(String input);
 
     boolean validateLastOp(String input);
+
+    boolean validateString(String input);
+
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ValidationImpl implements ValidationOp, ValidationString {
+public class ValidationImpl implements ValidationOp {
 
     List<String> operator = new ArrayList<>(Arrays.asList("+", "-", "*", "/"));
     List<String> operatorMulAndDiv = new ArrayList<>(Arrays.asList("*", "/"));

@@ -77,11 +77,11 @@ class ValidationTest {
     @Test
     public void validateString() throws Exception {
 
-        ValidationString validation2 = new ValidationImpl();
+        ValidationOp validation = new ValidationImpl();
         String input1 = "1+2+4+5+1";
         String input2 = "1a+2+4+5+1";
-        boolean result1 = validation2.validateString(input1);
-        boolean result2 = validation2.validateString(input2);
+        boolean result1 = validation.validateString(input1);
+        boolean result2 = validation.validateString(input2);
 
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
