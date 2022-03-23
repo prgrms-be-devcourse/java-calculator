@@ -29,12 +29,11 @@ public class CalculationService implements Runnable {
                 System.out.println("계산 선택");
                 String inputForCal = input.input("식을 입력해주세요.");
 
-                Double result = calTotal.calcalateTotal(inputForCal);
+                Double result = calTotal.calculationTotal(inputForCal);
                 if (result == null) {
                     output.wrongInput();
                 } else {
-                    output.correct(result);
-                    repository.save(inputForCal + " = " + result);
+                    removeDot(inputForCal, result);
                 }
             } else {
                 output.wrongInput();
@@ -42,5 +41,16 @@ public class CalculationService implements Runnable {
 
         }
 
+    }
+
+    private void removeDot(String inputForCal, Double result) {
+        int i = result.intValue();
+        if (i == result) {
+            output.correct(i);
+            repository.save(inputForCal + " = " + i);
+        } else {
+            output.correct(result);
+            repository.save(inputForCal + " = " + result);
+        }
     }
 }
