@@ -14,13 +14,6 @@
     </properties>
 
     <dependencies>
-        <!-- H2 데이터베이스 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
-        </dependency>
-
         <!-- JUnit 5  -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

@@ -8,13 +8,9 @@ public class Application {
 
     public static void main(String[] args) throws Exception {
 
-//        AppInitializer appInitializer = new AppInitializer();
-//        appInitializer.init();
-
         new Calculator(
                 new RegexParser(),
                 new BufferedReaderWriter(),
-//                new H2CalculationRepository(appInitializer.getDataSource())
                 new HashMapCalculationRepository()
         )
                 .run();

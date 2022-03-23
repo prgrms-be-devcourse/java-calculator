@@ -24,12 +24,12 @@ public class Calculator {
         try {
             do {
                 rw.write("1. 조회\n2. 계산\n\n선택 : ");
-                String expr = rw.read();
-                if (expr.equals("F")) {
+                String choice = rw.read();
+                if (choice.equals("F")) {
                     break;
                 }
 
-                int type = getType(expr);
+                int type = getType(choice);
                 if (type == 1) {
                     displayCalculation();
                 } else if (type == 2) {
@@ -41,10 +41,10 @@ public class Calculator {
         }
     }
 
-    private int getType(String expr) throws IOException {
+    private int getType(String choice) throws IOException {
         int type;
         try {
-            type = resolveType(expr);
+            type = resolveType(choice);
         } catch (IllegalArgumentException e) {
             rw.write("1 or 2 중에 입력해주세요.\n");
             return -1;
