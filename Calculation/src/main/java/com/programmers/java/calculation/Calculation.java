@@ -14,7 +14,7 @@ public class Calculation {
     private final Validation validation;
     private final Calculate calculate;
 
-    public Double calcalateTotal(String input) {
+    public Double calculationTotal(String input) {
         String result1 = parsing.removeSpase(input);
         boolean validateString = validation.validateString(result1);
         boolean validateContOp = validation.validateContOp(result1);

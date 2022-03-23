@@ -8,17 +8,8 @@ import com.programmers.java.calculation.parse.Validation;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class CalcualateTest {
-
-
-    private final Scanner scanner = new Scanner(System.in);
-
-    public String input(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine();
-    }
 
     Parsing parsing = new Parsing();
     Validation validation = new ValidationImpl();
