@@ -1,6 +1,5 @@
 package com.programmers.java.calculation.calculate;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,19 +7,21 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CalculateImplTest {
 
 
-    CalculateImpl calculate = new CalculateImpl();
+    CalculateBasicImpl calculate = new CalculateBasicImpl();
 
     @Test
     public void 계산기() throws Exception {
 
         List<String> input = new ArrayList<>(Arrays.asList("24", "+", "12", "/", "5", "-", "3", "*", "2"));
+        List<String> input2 = new ArrayList<>(Arrays.asList("24", "-", "12"));
 
         Double result = calculate.cal(input);
+        Double result2 = calculate.cal(input2);
+        System.out.println("result2 = " + result2);
 
         assertThat(result).isEqualTo(20.4);
 
