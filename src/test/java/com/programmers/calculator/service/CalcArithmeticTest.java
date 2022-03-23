@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CalcExpressionTest {
-    CalcExpression ex = new CalcExpression();
+public class CalcArithmeticTest {
+    CalcArithmeticService ex = new CalcArithmeticService();
 
     @Test
     @DisplayName("더하기 연산의 경우")
