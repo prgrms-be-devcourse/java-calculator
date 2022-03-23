@@ -30,12 +30,11 @@ class RegexParserTest {
 
     // 실패해야 할 테스트(연산자 차이)
     compareTarget = new String[]{"1", "-", "2", "*", "3", "+", "4.54234"};
-    try {
+
+    Assertions.assertThrows(AssertionFailedError.class, () -> {
       Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
 
-    } catch (AssertionFailedError e) {
-      System.out.println(e.getMessage());
-    }
+    });
 
 
   }
@@ -70,7 +69,7 @@ class RegexParserTest {
   @Test()
   void testParserWhenInputStringHasWrongOrder() {
     Assertions.assertThrows(WrongTokenPositionException.class, () -> {
-      parser.parse("1++4");
+      parser.parse("+4+5");
     });
   }
 
