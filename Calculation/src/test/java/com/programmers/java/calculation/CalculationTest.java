@@ -2,6 +2,7 @@ package com.programmers.java.calculation;
 
 import com.programmers.java.calculation.calculate.CalculateBasicImpl;
 import com.programmers.java.calculation.parse.ParsingImpl;
+import com.programmers.java.calculation.parse.ValidationAddDecimalImpl;
 import com.programmers.java.calculation.parse.ValidationImpl;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculationTest {
 
-    private Calculation calculation = new Calculation(new ParsingImpl(), new ValidationImpl(), new CalculateBasicImpl());
+    private Calculation calculation = new Calculation(new ParsingImpl(), new ValidationAddDecimalImpl(), new CalculateBasicImpl());
 
     @Test
     public void calculation() throws Exception {
@@ -35,7 +36,7 @@ class CalculationTest {
         assertThat(result4).isEqualTo(2);
 
         String input5;
-        List<String> operator = new ArrayList<>(Arrays.asList("+", "-", "*", "/"));
+        List<String> operator = new ArrayList<>(Arrays.asList("+", "-", "*", "/", "."));
         for (String s1 : operator) {
             for (String s2 : operator) {
                 input5 = "2" + s1 + s2 + "1";
@@ -56,7 +57,7 @@ class CalculationTest {
         assertThat(result7).isNull();
 
         String input8;
-        List<String> operatorMulAndDiv = new ArrayList<>(Arrays.asList("*", "/"));
+        List<String> operatorMulAndDiv = new ArrayList<>(Arrays.asList("*", "/", "."));
         for (String s1 : operatorMulAndDiv) {
             input8 = s1 + "2 + 1";
             Double result8 = calculation.calculationAndValidate(input8);
@@ -74,6 +75,10 @@ class CalculationTest {
         String input11 = "a+-2+1";
         Double result11 = calculation.calculationAndValidate(input11);
         assertThat(result11).isNull();
+
+        String input12 = "2.1+1.1";
+        Double result12 = calculation.calculationAndValidate(input12);
+        assertThat(result12).isEqualTo(3.2);
 
 
 
