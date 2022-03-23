@@ -3,7 +3,7 @@ package com.programmers.java.calculation;
 import com.programmers.java.calculation.calculate.CalculateBasicImpl;
 import com.programmers.java.calculation.io.Input;
 import com.programmers.java.calculation.io.Output;
-import com.programmers.java.calculation.parse.Parsing;
+import com.programmers.java.calculation.parse.ParsingImpl;
 import com.programmers.java.calculation.parse.ValidationImpl;
 import com.programmers.java.calculation.repository.Repository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class CalculationService implements Runnable {
     private final Input input;
     private final Output output;
     private final Repository repository;
-    Calculation calTotal = new Calculation(new Parsing(), new ValidationImpl(),new CalculateBasicImpl());
+    Calculation calTotal = new Calculation(new ParsingImpl(), new ValidationImpl(),new CalculateBasicImpl());
 
     @Override
     public void run() {
@@ -29,7 +29,7 @@ public class CalculationService implements Runnable {
                 System.out.println("계산 선택");
                 String inputForCal = input.input("식을 입력해주세요.");
 
-                Double result = calTotal.calculationTotal(inputForCal);
+                Double result = calTotal.calculationAndValidate(inputForCal);
                 if (result == null) {
                     output.wrongInput();
                 } else {

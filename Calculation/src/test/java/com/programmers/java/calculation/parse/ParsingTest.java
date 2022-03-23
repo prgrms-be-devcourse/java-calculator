@@ -4,11 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ParsingTest {
 
-    Parsing parsing = new Parsing();
+    ParsingImpl parsing = new ParsingImpl();
 
     @Test
     public void makeArray() throws Exception {

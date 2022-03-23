@@ -2,6 +2,7 @@ package com.programmers.java.calculation;
 
 import com.programmers.java.calculation.calculate.Calculate;
 import com.programmers.java.calculation.parse.Parsing;
+import com.programmers.java.calculation.parse.ParsingImpl;
 import com.programmers.java.calculation.parse.Validation;
 import lombok.RequiredArgsConstructor;
 
@@ -14,7 +15,7 @@ public class Calculation {
     private final Validation validation;
     private final Calculate calculate;
 
-    public Double calculationTotal(String input) {
+    public Double calculationAndValidate(String input) {
         String result1 = parsing.removeSpase(input);
         boolean validateString = validation.validateString(result1);
         boolean validateContOp = validation.validateContOp(result1);
@@ -26,7 +27,6 @@ public class Calculation {
             Double cal = calculate.cal(resultList);
             return cal;
         } else {
-
             return null;
         }
     }
