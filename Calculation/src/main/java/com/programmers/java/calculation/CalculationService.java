@@ -33,6 +33,10 @@ public class CalculationService implements Runnable {
             } else if (inputString.equals("2")) {
                 System.out.println("계산 선택");
                 String inputForCal = input.input("식을 입력해주세요.");
+                if (inputForCal.replaceAll(" ", "").equals("")) {
+                    output.wrongInput();
+                    continue;
+                }
 
                 Double result = calTotal.calculationAndValidate(inputForCal);
                 if (result == null) {
