@@ -26,7 +26,7 @@ public class CalculateBasicImpl implements Calculate {
                 if (Objects.equals(input.get(i), "*")) {
                     mulDivResult = nums.get(lastIndex) * Double.parseDouble(input.get(i+1));
                 } else {
-                    if (Integer.parseInt(input.get(i+1)) == 0) {
+                    if (Double.parseDouble(input.get(i+1)) == 0) {
                         return null;
                     }
                     mulDivResult = nums.get(lastIndex) / Double.parseDouble(input.get(i+1));
