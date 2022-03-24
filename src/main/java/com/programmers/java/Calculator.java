@@ -1,5 +1,4 @@
 package com.programmers.java;
-
 import java.util.StringTokenizer;
 
 public class Calculator {
@@ -21,7 +20,11 @@ public class Calculator {
             }
             else {
                 for (int j = 0; j < str.length(); j++) {
-                    if (!isDigit(str.charAt(j)))
+                    if (str.charAt(0) == '-') {
+                        if (str.length() <= 1)
+                            return false;
+                    }
+                    else if (!isDigit(str.charAt(j)))
                         return false;
                 }
             }
@@ -29,3 +32,4 @@ public class Calculator {
         return true;
     }
 }
+

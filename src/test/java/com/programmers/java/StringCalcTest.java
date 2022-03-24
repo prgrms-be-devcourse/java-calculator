@@ -9,10 +9,12 @@ import java.util.StringTokenizer;
 public class StringCalcTest {
 
     Calculator c = new Calculator();
-    StringTokenizer s = new StringTokenizer("1 2 2 - 3");
+    String str = "-12 - -3 * -2";
+    StringTokenizer s = new StringTokenizer(str);
 
     @Test
     public void 입력식_유효성테스트() {
-        Assertions.assertFalse(c.invalidCheck(s));
+        Assertions.assertTrue(c.invalidCheck(s));
     }
+
 }
