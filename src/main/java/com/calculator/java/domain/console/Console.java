@@ -5,7 +5,6 @@ import com.calculator.java.domain.comand.Command;
 import com.calculator.java.domain.comand.Selection;
 import com.calculator.java.domain.console.exception.TerminationException;
 import com.calculator.java.domain.console.exception.WrongInputException;
-import com.calculator.java.domain.console.util.Validation;
 import com.calculator.java.domain.database.Database;
 
 import java.io.*;
@@ -14,31 +13,38 @@ import java.util.*;
 import static com.calculator.java.domain.comand.CommandTypes.*;
 
 public class Console {
-    private final String WRONG_INPUT_MESSAGE = "잘 못된 입력입니다.";
+    private final String WRONG_INPUT_MESSAGE = "잘 못된 입력입니다.\n";
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    private Validation validation;
-    private Database database;
+    private final Validation validation;
+    private final Database database;
 
     public Console(Validation validation, Database database) {
         this.validation = validation;
         this.database = database;
     }
 
-    public boolean selectCommand() {
+    public void run() {
+        while(true) {
+            if(!selectCommand()) break;
+        }
+    }
+
+    private boolean selectCommand() {
         try {
             showCommandType();
             String selectedCommand = input();
-            Command command = getCommand(selectedCommand).orElseThrow(()->new TerminationException());
+            Command command = getCommand(selectedCommand).orElseThrow(TerminationException::new);
 
             if(command instanceof Calculation) {
-                String mathExpression = input();
+                String mathExpression = input(); // input을 format 해주는 기능이 필요할거 같다
 
                 if(validation.validate(mathExpression)) ((Calculation) command).setMathExpression(mathExpression);
                 else throw new WrongInputException(WRONG_INPUT_MESSAGE);
             }
 
             String result = command.doCommand();
+            System.out.println(result+"\n");
 
         }catch (WrongInputException wrongInputException) {
           System.out.println(wrongInputException.getMessage());
@@ -71,7 +77,7 @@ public class Console {
 
     private Optional<Command> getCommand(String selectedCommand) throws WrongInputException {
         if (selectedCommand.equals(SELECTION.getCommandId())) {
-            return Optional.of(new Selection());
+            return Optional.of(new Selection(database));
         } else if (selectedCommand.equals(CALCULATION.getCommandId())) {
             return Optional.of(new Calculation(database));
         } else if (selectedCommand.equals(TERMINATION.getCommandId())) {

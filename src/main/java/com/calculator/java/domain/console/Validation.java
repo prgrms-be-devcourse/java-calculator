@@ -1,4 +1,4 @@
-package com.calculator.java.domain.console.util;
+package com.calculator.java.domain.console;
 
 import java.util.Arrays;
 import java.util.List;

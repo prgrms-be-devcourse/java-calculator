@@ -5,7 +5,7 @@ import com.calculator.java.domain.database.Database;
 import java.util.List;
 
 public class Selection implements Command {
-    private Database database;
+    private final Database database;
 
     public Selection(Database database) {
         this.database = database;
@@ -14,8 +14,6 @@ public class Selection implements Command {
     @Override
     public String doCommand() {
         List<String> records = database.get();
-        String result = String.join("\n", records);
-
-        return result;
+        return String.join("\n", records);
     }
 }
