@@ -63,6 +63,7 @@ class RegexParserTest {
   void testParserThrowsExceptionWhenInputStringHasWrongTokenCount() {
     Assertions.assertThrows(WrongTokenCountException.class, () -> {
       parser.parse("1+2*");
+      parser.parse("           ");
     });
   }
 
@@ -77,7 +78,13 @@ class RegexParserTest {
   @Test()
   void testParserThrowNotAcceptableStringExceptionWhenInputStringHasWrongCharacter() {
     Assertions.assertThrows(NotAcceptableStringException.class, () -> {
-      parser.parse("         ");
+      parser.parse("        a ");
+    });
+    Assertions.assertThrows(NotAcceptableStringException.class, () -> {
+      parser.parse("  asdfkjzxv ");
+    });
+    Assertions.assertThrows(NotAcceptableStringException.class, () -> {
+      parser.parse("abvracvsdf");
     });
   }
 
