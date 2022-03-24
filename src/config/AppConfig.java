@@ -18,14 +18,15 @@ public class AppConfig {
     }
 
     public CommandFilter commandFilter() {
-        return new CommandFilterImpl(validationCheck());
+        return new CommandFilterImpl();
     }
 
     public CalculationServiceImpl calculationService() {
         return new CalculationServiceImpl(
                 commandFilter(),
                 calculation(),
-                calculationRepository()
+                calculationRepository(),
+                validationCheck()
         );
     }
 }
