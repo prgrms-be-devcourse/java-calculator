@@ -30,6 +30,11 @@ public enum Opcode {
         return expression.apply(op1, op2);
     }
 
+    /**
+     * opName이 +-* /()중 하나인지 체크
+     * @param opName
+     * @return
+     */
     public static boolean isOperator(String opName) {
         return Stream.of(values())
                 .anyMatch(opcode -> opcode.name.equals(opName));

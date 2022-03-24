@@ -22,12 +22,16 @@ public class PostfixCalculator implements Calculator {
         this.converter = converter;
     }
 
+    /**
+     * 3 입력시 종료
+     * 1, 2, 3 이외 입력시 다시 입력받습니다.
+     */
     public void run() {
 
         int command;
         while (true) {
             try {
-                System.out.print("1. 조회\n2. 계산\n\n선택: ");
+                System.out.print("1. 조회\n2. 계산\n3. 종료\n\n선택: ");
                 command = Integer.parseInt(br.readLine());
                 System.out.println();
 
@@ -59,11 +63,20 @@ public class PostfixCalculator implements Calculator {
         }
     }
 
+    /**
+     * repository에서 이력을 출력합니다.
+     */
     @Override
     public void printHistory() {
         System.out.println(repository.getAll());
     }
 
+    /**
+     * result 값에 따라서 출력형식을 변환하여 repository에 저장합니다.
+     * @param expression
+     * @return result값을 적절하게 변경하여 String 으로 반환합니다.
+     */
+    @Override
     public String operate(String expression) {
         List<String> converted = converter.convert(expression);
         double result = calculate(converted);
@@ -83,7 +96,12 @@ public class PostfixCalculator implements Calculator {
         return String.valueOf(bigDecimal);
     }
 
-
+    /**
+     * 계산 끝에 stack이 완전히 비워지지 않거나, 계산도중 stack이 비면 예외를 던집니다.
+     * @param expression
+     * @return Postfix expression을 계산한 값을 double로 반환합니다.
+     * @throws CalculatorException
+     */
     public double calculate(List<String> expression) throws CalculatorException {
 
         Stack<Double> stack = new Stack<>();
