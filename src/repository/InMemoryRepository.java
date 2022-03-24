@@ -6,14 +6,8 @@ import java.util.List;
 
 public class InMemoryRepository implements CalcRepository {
     private static final List<String> memory = new ArrayList<>();
-    private static InMemoryRepository instance;
 
-    public static InMemoryRepository getInstance() {
-        if (instance == null) instance = new InMemoryRepository();
-        return instance;
-    }
-
-    private InMemoryRepository() {
+    public InMemoryRepository() {
     }
 
     @Override
@@ -22,7 +16,9 @@ public class InMemoryRepository implements CalcRepository {
     }
 
     @Override
-    public void save(String expression, Long result){ memory.add(expression+" = "+result); }
+    public void save(String expression, Long result) {
+        memory.add(expression + " = " + result);
+    }
 
     @Override
     public String getAll() {

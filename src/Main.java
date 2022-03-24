@@ -1,4 +1,3 @@
-import repository.CalcRepository;
 import repository.InMemoryRepository;
 
 import java.io.BufferedReader;
@@ -10,7 +9,7 @@ public class Main {
 
         Calculator calculator = new PostfixCalculator(
                 new BufferedReader(new InputStreamReader(System.in)),
-                InMemoryRepository.getInstance(),
+                new InMemoryRepository(),
                 new Prefix2PostfixConverter());
 
         calculator.run();

@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class Prefix2PostfixConverter implements ExpressionConverter {
 
-    public static boolean isValidDouble(String input){
+    private static boolean isValidDouble(String input){
         final BigDecimal MAX_DOUBLE = new BigDecimal(Double.MAX_VALUE);
         try{
             BigDecimal bigInput = new BigDecimal(input);
@@ -27,9 +27,9 @@ public class Prefix2PostfixConverter implements ExpressionConverter {
 
         int parenthesisCount = 0;
         for (String s : expressionList) {
+            if (!Opcode.isOperator(s) && !isValidDouble(s)) throw new CalculatorException("피연산자가 범위를 초과했거나 지원하지 않는 연산자가 포함되어 있습니다.");
             if (s.equals("(")) parenthesisCount++;
             if (s.equals(")")) parenthesisCount--;
-            if (!Opcode.isOperator(s) && !isValidDouble(s)) throw new CalculatorException("피연산자가 범위를 초과했거나 지원하지 않는 연산자가 포함되어 있습니다.");
             if (parenthesisCount < 0) throw new CalculatorException("괄호의 짝이 맞지 않는 연산식입니다.");
         }
     }

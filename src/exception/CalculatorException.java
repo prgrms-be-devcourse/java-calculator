@@ -2,7 +2,7 @@ package exception;
 
 public class CalculatorException extends RuntimeException {
 
-    public CalculatorException() {
+    CalculatorException() {
     }
 
     public CalculatorException(String msg) {
