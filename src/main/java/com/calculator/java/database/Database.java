@@ -1,8 +1,7 @@
-package com.calculator.java.domain.database;
+package com.calculator.java.database;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Database {
     private final List<String> records = new ArrayList<>();
@@ -12,6 +11,6 @@ public class Database {
     }
 
     public List<String> get() {
-        return records.stream().collect(Collectors.toList());
+        return new ArrayList<>(records);
     }
 }

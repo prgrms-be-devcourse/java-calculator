@@ -1,6 +1,6 @@
 package com.calculator.java;
 
-import com.calculator.java.domain.console.Console;
+import com.calculator.java.console.Console;
 
 class ConsoleTest {
     private static Console console;

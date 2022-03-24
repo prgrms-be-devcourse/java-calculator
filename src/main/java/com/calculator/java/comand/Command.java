@@ -1,4 +1,4 @@
-package com.calculator.java.domain.comand;
+package com.calculator.java.comand;
 
 public interface Command {
     String doCommand();

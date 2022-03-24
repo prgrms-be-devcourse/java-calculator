@@ -1,16 +1,16 @@
-package com.calculator.java.domain.console;
+package com.calculator.java.console;
 
-import com.calculator.java.domain.comand.Calculation;
-import com.calculator.java.domain.comand.Command;
-import com.calculator.java.domain.comand.Selection;
-import com.calculator.java.domain.console.exception.TerminationException;
-import com.calculator.java.domain.console.exception.WrongInputException;
-import com.calculator.java.domain.database.Database;
+import com.calculator.java.comand.Calculation;
+import com.calculator.java.comand.Command;
+import com.calculator.java.comand.Selection;
+import com.calculator.java.console.exception.TerminationException;
+import com.calculator.java.console.exception.WrongInputException;
+import com.calculator.java.database.Database;
 
 import java.io.*;
 import java.util.*;
 
-import static com.calculator.java.domain.comand.CommandTypes.*;
+import static com.calculator.java.comand.CommandTypes.*;
 
 public class Console {
     private final String WRONG_INPUT_MESSAGE = "잘 못된 입력입니다.\n";
@@ -37,7 +37,7 @@ public class Console {
             Command command = getCommand(selectedCommand).orElseThrow(TerminationException::new);
 
             if(command instanceof Calculation) {
-                String mathExpression = input(); // input을 format 해주는 기능이 필요할거 같다
+                String mathExpression = input();
 
                 if(validation.validate(mathExpression)) ((Calculation) command).setMathExpression(mathExpression);
                 else throw new WrongInputException(WRONG_INPUT_MESSAGE);

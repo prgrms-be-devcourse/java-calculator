@@ -1,4 +1,4 @@
-package com.calculator.java.domain.console;
+package com.calculator.java.console;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.StringTokenizer;
 
 public class Validation {
     public boolean validate(String expression) {
-        StringTokenizer st = new StringTokenizer(expression);
+        boolean isValid = !expression.contains("  ");
 
+        StringTokenizer st = new StringTokenizer(expression);
         int numbOfElements = st.countTokens();
-        boolean isValid = true;
 
         for(int i = 0; i < numbOfElements && isValid; i++ ) {
             String element = st.nextToken();

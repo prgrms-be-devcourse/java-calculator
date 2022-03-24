@@ -1,8 +1,8 @@
 package com.calculator.java.domain.comand;
 
-import com.calculator.java.Calculator;
-import com.calculator.java.domain.database.Database;
-import org.assertj.core.api.Assertions;
+import com.calculator.java.comand.Calculation;
+import com.calculator.java.comand.Command;
+import com.calculator.java.database.Database;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

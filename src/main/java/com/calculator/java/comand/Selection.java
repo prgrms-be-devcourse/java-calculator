@@ -1,6 +1,6 @@
-package com.calculator.java.domain.comand;
+package com.calculator.java.comand;
 
-import com.calculator.java.domain.database.Database;
+import com.calculator.java.database.Database;
 
 import java.util.List;
 

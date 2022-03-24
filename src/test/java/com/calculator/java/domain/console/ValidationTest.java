@@ -1,5 +1,6 @@
 package com.calculator.java.domain.console;
 
+import com.calculator.java.console.Validation;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,13 +25,16 @@ class ValidationTest {
         String exp1 = "1 + 2 + 3 = ";
         String exp2 = "+2+ 3";
         String exp3 = "121 a fd";
+        String exp4 = "1  + 2";
 
         boolean isValid1 = validation.validate(exp1);
         boolean isValid2 = validation.validate(exp2);
         boolean isValid3 = validation.validate(exp3);
+        boolean isValid4 = validation.validate(exp4);
 
         assertThat(isValid1).isFalse();
         assertThat(isValid2).isFalse();
         assertThat(isValid3).isFalse();
+        assertThat(isValid4).isFalse();
     }
 }

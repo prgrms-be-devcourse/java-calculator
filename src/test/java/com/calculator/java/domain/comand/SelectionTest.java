@@ -1,11 +1,11 @@
 package com.calculator.java.domain.comand;
 
-import com.calculator.java.domain.database.Database;
-import org.assertj.core.api.Assertions;
+import com.calculator.java.comand.Command;
+import com.calculator.java.comand.Selection;
+import com.calculator.java.database.Database;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class SelectionTest {
     Database database = new Database();
@@ -21,14 +21,14 @@ class SelectionTest {
         database.add(exp2);
         database.add(exp3);
 
-        String result = ((Selection)selection).doCommand();
+        String result = selection.doCommand();
 
         assertThat(result).isEqualTo(exp1+"\n"+exp2+"\n"+exp3);
     }
 
     @Test
     void 계산_이력_없는_경우_테스트 () {
-        String result = ((Selection)selection).doCommand();
+        String result = selection.doCommand();
 
         assertThat(result).isEqualTo("");
     }

@@ -1,4 +1,4 @@
-package com.calculator.java.domain.console.exception;
+package com.calculator.java.console.exception;
 
 public class TerminationException extends RuntimeException{
     public TerminationException() {
