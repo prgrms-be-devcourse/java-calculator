@@ -1,9 +1,45 @@
 package service;
 
-public class ValidationCheckImpl implements ValidationCheck {
+import static java.lang.Character.isWhitespace;
+import static service.Utils.*;
+import static service.Utils.isNumberWithWhite;
 
+/**
+ * 올바른 포맷: [숫자 -> 연산자 -> 숫자]
+ */
+public class ValidationCheckImpl implements ValidationCheck {
     public boolean validate(String command) {
-        // 잘못된 명령어면 false
+        int i = 0;
+        int len = command.length();
+        boolean existOp = false;
+
+        // 공백제거
+        while (i < len && isWhitespace(command.charAt(i))) {
+            i++;
+        }
+        // 공백 문자열인 경우
+        if (i == len)
+            return false;
+        // -부호로 시작은 가능
+        if (command.charAt(i) == '-')
+            i++;
+        while (i < len) {
+            // 반복의 시작은 반드시 숫자. (최초 입력 및 연산자 중복되는 경우 체크)
+            if (!isNumberWithWhite(command.charAt(i)))
+                return false;
+            while (i < len && isNumberWithWhite(command.charAt(i))) {
+                i++;
+            }
+            // 연산자가 존재하면서, 숫자로 종료된 경우가 정상 Case
+            if (existOp && i == len)
+                return true;
+            // 다음은 연산자
+            if (i < len && !isOperator(command.charAt(i)))
+                return false;
+            // 한번이라도 타면 연산자는 존재함.
+            existOp = true;
+            i++;
+        }
         return false;
     }
 }
