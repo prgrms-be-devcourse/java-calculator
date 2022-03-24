@@ -10,10 +10,11 @@ public class Prefix2PostfixConverter implements ExpressionConverter {
     @Override
     public List<String> convert(String expression) {
 
-        List<String> expressionList = expressionToList(expression);
-        validate(expressionList);
         List<String> postfixExpression = new ArrayList<>();
         Stack<String> stack = new Stack<>();
+
+        List<String> expressionList = expressionToList(expression);
+        validate(expressionList);
 
         for (String s : expressionList) {
 

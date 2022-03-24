@@ -19,7 +19,7 @@ public interface ExpressionConverter {
         return expressionList;
     }
 
-    void validate(List<String> expressionList) throws Exception;
+    void validate(List<String> expressionList);
 
     List<String> convert(String expression);
 

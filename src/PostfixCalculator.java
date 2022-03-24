@@ -38,7 +38,7 @@ public class PostfixCalculator implements Calculator {
 
                 if (command == 2) {
                     String expression = br.readLine();
-                    operate(expression);
+                    System.out.println(operate(expression));
                     System.out.println();
                     continue;
                 }
@@ -59,23 +59,28 @@ public class PostfixCalculator implements Calculator {
         }
     }
 
-    private void printHistory() {
+    @Override
+    public void printHistory() {
         System.out.println(repository.getAll());
     }
 
-    private void operate(String expression) {
+    public String operate(String expression) {
         List<String> converted = converter.convert(expression);
         double result = calculate(converted);
 
+        if (Double.isInfinite(result)) {
+            repository.save(expression, String.valueOf(result));
+            return String.valueOf(result);
+        }
+
         if (result == Math.ceil(result)) {
             repository.save(expression, (long) result);
-            System.out.println((long) result);
-            return;
+            return String.valueOf((long) result);
         }
 
         BigDecimal bigDecimal = new BigDecimal(result).setScale(15, RoundingMode.HALF_UP).stripTrailingZeros();
         repository.save(expression, bigDecimal);
-        System.out.println(bigDecimal);
+        return String.valueOf(bigDecimal);
     }
 
 
@@ -105,6 +110,7 @@ public class PostfixCalculator implements Calculator {
         } catch (EmptyStackException e) {
             throw new CalculatorException("올바르지 않은 연산식입니다.");
         }
+
         return answer;
     }
 
