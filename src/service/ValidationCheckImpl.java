@@ -8,21 +8,26 @@ import static utils.ValidationUtil.isNumberWithWhite;
  * 올바른 포맷: [숫자 -> 연산자 -> 숫자]
  */
 public class ValidationCheckImpl implements ValidationCheck {
-    public boolean validate(String command) {
-        int i = 0;
-        int len = command.length();
-        boolean existOp = false;
 
+    private int getStartIndex(String command, int len) {
+        int i = 0;
         // 공백제거
         while (i < len && isWhitespace(command.charAt(i))) {
             i++;
         }
-        // 공백 문자열인 경우
-        if (i == len)
-            return false;
         // -부호로 시작은 가능
-        if (command.charAt(i) == '-')
+        if (i < len && command.charAt(i) == '-')
             i++;
+        return i;
+    }
+
+    public boolean validate(String command) {
+        int len = command.length();
+        boolean existOp = false;
+        int i = getStartIndex(command, len);
+        // 실수의 경우 . 는 1번만 나오도록
+        boolean dotExist = false;
+
         while (i < len) {
             // 반복의 시작은 반드시 숫자. (최초 입력 및 연산자 중복되는 경우 체크)
             if (!isNumberWithWhite(command.charAt(i)))
@@ -30,6 +35,14 @@ public class ValidationCheckImpl implements ValidationCheck {
             while (i < len && isNumberWithWhite(command.charAt(i))) {
                 i++;
             }
+            if (i < len && command.charAt(i) == '.') {
+                if (dotExist)
+                    return false;
+                i++;
+                dotExist = true;
+                continue;
+            }
+            dotExist = false;
             // 연산자가 존재하면서, 숫자로 종료된 경우가 정상 Case
             if (existOp && i == len)
                 return true;

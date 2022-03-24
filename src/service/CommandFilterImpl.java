@@ -14,7 +14,7 @@ public class CommandFilterImpl implements CommandFilter {
 
         while (i < len && isWhitespace(command.charAt(i)))
             i++;
-        if (command.charAt(i) == '-') {
+        if (i < len && command.charAt(i) == '-') {
             sb.append('-');
             i++;
         }
@@ -24,11 +24,10 @@ public class CommandFilterImpl implements CommandFilter {
                     sb.append(command.charAt(i));
                 i++;
             }
-            if (i == len)
-                break;
-            if (i < len && isOperator(command.charAt(i))) {
+            if (i < len && command.charAt(i) == '.')
+                sb.append(command.charAt(i));
+            if (i < len && isOperator(command.charAt(i)))
                 sb.append(' ').append(command.charAt(i)).append(' ');
-            }
             i++;
         }
         return sb.toString();
