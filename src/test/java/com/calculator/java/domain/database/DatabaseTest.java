@@ -10,9 +10,10 @@ class DatabaseTest {
     @Test
     void 데이터_조회_테스트() {
         database.add("1 + 2 + 3 = 6");
+        database.add("1 + 2 = 3");
         String ret = database.get();
 
-        assertThat(ret).isEqualTo("1 + 2 + 3 = 6\n");
+        assertThat(ret).isEqualTo("1 + 2 + 3 = 6\n1 + 2 = 3\n");
     }
 
 }

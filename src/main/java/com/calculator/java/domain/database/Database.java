@@ -1,13 +1,15 @@
 package com.calculator.java.domain.database;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Database {
-    private final Set<String> records;
+    private final List<String> records;
 
     public Database() {
-        records = new TreeSet<>();
+        records = new ArrayList<>();
     }
 
     public void add(String record) {
