@@ -1,7 +1,10 @@
 package repository;
 
-public interface CalcRepository {
-    void save(String expression, double result);
+import java.math.BigDecimal;
 
-    String getResults();
+public interface CalcRepository {
+    void save(String expression, BigDecimal result);
+    void save(String expression, Long result);
+
+    String getAll();
 }

@@ -5,6 +5,6 @@ public interface Calculator {
 
     void run() throws IOException;
 
-    double calculate(List<String> expression);
+    double calculate(List<String> expression) throws Exception;
 
 }

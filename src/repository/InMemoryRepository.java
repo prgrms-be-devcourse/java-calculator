@@ -1,10 +1,11 @@
 package repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryRepository implements CalcRepository {
-    private final List<String> memory = new ArrayList<>();
+    private static final List<String> memory = new ArrayList<>();
     private static InMemoryRepository instance;
 
     public static InMemoryRepository getInstance() {
@@ -16,12 +17,15 @@ public class InMemoryRepository implements CalcRepository {
     }
 
     @Override
-    public void save(String expression, double result) {
+    public void save(String expression, BigDecimal result) {
         memory.add(expression + " = " + result);
     }
 
     @Override
-    public String getResults() {
+    public void save(String expression, Long result){ memory.add(expression+" = "+result); }
+
+    @Override
+    public String getAll() {
 
         StringBuilder sb = new StringBuilder();
 

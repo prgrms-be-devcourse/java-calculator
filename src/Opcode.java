@@ -45,7 +45,7 @@ public enum Opcode {
         return "()".contains(s);
     }
 
-    public static boolean compareTo(Opcode opcode, String c) {
+    public static boolean comparePriority(Opcode opcode, String c) {
         Opcode opcode2 = findOperator(String.valueOf(c));
         return opcode.priority <= opcode2.priority;
     }
