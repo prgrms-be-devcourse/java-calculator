@@ -1,4 +1,4 @@
-package com.calculator.java.domain.console;
+package com.calculator.java.domain.console.exception;
 
 public class WrongInputException extends RuntimeException{
     public WrongInputException() {
