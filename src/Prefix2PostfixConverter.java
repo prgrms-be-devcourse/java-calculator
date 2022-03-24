@@ -23,7 +23,7 @@ public class Prefix2PostfixConverter implements ExpressionConverter {
         String lastOp = expressionList.get(expressionList.size() - 1);
         if (Opcode.isOperator(lastOp) && !Opcode.isRightParenthesis(lastOp))
             throw new CalculatorException("연산자로 끝난 올바르지 않은 연산식 입니다.");
-        if (expressionList.size() <= 1) throw new CalculatorException("적어도 3개의 연산항이 필요합니다.");
+        if (expressionList.size() <= 2) throw new CalculatorException("적어도 3개의 연산항이 필요합니다.");
 
         int parenthesisCount = 0;
         for (String s : expressionList) {
