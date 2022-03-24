@@ -2,24 +2,11 @@ package repository;
 
 import entity.Expression;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
 
-public class CalculatorRepository implements MemoryRepository {
+public interface CalculatorRepository {
 
-    private static final Map<Long, Expression> historyMap = new ConcurrentHashMap<>();
-    private static AtomicLong id = new AtomicLong(1L);
+    Expression save(String input, double result);
+    List<Expression> findAll();
 
-    @Override
-    public Expression save (String input, double result) {
-        Expression expression = new Expression(id.get(),input,result);
-        historyMap.put(id.getAndIncrement(),expression);
-        return expression;
-    }
-
-    @Override
-    public List<Expression> findAll() {
-        return new ArrayList<>(historyMap.values());
-    }
 }

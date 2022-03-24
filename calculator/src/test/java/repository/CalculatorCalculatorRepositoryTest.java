@@ -1,22 +1,18 @@
 package repository;
 
 import entity.Expression;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.*;
 
-class CalculatorMemoryRepositoryTest {
+class CalculatorCalculatorRepositoryTest {
 
-    MemoryRepository memoryRepository;
+    CalculatorRepository calculatorRepository;
 
     @BeforeEach
     void setRepository(){
-        memoryRepository = new CalculatorRepository();
+        calculatorRepository = new InMemoryRepository();
     }
 
     @Test
@@ -28,12 +24,12 @@ class CalculatorMemoryRepositoryTest {
         Long id = 1L;
 
         Expression expression1 = new Expression(id,input,result);
-        Expression expression2 = memoryRepository.save(input,result);
+        Expression expression2 = calculatorRepository.save(input,result);
         assertThat(expression1.equals(expression2)).isEqualTo(true);
     }
 
     @Test
     void findAllWhenHistoryNull(){
-        assertThat(memoryRepository.findAll().size()).isEqualTo(0);
+        assertThat(calculatorRepository.findAll().size()).isEqualTo(0);
     }
 }
