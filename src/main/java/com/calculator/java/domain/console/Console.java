@@ -5,6 +5,7 @@ import com.calculator.java.domain.comand.Command;
 import com.calculator.java.domain.comand.Selection;
 import com.calculator.java.domain.console.exception.TerminationException;
 import com.calculator.java.domain.console.exception.WrongInputException;
+import com.calculator.java.domain.console.util.Validation;
 import com.calculator.java.domain.database.Database;
 
 import java.io.*;
@@ -14,9 +15,10 @@ import static com.calculator.java.domain.comand.CommandTypes.*;
 
 public class Console {
     private final String WRONG_INPUT_MESSAGE = "잘 못된 입력입니다.";
+    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
     private Validation validation;
     private Database database;
-    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public Console(Validation validation, Database database) {
         this.validation = validation;
@@ -36,7 +38,7 @@ public class Console {
                 else throw new WrongInputException(WRONG_INPUT_MESSAGE);
             }
 
-            // doCommand
+            String result = command.doCommand();
 
         }catch (WrongInputException wrongInputException) {
           System.out.println(wrongInputException.getMessage());
@@ -71,7 +73,7 @@ public class Console {
         if (selectedCommand.equals(SELECTION.getCommandId())) {
             return Optional.of(new Selection());
         } else if (selectedCommand.equals(CALCULATION.getCommandId())) {
-            return Optional.of(new Calculation());
+            return Optional.of(new Calculation(database));
         } else if (selectedCommand.equals(TERMINATION.getCommandId())) {
             return Optional.empty();
         } else {
