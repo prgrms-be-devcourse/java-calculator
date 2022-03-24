@@ -57,6 +57,8 @@ public class Calculation implements Command {
         switch (operate) {
             case "+":
                 return num1 + num2;
+            case "-":
+                return num1 - num2;
             default:
                 return 0;
         }
