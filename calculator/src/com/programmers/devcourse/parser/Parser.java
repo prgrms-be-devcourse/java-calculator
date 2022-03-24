@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface Parser {
 
-  List parse(String target) throws ParserException;
+  List<String> parse(String target) throws ParserException;
 }

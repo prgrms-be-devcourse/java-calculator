@@ -1,35 +1,42 @@
 package com.programmers.devcourse.repository;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
 class ResultRepositoryTest {
 
-  static ResultRepository<String> repository;
+  static ResultRepository<String, Double> repository;
 
   @BeforeAll
   static void setup() {
     repository = new StringResultRepository();
   }
 
+
+  @BeforeEach
+  void beforeEachTestRepositoryShouldHaveData() {
+    repository.save("1 + 1", 2.0);
+
+    repository.save("2 + 2", 4.0);
+    repository.save("3 + 3", 5.0);
+  }
+
   @Test
-  void testSaveAndGetSizeShouldReturnOne() {
-    repository.save("Hello");
-    Assertions.assertEquals(repository.getSize(), 1);
+  void testGetSizeShouldReturn3() {
+    assertEquals(repository.getSize(), 3);
   }
 
   @Test
   void testSaveAndGetAllResultsShouldReturnSavedData() {
-    repository.save("Hello2");
-    repository.save("Hello3");
-    Assertions.assertArrayEquals(repository.getAllResults(), new String[]{"Hello2", "Hello3"});
 
-    Assertions.assertThrows(AssertionFailedError.class, () -> {
-      Assertions.assertArrayEquals(repository.getAllResults(),
-          new String[]{"Hello2", "Hello3", "Hello4"});
-    });
+    assertTrue(
+        repository.getAllResults().keySet().containsAll(Arrays.asList("1 + 1", "2 + 2", "3 + 3")) &&
+            repository.getAllResults().values().containsAll(Arrays.asList(2.0, 4.0, 5.0)));
 
   }
 }

@@ -1,10 +1,12 @@
 package com.programmers.devcourse.repository;
 
-public interface ResultRepository<T> {
+import java.util.Map;
 
-  void save(T result);
+public interface ResultRepository<K, V> {
 
-  T[] getAllResults();
+  void save(K expression, V result);
+
+  Map<K, V> getAllResults();
 
   int getSize();
 }

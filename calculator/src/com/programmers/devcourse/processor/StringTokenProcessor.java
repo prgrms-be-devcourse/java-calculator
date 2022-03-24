@@ -28,7 +28,7 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
 
       char operator = operatorList.get(operatorPointer);
       if (operator == '+' || operator == '-') {
-        operateTwoNumbersInList(operatorPointer, operator);
+        operateNumbersInList(operatorPointer, operator);
       }
     }
   }
@@ -40,7 +40,7 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
 
       char operator = operatorList.get(operatorPointer);
       if (operator == '*' || operator == '/') {
-        operateTwoNumbersInList(operatorPointer, operator);
+        operateNumbersInList(operatorPointer, operator);
       } else {
         operatorPointer++;
 
@@ -64,7 +64,7 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
     }
   }
 
-  private void operateTwoNumbersInList(int operatorPointer, char operator) {
+  private void operateNumbersInList(int operatorPointer, char operator) {
     double first = numberList.get(operatorPointer);
     double second = numberList.get(operatorPointer + 1);
     double result = calculateTwoNumbers(operator, first, second);

@@ -6,7 +6,7 @@ import com.programmers.devcourse.parser.RegexParser;
 import com.programmers.devcourse.processor.StringTokenProcessor;
 import java.io.IOException;
 
-public class Program {
+public class Main {
 
 
   public static void main(String[] args) throws IOException {

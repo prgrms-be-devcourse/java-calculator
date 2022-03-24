@@ -9,16 +9,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map.Entry;
 
 public class ConsoleCalculator implements Calculator {
 
-  private Parser parser;
-  private BufferedReader br;
-  private ResultRepository<String> repository;
-  private Processor<List<String>, Double> processor;
+  private final Parser parser;
+  private final BufferedReader br;
+  private final ResultRepository<String, Double> repository;
+  private final Processor<List<String>, Double> processor;
 
 
-  public ConsoleCalculator(Parser parser, Processor processor) {
+  public ConsoleCalculator(Parser parser, Processor<List<String>, Double> processor) {
     this.parser = parser;
     this.repository = new StringResultRepository();
     this.br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,52 +31,57 @@ public class ConsoleCalculator implements Calculator {
     int mode;
     try {
       while (true) {
-
         mode = printMenuAndGetMode();
         if (mode == 1) {
-
           printAllResults();
-
         } else if (mode == 2) {
-
-          String expression = br.readLine();
-          double result;
-          try {
-
-            result = calculate(expression);
-
-          } catch (CalculatorException e) {
-
-            System.out.println(e.getMessage());
-            continue;
-
-          }
-
-          repository.save(
-              expression + " = " + result);
-          System.out.println(result);
-          System.out.println();
-
+          handleExpressionFromConsole();
         } else {
+          System.out.println("일치하는 메뉴가 없습니다.");
           break;
         }
-
       }
-      br.close();
+
     } catch (IOException | NumberFormatException e) {
-      
+
       if (e instanceof IOException) {
         e.printStackTrace();
 
       }
-      System.out.println("1 또는 2를 입력해야 합니다.");
-
+      System.out.println("입력 형식이 적합하지 않습니다.");
 
     } finally {
-      System.out.println("\n계산기 종료");
+      try {
+        br.close();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      System.out.println("계산기 종료");
     }
 
 
+  }
+
+  private void handleExpressionFromConsole() throws IOException {
+    String expression = br.readLine();
+    double result;
+    try {
+
+      Entry<String, Double> resultEntry = formatAndCalculateExpression(expression);
+      expression = resultEntry.getKey();
+      result = resultEntry.getValue();
+
+    } catch (CalculatorException e) {
+
+      System.out.println(e.getMessage());
+      System.out.println();
+      return;
+
+    }
+
+    repository.save(
+        expression, result);
+    System.out.println(result + "\n");
   }
 
   private int printMenuAndGetMode() throws IOException {
@@ -89,22 +95,50 @@ public class ConsoleCalculator implements Calculator {
 
   private void printAllResults() {
     if (repository.getSize() == 0) {
-      System.out.println("없음");
+      System.out.println("\n없음");
       return;
     }
-    for (String result : repository.getAllResults()
-    ) {
-      System.out.println(result);
-    }
+    repository.getAllResults().forEach((key, value) -> {
+      System.out.println(key + " = " + value);
+    });
+
     System.out.println();
   }
 
 
-  private Double calculate(String expression) throws CalculatorException {
+  private Entry<String, Double> formatAndCalculateExpression(String expression)
+      throws CalculatorException {
     List<String> tokens;
     tokens = parser.parse(expression);
+    String formattedExpression = mapTokensToFormattedExpression(tokens);
+    double result = processor.process(tokens);
 
-    return processor.process(tokens);
+    return new Entry<String, Double>() {
+      @Override
+      public String getKey() {
+        return formattedExpression;
+      }
+
+      @Override
+      public Double getValue() {
+        return result;
+      }
+
+      @Override
+      public Double setValue(Double value) {
+        throw new UnsupportedOperationException();
+      }
+    };
+  }
+
+  private String mapTokensToFormattedExpression(List<String> tokens) {
+    StringBuilder sb = new StringBuilder();
+    tokens.forEach(token -> {
+      sb.append(token);
+      sb.append(" ");
+    });
+    sb.delete(sb.length() - 1, sb.length());
+    return sb.toString();
   }
 
 

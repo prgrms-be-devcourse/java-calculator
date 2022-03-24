@@ -10,12 +10,20 @@ import java.util.regex.Pattern;
 
 public class RegexParser implements Parser {
 
-  private final String pattern = "([+*-/])|([0-9]{1,7}(\\.[0-9]{1,7})?)";
+  private final String pattern;
   private final String operatorPattern;
   private final String numberPattern;
 
 
   public RegexParser() {
+    this.pattern = "([+*-/])|([0-9]{1,7}(\\.[0-9]{1,7})?)";
+    String[] dividedPatterns = pattern.split("\\|");
+    operatorPattern = dividedPatterns[0];
+    numberPattern = dividedPatterns[1];
+  }
+
+  public RegexParser(String pattern) {
+    this.pattern = pattern;
     String[] dividedPatterns = pattern.split("\\|");
     operatorPattern = dividedPatterns[0];
     numberPattern = dividedPatterns[1];

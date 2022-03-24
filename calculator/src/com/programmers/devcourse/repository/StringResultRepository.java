@@ -1,34 +1,34 @@
 package com.programmers.devcourse.repository;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Hashtable;
+import java.util.Map;
 
-public class StringResultRepository implements ResultRepository<String> {
+public class StringResultRepository implements ResultRepository<String, Double> {
 
-  private List<String> resultList;
+  private final Map<String, Double> resultMap;
 
   public StringResultRepository() {
-    this.resultList = new LinkedList<>();
+    this.resultMap = new Hashtable<>();
   }
 
-  public StringResultRepository(List<String> resultList) {
+  public StringResultRepository(Map<String, Double> resultMap) {
 
-    this.resultList = resultList;
+    this.resultMap = resultMap;
+  }
+
+
+  @Override
+  public void save(String expression, Double result) {
+    resultMap.put(expression, result);
   }
 
   @Override
-  public void save(String result) {
-    resultList.add(result);
-  }
-
-  @Override
-  public String[] getAllResults() {
-
-    return resultList.toArray(new String[resultList.size()]);
+  public Map<String, Double> getAllResults() {
+    return Map.copyOf(resultMap);
   }
 
   @Override
   public int getSize() {
-    return this.resultList.size();
+    return this.resultMap.size();
   }
 }
