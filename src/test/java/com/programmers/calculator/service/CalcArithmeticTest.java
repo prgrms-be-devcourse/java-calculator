@@ -12,8 +12,8 @@ public class CalcArithmeticTest {
     @DisplayName("더하기 연산의 경우")
     void calcPlusTest() {
         // given
-        int a = 1;
-        int b = 1;
+        double a = 1;
+        double b = 1;
 
         // when
         Double result = ex.calcPlus(a, b);
@@ -26,8 +26,8 @@ public class CalcArithmeticTest {
     @DisplayName("곱셈 연산의 경우")
     void calcMultiTest() {
         // given
-        int a = 2;
-        int b = 3;
+        double a = 2;
+        double b = 3;
 
         // when
         Double result = ex.calcMulti(a, b);
@@ -40,8 +40,8 @@ public class CalcArithmeticTest {
     @DisplayName("나눗셈 연산의 경우")
     void calcDiviTest() {
         // given
-        int a = 2;
-        int b = 3;
+        double a = 2;
+        double b = 3;
 
         // when
         Double result = ex.calcDivi(a, b);
@@ -54,8 +54,8 @@ public class CalcArithmeticTest {
     @DisplayName("뺄셈 연산의 경우")
     void calcMinusTest() {
         // given
-        int a = 2;
-        int b = 3;
+        double a = 2;
+        double b = 3;
 
         // when
         Double result = ex.calcMinus(a, b);
@@ -66,15 +66,16 @@ public class CalcArithmeticTest {
 
     @Test
     @DisplayName("0으로 나눌 경우")
-    void calcDiviByZeroTest() {
+    void calcDiviByZeroTest() throws Exception {
         // given
-        int a = 2;
-        int b = 0;
+        double a = 2;
+        double b = 0;
 
         // when
-        Double result = ex.calcDivi(a, b);
+        Exception exception = assertThrows(ArithmeticException.class,
+                () -> ex.calcDivi(a, b));
 
         // then
-        assertEquals(0, result);
+        assertTrue(exception.getMessage().contains("0으로 나눌 수 없습니다."));
     }
 }
