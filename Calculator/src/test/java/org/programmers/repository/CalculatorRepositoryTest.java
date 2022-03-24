@@ -1,8 +1,6 @@
 package org.programmers.repository;
 
 //import org.junit.jupiter.api.Assertions;
-import lombok.Getter;
-import lombok.Setter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
