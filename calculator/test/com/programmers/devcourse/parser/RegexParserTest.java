@@ -1,5 +1,6 @@
 package com.programmers.devcourse.parser;
 
+import com.programmers.devcourse.exception.parser.NotAcceptableStringException;
 import com.programmers.devcourse.exception.parser.ParserException;
 import com.programmers.devcourse.exception.parser.WrongTokenCountException;
 import com.programmers.devcourse.exception.parser.WrongTokenPositionException;
@@ -72,5 +73,13 @@ class RegexParserTest {
       parser.parse("+4+5");
     });
   }
+
+  @Test()
+  void testParserThrowNotAcceptableStringExceptionWhenInputStringHasWrongCharacter() {
+    Assertions.assertThrows(NotAcceptableStringException.class, () -> {
+      parser.parse("         ");
+    });
+  }
+
 
 }

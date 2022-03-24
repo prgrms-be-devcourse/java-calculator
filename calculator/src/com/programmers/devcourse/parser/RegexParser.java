@@ -1,5 +1,6 @@
 package com.programmers.devcourse.parser;
 
+import com.programmers.devcourse.exception.parser.NotAcceptableStringException;
 import com.programmers.devcourse.exception.parser.ParserException;
 import com.programmers.devcourse.exception.parser.WrongTokenCountException;
 import com.programmers.devcourse.exception.parser.WrongTokenPositionException;
@@ -31,6 +32,10 @@ public class RegexParser implements Parser {
 
   @Override
   public List<String> parse(String target) throws ParserException {
+    // 숫자, 연산자 외 부적합한 기호가 들어왔다?
+    if (!target.matches("^(([+*-/])|([0-9]{1,7}(\\\\.[0-9]{1,7})?))+$")) {
+      throw new NotAcceptableStringException();
+    }
 
     Matcher matcher = Pattern.compile(pattern).matcher(target);
     return mapMatcherToTokenList(matcher);

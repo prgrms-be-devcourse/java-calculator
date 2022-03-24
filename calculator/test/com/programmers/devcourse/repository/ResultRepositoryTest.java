@@ -19,7 +19,7 @@ class ResultRepositoryTest {
 
 
   @BeforeEach
-  void beforeEachTestRepositoryShouldHaveData() {
+  void settingUpRepositoryData() {
     repository.save("1 + 1", 2.0);
 
     repository.save("2 + 2", 4.0);
@@ -27,12 +27,12 @@ class ResultRepositoryTest {
   }
 
   @Test
-  void testGetSizeShouldReturn3() {
+  void testGetSizeReturn3() {
     assertEquals(repository.getSize(), 3);
   }
 
   @Test
-  void testSaveAndGetAllResultsShouldReturnSavedData() {
+  void testSaveAndGetAllResultsReturnSavedData() {
 
     assertTrue(
         repository.getAllResults().keySet().containsAll(Arrays.asList("1 + 1", "2 + 2", "3 + 3")) &&
