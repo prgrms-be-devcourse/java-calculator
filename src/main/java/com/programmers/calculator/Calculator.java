@@ -1,6 +1,7 @@
 package com.programmers.calculator;
 
 import com.programmers.calculator.service.CalcArithmeticService;
+import com.programmers.calculator.service.CalcKeyBoardService;
 import com.programmers.calculator.service.CalcValidatorService;
 
 import java.util.ArrayList;
@@ -10,6 +11,20 @@ import java.util.List;
 public class Calculator {
     CalcArithmeticService as = new CalcArithmeticService();
     CalcValidatorService vs = new CalcValidatorService();
+    CalcKeyBoardService ks = new CalcKeyBoardService();
+
+
+    private int typeAction() {
+        return ks.selectAction();
+    }
+
+    private String typeFormula() {
+        String formula = ks.inputFormula();
+        if (vs.checkNumsAndSymbol(formula) && vs.checkSymbolMatching(formula)) {
+            return "";
+        }
+        return vs.checkSpacing(formula);
+    }
 
     public double getResult(String formula) {
         double result;
