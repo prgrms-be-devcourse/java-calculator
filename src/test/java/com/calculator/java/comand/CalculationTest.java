@@ -1,4 +1,4 @@
-package com.calculator.java.domain.comand;
+package com.calculator.java.comand;
 
 import com.calculator.java.comand.Calculation;
 import com.calculator.java.comand.Command;

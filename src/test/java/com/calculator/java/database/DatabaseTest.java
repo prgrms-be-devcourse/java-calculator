@@ -1,4 +1,4 @@
-package com.calculator.java.domain.database;
+package com.calculator.java.database;
 
 import com.calculator.java.database.Database;
 import org.junit.jupiter.api.Test;

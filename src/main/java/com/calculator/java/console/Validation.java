@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 
 public class Validation {
     public boolean validate(String expression) {
-        boolean isValid = !expression.contains("  ");
+        boolean isValid = !(expression.contains("  ") || expression.length() == 1);
 
         StringTokenizer st = new StringTokenizer(expression);
         int numbOfElements = st.countTokens();
