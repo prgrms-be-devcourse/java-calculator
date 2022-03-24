@@ -3,7 +3,8 @@ package com.calculator.java.domain.console;
 import com.calculator.java.domain.comand.Calculation;
 import com.calculator.java.domain.comand.Command;
 import com.calculator.java.domain.comand.Selection;
-import com.calculator.java.domain.comand.Termination;
+import com.calculator.java.domain.console.exception.TerminationException;
+import com.calculator.java.domain.console.exception.WrongInputException;
 import com.calculator.java.domain.database.Database;
 
 import java.io.*;
@@ -12,6 +13,7 @@ import java.util.*;
 import static com.calculator.java.domain.comand.CommandTypes.*;
 
 public class Console {
+    private final String WRONG_INPUT_MESSAGE = "잘 못된 입력입니다.";
     private Validation validation;
     private Database database;
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,18 +26,25 @@ public class Console {
     public boolean selectCommand() {
         try {
             showCommandType();
-            Command command = getCommand(inputCommand());
+            String selectedCommand = input();
+            Command command = getCommand(selectedCommand).orElseThrow(()->new TerminationException());
 
             if(command instanceof Calculation) {
-                String mathExpression = inputCommand();
-                // validation
+                String mathExpression = input();
+
+                if(validation.validate(mathExpression)) ((Calculation) command).setMathExpression(mathExpression);
+                else throw new WrongInputException(WRONG_INPUT_MESSAGE);
             }
 
-            // doCommand ->  1 / 0 => return 연산 불가능
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            // doCommand
 
-            if (exception instanceof IOException) return false;
+        }catch (WrongInputException wrongInputException) {
+          System.out.println(wrongInputException.getMessage());
+        } catch (TerminationException terminationException){
+            return false;
+        } catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
+            return false;
         }
 
         return true;
@@ -52,21 +61,21 @@ public class Console {
         System.out.print(sb);
     }
 
-    private Command getCommand(String selectedCommand) throws Exception {
-        if (selectedCommand.equals(SELECTION.getCommandId())) {
-            return new Selection();
-        } else if (selectedCommand.equals(CALCULATION.getCommandId())) {
-            return new Calculation();
-        } else if (selectedCommand.equals(TERMINATION.getCommandId())) {
-            return new Termination();
-        } else {
-            throw new WrongInputException("잘 못된 입력입니다.");
-        }
+    private String input() throws IOException {
+        String input = br.readLine().trim();
+        System.out.println();
+        return input;
     }
 
-    private String inputCommand() throws IOException {
-        String tmp = br.readLine().trim();
-        System.out.println();
-        return tmp;
+    private Optional<Command> getCommand(String selectedCommand) throws WrongInputException {
+        if (selectedCommand.equals(SELECTION.getCommandId())) {
+            return Optional.of(new Selection());
+        } else if (selectedCommand.equals(CALCULATION.getCommandId())) {
+            return Optional.of(new Calculation());
+        } else if (selectedCommand.equals(TERMINATION.getCommandId())) {
+            return Optional.empty();
+        } else {
+            throw new WrongInputException(WRONG_INPUT_MESSAGE);
+        }
     }
 }
