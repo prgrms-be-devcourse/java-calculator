@@ -1,8 +1,8 @@
 package service;
 
 import static java.lang.Character.isWhitespace;
-import static service.Utils.*;
-import static service.Utils.isNumberWithWhite;
+import static utils.ValidationUtil.*;
+import static utils.ValidationUtil.isNumberWithWhite;
 
 /**
  * 올바른 포맷: [숫자 -> 연산자 -> 숫자]
