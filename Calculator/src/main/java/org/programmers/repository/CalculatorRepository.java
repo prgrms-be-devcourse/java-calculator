@@ -5,11 +5,12 @@ import org.programmers.entity.ResultModel;
 import java.util.*;
 
 public class CalculatorRepository implements Repository{
-    Map<Long, ResultModel> map = new LinkedHashMap<>();
-    Long id = 0L;
+    private Map<Long, ResultModel> map = new LinkedHashMap<>();
+    private Long id = 0L;
+
     @Override
     public List<ResultModel> findAll() {
-        return new ArrayList<>();
+        return new ArrayList<>(map.values());
     }
 
     @Override

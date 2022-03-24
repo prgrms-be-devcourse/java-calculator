@@ -10,4 +10,9 @@ public class ResultModel {
         this.inputEx = inputEx;
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return inputEx + " = " + result;
+    }
 }
