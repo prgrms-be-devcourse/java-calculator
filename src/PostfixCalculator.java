@@ -49,8 +49,11 @@ public class PostfixCalculator implements Calculator {
 
             } catch (NumberFormatException e) {
                 System.out.println("잘못 입력하셨습니다. 다시 입력하세요.");
-            } catch (Exception e) {
+            } catch (CalculatorException e) {
+                e.printStackTrace();
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         }
@@ -100,7 +103,7 @@ public class PostfixCalculator implements Calculator {
             if (!stack.isEmpty()) throw new CalculatorException("올바르지 않은 연산식입니다. :" + expression);
 
         } catch (EmptyStackException e) {
-            throw new CalculatorException("괄호 속 단항연산자는 허용하지 않습니다. ex: 1+(-3)");
+            throw new CalculatorException("올바르지 않은 연산식입니다.");
         }
         return answer;
     }

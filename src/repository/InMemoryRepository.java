@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class InMemoryRepository implements CalcRepository {
     private static final Map<Long, String> memory = new LinkedHashMap<>();
-    private static Long sequence;
+    private static Long sequence = 0L;
 
     public InMemoryRepository() {
     }

@@ -10,12 +10,6 @@ public interface ExpressionConverter {
         List<String> expressionList = new ArrayList<>();
         StringTokenizer st = new StringTokenizer(expression, "+-/*() ", true);
 
-        if ((expression.startsWith("-") || expression.startsWith("+")) && st.countTokens() > 2)
-            expressionList.add("0");
-
-        if((expression.startsWith("-") || expression.startsWith("+")) && st.countTokens() <= 2)
-            throw new CalculatorException("피연산자의 개수가 1개 이하입니다.");
-
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
             if (token.equals(" ")) continue;
