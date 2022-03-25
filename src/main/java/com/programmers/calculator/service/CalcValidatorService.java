@@ -25,4 +25,9 @@ public class CalcValidatorService {
     public boolean checkSymbolMatching(String str) {
         return str.length() % 2 == 0;
     }
+
+    public Boolean checkSpacingVerified(String str) {
+        int count = (int) str.chars().filter(c -> c == ' ').count();
+        return str.length() == (count * 2 + 1);
+    }
 }

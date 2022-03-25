@@ -59,7 +59,9 @@ public class Calculator {
                 || formula.equals("")) {
             return "";
         }
-        return vs.checkSpacing(formula);
+        formula = vs.checkSpacing(formula);
+
+        return vs.checkSpacingVerified(formula) ? formula : "";
     }
 
     public double getResult(String formula) {
