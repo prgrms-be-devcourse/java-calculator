@@ -5,6 +5,8 @@ import com.prgrms.dev.calculator.io.Operator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.apache.commons.lang3.math.NumberUtils.toInt;
+
 public class SimpleOperator implements Operator {
   private final Pattern pattern = Pattern.compile("[0-9]( [/*] [0-9])*");
 
@@ -28,21 +30,21 @@ public class SimpleOperator implements Operator {
   }
 
   private int calculateFormula(String[] array) {
-    int result = Integer.parseInt(array[0]);
+    int result = toInt(array[0]);
     for (int i = 1; i < array.length; i+=2) {
       switch (array[i]) {
         case "+":
-          result += Integer.parseInt(array[i + 1]);
+          result += toInt(array[i + 1]);
           break;
         case "-":
-          result -= Integer.parseInt(array[i + 1]);
+          result -= toInt(array[i + 1]);
           break;
         case "*":
-          result *= Integer.parseInt(array[i + 1]);
+          result *= toInt(array[i + 1]);
           break;
         case "/":
           if (array[i + 1].equals("0")) throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-          result /= Integer.parseInt(array[i + 1]);
+          result /= toInt(array[i + 1]);
           break;
         default:
           break;
