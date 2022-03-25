@@ -7,6 +7,7 @@ import calculator.service.Sorter;
 import java.util.*;
 
 import static calculator.engine.utils.Operator.*;
+import static calculator.engine.utils.Util.callExec;
 
 public class CalculateImpl implements Calculate {
 
@@ -57,17 +58,8 @@ public class CalculateImpl implements Calculate {
             double a = calculations[leftIdx];
             double b = calculations[rightIdx];
             char sign = data.getSign();
-            if (sign == MULTIPLY.getSign())
-                result = MULTIPLY.exec(a, b);
-            else if (sign == DIVISION.getSign()) {
-                if (b == 0)
-                    throw new RuntimeException("0으로 나눌 수 없습니다.");
-                result = DIVISION.exec(a, b);
-            }
-            else if (sign == ADD.getSign())
-                result = ADD.exec(a, b);
-            else
-                result = MINUS.exec(a, b);
+
+            result = callExec(sign, a, b);
             visited[leftIdx] = true;
             calculations[rightIdx] = result;
         }

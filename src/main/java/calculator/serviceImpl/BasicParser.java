@@ -29,8 +29,6 @@ public class BasicParser implements Parser {
     private String parsing(String command, int len, StringBuilder sb, int i) {
         boolean existOp = false;
         boolean dotExist = false;
-        Map<Character, Integer> operatorMap = getOperatorMap();
-
         while (i < len) {
             if (!isNumberWithWhite(command.charAt(i)))
                 return null;
