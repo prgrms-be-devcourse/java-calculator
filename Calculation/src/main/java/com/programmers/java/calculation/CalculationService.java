@@ -6,20 +6,20 @@ import com.programmers.java.calculation.io.Output;
 import com.programmers.java.calculation.parse.Parsing;
 import com.programmers.java.calculation.parse.ParsingImpl;
 import com.programmers.java.calculation.parse.ValidationAddDecimalImpl;
-import com.programmers.java.calculation.parse.ValidationImpl;
 import com.programmers.java.calculation.repository.Repository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CalculationService implements Runnable {
 
     private final Input input;
     private final Output output;
     private final Repository repository;
     private final Parsing parsing;
-    private final Calculation calTotal = new Calculation(new ParsingImpl(), new ValidationAddDecimalImpl(),new CalculateBasicImpl());
+    private final Calculation calculation;
 
     @Override
     public void run() {
@@ -38,7 +38,7 @@ public class CalculationService implements Runnable {
                     continue;
                 }
 
-                Double result = calTotal.calculationAndValidate(inputForCal);
+                Double result = calculation.calculationAndValidate(inputForCal);
                 if (result == null) {
                     output.wrongInput();
                 } else {
