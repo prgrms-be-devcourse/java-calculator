@@ -10,7 +10,7 @@ import java.util.Scanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class inputViewTest {
+public class InputViewTest {
 
     InputView inputView = new InputView();
 
