@@ -17,12 +17,9 @@ public class Calculation {
 
     public Double calculationAndValidate(String input) {
         String result1 = parsing.removeSpase(input);
-        boolean validateString = validation.validateString(result1);
-        boolean validateContOp = validation.validateContOp(result1);
-        boolean validateFirstOp = validation.validateFirstOp(result1);
-        boolean validateLastOp = validation.validateLastOp(result1);
+        boolean validationTotal = validation.validationTotal(input);
 
-        if (validateTotal(validateString, validateContOp, validateFirstOp, validateLastOp)) {
+        if (validationTotal) {
             List<String> resultList = parsing.makeArray(result1);
             return calculate.cal(resultList);
         } else {
@@ -31,9 +28,7 @@ public class Calculation {
     }
 
 
-    private boolean validateTotal(boolean validateString, boolean validateContOp, boolean validateFirstOp, boolean validateLastOp) {
-        return validateString && validateContOp && validateFirstOp && validateLastOp;
-    }
+
 
 
 }

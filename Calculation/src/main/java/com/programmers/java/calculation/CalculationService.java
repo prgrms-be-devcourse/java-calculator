@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CalculationService implements Runnable {
 
     private final Input input;

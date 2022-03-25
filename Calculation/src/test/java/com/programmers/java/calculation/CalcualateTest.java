@@ -3,7 +3,7 @@ package com.programmers.java.calculation;
 import com.programmers.java.calculation.calculate.Calculate;
 import com.programmers.java.calculation.calculate.CalculateBasicImpl;
 import com.programmers.java.calculation.parse.ParsingImpl;
-import com.programmers.java.calculation.parse.ValidationImpl;
+import com.programmers.java.calculation.parse.ValidationAddDecimalImpl;
 import com.programmers.java.calculation.parse.Validation;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class CalcualateTest {
 
     ParsingImpl parsing = new ParsingImpl();
-    Validation validation = new ValidationImpl();
+    Validation validation = new ValidationAddDecimalImpl();
     Calculate calculate = new CalculateBasicImpl();
 
 
@@ -42,12 +42,9 @@ public class CalcualateTest {
 
     private void calcalateTotal(String input) {
         String result1 = parsing.removeSpase(input);
-        boolean validateString = validation.validateString(result1);
-        boolean validateContOp = validation.validateContOp(result1);
-        boolean validateFirstOp = validation.validateFirstOp(result1);
-        boolean validateLastOp = validation.validateLastOp(result1);
+        boolean validationTotal = validation.validationTotal(result1);
 
-        if (validateTotal(validateString, validateContOp, validateFirstOp, validateLastOp)) {
+        if (validationTotal) {
             List<String> resultList = parsing.makeArray(result1);
             Double cal = calculate.cal(resultList);
             System.out.println("cal = " + cal);
@@ -57,7 +54,5 @@ public class CalcualateTest {
     }
 
 
-    private boolean validateTotal(boolean validateString, boolean validateContOp, boolean validateFirstOp, boolean validateLastOp) {
-        return validateString && validateContOp && validateFirstOp && validateLastOp;
-    }
+
 }

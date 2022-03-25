@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ValidationTest {
 
-    Validation validation = new ValidationImpl();
+    Validation validation = new ValidationAddDecimalImpl();
 
     @Test
     public void validate() throws Exception {
@@ -18,11 +18,11 @@ class ValidationTest {
         String input4 = "24+12//5-3*2";
         String input5 = "24+12/*5-3*2";
 
-        boolean result1 = validation.validateContOp(input1);
-        boolean result2 = validation.validateContOp(input2);
-        boolean result3 = validation.validateContOp(input3);
-        boolean result4 = validation.validateContOp(input4);
-        boolean result5 = validation.validateContOp(input5);
+        boolean result1 = validation.validationTotal(input1);
+        boolean result2 = validation.validationTotal(input2);
+        boolean result3 = validation.validationTotal(input3);
+        boolean result4 = validation.validationTotal(input4);
+        boolean result5 = validation.validationTotal(input5);
 
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
@@ -38,11 +38,11 @@ class ValidationTest {
         String input4 = "*24+12/5-3*2";
         String input5 = "/24+12/5-3*2";
 
-        boolean result1 = validation.validateFirstOp(input1);
-        boolean result2 = validation.validateFirstOp(input2);
-        boolean result3 = validation.validateFirstOp(input3);
-        boolean result4 = validation.validateFirstOp(input4);
-        boolean result5 = validation.validateFirstOp(input5);
+        boolean result1 = validation.validationTotal(input1);
+        boolean result2 = validation.validationTotal(input2);
+        boolean result3 = validation.validationTotal(input3);
+        boolean result4 = validation.validationTotal(input4);
+        boolean result5 = validation.validationTotal(input5);
 
         assertThat(result1).isTrue();
         assertThat(result2).isTrue();
@@ -60,11 +60,11 @@ class ValidationTest {
         String input4 = "24+12/5-3*2*";
         String input5 = "24+12/5-3*2/";
 
-        boolean result1 = validation.validateLastOp(input1);
-        boolean result2 = validation.validateLastOp(input2);
-        boolean result3 = validation.validateLastOp(input3);
-        boolean result4 = validation.validateLastOp(input4);
-        boolean result5 = validation.validateLastOp(input5);
+        boolean result1 = validation.validationTotal(input1);
+        boolean result2 = validation.validationTotal(input2);
+        boolean result3 = validation.validationTotal(input3);
+        boolean result4 = validation.validationTotal(input4);
+        boolean result5 = validation.validationTotal(input5);
 
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
@@ -75,13 +75,13 @@ class ValidationTest {
     }
 
     @Test
-    public void validateString() throws Exception {
+    public void validationTotal() throws Exception {
 
-        Validation validation = new ValidationImpl();
+        Validation validation = new ValidationAddDecimalImpl();
         String input1 = "1+2+4+5+1";
         String input2 = "1a+2+4+5+1";
-        boolean result1 = validation.validateString(input1);
-        boolean result2 = validation.validateString(input2);
+        boolean result1 = validation.validationTotal(input1);
+        boolean result2 = validation.validationTotal(input2);
 
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
