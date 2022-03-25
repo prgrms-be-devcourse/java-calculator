@@ -8,7 +8,7 @@ public class Result {
         this.result = result;
     }
 
-    public int getResult() {
+    public int showResult() {
         return result;
     }
 }

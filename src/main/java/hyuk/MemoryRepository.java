@@ -22,7 +22,7 @@ public class MemoryRepository {
                 sb.append(operators.getOperators().get(i) + " ");
             }
         }
-        sb.append("= " + result.getResult());
+        sb.append("= " + result.showResult());
 
         return sb.toString();
     }

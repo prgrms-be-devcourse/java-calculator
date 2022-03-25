@@ -27,7 +27,7 @@ public class MemoryRepositoryTest {
 
         //then
         Assertions.assertThat(memoryRepository.getData())
-            .contains(exp + " = " + result.getResult());
+            .contains(exp + " = " + result.showResult());
     }
 
 }

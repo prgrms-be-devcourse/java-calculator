@@ -1,7 +1,10 @@
 package hyuk.view;
 
+import hyuk.entity.LogDTO;
+import hyuk.entity.Result;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,10 +28,10 @@ public class ConsoleOutputViewTest {
         output.reset();
     }
 
-    @DisplayName("출력 테스트")
+    @DisplayName("메뉴 출력 테스트")
     @Test
     void printMenu() {
-        //gievn
+        //given
         //when
         consoleOutputView.printMenu();
 
@@ -38,6 +41,33 @@ public class ConsoleOutputViewTest {
                 "2. 계산\n" +
                 "\n" +
                 "선택 : ");
+    }
+
+    @DisplayName("계산 결과 출력 테스트")
+    @Test
+    void printResult() {
+        //given
+        //when
+        consoleOutputView.printResult(new Result(10));
+
+        //then
+        Assertions.assertThat(output.toString())
+            .isEqualTo("10\n");
+    }
+
+    @DisplayName("계산기 로그 조회")
+    @Test
+    void printLogs() {
+        //given
+        LogDTO logDTO = new LogDTO(Arrays.asList("1 + 2 * 3 + 4 = 11", "1 + 2 = 3"));
+
+        //when
+        consoleOutputView.printLogs(logDTO);
+
+        //then
+        Assertions.assertThat(output.toString())
+            .isEqualTo("1 + 2 * 3 + 4 = 11\n" +
+                "1 + 2 = 3\n\n");
     }
 
 }

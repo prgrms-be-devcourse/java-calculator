@@ -2,7 +2,7 @@ package hyuk.view;
 
 import java.util.Scanner;
 
-public class InputView {
+public class ConsoleInputView {
 
     public String selectMenu(Scanner scanner) {
         String menu = scanner.next();

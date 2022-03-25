@@ -10,9 +10,9 @@ import java.util.Scanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class InputViewTest {
+public class ConsoleInputViewTest {
 
-    InputView inputView = new InputView();
+    ConsoleInputView inputView = new ConsoleInputView();
 
     public static InputStream generateUserInput(String input) {
         return new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));

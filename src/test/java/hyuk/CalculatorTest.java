@@ -81,7 +81,7 @@ public class CalculatorTest {
         //when
         //then
         assertTimeoutPreemptively(Duration.ofMillis(2000),
-            () -> assertThat(calculator.calculate(operands, operators).getResult()).isEqualTo(11));
+            () -> assertThat(calculator.calculate(operands, operators).showResult()).isEqualTo(11));
     }
 
 }
