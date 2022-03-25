@@ -5,7 +5,7 @@ import com.prgrms.dev.calculator.io.Operator;
 
 public class Application {
   public static void main(String[] args) {
-    Operator operator = new SimpleOperator();
+    Operator operator = new PostfixOperator();
     Console console = new Console();
 
     new Calculator(operator, console, console).run();
