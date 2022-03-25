@@ -11,7 +11,7 @@ public class SimpleOperator implements Operator {
   @Override
   public int calculate(String formula) {
     String[] arr = calculatePriority(formula).split(" ");
-    return cal(arr);
+    return calculateFormula(arr);
   }
 
   private String calculatePriority(String formula) {
@@ -21,13 +21,13 @@ public class SimpleOperator implements Operator {
       if (priority.equals("")) continue;
 
       // 계산
-      int result = cal(priority.split(" "));
+      int result = calculateFormula(priority.split(" "));
       formula = formula.replace(priority, String.valueOf(result));
     }
     return formula;
   }
 
-  private int cal(String[] array) {
+  private int calculateFormula(String[] array) {
     int result = Integer.parseInt(array[0]);
     for (int i = 1; i < array.length; i+=2) {
       switch (array[i]) {

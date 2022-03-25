@@ -16,7 +16,7 @@ class SimpleOperatorTest {
     String[] array = {"1", "+", "2"};
     int expected = 3;
 
-    Method method = simpleOperator.getClass().getDeclaredMethod("cal", String[].class);
+    Method method = simpleOperator.getClass().getDeclaredMethod("calculateFormula", String[].class);
     method.setAccessible(true);
 
     int result = (int) method.invoke(simpleOperator, new Object[] {array});
@@ -28,7 +28,7 @@ class SimpleOperatorTest {
     String[] array = {"1", "-", "2"};
     int expected = -1;
 
-    Method method = simpleOperator.getClass().getDeclaredMethod("cal", String[].class);
+    Method method = simpleOperator.getClass().getDeclaredMethod("calculateFormula", String[].class);
     method.setAccessible(true);
 
     int result = (int) method.invoke(simpleOperator, new Object[] {array});
@@ -39,7 +39,7 @@ class SimpleOperatorTest {
     String[] array = {"2", "*", "2"};
     int expected = 4;
 
-    Method method = simpleOperator.getClass().getDeclaredMethod("cal", String[].class);
+    Method method = simpleOperator.getClass().getDeclaredMethod("calculateFormula", String[].class);
     method.setAccessible(true);
 
     int result = (int) method.invoke(simpleOperator, new Object[] {array});
@@ -51,7 +51,7 @@ class SimpleOperatorTest {
     String[] array = {"8", "/", "4"};
     int expected = 2;
 
-    Method method = simpleOperator.getClass().getDeclaredMethod("cal", String[].class);
+    Method method = simpleOperator.getClass().getDeclaredMethod("calculateFormula", String[].class);
     method.setAccessible(true);
 
     int result = (int) method.invoke(simpleOperator, new Object[] {array});
