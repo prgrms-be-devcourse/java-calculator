@@ -1,0 +1,5 @@
+package calculator.service;
+
+public interface Calculate {
+    double calc(String command);
+}

@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    mainClassName = 'Main'
+    mainClassName = 'calculator.App'
 }
 
 group 'org.example'
