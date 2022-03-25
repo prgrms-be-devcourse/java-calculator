@@ -1,16 +1,20 @@
 package com.calculator.java.database;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Database {
-    private final List<String> records = new ArrayList<>();
+    private final Map<String, String> records = new LinkedHashMap<>();
 
-    public void add(String record) {
-        records.add(record);
+    public void add(String expression, int result) {
+        records.put(expression, Integer.toString(result));
     }
 
     public List<String> get() {
-        return new ArrayList<>(records);
+        return records.keySet().stream()
+                .map(expression -> expression+" = "+records.get(expression))
+                .collect(Collectors.toList());
     }
 }
