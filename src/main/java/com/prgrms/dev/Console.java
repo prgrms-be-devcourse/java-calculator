@@ -12,8 +12,8 @@ public class Console implements Input, Output {
   private final List<String> inMemory = new ArrayList<>();
 
   @Override
-  public String menu(String s) {
-    System.out.print("1.조회\n2.계산\n\n" + s);
+  public String menu(String message) {
+    System.out.print("1.조회\n2.계산\n\n" + message);
     return scanner.nextLine();
   }
 
@@ -45,5 +45,10 @@ public class Console implements Input, Output {
   @Override
   public void inputError() {
     System.out.println("입력이 잘못되었습니다.");
+  }
+
+  @Override
+  public void inputError(String message) {
+    System.out.println(message);
   }
 }

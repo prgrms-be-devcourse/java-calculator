@@ -5,6 +5,8 @@ public interface Output {
 
   void inputError();
 
+  void inputError(String message);
+
   void reply(String formula, int answer);
 
   void menuError();

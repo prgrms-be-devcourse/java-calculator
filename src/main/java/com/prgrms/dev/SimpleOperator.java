@@ -43,7 +43,6 @@ public class SimpleOperator implements Operator {
           result *= toInt(array[i + 1]);
           break;
         case "/":
-          if (array[i + 1].equals("0")) throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
           result /= toInt(array[i + 1]);
           break;
         default:

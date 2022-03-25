@@ -33,6 +33,11 @@ public class Calculator implements Runnable {
           continue;
         }
 
+        if (formula.indexOf("/ 0") > 0) {
+          output.inputError("0으로 나눌 수 없습니다.");
+          continue;
+        }
+
         int answer = operator.calculate(formula);
         output.reply(formula, answer);
       } else {
