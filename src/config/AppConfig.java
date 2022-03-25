@@ -9,8 +9,12 @@ public class AppConfig {
         return new ValidationCheckImpl();
     }
 
-    public Calculation calculation() {
-        return new CalculationImpl();
+    public Sorter sorter() {
+        return new BasicSorter();
+    }
+
+    public Calculate calculation() {
+        return new CalculateImpl(sorter());
     }
 
     public CalculationRepository calculationRepository() {

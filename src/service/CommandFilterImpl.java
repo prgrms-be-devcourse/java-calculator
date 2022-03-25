@@ -1,8 +1,8 @@
 package service;
 
 import static java.lang.Character.isWhitespace;
-import static utils.ValidationUtil.isNumberWithWhite;
-import static utils.ValidationUtil.isOperator;
+import static utils.Util.isNumberWithWhite;
+import static utils.Util.isOperator;
 
 public class CommandFilterImpl implements CommandFilter {
 

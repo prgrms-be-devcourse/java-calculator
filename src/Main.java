@@ -1,9 +1,5 @@
 import config.AppConfig;
-import repository.ListRepository;
-import service.CalculationImpl;
 import service.CalculationService;
-import service.CalculationServiceImpl;
-import service.CommandFilterImpl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

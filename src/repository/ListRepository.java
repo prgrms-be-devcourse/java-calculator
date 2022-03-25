@@ -1,6 +1,6 @@
 package repository;
 
-import domain.CalculationDto;
+import model.CalculationDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class ListRepository implements CalculationRepository {
 
     @Override
     public void save(CalculationDto calculationDto) {
-        list.add(calculationDto.getCommand() + " = " + calculationDto.getResult());
+        list.add(calculationDto.toString());
     }
 
     @Override

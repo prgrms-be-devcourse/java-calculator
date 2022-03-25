@@ -1,6 +1,6 @@
 package service;
 
-import domain.CalculationDto;
+import model.CalculationDto;
 import repository.CalculationRepository;
 
 import java.util.List;
@@ -8,12 +8,12 @@ import java.util.List;
 public class CalculationServiceImpl implements CalculationService {
 
     private final CommandFilter filter;
-    private final Calculation calculation;
+    private final Calculate calculation;
     private final CalculationRepository calculationRepository;
     private final ValidationCheck validationCheck;
 
     public CalculationServiceImpl(CommandFilter filter,
-                                  Calculation calculation,
+                                  Calculate calculation,
                                   CalculationRepository calculationRepository,
                                   ValidationCheck validationCheck) {
         this.filter = filter;
@@ -27,7 +27,7 @@ public class CalculationServiceImpl implements CalculationService {
         if (!validationCheck.validate(command))
             throw new RuntimeException("strange command");
         String filteredCmd = filter.filter(command);
-        int result = calculation.calc(filteredCmd);
+        double result = calculation.calc(filteredCmd);
         CalculationDto calculationDto = new CalculationDto(filteredCmd, result);
         calculationRepository.save(calculationDto);
     }

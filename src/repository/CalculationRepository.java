@@ -1,6 +1,6 @@
 package repository;
 
-import domain.CalculationDto;
+import model.CalculationDto;
 
 import java.util.List;
 
