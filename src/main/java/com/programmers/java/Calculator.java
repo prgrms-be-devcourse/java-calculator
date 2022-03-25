@@ -1,5 +1,5 @@
 package com.programmers.java;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Calculator {
 
@@ -12,6 +12,8 @@ public class Calculator {
     }
 
     public boolean invalidCheck(StringTokenizer s) {
+        if(s.hasMoreElements())
+            return false;
         for (int i = 0; s.hasMoreElements(); i++) {
             String str = s.nextToken();
             if (i % 2 == 1) {
@@ -30,6 +32,42 @@ public class Calculator {
             }
         }
         return true;
+    }
+
+    public String PostFixForm(StringTokenizer s) {
+        Map<String, Integer> OperatorPriority = new HashMap<>();
+        OperatorPriority.put("+",2);
+        OperatorPriority.put("-",2);
+        OperatorPriority.put("*",1);
+        OperatorPriority.put("/",1);
+
+        Stack<String> Operator = new Stack<>();
+        Queue<String> tmp = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; s.hasMoreElements() ; i++) {
+            String str = s.nextToken();
+            if (i % 2 == 0) sb.append(str);
+            else {
+                if (Operator.isEmpty()) Operator.push(str);
+                else {
+                    while (true) {
+                        int beforeOperator = OperatorPriority.get(Operator.peek());
+                        if (OperatorPriority.get(str) == beforeOperator || OperatorPriority.get(str) < beforeOperator) Operator.push(str);
+                        else {
+                            while (!Operator.isEmpty() && OperatorPriority.get(Operator.peek()) < OperatorPriority.get(str)) {
+                                tmp.add(Operator.pop());
+                            }
+                            Operator.push(str);
+                            while (!tmp.isEmpty()) Operator.push(tmp.poll());
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        sb.append(" ");
+        while (!Operator.isEmpty()) sb.append(Operator.pop());
+        return sb.toString();
     }
 }
 
