@@ -1,3 +1,15 @@
+# 실행 방법
+``` bash
+# mac
+./gradlew build
+./graldew run
+
+# window
+./gradlew.bat build
+./gradlew.bat run
+```
+
+
 # java_calculator
 자바 계산기 구현 미션 Repository입니다.
 
