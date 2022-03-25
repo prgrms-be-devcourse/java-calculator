@@ -18,6 +18,7 @@ public class CalcKeyBoardService {
     }
 
     public String inputFormula() {
-        return sc.next();
+        sc.nextLine();
+        return sc.nextLine();
     }
 }

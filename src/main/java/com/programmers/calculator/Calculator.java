@@ -1,5 +1,7 @@
 package com.programmers.calculator;
 
+import com.programmers.calculator.entity.CalcData;
+import com.programmers.calculator.repository.MemoryRepository;
 import com.programmers.calculator.service.CalcArithmeticService;
 import com.programmers.calculator.service.CalcKeyBoardService;
 import com.programmers.calculator.service.CalcValidatorService;
@@ -12,7 +14,39 @@ public class Calculator {
     CalcArithmeticService as = new CalcArithmeticService();
     CalcValidatorService vs = new CalcValidatorService();
     CalcKeyBoardService ks = new CalcKeyBoardService();
+    MemoryRepository mr = new MemoryRepository();
 
+    public void init() {
+        while (true) {
+            int action = typeAction();
+
+            if (action == 1) {
+                mr.printAll();
+            }
+
+            if (action == 2) {
+                String formula = typeFormula();
+
+                System.out.println();
+
+                if (formula.equals("")) {
+                    System.out.println("잘못된 입력입니다.");
+                } else {
+                    Double result = getResult(formula);
+
+                    mr.save(new CalcData(formula, result));
+
+                    System.out.println(result);
+                }
+
+                System.out.println();
+            }
+
+            if (action == -1) {
+                break;
+            }
+        }
+    }
 
     private int typeAction() {
         return ks.selectAction();
@@ -20,7 +54,9 @@ public class Calculator {
 
     private String typeFormula() {
         String formula = ks.inputFormula();
-        if (vs.checkNumsAndSymbol(formula) && vs.checkSymbolMatching(formula)) {
+        if (vs.checkNumsAndSymbol(formula)
+                || vs.checkSymbolMatching(formula)
+                || formula.equals("")) {
             return "";
         }
         return vs.checkSpacing(formula);

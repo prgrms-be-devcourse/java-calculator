@@ -2,18 +2,18 @@ package com.programmers.calculator.repository;
 
 import com.programmers.calculator.entity.CalcData;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.ArrayList;
 
 public class MemoryRepository {
-    Map<Long, CalcData> map = new HashMap<>();
+    ArrayList<CalcData> list = new ArrayList<>();
 
     public void save(CalcData calcData) {
-        map.put(calcData.getId(), calcData);
+        list.add(calcData);
     }
 
-    public Optional<CalcData> get(long l) {
-        return Optional.ofNullable(map.getOrDefault(l, null));
+    public void printAll() {
+        list.forEach((v) ->
+                System.out.println(v.getCalcFormula() + " = " + v.getResult()));
+        System.out.println();
     }
 }
