@@ -16,7 +16,7 @@ public class ListRepository implements CalculationRepository {
 
     @Override
     public List<String> findAll() {
-        return null;
+        return list;
     }
 }
 

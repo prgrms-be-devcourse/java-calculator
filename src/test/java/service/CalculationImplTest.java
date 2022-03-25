@@ -1,8 +1,15 @@
 package service;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import static utils.Operator.*;
 
 public class CalculationImplTest {
 
@@ -90,6 +97,59 @@ public class CalculationImplTest {
         System.out.printf("command : [%s], expected: [%s], actual : [%f]\n", command, expected, actual);
         // then
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void 뒤에_곱하기_나누기가나오는_3개연산자_테스트() {
+        Map<Integer, Character> ops = new HashMap<>();
+        ops.put(0, '+');
+        ops.put(1, '-');
+        // 우선순위가 높은게 뒤에나오도록 테스트 함
+        ops.put(2, '/');
+        ops.put(3, '*');
+
+        Random r = new Random();
+        int testCase = 1000;
+
+        for (int i = 0; i < testCase; i++) {
+            double num1 = getNum(r);
+            double num2 = getNum(r);
+            double num3 = getNum(r);
+
+            // + or -
+            char op1 = ops.get(getNextOpIdx(r, 0));
+            // all
+            char op2 = ops.get(getNextOpIdx(r, 2));
+
+            double temp = calculate(op2, num2, num3);
+            double expected = calculate(op1, num1, temp);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(num1 + " " + op1 + " " + num2 + " " + op2 + " " + num3);
+
+            double actual = calculation.calc(sb.toString());
+            // System.out.printf("command : [%s], expected: [%f], actual : [%f]\n", sb.toString(), expected, actual);
+            Assertions.assertEquals(expected, actual);
+        }
+    }
+
+    private static double calculate(char sign, double a, double b) {
+        if (sign == MULTIPLY.getSign())
+            return MULTIPLY.exec(a, b);
+        else if (sign == DIVISION.getSign()) {
+            return DIVISION.exec(a, b);
+        } else if (sign == ADD.getSign())
+            return ADD.exec(a, b);
+        else
+            return MINUS.exec(a, b);
+    }
+
+    private int getNextOpIdx(Random r, int i) {
+        return r.nextInt(2) + i;
+    }
+
+    private int getNum(Random r) {
+        return r.nextInt(100) + 1;
     }
 }
 

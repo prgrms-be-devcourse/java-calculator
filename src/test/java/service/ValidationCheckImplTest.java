@@ -87,5 +87,4 @@ class ValidationCheckImplTest {
         // then
         Assertions.assertEquals(false, validate);
     }
-
 }

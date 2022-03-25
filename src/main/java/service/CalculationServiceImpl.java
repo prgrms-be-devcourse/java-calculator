@@ -23,13 +23,14 @@ public class CalculationServiceImpl implements CalculationService {
     }
 
     @Override
-    public void calculate(String command) {
+    public CalculationDto calculate(String command) {
         if (!validationCheck.validate(command))
             throw new RuntimeException("strange command");
         String filteredCmd = filter.filter(command);
         double result = calculation.calc(filteredCmd);
         CalculationDto calculationDto = new CalculationDto(filteredCmd, result);
         calculationRepository.save(calculationDto);
+        return calculationDto;
     }
 
     @Override

@@ -16,13 +16,7 @@ public class CalculateImpl implements Calculate {
 
     @Override
     public double calc(String command) {
-        int result = 0;
-        // 명령어 해석하면서 계산.
-
-        System.out.println("command : " + command);
-
         String[] splitArr = command.split(" ");
-
         Double[] calculations = new Double[splitArr.length];
         List<OperatorOrder> orderOperList = new ArrayList<>();
         for (int i = 0; i < splitArr.length; i++) {
@@ -55,7 +49,6 @@ public class CalculateImpl implements Calculate {
         boolean[] visited = new boolean[calculations.length];
         double result = 0;
         for (OperatorOrder data : list) {
-            // System.out.println(Arrays.toString(calculations));
             int leftIdx = getLeft(data.getIdx() - 1, visited);
             int rightIdx = getRight(data.getIdx() + 1, visited);
 
@@ -73,11 +66,9 @@ public class CalculateImpl implements Calculate {
                 result = ADD.exec(a, b);
             else
                 result = MINUS.exec(a, b);
-            // System.out.printf("%f %c %f = %f\n", a, sign, b, result);
             visited[leftIdx] = true;
             calculations[rightIdx] = result;
         }
-        // System.out.println("finish :" + Arrays.toString(calculations));
     }
 
 }

@@ -1,8 +1,10 @@
 package service;
 
+import model.CalculationDto;
+
 import java.util.List;
 
 public interface CalculationService {
     List<String> findAll();
-    void calculate(String command);
+    CalculationDto calculate(String command);
 }
