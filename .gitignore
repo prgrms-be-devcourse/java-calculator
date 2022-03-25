@@ -1,0 +1,6 @@
+# maven
+/target
+
+# intelliJ
+.idea
+
