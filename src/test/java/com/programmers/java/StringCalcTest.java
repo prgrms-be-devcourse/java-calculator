@@ -22,4 +22,11 @@ public class StringCalcTest {
         StringTokenizer s = new StringTokenizer(str);
         Assertions.assertEquals("324531 /*+++", c.PostFixForm(s));
     }
+
+    @Test
+    public void 후위표기법_수식계산_테스트() {
+        StringTokenizer s = new StringTokenizer(str);
+        String form = c.PostFixForm(s);
+        Assertions.assertEquals(28, c.Calc(form));
+    }
 }

@@ -12,21 +12,19 @@ public class Calculator {
     }
 
     public boolean invalidCheck(StringTokenizer s) {
-        if(s.hasMoreElements())
+        if (s.hasMoreElements())
             return false;
         for (int i = 0; s.hasMoreElements(); i++) {
             String str = s.nextToken();
             if (i % 2 == 1) {
                 if (str.length() > 1 || !isOperator(str.charAt(0)))
                     return false;
-            }
-            else {
+            } else {
                 for (int j = 0; j < str.length(); j++) {
                     if (str.charAt(0) == '-') {
                         if (str.length() <= 1)
                             return false;
-                    }
-                    else if (!isDigit(str.charAt(j)))
+                    } else if (!isDigit(str.charAt(j)))
                         return false;
                 }
             }
@@ -36,15 +34,15 @@ public class Calculator {
 
     public String PostFixForm(StringTokenizer s) {
         Map<String, Integer> OperatorPriority = new HashMap<>();
-        OperatorPriority.put("+",2);
-        OperatorPriority.put("-",2);
-        OperatorPriority.put("*",1);
-        OperatorPriority.put("/",1);
+        OperatorPriority.put("+", 2);
+        OperatorPriority.put("-", 2);
+        OperatorPriority.put("*", 1);
+        OperatorPriority.put("/", 1);
 
         Stack<String> Operator = new Stack<>();
         Queue<String> tmp = new LinkedList<>();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; s.hasMoreElements() ; i++) {
+        for (int i = 0; s.hasMoreElements(); i++) {
             String str = s.nextToken();
             if (i % 2 == 0) sb.append(str);
             else {
@@ -52,22 +50,54 @@ public class Calculator {
                 else {
                     while (true) {
                         int beforeOperator = OperatorPriority.get(Operator.peek());
-                        if (OperatorPriority.get(str) == beforeOperator || OperatorPriority.get(str) < beforeOperator) Operator.push(str);
+                        if (OperatorPriority.get(str) < beforeOperator) {
+                            sb.append(s.nextToken());
+                            sb.append(str);
+                            i += 1;
+                        }
+                        else if (beforeOperator < OperatorPriority.get(str)){
+                            sb.append(Operator.pop());
+                            Operator.push(str);
+                        }
                         else {
                             while (!Operator.isEmpty() && OperatorPriority.get(Operator.peek()) < OperatorPriority.get(str)) {
                                 tmp.add(Operator.pop());
                             }
                             Operator.push(str);
-                            while (!tmp.isEmpty()) Operator.push(tmp.poll());
+                            while (!tmp.isEmpty()) {
+                                Operator.push(tmp.poll());
+                            }
                         }
                         break;
                     }
                 }
             }
         }
-        sb.append(" ");
         while (!Operator.isEmpty()) sb.append(Operator.pop());
         return sb.toString();
+    }
+
+    public int Calc(String formula) {
+        Stack<Integer> s = new Stack<>();
+        for (int i = 0; i < formula.length(); i++) {
+            if(isDigit(formula.charAt(i)))
+                s.push(formula.charAt(i) - '0');
+            else {
+                int b = s.pop();
+                int a = s.pop();
+                switch (formula.charAt(i)) {
+                    case '+' : s.push(a + b);
+                        break;
+                    case '-' : s.push(a - b);
+                        break;
+                    case '/' : s.push(a / b);
+                        break;
+                    case '*' : s.push(a * b);
+                        break;
+                }
+            }
+        }
+        return s.pop();
     }
 }
 
