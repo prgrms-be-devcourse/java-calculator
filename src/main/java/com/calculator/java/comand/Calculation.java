@@ -85,6 +85,6 @@ public class Calculation implements Command {
     }
 
     private void saveResult(String mathExpression, int result) {
-//        database.add(mathExpression + " = " + result);
+        database.add(mathExpression, result);
     }
 }
