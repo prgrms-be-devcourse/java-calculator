@@ -28,7 +28,6 @@ public class AppConfig {
         return new ListRepository();
     }
 
-
     public CalculationServiceImpl calculationService() {
         return new CalculationServiceImpl(
                 calculationRepository(),

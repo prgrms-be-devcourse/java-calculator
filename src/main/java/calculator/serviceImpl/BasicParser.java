@@ -1,9 +1,6 @@
 package calculator.serviceImpl;
 
 import calculator.service.Parser;
-
-import java.util.Map;
-
 import static calculator.engine.utils.Util.*;
 import static java.lang.Character.isWhitespace;
 

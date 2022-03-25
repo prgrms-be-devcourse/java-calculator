@@ -3,17 +3,17 @@ package calculator.engine;
 import calculator.engine.io.Input;
 import calculator.engine.io.Output;
 import calculator.engine.model.CalculationDto;
-import calculator.service.CalculationService;
+import calculator.service.CalculateService;
 
 import java.util.List;
 
-public class Calculation implements Runnable {
+public class Calculator implements Runnable {
 
-    private final CalculationService calculationService;
+    private final CalculateService calculationService;
     private final Input input;
     private final Output output;
 
-    public Calculation(CalculationService calculationService, Input input, Output output) {
+    public Calculator(CalculateService calculationService, Input input, Output output) {
         this.calculationService = calculationService;
         this.input = input;
         this.output = output;

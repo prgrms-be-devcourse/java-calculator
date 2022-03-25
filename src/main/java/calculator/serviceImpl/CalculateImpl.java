@@ -6,7 +6,6 @@ import calculator.service.Sorter;
 
 import java.util.*;
 
-import static calculator.engine.utils.Operator.*;
 import static calculator.engine.utils.Util.callExec;
 
 public class CalculateImpl implements Calculate {
@@ -54,7 +53,6 @@ public class CalculateImpl implements Calculate {
         for (OperatorOrder data : list) {
             int leftIdx = getLeft(data.getIdx() - 1, visited);
             int rightIdx = getRight(data.getIdx() + 1, visited);
-
             double a = calculations[leftIdx];
             double b = calculations[rightIdx];
             char sign = data.getSign();

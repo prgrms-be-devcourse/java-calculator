@@ -1,7 +1,7 @@
 package calculator.serviceImpl;
 
 import calculator.config.AppConfig;
-import calculator.service.CalculationService;
+import calculator.service.CalculateService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -11,7 +11,7 @@ import java.util.List;
 class CalculationServiceImplTest {
 
     AppConfig appConfig = new AppConfig();
-    CalculationService calculationService = appConfig.calculationService();
+    CalculateService calculationService = appConfig.calculationService();
 
     @ParameterizedTest
     @CsvSource({ // given

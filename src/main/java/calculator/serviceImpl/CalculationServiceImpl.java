@@ -3,12 +3,12 @@ package calculator.serviceImpl;
 import calculator.engine.model.CalculationDto;
 import calculator.repository.CalculationRepository;
 import calculator.service.Calculate;
-import calculator.service.CalculationService;
+import calculator.service.CalculateService;
 import calculator.service.Parser;
 
 import java.util.List;
 
-public class CalculationServiceImpl implements CalculationService {
+public class CalculationServiceImpl implements CalculateService {
 
     private final CalculationRepository calculationRepository;
     private final Parser parser;
