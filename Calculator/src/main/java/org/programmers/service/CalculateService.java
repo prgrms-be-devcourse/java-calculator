@@ -17,9 +17,8 @@ public class CalculateService {
         return result;
     }
 
-    public void find() {
-        calculatorRepository.findAll().stream()
-                .forEach(System.out::println);
+    public List<ResultModel> findHistory() {
+        return calculatorRepository.findAll();
     }
 
     private Deque<String> makePostfix(String inputEx) {
@@ -70,7 +69,7 @@ public class CalculateService {
                         stack.push(stack.pop() * stack.pop());
                         break;
                     case "/":
-                        temp = stack.pop();
+                         temp = stack.pop();
                         stack.push(stack.pop() / temp);
                         break;
                     default:
