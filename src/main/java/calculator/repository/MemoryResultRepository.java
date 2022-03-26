@@ -1,19 +1,16 @@
 package calculator.repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class MemoryResultRepository implements ResultRepository {
 
-    private static final Map<Long, String> store = new HashMap<>();
-    private static long sequence = 0L;
+    private static final List<String> store = new ArrayList<>();
 
     @Override
     public void save(String result) {
-        store.put(++sequence, result);
+        store.add(result);
     }
 
     @Override
@@ -22,7 +19,7 @@ public class MemoryResultRepository implements ResultRepository {
             return Optional.empty();
         }
 
-        return Optional.of(new ArrayList<>(store.values()));
+        return Optional.of(new ArrayList<>(store));
     }
 
     public void clearStore() {
