@@ -14,7 +14,7 @@ public enum OperatorType {
         }
         return firstNumber / secondNumber;
     }, 2);
-
+    
     private final String operator;
     private final BinaryOperator<Double> expression;
     private final int priorityValue;

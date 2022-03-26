@@ -18,7 +18,7 @@ class CalculatorTest {
 
     Calculator calculator;
 
-    private static Stream<Arguments> provideNormalExpression() { // argument source method
+    private static Stream<Arguments> provideNormalExpression() {
         return Stream.of(
             Arguments.of(Arrays.asList("1", "2", "*"), "2"),
             Arguments.of(Arrays.asList("4", "5", "2", "/", "*"), "10"),
@@ -26,7 +26,7 @@ class CalculatorTest {
         );
     }
 
-    private static Stream<Arguments> provideWrongExpression() { // argument source method
+    private static Stream<Arguments> provideWrongExpression() {
         return Stream.of(
             Arguments.of(Arrays.asList("+", "1")),
             Arguments.of(Arrays.asList("4", "5", "2", "/", "*", "3")),

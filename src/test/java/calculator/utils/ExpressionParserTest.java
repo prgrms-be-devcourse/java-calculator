@@ -17,7 +17,7 @@ class ExpressionParserTest {
 
     Parser parser;
 
-    private static Stream<Arguments> provideNormalExpression() { // argument source method
+    private static Stream<Arguments> provideNormalExpression() {
         return Stream.of(
             Arguments.of("1 + 3 / 2", Arrays.asList("1", "3", "2", "/", "+")),
             Arguments.of("1 / 5 / 3", Arrays.asList("1", "5", "/", "3", "/")),
@@ -26,7 +26,7 @@ class ExpressionParserTest {
         );
     }
 
-    private static Stream<Arguments> provideWrongExpression() { // argument source method
+    private static Stream<Arguments> provideWrongExpression() {
         return Stream.of(
             Arguments.of("1 + 3 / 2 ㅁ", Arrays.asList("1", "3", "2", "/", "+")),
             Arguments.of("1 / 5 // 3 ", Arrays.asList("1", "5", "/", "3", "/")),
@@ -37,7 +37,7 @@ class ExpressionParserTest {
 
     @BeforeEach
     void setup() {
-        parser = new ExpressionParser(" ");
+        parser = new ExpressionParser();
     }
 
     @DisplayName("입력받은 식을 후위표기식으로 변환한다.")
