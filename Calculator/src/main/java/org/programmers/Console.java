@@ -23,12 +23,17 @@ public class Console implements Input, Output {
 
     @Override
     public void inputNumError() {
-        System.out.println("1, 2번 중 선택하세요.");
+        System.out.println("\n1, 2번 중 선택하세요.\n");
     }
 
     @Override
-    public void inputExError() {
-        System.out.println("수식을 잘못 입력하셨습니다.");
+    public void inputExError(int i) {
+        if (i == 1) {
+            System.out.println("\n수식을 잘못 입력하셨습니다.\n");
+        } else {
+            System.out.println("\n0 으로 나눌 수 없습니다.\n");
+        }
+
     }
 
     @Override
@@ -43,7 +48,7 @@ public class Console implements Input, Output {
 
     @Override
     public void historyInquiry(List<ResultModel> history) {
-        history.stream()
-                .forEach(System.out::println);
+        history.forEach(System.out::println);
+        System.out.println();
     }
 }

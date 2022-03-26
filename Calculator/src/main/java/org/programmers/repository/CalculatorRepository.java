@@ -3,14 +3,15 @@ package org.programmers.repository;
 import org.programmers.entity.ResultModel;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CalculatorRepository implements Repository{
-    private Map<Long, ResultModel> map = new LinkedHashMap<>();
+    private Map<Long, ResultModel> map = new ConcurrentHashMap<>();
     private Long id = 0L;
 
     @Override
-    public List<ResultModel> findAll() {
-        return new ArrayList<>(map.values());
+    public Map<Long, ResultModel> findAll() {
+        return map;
     }
 
     @Override

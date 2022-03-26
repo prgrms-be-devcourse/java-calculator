@@ -18,7 +18,14 @@ public class CalculateService {
     }
 
     public List<ResultModel> findHistory() {
-        return calculatorRepository.findAll();
+        Map<Long, ResultModel> map = calculatorRepository.findAll();
+
+        List<Map.Entry<Long, ResultModel>> entries = new LinkedList<>(map.entrySet());
+        entries.sort(Map.Entry.comparingByKey());
+        List<ResultModel> result = new ArrayList<>();
+        entries.forEach((i)-> result.add(i.getValue()));
+
+        return result;
     }
 
     private Deque<String> makePostfix(String inputEx) {
@@ -33,10 +40,13 @@ public class CalculateService {
             } else {
                 if (isNumeric(deque.peekFirst())) {
                     deque.addFirst(token);
+
                 } else if (!deque.isEmpty() && deque.peekFirst().equals("*")
                         || !deque.isEmpty() && deque.peekFirst().equals("/")) {
+
                     deque.addLast(deque.removeFirst());
                     deque.addFirst(token);
+
                 } else {
                     deque.addFirst(token);
                 }
@@ -46,7 +56,6 @@ public class CalculateService {
         while (!deque.isEmpty() && !isNumeric(deque.peekFirst())) {
             deque.addLast(deque.removeFirst());
         }
-
         return deque;
     }
 
@@ -54,10 +63,11 @@ public class CalculateService {
         Stack<Double> stack = new Stack<>();
 
         while (!deque.isEmpty()) {
-            if (isNumeric(deque.peekFirst())){
+            if (isNumeric(deque.peekFirst())) {
                 stack.push(Double.parseDouble(deque.removeFirst()));
-            }else{
-                switch (deque.removeFirst()){
+
+            } else {
+                switch (deque.removeFirst()) {
                     case "+":
                         stack.push(stack.pop() + stack.pop());
                         break;
@@ -69,7 +79,7 @@ public class CalculateService {
                         stack.push(stack.pop() * stack.pop());
                         break;
                     case "/":
-                         temp = stack.pop();
+                        temp = stack.pop();
                         stack.push(stack.pop() / temp);
                         break;
                     default:
@@ -77,7 +87,6 @@ public class CalculateService {
                 }
             }
         }
-
         return stack.pop();
     }
 

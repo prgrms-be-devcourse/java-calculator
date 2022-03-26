@@ -5,6 +5,7 @@ import org.programmers.entity.ResultModel;
 import java.util.List;
 
 public interface Output {
+
     void printMenu();
 
     void printResult(double result);
@@ -13,5 +14,5 @@ public interface Output {
 
     void inputNumError();
 
-    void inputExError();
+    void inputExError(int i);
 }

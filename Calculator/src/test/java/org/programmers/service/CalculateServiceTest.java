@@ -1,34 +1,45 @@
 package org.programmers.service;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.programmers.entity.ResultModel;
 import org.programmers.repository.CalculatorRepository;
 import org.programmers.repository.Repository;
 
+import java.util.*;
+
 class CalculateServiceTest {
     CalculateService calculateService = new CalculateService();
-    Repository repository = new CalculatorRepository();
+    CalculatorRepository repository = new CalculatorRepository();
+
 
     @Test
     void calculateSaveTest() {
-        String input = "5555555 * 30";
+        Map<Double, Double> map = new HashMap<>();
 
-        double result = calculateService.calculateSave(input);
-        double result2 = 5555555 * 30;
-        System.out.println(result);
-        System.out.println(5555555 * 30);
-        String a = "0000777";
-        System.out.println(Integer.parseInt(a));
-        Assertions.assertThat(result).isEqualTo(result2);
+        map.put((double)(2 + 3 * 3 * 2), calculateService.calculateSave("2 + 3 * 3 * 2"));
+
+        long result2 = map.entrySet()
+                        .stream()
+                                .filter(i -> i.getKey().equals(i.getValue()))
+                                        .count();
+
+        Assertions.assertThat(result2).isEqualTo(1);
     }
 
     @Test
     void find() {
+        List<ResultModel> list = new ArrayList<>();
+
         calculateService.calculateSave("4 * 2");
         calculateService.calculateSave("3 * 3");
         calculateService.calculateSave("2 * 2");
         calculateService.calculateSave("3 * 1");
 
-        calculateService.historyCheck();
+        list = calculateService.findHistory();
+
+        Assertions.assertThat(list.size()).isEqualTo(4);
+
     }
 }
