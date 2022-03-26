@@ -18,15 +18,11 @@ public class MemoryResultRepository implements ResultRepository {
 
     @Override
     public Optional<List<String>> findAll() {
-        if (isEmpty()) {
+        if (store.isEmpty()) {
             return Optional.empty();
         }
 
         return Optional.of(new ArrayList<>(store.values()));
-    }
-
-    private boolean isEmpty() {
-        return sequence == 0L;
     }
 
     public void clearStore() {

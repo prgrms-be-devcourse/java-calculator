@@ -41,5 +41,4 @@ class MemoryResultRepositoryTest {
         assertThat(results.size()).isEqualTo(3);
         assertThat(results).contains("1 + 2 = 3", "4 * 3 = 12", "1 + 2 / 2 = 2");
     }
-
 }
