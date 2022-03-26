@@ -44,7 +44,7 @@ public class Console implements Input, Output {
 
     @Override
     public void inputError() {
-        System.out.println("잘못된 입력입니다.");
+        System.out.println("잘못된 입력입니다.\n");
     }
 
     @Override
@@ -58,7 +58,6 @@ public class Console implements Input, Output {
 
     private boolean isValidExpr(String expr) {
         return true;
-//        return expr.matches("^(([+*-/])|([0-9]{1,7}(\\\\.[0-9]{1,7})?)|\\s)+$");
     }
 
 }

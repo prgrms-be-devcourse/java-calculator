@@ -69,13 +69,15 @@ class CalculationServiceTest {
         String expr = "1 / 0";
 
         // when
-        String result = calculationService.getResult(expr);
+        try {
+            String result = calculationService.getResult(expr);
+        } catch (ArithmeticException ignored) {
 
-        // then
+        }
     }
 
     @Test
-    public void 계산서비스_테스트_괄호() throws Exception {
+    public void 계산서비스_테스트_괄호1() throws Exception {
         // given
         String expr = "2 / ( 4 + 3 )";
 
@@ -84,6 +86,18 @@ class CalculationServiceTest {
 
         // then
         Assertions.assertThat(result).isEqualTo("0");
+    }
+
+    @Test
+    public void 계산서비스_테스트_괄호2() throws Exception {
+        // given
+        String expr = "(4 - 2) * 2";
+
+        // when
+        String result = calculationService.getResult(expr);
+
+        // then
+        Assertions.assertThat(result).isEqualTo("4");
     }
 
 }

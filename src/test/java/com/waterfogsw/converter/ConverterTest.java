@@ -54,4 +54,16 @@ class ConverterTest {
         Assertions.assertThat(postfix).isEqualTo(Arrays.asList("2", "2", "2", "+", "/"));
     }
 
+    @Test
+    public void 후위표기식_변환_테스트_4() throws Exception {
+        // given
+        List<String> infix = new ArrayList<>(Arrays.asList("(", "4", "-", "2", ")", "*", "2"));
+
+        // when
+        List<String> postfix = converter.convert(infix);
+
+        // then
+        Assertions.assertThat(postfix).isEqualTo(Arrays.asList("4", "2", "-", "2", "*"));
+    }
+
 }

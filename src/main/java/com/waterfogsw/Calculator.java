@@ -36,10 +36,8 @@ public class Calculator implements Runnable {
                 }
             } catch (ArithmeticException e) {
                 output.divZeroError();
-                return;
             } catch (Exception e) {
                 output.inputError();
-                return;
             }
         }
     }

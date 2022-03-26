@@ -28,4 +28,16 @@ class ParserTest {
         // then
         Assertions.assertThat(exprList).isEqualTo(Arrays.asList("2", "+", "2", "+", "2"));
     }
+
+    @Test
+    public void 문자열_파싱_테스트2() throws Exception {
+        // given
+        String exprStr = "(4 - 2) * 2";
+
+        // when
+        List<String> exprList = parser.parse(exprStr);
+
+        // then
+        Assertions.assertThat(exprList).isEqualTo(Arrays.asList("(", "4", "-", "2", ")", "*", "2"));
+    }
 }
