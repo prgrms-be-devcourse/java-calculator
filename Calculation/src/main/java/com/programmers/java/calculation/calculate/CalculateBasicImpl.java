@@ -39,11 +39,5 @@ public class CalculateBasicImpl implements Calculate {
             }
         }
         return nums.stream().mapToDouble(i -> i).sum();
-
-        /*Double result = (double) 0;
-        for (Double num : nums) {
-            result += num;
-        }
-        return result;*/
     }
 }
