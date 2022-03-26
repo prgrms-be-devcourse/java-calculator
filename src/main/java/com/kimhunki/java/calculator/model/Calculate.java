@@ -26,11 +26,42 @@ public class Calculate implements CalculateStrategy
 
         List<String> expressionList = splitString(expression);
 
-        if(!isExpression(expressionList)) // 올바른 수식으로 되어있는지 확인
+        if(isExpression(expressionList)) // 올바른 수식으로 되어있는지 확인
         {
             console.inputError();
             return;
         }
+        Stack<String> expressStack = new Stack<>();
+        String symbol = ""; // *나 /가 나오면 부호 저장
+        for(String element : expressionList) // * , / 먼저 계산
+        {
+            if(symbol.equals("*") || symbol.equals("/"))
+            {
+                Integer num1 = Integer.parseInt(expressStack.pop()); // 팝
+                Integer num2 = Integer.parseInt(element);
+                if(symbol.equals("*"))
+                    expressStack.add(Integer.toString(num1*num2));
+                else expressStack.add(Integer.toString(num1/num2));
+                symbol = "";
+            }
+            else if(element.equals("*") || element.equals("/"))
+            {
+                symbol = element;
+            }
+            else
+                expressStack.add(element);
+        }
+        result = Integer.parseInt(expressStack.get(0)); // 초기값 결과에 넣어둠
+        System.out.println("expressStack = " + expressStack);
+        for(int i=1; i<expressStack.size(); i+=2)
+        {
+            if(expressStack.get(i).equals("+")) // +,-만 있으므로 뒤에 결과만 result에 더해줌
+                result += Integer.parseInt(expressStack.get(i+1));
+            else
+                result -= Integer.parseInt(expressStack.get(i+1));
+        }
+        console.output(Integer.toString(result));
+        resultRepository.getResultList().add(expression + " = " + result);
 
     }
     private List<String> splitString(String expression)
