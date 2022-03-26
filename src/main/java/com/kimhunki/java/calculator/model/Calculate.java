@@ -3,6 +3,7 @@ package com.kimhunki.java.calculator.model;
 import com.kimhunki.java.calculator.Console;
 import com.kimhunki.java.calculator.db.ResultRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
@@ -16,7 +17,6 @@ public class Calculate implements CalculateStrategy
     {
         int result = 0;
         String expression =  console.input("");
-
         if(expression.isBlank() || !Character.isDigit(expression.charAt(expression.length()-1)))
         { // 그냥 엔터를 눌렀을 경우 or 마지막이 숫자가 아닌경우
             console.inputError();
@@ -26,7 +26,7 @@ public class Calculate implements CalculateStrategy
 
         List<String> expressionList = splitString(expression);
 
-        if(isExpression(expressionList)) // 올바른 수식으로 되어있는지 확인
+        if(!isExpression(expressionList)) // 올바른 수식으로 되어있는지 확인
         {
             console.inputError();
             return;
@@ -52,7 +52,6 @@ public class Calculate implements CalculateStrategy
                 expressStack.add(element);
         }
         result = Integer.parseInt(expressStack.get(0)); // 초기값 결과에 넣어둠
-        System.out.println("expressStack = " + expressStack);
         for(int i=1; i<expressStack.size(); i+=2)
         {
             if(expressStack.get(i).equals("+")) // +,-만 있으므로 뒤에 결과만 result에 더해줌
@@ -101,7 +100,7 @@ public class Calculate implements CalculateStrategy
             {
                 if (divideFlag != 0 && s.equals("0")) return false;
                 state = 1;
-            } else if (isSymbol(s)) // 숫자가 아니라면
+            } else if (state == 1 && isSymbol(s)) // 숫자가 아니라면
             {
                 if (s.equals("/")) divideFlag = 1;
                 else divideFlag = 0;
