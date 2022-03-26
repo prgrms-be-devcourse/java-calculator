@@ -12,6 +12,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import calculator.repository.MemoryResultRepository;
+import calculator.utils.ExpressionParser;
+import calculator.view.Console;
+
 class CalculatorTest {
 
     Calculator calculator;
@@ -35,14 +39,14 @@ class CalculatorTest {
 
     @BeforeEach
     void setup() {
-        calculator = new Calculator();
+        calculator = new Calculator(new MemoryResultRepository(), new ExpressionParser(), new Console(), new Console());
     }
 
     @DisplayName("정상적인 후위표기식을 주면 계산한다.")
     @ParameterizedTest
     @MethodSource("provideNormalExpression")
     void calculate_expression(List<String> input, double expected) {
-        double result = calculator.calculateExpression(input);
+        double result = calculator.calculate(input);
         assertThat(result).isEqualTo(expected);
     }
 
@@ -50,7 +54,7 @@ class CalculatorTest {
     @ParameterizedTest
     @MethodSource("provideWrongExpression")
     void calculate_expression(List<String> input) {
-        assertThatThrownBy(() -> calculator.calculateExpression(input))
+        assertThatThrownBy(() -> calculator.calculate(input))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR]");
     }
