@@ -7,7 +7,6 @@ import calculator.domain.OperatorType;
 import calculator.utils.ExpressionParser;
 
 public class Calculator {
-
     private static final String ERROR_INPUT_FORM = "[ERROR] 정상적인 입력이 아닙니다. 다시 입력해주세요.";
 
     public Double calculateExpression(List<String> expression) {
@@ -24,7 +23,7 @@ public class Calculator {
 
                 double secondNumber = stack.pop();
                 double firstNumber = stack.pop();
-                stack.add(calculate(value, firstNumber, secondNumber));
+                stack.add(OperatorType.calculate(value, firstNumber, secondNumber));
             }
         }
 
@@ -47,11 +46,6 @@ public class Calculator {
 
     private double roundNumberTwoDecimal(double result) {
         return Math.round(result * 100) / 100.0;
-    }
-
-    public double calculate(String operator, double firstNumber, double secondNumber) {
-        return OperatorType.from(operator)
-            .calculate(firstNumber, secondNumber);
     }
 
     private boolean isOperator(String inputString) {
