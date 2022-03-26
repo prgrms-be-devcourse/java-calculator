@@ -8,16 +8,12 @@ import java.util.regex.Pattern;
 import calculator.domain.OperatorType;
 
 public class ExpressionParser implements Parser {
-    public static final Pattern INPUT_FORM = Pattern.compile("\\d+(.\\d+)?( [+-/*] \\d+(.\\d+)?)*");
     public static final Pattern NUMBER = Pattern.compile("\\d+(.\\d+)?");
     public static final Pattern OPERATOR = Pattern.compile("[+-/*]");
+
+    private static final Pattern INPUT_FORM = Pattern.compile("\\d+(.\\d+)?( [+-/*] \\d+(.\\d+)?)*");
     private static final String ERROR_INPUT_FORM = "[ERROR] 정상적인 입력이 아닙니다. 다시 입력해주세요.";
-
-    private final String delimiter;
-
-    public ExpressionParser(String delimiter) {
-        this.delimiter = delimiter;
-    }
+    private static final String DELIMITER = " ";
 
     @Override
     public List<String> parsePostfix(String input) {
@@ -27,7 +23,7 @@ public class ExpressionParser implements Parser {
         Stack<String> converter = new Stack<>();
         List<String> result = new ArrayList<>();
 
-        String[] inputStrings = input.split(delimiter);
+        String[] inputStrings = input.split(DELIMITER);
 
         for (String inputString : inputStrings) {
             if (isNumber(inputString)) {
