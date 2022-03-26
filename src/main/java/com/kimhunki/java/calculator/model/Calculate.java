@@ -24,8 +24,6 @@ public class Calculate implements CalculateStrategy
         }
 
 
-
-
         List<String> expressionList = splitString(expression);
 
     }
@@ -38,6 +36,23 @@ public class Calculate implements CalculateStrategy
         return arrayString;
     }
 
+    private boolean isNumber(String num) // 숫자인지
+    {
+        for(int i=0; i<num.length(); i++)
+        {
+            if(!Character.isDigit(num.charAt(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    private boolean isSymbol(String symbol) // 부호인지
+    {
+        if (symbol.equals("+") ||symbol.equals("-") || symbol.equals("*") ||symbol.equals("/") )
+            return true;
+        return false;
+    }
 
 
 
