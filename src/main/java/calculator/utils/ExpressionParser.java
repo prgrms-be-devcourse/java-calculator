@@ -8,9 +8,10 @@ import java.util.regex.Pattern;
 import calculator.domain.OperatorType;
 
 public class ExpressionParser implements Parser {
-    public static final String ERROR_INPUT_FORM = "[ERROR] 정상적인 입력이 아닙니다. 다시 입력해주세요.";
     public static final Pattern NUMBER = Pattern.compile("\\d+(.\\d+)?");
     public static final Pattern OPERATOR = Pattern.compile("[+-/*]");
+    private static final String ERROR_INPUT_FORM = "[ERROR] 정상적인 입력이 아닙니다. 다시 입력해주세요.";
+    
     private final String delimiter;
 
     public ExpressionParser(String delimiter) {
@@ -38,7 +39,7 @@ public class ExpressionParser implements Parser {
                 continue;
             }
 
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_INPUT_FORM);
         }
 
         while (!converter.isEmpty()) {
