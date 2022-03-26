@@ -8,10 +8,11 @@ import java.util.regex.Pattern;
 import calculator.domain.OperatorType;
 
 public class ExpressionParser implements Parser {
+    public static final Pattern INPUT_FORM = Pattern.compile("\\d+(.\\d+)?( [+-/*] \\d+(.\\d+)?)*");
     public static final Pattern NUMBER = Pattern.compile("\\d+(.\\d+)?");
     public static final Pattern OPERATOR = Pattern.compile("[+-/*]");
     private static final String ERROR_INPUT_FORM = "[ERROR] 정상적인 입력이 아닙니다. 다시 입력해주세요.";
-    
+
     private final String delimiter;
 
     public ExpressionParser(String delimiter) {
@@ -19,11 +20,14 @@ public class ExpressionParser implements Parser {
     }
 
     @Override
-    public List<String> parsePostfix(String expression) {
+    public List<String> parsePostfix(String input) {
+
+        validateInput(input);
+
         Stack<String> converter = new Stack<>();
         List<String> result = new ArrayList<>();
 
-        String[] inputStrings = split(expression);
+        String[] inputStrings = input.split(delimiter);
 
         for (String inputString : inputStrings) {
             if (isNumber(inputString)) {
@@ -32,20 +36,42 @@ public class ExpressionParser implements Parser {
             }
 
             if (isOperator(inputString)) {
-                while (!converter.isEmpty() && isPopOperator(converter.peek(), inputString)) {
+                while (hasValueInStack(converter) && isPopOperator(converter.peek(), inputString)) {
                     result.add(converter.pop());
                 }
                 converter.add(inputString);
-                continue;
             }
-
-            throw new IllegalArgumentException(ERROR_INPUT_FORM);
         }
 
-        while (!converter.isEmpty()) {
+        while (hasValueInStack(converter)) {
             result.add(converter.pop());
         }
         return result;
+    }
+
+    private void validateInput(String input) {
+        if (input == null || isNotCorrectInput(input)) {
+            throw new IllegalArgumentException(ERROR_INPUT_FORM);
+        }
+    }
+
+    private boolean isNotCorrectInput(String input) {
+        return !INPUT_FORM.matcher(input)
+            .matches();
+    }
+
+    private boolean isNumber(String value) {
+        return NUMBER.matcher(value)
+            .matches();
+    }
+
+    private boolean isOperator(String value) {
+        return OPERATOR.matcher(value)
+            .matches();
+    }
+
+    private boolean hasValueInStack(Stack<String> converter) {
+        return !converter.isEmpty();
     }
 
     private boolean isPopOperator(String converterOperator, String inputOperator) {
@@ -55,26 +81,5 @@ public class ExpressionParser implements Parser {
     private int getOperatorPriorityValue(String operator) {
         return OperatorType.from(operator)
             .getPriorityValue();
-    }
-
-    private boolean isOperator(String inputString) {
-        return OPERATOR.matcher(inputString)
-            .matches();
-    }
-
-    private boolean isNumber(String inputString) {
-        return NUMBER.matcher(inputString)
-            .matches();
-    }
-
-    private String[] split(String inputString) {
-        if (isNullOrBlank(inputString)) {
-            throw new IllegalArgumentException(ERROR_INPUT_FORM);
-        }
-        return inputString.split(delimiter);
-    }
-
-    private boolean isNullOrBlank(String inputString) {
-        return inputString == null || inputString.isBlank();
     }
 }
