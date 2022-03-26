@@ -26,6 +26,12 @@ public class Calculate implements CalculateStrategy
 
         List<String> expressionList = splitString(expression);
 
+        if(!isExpression(expressionList)) // 올바른 수식으로 되어있는지 확인
+        {
+            console.inputError();
+            return;
+        }
+
     }
     private List<String> splitString(String expression)
     {
@@ -54,6 +60,30 @@ public class Calculate implements CalculateStrategy
         return false;
     }
 
+    private boolean isExpression(List<String> expressionList) // 올바른 식으로 구성되어 있는지 확인
+    {
+        int state = 0; // 숫자인지 부호인지 상태 확인하는 코드
+        int divideFlag = 0;  // 이전 부호가 나누기인지 아닌지 확인하는 코드
+        for (String s : expressionList) // s가 스택에 쌓인 스트링(부호 혹은 숫자)
+        {
+            if (state == 0 && isNumber(s)) // 숫자라면
+            {
+                if (divideFlag != 0 && s.equals("0")) return false;
+                state = 1;
+            } else if (isSymbol(s)) // 숫자가 아니라면
+            {
+                if (s.equals("/")) divideFlag = 1;
+                else divideFlag = 0;
+                state = 0;
+            }
+            else{ // 만약 올바르지 않다면
+                return false;
+            }
+        }
+        if(state == 1) // 마지막이 부호로 끝난다면 잘못된 수식.
+            return false;
+        return true;
+    }
 
 
 }
