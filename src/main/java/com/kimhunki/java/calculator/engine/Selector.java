@@ -49,11 +49,14 @@ public class Selector implements Runnable
     private void selectModel(String selectString,CalculateStrategy calculate, QueryStrategy query,ResultRepository resultRepository,Console console)
     {
         if (selectString.equals("1")){
-            calculate.calculate(resultRepository);
+            if (resultRepository.getResultList().size() > 0)
+                query.printResult(resultRepository);
+            else
+                console.inputError();
         }
 
         else if(selectString.equals("2"))
-            if (resultRepository.getResultList().size() > 0)
-                query.printResult(resultRepository);
+            calculate.calculate(resultRepository);
+
     }
 }
