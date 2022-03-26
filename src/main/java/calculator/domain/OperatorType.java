@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import java.util.Arrays;
 import java.util.function.BinaryOperator;
@@ -13,16 +13,16 @@ public enum OperatorType {
             throw new IllegalArgumentException("[ERROR] 0으로 나눌 수 없습니다. 다시 입력해주세요.");
         }
         return firstNumber / secondNumber;
-    }, 3);
+    }, 2);
 
     private final String operator;
     private final BinaryOperator<Double> expression;
-    private final int value;
+    private final int priorityValue;
 
-    OperatorType(String operator, BinaryOperator<Double> expression, int value) {
+    OperatorType(String operator, BinaryOperator<Double> expression, int priorityValue) {
         this.operator = operator;
         this.expression = expression;
-        this.value = value;
+        this.priorityValue = priorityValue;
     }
 
     public static OperatorType from(String operator) {
@@ -32,11 +32,11 @@ public enum OperatorType {
             .orElseThrow(() -> new IllegalArgumentException("[ERROR] 연산자가 아닙니다. 다시 입력해주세요."));
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public double calculate(double firstNumber, double secondNumber) {
         return expression.apply(firstNumber, secondNumber);
+    }
+
+    public int getPriorityValue() {
+        return priorityValue;
     }
 }
