@@ -64,6 +64,17 @@ class CalculationServiceTest {
     }
 
     @Test
+    public void 계산서비스_테스트_0으로나누기() throws Exception {
+        // given
+        String expr = "1 / 0";
+
+        // when
+        String result = calculationService.getResult(expr);
+
+        // then
+    }
+
+    @Test
     public void 계산서비스_테스트_괄호() throws Exception {
         // given
         String expr = "2 / ( 4 + 3 )";

@@ -34,6 +34,9 @@ public class Calculator implements Runnable {
                     output.printResult(expr, result);
                     historyService.save(expr, result);
                 }
+            } catch (ArithmeticException e) {
+                output.divZeroError();
+                return;
             } catch (Exception e) {
                 output.inputError();
                 return;

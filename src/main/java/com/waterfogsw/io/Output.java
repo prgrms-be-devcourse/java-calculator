@@ -10,4 +10,6 @@ public interface Output {
     void printHistories(List<Calculation> calculations);
 
     void inputError();
+
+    void divZeroError();
 }

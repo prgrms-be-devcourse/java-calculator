@@ -47,6 +47,11 @@ public class Console implements Input, Output {
         System.out.println("잘못된 입력입니다.");
     }
 
+    @Override
+    public void divZeroError() {
+        System.out.println("0으로 나눌 수 없습니다.");
+    }
+
     private boolean isValidMenu(String menu) {
         return Integer.parseInt(menu) == 1 || Integer.parseInt(menu) == 2;
     }
