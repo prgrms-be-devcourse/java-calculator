@@ -1,9 +1,10 @@
 package repository;
 
+import model.Expression;
+
 import java.util.List;
 
 public interface ExpressionRepository {
-
-    void save(String expression);
-    List<String> findAll();
+    void save(Expression expression);
+    List<Expression> findAll();
 }
