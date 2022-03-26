@@ -26,15 +26,6 @@ class PostfixExpressionTest {
         );
     }
 
-    private static Stream<Arguments> provideWrongExpression() {
-        return Stream.of(
-            Arguments.of("1 + 3 / 2 ㅁ", Arrays.asList("1", "3", "2", "/", "+")),
-            Arguments.of("1 / 5 // 3 ", Arrays.asList("1", "5", "/", "3", "/")),
-            Arguments.of("1 * 3 ++ 5 / 2", Arrays.asList("1", "3", "*", "5", "2", "/", "+")),
-            Arguments.of("1.5 * 3.5 + 5.5 / 2.012ㅇㄴㅁ", Arrays.asList("1.5", "3.5", "*", "5.5", "2.012", "/", "+"))
-        );
-    }
-
     @DisplayName("from은 식을 주면 Expression 인스턴스를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1 * 2", "4 / 2 * 5", "3 * 2 + 1 - 4 / 5"})
