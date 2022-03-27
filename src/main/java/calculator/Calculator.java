@@ -8,6 +8,9 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class Calculator implements Runnable {
+    private static final String END_PROGRAM = "3";
+    private static final String MENU_RECORD = "1";
+    private static final String MENU_CALCULATE = "2";
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
 
     private final ResultRepository repository;
@@ -24,17 +27,17 @@ public class Calculator implements Runnable {
     public void run() {
         while (true) {
             String command = inputView.inputMenu();
-            if (command.equals("3")) {
+            if (command.equals(END_PROGRAM)) {
                 break;
             }
 
-            if (command.equals("1")) {
+            if (command.equals(MENU_RECORD)) {
                 repository.findAll()
                     .ifPresentOrElse(outputView::printResults, outputView::printNoResults);
                 continue;
             }
 
-            if (command.equals("2")) {
+            if (command.equals(MENU_CALCULATE)) {
                 boolean wrongInput = true;
                 while (wrongInput) {
                     String expression = inputView.inputExpression();
