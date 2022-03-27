@@ -19,13 +19,13 @@ import java.util.regex.Pattern;
  *    3. 잘못된 수식인 경우 -> 1 ++ 2, 1 + 2 * 등등
  *    4. 수식이 null || "" || " " 인 경우
  */
-public class Calculator {
+public final class Calculator {
     /*
         계산 로직
         1. 중위 표기법 -> 후위 표기법 변환
         2. 후위 표기법 계산
      */
-    public static String calculate(String expression) {
+    public static final String calculate(String expression) {
 
         if(expression == null || expression.isBlank()){
             throw new RuntimeException(ErrorMessage.EMPTY_EXPRESSION.getMessage());
@@ -49,7 +49,7 @@ public class Calculator {
     }
 
     // 후위 표기법 계산
-    private static double calculatePostfix(String postfix) {
+    private static final double calculatePostfix(String postfix) {
         Stack<String> stack = new Stack<>();
         String element[] = postfix.split(" ");
 
@@ -86,7 +86,7 @@ public class Calculator {
     }
 
     // 중위 표기법 -> 후위 표기법 변환
-    private static String infixToPostfix(String expression) {
+    private static final String infixToPostfix(String expression) {
         String element[] = expression.split(" ");
         Stack<String> stack = new Stack<>();
 
@@ -114,7 +114,7 @@ public class Calculator {
     }
 
     //입력 예외 처리
-    private static boolean validateExpression(String s) {
+    private static final boolean validateExpression(String s) {
         /**
          * 예외 처리
          * 1. 빈 값이거나 공백만 있는 경우
@@ -131,7 +131,7 @@ public class Calculator {
 
 
     // 우선순위를 반환
-    private static int prec(String s) {
+    private static final int prec(String s) {
         if (s.equals("+") || s.equals("-") )
             return 0;
         return 1;
