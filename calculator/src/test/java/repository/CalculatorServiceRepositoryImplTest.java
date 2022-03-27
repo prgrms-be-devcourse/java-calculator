@@ -42,4 +42,19 @@ class CalculatorServiceRepositoryImplTest {
         //then
         Assertions.assertThat(repository.getResults().size()).isEqualTo(2);
     }
+
+    @Test
+    void DB_초기화() {
+        //given
+        String exp = "1+2-7";
+        int result = -4;
+        String exp2 = "3*2-2";
+        int result2 = 4;
+        //when
+        repository.save(exp,result);
+        repository.save(exp2,result2);
+        repository.clear();
+        //then
+        Assertions.assertThat(repository.getResults().size()).isEqualTo(0);
+    }
 }

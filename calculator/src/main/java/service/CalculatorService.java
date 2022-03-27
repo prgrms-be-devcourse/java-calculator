@@ -1,9 +1,11 @@
 package service;
 
-import java.util.List;
-
 public interface CalculatorService {
-    Double calculate();
+    void calculate();
+
     void getResults();
 
+    String toPostfix(String expression);
+
+    boolean checkPriority(Character a,Character b);
 }

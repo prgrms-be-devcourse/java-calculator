@@ -4,16 +4,17 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public enum Option {
-    INQUIRY(1),CALCULATE(2),EXIT(3);
+    INQUIRY(1), CALCULATE(2), EXIT(3);
 
     private final int select;
 
     Option(int select) {
         this.select = select;
     }
+
     public static Option parse(String input) {
         return Arrays.stream(Option.values())
-                .filter(e -> e.select==toInt(input))
+                .filter(e -> e.select == toInt(input))
                 .findAny()
                 .orElseThrow(() -> new NoSuchElementException("1,2 중 선택해야 합니다"));
     }

@@ -9,19 +9,24 @@ public enum Operator {
     MINUS("-", (a, b) -> (a - b)),
     MULTIPLY("*", (a, b) -> (a * b)),
     DIVIDE("/", (a, b) -> {
-        if(b==0) throw new ArithmeticException("0으로 나눌 수 없다");
-        return a/b;
+        if (b == 0) throw new ArithmeticException("0으로 나눌 수 없다");
+        return a / b;
     });
     private final String operation;
+    private final int priority;
     private final BinaryOperator<Double> biFunction;
 
-    Operator(String operation, BinaryOperator<Double> biFunction) {
+    Operator(String operation,BinaryOperator<Double> biFunction) {
+        int prior = -1;
         this.operation = operation;
+        switch(operation) {
+            case "+": prior =1;
+            case "-": prior =1;
+            case "*": prior =2;
+            case "/": prior =2;
+        }
+        this.priority = prior;
         this.biFunction = biFunction;
-    }
-
-    public Double calculate(double a, double b) {
-        return this.biFunction.apply(a,b);
     }
 
     public static Operator parse(String operation) {
@@ -29,5 +34,9 @@ public enum Operator {
                 .filter(e -> e.operation.equals(operation))
                 .findAny()
                 .orElseThrow(() -> new NoSuchElementException("올바른 수식을 입력해야 합니다."));
+    }
+
+    public Double calculate(double a, double b) {
+        return this.biFunction.apply(a, b);
     }
 }

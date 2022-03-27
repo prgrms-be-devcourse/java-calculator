@@ -13,8 +13,9 @@ public class Main {
     public static void main(String[] args) {
         Input input = new InputImpl();
         Output output = new OutputImpl();
-        CalculatorService calculatorService = new CalculatorServiceImpl();
         CalculatorRepository calculatorRepository = new CalculatorRepositoryImpl();
-        new ServiceImpl(input,output,calculatorRepository,calculatorService).run();
+        CalculatorService calculatorService = new CalculatorServiceImpl(
+                calculatorRepository, input, output);
+        new ServiceImpl(input, output, calculatorService).run();
     }
 }
