@@ -1,4 +1,5 @@
 import model.Operator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class OperatorTest {
@@ -12,11 +13,13 @@ class OperatorTest {
         String divideOperation = "/";
         //when
         Operator plus = Operator.parse(plusOperation);
-        Operator minus = Operator.MINUS;
-        Operator multiply = Operator.MULTIPLY;
-        Operator divide = Operator.DIVIDE;
+        Operator minus = Operator.parse(minusOperation);
+        Operator multiply = Operator.parse(multiplyOperation);
+        Operator divide = Operator.parse(divideOperation);
         //then
-        Double calculate = plus.calculate(1, 2);
-
+        Assertions.assertThat(plus.calculate(1, 2)).isEqualTo(3.0);
+        Assertions.assertThat(minus.calculate(1, 2)).isEqualTo(-1.0);
+        Assertions.assertThat(multiply.calculate(5, 222)).isEqualTo(1110.0);
+        Assertions.assertThat(divide.calculate(66, 5)).isEqualTo(13.2);
     }
 }
