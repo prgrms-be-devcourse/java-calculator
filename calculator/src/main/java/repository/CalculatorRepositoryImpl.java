@@ -3,8 +3,9 @@ package repository;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class calculatorRepositoryImpl implements calculatorRepository{
+public class CalculatorRepositoryImpl implements CalculatorRepository {
     private final Map<String,Integer> db = new LinkedHashMap<>();
 
     @Override
@@ -13,8 +14,16 @@ public class calculatorRepositoryImpl implements calculatorRepository{
     }
 
     @Override
+    public int getResult(String exp) {
+        return db.get(exp);
+    }
+
+    @Override
     public List<String> getResults() {
-        return null;
+        return db.entrySet()
+                .stream()
+                .map(e-> e.getKey()+ "=" + e.getValue())
+                .collect(Collectors.toList());
     }
 
     @Override
