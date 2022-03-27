@@ -1,4 +1,4 @@
-package programmers.calculator.memory;
+package programmers.calculator.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class MemoryImpl implements Memory<String, String> {
+public class InMemoryRepository implements Repository<String, String> {
 
   private final List<String> memory = new ArrayList<>();
 

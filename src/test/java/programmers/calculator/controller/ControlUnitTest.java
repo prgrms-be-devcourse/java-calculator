@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import programmers.calculator.memory.MemoryImpl;
+import programmers.calculator.repository.InMemoryRepository;
 import programmers.calculator.processor.Processor;
 import programmers.calculator.processor.register.BufferRegister;
 import programmers.calculator.processor.register.OperatorRegister;
@@ -16,7 +16,7 @@ class ControlUnitTest {
 
   ControlUnit controlUnit = new ControlUnit(new WhiteSpaceParser(),
       new Processor(new BufferRegister(), new ResultRegister(), new OperatorRegister()),
-      new MemoryImpl());
+      new InMemoryRepository());
 
   @Test
   @DisplayName("연산 결과를 출력한다")

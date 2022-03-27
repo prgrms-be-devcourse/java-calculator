@@ -1,9 +1,9 @@
-package programmers.calculator.memory;
+package programmers.calculator.repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface Memory<K, V>{
+public interface Repository<K, V>{
 
   void save(K key, V value);
 
