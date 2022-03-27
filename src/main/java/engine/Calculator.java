@@ -22,9 +22,19 @@ public class Calculator implements Runnable {
             Optional<Integer> inputFunctionNumber = function.check(inputString);
             if(inputFunctionNumber.isEmpty()){
                 output.inputFunctionError();
-                //break;
+                continue;
+            }
+            if(inputFunctionNumber.equals(1)){ //enum사용하도록 변경
+
+            }
+            if(inputFunctionNumber.equals(2)){
+                String expression = input.inputExpression();
+                calculate(expression);
             }
         }
+    }
+    private void calculate(String expression){
+
     }
 
 

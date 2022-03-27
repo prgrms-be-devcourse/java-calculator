@@ -24,4 +24,9 @@ public class Console implements Output, Input {
         System.out.print(s);
         return scanner.nextLine();
     }
+
+    @Override
+    public String inputExpression() {
+        return scanner.nextLine();
+    }
 }
