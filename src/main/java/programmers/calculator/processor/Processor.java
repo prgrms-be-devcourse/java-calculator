@@ -1,14 +1,13 @@
 package programmers.calculator.processor;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import programmers.calculator.controller.Validator;
 import programmers.calculator.processor.arithmetic.Operator;
 import programmers.calculator.processor.register.BufferRegister;
 import programmers.calculator.processor.register.OperatorRegister;
 import programmers.calculator.processor.register.ResultRegister;
-import programmers.calculator.util.PatternUtil;
 
 @RequiredArgsConstructor
 public class Processor {
@@ -18,7 +17,7 @@ public class Processor {
   private final OperatorRegister operatorRegister;
 
   public void writeBuffer(String token) {
-    if (PatternUtil.isNumeric(token)) {
+    if (Validator.isNumeric(token)) {
       bufferRegister.save(token);
       return;
     }
@@ -36,7 +35,7 @@ public class Processor {
   }
 
   public void writeResult(String token) {
-    if (PatternUtil.isNumeric(token)) {
+    if (Validator.isNumeric(token)) {
       resultRegister.save(Double.parseDouble(token));
       return;
     }

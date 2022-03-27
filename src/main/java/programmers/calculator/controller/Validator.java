@@ -4,13 +4,15 @@ import static lombok.AccessLevel.PRIVATE;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import lombok.NoArgsConstructor;
 import programmers.calculator.processor.arithmetic.Operator;
-import programmers.calculator.util.PatternUtil;
 
 @NoArgsConstructor(access = PRIVATE)
 public class Validator {
+
+  private static final Pattern numberPattern = Pattern.compile("^[+-]?(([1-9]\\d*)|0)(\\.\\d+)?");
 
   public static void validate(List<String> tokens) {
     List<String> numerics = new ArrayList<>();
@@ -26,7 +28,7 @@ public class Validator {
   }
 
   private static void validateNumeric(List<String> tokens) {
-    tokens.stream().filter(token -> !PatternUtil.isNumeric(token)).findAny().ifPresent(
+    tokens.stream().filter(token -> !isNumeric(token)).findAny().ifPresent(
         (t) -> {
           throw new IllegalArgumentException("잘못된 수식입니다.");
         });
@@ -46,4 +48,7 @@ public class Validator {
     throw new IllegalArgumentException("잘못된 수식입니다.");
   }
 
+  public static boolean isNumeric(String token) {
+    return numberPattern.matcher(token).matches();
+  }
 }

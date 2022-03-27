@@ -1,41 +1,43 @@
 package programmers.calculator.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
-import programmers.calculator.memory.Memory;
+import programmers.calculator.repository.Repository;
 import programmers.calculator.processor.Processor;
 
 @AllArgsConstructor
 public class ControlUnit {
 
-  private final Parser parser;
+  public static final double DIGIT_FORMAT = 100.0;
+  private static final String WHITE_SPACE_SPLIT_REGEX = "\\s";
   private final Processor processor;
-  private final Memory<String, String> memory;
+  private final Repository<String, String> repository;
 
   public String printHistory() {
     StringBuilder sb = new StringBuilder();
-    memory.findAll().
+    repository.findAll().
         forEach((value) -> sb.append(value).append("\n"));
     return sb.toString();
   }
 
   public String execute(String input) {
-    Optional<String> cache = memory.find(input);
+    Optional<String> cache = repository.find(input);
     if (cache.isPresent()) {
-      memory.save(input, cache.get());
+      repository.save(input, cache.get());
       return cache.get();
     }
 
     String result = getResult(input);
-    memory.save(input, result);
+    repository.save(input, result);
     return result;
   }
 
   private String getResult(String input) {
-      List<String> tokens = parser.parse(input);
-      List<String> postfixOrder = toPostfix(tokens);
-      return format(cycle(postfixOrder));
+    List<String> tokens = parse(input);
+    List<String> postfixOrder = toPostfix(tokens);
+    return format(cycle(postfixOrder));
   }
 
   private List<String> toPostfix(List<String> tokens) {
@@ -52,6 +54,13 @@ public class ControlUnit {
     if (value == (long) value) {
       return Long.toString((long) value);
     }
-    return Double.toString(Math.round(value * 100.0) / 100.0);
+    return Double.toString(Math.round(value * DIGIT_FORMAT) / DIGIT_FORMAT);
   }
+
+  public List<String> parse(String input) {
+    List<String> tokens = Arrays.asList(input.split(WHITE_SPACE_SPLIT_REGEX));
+    Validator.validate(tokens);
+    return tokens;
+  }
+
 }
