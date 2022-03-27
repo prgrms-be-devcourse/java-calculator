@@ -13,14 +13,14 @@ public enum Option {
         return Arrays.stream(Option.values())
                 .filter(e -> e.select==toInt(input))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("1,2 중 선택해야 합니다"));
+                .orElseThrow(() -> new NoSuchElementException("1,2 중 선택해야 합니다"));
     }
 
     static int toInt(String num) {
         try {
             return Integer.parseInt(num);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해야 합니다.");
+            throw new NumberFormatException("숫자를 입력해야 합니다.");
         }
     }
 

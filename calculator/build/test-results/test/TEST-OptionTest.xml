@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="OptionTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-03-27T09:12:50" hostname="macui-MacBookAir.local" time="0.017">
+<testsuite name="OptionTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-03-27T09:12:58" hostname="macui-MacBookAir.local" time="293.308">
   <properties/>
-  <testcase name="_12가_아닌_숫자를_입력()" classname="OptionTest" time="0.017">
+  <testcase name="_12가_아닌_숫자를_입력()" classname="OptionTest" time="293.308">
     <failure message="java.lang.IllegalArgumentException: 1,2 중 선택해야 합니다" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: 1,2 중 선택해야 합니다
 	at Option.lambda$find$1(Option.java:16)
 	at java.util.Optional.orElseThrow(Optional.java:290)

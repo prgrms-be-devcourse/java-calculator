@@ -21,7 +21,9 @@ class OptionTest {
         //given
         String input = "3";
         //then
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Option.find(input));
+        Assertions.assertThatThrownBy(() -> Option.find(input))
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessage("1,2 중 선택해야 합니다");
 
     }
 
@@ -30,6 +32,8 @@ class OptionTest {
         //given
         String input = "a";
         //then
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Option.find(input));
+        Assertions.assertThatThrownBy(() -> Option.find(input))
+                .isInstanceOf(NumberFormatException.class)
+                .hasMessage("숫자를 입력해야 합니다.");
     }
 }
