@@ -6,20 +6,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CalculatorRepositoryImpl implements CalculatorRepository {
-    private final Map<String,Integer> db = new LinkedHashMap<>();
+    private final Map<String,Double> db = new LinkedHashMap<>();
 
     @Override
-    public void save(String exp, int result) {
+    public void save(String exp, double result) {
         db.put(exp,result);
     }
 
     @Override
-    public int getResult(String exp) {
+    public double getResult(String exp) {
         return db.get(exp);
     }
 
     @Override
     public List<String> getResults() {
+        db.put("1+2",3.0);
         return db.entrySet()
                 .stream()
                 .map(e-> e.getKey()+ "=" + e.getValue())

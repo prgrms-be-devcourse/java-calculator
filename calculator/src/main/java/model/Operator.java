@@ -1,6 +1,7 @@
+package model;
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
@@ -11,7 +12,6 @@ public enum Operator {
         if(b==0) throw new ArithmeticException("0으로 나눌 수 없다");
         return a/b;
     });
-
     private final String operation;
     private final BinaryOperator<Double> biFunction;
 
@@ -24,9 +24,9 @@ public enum Operator {
         return this.biFunction.apply(a,b);
     }
 
-    public Operator parse(String operation) {
+    public static Operator parse(String operation) {
         return Arrays.stream(Operator.values())
-                .filter(e -> e.operation == this.operation)
+                .filter(e -> e.operation.equals(operation))
                 .findAny()
                 .orElseThrow(() -> new NoSuchElementException("올바른 수식을 입력해야 합니다."));
     }

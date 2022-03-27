@@ -1,5 +1,9 @@
 package service;
 
+import java.util.List;
+
 public interface CalculatorService {
-    Double calculate(String input);
+    Double calculate();
+    void getResults();
+
 }

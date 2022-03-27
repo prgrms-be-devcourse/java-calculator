@@ -1,15 +1,17 @@
+package model;
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public enum Option {
-    INQUIRY(1),CALCULATE(2);
+    INQUIRY(1),CALCULATE(2),EXIT(3);
 
     private final int select;
 
     Option(int select) {
         this.select = select;
     }
-    static Option parse(String input) {
+    public static Option parse(String input) {
         return Arrays.stream(Option.values())
                 .filter(e -> e.select==toInt(input))
                 .findAny()

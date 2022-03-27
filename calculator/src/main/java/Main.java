@@ -1,10 +1,20 @@
+import io.Input;
+import io.InputImpl;
+import io.Output;
+import io.OutputImpl;
+import repository.CalculatorRepository;
+import repository.CalculatorRepositoryImpl;
+import service.CalculatorService;
+import service.CalculatorServiceImpl;
 import service.ServiceImpl;
-import service.Service;
 
 public class Main {
 
     public static void main(String[] args) {
-        Service service = new ServiceImpl();
-        service.run();
+        Input input = new InputImpl();
+        Output output = new OutputImpl();
+        CalculatorService calculatorService = new CalculatorServiceImpl();
+        CalculatorRepository calculatorRepository = new CalculatorRepositoryImpl();
+        new ServiceImpl(input,output,calculatorRepository,calculatorService).run();
     }
 }
