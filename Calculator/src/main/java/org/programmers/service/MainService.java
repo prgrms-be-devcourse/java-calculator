@@ -6,6 +6,10 @@ import org.programmers.service.IO.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 변수 및 함수의 이름들을 보다 더 명확하게 수정해봤습니다.
+ * 계산 결과값의 출력과 저장을 분리했습니다.
+ */
 @AllArgsConstructor
 public class MainService implements Runnable {
     private final int ERROR_EXPRESSION_PATTERN = 1;

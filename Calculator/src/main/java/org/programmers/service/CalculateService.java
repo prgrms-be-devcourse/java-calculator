@@ -6,6 +6,12 @@ import org.programmers.repository.Repository;
 
 import java.util.*;
 
+/**
+ * 기존에 연산과 저장을 동시에 했던 calculateSave 메소드를
+ * calculate와 historysave 메소드로 분리했습니다.
+ * 그리고 historysave메소드는 반환값을 줘서 저장한 값을 확인할 수 있도록 했습니다.
+ *
+ */
 @AllArgsConstructor
 public class CalculateService {
     private Repository calculatorRepository;
