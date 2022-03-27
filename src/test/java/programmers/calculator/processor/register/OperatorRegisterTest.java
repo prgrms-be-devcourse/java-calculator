@@ -18,7 +18,7 @@ class OperatorRegisterTest {
     operatorRegister.save(Operator.DIVIDE);
 
     List<String> trailingSymbols = operatorRegister.popTrailingSymbols(Operator.ADD);
-    assertThat(trailingSymbols).containsExactly("*", "/");
+    assertThat(trailingSymbols).containsExactly("/", "*");
     assertThat(operatorRegister.popAll().size()).isEqualTo(0);
   }
 
@@ -29,5 +29,7 @@ class OperatorRegisterTest {
     operatorRegister.save(Operator.SUBTRACT);
 
     List<String> trailingSymbols = operatorRegister.popTrailingSymbols(Operator.MULTIPLY);
-    assertThat(trailingSymbols).isEmpty();}
+    assertThat(trailingSymbols).isEmpty();
+    assertThat(operatorRegister.popAll().size()).isEqualTo(2);
+  }
 }
