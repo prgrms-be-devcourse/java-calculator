@@ -6,20 +6,27 @@ import java.util.Map;
 public class History {
     Map<String ,Number> history = new HashMap<>();
 
-    private boolean save(){
+    boolean save(String operation, Number result){
+        history.put(operation, result);
         return true;
     }
 
-    List<String> listAll(){
+    List<String> getList(){
         List<String> historyList = new ArrayList<>();
+        System.out.println("list All");
 
         for(var entry : history.entrySet()) {
-            String key = entry.getKey();
-            Number value = entry.getValue();
+            String operation = entry.getKey();
+            Number result = entry.getValue();
 
-            String item = key +" = "+ value.toString();
+            String item = operation + " = " + result.toString();
             historyList.add(item);
         }
+
         return historyList;
+    }
+
+    int count(){
+        return history.size();
     }
 }
