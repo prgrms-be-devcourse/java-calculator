@@ -30,13 +30,13 @@ class CalculationServiceTest {
     @Test
     public void 계산서비스_테스트_뺄셈() throws Exception {
         // given
-        String expr = "2 - 2 - 2";
+        String expr = "2 - 2 - 2 - 2";
 
         // when
         String result = calculationService.getResult(expr);
 
         // then
-        Assertions.assertThat(result).isEqualTo("-2");
+        Assertions.assertThat(result).isEqualTo("-4");
     }
 
     @Test
@@ -98,6 +98,30 @@ class CalculationServiceTest {
 
         // then
         Assertions.assertThat(result).isEqualTo("4");
+    }
+
+    @Test
+    public void 계산서비스_테스트_음수시작1() throws Exception {
+        // given
+        String expr = "-100";
+
+        // when
+        String result = calculationService.getResult(expr);
+
+        // then
+        Assertions.assertThat(result).isEqualTo("-100");
+    }
+
+    @Test
+    public void 계산서비스_테스트_음수시작2() throws Exception {
+        // given
+        String expr = "-10 + 45";
+
+        // when
+        String result = calculationService.getResult(expr);
+
+        // then
+        Assertions.assertThat(result).isEqualTo("35");
     }
 
 }

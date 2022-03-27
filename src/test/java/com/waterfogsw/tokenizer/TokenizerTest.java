@@ -40,4 +40,16 @@ class TokenizerTest {
         // then
         Assertions.assertThat(exprList).isEqualTo(Arrays.asList("(", "4", "-", "2", ")", "*", "2"));
     }
+
+    @Test
+    public void 문자열_토큰화_테스트3() throws Exception {
+        // given
+        String exprStr = "-100 + 300";
+
+        // when
+        List<String> exprList = tokenizer.parse(exprStr);
+
+        // then
+        Assertions.assertThat(exprList).isEqualTo(Arrays.asList("-", "100", "+", "300"));
+    }
 }

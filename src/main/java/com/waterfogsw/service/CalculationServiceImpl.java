@@ -24,6 +24,11 @@ public class CalculationServiceImpl implements CalculationService {
         for (String token : postfixTokens) {
             if (!Operator.isOperator(token)) {
                 stack.add(token);
+            } else if (stack.size() == 1) {
+                String x = stack.pop();
+
+                String result = calculate(x, "0", token);
+                stack.add(result);
             } else {
                 String x = stack.pop();
                 String y = stack.pop();
