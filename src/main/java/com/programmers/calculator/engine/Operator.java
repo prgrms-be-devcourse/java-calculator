@@ -44,17 +44,16 @@ public enum Operator {
 		this.type = type;
 	}
 
-	public abstract Value calculate(Value x, Value y);
-
 	public static Operator fineOperator(String op) {
 		return Stream.of(Operator.values()).filter(o -> o.op.equals(op))
 			.findAny()
-			.orElseThrow(() -> new IllegalArgumentException("잘못된 연산자 입력입니다!"));
+			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 잘못된 연산자 입력입니다!"));
 	}
 
-	public boolean isHighPriority(){
+	public boolean isHighPriority() {
 		return this.type == PriorityType.HIGH;
 	}
 
+	public abstract Value calculate(Value x, Value y);
 
 }

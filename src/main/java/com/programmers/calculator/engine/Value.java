@@ -42,7 +42,7 @@ public class Value {
 		Objects.requireNonNull(val);
 		try {
 			assertNumber(val);
-		} catch (NumberFormatException e){
+		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException();
 		}
 

@@ -5,7 +5,7 @@ import com.programmers.calculator.engine.repository.MemoryCalculatorRepository;
 import com.programmers.calculator.io.Input;
 import com.programmers.calculator.io.Output;
 
-public class Calculator implements Runnable{
+public class Calculator implements Runnable {
 	private Input input;
 	private Output output;
 	private Menu menu;
@@ -22,40 +22,40 @@ public class Calculator implements Runnable{
 	public void run() {
 		do {
 			menu = selectMenu();
-			if(menu.isRunning()){
+			if (menu.isRunning()) {
 				String formula = "";
-				if(menu == Menu.CALCULATE){
+				if (menu == Menu.CALCULATE) {
 					formula = enterFomula();
 				}
-				String result = menu.start(repository,formula);
+				String result = menu.start(repository, formula);
 
 				output.print(result);
 			}
 		} while (menu.isRunning());
 	}
 
-	private Menu selectMenu(){
-		while(true){
-			try{
+	private Menu selectMenu() {
+		while (true) {
+			try {
 				output.print(Menu.menuList());
 				return Menu.fineMenu(input.enter());
 
-			} catch (IllegalArgumentException e){
+			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
 		}
 	}
 
-	private String enterFomula(){
-		while(true){
-			try{
+	private String enterFomula() {
+		while (true) {
+			try {
 				output.print("식을 입력하세요!");
 				String formula = input.enter();
-				if(Parser.parse(formula)){
+				if (Parser.parse(formula)) {
 					return formula;
 				}
 
-			} catch (IllegalArgumentException e){
+			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
 		}

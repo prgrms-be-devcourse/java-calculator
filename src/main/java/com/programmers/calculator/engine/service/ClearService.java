@@ -2,7 +2,7 @@ package com.programmers.calculator.engine.service;
 
 import com.programmers.calculator.engine.repository.CalculatorRepository;
 
-public class ClearService implements CalculatorService{
+public class ClearService implements CalculatorService {
 
 	/**
 	 * repository의 메모리를 clear하는 메서드

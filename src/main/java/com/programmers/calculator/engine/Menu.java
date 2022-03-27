@@ -10,10 +10,10 @@ import com.programmers.calculator.engine.service.ClearService;
 import com.programmers.calculator.engine.service.InquiryService;
 
 public enum Menu {
-	INQUIRY("1", "1. 조회",new InquiryService()),
-	CALCULATE("2", "2. 계산",new CalculateService()),
+	INQUIRY("1", "1. 조회", new InquiryService()),
+	CALCULATE("2", "2. 계산", new CalculateService()),
 	CLEAR("3", "3. 초기화", new ClearService()),
-	QUIT("4", "4. 종료",null);
+	QUIT("4", "4. 종료", null);
 
 	private String button;
 	private String menu;
@@ -52,7 +52,7 @@ public enum Menu {
 		return CLEAR;
 	}
 
-	public String start(CalculatorRepository repository,String formula){
-		return this.service.execute(repository,formula);
+	public String start(CalculatorRepository repository, String formula) {
+		return this.service.execute(repository, formula);
 	}
 }
