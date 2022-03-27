@@ -2,6 +2,7 @@ package com.kimhunki.java.calculator.model;
 
 import com.kimhunki.java.calculator.Console;
 import com.kimhunki.java.calculator.db.ResultRepository;
+import com.kimhunki.java.calculator.strategy.QueryStrategy;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

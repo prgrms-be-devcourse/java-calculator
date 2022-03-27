@@ -2,8 +2,8 @@ package com.kimhunki.java.calculator.model;
 
 import com.kimhunki.java.calculator.Console;
 import com.kimhunki.java.calculator.db.ResultRepository;
+import com.kimhunki.java.calculator.strategy.CalculateStrategy;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
@@ -23,9 +23,9 @@ public class Calculate implements CalculateStrategy
             return;
         }
 
-
+        
         List<String> expressionList = splitString(expression);
-
+        
         if(!isExpression(expressionList)) // 올바른 수식으로 되어있는지 확인
         {
             console.inputError();
@@ -110,7 +110,7 @@ public class Calculate implements CalculateStrategy
                 return false;
             }
         }
-        if(state == 1) // 마지막이 부호로 끝난다면 잘못된 수식.
+        if(state == 0) // 마지막이 부호로 끝난다면 잘못된 수식.
             return false;
         return true;
     }

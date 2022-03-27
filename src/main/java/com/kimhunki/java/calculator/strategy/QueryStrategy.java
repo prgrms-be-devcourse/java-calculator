@@ -1,4 +1,4 @@
-package com.kimhunki.java.calculator.model;
+package com.kimhunki.java.calculator.strategy;
 
 import com.kimhunki.java.calculator.db.ResultRepository;
 

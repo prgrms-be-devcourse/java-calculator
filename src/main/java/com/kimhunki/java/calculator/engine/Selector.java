@@ -2,21 +2,18 @@ package com.kimhunki.java.calculator.engine;
 
 import com.kimhunki.java.calculator.Console;
 import com.kimhunki.java.calculator.db.ResultRepository;
-import com.kimhunki.java.calculator.io.Input;
-import com.kimhunki.java.calculator.io.Output;
 import com.kimhunki.java.calculator.model.Calculate;
-import com.kimhunki.java.calculator.model.CalculateStrategy;
+import com.kimhunki.java.calculator.strategy.CalculateStrategy;
 import com.kimhunki.java.calculator.model.Query;
-import com.kimhunki.java.calculator.model.QueryStrategy;
+import com.kimhunki.java.calculator.strategy.QueryStrategy;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 public class Selector implements Runnable
 {
+
     Console console;
 
     @Override
