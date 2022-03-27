@@ -8,12 +8,15 @@ public enum OPERATOR {
 
     private final String value;
     private final int priority;
+
     OPERATOR(String value, int priority) {
         this.value = value;
         this.priority = priority;
     }
 
-    public String getValue() {return this.value;}
+    public String getValue() {
+        return this.value;
+    }
 
     static public int getPriority(String operator) {
         if (PLUS.getValue().equals(operator)) return PLUS.priority;
@@ -24,8 +27,8 @@ public enum OPERATOR {
     }
 
     static public boolean isOperator(String operator) {
-        for (OPERATOR op:OPERATOR.values()) {
-            if(op.getValue().equals(operator)) return true;
+        for (OPERATOR op : OPERATOR.values()) {
+            if (op.getValue().equals(operator)) return true;
         }
         return false;
     }

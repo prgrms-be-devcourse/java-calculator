@@ -12,10 +12,10 @@ public class InputParser {
     }
 
     public String[] parse(String inputFormula) {
-        if(inputFormula == null) throw new IllegalArgumentException();
+        if (inputFormula == null) throw new IllegalArgumentException();
         String[] splittedInputFormula = inputFormula.split(seperator);
 
-        if(!inputValidator.valid(splittedInputFormula)) throw new IllegalArgumentException();
+        if (!inputValidator.valid(splittedInputFormula)) throw new IllegalArgumentException();
 
         return PostfixConvertor.convert(splittedInputFormula);
     }

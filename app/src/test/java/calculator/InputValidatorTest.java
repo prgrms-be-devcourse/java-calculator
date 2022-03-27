@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputValidatorTest {
     static private InputValidator inputValidator;
+
     @BeforeAll
     static void setUp() {
         inputValidator = new InputValidator();
@@ -19,8 +20,8 @@ public class InputValidatorTest {
         assertThat(inputValidator.valid(null)).isFalse();
         assertThat(inputValidator.valid(new String[]{})).isFalse();
         assertThat(inputValidator.valid(new String[]{"1"})).isFalse();
-        assertThat(inputValidator.valid(new String[]{"1","+"})).isFalse();
-        assertThat(inputValidator.valid(new String[]{"1","+","2"})).isTrue();
-        assertThat(inputValidator.valid(new String[]{"1","+","2","3"})).isFalse();
+        assertThat(inputValidator.valid(new String[]{"1", "+"})).isFalse();
+        assertThat(inputValidator.valid(new String[]{"1", "+", "2"})).isTrue();
+        assertThat(inputValidator.valid(new String[]{"1", "+", "2", "3"})).isFalse();
     }
 }
