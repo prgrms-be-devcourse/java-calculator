@@ -2,6 +2,7 @@ package model;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
@@ -14,9 +15,9 @@ public enum Operator {
     });
     private final String operation;
     private final int priority;
-    private final BinaryOperator<Double> biFunction;
+    private final BiFunction<Double,Double,Double> biFunction;
 
-    Operator(String operation,BinaryOperator<Double> biFunction) {
+    Operator(String operation,BiFunction<Double,Double,Double> biFunction) {
         int prior = -1;
         this.operation = operation;
         switch(operation) {

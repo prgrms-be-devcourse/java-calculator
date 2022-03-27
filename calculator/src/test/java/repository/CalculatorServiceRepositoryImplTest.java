@@ -15,7 +15,7 @@ class CalculatorServiceRepositoryImplTest {
         repository.save(exp,result);
         //then
         Assertions.assertThat(repository.getResult(exp)).isEqualTo(-4.0);
-        Assertions.assertThat(repository.getResults().size()).isEqualTo(1.0);
+        Assertions.assertThat(repository.getResults().size()).isEqualTo(1);
     }
 
     @Test

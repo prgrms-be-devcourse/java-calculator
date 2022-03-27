@@ -1,11 +1,15 @@
 package service;
 
+import java.util.ArrayList;
+
 public interface CalculatorService {
-    void calculate();
+
+    void input();
+    double calculate(String postfix);
 
     void getResults();
 
-    String toPostfix(String expression);
+    ArrayList<Object> toPostfix(String expression);
 
     boolean checkPriority(Character a,Character b);
 }

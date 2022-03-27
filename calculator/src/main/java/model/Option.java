@@ -16,7 +16,7 @@ public enum Option {
         return Arrays.stream(Option.values())
                 .filter(e -> e.select == toInt(input))
                 .findAny()
-                .orElseThrow(() -> new NoSuchElementException("1,2 중 선택해야 합니다"));
+                .orElseThrow(() -> new NoSuchElementException("1,2,3 중 선택해야 합니다"));
     }
 
     static int toInt(String num) {

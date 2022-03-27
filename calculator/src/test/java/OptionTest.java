@@ -20,11 +20,11 @@ class OptionTest {
     @Test
     void _12가_아닌_숫자를_입력() {
         //given
-        String input = "3";
+        String input = "4";
         //then
         Assertions.assertThatThrownBy(() -> Option.parse(input))
                 .isInstanceOf(NoSuchElementException.class)
-                .hasMessage("1,2 중 선택해야 합니다");
+                .hasMessage("1,2,3 중 선택해야 합니다");
 
     }
 
