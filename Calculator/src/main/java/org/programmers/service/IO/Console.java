@@ -1,16 +1,14 @@
-package org.programmers;
+package org.programmers.service.IO;
 
 import org.programmers.entity.ResultModel;
-import org.programmers.service.IO.Input;
-import org.programmers.service.IO.Output;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
-    private Scanner sc;
+
     @Override
-    public String selectFuction(String prompt) {
+    public String inputSelectMenu(String prompt) {
         System.out.print(prompt);
 
         return new Scanner(System.in).nextLine();
@@ -33,7 +31,6 @@ public class Console implements Input, Output {
         } else {
             System.out.println("\n0 으로 나눌 수 없습니다.\n");
         }
-
     }
 
     @Override

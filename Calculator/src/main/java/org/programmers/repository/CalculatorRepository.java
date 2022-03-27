@@ -6,8 +6,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CalculatorRepository implements Repository{
-    private Map<Long, ResultModel> map = new ConcurrentHashMap<>();
-    private Long id = 0L;
+    private final Map<Long, ResultModel> map = new ConcurrentHashMap<>();
 
     @Override
     public Map<Long, ResultModel> findAll() {
@@ -15,8 +14,8 @@ public class CalculatorRepository implements Repository{
     }
 
     @Override
-    public void save(String inputEx, double result) {
-        ResultModel myExpression = new ResultModel(++id, inputEx, result);
-        map.put(id, myExpression);
+    public ResultModel save(ResultModel resultModel) {
+       map.put(resultModel.getExpressionId(), resultModel);
+       return resultModel;
     }
 }

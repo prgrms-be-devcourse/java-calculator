@@ -2,7 +2,7 @@ package org.programmers.service.IO;
 
 public interface Input {
 
-    String selectFuction(String s);
+    String inputSelectMenu(String s);
 
     String inputExpression();
 }

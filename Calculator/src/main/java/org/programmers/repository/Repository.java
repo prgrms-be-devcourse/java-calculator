@@ -4,9 +4,9 @@ import org.programmers.entity.ResultModel;
 
 import java.util.Map;
 
-public interface Repository {
+public interface Repository{
 
-    public Map<Long, ResultModel> findAll();
+    Map<Long, ResultModel> findAll();
 
-    public void save(String inputEx, double result);
+    ResultModel save(ResultModel entity);
 }

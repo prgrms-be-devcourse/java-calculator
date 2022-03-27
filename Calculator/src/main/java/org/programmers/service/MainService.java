@@ -1,57 +1,57 @@
 package org.programmers.service;
 
 import lombok.AllArgsConstructor;
-import org.programmers.service.IO.Input;
-import org.programmers.service.IO.Output;
+import org.programmers.service.IO.Console;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @AllArgsConstructor
 public class MainService implements Runnable {
-    private final int ERROR_1 = 1;
-    private final int ERROR_2 = 2;
-    CalculateService calculateService;
-    Input input;
-    Output output;
+    private final int ERROR_EXPRESSION_PATTERN = 1;
+    private final int ERROR_DIVIDE_ZERO = 2;
+    private final CalculateService calculateService;
+    private final Console console;
 
     @Override
     public void run() {
 
         while (true) {
-            output.printMenu();
-            String inputNum = input.selectFuction("선택 : ");
+            console.printMenu();
+            String inputNum = console.inputSelectMenu("선택 : ");
 
             if (inputNum.equals("1")) {
-                output.historyInquiry(calculateService.findHistory());
+                console.historyInquiry(calculateService.findHistory());
             } else if (inputNum.equals("2")) {
-                String inputEx = input.inputExpression();
+                String expression = console.inputExpression();
 
-                if (validCheck(inputEx) == ERROR_1) {
-                    output.inputExError(ERROR_1);
+                if (validCheck(expression) == ERROR_EXPRESSION_PATTERN) {
+                    console.inputExError(ERROR_EXPRESSION_PATTERN);
                     continue;
-                } else if (validCheck(inputEx) == ERROR_2) {
-                    output.inputExError(ERROR_2);
+                } else if (validCheck(expression) == ERROR_DIVIDE_ZERO) {
+                    console.inputExError(ERROR_DIVIDE_ZERO);
                     continue;
                 }
 
-                output.printResult(calculateService.calculateSave(inputEx));
-                ;
+                double expressionResult = calculateService.calculate(expression);
+                console.printResult(expressionResult);
+                calculateService.historySave(expressionResult, expression);
+
             } else {
-                output.inputNumError();
+                console.inputNumError();
             }
         }
     }
 
-    private int validCheck(String inputEx) {
+    private int validCheck(String expression) {
         String pattern = "^-?(\\d*\\.?\\d+)([ \\t]+[-+/*][ \\t]+(\\d*\\.?\\d+))*";
         Pattern divZero = Pattern.compile("[/][ \\t]0((\\.0+)|$|[ \\t])");
-        Matcher m = divZero.matcher(inputEx);
+        Matcher m = divZero.matcher(expression);
 
-        if (!Pattern.matches(pattern, inputEx)){
-            return ERROR_1;
+        if (!Pattern.matches(pattern, expression)){
+            return ERROR_EXPRESSION_PATTERN;
         } else if (m.find()){
-            return ERROR_2;
+            return ERROR_DIVIDE_ZERO;
         }
         return 0;
     }

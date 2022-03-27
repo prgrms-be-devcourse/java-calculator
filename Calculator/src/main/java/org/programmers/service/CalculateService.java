@@ -1,20 +1,23 @@
 package org.programmers.service;
 
+import lombok.AllArgsConstructor;
 import org.programmers.entity.ResultModel;
-import org.programmers.repository.CalculatorRepository;
 import org.programmers.repository.Repository;
 
 import java.util.*;
 
+@AllArgsConstructor
 public class CalculateService {
-    Repository calculatorRepository = new CalculatorRepository();
+    private Repository calculatorRepository;
 
-    public double calculateSave(String inputEx) {
-        Deque<String> deque = makePostfix(inputEx);
+    public double calculate(String expression) {
+        Deque<String> deque = makePostfix(expression);
 
-        double result = calculate(deque);
-        calculatorRepository.save(inputEx, result);
-        return result;
+        return calculate(deque);
+    }
+
+    public ResultModel historySave(double result, String expression){
+        return calculatorRepository.save(new ResultModel(expression, result));
     }
 
     public List<ResultModel> findHistory() {
@@ -28,8 +31,8 @@ public class CalculateService {
         return result;
     }
 
-    private Deque<String> makePostfix(String inputEx) {
-        StringTokenizer st = new StringTokenizer(inputEx);
+    private Deque<String> makePostfix(String expression) {
+        StringTokenizer st = new StringTokenizer(expression);
         Deque<String> deque = new ArrayDeque<>();
 
         while (st.hasMoreTokens()) {

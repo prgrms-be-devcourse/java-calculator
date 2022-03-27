@@ -1,15 +1,26 @@
 package org.programmers.entity;
 
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@AllArgsConstructor
+import java.util.concurrent.atomic.AtomicLong;
+
+@EqualsAndHashCode
+@Getter
 public class ResultModel {
-    Long id;
-    String inputEx;
-    double result;
+    private static final AtomicLong count = new AtomicLong(0L);
+    private final long expressionId;
+    private final String inputExpression;
+    private final double calculationResult;
+
+    public ResultModel(String inputExpression, double calculationResult) {
+        this.expressionId = count.incrementAndGet();
+        this.inputExpression = inputExpression;
+        this.calculationResult = calculationResult;
+    }
 
     @Override
     public String toString() {
-        return inputEx + " = " + result;
+        return inputExpression + " = " + calculationResult;
     }
 }
