@@ -11,7 +11,10 @@ repositories {
 
 dependencies {
     // lombok
-    implementation 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     // test
     testImplementation 'org.assertj:assertj-core:3.22.0'
