@@ -35,7 +35,10 @@ public enum Operator {
 	private final String op;
 	private final PriorityType type;
 
-	public static enum PriorityType {
+	/**
+	 * 전략 열거 패턴
+	 */
+	public enum PriorityType {
 		HIGH, LOW
 	}
 
@@ -44,14 +47,25 @@ public enum Operator {
 		this.type = type;
 	}
 
+	/**
+	 * 올바른 연산자를 입력했는지 판단하고 Operator를 반환하는 메서드
+	 *
+	 * @param op
+	 * @return 입력된 값에 해당하는 operator
+	 */
 	public static Operator fineOperator(String op) {
 		return Stream.of(Operator.values()).filter(o -> o.op.equals(op))
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 잘못된 연산자 입력입니다!"));
 	}
 
+	/**
+	 * Operator의 우선순위를 반환하는 메서드
+	 *
+	 * @return 높은 우선순위면 HIGH, 낮은 우선순위면 LOW
+	 */
 	public PriorityType getPriorityType(){
-		return this.getPriorityType();
+		return this.type;
 	}
 
 	public abstract Value calculate(Value x, Value y);

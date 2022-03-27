@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class ArithmeticUnit {
-
+	/**
+	 * 입력된 공식을 우선순위에 따라 계산하고 결과를 저장, 반환하는 메서드
+	 *
+	 * @param formula
+	 * @return formula를 계산하고 난 답을 반환
+	 */
 	public static String calculate(String formula) {
 		Objects.requireNonNull(formula);
 

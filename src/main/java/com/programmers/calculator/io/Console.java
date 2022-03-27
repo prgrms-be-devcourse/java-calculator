@@ -12,6 +12,6 @@ public class Console implements Input, Output {
 
 	@Override
 	public void print(String str) {
-		System.out.println(str + "\n");
+		System.out.println("\n" + str);
 	}
 }
