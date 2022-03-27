@@ -63,8 +63,8 @@ public class Console implements Input, Output {
     }
 
     private boolean isValidExpr(String expr) {
-        //구현 필요
-        return true;
+        String pattern = "[^\\d\\+\\-\\*\\/\\s]";
+        return !expr.matches(pattern);
     }
 
 }
