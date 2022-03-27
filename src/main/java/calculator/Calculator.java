@@ -53,9 +53,9 @@ public class Calculator implements Runnable {
     private boolean calculate(String expression) {
         try {
             PostfixExpression postfix = PostfixExpression.from(expression);
-            double result = postfix.calculate();
-            repository.save(expression + " = " + DECIMAL_FORMAT.format(result));
-            outputView.printResult(DECIMAL_FORMAT.format(result));
+            String result = DECIMAL_FORMAT.format(postfix.calculate());
+            repository.save(expression + " = " + result);
+            outputView.printResult(result);
             return false;
         } catch (IllegalArgumentException e) {
             outputView.printErrorMsg(e.getMessage());

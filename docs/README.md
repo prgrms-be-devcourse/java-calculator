@@ -2,7 +2,7 @@
 
 - [x] 입력
     - [x] 메뉴
-        - [ ] 1,2,3이 아닐 경우 `IllegalArgumentException`를 발생시키고, 에러메세지 출력 후 다시 입력 받기
+        - [x] 1,2,3이 아닐 경우 `IllegalArgumentException`를 발생시키고, 에러메세지 출력 후 다시 입력 받기
     - [x] 계산식
         - [x] 공백을 기준으로 구분하기
             - [x] 정규표현식
