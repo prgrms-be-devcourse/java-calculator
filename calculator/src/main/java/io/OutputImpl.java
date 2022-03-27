@@ -16,6 +16,6 @@ public class OutputImpl implements Output {
 
     @Override
     public void printGuide() {
-        System.out.println(CAL);
+        System.out.print(CAL);
     }
 }

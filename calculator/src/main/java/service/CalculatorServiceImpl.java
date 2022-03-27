@@ -20,12 +20,18 @@ public class CalculatorServiceImpl implements CalculatorService {
         put('*', 2);
         put('/', 2);
     }};
-
+    private final String RESULT="계산 결과:";
+    /**
+    * @Method : input
+    * @Description : 계산 입력 받고 결과 출력
+    **/
     @Override
     public void input() {
+        output.printGuide();
         String line = input.readLine();
         double calculate = calculate(line);
-        output.printResult(String.valueOf(calculate));
+        repository.save(line,calculate);
+        output.printResult(RESULT+String.valueOf(calculate));
     }
 
     /**
@@ -70,12 +76,11 @@ public class CalculatorServiceImpl implements CalculatorService {
         ArrayList<Object> postFix = new ArrayList<>();
         Stack<Character> stack = new Stack<>();
         String tmp = "";
-        Set<Character> characters = priorityMap.keySet();
         for (char c : expression.toCharArray()) {
             if (48 <= c && c <= 57) tmp += c;
             else {
                 postFix.add(validator.validateDouble(tmp));
-                validator.validateCharacter(characters, c);
+                validator.validateCharacter(priorityMap.keySet(), c);
                 tmp = "";
                 while (!stack.isEmpty() && checkPriority(stack.peek(), c)) {
                     postFix.add(String.valueOf(stack.pop()));
