@@ -1,9 +1,10 @@
-import repository.CalculatorRepository;
-import repository.CalculatorRepositoryImpl;
+import service.ServiceImpl;
+import service.Service;
 
 public class Main {
+
     public static void main(String[] args) {
-        CalculatorRepository repository = new CalculatorRepositoryImpl();
-        new Calculator().run();
+        Service service = new ServiceImpl();
+        service.run();
     }
 }

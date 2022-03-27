@@ -11,7 +11,7 @@ class OptionTest {
         //given
         String input = "1";
         //when
-        Option option = Option.find(input);
+        Option option = Option.parse(input);
         //then
         Assertions.assertThat(option).isEqualByComparingTo(Option.INQUIRY);
     }
@@ -21,7 +21,7 @@ class OptionTest {
         //given
         String input = "3";
         //then
-        Assertions.assertThatThrownBy(() -> Option.find(input))
+        Assertions.assertThatThrownBy(() -> Option.parse(input))
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessage("1,2 중 선택해야 합니다");
 
@@ -32,7 +32,7 @@ class OptionTest {
         //given
         String input = "a";
         //then
-        Assertions.assertThatThrownBy(() -> Option.find(input))
+        Assertions.assertThatThrownBy(() -> Option.parse(input))
                 .isInstanceOf(NumberFormatException.class)
                 .hasMessage("숫자를 입력해야 합니다.");
     }

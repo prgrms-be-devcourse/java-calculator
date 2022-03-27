@@ -9,7 +9,7 @@ public enum Option {
     Option(int select) {
         this.select = select;
     }
-    static Option find(String input) {
+    static Option parse(String input) {
         return Arrays.stream(Option.values())
                 .filter(e -> e.select==toInt(input))
                 .findAny()

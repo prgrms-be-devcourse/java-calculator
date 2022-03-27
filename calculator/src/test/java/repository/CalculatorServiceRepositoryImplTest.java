@@ -2,7 +2,7 @@ package repository;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-class CalculatorRepositoryImplTest {
+class CalculatorServiceRepositoryImplTest {
 
     CalculatorRepository repository = new CalculatorRepositoryImpl();
 
