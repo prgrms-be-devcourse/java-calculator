@@ -1,11 +1,12 @@
 package programmers.calculator.processor.register;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 public class BufferRegister implements Register<String> {
 
-  Stack<String> buffer = new Stack<>();
+  Deque<String> buffer = new ArrayDeque<>();
 
   @Override
   public void save(String value) {

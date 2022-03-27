@@ -1,13 +1,14 @@
 package programmers.calculator.processor.register;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 import programmers.calculator.processor.arithmetic.Operator;
 
 public class OperatorRegister implements Register<Operator> {
 
-  Stack<Operator> buffer = new Stack<>();
+  Deque<Operator> buffer = new ArrayDeque<>();
 
   @Override
   public void save(Operator operator) {

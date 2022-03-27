@@ -1,12 +1,13 @@
 package programmers.calculator.processor.register;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class ResultRegister implements Register<Double> {
 
-  Stack<Double> buffer = new Stack<>();
+  Deque<Double> buffer = new ArrayDeque<>();
 
   @Override
   public void save(Double data) {
