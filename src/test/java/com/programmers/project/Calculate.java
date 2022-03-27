@@ -10,8 +10,8 @@ public class Calculate {
 
     @Test
     void 후위연산() {
-        String result = calculator.priority("a+b*c");
+        String result = calculator.priority("3+2*4");
 
-        Assertions.assertEquals("abc*+", result);
+        Assertions.assertEquals("324*+", result);
     }
 }
