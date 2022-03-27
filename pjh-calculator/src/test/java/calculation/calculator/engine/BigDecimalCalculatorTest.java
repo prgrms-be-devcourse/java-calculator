@@ -11,10 +11,8 @@ import org.junit.jupiter.api.Test;
 
 class BigDecimalCalculatorTest {
 
-  private final String operatorRegex = "[\\+\\-\\*\\/]";
-  private final String expressionRegex = "^((-?\\d*\\.?\\d+)\\s[\\+\\-\\*\\/]\\s)+(-?\\d*\\.?\\d+)$";
   Calculator calculator = new BigDecimalCalculator
-      (new NormalExpressionService(new NormalArithmeticLogic(operatorRegex, expressionRegex)));
+      (new NormalExpressionService(new NormalArithmeticLogic()));
 
   //잘못된 연산식 테스트
   @Test

@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class NormalArithmeticLogicTest {
 
-  private final String operatorRegex = "[\\+\\-\\*\\/]";
-  private final String expressionRegex = "^((-?\\d*\\.?\\d+)\\s[\\+\\-\\*\\/]\\s)+(-?\\d*\\.?\\d+)$";
-  ArithmeticLogic arithmeticLogic = new NormalArithmeticLogic(operatorRegex, expressionRegex);
+  ArithmeticLogic arithmeticLogic = new NormalArithmeticLogic();
 
   @Test
   void getPriorityTest() {

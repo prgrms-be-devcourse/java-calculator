@@ -8,9 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class NormalExpressionServiceTest {
 
-  private final String operatorRegex = "[\\+\\-\\*\\/]";
-  private final String expressionRegex = "^((-?\\d*\\.?\\d+)\\s[\\+\\-\\*\\/]\\s)+(-?\\d*\\.?\\d+)$";
-  private ExpressionService expressionService = new NormalExpressionService(new NormalArithmeticLogic(operatorRegex, expressionRegex));
+  private ExpressionService expressionService = new NormalExpressionService(new NormalArithmeticLogic());
 
   private Boolean compare(List a, List b) {
     Iterator iterA = a.iterator();
