@@ -11,7 +11,7 @@ public class Console implements OutputView, InputView {
     @Override
     public String inputMenu() {
         System.out.print(REQUEST_INSERT_MENU);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     @Override
