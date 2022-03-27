@@ -45,4 +45,8 @@ public enum Operator {
   public boolean isPreceding(Operator other) {
     return precedence.compareTo(other.precedence) > 0;
   }
+
+  public static boolean isOperator(String token) {
+    return SYMBOL_MAP.containsKey(token);
+  }
 }

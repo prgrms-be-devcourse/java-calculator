@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import programmers.calculator.processor.arithmetic.Operator;
 
 class OperatorTest {
@@ -51,4 +52,10 @@ class OperatorTest {
     assertThrows(ArithmeticException.class, () -> divide.operate(1, 0));
   }
 
+  @ParameterizedTest
+  @ValueSource(strings = {"+", "-", "*", "/"})
+  @DisplayName("연산자인지 테스트한다")
+  void isOperator(String input) {
+    assertTrue(Operator.isOperator(input));
+  }
 }

@@ -9,8 +9,4 @@ public class PatternUtil {
   public static boolean isNumeric(String token) {
     return number.matcher(token).matches();
   }
-
-  public static boolean isOperator(String token) {
-    return token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/");
-  }
 }

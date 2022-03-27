@@ -15,11 +15,4 @@ class PatternUtilTest {
 
     assertTrue(PatternUtil.isNumeric(input));
   }
-
-  @ParameterizedTest
-  @ValueSource(strings = {"+", "-", "*", "/"})
-  @DisplayName("연산자를 테스트한다")
-  void isOperator(String input) {
-    assertTrue(PatternUtil.isOperator(input));
-  }
 }

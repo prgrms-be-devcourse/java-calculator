@@ -1,10 +1,15 @@
 package programmers.calculator.controller;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import lombok.NoArgsConstructor;
+import programmers.calculator.processor.arithmetic.Operator;
 import programmers.calculator.util.PatternUtil;
 
+@NoArgsConstructor(access = PRIVATE)
 public class Validator {
 
   public static void validate(List<String> tokens) {
@@ -28,7 +33,7 @@ public class Validator {
   }
 
   private static void validateOperator(List<String> tokens) {
-    tokens.stream().filter(token -> !PatternUtil.isOperator(token)).findAny().ifPresent(
+    tokens.stream().filter(token -> !Operator.isOperator(token)).findAny().ifPresent(
         (t) -> {
           throw new IllegalArgumentException("잘못된 수식입니다.");
         });
