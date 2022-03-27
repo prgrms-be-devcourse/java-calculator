@@ -16,7 +16,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     testCompileOnly 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
-    testImplementation 'org.jacoco:org.jacoco.agent:0.7.8'
 }
 
 test {
