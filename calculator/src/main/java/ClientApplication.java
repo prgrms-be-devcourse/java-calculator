@@ -1,4 +1,4 @@
-import creator.CreatorManagement;
+import service.ClientService;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ public class ClientApplication {
 
     public static void main(String[] args) throws IOException {
 
-        CreatorManagement
-                .getClientService().run();
+        new ClientService().run();
+        //CreatorManagement.getClientService().run();
     }
 }

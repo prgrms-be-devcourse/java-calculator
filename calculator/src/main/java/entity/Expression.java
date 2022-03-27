@@ -3,7 +3,6 @@ package entity;
 import lombok.Getter;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 public class Expression {
@@ -31,7 +30,7 @@ public class Expression {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        
+
         return this.hashCode() == o.hashCode();
     }
 

@@ -1,11 +1,10 @@
 package service;
 
-import creator.CreatorManagement;
-import creator.type.RepositoryType;
-import entity.Expression;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.CalculatorRepository;
+import repository.InMemoryRepository;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -13,8 +12,14 @@ import static org.assertj.core.api.Assertions.*;
 
 class CalculatorServiceTest {
 
-    CalculatorService calcService = CreatorManagement.getCalcService();
-    CalculatorRepository repository = CreatorManagement.createCalculatorRepository(RepositoryType.InMemory);
+    CalculatorService calcService;
+    CalculatorRepository repository;
+
+    @BeforeEach
+    void init(){
+        calcService = new CalculatorService();
+        repository = new InMemoryRepository();
+    }
 
     @Test
     void getResultTest(){

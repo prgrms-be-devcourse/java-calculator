@@ -1,6 +1,5 @@
 package service;
 
-import creator.CreatorManagement;
 import entity.Expression;
 import console.Console;
 
@@ -10,12 +9,16 @@ import java.util.List;
 public class ClientService{
 
     private Console console;
-    private final CalculatorService calcService = CreatorManagement.getCalcService();
+    private CalculatorService calcService;
 
     public ClientService() {
         this.console = new Console();
+        this.calcService = new CalculatorService();
     }
 
+    /**
+     * ClientService run()에서 검증 역할까지 하는 문제 3.27
+     * */
     public void run() throws IOException {
 
         boolean isRunning = true;
@@ -67,7 +70,6 @@ public class ClientService{
                     console.printCmdTypeError();
                     break;
             }
-
         }
     }
 }

@@ -13,7 +13,7 @@ public interface output {
     void printExitCall() throws IOException;
     void printNewLine() throws IOException;
 
-    // Error
+    // <Error>
     void printCmdFormatError() throws IOException;
     void printCmdTypeError() throws IOException;
     void printExpressionError() throws IOException;
