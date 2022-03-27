@@ -1,4 +1,11 @@
 package com.programmers.calculator.engine.repository;
 
-public class CalculatorRepository {
+public interface CalculatorRepository {
+	void save(String formula, String answer);
+
+	void clear();
+
+	int size();
+
+	String values();
 }

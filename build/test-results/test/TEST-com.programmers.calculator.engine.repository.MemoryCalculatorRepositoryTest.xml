@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.programmers.calculator.engine.repository.MemoryCalculatorRepositoryTest" tests="3" skipped="1" failures="0" errors="0" timestamp="2022-03-27T05:38:33" hostname="hwangseunghan-ui-MacBookPro.local" time="0.022">
+  <properties/>
+  <testcase name="3. 조회 테스트" classname="com.programmers.calculator.engine.repository.MemoryCalculatorRepositoryTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <testcase name="2. 초기화 테스트" classname="com.programmers.calculator.engine.repository.MemoryCalculatorRepositoryTest" time="0.018"/>
+  <testcase name="1. 저장 테스트" classname="com.programmers.calculator.engine.repository.MemoryCalculatorRepositoryTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

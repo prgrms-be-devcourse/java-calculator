@@ -3,6 +3,7 @@ package com.programmers.calculator.engine;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import com.programmers.calculator.engine.repository.CalculatorRepository;
 import com.programmers.calculator.engine.service.CalculateService;
 import com.programmers.calculator.engine.service.CalculatorService;
 import com.programmers.calculator.engine.service.ClearService;
@@ -51,7 +52,7 @@ public enum Menu {
 		return CLEAR;
 	}
 
-	public String start(){
-		return this.service.execute();
+	public String start(CalculatorRepository repository){
+		return this.service.execute(repository);
 	}
 }
