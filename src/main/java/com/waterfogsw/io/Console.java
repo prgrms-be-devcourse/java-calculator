@@ -17,8 +17,11 @@ public class Console implements Input, Output {
         String input = br.readLine();
 
         System.out.println();
-        if (!isValidMenu(input)) throw new InputMismatchException();
-        else return Integer.parseInt(input);
+        if (!isValidMenu(input)) {
+            throw new InputMismatchException();
+        } else {
+            return Integer.parseInt(input);
+        }
     }
 
     @Override
@@ -26,8 +29,11 @@ public class Console implements Input, Output {
         System.out.print(prompt);
         String input = br.readLine();
         System.out.println();
-        if (isValidExpr(input)) return input;
-        else return null;
+        if (isValidExpr(input)) {
+            return input;
+        } else {
+            throw new IOException();
+        }
     }
 
     @Override

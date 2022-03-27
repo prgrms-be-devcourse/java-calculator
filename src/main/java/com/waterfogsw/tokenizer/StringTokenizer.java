@@ -1,10 +1,10 @@
-package com.waterfogsw.parser;
+package com.waterfogsw.tokenizer;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StringParser implements Parser {
+public class StringTokenizer implements Tokenizer {
     private final String regex = "(?:(?<=[^\\d])(?=\\d)|(?=[^\\d]))";
 
     @Override

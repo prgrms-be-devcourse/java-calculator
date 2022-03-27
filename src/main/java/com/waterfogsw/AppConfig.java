@@ -3,8 +3,8 @@ package com.waterfogsw;
 import com.waterfogsw.converter.Converter;
 import com.waterfogsw.converter.PostfixConverter;
 import com.waterfogsw.io.Console;
-import com.waterfogsw.parser.Parser;
-import com.waterfogsw.parser.StringParser;
+import com.waterfogsw.tokenizer.Tokenizer;
+import com.waterfogsw.tokenizer.StringTokenizer;
 import com.waterfogsw.repository.CalculationRepository;
 import com.waterfogsw.repository.MemoryCalculationRepository;
 import com.waterfogsw.service.CalculationService;
@@ -21,8 +21,8 @@ public class AppConfig {
         return new Console();
     }
 
-    public Parser parser() {
-        return new StringParser();
+    public Tokenizer tokenizer() {
+        return new StringTokenizer();
     }
 
     public Converter converter() {
@@ -34,7 +34,7 @@ public class AppConfig {
     }
 
     public CalculationService calculationService() {
-        return new CalculationServiceImpl(parser(), converter());
+        return new CalculationServiceImpl(tokenizer(), converter());
     }
 
     public HistoryService historyService() {
