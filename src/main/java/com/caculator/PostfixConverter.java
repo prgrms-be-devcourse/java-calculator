@@ -11,15 +11,13 @@ public class PostfixConverter {
         String[] split = exp.split(" ");
         Stack<String> stack = new Stack<>();
 
-        if (split.length == 0) throw new IllegalArgumentException("올바른 수식이 아닙니다");
+        if (split.length == 0) throw new IllegalArgumentException();
 
         for (int i = 0; i < split.length; i++) {
             String s = split[i];
 
             if (isIdxForOperator(i)) {
-                if (!(s.equals("*") || s.equals("/") || s.equals("+") || s.equals("-"))) {
-                    throw new IllegalArgumentException();
-                }
+                if (!isOperator(s)) throw new IllegalArgumentException();
 
                 if (stack.isEmpty() || getPriority(stack.peek()) < getPriority(s)) {
                     stack.push(s);
@@ -33,7 +31,7 @@ public class PostfixConverter {
                 stack.push(s);
             } else {
                 if (!StringUtils.isNumber(s)) {
-                    throw new IllegalArgumentException("올바른 수식이 아닙니다");
+                    throw new IllegalArgumentException();
                 }
                 postfix.add(s);
             }
@@ -42,6 +40,10 @@ public class PostfixConverter {
         while (!stack.isEmpty()) postfix.add(stack.pop());
 
         return postfix;
+    }
+
+    private static boolean isOperator(String s) {
+        return s.equals("*") || s.equals("/") || s.equals("+") || s.equals("-");
     }
 
     private static boolean isIdxForOperator(int index) {
