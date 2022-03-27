@@ -41,13 +41,9 @@ public class Calculator implements Runnable {
                         break;
                     case 2:
                         String str = input.inputString("식 입력 : ");
-                        Optional<Double> result = calculate(str);
-                        if (result.isPresent()) {
-                            System.out.println(result + newline);
-                            REPOSITORY.save(new Formula(str, result.get()));
-                        } else {
-                            throw new ValidationException();
-                        }
+                        String result = calculate(str);
+                        System.out.println(result + newline);
+                        REPOSITORY.save(new Formula(str, result));
                         break;
                     case 3:
                         flag = false;
@@ -61,15 +57,11 @@ public class Calculator implements Runnable {
         }
     }
 
-    private Optional<Double> calculate(String str) {
+    private String calculate(String str) throws ValidationException {
         if (!isValidate(str)) {
-            return Optional.empty();
+            throw new ValidationException();
         }
-
-        String[] array = Parser.parse(str);
-        System.out.println(Arrays.toString(array));
-
-        return Optional.of(0.0);
+        return cal(Parser.makePostfix(Parser.parse(str)));
     }
 
     private boolean isValidate(String s) {
@@ -86,5 +78,39 @@ public class Calculator implements Runnable {
             }
         }
         return stack.empty();
+    }
+
+    private String cal(String[] formula) {
+        Stack<String> calculatorStack = new Stack<>();
+        Set<String> operationCode = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
+
+        for (String token : formula) {
+            if (operationCode.contains(token)) {
+                Double b = Double.parseDouble(calculatorStack.pop());
+                Double a = Double.parseDouble(calculatorStack.pop());
+                Double result;
+                switch (token) {
+                    case "+":
+                        result = a + b;
+                        break;
+                    case "-":
+                        result = a - b;
+                        break;
+                    case "*":
+                        result = a * b;
+                        break;
+                    case "/":
+                        result = a / b;
+                        break;
+                    default:
+                        result = -1.0;
+                        break;
+                }
+                calculatorStack.add(String.valueOf(result));
+            } else {
+                calculatorStack.add(token);
+            }
+        }
+        return calculatorStack.pop();
     }
 }
