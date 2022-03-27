@@ -13,9 +13,14 @@ public class PostfixConverter {
 
         if (split.length == 0) throw new IllegalArgumentException("올바른 수식이 아닙니다");
 
-        for (String s : split) {
+        for (int i = 0; i < split.length; i++) {
+            String s = split[i];
 
-            if (s.equals("*") || s.equals("/") || s.equals("+") || s.equals("-")) {
+            if (isIdxForOperator(i)) {
+                if (!(s.equals("*") || s.equals("/") || s.equals("+") || s.equals("-"))) {
+                    throw new IllegalArgumentException();
+                }
+
                 if (stack.isEmpty() || getPriority(stack.peek()) < getPriority(s)) {
                     stack.push(s);
                     continue;
@@ -30,7 +35,6 @@ public class PostfixConverter {
                 if (!StringUtils.isNumber(s)) {
                     throw new IllegalArgumentException("올바른 수식이 아닙니다");
                 }
-
                 postfix.add(s);
             }
         }
@@ -38,6 +42,10 @@ public class PostfixConverter {
         while (!stack.isEmpty()) postfix.add(stack.pop());
 
         return postfix;
+    }
+
+    private static boolean isIdxForOperator(int index) {
+        return (index + 1) % 2 == 0;
     }
 
     private static int getPriority(String op) {
