@@ -1,69 +1,59 @@
 # java_calculator
-자바 계산기 구현 미션 Repository입니다.
+**자바 계산기 구현 미션 Repository / 김수미**
+<br><br>
 
-### 이곳은 공개 Repo입니다.
-1. 여러분의 포트폴리오로 사용하셔도 됩니다.
-2. 때문에 이 repo를 fork한 뒤
-3. 여러분의 개인 Repo에 작업하며 
-4. 이 Repo에 PR을 보내어 멘토의 코드 리뷰와 피드백을 받으세요.
+## ✔️ 과제 요구사항
+- [x]  더하기
+- [x]  빼기
+- [x]  곱하기
+- [x]  나누기
+- [x]  사칙연산 우선순위 규칙 적용
+- [x]  계산 이력을 맵으로 데이터 저장기능 만들기(인메모리 DB)
+- [x]  객체지향적 코드 작성
+- [ ]  테스트 코드 구현
+<br><br>
 
-### Branch 명명 규칙 + 팀의 PR규칙 정하기
-1. 여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
-2. prgrms-be-devcourse/spring-board 레포로 PR시 branch는 gituser_id을 적어주세요 :)  
-    - base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 `github_id`
-3. 실제 진행할 PR규칙은 멘토+팀원들과 정하여 진행해주세요 :) 
-    - ← head repo : `여러분repo` compare : `main`로 할지
-    - 또는 ← head repo : `여러분repo` compare : `github_id`로 할지
-- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
-
-### 과제를 통해 기대하는 역량
-
-- 깃허브를 통한 코드리뷰를 경험해보자
-- 기본적인 테스트 코드 작성 및 활용하는 능력해보자
-- 스스로 OOP를 생각하고 코드로 옮길 수 있는 능력해보자
-
-### 요구사항
-- 콘솔로 구현입니다.(스윙으로 구현하시는 분들 계실까봐) 
-- 객체지향적인 코드로 계산기 구현하기
-    - [ ]  더하기
-    - [ ]  빼기
-    - [ ]  곱하기
-    - [ ]  나누기
-    - [ ]  우선순위(사칙연산)
-- [ ]  테스트 코드 구현하기
-- [ ]  계산 이력을 맵으로 데이터 저장기능 만들기
-    - 애플리케이션이 동작하는 동안 데이터베이스 외에 데이터를 저장할 수 있는 방법을 고안해보세요.
-- (선택) 정규식 사용
-
-### 실행결과(콘솔)
+## ✔️ 과제 구현 결과
+계산기 코드의 구조는 아래와 같습니다.
 ```
-1. 조회
-2. 계산
+ calculator
+    ├── App.java
+    ├── Console.java
+    └── engine
+        ├── Calculator.java
+        ├── io
+        │   ├── Input.java
+        │   └── Output.java
+        └── model
+            ├── History.java
+            └── Symbols.java
+```
+- **Calculate.java** : 핵심 클래스로 계산식 연산 및 데이터 저장을 담당합니다.
+- **In/Output.java** : 입출력을 위한 인터페이스 입니다.
+- **History.java** : 입력받은 계산식과, 계산 결과 객체를 관리합니다.
+- **Symbols.java** : 입력받은 계산식의 연산자와 피연산자를 관리합니다.
+<br><br>
 
-선택 : 2
+## ✔️ PR 포인트 & 궁금한 점
+- 객체별로 분리하려고 노력했으나, 분리하는 과정에서 객체를 생성하고 할당하는 과정이 불필요하게 반복된다는 느낌이 들었습니다.
+- 예를 들면 아래 코드에서, Symbols 클래스가 없어도 생성한 operands, operators ArrayList 만으로 코드를 이어 작성할 수 있습니다.
 
-1 + 2
-3
-
-1. 조회
-2. 계산
-
-선택 : 2
-
-1 + 2 * 3
-7
-
-1. 조회
-2. 계산
-
-선택 : 1
-
-1 + 2 = 3
-1 + 2 * 3 = 7
-
-선택 : 2
-
-3 - 2 * 2
--1
+```java
+ List<Double> operands = new ArrayList<Double>();
+ List<String> operators = new ArrayList<String>();
+ for (int i = 0; i < newString.length; i += 2) operands.add(Double.parseDouble(newString[i]));
+ for (int i = 1; i < newString.length; i += 2) operators.add(newString[i]);
+ Symbols symbols = new Symbols(operands,operators);
 ```
 
+- 이번주차 Java 강의를 최대한 참고하여 코드를 작성하려고 노력했는데, 제가 불필요한 클래스를 만들고 있는 것일까요?
+- 아니면 이후 코드 유지보수를 위해 이렇게 작성하는 것이 알맞은 객체지향 프로그래밍인 것인가요?
+- commit 또한 전체를 하나의 평면적인 코드로 작성하는것에 익숙하다 보니 적합한 시기를 잘 모르겠습니다. commit 의 시기는 언제가 적합한가요?
+<br><br>
+
+## ✔️ 피드백 반영사항
+- 테스트 코드를 아직 작성하지 못했는데, 객체지향적 구현이 어느정도 다듬어진 후에 작성하고 싶어 일단 코드만 제출하겠습니다.
+- 아직 java 언어와 객체지향 개념에 익숙하지 않아, 많은 흠이 있는 코드라고 생각합니다.
+- 또한 평면적인 코드만 작성하다가 depth가 있는 코드를 작성하려니 많은 부분이 헷갈립니다.
+- 어떤 부분이라도 따끔하게 조언 주시면 감사하겠습니다!🥺
+<br><br>
