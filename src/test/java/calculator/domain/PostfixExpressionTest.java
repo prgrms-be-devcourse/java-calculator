@@ -22,7 +22,8 @@ class PostfixExpressionTest {
             Arguments.of("1 + 3 / 2", Arrays.asList("1", "3", "2", "/", "+")),
             Arguments.of("1 / 5 / 3", Arrays.asList("1", "5", "/", "3", "/")),
             Arguments.of("1 * 3 + 5 / 2", Arrays.asList("1", "3", "*", "5", "2", "/", "+")),
-            Arguments.of("1.5 * 3.5 + 5.5 / 2.012", Arrays.asList("1.5", "3.5", "*", "5.5", "2.012", "/", "+"))
+            Arguments.of("1.5 * 3.5 + 5.5 / 2.012", Arrays.asList("1.5", "3.5", "*", "5.5", "2.012", "/", "+")),
+            Arguments.of("-1.5 * 3.5 + -5.5 / 2.012", Arrays.asList("-1.5", "3.5", "*", "-5.5", "2.012", "/", "+"))
         );
     }
 

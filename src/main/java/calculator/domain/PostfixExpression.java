@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 
 public class PostfixExpression {
     private static final String ERROR_INPUT_FORM = "[ERROR] 정상적인 입력이 아닙니다. 다시 입력해주세요.";
-    private static final Pattern INPUT_FORM = Pattern.compile("\\d+(.\\d+)?( [+-/*] \\d+(.\\d+)?)*");
-    private static final Pattern NUMBER = Pattern.compile("\\d+(.\\d+)?");
+    private static final Pattern INPUT_FORM = Pattern.compile("-?\\d+(.\\d+)?( [+-/*] -?\\d+(.\\d+)?)*");
+    private static final Pattern NUMBER = Pattern.compile("-?\\d+(.\\d+)?");
     private static final Pattern OPERATOR = Pattern.compile("[+-/*]");
     private static final String DELIMITER = " ";
 
