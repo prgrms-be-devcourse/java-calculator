@@ -1,6 +1,7 @@
 package com.programmers.devcourse.calculator;
 
 import com.programmers.devcourse.exception.CalculatorException;
+import com.programmers.devcourse.model.Result;
 import com.programmers.devcourse.parser.Parser;
 import com.programmers.devcourse.processor.Processor;
 import com.programmers.devcourse.repository.ResultRepository;
@@ -9,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class ConsoleCalculator implements Calculator {
 
@@ -64,12 +64,10 @@ public class ConsoleCalculator implements Calculator {
 
   private void handleExpressionFromConsole() throws IOException {
     String expression = br.readLine();
-    double result;
+    Result<String, Double> result;
     try {
 
-      Entry<String, Double> resultEntry = formatAndCalculateExpression(expression);
-      expression = resultEntry.getKey();
-      result = resultEntry.getValue();
+      result = formatAndCalculateExpression(expression);
 
     } catch (CalculatorException e) {
 
@@ -79,9 +77,8 @@ public class ConsoleCalculator implements Calculator {
 
     }
 
-    repository.save(
-        expression, result);
-    System.out.println(result + "\n");
+    repository.save(result.getKey(), result.getValue());
+    System.out.println(result.getValue() + "\n");
   }
 
   private int printMenuAndGetMode() throws IOException {
@@ -98,7 +95,7 @@ public class ConsoleCalculator implements Calculator {
       System.out.println("\n없음");
       return;
     }
-    repository.getAllResults().forEach((key, value) -> {
+    repository.forEach((key, value) -> {
       System.out.println(key + " = " + value);
     });
 
@@ -106,29 +103,14 @@ public class ConsoleCalculator implements Calculator {
   }
 
 
-  private Entry<String, Double> formatAndCalculateExpression(String expression)
+  private Result<String, Double> formatAndCalculateExpression(String expression)
       throws CalculatorException {
     List<String> tokens;
     tokens = parser.parse(expression);
     String formattedExpression = mapTokensToFormattedExpression(tokens);
     double result = processor.process(tokens);
 
-    return new Entry<String, Double>() {
-      @Override
-      public String getKey() {
-        return formattedExpression;
-      }
-
-      @Override
-      public Double getValue() {
-        return result;
-      }
-
-      @Override
-      public Double setValue(Double value) {
-        throw new UnsupportedOperationException();
-      }
-    };
+    return new Result<>(formattedExpression, result);
   }
 
   private String mapTokensToFormattedExpression(List<String> tokens) {

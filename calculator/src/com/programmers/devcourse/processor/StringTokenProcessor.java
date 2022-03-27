@@ -1,8 +1,8 @@
 package com.programmers.devcourse.processor;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class StringTokenProcessor implements Processor<List<String>, Double> {
 
@@ -49,19 +49,14 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
   }
 
   private void identifyTokens(List<String> tokens) {
-    Iterator<String> tokenIterator = tokens.iterator();
-    int i = 0;
-
-    while (tokenIterator.hasNext()) {
-      String token = tokenIterator.next();
-      if (i % 2 == 0) {
+    AtomicInteger i = new AtomicInteger();
+    tokens.forEach(token -> {
+      if (i.getAndIncrement() % 2 == 0) {
         numberList.add(Double.parseDouble(token));
-        i++;
-        continue;
+        return;
       }
       operatorList.add(token.charAt(0));
-      i++;
-    }
+    });
   }
 
   private void operateNumbersInList(int operatorPointer, char operator) {

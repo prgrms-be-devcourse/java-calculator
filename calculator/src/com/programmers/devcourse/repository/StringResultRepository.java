@@ -2,6 +2,7 @@ package com.programmers.devcourse.repository;
 
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class StringResultRepository implements ResultRepository<String, Double> {
 
@@ -25,6 +26,11 @@ public class StringResultRepository implements ResultRepository<String, Double> 
   @Override
   public Map<String, Double> getAllResults() {
     return Map.copyOf(resultMap);
+  }
+
+  @Override
+  public void forEach(BiConsumer<String, Double> biConsumer) {
+    resultMap.forEach(biConsumer);
   }
 
   @Override
