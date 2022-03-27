@@ -13,7 +13,7 @@ public class InputValidator {
 
     public static boolean isOperator(String operator) {
         for (OPERATOR op:OPERATOR.values()) {
-            if(op.getValue() == operator) return true;
+            if(op.getValue().equals(operator)) return true;
         }
         return false;
     }

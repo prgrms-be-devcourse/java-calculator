@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 
 public class PostfixConvertor {
@@ -16,7 +17,7 @@ public class PostfixConvertor {
                 postfix[indexIndicator++] = element;
                 continue;
             }
-            while(OPERATOR.getPriority(stack.peek()) >= OPERATOR.getPriority(element)) {
+            while(!stack.isEmpty() && OPERATOR.getPriority(stack.peek()) >= OPERATOR.getPriority(element)) {
                 postfix[indexIndicator++] = stack.pop();
             }
             stack.push(element);
