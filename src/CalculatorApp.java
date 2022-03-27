@@ -4,17 +4,17 @@ import src.calculation.Calculator;
 import src.io.Input;
 import src.io.Output;
 import src.log.Log;
-import src.log.Logger;
+import src.log.LogService;
 
 
 
 public class CalculatorApp implements Runnable{
-    private final Logger logger;
+    private final LogService logService;
     private final Input input;
     private final Output output;
 
-    public CalculatorApp(Logger logger, Input input, Output output) {
-        this.logger = logger;
+    public CalculatorApp(LogService logService, Input input, Output output) {
+        this.logService = logService;
         this.input = input;
         this.output = output;
     }
@@ -35,7 +35,7 @@ public class CalculatorApp implements Runnable{
 
             if(choice == 1){
                 //조회
-                output.printLog(logger.findAll());
+                output.printLog(logService.findAll());
             }else if(choice == 2){
                 //계산
                 calculate();
@@ -57,7 +57,7 @@ public class CalculatorApp implements Runnable{
             return;
         }
         output.printAnswer(answer);
-        logger.save(Log.createLog(expression, answer));
+        logService.save(Log.createLog(expression, answer));
     }
 
 }

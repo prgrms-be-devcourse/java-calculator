@@ -7,10 +7,10 @@ import java.util.List;
  * => 인터페이스 구현
  * Logger -> LogDB <= MemoryLogDB
  */
-public class Logger {
-    private final LogDB logDB;
+public class LogService {
+    private final LogRepository logDB;
 
-    public Logger(LogDB logDB) {
+    public LogService(LogRepository logDB) {
         this.logDB = logDB;
     }
 

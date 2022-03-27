@@ -3,20 +3,20 @@ package test;
 import org.junit.After;
 import org.junit.Test;
 import src.log.Log;
-import src.log.LogDB;
-import src.log.MemoryLogDB;
+import src.log.LogRepository;
+import src.log.MemoryLogRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LogDBTest {
+public class LogRepositoryTest {
 
-    private final LogDB logDB = new MemoryLogDB();
+    private final LogRepository logRepository = new MemoryLogRepository();
 
     @After
     public void tearDown() throws Exception {
-        logDB.clear();
+        logRepository.clear();
     }
 
     @Test
@@ -25,10 +25,10 @@ public class LogDBTest {
         Log log = Log.createLog("1 + 2", "3");
 
         //when
-        logDB.save(log);
+        logRepository.save(log);
 
         //then
-        List<Log> result = logDB.findAll();
+        List<Log> result = logRepository.findAll();
 
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0)).isEqualTo(log);
@@ -39,11 +39,11 @@ public class LogDBTest {
         //given
         Log log1 = Log.createLog("1 + 2", "3");
         Log log2 = Log.createLog("1 + 2", "3");
-        logDB.save(log1);
-        logDB.save(log2);
+        logRepository.save(log1);
+        logRepository.save(log2);
 
         //when
-        List<Log> result = logDB.findAll();
+        List<Log> result = logRepository.findAll();
 
         //then
         assertThat(result.size()).isEqualTo(2);

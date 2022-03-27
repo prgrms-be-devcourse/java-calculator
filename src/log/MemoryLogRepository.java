@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
 
-public class MemoryLogDB implements LogDB {
+public class MemoryLogRepository implements LogRepository {
     /**
      * 멀티스레딩 & 병렬처리(성능 개선)
      */
