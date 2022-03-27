@@ -6,16 +6,14 @@ import lombok.AllArgsConstructor;
 import model.Operator;
 import repository.CalculatorRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 @AllArgsConstructor
 public class CalculatorServiceImpl implements CalculatorService {
     private final CalculatorRepository repository;
     private final Input input;
     private final Output output;
+    private final Validator validator;
     private static final Map<Character, Integer> priorityMap = new HashMap<Character, Integer>() {{
         put('+', 1);
         put('-', 1);
@@ -72,10 +70,12 @@ public class CalculatorServiceImpl implements CalculatorService {
         ArrayList<Object> postFix = new ArrayList<>();
         Stack<Character> stack = new Stack<>();
         String tmp = "";
+        Set<Character> characters = priorityMap.keySet();
         for (char c : expression.toCharArray()) {
             if (48 <= c && c <= 57) tmp += c;
             else {
-                postFix.add(Double.parseDouble(tmp));
+                postFix.add(validator.validateDouble(tmp));
+                validator.validateCharacter(characters, c);
                 tmp = "";
                 while (!stack.isEmpty() && checkPriority(stack.peek(), c)) {
                     postFix.add(String.valueOf(stack.pop()));
@@ -85,6 +85,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         }
         if(!tmp.equals("")) postFix.add(Double.parseDouble(tmp));
         while (!stack.isEmpty()) postFix.add(String.valueOf(stack.pop()));
+        validator.validateFormat(postFix);
         return postFix;
     }
 
