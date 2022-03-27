@@ -19,4 +19,12 @@ public class CalculatorTest {
         assertThat(Calculator.minus(0.0,1.0)).isEqualTo(-1.0);
         assertThat(Calculator.minus(1.0,0.0)).isEqualTo(1.0);
     }
+
+    @Test
+    @DisplayName("곱하기_기능_테스트")
+    void multiply() {
+        assertThat(Calculator.multiply(2.0,0.0)).isEqualTo(0.0);
+        assertThat(Calculator.multiply(2.0,1.0)).isEqualTo(2.0);
+        assertThat(Calculator.multiply(2.0,-2.0)).isEqualTo(-4.0);
+    }
 }
