@@ -11,4 +11,12 @@ public class CalculatorTest {
     void plus() {
         assertThat(Calculator.plus(1.0,2.0)).isEqualTo(3.0);
     }
+
+    @Test
+    @DisplayName("뺴기_기능_테스트")
+    void minus() {
+        assertThat(Calculator.minus(0.0,0.0)).isEqualTo(0.0);
+        assertThat(Calculator.minus(0.0,1.0)).isEqualTo(-1.0);
+        assertThat(Calculator.minus(1.0,0.0)).isEqualTo(1.0);
+    }
 }
