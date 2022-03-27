@@ -1,67 +1,53 @@
 package com.programmers.calculator;
 
-import com.programmers.calculator.entity.CalcData;
-import com.programmers.calculator.repository.MemoryRepository;
-import com.programmers.calculator.service.CalcArithmeticService;
-import com.programmers.calculator.service.CalcKeyBoardService;
-import com.programmers.calculator.service.CalcValidatorService;
+import com.programmers.calculator.io.Input;
+import com.programmers.calculator.io.Output;
+import com.programmers.calculator.model.CalcData;
+import com.programmers.calculator.repository.Repository;
+import com.programmers.calculator.service.ArithmeticService;
+import com.programmers.calculator.service.ValidatorService;
+import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@AllArgsConstructor
 public class Calculator {
-    CalcArithmeticService as = new CalcArithmeticService();
-    CalcValidatorService vs = new CalcValidatorService();
-    CalcKeyBoardService ks = new CalcKeyBoardService();
-    MemoryRepository mr = new MemoryRepository();
+    private Input input;
+    private Output output;
+    private Repository repository;
+    private ArithmeticService arithmeticService;
+    private ValidatorService validatorService;
 
-    public void init() {
+    public void run() {
         while (true) {
-            int action = typeAction();
+            output.select();
+
+            int action = input.action();
 
             if (action == 1) {
-                mr.printAll();
+                output.results(repository.getAll());
             }
 
             if (action == 2) {
-                String formula = typeFormula();
-
-                System.out.println();
+                String formula = typeFormula(input.formula());
+                double result = 0;
 
                 if (formula.equals("")) {
-                    System.out.println("잘못된 입력입니다.");
+                    output.error("잘못된 입력입니다.");
                 } else {
-                    Double result = getResult(formula);
-
-                    mr.save(new CalcData(formula, result));
-
-                    System.out.println(result);
+                    result = getResult(formula);
+                    repository.save(new CalcData(formula, result));
                 }
 
-                System.out.println();
+                output.result(result);
             }
 
             if (action == -1) {
                 break;
             }
         }
-    }
-
-    private int typeAction() {
-        return ks.selectAction();
-    }
-
-    private String typeFormula() {
-        String formula = ks.inputFormula();
-        if (vs.checkNumsAndSymbol(formula)
-                || vs.checkSymbolMatching(formula)
-                || formula.equals("")) {
-            return "";
-        }
-        formula = vs.checkSpacing(formula);
-
-        return vs.checkSpacingVerified(formula) ? formula : "";
     }
 
     public double getResult(String formula) {
@@ -85,13 +71,13 @@ public class Calculator {
                         list.add(String.valueOf(pos));
                     }
                     case "*" -> {
-                        double d = as.calcMulti(pre, pos);
+                        double d = arithmeticService.calcMulti(pre, pos);
                         formulaArr[target + 1] = String.valueOf(d);
                         list.remove(list.size() - 1);
                         list.add(String.valueOf(d));
                     }
                     case "/" -> {
-                        double d = as.calcDivi(pre, pos);
+                        double d = arithmeticService.calcDivi(pre, pos);
                         formulaArr[target + 1] = String.valueOf(d);
                         list.remove(list.size() - 1);
                         list.add(String.valueOf(d));
@@ -116,9 +102,20 @@ public class Calculator {
                 }
             }
         } catch (ArithmeticException e) {
-            System.out.println(e.getMessage());
+            output.error(e.getMessage());
             result = 0;
         }
         return result;
+    }
+
+    private String typeFormula(String formula) {
+        if (validatorService.checkNumsAndSymbol(formula)
+                || validatorService.checkSymbolMatching(formula)
+                || formula.equals("")) {
+            return "";
+        }
+        formula = validatorService.checkSpacing(formula);
+
+        return validatorService.checkSpacingVerified(formula) ? formula : "";
     }
 }

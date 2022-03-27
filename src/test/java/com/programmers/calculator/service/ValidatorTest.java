@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CalcValidatorTest {
-    CalcValidatorService vs = new CalcValidatorService();
+public class ValidatorTest {
+    ValidatorService vs = new ValidatorService();
 
     @Test
     @DisplayName("숫자와 연산기호만 있는지 확인")

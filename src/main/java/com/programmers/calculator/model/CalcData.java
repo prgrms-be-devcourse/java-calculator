@@ -1,8 +1,8 @@
-package com.programmers.calculator.entity;
+package com.programmers.calculator.model;
 
 public class CalcData {
-    private String calcFormula;
-    private Double result;
+    private final String calcFormula;
+    private final Double result;
 
     public CalcData(String calcFormula, Double result) {
         this.calcFormula = calcFormula;

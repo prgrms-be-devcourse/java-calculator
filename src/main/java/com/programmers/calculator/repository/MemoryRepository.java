@@ -1,19 +1,20 @@
 package com.programmers.calculator.repository;
 
-import com.programmers.calculator.entity.CalcData;
+import com.programmers.calculator.model.CalcData;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MemoryRepository {
+public class MemoryRepository implements Repository {
     ArrayList<CalcData> list = new ArrayList<>();
 
+    @Override
     public void save(CalcData calcData) {
         list.add(calcData);
     }
 
-    public void printAll() {
-        list.forEach((v) ->
-                System.out.println(v.getCalcFormula() + " = " + v.getResult()));
-        System.out.println();
+    @Override
+    public List<CalcData> getAll() {
+        return list;
     }
 }

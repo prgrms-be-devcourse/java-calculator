@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CalcArithmeticTest {
-    CalcArithmeticService ex = new CalcArithmeticService();
+public class ArithmeticTest {
+    ArithmeticService ex = new ArithmeticService();
 
     @Test
     @DisplayName("더하기 연산의 경우")
-    void calcPlusTest() {
+    void plusTest() {
         // given
         double a = 1;
         double b = 1;
@@ -24,7 +24,7 @@ public class CalcArithmeticTest {
 
     @Test
     @DisplayName("곱셈 연산의 경우")
-    void calcMultiTest() {
+    void multiTest() {
         // given
         double a = 2;
         double b = 3;
@@ -38,7 +38,7 @@ public class CalcArithmeticTest {
 
     @Test
     @DisplayName("나눗셈 연산의 경우")
-    void calcDiviTest() {
+    void diviTest() {
         // given
         double a = 2;
         double b = 3;
@@ -52,7 +52,7 @@ public class CalcArithmeticTest {
 
     @Test
     @DisplayName("뺄셈 연산의 경우")
-    void calcMinusTest() {
+    void minusTest() {
         // given
         double a = 2;
         double b = 3;
@@ -66,7 +66,7 @@ public class CalcArithmeticTest {
 
     @Test
     @DisplayName("0으로 나눌 경우")
-    void calcDiviByZeroTest() throws Exception {
+    void diviByZeroTest() {
         // given
         double a = 2;
         double b = 0;

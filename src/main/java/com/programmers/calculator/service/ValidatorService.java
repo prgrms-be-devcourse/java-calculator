@@ -3,9 +3,9 @@ package com.programmers.calculator.service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CalcValidatorService {
+public class ValidatorService {
     public boolean checkNumsAndSymbol(String str) {
-        String regex = "[^1-9+\\-*\\/\\s]";
+        String regex = "[^0-9+\\-*\\/\\s]";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(str);
 

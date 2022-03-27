@@ -1,6 +1,6 @@
 package com.programmers.calculator.service;
 
-public class CalcArithmeticService {
+public class ArithmeticService {
     public Double calcPlus(double a, double b) {
         return a + b;
     }
