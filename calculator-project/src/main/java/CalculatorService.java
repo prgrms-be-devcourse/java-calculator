@@ -18,7 +18,7 @@ public class CalculatorService<T extends Number> implements Runnable{
                     output.history(calculator.getHistory());
                     break;
                 case CALCULATE:
-                    calculator.calculate(input.operation());
+                    output.result(calculator.calculate(input.operation()));
                     break;
                 case EXIT:
                     output.exit();
@@ -30,10 +30,6 @@ public class CalculatorService<T extends Number> implements Runnable{
         }
     }
 
-    static boolean isOperationValid(String operation){ // input 단에서 검증하는게???
-        // .replace(" ","");
-        String pattern = "[-+]?([0-9][-+*/])*[0-9]$";
-        return Pattern.matches(pattern, operation);
-    }
+
 }
 
