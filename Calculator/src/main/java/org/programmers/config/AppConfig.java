@@ -15,6 +15,10 @@ public class AppConfig {
     }
 
     public CalculateService calculateService(){
-        return new CalculateService(new CalculatorRepository());
+        return new CalculateService(calculatorRepository());
+    }
+
+    public CalculatorRepository calculatorRepository(){
+        return new CalculatorRepository();
     }
 }
