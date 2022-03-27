@@ -8,6 +8,7 @@ public class ConsoleView {
     private final String newline = "\n";
     private final String calculatorMessage = "계산식 : ";
     private final String errorMessage = "잘못된 입력입니다.\n";
+    private final String closingMessage = "프로그램을 종료합니다.";
     private Scanner sc;
 
     public ConsoleView() {
@@ -42,5 +43,9 @@ public class ConsoleView {
 
     public void close() {
         sc.close();
+    }
+
+    public void displayCloseMessage() {
+        this.display(closingMessage);
     }
 }
