@@ -3,6 +3,10 @@ package programmers.calculator.processor;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static programmers.calculator.processor.arithmetic.Operator.ADD;
+import static programmers.calculator.processor.arithmetic.Operator.DIVIDE;
+import static programmers.calculator.processor.arithmetic.Operator.MULTIPLY;
+import static programmers.calculator.processor.arithmetic.Operator.SUBTRACT;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,10 +16,10 @@ import programmers.calculator.processor.arithmetic.Operator;
 
 class OperatorTest {
 
-  Operator add = Operator.ADD;
-  Operator subtract = Operator.SUBTRACT;
-  Operator multiply = Operator.MULTIPLY;
-  Operator divide = Operator.DIVIDE;
+  Operator add = ADD;
+  Operator subtract = SUBTRACT;
+  Operator multiply = MULTIPLY;
+  Operator divide = DIVIDE;
 
   @ParameterizedTest
   @EnumSource(value = Operator.class, names = {"MULTIPLY", "DIVIDE"})
