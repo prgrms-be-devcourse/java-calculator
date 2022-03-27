@@ -1,9 +1,9 @@
 package programmers.calculator.processor.register;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ResultRegister implements Register<Double> {
 
@@ -16,9 +16,11 @@ public class ResultRegister implements Register<Double> {
 
   @Override
   public List<String> popAll() {
-    List<String> values = buffer.stream().map(Object::toString).collect(Collectors.toList());
-    buffer.clear();
-    return values;
+    List<String> symbols = new ArrayList<>();
+    while (!buffer.isEmpty()) {
+      symbols.add(String.valueOf(buffer.pop()));
+    }
+    return symbols;
   }
 
   public Double pop() {

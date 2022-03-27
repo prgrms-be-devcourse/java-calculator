@@ -30,6 +30,8 @@ class OperatorRegisterTest {
 
     List<String> trailingSymbols = operatorRegister.popTrailingSymbols(Operator.MULTIPLY);
     assertThat(trailingSymbols).isEmpty();
-    assertThat(operatorRegister.popAll().size()).isEqualTo(2);
+    List<String> strings = operatorRegister.popAll();
+    assertThat(strings).containsExactly("-", "+");
+    assertThat(strings.size()).isEqualTo(2);
   }
 }
