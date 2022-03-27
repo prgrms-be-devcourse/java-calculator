@@ -1,7 +1,3 @@
+public class Calculator {
 
-public class Calculator implements Runnable{
-    @Override
-    public void run() {
-
-    }
 }
