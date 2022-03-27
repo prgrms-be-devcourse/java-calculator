@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="repository.CalculatorRepositoryImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-27T08:05:38" hostname="macui-MacBookAir.local" time="0.033">
-  <properties/>
-  <testcase name="계산_결과_출력_실패()" classname="repository.CalculatorRepositoryImplTest" time="0.033"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
