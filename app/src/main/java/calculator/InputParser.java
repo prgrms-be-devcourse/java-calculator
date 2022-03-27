@@ -3,8 +3,8 @@ package calculator;
 import java.util.Arrays;
 
 public class InputParser {
-    private static String seperator = " ";
-    public static String[] parse(String inputFormula) {
+    private String seperator = " ";
+    public String[] parse(String inputFormula) {
         if(inputFormula == null) throw new IllegalArgumentException();
         String[] splitedInputFormula = inputFormula.split(seperator);
 
