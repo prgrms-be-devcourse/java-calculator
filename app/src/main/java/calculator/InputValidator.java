@@ -1,24 +1,21 @@
 package calculator;
 
 public class InputValidator {
-    public static boolean valid(String[] splitedInputFormula) {
-        if(splitedInputFormula == null) return false;
-        if(splitedInputFormula.length < 3 || splitedInputFormula.length % 2 == 0) return false;
-        for (int i = 0; i < splitedInputFormula.length; i++) {
-            if(i % 2 == 0 && !isNumber(splitedInputFormula[i])) return false;
-            if(i % 2 == 1 && !isOperator(splitedInputFormula[i])) return false;
+    public boolean valid(String[] splittedInputFormula) {
+        if(splittedInputFormula == null) return false;
+        if(splittedInputFormula.length < 3 || splittedInputFormula.length % 2 == 0) return false;
+        for (int i = 0; i < splittedInputFormula.length; i++) {
+            if(i % 2 == 0 && !isNumber(splittedInputFormula[i])) return false;
+            if(i % 2 == 1 && !isOperator(splittedInputFormula[i])) return false;
         }
         return true;
     }
 
-    public static boolean isOperator(String operator) {
-        for (OPERATOR op:OPERATOR.values()) {
-            if(op.getValue().equals(operator)) return true;
-        }
-        return false;
+    private boolean isOperator(String operator) {
+        return OPERATOR.isOperator(operator);
     }
 
-    public static boolean isNumber(String stringNumber) {
+    private boolean isNumber(String stringNumber) {
         try{
             Double.parseDouble(stringNumber);
         } catch (NumberFormatException nfe) {

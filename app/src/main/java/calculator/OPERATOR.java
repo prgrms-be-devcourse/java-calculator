@@ -22,4 +22,11 @@ public enum OPERATOR {
         if (DIVIED.getValue().equals(operator)) return DIVIED.priority;
         return -1;
     }
+
+    static public boolean isOperator(String operator) {
+        for (OPERATOR op:OPERATOR.values()) {
+            if(op.getValue().equals(operator)) return true;
+        }
+        return false;
+    }
 }
