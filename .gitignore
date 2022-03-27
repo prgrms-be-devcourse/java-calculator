@@ -2,10 +2,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/gradle,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=gradle,java
 
+
 ### Java ###
 # Compiled class file
 *.class
 
+.idea
 # Log file
 *.log
 
