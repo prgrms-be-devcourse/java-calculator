@@ -47,6 +47,13 @@ public class Value {
 		return this.value.hashCode();
 	}
 
+	/**
+	 * BigDecimal끼리의 연산은 numeric value와 scale 모두를 비교(예시. 1 != 1.0)
+	 * numeric value로만 비교하기 위해 BigDecimal의 compareTo 메서드를 사용
+	 *
+	 * @param o
+	 * @return numeric value가 같으면 true, 다르면 false
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o == this) {
