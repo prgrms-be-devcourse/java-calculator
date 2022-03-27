@@ -19,12 +19,25 @@ public class Value {
 		this.value = BigDecimal.valueOf(val);
 	}
 
+	private Value(String val) {
+		this.value = new BigDecimal(val);
+	}
+
+	public BigDecimal getValue() {
+		return value;
+	}
+
 	public static Value valueOf(int val) {
 		Objects.requireNonNull(val);
 		return new Value((double)val);
 	}
 
 	public static Value valueOf(double val) {
+		Objects.requireNonNull(val);
+		return new Value(val);
+	}
+
+	public static Value valueOf(String val) {
 		Objects.requireNonNull(val);
 		return new Value(val);
 	}
@@ -43,21 +56,19 @@ public class Value {
 			return false;
 		}
 		Value val = (Value)o;
-		return val.value.equals(this.value);
+		return val.value.compareTo(this.value) == 0;
 	}
 
+	/**
+	 * 나머지가 없으면 나머지를 제거한 수를, 나머지가 있으면 나머지까지 값을 반환하는 메서드
+	 * @return value % 1 > 0 -> 나머지까지 반환
+	 */
 	@Override
 	public String toString() {
-		if (this.value.remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) > 0) {
+		if (this.value.abs().remainder(BigDecimal.ONE).compareTo(BigDecimal.ZERO) > 0) {
 			return String.valueOf(this.value.doubleValue());
 		}
 		return String.valueOf(this.value.intValue());
-	}
-
-	public static void main(String[] args) {
-		System.out.println(Value.valueOf(5).toString());
-		System.out.println(Value.valueOf(5.5).toString());
-		System.out.println(Value.valueOf(5).toString());
 	}
 
 }

@@ -2,6 +2,8 @@ package com.programmers.calculator.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +14,9 @@ class ValueTest {
 	public void Equals_Test() throws Exception{
 		assertTrue(Value.valueOf(1).equals(Value.valueOf(1)));
 		assertTrue(Value.valueOf(1).equals(Value.valueOf(1.0)));
+		assertTrue(Value.valueOf(1).equals(Value.valueOf(1.0)));
 		assertFalse(Value.valueOf(1).equals(Value.valueOf(2)));
+		assertTrue(Value.valueOf(-11).equals(Value.valueOf(-11)));
 	}
 
 	@DisplayName("2. HashCode Test")
@@ -25,10 +29,16 @@ class ValueTest {
 
 	@DisplayName("3. toString Test")
 	@Test
-	public void test() throws Exception{
+	public void to_string_test() throws Exception{
 		assertEquals("5",Value.valueOf(5).toString());
 		assertEquals("5.5", Value.valueOf(5.5).toString());
 		assertEquals("-1", Value.valueOf(-1).toString());
+	}
+
+	@DisplayName("4. 생성 테스트")
+	@Test
+	public void create_test() throws Exception{
+		assertEquals(Value.valueOf(55.5),Value.valueOf("55.5"));
 	}
 
 }
