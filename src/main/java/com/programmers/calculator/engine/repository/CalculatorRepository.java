@@ -8,4 +8,8 @@ public interface CalculatorRepository {
 	int size();
 
 	String values();
+
+	boolean alreadyCalculated(String formula);
+
+	String findByFormula(String formula);
 }

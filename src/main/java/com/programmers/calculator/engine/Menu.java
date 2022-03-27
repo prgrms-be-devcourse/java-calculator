@@ -52,7 +52,7 @@ public enum Menu {
 		return CLEAR;
 	}
 
-	public String start(CalculatorRepository repository){
-		return this.service.execute(repository);
+	public String start(CalculatorRepository repository,String formula){
+		return this.service.execute(repository,formula);
 	}
 }

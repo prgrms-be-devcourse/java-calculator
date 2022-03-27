@@ -23,7 +23,11 @@ public class Calculator implements Runnable{
 		do {
 			menu = selectMenu();
 			if(menu.isRunning()){
-				String result = menu.start(repository);
+				String formula = "";
+				if(menu == Menu.CALCULATE){
+					formula = enterFomula();
+				}
+				String result = menu.start(repository,formula);
 
 				output.print(result);
 			}
@@ -40,6 +44,20 @@ public class Calculator implements Runnable{
 				System.out.println(e.getMessage());
 			}
 		}
+	}
 
+	private String enterFomula(){
+		while(true){
+			try{
+				output.print("식을 입력하세요!");
+				String formula = input.enter();
+				if(Parser.parse(formula)){
+					return formula;
+				}
+
+			} catch (IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 }

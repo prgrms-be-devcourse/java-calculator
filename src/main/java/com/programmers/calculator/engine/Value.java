@@ -7,6 +7,7 @@ import java.util.Objects;
  * 계산기에서 쓰일 값 객체
  */
 public class Value {
+	public static final Value ZERO = Value.valueOf(0);
 	/**
 	 * 실수 계산도 지원하기 위해 BigDecimal 사용
 	 */
@@ -39,7 +40,17 @@ public class Value {
 
 	public static Value valueOf(String val) {
 		Objects.requireNonNull(val);
+		try {
+			assertNumber(val);
+		} catch (NumberFormatException e){
+			throw new IllegalArgumentException();
+		}
+
 		return new Value(val);
+	}
+
+	private static void assertNumber(String val) {
+		Double.parseDouble(val);
 	}
 
 	@Override

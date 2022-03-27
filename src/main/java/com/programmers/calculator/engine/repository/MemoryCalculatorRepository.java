@@ -1,16 +1,14 @@
 package com.programmers.calculator.engine.repository;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
-public class MemoryCalculatorRepository implements CalculatorRepository{
-	private LinkedHashMap<String, String> memory = new LinkedHashMap<>();
+public class MemoryCalculatorRepository implements CalculatorRepository {
+	private Map<String, String> memory = new HashMap<>();
 
 	@Override
 	public void save(String formula, String answer) {
-		memory.put(formula,answer);
+		memory.put(formula, answer);
 	}
 
 	@Override
@@ -34,4 +32,13 @@ public class MemoryCalculatorRepository implements CalculatorRepository{
 		return builder.toString();
 	}
 
+	@Override
+	public String findByFormula(String formula) {
+		return memory.get(formula);
+	}
+
+	@Override
+	public boolean alreadyCalculated(String formula) {
+		return memory.containsKey(formula);
+	}
 }
