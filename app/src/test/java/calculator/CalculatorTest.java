@@ -10,6 +10,8 @@ public class CalculatorTest {
     @DisplayName("더하기_기능_테스트")
     void plus() {
         assertThat(Calculator.plus(1.0,2.0)).isEqualTo(3.0);
+        assertThat(Calculator.plus(1.0,0.0)).isEqualTo(1.0);
+        assertThat(Calculator.plus(1.0,-2.0)).isEqualTo(-1.0);
     }
 
     @Test
