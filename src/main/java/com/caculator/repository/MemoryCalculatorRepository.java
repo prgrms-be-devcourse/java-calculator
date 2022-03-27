@@ -1,5 +1,7 @@
 package com.caculator.repository;
 
+import com.caculator.dto.Result;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

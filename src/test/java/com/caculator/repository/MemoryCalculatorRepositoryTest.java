@@ -1,5 +1,6 @@
 package com.caculator.repository;
 
+import com.caculator.dto.Result;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

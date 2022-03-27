@@ -1,4 +1,4 @@
-package com.caculator.repository;
+package com.caculator.dto;
 
 public class Result {
     private String exp;

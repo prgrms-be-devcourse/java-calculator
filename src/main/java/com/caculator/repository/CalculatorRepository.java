@@ -1,5 +1,7 @@
 package com.caculator.repository;
 
+import com.caculator.dto.Result;
+
 import java.util.List;
 
 public interface CalculatorRepository {

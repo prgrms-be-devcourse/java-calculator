@@ -3,7 +3,7 @@ package com.caculator;
 import com.caculator.io.Input;
 import com.caculator.io.Output;
 import com.caculator.repository.CalculatorRepository;
-import com.caculator.repository.Result;
+import com.caculator.dto.Result;
 
 import java.util.List;
 import java.util.Stack;

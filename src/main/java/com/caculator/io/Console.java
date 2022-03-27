@@ -1,6 +1,6 @@
 package com.caculator.io;
 
-import com.caculator.repository.Result;
+import com.caculator.dto.Result;
 
 import java.util.List;
 import java.util.Scanner;
