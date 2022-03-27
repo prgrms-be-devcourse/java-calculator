@@ -2,9 +2,11 @@ package com.programmers.calculator.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import com.programmers.calculator.engine.util.Operator;
+import com.programmers.calculator.engine.util.Value;
 
 class OperatorTest {
 

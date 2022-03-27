@@ -53,6 +53,9 @@ public enum Menu {
 	}
 
 	public String start(CalculatorRepository repository, String formula) {
+		Objects.requireNonNull(repository);
+		Objects.requireNonNull(formula);
+
 		return this.service.execute(repository, formula);
 	}
 }

@@ -1,16 +1,14 @@
 package com.programmers.calculator.engine.util;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-
-import com.programmers.calculator.engine.Operator;
-import com.programmers.calculator.engine.Value;
+import java.util.Objects;
 
 public class ArithmeticUnit {
 
 	public static String calculate(String formula) {
+		Objects.requireNonNull(formula);
+
 		List<Value> values = new ArrayList<>();
 		List<Operator> operators = new ArrayList<>();
 		String[] inputs = formula.trim().split(" ");
@@ -22,32 +20,26 @@ public class ArithmeticUnit {
 			}
 		}
 
-		calc(values, operators);
+		calculateByType(values, operators, Operator.PriorityType.HIGH);
+		calculateByType(values, operators, Operator.PriorityType.LOW);
 
 		return values.get(0).toString();
 	}
 
-	private static void calc(List<Value> values, List<Operator> operators) {
+	private static void calculateByType(List<Value> values, List<Operator> operators, Operator.PriorityType type) {
+		assert values != null;
+		assert operators != null;
+		assert type != null;
+
 		for (int i = operators.size() - 1; i >= 0; --i) {
 			Operator op = operators.get(i);
-			if (op.isHighPriority()) {
+			if (op.getPriorityType() == type) {
 				operators.remove(i);
 				Value first = values.remove(i + 1);
 				Value second = values.remove(i);
 
-				Value res = op.calculate(first, second);
 				values.add(i, op.calculate(first, second));
 			}
-		}
-
-		for (int i = operators.size() - 1; i >= 0; --i) {
-			Operator op = operators.get(i);
-			operators.remove(i);
-			Value first = values.remove(i + 1);
-			Value second = values.remove(i);
-			Value res = op.calculate(first, second);
-
-			values.add(op.calculate(first, second));
 		}
 	}
 

@@ -1,5 +1,7 @@
 package com.programmers.calculator.engine.service;
 
+import java.util.Objects;
+
 import com.programmers.calculator.engine.repository.CalculatorRepository;
 
 public class ClearService implements CalculatorService {
@@ -13,6 +15,8 @@ public class ClearService implements CalculatorService {
 	 */
 	@Override
 	public String execute(CalculatorRepository repository, String formula) {
+		Objects.requireNonNull(repository);
+
 		repository.clear();
 		return "메모리 초기화 완료!\n";
 	}

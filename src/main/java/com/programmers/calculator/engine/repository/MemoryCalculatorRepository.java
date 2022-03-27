@@ -2,12 +2,16 @@ package com.programmers.calculator.engine.repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MemoryCalculatorRepository implements CalculatorRepository {
 	private Map<String, String> memory = new HashMap<>();
 
 	@Override
 	public void save(String formula, String answer) {
+		Objects.requireNonNull(formula);
+		Objects.requireNonNull(answer);
+
 		memory.put(formula, answer);
 	}
 
@@ -34,11 +38,15 @@ public class MemoryCalculatorRepository implements CalculatorRepository {
 
 	@Override
 	public String findByFormula(String formula) {
+		Objects.requireNonNull(formula);
+
 		return memory.get(formula);
 	}
 
 	@Override
 	public boolean alreadyCalculated(String formula) {
+		Objects.requireNonNull(formula);
+
 		return memory.containsKey(formula);
 	}
 }

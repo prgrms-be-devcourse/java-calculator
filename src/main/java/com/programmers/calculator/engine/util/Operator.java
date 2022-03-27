@@ -1,4 +1,4 @@
-package com.programmers.calculator.engine;
+package com.programmers.calculator.engine.util;
 
 import java.util.stream.Stream;
 
@@ -50,8 +50,8 @@ public enum Operator {
 			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 잘못된 연산자 입력입니다!"));
 	}
 
-	public boolean isHighPriority() {
-		return this.type == PriorityType.HIGH;
+	public PriorityType getPriorityType(){
+		return this.getPriorityType();
 	}
 
 	public abstract Value calculate(Value x, Value y);

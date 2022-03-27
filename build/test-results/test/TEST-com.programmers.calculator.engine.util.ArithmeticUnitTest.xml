@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.programmers.calculator.engine.util.ArithmeticUnitTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-03-27T10:17:37" hostname="hwangseunghan-ui-MacBookPro.local" time="0.07">
+<testsuite name="com.programmers.calculator.engine.util.ArithmeticUnitTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-03-27T10:37:53" hostname="hwangseunghan-ui-MacBookPro.local" time="0.004">
   <properties/>
-  <testcase name="1. 계산 테스트( +, -) 순차적 계산" classname="com.programmers.calculator.engine.util.ArithmeticUnitTest" time="0.063"/>
-  <testcase name="2. 우선순위 만족 계산(*,  %) 테스트" classname="com.programmers.calculator.engine.util.ArithmeticUnitTest" time="0.006"/>
-  <system-out><![CDATA[1PLUS2 = 3
-3PLUS3 = 6
-1PLUS2 = 3
-3MINUS3 = 0
-50PLUS51 = 101
-101MINUS2 = 99
-50MULTIPLY51 = 2550
-2550MINUS2 = 2548
-2MULTIPLY5 = 10
-40MINUS10 = 30
-2MULTIPLY5 = 10
-25DIVIDE2 = 12.5
-40MINUS10 = 30
-30PLUS12.5 = 42.5
-]]></system-out>
+  <testcase name="1. 계산 테스트( +, -) 순차적 계산" classname="com.programmers.calculator.engine.util.ArithmeticUnitTest" time="0.002"/>
+  <testcase name="2. 우선순위 만족 계산(*,  %) 테스트" classname="com.programmers.calculator.engine.util.ArithmeticUnitTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

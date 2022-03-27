@@ -2,15 +2,8 @@ package com.programmers.calculator.engine.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import com.programmers.calculator.engine.Operator;
-import com.programmers.calculator.engine.Value;
 
 class ArithmeticUnitTest {
 

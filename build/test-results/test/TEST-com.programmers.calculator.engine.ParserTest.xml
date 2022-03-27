@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.programmers.calculator.engine.ParserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-27T10:37:53" hostname="hwangseunghan-ui-MacBookPro.local" time="0.003">
+  <properties/>
+  <testcase name="1. formula parse 테스트" classname="com.programmers.calculator.engine.ParserTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

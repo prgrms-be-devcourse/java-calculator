@@ -1,7 +1,8 @@
 package com.programmers.calculator.engine;
 
+import java.util.Objects;
+
 import com.programmers.calculator.engine.repository.CalculatorRepository;
-import com.programmers.calculator.engine.repository.MemoryCalculatorRepository;
 import com.programmers.calculator.io.Input;
 import com.programmers.calculator.io.Output;
 
@@ -11,10 +12,14 @@ public class Calculator implements Runnable {
 	private Menu menu;
 	private CalculatorRepository repository;
 
-	public Calculator(Input input, Output output) {
+	public Calculator(Input input, Output output, CalculatorRepository repository) {
+		Objects.requireNonNull(input);
+		Objects.requireNonNull(output);
+		Objects.requireNonNull(repository);
+
 		this.input = input;
 		this.output = output;
-		this.repository = new MemoryCalculatorRepository();
+		this.repository = repository;
 		menu = Menu.setRunningState();
 	}
 
