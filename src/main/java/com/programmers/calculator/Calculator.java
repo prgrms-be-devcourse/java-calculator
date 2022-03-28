@@ -43,7 +43,7 @@ public class Calculator implements Runnable {
                         String str = input.inputString("식 입력 : ");
                         String result = calculate(str);
                         System.out.println(result + newline);
-                        REPOSITORY.save(new Formula(str, result));
+                        REPOSITORY.save(new Formula(Parser.parse(str), result));
                         break;
                     case 3:
                         flag = false;
