@@ -20,8 +20,8 @@ public class MemoryRepository implements Repository<Formula> {
     }
 
     @Override
-    public void save(Formula formula) {
-        store.put(formula.hashCode(), formula);
+    public Formula save(Formula formula) {
+        return store.put(formula.hashCode(), formula);
     }
 
     @Override
