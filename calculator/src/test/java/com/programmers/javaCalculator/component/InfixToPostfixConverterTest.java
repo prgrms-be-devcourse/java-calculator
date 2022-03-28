@@ -1,13 +1,11 @@
 package com.programmers.javaCalculator.component;
 
-import com.programmers.javaCalculator.component.InfixToPostfixConverter;
 import com.programmers.javaCalulator.exception.ExceptionMessage;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InfixToPostfixConverterTest {
 
