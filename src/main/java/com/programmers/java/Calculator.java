@@ -6,7 +6,7 @@ import com.programmers.java.engine.model.PostFixFormula;
 import com.programmers.java.engine.model.ValidFormula;
 import com.programmers.java.engine.repository.FormulaRepo;
 import com.programmers.java.engine.service.CalcService;
-import com.programmers.java.engine.service.Function;
+import com.programmers.java.engine.service.utils.Function;
 import com.programmers.java.engine.service.PostFixService;
 import com.programmers.java.engine.service.ValidationService;
 

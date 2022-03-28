@@ -16,7 +16,6 @@ public class Console implements Input, Output {
 
     @Override
     public void inquireInput(String s) {
-
     }
 
     @Override

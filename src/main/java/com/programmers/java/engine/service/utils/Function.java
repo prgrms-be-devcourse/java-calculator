@@ -1,7 +1,7 @@
-package com.programmers.java.engine.service;
+package com.programmers.java.engine.service.utils;
 
-public interface Function {
-    default boolean isStrDigit(String c) {
+public class Function {
+    public static boolean isStrDigit(String c) {
 
         for (int i = 0; i < c.length(); i++) {
             if (i == 0 && c.charAt(i) == '-')
@@ -12,11 +12,11 @@ public interface Function {
         return true;
     }
 
-    default boolean isDigit(char c) {
+    public static  boolean isDigit(char c) {
         return c >= '0' && c <= '9';
     }
 
-    default boolean isOperator(char c) {
+    public static  boolean isOperator(char c) {
         return c == '+' || c == '-' || c == '*' || c == '/';
     }
 }

@@ -1,9 +1,11 @@
 package com.programmers.java.engine.service;
 
 
+import com.programmers.java.engine.service.utils.Function;
+
 import java.util.Stack;
 
-public class CalcService implements Function {
+public class CalcService {
     public Long calculate(String[] postFixFormula) {
         Stack<Long> s = new Stack<>();
         Stack<Long> s2 = new Stack<>();
@@ -11,7 +13,7 @@ public class CalcService implements Function {
         int idx = 0;
         for (int i = 0; !postFixFormula[i].equals("^"); i++) {
             String str = postFixFormula[i];
-            if (isStrDigit(str))
+            if (Function.isStrDigit(str))
                 s.push(Long.parseLong(str));
             else {
                 Long b = s.pop();
