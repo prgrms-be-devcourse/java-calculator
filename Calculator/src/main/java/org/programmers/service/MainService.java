@@ -37,7 +37,7 @@ public class MainService implements Runnable {
                     continue;
                 }
 
-                double expressionResult = calculateService.calculate(expression);
+                double expressionResult = calculateService.calculateResult(expression);
                 console.printResult(expressionResult);
                 calculateService.historySave(expressionResult, expression);
 

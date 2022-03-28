@@ -1,6 +1,7 @@
 package org.programmers.config;
 
 import org.programmers.repository.CalculatorRepository;
+import org.programmers.repository.Repository;
 import org.programmers.service.CalculateService;
 import org.programmers.service.IO.Console;
 
@@ -11,14 +12,17 @@ import org.programmers.service.IO.Console;
 public class AppConfig {
 
     public Console console(){
+
         return new Console();
     }
 
-    public CalculateService calculateService(){
-        return new CalculateService(calculatorRepository());
+    public CalculateService calculateService(Repository repository){
+
+        return new CalculateService(repository);
     }
 
     public CalculatorRepository calculatorRepository(){
+
         return new CalculatorRepository();
     }
 }

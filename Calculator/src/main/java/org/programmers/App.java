@@ -10,6 +10,6 @@ public class App {
     public static void main(String[] args) {
         AppConfig appConfig = new AppConfig();
 
-        new MainService(appConfig.calculateService(), appConfig.console()).run();
+        new MainService(appConfig.calculateService(appConfig.calculatorRepository()), appConfig.console()).run();
     }
 }

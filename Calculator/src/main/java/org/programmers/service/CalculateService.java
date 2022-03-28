@@ -16,10 +16,8 @@ import java.util.*;
 public class CalculateService {
     private Repository calculatorRepository;
 
-    public double calculate(String expression) {
-        Deque<String> deque = makePostfix(expression);
-
-        return calculate(deque);
+    public double calculateResult(String expression) {
+        return calculate(makePostfix(expression));
     }
 
     public ResultModel historySave(double result, String expression){
@@ -50,13 +48,12 @@ public class CalculateService {
                 if (isNumeric(deque.peekFirst())) {
                     deque.addFirst(token);
 
-                } else if (!deque.isEmpty() && deque.peekFirst().equals("*")
-                        || !deque.isEmpty() && deque.peekFirst().equals("/")) {
-
-                    deque.addLast(deque.removeFirst());
+                } else if (!deque.isEmpty() && token.equals("*")
+                        || !deque.isEmpty() && token.equals("/")){
                     deque.addFirst(token);
-
-                } else {
+                }
+                else {
+                    deque.addLast(deque.removeFirst());
                     deque.addFirst(token);
                 }
             }
