@@ -27,5 +27,4 @@ class MemoryCalculationHistoryManagerTest {
         historyManager.saveCalculationResultToHistory("1 + 3",4.0);
         assertFalse(historyManager.calculationHistoryNotExist());
     }
-
 }
