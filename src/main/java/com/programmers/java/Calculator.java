@@ -2,27 +2,25 @@ package com.programmers.java;
 
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
-import com.programmers.java.engine.model.PostFixFormula;
-import com.programmers.java.engine.model.ValidFormula;
+import com.programmers.java.engine.model.Formula;
 import com.programmers.java.engine.repository.FormulaRepository;
-import com.programmers.java.engine.service.CalcService;
+import com.programmers.java.engine.service.*;
 import com.programmers.java.engine.service.utils.Function;
-import com.programmers.java.engine.service.PostFixService;
-import com.programmers.java.engine.service.ValidationService;
 
 import java.util.Optional;
 
 public class Calculator implements Runnable {
+
+    private static final int ERROR = -1;
+    private static final int INQUIRE = 1;
+    private static final int CALCULATE = 2;
+    private final Input input;
+    private final Output output;
+
     ValidationService validService = new ValidationService();
     PostFixService postFixService = new PostFixService();
-    FormulaRepository formulaRepo = new FormulaRepository();
+    FormulaRepository formulaRepository = new FormulaRepository();
     CalcService calcService = new CalcService();
-
-    private final int INQUERY = 1;
-    private final int CALCULATE = 2;
-
-    private Input input;
-    private Output output;
 
     public Calculator(Input input, Output output) {
         this.input = input;
@@ -31,45 +29,52 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-
         while (true) {
-            String inputString = input.returnInput("1. 조회" + "\n2. 계산");
-            if (inputString.isEmpty())
+            String inputString = input.ReturnInput("1. 조회" + "\n2. 계산");
+            if (inputString.isEmpty()) {
                 break;
-
-            int selectNum = parse(inputString);
-            if (selectNum == INQUERY) {
-                input.inquireInput(selectNum);
-                if (formulaRepo.size() < 1)
-                    output.errorEmptyRepo();
-                else
-                    formulaRepo.inquire();
+            }
+            int selectNum = Parse(inputString);
+            if (selectNum == INQUIRE) {
+                Inquire(selectNum);
             } else if (selectNum == CALCULATE) {
-                String inputFormula = input.returnInput(selectNum + " 번을 선택하셨습니다. 식을 입력해주세요 !");
-                Optional<ValidFormula> validFormula = validService.Validation(inputFormula);
-                if (validFormula.isEmpty()) {
-                    output.inputError();
-                } else {
-                    PostFixFormula postFixFormula = new PostFixFormula(postFixService.makePostFixFormula(validFormula.get()));
-                    Long result = calcService.calculate(postFixFormula.getFormula());
-                    output.printCalcResult(result);
-                    formulaRepo.save(inputFormula, result);
-                }
+                Calculate(selectNum);
             } else {
-                output.inputError();
+                output.Error("Input");
             }
         }
     }
 
-    private int parse(String inputString) {
-        if (inputString.length() > 1 || !Function.isStrDigit(inputString)) {
-            return -1;
-        } else if (Integer.parseInt(inputString) == 1) {
-            return 1;
-        } else if (Integer.parseInt(inputString) == 2) {
-            return 2;
+    private void Inquire(int selectNum) {
+        input.InquireInput(selectNum);
+        if (formulaRepository.size() < 1) {
+            output.Error("EmptyMap");
         } else {
-            return -1;
+            formulaRepository.find();
         }
+    }
+
+    private void Calculate(int selectNum) {
+        String inputFormula = input.ReturnInput(selectNum + " 번을 선택하셨습니다. 식을 입력해주세요");
+        Optional<Formula> validFormula = validService.Validation(inputFormula);
+        if (validFormula.isEmpty()) {
+            output.Error("Input");
+        } else {
+            Formula postFixFormula = new Formula(postFixService.makePostFixFormula(validFormula.get()));
+            Long result = calcService.calculate(postFixFormula.getFormula());
+            output.PrintCalcResult(result);
+            formulaRepository.save(inputFormula, result);
+        }
+    }
+
+    private int Parse(String inputString) {
+        if (inputString.length() > 1 || !Function.isStrDigit(inputString)) {
+            return ERROR;
+        } else if (Integer.parseInt(inputString) == 1) {
+            return INQUIRE;
+        } else if (Integer.parseInt(inputString) == 2) {
+            return CALCULATE;
+        }
+        return ERROR;
     }
 }
