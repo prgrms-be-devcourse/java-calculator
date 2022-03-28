@@ -3,15 +3,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class History {
-    Map<String ,Number> history = new HashMap<>();
+public class History implements IHistory{
+    Map<String ,Double> history = new HashMap<>();
 
-    boolean save(String operation, Number result){
+    @Override
+    public boolean save(String operation, Double result) {
         history.put(operation, result);
         return true;
     }
 
-    List<String> getList(){
+    public List<String> getList(){
         List<String> historyList = new ArrayList<>();
         System.out.println("list All");
 
@@ -22,11 +23,20 @@ public class History {
             String item = operation + " = " + result.toString();
             historyList.add(item);
         }
-
         return historyList;
     }
 
-    int count(){
+    @Override
+    public boolean isExist(String operation) {
+        return history.containsKey(operation);
+    }
+
+    @Override
+    public Double getResult(String operation) {
+        return history.get(operation);
+    }
+
+    public int count(){
         return history.size();
     }
 }
