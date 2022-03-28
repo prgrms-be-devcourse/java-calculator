@@ -12,7 +12,7 @@ import com.programmers.java.engine.service.ValidationService;
 
 import java.util.Optional;
 
-public class Calculator implements Runnable, Function {
+public class Calculator implements Runnable {
     ValidationService validService = new ValidationService();
     PostFixService postFixService = new PostFixService();
     FormulaRepo formulaRepo = new FormulaRepo();
@@ -62,7 +62,7 @@ public class Calculator implements Runnable, Function {
     }
 
     private int parse(String inputString) {
-        if (inputString.length() > 1 || !isStrDigit(inputString)) {
+        if (inputString.length() > 1 || !Function.isStrDigit(inputString)) {
             return -1;
         } else if (Integer.parseInt(inputString) == 1) {
             return 1;
