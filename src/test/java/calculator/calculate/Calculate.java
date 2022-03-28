@@ -58,7 +58,8 @@ public class Calculate {
         String[] testString = {
                 "1 * 5",
                 "2 * 30 - 100",
-                "0.3 * 0.5"
+                "0.3 * 0.5",
+                "10 * 10 / 3"
         };
         String result = calculation.calculate(testString[0]);
         Assertions.assertEquals("5.0",result);
@@ -66,6 +67,8 @@ public class Calculate {
         Assertions.assertEquals("-40.0",result);
         result = calculation.calculate(testString[2]);
         Assertions.assertEquals("0.15",result);
+        result = calculation.calculate(testString[3]);
+        Assertions.assertEquals("33.33",result);
     }
     @Test
     void 나누기(){

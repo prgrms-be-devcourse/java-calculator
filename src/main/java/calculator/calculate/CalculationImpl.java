@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import static java.lang.Math.round;
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalculationImpl implements Calculation {
@@ -40,6 +42,7 @@ public class CalculationImpl implements Calculation {
             double next = Double.parseDouble(elements.get(i+1));
             result = strategyMapping.getCalculatorStrategy(operator).calculate(result,next);
         }
+        result = (round(result*100))/100.0;
         return String.valueOf(result);
     }
 
