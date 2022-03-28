@@ -1,49 +1,52 @@
 package calculation.log.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import calculation.model.CalcData;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class CalcDataRepositoryTest {
 
   DataRepository<CalcData, Long> calcDataRepository = new CalcDataRepository();
 
+  @DisplayName("저장 테스트")
   @Test
   void save() {
     //given
     String expression = "1 + 2 + 3";
-    BigDecimal ans = new BigDecimal(6.0);
+    BigDecimal answer = new BigDecimal(6.0);
+    calcDataRepository.save(new CalcData(expression,answer));
 
     //when
-    calcDataRepository.save(new CalcData(expression,ans));
-    Optional<CalcData> findData = calcDataRepository.findById(0L);
+    Optional<CalcData> foundData = calcDataRepository.findById(0L);
 
     //then
-    Assertions.assertTrue(findData.isPresent());
-    Assertions.assertEquals(expression, findData.get().getExpression());
-    Assertions.assertEquals(ans, findData.get().getAns());
+    assertThat(foundData.isPresent()).isTrue();
+    assertThat(foundData.get().getExpression()).isEqualTo(expression);
+    assertThat(foundData.get().getAns()).isEqualTo(answer);
   }
 
-  @Test
-  void findAll() {
+  @DisplayName("전체 조회 테스트")
+  @ParameterizedTest
+  @CsvSource(value = {
+      "1 + 2 + 3:6",
+      "1 + 2 * 3:7"
+  }, delimiter = ':')
+  void findAll(String expression, BigDecimal answer) {
     //given
-    String expressionA = "1 + 2 + 3";
-    String expressionB = "1 + 2 * 3";
-    BigDecimal ansA = new BigDecimal(6.0);
-    BigDecimal ansB = new BigDecimal(7.0);
+    calcDataRepository.save(new CalcData(expression,answer));
 
     //when
-    calcDataRepository.save(new CalcData(expressionA,ansA));
-    calcDataRepository.save(new CalcData(expressionB,ansB));
-    List<CalcData> findData = calcDataRepository.findAll();
+    List<CalcData> foundData = calcDataRepository.findAll();
 
     //then
-    Assertions.assertEquals(expressionA, findData.get(0).getExpression());
-    Assertions.assertEquals(expressionB, findData.get(1).getExpression());
-    Assertions.assertEquals(ansA, findData.get(0).getAns());
-    Assertions.assertEquals(ansB, findData.get(1).getAns());
+    assertThat(foundData.get(0).getExpression()).isEqualTo(expression);
+    assertThat(foundData.get(0).getAns()).isEqualTo(answer);
   }
 }

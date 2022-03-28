@@ -1,74 +1,54 @@
 package calculation.calculator.expression;
 
-import java.util.Iterator;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NormalExpressionServiceTest {
 
   private ExpressionService expressionService = new NormalExpressionService(new NormalArithmeticLogic());
 
-  private Boolean compare(List a, List b) {
-    Iterator iterA = a.iterator();
-    Iterator iterB = b.iterator();
-    while (iterA.hasNext() && iterB.hasNext()) {
-      if (!iterA.next().equals(iterB.next())) {
-        return false;
-      }
-    }
-    if (!iterA.hasNext() && !iterB.hasNext()) {
-      return true;
-    }
-    return false;
-  }
-
-  //후위 표기식 변경 테스트
+  @DisplayName("후위 표기식 변경 테스트")
   @Test
   public void onlyAddConvertToPostfixTest() {
     //given
+    List<String> expression1 = List.of("1", "+", "2");
+    List<String> expression2 = List.of("1", "+", "2", "+", "3");
+    List<String> expression3 = List.of("1", "+", "2", "+", "3", "+", "4", "+", "5");
 
-    List<String> exp1 = List.of("1", "+", "2");
-    List<String> exp2 = List.of("1", "+", "2", "+", "3");
-    List<String> exp3 = List.of("1", "+", "2", "+", "3", "+", "4", "+", "5");
-
-    List<String> ans1 = List.of("1", "2", "+").stream().collect(Collectors.toList());
-    List<String> ans2 = List.of("1", "2", "+", "3", "+").stream().collect(Collectors.toList());
-    List<String> ans3 = List.of("1", "2", "+", "3", "+", "4", "+", "5", "+").stream().collect(Collectors.toList());
+    List<String> answer1 = List.of("1", "2", "+");
+    List<String> answer2 = List.of("1", "2", "+", "3", "+");
+    List<String> answer3 = List.of("1", "2", "+", "3", "+", "4", "+", "5", "+");
 
     //when
-    List<String> data1 = expressionService.convertToPostfix(exp1);
-    List<String> data2 = expressionService.convertToPostfix(exp2);
-    List<String> data3 = expressionService.convertToPostfix(exp3);
-    System.out.println(data3);
+    List<String> result1 = expressionService.convertToPostfix(expression1);
+    List<String> result2 = expressionService.convertToPostfix(expression2);
+    List<String> result3 = expressionService.convertToPostfix(expression3);
 
-    Boolean same = compare(data1, ans1);
-    Boolean same2 = compare(data2, ans2);
-    Boolean same3 = compare(data3, ans3);
     //then
-    Assertions.assertTrue(same);
-    Assertions.assertTrue(same2);
-    Assertions.assertTrue(same3);
+    assertThat(result1).isEqualTo(answer1);
+    assertThat(result2).isEqualTo(answer2);
+    assertThat(result3).isEqualTo(answer3);
   }
 
   @Test
   public void complexConvertToPostfixTest() {
     //given
-    List<String> exp1 = List.of("1", "/", "2", "+", "3");
-    List<String> exp2 = List.of("1", "*", "2", "/", "3", "-", "5", "*", "1");
+    List<String> expression1 = List.of("1", "/", "2", "+", "3");
+    List<String> expression2 = List.of("1", "*", "2", "/", "3", "-", "5", "*", "1");
 
-    List<String> ans1 = List.of("1", "2", "/", "3", "+").stream().collect(Collectors.toList());
-    List<String> ans2 = List.of("1", "2", "*", "3", "/", "5", "1", "*", "-").stream().collect(Collectors.toList());
+    List<String> answer1 = List.of("1", "2", "/", "3", "+");
+    List<String> answer2 = List.of("1", "2", "*", "3", "/", "5", "1", "*", "-");
 
     //when
-    List<String> data1 = expressionService.convertToPostfix(exp1);
-    List<String> data2 = expressionService.convertToPostfix(exp2);
-    Boolean same = compare(data1, ans1);
-    Boolean same2 = compare(data2, ans2);
+    List<String> result1 = expressionService.convertToPostfix(expression1);
+    List<String> result2 = expressionService.convertToPostfix(expression2);
 
     //then
-    Assertions.assertTrue(same);
-    Assertions.assertTrue(same2);
+    assertThat(result1).isEqualTo(answer1);
+    assertThat(result2).isEqualTo(answer2);
+
   }
 }

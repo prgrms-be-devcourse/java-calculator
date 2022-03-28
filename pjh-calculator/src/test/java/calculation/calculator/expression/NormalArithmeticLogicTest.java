@@ -1,16 +1,20 @@
 package calculation.calculator.expression;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculation.model.CalcData;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class NormalArithmeticLogicTest {
 
   ArithmeticLogic arithmeticLogic = new NormalArithmeticLogic();
 
+  @DisplayName("연산자 우선 순위 테스트")
   @Test
   void getPriorityTest() {
     int priorityMul = arithmeticLogic.getPriority("*");
@@ -26,73 +30,61 @@ class NormalArithmeticLogicTest {
     Assertions.assertTrue(priorityDiv > prioritySub);
   }
 
-  //정수 계산 테스트
-  @Test
-  public void BasicCalcTest() {
-
-    BigDecimal ans1 = new BigDecimal(3);
-    BigDecimal ans2 = new BigDecimal(-10);
-    BigDecimal ans3 = new BigDecimal(45);
-    BigDecimal ans4 = new BigDecimal(5);
-    BigDecimal ans5 = new BigDecimal(5.5);
-
+  @DisplayName("정수 계산 테스트")
+  @ParameterizedTest
+  @CsvSource(value = {
+      "+:1:2:3",
+      "-:5:15:-10",
+      "*:5:9:45",
+      "/:10:2:5",
+      "/:11:2:5.5"
+  }, delimiter = ':')
+  public void BasicCalcTest(String operator, BigDecimal operandA, BigDecimal operandB, BigDecimal expected) {
     //when
-    BigDecimal calculate1 = arithmeticLogic.calculate("+", BigDecimal.valueOf(1), BigDecimal.valueOf(2));
-    BigDecimal calculate2 = arithmeticLogic.calculate("-", BigDecimal.valueOf(5), BigDecimal.valueOf(15));
-    BigDecimal calculate3 = arithmeticLogic.calculate("*", BigDecimal.valueOf(5), BigDecimal.valueOf(9));
-    BigDecimal calculate4 = arithmeticLogic.calculate("/", BigDecimal.valueOf(10), BigDecimal.valueOf(2));
-    BigDecimal calculate5 = arithmeticLogic.calculate("/", BigDecimal.valueOf(11), BigDecimal.valueOf(2));
+    BigDecimal result = arithmeticLogic.calculate(operator, operandA, operandB);
 
     //then
-    Assertions.assertEquals(ans1, calculate1);
-    Assertions.assertEquals(ans2, calculate2);
-    Assertions.assertEquals(ans3, calculate3);
-    Assertions.assertEquals(ans4, calculate4);
-    Assertions.assertEquals(ans5, calculate5);
+    assertThat(result).isEqualTo(expected);
   }
 
-  //실수 계산 테스트
-  @Test
-  public void actualNumCalcTest() {
-
-    BigDecimal ans1 = new BigDecimal("2.7");
-    BigDecimal ans2 = new BigDecimal("0.4");
-    BigDecimal ans3 = new BigDecimal("0.9285714285714285714285714285714286");
-    BigDecimal ans4 = new BigDecimal("1.32");
-
+  @DisplayName("실수 계산 테스트")
+  @ParameterizedTest
+  @CsvSource(value = {
+      "+:1.5:1.2:2.7",
+      "-:1.6:1.2:0.4",
+      "/:1.3:1.4:0.9285714285714285714285714285714286",
+      "*:1.1:1.2:1.32"
+  }, delimiter = ':')
+  public void actualNumCalcTest(String operator, BigDecimal operandA, BigDecimal operandB, BigDecimal expected) {
     //when
-    BigDecimal calculate1 = arithmeticLogic.calculate("+", BigDecimal.valueOf(1.5), BigDecimal.valueOf(1.2));
-    BigDecimal calculate2 = arithmeticLogic.calculate("-", BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.2));
-    BigDecimal calculate3 = arithmeticLogic.calculate("/", BigDecimal.valueOf(1.3), BigDecimal.valueOf(1.4));
-    BigDecimal calculate4 = arithmeticLogic.calculate("*", BigDecimal.valueOf(1.1), BigDecimal.valueOf(1.2));
+    BigDecimal result = arithmeticLogic.calculate(operator, operandA, operandB);
 
     //then
-    Assertions.assertEquals(ans1, calculate1);
-    Assertions.assertEquals(ans2, calculate2);
-    Assertions.assertEquals(ans3, calculate3);
-    Assertions.assertEquals(ans4, calculate4);
+    assertThat(result).isEqualTo(expected);
   }
 
-  //큰 숫자 계산 테스트
-  @Test
-  public void bigNumCalcTest() {
-    //given
-    String ans1 = "4294967294";
-    String ans2 = "1000000000000000000000000";
-
+  @DisplayName("큰 숫자 계산 테스트")
+  @ParameterizedTest
+  @CsvSource(value = {
+      "+:2147483647:2147483647:4294967294",
+      "*:1000000000000:1000000000000:1000000000000000000000000",
+  }, delimiter = ':')
+  public void bigNumCalcTest(String operator, BigDecimal operandA, BigDecimal operandB, BigDecimal expected) {
     //when
-    BigDecimal calculate1 = arithmeticLogic.calculate("+", BigDecimal.valueOf(2147483647), BigDecimal.valueOf(2147483647));
-    BigDecimal calculate2 = arithmeticLogic.calculate("*", BigDecimal.valueOf(1000000000000L), BigDecimal.valueOf(1000000000000L));
+    BigDecimal result = arithmeticLogic.calculate(operator, operandA, operandB);
 
     //then
-    Assertions.assertEquals(new BigDecimal(ans1), calculate1);
-    Assertions.assertEquals(new BigDecimal(ans2), calculate2);
+    assertThat(result).isEqualTo(expected);
   }
 
-  //0으로 나누기 테스트
-  @Test
-  public void divideByZeroTest() {
-    Assertions.assertThrows(ArithmeticException.class, () -> arithmeticLogic.calculate("/",BigDecimal.valueOf(1),BigDecimal.valueOf(0)));
-    Assertions.assertThrows(ArithmeticException.class, () -> arithmeticLogic.calculate("/",BigDecimal.valueOf(10000),BigDecimal.valueOf(0)));
+  @DisplayName("0으로 나누기 테스트")
+  @ParameterizedTest
+  @CsvSource(value = {
+      "/:1:0",
+      "/:10000:0",
+  }, delimiter = ':')
+  public void divideByZeroTest(String operator, BigDecimal operandA, BigDecimal operandB) {
+    //when, then
+    assertThatThrownBy(()->arithmeticLogic.calculate(operator,operandA,operandB)).isInstanceOf(ArithmeticException.class);
   }
 }

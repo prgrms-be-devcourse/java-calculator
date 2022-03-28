@@ -1,25 +1,28 @@
 package calculation.log;
 
-import calculation.model.CalcData;
+import static java.lang.System.lineSeparator;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import calculation.log.repository.CalcDataRepository;
+import calculation.model.CalcData;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CalcLogServiceTest {
 
   LogService<CalcData> logService = new CalcLogService(new CalcDataRepository());
-  ByteArrayOutputStream out = new ByteArrayOutputStream();
+  ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
   @BeforeEach
   private void before() {
-    System.setOut(new PrintStream(out));
+    System.setOut(new PrintStream(outputStream));
   }
 
-  // 로그 서비스를 통해 로그가 잘 저장되는지 확인한다.
+  @DisplayName("로그 서비스를 통한 로그 저장 테스트")
   @Test
   public void logTest() {
     //when
@@ -27,9 +30,10 @@ class CalcLogServiceTest {
     logService.printLogById(0L);
 
     //then
-    Assertions.assertEquals("1 + 2 + 3 = 6", out.toString().trim());
+    assertThat(outputStream.toString().trim()).isEqualTo("1 + 2 + 3 = 6");
   }
 
+  @DisplayName("로그 서비스를 통한 로그 출력 테스트")
   @Test
   public void printLogTest() {
 
@@ -38,8 +42,8 @@ class CalcLogServiceTest {
     logService.log(new CalcData("3 * 2 + 1", new BigDecimal(7)));
     logService.printLog();
 
-    Assertions.assertEquals("1 + 2 + 3 = 6" + System.lineSeparator() +
-        "1 + 2 = 3" + System.lineSeparator() +
-        "3 * 2 + 1 = 7", out.toString().trim());
+    String expected = "1 + 2 + 3 = 6" + lineSeparator() + "1 + 2 = 3" + lineSeparator() + "3 * 2 + 1 = 7";
+
+    assertThat(outputStream.toString().trim()).isEqualTo(expected);
   }
 }
