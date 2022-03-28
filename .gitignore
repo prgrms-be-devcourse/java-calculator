@@ -1,4 +1,4 @@
-.gradle
+calculator/.gradle
 build
 gradle
 out
@@ -6,5 +6,4 @@ build.gradle
 gradlew
 gradlew.bat
 settings.gradle
-out
-
+.idea
