@@ -1,4 +1,5 @@
 package service;
+import model.Expression;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import repository.ExpressionRepository;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ExpressionServiceTest {
     ExpressionRepository expressionRepository = new MemoryExpressionRepository();
@@ -68,10 +70,19 @@ class ExpressionServiceTest {
     }
 
     @Test
-    public void 사칙연산_수행후_계산된_이력을_찾기_성공(){
+    public void 사칙연산_수행후_수식클래스에_값이_저장된다(){
         //given
+        String exp = "4 + 9 / 3 - 1 + 2 * 10";
+        Double resultNum = (double)26;
+        Expression expression = new Expression(exp);
+        expression.setCalcResult(resultNum);
         //when
+        expressionService.calculateExpression(exp);
+        List<Expression> allExpression = expressionService.findAllExpression();
         //then
+        assertThat(allExpression.size()).isEqualTo(1);
+        assertThat(allExpression.get(0).getExpression()).isEqualTo(exp);
+        assertThat(allExpression.get(0).getCalcResult()).isEqualTo(resultNum);
     }
 
     @Test
