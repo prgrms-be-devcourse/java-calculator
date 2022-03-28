@@ -1,6 +1,6 @@
 package calculation;
 
-import calculation.calculator.engine.Calculator;
+import calculation.calculator.engine.BigDecimalCalculator;
 import calculation.io.Input;
 import calculation.io.Output;
 import calculation.model.CalcData;
@@ -10,12 +10,13 @@ import java.util.NoSuchElementException;
 
 public class CalculateService {
 
-  private final Calculator calculator;
+  private final BigDecimalCalculator calculator;
   private final LogService<CalcData> logService;
   private final Input input;
   private final Output output;
 
-  public CalculateService(Calculator calculator, LogService logService, Input input, Output output) {
+
+  public CalculateService(BigDecimalCalculator calculator, LogService logService, Input input, Output output) {
     this.calculator = calculator;
     this.logService = logService;
     this.input = input;

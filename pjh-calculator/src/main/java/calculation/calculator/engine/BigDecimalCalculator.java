@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Stack;
 
-public class BigDecimalCalculator implements Calculator {
+public class BigDecimalCalculator {
 
   private final NormalExpressionService expService;
 
@@ -14,7 +14,6 @@ public class BigDecimalCalculator implements Calculator {
     this.expService = expService;
   }
 
-  @Override
   public CalcData execute(String exp) {
     if (!expService.checkExpression(exp)) {
       throw new IllegalArgumentException("잘못된 연산식 입니다.");

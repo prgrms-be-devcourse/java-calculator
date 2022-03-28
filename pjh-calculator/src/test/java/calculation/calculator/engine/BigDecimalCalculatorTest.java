@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class BigDecimalCalculatorTest {
 
-  Calculator calculator = new BigDecimalCalculator
+  BigDecimalCalculator calculator = new BigDecimalCalculator
       (new NormalExpressionService(new NormalArithmeticLogic()));
 
   //잘못된 연산식 테스트
