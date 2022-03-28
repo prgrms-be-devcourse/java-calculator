@@ -7,13 +7,17 @@ import java.time.temporal.ChronoField;
 import java.util.*;
 
 
-public class Calculator {
+public class Calculator extends Basic{
 
-    private Console console = new Console();
+    private Console console = new Console(); //입출력
+    private List<String> operations = new ArrayList<>(Arrays.asList("+","-","*","/"));  // 연산자
 
     public String menu() {
         return console.menu();
     }
+
+
+
 
     public Queue<String> priority(String s) { // 후위연산식으로 변환
         HashMap<String, Integer> pr = new HashMap<>(); // 우선순위 저장
@@ -51,4 +55,22 @@ public class Calculator {
 
 
 
+
+    public double calculate(Queue<String> formula) { // 계산
+        double result = 0;
+        Stack<Double> numbers = new Stack<>();
+
+        for(String str : formula){
+            if(!operations.contains(str)) { // 숫자라면
+                numbers.push(Double.parseDouble(str));
+            }
+            else{ // 연산자라면
+                Double num2 = numbers.pop();
+                Double num1 = numbers.pop();
+                numbers.push(cal(num1,num2,str));
+            }
+        }
+
+        return numbers.pop();
+    }
 }
