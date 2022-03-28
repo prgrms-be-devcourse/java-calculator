@@ -114,8 +114,7 @@ public class Calculator {
                 || formula.equals("")) {
             return "";
         }
-        formula = validatorService.checkSpacing(formula);
 
-        return validatorService.checkSpacingVerified(formula) ? formula : "";
+        return formula;
     }
 }

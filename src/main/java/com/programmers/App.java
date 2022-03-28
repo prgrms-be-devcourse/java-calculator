@@ -5,7 +5,6 @@ import com.programmers.calculator.repository.MemoryRepository;
 import com.programmers.calculator.service.ArithmeticService;
 import com.programmers.calculator.service.ValidatorService;
 
-
 public class App {
     public static void main(String[] args) {
         Console console = new Console();
