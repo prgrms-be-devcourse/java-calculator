@@ -1,13 +1,16 @@
 package com.programmers.calculator;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.programmers.calculator.engine.Calculator;
+import com.programmers.calculator.engine.repository.MemoryCalculatorRepository;
+import com.programmers.calculator.io.Console;
 
 @SpringBootApplication
 public class CalculatorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CalculatorApplication.class, args);
+		new Calculator(new Console(), new Console(), new MemoryCalculatorRepository()).run();
 	}
 
 }
