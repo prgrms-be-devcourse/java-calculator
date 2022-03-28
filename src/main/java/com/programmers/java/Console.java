@@ -9,28 +9,28 @@ public class Console implements Input, Output {
     private final Scanner sc = new Scanner(System.in);
 
     @Override
-    public String returnInput(String s) {
+    public String ReturnInput(String s) {
         System.out.println(s);
         return sc.nextLine();
     }
 
     @Override
-    public void inquireInput(int s) {
+    public void Error(String s) {
+        if (s.equals("Input")) {
+            System.out.println("잘못된 입력입니다.\n");
+        } else if (s.equals("EmptyMap")) {
+            System.out.println("계산 이력이 존재하지 않습니다.\n");
+        }
+    }
+
+    @Override
+    public void InquireInput(int s) {
         System.out.println(s + " 번을 선택하셨습니다.");
     }
 
     @Override
-    public void inputError() {
-        System.out.println("잘못된 입력입니다.\n");
-    }
-
-    @Override
-    public void printCalcResult(Long result) {
+    public void PrintCalcResult(Long result) {
         System.out.println("결과 : " + result + "\n");
     }
 
-    @Override
-    public void errorEmptyRepo() {
-        System.out.println("계산 이력이 존재하지 않습니다.");
-    }
 }

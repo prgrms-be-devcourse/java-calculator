@@ -1,9 +1,7 @@
 package com.programmers.java.engine.io;
 
 public interface Output {
-    void inputError();
+    void Error(String s);
+    void PrintCalcResult(Long result);
 
-    void printCalcResult(Long result);
-
-    void errorEmptyRepo();
 }

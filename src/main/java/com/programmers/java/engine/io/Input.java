@@ -1,7 +1,7 @@
 package com.programmers.java.engine.io;
 
 public interface Input {
-    String returnInput(String s);
+    String ReturnInput(String s);
 
-    void inquireInput(int s);
+    void InquireInput(int s);
 }
