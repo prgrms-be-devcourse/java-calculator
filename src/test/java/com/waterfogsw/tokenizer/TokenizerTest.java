@@ -23,7 +23,7 @@ class TokenizerTest {
         String exprStr = "2 + 2 + 2";
 
         // when
-        List<String> exprList = tokenizer.parse(exprStr);
+        List<String> exprList = tokenizer.tokenize(exprStr);
 
         // then
         Assertions.assertThat(exprList).isEqualTo(Arrays.asList("2", "+", "2", "+", "2"));
@@ -35,7 +35,7 @@ class TokenizerTest {
         String exprStr = "(4 - 2) * 2";
 
         // when
-        List<String> exprList = tokenizer.parse(exprStr);
+        List<String> exprList = tokenizer.tokenize(exprStr);
 
         // then
         Assertions.assertThat(exprList).isEqualTo(Arrays.asList("(", "4", "-", "2", ")", "*", "2"));
@@ -47,7 +47,7 @@ class TokenizerTest {
         String exprStr = "-100 + 300";
 
         // when
-        List<String> exprList = tokenizer.parse(exprStr);
+        List<String> exprList = tokenizer.tokenize(exprStr);
 
         // then
         Assertions.assertThat(exprList).isEqualTo(Arrays.asList("-", "100", "+", "300"));

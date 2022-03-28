@@ -8,7 +8,7 @@ public class StringTokenizer implements Tokenizer {
     private final String regex = "(?<=[^\\d])(?=\\d)|(?=[^\\d])";
 
     @Override
-    public List<String> parse(String exprStr) {
+    public List<String> tokenize(String exprStr) {
         return Arrays.stream(exprStr.split(regex))
                 .filter((token) -> !token.equals(" "))
                 .collect(Collectors.toList());

@@ -16,7 +16,7 @@ public class CalculationServiceImpl implements CalculationService {
 
     @Override
     public String getResult(String expr) {
-        List<String> infixTokens = tokenizer.parse(expr);
+        List<String> infixTokens = tokenizer.tokenize(expr);
         List<String> postfixTokens = converter.convert(infixTokens);
 
         Stack<String> stack = new Stack<>();
