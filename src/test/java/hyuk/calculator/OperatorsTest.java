@@ -1,4 +1,4 @@
-package hyuk.model;
+package hyuk.calculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

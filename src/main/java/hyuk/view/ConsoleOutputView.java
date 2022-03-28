@@ -1,7 +1,7 @@
 package hyuk.view;
 
 import hyuk.model.LogDTO;
-import hyuk.model.Result;
+import hyuk.model.ResultDTO;
 import java.util.List;
 
 public class ConsoleOutputView implements OutputView {
@@ -13,8 +13,8 @@ public class ConsoleOutputView implements OutputView {
         System.out.print("선택 : ");
     }
 
-    public void printResult(Result result) {
-        System.out.println(result.showResult());
+    public void printResult(ResultDTO resultDTO) {
+        System.out.println(resultDTO.getResult());
         System.out.println();
     }
 

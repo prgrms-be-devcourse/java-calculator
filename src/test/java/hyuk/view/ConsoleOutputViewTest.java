@@ -2,8 +2,9 @@ package hyuk.view;
 
 import static org.mockito.Mockito.when;
 
+import hyuk.calculator.Result;
 import hyuk.model.LogDTO;
-import hyuk.model.Result;
+import hyuk.model.ResultDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
@@ -58,7 +59,7 @@ public class ConsoleOutputViewTest {
     void printResult() {
         //given
         //when
-        consoleOutputView.printResult(new Result(10));
+        consoleOutputView.printResult(new ResultDTO(new Result(10)));
 
         //then
         Assertions.assertThat(output.toString())

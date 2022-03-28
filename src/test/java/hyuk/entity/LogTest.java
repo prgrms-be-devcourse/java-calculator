@@ -2,9 +2,9 @@ package hyuk.entity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import hyuk.model.Operands;
-import hyuk.model.Operators;
-import hyuk.model.Result;
+import hyuk.calculator.Operands;
+import hyuk.calculator.Operators;
+import hyuk.calculator.Result;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

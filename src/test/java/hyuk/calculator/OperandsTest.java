@@ -1,6 +1,5 @@
-package hyuk.model;
+package hyuk.calculator;
 
-import hyuk.model.Operands;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

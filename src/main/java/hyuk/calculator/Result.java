@@ -1,4 +1,4 @@
-package hyuk.model;
+package hyuk.calculator;
 
 public class Result {
 

@@ -1,13 +1,13 @@
 package hyuk.view;
 
 import hyuk.model.LogDTO;
-import hyuk.model.Result;
+import hyuk.model.ResultDTO;
 
 public interface OutputView {
 
     void printMenu();
 
-    void printResult(Result result);
+    void printResult(ResultDTO resultDTO);
 
     void printLogs(LogDTO logDTO);
 

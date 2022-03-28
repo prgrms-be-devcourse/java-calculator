@@ -1,7 +1,9 @@
 package hyuk;
 
+import hyuk.calculator.Calculator;
 import hyuk.controller.CalculatorController;
 import hyuk.repository.MemoryRepository;
+import hyuk.service.CalculatorService;
 import hyuk.view.ConsoleInputView;
 import hyuk.view.ConsoleOutputView;
 
@@ -11,7 +13,7 @@ public class App {
         new CalculatorController(
             new ConsoleInputView(),
             new ConsoleOutputView(),
-            new MemoryRepository())
+            new CalculatorService(new MemoryRepository(), new Calculator()))
             .run();
     }
 }

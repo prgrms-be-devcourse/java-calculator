@@ -1,8 +1,8 @@
 package hyuk.entity;
 
-import hyuk.model.Operands;
-import hyuk.model.Operators;
-import hyuk.model.Result;
+import hyuk.calculator.Operands;
+import hyuk.calculator.Operators;
+import hyuk.calculator.Result;
 
 public class Log {
 
