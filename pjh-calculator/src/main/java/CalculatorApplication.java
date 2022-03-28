@@ -1,9 +1,9 @@
 import calculation.CalculateService;
-import calculation.io.BufferedIO;
 import calculation.calculator.engine.BigDecimalCalculator;
 import calculation.calculator.expression.ArithmeticLogic;
-import calculation.calculator.expression.NormalExpressionService;
 import calculation.calculator.expression.NormalArithmeticLogic;
+import calculation.calculator.expression.NormalExpressionService;
+import calculation.io.BufferedIO;
 import calculation.log.CalcLogService;
 import calculation.log.repository.CalcDataRepository;
 import java.io.BufferedReader;
@@ -17,17 +17,15 @@ public class CalculatorApplication {
 
   public static void main(String[] args) throws IOException {
 
-    // 표준 입출력으로 세팅
-    BufferedIO io = new BufferedIO(new BufferedReader(new InputStreamReader(System.in)), new BufferedWriter(new OutputStreamWriter(System.out)));
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
+    BufferedIO io = new BufferedIO(bufferedReader, bufferedWriter);
 
-    // 계산기 로직과 엔진 세팅
     ArithmeticLogic arithmeticLogic = new NormalArithmeticLogic();
     BigDecimalCalculator calEngine = new BigDecimalCalculator(new NormalExpressionService(arithmeticLogic));
 
-    //로그 서비스 세팅
     CalcLogService calcLogService = new CalcLogService(new CalcDataRepository());
 
-    //계산기 서비스 실행
     new CalculateService(calEngine, calcLogService, io, io).run();
   }
 }
