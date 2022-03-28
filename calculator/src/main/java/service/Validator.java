@@ -1,13 +1,20 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.Set;
 
-public interface Validator {
-    void validateFormat(ArrayList<Object> postFix);
+public class Validator {
 
-    void validateCharacter(Set<Character> characters, char c);
+    public void validateFormat(ArrayList<Object> postFix) {
+        if (postFix.size() == 0 || postFix.size() % 2 == 0) {
+            throw new IllegalArgumentException();
+        }
+    }
 
-    double validateDouble(String tmp);
+    public double validateDouble(String number) {
+        try {
+            return Double.parseDouble(number);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+    }
 }

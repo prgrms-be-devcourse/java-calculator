@@ -1,20 +1,18 @@
 import io.Input;
-import io.InputImpl;
 import io.Output;
-import io.OutputImpl;
-import repository.CalculatorRepository;
-import repository.CalculatorRepositoryImpl;
-import service.*;
+import repository.InMemoryRepository;
+import repository.Repository;
+import service.Calculator;
+import service.Console;
+import service.Validator;
 
 public class Main {
-
     public static void main(String[] args) {
-        Input input = new InputImpl();
-        Output output = new OutputImpl();
-        CalculatorRepository calculatorRepository = new CalculatorRepositoryImpl();
-        Validator validator=new ValidatorImpl();
-        CalculatorService calculatorService = new CalculatorServiceImpl(
-                calculatorRepository, input, output,validator);
-        new ServiceImpl(input, output, calculatorService).run();
+        Repository calculatorRepository = new InMemoryRepository();
+        Input input = new Input();
+        Output output = new Output();
+        Validator validator = new Validator();
+        Calculator calculator = new Calculator(calculatorRepository, input, output, validator);
+        new Console(input, calculator).run();
     }
 }

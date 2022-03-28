@@ -23,8 +23,7 @@ class OptionTest {
         String input = "4";
         //then
         Assertions.assertThatThrownBy(() -> Option.parse(input))
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessage("1,2,3 중 선택해야 합니다");
+                .isInstanceOf(NoSuchElementException.class);
 
     }
 
@@ -34,7 +33,6 @@ class OptionTest {
         String input = "a";
         //then
         Assertions.assertThatThrownBy(() -> Option.parse(input))
-                .isInstanceOf(NumberFormatException.class)
-                .hasMessage("숫자를 입력해야 합니다.");
+                .isInstanceOf(NumberFormatException.class);
     }
 }

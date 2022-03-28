@@ -33,7 +33,6 @@ class OperatorTest {
         Operator divide = Operator.parse(divideOperation);
         //then
         Assertions.assertThatThrownBy(() -> divide.calculate(66, 0))
-                .isInstanceOf(ArithmeticException.class)
-                .hasMessage("0으로 나눌 수 없다");
+                .isInstanceOf(ArithmeticException.class);
     }
 }

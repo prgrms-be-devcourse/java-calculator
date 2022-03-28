@@ -1,7 +1,7 @@
 package model;
 
 import lombok.AllArgsConstructor;
-import service.CalculatorService;
+import service.Calculator;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -22,14 +22,14 @@ public enum Option {
         return Arrays.stream(Option.values())
                 .filter(e -> e.select == toInt(input))
                 .findAny()
-                .orElseThrow(() -> new NoSuchElementException("1,2,3 중 선택해야 합니다"));
+                .orElseThrow(NoSuchElementException::new);
     }
 
     static int toInt(String num) {
         try {
             return Integer.parseInt(num);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자를 입력해야 합니다.");
+            throw new NumberFormatException();
         }
     }
 
@@ -39,17 +39,9 @@ public enum Option {
      * @Parameter : [calculatorService,parse]
      * @Return : void
      **/
-    public void chooseOption(CalculatorService calculatorService, Option parse)  {
+    public void chooseOption(Calculator calculatorService, Option parse)  {
         if (parse.equals(Option.INQUIRY)) calculatorService.getResults();
         else if (parse.equals(Option.CALCULATE)) calculatorService.input();
         else if (parse.equals(Option.EXIT)) System.exit(0);
-
-        /* 자바8 버전: switch문 Enum 에러 발생
-        switch (parse) {
-            case INQUIRY: calculatorService.getResults();
-            case CALCULATE: calculatorService.calculate();
-            case EXIT: System.exit(0);
-        } */
     }
-
 }

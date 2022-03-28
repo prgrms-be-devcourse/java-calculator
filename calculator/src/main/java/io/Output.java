@@ -1,9 +1,8 @@
 package io;
 
-public interface Output {
-    void printResult(String output);
+public class Output{
+    public void printResult(String output) {
+        System.out.println(output);
+    }
 
-    void printOption();
-
-    void printGuide();
 }

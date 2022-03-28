@@ -46,19 +46,9 @@ Validator, ValidatorImpl -> 검증 인터페이스 및 구현체
 ## 테스트 케이스
 ![Screen Shot 2022-03-28 at 12 45 29 PM](https://user-images.githubusercontent.com/58693617/160323030-df128c24-b1f8-43a0-8d47-b82b72abd2a7.png)
 
-## 예외 처리 내역
-ArithmeticException -> 0으로 나눌때 발생
-EmptyStackException -> 숫자, 연산의 비율이 맞지 않을때
-IllegalArgumentException -> 사칙연산이 연속해서 입력됐을때,사칙연산이 아닌 문자가 입력됐을때
-NoSuchElementException -> 메뉴 옵션 중 1,2,3이 아닌 수를 입력했을때
-NumberFormatException -> 1,2,3이 아닌 문자를 입력했을때
 
 ## 계산기 시연
-![Screen Shot 2022-03-28 at 13 27 43 PM](https://user-images.githubusercontent.com/58693617/160326663-38f40071-2050-47b6-a999-a93ec221e1c7.png)
 
 ## ✅ 피드백 반영사항  <!-- 지난 코드리뷰에서 고친 사항을 적어주세요. 재PR 시에만 사용해 주세요! (재PR 아닌 경우 삭제) -->
 
 ## ✅ PR 포인트 & 궁금한 점 <!-- 리뷰어 분들이 집중적으로 보셨으면 하는 내용을 적어주세요 -->
-1. 테스트를 진행하면서 몇몇 중복된 테스트가 있었는데 이런 경우는 어쩔 수 없는 부분인지 궁금합니다.
-2. ServiceImpl에서 run 메소드의 테스트 방법이 궁금합니다.
-3. 현재 EmptyStackException이라는 예외가 있는데 메시지를 넣으려면 커스텀 클래스를 따로 만들어 넣어야 했습니다. 그러다 보니 하나의 예외처리를 위해 여러 메소드에 throws Exception이 추가되어 지저분한 느낌이었습니다. EmptyStack같이 예외를 특정할 수 있다면 굳이 메시지를 커스텀 안해도 될까요?

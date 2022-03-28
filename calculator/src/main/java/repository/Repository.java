@@ -1,11 +1,12 @@
 package repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface CalculatorRepository {
+public interface Repository {
     void save(String exp, double result);
 
-    double getResult(String exp);
+    String getResult(Long id);
 
     List<String> getResults();
 

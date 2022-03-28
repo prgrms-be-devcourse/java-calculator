@@ -9,18 +9,18 @@ import java.util.EmptyStackException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidatorImplTest {
-    Validator validator = new ValidatorImpl();
+    Validator validator = new Validator();
 
     @Test
-    void 빈_리스트_사이즈() {
+    void 빈_문자열_입력시() {
         //given
         ArrayList<Object> list=new ArrayList<>();
         //then
         Assertions.assertThatThrownBy(() -> validator.validateFormat(list))
-                .isInstanceOf(EmptyStackException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
     @Test
-    void 짝수_리스트_사이즈() {
+    void 숫자_문자_비율이_맞지_않을때() {
         //given
         ArrayList<Object> list=new ArrayList<>();
         //when
@@ -28,6 +28,6 @@ class ValidatorImplTest {
         list.add("+");
         //then
         Assertions.assertThatThrownBy(() -> validator.validateFormat(list))
-                .isInstanceOf(EmptyStackException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
