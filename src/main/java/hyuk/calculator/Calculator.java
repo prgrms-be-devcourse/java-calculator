@@ -1,4 +1,4 @@
-package hyuk;
+package hyuk.calculator;
 
 import hyuk.entity.Operands;
 import hyuk.entity.Operators;

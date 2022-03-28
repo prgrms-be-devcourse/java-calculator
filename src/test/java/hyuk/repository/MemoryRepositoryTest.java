@@ -1,5 +1,6 @@
-package hyuk;
+package hyuk.repository;
 
+import hyuk.calculator.Calculator;
 import hyuk.entity.Operands;
 import hyuk.entity.Operators;
 import hyuk.entity.Result;

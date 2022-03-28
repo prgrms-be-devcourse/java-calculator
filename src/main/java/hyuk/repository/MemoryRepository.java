@@ -1,4 +1,4 @@
-package hyuk;
+package hyuk.repository;
 
 import hyuk.entity.Operands;
 import hyuk.entity.Operators;
@@ -6,7 +6,7 @@ import hyuk.entity.Result;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemoryRepository {
+public class MemoryRepository implements Repository {
 
     private List<String> repository = new ArrayList<>();
 
