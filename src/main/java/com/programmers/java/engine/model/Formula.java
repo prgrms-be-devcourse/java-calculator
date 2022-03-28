@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class PostFixFormula {
+public class Formula {
     private String[] formula;
 }
