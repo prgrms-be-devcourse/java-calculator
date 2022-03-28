@@ -20,6 +20,11 @@ public class Console implements Output, Input {
     }
 
     @Override
+    public void inputExpressionError() {
+        System.out.println("올바른 계산식을 입력해 주세요.");
+    }
+
+    @Override
     public String inputFunction(String s) {
         System.out.print(s);
         return scanner.nextLine();
