@@ -8,4 +8,6 @@ public interface Output {
     void inputFunctionError();
 
     void inputExpressionError();
+
+    void outputCalculateAnswer(int answer);
 }

@@ -38,11 +38,10 @@ public class Calculator implements Runnable {
                     output.inputExpressionError();
                     continue;
                 }
+
                 int answer = calculate(expression.get().replaceAll(" ", ""), element);
-                System.out.println(answer);
-
+                output.outputCalculateAnswer(answer);
             }
-
         }
     }
 
@@ -54,7 +53,7 @@ public class Calculator implements Runnable {
         if (!isCorrectExpression) return Optional.empty();
 
         isCorrectExpression = calculateOperators.stream().anyMatch(c -> expression.trim().endsWith(Character.toString(c)));
-        //endswith, startwith 으로 변경필요
+        //startwith 으로 변경필요
         if (isCorrectExpression) return Optional.empty();
         if (expression.trim().equals("")) return Optional.empty();
 

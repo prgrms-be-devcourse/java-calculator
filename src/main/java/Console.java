@@ -25,6 +25,12 @@ public class Console implements Output, Input {
     }
 
     @Override
+    public void outputCalculateAnswer(int answer) {
+        System.out.println(answer);
+        System.out.println();
+    }
+
+    @Override
     public String inputFunction(String s) {
         System.out.print(s);
         return scanner.nextLine();
@@ -32,6 +38,7 @@ public class Console implements Output, Input {
 
     @Override
     public String inputExpression() {
+        System.out.println();
         return scanner.nextLine();
     }
 }
