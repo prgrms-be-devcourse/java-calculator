@@ -1,13 +1,10 @@
 import io.*;
 
-import java.util.Optional;
-import java.util.regex.Pattern;
-
-public class CalculatorService<T extends Number> implements Runnable{
+public class CalculatorService implements Runnable{
     static final int VIEW = 1, CALCULATE = 2, EXIT = 3;
     private Input input;
     private Output output;
-    Calculator<T> calculator;
+    private final Calculator calculator = new Calculator();
 
     @Override
     public void run() {
@@ -29,7 +26,5 @@ public class CalculatorService<T extends Number> implements Runnable{
             }
         }
     }
-
-
 }
 
