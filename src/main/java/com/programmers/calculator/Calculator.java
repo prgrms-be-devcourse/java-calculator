@@ -41,9 +41,13 @@ public class Calculator implements Runnable {
                         break;
                     case 2:
                         String str = input.inputString("식 입력 : ");
-                        String result = calculate(str);
+                        if (!isValidate(str)) {
+                            throw new ValidationException();
+                        }
+                        String[] arrays = Parser.parse(str);
+                        String result = calculate(arrays);
                         System.out.println(result + newline);
-                        REPOSITORY.save(new Formula(Parser.parse(str), result));
+                        REPOSITORY.save(new Formula(arrays, result));
                         break;
                     case 3:
                         flag = false;
@@ -57,30 +61,8 @@ public class Calculator implements Runnable {
         }
     }
 
-    private String calculate(String str) throws ValidationException {
-        if (!isValidate(str)) {
-            throw new ValidationException();
-        }
-        return cal(Parser.makePostfix(Parser.parse(str)));
-    }
-
-    private boolean isValidate(String s) {
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            char temp = s.charAt(i);
-            if (temp == '(') {
-                stack.push(temp);
-            } else if (temp == ')') {
-                if (stack.empty()) {
-                    return false;
-                }
-                stack.pop();
-            }
-        }
-        return stack.empty();
-    }
-
-    private String cal(String[] formula) {
+    private String calculate(String[] str) throws ValidationException {
+        String[] formula = Parser.makePostfix(str);
         Stack<String> calculatorStack = new Stack<>();
         Set<String> operationCode = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
 
@@ -103,8 +85,7 @@ public class Calculator implements Runnable {
                         result = a / b;
                         break;
                     default:
-                        result = -1.0;
-                        break;
+                        throw new ValidationException();
                 }
                 calculatorStack.add(String.valueOf(result));
             } else {
@@ -112,5 +93,21 @@ public class Calculator implements Runnable {
             }
         }
         return calculatorStack.pop();
+    }
+
+    private boolean isValidate(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char temp = s.charAt(i);
+            if (temp == '(') {
+                stack.push(temp);
+            } else if (temp == ')') {
+                if (stack.empty()) {
+                    return false;
+                }
+                stack.pop();
+            }
+        }
+        return stack.empty();
     }
 }
