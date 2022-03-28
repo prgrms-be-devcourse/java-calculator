@@ -1,7 +1,7 @@
 package calculation.log;
 
-import calculation.model.CalcData;
 import calculation.log.repository.DataRepository;
+import calculation.model.CalcData;
 import java.util.List;
 
 public class CalcLogService implements LogService<CalcData> {
@@ -13,8 +13,8 @@ public class CalcLogService implements LogService<CalcData> {
   }
 
   public void printLogById(Long id) {
-    CalcData o = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 데이터 입니다."));
-    System.out.println(o.getExpression() + " = " + o.getAns());
+    CalcData foundData = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 데이터 입니다."));
+    System.out.println(foundData.getExpression() + " = " + foundData.getAns());
   }
 
   public void log(CalcData data) {
@@ -22,9 +22,9 @@ public class CalcLogService implements LogService<CalcData> {
   }
 
   public void printLog() {
-    List<CalcData> data = repository.findAll();
-    for (CalcData o : data) {
-      System.out.println(o.getExpression() + " = " + o.getAns());
+    List<CalcData> foundDataList = repository.findAll();
+    for (CalcData data : foundDataList) {
+      System.out.println(data.getExpression() + " = " + data.getAns());
     }
   }
 }
