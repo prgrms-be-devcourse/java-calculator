@@ -13,6 +13,7 @@ public class Calculate {
     void 후위연산() {
         Queue<String> result = calculator.priority("3 + 2 * 4");
         StringBuilder sb = new StringBuilder();
+
         for(String str : result){
             sb.append(str);
         }
@@ -22,6 +23,8 @@ public class Calculate {
 
     @Test
     void 계산결과출력(){
-        String formula = calculator.priority("")
+        double result = calculator.calculate("324*+");
+
+        Assertions.assertEquals(3+2*4, result);
     }
 }
