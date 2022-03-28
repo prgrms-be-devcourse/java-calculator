@@ -1,4 +1,5 @@
 .DS_Store
+/.idea/
 
 # Created by https://www.toptal.com/developers/gitignore/api/gradle,java,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=gradle,java,intellij
@@ -32,6 +33,9 @@
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+/.gradle/
+build/
+/gradle/
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
