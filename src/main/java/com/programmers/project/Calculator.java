@@ -10,7 +10,6 @@ import java.util.*;
 public class Calculator {
 
     private Console console = new Console();
-    private List<String> operator = new ArrayList<>(Arrays.asList("+","-","/","*")); // 연산자
 
     public String menu() {
         return console.menu();
@@ -42,12 +41,13 @@ public class Calculator {
 
         }
 
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty()) { // 스택에서 나머지 꺼내서 전부 큐에 넣기
             result.offer(stack.pop());
         }
 
         return result;
     }
+
 
 
 
