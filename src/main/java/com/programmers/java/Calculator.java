@@ -4,7 +4,7 @@ import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
 import com.programmers.java.engine.model.PostFixFormula;
 import com.programmers.java.engine.model.ValidFormula;
-import com.programmers.java.engine.repository.FormulaRepo;
+import com.programmers.java.engine.repository.FormulaRepository;
 import com.programmers.java.engine.service.CalcService;
 import com.programmers.java.engine.service.utils.Function;
 import com.programmers.java.engine.service.PostFixService;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class Calculator implements Runnable {
     ValidationService validService = new ValidationService();
     PostFixService postFixService = new PostFixService();
-    FormulaRepo formulaRepo = new FormulaRepo();
+    FormulaRepository formulaRepo = new FormulaRepository();
     CalcService calcService = new CalcService();
 
     private final int INQUERY = 1;
@@ -39,13 +39,13 @@ public class Calculator implements Runnable {
 
             int selectNum = parse(inputString);
             if (selectNum == INQUERY) {
-                input.inquireInput("선택 : " + selectNum);
+                input.inquireInput(selectNum);
                 if (formulaRepo.size() < 1)
                     output.errorEmptyRepo();
                 else
                     formulaRepo.inquire();
             } else if (selectNum == CALCULATE) {
-                String inputFormula = input.returnInput("선택 : " + selectNum +", 식을 입력해주세요 !");
+                String inputFormula = input.returnInput(selectNum + " 번을 선택하셨습니다. 식을 입력해주세요 !");
                 Optional<ValidFormula> validFormula = validService.Validation(inputFormula);
                 if (validFormula.isEmpty()) {
                     output.inputError();

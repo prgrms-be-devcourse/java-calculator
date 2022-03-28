@@ -15,7 +15,8 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void inquireInput(String s) {
+    public void inquireInput(int s) {
+        System.out.println(s + " 번을 선택하셨습니다.");
     }
 
     @Override
@@ -25,7 +26,7 @@ public class Console implements Input, Output {
 
     @Override
     public void printCalcResult(Long result) {
-        System.out.println(result);
+        System.out.println("결과 : " + result + "\n");
     }
 
     @Override
