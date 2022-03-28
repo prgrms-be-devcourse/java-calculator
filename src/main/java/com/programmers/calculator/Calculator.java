@@ -13,9 +13,13 @@ import java.util.*;
 
 public class Calculator implements Runnable {
     private static final Repository<Formula> REPOSITORY = MemoryRepository.getInstance();
+
     private final Input input;
     private final Output<Formula> output;
+
     private final String newline = System.getProperty("line.separator");
+    private final String MENU_INPUT_SCRIPT = "1. 조회" + newline + "2. 계산" + newline + "3. 종료" + newline + newline + "선택 : ";
+    private final String FORMULA_INPUT_SCRIPT = "식 입력 : ";
 
     public Calculator(Input input, Output<Formula> output) {
         this.input = input;
@@ -25,29 +29,21 @@ public class Calculator implements Runnable {
     @Override
     public void run() {
         boolean flag = true;
-
         while (flag) {
             try {
-                int commandNumber;
-                commandNumber = input.inputNumber(
-                        "1. 조회" + newline +
-                                "2. 계산" + newline +
-                                "3. 종료" + newline + newline +
-                                "선택 : ");
-
-                switch (commandNumber) {
+                switch (input.inputNumber(MENU_INPUT_SCRIPT)) {
                     case 1:
                         output.outputList(REPOSITORY.findAll());
                         break;
                     case 2:
-                        String str = input.inputString("식 입력 : ");
-                        if (!isValidate(str)) {
-                            throw new ValidationException();
-                        }
-                        String[] arrays = Parser.parse(str);
-                        String result = calculate(arrays);
-                        System.out.println(result + newline);
-                        REPOSITORY.save(new Formula(arrays, result));
+                        String originFormula = input.inputString(FORMULA_INPUT_SCRIPT);
+
+                        if (!isValidate(originFormula)) throw new ValidationException();
+
+                        String[] formula = Parser.parse(originFormula);
+                        Formula result = REPOSITORY.save(new Formula(formula, calculate(formula)));
+
+                        System.out.println(result.getResult() + newline);
                         break;
                     case 3:
                         flag = false;
@@ -61,44 +57,10 @@ public class Calculator implements Runnable {
         }
     }
 
-    private String calculate(String[] str) throws ValidationException {
-        String[] formula = Parser.makePostfix(str);
-        Stack<String> calculatorStack = new Stack<>();
-        Set<String> operationCode = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
-
-        for (String token : formula) {
-            if (operationCode.contains(token)) {
-                Double b = Double.parseDouble(calculatorStack.pop());
-                Double a = Double.parseDouble(calculatorStack.pop());
-                Double result;
-                switch (token) {
-                    case "+":
-                        result = a + b;
-                        break;
-                    case "-":
-                        result = a - b;
-                        break;
-                    case "*":
-                        result = a * b;
-                        break;
-                    case "/":
-                        result = a / b;
-                        break;
-                    default:
-                        throw new ValidationException();
-                }
-                calculatorStack.add(String.valueOf(result));
-            } else {
-                calculatorStack.add(token);
-            }
-        }
-        return calculatorStack.pop();
-    }
-
-    private boolean isValidate(String s) {
+    private boolean isValidate(String formula) {
         Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            char temp = s.charAt(i);
+        for (int i = 0; i < formula.length(); i++) {
+            char temp = formula.charAt(i);
             if (temp == '(') {
                 stack.push(temp);
             } else if (temp == ')') {
@@ -109,5 +71,43 @@ public class Calculator implements Runnable {
             }
         }
         return stack.empty();
+    }
+
+    private String calculate(String[] originFormula) throws ValidationException {
+        String[] formula = Parser.getPostfix(originFormula);
+        Stack<String> calculatorStack = new Stack<>();
+        Set<String> operationCode = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
+
+        try {
+            for (String token : formula) {
+                if (operationCode.contains(token)) {
+                    Double b = Double.parseDouble(calculatorStack.pop());
+                    Double a = Double.parseDouble(calculatorStack.pop());
+                    Double result;
+                    switch (token) {
+                        case "+":
+                            result = a + b;
+                            break;
+                        case "-":
+                            result = a - b;
+                            break;
+                        case "*":
+                            result = a * b;
+                            break;
+                        case "/":
+                            result = a / b;
+                            break;
+                        default:
+                            throw new ValidationException();
+                    }
+                    calculatorStack.add(String.valueOf(result));
+                } else {
+                    calculatorStack.add(token);
+                }
+            }
+            return calculatorStack.pop();
+        } catch (Exception e) {
+            throw new ValidationException();
+        }
     }
 }
