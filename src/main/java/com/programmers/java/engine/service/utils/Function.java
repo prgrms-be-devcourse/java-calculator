@@ -4,9 +4,11 @@ public class Function {
     public static boolean isStrDigit(String c) {
 
         for (int i = 0; i < c.length(); i++) {
-            if (i == 0 && c.charAt(i) == '-')
-                continue;
-            if (!isDigit(c.charAt(i)))
+            if (i == 0 && c.charAt(i) == '-') {
+                if (c.length() == 1)
+                    return false;
+            }
+            else if (!isDigit(c.charAt(i)))
                 return false;
         }
         return true;
