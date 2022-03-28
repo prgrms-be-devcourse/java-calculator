@@ -1,6 +1,7 @@
 import engine.io.Input;
 import engine.io.Output;
 import engine.model.Function;
+import engine.model.Record;
 
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Console implements Output, Input {
     @Override
     public void outputFunction(Function function) {
         function.indexForEach(System.out::println);
-        System.out.println(System.lineSeparator());
+        System.lineSeparator();
     }
 
     @Override
@@ -27,6 +28,12 @@ public class Console implements Output, Input {
     @Override
     public void outputCalculateAnswer(int answer) {
         System.out.println(answer);
+        System.out.println();
+    }
+
+    @Override
+    public void printRecord(Record record) {
+        record.printRecord();
         System.out.println();
     }
 

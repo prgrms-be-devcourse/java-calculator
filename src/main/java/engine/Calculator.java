@@ -4,12 +4,10 @@ import engine.io.Input;
 import engine.io.Output;
 import engine.model.Element;
 import engine.model.Function;
+import engine.model.Record;
 import lombok.AllArgsConstructor;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Stack;
+import java.util.*;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
@@ -17,6 +15,7 @@ public class Calculator implements Runnable {
     private Output output;
     private Input input;
     private Function function;
+    private Record record;
 
     @Override
     public void run() {
@@ -29,7 +28,7 @@ public class Calculator implements Runnable {
                 continue;
             }
             if (inputFunctionNumber.get().equals(1)) { //enum사용하도록 변경
-
+                output.printRecord(record);
             }
             if (inputFunctionNumber.get().equals(2)) {
                 Element element = new Element(new Stack<Integer>(), new Stack<Character>());
@@ -41,6 +40,7 @@ public class Calculator implements Runnable {
 
                 int answer = calculate(expression.get().replaceAll(" ", ""), element);
                 output.outputCalculateAnswer(answer);
+                record.addRecord(expression.get(), answer);
             }
         }
     }
