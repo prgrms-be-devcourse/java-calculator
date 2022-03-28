@@ -1,14 +1,10 @@
-public interface ICalculator<T extends Number> {
-    default Number add(T a, T b){
-        return 1;
+import java.util.Optional;
+
+public interface ICalculator {
+    default Double add(Double a, Double b) { return a+b; }
+    default Double sub(Double a, Double b) { return b-a; }
+    default Double mul(Double a, Double b){
+        return a*b;
     }
-    default Number sub(T a, T b){
-        return 1;
-    }
-    default Number mul(T a, T b){
-        return 1;
-    }
-    default Number div(T a, T b){
-        return 1;
-    }
+    default Double div(Double a, Double b) { return b/a; }
 }
