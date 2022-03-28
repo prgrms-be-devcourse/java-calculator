@@ -1,7 +1,9 @@
 package hyuk.view;
 
-import hyuk.entity.LogDTO;
-import hyuk.entity.Result;
+import static org.mockito.Mockito.when;
+
+import hyuk.model.LogDTO;
+import hyuk.model.Result;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
@@ -10,12 +12,20 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+
+@ExtendWith(MockitoExtension.class)
 public class ConsoleOutputViewTest {
 
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
     ConsoleOutputView consoleOutputView = new ConsoleOutputView();
+
+    @Mock
+    LogDTO logDTO;
 
     @BeforeEach
     public void setUpStream() {
@@ -59,15 +69,14 @@ public class ConsoleOutputViewTest {
     @Test
     void printLogs() {
         //given
-        LogDTO logDTO = new LogDTO(Arrays.asList("1 + 2 * 3 + 4 = 11", "1 + 2 = 3"));
+        when(logDTO.getLogs()).thenReturn(Arrays.asList("1 + 2 * 3 + 4 = 11"));
 
         //when
         consoleOutputView.printLogs(logDTO);
 
         //then
         Assertions.assertThat(output.toString())
-            .isEqualTo("1 + 2 * 3 + 4 = 11\n" +
-                "1 + 2 = 3\n\n");
+            .isEqualTo("1 + 2 * 3 + 4 = 11\n\n");
     }
 
 }

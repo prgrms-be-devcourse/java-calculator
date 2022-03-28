@@ -1,34 +1,32 @@
 package hyuk.repository;
 
-import hyuk.calculator.Calculator;
-import hyuk.entity.Operands;
-import hyuk.entity.Operators;
-import hyuk.entity.Result;
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import hyuk.entity.Log;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class MemoryRepositoryTest {
+
+    MemoryRepository memoryRepository = new MemoryRepository();
+
+    @Mock
+    Log log;
 
     @DisplayName("계산이력 저장 기능 테스트")
     @Test
     void store() {
         //given
-        MemoryRepository memoryRepository = new MemoryRepository();
-
-        String exp = "1 + 2 * 3 + 4";
-        Operands operands = new Operands(exp);
-        Operators operators = new Operators(exp);
-
-        Calculator calculator = new Calculator();
-        Result result = calculator.calculate(operands, operators);
-
         //when
-        memoryRepository.store(operands, operators, result);
+        memoryRepository.store(log);
 
         //then
-        Assertions.assertThat(memoryRepository.getData())
-            .contains(exp + " = " + result.showResult());
+        assertThat(memoryRepository.getData().size())
+            .isEqualTo(1);
     }
 
 }

@@ -1,10 +1,11 @@
 package hyuk.controller;
 
 import hyuk.calculator.Calculator;
-import hyuk.entity.LogDTO;
-import hyuk.entity.Operands;
-import hyuk.entity.Operators;
-import hyuk.entity.Result;
+import hyuk.entity.Log;
+import hyuk.model.LogDTO;
+import hyuk.model.Operands;
+import hyuk.model.Operators;
+import hyuk.model.Result;
 import hyuk.repository.Repository;
 import hyuk.view.InputView;
 import hyuk.view.OutputView;
@@ -49,7 +50,9 @@ public class CalculatorController {
         Operators operators = new Operators(formula);
 
         Result result = calculator.calculate(operands, operators);
-        repository.store(operands, operators, result);
+        Log log = Log.createLog(operands, operators, result);
+
+        repository.store(log);
 
         outputView.printResult(result);
     }

@@ -1,4 +1,4 @@
-package hyuk.entity;
+package hyuk.model;
 
 public class Result {
 

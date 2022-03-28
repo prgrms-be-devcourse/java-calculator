@@ -1,4 +1,4 @@
-package hyuk.entity;
+package hyuk.model;
 
 import java.util.ArrayList;
 import java.util.List;

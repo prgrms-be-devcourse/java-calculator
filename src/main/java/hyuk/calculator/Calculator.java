@@ -1,8 +1,8 @@
 package hyuk.calculator;
 
-import hyuk.entity.Operands;
-import hyuk.entity.Operators;
-import hyuk.entity.Result;
+import hyuk.model.Operands;
+import hyuk.model.Operators;
+import hyuk.model.Result;
 import java.util.ArrayDeque;
 import java.util.Deque;
 

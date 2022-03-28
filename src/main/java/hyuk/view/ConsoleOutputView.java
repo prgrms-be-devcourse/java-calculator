@@ -1,7 +1,7 @@
 package hyuk.view;
 
-import hyuk.entity.LogDTO;
-import hyuk.entity.Result;
+import hyuk.model.LogDTO;
+import hyuk.model.Result;
 import java.util.List;
 
 public class ConsoleOutputView implements OutputView {

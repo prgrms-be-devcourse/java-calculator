@@ -1,4 +1,4 @@
-package hyuk.entity;
+package hyuk.model;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
