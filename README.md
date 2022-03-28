@@ -22,11 +22,21 @@
 
 ---- 
 ### 프로젝트 구조 설명
-- `app` : 계산기 프로젝트 폴더 
-- `app\src\main\java\caculator\App.java` : 계산기 프로그램 콘솔 구현 파일  
-- `app\src\main\java\caculator\Calculator.java` : 계산기 기능 구현 파일
-- `app\src\test\java\caculator\AppTest.java`: App 테스트 파일 
-- `app\src\test\java\caculator\CalculatorTest.java`: Calculator 테스트 파일 
+```
+├─app
+│  └─src
+│      ├─main
+│      │  └─java
+│      │      └─caculator
+│      └─test
+│          └─java
+│              └─caculator
+└─gradle
+    └─wrapper
+
+```
+- `App` : 계산기 프로그램 콘솔 관련  
+- `Calculator` : 계산기 기능 관련
 
 ### 기능 설명
 1. `조회` : 프로그램이 실행되는 동안 유저 입력했던 계산 내역들을 보여준다. 
