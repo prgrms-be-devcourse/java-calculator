@@ -7,7 +7,7 @@ public class Expression {
     private static final String NUM_REGEX = "[0-9]+";
     private static final String OPERATOR_REGEX = "[+\\-*/]";
     private final String expression;
-    private double calcResult;
+    private Double calcResult = null;
 
     public Expression(String expression) {
         validateExpressions(expression);
@@ -18,11 +18,11 @@ public class Expression {
         return expression;
     }
 
-    public double getCalcResult() {
+    public Double getCalcResult() {
         return calcResult;
     }
 
-    public void setCalcResult(double calcResult) {
+    public void setCalcResult(Double calcResult) {
         this.calcResult = calcResult;
     }
 
