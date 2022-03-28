@@ -10,7 +10,7 @@ import java.util.*;
 public class Calculator extends Basic{
 
     private Console console = new Console(); //입출력
-    private List<String> operations = new ArrayList<>(Arrays.asList("+","-","*","/"));  // 연산자
+    private final List<String> operations = new ArrayList<>(Arrays.asList("+","-","*","/"));  // 연산자
 
     public String menu() {
         return console.menu();
