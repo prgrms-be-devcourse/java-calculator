@@ -39,7 +39,7 @@ public enum Option {
      * @Parameter : [calculatorService,parse]
      * @Return : void
      **/
-    public void chooseOption(CalculatorService calculatorService, Option parse) {
+    public void chooseOption(CalculatorService calculatorService, Option parse)  {
         if (parse.equals(Option.INQUIRY)) calculatorService.getResults();
         else if (parse.equals(Option.CALCULATE)) calculatorService.input();
         else if (parse.equals(Option.EXIT)) System.exit(0);
