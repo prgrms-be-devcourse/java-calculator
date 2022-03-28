@@ -4,7 +4,7 @@ import hyuk.entity.LogDTO;
 import hyuk.entity.Result;
 import java.util.List;
 
-public class ConsoleOutputView {
+public class ConsoleOutputView implements OutputView {
 
     public void printMenu() {
         System.out.println("1. 조회");

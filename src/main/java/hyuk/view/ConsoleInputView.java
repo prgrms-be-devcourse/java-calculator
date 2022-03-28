@@ -2,7 +2,7 @@ package hyuk.view;
 
 import java.util.Scanner;
 
-public class ConsoleInputView {
+public class ConsoleInputView implements InputView {
 
     public String selectMenu(Scanner scanner) {
         String menu = scanner.next();
@@ -13,7 +13,7 @@ public class ConsoleInputView {
         throw new IllegalStateException("1 또는 2를 입력해주세요.");
     }
 
-    public String inputExp(Scanner scanner) {
+    public String inputFormula(Scanner scanner) {
         String exp = scanner.nextLine();
         return exp;
     }

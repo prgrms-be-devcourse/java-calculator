@@ -55,7 +55,7 @@ public class ConsoleInputViewTest {
         Scanner scanner = new Scanner(System.in);
 
         //when
-        String exp = inputView.inputExp(scanner);
+        String exp = inputView.inputFormula(scanner);
 
         //then
         assertThat(exp).isEqualTo("1 + 2 * 3 + 4");
