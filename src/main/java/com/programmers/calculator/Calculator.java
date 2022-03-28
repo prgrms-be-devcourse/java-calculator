@@ -109,8 +109,8 @@ public class Calculator {
     }
 
     private String typeFormula(String formula) {
-        if (validatorService.checkNumsAndSymbol(formula)
-                || validatorService.checkSymbolMatching(formula)
+        if (!validatorService.checkNumsAndSymbol(formula)
+                || !validatorService.checkSymbolMatching(formula)
                 || formula.equals("")) {
             return "";
         }

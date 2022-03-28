@@ -32,6 +32,6 @@ public class ValidatorTest {
         boolean result = vs.checkSymbolMatching(str);
 
         // then
-        assertFalse(result);
+        assertTrue(result);
     }
 }
