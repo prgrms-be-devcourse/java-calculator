@@ -1,6 +1,7 @@
 package com.programmers.calculator.util.io;
 
 import com.programmers.calculator.exception.NumberInputException;
+import com.programmers.calculator.exception.OutputException;
 import com.programmers.calculator.vo.Formula;
 
 import java.util.List;
@@ -34,9 +35,9 @@ public class Console implements Input, Output<Formula> {
     }
 
     @Override
-    public void outputList(List<Formula> list) {
+    public void outputList(List<Formula> list) throws OutputException {
         if (list.isEmpty()) {
-            System.out.println("저장된 데이터가 없습니다.");
+            throw new OutputException();
         } else {
             list.forEach(System.out::println);
         }
