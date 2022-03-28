@@ -1,3 +1,5 @@
+import lombok.AllArgsConstructor;
+
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -10,13 +12,19 @@ public class Calculator implements ICalculator {
         // history 에 존재하면 곧바로 반환
         if (history.isExist(operation)) return history.getResult(operation);
 
-        String postfixExpression = postfixConverter(operation); // infix -> postfix
-        List<Character> expressionList = string2CharList(postfixExpression); // string -> List<Char>
+        List<Token> tokenList = Token.makeTokenList(operation);
+        List<Token> postfixTokenList = Token.postfixConverter(tokenList);
 
         Stack<Double> stack = new Stack<>();
-        for (var op : expressionList) {
-            if(isNumber(op)) {
-                stack.push(charToDouble(op));
+        System.out.println("token list");
+        for(var token : postfixTokenList){
+            System.out.print(token.getData());
+        }
+        System.out.println();
+
+        for (var token : postfixTokenList) {
+            if(token.getType() == Token.NUMBER) {
+                stack.push(token.convertData2Number());
                 continue;
             }
 
@@ -24,7 +32,7 @@ public class Calculator implements ICalculator {
             Double a = stack.pop();
             Double b = stack.pop();
 
-            switch(op){
+            switch(token.getOperator()){
                 case '+':
                     stack.push(add(a,b));
                     break;
@@ -39,57 +47,14 @@ public class Calculator implements ICalculator {
                     break;
             }
         }
-        Double calcResult = stack.pop();
+        Double calcResult = stack.pop();//
         history.save(operation, calcResult);
         return calcResult;
-    }
-
-    String postfixConverter(String operation){
-        StringBuilder postfix = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
-
-        for (int i = 0; i < operation.length(); i++) {
-            char op = operation.charAt(i);
-            if(isOperator(op)){
-                while (!stack.empty() && priority(op) <= priority(stack.peek())) {
-                    postfix.append(stack.pop());
-                }
-                stack.push(op);
-            }
-            else{
-                postfix.append(op);
-            }
-        }
-
-        while (!stack.empty()) {
-            postfix.append(stack.pop());
-        }
-        return postfix.toString();
-    }
-
-    boolean isOperator(char ch) {
-        if (ch == '*' || ch == '/' || ch == '+' || ch == '-') return true;
-        return false;
-    }
-
-    int priority(char ch) {
-        if(ch == '+' || ch =='-') return 1;
-        if(ch == '*' || ch =='/') return 2;
-        return 0;
     }
 
     List<String> getHistory() {
         return history.getList();
     }
 
-    /* 가독성을 위한 메서드(?) */
-    List<Character> string2CharList(String str){
-        return str.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
-    }
-    Double charToDouble(char ch){
-        return Double.parseDouble(String.valueOf(ch));
-    }
-    boolean isNumber(char ch){
-        return !isOperator(ch);
-    }
+
 }

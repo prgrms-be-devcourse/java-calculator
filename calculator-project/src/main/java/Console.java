@@ -18,19 +18,28 @@ public class Console implements Input, Output {
     @Override
     public int selectMenu() {
         System.out.print("선택 : ");
-        return Integer.parseInt(scanner.nextLine());
+        String pattern = "[1-3]";
+        String select = scanner.nextLine();
+
+        if(Pattern.matches(pattern, select))
+            return Integer.parseInt(select);
+        else
+            return selectMenu();
     }
     @Override
     public void inputError() {
-        System.out.println("입력이 올바르지 않습니다");
+        System.out.println("입력이 올바르지 않습니다\n");
     }
 
 
     @Override
     public void history(List<String> history) {
+        System.out.println("저장된 기록 (size) : "+history.size());
+
         for(var operation : history){
             System.out.println(operation);
         }
+        System.out.println();
     }
 
     @Override
@@ -39,12 +48,15 @@ public class Console implements Input, Output {
             System.out.println(number.intValue());
         else
             System.out.println(number.doubleValue());
+        System.out.println();
     }
 
     @Override
     public String operation() {
+        System.out.print("수식을 입력하세요: ");
         String expression = scanner.nextLine();
         expression.replace(" ","");
+
         if(isOperationValid(expression))
             return expression;
         else
@@ -52,7 +64,9 @@ public class Console implements Input, Output {
     }
 
     static boolean isOperationValid(String operation){
-        String pattern = "[-+]?([0-9][-+*/])*[0-9]$";
+        String pattern = "[-+]?([0-9.]*[-+*/])*[0-9.]*$";
+
+
         return Pattern.matches(pattern, operation);
     }
 

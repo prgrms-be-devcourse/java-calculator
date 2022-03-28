@@ -1,5 +1,7 @@
 import io.*;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class CalculatorService implements Runnable{
     static final int VIEW = 1, CALCULATE = 2, EXIT = 3;
     private Input input;

@@ -14,7 +14,6 @@ public class History implements IHistory{
 
     public List<String> getList(){
         List<String> historyList = new ArrayList<>();
-        System.out.println("list All");
 
         for(var entry : history.entrySet()) {
             String operation = entry.getKey();
