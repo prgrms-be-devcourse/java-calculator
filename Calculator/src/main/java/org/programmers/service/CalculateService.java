@@ -14,7 +14,7 @@ import java.util.*;
  */
 @AllArgsConstructor
 public class CalculateService {
-    private Repository calculatorRepository;
+    private final Repository calculatorRepository;
 
     public double calculateResult(String expression) {
         return calculate(makePostfix(expression));
