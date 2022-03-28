@@ -12,7 +12,7 @@ import com.programmers.calculator.vo.Formula;
 import java.util.*;
 
 public class Calculator implements Runnable {
-    private static final Repository<Formula> REPOSITORY = MemoryRepository.getInstance();
+    private final Repository<Formula> repository = new MemoryRepository();
 
     private final Input input;
     private final Output<Formula> output;
@@ -33,7 +33,7 @@ public class Calculator implements Runnable {
             try {
                 switch (input.inputNumber(MENU_INPUT_SCRIPT)) {
                     case 1:
-                        output.outputList(REPOSITORY.findAll());
+                        output.outputList(repository.findAll());
                         break;
                     case 2:
                         String originFormula = input.inputString(FORMULA_INPUT_SCRIPT);
@@ -41,7 +41,7 @@ public class Calculator implements Runnable {
                         if (!isValidate(originFormula)) throw new ValidationException();
 
                         String[] formula = Parser.parse(originFormula);
-                        Formula result = REPOSITORY.save(new Formula(formula, calculate(formula)));
+                        Formula result = repository.save(new Formula(formula, calculate(formula)));
 
                         System.out.println(result.getResult() + newline);
                         break;

@@ -5,18 +5,10 @@ import com.programmers.calculator.vo.Formula;
 import java.util.*;
 
 public class MemoryRepository implements Repository<Formula> {
-    private static final Map<Integer, Formula> store = new LinkedHashMap<>();
-    private static MemoryRepository repository;
+    private final Map<Integer, Formula> store;
 
-    private MemoryRepository() {
-
-    }
-
-    public static MemoryRepository getInstance() {
-        if (repository == null) {
-            repository = new MemoryRepository();
-        }
-        return repository;
+    public MemoryRepository() {
+        store = new LinkedHashMap<>();
     }
 
     @Override
