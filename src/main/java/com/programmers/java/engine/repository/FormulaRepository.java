@@ -16,9 +16,9 @@ public class FormulaRepository implements MemoryRepository {
     }
 
     @Override
-    public void inquire() {
+    public void find() {
         history.forEach((form, result) -> System.out.println(form + " = " + result));
-        System.out.println("END !");
+        System.out.println("END !\n");
     }
 
     @Override
