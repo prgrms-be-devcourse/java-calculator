@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Repository 테스트")
 public class RepositoryTest {
     private Repository<Formula> repository;
 
@@ -20,7 +21,7 @@ public class RepositoryTest {
 
     @DisplayName("save() 테스트")
     @Nested
-    class SaveFormula {
+    class SaveTest {
         @DisplayName("저장 가능 사례")
         @Test
         void saveSuccess() {
@@ -33,7 +34,7 @@ public class RepositoryTest {
 
     @DisplayName("findAll() 테스트")
     @Nested
-    class FindAllFormulas {
+    class FindAllTest {
         @DisplayName("조회 가능 사례")
         @Test
         void findAllSuccess() {
