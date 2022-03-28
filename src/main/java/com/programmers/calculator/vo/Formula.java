@@ -2,9 +2,9 @@ package com.programmers.calculator.vo;
 
 public class Formula {
     private final String originFormula;
-    private final double result;
+    private final String result;
 
-    public Formula(String originFormula, double result) {
+    public Formula(String originFormula, String result) {
         this.originFormula = originFormula;
         this.result = result;
     }

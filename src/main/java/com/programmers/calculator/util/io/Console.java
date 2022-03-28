@@ -13,7 +13,10 @@ public class Console implements Input, Output<Formula> {
     public int inputNumber(String script) throws NumberInputException {
         System.out.print(script);
         String str = scanner.nextLine();
+        System.out.println();
+
         int number;
+
         try {
             number = Integer.parseInt(str);
         } catch (NumberFormatException e) {
@@ -25,11 +28,18 @@ public class Console implements Input, Output<Formula> {
     @Override
     public String inputString(String script) {
         System.out.print(script);
-        return scanner.nextLine();
+        String result = scanner.nextLine();
+        System.out.println();
+        return result;
     }
 
     @Override
     public void outputList(List<Formula> list) {
-        list.forEach(System.out::println);
+        if (list.isEmpty()) {
+            System.out.println("저장된 데이터가 없습니다.");
+        } else {
+            list.forEach(System.out::println);
+        }
+        System.out.println();
     }
 }
