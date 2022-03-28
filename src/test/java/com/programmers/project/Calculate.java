@@ -23,8 +23,8 @@ public class Calculate {
 
     @Test
     void 계산결과출력(){
-        double result = calculator.calculate(calculator.priority("3 + 2 * 4"));
+        double result = calculator.calculate(calculator.priority("13 + 2 * 4"));
 
-        Assertions.assertEquals(3+2*4, result);
+        Assertions.assertEquals(13+2*4, result);
     }
 }
