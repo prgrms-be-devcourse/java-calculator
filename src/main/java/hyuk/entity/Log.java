@@ -1,7 +1,5 @@
 package hyuk.entity;
 
-import hyuk.calculator.Operands;
-import hyuk.calculator.Operators;
 import hyuk.calculator.Result;
 
 public class Log {
@@ -14,23 +12,12 @@ public class Log {
     private Log() {
     }
 
-    public static Log createLog(Operands operands, Operators operators, Result result) {
+    public static Log createLog(String formula, Result result) {
         Log log = new Log();
         log.id = ++SEQUENCE;
-        log.formula = makeFormula(operands, operators);
+        log.formula = formula;
         log.result = result.showResult();
         return log;
-    }
-
-    private static String makeFormula(Operands operands, Operators operators) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < operands.getOperands().size(); ++i) {
-            sb.append(operands.getOperands().get(i) + " ");
-            if (i < operators.getOperators().size()) {
-                sb.append(operators.getOperators().get(i) + " ");
-            }
-        }
-        return sb.substring(0, sb.length() - 1); //마지막 공백 제거용 위해 -1
     }
 
     public Long getId() {

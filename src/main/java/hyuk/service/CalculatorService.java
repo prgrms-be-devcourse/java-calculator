@@ -1,8 +1,7 @@
 package hyuk.service;
 
 import hyuk.calculator.Calculator;
-import hyuk.calculator.Operands;
-import hyuk.calculator.Operators;
+import hyuk.calculator.PostOrderFormula;
 import hyuk.calculator.Result;
 import hyuk.entity.Log;
 import hyuk.model.LogDTO;
@@ -20,11 +19,10 @@ public class CalculatorService {
     }
 
     public ResultDTO calculate(String formula) {
-        Operands operands = new Operands(formula);
-        Operators operators = new Operators(formula);
-        Result result = calculator.calculate(operands, operators);
+        PostOrderFormula postOrderFormula = new PostOrderFormula(formula);
+        Result result = calculator.calculate(postOrderFormula);
 
-        Log log = Log.createLog(operands, operators, result);
+        Log log = Log.createLog(formula, result);
         repository.store(log);
 
         return new ResultDTO(result);

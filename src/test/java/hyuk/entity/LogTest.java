@@ -2,8 +2,6 @@ package hyuk.entity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import hyuk.calculator.Operands;
-import hyuk.calculator.Operators;
 import hyuk.calculator.Result;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,12 +13,10 @@ public class LogTest {
     void translate() {
         //given
         String formula = "1 + 2 * 3 + 4";
-        Operands operands = new Operands(formula);
-        Operators operators = new Operators(formula);
         Result result = new Result(11);
 
         //when
-        Log log = Log.createLog(operands, operators, result);
+        Log log = Log.createLog(formula, result);
 
         //then
         assertThat(log.getId()).isEqualTo(1);
