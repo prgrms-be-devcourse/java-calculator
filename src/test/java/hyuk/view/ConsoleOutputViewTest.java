@@ -62,7 +62,7 @@ public class ConsoleOutputViewTest {
 
         //then
         Assertions.assertThat(output.toString())
-            .isEqualTo("10\n");
+            .isEqualTo("10\n\n");
     }
 
     @DisplayName("계산기 로그 조회")

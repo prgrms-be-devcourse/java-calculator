@@ -28,33 +28,41 @@ public class CalculatorController {
     public void run() {
         while (true) {
             outputView.printMenu();
-
             try {
                 String menu = inputView.selectMenu(new Scanner(System.in));
+                outputView.printEmptySpace();
+
                 if (menu.equals("1")) {
                     printLogs();
                     continue;
                 }
                 calculate();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + "\n");
                 continue;
             }
         }
     }
 
     private void calculate() {
-        String formula = inputView.inputFormula(new Scanner(System.in));
+        while (true) {
+            try {
+                String formula = inputView.inputFormula(new Scanner(System.in));
 
-        Operands operands = new Operands(formula);
-        Operators operators = new Operators(formula);
+                Operands operands = new Operands(formula);
+                Operators operators = new Operators(formula);
 
-        Result result = calculator.calculate(operands, operators);
-        Log log = Log.createLog(operands, operators, result);
+                Result result = calculator.calculate(operands, operators);
+                Log log = Log.createLog(operands, operators, result);
 
-        repository.store(log);
+                repository.store(log);
 
-        outputView.printResult(result);
+                outputView.printResult(result);
+                return;
+            } catch (Exception e) {
+                System.out.println(e.getMessage() + "\n");
+            }
+        }
     }
 
     private void printLogs() {

@@ -10,4 +10,6 @@ public interface OutputView {
     void printResult(Result result);
 
     void printLogs(LogDTO logDTO);
+
+    void printEmptySpace();
 }

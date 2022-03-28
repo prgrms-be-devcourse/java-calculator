@@ -48,7 +48,7 @@ public class ConsoleInputViewTest {
 
     @DisplayName("계산식 입력 테스트")
     @Test
-    void inputExp() {
+    void inputFormula() {
         //given
         InputStream in = generateUserInput("1 + 2 * 3 + 4");
         System.setIn(in);
@@ -59,6 +59,36 @@ public class ConsoleInputViewTest {
 
         //then
         assertThat(exp).isEqualTo("1 + 2 * 3 + 4");
+    }
+
+    @DisplayName("계산식 입력 테스트 - 오류1")
+    @Test
+    void FormulaException() {
+        //given
+        InputStream in = generateUserInput("1 2 3 4");
+        System.setIn(in);
+        Scanner scanner = new Scanner(System.in);
+
+        //when
+        //then
+        assertThatThrownBy(() -> inputView.inputFormula(scanner))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining("정규 표현식이 아닙니다.");
+    }
+
+    @DisplayName("계산식 입력 테스트 - 오류2")
+    @Test
+    void FormulaExceptionVer2() {
+        //given
+        InputStream in = generateUserInput("1 2 3 4");
+        System.setIn(in);
+        Scanner scanner = new Scanner(System.in);
+
+        //when
+        //then
+        assertThatThrownBy(() -> inputView.inputFormula(scanner))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining("정규 표현식이 아닙니다.");
     }
 
 }

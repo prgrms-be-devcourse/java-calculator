@@ -15,12 +15,16 @@ public class ConsoleOutputView implements OutputView {
 
     public void printResult(Result result) {
         System.out.println(result.showResult());
+        System.out.println();
     }
 
     public void printLogs(LogDTO logDTO) {
-        List<String> logs = logDTO.getLogs();
+        List<String> dtoLogs = logDTO.getLogs();
+        dtoLogs.forEach(System.out::println);
+        System.out.println();
+    }
 
-        logs.forEach((log) -> System.out.println(log));
+    public void printEmptySpace() {
         System.out.println();
     }
 }

@@ -47,6 +47,6 @@ public class Log {
 
     @Override
     public String toString() {
-        return formula + " = " + String.valueOf(result);
+        return formula + " = " + result;
     }
 }
