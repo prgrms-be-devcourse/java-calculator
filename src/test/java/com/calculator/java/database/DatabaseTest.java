@@ -1,6 +1,5 @@
 package com.calculator.java.database;
 
-import com.calculator.java.database.Database;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
