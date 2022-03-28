@@ -1,5 +1,7 @@
 package calculator.io;
 
-public interface Input {
+import java.io.IOException;
 
+public interface Input {
+    String input (String text) throws IOException;
 }
