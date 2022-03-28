@@ -3,6 +3,10 @@ package model;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+/**
+ * 수식 및 수식에 대한 결과값을 저장하는 클래스입니다.
+ * 생성자를 통해 수식 객체 생성 시, 해당 수식이 유효한지 확인합니다.
+ */
 public class Expression {
     private static final String NUM_REGEX = "[0-9]+";
     private static final String OPERATOR_REGEX = "[+\\-*/]";
