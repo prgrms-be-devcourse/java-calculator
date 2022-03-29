@@ -1,28 +1,14 @@
 package hyuk.calculator;
 
+import static hyuk.calculator.Operator.DIVIDE;
+import static hyuk.calculator.Operator.MINUS;
+import static hyuk.calculator.Operator.MULTIPLY;
+import static hyuk.calculator.Operator.PLUS;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Calculator {
-
-    public int add(int firstOperand, int secondOperand) {
-        return firstOperand + secondOperand;
-    }
-
-    public int subtract(int firstOperand, int secondOperand) {
-        return firstOperand - secondOperand;
-    }
-
-    public int divide(int firstOperand, int secondOperand) {
-        if (secondOperand == 0) {
-            throw new IllegalStateException("0으로 나눌 수 없습니다.");
-        }
-        return firstOperand / secondOperand;
-    }
-
-    public int multiply(int firstOperand, int secondOperand) {
-        return firstOperand * secondOperand;
-    }
 
     public Result calculate(PostOrderFormula postOrderFormula) {
         Deque<Integer> stack = new ArrayDeque<>();
@@ -36,13 +22,13 @@ public class Calculator {
             Integer secondOperand = stack.pollLast();
             Integer firstOperand = stack.pollLast();
             if (operator.equals("+")) {
-                stack.addLast(add(firstOperand, secondOperand));
+                stack.addLast(PLUS.calculate(firstOperand, secondOperand));
             } else if (operator.equals("-")) {
-                stack.addLast(subtract(firstOperand, secondOperand));
+                stack.addLast(MINUS.calculate(firstOperand, secondOperand));
             } else if (operator.equals("*")) {
-                stack.addLast(multiply(firstOperand, secondOperand));
+                stack.addLast(MULTIPLY.calculate(firstOperand, secondOperand));
             } else {
-                stack.addLast(divide(firstOperand, secondOperand));
+                stack.addLast(DIVIDE.calculate(firstOperand, secondOperand));
             }
         }
 
