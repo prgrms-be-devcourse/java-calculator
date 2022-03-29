@@ -28,8 +28,8 @@ public class PostfixCalculator implements Calculator {
      */
     public void run() {
 
-        int command;
         while (true) {
+            int command;
             try {
                 System.out.print("1. 조회\n2. 계산\n3. 종료\n\n선택: ");
                 command = Integer.parseInt(br.readLine());

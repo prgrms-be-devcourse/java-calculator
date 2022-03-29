@@ -1,12 +1,10 @@
 package repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-public class InMemoryRepository implements CalcRepository {
+public class InMemoryRepository implements CalcRepository  {
     private final Map<Long, String> memory = new LinkedHashMap<>();
     private static Long sequence = 0L;
 
