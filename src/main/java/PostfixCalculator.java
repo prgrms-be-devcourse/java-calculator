@@ -2,12 +2,10 @@ import exception.CalculatorException;
 import repository.CalcRepository;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.EmptyStackException;
 import java.util.List;
-import java.util.Optional;
 import java.util.Stack;
 
 public class PostfixCalculator implements Calculator {
@@ -49,15 +47,10 @@ public class PostfixCalculator implements Calculator {
 
                 if (command == 3) break;
 
-                throw new NumberFormatException();
-
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 System.out.println("잘못 입력하셨습니다. 다시 입력하세요.");
-            } catch (CalculatorException e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
+            } finally {
+                continue;
             }
 
         }
@@ -73,6 +66,7 @@ public class PostfixCalculator implements Calculator {
 
     /**
      * result 값에 따라서 출력형식을 변환하여 repository에 저장합니다.
+     *
      * @param expression
      * @return result값을 적절하게 변경하여 String 으로 반환합니다.
      */
@@ -98,6 +92,7 @@ public class PostfixCalculator implements Calculator {
 
     /**
      * 계산 끝에 stack이 완전히 비워지지 않거나, 계산도중 stack이 비면 예외를 던집니다.
+     *
      * @param expression
      * @return Postfix expression을 계산한 값을 double로 반환합니다.
      * @throws CalculatorException
