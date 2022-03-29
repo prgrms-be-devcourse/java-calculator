@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         init();
-        Menu menu = new Menu();
+        Menu menu = ObjectContainer.getMenu();
         menu.run();
     }
 
