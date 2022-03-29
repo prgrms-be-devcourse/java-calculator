@@ -25,6 +25,10 @@ public class ConsoleInputView implements InputView {
 
     private void validateRegex(String formula) {
         String[] tokens = formula.split(" ");
+        if (tokens.length % 2 == 0) {
+            throw new IllegalStateException(FORMULA_ERROR_MSG);
+        }
+
         for (int i = 0; i < tokens.length; ++i) {
             if (i % 2 == 0) {
                 if (!isOperand(tokens[i])) {

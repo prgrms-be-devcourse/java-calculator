@@ -91,4 +91,19 @@ public class ConsoleInputViewTest {
             .hasMessageContaining("정규 표현식이 아닙니다.");
     }
 
+    @DisplayName("계산식 입력 테스트 - 오류3")
+    @Test
+    void FormulaExceptionVer3() {
+        //given
+        InputStream in = generateUserInput("1 + 2 +");
+        System.setIn(in);
+        Scanner scanner = new Scanner(System.in);
+
+        //when
+        //then
+        assertThatThrownBy(() -> inputView.inputFormula(scanner))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining("정규 표현식이 아닙니다.");
+    }
+
 }
