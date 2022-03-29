@@ -1,13 +1,12 @@
 package org.programmers.calculator.postfixCalculator;
 
-import org.programmers.calculator.TypeChecker.TypeChecker;
-import org.programmers.calculator.configuration.Component;
 import org.programmers.calculator.TypeChecker.NumeralTypeChecker;
+import org.programmers.calculator.TypeChecker.TypeChecker;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
-@Component
 public class NumeralPrefixSolver implements Solver {
 
     private NumeralTypeChecker typeChecker;
@@ -19,10 +18,9 @@ public class NumeralPrefixSolver implements Solver {
     }
 
     public String solve(List<String> postfixExpression) {
-        Stack<String> calculationStack = new Stack();
+        Deque<String> calculationStack = new ArrayDeque<>();
 
-        for (int i = 0; i < postfixExpression.size(); i++) {
-            String s = postfixExpression.get(i);
+        for (String s : postfixExpression) {
             if (typeChecker.isOperand(s)) {
                 calculationStack.push(s);
             } else if (typeChecker.isOperator(s)) {

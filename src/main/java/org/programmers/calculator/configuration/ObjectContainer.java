@@ -8,9 +8,10 @@ import org.programmers.calculator.postfixParser.NumeralPostfixParser;
 import org.programmers.calculator.postfixParser.PostfixParser;
 import org.programmers.calculator.TypeChecker.NumeralTypeChecker;
 import org.programmers.calculator.TypeChecker.TypeChecker;
+import org.programmers.calculator.repository.MemoryMapRepository;
 import org.programmers.calculator.repository.Repository;
 
-public class ObjectContainer {
+public final class ObjectContainer {
 
     private static PostfixParser parser;
     private static TypeChecker typeChecker;
@@ -19,8 +20,13 @@ public class ObjectContainer {
     private static Repository repository;
     private static Menu menu;
 
-    public void create(Operand operand) {
+    private ObjectContainer() {
+    }
+
+    public static void create(Operand operand) {
+        destroy();
         if (operand==Operand.RATIONAL_NUMBER) {
+            repository = new MemoryMapRepository();
             typeChecker = new NumeralTypeChecker();
             parser = new NumeralPostfixParser(typeChecker);
             calculator = new NumeralCalculator(typeChecker);
@@ -39,5 +45,13 @@ public class ObjectContainer {
 
     public static Menu getMenu() {
         return menu;
+    }
+
+    private static void destroy() {
+        typeChecker = null;
+        parser = null;
+        calculator = null;
+        solver = null;
+        menu = null;
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PostfixParser {
 
-    public default List<String> parse(String input) {
+    default List<String> parse(String input) {
         return toPostfix(input.split(" "));
     }
 

@@ -2,14 +2,14 @@ package org.programmers.calculator.configuration;
 
 public class Config {
 
-    private Operand operandType = Operand.RATIONAL_NUMBER;
+    private static Operand operandType = Operand.RATIONAL_NUMBER;
+    private static Operator operatorType;
 
-    public void read() {
+    public static void read() {
 
-        apply();
     }
 
-    private void apply() {
-
+    private static void apply() {
+        ObjectContainer.create(operandType);
     }
 }

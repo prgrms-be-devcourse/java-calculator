@@ -18,18 +18,14 @@ public class MemoryMapRepository implements Repository {
 
     @Override
     public String findPrevious() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("이전 계산입니다: " + previousKey + " = " + store.get(previousKey));
-        return sb.toString();
+        return ((previousKey==null) || (store.get(previousKey)==null)) ?
+         "이전 계산 결과가 없습니다." : "이전 계산입니다: " + previousKey + " = " + store.get(previousKey);
     }
 
     @Override
-    public String findByKey(String expression) throws IllegalArgumentException {
-        String foundCalculationResult = store.get(expression);
-        if (foundCalculationResult==null) {
-            throw new IllegalArgumentException();
-        }
-        return foundCalculationResult;
+    public String findByKey(String expression) {
+        String s = store.get(expression);
+        return (s==null)? "검색 결과가 없습니다" : s;
     }
 
     @Override
@@ -41,9 +37,15 @@ public class MemoryMapRepository implements Repository {
 
         Set<String> keys = store.keySet();
 
+        if (keys.isEmpty()) {
+            result.add("이전 계산 결과가 없습니다.");
+            return result;
+        }
+
         for (String key : keys) {
             result.add(
-                    sb.append(++sequence + ": " + key + " = " + store.get(key)).toString());
+                    sb.append(++sequence).append(": ").append(key)
+                            .append(" = ").append(store.get(key)).toString());
             sb.setLength(0);
         }
 

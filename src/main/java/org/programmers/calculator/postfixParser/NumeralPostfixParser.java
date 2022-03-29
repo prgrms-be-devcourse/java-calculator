@@ -10,7 +10,7 @@ public class NumeralPostfixParser implements PostfixParser {
     private final List<String> postfixExpression = new ArrayList<>();
     private Map<String, Integer> operatorRank;
 
-    Stack<String> stack = new Stack<>();
+    Deque<String> stack = new ArrayDeque<>();
 
     public NumeralPostfixParser(TypeChecker typeChecker) {
         this.typeChecker = typeChecker;
@@ -18,13 +18,18 @@ public class NumeralPostfixParser implements PostfixParser {
     }
 
     @Override
-    public List<String> toPostfix(String[] input) {
+    public List<String> toPostfix(String[] input) throws IllegalArgumentException {
+
+        boolean previousIsOperator = true;
 
         for (String each : input) {
             if (typeChecker.isOperand(each)) {
+                previousIsOperator = false;
                 postfixExpression.add(each);
             }
             else if (typeChecker.isOperator(each)) {
+                if (previousIsOperator) throw new IllegalArgumentException("수식이 잘못되었습니다!");
+                previousIsOperator = true;
                 pushOperatorToStack(each);
             }
             else {
@@ -39,7 +44,7 @@ public class NumeralPostfixParser implements PostfixParser {
     }
 
     private void pushOperatorToStack(String each) {
-        if (stack.empty()) {
+        if (stack.isEmpty()) {
             stack.push(each);
         }
         else {
