@@ -5,12 +5,17 @@ package com.programmers.oop;
 
 import java.io.IOException;
 
+import com.programmers.oop.repository.ComputeHistoryRepositoryImpl;
+import com.programmers.oop.service.Service;
+
 import com.programmers.oop.view.Console;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        CalculatorMachine calculatorMachine = new CalculatorMachine(new Console());
+
+        CalculatorMachine calculatorMachine = new CalculatorMachine(new Console(),
+            new Service(new ComputeHistoryRepositoryImpl()));
         calculatorMachine.start();
     }
 }

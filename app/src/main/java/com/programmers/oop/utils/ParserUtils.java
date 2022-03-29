@@ -30,18 +30,25 @@ public class ParserUtils {
                 if (current == OPEN_BRACKET) {
                     stack.push(current);
                 } else if (current == CLOSE_BRACKET) {
+                    if (!stack.isEmpty() && stack.peek() != '(') {
+                        postfix.add(numbers.toString());
+                        numbers = new StringBuilder();
+                    }
                     while (!stack.isEmpty() && stack.peek() != '(') {
-                        numbers.append(stack.pop());
+                        postfix.add(Character.toString(stack.pop()));
                     }
                     if (stack.peek() == '(') {
                         stack.pop();
                     }
                 } else if (OperatorUtils.isProperOpertatorYn(current)) {
-                    postfix.add(numbers.toString());
-                    numbers = new StringBuilder();
+                    if (!numbers.isEmpty()) {
+                        postfix.add(numbers.toString());
+                        numbers = new StringBuilder();
+                    }
                     Operator putting = OperatorUtils.getOperator(current);
-                    while (!stack.isEmpty() && OperatorUtils.getOperator(stack.peek())
-                        .isPriorityYn(putting)) {
+                    while (!stack.isEmpty() && stack.peek() != '(' &&
+                        OperatorUtils.getOperator(stack.peek())
+                            .isPriorityYn(putting)) {
                         postfix.add(Character.toString(stack.pop()));
                     }
                     stack.push(current);
