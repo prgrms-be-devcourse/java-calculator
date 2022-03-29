@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 class CalcLogServiceTest {
 
-  LogService<CalcData> logService = new CalcLogService(new CalcDataRepository());
+  Logger<CalcData> logService = new CalcLogger(new CalcDataRepository());
   ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
   @BeforeEach

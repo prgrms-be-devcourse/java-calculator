@@ -4,19 +4,19 @@ import calculation.calculator.engine.BigDecimalCalculator;
 import calculation.io.Input;
 import calculation.io.Output;
 import calculation.model.CalcData;
-import calculation.log.LogService;
+import calculation.log.Logger;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public class CalculateService {
 
   private final BigDecimalCalculator calculator;
-  private final LogService<CalcData> logService;
+  private final Logger<CalcData> logService;
   private final Input input;
   private final Output output;
 
 
-  public CalculateService(BigDecimalCalculator calculator, LogService logService, Input input, Output output) {
+  public CalculateService(BigDecimalCalculator calculator, Logger logService, Input input, Output output) {
     this.calculator = calculator;
     this.logService = logService;
     this.input = input;

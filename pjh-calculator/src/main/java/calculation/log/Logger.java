@@ -1,6 +1,6 @@
 package calculation.log;
 
-public interface LogService<T> {
+public interface Logger<T> {
 
   void log(T exp);
 
