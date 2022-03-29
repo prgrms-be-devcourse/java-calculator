@@ -26,9 +26,4 @@ public class Calculation {
             return null;
         }
     }
-
-
-
-
-
 }

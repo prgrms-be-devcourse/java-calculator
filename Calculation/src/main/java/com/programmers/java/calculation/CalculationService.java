@@ -1,16 +1,13 @@
 package com.programmers.java.calculation;
 
-import com.programmers.java.calculation.calculate.CalculateBasicImpl;
 import com.programmers.java.calculation.io.Input;
 import com.programmers.java.calculation.io.Output;
 import com.programmers.java.calculation.parse.Parsing;
-import com.programmers.java.calculation.parse.ParsingImpl;
-import com.programmers.java.calculation.parse.ValidationAddDecimalImpl;
 import com.programmers.java.calculation.repository.Repository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class CalculationService implements Runnable {
@@ -25,25 +22,31 @@ public class CalculationService implements Runnable {
     public void run() {
 
         while (true) {
-            String inputString = input.input("1. 조회 \n2. 계산");
+            String inputString = input.input("1. 조회 \n2. 계산 \n3. 종료");
 
-            if (inputString.equals("1")) {
+            if (inputString.equals("3")) {
+                System.out.println("종료");
+                break;
+            } else if (inputString.equals("1")) {
                 System.out.println("조회 선택");
-                repository.findAll();
+                repository.printAll();
             } else if (inputString.equals("2")) {
                 System.out.println("계산 선택");
                 String inputForCal = input.input("식을 입력해주세요.");
-                if (inputForCal.replaceAll(" ", "").equals("")) {
+
+                if (parsing.removeSpase(inputForCal).equals("")) {
                     output.wrongInput();
                     continue;
                 }
 
-                Double result = calculation.calculationAndValidate(inputForCal);
-                if (result == null) {
+                Optional<Double> result = Optional.of(calculation.calculationAndValidate(inputForCal));
+                if (result.isEmpty()) {
                     output.wrongInput();
-                } else {
-                    StringBuilder saveInput = getSaveInput(inputForCal);
-                    removeDot(result, saveInput);
+                }
+                
+                if (result.isPresent()) {
+                    StringBuilder frontOfOutput = getFrontOfOutput(inputForCal);
+                    saveOutput(result.get(), frontOfOutput);
                 }
             } else {
                 output.wrongInput();
@@ -53,7 +56,7 @@ public class CalculationService implements Runnable {
 
     }
 
-    private void removeDot(Double result, StringBuilder saveInput) {
+    private void saveOutput(Double result, StringBuilder saveInput) {
         int i = result.intValue();
         if (i == result) {
             output.correct(i);
@@ -65,13 +68,13 @@ public class CalculationService implements Runnable {
         }
     }
 
-    private StringBuilder getSaveInput(String inputForCal) {
+    private StringBuilder getFrontOfOutput(String inputForCal) {
         List<String> list = parsing.makeArray(parsing.removeSpase(inputForCal));
-        StringBuilder saveInput = new StringBuilder();
+        StringBuilder frontOfOutput = new StringBuilder();
         for (String s : list) {
-            saveInput.append(s + " ");
+            frontOfOutput.append(s + " ");
         }
-        return saveInput;
+        return frontOfOutput;
     }
 
 

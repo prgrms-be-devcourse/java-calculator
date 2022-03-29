@@ -14,7 +14,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public void findAll() {
+    public void printAll() {
         for (String a : list) {
             System.out.println(a);
         }
