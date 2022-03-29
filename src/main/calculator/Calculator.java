@@ -2,14 +2,20 @@ package main.calculator;
 
 import main.calculator.engine.io.Input;
 import main.calculator.engine.io.Output;
+import main.calculator.engine.model.CalculationRepository;
 
 public class Calculator implements Runnable{
 
     private Input input;
     private Output output;
-    public Calculator(Input input, Output output) {
+    private CalculationRepository calculationRepository;
+
+    public Calculator(Input input,
+                      Output output,
+                      CalculationRepository calculationRepository) {
         this.input = input;
         this.output = output;
+        this.calculationRepository = calculationRepository;
     }
 
     @Override
@@ -28,6 +34,7 @@ public class Calculator implements Runnable{
             }
             if(target == 2){
                 //TODO: operator 만들기
+                writeCalculation(input.input("입력해주세요"));
                 continue;
             }
             if(target == 3){
@@ -36,5 +43,13 @@ public class Calculator implements Runnable{
             }
             output.inputError();
         }
+    }
+
+    private void writeCalculation(String InputString) {
+        //실질적 계산이 이루어져짐
+        //repository에 저장
+        String result=""; //여기에 실질적 계산으로 보내기
+        calculationRepository.save(InputString,result);
+        output.print(result);
     }
 }
