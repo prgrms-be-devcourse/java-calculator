@@ -5,6 +5,8 @@ import com.caculator.repository.MemoryCalculatorRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,12 +18,12 @@ class CalculatorTest {
 
     @Test
     @DisplayName("덧셈 테스트")
-    void plusTest() {
+    void addTest() {
         //given
-        String exp = "1 + 2 + 3";
+        String expression = "1 + 2 + 3";
 
         //when
-        int result = calculator.executeCalculator(exp);
+        int result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(6);
@@ -29,12 +31,12 @@ class CalculatorTest {
 
     @Test
     @DisplayName("뺼셈 테스트")
-    void minusTest() {
+    void subtractTest() {
         //given
-        String exp = "20 - 10 - 5";
+        String expression = "20 - 10 - 5";
 
         //when
-        int result = calculator.executeCalculator(exp);
+        int result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(5);
@@ -44,10 +46,10 @@ class CalculatorTest {
     @DisplayName("곱셈 테스트")
     void multiTest() {
         //given
-        String exp = "10 * 15 * 3";
+        String expression = "10 * 15 * 3";
 
         //when
-        int result = calculator.executeCalculator(exp);
+        int result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(450);
@@ -57,10 +59,10 @@ class CalculatorTest {
     @DisplayName("나눗셈 테스트")
     void divideTest() {
         //given
-        String exp = "20 / 2 / 5";
+        String expression = "20 / 2 / 5";
 
         //when
-        int result = calculator.executeCalculator(exp);
+        int result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(2);
@@ -71,14 +73,14 @@ class CalculatorTest {
     void priorityTest() {
 
         //given
-        String exp1 = "1 + 2 * 3 + 4 / 2";
-        String exp2 = "100 - 50 * 3 / 2 + 25";
-        String exp3 = "100 * 50 / 20 - 35 / 5 * 4 + 10 * 5 * 2";
+        String expression1 = "1 + 2 * 3 + 4 / 2";
+        String expression2 = "100 - 50 * 3 / 2 + 25";
+        String expression3 = "100 * 50 / 20 - 35 / 5 * 4 + 10 * 5 * 2";
 
         //when
-        int result1 = calculator.executeCalculator(exp1);
-        int result2 = calculator.executeCalculator(exp2);
-        int result3 = calculator.executeCalculator(exp3);
+        int result1 = calculator.executeCalculator(expression1);
+        int result2 = calculator.executeCalculator(expression2);
+        int result3 = calculator.executeCalculator(expression3);
 
         //then
         assertThat(result1).isEqualTo(9);
@@ -87,26 +89,16 @@ class CalculatorTest {
     }
 
     @Test
+    @ValueSource(strings = {"3 / 0", "1 + 2 * 10 / 0 + 4", "3 * 4 / 0 * 5"})
     @DisplayName("0으로 나누면 ArithmeticException 발생")
-    void divideZeroTest() {
-        String exp1 = "3 / 0";
-        String exp2 = "1 + 2 * 10 / 0 + 4";
-        String exp3 = "3 * 4 / 0 * 5";
-
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(exp1));
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(exp2));
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(exp3));
+    void divideZeroTest(String expression) {
+        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(expression));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"a b c d e f g", "1 + 2 * b / 0 + 4", "3 * @ / 0 * %"})
     @DisplayName("숫자와 연산자(+,-,*,/) 외에 다른 문자가 있으면 IllegalArgumentException 발생")
-    void otherCharTest() {
-        String exp1 = "a b c d e f g";
-        String exp2 = "1 + 2 * b / 0 + 4";
-        String exp3 = "3 * @ / 0 * %";
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(exp1));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(exp2));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(exp3));
+    void otherCharTest(String expression) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(expression));
     }
 }
