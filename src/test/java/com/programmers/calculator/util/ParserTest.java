@@ -1,5 +1,6 @@
 package com.programmers.calculator.util;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -79,6 +80,12 @@ class DataForPostfix {
 
 @DisplayName("Parser 테스트")
 public class ParserTest {
+    private Parser parser;
+
+    @BeforeEach
+    void setUp() {
+        parser = Parser.getInstance();
+    }
 
     @DisplayName("parse() 테스트")
     @Nested
@@ -93,7 +100,7 @@ public class ParserTest {
             list.add(new DataForParse("1-2 * 3", new String[]{"1", "-", "2", "*", "3"}));
             list.add(new DataForParse("1 + ( 2 - 3 ) * 4 + 5", new String[]{"1", "+", "(", "2", "-", "3", ")", "*", "4", "+", "5"}));
 
-            list.forEach(mockData -> assertArrayEquals(mockData.getResult(), Parser.parse(mockData.getOrigin())));
+            list.forEach(mockData -> assertArrayEquals(mockData.getResult(), parser.parse(mockData.getOrigin())));
         }
 
         @DisplayName("연산자&숫자 분리 실패 사례")
@@ -104,7 +111,7 @@ public class ParserTest {
             list.add(new DataForParse("1 & 2 ^3", new String[]{"1&2^3"}));
             list.add(new DataForParse("[1.1+2] /3", new String[]{"[1.1", "+", "2]", "/", "3"}));
 
-            list.forEach(mockData -> assertArrayEquals(mockData.getResult(), Parser.parse(mockData.getOrigin())));
+            list.forEach(mockData -> assertArrayEquals(mockData.getResult(), parser.parse(mockData.getOrigin())));
         }
     }
 
@@ -121,7 +128,7 @@ public class ParserTest {
             list.add(new DataForPostfix(new String[]{"1", "-", "2", "*", "3"}, new String[]{"1", "2", "3", "*", "-"}));
             list.add(new DataForPostfix(new String[]{"1", "+", "(", "2", "-", "3", ")", "*", "4", "+", "5"}, new String[]{"1", "2", "3", "-", "4", "*", "5", "+", "+"}));
 
-            list.forEach(mockData -> assertArrayEquals(mockData.getResult(), Parser.getPostfix(mockData.getOrigin())));
+            list.forEach(mockData -> assertArrayEquals(mockData.getResult(), parser.getPostfix(mockData.getOrigin())));
         }
     }
 }

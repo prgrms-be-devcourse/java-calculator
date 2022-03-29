@@ -1,5 +1,6 @@
 package com.programmers.calculator;
 
+import com.programmers.calculator.repository.MemoryRepository;
 import com.programmers.calculator.util.io.Console;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,7 +38,7 @@ public class CalculatorTest {
     @BeforeEach
     void setUp() {
         Console console = new Console();
-        calculator = new Calculator(console, console);
+        calculator = new Calculator(console, console, new MemoryRepository());
     }
 
     @DisplayName("isValidate() 테스트")

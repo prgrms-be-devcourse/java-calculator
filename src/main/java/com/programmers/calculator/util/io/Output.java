@@ -1,6 +1,6 @@
 package com.programmers.calculator.util.io;
 
-import com.programmers.calculator.exception.OutputException;
+import com.programmers.calculator.exception.io.OutputException;
 
 import java.util.List;
 

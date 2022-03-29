@@ -3,11 +3,23 @@ package com.programmers.calculator.util;
 import java.util.*;
 
 public class Parser {
-    public static String[] parse(String str) {
+    private static Parser parser;
+
+    private Parser() {
+    }
+
+    public static Parser getInstance() {
+        if (parser == null) {
+            parser = new Parser();
+        }
+        return parser;
+    }
+
+    public String[] parse(String str) {
         return str.trim().replace(" ", "").split("(?<=[()*/+-])|(?=[()*/+-])");
     }
 
-    public static String[] getPostfix(String[] formula) {
+    public String[] getPostfix(String[] formula) {
         List<String> postfixList = new ArrayList<>();
         Stack<String> operatorStack = new Stack<>();
 
@@ -52,7 +64,7 @@ public class Parser {
         return postfixList.toArray(new String[0]);
     }
 
-    private static int getPriority(String operator) {
+    private int getPriority(String operator) {
         switch (operator) {
             case "+":
             case "-":
