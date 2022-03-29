@@ -11,7 +11,7 @@ public class Computer implements Runnable{
     Output output;
     Calculator calculator = new Calculator();
     List<String> db = new ArrayList<>();
-    private final String MESSAGE = "1. 조회\n2. 계산\n\n선택 : ";
+    private final String OPTION_MESSAGE = "1. 조회\n2. 계산\n\n선택 : ";
 
     public Computer(Input input, Output output){
         this.input = input;
@@ -21,7 +21,7 @@ public class Computer implements Runnable{
     @Override
     public void run() {
         while(true){
-            String option = input.chooseOpt(MESSAGE);
+            String option = input.chooseOpt(OPTION_MESSAGE);
             int optNum = parseOption(option);
             if(optNum == -1){
                 output.inputError();
@@ -51,7 +51,17 @@ public class Computer implements Runnable{
     }
 
     private int parseOption(String option){
-        return Integer.parseInt(option);
+        try{
+            int res = Integer.parseInt(option);
+            if(res >=1 && res <=2){
+                return res;
+            }
+            else{
+                return -1;
+            }
+        }
+        catch(NumberFormatException e){
+            return -1;
+        }
     }
-
 }

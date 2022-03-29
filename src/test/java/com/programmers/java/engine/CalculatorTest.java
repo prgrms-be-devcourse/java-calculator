@@ -22,18 +22,15 @@ public class CalculatorTest {
     @DisplayName("곱셈 나눗셈 테스트")
     public void multiplyAndDivideTest(){
         String inputStr = "1+2*3-4/2";
-        Expression expression = calculator.parseInput(inputStr);
-        Expression result = calculator.doMultiplyAndDivide(expression);
-        Assertions.assertThat(result.getOperators()).isEqualTo(new String[]{"+", "-"});
-        Assertions.assertThat(result.getOperands()).isEqualTo(new Double[]{1.0, 6.0, 2.0});
+        Double result = calculator.calculate(inputStr);
+        Assertions.assertThat(result).isEqualTo(5);
     }
 
     @Test
     @DisplayName("덧셈 뺄셈 테스트")
     public void addAndSubtractTest(){
         String inputStr = "1+2-4";
-        Expression expression = calculator.parseInput(inputStr);
-        Double result = calculator.doAddAndSubtract(expression);
+        Double result = calculator.calculate(inputStr);
         Assertions.assertThat(result).isEqualTo(-1.0);
     }
 }

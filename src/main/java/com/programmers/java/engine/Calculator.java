@@ -9,9 +9,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    public Double calculate(String inputStr) {
-        return doAddAndSubtract(doMultiplyAndDivide(parseInput(inputStr)));
-    }
+    public Double calculate(String inputStr) {return doAddAndSubtract(doMultiplyAndDivide(parseInput(inputStr))); }
 
     public Expression parseInput(String inputStr){
         String operatorPattern = "[\\+\\*-/]";
@@ -25,7 +23,7 @@ public class Calculator {
         return new Expression(operators, operands);
     }
 
-   public Expression doMultiplyAndDivide(Expression expression){
+   private Expression doMultiplyAndDivide(Expression expression){
         String[] operators = expression.getOperators();
         Double[] operands = expression.getOperands();
 
@@ -52,7 +50,7 @@ public class Calculator {
         return new Expression(operatorStack.toArray(String[]::new), operandStack.toArray(Double[]::new));
     }
 
-    public Double doAddAndSubtract(Expression expression){
+    private Double doAddAndSubtract(Expression expression){
         String[] operators = expression.getOperators();
         Double[] operands = expression.getOperands();
 
