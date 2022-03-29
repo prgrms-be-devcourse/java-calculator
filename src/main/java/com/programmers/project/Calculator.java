@@ -2,6 +2,8 @@ package com.programmers.project;
 
 import com.programmers.project.io.Console;
 import com.programmers.project.io.Input;
+import com.programmers.project.repository.DataRepository;
+import com.programmers.project.repository.VolatilityRepository;
 
 import java.time.temporal.ChronoField;
 import java.util.*;
@@ -10,6 +12,8 @@ import java.util.*;
 public class Calculator extends Basic{
 
     private Console console = new Console(); //입출력
+    private DataRepository repository = new VolatilityRepository(); // 계산식 저장소
+
     private final List<String> operations = new ArrayList<>(Arrays.asList("+","-","*","/"));  // 연산자
 
     public String menu() {
