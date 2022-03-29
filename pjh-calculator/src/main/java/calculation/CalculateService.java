@@ -35,7 +35,8 @@ public class CalculateService {
       } catch (NoSuchElementException e) {
         break;
       } catch (IOException e) {
-        e.printStackTrace();
+        output.printErrorMsg("입출력 오류가 발생했습니다.");
+        break;
       }
     }
   }
