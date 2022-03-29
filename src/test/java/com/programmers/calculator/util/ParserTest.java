@@ -12,72 +12,6 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DataForParse {
-    private final String origin;
-    private final String[] result;
-
-    public DataForParse(String origin, String[] result) {
-        this.origin = origin;
-        this.result = result;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public String[] getResult() {
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DataForParse mockData = (DataForParse) o;
-        return Objects.equals(origin, mockData.origin) && Arrays.equals(result, mockData.result);
-    }
-
-    @Override
-    public int hashCode() {
-        int result1 = Objects.hash(origin);
-        result1 = 31 * result1 + Arrays.hashCode(result);
-        return result1;
-    }
-}
-
-class DataForPostfix {
-    private final String[] origin;
-    private final String[] result;
-
-    public DataForPostfix(String[] origin, String[] result) {
-        this.origin = origin;
-        this.result = result;
-    }
-
-    public String[] getOrigin() {
-        return origin;
-    }
-
-    public String[] getResult() {
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DataForPostfix that = (DataForPostfix) o;
-        return Arrays.equals(origin, that.origin) && Arrays.equals(result, that.result);
-    }
-
-    @Override
-    public int hashCode() {
-        int result1 = Arrays.hashCode(origin);
-        result1 = 31 * result1 + Arrays.hashCode(result);
-        return result1;
-    }
-}
-
 @DisplayName("Parser 테스트")
 public class ParserTest {
     private Parser parser;
@@ -129,6 +63,72 @@ public class ParserTest {
             list.add(new DataForPostfix(new String[]{"1", "+", "(", "2", "-", "3", ")", "*", "4", "+", "5"}, new String[]{"1", "2", "3", "-", "4", "*", "5", "+", "+"}));
 
             list.forEach(mockData -> assertArrayEquals(mockData.getResult(), parser.getPostfix(mockData.getOrigin())));
+        }
+    }
+
+    static class DataForParse {
+        private final String origin;
+        private final String[] result;
+
+        public DataForParse(String origin, String[] result) {
+            this.origin = origin;
+            this.result = result;
+        }
+
+        public String getOrigin() {
+            return origin;
+        }
+
+        public String[] getResult() {
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DataForParse mockData = (DataForParse) o;
+            return Objects.equals(origin, mockData.origin) && Arrays.equals(result, mockData.result);
+        }
+
+        @Override
+        public int hashCode() {
+            int result1 = Objects.hash(origin);
+            result1 = 31 * result1 + Arrays.hashCode(result);
+            return result1;
+        }
+    }
+
+    static class DataForPostfix {
+        private final String[] origin;
+        private final String[] result;
+
+        public DataForPostfix(String[] origin, String[] result) {
+            this.origin = origin;
+            this.result = result;
+        }
+
+        public String[] getOrigin() {
+            return origin;
+        }
+
+        public String[] getResult() {
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DataForPostfix that = (DataForPostfix) o;
+            return Arrays.equals(origin, that.origin) && Arrays.equals(result, that.result);
+        }
+
+        @Override
+        public int hashCode() {
+            int result1 = Arrays.hashCode(origin);
+            result1 = 31 * result1 + Arrays.hashCode(result);
+            return result1;
         }
     }
 }
