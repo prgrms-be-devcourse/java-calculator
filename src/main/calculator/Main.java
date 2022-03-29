@@ -1,11 +1,13 @@
 package main.calculator;
 
-import main.calculator.engine.Console;
+import main.calculator.engine.model.CalculationRepository;
+import main.calculator.engine.model.MemoryCalculationRepository;
 
 public class Main {
     public static void main(String[] args) {
 
         Console console = new Console();
-        new Calculator(console,console).run();
+        CalculationRepository calculationRepository = new MemoryCalculationRepository();
+        new Calculator(console,console,calculationRepository).run();
     }
 }
