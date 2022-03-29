@@ -17,6 +17,6 @@ public class Console implements Input, Output {
 
     @Override
     public void showMessage(String message) {
-
+        System.out.print(message);
     }
 }
