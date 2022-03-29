@@ -21,7 +21,7 @@ class CalculatorTest {
         String exp = "1 + 2 + 3";
 
         //when
-        int result = calculator.calculate(exp);
+        int result = calculator.executeCalculator(exp);
 
         //then
         assertThat(result).isEqualTo(6);
@@ -34,7 +34,7 @@ class CalculatorTest {
         String exp = "20 - 10 - 5";
 
         //when
-        int result = calculator.calculate(exp);
+        int result = calculator.executeCalculator(exp);
 
         //then
         assertThat(result).isEqualTo(5);
@@ -47,7 +47,7 @@ class CalculatorTest {
         String exp = "10 * 15 * 3";
 
         //when
-        int result = calculator.calculate(exp);
+        int result = calculator.executeCalculator(exp);
 
         //then
         assertThat(result).isEqualTo(450);
@@ -60,7 +60,7 @@ class CalculatorTest {
         String exp = "20 / 2 / 5";
 
         //when
-        int result = calculator.calculate(exp);
+        int result = calculator.executeCalculator(exp);
 
         //then
         assertThat(result).isEqualTo(2);
@@ -76,9 +76,9 @@ class CalculatorTest {
         String exp3 = "100 * 50 / 20 - 35 / 5 * 4 + 10 * 5 * 2";
 
         //when
-        int result1 = calculator.calculate(exp1);
-        int result2 = calculator.calculate(exp2);
-        int result3 = calculator.calculate(exp3);
+        int result1 = calculator.executeCalculator(exp1);
+        int result2 = calculator.executeCalculator(exp2);
+        int result3 = calculator.executeCalculator(exp3);
 
         //then
         assertThat(result1).isEqualTo(9);
@@ -93,9 +93,9 @@ class CalculatorTest {
         String exp2 = "1 + 2 * 10 / 0 + 4";
         String exp3 = "3 * 4 / 0 * 5";
 
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.calculate(exp1));
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.calculate(exp2));
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.calculate(exp3));
+        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(exp1));
+        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(exp2));
+        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(exp3));
     }
 
     @Test
@@ -105,8 +105,8 @@ class CalculatorTest {
         String exp2 = "1 + 2 * b / 0 + 4";
         String exp3 = "3 * @ / 0 * %";
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.calculate(exp1));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.calculate(exp2));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.calculate(exp3));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(exp1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(exp2));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(exp3));
     }
 }
