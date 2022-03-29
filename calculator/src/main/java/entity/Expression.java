@@ -6,13 +6,10 @@ import java.util.Objects;
 
 @Getter
 public class Expression {
-
-    private Long id;
     private String input;
     private double result;
 
-    public Expression(Long id, String input, double result) {
-        this.id = id;
+    public Expression(String input, double result) {
         this.input = input;
         this.result = result;
     }
@@ -36,6 +33,6 @@ public class Expression {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, input, result);
+        return Objects.hash(input, result);
     }
 }
