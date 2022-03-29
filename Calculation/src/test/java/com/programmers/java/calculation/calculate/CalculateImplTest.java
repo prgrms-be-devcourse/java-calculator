@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,11 +20,11 @@ class CalculateImplTest {
         List<String> input = new ArrayList<>(Arrays.asList("24", "+", "12", "/", "5", "-", "3", "*", "2"));
         List<String> input2 = new ArrayList<>(Arrays.asList("24", "-", "12"));
 
-        Double result = calculate.cal(input);
-        Double result2 = calculate.cal(input2);
-        System.out.println("result2 = " + result2);
+        Optional<Double> result = calculate.fourRules(input);
+        Optional<Double> result2 = calculate.fourRules(input2);
+        System.out.println("result2 = " + result2.get());
 
-        assertThat(result).isEqualTo(20.4);
+        assertThat(result.get()).isEqualTo(20.4);
 
     }
 
@@ -31,9 +32,9 @@ class CalculateImplTest {
     public void divisionZero() throws Exception {
         List<String> input = new ArrayList<>(Arrays.asList("24", "+", "12", "/", "0", "-", "3", "*", "2"));
 
-        Double result = calculate.cal(input);
+        Optional<Double> result = calculate.fourRules(input);
 
-        assertThat(result).isNull();
+        assertThat(result.isEmpty()).isTrue();
 
     }
     @Test
@@ -42,7 +43,7 @@ class CalculateImplTest {
 
 
 
-        org.junit.jupiter.api.Assertions.assertThrows(RuntimeException.class, () -> calculate.cal(input));
+        org.junit.jupiter.api.Assertions.assertThrows(RuntimeException.class, () -> calculate.fourRules(input));
 
 
     }

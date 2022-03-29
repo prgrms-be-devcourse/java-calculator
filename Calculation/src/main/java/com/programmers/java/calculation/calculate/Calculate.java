@@ -1,8 +1,9 @@
 package com.programmers.java.calculation.calculate;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Calculate {
 
-    Double cal(List<String> input);
+    Optional<Double> fourRules(List<String> input);
 }

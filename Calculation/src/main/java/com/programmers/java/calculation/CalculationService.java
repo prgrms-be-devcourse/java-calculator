@@ -1,8 +1,10 @@
 package com.programmers.java.calculation;
 
+import com.programmers.java.calculation.calculate.Calculate;
 import com.programmers.java.calculation.io.Input;
 import com.programmers.java.calculation.io.Output;
 import com.programmers.java.calculation.parse.Parsing;
+import com.programmers.java.calculation.parse.Validation;
 import com.programmers.java.calculation.repository.Repository;
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +17,9 @@ public class CalculationService implements Runnable {
     private final Input input;
     private final Output output;
     private final Repository repository;
+    private final Validation validation;
     private final Parsing parsing;
-    private final Calculation calculation;
+    private final Calculate calculate;
 
     @Override
     public void run() {
@@ -34,26 +37,32 @@ public class CalculationService implements Runnable {
                 System.out.println("계산 선택");
                 String inputForCal = input.input("식을 입력해주세요.");
 
-                if (parsing.removeSpase(inputForCal).equals("")) {
+                Optional<Double> result = getOutput(inputForCal);
+                if (result.isEmpty()) {
                     output.wrongInput();
                     continue;
                 }
+                saveOutput(result.get(), getFrontOfOutput(inputForCal));
 
-                Optional<Double> result = Optional.of(calculation.calculationAndValidate(inputForCal));
-                if (result.isEmpty()) {
-                    output.wrongInput();
-                }
-                
-                if (result.isPresent()) {
-                    StringBuilder frontOfOutput = getFrontOfOutput(inputForCal);
-                    saveOutput(result.get(), frontOfOutput);
-                }
             } else {
                 output.wrongInput();
             }
 
         }
 
+    }
+
+    protected Optional<Double> getOutput(String inputForCal) {
+        String inputRemoveSpase = parsing.removeSpase(inputForCal);
+
+        if (inputRemoveSpase.equals("") || !validation.validationTotal(inputRemoveSpase)) {
+            output.wrongInput();
+            return Optional.empty();
+        }
+
+        List<String> resultList = parsing.makeArray(inputRemoveSpase);
+        Optional<Double> result = calculate.fourRules(resultList);
+        return result;
     }
 
     private void saveOutput(Double result, StringBuilder saveInput) {
@@ -76,6 +85,8 @@ public class CalculationService implements Runnable {
         }
         return frontOfOutput;
     }
+
+
 
 
 }

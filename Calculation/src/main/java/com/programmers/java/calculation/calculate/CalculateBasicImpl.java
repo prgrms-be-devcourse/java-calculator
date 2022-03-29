@@ -7,7 +7,7 @@ import java.util.*;
 public class CalculateBasicImpl implements Calculate {
 
     @Override
-    public Double cal(List<String> input) {
+    public Optional<Double> fourRules(List<String> input) {
         List<String> operatorMulAndDiv = new ArrayList<>(Arrays.asList("*", "/"));
         List<String> operatorPlusAndMinus = new ArrayList<>(Arrays.asList("+", "-"));
         List<Double> nums = new ArrayList<>();
@@ -27,17 +27,16 @@ public class CalculateBasicImpl implements Calculate {
                     mulDivResult = nums.get(lastIndex) * Double.parseDouble(input.get(i+1));
                 } else {
                     if (Double.parseDouble(input.get(i+1)) == 0) {
-                        return null;
+                        return Optional.empty();
                     }
                     mulDivResult = nums.get(lastIndex) / Double.parseDouble(input.get(i+1));
                 }
                 nums.set(lastIndex, mulDivResult);
                 i++;
             } else {
-                Double result = temp * Double.parseDouble(input.get(i));
-                nums.add(result);
+                nums.add(temp * Double.parseDouble(input.get(i)));
             }
         }
-        return nums.stream().mapToDouble(i -> i).sum();
+        return Optional.of(nums.stream().mapToDouble(i -> i).sum());
     }
 }

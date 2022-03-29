@@ -18,9 +18,9 @@ public class App {
         Calculate calculate = new CalculateBasicImpl();
         Repository repository = new RepositoryImpl();
 
-        Calculation calculation = new Calculation(parsing, validation, calculate);
 
-        CalculationService calculationService = new CalculationService(input, output, repository, parsing, calculation);
+        CalculationService calculationService =
+                new CalculationService(input, output, repository, validation, parsing, calculate);
 
         calculationService.run();
 
