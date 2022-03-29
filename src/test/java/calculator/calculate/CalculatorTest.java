@@ -1,12 +1,13 @@
 package calculator.calculate;
 
 import calculator.console.Console;
+import calculator.repository.ResultRepositoryImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
-    Calculator calculator = new Calculator(new Console());
+    CalculatorImpl calculator = new CalculatorImpl(new Console(), ResultRepositoryImpl.getInstance());
 
     @Test
     void testIsValidExpressionFalse() {
@@ -30,6 +31,7 @@ class CalculatorTest {
         assertEquals(calculator.calculate("5 - 2"), 3);
         assertEquals(calculator.calculate("2 * 2"), 4);
         assertEquals(calculator.calculate("6 / 2"), 3);
+        assertEquals(calculator.calculate("2 * 2 * 3"), 12);
     }
 
 }
