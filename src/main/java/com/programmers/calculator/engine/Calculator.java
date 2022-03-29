@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Calculator implements Runnable{
     private Input input;
     private Output output;
-    private ExpressionAndResult expressionAndResult;
+    private ExpressionAndResult expressionAndResult; // 연산식, 결과 저장
 
     public Calculator(Input input, Output output) {
         this.input = input;
@@ -45,6 +45,7 @@ public class Calculator implements Runnable{
         }
     }
 
+    // 연산식을 후위표기법으로 변환 -> Optional null체크 -> 후위표기법 계산하고 출력 -> map에 연산식, 결과 저장
     public void calc(String expression) {
         Optional<List<String>> postfix = infixToPostfix(expression);
         if(!postfix.isPresent()) {
@@ -67,11 +68,11 @@ public class Calculator implements Runnable{
         }
 
         int result = Integer.parseInt(stack.pop());
-        expressionAndResult.put(expression, result);
-
         output.printResult(result);
+        expressionAndResult.put(expression, result);
     }
 
+    // 중위표기법 => 후위표기법 변환 (수식이 잘못 입력된 경우 Optional.empty() 리턴)
     public Optional<List<String>> infixToPostfix(String infix) {
         List<String> postfix = new ArrayList<>();
         Stack<String> stack = new Stack<>();
