@@ -1,4 +1,4 @@
-package main.calculator.engine;
+package main.calculator;
 
 import main.calculator.engine.io.Input;
 import main.calculator.engine.io.Output;
@@ -27,5 +27,10 @@ public class Console implements Output, Input {
     @Override
     public void quit() {
         System.out.println("종료합니다.");
+    }
+
+    @Override
+    public void print(String content) {
+        System.out.println(content);
     }
 }
