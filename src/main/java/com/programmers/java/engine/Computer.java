@@ -37,7 +37,7 @@ public class Computer implements Runnable{
         }
         else if(optNum == 2){
             String inputStr = input.input();
-            int answer = calculator.calculate(inputStr);
+            Double answer = calculator.calculate(inputStr);
             output.output(String.valueOf(answer));
             db.add(String.format("%s = %s", inputStr, answer));
         }

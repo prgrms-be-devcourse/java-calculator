@@ -1,0 +1,39 @@
+package com.programmers.java.engine;
+
+import com.programmers.java.engine.domain.Expression;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+
+public class CalculatorTest {
+    Calculator calculator = new Calculator();
+
+    @Test
+    @DisplayName("입력 변환 테스트")
+    public void parseInputTest(){
+        String inputStr = "1+2*3-4/2";
+        Expression expression = calculator.parseInput(inputStr);
+        Assertions.assertThat(expression.getOperands()).isEqualTo(new Double[]{1.0, 2.0, 3.0, 4.0, 2.0});
+        Assertions.assertThat(expression.getOperators()).isEqualTo(new String[]{"+", "*", "-", "/"});
+    }
+
+    @Test
+    @DisplayName("곱셈 나눗셈 테스트")
+    public void multiplyAndDivideTest(){
+        String inputStr = "1+2*3-4/2";
+        Expression expression = calculator.parseInput(inputStr);
+        Expression result = calculator.doMultiplyAndDivide(expression);
+        Assertions.assertThat(result.getOperators()).isEqualTo(new String[]{"+", "-"});
+        Assertions.assertThat(result.getOperands()).isEqualTo(new Double[]{1.0, 6.0, 2.0});
+    }
+
+    @Test
+    @DisplayName("덧셈 뺄셈 테스트")
+    public void addAndSubtractTest(){
+        String inputStr = "1+2-4";
+        Expression expression = calculator.parseInput(inputStr);
+        Double result = calculator.doAddAndSubtract(expression);
+        Assertions.assertThat(result).isEqualTo(-1.0);
+    }
+}
