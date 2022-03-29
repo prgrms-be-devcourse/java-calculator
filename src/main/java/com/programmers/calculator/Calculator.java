@@ -1,12 +1,15 @@
 package com.programmers.calculator;
 
+import com.programmers.calculator.exception.validation.FormulaValidationException;
 import com.programmers.calculator.exception.NumberInputException;
-import com.programmers.calculator.exception.ValidationException;
+import com.programmers.calculator.exception.validation.ValidationException;
 import com.programmers.calculator.repository.MemoryRepository;
 import com.programmers.calculator.repository.Repository;
 import com.programmers.calculator.util.Parser;
 import com.programmers.calculator.util.io.Input;
 import com.programmers.calculator.util.io.Output;
+import com.programmers.calculator.validator.FormulaValidator;
+import com.programmers.calculator.validator.Validator;
 import com.programmers.calculator.vo.Formula;
 
 import java.util.*;
@@ -16,6 +19,7 @@ public class Calculator implements Runnable {
 
     private final Input input;
     private final Output<Formula> output;
+    private final Validator<String> validator;
 
     private final String newline = System.getProperty("line.separator");
     private final String MENU_INPUT_SCRIPT = "1. 조회" + newline + "2. 계산" + newline + "3. 종료" + newline + newline + "선택 : ";
@@ -24,6 +28,7 @@ public class Calculator implements Runnable {
     public Calculator(Input input, Output<Formula> output) {
         this.input = input;
         this.output = output;
+        this.validator = FormulaValidator.getInstance();
     }
 
     @Override
@@ -37,12 +42,9 @@ public class Calculator implements Runnable {
                         break;
                     case 2:
                         String originFormula = input.inputString(FORMULA_INPUT_SCRIPT);
-
-                        if (!isValidate(originFormula)) throw new ValidationException();
-
+                        validator.validate(originFormula);
                         String[] formula = Parser.parse(originFormula);
                         Formula result = repository.save(new Formula(formula, calculate(formula)));
-
                         System.out.println(result.getResult() + newline);
                         break;
                     case 3:
@@ -55,22 +57,6 @@ public class Calculator implements Runnable {
                 System.out.println(e.getMessage() + newline);
             }
         }
-    }
-
-    private boolean isValidate(String formula) {
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < formula.length(); i++) {
-            char temp = formula.charAt(i);
-            if (temp == '(') {
-                stack.push(temp);
-            } else if (temp == ')') {
-                if (stack.empty()) {
-                    return false;
-                }
-                stack.pop();
-            }
-        }
-        return stack.empty();
     }
 
     private String calculate(String[] originFormula) throws ValidationException {
@@ -98,7 +84,7 @@ public class Calculator implements Runnable {
                             result = a / b;
                             break;
                         default:
-                            throw new ValidationException();
+                            throw new FormulaValidationException();
                     }
                     calculatorStack.add(String.valueOf(result));
                 } else {
@@ -107,7 +93,7 @@ public class Calculator implements Runnable {
             }
             return calculatorStack.pop();
         } catch (Exception e) {
-            throw new ValidationException();
+            throw new FormulaValidationException();
         }
     }
 }
