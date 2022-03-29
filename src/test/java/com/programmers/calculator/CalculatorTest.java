@@ -23,40 +23,10 @@ public class CalculatorTest {
         calculator = new Calculator(console, console, new MemoryRepository());
     }
 
-    @DisplayName("isValidate() 테스트")
-    @Nested
-    class ValidateTest {
-        @DisplayName("유효한 식인 경우")
-        @ParameterizedTest(name = "{0} 식의 괄호가 알맞게 구성되어 있습니다.")
-        @ValueSource(strings = {"1+2", "1 / 2 +3", "(1.1+2) /3", "1-2 * 3", "1 + ( 2 - 3 ) * 4 + 5"})
-        void validationSuccess(String formula) {
-            try {
-                Method method = calculator.getClass().getDeclaredMethod("isValidate", String.class);
-                method.setAccessible(true);
-                assertTrue((Boolean) method.invoke(calculator, formula));
-            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @DisplayName("유효하지 않은 식인 경우")
-        @ParameterizedTest(name = "{0} 식의 괄호가 알맞게 구성되어 있지 않습니다.")
-        @ValueSource(strings = {"1+2)", "(1 / 2 +3", "((1.1+2) /3", "1-2 (* 3", "1 + ( 2 - 3 )) * 4 + 5"})
-        void validationFail(String formula) {
-            try {
-                Method method = calculator.getClass().getDeclaredMethod("isValidate", String.class);
-                method.setAccessible(true);
-                assertFalse((Boolean) method.invoke(calculator, formula));
-            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     @DisplayName("calculate() 테스트")
     @Nested
     class CalculateTest {
-        @DisplayName("후위 표기식으로 변경이 완료되 경우")
+        @DisplayName("후위 표기식으로 변경이 완료된 경우 계산 성공 사례")
         @Test
         void CalculateSuccess() {
             List<DataForCalculator> list = new ArrayList<>();
