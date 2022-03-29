@@ -42,7 +42,7 @@ public class BufferedIO implements Input, Output {
 
   @Override
   public void printAnswer(CalcData calcData) throws IOException {
-    bw.write(calcData.getExpression() + " = " + calcData.getAns() + "\n");
+    bw.write(calcData.getExpression() + " = " + calcData.getAnswer() + "\n");
     bw.flush();
   }
 }

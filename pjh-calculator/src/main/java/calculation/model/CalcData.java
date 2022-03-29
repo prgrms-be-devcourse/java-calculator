@@ -3,25 +3,29 @@ package calculation.model;
 import java.math.BigDecimal;
 
 public class CalcData {
-  Long id;
-  String expression;
-  BigDecimal ans;
+
+  private Long id;
+  private String expression;
+  private BigDecimal answer;
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 
   public String getExpression() {
     return expression;
   }
 
-  public BigDecimal getAns() {
-    return ans;
-  }
-
-  public void setId(Long id)
-  {
-   this.id = id;
-  }
-
-  public CalcData(String expression, BigDecimal ans) {
+  public void setExpression(String expression) {
     this.expression = expression;
-    this.ans = ans;
+  }
+
+  public BigDecimal getAnswer() {
+    return answer;
+  }
+
+  public CalcData(String expression, BigDecimal answer) {
+    this.expression = expression;
+    this.answer = answer;
   }
 }

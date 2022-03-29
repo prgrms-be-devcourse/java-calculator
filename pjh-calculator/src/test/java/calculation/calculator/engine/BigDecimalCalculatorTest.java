@@ -43,7 +43,7 @@ class BigDecimalCalculatorTest {
       "11 / 2:5.5"}, delimiter = ':')
   public void basicCalculationTest(String expression, BigDecimal expected) {
     //when
-    BigDecimal answer = calculator.execute(expression).getAns();
+    BigDecimal answer = calculator.execute(expression).getAnswer();
 
     //then
     assertThat(answer).isEqualTo(expected);
@@ -58,7 +58,7 @@ class BigDecimalCalculatorTest {
       "1.1 * 1.2:1.32"}, delimiter = ':')
   public void actualNumberCalculationTest(String expression, BigDecimal expected) {
     //when
-    BigDecimal answer = calculator.execute(expression).getAns();
+    BigDecimal answer = calculator.execute(expression).getAnswer();
 
     //then
     assertThat(answer).isEqualTo(expected);
@@ -72,7 +72,7 @@ class BigDecimalCalculatorTest {
       "1 * 2 + 1 / 1 * 10:12"}, delimiter = ':')
   public void complexCalculationTest(String expression, BigDecimal expected) {
     //when
-    BigDecimal answer = calculator.execute(expression).getAns();
+    BigDecimal answer = calculator.execute(expression).getAnswer();
 
     //then
     assertThat(answer).isEqualTo(expected);
@@ -86,7 +86,7 @@ class BigDecimalCalculatorTest {
   }, delimiter = ':')
   public void bigNumberCalculationTest(String expression, BigDecimal expected) {
     //when
-    BigDecimal answer = calculator.execute(expression).getAns();
+    BigDecimal answer = calculator.execute(expression).getAnswer();
 
     //then
     assertThat(answer).isEqualTo(expected);

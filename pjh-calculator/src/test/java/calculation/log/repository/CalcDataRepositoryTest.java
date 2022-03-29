@@ -29,7 +29,7 @@ class CalcDataRepositoryTest {
     //then
     assertThat(foundData.isPresent()).isTrue();
     assertThat(foundData.get().getExpression()).isEqualTo(expression);
-    assertThat(foundData.get().getAns()).isEqualTo(answer);
+    assertThat(foundData.get().getAnswer()).isEqualTo(answer);
   }
 
   @DisplayName("전체 조회 테스트")
@@ -47,6 +47,6 @@ class CalcDataRepositoryTest {
 
     //then
     assertThat(foundData.get(0).getExpression()).isEqualTo(expression);
-    assertThat(foundData.get(0).getAns()).isEqualTo(answer);
+    assertThat(foundData.get(0).getAnswer()).isEqualTo(answer);
   }
 }
