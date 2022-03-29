@@ -76,7 +76,9 @@ public class CalculatorRepositoryTest {
     @Test
     @DisplayName("저장소 초기화")
     void clear() {
+
         cr.clear();
+
         assertTrue(cr.findAll().isEmpty());
     }
 }
