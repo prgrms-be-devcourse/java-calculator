@@ -72,7 +72,7 @@ public class PostfixCalculator implements Calculator {
      */
     public String operate(String expression) {
         List<String> converted = converter.convert(expression);
-        double result = calculate(converted);
+        double result = calculate(converted).orElseThrow(() -> new CalculatorException("올바르지 않은 연산식입니다."));
 
         if (Double.isInfinite(result)) {
             repository.save(expression, String.valueOf(result));
@@ -96,20 +96,20 @@ public class PostfixCalculator implements Calculator {
      * @return Postfix expression을 계산한 값을 double로 반환합니다.
      * @throws CalculatorException
      */
-    public double calculate(List<String> expression) throws CalculatorException {
+    public Optional<Double> calculate(List<String> expression) {
 
         Stack<Double> stack = new Stack<>();
-        double answer;
+        Optional<Double> answer;
+
         try {
             for (String s : expression) {
+                Optional<Opcode> findOperator = Opcode.findOperator(s);
 
-                if (Opcode.isOperator(s)) {
+                if (findOperator.isPresent()) {
                     double op2 = stack.pop();
                     double op1 = stack.pop();
 
-                    Opcode op = Opcode.findOperator(s).orElseThrow(() -> new CalculatorException("적절하지 않은 연산자"));
-
-                    double result = op.calculate(op1, op2);
+                    double result = findOperator.get().calculate(op1, op2);
                     stack.push(result);
                     continue;
                 }
@@ -117,12 +117,13 @@ public class PostfixCalculator implements Calculator {
                 stack.push(Double.parseDouble(s));
 
             }
-            answer = stack.pop();
 
-            if (!stack.isEmpty()) throw new CalculatorException("올바르지 않은 연산식입니다. :" + expression);
+            answer = Optional.of(stack.pop());
+
+            if (!stack.isEmpty()) return Optional.empty();
 
         } catch (EmptyStackException e) {
-            throw new CalculatorException("올바르지 않은 연산식입니다.");
+            return Optional.empty();
         }
 
         return answer;
