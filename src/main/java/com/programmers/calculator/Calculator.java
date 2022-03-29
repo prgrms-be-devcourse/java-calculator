@@ -27,37 +27,36 @@ public class Calculator {
             int action = input.action();
 
             if (action == 1) {
-                output.results(repository.getAll());
-            }
-
-            if (action == 2) {
-                String formula = typeFormula(input.formula());
-                double result = 0;
+                output.showArithmeticResults(repository.getAll());
+            } else if (action == 2) {
+                String formula = input.formula();
+                formula = checkFormulaValidate(formula) ? formula : "";
+                double arithmeticResult = 0;
 
                 if (formula.equals("")) {
                     output.error("잘못된 입력입니다.");
                 } else {
-                    result = getResult(formula);
-                    repository.save(new CalcData(formula, result));
+                    arithmeticResult = getArithmeticResult(formula);
+                    repository.save(new CalcData(formula, arithmeticResult));
                 }
 
-                output.result(result);
-            }
-
-            if (action == -1) {
+                output.showArithmeticResult(arithmeticResult);
+            } else if (action == -1) {
                 break;
+            } else {
+                output.error("잘못된 입력입니다.");
             }
         }
     }
 
-    public double getResult(String formula) {
+    public double getArithmeticResult(String formula) {
         double result;
         int target = 1;
 
         List<String> list = new ArrayList<>();
         String[] formulaArr = formula.split(" ");
 
-        list.add(formulaArr[target - 1]);
+        list.add(formulaArr[0]);
 
         try {
             while (target < formulaArr.length - 1) {
@@ -108,13 +107,9 @@ public class Calculator {
         return result;
     }
 
-    private String typeFormula(String formula) {
-        if (!validatorService.checkNumsAndSymbol(formula)
-                || !validatorService.checkSymbolMatching(formula)
-                || formula.equals("")) {
-            return "";
-        }
-
-        return formula;
+    private Boolean checkFormulaValidate(String formula) {
+        return validatorService.checkNumsAndSymbol(formula)
+                && validatorService.checkSymbolMatching(formula)
+                && !formula.equals("");
     }
 }

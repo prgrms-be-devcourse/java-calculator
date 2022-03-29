@@ -7,9 +7,9 @@ import java.util.List;
 public interface Output {
     void select();
 
-    void result(double i);
+    void showArithmeticResult(double arithmeticResult);
 
-    void results(List<CalcData> list);
+    void showArithmeticResults(List<CalcData> list);
 
-    void error(String s);
+    void error(String errorMsg);
 }

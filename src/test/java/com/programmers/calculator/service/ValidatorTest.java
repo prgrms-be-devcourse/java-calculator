@@ -26,7 +26,6 @@ public class ValidatorTest {
     void symbolMatchingTest() {
         // given
         String str = "-1 + -3 + 1";
-        str = "-1 + -1";
 
         // when
         boolean result = vs.checkSymbolMatching(str);

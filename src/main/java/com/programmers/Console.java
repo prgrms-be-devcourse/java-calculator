@@ -32,14 +32,14 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void result(double i) {
+    public void showArithmeticResult(double i) {
         System.out.println();
         System.out.println(i);
         System.out.println();
     }
 
     @Override
-    public void results(List<CalcData> list) {
+    public void showArithmeticResults(List<CalcData> list) {
         list.forEach((v) ->
                 System.out.println(v.getCalcFormula() + " = " + v.getResult()));
         System.out.println();

@@ -10,7 +10,7 @@ public class ArithmeticService {
     }
 
     public Double calcDivi(double a, double b) {
-        if (a == 0 || b == 0) {
+        if (b == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
         return a / b;
