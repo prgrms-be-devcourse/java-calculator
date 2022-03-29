@@ -21,8 +21,7 @@ public class BigDecimalCalculator {
     List<String> parse = expService.parse(exp);
     List<String> expression = expService.convertToPostfix(parse);
     Stack<BigDecimal> stk = new Stack<>();
-    for (int i = 0; i < expression.size(); i++) {
-      String token = expression.get(i);
+    for (String token : expression) {
       if (stk.size() >= 2 && expService.isOperator(token)) {
         BigDecimal numB = stk.pop();
         BigDecimal numA = stk.pop();
