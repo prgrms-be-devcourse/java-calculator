@@ -31,7 +31,7 @@ public class ConsoleInputViewTest {
         assertThat(inputView.selectMenu(scanner)).isEqualTo("1");
     }
 
-    @DisplayName("메뉴 입력 예외")
+    @DisplayName("메뉴 입력 예외 - 1, 2 이외의 한자리 입력")
     @Test
     void selectMenuException() {
         //given
@@ -45,6 +45,22 @@ public class ConsoleInputViewTest {
             .isInstanceOf(IllegalStateException.class)
             .hasMessageContaining("1 또는 2를 입력해주세요.");
     }
+
+    @DisplayName("메뉴 입력 예외 - 긴 문자열 입력")
+    @Test
+    void selectMenuExceptionVer2() {
+        //given
+        InputStream in = generateUserInput("1 2 23");
+        System.setIn(in);
+        Scanner scanner = new Scanner(System.in);
+
+        //when
+        //then
+        assertThatThrownBy(() -> inputView.selectMenu(scanner))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining("1 또는 2를 입력해주세요.");
+    }
+
 
     @DisplayName("계산식 입력 테스트")
     @Test

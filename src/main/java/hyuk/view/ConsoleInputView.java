@@ -8,7 +8,7 @@ public class ConsoleInputView implements InputView {
     private static final String FORMULA_ERROR_MSG = "정규 표현식이 아닙니다.";
 
     public String selectMenu(Scanner scanner) {
-        String menu = scanner.next();
+        String menu = scanner.nextLine();
 
         if (menu.equals("1") || menu.equals("2")) {
             return menu;
