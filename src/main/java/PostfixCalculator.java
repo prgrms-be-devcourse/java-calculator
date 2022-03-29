@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.EmptyStackException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Stack;
 
 public class PostfixCalculator implements Calculator {
@@ -45,12 +46,12 @@ public class PostfixCalculator implements Calculator {
                     continue;
                 }
 
-                if (command == 3) break;
+                if (command == 3) return;
+
+                System.out.println("잘못 입력하셨습니다. 다시 입력하세요.");
 
             } catch (Exception e) {
-                System.out.println("잘못 입력하셨습니다. 다시 입력하세요.");
-            } finally {
-                continue;
+                System.out.println("예외발생");
             }
 
         }
@@ -106,7 +107,9 @@ public class PostfixCalculator implements Calculator {
                     double op2 = stack.pop();
                     double op1 = stack.pop();
 
-                    double result = Opcode.findOperator(s).calculate(op1, op2);
+                    Opcode op = Opcode.findOperator(s).orElseThrow(() -> new CalculatorException("적절하지 않은 연산자"));
+
+                    double result = op.calculate(op1, op2);
                     stack.push(result);
                     continue;
                 }
