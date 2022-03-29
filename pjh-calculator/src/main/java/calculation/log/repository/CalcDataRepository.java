@@ -9,20 +9,20 @@ import java.util.Optional;
 
 public class CalcDataRepository implements DataRepository<CalcData, Long> {
 
-  private Long pk;
+  private Long idSequence;
 
   private Map<Long, CalcData> store;
 
   public CalcDataRepository() {
-    this.pk = 0L;
+    this.idSequence = 0L;
     this.store = new LinkedHashMap<>();
   }
 
   @Override
   public void save(CalcData data) {
-    data.setId(pk);
-    this.store.put(pk, data);
-    this.pk++;
+    data.setId(idSequence);
+    this.store.put(idSequence, data);
+    this.idSequence++;
   }
 
   @Override
