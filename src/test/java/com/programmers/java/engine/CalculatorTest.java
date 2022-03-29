@@ -19,11 +19,19 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("곱셈 나눗셈 테스트")
+    @DisplayName("곱셈 나눗셈 테스트. 1")
     public void multiplyAndDivideTest(){
         String inputStr = "1+2*3-4/2";
         Double result = calculator.calculate(inputStr);
         Assertions.assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("곱셈 나눗셈 테스트. 2")
+    public void multiplyAndDivideTest2(){
+        String inputStr = "1*2*3*4/2";
+        Double result = calculator.calculate(inputStr);
+        Assertions.assertThat(result).isEqualTo(12);
     }
 
     @Test
