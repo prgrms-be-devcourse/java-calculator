@@ -13,6 +13,7 @@ public class Console {
     }
 
     public String input() throws IOException {
+        System.out.print("1. 조회\n2. 계산\n\n 선택 : ");
         return br.readLine();
     }
 
