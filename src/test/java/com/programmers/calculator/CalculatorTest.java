@@ -1,5 +1,6 @@
 package com.programmers.calculator;
 
+import com.programmers.calculator.repository.MemoryRepository;
 import com.programmers.calculator.util.io.Console;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,24 +13,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DataForCalculator {
-    private final String[] origin;
-    private final String result;
-
-    DataForCalculator(String[] origin, String result) {
-        this.origin = origin;
-        this.result = result;
-    }
-
-    public String[] getOrigin() {
-        return origin;
-    }
-
-    public String getResult() {
-        return result;
-    }
-}
-
 @DisplayName("계산기 내부 로직 테스트")
 public class CalculatorTest {
     private Calculator calculator;
@@ -37,7 +20,7 @@ public class CalculatorTest {
     @BeforeEach
     void setUp() {
         Console console = new Console();
-        calculator = new Calculator(console, console);
+        calculator = new Calculator(console, console, new MemoryRepository());
     }
 
     @DisplayName("isValidate() 테스트")
@@ -78,10 +61,9 @@ public class CalculatorTest {
         void CalculateSuccess() {
             List<DataForCalculator> list = new ArrayList<>();
             list.add(new DataForCalculator(new String[]{"1", "2", "+"}, "3.0"));
-            list.add(new DataForCalculator(new String[]{"1", "2", "/", "3", "+"}, "1.6666666666666665"));
-            list.add(new DataForCalculator(new String[]{"1.1", "2", "+", "3", "/"}, "1.7666666666666666"));
             list.add(new DataForCalculator(new String[]{"1", "2", "3", "*", "-"}, "-5.0"));
-            list.add(new DataForCalculator(new String[]{"1", "2", "3", "-", "4", "*", "5", "+", "+"}, "-24.0"));
+            list.add(new DataForCalculator(new String[]{"1", "2", "3", "*", "+"}, "7.0"));
+            list.add(new DataForCalculator(new String[]{"3", "2", "2", "*", "-"}, "-1.0"));
 
             try {
                 Method method = calculator.getClass().getDeclaredMethod("calculate", String[].class);
@@ -96,6 +78,24 @@ public class CalculatorTest {
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    static class DataForCalculator {
+        private final String[] origin;
+        private final String result;
+
+        DataForCalculator(String[] origin, String result) {
+            this.origin = origin;
+            this.result = result;
+        }
+
+        public String[] getOrigin() {
+            return origin;
+        }
+
+        public String getResult() {
+            return result;
         }
     }
 }

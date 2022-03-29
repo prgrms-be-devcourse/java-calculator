@@ -1,7 +1,7 @@
 package com.programmers.calculator.util.io;
 
-import com.programmers.calculator.exception.NumberInputException;
-import com.programmers.calculator.exception.OutputException;
+import com.programmers.calculator.exception.io.NumberInputException;
+import com.programmers.calculator.exception.io.OutputException;
 import com.programmers.calculator.vo.Formula;
 
 import java.util.List;
