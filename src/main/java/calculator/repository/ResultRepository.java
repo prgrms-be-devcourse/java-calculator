@@ -7,6 +7,6 @@ public interface ResultRepository {
 
     Integer getResult(String expr);
 
-    void saveResult(String expr);
+    void saveResult(String expr, Integer resultOfExpr);
 
 }
