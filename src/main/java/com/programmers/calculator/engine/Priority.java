@@ -1,10 +1,10 @@
-package com.programmers.calculator;
+package com.programmers.calculator.engine;
 
 import java.util.HashMap;
 import java.util.Map;
 
-interface Priority {
-    static Map<String, Integer> priority = new HashMap<String, Integer>() {
+class Priority {
+    private static final Map<String, Integer> priority = new HashMap<String, Integer>() {
         {
             put("*", 3);
             put("/", 3);
@@ -14,7 +14,7 @@ interface Priority {
         }
     };
 
-    static int getPriority(String symbol) {
+    public static int getPriority(String symbol) {
         return priority.get(symbol);
     }
 }
