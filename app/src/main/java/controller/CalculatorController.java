@@ -3,6 +3,7 @@ package controller;
 import calculator.StringCalculator;
 import consoleview.ConsoleView;
 import database.Database;
+import database.FormulaEntity;
 
 import java.io.IOException;
 
@@ -36,9 +37,9 @@ public class CalculatorController {
 
     public void getHistory() {
         consoleView.displayBlankLine();
-        String[] results = db.findAll();
-        for (String prevFormula:results){
-            consoleView.display(prevFormula);
+        FormulaEntity[] results = db.findAll();
+        for (FormulaEntity prevFormula:results){
+            consoleView.display(prevFormula.toString());
         }
         consoleView.displayBlankLine();
     }

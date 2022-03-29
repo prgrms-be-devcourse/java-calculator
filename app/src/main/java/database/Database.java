@@ -11,14 +11,8 @@ public class Database {
         database = new ArrayDeque<>();
     }
 
-    public String[] findAll() {
-        String[] result = new String[database.size()];
-        Iterator iter = database.iterator();
-        int i = 0;
-        while(iter.hasNext()){
-            result[i++] = iter.next().toString();
-        }
-        return result;
+    public FormulaEntity[] findAll() {
+        return (FormulaEntity[])database.toArray();
     }
 
     public void add(String formula, double result) {
