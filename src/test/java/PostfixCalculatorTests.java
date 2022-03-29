@@ -1,20 +1,18 @@
 import exception.CalculatorException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import repository.InMemoryRepository;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CalculatorTests {
+public class PostfixCalculatorTests {
 
-    private Calculator calculator;
+    private PostfixCalculator calculator;
 
     @BeforeEach
     void beforeEach() {

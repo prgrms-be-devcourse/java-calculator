@@ -59,7 +59,6 @@ public class PostfixCalculator implements Calculator {
     /**
      * repository에서 이력을 출력합니다.
      */
-    @Override
     public void printHistory() {
         System.out.println(repository.getAll());
     }
@@ -70,7 +69,6 @@ public class PostfixCalculator implements Calculator {
      * @param expression
      * @return result값을 적절하게 변경하여 String 으로 반환합니다.
      */
-    @Override
     public String operate(String expression) {
         List<String> converted = converter.convert(expression);
         double result = calculate(converted);
