@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface DataRepository<T, ID> {
 
-  Optional<T> findById(Long id);
+  Optional<T> findById(ID id);
 
   List<T> findAll();
 
