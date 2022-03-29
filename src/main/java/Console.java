@@ -12,7 +12,7 @@ public class Console implements Output, Input {
     @Override
     public void outputFunction(Function function) {
         function.indexForEach(System.out::println);
-        System.lineSeparator();
+        System.out.println();
     }
 
     @Override
@@ -45,7 +45,6 @@ public class Console implements Output, Input {
 
     @Override
     public String inputExpression() {
-        System.out.println();
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 }

@@ -47,15 +47,16 @@ public class Calculator implements Runnable {
 
 
     private Optional<String> parse(String expression, List<Character> calculateOperators) {
-        boolean isCorrectExpression = expression.trim().chars()
+        boolean isCorrectExpression = expression.replace(" ","").chars()
                 .filter(c -> c != '*' && c != '+' && c != '/' && c != '-')
                 .allMatch(c -> c >= '0' && c <= '9');
         if (!isCorrectExpression) return Optional.empty();
 
-        isCorrectExpression = calculateOperators.stream().anyMatch(c -> expression.trim().endsWith(Character.toString(c)));
-        //startwith 으로 변경필요
+        isCorrectExpression = calculateOperators.stream().anyMatch(c -> expression.endsWith(Character.toString(c))||
+                expression.startsWith(Character.toString(c)));
         if (isCorrectExpression) return Optional.empty();
-        if (expression.trim().equals("")) return Optional.empty();
+
+        if (expression.replace(" ","").equals("")) return Optional.empty();
 
         boolean needCheck = false;
         Stack<Character> stack = new Stack<Character>();
@@ -111,7 +112,7 @@ public class Calculator implements Runnable {
                 answer += element.getNumbers().peek();
             }
             if (element.getOperation().peek() == '-') {
-                answer -= element.getNumbers().peek();
+                answer = element.getNumbers().peek() - answer;
             }
             element.getOperation().pop();
             element.getNumbers().pop();
