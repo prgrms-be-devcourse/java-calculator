@@ -3,6 +3,9 @@ package com.programmers.calculator.validator;
 import com.programmers.calculator.exception.validation.FormulaValidationException;
 import com.programmers.calculator.exception.validation.ValidationException;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 public class FormulaValidator implements Validator<String> {
@@ -22,6 +25,9 @@ public class FormulaValidator implements Validator<String> {
         if (!checkBracket(formula)) {
             throw new FormulaValidationException();
         }
+        if (!checkInvalidCharacter(formula)) {
+            throw new FormulaValidationException();
+        }
     }
 
     private boolean checkBracket(String formula) {
@@ -38,5 +44,15 @@ public class FormulaValidator implements Validator<String> {
             }
         }
         return stack.empty();
+    }
+
+    private boolean checkInvalidCharacter(String formula) {
+        Set<Character> set = new HashSet<>(Arrays.asList('+', '-', '/', '*', '(', ')', '.', ' '));
+        for (char c : formula.toCharArray()) {
+            if (!(Character.isDigit(c) || set.contains(c))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

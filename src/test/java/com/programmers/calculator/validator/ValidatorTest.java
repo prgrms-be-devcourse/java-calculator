@@ -49,4 +49,34 @@ public class ValidatorTest {
             }
         }
     }
+
+    @DisplayName("checkInvalidCharacter() 테스트")
+    @Nested
+    class CheckInvalidCharacterTest {
+        @DisplayName("유효한 식인 경우")
+        @ParameterizedTest(name = "{0} 식은 숫자와 연산자로 구성되어 있습니다.")
+        @ValueSource(strings = {"1+2", "1 / 2 +3", "(1.1+2) /3", "1-2 * 3", "1 + ( 2 - 3 ) * 4 + 5"})
+        void validationSuccess(String formula) {
+            try {
+                Method method = validator.getClass().getDeclaredMethod("checkInvalidCharacter", String.class);
+                method.setAccessible(true);
+                assertTrue((Boolean) method.invoke(validator, formula));
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @DisplayName("유효하지 않은 식인 경우")
+        @ParameterizedTest(name = "{0} 식은 숫자와 연산자 이외의 문자가 들어가 있습니다..")
+        @ValueSource(strings = {"1+2&", "$1 / 2 +3", "(#1.1+2) /3", "1-2 @ 3", "1 + ( 2 - 3 )) ~ 4 + 5"})
+        void validationFail(String formula) {
+            try {
+                Method method = validator.getClass().getDeclaredMethod("checkInvalidCharacter", String.class);
+                method.setAccessible(true);
+                assertFalse((Boolean) method.invoke(validator, formula));
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
