@@ -1,0 +1,10 @@
+calculator/.gradle
+build
+gradle
+out
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+.idea
+out/production/java-calculator
