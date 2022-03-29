@@ -50,7 +50,6 @@ public class CalculationLogicTest {
 	}
 
 	// 로직을 여기서 테스트 해 볼 거임
-	// 후위연산식을 사용한 테스트를 해보려한다.
 	// throws IllegalArgumentException
 	private long calculateFirstlyMulNDivide(String[] inputs) {
 		Map<String, Integer> precedence = new HashMap<>();
@@ -64,7 +63,7 @@ public class CalculationLogicTest {
 		long result = 0;
 
 		// inputs 을 순회하면서 operators 가 비어있지 않은 경우 -> operators 의 top 에 있는 연산자와 현재 연산자의 우선순위를 비교한다
-		// 현재 연산자의 우선순위가 더 낮을 경우, 스택에서 값을 2개 꺼내 연산한다.
+		// 현재 연산자의 우선순위가 더 낮거나 같을 경우, 스택에서 값을 2개 꺼내 연산한다.
 
 		for (int i = 0; i < inputs.length; i++) {
 			// precedence 에 없는 값 -> 숫자
@@ -77,8 +76,8 @@ public class CalculationLogicTest {
 				continue;
 			}
 			// 연산자인 경우
-			if (!operators.isEmpty() && isPreceded(inputs[i], operators.getLast(), precedence)) {
-				// 연산자 스택의 최상위 연산자보다 현재 연산자의 우선순위가 더 낮은 경우
+			if (!operators.isEmpty() && isPrecededOrEqual(inputs[i], operators.getLast(), precedence)) {
+				// 연산자 스택의 최상위 연산자보다 현재 연산자의 우선순위가 더 낮거나 같을 경우 경우
 				op2 = values.pollLast();
 				op1 = values.pollLast();
 				result = calculate(op1, op2, operators.getLast());
@@ -97,8 +96,8 @@ public class CalculationLogicTest {
 		return values.getLast();
 	}
 
-	// 현재 연산자의 우선순위가 더 낮은 경우 리턴 true
-	private boolean isPreceded(String cur, String prior, Map<String, Integer> precedence) {
+	// 현재 연산자의 우선순위가 더 낮거나 같은 경우 리턴 트루 -> 그러면 스택의 가장 위에 있는 연산자로 연산을 수행한다
+	private boolean isPrecededOrEqual(String cur, String prior, Map<String, Integer> precedence) {
 		if (precedence.get(cur) < precedence.get(prior)) {
 			return true;
 		}

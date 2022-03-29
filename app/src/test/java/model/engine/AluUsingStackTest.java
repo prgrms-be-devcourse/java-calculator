@@ -11,7 +11,6 @@ public class AluUsingStackTest {
 
 	private final Alu myAlu;
 	private final Parser parser;
-	private final String NAN = "NaN";
 	private Input divideByZeroInput;
 
 
@@ -56,12 +55,6 @@ public class AluUsingStackTest {
 		Assertions.assertEquals("5100",myAlu.process(input).getResult());
 	}
 
-
-	@Test
-	public void 예외상황_0으로_나눈_경우() {
-		Input input = new Input("1 + 3 / 0", parser);
-		Assertions.assertEquals(NAN, myAlu.process(input).getResult());
-	}
 
 	@Test
 	public void 예외상황_0으로_나눈_경우_예외를던진다(){
