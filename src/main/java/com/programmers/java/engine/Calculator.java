@@ -8,15 +8,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private final String REGEX_PATTERN = "[\\+\\*-/]";
 
     public Double calculate(String inputStr) {
         return doAddAndSubtract(doMultiplyAndDivide(parseInput(inputStr)));
     }
 
     public Expression parseInput(String inputStr){
-        Double[] operands = Arrays.stream(inputStr.split(REGEX_PATTERN)).map(Double::valueOf).toArray(Double[]::new);
-        Matcher operatorMatcher = Pattern.compile(REGEX_PATTERN).matcher(inputStr);
+        String operatorPattern = "[\\+\\*-/]";
+        Double[] operands = Arrays.stream(inputStr.split(operatorPattern)).map(Double::valueOf).toArray(Double[]::new);
+        Matcher operatorMatcher = Pattern.compile(operatorPattern).matcher(inputStr);
         String[] operators = new String[operands.length - 1];
         int i=0;
         while(operatorMatcher.find()){
