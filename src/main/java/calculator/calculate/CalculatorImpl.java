@@ -1,6 +1,7 @@
 package calculator.calculate;
 
 import calculator.console.Console;
+import calculator.dto.RequestDto;
 import calculator.repository.ResultRepository;
 
 import java.io.IOException;
@@ -18,16 +19,23 @@ public class CalculatorImpl implements Calculator {
 
     public void run() throws IOException {
         while(true) {
-            String expression = console.input();
+            RequestDto requestDto = console.input();
+            if(requestDto.getRequest() == 1) {
+                repository.printAll();
+            } else if(requestDto.getRequest() == 2) {
+                if(!isValidExpression(requestDto.getExpr())) {
+                    console.print("유효하지 않은 식입니다.");
+                }
+                else {
+                    Integer result;
+                    if(repository.isCalculated(requestDto.getExpr())) result = repository.getResult(requestDto.getExpr());
+                    else {
+                        result = calculate(requestDto.getExpr());
+                        repository.saveResult(requestDto.getExpr(), result);
+                    }
 
-            if(!isValidExpression(expression)) {
-                console.print("유효하지 않은 식입니다.");
-            }
-            else {
-                Integer result;
-                if(repository.isCalculated(expression)) result = repository.getResult(expression);
-                else result = calculate(expression);
-                console.print(String.valueOf(result));
+                    console.print(String.valueOf(result));
+                }
             }
         }
     }

@@ -9,4 +9,6 @@ public interface ResultRepository {
 
     void saveResult(String expr, Integer resultOfExpr);
 
+    void printAll();
+
 }

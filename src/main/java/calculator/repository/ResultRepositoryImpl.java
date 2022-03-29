@@ -32,6 +32,14 @@ public class ResultRepositoryImpl implements ResultRepository {
         history.put(expr, resultOfExpr);
     }
 
+    @Override
+    public void printAll() {
+        for(String key: history.keySet()) {
+            System.out.println(key + " = " + history.get(key));
+        }
+        System.out.println();
+    }
+
     /**
      * test를 위한 method
      */
