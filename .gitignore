@@ -151,7 +151,7 @@ modules.xml
 # Compiled class file
 *.class
 
-# Log file
+# entity.CustomLog file
 *.log
 
 # BlueJ files

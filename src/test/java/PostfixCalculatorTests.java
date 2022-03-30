@@ -2,7 +2,7 @@ import exception.CalculatorException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import repository.InMemoryRepository;
+import repository.InMemoryLogRepository;
 
 import java.io.*;
 
@@ -18,7 +18,7 @@ public class PostfixCalculatorTests {
     void beforeEach() {
         calculator = new PostfixCalculator(
                 new BufferedReader(new InputStreamReader(System.in)),
-                new InMemoryRepository(),
+                new InMemoryLogRepository(),
                 new Prefix2PostfixConverter());
     }
 
@@ -33,10 +33,10 @@ public class PostfixCalculatorTests {
         String exp4 = "1 - 2 / 0";
 
         // when
-        String result1 = calculator.operate(exp1);
-        String result2 = calculator.operate(exp2);
-        String result3 = calculator.operate(exp3);
-        String result4 = calculator.operate(exp4);
+        String result1 = calculator.getResult(exp1);
+        String result2 = calculator.getResult(exp2);
+        String result3 = calculator.getResult(exp3);
+        String result4 = calculator.getResult(exp4);
 
         // then
         assertThat(result1).isEqualTo("7");
@@ -56,10 +56,10 @@ public class PostfixCalculatorTests {
         String exp4 = "1 - 2 / 0";
 
         // when
-        calculator.operate(exp1);
-        calculator.operate(exp2);
-        calculator.operate(exp3);
-        calculator.operate(exp4);
+        calculator.getResult(exp1);
+        calculator.getResult(exp2);
+        calculator.getResult(exp3);
+        calculator.getResult(exp4);
 
         // then
         calculator.printHistory();
@@ -77,13 +77,13 @@ public class PostfixCalculatorTests {
         // when
 
         // then
-        Exception exception = assertThrows(CalculatorException.class, () -> calculator.operate(exp1));
+        Exception exception = assertThrows(CalculatorException.class, () -> calculator.getResult(exp1));
         assertEquals("올바르지 않은 연산식입니다.", exception.getMessage());
 
-        exception = assertThrows(CalculatorException.class, () -> calculator.operate(exp2));
+        exception = assertThrows(CalculatorException.class, () -> calculator.getResult(exp2));
         assertEquals("올바르지 않은 연산식입니다.", exception.getMessage());
 
-        exception = assertThrows(CalculatorException.class, () -> calculator.operate(exp3));
+        exception = assertThrows(CalculatorException.class, () -> calculator.getResult(exp3));
         assertEquals("올바르지 않은 연산식입니다.", exception.getMessage());
 
     }
