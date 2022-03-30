@@ -11,7 +11,7 @@ public class CaseData {
         this.result = result;
     }
 
-    public String getInputAndResultString(){
+    public String getInputAndResultString() {
         return input + " = " + String.valueOf(result);
     }
 

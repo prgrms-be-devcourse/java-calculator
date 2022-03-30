@@ -23,7 +23,8 @@ public class MemoryRepository implements CaseRepository {
     @Override
     public void allStoreValue() {
         Iterator<Long> keys = store.keySet().iterator();
-        while(keys.hasNext()){
+
+        while (keys.hasNext()) {
             Long key = keys.next();
             System.out.println(store.get(key).getInputAndResultString());
         }

@@ -6,7 +6,7 @@ import com.programmers.service.MainService;
 
 public class AppConfig {
 
-    public MainService mainService(){
+    public MainService mainService() {
         return new MainService(memoryRepository());
     }
 
