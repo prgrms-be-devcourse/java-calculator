@@ -12,7 +12,7 @@ public class RegularExpression {
     }
 
     public static boolean isNumeric (String str) {
-        return Pattern.matches("^[0-9]*$", str);
+        return Pattern.matches("^(-?[0-9]+)$", str);
     }
 
     public static boolean isOperator (String str) {
