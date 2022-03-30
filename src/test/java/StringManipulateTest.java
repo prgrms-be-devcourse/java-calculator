@@ -23,6 +23,14 @@ public class StringManipulateTest {
         assertEquals(new Stack<Integer>(),integerStack);
     }
 
+    @Test
+    public void testOperatorStack(String string){
+        StringManipulator manipulator = new StringManipulator(string);
+        Stack<Character> operatorStack = manipulator.getOperatorStack();
+
+        assertEquals(getRightTestOperatorStack(string),operatorStack);
+    }
+
     public Stack<Integer> getRightIntegerStack(String string){
         Stack<Integer> integerStack = new Stack<>();
         for (int i = 0; i<string.length(); i++){
@@ -33,5 +41,15 @@ public class StringManipulateTest {
         }
         return integerStack;
     }
-    
+
+    public Stack<Character> getRightTestOperatorStack(String string){
+        Stack<Character> operatorStack = new Stack<>();
+        for (int i = 0; i<string.length(); i++){
+            char nowChar = string.charAt(i);
+            if ('0' > nowChar || nowChar >'9'){
+                operatorStack.push(nowChar);
+            }
+        }
+        return operatorStack;
+    }
 }
