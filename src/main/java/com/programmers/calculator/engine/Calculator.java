@@ -1,6 +1,6 @@
 package com.programmers.calculator.engine;
 
-import com.programmers.calculator.engine.exception.ExceptionCheck;
+import com.programmers.calculator.engine.exception.Exception;
 import com.programmers.calculator.engine.io.Input;
 import com.programmers.calculator.engine.io.Output;
 import com.programmers.calculator.engine.repository.ExpressionAndResult;
@@ -83,8 +83,7 @@ public class Calculator implements Runnable{
         String[] numsNSymbols = infix.split(" ");
 
         // 예외 체크
-        ExceptionCheck ec = new ExceptionCheck();
-        if(!ec.exceptionCheck(numsNSymbols)) {
+        if(!Exception.check(numsNSymbols)) {
             return Optional.empty();
         }
 
