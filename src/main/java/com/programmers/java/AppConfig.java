@@ -18,19 +18,19 @@ public class AppConfig {
         return new Calculator(console(), console(), calculateService(), findService(), validator());
     }
 
-    public Console console() {
+    private Console console() {
         return new Console();
     }
 
-    public CalculateService calculateService() {
+    private CalculateService calculateService() {
         return new CalculateServiceImpl(tokenizer());
     }
 
-    public HistoryService findService() {
+    private HistoryService findService() {
         return new HistoryServiceImpl(repository());
     }
 
-    public Repository repository() {
+    private Repository repository() {
         return new MemoryRepository();
     }
 
