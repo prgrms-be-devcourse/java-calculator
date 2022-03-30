@@ -29,7 +29,7 @@ public class Console implements Input, Output  {
 
     @Override
     public void inputError() {
-
+        System.out.println("입력이 잘못되었습니다.\n");
     }
 
     @Override

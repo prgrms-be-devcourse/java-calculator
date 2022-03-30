@@ -4,6 +4,7 @@ import com.programmers.calculator.engine.io.Input;
 import com.programmers.calculator.engine.io.Output;
 import com.programmers.calculator.engine.repository.CalculatorRepository;
 import com.programmers.calculator.engine.repository.MemoryCalculatorRepository;
+import com.programmers.calculator.engine.validation.Validator;
 import lombok.AllArgsConstructor;
 
 import java.util.*;
@@ -14,6 +15,7 @@ public class Calculator implements Runnable{
     Input input;
     Output output;
     CalculatorRepository repository;
+    Validator validator;
 
     @Override
     public void run() {
@@ -24,11 +26,17 @@ public class Calculator implements Runnable{
                 output.lookUp(list);
             } else if (option.equals("2")) {
                 String inputString  = input.calculationInput();
+                if (!validator.validate(inputString)) {
+                    output.inputError();
+                    continue;
+                }
                 Queue<String> parse = parse(inputString);
                 Integer result = calculate(parse);
 
                 System.out.println(result+"\n");
                 save(inputString, result);
+            } else {
+                System.out.println("1,2 번 중 하나를 골라 주세요\n");
             }
         }
 
