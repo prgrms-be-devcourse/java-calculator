@@ -27,21 +27,25 @@ public class Calculator implements Runnable {
 
             int inputValue = Integer.parseInt(inputString);
 
-            switch (inputValue) {
-                case 1:     //조회
-                    List<String> formulaList = repository.findAllValues();
-                    for (String f : formulaList) {
-                        output.formula(f);
-                    }
-                    break;
-                case 2:     //계산
-                    String inputFormula = input.input();
-                    String answer = cal(inputFormula);
-                    output.output(answer);
-                    save(inputFormula, answer);
-                    break;
-                default:
-                    output.inputError();
+            try {
+                switch (inputValue) {
+                    case 1:     //조회
+                        List<String> formulaList = repository.findAllValues();
+                        for (String f : formulaList) {
+                            output.formula(f);
+                        }
+                        break;
+                    case 2:     //계산
+                        String inputFormula = input.input();
+                        String answer = cal(inputFormula);
+                        output.output(answer);
+                        save(inputFormula, answer);
+                        break;
+                    default:
+                        output.inputError();
+                }
+            } catch (ArithmeticException e) {
+                output.inputError();
             }
         }
 
@@ -90,7 +94,7 @@ public class Calculator implements Runnable {
         return String.format("%.2f", answer);
     }
 
-    private double cal(String operator, double x, double y) {
+    private double cal(String operator, double x, double y) throws ArithmeticException {
         return Operator.getOperator(operator).calculate(x, y);
     }
 
