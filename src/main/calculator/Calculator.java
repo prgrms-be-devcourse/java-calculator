@@ -9,20 +9,23 @@ import java.util.Optional;
 
 public class Calculator implements Runnable{
 
-    private Integer LOOKUP = 1;
-    private Integer CALCULATION = 2;
-    private Integer EXIT = 3;
+    private final int LOOKUP = 1;
+    private final int CALCULATION = 2;
+    private final int EXIT = 3;
 
     private Input input;
     private Output output;
     private CalculationRepository calculationRepository;
+    private Operator operator;
 
     public Calculator(Input input,
                       Output output,
-                      CalculationRepository calculationRepository) {
+                      CalculationRepository calculationRepository,
+                      Operator operator) {
         this.input = input;
         this.output = output;
         this.calculationRepository = calculationRepository;
+        this.operator = operator;
     }
 
     @Override
@@ -41,18 +44,20 @@ public class Calculator implements Runnable{
                 continue;
             }
 
+            int choice = target.get();
+
             //1번이 보여주기, 2번이 계산, 3번이 끝
-            if(LOOKUP.equals(target.get())){
+            if(choice == LOOKUP){
                 // TODO: 지금까지 했던 기록 list 보여주기
                 lookupList(calculationRepository.findAll());
                 continue;
             }
-            if(CALCULATION.equals(target.get())){
+            if(choice == CALCULATION){
                 // TODO: operator 만들기
                 writeCalculation(input.input("입력해주세요."));
                 continue;
             }
-            if(EXIT.equals(target.get())){
+            if(choice == EXIT){
                 output.quit();
                 break;
             }
@@ -60,11 +65,16 @@ public class Calculator implements Runnable{
         }
     }
 
-    private void writeCalculation(String InputString) {
-        //실질적 계산이 이루어져짐
+    private void writeCalculation(String inputString) {
+        //실질적 계산이 이루어짐
+        
+        //여기에 실질적 계산으로 보내기
+        String result = operator.calculate(inputString);
+
         //repository에 저장
-        String result=""; //여기에 실질적 계산으로 보내기
-        calculationRepository.save(InputString,result);
+        calculationRepository.save(inputString,result);
+        
+        //출력
         output.print(result);
     }
 
