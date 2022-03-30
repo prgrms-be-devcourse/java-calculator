@@ -20,7 +20,7 @@ public class Prefix2PostfixConverter implements ExpressionConverter {
         Stack<String> stack = new Stack<>();
 
         List<String> expressionList = expressionToList(expression);
-        validate(expressionList);
+        if(!validate(expressionList)) return List.of();
 
         for (String s : expressionList) {
 
@@ -52,36 +52,37 @@ public class Prefix2PostfixConverter implements ExpressionConverter {
     }
 
     /**
-     * 각 조건마다 validate 하여 예외를 던집니다.
+     * 각 조건마다 validate 하여 true, false 반환합니다.
      *
      * @param expressionList
      * @throws CalculatorException
      */
-    @Override
-    public void validate(List<String> expressionList) throws CalculatorException {
+    public boolean validate(List<String> expressionList) {
 
         if (expressionList.size() <= 2)
-            throw new CalculatorException("적어도 3개의 연산항이 필요합니다.");
+            return false;
 
         String firstOp = expressionList.get(0);
         if (Opcode.isOperator(firstOp) && !Opcode.isLeftParenthesis(firstOp))
-            throw new CalculatorException("연산자로 시작하는 올바르지 않은 연산식 입니다.");
+            return false;
 
         String lastOp = expressionList.get(expressionList.size() - 1);
         if (Opcode.isOperator(lastOp) && !Opcode.isRightParenthesis(lastOp))
-            throw new CalculatorException("연산자로 끝난 올바르지 않은 연산식 입니다.");
+            return false;
 
         int parenthesisCount = 0;
         for (String s : expressionList) {
             if (!Opcode.isOperator(s) && !isValidDouble(s))
-                throw new CalculatorException("피연산자가 범위를 초과했거나 지원하지 않는 연산자가 포함되어 있습니다.");
+                return false;
 
             if (s.equals("(")) parenthesisCount++;
             if (s.equals(")")) parenthesisCount--;
-            if (parenthesisCount < 0) throw new CalculatorException("괄호의 짝이 맞지 않는 연산식입니다.");
+            if (parenthesisCount < 0) return false;
         }
 
-        if (parenthesisCount != 0) throw new CalculatorException("괄호의 짝이 맞지 않는 연산식입니다.");
+        if (parenthesisCount != 0) return false;
+
+        return true;
 
     }
 
