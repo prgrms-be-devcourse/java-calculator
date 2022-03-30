@@ -6,8 +6,7 @@ import com.programmers.java.engine.repository.FormulaRepository;
 import com.programmers.java.engine.service.CalcService;
 import com.programmers.java.engine.service.PostFixService;
 import com.programmers.java.engine.service.ValidationService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -15,17 +14,17 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class StringCalcServiceTest {
-    final String TESTFORMULA1 = "1 + 2 * 3";
-    final String TESTFORMULA2 = "-1 + 3 * -2";
-    final String TESTFORMULA3 = "2 - 7 * 3 + 5 - 3";
-    final Long TESTRESULT1 = 7L;
-    final Long TESTRESULT2 = -7L;
-    final Long TESTRESULT3 = -17L;
+    static final String TESTFORMULA1 = "1 + 2 * 3";
+    static final String TESTFORMULA2 = "-1 + 3 * -2";
+    static final String TESTFORMULA3 = "2 - 7 * 3 + 5 - 3";
+    static final Long TESTRESULT1 = 7L;
+    static final Long TESTRESULT2 = -7L;
+    static final Long TESTRESULT3 = -17L;
 
     ValidationService testValidationService = new ValidationService();
     PostFixService testPostFixService = new PostFixService();
     CalcService testCalc = new CalcService();
-    FormulaRepository testRepository = new FormulaRepository();
+
 
     @Test
     public void ValidationService_Validation함수_유효한식_NotNull옵셔널_반환() {
@@ -36,7 +35,7 @@ public class StringCalcServiceTest {
         Optional<Formula> incorrectFormula = testValidationService.Validation(testFormula2);
         //then
         Assertions.assertNotNull(correctFormula);
-        Assertions.assertNull(incorrectFormula);
+        Assertions.assertTrue(incorrectFormula.isEmpty());
     }
 
     @Test
@@ -93,9 +92,11 @@ public class StringCalcServiceTest {
         Assertions.assertEquals(TESTRESULT1, testResult);
     }
 
+    private static FormulaRepository testRepository = new FormulaRepository();
 
     @Test
-    public void FormulaRepository_save함수_map사이즈_반환() {
+    @BeforeAll
+    public static void FormulaRepository_save함수_map사이즈_반환() {
         //given
         testRepository.save(TESTFORMULA1, TESTRESULT1);
         testRepository.save(TESTFORMULA2, TESTRESULT2);
@@ -109,9 +110,7 @@ public class StringCalcServiceTest {
     @Test
     public void FormulaRepository_size함수_map사이즈_반환() {
         //given
-        testRepository.save(TESTFORMULA1, TESTRESULT1);
-        testRepository.save(TESTFORMULA2, TESTRESULT2);
-        testRepository.save(TESTFORMULA3, TESTRESULT3);
+
         //when
         int size = testRepository.size();
         //then
@@ -127,9 +126,6 @@ public class StringCalcServiceTest {
         resultOuput[2] = TESTFORMULA3 + " = " + TESTRESULT3;
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        testRepository.save(TESTFORMULA1, TESTRESULT1);
-        testRepository.save(TESTFORMULA2, TESTRESULT2);
-        testRepository.save(TESTFORMULA3, TESTRESULT3);
 
         //WHEN
         testRepository.findAll();
