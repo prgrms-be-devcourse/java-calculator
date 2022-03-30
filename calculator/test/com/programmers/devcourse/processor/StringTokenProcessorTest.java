@@ -1,31 +1,41 @@
 package com.programmers.devcourse.processor;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class StringTokenProcessorTest {
 
-  StringTokenProcessor processor;
+  StringTokenProcessor processor = new StringTokenProcessor();
 
-  @BeforeEach
-  void setup() {
-    processor = new StringTokenProcessor();
+  private static Stream<Arguments> listAnswerProvider() {
+
+    return Stream.of(Arguments.of(Arrays.asList("3.5", "+", "1"), 4.5),
+        Arguments.of(Arrays.asList("5.5", "-", "1"), 4.5),
+        Arguments.of(Arrays.asList("7.5", "+", "1", "*", "92.5"), 100)
+    );
+
+
   }
 
-
-  @Test
-  void testProcessReturnProperResult() {
-    Assertions.assertEquals(processor.process(Arrays.asList("3.5", "+", "1")), 4.5);
-    Assertions.assertEquals(processor.process(Arrays.asList("5.5", "-", "1")), 4.5);
-    Assertions.assertEquals(processor.process(Arrays.asList("7.5", "+", "1", "*", "92.5")), 100.0);
+  @DisplayName("process의 결과가 예상한 정답과 일치해야 한다.")
+  @ParameterizedTest
+  @MethodSource("listAnswerProvider")
+  void testProcessReturnProperResult(List<String> expected, double actual) {
+    Assertions.assertEquals(processor.process(expected), actual);
   }
 
-  @Test
-  void testProcessReturnDifferentResult() {
+  @DisplayName("process의 return 값이 소수점까지 일치해야 한다.")
+  @ParameterizedTest
+  @MethodSource("listAnswerProvider")
+  void testProcessReturnDifferentResult(List<String> expected, double actual) {
 
-    Assertions.assertNotEquals(processor.process(Arrays.asList("7.5", "+", "1", "*", "92.5")),
-        100.1);
+    Assertions.assertNotEquals(processor.process(expected),
+        Double.sum(actual, 0.1));
   }
 }

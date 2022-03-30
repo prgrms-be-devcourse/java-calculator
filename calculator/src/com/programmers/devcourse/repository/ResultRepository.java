@@ -7,7 +7,7 @@ public interface ResultRepository<K, V> {
 
   void save(K expression, V result);
 
-  Map<K, V> getAllResults();
+  Map<K, V> getAll();
 
   void forEach(BiConsumer<K, V> biConsumer);
 

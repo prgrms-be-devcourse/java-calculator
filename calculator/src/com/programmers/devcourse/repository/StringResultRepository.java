@@ -10,11 +10,7 @@ public class StringResultRepository implements ResultRepository<String, Double> 
 
   public StringResultRepository() {
     this.resultMap = new Hashtable<>();
-  }
-
-  public StringResultRepository(Map<String, Double> resultMap) {
-
-    this.resultMap = resultMap;
+    
   }
 
 
@@ -24,7 +20,7 @@ public class StringResultRepository implements ResultRepository<String, Double> 
   }
 
   @Override
-  public Map<String, Double> getAllResults() {
+  public Map<String, Double> getAll() {
     return Map.copyOf(resultMap);
   }
 

@@ -48,14 +48,6 @@ class RegexParserTest {
     compareTarget = new String[]{"5.3", "+", "4", "/", "6"};
     Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
 
-    // 실패해야 할 테스트(연산자 차이)
-    compareTarget = new String[]{"5.3", "-", "4", "/", "6"};
-    try {
-      Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
-    } catch (AssertionFailedError e) {
-      System.out.println(e.getMessage());
-    }
-
 
   }
 
