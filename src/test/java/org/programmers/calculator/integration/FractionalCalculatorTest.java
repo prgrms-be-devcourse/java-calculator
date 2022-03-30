@@ -1,54 +1,58 @@
 package org.programmers.calculator.integration;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.programmers.calculator.TypeChecker.NumeralTypeChecker;
-import org.programmers.calculator.postfixCalculator.NumeralCalculator;
-import org.programmers.calculator.postfixCalculator.NumeralPrefixSolver;
-import org.programmers.calculator.postfixParser.NumeralPostfixParser;
+import org.programmers.calculator.configuration.ObjectContainer;
+import org.programmers.calculator.configuration.Operand;
+import org.programmers.calculator.postfixCalculator.Solver;
+import org.programmers.calculator.postfixParser.PostfixParser;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("소수 연산")
 public class FractionalCalculatorTest {
 
+    @BeforeAll
+    static void beforeAll() {
+        ObjectContainer.create(Operand.RATIONAL_NUMBER);
+    }
+
     @Test
     @DisplayName("소수 덧셈")
     void plus() {
-        NumeralTypeChecker numeralTypeChecker = new NumeralTypeChecker();
-        NumeralPostfixParser parser = new NumeralPostfixParser(numeralTypeChecker);
-        NumeralPrefixSolver solver = new NumeralPrefixSolver(numeralTypeChecker, new NumeralCalculator(numeralTypeChecker));
+        PostfixParser parser = ObjectContainer.getParser();
+        Solver solver = ObjectContainer.getSolver();
 
         String input = "5.1 + 7";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
-        Assertions.assertEquals("12.1", result);
+        assertEquals("12.1", result);
     }
 
     @Test
     @DisplayName("소수 곱셈")
     void multiply() {
-        NumeralTypeChecker numeralTypeChecker = new NumeralTypeChecker();
-        NumeralPostfixParser parser = new NumeralPostfixParser(numeralTypeChecker);
-        NumeralPrefixSolver solver = new NumeralPrefixSolver(numeralTypeChecker, new NumeralCalculator(numeralTypeChecker));
+        PostfixParser parser = ObjectContainer.getParser();
+        Solver solver = ObjectContainer.getSolver();
 
         String input = "-2.2 * 3";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
-        Assertions.assertEquals("-6.6", result);
+        assertEquals("-6.6", result);
     }
 
     @Test
     @DisplayName("소수 복합")
     void multipleCalculation() {
-        NumeralTypeChecker numeralTypeChecker = new NumeralTypeChecker();
-        NumeralPostfixParser parser = new NumeralPostfixParser(numeralTypeChecker);
-        NumeralPrefixSolver solver = new NumeralPrefixSolver(numeralTypeChecker, new NumeralCalculator(numeralTypeChecker));
+        PostfixParser parser = ObjectContainer.getParser();
+        Solver solver = ObjectContainer.getSolver();
 
         String input = "1.2 + -2 * 3";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
-        Assertions.assertEquals("-4.8", result);
+        assertEquals("-4.8", result);
     }
 }

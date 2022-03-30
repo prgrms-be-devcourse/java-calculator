@@ -62,10 +62,6 @@ public class Menu {
         System.out.println("수식을 입력해 주세요.");
         sc.nextLine();
         String input = sc.nextLine();
-        if (repository.findByKey(input) != null) {
-            System.out.println(repository.findByKey(input));
-            run();
-        }
         try {
             List<String> postFixExpression = parser.parse(input);
             String result = solver.solve(postFixExpression);

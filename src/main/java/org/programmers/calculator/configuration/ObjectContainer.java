@@ -2,7 +2,7 @@ package org.programmers.calculator.configuration;
 
 import org.programmers.calculator.Menu;
 import org.programmers.calculator.postfixCalculator.NumeralCalculator;
-import org.programmers.calculator.postfixCalculator.NumeralPrefixSolver;
+import org.programmers.calculator.postfixCalculator.NumeralPostfixSolver;
 import org.programmers.calculator.postfixCalculator.Solver;
 import org.programmers.calculator.postfixParser.NumeralPostfixParser;
 import org.programmers.calculator.postfixParser.PostfixParser;
@@ -30,7 +30,7 @@ public final class ObjectContainer {
             typeChecker = new NumeralTypeChecker();
             parser = new NumeralPostfixParser(typeChecker);
             calculator = new NumeralCalculator(typeChecker);
-            solver = new NumeralPrefixSolver(typeChecker, calculator);
+            solver = new NumeralPostfixSolver(typeChecker, calculator);
             menu = new Menu(parser, solver, repository);
         }
     }

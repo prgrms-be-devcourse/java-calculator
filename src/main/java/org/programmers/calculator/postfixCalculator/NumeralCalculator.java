@@ -42,7 +42,10 @@ public class NumeralCalculator {
         }
     }
 
-    String division(String a, String b) {
+    String divide(String a, String b) throws ArithmeticException {
+        if (typeChecker.isZero(b)) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        }
 
         if (typeChecker.isFractional(a) || typeChecker.isFractional(b)) {
             BigDecimal result = new BigDecimal(a);

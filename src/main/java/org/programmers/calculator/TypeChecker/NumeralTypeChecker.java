@@ -36,8 +36,8 @@ public class NumeralTypeChecker implements TypeChecker {
         return false;
     }
 
-    public boolean isFractional(String s) {
-        if (Pattern.matches(fractionalValuePattern, s)) {
+    public boolean isFractional(String value) {
+        if (Pattern.matches(fractionalValuePattern, value)) {
             return true;
         }
         return false;
@@ -53,9 +53,15 @@ public class NumeralTypeChecker implements TypeChecker {
         return false;
     }
 
+    public boolean isZero(String value) {
+        if (value.equals("0") || Pattern.matches("^0\\.0+$", value)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public Map<String, Integer> getOperatorRank() {
         return operatorRank;
     }
-
 }

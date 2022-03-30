@@ -1,54 +1,58 @@
 package org.programmers.calculator.integration;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.programmers.calculator.TypeChecker.NumeralTypeChecker;
-import org.programmers.calculator.postfixCalculator.NumeralCalculator;
-import org.programmers.calculator.postfixCalculator.NumeralPrefixSolver;
-import org.programmers.calculator.postfixParser.NumeralPostfixParser;
+import org.programmers.calculator.configuration.ObjectContainer;
+import org.programmers.calculator.configuration.Operand;
+import org.programmers.calculator.postfixCalculator.Solver;
+import org.programmers.calculator.postfixParser.PostfixParser;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("음수 연산")
 public class NegativeCalculatorTest {
 
+    @BeforeAll
+    static void beforeAll() {
+        ObjectContainer.create(Operand.RATIONAL_NUMBER);
+    }
+
     @Test
     @DisplayName("음수 덧셈")
     void plus() {
-        NumeralTypeChecker numeralTypeChecker = new NumeralTypeChecker();
-        NumeralPostfixParser parser = new NumeralPostfixParser(numeralTypeChecker);
-        NumeralPrefixSolver solver = new NumeralPrefixSolver(numeralTypeChecker, new NumeralCalculator(numeralTypeChecker));
+        PostfixParser parser = ObjectContainer.getParser();
+        Solver solver = ObjectContainer.getSolver();
 
         String input = "5 + -7";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
-        Assertions.assertEquals("-2", result);
+        assertEquals("-2", result);
     }
 
     @Test
     @DisplayName("음수 곱셈")
     void multiply() {
-        NumeralTypeChecker numeralTypeChecker = new NumeralTypeChecker();
-        NumeralPostfixParser parser = new NumeralPostfixParser(numeralTypeChecker);
-        NumeralPrefixSolver solver = new NumeralPrefixSolver(numeralTypeChecker, new NumeralCalculator(numeralTypeChecker));
+        PostfixParser parser = ObjectContainer.getParser();
+        Solver solver = ObjectContainer.getSolver();
 
         String input = "-2 * 3";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
-        Assertions.assertEquals("-6", result);
+        assertEquals("-6", result);
     }
 
     @Test
     @DisplayName("음수 곱셈과 함께 덧셈")
     void multiplyWithPlus() {
-        NumeralTypeChecker numeralTypeChecker = new NumeralTypeChecker();
-        NumeralPostfixParser parser = new NumeralPostfixParser(numeralTypeChecker);
-        NumeralPrefixSolver solver = new NumeralPrefixSolver(numeralTypeChecker, new NumeralCalculator(numeralTypeChecker));
+        PostfixParser parser = ObjectContainer.getParser();
+        Solver solver = ObjectContainer.getSolver();
 
         String input = "1 + -2 * 3";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
-        Assertions.assertEquals("-5", result);
+        assertEquals("-5", result);
     }
 }

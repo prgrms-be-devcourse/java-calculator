@@ -7,12 +7,12 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
-public class NumeralPrefixSolver implements Solver {
+public class NumeralPostfixSolver implements Solver {
 
     private NumeralTypeChecker typeChecker;
     private NumeralCalculator calculator;
 
-    public NumeralPrefixSolver(TypeChecker typeChecker, NumeralCalculator calculator) {
+    public NumeralPostfixSolver(TypeChecker typeChecker, NumeralCalculator calculator) {
         this.typeChecker = (NumeralTypeChecker) typeChecker;
         this.calculator = calculator;
     }
@@ -33,7 +33,7 @@ public class NumeralPrefixSolver implements Solver {
         return calculationStack.pop();
     }
 
-    private String callOperation(String operator, String operandA, String operandB) {
+    private String callOperation(String operator, String operandA, String operandB) throws ArithmeticException {
         if (operator.equals("+")) {
             return calculator.plus(operandA, operandB);
         }
@@ -44,7 +44,7 @@ public class NumeralPrefixSolver implements Solver {
             return calculator.multiply(operandA, operandB);
         }
         if (operator.equals("/")) {
-            return calculator.division(operandA, operandB);
+            return calculator.divide(operandA, operandB);
         }
         throw new IllegalArgumentException("연산자를 잘못 입력하셨습니다.");
     }

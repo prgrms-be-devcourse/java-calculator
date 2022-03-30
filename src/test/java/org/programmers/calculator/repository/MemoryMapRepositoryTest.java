@@ -2,12 +2,6 @@ package org.programmers.calculator.repository;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.programmers.calculator.Menu;
-import org.programmers.calculator.TypeChecker.NumeralTypeChecker;
-import org.programmers.calculator.postfixCalculator.NumeralCalculator;
-import org.programmers.calculator.postfixCalculator.NumeralPrefixSolver;
-import org.programmers.calculator.postfixParser.NumeralPostfixParser;
-import org.programmers.calculator.postfixParser.PostfixParser;
 
 import java.util.ArrayList;
 import java.util.List;

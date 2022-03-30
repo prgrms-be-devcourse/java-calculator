@@ -79,4 +79,15 @@ class NumeralTypeCheckerTest {
         boolean result = typeChecker.isOperator("/");
         assertEquals(true, result);
     }
+
+    @Test
+    @DisplayName("0 체크")
+    public void isZero() {
+        NumeralTypeChecker typeChecker = new NumeralTypeChecker();
+        boolean result = typeChecker.isZero("5") &&
+                typeChecker.isZero("0.0") &&
+                typeChecker.isZero("0.00") &&
+                typeChecker.isZero("0.000") &&
+                !typeChecker.isZero("0.0010");
+    }
 }
