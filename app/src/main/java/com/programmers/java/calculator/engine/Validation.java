@@ -10,7 +10,6 @@ public class Validation {
         if (input == null) return Optional.empty();
 
         String[] splitTokens = input.split("\\s");
-//        StringTokenizer stringTokenizer = new StringTokenizer(input);
         boolean flag = true;
 
         for (String splitToken : splitTokens) {
@@ -22,8 +21,8 @@ public class Validation {
                 if (!RegularExpression.isOperator(splitToken)) return Optional.empty();
             }
         }
-        if(flag)return Optional.empty();
+        if (flag) return Optional.empty();
 
         return Optional.of(new Arithmetic(splitTokens));
-}
+    }
 }
