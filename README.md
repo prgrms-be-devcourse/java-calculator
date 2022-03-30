@@ -95,3 +95,18 @@
 ### java convention
 
 - [google convention](https://google.github.io/styleguide/javaguide.html)
+
+### 피드백
+- [ ] .gitignore도 깔끔하게 관리하기
+- [ ] 사칙연산 enum을 이용한 전략패턴으로 구현해보기
+- [ ] matches는 비싼 행위 대안 생각해보기
+- [ ] 한 메서드에 Depth가 많으면 레픽토링 요소. depth가 많으면 분리해보기
+- [ ] menu도 enum으로 관리해보기
+- [ ] 과연 scanner를 컨트롤러에서 넣어주는게 맞는걸까?
+- [ ] System.lineSeparator() 알아보기
+- [ ] 클래스명이 Log인 것은 좋지 않다.
+- [ ] stream은 한줄에 하나씩 쓰는게 좋다.
+- [ ] 데이터베이스에 getter가 필요한가?
+- [ ] 차후 select가 생기면 어떻게 찾을 수 있을까?
+- [ ] 단순히 콘솔 프로그램인데 서비스가 필요하다고 생각이 드는가?
+- [ ] test에 Mockito를 사용한 이유.
