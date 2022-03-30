@@ -4,6 +4,7 @@ import main.calculator.engine.io.Input;
 import main.calculator.engine.io.Output;
 import main.calculator.engine.model.CalculationRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Calculator implements Runnable{
@@ -42,11 +43,12 @@ public class Calculator implements Runnable{
 
             //1번이 보여주기, 2번이 계산, 3번이 끝
             if(LOOKUP.equals(target.get())){
-                //TODO: 지금까지 했던 기록 list 보여주기
+                // TODO: 지금까지 했던 기록 list 보여주기
+                lookupList(calculationRepository.findAll());
                 continue;
             }
             if(CALCULATION.equals(target.get())){
-                //TODO: operator 만들기
+                // TODO: operator 만들기
                 writeCalculation(input.input("입력해주세요."));
                 continue;
             }
@@ -66,6 +68,14 @@ public class Calculator implements Runnable{
         output.print(result);
     }
 
+    private void lookupList(List<String> list){
+        //repository에서 가져온 list를 전체적으로 출력하기
+        for (String content : list) {
+            output.print(content);
+        }
+    }
+
+
     private Optional<Integer> parse(String selectString) {
         //1~3만 들어와야 함
         try {
@@ -74,7 +84,6 @@ public class Calculator implements Runnable{
                 //숫자형태가 아님
                 throw new NumberFormatException();
             }
-
             return Optional.of(number);
         }
         catch(NumberFormatException e){
