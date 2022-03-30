@@ -6,7 +6,7 @@ public class InputParser {
     private final InputValidator inputValidator;
     private final String seperator;
 
-    InputParser() {
+    public InputParser() {
         this.inputValidator = new InputValidator();
         this.seperator = " ";
     }
