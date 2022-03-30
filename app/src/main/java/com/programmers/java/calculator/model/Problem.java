@@ -65,7 +65,6 @@ public class Problem {
 
     public Problem calculate() {
         String postfix = transformToPostfix();
-        System.out.println("postfix = " + postfix);
         String[] str = postfix.split(" ");
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < str.length; i++) {

@@ -48,4 +48,52 @@ class ProblemTest {
         }
     }
 
+    @Test
+    public void 더하기연산(){
+        Problem problem = new Problem();
+        int answer = problem.makeQuestionArray("1 + 2 + 3 + 4 + 5").calculate().getAnswer();
+        Assertions.assertEquals(answer,15);
+    }
+
+    @Test
+    public void 마이너스연산(){
+        Problem problem = new Problem();
+        int answer = problem.makeQuestionArray("0 - 1 - 2 - 3 - 4 - 5").calculate().getAnswer();
+        Assertions.assertEquals(answer,-15);
+    }
+
+    @Test
+    public void 곱하기연산(){
+        Problem problem = new Problem();
+        int answer = problem.makeQuestionArray("1 * 2 * 3 * 4 * 5").calculate().getAnswer();
+        Assertions.assertEquals(answer,120);
+    }
+
+    @Test
+    public void 나누기연산(){
+        Problem problem = new Problem();
+        int answer = problem.makeQuestionArray("120 / 5 / 4 / 3 / 2").calculate().getAnswer();
+        Assertions.assertEquals(answer,1);
+    }
+
+    @Test
+    public void 맨앞이마이너스일경우(){
+        Problem problem = new Problem();
+        int answer = problem.makeQuestionArray("-120 + 130 *2").calculate().getAnswer();
+        Assertions.assertEquals(answer,140);
+    }
+
+    @Test
+    public void 사칙연산적용(){
+        Problem problem = new Problem();
+        int answer = problem.makeQuestionArray("1 + 2 * 3 / 2 - 3").calculate().getAnswer();
+        Assertions.assertEquals(answer,1);
+    }
+
+    @Test
+    public void 사칙연산적용2(){
+        Problem problem = new Problem();
+        int answer = problem.makeQuestionArray("-1 + 2 * 3 / 2 - 3").calculate().getAnswer();
+        Assertions.assertEquals(answer,-1);
+    }
 }
