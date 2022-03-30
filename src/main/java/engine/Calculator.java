@@ -4,6 +4,7 @@ import engine.io.*;
 import engine.repository.CalculatorRepository;
 
 import java.util.List;
+import java.util.Stack;
 
 public class Calculator implements Runnable {
 
@@ -44,6 +45,53 @@ public class Calculator implements Runnable {
             }
         }
 
+    }
+
+    public String cal(String input) {
+        String formula[] = parse(input);
+
+        /** 후위 계산식으로 변경 **/
+        Stack<Double> operandStack = new Stack<>();
+        Stack<String> operatorStack = new Stack<>();
+
+        double answer = Double.valueOf(formula[0]);
+        operandStack.push(answer);
+
+        for (int i = 1; i < formula.length; i += 2) {
+            String pushOper = formula[i];
+            double operand = Double.valueOf(formula[i + 1]);
+
+            if (!operatorStack.isEmpty()) {
+                Operator op = Operator.getOperator(operatorStack.peek());
+                int result = op.comparePriority(Operator.getOperator(pushOper));
+
+                if (result >= 0) {   //stack pop
+                    String operator = operatorStack.pop();
+                    double operand2 = operandStack.pop();
+                    double operand1 = operandStack.pop();
+
+                    answer = cal(operator, operand1, operand2);
+                    operandStack.push(answer);
+                }
+            }
+            operatorStack.push(pushOper);
+            operandStack.push(operand);
+        }
+
+        while (!operatorStack.isEmpty()) {
+            String operator = operatorStack.pop();
+            double operand2 = operandStack.pop();
+            double operand1 = operandStack.pop();
+
+            answer = cal(operator, operand1, operand2);
+            operandStack.push(answer);
+        }
+
+        return String.format("%.2f", answer);
+    }
+
+    private double cal(String operator, double x, double y) {
+        return Operator.getOperator(operator).calculate(x, y);
     }
 
     private String[] parse(String input) {
