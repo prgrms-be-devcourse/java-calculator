@@ -25,10 +25,6 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void outputCalculatedLog() {
-    }
-
-    @Override
     public void outputCalculationResult(Double input) {
         System.out.println(input + "\n");
     }

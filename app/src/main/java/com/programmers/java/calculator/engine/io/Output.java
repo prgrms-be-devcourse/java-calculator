@@ -6,8 +6,6 @@ public interface Output {
 
     void outputChoiceMessage();
 
-    void outputCalculatedLog();
-
     void outputCalculationResult(Double input);
 
     void calcError();
