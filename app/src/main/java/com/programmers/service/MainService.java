@@ -2,13 +2,13 @@ package com.programmers.service;
 
 import com.programmers.entity.CaseData;
 import com.programmers.repository.CaseRepository;
-import com.programmers.repository.MemoryRepository;
 
 import java.util.Scanner;
 
 public class MainService {
-    private ValidationService validationCase = new ValidationService();
+
     private CalculationService calculationService = new CalculationService();
+    private Input input = new Input();
     private CaseRepository caseRepository;
 
     public MainService(CaseRepository caseRepository) {
@@ -16,50 +16,35 @@ public class MainService {
     }
 
     public void playCalculate() {
-        Scanner sc = new Scanner(System.in);
+
         boolean isWorking = true;
         Long id = 0L;
 
         while (isWorking) {
             id++;
+
             System.out.println("1.조회");
             System.out.println("2.계산");
             System.out.println();
             System.out.print("선택 : ");
-            int number;
 
-            try {
-                number = sc.nextInt();
-                sc.nextLine();
-                if (!validationCase.validationNumber(number)) break;
-            } catch (Exception e) {
-                break;
-            }
 
+            int number = input.getOptionNumber();
             System.out.println();
 
             if (number == 1) {
                 // 조회 로직
                 caseRepository.allStoreValue();
             } else {
-                // 공식 입력 받는다.
-                String input = sc.nextLine();
-                if (!validationCase.validationInput(input)) {
-                    break;
-                }
+                // 공식 입력 받는다.(숫자 혹은 연산자)
+                String inputStr = input.getString();
 
                 // 계산 후 저장 로직
-                Double result = calculationService.calculate(input);
-                // 0 으로 나눈 경우 예외처리
-                if (result == null) {
-                    System.out.println("0으로 나누었습니다 - error");
-                    break;
-                }
-
+                Double result = calculationService.calculate(inputStr);
                 System.out.println(result);
 
                 // Data 저장
-                CaseData caseData = new CaseData(id, input, result);
+                CaseData caseData = new CaseData(id, inputStr, result);
                 caseRepository.save(caseData);
             }
         }
