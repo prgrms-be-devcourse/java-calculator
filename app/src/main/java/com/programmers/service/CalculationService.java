@@ -1,7 +1,9 @@
 package com.programmers.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class CalculationService {
 
@@ -11,33 +13,34 @@ public class CalculationService {
 
         lastList = new ArrayList<>();
         String[] inputArr = input.split(" ");
+        List<String> inputList = Arrays.asList(inputArr);
 
         // case1 = 숫자 1개만 입력한 경우
-        if (inputArr.length == 1) {
+        if (inputList.size() == 1) {
             return Double.valueOf(inputArr[0]);
         }
 
         // case2 = 계산 값을 출력해 준다.
         int index = 0;
 
-        while (index < inputArr.length - 1) {
-            String valueBeforeOperation = inputArr[index];
-            String operation = inputArr[index + 1];
-            String valueAfterOperation = inputArr[index + 2];
+        while (index < inputList.size() - 1) {
+            String valueBeforeOperation = inputList.get(index);
+            String operation = inputList.get(index + 1);
+            String valueAfterOperation = inputList.get(index + 2);
 
             // + - 인 경우
             if (isPlusAndMius(operation)) {
                 plusOrMinusOperation(valueBeforeOperation, operation);
             } else {
                 // 곱하기인 경우
-                multiplyOperation(inputArr, index, valueBeforeOperation, operation, valueAfterOperation);
+                multiplyOperation(inputList, index, valueBeforeOperation, operation, valueAfterOperation);
                 // 나누기인 경우
-                divideOperation(inputArr, index, valueBeforeOperation, operation, valueAfterOperation);
+                divideOperation(inputList, index, valueBeforeOperation, operation, valueAfterOperation);
             }
             index += 2;
         }
 
-        lastList.add(inputArr[inputArr.length - 1]);
+        lastList.add(inputList.get(inputList.size() - 1));
 
         // 최종 + - 로만 이루어진 lastList을 통해 값을 구한다
         // 첫 값을 집어넣는다.
@@ -53,7 +56,7 @@ public class CalculationService {
 
     }
 
-    private void divideOperation(String[] inputArr, int index, String valueBeforeOperation, String operation, String valueAfterOperation) {
+    private void divideOperation(List<String> inputList, int index, String valueBeforeOperation, String operation, String valueAfterOperation) {
         // 나누기 연산자일때 계산
         if (operation.equals("/")) {
             // 0 으로 나눈경우 예외처리
@@ -62,15 +65,15 @@ public class CalculationService {
             }
 
             Double divideValue = Double.valueOf(valueBeforeOperation) / Double.valueOf(valueAfterOperation);
-            inputArr[index + 2] = String.valueOf(divideValue);
+            inputList.set(index+2, String.valueOf(divideValue));
         }
     }
 
-    private void multiplyOperation(String[] inputArr, int index, String valueBeforeOperation, String operation, String valueAfterOperation) {
+    private void multiplyOperation(List<String> inputList, int index, String valueBeforeOperation, String operation, String valueAfterOperation) {
         // 곱하기 연산자일때 계산
         if (operation.equals("*")) {
             Double multiplyValue = Double.valueOf(valueBeforeOperation) * Double.valueOf(valueAfterOperation);
-            inputArr[index + 2] = String.valueOf(multiplyValue);
+            inputList.set(index+2, String.valueOf(multiplyValue));
         }
     }
 
