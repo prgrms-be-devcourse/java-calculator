@@ -1,4 +1,7 @@
 package calculator.calculate;
 
-public class Calculate {
+import java.util.ArrayList;
+
+public interface Calculate {
+    int execute(ArrayList<String> exp);
 }
