@@ -8,6 +8,12 @@ import java.util.Stack;
 
 public class PostfixConverter implements Converter {
 
+    /**
+     * 후위표기식 변환 메서드
+     *
+     * @param infixExpr 중위표기식 토큰
+     * @return 후위표기식 토큰
+     */
     @Override
     public List<String> convert(List<String> infixExpr) {
         Stack<String> stack = new Stack<>();
@@ -16,10 +22,10 @@ public class PostfixConverter implements Converter {
         for (String op : infixExpr) {
             if (!Operator.isOperator(op)) {
                 output.add(op);
-            } else if (op.equals("(")) {
+            } else if (op.equals(Operator.LPR.symbol)) {
                 stack.add(op);
-            } else if (op.equals(")")) {
-                while (!stack.isEmpty() && !stack.peek().equals("(")) {
+            } else if (op.equals(Operator.RPR.symbol)) {
+                while (!stack.isEmpty() && !stack.peek().equals(Operator.LPR.symbol)) {
                     output.add(stack.pop());
                 }
                 stack.pop();
@@ -30,6 +36,7 @@ public class PostfixConverter implements Converter {
                 stack.add(op);
             }
         }
+
         while (!stack.isEmpty()) {
             output.add(stack.pop());
         }
