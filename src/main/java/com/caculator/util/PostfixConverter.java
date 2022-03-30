@@ -1,4 +1,6 @@
-package com.caculator;
+package com.caculator.util;
+
+import com.caculator.Operator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.caculator;
+package com.caculator.util;
 
 public class StringUtils {
 
