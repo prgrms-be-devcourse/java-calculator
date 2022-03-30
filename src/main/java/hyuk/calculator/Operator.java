@@ -1,26 +1,53 @@
 package hyuk.calculator;
 
-import java.util.function.BiFunction;
+import java.util.Arrays;
 
 public enum Operator {
-    PLUS((a, b) -> a + b),
-    MINUS((a, b) -> a - b),
-    DIVIDE((a, b) -> {
-        if (b == 0) {
-            throw new IllegalStateException("0으로 나눌 수 없습니다.");
+    PLUS("+") {
+        @Override
+        public Integer apply(int firstOperand, int secondOperand) {
+            return firstOperand + secondOperand;
         }
-        return a / b;
-    }),
-    MULTIPLY((a, b) -> a * b);
+    },
+    MINUS("-") {
+        @Override
+        public Integer apply(int firstOperand, int secondOperand) {
+            return firstOperand - secondOperand;
+        }
+    },
+    DIVIDE("/") {
+        @Override
+        public Integer apply(int firstOperand, int secondOperand) {
+            if (secondOperand == 0) {
+                throw new IllegalStateException("0으로 나눌 수 없습니다.");
+            }
+            return firstOperand / secondOperand;
+        }
+    },
+    MULTIPLY("*") {
+        @Override
+        public Integer apply(int firstOperand, int secondOperand) {
+            return firstOperand * secondOperand;
+        }
+    };
 
-    private final BiFunction<Integer, Integer, Integer> biFunction;
+    private final String textOperator;
 
-    Operator(BiFunction<Integer, Integer, Integer> biFunction) {
-        this.biFunction = biFunction;
+    Operator(final String textOperator) {
+        this.textOperator = textOperator;
     }
 
-    public Integer calculate(int firstOperand, int secondOperand) {
-        return this.biFunction.apply(firstOperand, secondOperand);
+    public static Operator of(final String symbol) {
+        return Arrays.stream(values())
+            .filter(operator -> operator.isTextOperator(symbol))
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("해당 연산자를 찾을 수 없습니다."));
     }
+
+    private boolean isTextOperator(String symbol) {
+        return textOperator.equals(symbol);
+    }
+
+    public abstract Integer apply(int firstOperand, int secondOperand);
 
 }

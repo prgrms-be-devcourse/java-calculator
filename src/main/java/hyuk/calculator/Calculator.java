@@ -1,10 +1,5 @@
 package hyuk.calculator;
 
-import static hyuk.calculator.Operator.DIVIDE;
-import static hyuk.calculator.Operator.MINUS;
-import static hyuk.calculator.Operator.MULTIPLY;
-import static hyuk.calculator.Operator.PLUS;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -21,15 +16,7 @@ public class Calculator {
             String operator = token;
             Integer secondOperand = stack.pollLast();
             Integer firstOperand = stack.pollLast();
-            if (operator.equals("+")) {
-                stack.addLast(PLUS.calculate(firstOperand, secondOperand));
-            } else if (operator.equals("-")) {
-                stack.addLast(MINUS.calculate(firstOperand, secondOperand));
-            } else if (operator.equals("*")) {
-                stack.addLast(MULTIPLY.calculate(firstOperand, secondOperand));
-            } else {
-                stack.addLast(DIVIDE.calculate(firstOperand, secondOperand));
-            }
+            stack.addLast(Operator.of(operator).apply(firstOperand, secondOperand));
         }
 
         return new Result(stack.pollLast());

@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 class OperatorTest {
 
     @DisplayName("덧셈 기능 테스트")
@@ -13,7 +14,7 @@ class OperatorTest {
     void add() {
         //given
         //when
-        int actual = Operator.PLUS.calculate(1, 2);
+        int actual = Operator.of("+").apply(1, 2);
 
         //then
         assertThat(actual).isEqualTo(3);
@@ -24,7 +25,7 @@ class OperatorTest {
     void subtract() {
         //given
         //when
-        int actual = Operator.MINUS.calculate(1, 2);
+        int actual = Operator.of("-").apply(1, 2);
 
         //then
         assertThat(actual).isEqualTo(-1);
@@ -36,7 +37,7 @@ class OperatorTest {
         //given
         //when
         //then
-        assertThatThrownBy(() -> Operator.DIVIDE.calculate(1, 0))
+        assertThatThrownBy(() -> Operator.of("/").apply(1, 0))
             .isInstanceOf(IllegalStateException.class)
             .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
@@ -46,7 +47,7 @@ class OperatorTest {
     void divide() {
         //given
         //when
-        int actual = Operator.DIVIDE.calculate(6, 2);
+        int actual = Operator.of("/").apply(6, 2);
 
         //then
         assertThat(actual).isEqualTo(3);
@@ -57,7 +58,7 @@ class OperatorTest {
     void multiply() {
         //given
         //when
-        int actual = Operator.MULTIPLY.calculate(5, 5);
+        int actual = Operator.of("*").apply(5, 5);
 
         //then
         assertThat(actual).isEqualTo(25);
