@@ -42,10 +42,10 @@ class CalculationServiceTest {
         String input = "1 + 3 * 4 / 0 * 3 + 4 - 3 + 4 * 3";
 
         // when
-        Double result = calculationService.calculate(input);
 
         // then
-        Assertions.assertEquals(null, result);
+        Exception e = Assertions.assertThrows(IllegalArgumentException.class,
+                ()->calculationService.calculate(input));
     }
 
     @Test
