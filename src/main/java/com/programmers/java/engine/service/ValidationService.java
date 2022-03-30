@@ -9,6 +9,11 @@ import java.util.StringTokenizer;
 public class ValidationService {
 
     public Optional<Formula> Validation(String inputFormula) {
+        for (int i = 0; i < inputFormula.length() - 1; i++) {
+            if (inputFormula.charAt(i) ==' ' && inputFormula.charAt(i+1) == ' ')
+                return Optional.empty();
+        }
+
         StringTokenizer s = new StringTokenizer(inputFormula);
         String str = "";
         if (!s.hasMoreElements())
