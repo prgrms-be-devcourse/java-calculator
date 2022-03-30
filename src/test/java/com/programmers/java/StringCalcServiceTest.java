@@ -9,6 +9,9 @@ import com.programmers.java.engine.service.ValidationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.*;
 
 public class StringCalcServiceTest {
@@ -19,21 +22,21 @@ public class StringCalcServiceTest {
     final Long TESTRESULT2 = -7L;
     final Long TESTRESULT3 = -17L;
 
-    ValidationService validService = new ValidationService();
-    PostFixService postFixService = new PostFixService();
-    CalcService c = new CalcService();
+    ValidationService testValidationService = new ValidationService();
+    PostFixService testPostFixService = new PostFixService();
+    CalcService testCalc = new CalcService();
+    FormulaRepository testRepository = new FormulaRepository();
 
     @Test
     public void ValidationService_Validation함수_유효한식_NotNull옵셔널_반환() {
         //given
-        String testFormula1 = this.TESTFORMULA1;
         String testFormula2 = "1+ ";
         //when
-        Optional<Formula> correctFormula =  validService.Validation(testFormula1);
-        Optional<Formula> incorrectFormula =  validService.Validation(testFormula2);
+        Optional<Formula> correctFormula = testValidationService.Validation(TESTFORMULA1);
+        Optional<Formula> incorrectFormula = testValidationService.Validation(testFormula2);
         //then
-        Assertions.assertTrue(!correctFormula.isEmpty());
-        Assertions.assertFalse(!incorrectFormula.isEmpty());
+        Assertions.assertNotNull(correctFormula);
+        Assertions.assertNull(incorrectFormula);
     }
 
     @Test
@@ -41,7 +44,7 @@ public class StringCalcServiceTest {
         //given
         String postFix = "1 2 3 * +";
         //when
-        String[] postFixTestForm = postFixService.makePostFixFormula(validService.Validation(TESTFORMULA1).get());
+        String[] postFixTestForm = testPostFixService.makePostFixFormula(testValidationService.Validation(TESTFORMULA1).get());
         //then
         Assertions.assertArrayEquals(postFix.split(" "), postFixTestForm);
     }
@@ -52,10 +55,10 @@ public class StringCalcServiceTest {
         int MULDIV = 1;
         int PLUSMINUS = 2;
         //when
-        int plus = postFixService.OperatorPriority("+");
-        int minus = postFixService.OperatorPriority("+");
-        int mul = postFixService.OperatorPriority("+");
-        int div = postFixService.OperatorPriority("+");
+        int plus = testPostFixService.OperatorPriority("+");
+        int minus = testPostFixService.OperatorPriority("+");
+        int mul = testPostFixService.OperatorPriority("+");
+        int div = testPostFixService.OperatorPriority("+");
         //then
         Assertions.assertEquals(PLUSMINUS, plus, minus);
         Assertions.assertEquals(MULDIV, mul, div);
@@ -69,50 +72,73 @@ public class StringCalcServiceTest {
         Long b = 2L;
         Stack<Long> s = new Stack<>();
         //when
-        Long plus = c.calcArithmetic(a,b,"+", s).pop();
-        Long minus = c.calcArithmetic(a,b,"-", s).pop();
-        Long mul = c.calcArithmetic(a,b,"*", s).pop();
-        Long div = c.calcArithmetic(a,b,"/", s).pop();
+        Long plus = testCalc.calcArithmetic(a, b, "+", s).pop();
+        Long minus = testCalc.calcArithmetic(a, b, "-", s).pop();
+        Long mul = testCalc.calcArithmetic(a, b, "*", s).pop();
+        Long div = testCalc.calcArithmetic(a, b, "/", s).pop();
         //then
         Assertions.assertEquals(3, plus);
         Assertions.assertEquals(-1, minus);
-        Assertions.assertEquals(2,mul);
+        Assertions.assertEquals(2, mul);
         Assertions.assertEquals(0, div);
     }
 
     @Test
     public void CalcService_calculate함수_계산결과_반환() {
         //given
-        String  postFixFormula[] = postFixService.makePostFixFormula(validService.Validation(TESTFORMULA1).get());
+        String postFixFormula[] = testPostFixService.makePostFixFormula(testValidationService.Validation(TESTFORMULA1).get());
         //when
-        Long testResult = c.calculate(postFixFormula);
+        Long testResult = testCalc.calculate(postFixFormula);
         //then
         Assertions.assertEquals(TESTRESULT1, testResult);
     }
 
-    FormulaRepository formulaRepository = new FormulaRepository();
+
     @Test
     public void FormulaRepository_save함수_map사이즈_반환() {
         //given
-        formulaRepository.save(TESTFORMULA1, TESTRESULT1);
-        formulaRepository.save(TESTFORMULA2, TESTRESULT2);
-        formulaRepository.save(TESTFORMULA3, TESTRESULT3);
+        testRepository.save(TESTFORMULA1, TESTRESULT1);
+        testRepository.save(TESTFORMULA2, TESTRESULT2);
+        testRepository.save(TESTFORMULA3, TESTRESULT3);
         //when
-        Map<String, Long> testMap = formulaRepository.find();
+        Map<String, Long> testMap = testRepository.getHistory();
         //then
-        Assertions.assertEquals(3 , testMap.size());
+        Assertions.assertEquals(3, testMap.size());
     }
 
     @Test
     public void FormulaRepository_size함수_map사이즈_반환() {
         //given
-        formulaRepository.save(TESTFORMULA1, TESTRESULT1);
-        formulaRepository.save(TESTFORMULA2, TESTRESULT2);
-        formulaRepository.save(TESTFORMULA3, TESTRESULT3);
+        testRepository.save(TESTFORMULA1, TESTRESULT1);
+        testRepository.save(TESTFORMULA2, TESTRESULT2);
+        testRepository.save(TESTFORMULA3, TESTRESULT3);
         //when
-        int size = formulaRepository.size();
+        int size = testRepository.size();
         //then
         Assertions.assertEquals(3, size);
+    }
+
+    @Test
+    public void FormulaRepository_find함수_계산이력_반환() {
+        //given
+        String resultOuput[] = new String[3];
+        resultOuput[0] = TESTFORMULA1 + " = " + TESTRESULT1;
+        resultOuput[1] = TESTFORMULA2 + " = " + TESTRESULT2;
+        resultOuput[2] = TESTFORMULA3 + " = " + TESTRESULT3;
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        testRepository.save(TESTFORMULA1, TESTRESULT1);
+        testRepository.save(TESTFORMULA2, TESTRESULT2);
+        testRepository.save(TESTFORMULA3, TESTRESULT3);
+
+        //WHEN
+        testRepository.findAll();
+        String testOutput[] = out.toString().split("\n");
+
+        //then
+        for (int i = 0; i < resultOuput.length; i++) {
+            Assertions.assertEquals(resultOuput[i],testOutput[i].trim());
+        }
     }
 }
 
