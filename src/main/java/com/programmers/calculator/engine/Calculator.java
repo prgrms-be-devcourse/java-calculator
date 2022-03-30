@@ -76,14 +76,32 @@ public class Calculator implements Runnable{
     public Optional<List<String>> infixToPostfix(String infix) {
         List<String> postfix = new ArrayList<>();
         Stack<String> stack = new Stack<>();
+        Stack<String> parentheses = new Stack<>();
         String[] numsNSymbols = infix.split(" ");
+        String lastString = "";
         for(String s : numsNSymbols) {
             if (Pattern.matches(Regex.getNum(), s)) {
-                postfix.add(s);
+                if(!lastString.equals("") && !lastString.equals("(") &&
+                        !lastString.equals("+") && !lastString.equals("-") &&
+                        !lastString.equals("*") && !lastString.equals("/")) {
+                    return Optional.empty();
+                } else {
+                    postfix.add(s);
+                }
             } else if (s.equals("(")) {
-                stack.push(s);
+                if(!lastString.equals("") &&
+                        !lastString.equals("+") && !lastString.equals("-") &&
+                        !lastString.equals("*") && !lastString.equals("/")) {
+                    return Optional.empty();
+                } else {
+                    stack.push(s);
+                    parentheses.push(s);
+                }
             } else if (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/")) {
-                if (stack.isEmpty()) {
+                if (!Pattern.matches(Regex.getNum(), lastString) && !lastString.equals(")")) {
+                    return Optional.empty();
+                }
+                else if (stack.isEmpty()) {
                     stack.push(s);
                 } else {
                     if (Priority.getPriority(stack.peek()) >= Priority.getPriority(s)) {
@@ -94,19 +112,31 @@ public class Calculator implements Runnable{
                     }
                 }
             } else if (s.equals(")")) {
-                while(true) {
-                    String tmp = stack.pop();
-                    if(tmp.equals("(")) break;
-                    postfix.add(tmp);
+                if (!Pattern.matches(Regex.getNum(), lastString)) {
+                    return Optional.empty();
+                } else {
+                    if(parentheses.isEmpty() || !parentheses.pop().equals("(")) {
+                        return Optional.empty();
+                    } else {
+                        while (true) {
+                            String tmp = stack.pop();
+                            if (tmp.equals("(")) break;
+                            postfix.add(tmp);
+                        }
+                    }
                 }
             } else {
                 return Optional.empty();
             }
+
+            lastString = s;
         }
 
         while(!stack.isEmpty()) {
             postfix.add(stack.pop());
         }
+
+        if(!parentheses.isEmpty()) return Optional.empty();
 
         return Optional.of(postfix);
     }
