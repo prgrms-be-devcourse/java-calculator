@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Expression {
-    private String[] operators;
-    private Double[] operands;
+    private Operator operator;
+    private Operand operand;
 }
