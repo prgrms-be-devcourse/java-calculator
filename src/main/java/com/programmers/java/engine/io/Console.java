@@ -1,7 +1,4 @@
-package com.programmers.java;
-
-import com.programmers.java.engine.io.Input;
-import com.programmers.java.engine.io.Output;
+package com.programmers.java.engine.io;
 
 import java.util.Scanner;
 
