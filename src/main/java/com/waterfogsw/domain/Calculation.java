@@ -7,11 +7,11 @@ import lombok.Getter;
 @Getter
 public class Calculation {
     private Long id;
-    private String expr;
-    private String result;
+    private String formula; // 계산식
+    private String result;  // 계산결과
 
     @Override
     public String toString() {
-        return expr + " = " + result;
+        return formula + " = " + result;
     }
 }
