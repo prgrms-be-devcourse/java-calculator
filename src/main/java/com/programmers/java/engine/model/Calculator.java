@@ -41,8 +41,8 @@ public class Calculator {
         return String.format("%.2f", stack.pop());
     }
 
-    //속에서 호출된 함수에서 에러발생시 바깥함수까지 모두 throws를 붙이는게 맞는건지?
-    //모든 함수에 대해 유효하지 않은 매개변수가 들어왔을 때의 경우를 다 생각해야하는지!
+    //TODO : 속에서 호출된 함수에서 에러발생시 바깥함수까지 모두 throws를 붙이는게 맞는건지?
+    //TODO : 모든 함수에 대해 유효하지 않은 매개변수가 들어왔을 때의 경우를 다 생각해야하는지!
 
     private void changeToPosix(String[] userStr) throws NumberFormatException{
         Stack<Operator> stack=new Stack<Operator>();

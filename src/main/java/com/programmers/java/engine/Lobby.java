@@ -2,6 +2,8 @@ package com.programmers.java.engine;
 
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
+import com.programmers.java.engine.model.Calculator;
+import com.programmers.java.engine.model.Expression;
 import com.programmers.java.engine.model.History;
 import lombok.AllArgsConstructor;
 
@@ -22,12 +24,17 @@ enum Menu{
     }
 }
 
+//TODO : Exception과 에러 처리
+//TODO : Parsing과 유효성 검사
+//TODO : Parsing Test 코드 작성
+
 @AllArgsConstructor
 public class Lobby implements Runnable{
 
     private Input input;
     private Output output;
     private History history;
+    private Calculator calculator;
 
     @Override
     public void run() {
@@ -42,24 +49,30 @@ public class Lobby implements Runnable{
         final int CALCULATE=Menu.CALCULATE.ordinal();
 
         while(true){
-            System.out.println(menus);
+            System.out.println('\n'+menus);
             int userOption=input.optionInput("선택 : ");
             if(userOption==EXIT){
                 output.exitMessage();
                 break;
             }
             else if(userOption==LOOKUP){
-                System.out.println("조회함");
+                history.searchAll();
             }
             else if(userOption==CALCULATE){
                 String userStr=input.strInput("계산식을 입력해주세요 : ");
-
-
+                String[] parsedUserStr=parse(userStr);
+                String ans=calculator.calculate(parsedUserStr);
+                System.out.println(ans);
+                history.save(new Expression(userStr,ans));
             }
             else{
                 output.inputError();
                 continue;
             }
         }
+    }
+
+    public String[] parse(String userStr){
+        return userStr.split(" ");
     }
 }

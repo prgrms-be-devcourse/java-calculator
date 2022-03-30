@@ -19,6 +19,7 @@ public class Console implements Output, Input {
     @Override
     public String strInput(String prompt) {
         System.out.println(prompt);
+        scanner.nextLine(); //버퍼비우기
         return scanner.nextLine();
     }
 

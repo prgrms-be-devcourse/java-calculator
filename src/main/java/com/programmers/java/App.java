@@ -1,6 +1,7 @@
 package com.programmers.java;
 
 import com.programmers.java.engine.Lobby;
+import com.programmers.java.engine.model.Calculator;
 import com.programmers.java.engine.model.Expression;
 import com.programmers.java.engine.model.History;
 
@@ -10,6 +11,7 @@ public class App {
     public static void main(String[] args) {
         Console console=new Console();
         History history=new History(new ArrayList<Expression>());
-        new Lobby(console, console, history).run();
+        Calculator calculator = new Calculator();
+        new Lobby(console, console, history, calculator).run();
     }
 }
