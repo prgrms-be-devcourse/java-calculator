@@ -97,7 +97,7 @@
 - [google convention](https://google.github.io/styleguide/javaguide.html)
 
 ### 피드백
-- [ ] .gitignore도 깔끔하게 관리하기
+- [X] .gitignore도 깔끔하게 관리하기
 - [ ] 사칙연산 enum을 이용한 전략패턴으로 구현해보기
 - [ ] matches는 비싼 행위 대안 생각해보기
 - [ ] 한 메서드에 Depth가 많으면 레픽토링 요소. depth가 많으면 분리해보기
