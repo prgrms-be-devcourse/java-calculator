@@ -40,31 +40,21 @@ public class PostfixConverter {
     }
 
     private static void executeOperatorProcess(String operator, List<String> postfix, Stack<String> stack) throws IllegalArgumentException {
-        if (!isOperator(operator)) throw new IllegalArgumentException();
+        if (!Operator.isOperator(operator)) throw new IllegalArgumentException();
 
-        if (stack.isEmpty() || getPriority(stack.peek()) < getPriority(operator)) {
+        if (stack.isEmpty() || Operator.getPriority(stack.peek()) < Operator.getPriority(operator)) {
             stack.push(operator);
             return;
         }
 
-        while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(operator)) {
+        while (!stack.isEmpty() && Operator.getPriority(stack.peek()) >= Operator.getPriority(operator)) {
             postfix.add(stack.pop());
         }
 
         stack.push(operator);
     }
 
-    private static boolean isOperator(String operator) {
-        return operator.equals("*") || operator.equals("/") || operator.equals("+") || operator.equals("-");
-    }
-
     private static boolean isIdxForOperator(int index) {
         return (index + 1) % 2 == 0;
-    }
-
-    private static int getPriority(String operator) {
-        if (operator.equals("*") || operator.equals("/")) return 2;
-        if (operator.equals("+") || operator.equals("-")) return 1;
-        return -1;
     }
 }

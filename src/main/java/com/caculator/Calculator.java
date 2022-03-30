@@ -58,7 +58,7 @@ public class Calculator {
      */
     private void executeCalculationCommand(String expression) {
         try {
-            long result = executeCalculator(expression);
+            long result = calculate(expression);
             repository.save(new Result(expression, result));
             output.printResult(result);
         } catch (IllegalArgumentException e) {
@@ -94,7 +94,7 @@ public class Calculator {
      * @return : 계산 결과 정수
      * @throws IllegalArgumentException, ArithmeticException : convert(), calculatePostfixExpression()에서 던져진 예외
      */
-    public long executeCalculator(String expression) throws IllegalArgumentException, ArithmeticException {
+    public long calculate(String expression) throws IllegalArgumentException, ArithmeticException {
         List<String> postfix = PostfixConverter.convert(expression);
         return calculatePostfixExpression(postfix);
     }
@@ -103,7 +103,7 @@ public class Calculator {
      후위 표기식을 입력 받아 계산 후 결과를 반환한다.
      * @param expressions : 후위 표기식
      * @return 연산 결과
-     * @throws IllegalArgumentException, ArithmeticException : calculate()에서 던져진 예외
+     * @throws IllegalArgumentException, ArithmeticException : Operator.calculate()에서 던져진 예외
      */
     private long calculatePostfixExpression(List<String> expressions) throws IllegalArgumentException, ArithmeticException {
         Stack<Long> stack = new Stack<>();
@@ -114,30 +114,10 @@ public class Calculator {
             } else {
                 long n2 = stack.pop();
                 long n1 = stack.pop();
-                stack.push(calculate(n1, n2, s));
+                stack.push(Operator.calculate(s, n1, n2));
             }
         }
 
         return stack.pop();
-    }
-
-    /**
-     * n1,n2를 operator 연산한 결과를 반환한다.
-     * @throws ArithmeticException : 0으로 나누는 연산, 연산 결과에 오버플로 발생시 던져진다.
-     * @throws IllegalArgumentException : operator 가 연산자(+, -. *, /)가 가 아닌 경우 던져진다.
-     */
-    private long calculate(long n1, long n2, String operator) throws ArithmeticException, IllegalArgumentException {
-        switch (operator) {
-            case "+":
-                return Math.addExact(n1, n2);
-            case "-":
-                return Math.subtractExact(n1, n2);
-            case "*":
-                return Math.multiplyExact(n1, n2);
-            case "/":
-                return Math.floorDiv(n1, n2);
-            default:
-                throw new IllegalArgumentException();
-        }
     }
 }

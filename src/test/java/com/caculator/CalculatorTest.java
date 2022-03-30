@@ -23,7 +23,7 @@ class CalculatorTest {
         String expression = "1 + 2 + 3";
 
         //when
-        long result = calculator.executeCalculator(expression);
+        long result = calculator.calculate(expression);
 
         //then
         assertThat(result).isEqualTo(6);
@@ -36,7 +36,7 @@ class CalculatorTest {
         String expression = "20 - 10 - 5";
 
         //when
-        long result = calculator.executeCalculator(expression);
+        long result = calculator.calculate(expression);
 
         //then
         assertThat(result).isEqualTo(5);
@@ -49,7 +49,7 @@ class CalculatorTest {
         String expression = "10 * 15 * 3";
 
         //when
-        long result = calculator.executeCalculator(expression);
+        long result = calculator.calculate(expression);
 
         //then
         assertThat(result).isEqualTo(450);
@@ -62,7 +62,7 @@ class CalculatorTest {
         String expression = "20 / 2 / 5";
 
         //when
-        long result = calculator.executeCalculator(expression);
+        long result = calculator.calculate(expression);
 
         //then
         assertThat(result).isEqualTo(2);
@@ -78,9 +78,9 @@ class CalculatorTest {
         String expression3 = "100 * 50 / 20 - 35 / 5 * 4 + 10 * 5 * 2";
 
         //when
-        long result1 = calculator.executeCalculator(expression1);
-        long result2 = calculator.executeCalculator(expression2);
-        long result3 = calculator.executeCalculator(expression3);
+        long result1 = calculator.calculate(expression1);
+        long result2 = calculator.calculate(expression2);
+        long result3 = calculator.calculate(expression3);
 
         //then
         assertThat(result1).isEqualTo(9);
@@ -92,13 +92,13 @@ class CalculatorTest {
     @ValueSource(strings = {"3 / 0", "1 + 2 * 10 / 0 + 4", "3 * 4 / 0 * 5"})
     @DisplayName("0으로 나누면 ArithmeticException 발생")
     void divideZeroTest(String expression) {
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.executeCalculator(expression));
+        Assertions.assertThrows(ArithmeticException.class, () -> calculator.calculate(expression));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"a b c d e f g", "1 + 2 * b / 0 + 4", "3 * @ / 0 * %"})
     @DisplayName("숫자와 연산자(+,-,*,/) 외에 다른 문자가 있으면 IllegalArgumentException 발생")
     void otherCharTest(String expression) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.executeCalculator(expression));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.calculate(expression));
     }
 }
