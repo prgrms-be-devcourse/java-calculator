@@ -23,6 +23,9 @@ public class Calculator {
         this.output = output;
     }
 
+    /**
+     * 메뉴를 입력받고 각 메뉴에 해당하는 로직을 실행한다.
+     */
     public void run() {
         while (true) {
             String command = input.inputCommand();
