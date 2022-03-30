@@ -1,6 +1,7 @@
 package com.programmers.entity;
 
 public class CaseData {
+
     private Long id;
     private String input;
     private Double result;
