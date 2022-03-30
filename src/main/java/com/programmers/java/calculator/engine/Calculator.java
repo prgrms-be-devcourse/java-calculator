@@ -8,19 +8,16 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
-    private Integer SELECT_HISTORY = 1;
-    private Integer SELECT_CALCULATION = 2;
-
-
-
     private Calculation calculation;
     private HistoryStore historyStore;
     private Input input;
     private Output output;
 
-
     @Override
     public void run() {
+        final int SELECT_HISTORY = 1;
+        final int SELECT_CALCULATION = 2;
+
         while (true) {
             output.print("1. 조회");
             output.print("2. 계산");
@@ -29,9 +26,9 @@ public class Calculator implements Runnable {
             Optional<Integer> selectNum = parse(selectString);
             if (selectNum.isEmpty()) {
                 output.printError("알맞은 숫자를 입력해주세요.");
-            }else if (SELECT_HISTORY.equals(selectNum.get())) {
-                historyStore.show(input);
-            } else if(SELECT_CALCULATION.equals(selectNum.get())) {
+            }else if (SELECT_HISTORY == selectNum.get()) {
+                historyStore.show(output);
+            } else if(SELECT_CALCULATION == selectNum.get()) {
                 String inputString = input.inputQuestion();
                 Optional<Integer> result = calculation.calculate(inputString);
                 if (result.isEmpty()) {
