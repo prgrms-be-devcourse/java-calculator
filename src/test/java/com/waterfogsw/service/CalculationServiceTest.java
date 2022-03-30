@@ -1,7 +1,6 @@
 package com.waterfogsw.service;
 
 import com.waterfogsw.AppConfig;
-import com.waterfogsw.service.CalculationService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ class CalculationServiceTest {
         AppConfig appConfig = new AppConfig();
         calculationService = appConfig.calculationService();
     }
-    
+
     @Test
     public void 계산서비스_테스트_덧셈() throws Exception {
         // given
@@ -85,13 +84,13 @@ class CalculationServiceTest {
         String result = calculationService.getResult(expr);
 
         // then
-        Assertions.assertThat(result).isEqualTo("0");
+        Assertions.assertThat(result).isEqualTo("0.286");
     }
 
     @Test
     public void 계산서비스_테스트_괄호2() throws Exception {
         // given
-        String expr = "(4 - 2) * 2";
+        String expr = "( 4 - 2 ) * 2";
 
         // when
         String result = calculationService.getResult(expr);
@@ -124,4 +123,15 @@ class CalculationServiceTest {
         Assertions.assertThat(result).isEqualTo("35");
     }
 
+    @Test
+    public void 계산서비스_테스트_소수점() throws Exception {
+        // given
+        String expr = "-3.3 + 4";
+
+        // when
+        String result = calculationService.getResult(expr);
+
+        // then
+        Assertions.assertThat(result).isEqualTo("0.7");
+    }
 }
