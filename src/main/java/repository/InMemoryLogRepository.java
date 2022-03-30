@@ -1,9 +1,9 @@
 package repository;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class InMemoryLogRepository<T> implements LogRepository {
     private final Map<Long, T> memory = new LinkedHashMap<>();
@@ -19,7 +19,7 @@ public class InMemoryLogRepository<T> implements LogRepository {
 
     @Override
     public List<T> getAll() {
-        return memory.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(memory.values());
     }
 
 }

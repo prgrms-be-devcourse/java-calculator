@@ -18,6 +18,7 @@ class ValidateExpressionTests {
         List<String> exp1 = converter.expressionToList("1 + ( 3 * ( 4 - 2 )");
         List<String> exp2 = converter.expressionToList("(()");
         List<String> exp3 = converter.expressionToList("(3))");
+        List<String> exp4 = converter.expressionToList("1 + (3/(4-2))");
 
         // when
 
@@ -25,10 +26,11 @@ class ValidateExpressionTests {
         assertThat(converter.validate(exp1)).isEqualTo(false);
         assertThat(converter.validate(exp2)).isEqualTo(false);
         assertThat(converter.validate(exp3)).isEqualTo(false);
+        assertThat(converter.validate(exp4)).isEqualTo(true);
     }
 
     @Test
-    @DisplayName("+-/*이외의 연산자를 사용한 경우 예외를 발생시킨다.")
+    @DisplayName("+-/*이외의 연산자를 사용한 경우 false 를 반환한다.")
     void validateExpressionWithOpcode() {
         // given
         List<String> exp1 = converter.expressionToList("1 = 3");
@@ -44,7 +46,7 @@ class ValidateExpressionTests {
     }
 
     @Test
-    @DisplayName("'('를 제외한 연산자로 시작하는 경우 예외를 발생시킨다.")
+    @DisplayName("'('를 제외한 연산자로 시작하는 경우 false 를 반환한다.")
     void validateExpressionWithFirstLetter() {
         // given
         List<String> exp1 = converter.expressionToList("+1 + 1");
@@ -60,7 +62,7 @@ class ValidateExpressionTests {
     }
 
     @Test
-    @DisplayName("')'를 제외한 연산자로 끝나는 경우 예외를 발생시킨다.")
+    @DisplayName("')'를 제외한 연산자로 끝나는 경우 false 를 반환한다.")
     void validateExpressionWithEndLetter() {
         // given
         List<String> exp1 = converter.expressionToList("1 + +");
@@ -76,7 +78,7 @@ class ValidateExpressionTests {
     }
 
     @Test
-    @DisplayName("공백이거나 연산항의 개수가 2개 이하인 경우 예외를 발생시킨다.")
+    @DisplayName("공백이거나 연산항의 개수가 2개 이하인 경우 false 를 반환한다.")
     void validateExpressionWithNumberOfOperatorsAndOperands() {
         // given
         List<String> exp1 = converter.expressionToList("");
