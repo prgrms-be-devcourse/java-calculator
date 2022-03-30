@@ -1,5 +1,13 @@
 package com.programmers.java.calculator.model;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class Problem {
     private String[] question;
     private int answer;
