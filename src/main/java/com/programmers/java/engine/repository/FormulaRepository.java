@@ -2,13 +2,12 @@ package com.programmers.java.engine.repository;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 @Getter
 public class FormulaRepository implements MemoryRepository {
 
-    private final Map<String, Long> history = new HashMap<>();
+    private final LinkedHashMap<String, Long> history = new LinkedHashMap<>();
 
     @Override
     public void save(String formula, Long result) {
@@ -18,7 +17,6 @@ public class FormulaRepository implements MemoryRepository {
     @Override
     public void findAll() {
         history.forEach((form, result) -> System.out.println(form + " = " + result));
-        System.out.println("END !\n");
     }
 
     @Override
