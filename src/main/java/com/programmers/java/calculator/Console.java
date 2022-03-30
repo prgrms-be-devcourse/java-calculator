@@ -26,8 +26,13 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printError(String s) {
-        System.out.println("[에러 발생] : " + s);
+    public void printCalculatorException(String s) {
+        System.out.println("[계산기 문제] " + s);
+    }
+
+    @Override
+    public void printInputException(String s) {
+        System.out.println("[입력 문제] " + s);
     }
 
     @Override

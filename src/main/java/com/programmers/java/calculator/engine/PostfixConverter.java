@@ -4,6 +4,7 @@ import com.programmers.java.calculator.engine.model.Infix;
 import com.programmers.java.calculator.engine.model.Postfix;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class PostfixConverter {
     private final HashMap<String, Integer> priorityMap = new HashMap<>() {{
@@ -18,10 +19,9 @@ public class PostfixConverter {
         Deque<String> deque = new ArrayDeque<>();
         List<String> postfix = new ArrayList<>();
         infix.forEach((s) -> {
-            try {
-                Integer num = Integer.parseInt(s);
+            if (Pattern.matches("[\\d]+", s)) {
                 postfix.add(s);
-            } catch (NumberFormatException e) {
+            } else {
                 while (!deque.isEmpty() && priorityMap.get(s) <= priorityMap.get(deque.getFirst())) {
                     postfix.add(deque.removeFirst());
                 }
@@ -31,6 +31,6 @@ public class PostfixConverter {
         while (!deque.isEmpty()) {
             postfix.add(deque.removeFirst());
         }
-        return new Postfix(postfix.toArray(new String[0]));
+        return new Postfix(postfix);
     }
 }

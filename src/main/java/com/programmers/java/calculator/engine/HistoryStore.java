@@ -8,7 +8,7 @@ import java.util.List;
 
 public class HistoryStore {
     private List<History> histories = new ArrayList<>();
-    public void show(Output input) {
+    public void show(Output output) {
         //TODO : History를 이용한 조회 기능 구현하기
     }
 }
