@@ -37,7 +37,7 @@ public class Calculator {
                 else {
                     int diff=stack.peek().getPriority()-operator.get().getPriority();
                     if(diff>=0) posixList.add(stack.pop().toString());
-                    else stack.push(operator.get());
+                    stack.push(operator.get());
                 }
                 continue;
             }
