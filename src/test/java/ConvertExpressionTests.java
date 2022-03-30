@@ -1,6 +1,8 @@
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class ConvertExpressionTests {
     private final ExpressionConverter converter = new Prefix2PostfixConverter();
@@ -28,9 +30,23 @@ public class ConvertExpressionTests {
         String res3 = sb.toString();
 
         // then
-        Assertions.assertThat(res1).isEqualTo("123*+");
-        Assertions.assertThat(res2).isEqualTo("1234-/*");
-        Assertions.assertThat(res3).isEqualTo("210/+");
+        assertThat(res1).isEqualTo("123*+");
+        assertThat(res2).isEqualTo("1234-/*");
+        assertThat(res3).isEqualTo("210/+");
 
+    }
+
+    @Test
+    @DisplayName("Double 값 검증")
+    void validateDouble() {
+        // given
+        String input = "0%0";
+
+        // when
+
+        // then
+        Assertions.assertThrows(NumberFormatException.class, () -> {
+            Double.parseDouble(input);
+        });
     }
 }

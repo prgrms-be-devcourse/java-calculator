@@ -92,14 +92,13 @@ public class Prefix2PostfixConverter implements ExpressionConverter {
      * @param input
      * @return
      */
-    private static boolean isValidDouble(String input) {
-        final BigDecimal MAX_DOUBLE = new BigDecimal(Double.MAX_VALUE);
+    private boolean isValidDouble(String input) {
         try {
-            BigDecimal bigInput = new BigDecimal(input);
-            return bigInput.compareTo(MAX_DOUBLE) < 1;
+            Double.valueOf(input);
         } catch (NumberFormatException e) {
             return false;
         }
+        return true;
     }
 
 }
