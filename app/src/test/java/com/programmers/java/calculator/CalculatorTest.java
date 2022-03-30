@@ -28,6 +28,21 @@ public class CalculatorTest {
     public void checkCalculation() {
         Assertions.assertEquals(
                 calculation.doCalculation(new Arithmetic(new String[]{"1", "2", "3", "*", "+", "4", "-"}))
-                        .orElse((double) 0), 3.0);
+                        .orElseThrow(), 3.0);
+    }
+
+    @Test
+    public void checkDivisionByZero() {
+        Assertions.assertEquals(
+                calculation.doCalculation(new Arithmetic(new String[]{"1", "0", "/"}))
+                        .orElseThrow(), Double.POSITIVE_INFINITY);
+
+        Assertions.assertEquals(
+                calculation.doCalculation(new Arithmetic(new String[]{"-1", "0", "/"}))
+                        .orElseThrow(), Double.NEGATIVE_INFINITY);
+
+        Assertions.assertEquals(
+                calculation.doCalculation(new Arithmetic(new String[]{"0", "0", "/"}))
+                        .orElseThrow(), Double.NaN);
     }
 }
