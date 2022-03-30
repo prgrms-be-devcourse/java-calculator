@@ -6,9 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringManipulateTest {
 
+    private String string = "1 + 2 * 3";
+
     @Test
     public void testIntegerStack(){
-        String string = "1 + 2 * 3";
         StringManipulator manipulator = new StringManipulator(string);
         Stack<Integer> integerStack = manipulator.getIntegerStack();
 
@@ -24,11 +25,19 @@ public class StringManipulateTest {
     }
 
     @Test
-    public void testOperatorStack(String string){
+    public void testOperatorStack(){
         StringManipulator manipulator = new StringManipulator(string);
         Stack<Character> operatorStack = manipulator.getOperatorStack();
 
-        assertEquals(getRightTestOperatorStack(string),operatorStack);
+        assertEquals(getRightOperatorStack(string),operatorStack);
+    }
+
+    @Test
+    public void testEmptyOperatorStack(){
+        StringManipulator manipulator = new StringManipulator("");
+        Stack<Character> operatorStack = manipulator.getOperatorStack();
+
+        assertEquals(new Stack<Integer>(),operatorStack);
     }
 
     public Stack<Integer> getRightIntegerStack(String string){
@@ -42,7 +51,7 @@ public class StringManipulateTest {
         return integerStack;
     }
 
-    public Stack<Character> getRightTestOperatorStack(String string){
+    public Stack<Character> getRightOperatorStack(String string){
         Stack<Character> operatorStack = new Stack<>();
         for (int i = 0; i<string.length(); i++){
             char nowChar = string.charAt(i);
