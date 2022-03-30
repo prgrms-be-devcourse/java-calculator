@@ -32,7 +32,7 @@ class TokenizerTest {
     @Test
     public void 문자열_토큰화_테스트2() throws Exception {
         // given
-        String exprStr = "(4 - 2) * 2";
+        String exprStr = "( 4 - 2 ) * 2";
 
         // when
         List<String> exprList = tokenizer.tokenize(exprStr);
@@ -50,6 +50,18 @@ class TokenizerTest {
         List<String> exprList = tokenizer.tokenize(exprStr);
 
         // then
-        Assertions.assertThat(exprList).isEqualTo(Arrays.asList("-", "100", "+", "300"));
+        Assertions.assertThat(exprList).isEqualTo(Arrays.asList("-100", "+", "300"));
+    }
+
+    @Test
+    public void 문자열_토큰화_테스트4() throws Exception {
+        // given
+        String exprStr = "-1.2 + 3";
+
+        // when
+        List<String> exprList = tokenizer.tokenize(exprStr);
+
+        // then
+        Assertions.assertThat(exprList).isEqualTo(Arrays.asList("-1.2", "+", "3"));
     }
 }
