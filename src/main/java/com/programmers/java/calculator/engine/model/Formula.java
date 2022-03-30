@@ -1,4 +1,7 @@
 package com.programmers.java.calculator.engine.model;
 
-public class Formula {
+import java.util.function.Consumer;
+
+public interface Formula {
+    void forEach(Consumer<String> consumer);
 }
