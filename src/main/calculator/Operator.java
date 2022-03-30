@@ -48,11 +48,9 @@ public class Operator {
                 else if(cur.equals("-")){
                     list.add(i-1,String.valueOf(front - back));
                 }
-
                 //인덱스 제거 후 제자리
                 i-=2;
             }
         }
     }
-
 }
