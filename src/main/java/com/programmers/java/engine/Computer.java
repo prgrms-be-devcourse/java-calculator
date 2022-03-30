@@ -5,17 +5,19 @@ import java.util.List;
 
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
+import com.programmers.java.engine.operations.ArithmeticOperation;
 
 public class Computer implements Runnable{
     Input input;
     Output output;
-    Calculator calculator = new Calculator();
+    Calculator calculator;
     List<String> db = new ArrayList<>();
     private final String OPTION_MESSAGE = "1. 조회\n2. 계산\n\n선택 : ";
 
-    public Computer(Input input, Output output){
+    public Computer(Input input, Output output, ArithmeticOperation arithmeticOperation){
         this.input = input;
         this.output = output;
+        calculator = new Calculator(arithmeticOperation);
     }
 
     @Override

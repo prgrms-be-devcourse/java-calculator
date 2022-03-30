@@ -1,13 +1,18 @@
 package com.programmers.java.engine;
 
+import com.programmers.java.OperationImpl;
 import com.programmers.java.engine.domain.Expression;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class CalculatorTest {
-    Calculator calculator = new Calculator();
+    Calculator calculator = new Calculator(new OperationImpl());
 
     @Test
     @DisplayName("입력 변환 테스트")
