@@ -42,9 +42,19 @@ public class Calculator implements Runnable {
                 default:
                     output.inputError();
             }
-
         }
 
     }
 
+    private String[] parse(String input) {
+        return input.split(" ");
+    }
+
+    private void save(String formula, String answer) {
+        String value = String.format
+                (formula +
+                        " = " +
+                        answer);
+        repository.save(value);
+    }
 }
