@@ -1,38 +1,41 @@
 package com.waterfogsw.io;
 
 import com.waterfogsw.domain.Calculation;
+import com.waterfogsw.exception.InvalidFormulaInput;
+import com.waterfogsw.exception.InvalidMenuInput;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.InputMismatchException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Console implements Input, Output {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public int inputMenu(String prompt) throws IOException {
+    public int inputMenu(String prompt) throws IOException, InvalidMenuInput {
         System.out.print(prompt);
         String input = br.readLine();
 
         System.out.println();
         if (!isValidMenu(input)) {
-            throw new InputMismatchException();
+            throw new InvalidMenuInput();
         } else {
             return Integer.parseInt(input);
         }
     }
 
     @Override
-    public String inputExpr(String prompt) throws IOException {
+    public String inputFormula(String prompt) throws IOException, InvalidFormulaInput {
         System.out.print(prompt);
         String input = br.readLine();
         System.out.println();
-        if (isValidExpr(input)) {
+        if (isValidFormula(input)) {
             return input;
         } else {
-            throw new IOException();
+            throw new InvalidFormulaInput();
         }
     }
 
@@ -50,21 +53,27 @@ public class Console implements Input, Output {
 
     @Override
     public void inputError() {
-        System.out.println("잘못된 입력입니다.\n");
+        System.out.println(ErrorMessage.WRONG_INPUT);
     }
 
     @Override
     public void divZeroError() {
-        System.out.println("0으로 나눌 수 없습니다.");
+        System.out.println(ErrorMessage.DIV_BY_ZERO);
+    }
+
+    @Override
+    public void dataOverflowError() {
+        System.out.println(ErrorMessage.DATA_OVERFLOW);
     }
 
     private boolean isValidMenu(String menu) {
-        return Integer.parseInt(menu) == 1 || Integer.parseInt(menu) == 2;
+        Pattern pattern = Pattern.compile(ValidationRegex.MENU_REGEX);
+        Matcher matcher = pattern.matcher(menu);
+        return !matcher.find();
     }
 
-    private boolean isValidExpr(String expr) {
-        String pattern = "[^\\d\\+\\-\\*\\/\\s]";
-        return !expr.matches(pattern);
+    private boolean isValidFormula(String formula) {
+        return formula.matches(ValidationRegex.FORMULA_REGEX);
     }
 
 }
