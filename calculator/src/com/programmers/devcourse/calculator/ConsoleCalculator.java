@@ -13,6 +13,11 @@ import java.util.List;
 
 public class ConsoleCalculator implements Calculator {
 
+  // Enum 클래스를 활용해서 mode를 if 문 없이 사용해보고 싶다.
+  // Enum 클래스에는 각 모드마다 메서드가 정해져 있어야 하는 것이 아닐까?
+  // 그럴려면 input, output 인터페이스가 정해져 있어야 할 듯
+
+
   private final Parser parser;
   private final BufferedReader br;
   private final ResultRepository<String, Double> repository;
@@ -94,6 +99,7 @@ public class ConsoleCalculator implements Calculator {
       System.out.println("\n없음");
       return;
     }
+
     repository.forEach((key, value) -> {
       System.out.println(key + " = " + value);
     });

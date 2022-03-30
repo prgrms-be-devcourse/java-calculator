@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -57,6 +58,19 @@ class ResultRepositoryTest {
     });
 
     assertTrue(flag.get());
+  }
+
+
+  @DisplayName("Repository에 입력한 순서대로 데이터가 저장되어 있어야 한다.")
+  @Test
+  void savedDataShouldHaveRightOrder() {
+    AtomicInteger i = new AtomicInteger();
+    repository.forEach((key, value) -> {
+      int index = i.getAndIncrement();
+      assertEquals(expressions[index], key);
+      assertEquals(results[index], value);
+
+    });
   }
 
 

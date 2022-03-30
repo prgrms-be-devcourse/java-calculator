@@ -1,6 +1,6 @@
 package com.programmers.devcourse.repository;
 
-import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -9,8 +9,8 @@ public class StringResultRepository implements ResultRepository<String, Double> 
   private final Map<String, Double> resultMap;
 
   public StringResultRepository() {
-    this.resultMap = new Hashtable<>();
-    
+    this.resultMap = new LinkedHashMap<>();
+
   }
 
 
