@@ -1,15 +1,23 @@
 package com.programmers.oop.utils;
 
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 import com.programmers.oop.type.Operator;
+import java.util.stream.Collectors;
 
 public class ParserUtils {
 
     private static final char OPEN_BRACKET = '(';
     private static final char CLOSE_BRACKET = ')';
+    private static final String OPERATE_REGEX = "[+*\\-/]";
+
+    private ParserUtils() {
+
+    }
 
     /**
      * what : infix -> postfix
@@ -73,6 +81,12 @@ public class ParserUtils {
         StringBuilder answer = new StringBuilder();
         list.stream().forEach(value -> answer.append(value + "\n"));
         return answer.toString();
+    }
+
+    public static List<String> splitOperator(String expression) {
+        return Arrays.stream(expression.split(OPERATE_REGEX))
+            .filter(val -> !val.isBlank())
+            .collect(Collectors.toList());
     }
 
 

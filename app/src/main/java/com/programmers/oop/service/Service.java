@@ -24,7 +24,7 @@ public class Service implements ComputeService<String>, LookUpService<String> {
     public String computeExpression(String formula) {
         List<String> expressionList = ParserUtils.toPostFix(formula);
         String answer = computeFormula(expressionList);
-        respository.save(String.join(" ", expressionList) + " = " + answer);
+        respository.save(formula + " = " + answer);
         return answer;
     }
 
@@ -36,6 +36,13 @@ public class Service implements ComputeService<String>, LookUpService<String> {
         }
         return histories;
     }
+
+    /**
+     * worries : private 접근 제어자라.. test하기 용이하지 않는 단점이 있는데 어떤 역할로 분리해야할지 아이디어가 없습니다..
+     *
+     * @param expression
+     * @return
+     */
 
     private String computeFormula(List<String> expression) {
         StringBuilder answer = new StringBuilder();
