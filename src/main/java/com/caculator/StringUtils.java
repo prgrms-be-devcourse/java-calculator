@@ -4,7 +4,7 @@ public class StringUtils {
 
     public static boolean isNumber(String s) {
         try {
-            Integer.parseInt(s);
+            Long.parseLong(s);
             return true;
         } catch (NumberFormatException e) {
             return false;

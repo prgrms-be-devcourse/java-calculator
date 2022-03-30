@@ -23,7 +23,7 @@ class CalculatorTest {
         String expression = "1 + 2 + 3";
 
         //when
-        int result = calculator.executeCalculator(expression);
+        long result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(6);
@@ -36,7 +36,7 @@ class CalculatorTest {
         String expression = "20 - 10 - 5";
 
         //when
-        int result = calculator.executeCalculator(expression);
+        long result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(5);
@@ -49,7 +49,7 @@ class CalculatorTest {
         String expression = "10 * 15 * 3";
 
         //when
-        int result = calculator.executeCalculator(expression);
+        long result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(450);
@@ -62,7 +62,7 @@ class CalculatorTest {
         String expression = "20 / 2 / 5";
 
         //when
-        int result = calculator.executeCalculator(expression);
+        long result = calculator.executeCalculator(expression);
 
         //then
         assertThat(result).isEqualTo(2);
@@ -78,9 +78,9 @@ class CalculatorTest {
         String expression3 = "100 * 50 / 20 - 35 / 5 * 4 + 10 * 5 * 2";
 
         //when
-        int result1 = calculator.executeCalculator(expression1);
-        int result2 = calculator.executeCalculator(expression2);
-        int result3 = calculator.executeCalculator(expression3);
+        long result1 = calculator.executeCalculator(expression1);
+        long result2 = calculator.executeCalculator(expression2);
+        long result3 = calculator.executeCalculator(expression3);
 
         //then
         assertThat(result1).isEqualTo(9);
@@ -88,7 +88,7 @@ class CalculatorTest {
         assertThat(result3).isEqualTo(322);
     }
 
-    @Test
+    @ParameterizedTest
     @ValueSource(strings = {"3 / 0", "1 + 2 * 10 / 0 + 4", "3 * 4 / 0 * 5"})
     @DisplayName("0으로 나누면 ArithmeticException 발생")
     void divideZeroTest(String expression) {

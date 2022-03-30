@@ -2,9 +2,9 @@ package com.caculator.dto;
 
 public class Result {
     private String exp;
-    private int result;
+    private long result;
 
-    public Result(String exp, int result) {
+    public Result(String exp, long result) {
         this.exp = exp;
         this.result = result;
     }

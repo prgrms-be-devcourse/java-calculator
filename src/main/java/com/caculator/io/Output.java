@@ -9,5 +9,5 @@ public interface Output {
 
     void printError(String errMsg);
 
-    void printResult(int n);
+    void printResult(long result);
 }

@@ -10,7 +10,7 @@ public class Console implements Input, Output {
     private final Scanner sc = new Scanner(System.in);
 
     @Override
-    public String inputCmd() {
+    public String inputCommand() {
         System.out.println("1. 조회");
         System.out.println("2. 계산");
         System.out.println();
@@ -19,12 +19,12 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public String inputExp() {
+    public String inputExpression() {
         return sc.nextLine().trim();
     }
 
     @Override
-    public void printResult(int result) {
+    public void printResult(long result) {
         System.out.println(result);
         System.out.println();
     }

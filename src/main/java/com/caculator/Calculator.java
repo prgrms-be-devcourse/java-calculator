@@ -25,16 +25,16 @@ public class Calculator {
 
     public void run() {
         while (true) {
-            String cmd = input.inputCmd();
+            String command = input.inputCommand();
 
-            switch (cmd) {
+            switch (command) {
                 case COMMAND_HISTORY:
                     List<Result> history = repository.findAll();
                     executeHistoryCommand(history);
                     break;
                 case COMMAND_CALCULATE:
-                    String exp = input.inputExp();
-                    executeCalculationCommand(exp);
+                    String expression = input.inputExpression();
+                    executeCalculationCommand(expression);
                     break;
                 case COMMAND_EXIT:
                     return;
@@ -58,7 +58,7 @@ public class Calculator {
      */
     private void executeCalculationCommand(String expression) {
         try {
-            int result = executeCalculator(expression);
+            long result = executeCalculator(expression);
             repository.save(new Result(expression, result));
             output.printResult(result);
         } catch (IllegalArgumentException e) {
@@ -94,7 +94,7 @@ public class Calculator {
      * @return : 계산 결과 정수
      * @throws IllegalArgumentException, ArithmeticException : convert(), calculatePostfixExpression()에서 던져진 예외
      */
-    public int executeCalculator(String expression) throws IllegalArgumentException, ArithmeticException {
+    public long executeCalculator(String expression) throws IllegalArgumentException, ArithmeticException {
         List<String> postfix = PostfixConverter.convert(expression);
         return calculatePostfixExpression(postfix);
     }
@@ -105,15 +105,15 @@ public class Calculator {
      * @return 연산 결과
      * @throws IllegalArgumentException, ArithmeticException : calculate()에서 던져진 예외
      */
-    private int calculatePostfixExpression(List<String> expressions) throws IllegalArgumentException, ArithmeticException {
-        Stack<Integer> stack = new Stack<>();
+    private long calculatePostfixExpression(List<String> expressions) throws IllegalArgumentException, ArithmeticException {
+        Stack<Long> stack = new Stack<>();
 
         for (String s : expressions) {
             if (StringUtils.isNumber(s)) {
-                stack.push(Integer.parseInt(s));
+                stack.push(Long.parseLong(s));
             } else {
-                int n2 = stack.pop();
-                int n1 = stack.pop();
+                long n2 = stack.pop();
+                long n1 = stack.pop();
                 stack.push(calculate(n1, n2, s));
             }
         }
@@ -126,7 +126,7 @@ public class Calculator {
      * @throws ArithmeticException : 0으로 나누는 연산, 연산 결과에 오버플로 발생시 던져진다.
      * @throws IllegalArgumentException : operator 가 연산자(+, -. *, /)가 가 아닌 경우 던져진다.
      */
-    private int calculate(int n1, int n2, String operator) throws ArithmeticException, IllegalArgumentException {
+    private long calculate(long n1, long n2, String operator) throws ArithmeticException, IllegalArgumentException {
         switch (operator) {
             case "+":
                 return Math.addExact(n1, n2);
