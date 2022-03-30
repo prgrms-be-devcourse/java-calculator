@@ -1,6 +1,8 @@
 package org.programmers.calculator;
 
-import org.programmers.calculator.postfixCalculator.Solver;
+import org.programmers.calculator.configuration.Config;
+import org.programmers.calculator.configuration.Operand;
+import org.programmers.calculator.postfixCalculator.PostfixSolver;
 import org.programmers.calculator.postfixParser.PostfixParser;
 import org.programmers.calculator.repository.Repository;
 
@@ -11,11 +13,11 @@ import java.util.Scanner;
 public class Menu {
 
     private PostfixParser parser;
-    private Solver solver;
+    private PostfixSolver solver;
     private Repository repository;
     private final Scanner sc = new Scanner(System.in);
 
-    public Menu(PostfixParser parser, Solver solver, Repository repository) {
+    public Menu(PostfixParser parser, PostfixSolver solver, Repository repository) {
         this.parser = parser;
         this.solver = solver;
         this.repository = repository;
@@ -32,6 +34,8 @@ public class Menu {
         System.out.println("==============================================");
 
         int input = sc.nextInt();
+        sc.nextLine();
+
         switch (input) {
             case 1:
                 calculation();
@@ -51,17 +55,11 @@ public class Menu {
 
     }
 
-    private boolean exit() {
-        System.out.println("정말로 종료 하시겠습니까?(Y/N)");
-        sc.nextLine();
-        String input = sc.nextLine();
-        return input.equals("Y") || input.equals("y");
-    }
-
     private void calculation() {
         System.out.println("수식을 입력해 주세요.");
-        sc.nextLine();
         String input = sc.nextLine();
+        sc.nextLine();
+
         try {
             List<String> postFixExpression = parser.parse(input);
             String result = solver.solve(postFixExpression);
@@ -89,8 +87,9 @@ public class Menu {
 
     private void searchRecordWithExpression() {
         System.out.println("검색하시려는 연산을 정확히 입력해 주십시오.");
-        sc.nextLine();
         String input = sc.nextLine();
+        sc.nextLine();
+
         System.out.println(repository.findByKey(input));
         run();
     }
@@ -105,7 +104,15 @@ public class Menu {
 
     private void configure() {
         System.out.println("피연산자를 선택해 주세요.");
-        System.out.println("1. 정수");
+        System.out.println("1. 유리수 2. 부울 값");
+        int input = sc.nextInt();
+        sc.nextLine();
+
+        switch (input) {
+            case 1: Config.set(Operand.RATIONAL_NUMBER);
+            case 2: Config.set(Operand.BOOLEAN);
+            default:
+        };
         run();
     }
 }

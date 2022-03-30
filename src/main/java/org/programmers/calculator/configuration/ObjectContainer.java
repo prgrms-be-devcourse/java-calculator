@@ -1,9 +1,9 @@
 package org.programmers.calculator.configuration;
 
 import org.programmers.calculator.Menu;
-import org.programmers.calculator.postfixCalculator.NumeralCalculator;
-import org.programmers.calculator.postfixCalculator.NumeralPostfixSolver;
-import org.programmers.calculator.postfixCalculator.Solver;
+import org.programmers.calculator.TypeChecker.BooleanTypeChecker;
+import org.programmers.calculator.postfixCalculator.*;
+import org.programmers.calculator.postfixParser.BooleanPostfixParser;
 import org.programmers.calculator.postfixParser.NumeralPostfixParser;
 import org.programmers.calculator.postfixParser.PostfixParser;
 import org.programmers.calculator.TypeChecker.NumeralTypeChecker;
@@ -15,8 +15,7 @@ public final class ObjectContainer {
 
     private static PostfixParser parser;
     private static TypeChecker typeChecker;
-    private static Solver solver;
-    private static NumeralCalculator calculator;
+    private static PostfixSolver solver;
     private static Repository repository;
     private static Menu menu;
 
@@ -25,21 +24,28 @@ public final class ObjectContainer {
 
     public static void create(Operand operand) {
         destroy();
+
         if (operand==Operand.RATIONAL_NUMBER) {
-            repository = new MemoryMapRepository();
             typeChecker = new NumeralTypeChecker();
             parser = new NumeralPostfixParser(typeChecker);
-            calculator = new NumeralCalculator(typeChecker);
-            solver = new NumeralPostfixSolver(typeChecker, calculator);
-            menu = new Menu(parser, solver, repository);
+            solver = new NumeralPostfixSolver(typeChecker);
         }
+        else if (operand==Operand.BOOLEAN) {
+            typeChecker = new BooleanTypeChecker();
+            parser = new BooleanPostfixParser(typeChecker);
+            solver = new BooleanPostfixSolver(typeChecker);
+        }
+
+        repository = new MemoryMapRepository();
+        menu = new Menu(parser, solver, repository);
+
     }
 
     public static PostfixParser getParser() {
         return parser;
     }
 
-    public static Solver getSolver() {
+    public static PostfixSolver getSolver() {
         return solver;
     }
 
@@ -50,7 +56,6 @@ public final class ObjectContainer {
     private static void destroy() {
         typeChecker = null;
         parser = null;
-        calculator = null;
         solver = null;
         menu = null;
     }

@@ -1,5 +1,6 @@
 package org.programmers.calculator;
 
+import org.programmers.calculator.configuration.Config;
 import org.programmers.calculator.configuration.ObjectContainer;
 import org.programmers.calculator.configuration.Operand;
 
@@ -19,6 +20,6 @@ public class Main {
     }
 
     private static void init() {
-        ObjectContainer.create(Operand.RATIONAL_NUMBER);
+        Config.set(Operand.RATIONAL_NUMBER);
     }
 }
