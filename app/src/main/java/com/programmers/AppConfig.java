@@ -1,7 +1,7 @@
 package com.programmers;
 
-import com.programmers.repository.CaseRepository;
-import com.programmers.repository.MemoryRepository;
+import com.programmers.store.CaseStore;
+import com.programmers.store.MemoryStore;
 import com.programmers.service.MainService;
 
 public class AppConfig {
@@ -11,7 +11,7 @@ public class AppConfig {
     }
 
     // memoryRepository 연동
-    private CaseRepository memoryRepository() {
-        return new MemoryRepository();
+    private CaseStore memoryRepository() {
+        return new MemoryStore();
     }
 }

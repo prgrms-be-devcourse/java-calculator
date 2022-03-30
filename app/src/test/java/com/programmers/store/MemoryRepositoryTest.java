@@ -1,13 +1,13 @@
-package com.programmers.repository;
+package com.programmers.store;
 
-import com.programmers.entity.CaseData;
+import com.programmers.item.CaseData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
 class MemoryRepositoryTest {
-    CaseRepository caseRepository = new MemoryRepository();
+    CaseStore caseStore = new MemoryStore();
     
     @Test
     @DisplayName("CaseData Repository 에 저장후 저장되는지 비교")
@@ -15,10 +15,10 @@ class MemoryRepositoryTest {
         // given
         CaseData caseData = new CaseData(1L, "1 + 2", 3d);
         // when
-        caseRepository.save(caseData);
+        caseStore.save(caseData);
         
         // then
-        Assertions.assertEquals(caseData, caseRepository.findById(1L));
+        Assertions.assertEquals(caseData, caseStore.findById(1L));
         
     }
 

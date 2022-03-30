@@ -34,7 +34,7 @@ main/java/com/programmers/MainApplication.java 실행
   - 최종적으로 출력 양식을 이쁘게하기 위해 소수 둘째자리까지 반올림한다.
 
 **MainService.java**
-- caseRepository 의 경우 repository 의 변경가능성을 고려하여 생성자로 연관성 주입을 연결하였다. 의존성 관리를 위해 AppConfig.java 파일을 만들어 팩토리패턴을 적용하였다.
+- caseStore 의 경우 repository 의 변경가능성을 고려하여 생성자로 연관성 주입을 연결하였다. 의존성 관리를 위해 AppConfig.java 파일을 만들어 팩토리패턴을 적용하였다.
 - playCalculate 함수
   - 계산기가 실행되는 MainApplication 에서 사용될 함수이다.
 

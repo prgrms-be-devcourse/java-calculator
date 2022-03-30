@@ -2,7 +2,7 @@ package com.programmers.service;
 
 import java.util.Scanner;
 
-public class Input {
+public class InputService {
 
     private ValidationService validationCase = new ValidationService();
     Scanner sc = new Scanner(System.in);

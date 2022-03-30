@@ -1,4 +1,4 @@
-package com.programmers.entity;
+package com.programmers.item;
 
 public class CaseData {
 

@@ -1,18 +1,16 @@
 package com.programmers.service;
 
-import com.programmers.entity.CaseData;
-import com.programmers.repository.CaseRepository;
-
-import java.util.Scanner;
+import com.programmers.item.CaseData;
+import com.programmers.store.CaseStore;
 
 public class MainService {
 
     private CalculationService calculationService = new CalculationService();
-    private Input input = new Input();
-    private CaseRepository caseRepository;
+    private InputService input = new InputService();
+    private CaseStore caseStore;
 
-    public MainService(CaseRepository caseRepository) {
-        this.caseRepository = caseRepository;
+    public MainService(CaseStore caseStore) {
+        this.caseStore = caseStore;
     }
 
     public void playCalculate() {
@@ -34,7 +32,7 @@ public class MainService {
 
             if (number == 1) {
                 // 조회 로직
-                caseRepository.allStoreValue();
+                caseStore.allStoreValue();
             } else {
                 // 공식 입력 받는다.(숫자 혹은 연산자)
                 String inputStr = input.getString();
@@ -45,7 +43,7 @@ public class MainService {
 
                 // Data 저장
                 CaseData caseData = new CaseData(id, inputStr, result);
-                caseRepository.save(caseData);
+                caseStore.save(caseData);
             }
         }
     }

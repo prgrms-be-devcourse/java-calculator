@@ -1,12 +1,12 @@
-package com.programmers.repository;
+package com.programmers.store;
 
-import com.programmers.entity.CaseData;
+import com.programmers.item.CaseData;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class MemoryRepository implements CaseRepository {
+public class MemoryStore implements CaseStore {
     // 메모리 사용 저장소 store 생성
     private static Map<Long, CaseData> store = new LinkedHashMap<>();
 
