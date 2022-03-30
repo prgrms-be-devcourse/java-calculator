@@ -1,5 +1,8 @@
 package com.programmers.java.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorMessage {
     INVALID_MENU_INPUT("선택한 숫자값이 유효하지 않습니다."),
     EMPTY_INPUT("빈 계산식이 입력되었습니다."),
@@ -14,7 +17,4 @@ public enum ErrorMessage {
         this.message = message;
     }
 
-    public String getMessage() {
-        return message;
-    }
 }
