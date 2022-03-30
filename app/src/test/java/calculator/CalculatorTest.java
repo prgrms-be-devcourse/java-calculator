@@ -1,8 +1,10 @@
-package calculator;
+package javacalculator.calculator;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,35 +17,36 @@ public class CalculatorTest {
         calculator = new Calculator();
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("더하기_기능_테스트")
-    void plus() {
-        assertThat(calculator.plus(1.0, 2.0)).isEqualTo(3.0);
-        assertThat(calculator.plus(1.0, 0.0)).isEqualTo(1.0);
-        assertThat(calculator.plus(1.0, -2.0)).isEqualTo(-1.0);
+    @CsvSource({"1.0,2.0,3.0","1.0,0.0,1.0","1.0,-2.0,-1.0"})
+    void plus(double operand1, double operand2, double expect) {
+        assertThat(calculator.plus(operand1, operand2)).isEqualTo(expect);
     }
-
-    @Test
+    @ParameterizedTest
     @DisplayName("뺴기_기능_테스트")
-    void minus() {
-        assertThat(calculator.minus(0.0, 0.0)).isEqualTo(0.0);
-        assertThat(calculator.minus(0.0, 1.0)).isEqualTo(-1.0);
-        assertThat(calculator.minus(1.0, 0.0)).isEqualTo(1.0);
+    @CsvSource({"0.0,0.0,0.0","0.0,1.0,-1.0","1.0,0.0,1.0"})
+    void minus(double operand1, double operand2, double expect) {
+        assertThat(calculator.minus(operand1, operand2)).isEqualTo(expect);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("곱하기_기능_테스트")
-    void multiply() {
-        assertThat(calculator.multiply(2.0, 0.0)).isEqualTo(0.0);
-        assertThat(calculator.multiply(2.0, 1.0)).isEqualTo(2.0);
-        assertThat(calculator.multiply(2.0, -2.0)).isEqualTo(-4.0);
+    @CsvSource({"2.0,0.0,0.0","2.0,1.0,2.0","2.0,-2.0,-4.0"})
+    void multiply(double operand1, double operand2, double expect) {
+        assertThat(calculator.multiply(operand1, operand2)).isEqualTo(expect);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("나누기_기능_테스트")
-    void divied() {
-        assertThat(calculator.divied(2.0, 1.0)).isEqualTo(2.0);
-        assertThat(calculator.divied(1.0, -2.0)).isEqualTo(-0.5);
+    @CsvSource({"2.0,1.0,2.0","1.0,-2.0,-0.5",})
+    void divied(double operand1, double operand2, double expect) {
+        assertThat(calculator.divied(operand1, operand2)).isEqualTo(expect);
+    }
+    @Test
+    @DisplayName("나누기 기능 테스트 - 0으로 나눌 때")
+    void diviedWithZero() {
         assertThatThrownBy(() -> calculator.divied(2.0, 0.0)).isInstanceOf(IllegalArgumentException.class);
     }
+
 }
