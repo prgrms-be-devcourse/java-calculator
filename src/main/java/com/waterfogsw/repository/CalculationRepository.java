@@ -5,7 +5,8 @@ import com.waterfogsw.domain.Calculation;
 import java.util.List;
 
 public interface CalculationRepository {
-    void save(Calculation calculation);
+
+    void save(String formula, String result);
 
     Calculation findById(Long id);
 

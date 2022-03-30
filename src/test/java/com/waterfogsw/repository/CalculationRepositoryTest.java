@@ -21,27 +21,34 @@ class CalculationRepositoryTest {
     @Test
     void 저장소_저장_테스트() {
         // given
-        Calculation cal = new Calculation(0L, "2 + 2 + 2", "6");
+        String expression = "2 + 2 + 2";
+        String result = "6";
 
         // when
-        repository.save(cal);
+        repository.save(expression, result);
         Calculation findCal = repository.findById(0L);
 
         //then
-        Assertions.assertThat(findCal).isEqualTo(cal);
+        Assertions.assertThat(findCal.getFormula()).isEqualTo(expression);
     }
 
     @Test
     void 저장소_전체조회_테스트() {
         // given
-        Calculation cal1 = new Calculation(0L, "2 + 2 + 2", "6");
-        Calculation cal2 = new Calculation(1L, "( 2 + 2 ) * 4", "16");
-        Calculation cal3 = new Calculation(2L, "( 2 + 2 ) / 4", "1");
+        String expression1 = "2 + 2 + 2";
+        String result1 = "6";
+
+        String expression2 = "( 2 + 2 ) * 4";
+        String result2 = "16";
+
+        String expression3 = " ( 2 + 2 ) / 4";
+        String result3 = "1";
+
 
         // when
-        repository.save(cal1);
-        repository.save(cal2);
-        repository.save(cal3);
+        repository.save(expression1, result1);
+        repository.save(expression2, result2);
+        repository.save(expression3, result3);
 
         //then
         List<Calculation> findCals = repository.findAll();

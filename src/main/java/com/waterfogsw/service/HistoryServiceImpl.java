@@ -10,21 +10,13 @@ import java.util.List;
 public class HistoryServiceImpl implements HistoryService {
     private final CalculationRepository repository;
 
-    private static Long calIdx = 0L;
-
     @Override
-    public void save(String expr, String result) {
-        Calculation calculation = new Calculation(calIdx, expr, result);
-        repository.save(calculation);
-        incrIdx();
+    public void save(String formula, String result) {
+        repository.save(formula, result);
     }
 
     @Override
     public List<Calculation> findAll() {
         return repository.findAll();
-    }
-
-    private void incrIdx() {
-        calIdx++;
     }
 }

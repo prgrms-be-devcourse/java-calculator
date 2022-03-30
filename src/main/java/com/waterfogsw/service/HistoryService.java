@@ -5,7 +5,7 @@ import com.waterfogsw.domain.Calculation;
 import java.util.List;
 
 public interface HistoryService {
-    void save(String expr, String result);
+    void save(String formula, String result);
 
     List<Calculation> findAll();
 }
