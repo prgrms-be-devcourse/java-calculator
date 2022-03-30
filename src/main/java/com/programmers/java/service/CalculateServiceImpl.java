@@ -7,7 +7,8 @@ import java.util.*;
 
 public class CalculateServiceImpl implements CalculateService {
 
-    private final String regex = "[-]?\\d*(\\.\\d+)?";
+    private final String REGEX = "[-]?\\d*(\\.\\d+)?";
+    private final String MINUS_SIGN = "-";
     private final Tokenizer tokenizer;
 
     public CalculateServiceImpl(Tokenizer tokenizer) {
@@ -28,7 +29,7 @@ public class CalculateServiceImpl implements CalculateService {
         Stack<Integer> numStack = new Stack<>();
         for (String token : postfixFormulaList) {
 
-            if (!token.equals("-") && token.matches(regex)) {
+            if (!token.equals("MINUS_SIGN") && token.matches(REGEX)) {
                 numStack.push(Integer.parseInt(token));
                 continue;
             }

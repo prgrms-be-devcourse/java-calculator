@@ -11,8 +11,8 @@ import static com.programmers.java.enums.ErrorMessage.*;
 @Getter @Setter
 public class ValidatorImpl implements Validator {
 
-    private final String regex = "[-]?\\d*(\\.\\d+)?";
-    private final String operators = "+*-/";
+    private final String REGEX = "[-]?\\d*(\\.\\d+)?";
+    private final String OPERATORS = "+*-/";
     private final Tokenizer tokenizer;
 
     public ValidatorImpl(Tokenizer tokenizer) {
@@ -48,11 +48,11 @@ public class ValidatorImpl implements Validator {
         for (int i = 0; i < formulaList.size(); i++) {
 
             if (i % 2 == 0) {
-                if (formulaList.get(i).equals("-") || !formulaList.get(i).matches(regex)) {
+                if (formulaList.get(i).equals("-") || !formulaList.get(i).matches(REGEX)) {
                     throw new IllegalArgumentException(INVALID_OPERAND.getMessage());
                 }
             } else {
-                if (!operators.contains(formulaList.get(i))) {
+                if (!OPERATORS.contains(formulaList.get(i))) {
                     throw new IllegalArgumentException(INVALID_OPERATOR.getMessage());
                 }
             }
