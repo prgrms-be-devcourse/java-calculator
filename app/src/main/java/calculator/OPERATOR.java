@@ -1,6 +1,6 @@
 package calculator;
 
-public enum OPERATOR {
+public enum Operator {
     PLUS("+", 0),
     MINUS("-", 0),
     MULTIPLY("*", 1),
@@ -27,7 +27,7 @@ public enum OPERATOR {
     }
 
     static public boolean isOperator(String operator) {
-        for (OPERATOR op : OPERATOR.values()) {
+        for (Operator op : Operator.values()) {
             if (op.getValue().equals(operator)) return true;
         }
         return false;
