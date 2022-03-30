@@ -4,31 +4,30 @@ import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
 import com.programmers.java.engine.model.History;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+
+enum Menu{
+    EXIT(0, "종료"), LOOKUP(1, "조회"), CALCULATE(2, "계산");
+
+    private final int value;
+    private final String prompt;
+
+    Menu(int value, String prompt) {
+        this.value=value;
+        this.prompt=prompt;
+    }
+
+    @Override
+    public String toString(){
+        return prompt;
+    }
+}
 
 @AllArgsConstructor
-public class Calculator implements Runnable{
+public class Lobby implements Runnable{
 
     private Input input;
     private Output output;
     private History history;
-
-    enum Menu{
-        EXIT(0, "종료"), LOOKUP(1, "조회"), CALCULATE(2, "계산");
-
-        private final int value;
-        private final String prompt;
-
-        Menu(int value, String prompt) {
-            this.value=value;
-            this.prompt=prompt;
-        }
-
-        @Override
-        public String toString(){
-            return prompt;
-        }
-    }
 
     @Override
     public void run() {
@@ -44,16 +43,18 @@ public class Calculator implements Runnable{
 
         while(true){
             System.out.println(menus);
-            int userOption=input.input("선택 : ");
+            int userOption=input.optionInput("선택 : ");
             if(userOption==EXIT){
-                System.out.println("exit");
+                output.exitMessage();
                 break;
             }
             else if(userOption==LOOKUP){
                 System.out.println("조회함");
             }
             else if(userOption==CALCULATE){
-                System.out.println("계산함");
+                String userStr=input.strInput("계산식을 입력해주세요 : ");
+
+
             }
             else{
                 output.inputError();

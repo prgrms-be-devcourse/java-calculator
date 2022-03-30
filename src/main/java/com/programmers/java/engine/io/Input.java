@@ -1,5 +1,6 @@
 package com.programmers.java.engine.io;
 
 public interface Input {
-    int input(String s);
+    int optionInput(String s);
+    String strInput(String s);
 }
