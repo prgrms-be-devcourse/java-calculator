@@ -3,7 +3,7 @@ package calculator;
 import java.util.Arrays;
 
 public class InputParser {
-    private InputValidator inputValidator;
+    private final InputValidator inputValidator;
     private final String seperator;
 
     InputParser() {
