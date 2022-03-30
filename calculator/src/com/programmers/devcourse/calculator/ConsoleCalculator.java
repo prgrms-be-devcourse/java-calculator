@@ -18,7 +18,6 @@ public class ConsoleCalculator implements Calculator {
   private final ResultRepository<String, Double> repository;
   private final Processor<List<String>, Double> processor;
 
-
   public ConsoleCalculator(Parser parser, Processor<List<String>, Double> processor) {
     this.parser = parser;
     this.repository = new StringResultRepository();
@@ -101,7 +100,6 @@ public class ConsoleCalculator implements Calculator {
 
     System.out.println();
   }
-
 
   private Result<String, Double> formatAndCalculateExpression(String expression)
       throws CalculatorException {
