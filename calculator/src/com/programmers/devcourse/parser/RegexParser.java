@@ -11,33 +11,22 @@ import java.util.regex.Pattern;
 
 public class RegexParser implements Parser {
 
-  private final String pattern;
-  private final String operatorPattern;
-  private final String numberPattern;
+  private static final Pattern pattern = Pattern.compile("([+*-/])|([0-9]{1,7}(\\.[0-9]{1,7})?)");
 
+  private static final Pattern operatorPattern = Pattern.compile("[+*-/]");
+  private static final Pattern numberPattern = Pattern.compile("[0-9]{1,7}(\\.[0-9]{1,7})?");
+  private static final Pattern acceptablePattern = Pattern.compile(
+      "^(([+*-/])|([0-9]{1,7}(\\.[0-9]{1,7})?)|\\s)+$");
 
-  public RegexParser() {
-    this.pattern = "([+*-/])|([0-9]{1,7}(\\.[0-9]{1,7})?)";
-    String[] dividedPatterns = pattern.split("\\|");
-    operatorPattern = dividedPatterns[0];
-    numberPattern = dividedPatterns[1];
-  }
-
-  public RegexParser(String pattern) {
-    this.pattern = pattern;
-    String[] dividedPatterns = pattern.split("\\|");
-    operatorPattern = dividedPatterns[0];
-    numberPattern = dividedPatterns[1];
-  }
 
   @Override
   public List<String> parse(String target) throws ParserException {
     // 숫자, 연산자 외 부적합한 기호가 들어왔다?
-    if (!target.matches("^(([+*-/])|([0-9]{1,7}(\\\\.[0-9]{1,7})?)|\\s)+$")) {
+    if (!acceptablePattern.matcher(target).matches()) {
       throw new NotAcceptableStringException();
     }
 
-    Matcher matcher = Pattern.compile(pattern).matcher(target);
+    Matcher matcher = pattern.matcher(target);
     return mapMatcherToTokenList(matcher);
   }
 
@@ -47,11 +36,11 @@ public class RegexParser implements Parser {
     int tokenCount = 0;
     while (matcher.find()) {
       String group = matcher.group();
-      if (tokenCount % 2 == 0 && !group.matches(numberPattern)) {
+      if (tokenCount % 2 == 0 && !numberPattern.matcher(group).matches()) {
         throw new WrongTokenPositionException();
       }
 
-      if (tokenCount % 2 != 0 && !group.matches(operatorPattern)) {
+      if (tokenCount % 2 != 0 && !operatorPattern.matcher(group).matches()) {
         throw new WrongTokenPositionException();
       }
       matchedTokens.add(group);

@@ -14,6 +14,7 @@ class StringTokenProcessorTest {
     processor = new StringTokenProcessor();
   }
 
+
   @Test
   void testProcessReturnProperResult() {
     Assertions.assertEquals(processor.process(Arrays.asList("3.5", "+", "1")), 4.5);

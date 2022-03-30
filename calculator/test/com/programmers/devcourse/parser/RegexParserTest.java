@@ -5,21 +5,20 @@ import com.programmers.devcourse.exception.parser.ParserException;
 import com.programmers.devcourse.exception.parser.WrongTokenCountException;
 import com.programmers.devcourse.exception.parser.WrongTokenPositionException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.opentest4j.AssertionFailedError;
 
 class RegexParserTest {
 
-  static Parser parser;
+  Parser parser = new RegexParser();
   Object[] parsedTokenArray;
   String[] compareTarget;
 
-  @BeforeAll
-  public static void settingParser() {
-    parser = new RegexParser();
-  }
 
+  @DisplayName("문자열에 빈 칸이 없을 때 토큰을 정확하게 구해야 한다.")
   @Test
   void testParserShouldReturnProperTokenArrayWhenTargetStringHasNoSpace() throws ParserException {
     Parser parser = new RegexParser();
@@ -40,6 +39,7 @@ class RegexParserTest {
 
   }
 
+  @DisplayName("문자열에 빈칸 있을 때 정확하게 토큰을 구해야 한다.")
   @Test
   void testParserShouldReturnProperTokenArrayWhenInputStringHasSpace() throws ParserException {
 
@@ -59,32 +59,32 @@ class RegexParserTest {
 
   }
 
-  @Test()
-  void testParserThrowsExceptionWhenInputStringHasWrongTokenCount() {
+  @DisplayName("토큰 개수가 연산에 적합하지 않을 때 WrongTokenCountException을 던져야 한다.")
+  @ParameterizedTest()
+  @ValueSource(strings = {"1+2*", "           "})
+  void testParserThrowsExceptionWhenInputStringHasWrongTokenCount(String target) {
     Assertions.assertThrows(WrongTokenCountException.class, () -> {
-      parser.parse("1+2*");
-      parser.parse("           ");
-    });
+      parser.parse(target);
+    }).getMessage();
+
   }
 
 
-  @Test()
-  void testParserThrowExceptionWhenInputStringHasWrongOrder() {
+  @DisplayName("토큰들의 순서가 연산에 적합하지 않을 때 WrongTokenPositionException을 던져야 한다.")
+  @ParameterizedTest()
+  @ValueSource(strings = {"+45", "5  3 +"})
+  void testParserThrowExceptionWhenInputStringHasWrongOrder(String target) {
     Assertions.assertThrows(WrongTokenPositionException.class, () -> {
-      parser.parse("+4+5");
+      parser.parse(target);
     });
   }
 
-  @Test()
-  void testParserThrowNotAcceptableStringExceptionWhenInputStringHasWrongCharacter() {
+  @DisplayName("토큰에 적합하지 않은 문자열이 들어왔을 때 NotAccpetableStringException을 던져야 한다.")
+  @ParameterizedTest
+  @ValueSource(strings = {"        a ", "  asdfkjzxv ", "@#IY@Y&*&Y&*"})
+  void testParserThrowNotAcceptableStringExceptionWhenInputStringHasWrongCharacter(String target) {
     Assertions.assertThrows(NotAcceptableStringException.class, () -> {
-      parser.parse("        a ");
-    });
-    Assertions.assertThrows(NotAcceptableStringException.class, () -> {
-      parser.parse("  asdfkjzxv ");
-    });
-    Assertions.assertThrows(NotAcceptableStringException.class, () -> {
-      parser.parse("abvracvsdf");
+      parser.parse(target);
     });
   }
 
