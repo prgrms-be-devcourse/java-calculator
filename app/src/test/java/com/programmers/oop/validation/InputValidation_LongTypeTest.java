@@ -52,4 +52,20 @@ class InputValidation_LongTypeTest {
 
     }
 
+
+    /**
+     * bug : 유효성 검증 버그
+     */
+    @Test
+    @DisplayName("앞단과 끝에 연산자로 끝나느 경우 유효성 검증")
+    public void verifyExpression_False3() {
+        //given
+        String data = "+12++3//12-21313";
+        String answer = validation.verifyExpression(data);
+        //when, then
+        Assertions.assertThrows(RuntimeException.class,
+            () -> validation.verifyExpression(data));
+
+    }
+
 }
