@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.opentest4j.AssertionFailedError;
 
 class RegexParserTest {
 
@@ -27,14 +26,6 @@ class RegexParserTest {
     compareTarget =
         new String[]{"1", "+", "2", "*", "3", "+", "4.54234"};
     Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
-
-    // 실패해야 할 테스트(연산자 차이)
-    compareTarget = new String[]{"1", "-", "2", "*", "3", "+", "4.54234"};
-
-    Assertions.assertThrows(AssertionFailedError.class, () -> {
-      Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
-
-    });
 
 
   }

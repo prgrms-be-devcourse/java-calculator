@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 public class RegexParser implements Parser {
 
   private static final Pattern pattern = Pattern.compile("([+*-/])|([0-9]{1,7}(\\.[0-9]{1,7})?)");
-
   private static final Pattern operatorPattern = Pattern.compile("[+*-/]");
   private static final Pattern numberPattern = Pattern.compile("[0-9]{1,7}(\\.[0-9]{1,7})?");
   private static final Pattern acceptablePattern = Pattern.compile(
@@ -36,21 +35,32 @@ public class RegexParser implements Parser {
     int tokenCount = 0;
     while (matcher.find()) {
       String group = matcher.group();
-      if (tokenCount % 2 == 0 && !numberPattern.matcher(group).matches()) {
+      if (isNumberInWrongPosition(tokenCount, group) || isOperatorInWrongPosition(tokenCount,
+          group)) {
         throw new WrongTokenPositionException();
       }
 
-      if (tokenCount % 2 != 0 && !operatorPattern.matcher(group).matches()) {
-        throw new WrongTokenPositionException();
-      }
       matchedTokens.add(group);
       tokenCount++;
     }
-    if (tokenCount == 1 || tokenCount % 2 == 0) {
+
+    if (isAppropriateTokenCount(tokenCount)) {
       // 토큰이 한 개만 or 토큰의 개수가 짝수면 연산이 올바르게 되지 않는다.
       throw new WrongTokenCountException();
     }
     return matchedTokens;
+  }
+
+  private boolean isAppropriateTokenCount(int tokenCount) {
+    return tokenCount == 1 || tokenCount % 2 == 0;
+  }
+
+  private boolean isOperatorInWrongPosition(int tokenCount, String group) {
+    return tokenCount % 2 != 0 && !operatorPattern.matcher(group).matches();
+  }
+
+  private boolean isNumberInWrongPosition(int tokenCount, String group) {
+    return tokenCount % 2 == 0 && !numberPattern.matcher(group).matches();
   }
 
 

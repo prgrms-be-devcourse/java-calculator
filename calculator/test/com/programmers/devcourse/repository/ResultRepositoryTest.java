@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -43,7 +44,7 @@ class ResultRepositoryTest {
   @DisplayName("Repository 에는 3개의 데이터가 저장되어 있어야 한다.")
   @Test
   void testGetSizeReturn3() {
-    assertEquals(repository.getSize(), 3);
+    assertEquals(repository.getAll().size(), 3);
   }
 
   @DisplayName("Repository에 key와 value가 정확하게 저장되어 있어야 한다.")
@@ -51,7 +52,7 @@ class ResultRepositoryTest {
   @ParameterizedTest
   void testSaveAndGetAllResultsReturnSavedData(String key, double value) {
     AtomicBoolean flag = new AtomicBoolean(false);
-    repository.forEach((storedKey, storedValue) -> {
+    repository.getAll().forEach((storedKey, storedValue) -> {
       if (storedKey.equals(key) && storedValue == value) {
         flag.set(true);
       }
@@ -62,10 +63,10 @@ class ResultRepositoryTest {
 
 
   @DisplayName("Repository에 입력한 순서대로 데이터가 저장되어 있어야 한다.")
-  @Test
+  @RepeatedTest(5)
   void savedDataShouldHaveRightOrder() {
     AtomicInteger i = new AtomicInteger();
-    repository.forEach((key, value) -> {
+    repository.getAll().forEach((key, value) -> {
       int index = i.getAndIncrement();
       assertEquals(expressions[index], key);
       assertEquals(results[index], value);
