@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class NumeralTypeChecker implements TypeChecker {
     private final String digitPattern = "[+-]?[0-9]+$";
     private final String fractionalValuePattern = "[+-]?[0-9]+\\.[0-9]+$";
-    private final String[] operatorPatterns = {"\\+", "-", "\\*", "/", "\\(", "\\)"};
+    private final String[] operatorPatterns = {"\\+", "-", "\\*", "/"};
     private final Map<String, Integer> operatorRank = new HashMap<>();
 
     public NumeralTypeChecker() {
@@ -17,12 +17,12 @@ public class NumeralTypeChecker implements TypeChecker {
     }
 
     private void setOperatorRank() {
-        operatorRank.put("+", 1);
-        operatorRank.put("-", 1);
-        operatorRank.put("*", 2);
-        operatorRank.put("/", 2);
-        operatorRank.put("(", 3);
-        operatorRank.put(")", 3);
+        operatorRank.put("(", 1);
+        operatorRank.put(")", 1);
+        operatorRank.put("+", 2);
+        operatorRank.put("-", 2);
+        operatorRank.put("*", 3);
+        operatorRank.put("/", 3);
     }
 
     @Override
@@ -52,7 +52,6 @@ public class NumeralTypeChecker implements TypeChecker {
         }
         return false;
     }
-
 
     @Override
     public Map<String, Integer> getOperatorRank() {

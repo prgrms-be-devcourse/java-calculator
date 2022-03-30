@@ -7,10 +7,10 @@ import java.util.*;
 public class NumeralPostfixParser implements PostfixParser {
 
     private TypeChecker typeChecker;
-    private final List<String> postfixExpression = new ArrayList<>();
     private Map<String, Integer> operatorRank;
 
-    Deque<String> stack = new ArrayDeque<>();
+    private final List<String> postfixExpression = new ArrayList<>();
+    private Deque<String> stack = new ArrayDeque<>();
 
     public NumeralPostfixParser(TypeChecker typeChecker) {
         this.typeChecker = typeChecker;
@@ -23,7 +23,16 @@ public class NumeralPostfixParser implements PostfixParser {
         boolean previousIsOperator = true;
 
         for (String each : input) {
-            if (typeChecker.isOperand(each)) {
+
+            if (each.equals("(")) {
+                if (!previousIsOperator) throw new IllegalArgumentException("수식이 잘못되었습니다!");
+                stack.push(each);
+            }
+            else if (each.equals(")")) {
+                if (previousIsOperator) throw new IllegalArgumentException("수식이 잘못되었습니다!");
+                closeBracket();
+            }
+            else if (typeChecker.isOperand(each)) {
                 previousIsOperator = false;
                 postfixExpression.add(each);
             }
@@ -40,8 +49,16 @@ public class NumeralPostfixParser implements PostfixParser {
             postfixExpression.add(stack.pop());
         }
 
-        return postfixExpression;
+            return postfixExpression;
     }
+
+    private void closeBracket() {
+        while (!stack.isEmpty() && !stack.peek().equals("(")) {
+            postfixExpression.add(stack.pop());
+        }
+        stack.pop();
+    }
+
 
     private void pushOperatorToStack(String each) {
         if (stack.isEmpty()) {

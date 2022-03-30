@@ -19,6 +19,22 @@ public class ExceptionPostfixParserTest {
     }
 
     @Test
+    @DisplayName("예외: 연산자가 연이어 들어올 때")
+    void chainOfOperator() {
+        NumeralPostfixParser parser = new NumeralPostfixParser(new NumeralTypeChecker());
+        assertThrows(IllegalArgumentException.class,
+                () -> parser.parse("1 + + 2"));
+    }
+
+    @Test
+    @DisplayName("예외: 연산자가 첫 자리에 들어올 때")
+    void operatorInFirstPlace() {
+        NumeralPostfixParser parser = new NumeralPostfixParser(new NumeralTypeChecker());
+        assertThrows(IllegalArgumentException.class,
+                () -> parser.parse(" + 1 + 2"));
+    }
+
+    @Test
     @DisplayName("예외: 소수점이 여럿 찍혔을 때")
     void parseShortPlusFailed() {
         NumeralPostfixParser parser = new NumeralPostfixParser(new NumeralTypeChecker());

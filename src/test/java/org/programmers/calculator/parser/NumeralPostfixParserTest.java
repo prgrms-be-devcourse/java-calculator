@@ -63,10 +63,18 @@ public class NumeralPostfixParserTest {
         NumeralPostfixParser parser = new NumeralPostfixParser(new NumeralTypeChecker());
         Object[] result = parser.parse("1 + 2 * 3").toArray();
 
-        List<String> expectedList = new ArrayList<>();
         Object[] expected = {"1", "2", "3", "*", "+"};
 
         // List<>끼리 assert 비교할 경우 순서를 무시하고 equals()가 true 일 수 있기 때문에 배열 비교로 한다.
         Assertions.assertArrayEquals(expected, result);
+    }
+
+    @Test
+    @DisplayName("괄호 연산 변환")
+    void parseBracket() {
+        NumeralPostfixParser parser = new NumeralPostfixParser(new NumeralTypeChecker());
+        List<String> result = parser.parse("( 3 + 2 ) * 2 + 1");
+
+        Object[] expected = {"1", "2", "2", "3", "+", "*", "+"};
     }
 }
