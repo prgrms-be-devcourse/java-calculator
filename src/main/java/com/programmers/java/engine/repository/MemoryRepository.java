@@ -4,7 +4,7 @@ public interface MemoryRepository {
 
    void save(String formula, Long result) ;
 
-   void find();
+   void findAll();
 
    int size();
 }

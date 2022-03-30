@@ -50,7 +50,7 @@ public class Calculator implements Runnable {
         if (formulaRepository.size() < 1) {
             output.Error("EmptyMap");
         } else {
-            formulaRepository.find();
+            formulaRepository.findAll();
         }
     }
 
@@ -62,8 +62,8 @@ public class Calculator implements Runnable {
         } else {
             Formula postFixFormula = new Formula(postFixService.makePostFixFormula(validFormula.get()));
             Long result = calcService.calculate(postFixFormula.getFormula());
-            output.PrintCalcResult(result);
             formulaRepository.save(inputFormula, result);
+            output.PrintCalcResult(result);
         }
     }
 
