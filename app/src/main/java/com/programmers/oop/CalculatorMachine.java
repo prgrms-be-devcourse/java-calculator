@@ -1,5 +1,6 @@
 package com.programmers.oop;
 
+import com.programmers.oop.validation.Validation;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,10 +20,12 @@ public class CalculatorMachine {
     private final Output output;
     private final ComputeService<String> computeService;
     private final LookUpService<String> lookUpService;
+    private final Validation inputValidation;
 
-    public CalculatorMachine(Console console, Service service) {
+    public CalculatorMachine(Console console, Validation validation, Service service) {
         input = console;
         output = console;
+        inputValidation = validation;
         computeService = service;
         lookUpService = service;
     }
@@ -38,7 +41,8 @@ public class CalculatorMachine {
             } else if (ServiceType.COMPUTE.isSameYn(menu)) {
                 output.showMessage(FrontMessage.FORMULA.getMessage());
                 String formula = input.readInput();
-                output.showMessage(computeService.computeExpression(formula)
+                String validExpression = inputValidation.verifyExpression(formula);
+                output.showMessage(computeService.computeExpression(validExpression)
                     + FrontMessage.RESULT_LINE.getMessage());
             } else if (ServiceType.EXIT.isSameYn(menu)) {
                 break;

@@ -5,6 +5,7 @@ package com.programmers.oop;
 
 import java.io.IOException;
 
+import com.programmers.oop.validation.InputValidation_LongType;
 import com.programmers.oop.repository.ComputeHistoryRepositoryImpl;
 import com.programmers.oop.service.Service;
 
@@ -15,6 +16,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         CalculatorMachine calculatorMachine = new CalculatorMachine(new Console(),
+            new InputValidation_LongType(),
             new Service(new ComputeHistoryRepositoryImpl()));
         calculatorMachine.start();
     }
