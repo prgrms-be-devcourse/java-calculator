@@ -4,41 +4,33 @@ import com.programmers.java.engine.model.Formula;
 import com.programmers.java.engine.service.utils.Function;
 
 import java.util.Optional;
-import java.util.StringTokenizer;
 
 public class ValidationService {
 
     public Optional<Formula> Validation(String inputFormula) {
-        for (int i = 0; i < inputFormula.length() - 1; i++) {
-            if (inputFormula.charAt(i) ==' ' && inputFormula.charAt(i+1) == ' ')
-                return Optional.empty();
-        }
-
-        StringTokenizer s = new StringTokenizer(inputFormula);
-        String str = "";
-        if (!s.hasMoreElements())
+        String []s = inputFormula.split(" ");
+        if (s.length < 3)
             return Optional.empty();
         boolean divideCheck = false;
-        for (int i = 0; s.hasMoreElements(); i++) {
-            str = s.nextToken();
+        for (int i = 0; i < s.length; i++) {
             if (i % 2 == 1) {
-                if (!Function.isOperator(str)) {
+                if (!Function.isOperator(s[i])) {
                     return Optional.empty();
                 }
-                if (str.equals("/")) {
+                if (s[i].equals("/")) {
                     divideCheck = true;
                 }
             } else {
-                if (!Function.isStrDigit(str)) {
+                if (!Function.isStrDigit(s[i])) {
                     return Optional.empty();
-                } else if (str.equals("0") && divideCheck) {
+                } else if (s[i].equals("0") && divideCheck) {
                     return Optional.empty();
                 }
                 divideCheck = false;
             }
         }
-        if (!Function.isStrDigit(str))
+        if (!Function.isStrDigit(s[s.length - 1]))
             return Optional.empty();
-        return Optional.of(new Formula(inputFormula.split(" ")));
+        return Optional.of(new Formula(s));
     }
 }
