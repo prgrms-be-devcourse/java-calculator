@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Console implements Input, Output {
     private final Scanner scanner = new Scanner(System.in);
 
-
     @Override
     public String select(String s) {
         System.out.print("선택 : ");

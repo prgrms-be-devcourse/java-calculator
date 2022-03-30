@@ -14,12 +14,11 @@ public class PostfixConverter {
         put("/", 2);
     }};
 
-
     public Postfix convertInfixToPostfix(Infix infix) {
         Deque<String> deque = new ArrayDeque<>();
         List<String> postfix = new ArrayList<>();
         infix.forEach((s) -> {
-            if (Pattern.matches("[\\d]+", s)) {
+            if (Pattern.matches("[\\d]*", s)) {
                 postfix.add(s);
             } else {
                 while (!deque.isEmpty() && priorityMap.get(s) <= priorityMap.get(deque.getFirst())) {

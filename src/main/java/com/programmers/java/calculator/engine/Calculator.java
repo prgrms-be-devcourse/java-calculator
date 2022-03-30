@@ -4,6 +4,7 @@ import com.programmers.java.calculator.engine.exception.CalculatorException;
 import com.programmers.java.calculator.engine.exception.InputException;
 import com.programmers.java.calculator.engine.io.Input;
 import com.programmers.java.calculator.engine.io.Output;
+import com.programmers.java.calculator.engine.model.History;
 import lombok.AllArgsConstructor;
 
 import java.util.regex.Pattern;
@@ -25,7 +26,9 @@ public class Calculator implements Runnable {
             output.print("1. 조회");
             output.print("2. 계산");
             output.print("3. 종료");
+            output.print("");
             String selectString = input.select("선택 : ");
+            output.print("");
             try {
                 int selectNum = parse(selectString);
                 if (selectNum == SELECT_HISTORY) {
@@ -34,6 +37,7 @@ public class Calculator implements Runnable {
                     String inputString = input.inputQuestion();
                     Integer result = calculation.calculate(inputString);
                     output.printResult(result);
+                    historyStore.store(new History(inputString, result));
                 } else if (selectNum == SELECT_TERMINATE) {
                     output.print("계산기를 종료합니다.");
                     break;
@@ -45,14 +49,16 @@ public class Calculator implements Runnable {
             } catch(CalculatorException ex) {
                 output.printCalculatorException(ex.getMessage());
                 ex.printStackTrace();
+            } finally {
+                output.print("");
             }
         }
     }
 
     private Integer parse(String selectString) {
-        if (Pattern.matches("[^1-3]", selectString)) {
-            throw new InputException("알맞은 번호를 선택해주세요.");
+        if (Pattern.matches("[1-3]", selectString)) {
+            return Integer.parseInt(selectString);
         }
-        return Integer.parseInt(selectString);
+        throw new InputException("알맞은 번호를 선택해주세요.");
     }
 }

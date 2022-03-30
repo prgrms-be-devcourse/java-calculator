@@ -9,8 +9,8 @@ public class App {
         Console console = new Console();
         Calculation calculation = new Calculation();
         HistoryStore historyStore = new HistoryStore();
-
         Calculator calculator = new Calculator(calculation, historyStore, console, console);
+
         calculator.run();
     }
 }

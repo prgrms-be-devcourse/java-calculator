@@ -12,12 +12,12 @@ public class Calculation {
     private final PostfixConverter postfixConverter = new PostfixConverter();
 
     public Integer calculate(String inputString) {
-        inputString = inputString.replace(" ", "");
-        Boolean pass = validateInput(inputString);
+        String nonBlankedString = inputString.replace(" ", "");
+        Boolean pass = validateInput(nonBlankedString);
         if (!pass) {
             throw new InputException("계산식이 잘못되었습니다.");
         }
-        Infix infix = parse(inputString);
+        Infix infix = parse(nonBlankedString);
         Postfix postfix = postfixConverter.convertInfixToPostfix(infix);
         return solvePostfix(postfix);
         //TODO : inputString 과 result 를 이용해 조회 기능에 사용될 History 객체 생성하기
