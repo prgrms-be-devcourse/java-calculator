@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 @AllArgsConstructor
@@ -194,5 +195,21 @@ public class Problem {
                 return 2;
         }
         return -1;
+    }
+
+    /**
+     * toString 함수로 이후 편한 print를 위해 재구성
+     * @return String     
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s : question) {
+            sb.append(s+" ");
+        }
+        sb.append("= ");
+        sb.append(answer);
+
+        return sb.toString();
     }
 }
