@@ -22,12 +22,13 @@ public class Computer implements Runnable{
     public void run() {
         while(true){
             String option = input.chooseOpt(OPTION_MESSAGE);
-            int optNum = parseOption(option);
-            if(optNum == -1){
-                output.inputError();
-                continue;
+            try{
+                int optNum = parseOption(option);
+                mainJob(optNum);
             }
-            mainJob(optNum);
+            catch(NumberFormatException e){
+                output.inputError();
+            }
         }
     }
 
@@ -57,11 +58,11 @@ public class Computer implements Runnable{
                 return res;
             }
             else{
-                return -1;
+                throw new NumberFormatException();
             }
         }
         catch(NumberFormatException e){
-            return -1;
+            throw e;
         }
     }
 }
