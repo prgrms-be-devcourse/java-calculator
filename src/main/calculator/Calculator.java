@@ -70,6 +70,11 @@ public class Calculator implements Runnable{
 
     private void lookupList(List<String> list){
         //repository에서 가져온 list를 전체적으로 출력하기
+        if(list.isEmpty()){
+            output.print("조회할 내용이 없습니다.");
+            return ;
+        }
+
         for (String content : list) {
             output.print(content);
         }
