@@ -4,4 +4,6 @@ public interface Output {
     void output(String s);
 
     void inputError();
+
+    void error(String msg);
 }

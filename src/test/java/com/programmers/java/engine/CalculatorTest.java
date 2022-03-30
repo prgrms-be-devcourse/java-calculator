@@ -19,8 +19,8 @@ public class CalculatorTest {
     public void parseInputTest(){
         String inputStr = "1+2*3-4/2";
         Expression expression = calculator.parseInput(inputStr);
-        Assertions.assertThat(expression.getOperands()).isEqualTo(new Double[]{1.0, 2.0, 3.0, 4.0, 2.0});
-        Assertions.assertThat(expression.getOperators()).isEqualTo(new String[]{"+", "*", "-", "/"});
+        Assertions.assertThat(expression.getOperand().operands).isEqualTo(new Double[]{1.0, 2.0, 3.0, 4.0, 2.0});
+        Assertions.assertThat(expression.getOperator().operators).isEqualTo(List.of("+", "*", "-", "/"));
     }
 
     @Test
@@ -37,6 +37,18 @@ public class CalculatorTest {
         String inputStr = "1*2*3*4/2";
         Double result = calculator.calculate(inputStr);
         Assertions.assertThat(result).isEqualTo(12);
+    }
+
+    @Test
+    @DisplayName("곱셈 나눗셈 테스트. 3")
+    public void multiplyAndDivideTest3(){
+        String inputStr = "1*2*3*4/0";
+        try {
+            Double result = calculator.calculate(inputStr);
+        }
+        catch(Exception e){
+            Assertions.assertThat(e.getMessage()).isEqualTo("0으로 나누는 것은 안됩니다.");
+        }
     }
 
     @Test

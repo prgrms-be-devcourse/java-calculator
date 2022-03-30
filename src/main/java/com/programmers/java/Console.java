@@ -30,4 +30,10 @@ public class Console implements Input, Output {
         System.out.println("범위 안에서 선택해주세요");
 
     }
+
+    @Override
+    public void error(String msg) {
+        System.out.println(msg);
+    }
+
 }
