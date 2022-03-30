@@ -1,6 +1,7 @@
 package com.waterfogsw.service;
 
 import com.waterfogsw.AppConfig;
+import com.waterfogsw.exception.DoubleOverflow;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -133,5 +134,18 @@ class CalculationServiceTest {
 
         // then
         Assertions.assertThat(result).isEqualTo("0.7");
+    }
+
+    @Test
+    public void 계산서비스_테스트_범위초과() throws Exception {
+        // given
+        String expr = "2500000000000000000000 + 2000";
+
+        // when
+        try {
+            String result = calculationService.getResult(expr);
+        } catch (DoubleOverflow ignored) {
+
+        }
     }
 }
