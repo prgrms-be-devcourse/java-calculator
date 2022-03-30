@@ -10,9 +10,13 @@ import java.util.Map;
 public class MemoryCalculationRepository implements CalculationRepository {
     private final Map<Long, Calculation> store = new LinkedHashMap<>();
 
+    private Long calIdx = 0L;
+
     @Override
-    public void save(Calculation calculation) {
+    public void save(String formula, String result) {
+        Calculation calculation = new Calculation(calIdx, formula, result);
         store.put(calculation.getId(), calculation);
+        incrIdx();
     }
 
     @Override
@@ -23,5 +27,9 @@ public class MemoryCalculationRepository implements CalculationRepository {
     @Override
     public List<Calculation> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    private void incrIdx() {
+        calIdx++;
     }
 }
