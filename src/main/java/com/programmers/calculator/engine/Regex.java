@@ -1,9 +1,10 @@
 package com.programmers.calculator.engine;
 
-class Regex {
-    private static final String num = "^[0-9]*$";
+// 정규식
+public class Regex {
+    private static final String numRegex = "^-?[0-9]*$";
 
-    public static String getNum() {
-        return num;
+    public static String getNumRegex() {
+        return numRegex;
     }
 }

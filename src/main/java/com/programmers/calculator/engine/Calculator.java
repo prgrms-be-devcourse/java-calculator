@@ -1,5 +1,6 @@
 package com.programmers.calculator.engine;
 
+import com.programmers.calculator.engine.exception.ExceptionCheck;
 import com.programmers.calculator.engine.io.Input;
 import com.programmers.calculator.engine.io.Output;
 import com.programmers.calculator.engine.repository.ExpressionAndResult;
@@ -8,9 +9,9 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class Calculator implements Runnable{
-    private Input input;
-    private Output output;
-    private ExpressionAndResult expressionAndResult; // 연산식, 결과 저장
+    private final Input input;
+    private final Output output;
+    private final ExpressionAndResult expressionAndResult; // 연산식, 결과 저장
 
     public Calculator(Input input, Output output) {
         this.input = input;
@@ -48,14 +49,17 @@ public class Calculator implements Runnable{
     // 연산식을 후위표기법으로 변환 -> Optional null체크 -> 후위표기법 계산하고 출력 -> map에 연산식, 결과 저장
     public void calc(String expression) {
         Optional<List<String>> postfix = infixToPostfix(expression);
+
+        // 예외 출력
         if(!postfix.isPresent()) {
             output.inputError();
             return;
         }
 
+        // 후위표기법 연산
         Stack<String> stack = new Stack<>();
         for(String s : postfix.get()) {
-            if(Pattern.matches(Regex.getNum(), s)) {
+            if(Pattern.matches(Regex.getNumRegex(), s)) {
                 stack.push(s);
             } else {
                 int num2 = Integer.parseInt(stack.pop());
@@ -68,75 +72,47 @@ public class Calculator implements Runnable{
         }
 
         int result = Integer.parseInt(stack.pop());
-        output.printResult(result);
-        expressionAndResult.put(expression, result);
+        output.printResult(result); // 결과 출력
+        expressionAndResult.put(expression, result); // map에 저장
     }
 
-    // 중위표기법 => 후위표기법 변환 (수식이 잘못 입력된 경우 Optional.empty() 리턴)
+    // 예외 체크 후 중위표기법 => 후위표기법 변환 (수식이 잘못 입력된 경우 Optional.empty() 리턴)
     public Optional<List<String>> infixToPostfix(String infix) {
         List<String> postfix = new ArrayList<>();
         Stack<String> stack = new Stack<>();
-        Stack<String> parentheses = new Stack<>();
         String[] numsNSymbols = infix.split(" ");
-        String lastString = "";
+
+        // 예외 체크
+        ExceptionCheck ec = new ExceptionCheck();
+        if(!ec.exceptionCheck(numsNSymbols)) {
+            return Optional.empty();
+        }
+
+        // 중위 표기법 => 후위표기법 변환
         for(String s : numsNSymbols) {
-            if (Pattern.matches(Regex.getNum(), s)) {
-                if(!lastString.equals("") && !lastString.equals("(") &&
-                        !lastString.equals("+") && !lastString.equals("-") &&
-                        !lastString.equals("*") && !lastString.equals("/")) {
-                    return Optional.empty();
-                } else {
-                    postfix.add(s);
-                }
+            if (Pattern.matches(Regex.getNumRegex(), s)) {
+                postfix.add(s);
             } else if (s.equals("(")) {
-                if(!lastString.equals("") &&
-                        !lastString.equals("+") && !lastString.equals("-") &&
-                        !lastString.equals("*") && !lastString.equals("/")) {
-                    return Optional.empty();
-                } else {
-                    stack.push(s);
-                    parentheses.push(s);
-                }
+                stack.push(s);
             } else if (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/")) {
-                if (!Pattern.matches(Regex.getNum(), lastString) && !lastString.equals(")")) {
-                    return Optional.empty();
-                }
-                else if (stack.isEmpty()) {
+                if (!stack.isEmpty() && Priority.getPriority(stack.peek()) >= Priority.getPriority(s)) {
+                    postfix.add(stack.pop());
                     stack.push(s);
                 } else {
-                    if (Priority.getPriority(stack.peek()) >= Priority.getPriority(s)) {
-                        postfix.add(stack.pop());
-                        stack.push(s);
-                    } else {
-                        stack.push(s);
-                    }
+                    stack.push(s);
                 }
             } else if (s.equals(")")) {
-                if (!Pattern.matches(Regex.getNum(), lastString)) {
-                    return Optional.empty();
-                } else {
-                    if(parentheses.isEmpty() || !parentheses.pop().equals("(")) {
-                        return Optional.empty();
-                    } else {
-                        while (true) {
-                            String tmp = stack.pop();
-                            if (tmp.equals("(")) break;
-                            postfix.add(tmp);
-                        }
-                    }
+                while (true) {
+                    String tmp = stack.pop();
+                    if (tmp.equals("(")) break;
+                    postfix.add(tmp);
                 }
-            } else {
-                return Optional.empty();
             }
-
-            lastString = s;
         }
 
         while(!stack.isEmpty()) {
             postfix.add(stack.pop());
         }
-
-        if(!parentheses.isEmpty()) return Optional.empty();
 
         return Optional.of(postfix);
     }

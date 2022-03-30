@@ -3,7 +3,8 @@ package com.programmers.calculator.engine;
 import java.util.HashMap;
 import java.util.Map;
 
-class Priority {
+// 연산자 우선순위
+public class Priority {
     private static final Map<String, Integer> priority = new HashMap<String, Integer>() {
         {
             put("*", 3);
