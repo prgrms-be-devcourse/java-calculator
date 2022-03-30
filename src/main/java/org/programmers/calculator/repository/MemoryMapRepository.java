@@ -24,8 +24,8 @@ public class MemoryMapRepository implements Repository {
 
     @Override
     public String findByKey(String expression) {
-        String s = store.get(expression);
-        return (s==null)? "검색 결과가 없습니다" : s;
+        String foundResult = store.get(expression);
+        return (foundResult==null)? "검색 결과가 없습니다" : foundResult;
     }
 
     @Override

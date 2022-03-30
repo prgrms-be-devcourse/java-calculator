@@ -11,103 +11,77 @@ import org.programmers.calculator.postfixParser.PostfixParser;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("기본 연산")
-public class CalculatorTest {
+@DisplayName("Boolean 기본 연산")
+public class BooleanCalculatorTest {
 
     @BeforeAll
     static void beforeAll() {
-        ObjectContainer.create(Operand.RATIONAL_NUMBER);
+        ObjectContainer.create(Operand.BOOLEAN);
     }
 
     @Test
-    @DisplayName("기본 덧셈")
+    @DisplayName("!부정")
     void plus() {
         PostfixParser parser = ObjectContainer.getParser();
         PostfixSolver solver = ObjectContainer.getSolver();
 
-        String input = "7 + 5";
+        String input = "! T";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
 
-        assertEquals("12", result);
+        assertEquals("F", result);
     }
 
     @Test
-    @DisplayName("기본 뺄셈")
+    @DisplayName("And")
     void minus() {
         PostfixParser parser = ObjectContainer.getParser();
         PostfixSolver solver = ObjectContainer.getSolver();
 
-        String input = "3 - 9";
+        String input = "T & F";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
 
-        assertEquals("-6", result);
+        assertEquals("F", result);
     }
 
     @Test
-    @DisplayName("기본 곱셈")
+    @DisplayName("Or")
     void multiply() {
         PostfixParser parser = ObjectContainer.getParser();
         PostfixSolver solver = ObjectContainer.getSolver();
 
-        String input = "2 * 3";
+        String input = "F | T";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
 
-        assertEquals("6", result);
+        assertEquals("T", result);
     }
 
     @Test
-    @DisplayName("기본 나눗셈")
-    void division() {
+    @DisplayName("->")
+    void materialImplication() {
         PostfixParser parser = ObjectContainer.getParser();
         PostfixSolver solver = ObjectContainer.getSolver();
 
-        String input = "10 / 2";
+        String input = "T -> F";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
 
-        assertEquals("5", result);
+        assertEquals("F", result);
     }
 
     @Test
-    @DisplayName("0으로 나누기")
-    void divideWithZero() {
-        PostfixParser parser = ObjectContainer.getParser();
-        PostfixSolver solver = ObjectContainer.getSolver();
-
-        String input = "4 / 0";
-        List<String> postfixExpression = parser.parse(input);
-
-        assertThrows(ArithmeticException.class, () -> solver.solve(postfixExpression));
-    }
-
-    @Test
-    @DisplayName("덧셈, 곱셈 복합")
+    @DisplayName("복합")
     void multiplyWithPlus() {
         PostfixParser parser = ObjectContainer.getParser();
         PostfixSolver solver = ObjectContainer.getSolver();
 
-        String input = "1 + 2 * 3";
+        String input = "T & ! F | F";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
 
-        assertEquals("7", result);
-    }
-
-    @Test
-    @DisplayName("사칙연산 혼재")
-    void complexCalculation() {
-        PostfixParser parser = ObjectContainer.getParser();
-        PostfixSolver solver = ObjectContainer.getSolver();
-
-        String input = "1 / 2 + 2 * 3 - 5";
-        List<String> postfixExpression = parser.parse(input);
-        String result = solver.solve(postfixExpression);
-
-        assertEquals("1.5", result);
+        assertEquals("T", result);
     }
 }

@@ -4,9 +4,9 @@ import org.programmers.calculator.TypeChecker.TypeChecker;
 
 import java.util.*;
 
-public class NumeralPostfixParser extends PostfixParser {
+public class BooleanPostfixParser extends PostfixParser {
 
-    public NumeralPostfixParser(TypeChecker typeChecker) {
+    public BooleanPostfixParser(TypeChecker typeChecker) {
         super(typeChecker);
     }
 
@@ -26,7 +26,7 @@ public class NumeralPostfixParser extends PostfixParser {
                 previousIsOperator = false;
                 postfixExpression.add(each);
             } else if (typeChecker.isOperator(each)) {
-                if (previousIsOperator) throw new IllegalArgumentException("수식이 잘못되었습니다!");
+                if (previousIsOperator && !each.equals("!")) throw new IllegalArgumentException("수식이 잘못되었습니다!");
                 previousIsOperator = true;
                 pushOperatorToStack(each);
             } else {

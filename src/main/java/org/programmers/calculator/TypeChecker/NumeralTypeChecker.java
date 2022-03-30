@@ -1,7 +1,5 @@
 package org.programmers.calculator.TypeChecker;
 
-import org.programmers.calculator.TypeChecker.TypeChecker;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;

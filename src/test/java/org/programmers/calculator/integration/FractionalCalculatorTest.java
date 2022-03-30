@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.programmers.calculator.configuration.ObjectContainer;
 import org.programmers.calculator.configuration.Operand;
-import org.programmers.calculator.postfixCalculator.Solver;
+import org.programmers.calculator.postfixCalculator.PostfixSolver;
 import org.programmers.calculator.postfixParser.PostfixParser;
 
 import java.util.List;
@@ -24,11 +24,12 @@ public class FractionalCalculatorTest {
     @DisplayName("소수 덧셈")
     void plus() {
         PostfixParser parser = ObjectContainer.getParser();
-        Solver solver = ObjectContainer.getSolver();
+        PostfixSolver solver = ObjectContainer.getSolver();
 
         String input = "5.1 + 7";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
+
         assertEquals("12.1", result);
     }
 
@@ -36,11 +37,12 @@ public class FractionalCalculatorTest {
     @DisplayName("소수 곱셈")
     void multiply() {
         PostfixParser parser = ObjectContainer.getParser();
-        Solver solver = ObjectContainer.getSolver();
+        PostfixSolver solver = ObjectContainer.getSolver();
 
         String input = "-2.2 * 3";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
+
         assertEquals("-6.6", result);
     }
 
@@ -48,11 +50,12 @@ public class FractionalCalculatorTest {
     @DisplayName("소수 복합")
     void multipleCalculation() {
         PostfixParser parser = ObjectContainer.getParser();
-        Solver solver = ObjectContainer.getSolver();
+        PostfixSolver solver = ObjectContainer.getSolver();
 
         String input = "1.2 + -2 * 3";
         List<String> postfixExpression = parser.parse(input);
         String result = solver.solve(postfixExpression);
+
         assertEquals("-4.8", result);
     }
 }
