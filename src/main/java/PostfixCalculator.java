@@ -78,7 +78,7 @@ public class PostfixCalculator implements Calculator {
      */
     public String getResult(String expression) {
         List<String> converted = converter.convert(expression);
-        double result = calculate(converted).orElseThrow(() -> new CalculatorException("올바르지 않은 연산식입니다."));
+        double result = calculate(converted).orElseThrow(()-> new CalculatorException("잘못된 연산식입니다."));
 
         if (Double.isInfinite(result)) {
             return String.valueOf(result);
@@ -94,7 +94,7 @@ public class PostfixCalculator implements Calculator {
 
 
     /**
-     * 계산 끝에 stack이 완전히 비워지지 않거나, 계산도중 stack이 비면 예외를 던집니다.
+     * 계산 끝에 stack이 완전히 비워지지 않거나, 계산도중 stack이 비면 Optional.empty() 반환
      *
      * @param expression
      * @return Postfix expression을 계산한 값을 double로 반환합니다.

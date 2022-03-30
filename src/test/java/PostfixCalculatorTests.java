@@ -1,3 +1,4 @@
+import entity.CustomLog;
 import exception.CalculatorException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,52 +19,42 @@ public class PostfixCalculatorTests {
     void beforeEach() {
         calculator = new PostfixCalculator(
                 new BufferedReader(new InputStreamReader(System.in)),
-                new InMemoryLogRepository(),
+                new InMemoryLogRepository<CustomLog>(),
                 new Prefix2PostfixConverter());
     }
 
 
     @Test
-    @DisplayName("사칙연산의 우선순위에 따른 계산을 한다.")
+    @DisplayName("괄호 및 사칙연산의 우선순위에 따른 계산을 한다.")
     void calculateWithPriority() {
         // given
         String exp1 = "1 + 2 * 3";
         String exp2 = "1 * ( 2 / (3 - 4) )";
-        String exp3 = "2 + 1 / 0";
-        String exp4 = "1 - 2 / 0";
 
         // when
         String result1 = calculator.getResult(exp1);
         String result2 = calculator.getResult(exp2);
-        String result3 = calculator.getResult(exp3);
-        String result4 = calculator.getResult(exp4);
 
         // then
         assertThat(result1).isEqualTo("7");
         assertThat(result2).isEqualTo("-2");
-        assertThat(result3).isEqualTo("Infinity");
-        assertThat(result4).isEqualTo("-Infinity");
 
     }
 
     @Test
-    @DisplayName("계산이력을 저장하고 출력한다.")
-    void saveHistory() {
+    @DisplayName("0으로 나누는 경우, Infinity, -Infinity")
+    void calculateWithZero() {
         // given
-        String exp1 = "1 + 2 * 3";
-        String exp2 = "1 * ( 2 / (3 - 4) )";
-        String exp3 = "2 + 1 / 0";
-        String exp4 = "1 - 2 / 0";
+        String exp1 = "2 + 1 / 0";
+        String exp2 = "1 - 2 / 0";
 
         // when
-        calculator.getResult(exp1);
-        calculator.getResult(exp2);
-        calculator.getResult(exp3);
-        calculator.getResult(exp4);
+        String result3 = calculator.getResult(exp1);
+        String result4 = calculator.getResult(exp2);
 
         // then
-        calculator.printHistory();
-
+        assertThat(result3).isEqualTo("Infinity");
+        assertThat(result4).isEqualTo("-Infinity");
     }
 
     @Test
@@ -72,20 +63,12 @@ public class PostfixCalculatorTests {
 
         // given
         String exp1 = "(+1)";
-        String exp2 = "1 + 2 +(-3)";
-        String exp3 = "1 *(-3)";
+
         // when
 
         // then
         Exception exception = assertThrows(CalculatorException.class, () -> calculator.getResult(exp1));
         assertEquals("올바르지 않은 연산식입니다.", exception.getMessage());
-
-        exception = assertThrows(CalculatorException.class, () -> calculator.getResult(exp2));
-        assertEquals("올바르지 않은 연산식입니다.", exception.getMessage());
-
-        exception = assertThrows(CalculatorException.class, () -> calculator.getResult(exp3));
-        assertEquals("올바르지 않은 연산식입니다.", exception.getMessage());
-
     }
 
 }
