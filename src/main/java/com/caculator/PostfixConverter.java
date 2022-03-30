@@ -11,29 +11,15 @@ public class PostfixConverter {
         String[] split = exp.split(" ");
         Stack<String> stack = new Stack<>();
 
-        if (split.length == 0) throw new IllegalArgumentException();
+        if (isEmptyExpression(split)) throw new IllegalArgumentException();
 
         for (int i = 0; i < split.length; i++) {
             String s = split[i];
 
             if (isIdxForOperator(i)) {
-                if (!isOperator(s)) throw new IllegalArgumentException();
-
-                if (stack.isEmpty() || getPriority(stack.peek()) < getPriority(s)) {
-                    stack.push(s);
-                    continue;
-                }
-
-                while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(s)) {
-                    postfix.add(stack.pop());
-                }
-
-                stack.push(s);
+                executeOperatorProcess(s, postfix, stack);
             } else {
-                if (!StringUtils.isNumber(s)) {
-                    throw new IllegalArgumentException();
-                }
-                postfix.add(s);
+                executeNumberProcess(s, postfix);
             }
         }
 
@@ -42,17 +28,43 @@ public class PostfixConverter {
         return postfix;
     }
 
-    private static boolean isOperator(String s) {
-        return s.equals("*") || s.equals("/") || s.equals("+") || s.equals("-");
+    private static boolean isEmptyExpression(String[] expressions) {
+        return expressions.length == 0;
+    }
+
+    private static void executeNumberProcess(String number, List<String> postfix) {
+        if (!StringUtils.isNumber(number)) {
+            throw new IllegalArgumentException();
+        }
+        postfix.add(number);
+    }
+
+    private static void executeOperatorProcess(String operator, List<String> postfix, Stack<String> stack) throws IllegalArgumentException {
+        if (!isOperator(operator)) throw new IllegalArgumentException();
+
+        if (stack.isEmpty() || getPriority(stack.peek()) < getPriority(operator)) {
+            stack.push(operator);
+            return;
+        }
+
+        while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(operator)) {
+            postfix.add(stack.pop());
+        }
+
+        stack.push(operator);
+    }
+
+    private static boolean isOperator(String operator) {
+        return operator.equals("*") || operator.equals("/") || operator.equals("+") || operator.equals("-");
     }
 
     private static boolean isIdxForOperator(int index) {
         return (index + 1) % 2 == 0;
     }
 
-    private static int getPriority(String op) {
-        if (op.equals("*") || op.equals("/")) return 2;
-        if (op.equals("+") || op.equals("-")) return 1;
+    private static int getPriority(String operator) {
+        if (operator.equals("*") || operator.equals("/")) return 2;
+        if (operator.equals("+") || operator.equals("-")) return 1;
         return -1;
     }
 }
