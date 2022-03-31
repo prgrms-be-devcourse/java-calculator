@@ -22,4 +22,17 @@ class CalculateServiceTest {
         // then
         assertEquals(4, result);
     }
+
+    @Test
+    @DisplayName("더하기 빼기 & 나누기 곱하기가 같이 있는 경우")
+    void calculateWithAllOperator() throws Exception {
+        // given
+        String input = "1 + 2 - 3 * 4";
+
+        // when
+        Double result = calculateService.CalValue(input);
+
+        // then
+        assertEquals(-9, result);
+    }
 }
