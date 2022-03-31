@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class Calculator implements Runnable{
 
-    private final int LOOKUP = 1;
+    private final int SHOW_ALL = 1;
     private final int CALCULATION = 2;
     private final int EXIT = 3;
 
@@ -47,7 +47,7 @@ public class Calculator implements Runnable{
             int choice = target.get();
 
             //1번이 보여주기, 2번이 계산, 3번이 끝
-            if(choice == LOOKUP){
+            if(choice == SHOW_ALL){
                 // TODO: 지금까지 했던 기록 list 보여주기
                 lookupList(calculationRepository.findAll());
                 continue;
