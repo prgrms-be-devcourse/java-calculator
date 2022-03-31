@@ -26,8 +26,18 @@ public class Console implements Output, Input {
     // 메뉴 상수 번호, 한 곳에서 관리 및 메뉴 의존도 낮추는 방법
 
     @Override
+    public void informFormat() {
+        System.out.println("(피연산자와 연산자 사이에 공백을 입력해주세요.)");
+    }
+
+    @Override
     public void inputError() {
         System.out.println("입력이 잘못되었습니다.");
+    }
+
+    @Override
+    public void errorMessage(Exception e) {
+        System.out.println("msg : "+e.toString());
     }
 
     @Override
