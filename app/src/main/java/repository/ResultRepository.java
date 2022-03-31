@@ -15,10 +15,8 @@ public class ResultRepository {
     }
 
     public void showRecord() {
-        Iterator<Long> expKey = db.keySet().iterator();
 
-        while (expKey.hasNext()) {
-            Long key = expKey.next();
+        for (Long key : db.keySet()) {
             System.out.println(db.get(key).getExpressionWithResult());
         }
     }
