@@ -1,7 +1,5 @@
 package com.caculator.util;
 
-import com.caculator.Operator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;

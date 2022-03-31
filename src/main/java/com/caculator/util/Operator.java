@@ -1,4 +1,4 @@
-package com.caculator;
+package com.caculator.util;
 
 import java.util.Arrays;
 import java.util.function.ToLongBiFunction;
