@@ -2,6 +2,7 @@ package calculator;
 
 import java.text.DecimalFormat;
 
+import calculator.domain.MenuType;
 import calculator.domain.PostfixExpression;
 import calculator.repository.ResultRepository;
 import calculator.view.Console;
@@ -9,9 +10,6 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class Calculator implements Runnable {
-    private static final String END_PROGRAM = "3";
-    private static final String MENU_RECORD = "1";
-    private static final String MENU_CALCULATE = "2";
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
 
     private final ResultRepository repository;
@@ -26,28 +24,32 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        boolean isNotEndProgram = true;
+
+        while (isNotEndProgram) {
             String command = inputView.inputMenu();
-            if (command.equals(END_PROGRAM)) {
-                break;
-            }
 
-            if (command.equals(MENU_RECORD)) {
-                repository.findAll()
-                    .ifPresentOrElse(outputView::printResults, outputView::printNoResults);
-                continue;
+            switch (MenuType.from(command)) {
+                case MENU_RECORD:
+                    outputView.printResults(repository.findAll());
+                    break;
+                case MENU_CALCULATE:
+                    calculateExpression();
+                    break;
+                case END_PROGRAM:
+                    isNotEndProgram = false;
+                    break;
+                default:
+                    outputView.printWrongCommandError();
             }
+        }
+    }
 
-            if (command.equals(MENU_CALCULATE)) {
-                boolean wrongInput = true;
-                while (wrongInput) {
-                    String expression = inputView.inputExpression();
-                    wrongInput = calculate(expression);
-                }
-                continue;
-            }
-
-            outputView.printWrongCommandError();
+    private void calculateExpression() {
+        boolean wrongInput = true;
+        while (wrongInput) {
+            String expression = inputView.inputExpression();
+            wrongInput = calculate(expression);
         }
     }
 
