@@ -1,5 +1,7 @@
 package calculator.repository;
 
+import calculator.io.Output;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,6 +18,10 @@ public class MemoryExpressRepository implements ExpressRepository {
     @Override
     public int findByExpress(String exp) {
         return store.get(exp);
+    }
+
+    public void historyPrint(Output output) {
+        store.forEach(output::historyPrint);
     }
 
     @Override

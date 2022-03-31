@@ -6,11 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="9a2209ab-5990-4a13-9ba9-4d5cff856199" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/Calculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/io/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/io/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/io/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/io/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/io/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/io/Output.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/repository/ExpressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/repository/ExpressRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/repository/MemoryExpressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/repository/MemoryExpressRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/calculator/io/ConsoleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/calculator/io/ConsoleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/calculator/repository/MemoryExpressRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/calculator/repository/MemoryExpressRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +29,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -100,29 +107,19 @@
       <recent name="calculator.parse" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ConsoleTest">
-    <configuration name="CalculatorTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;calculator.CalculatorTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+  <component name="RunManager" selected="애플리케이션.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="calculator.App" />
+      <module name="java-calculator.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="calculator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="ConsoleTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -170,7 +167,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ConsoleTest.outputTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MemoryExpressRepositoryTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -183,7 +180,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;calculator.io.ConsoleTest.outputTest&quot;" />
+            <option value="&quot;calculator.repository.MemoryExpressRepositoryTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -193,7 +190,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MemoryExpressRepositoryTest.validSaveTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MemoryExpressRepositoryTest.validHistoryPrint" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -206,7 +203,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;calculator.repository.MemoryExpressRepositoryTest.validSaveTest&quot;" />
+            <option value="&quot;calculator.repository.MemoryExpressRepositoryTest.validHistoryPrint&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -218,11 +215,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MemoryExpressRepositoryTest" />
+        <item itemvalue="Gradle.MemoryExpressRepositoryTest.validHistoryPrint" />
         <item itemvalue="Gradle.ConsoleTest" />
         <item itemvalue="Gradle.ConsoleTest.historyOutputTest" />
-        <item itemvalue="Gradle.ConsoleTest.outputTest" />
-        <item itemvalue="Gradle.MemoryExpressRepositoryTest.validSaveTest" />
-        <item itemvalue="Gradle.CalculatorTest" />
+        <item itemvalue="애플리케이션.App" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +236,7 @@
       <workItem from="1648617378468" duration="13831000" />
       <workItem from="1648653816913" duration="3270000" />
       <workItem from="1648658651956" duration="9109000" />
-      <workItem from="1648695719901" duration="2996000" />
+      <workItem from="1648695719901" duration="5179000" />
     </task>
     <servers />
   </component>

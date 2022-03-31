@@ -26,4 +26,7 @@ public class Calculator {
         out.answerPrint(answer);
     }
 
+    public void history() {
+        repository.historyPrint(out);
+    }
 }

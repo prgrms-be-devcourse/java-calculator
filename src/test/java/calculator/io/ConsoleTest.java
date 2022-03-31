@@ -62,16 +62,15 @@ public class ConsoleTest {
         Assertions.assertThat(out.toString()).isEqualTo(want);
     }
 
-    @DisplayName("히스토리가 순서대로 잘 출력되는지")
+    @DisplayName("히스토리의 형태가 원하는 형태로 출력되는지")
     @Test
     void historyOutputTest() {
-        final String want = "1+2=3\n" +
-                "1+2*3=7\n";
+        final String want = "1+2=3\n";
         OutputStream out = consoleOutputHelp();
         System.setOut(new PrintStream(out));
 
         output = new Console();
-        output.historyPrint(mock);
+        output.historyPrint("1+2", 3);
 
         Assertions.assertThat(out.toString()).isEqualTo(want);
     }
