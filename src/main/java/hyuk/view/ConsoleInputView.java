@@ -7,8 +7,13 @@ public class ConsoleInputView implements InputView {
 
     private static final String MENU_ERROR_MSG = "1 또는 2를 입력해주세요.";
     private static final String FORMULA_ERROR_MSG = "정규 표현식이 아닙니다.";
+    private final Scanner scanner;
 
-    public String selectMenu(Scanner scanner) {
+    public ConsoleInputView(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public String selectMenu() {
         String menu = scanner.nextLine();
 
         if (menu.equals("1") || menu.equals("2")) {
@@ -17,7 +22,7 @@ public class ConsoleInputView implements InputView {
         throw new IllegalStateException(MENU_ERROR_MSG);
     }
 
-    public String inputFormula(Scanner scanner) {
+    public String inputFormula() {
         String formula = scanner.nextLine();
 
         validateRegex(formula);

@@ -102,7 +102,7 @@
 - [X] matches는 비싼 행위 대안 생각해보기
 - [X] 한 메서드에 Depth가 많으면 리펙토링 요소. depth가 많으면 분리해보기
 - [X] menu도 enum으로 관리해보기
-- [ ] 과연 scanner를 컨트롤러에서 넣어주는게 맞는걸까?
+- [X] 과연 scanner를 컨트롤러에서 넣어주는게 맞는걸까?
 - [ ] System.lineSeparator() 알아보기
 - [ ] 클래스명이 Log인 것은 좋지 않다.
 - [ ] stream은 한줄에 하나씩 쓰는게 좋다.

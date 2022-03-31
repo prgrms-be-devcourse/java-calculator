@@ -5,7 +5,6 @@ import hyuk.model.ResultDTO;
 import hyuk.service.CalculatorService;
 import hyuk.view.InputView;
 import hyuk.view.OutputView;
-import java.util.Scanner;
 
 public class CalculatorController {
 
@@ -24,7 +23,7 @@ public class CalculatorController {
         while (true) {
             outputView.printMenu();
             try {
-                Menu menu = Menu.of(inputView.selectMenu(new Scanner(System.in)));
+                Menu menu = Menu.of(inputView.selectMenu());
                 outputView.printEmptySpace();
 
                 if (menu.isPrint()) {
@@ -43,7 +42,7 @@ public class CalculatorController {
     private void calculate() {
         while (true) {
             try {
-                String formula = inputView.inputFormula(new Scanner(System.in));
+                String formula = inputView.inputFormula();
 
                 ResultDTO resultDTO = calculatorService.calculate(formula);
 

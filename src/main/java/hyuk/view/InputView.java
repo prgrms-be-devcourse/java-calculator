@@ -1,10 +1,8 @@
 package hyuk.view;
 
-import java.util.Scanner;
-
 public interface InputView {
 
-    String selectMenu(Scanner scanner);
+    String selectMenu();
 
-    String inputFormula(Scanner scanner);
+    String inputFormula();
 }

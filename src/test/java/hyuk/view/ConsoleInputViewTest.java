@@ -12,36 +12,37 @@ import org.junit.jupiter.api.Test;
 
 public class ConsoleInputViewTest {
 
-    ConsoleInputView inputView = new ConsoleInputView();
-
     public static InputStream generateUserInput(String input) {
         return new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private InputView getInputView(String input) {
+        InputStream in = generateUserInput(input);
+        System.setIn(in);
+        InputView inputView = new ConsoleInputView(new Scanner(System.in));
+        return inputView;
     }
 
     @DisplayName("메뉴 입력 테스트")
     @Test
     void selectMenu() {
         //given
-        InputStream in = generateUserInput("1");
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = getInputView("1");
 
         //when
         //then
-        assertThat(inputView.selectMenu(scanner)).isEqualTo("1");
+        assertThat(inputView.selectMenu()).isEqualTo("1");
     }
 
     @DisplayName("메뉴 입력 예외 - 1, 2 이외의 한자리 입력")
     @Test
     void selectMenuException() {
         //given
-        InputStream in = generateUserInput("3");
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = getInputView("3");
 
         //when
         //then
-        assertThatThrownBy(() -> inputView.selectMenu(scanner))
+        assertThatThrownBy(() -> inputView.selectMenu())
             .isInstanceOf(IllegalStateException.class)
             .hasMessageContaining("1 또는 2를 입력해주세요.");
     }
@@ -50,28 +51,23 @@ public class ConsoleInputViewTest {
     @Test
     void selectMenuExceptionVer2() {
         //given
-        InputStream in = generateUserInput("1 2 23");
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = getInputView("1 2 23");
 
         //when
         //then
-        assertThatThrownBy(() -> inputView.selectMenu(scanner))
+        assertThatThrownBy(() -> inputView.selectMenu())
             .isInstanceOf(IllegalStateException.class)
             .hasMessageContaining("1 또는 2를 입력해주세요.");
     }
-
 
     @DisplayName("계산식 입력 테스트")
     @Test
     void inputFormula() {
         //given
-        InputStream in = generateUserInput("1 + 2 * 3 + 4");
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = getInputView("1 + 2 * 3 + 4");
 
         //when
-        String exp = inputView.inputFormula(scanner);
+        String exp = inputView.inputFormula();
 
         //then
         assertThat(exp).isEqualTo("1 + 2 * 3 + 4");
@@ -81,13 +77,11 @@ public class ConsoleInputViewTest {
     @Test
     void FormulaException() {
         //given
-        InputStream in = generateUserInput("1 2 3 4");
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = getInputView("1 2 3 4");
 
         //when
         //then
-        assertThatThrownBy(() -> inputView.inputFormula(scanner))
+        assertThatThrownBy(() -> inputView.inputFormula())
             .isInstanceOf(IllegalStateException.class)
             .hasMessageContaining("정규 표현식이 아닙니다.");
     }
@@ -96,13 +90,11 @@ public class ConsoleInputViewTest {
     @Test
     void FormulaExceptionVer2() {
         //given
-        InputStream in = generateUserInput("1 2 3 4");
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = getInputView("1 2 3 4");
 
         //when
         //then
-        assertThatThrownBy(() -> inputView.inputFormula(scanner))
+        assertThatThrownBy(() -> inputView.inputFormula())
             .isInstanceOf(IllegalStateException.class)
             .hasMessageContaining("정규 표현식이 아닙니다.");
     }
@@ -111,13 +103,11 @@ public class ConsoleInputViewTest {
     @Test
     void FormulaExceptionVer3() {
         //given
-        InputStream in = generateUserInput("1 + 2 +");
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = getInputView("1 + 2 +");
 
         //when
         //then
-        assertThatThrownBy(() -> inputView.inputFormula(scanner))
+        assertThatThrownBy(() -> inputView.inputFormula())
             .isInstanceOf(IllegalStateException.class)
             .hasMessageContaining("정규 표현식이 아닙니다.");
     }
