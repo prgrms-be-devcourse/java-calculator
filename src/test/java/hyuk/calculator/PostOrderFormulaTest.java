@@ -16,7 +16,7 @@ class PostOrderFormulaTest {
         PostOrderFormula postOrderFormula = new PostOrderFormula(formula);
 
         //then
-        Assertions.assertThat(postOrderFormula.getFormula())
+        Assertions.assertThat(postOrderFormula.getPostOrderFormula())
             .containsExactly("1", "2", "3", "*", "+", "4", "+");
     }
 }

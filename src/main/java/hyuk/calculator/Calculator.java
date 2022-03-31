@@ -8,7 +8,7 @@ public class Calculator {
 
     public Result calculate(PostOrderFormula postOrderFormula) {
         Deque<Integer> stack = new ArrayDeque<>();
-        for (String token : postOrderFormula.getFormula()) {
+        for (String token : postOrderFormula.getPostOrderFormula()) {
             if (isOperand(token)) {
                 stack.addLast(Integer.parseInt(token));
                 continue;
