@@ -16,7 +16,7 @@ public class IOTest {
     Console console = new Console();
 
     @Test
-    void 조회메뉴입력받기() {
+    void 정수입력받기() {
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
