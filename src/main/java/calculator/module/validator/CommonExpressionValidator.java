@@ -46,16 +46,6 @@ public class CommonExpressionValidator implements ExpressionValidator{
             throw new InvalidExpressionException(EXPRESSION_ORDER_INVALID_MESSAGE);
     }
 
-    /*
-     * 1. 현재 글자가 "("
-     *      피연산자, ( 만 올 수 있음
-     * 2. 현재 글자가 ) 일 경우
-     *      연산자, ) 만 올 수 있음
-     * 3. 현재 글자가 연산자
-     *      피연산자, (
-     * 4. 현재 글자가 피연산자
-     *      연산자, )
-     * */
     private void checkMiddleTokenOrder(Tokenizationable [] tokens) throws InvalidExpressionException{
         int length = tokens.length;
         for(int i = 1; i < length-2; i++) {
