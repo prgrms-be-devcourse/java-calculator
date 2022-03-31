@@ -10,8 +10,7 @@ public class CalculateService {
 
         String[] userInputSplit = userInput.split(" ");
 
-        List<String> plus = new ArrayList<>();
-        List<String> minus = new ArrayList<>();
+        List<String> calList = new ArrayList<>();
 
         Double result;
 
@@ -20,29 +19,29 @@ public class CalculateService {
             String operator = userInputSplit[i + 1];
             String second = userInputSplit[i + 2];
 
-            if (operator.equals("+")) {
-                plus.add(first);
-            } else if (operator.equals("-")) {
-                minus.add(second);
+            if (operator.equals("+") || operator.equals("-")) {
+                calList.add(first);
+                calList.add(operator);
             } else if (operator.equals("*")) {
                 userInputSplit[i + 2] = String.valueOf(Double.parseDouble(first) * Double.parseDouble(second));
             } else {
+                if (second.equals("0")) throw new ArithmeticException("0으로 나눌 수 없습니다.");
                 userInputSplit[i + 2] = String.valueOf(Double.parseDouble(first) / Double.parseDouble(second));
             }
         }
 
-        result = Double.parseDouble(userInputSplit[userInputSplit.length - 1]);
+        calList.add(userInputSplit[userInputSplit.length - 1]);
 
+        result = Double.parseDouble(calList.get(0));
 
-        // 더하기 연산 마무리
-        for (String number : plus) {
-            result += Double.parseDouble(number);
+        for (int i = 1; i < calList.size(); i += 2) {
+            if (calList.get(i).equals("+")) {
+                result += Double.valueOf(calList.get(i+1));
+            } else if (calList.get(i).equals("-")) {
+                result -= Double.valueOf(calList.get(i+1));
+            }
         }
 
-        // 빼기 연산 마무리
-        for (String number : minus) {
-            result -= Double.parseDouble(number);
-        }
 
         return result;
     }
