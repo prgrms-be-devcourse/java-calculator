@@ -14,6 +14,7 @@ public class Calculator {
     private final CalculateService calculateService;
     private final HistoryService findService;
     private final Validator validator;
+    private static final String COMMAND_HISTORY = "1", COMMAND_CALCULATE = "2";
 
     public Calculator(Input input, Output output, CalculateService calculateService, HistoryService findService, Validator validator) {
         this.input = input;
@@ -30,19 +31,11 @@ public class Calculator {
             String inputMenu = input.inputMenu();
 
             switch (inputMenu) {
-                case "1":
-                    output.printHistory(findService.findHistory());
+                case COMMAND_HISTORY:
+                    executeFindHistory();
                     break;
-                case "2":
-                    String formula = input.inputFormula();
-                    try {
-                        validator.validateFormula(formula);
-                        int result = calculateService.calculateFormula(formula);
-                        findService.save(formula, result);
-                        output.printResult(result);
-                    } catch (Exception e) {
-                        output.printFormulaError(e.getMessage());
-                    }
+                case COMMAND_CALCULATE:
+                    executeCalculateFormula();
                     break;
                 default:
                     output.printMenuError();
@@ -50,4 +43,19 @@ public class Calculator {
         }
     }
 
+    public void executeFindHistory() {
+        output.printHistory(findService.findHistory());
+    }
+
+    public void executeCalculateFormula() {
+        String formula = input.inputFormula();
+        try {
+            validator.validateFormula(formula);
+            int result = calculateService.calculateFormula(formula);
+            findService.save(formula, result);
+            output.printResult(result);
+        } catch (Exception e) {
+            output.printFormulaError(e.getMessage());
+        }
+    }
 }
