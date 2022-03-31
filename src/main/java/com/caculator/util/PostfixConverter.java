@@ -28,7 +28,7 @@ public class PostfixConverter {
         String[] split = expression.split(" ");
         Stack<String> stack = new Stack<>();
 
-        if (isEmptyExpression(split)) throw new IllegalArgumentException();
+        checkEmptyExpression(split);
 
         for (int i = 0; i < split.length; i++) {
             String s = split[i];
@@ -45,8 +45,12 @@ public class PostfixConverter {
         return postfix;
     }
 
+    private static void checkEmptyExpression(String[] split) throws IllegalArgumentException{
+        if (isEmptyExpression(split)) throw new IllegalArgumentException();
+    }
+
     private static boolean isEmptyExpression(String[] expressions) {
-        return expressions.length == 0;
+        return expressions != null && expressions.length == 0;
     }
 
     /**
