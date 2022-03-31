@@ -54,12 +54,6 @@ public class CalculateServiceImpl implements CalculateService {
         Stack<String> opStack = new Stack<>();
         List<String> postFixFormulaList = new ArrayList<>();
 
-        Map<String, Integer> opPriorityMap = new HashMap<>();
-        opPriorityMap.put("+", 1);
-        opPriorityMap.put("-", 1);
-        opPriorityMap.put("*", 2);
-        opPriorityMap.put("/", 2);
-
         for (int i = 0; i < infixFormulaList.size(); i++) {
             if (i % 2 == 0) {
                 postFixFormulaList.add(infixFormulaList.get(i));
@@ -78,7 +72,3 @@ public class CalculateServiceImpl implements CalculateService {
         return postFixFormulaList;
     }
 }
-
-/*
-opPriorityMap.get(opStack.peek()) >= opPriorityMap.get(infixFormulaList.get(i)
- */
