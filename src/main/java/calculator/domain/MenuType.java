@@ -17,6 +17,6 @@ public enum MenuType {
         return Arrays.stream(MenuType.values())
             .filter(type -> type.menuCommand.equals(menuCommand))
             .findFirst()
-            .orElse(null);
+            .orElseThrow(() -> new IllegalArgumentException("\n[ERROR] 1, 2, 3번 중 선택하세요.\n"));
     }
 }

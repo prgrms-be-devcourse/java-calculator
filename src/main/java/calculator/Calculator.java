@@ -28,9 +28,8 @@ public class Calculator implements Runnable {
         boolean isNotEndProgram = true;
 
         while (isNotEndProgram) {
-            String command = inputView.inputMenu();
-
-            switch (MenuType.from(command)) {
+            MenuType menuType = inputMenu();
+            switch (menuType) {
                 case MENU_RECORD:
                     outputView.printResults(repository.findAll());
                     break;
@@ -39,11 +38,18 @@ public class Calculator implements Runnable {
                     break;
                 case END_PROGRAM:
                     isNotEndProgram = false;
-                    break;
-                default:
-                    outputView.printWrongCommandError();
             }
         }
+    }
+
+    private MenuType inputMenu() {
+        try {
+            String command = inputView.inputMenu();
+            return MenuType.from(command);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMsg(e.getMessage());
+        }
+        return inputMenu();
     }
 
     private void calculateExpression() {

@@ -37,11 +37,6 @@ public class Console implements OutputView, InputView {
         results.forEach(System.out::println);
         System.out.println();
     }
-    
-    @Override
-    public void printWrongCommandError() {
-        System.out.println("\n[ERROR] 1, 2, 3번 중 선택하세요.\n");
-    }
 
     @Override
     public void printErrorMsg(String msg) {
