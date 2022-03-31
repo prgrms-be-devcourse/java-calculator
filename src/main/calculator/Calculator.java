@@ -17,7 +17,7 @@ public class Calculator implements Runnable{
     private Output output;
     private CalculationRepository calculationRepository;
     private Operator operator;
-
+    private boolean exit = false;
     public Calculator(Input input,
                       Output output,
                       CalculationRepository calculationRepository,
@@ -39,29 +39,31 @@ public class Calculator implements Runnable{
             Optional<Integer> target = parse(inputString);
 
             //1,2,3을 제외한 다른문자가 들어오면 다시 돌리기
-            if(target.isEmpty()){
+            /*if(target.isEmpty()){
                 output.inputError();
                 continue;
-            }
-
-            int choice = target.get();
+            }*/
 
             //1번이 보여주기, 2번이 계산, 3번이 끝
-            if(choice == SHOW_ALL){
-                // TODO: 지금까지 했던 기록 list 보여주기
-                showList(calculationRepository.findAll());
-                continue;
-            }
-            if(choice == CALCULATION){
-                // TODO: operator 만들기
-                expressCalculation(input.input("입력해주세요."));
-                continue;
-            }
-            if(choice == EXIT){
-                output.quit();
-                break;
+            switch (target.get()){
+                case SHOW_ALL:
+                    showList(calculationRepository.findAll());
+                    break;
+                case CALCULATION:
+                    expressCalculation(input.input("입력해주세요."));
+                    break;
+                case EXIT:
+                    output.quit();
+                    exit =true;
+                    break;
+                default:
+                    throw new RuntimeException();
             }
 
+            //3번이 들어왔다면 종료
+            if(exit){
+                break;
+            }
         }
     }
 
