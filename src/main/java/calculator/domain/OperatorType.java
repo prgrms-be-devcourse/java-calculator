@@ -32,8 +32,8 @@ public enum OperatorType {
             .orElseThrow(() -> new IllegalArgumentException("[ERROR] 연산자가 아닙니다. 다시 입력해주세요."));
     }
 
-    public static double calculate(String operator, double firstNumber, double secondNumber) {
-        return from(operator).expression.apply(firstNumber, secondNumber);
+    public double calculate(double firstNumber, double secondNumber) {
+        return expression.apply(firstNumber, secondNumber);
     }
 
     public int getPriorityValue() {

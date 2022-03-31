@@ -97,7 +97,7 @@ public class PostfixExpression {
             if (isOperator(value)) {
                 double secondNumber = stack.pop();
                 double firstNumber = stack.pop();
-                stack.add(OperatorType.calculate(value, firstNumber, secondNumber));
+                stack.add(OperatorType.from(value).calculate(firstNumber, secondNumber));
             }
         }
         return stack.pop();
