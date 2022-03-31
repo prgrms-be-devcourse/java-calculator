@@ -16,7 +16,6 @@ public class Calculator implements Runnable {
     private Output output;
     private CalculationRepository calculationRepository;
     private Operator operator;
-    private boolean exit = false;
 
     public Calculator(Input input,
                       Output output,
@@ -50,13 +49,7 @@ public class Calculator implements Runnable {
                         break;
                     case EXIT:
                         output.quit();
-                        exit = true;
-                        break;
-                }
-
-                //3번이 들어왔다면 종료
-                if (exit) {
-                    break;
+                        return;
                 }
             }
         } catch (SelectException e) {
