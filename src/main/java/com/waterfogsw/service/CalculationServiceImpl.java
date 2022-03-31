@@ -46,7 +46,7 @@ public class CalculationServiceImpl implements CalculationService {
                 // 연산자이고 stack에 숫자(피연산자)가 1개만 있는 경우
                 // 피연산자 0이 있다는 가정하에 계산
                 String x = stack.pop();
-                String result = calculate(ZERO, x, Operator.MIN.symbol);
+                String result = calculate(ZERO, x, Operator.MIN.getSymbol());
 
                 stack.add(result);
             } else {

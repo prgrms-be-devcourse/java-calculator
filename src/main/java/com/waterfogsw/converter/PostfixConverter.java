@@ -1,6 +1,7 @@
 package com.waterfogsw.converter;
 
 import com.waterfogsw.domain.Operator;
+import com.waterfogsw.exception.NotExistsOperator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +16,17 @@ public class PostfixConverter implements Converter {
      * @return 후위표기식 토큰
      */
     @Override
-    public List<String> convert(List<String> infixExpr) {
+    public List<String> convert(List<String> infixExpr) throws NotExistsOperator {
         Stack<String> stack = new Stack<>();
         List<String> output = new ArrayList<>();
 
         for (String op : infixExpr) {
             if (!Operator.isOperator(op)) {
                 output.add(op);
-            } else if (op.equals(Operator.LPR.symbol)) {
+            } else if (op.equals(Operator.LPR.getSymbol())) {
                 stack.add(op);
-            } else if (op.equals(Operator.RPR.symbol)) {
-                while (!stack.isEmpty() && !stack.peek().equals(Operator.LPR.symbol)) {
+            } else if (op.equals(Operator.RPR.getSymbol())) {
+                while (!stack.isEmpty() && !stack.peek().equals(Operator.LPR.getSymbol())) {
                     output.add(stack.pop());
                 }
                 stack.pop();

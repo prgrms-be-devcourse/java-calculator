@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 @AllArgsConstructor
+@Getter
 public enum Operator {
     PLS("+", 2, (x, y) -> x + y),
     MIN("-", 2, (x, y) -> x - y),
@@ -21,21 +22,21 @@ public enum Operator {
     LPR("(", 1, null),
     RPR(")", 1, null);
 
-    public final String symbol;
+    private final String symbol;
     private final int priority;
     private final BiFunction<Double, Double, Double> calculateFunc;
 
-    public static boolean comparePri(String code1, String code2) {
+    public static boolean comparePri(String code1, String code2) throws NotExistsOperator {
         Operator op1 = findOperator(code1);
         Operator op2 = findOperator(code2);
         return op1.priority >= op2.priority;
     }
 
-    private static Operator findOperator(String code) {
+    private static Operator findOperator(String symbol) throws NotExistsOperator {
         return Stream.of(values())
-                .filter(opcode -> opcode.symbol.equals(code))
+                .filter(opcode -> opcode.getSymbol().equals(symbol))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(NotExistsOperator::new);
     }
 
     public static boolean isOperator(String opCode) {
