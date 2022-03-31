@@ -43,11 +43,11 @@ public class Calculator {
         }
     }
 
-    public void executeFindHistory() {
+    private void executeFindHistory() {
         output.printHistory(findService.findHistory());
     }
 
-    public void executeCalculateFormula() {
+    private void executeCalculateFormula() {
         String formula = input.inputFormula();
         try {
             validator.validateFormula(formula);
