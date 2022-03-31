@@ -9,7 +9,7 @@ public class Application {
         ResultRepository repository = new MemoryResultRepository();
         Console console = new Console();
 
-        Calculator calculator = new Calculator(repository, console, console);
+        Calculator calculator = new Calculator(repository, console);
         calculator.run();
     }
 }

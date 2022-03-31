@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import calculator.domain.PostfixExpression;
 import calculator.repository.ResultRepository;
+import calculator.view.Console;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -17,10 +18,10 @@ public class Calculator implements Runnable {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public Calculator(ResultRepository repository, InputView inputView, OutputView outputView) {
+    public Calculator(ResultRepository repository, Console console) {
         this.repository = repository;
-        this.inputView = inputView;
-        this.outputView = outputView;
+        this.inputView = console;
+        this.outputView = console;
     }
 
     @Override
