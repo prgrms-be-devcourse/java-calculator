@@ -1,5 +1,7 @@
 package com.programmers.devcourse.processor;
 
+import com.programmers.devcourse.exception.processor.ProcessorException;
+import com.programmers.devcourse.exception.processor.WrongOperatorTokenException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -10,7 +12,7 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
   private LinkedList<Character> operatorList;
 
   @Override
-  public Double process(List<String> tokens) {
+  public Double process(List<String> tokens) throws ProcessorException {
     numberList = new LinkedList<>();
     operatorList = new LinkedList<>();
     identifyTokens(tokens);
@@ -20,7 +22,7 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
     return numberList.getFirst();
   }
 
-  private void processAdditionAndSubtraction() {
+  private void processAdditionAndSubtraction() throws WrongOperatorTokenException {
     int operatorPointer;
     // 덧셈 뺄셈 연산을 해서 숫자 리스트의 크기를 1로 줄이고 그 값을 반환한다.
     operatorPointer = 0;
@@ -33,7 +35,7 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
     }
   }
 
-  private void processMultiplicationAndDivision() {
+  private void processMultiplicationAndDivision() throws WrongOperatorTokenException {
     int operatorPointer = 0;
     // 연산자 리스트를 순회하면서 곱셈과 나눗셈을 먼저 수행한다.
     while (operatorPointer < operatorList.size()) {
@@ -59,7 +61,8 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
     });
   }
 
-  private void operateNumbersInList(int operatorPointer, char operator) {
+  private void operateNumbersInList(int operatorPointer, char operator)
+      throws WrongOperatorTokenException {
     double first = numberList.get(operatorPointer);
     double second = numberList.get(operatorPointer + 1);
     double result = calculateTwoNumbers(operator, first, second);
@@ -69,18 +72,9 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
     operatorList.remove(operatorPointer);
   }
 
-  private double calculateTwoNumbers(char operator, double first, double second) {
-    switch (operator) {
-      case '+':
-        return first + second;
-      case '-':
-        return first - second;
-      case '*':
-        return first * second;
-      case '/':
-        return first / second;
-      default:
-        throw new ArithmeticException("연산자 입력 오류");
-    }
+  private double calculateTwoNumbers(char operator, double first, double second)
+      throws WrongOperatorTokenException {
+    Operator realOperator = Operator.from(operator);
+    return realOperator.operate(first, second);
   }
 }

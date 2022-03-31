@@ -17,10 +17,10 @@ public class Main {
     ResultRepository<String, Double> repository = new StringResultRepository();
     Parser parser = new RegexParser();
     Processor<List<String>, Double> processor = new StringTokenProcessor();
-    
+
     Calculator calculator = new Calculator(parser, processor, console,
         console, repository);
-
+    
     calculator.start();
 
   }
