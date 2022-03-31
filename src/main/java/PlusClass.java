@@ -5,7 +5,7 @@ public class PlusClass extends Operator{
     }
 
     @Override
-    public int getResult(int a, int b) {
+    public float getResult(float a, float b) {
         return a+b;
     }
 

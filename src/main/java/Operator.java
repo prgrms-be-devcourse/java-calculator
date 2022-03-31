@@ -5,5 +5,5 @@ public abstract class Operator {
         this.operator = operator;
     }
 
-    public abstract int getResult(int a, int b);
+    public abstract float getResult(float a, float b);
 }
