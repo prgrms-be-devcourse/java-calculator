@@ -7,18 +7,29 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public class ConsoleTest {
 
     Input input;
+    Output output;
     InputStream in;
+    Map<String, Integer> mock;
 
-
+    @BeforeEach
+    void beforeEach() {
+        mock = new LinkedHashMap<>();
+        mock.put("1+2", 3);
+        mock.put("1+2*3", 7);
+    }
     private InputStream consoleInputHelp(String userInput) {
         return new ByteArrayInputStream(userInput.getBytes());
+    }
+    private OutputStream consoleOutputHelp() {
+        return new ByteArrayOutputStream();
     }
 
     @DisplayName("사용자가 값을 입력했을 때 잘 입력되는지")
@@ -38,5 +49,30 @@ public class ConsoleTest {
 
 //        값이 잘 읽히는지 확인
         Assertions.assertThat(got).isEqualTo(want);
+    }
+
+    @DisplayName("답이 콘솔에 잘 출력되는지")
+    @Test
+    void outputTest() {
+        final String want = "4\n";
+        OutputStream out = consoleOutputHelp();
+        System.setOut(new PrintStream(out));
+        output = new Console();
+        output.answerPrint(4);
+        Assertions.assertThat(out.toString()).isEqualTo(want);
+    }
+
+    @DisplayName("히스토리가 순서대로 잘 출력되는지")
+    @Test
+    void historyOutputTest() {
+        final String want = "1+2=3\n" +
+                "1+2*3=7\n";
+        OutputStream out = consoleOutputHelp();
+        System.setOut(new PrintStream(out));
+
+        output = new Console();
+        output.historyPrint(mock);
+
+        Assertions.assertThat(out.toString()).isEqualTo(want);
     }
 }

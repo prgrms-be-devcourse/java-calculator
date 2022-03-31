@@ -19,11 +19,6 @@ public class MemoryExpressRepository implements ExpressRepository {
     }
 
     @Override
-    public void historyPrint() {
-
-    }
-
-    @Override
     public void clearStore() {
         store.clear();
     }
