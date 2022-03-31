@@ -1,5 +1,6 @@
 package hyuk.view;
 
+import hyuk.util.PatternValidator;
 import java.util.Scanner;
 
 public class ConsoleInputView implements InputView {
@@ -43,12 +44,11 @@ public class ConsoleInputView implements InputView {
     }
 
     private boolean isOperator(String token) {
-        return token.matches("[+\\-*/]");
+        return PatternValidator.OperatorPatter.matcher(token).matches();
     }
 
     private boolean isOperand(String token) {
-        return token.matches("^[0-9]*$");
+        return PatternValidator.OperandPattern.matcher(token).matches();
     }
-
 
 }

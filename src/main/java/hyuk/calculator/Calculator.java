@@ -1,5 +1,6 @@
 package hyuk.calculator;
 
+import hyuk.util.PatternValidator;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -23,7 +24,7 @@ public class Calculator {
     }
 
     private boolean isOperand(String token) {
-        return token.matches("^[0-9]*$");
+        return PatternValidator.OperandPattern.matcher(token).matches();
     }
 
 }

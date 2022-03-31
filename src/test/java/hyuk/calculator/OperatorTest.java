@@ -63,5 +63,6 @@ class OperatorTest {
         //then
         assertThat(actual).isEqualTo(25);
     }
+    
 
 }

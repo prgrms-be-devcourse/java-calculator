@@ -1,5 +1,6 @@
 package hyuk.calculator;
 
+import hyuk.util.PatternValidator;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -10,7 +11,6 @@ public class PostOrderFormula {
     private List<String> formula;
 
     public PostOrderFormula(String formula) {
-        StringBuilder sb = new StringBuilder();
         Deque<String> stack = new ArrayDeque<>();
         this.formula = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class PostOrderFormula {
     }
 
     private boolean isOperand(String token) {
-        return token.matches("^[0-9]*$");
+        return PatternValidator.OperandPattern.matcher(token).matches();
     }
 
     public List<String> getFormula() {
