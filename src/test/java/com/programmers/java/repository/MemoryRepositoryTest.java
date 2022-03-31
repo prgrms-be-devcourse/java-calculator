@@ -35,6 +35,7 @@ class MemoryRepositoryTest {
         repository.save(calculation);
 
         //then
+        org.junit.jupiter.api.Assertions.assertNotNull(repository.findAll().get(0));
         Assertions.assertThat(repository.findAll().get(0)).isEqualTo(calculation);
 
     }
@@ -52,6 +53,7 @@ class MemoryRepositoryTest {
         List<Calculation> resultRepositoryStore = repository.findAll();
 
         //then
+        org.junit.jupiter.api.Assertions.assertNotNull(resultRepositoryStore);
         Assertions.assertThat(resultRepositoryStore).isEqualTo(expectedStore);
     }
 }
