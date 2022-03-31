@@ -1,16 +1,14 @@
 import com.programmers.java.engine.model.Calculator;
 
+import fakeModel.FakeCalculator;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
 public class CalculatorTest extends TestCase {
 
-    private Calculator cal=new Calculator();
+    private FakeCalculator cal=new FakeCalculator();
 
-    //private 메소드를 테스트할 때는 test할 때만 잠깐 public으로 해뒀다가 다시 돌리는게 맞나요?
-
-/*
     @Test
     public void testChangeToPosix() throws Exception{
         String[] userStr={"5","+","2","*","7"};
@@ -24,7 +22,7 @@ public class CalculatorTest extends TestCase {
         cal.changeToPosix(userStr);
         Assert.assertEquals("58*42/+",cal.getPosixList());
     }
-*/
+
     @Test
     public void testCalculate() throws Exception{
         String[] userStr={"5","+","2","*","7"};
