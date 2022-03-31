@@ -39,7 +39,7 @@ public class Console implements Input, Output {
 
     @Override
     public void printMenuError() {
-        System.out.println(ErrorMessage.INVALID_MENU_INPUT);
+        System.out.println(ErrorMessage.INVALID_MENU_INPUT.getMessage());
     }
 
     @Override
