@@ -13,11 +13,19 @@ import calculator.repository.MemoryExpressRepository;
 import java.util.ArrayList;
 
 public class Calculator {
-    Input input = new Console();
-    Output out = (Output) input;
-    Parser parser = new StackParser();
-    Calculate calculate = new PostfixCalculate();
-    ExpressRepository repository = new MemoryExpressRepository();
+    Input input;
+    Output out;
+    Parser parser;
+    Calculate calculate;
+    ExpressRepository repository;
+
+    public Calculator(Input input, Output out, Parser parser, Calculate calculate, ExpressRepository repository) {
+        this.input = input;
+        this.out = out;
+        this.parser = parser;
+        this.calculate = calculate;
+        this.repository = repository;
+    }
 
     public void execute(String exp) {
         ArrayList<String> postfix = parser.parse(exp);

@@ -6,7 +6,9 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         String choice = "";
-        Calculator calculator = new Calculator();
+        AppConfig appConfig = new AppConfig();
+        Calculator calculator = new Calculator(appConfig.input(), appConfig.output(),
+                appConfig.parser(), appConfig.calculate(), appConfig.expressRepository());
         Scanner scanner = new Scanner(System.in);
         while (!choice.equals("3")){
             calculator.out.menu();

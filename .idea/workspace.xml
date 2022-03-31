@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a2209ab-5990-4a13-9ba9-4d5cff856199" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/calculator/AppConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/Calculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/io/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/io/Console.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/calculator/io/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/io/Input.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/io/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/io/Output.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/repository/ExpressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/repository/ExpressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/repository/MemoryExpressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/repository/MemoryExpressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/calculator/io/ConsoleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/calculator/io/ConsoleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/calculator/repository/MemoryExpressRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/calculator/repository/MemoryExpressRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/operator/Operator.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +47,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -236,7 +233,7 @@
       <workItem from="1648617378468" duration="13831000" />
       <workItem from="1648653816913" duration="3270000" />
       <workItem from="1648658651956" duration="9109000" />
-      <workItem from="1648695719901" duration="5179000" />
+      <workItem from="1648695719901" duration="6082000" />
     </task>
     <servers />
   </component>

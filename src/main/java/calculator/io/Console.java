@@ -14,8 +14,6 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public boolean hasNext() {return scanner.hasNextLine();}
-    @Override
     public void answerPrint(int answer) {
         System.out.println(answer);
     }
