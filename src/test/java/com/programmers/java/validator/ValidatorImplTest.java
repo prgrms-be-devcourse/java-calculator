@@ -31,12 +31,11 @@ class ValidatorImplTest {
         String formula2 = " ";
         String formula3 = "    ";
 
-        //when
+        //when, then
         Exception e1 = assertThrows(NullPointerException.class, ()-> validator.validateNull(formula1));
         Exception e2 = assertThrows(NullPointerException.class, ()-> validator.validateNull(formula2));
         Exception e3 = assertThrows(NullPointerException.class, ()-> validator.validateNull(formula3));
 
-        //then
         assertThat(e1.getMessage()).isEqualTo(ErrorMessage.EMPTY_INPUT.getMessage());
         assertThat(e2.getMessage()).isEqualTo(ErrorMessage.EMPTY_INPUT.getMessage());
         assertThat(e3.getMessage()).isEqualTo(ErrorMessage.EMPTY_INPUT.getMessage());
@@ -50,10 +49,8 @@ class ValidatorImplTest {
         String formula = "1";
         List<String> formulaList = tokenizer.tokenizeFormula(formula);
 
-        //when
+        //when, then
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> validator.validateLength(formulaList));
-
-        //then
         assertThat(e.getMessage()).isEqualTo(ErrorMessage.INVALID_FORMULA.getMessage());
     }
 
@@ -64,10 +61,8 @@ class ValidatorImplTest {
         String formula = "1 * 2 +";
         List<String> formulaList = tokenizer.tokenizeFormula(formula);
 
-        //when
+        //when, then
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> validator.validateLength(formulaList));
-
-        //then
         assertThat(e.getMessage()).isEqualTo(ErrorMessage.INVALID_FORMULA.getMessage());
     }
 
@@ -78,10 +73,8 @@ class ValidatorImplTest {
         String formula = "1 * -10 + 5 / + * 5";
         List<String> formulaList = tokenizer.tokenizeFormula(formula);
 
-        //when
+        //when, then
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> validator.validateOrder(formulaList));
-
-        //then
         assertThat(e.getMessage()).isEqualTo(ErrorMessage.INVALID_OPERAND.getMessage());
     }
 
@@ -91,10 +84,8 @@ class ValidatorImplTest {
         String formula = "1 * 10 / 0";
         List<String> formulaList = tokenizer.tokenizeFormula(formula);
 
-        //when
+        //when, then
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> validator.validateDivideZero(formulaList));
-
-        //then
         assertThat(e.getMessage()).isEqualTo(ErrorMessage.NOT_DIVIDE_ZERO.getMessage());
     }
 }
