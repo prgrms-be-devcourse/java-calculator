@@ -1,6 +1,7 @@
 package com.calculator.java.engine;
 
 import com.calculator.java.Console;
+import com.calculator.java.engine.comand.CommandTypes;
 import com.calculator.java.exception.TerminationException;
 import com.calculator.java.exception.WrongInputException;
 import com.calculator.java.database.Database;
@@ -10,8 +11,6 @@ import com.calculator.java.engine.comand.Inquiry;
 
 import java.io.IOException;
 import java.util.Optional;
-
-import static com.calculator.java.engine.comand.CommandTypes.*;
 
 public class Calculator {
     private Console console;
@@ -49,14 +48,16 @@ public class Calculator {
         }
     }
 
-
     private Optional<Command> getCommand(String selectedCommand) throws WrongInputException {
-        if (selectedCommand.equals(SELECTION.getCommandId())) {
-            return Optional.of(new Inquiry(database));
-        } else if (selectedCommand.equals(CALCULATION.getCommandId())) {
-            return Optional.of(new Calculation(database));
-        } else {
-            return Optional.empty();
+        CommandTypes commandType = CommandTypes.strToCommandType(selectedCommand);
+
+        switch (commandType) {
+            case INQUIRY:
+                return Optional.of(new Inquiry(database));
+            case CALCULATION:
+                return Optional.of(new Calculation(database));
+            default:
+                return Optional.empty();
         }
     }
 }

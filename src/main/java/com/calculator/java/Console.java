@@ -10,10 +10,10 @@ public class Console {
     private final String WRONG_INPUT_MESSAGE = "잘 못된 입력입니다.";
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    private final Validation validation;
+    private final Validator validator;
 
-    public Console(Validation validation) {
-        this.validation = validation;
+    public Console(Validator validator) {
+        this.validator = validator;
     }
 
     public void showCommandType() {
@@ -30,7 +30,7 @@ public class Console {
         String selectedCommand = br.readLine().trim();
         System.out.println();
 
-        if(!validation.validateSelectedCommand(selectedCommand)) {
+        if(!validator.validateSelectedCommand(selectedCommand)) {
             throw new WrongInputException(WRONG_INPUT_MESSAGE);
         }
 
@@ -40,7 +40,7 @@ public class Console {
     public String inputMathExpression() throws IOException, WrongInputException{
         String mathExpression = br.readLine().trim();
 
-        if(validation.validateMathExpression(mathExpression)) return mathExpression;
+        if(validator.validateMathExpression(mathExpression)) return mathExpression;
         else throw new WrongInputException(WRONG_INPUT_MESSAGE);
     }
 

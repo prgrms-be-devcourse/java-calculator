@@ -7,7 +7,7 @@ import com.calculator.java.engine.comand.CommandTypes;
 
 public class App {
     public static void main(String[] args)  {
-         Console console = new Console(new Validation(CommandTypes.values()));
+         Console console = new Console(new Validator(CommandTypes.values()));
          Database database = new Database();
 
          Calculator calculator = new Calculator(console, database);

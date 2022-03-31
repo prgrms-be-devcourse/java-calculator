@@ -6,27 +6,27 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ValidationTest {
-    Validation validation = new Validation(CommandTypes.values());
+class ValidatorTest {
+    Validator validator = new Validator(CommandTypes.values());
 
     @ParameterizedTest
     @ValueSource(strings = {"q", "qwerasdfzxcv", "qq23"})
     void 틀린_명령_선택_테스트(String selectedCommand) {
-        boolean isValid = validation.validateSelectedCommand(selectedCommand);
+        boolean isValid = validator.validateSelectedCommand(selectedCommand);
         assertThat(isValid).isFalse();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2 + 3", "3 - -2 + 3 * 200 / 20"})
     void 정상_수식_테스트(String exp) {
-        boolean isValid = validation.validateMathExpression(exp);
+        boolean isValid = validator.validateMathExpression(exp);
         assertThat(isValid).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2 + 3 = ", "+2+ 3", "121 a fd", "1  + 2", "1"})
     void 틀린_수식_테스트(String exp) {
-        boolean isValid = validation.validateMathExpression(exp);
+        boolean isValid = validator.validateMathExpression(exp);
         assertThat(isValid).isFalse();
     }
 }

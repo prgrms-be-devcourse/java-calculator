@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class Validation {
+public class Validator {
     public final List<String> validCommandIds;
 
-    public Validation(CommandTypes[] commandTypes) {
+    public Validator(CommandTypes[] commandTypes) {
         this.validCommandIds = Arrays.asList(commandTypes).stream()
                 .map(commandType -> commandType.getCommandId())
                 .collect(Collectors.toList());
@@ -50,6 +50,4 @@ public class Validation {
         List<String> operators = Arrays.asList("+", "-", "*", "/");
         return operators.contains(element);
     }
-
-
 }
