@@ -12,11 +12,6 @@ public class ConsoleUserInterface implements UserInterface{
     }
 
     @Override
-    public int inputNumber() {
-        return scanner.nextInt();
-    }
-
-    @Override
     public void printMessage(String message) {
         System.out.println(message);
     }
