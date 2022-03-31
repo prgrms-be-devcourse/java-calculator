@@ -5,9 +5,8 @@ import main.calculator.engine.io.Output;
 import main.calculator.engine.model.CalculationRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public class Calculator implements Runnable{
+public class Calculator implements Runnable {
 
     private final int SHOW_ALL = 1;
     private final int CALCULATION = 2;
@@ -18,6 +17,7 @@ public class Calculator implements Runnable{
     private CalculationRepository calculationRepository;
     private Operator operator;
     private boolean exit = false;
+
     public Calculator(Input input,
                       Output output,
                       CalculationRepository calculationRepository,
@@ -31,15 +31,17 @@ public class Calculator implements Runnable{
     @Override
     public void run() {
 
-        while(true){
-            //메뉴출력
-            output.menu();
-            String inputString = input.input("선택 :");
+        try {
+            while (true) {
 
-            //1번이 보여주기, 2번이 계산, 3번이 끝
-            try{
+                //메뉴출력
+                output.menu();
+                String inputString = input.input("선택 :");
+
+                //1번이 보여주기, 2번이 계산, 3번이 끝
                 int target = parse(inputString);
-                switch (target){
+
+                switch (target) {
                     case SHOW_ALL:
                         showList(calculationRepository.findAll());
                         break;
@@ -48,40 +50,40 @@ public class Calculator implements Runnable{
                         break;
                     case EXIT:
                         output.quit();
-                        exit =true;
+                        exit = true;
                         break;
                 }
-            }catch (SelectException e){
-                System.out.println(e.getMessage());
-            }catch (NumberFormatException e){
-                System.out.println("숫자를 입력해주세요");
+
+                //3번이 들어왔다면 종료
+                if (exit) {
+                    break;
+                }
             }
-            
-            //3번이 들어왔다면 종료
-            if(exit){
-                break;
-            }
+        } catch (SelectException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해주세요");
         }
     }
 
     private void expressCalculation(String inputString) {
         //실질적 계산이 이루어짐
-        
+
         //여기에 실질적 계산으로 보내기
         String result = operator.calculate(inputString);
 
         //repository에 저장
-        calculationRepository.save(inputString,result);
-        
+        calculationRepository.save(inputString, result);
+
         //출력
         output.print(result);
     }
 
-    private void showList(List<String> list){
+    private void showList(List<String> list) {
         //repository에서 가져온 list를 전체적으로 출력하기
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             output.print("조회할 내용이 없습니다.");
-            return ;
+            return;
         }
 
         for (String content : list) {
