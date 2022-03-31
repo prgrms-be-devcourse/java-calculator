@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a2209ab-5990-4a13-9ba9-4d5cff856199" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/img/:Users:yongckim:devCourse:java-calculator:src:main:java:calculator.uml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/uml.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/calculator/calculate/PostfixCalculateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" afterDir="false" />
@@ -12,8 +15,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/calculator/calculations/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculator/calculations/Calculations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/calculator/calculations/CalculationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/calculator/calculations/CalculationsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/calculator/CalculatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/calculator/CalculatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/calculator/parse/ParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/calculator/parse/ParserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +53,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -100,13 +104,14 @@
       <recent name="$PROJECT_DIR$/img" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="calculator.calculate" />
       <recent name="calculator.repository" />
       <recent name="calculator.calculations" />
       <recent name="calculator" />
       <recent name="calculator.parse" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.CalculationsTest.divideZeroTest">
+  <component name="RunManager" selected="Gradle.'java-calculator.test'에 있는 테스트">
     <configuration name="CalculationsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -130,7 +135,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CalculationsTest.divideZeroTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CalculatorTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -143,7 +148,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;calculator.calculations.CalculationsTest.divideZeroTest&quot;" />
+            <option value="&quot;calculator.CalculatorTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -153,7 +158,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ParserTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="CalculatorTest.calculatorHistoryTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -166,7 +171,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;calculator.parse.ParserTest&quot;" />
+            <option value="&quot;calculator.CalculatorTest.calculatorHistoryTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -176,7 +181,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ParserTest.WrongUnknownValueStackParserTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PostfixCalculateTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -189,7 +194,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;calculator.parse.ParserTest.WrongUnknownValueStackParserTest&quot;" />
+            <option value="&quot;calculator.calculate.PostfixCalculateTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -199,7 +204,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ParserTest.wrongExpressCheck" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="'java-calculator.test'에 있는 테스트" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -211,8 +216,6 @@
         <option name="taskNames">
           <list>
             <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;calculator.parse.ParserTest.wrongExpressCheck&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -224,11 +227,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.CalculationsTest.divideZeroTest" />
+        <item itemvalue="Gradle.'java-calculator.test'에 있는 테스트" />
+        <item itemvalue="Gradle.CalculatorTest.calculatorHistoryTest" />
+        <item itemvalue="Gradle.CalculatorTest" />
+        <item itemvalue="Gradle.PostfixCalculateTest" />
         <item itemvalue="Gradle.CalculationsTest" />
-        <item itemvalue="Gradle.ParserTest" />
-        <item itemvalue="Gradle.ParserTest.wrongExpressCheck" />
-        <item itemvalue="Gradle.ParserTest.WrongUnknownValueStackParserTest" />
       </list>
     </recent_temporary>
   </component>
@@ -245,7 +248,7 @@
       <workItem from="1648617378468" duration="13831000" />
       <workItem from="1648653816913" duration="3270000" />
       <workItem from="1648658651956" duration="9109000" />
-      <workItem from="1648695719901" duration="18651000" />
+      <workItem from="1648695719901" duration="21708000" />
     </task>
     <servers />
   </component>

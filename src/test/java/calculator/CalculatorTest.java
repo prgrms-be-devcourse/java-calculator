@@ -1,32 +1,55 @@
 package calculator;
 
-import calculator.calculate.Calculate;
-import calculator.calculate.PostfixCalculate;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
-class CalculatorTest {
-
-    Calculate calculator;
+public class CalculatorTest {
+    Calculator calculator;
 
     @BeforeEach
     void beforeEach() {
-        calculator = new PostfixCalculate();
+        AppConfig appConfig = new AppConfig();
+        calculator = new Calculator(appConfig.input(), appConfig.output(),
+                appConfig.parser(), appConfig.calculate(), appConfig.expressRepository());
+        calculator.execute("5 + 7");
+        calculator.execute("5 - 7");
+        calculator.execute("5 * 7");
+        calculator.execute("15 / 7");
     }
 
-    @DisplayName("파싱한 값을 전달했을 때 원하는 값이 나오는지 확인")
-    @Test
-    void validCalculateTest() {
-        ArrayList<String> mock = new ArrayList<>(Arrays.asList("3", "2", "4", "*", "+", "9", "3", "/", "-"));
-        int want = 8;
+    @AfterEach
+    void afterEach() {
+        calculator.repository.clearStore();
+    }
 
-        int got = calculator.execute(mock);
+    @DisplayName("계산기 계산 테스트")
+    @Test
+    void calculatorCalculateTest() {
+        int want = 7;
+        int got = calculator.execute("3 + 4");
 
         Assertions.assertThat(got).isEqualTo(want);
+    }
+
+    @DisplayName("계산기 히스토리 테스트")
+    @Test
+    void calculatorHistoryTest() {
+        String want = "5+7=12\n" +
+                "5-7=-2\n" +
+                "5*7=35\n" +
+                "15/7=2\n";
+        OutputStream got = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(got));
+
+        calculator.history();
+
+        Assertions.assertThat(got.toString()).isEqualTo(want);
     }
 }

@@ -74,7 +74,7 @@ class ParserTest {
         Assertions.assertThat(e.getMessage()).isEqualTo(StackParser.WRONG_ARGUMENTS);
     }
 
-    @DisplayName("잘못된 수식이 들어왔을 경우 테스트")
+    @DisplayName("연산자와 피연산자가 매칭되지 않는 경우 테스트 (예외 발생)")
     @Test
     void wrongExpressCheck() {
         String[] mocks = {
