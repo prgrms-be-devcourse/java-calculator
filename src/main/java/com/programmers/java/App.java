@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) {
         Console console=new Console();
-        History history=new History(new ArrayList<Expression>());
+        History history=new History(new ArrayList<>());
         Calculator calculator = new Calculator();
         new Lobby(console, console, history, calculator).run();
     }

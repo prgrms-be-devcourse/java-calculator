@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
+/*
+* Operator : 연산자를 관리하는 enum
+* */
 public enum Operator {
     PLUS("+", (a,b)->a+b, 0),
     MINUS("-",(a,b)->a-b,0),
@@ -19,12 +22,13 @@ public enum Operator {
         this.expression=expression;
         this.priority=priority;
     }
-    public static double calculate(String operator, double a, double b){
-        Optional<Operator> inputOperator=getOperator(operator);
-        if(inputOperator.isPresent()) return inputOperator.get().expression.apply(a,b);
-        throw new IllegalArgumentException("올바른 연산자가 아닙니다.");
+
+    /* calculate : operator로 두 인자를 계산해주는 메소드 */
+    public static double calculate(Operator operator, double a, double b){
+        return operator.expression.apply(a,b);
     }
 
+    /* getOperator : 문자열로 표시된 operator에 해당하는 enum operator를 찾아주는 메소드 */
     public static Optional<Operator> getOperator(String operator) {
         return Arrays.stream(values())
                 .filter(o -> o.operator.equals(operator))
