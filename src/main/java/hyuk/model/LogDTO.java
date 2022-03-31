@@ -9,7 +9,8 @@ public class LogDTO {
     private List<String> stringLogs;
 
     public LogDTO(List<Record> logs) {
-        stringLogs = logs.stream().map(Record::toString)
+        stringLogs = logs.stream()
+            .map(Record::toString)
             .collect(Collectors.toList());
     }
 
