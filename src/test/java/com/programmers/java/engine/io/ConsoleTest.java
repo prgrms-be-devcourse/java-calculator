@@ -12,7 +12,7 @@ public class ConsoleTest {
     Console console = new Console();
 
     @Test
-    public void Input_String들어오면_잘못된_입력입니다_출력해야함(){
+    public void Input_String들어오면_잘못된_입력입니다_출력해야함() {
         //given
         String s = "Input";
         OutputStream out = new ByteArrayOutputStream();
@@ -24,7 +24,7 @@ public class ConsoleTest {
     }
 
     @Test
-    public void EmptyMap_String들어오면_잘못된_입력입니다_출력해야함(){
+    public void EmptyMap_String들어오면_잘못된_입력입니다_출력해야함() {
         //given
         String s = "EmptyMap";
         OutputStream out = new ByteArrayOutputStream();
@@ -56,7 +56,6 @@ public class ConsoleTest {
         //when
         console.PrintCalcResult(3L);
         //then
-        Assertions.assertEquals("결과 : "+3L , out.toString().trim());
-
+        Assertions.assertEquals("결과 : " + 3L, out.toString().trim());
     }
 }

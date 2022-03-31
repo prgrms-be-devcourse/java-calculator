@@ -54,5 +54,4 @@ public class FunctionTest {
         //then
         Assertions.assertFalse(testBool);
     }
-
 }

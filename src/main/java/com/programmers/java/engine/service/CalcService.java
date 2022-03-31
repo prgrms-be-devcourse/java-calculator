@@ -15,20 +15,20 @@ public class CalcService {
                 Long a = s.pop();
                 calcArithmetic(a, b, str, s);
             } else {
-                    s.push(Long.parseLong(str));
-                }
+                s.push(Long.parseLong(str));
+            }
         }
         return s.pop();
     }
 
     public Stack<Long> calcArithmetic(Long a, Long b, String str, Stack<Long> s) {
-            switch (str) {
-                case "+" -> s.push(a + b);
-                case "-" -> s.push(a - b);
-                case "/" -> s.push(a / b);
-                case "*" -> s.push(a * b);
-                default -> throw new IllegalStateException("Unexpected Operator: " + str);
-            }
-            return s;
+        switch (str) {
+            case "+" -> s.push(a + b);
+            case "-" -> s.push(a - b);
+            case "/" -> s.push(a / b);
+            case "*" -> s.push(a * b);
+            default -> throw new IllegalStateException("Unexpected Operator: " + str);
+        }
+        return s;
     }
 }

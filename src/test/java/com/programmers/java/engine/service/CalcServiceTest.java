@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Stack;
-import java.util.function.Supplier;
 
 public class CalcServiceTest {
     CalcService calcService = new CalcService();

@@ -8,7 +8,7 @@ import java.util.Optional;
 public class ValidationService {
 
     public Optional<Formula> Validation(String inputFormula) {
-        String []s = inputFormula.split(" ");
+        String[] s = inputFormula.split(" ");
         if (s.length < 3)
             return Optional.empty();
         boolean divideCheck = false;

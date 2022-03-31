@@ -1,7 +1,6 @@
 package com.programmers.java.engine.repository;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,23 +13,25 @@ public class FormulaRepositoryTest {
     private static FormulaRepository formulaRepository = new FormulaRepository();
     final static String TESTFORMULA = "1 + 2";
     final static long TESTRESULT = 3;
-    @Test @BeforeEach
+
+    @Test
+    @BeforeEach
     public void 식과_결과가들어오면_testHistory와_history가_같아야함() {
         //given
         LinkedHashMap<String, Long> testHistory = new LinkedHashMap<>();
         //when
-        testHistory.put(TESTFORMULA,TESTRESULT);
-        formulaRepository.save(TESTFORMULA,TESTRESULT);
+        testHistory.put(TESTFORMULA, TESTRESULT);
+        formulaRepository.save(TESTFORMULA, TESTRESULT);
         //then
         Assertions.assertEquals(testHistory.get(TESTFORMULA), formulaRepository.getHistory().get(TESTFORMULA));
     }
 
     @Test
-    public void history에_저장된_모든값이_출력되어야함 () {
+    public void history에_저장된_모든값이_출력되어야함() {
         //given
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        String resultOutput[] = {TESTFORMULA + " = "+TESTRESULT };
+        String resultOutput[] = {TESTFORMULA + " = " + TESTRESULT};
         //when
         formulaRepository.findAll();
         String testOutput[] = out.toString().split("\n");
@@ -48,7 +49,6 @@ public class FormulaRepositoryTest {
         //when
         int testSize = formulaRepository.size();
         //then
-        Assertions.assertEquals(resultSize,testSize);
+        Assertions.assertEquals(resultSize, testSize);
     }
-
 }

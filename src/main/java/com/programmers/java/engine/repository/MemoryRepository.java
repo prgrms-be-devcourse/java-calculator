@@ -2,9 +2,9 @@ package com.programmers.java.engine.repository;
 
 public interface MemoryRepository {
 
-   void save(String formula, Long result) ;
+    void save(String formula, Long result);
 
-   void findAll();
+    void findAll();
 
-   int size();
+    int size();
 }
