@@ -37,6 +37,7 @@ public class PostFixService {
         switch (operator) {
             case "+", "-" -> priority = 2;
             case "*", "/" -> priority = 1;
+            default -> throw new IllegalStateException("Unexpected Operator: " + operator);
         }
         return priority;
     }
