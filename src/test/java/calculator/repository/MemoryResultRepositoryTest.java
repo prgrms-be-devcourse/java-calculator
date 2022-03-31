@@ -31,13 +31,13 @@ class MemoryResultRepositoryTest {
         String expected = "1 + 2 = 3";
         repository.save(expected);
 
-        assertThat(repository.findAll().get().get(3)).isEqualTo("1 + 2 = 3");
+        assertThat(repository.findAll().get(3)).isEqualTo("1 + 2 = 3");
     }
 
     @DisplayName("결과 전체를 반환한다.")
     @Test
     void find_All() {
-        List<String> results = repository.findAll().get();
+        List<String> results = repository.findAll();
         assertThat(results.size()).isEqualTo(3);
         assertThat(results).contains("1 + 2 = 3", "4 * 3 = 12", "1 + 2 / 2 = 2");
     }

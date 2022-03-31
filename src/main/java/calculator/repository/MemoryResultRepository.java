@@ -2,7 +2,6 @@ package calculator.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class MemoryResultRepository implements ResultRepository {
 
@@ -14,12 +13,8 @@ public class MemoryResultRepository implements ResultRepository {
     }
 
     @Override
-    public Optional<List<String>> findAll() {
-        if (store.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(new ArrayList<>(store));
+    public List<String> findAll() {
+        return new ArrayList<>(store);
     }
 
     public void clearStore() {

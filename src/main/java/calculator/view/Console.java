@@ -27,16 +27,17 @@ public class Console implements OutputView, InputView {
 
     @Override
     public void printResults(List<String> results) {
+
+        if (results.isEmpty()) {
+            System.out.println("계산 결과가 없습니다.\n");
+            return;
+        }
+
         System.out.println();
         results.forEach(System.out::println);
         System.out.println();
     }
-
-    @Override
-    public void printNoResults() {
-        System.out.println("계산 결과가 없습니다.\n");
-    }
-
+    
     @Override
     public void printWrongCommandError() {
         System.out.println("\n[ERROR] 1, 2, 3번 중 선택하세요.\n");
