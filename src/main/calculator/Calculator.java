@@ -32,34 +32,31 @@ public class Calculator implements Runnable{
     public void run() {
 
         while(true){
-
             //메뉴출력
             output.menu();
             String inputString = input.input("선택 :");
-            Optional<Integer> target = parse(inputString);
-
-            //1,2,3을 제외한 다른문자가 들어오면 다시 돌리기
-            /*if(target.isEmpty()){
-                output.inputError();
-                continue;
-            }*/
 
             //1번이 보여주기, 2번이 계산, 3번이 끝
-            switch (target.get()){
-                case SHOW_ALL:
-                    showList(calculationRepository.findAll());
-                    break;
-                case CALCULATION:
-                    expressCalculation(input.input("입력해주세요."));
-                    break;
-                case EXIT:
-                    output.quit();
-                    exit =true;
-                    break;
-                default:
-                    throw new RuntimeException();
+            try{
+                int target = parse(inputString);
+                switch (target){
+                    case SHOW_ALL:
+                        showList(calculationRepository.findAll());
+                        break;
+                    case CALCULATION:
+                        expressCalculation(input.input("입력해주세요."));
+                        break;
+                    case EXIT:
+                        output.quit();
+                        exit =true;
+                        break;
+                }
+            }catch (SelectException e){
+                System.out.println(e.getMessage());
+            }catch (NumberFormatException e){
+                System.out.println("숫자를 입력해주세요");
             }
-
+            
             //3번이 들어왔다면 종료
             if(exit){
                 break;
@@ -93,23 +90,12 @@ public class Calculator implements Runnable{
     }
 
 
-    private Optional<Integer> parse(String selectString) {
+    private int parse(String selectString) {
         //1~3만 들어와야 함
-        try {
-            int number = Integer.parseInt(selectString);
-            if (number < 1 || number > 3) {
-                //1 2 3 아니면 SelectException 예외
-                throw new SelectException("숫자중 1~3를 선택해주세요.");
-            }
-            return Optional.of(number);
+        int number = Integer.parseInt(selectString);
+        if (number >= 1 && number <= 3) {
+            return number;
         }
-        catch(NumberFormatException e){
-            //숫자형태가 아님
-            System.out.println("숫자 형태의 포맷이 아닙니다.");
-        }catch (SelectException e){
-            //1, 2, 3이 아님
-            System.out.println(e.getMessage());
-        }
-        return Optional.empty();
+        throw new SelectException("숫자중 1~3를 선택해주세요.");
     }
 }
