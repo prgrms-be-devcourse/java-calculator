@@ -27,11 +27,18 @@ public class Calculator {
         this.repository = repository;
     }
 
-    public void execute(String exp) {
-        ArrayList<String> postfix = parser.parse(exp);
-        int answer = calculate.execute(postfix);
-        repository.save(exp, answer);
-        out.answerPrint(answer);
+    public int execute(String exp) {
+        int answer = 0;
+        exp = exp.replaceAll("\s", "");
+        try {
+            ArrayList<String> postfix = parser.parse(exp);
+            answer = calculate.execute(postfix);
+            repository.save(exp, answer);
+            out.answerPrint(answer);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return answer;
     }
 
     public void history() {

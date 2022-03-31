@@ -70,7 +70,7 @@ public class ConsoleTest {
         System.setOut(new PrintStream(out));
 
         output = new Console();
-        output.historyPrint("1+2", 3);
+        output.historyPrintFormat("1+2", 3);
 
         Assertions.assertThat(out.toString()).isEqualTo(want);
     }

@@ -21,7 +21,7 @@ public class MemoryExpressRepository implements ExpressRepository {
     }
 
     public void historyPrint(Output output) {
-        store.forEach(output::historyPrint);
+        store.forEach(output::historyPrintFormat);
     }
 
     @Override

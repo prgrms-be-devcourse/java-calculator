@@ -23,7 +23,7 @@ class ParserTest {
 
     @DisplayName("정상적인 파싱 테스트")
     @Test
-    void ValidStackParserTest() {
+    void validStackParserTest() {
         String mock = "3+2*4-9/3";
         ArrayList<String> want = new ArrayList<>(Arrays.asList("3", "2", "4", "*", "+", "9", "3", "/", "-"));
 
@@ -34,7 +34,7 @@ class ParserTest {
 
     @DisplayName("수식에 공백이 있더라도 제대로 파싱해주는지 테스트")
     @Test
-    void ValidSpaceStackParserTest() {
+    void validSpaceStackParserTest() {
         String mock = "3-            6 + 1 *    7";
         ArrayList<String> want = new ArrayList<>(Arrays.asList("3", "6", "-", "1", "7", "*", "+"));
 
@@ -45,8 +45,8 @@ class ParserTest {
 
     @DisplayName("숫자가 2자리 이상일경우 제대로 구분되는지")
     @Test
-    void ValidMoreThanTwoDigitStackParserTest() {
-        String mock = "36+13-654 * 2 / 5";
+    void validMoreThanTwoDigitStackParserTest() {
+        String mock = "36+13-654*2/5";
         ArrayList<String> want = new ArrayList<>(Arrays.asList("36", "13", "+", "654", "2", "*", "5", "/", "-"));
 
         ArrayList<String> got = parser.parse(mock);
@@ -56,13 +56,40 @@ class ParserTest {
 
     @DisplayName("잘못된 연산자가 들어왔을 경우 예외 발생")
     @Test
-    void WrongOperatorStackParserTest() {
+    void wrongOperatorStackParserTest() {
+        String mock = "3%6";
 
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> parser.parse(mock));
+
+        Assertions.assertThat(e.getMessage()).isEqualTo(StackParser.WRONG_ARGUMENTS);
     }
 
     @DisplayName("연산자 + 숫자(int) 이외의 값이 들어오는 경우 예외 발생")
     @Test
-    void WrongUnknownValueStackParserTest() {
+    void wrongUnknownValueStackParserTest() {
+        String mock = "one+two";
 
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> parser.parse(mock));
+
+        Assertions.assertThat(e.getMessage()).isEqualTo(StackParser.WRONG_ARGUMENTS);
+    }
+
+    @DisplayName("잘못된 수식이 들어왔을 경우 테스트")
+    @Test
+    void wrongExpressCheck() {
+        String[] mocks = {
+                "3+",
+                "+3",
+                "-+*/",
+                "3++3",
+                "-33",
+                "35-",
+                "365-11-"
+        };
+        for (String mock : mocks) {
+            IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> parser.parse(mock));
+
+            Assertions.assertThat(e.getMessage()).isEqualTo(StackParser.OPERAND_NOT_MATCH);
+        }
     }
 }

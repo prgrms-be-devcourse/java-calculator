@@ -9,13 +9,15 @@ public class App {
         AppConfig appConfig = new AppConfig();
         Calculator calculator = new Calculator(appConfig.input(), appConfig.output(),
                 appConfig.parser(), appConfig.calculate(), appConfig.expressRepository());
-        Scanner scanner = new Scanner(System.in);
+
         while (!choice.equals("3")){
             calculator.out.menu();
             choice = calculator.input.read();
             switch (choice) {
                 case "1" -> {calculator.history();}
-                case "2" -> { calculator.execute(scanner.nextLine()); }
+                case "2" -> {
+                    calculator.execute(calculator.input.read());
+                }
                 case "3" -> {
                     System.out.println("프로그램 종료");
                 }

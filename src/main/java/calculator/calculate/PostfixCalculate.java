@@ -24,7 +24,7 @@ public class PostfixCalculate implements Calculate{
                     case "-" -> operand.push(Calculations.sub(a, b));
                     case "*" -> operand.push(Calculations.mul(a, b));
                     case "/" -> operand.push(Calculations.div(a, b));
-                    default -> {  } // error
+                    default -> { throw new IllegalArgumentException("알수없는 연산자입니다."); } // error
                 }
 
             }

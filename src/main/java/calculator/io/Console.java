@@ -19,7 +19,7 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void historyPrint(String exp, int answer) {
+    public void historyPrintFormat(String exp, int answer) {
         System.out.println(exp + "=" + answer);
     }
 
