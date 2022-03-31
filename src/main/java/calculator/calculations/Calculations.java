@@ -2,6 +2,7 @@ package calculator.calculations;
 
 public class Calculations {
     final public static String DIVIDE_BY_ZERO = "0으로 나눌 수 없습니다.";
+
     public static int add(int a, int b) {
         return a + b;
     }

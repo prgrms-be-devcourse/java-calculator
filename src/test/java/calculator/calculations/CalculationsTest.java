@@ -1,5 +1,6 @@
 package calculator.calculations;
 
+import calculator.parse.StackParser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,5 +56,16 @@ class CalculationsTest {
         int got = Calculations.div(a, b);
 
         Assertions.assertThat(got).isEqualTo(want);
+    }
+
+    @DisplayName("0으로 나눌때 예외 발생")
+    @Test
+    void divideZeroTest() {
+        int a = 6;
+        int b = 0;
+
+        ArithmeticException e = assertThrows(ArithmeticException.class, () -> Calculations.div(a, b));
+
+        Assertions.assertThat(e.getMessage()).isEqualTo(Calculations.DIVIDE_BY_ZERO);
     }
 }
