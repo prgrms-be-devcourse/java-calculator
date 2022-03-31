@@ -1,18 +1,33 @@
 package hyuk.repository;
 
 import hyuk.entity.Record;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MemoryRepository implements Repository {
 
-    private List<Record> logs = new ArrayList<>();
+    private static long SEQUENCE = 0;
+    private Map<Long, Record> records = new HashMap<>();
 
-    public void store(Record log) {
-        logs.add(log);
+    @Override
+    public void store(Record record) {
+        record.setId(++SEQUENCE);
+        records.put(record.getId(), record);
     }
 
-    public List<Record> getData() {
-        return logs;
+    @Override
+    public Integer getRecordsSize() {
+        return records.size();
+    }
+
+    @Override
+    public Record findById(Long id) {
+        return records.get(id);
+    }
+
+    @Override
+    public void removeAll() {
+        records.clear();
+        SEQUENCE = 0;
     }
 }

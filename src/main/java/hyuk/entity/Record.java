@@ -4,7 +4,6 @@ import hyuk.calculator.Result;
 
 public class Record {
 
-    private static long SEQUENCE = 0;
     private Long id;
     private String formula;
     private Integer result;
@@ -12,16 +11,19 @@ public class Record {
     private Record() {
     }
 
-    public static Record createLog(String formula, Result result) {
-        Record log = new Record();
-        log.id = ++SEQUENCE;
-        log.formula = formula;
-        log.result = result.showResult();
-        return log;
+    public static Record createRecord(String formula, Result result) {
+        Record record = new Record();
+        record.formula = formula;
+        record.result = result.showResult();
+        return record;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFormula() {

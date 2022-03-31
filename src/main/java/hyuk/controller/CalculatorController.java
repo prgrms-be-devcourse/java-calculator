@@ -1,6 +1,6 @@
 package hyuk.controller;
 
-import hyuk.model.LogDTO;
+import hyuk.model.RecordsDTO;
 import hyuk.model.ResultDTO;
 import hyuk.service.CalculatorService;
 import hyuk.view.InputView;
@@ -27,8 +27,8 @@ public class CalculatorController {
                 outputView.printEmptySpace();
 
                 if (menu.isPrint()) {
-                    LogDTO logDTO = calculatorService.printLogs();
-                    outputView.printLogs(logDTO);
+                    RecordsDTO recordsDTO = calculatorService.printRecords();
+                    outputView.printRecords(recordsDTO);
                     continue;
                 }
                 calculate();

@@ -3,7 +3,7 @@ package hyuk.view;
 import static org.mockito.Mockito.when;
 
 import hyuk.calculator.Result;
-import hyuk.model.LogDTO;
+import hyuk.model.RecordsDTO;
 import hyuk.model.ResultDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -26,7 +26,7 @@ public class ConsoleOutputViewTest {
     ConsoleOutputView consoleOutputView = new ConsoleOutputView();
 
     @Mock
-    LogDTO logDTO;
+    RecordsDTO recordsDTO;
 
     @BeforeEach
     public void setUpStream() {
@@ -68,12 +68,12 @@ public class ConsoleOutputViewTest {
 
     @DisplayName("계산기 로그 조회")
     @Test
-    void printLogs() {
+    void printRecords() {
         //given
-        when(logDTO.getLogs()).thenReturn(Arrays.asList("1 + 2 * 3 + 4 = 11"));
+        when(recordsDTO.getStringRecords()).thenReturn(Arrays.asList("1 + 2 * 3 + 4 = 11"));
 
         //when
-        consoleOutputView.printLogs(logDTO);
+        consoleOutputView.printRecords(recordsDTO);
 
         //then
         Assertions.assertThat(output.toString())

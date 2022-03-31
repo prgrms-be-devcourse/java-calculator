@@ -4,9 +4,11 @@ import hyuk.calculator.Calculator;
 import hyuk.calculator.PostOrderFormula;
 import hyuk.calculator.Result;
 import hyuk.entity.Record;
-import hyuk.model.LogDTO;
+import hyuk.model.RecordsDTO;
 import hyuk.model.ResultDTO;
 import hyuk.repository.Repository;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalculatorService {
 
@@ -22,13 +24,19 @@ public class CalculatorService {
         PostOrderFormula postOrderFormula = new PostOrderFormula(formula);
         Result result = calculator.calculate(postOrderFormula);
 
-        Record log = Record.createLog(formula, result);
-        repository.store(log);
+        Record record = Record.createRecord(formula, result);
+        repository.store(record);
 
         return new ResultDTO(result);
     }
 
-    public LogDTO printLogs() {
-        return new LogDTO(repository.getData());
+    public RecordsDTO printRecords() {
+        int dataSize = repository.getRecordsSize();
+        List<Record> records = new ArrayList<>();
+        for (long i = 1; i <= dataSize; ++i) {
+            records.add(repository.findById(i));
+        }
+
+        return new RecordsDTO(records);
     }
 }

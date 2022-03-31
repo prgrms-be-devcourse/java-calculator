@@ -1,6 +1,6 @@
 package hyuk.view;
 
-import hyuk.model.LogDTO;
+import hyuk.model.RecordsDTO;
 import hyuk.model.ResultDTO;
 
 public interface OutputView {
@@ -9,7 +9,7 @@ public interface OutputView {
 
     void printResult(ResultDTO resultDTO);
 
-    void printLogs(LogDTO logDTO);
+    void printRecords(RecordsDTO logDTO);
 
     void printEmptySpace();
 }

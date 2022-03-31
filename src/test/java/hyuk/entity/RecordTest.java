@@ -6,9 +6,9 @@ import hyuk.calculator.Result;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LogTest {
+public class RecordTest {
 
-    @DisplayName("log 변환 테스트")
+    @DisplayName("record 변환 테스트")
     @Test
     void translate() {
         //given
@@ -16,11 +16,11 @@ public class LogTest {
         Result result = new Result(11);
 
         //when
-        Record log = Record.createLog(formula, result);
+        Record record = Record.createRecord(formula, result);
 
         //then
-        assertThat(log.getId()).isEqualTo(1);
-        assertThat(log.getFormula()).isEqualTo(formula);
-        assertThat(log.getResult()).isEqualTo(11);
+        assertThat(record.getId()).isNull();
+        assertThat(record.getFormula()).isEqualTo(formula);
+        assertThat(record.getResult()).isEqualTo(11);
     }
 }

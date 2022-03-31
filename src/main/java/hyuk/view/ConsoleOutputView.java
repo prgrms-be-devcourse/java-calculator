@@ -1,6 +1,6 @@
 package hyuk.view;
 
-import hyuk.model.LogDTO;
+import hyuk.model.RecordsDTO;
 import hyuk.model.ResultDTO;
 import java.util.List;
 
@@ -18,9 +18,9 @@ public class ConsoleOutputView implements OutputView {
         System.out.println();
     }
 
-    public void printLogs(LogDTO logDTO) {
-        List<String> dtoLogs = logDTO.getLogs();
-        dtoLogs.forEach(System.out::println);
+    public void printRecords(RecordsDTO recordsDTO) {
+        List<String> stringRecords = recordsDTO.getStringRecords();
+        stringRecords.forEach(System.out::println);
         System.out.println();
     }
 
