@@ -2,7 +2,7 @@ package hyuk.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import hyuk.entity.Log;
+import hyuk.entity.Record;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +15,7 @@ public class MemoryRepositoryTest {
     MemoryRepository memoryRepository = new MemoryRepository();
 
     @Mock
-    Log log;
+    Record log;
 
     @DisplayName("계산이력 저장 기능 테스트")
     @Test

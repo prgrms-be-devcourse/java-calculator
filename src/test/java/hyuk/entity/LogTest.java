@@ -16,7 +16,7 @@ public class LogTest {
         Result result = new Result(11);
 
         //when
-        Log log = Log.createLog(formula, result);
+        Record log = Record.createLog(formula, result);
 
         //then
         assertThat(log.getId()).isEqualTo(1);

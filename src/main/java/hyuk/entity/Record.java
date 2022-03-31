@@ -2,18 +2,18 @@ package hyuk.entity;
 
 import hyuk.calculator.Result;
 
-public class Log {
+public class Record {
 
     private static long SEQUENCE = 0;
     private Long id;
     private String formula;
     private Integer result;
 
-    private Log() {
+    private Record() {
     }
 
-    public static Log createLog(String formula, Result result) {
-        Log log = new Log();
+    public static Record createLog(String formula, Result result) {
+        Record log = new Record();
         log.id = ++SEQUENCE;
         log.formula = formula;
         log.result = result.showResult();

@@ -1,11 +1,11 @@
 package hyuk.repository;
 
-import hyuk.entity.Log;
+import hyuk.entity.Record;
 import java.util.List;
 
 public interface Repository {
 
-    void store(Log log);
+    void store(Record log);
 
-    List<Log> getData();
+    List<Record> getData();
 }

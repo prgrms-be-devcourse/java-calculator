@@ -3,7 +3,7 @@ package hyuk.service;
 import hyuk.calculator.Calculator;
 import hyuk.calculator.PostOrderFormula;
 import hyuk.calculator.Result;
-import hyuk.entity.Log;
+import hyuk.entity.Record;
 import hyuk.model.LogDTO;
 import hyuk.model.ResultDTO;
 import hyuk.repository.Repository;
@@ -22,7 +22,7 @@ public class CalculatorService {
         PostOrderFormula postOrderFormula = new PostOrderFormula(formula);
         Result result = calculator.calculate(postOrderFormula);
 
-        Log log = Log.createLog(formula, result);
+        Record log = Record.createLog(formula, result);
         repository.store(log);
 
         return new ResultDTO(result);

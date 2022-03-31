@@ -1,6 +1,6 @@
 package hyuk.model;
 
-import hyuk.entity.Log;
+import hyuk.entity.Record;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,8 +8,8 @@ public class LogDTO {
 
     private List<String> stringLogs;
 
-    public LogDTO(List<Log> logs) {
-        stringLogs = logs.stream().map(Log::toString)
+    public LogDTO(List<Record> logs) {
+        stringLogs = logs.stream().map(Record::toString)
             .collect(Collectors.toList());
     }
 
