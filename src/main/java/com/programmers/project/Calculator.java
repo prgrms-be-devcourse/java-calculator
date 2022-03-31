@@ -12,15 +12,8 @@ import java.util.*;
 public class Calculator extends Basic{
 
     private Console console = new Console(); //입출력
-    private DataRepository repository = new VolatilityRepository(); // 계산식 저장소
 
     private final List<String> operations = new ArrayList<>(Arrays.asList("+","-","*","/"));  // 연산자
-
-    public String menu() {
-        return console.menu();
-    }
-
-
 
 
     public Queue<String> priority(String s) { // 후위연산식으로 변환
@@ -59,8 +52,8 @@ public class Calculator extends Basic{
 
 
 
-
-    public double calculate(Queue<String> formula) { // 계산
+    public double calculate(String s){ // 중위연산식 받아서 계산
+        Queue<String> formula = priority(s);
         double result = 0;
         Stack<Double> numbers = new Stack<>();
 
