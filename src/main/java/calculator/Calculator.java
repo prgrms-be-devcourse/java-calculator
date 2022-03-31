@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import calculator.domain.MenuType;
 import calculator.domain.PostfixExpression;
 import calculator.repository.ResultRepository;
+import calculator.utils.PostfixParser;
 import calculator.view.Console;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -55,7 +56,7 @@ public class Calculator implements Runnable {
 
     private boolean calculate(String expression) {
         try {
-            PostfixExpression postfix = PostfixExpression.from(expression);
+            PostfixExpression postfix = new PostfixExpression(PostfixParser.parse(expression));
             String result = DECIMAL_FORMAT.format(postfix.calculate());
             repository.save(expression + " = " + result);
             outputView.printResult(result);
