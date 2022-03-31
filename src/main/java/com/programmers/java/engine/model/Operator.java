@@ -10,9 +10,9 @@ public enum Operator {
     MULTIPLY("*",(a,b)->a*b, 1),
     DIVIDE("/", (a,b)->a/b, 1);
 
-    private String operator;
-    private BiFunction<Double, Double, Double> expression;
-    private int priority;
+    private final String operator;
+    private final BiFunction<Double, Double, Double> expression;
+    private final int priority;
 
     Operator(String operator, BiFunction<Double, Double, Double> expression, int priority){
         this.operator=operator;

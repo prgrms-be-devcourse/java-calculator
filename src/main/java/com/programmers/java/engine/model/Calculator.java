@@ -6,12 +6,12 @@ import java.util.Stack;
 
 public class Calculator {
 
-    private ArrayList<String> posixList=new ArrayList<String>();
+    private final ArrayList<String> posixList= new ArrayList<>();
 
     public String calculate(String[] userStr){
         changeToPosix(userStr);
         //posixList 계산
-        Stack<Double> stack=new Stack<Double>();
+        Stack<Double> stack= new Stack<>();
         double ans=0;
         for(String str : posixList){
             Optional<Operator> operator=Operator.getOperator(str);
@@ -37,7 +37,7 @@ public class Calculator {
     //TODO : 모든 함수에 대해 유효하지 않은 매개변수가 들어왔을 때의 경우를 다 생각해야하는지!
 
     private void changeToPosix(String[] userStr) throws NumberFormatException{
-        Stack<Operator> stack=new Stack<Operator>();
+        Stack<Operator> stack= new Stack<>();
         for(String str : userStr){
             // null이면 A, 아니면 B 로직 함수화 가능할듯.
             Optional<Operator> operator=Operator.getOperator(str);

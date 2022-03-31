@@ -12,15 +12,13 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 
 enum Menu{
-    EXIT(0, "종료"),
-    LOOKUP(1, "조회"),
-    CALCULATE(2, "계산");
+    EXIT("종료"),
+    LOOKUP("조회"),
+    CALCULATE("계산");
 
-    private final int value;
     private final String prompt;
 
-    Menu(int value, String prompt) {
-        this.value=value;
+    Menu(String prompt) {
         this.prompt=prompt;
     }
 
@@ -43,10 +41,9 @@ public class Lobby implements Runnable{
 
     @Override
     public void run() {
-        String menus="";
-        //+= 사용은 메모리적인 측면에서 비효율적이지만 초기 부분에서만 일어나기 때문에 사용함.
+        StringBuilder menus= new StringBuilder();
         for(Menu m : Menu.values()){
-            menus+=m.ordinal()+"."+ m +"\n";
+            menus.append(m.ordinal()).append(".").append(m).append("\n");
         }
 
         final int EXIT=Menu.EXIT.ordinal();
@@ -55,7 +52,7 @@ public class Lobby implements Runnable{
 
         while (true) {
             try {
-                System.out.println('\n' + menus);
+                System.out.println('\n' + menus.toString());
 
                 int userOption = input.optionInput("선택 : ");
                 if (userOption == EXIT) {
@@ -67,16 +64,15 @@ public class Lobby implements Runnable{
                     output.informFormat();
                     String userStr = input.strInput("계산식을 입력해주세요 : ");
                     Optional<String[]> parsedUserStr = parse(userStr);
+                    if(parsedUserStr.isEmpty()) throw new ParsedException();
                     String ans = calculator.calculate(parsedUserStr.get());
                     System.out.println(ans);
                     history.save(new Expression(userStr, ans));
                 } else {
                     output.inputError();
-                    continue;
                 }
             }catch(Exception e){
                 output.errorMessage(e);
-                continue;
             }
         }
 

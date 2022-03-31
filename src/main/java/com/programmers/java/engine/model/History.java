@@ -18,8 +18,8 @@ public class History {
     public void searchAll(){
         if(history.isEmpty()) System.out.println("아직 계산한 이력이 없습니다."); // TODO : 출력 부분을 어떻게 묶어야할까?
 
-        for(int i=0; i<history.size(); i++){
-            System.out.println(history.get(i));
+        for (Expression expression : history) {
+            System.out.println(expression);
         }
     }
 }
