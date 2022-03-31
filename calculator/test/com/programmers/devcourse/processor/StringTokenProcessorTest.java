@@ -1,9 +1,10 @@
 package com.programmers.devcourse.processor;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -27,17 +28,15 @@ class StringTokenProcessorTest {
   @ParameterizedTest
   @MethodSource("listAnswerProvider")
   void testProcessReturnProperResult(List<String> expected, double actual) throws Exception {
-    Assertions.assertEquals(processor.process(expected), actual);
+    assertThat(processor.process(expected)).isEqualTo(actual);
   }
 
   @DisplayName("process의 return 값이 소수점까지 일치해야 한다.")
   @ParameterizedTest
   @MethodSource("listAnswerProvider")
   void testProcessReturnDifferentResult(List<String> expected, double actual) throws Exception {
-
-    Assertions.assertNotEquals(processor.process(expected),
-        Double.sum(actual, 0.1));
+    assertThat(processor.process(expected)).isNotEqualTo(Double.sum(actual, 0.0001));
   }
-  
+
 
 }

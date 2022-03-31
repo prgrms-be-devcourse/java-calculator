@@ -65,14 +65,14 @@ public class StringTokenProcessor implements Processor<List<String>, Double> {
       throws WrongOperatorTokenException {
     double first = numberList.get(operatorPointer);
     double second = numberList.get(operatorPointer + 1);
-    double result = calculateTwoNumbers(operator, first, second);
+    double result = calculate(operator, first, second);
 
     numberList.set(operatorPointer, result);
     numberList.remove(operatorPointer + 1);
     operatorList.remove(operatorPointer);
   }
 
-  private double calculateTwoNumbers(char operator, double first, double second)
+  private double calculate(char operator, double first, double second)
       throws WrongOperatorTokenException {
     Operator realOperator = Operator.from(operator);
     return realOperator.operate(first, second);

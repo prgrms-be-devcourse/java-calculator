@@ -11,16 +11,16 @@ import java.util.List;
 
 public class Main {
 
+  static Console console = new Console();
+  static ResultRepository<String, Double> repository = new StringResultRepository();
+  static Parser parser = new RegexParser();
+  static Processor<List<String>, Double> processor = new StringTokenProcessor();
 
   public static void main(String[] args) {
-    Console console = new Console();
-    ResultRepository<String, Double> repository = new StringResultRepository();
-    Parser parser = new RegexParser();
-    Processor<List<String>, Double> processor = new StringTokenProcessor();
 
     Calculator calculator = new Calculator(parser, processor, console,
         console, repository);
-    
+
     calculator.start();
 
   }

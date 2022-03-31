@@ -25,5 +25,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="projectlombok.lombok" level="project" />
+    <orderEntry type="library" name="assertj.core" level="project" />
   </component>
 </module>

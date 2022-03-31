@@ -1,7 +1,6 @@
 package com.programmers.devcourse.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,7 +43,7 @@ class ResultRepositoryTest {
   @DisplayName("Repository 에는 3개의 데이터가 저장되어 있어야 한다.")
   @Test
   void testGetSizeReturn3() {
-    assertEquals(repository.getAll().size(), 3);
+    assertThat(repository.getAll().size()).isEqualTo(3);
   }
 
   @DisplayName("Repository에 key와 value가 정확하게 저장되어 있어야 한다.")
@@ -57,8 +56,8 @@ class ResultRepositoryTest {
         flag.set(true);
       }
     });
+    assertThat(flag.get()).isTrue();
 
-    assertTrue(flag.get());
   }
 
 
@@ -68,8 +67,9 @@ class ResultRepositoryTest {
     AtomicInteger i = new AtomicInteger();
     repository.getAll().forEach((key, value) -> {
       int index = i.getAndIncrement();
-      assertEquals(expressions[index], key);
-      assertEquals(results[index], value);
+      assertThat(expressions[index]).isEqualTo(key);
+      assertThat(results[index]).isEqualTo(value);
+
 
     });
   }

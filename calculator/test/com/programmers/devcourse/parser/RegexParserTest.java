@@ -1,10 +1,13 @@
 package com.programmers.devcourse.parser;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import com.programmers.devcourse.exception.parser.NotAcceptableStringException;
 import com.programmers.devcourse.exception.parser.ParserException;
 import com.programmers.devcourse.exception.parser.WrongTokenCountException;
 import com.programmers.devcourse.exception.parser.WrongTokenPositionException;
-import org.junit.jupiter.api.Assertions;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,19 +16,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 class RegexParserTest {
 
   Parser parser = new RegexParser();
-  Object[] parsedTokenArray;
-  String[] compareTarget;
+  List<String> parsedTokenList;
+  List<String> compareTarget;
 
 
   @DisplayName("문자열에 빈 칸이 없을 때 토큰을 정확하게 구해야 한다.")
   @Test
   void testParserShouldReturnProperTokenArrayWhenTargetStringHasNoSpace() throws ParserException {
-    Parser parser = new RegexParser();
     // test 공백 없이 붙여 넣었을 때
-    parsedTokenArray = parser.parse("1+2*3+4.54234").toArray();
+    parsedTokenList = parser.parse("1+2*3+4.54234");
     compareTarget =
-        new String[]{"1", "+", "2", "*", "3", "+", "4.54234"};
-    Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
+        List.of("1", "+", "2", "*", "3", "+", "4.54234");
+    assertThat(parsedTokenList).isEqualTo(compareTarget);
 
 
   }
@@ -35,9 +37,9 @@ class RegexParserTest {
   void testParserShouldReturnProperTokenArrayWhenInputStringHasSpace() throws ParserException {
 
     // 공백이 존재할 때
-    parsedTokenArray = parser.parse("5.3 + 4 /6").toArray();
-    compareTarget = new String[]{"5.3", "+", "4", "/", "6"};
-    Assertions.assertArrayEquals(parsedTokenArray, compareTarget);
+    parsedTokenList = parser.parse("5.3 + 4 /6");
+    compareTarget = List.of("5.3", "+", "4", "/", "6");
+    assertThat(parsedTokenList).isEqualTo(compareTarget);
 
 
   }
@@ -46,9 +48,9 @@ class RegexParserTest {
   @ParameterizedTest()
   @ValueSource(strings = {"1+2*", "           "})
   void testParserThrowsExceptionWhenInputStringHasWrongTokenCount(String target) {
-    Assertions.assertThrows(WrongTokenCountException.class, () -> {
+    assertThatExceptionOfType(WrongTokenCountException.class).isThrownBy(() -> {
       parser.parse(target);
-    }).getMessage();
+    });
 
   }
 
@@ -57,16 +59,16 @@ class RegexParserTest {
   @ParameterizedTest()
   @ValueSource(strings = {"+45", "5  3 +"})
   void testParserThrowExceptionWhenInputStringHasWrongOrder(String target) {
-    Assertions.assertThrows(WrongTokenPositionException.class, () -> {
+    assertThatExceptionOfType(WrongTokenPositionException.class).isThrownBy(() -> {
       parser.parse(target);
     });
   }
 
-  @DisplayName("토큰에 적합하지 않은 문자열이 들어왔을 때 NotAccpetableStringException을 던져야 한다.")
+  @DisplayName("토큰에 적합하지 않은 문자열이 들어왔을 때 NotAcceptableStringException을 던져야 한다.")
   @ParameterizedTest
   @ValueSource(strings = {"        a ", "  asdfkjzxv ", "@#IY@Y&*&Y&*"})
   void testParserThrowNotAcceptableStringExceptionWhenInputStringHasWrongCharacter(String target) {
-    Assertions.assertThrows(NotAcceptableStringException.class, () -> {
+    assertThatExceptionOfType(NotAcceptableStringException.class).isThrownBy(() -> {
       parser.parse(target);
     });
   }
