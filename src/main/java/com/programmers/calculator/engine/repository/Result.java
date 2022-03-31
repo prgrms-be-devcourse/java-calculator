@@ -2,15 +2,14 @@ package com.programmers.calculator.engine.repository;
 
 import com.programmers.calculator.engine.io.Output;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ExpressionAndResult {
+public class Result {
     private final Map<String, Integer> expressionAndResult = new LinkedHashMap<>();
     private final Output output;
 
-    public ExpressionAndResult(Output output) {
+    public Result(Output output) {
         this.output = output;
     }
 

@@ -3,7 +3,7 @@ package com.programmers.calculator.engine;
 import com.programmers.calculator.engine.exception.Validator;
 import com.programmers.calculator.engine.io.Input;
 import com.programmers.calculator.engine.io.Output;
-import com.programmers.calculator.engine.repository.ExpressionAndResult;
+import com.programmers.calculator.engine.repository.Result;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -11,12 +11,12 @@ import java.util.regex.Pattern;
 public class Calculator implements Runnable{
     private final Input input;
     private final Output output;
-    private final ExpressionAndResult expressionAndResult; // 연산식, 결과 저장
+    private final Result expressionAndResult; // 연산식, 결과 저장
 
     public Calculator(Input input, Output output) {
         this.input = input;
         this.output = output;
-        expressionAndResult = new ExpressionAndResult(output);
+        expressionAndResult = new Result(output);
     }
 
     @Override
