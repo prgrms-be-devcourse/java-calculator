@@ -54,7 +54,7 @@ public class Calculator implements Runnable{
             }
             if(choice == CALCULATION){
                 // TODO: operator 만들기
-                writeCalculation(input.input("입력해주세요."));
+                expressCalculation(input.input("입력해주세요."));
                 continue;
             }
             if(choice == EXIT){
@@ -65,7 +65,7 @@ public class Calculator implements Runnable{
         }
     }
 
-    private void writeCalculation(String inputString) {
+    private void expressCalculation(String inputString) {
         //실질적 계산이 이루어짐
         
         //여기에 실질적 계산으로 보내기
