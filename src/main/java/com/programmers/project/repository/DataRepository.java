@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface DataRepository {
-    List<String> show();
+    List<String> getAllRecords();
     void add(String str);
 
 }

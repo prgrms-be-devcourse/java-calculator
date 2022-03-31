@@ -7,7 +7,7 @@ public class VolatilityRepository implements DataRepository{
     List<String> records = new ArrayList<>();
 
     @Override
-    public List<String> show() {
+    public List<String> getAllRecords() {
         return records;
     }
 
