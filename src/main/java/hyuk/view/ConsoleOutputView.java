@@ -25,6 +25,6 @@ public class ConsoleOutputView implements OutputView {
     }
 
     public void printEmptySpace() {
-        System.out.println();
+        System.out.print(System.lineSeparator());
     }
 }
