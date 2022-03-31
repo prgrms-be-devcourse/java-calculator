@@ -49,7 +49,7 @@ public class Calculator implements Runnable{
             //1번이 보여주기, 2번이 계산, 3번이 끝
             if(choice == SHOW_ALL){
                 // TODO: 지금까지 했던 기록 list 보여주기
-                lookupList(calculationRepository.findAll());
+                showList(calculationRepository.findAll());
                 continue;
             }
             if(choice == CALCULATION){
@@ -78,7 +78,7 @@ public class Calculator implements Runnable{
         output.print(result);
     }
 
-    private void lookupList(List<String> list){
+    private void showList(List<String> list){
         //repository에서 가져온 list를 전체적으로 출력하기
         if(list.isEmpty()){
             output.print("조회할 내용이 없습니다.");
