@@ -1,6 +1,8 @@
 package com.programmers.java.enums;
 
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -29,8 +31,9 @@ public enum Operator {
 
     private static Operator getOperator(String operator) {
         return Arrays.stream(values())
+                .filter(Objects::nonNull)
                 .filter(o -> o.operator.equals(operator))
-                .findAny().get();
+                .findFirst().get();
     }
 
     private int getPriority() {
