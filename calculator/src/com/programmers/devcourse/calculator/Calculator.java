@@ -12,11 +12,6 @@ import java.util.List;
 
 public class Calculator {
 
-  // Enum 클래스를 활용해서 mode를 if 문 없이 사용해보고 싶다.
-  // Enum 클래스에는 각 모드마다 메서드가 정해져 있어야 하는 것이 아닐까?
-  // 그럴려면 input, output 인터페이스가 정해져 있어야 할 듯
-
-
   private final Parser parser;
   private final ResultRepository<String, Double> repository;
   private final Processor<List<String>, Double> processor;
@@ -33,22 +28,24 @@ public class Calculator {
     this.processor = processor;
   }
 
-
   public void start() {
-    int mode;
+    Mode mode;
     try {
+      label:
       while (true) {
-        mode = input.getMenuSelection();
-        if (mode == 1) {
-          output.sendAllResults(repository.getAll());
-        } else if (mode == 2) {
-          handleExpressionFromConsole();
-
-        } else if (mode == 3) {
-          break;
-        } else {
-          output.sendMessage("일치하는 메뉴가 없습니다.");
-
+        mode = Mode.from(input.getMenuSelection());
+        switch (mode) {
+          case PRINT_RESULT:
+            output.sendAllResults(repository.getAll());
+            break;
+          case CALCULATE:
+            handleExpressionFromConsole();
+            break;
+          case EXIT:
+            break label;
+          default:
+            output.sendMessage("일치하는 메뉴가 없습니다.");
+            break;
         }
       }
 
@@ -62,16 +59,20 @@ public class Calculator {
 
     } finally {
       try {
-        output.close();
-        if (input != output) {
-          input.close();
-        }
+        closeResources();
       } catch (IOException ex) {
         ex.printStackTrace();
       }
     }
 
 
+  }
+
+  private void closeResources() throws IOException {
+    output.close();
+    if (input != output) {
+      input.close();
+    }
   }
 
   private void handleExpressionFromConsole() throws IOException {
@@ -92,7 +93,6 @@ public class Calculator {
     output.sendMessage(result.getValue() + "\n");
   }
 
-
   private Result<String, Double> formatAndCalculateExpression(String expression)
       throws CalculatorException {
     List<String> tokens;
@@ -111,6 +111,24 @@ public class Calculator {
     });
     sb.delete(sb.length() - 1, sb.length());
     return sb.toString();
+  }
+
+  private enum Mode {
+
+    DEFAULT, PRINT_RESULT, CALCULATE, EXIT;
+
+    static Mode from(int ordinal) {
+
+      for (Mode mode : Mode.values()) {
+        if (mode.ordinal() == ordinal) {
+          return mode;
+        }
+      }
+
+      return DEFAULT;
+    }
+
+
   }
 
 
