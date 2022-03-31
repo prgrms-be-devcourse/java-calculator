@@ -34,7 +34,7 @@ public class CalculateTest {
 
     @Test
     void 계산결과확인(){
-        double result = calculator.calculate(calculator.priority("13 + 2 * 4"));
+        double result = calculator.calculate("13 + 2 * 4");
 
         Assertions.assertEquals(13+2*4, result);
     }
