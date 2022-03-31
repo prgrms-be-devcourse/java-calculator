@@ -8,14 +8,6 @@ public class Calculator {
 
     private ArrayList<String> posixList=new ArrayList<String>();
 
-    public String getPosixList(){
-        String str="";
-        for(int i=0; i<posixList.size(); i++){
-            str+=posixList.get(i);
-        }
-        return str;
-    }
-
     public String calculate(String[] userStr){
         changeToPosix(userStr);
         //posixList 계산

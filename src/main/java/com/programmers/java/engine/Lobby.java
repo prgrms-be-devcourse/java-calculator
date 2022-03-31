@@ -27,6 +27,7 @@ enum Menu{
 //TODO : Exception과 에러 처리
 //TODO : Parsing과 유효성 검사
 //TODO : Parsing Test 코드 작성
+//TODO : 바깥에서 유효성검사를 했다면 호출한 함수 속에서는 검사를 하지 않아도 되는건가요? 해야된다면 어느 깊이까지 해야하나요?
 
 @AllArgsConstructor
 public class Lobby implements Runnable{
