@@ -24,10 +24,10 @@ public class CalculatorController {
         while (true) {
             outputView.printMenu();
             try {
-                String menu = inputView.selectMenu(new Scanner(System.in));
+                Menu menu = Menu.of(inputView.selectMenu(new Scanner(System.in)));
                 outputView.printEmptySpace();
 
-                if (menu.equals("1")) {
+                if (menu.isPrint()) {
                     LogDTO logDTO = calculatorService.printLogs();
                     outputView.printLogs(logDTO);
                     continue;
