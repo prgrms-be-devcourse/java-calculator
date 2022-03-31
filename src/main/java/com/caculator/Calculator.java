@@ -90,7 +90,7 @@ public class Calculator {
      * 계산 이력이 없으면 true 를 반환한다.
      */
     private boolean isEmptyHistory(List<Result> history) {
-        return history.size() == 0;
+        return history != null && history.size() == 0;
     }
 
     /**
