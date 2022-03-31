@@ -36,7 +36,7 @@ public class Calculator implements Runnable {
             }
             int selectNum = Parse(inputString);
             if (selectNum == INQUIRE) {
-                Inquire(selectNum);
+                Find(selectNum);
             } else if (selectNum == CALCULATE) {
                 Calculate(selectNum);
             } else {
@@ -45,8 +45,8 @@ public class Calculator implements Runnable {
         }
     }
 
-    private void Inquire(int selectNum) {
-        input.InquireInput(selectNum);
+    private void Find(int selectNum) {
+        input.FindAllSelect(selectNum);
         if (formulaRepository.size() < 1) {
             output.Error("EmptyMap");
         } else {

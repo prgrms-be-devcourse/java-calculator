@@ -21,8 +21,8 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void InquireInput(int s) {
-        System.out.println(s + " 번을 선택하셨습니다.");
+    public void FindAllSelect(int number) {
+        System.out.println(number + " 번을 선택하셨습니다.");
     }
 
     @Override
