@@ -37,7 +37,8 @@ public class Calculator {
 
                 case CALCULATE:
                     String exp = input.inputExp();
-                    double result = operator.calculate(exp);
+                    String postfixExp = postfixConvertor.setPostfix(exp);
+                    double result = operator.calculate(postfixExp);
                     repository.save(exp + " = " + result);
                     output.outputResult(result);
                     break;
