@@ -6,14 +6,16 @@ import calculator.io.Console;
 import calculator.io.Input;
 import calculator.parse.Parser;
 import calculator.parse.StackParser;
+import calculator.repository.ExpressRepository;
+import calculator.repository.MemoryExpressRepository;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class Calculator {
     Input input = new Console();
     Parser parser = new StackParser();
     Calculate calculate = new PostfixCalculate();
+    ExpressRepository repository = new MemoryExpressRepository();
 
     public void execute(String exp) {
         ArrayList<String> postfix = parser.parse(exp);
@@ -22,9 +24,4 @@ public class Calculator {
         // print
     }
 
-
-
-    void historyPrint() {
-
-    }
 }

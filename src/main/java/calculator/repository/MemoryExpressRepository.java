@@ -1,11 +1,12 @@
 package calculator.repository;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MemoryExpressRepository implements ExpressRepository {
 
-    private static final Map<String, Integer> store = new HashMap<>();
+    private static final Map<String, Integer> store = new LinkedHashMap<>();
 
     @Override
     public void save(String exp, int answer) {
@@ -17,6 +18,12 @@ public class MemoryExpressRepository implements ExpressRepository {
         return store.get(exp);
     }
 
+    @Override
+    public void historyPrint() {
+
+    }
+
+    @Override
     public void clearStore() {
         store.clear();
     }

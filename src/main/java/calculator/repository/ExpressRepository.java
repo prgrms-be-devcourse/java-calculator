@@ -4,5 +4,6 @@ public interface ExpressRepository {
     void save(String exp, int answer);
     int findByExpress(String exp);
 
+    void historyPrint();
     void clearStore();
 }

@@ -11,6 +11,10 @@ class MemoryExpressRepositoryTest {
     @BeforeEach
     void beforeEach() {
         repository = new MemoryExpressRepository();
+        repository.save("3 + 3", 6);
+        repository.save("3 * 10", 30);
+        repository.save("3 / 3", 1);
+        repository.save("2-4", -2);
     }
 
     @AfterEach
@@ -30,4 +34,9 @@ class MemoryExpressRepositoryTest {
         Assertions.assertThat(answer).isEqualTo(ret);
     }
 
+
+    @DisplayName("히스토리 출력 테스트")
+    @Test
+    void validHistoryPrint() {
+    }
 }
