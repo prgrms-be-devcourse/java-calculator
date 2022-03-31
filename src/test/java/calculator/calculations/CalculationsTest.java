@@ -19,4 +19,41 @@ class CalculationsTest {
 
         Assertions.assertThat(got).isEqualTo(want);
     }
+
+    @DisplayName("뺄셈 기능 테스트")
+    @Test
+    void validSubTest() {
+        int a = 6;
+        int b = 7;
+        int want = -1;
+
+        int got = Calculations.sub(a, b);
+
+        Assertions.assertThat(got).isEqualTo(want);
+    }
+
+    @DisplayName("곱셈 기능 테스트")
+    @Test
+    void validMulTest() {
+        int a = 3;
+        int b = 7;
+        int want = 21;
+
+        int got = Calculations.mul(a, b);
+
+        Assertions.assertThat(got).isEqualTo(want);
+    }
+
+    @DisplayName("나눗셈 기능 테스트")
+    @Test
+    void validDivTest() {
+        int a = 8;
+        int b = 2;
+
+        int want  = 4;
+
+        int got = Calculations.div(a, b);
+
+        Assertions.assertThat(got).isEqualTo(want);
+    }
 }
