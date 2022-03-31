@@ -96,14 +96,18 @@ public class Calculator implements Runnable{
         try {
             int number = Integer.parseInt(selectString);
             if (number < 1 || number > 3) {
-                //숫자형태가 아님
-                throw new NumberFormatException();
+                //1 2 3 아니면 SelectException 예외
+                throw new SelectException("숫자중 1~3를 선택해주세요.");
             }
             return Optional.of(number);
         }
         catch(NumberFormatException e){
-            //1~3아니면 empty
-            return Optional.empty();
+            //숫자형태가 아님
+            System.out.println("숫자 형태의 포맷이 아닙니다.");
+        }catch (SelectException e){
+            //1, 2, 3이 아님
+            System.out.println(e.getMessage());
         }
+        return Optional.empty();
     }
 }
