@@ -1,3 +1,7 @@
+package arithmeticTest;
+
+import arithmetic.Operator;
+import arithmetic.PlusClass;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

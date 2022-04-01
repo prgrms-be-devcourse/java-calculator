@@ -1,3 +1,5 @@
+package arithmetic;
+
 public class DivisionClass extends Operator {
     public DivisionClass(){
         super('/');

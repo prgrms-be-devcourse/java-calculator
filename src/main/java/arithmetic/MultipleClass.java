@@ -1,3 +1,5 @@
+package arithmetic;
+
 public class MultipleClass extends Operator {
     public MultipleClass(){
         super('*');

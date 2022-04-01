@@ -1,3 +1,4 @@
+import console.StringManipulator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Stack;
@@ -9,19 +10,19 @@ public class StringManipulateTest {
     private String string = "1 + 2 * 3";
 
     @Test
-    public void testIntegerStack(){
+    public void testNumberStack(){
         StringManipulator manipulator = new StringManipulator(string);
-        Stack<Integer> integerStack = manipulator.getIntegerStack();
+        Stack<Float> numberStack = manipulator.getNumberStack();
 
-        assertEquals(getRightIntegerStack(string),integerStack);
+        assertEquals(getRightNumberStack(string),numberStack);
     }
 
     @Test
-    public void testEmptyIntegerStack(){
+    public void testEmptyNumberStack(){
         StringManipulator manipulator = new StringManipulator("");
-        Stack<Integer> integerStack = manipulator.getIntegerStack();
+        Stack<Float> numberStack = manipulator.getNumberStack();
 
-        assertEquals(new Stack<Integer>(),integerStack);
+        assertEquals(new Stack<Number>(),numberStack);
     }
 
     @Test
@@ -37,18 +38,26 @@ public class StringManipulateTest {
         StringManipulator manipulator = new StringManipulator("");
         Stack<Character> operatorStack = manipulator.getOperatorStack();
 
-        assertEquals(new Stack<Integer>(),operatorStack);
+        assertEquals(new Stack<Number>(),operatorStack);
     }
 
-    public Stack<Integer> getRightIntegerStack(String string){
-        Stack<Integer> integerStack = new Stack<>();
+    public Stack<Float> getRightNumberStack(String string){
+        Stack<Float> numberStack = new Stack<>();
+
+        StringBuffer nowNum = new StringBuffer();
+
         for (int i = 0; i<string.length(); i++){
             char nowChar = string.charAt(i);
-            if ('0' <= nowChar && nowChar<='9'){
-                integerStack.push(Character.getNumericValue(nowChar));
+            if (('0' <= nowChar && nowChar<='9') || nowChar == '.'){
+                nowNum.append(nowChar);
+            }else{
+                numberStack.push(Float.parseFloat(nowNum.toString()));
+                nowNum = new StringBuffer();
             }
         }
-        return integerStack;
+        numberStack.push(Float.parseFloat(nowNum.toString()));
+
+        return numberStack;
     }
 
     public Stack<Character> getRightOperatorStack(String string){

@@ -1,3 +1,5 @@
+package arithmetic;
+
 public abstract class Operator {
     private char operator;
 

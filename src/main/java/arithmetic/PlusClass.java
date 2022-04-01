@@ -1,3 +1,5 @@
+package arithmetic;
+
 public class PlusClass extends Operator{
 
     public PlusClass(){
