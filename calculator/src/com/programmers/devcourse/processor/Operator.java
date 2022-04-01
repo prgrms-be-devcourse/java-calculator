@@ -8,7 +8,7 @@ public enum Operator {
   ADDITION('+', Double::sum),
   SUBTRACTION('-', (a, b) -> a - b
   ), MULTIPLICATION('*', (a, b) -> a * b),
-  DIVISION('/', (a, b) -> a - b);
+  DIVISION('/', (a, b) -> a / b);
 
   private final char signature;
   private final BiFunction<Double, Double, Double> concreteOperator;

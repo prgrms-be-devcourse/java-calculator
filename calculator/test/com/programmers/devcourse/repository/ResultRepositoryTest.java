@@ -2,16 +2,13 @@ package com.programmers.devcourse.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 class ResultRepositoryTest {
 
@@ -46,25 +43,12 @@ class ResultRepositoryTest {
     assertThat(repository.getAll().size()).isEqualTo(3);
   }
 
-  @DisplayName("Repository에 key와 value가 정확하게 저장되어 있어야 한다.")
-  @MethodSource("expressionAnswerProvider")
-  @ParameterizedTest
-  void testSaveAndGetAllResultsReturnSavedData(String key, double value) {
-    AtomicBoolean flag = new AtomicBoolean(false);
-    repository.getAll().forEach((storedKey, storedValue) -> {
-      if (storedKey.equals(key) && storedValue == value) {
-        flag.set(true);
-      }
-    });
-    assertThat(flag.get()).isTrue();
-
-  }
-
 
   @DisplayName("Repository에 입력한 순서대로 데이터가 저장되어 있어야 한다.")
   @RepeatedTest(5)
   void savedDataShouldHaveRightOrder() {
     AtomicInteger i = new AtomicInteger();
+
     repository.getAll().forEach((key, value) -> {
       int index = i.getAndIncrement();
       assertThat(expressions[index]).isEqualTo(key);
