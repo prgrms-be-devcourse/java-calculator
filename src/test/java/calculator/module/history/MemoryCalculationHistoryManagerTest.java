@@ -1,7 +1,9 @@
 package calculator.module.history;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import calculator.DependencyConfigurer;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -10,21 +12,33 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryCalculationHistoryManagerTest {
-    MemoryCalculationHistoryManager historyManager =  new MemoryCalculationHistoryManager();
-    @Test
-    public void printAllCalculationHistoryTest(){
+    DependencyConfigurer dependencyConfigurer = new DependencyConfigurer();
+    MemoryCalculationHistoryManager historyManager =  new MemoryCalculationHistoryManager(dependencyConfigurer.userInterface());
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/history-test-data.csv",delimiter = ',')
+    public void printAllCalculationHistoryTest(String expression,Double calculationResult, String expectedOutput){
+        expectedOutput += "\n";
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        historyManager.saveCalculationResultToHistory("1 + 3",4.0);
-        historyManager.saveCalculationResultToHistory("200 * 3 + 6",606.0);
+        CalculationHistory history = new CalculationHistory(expression,calculationResult);
+        historyManager.saveCalculationResultToHistory(expression,history);
+
         historyManager.printAllCalculationHistory();
-        assertFalse(historyManager.calculationHistoryNotExist());
-        assertEquals("1 + 3 = 4.0\n200 * 3 + 6 = 606.0\n",out.toString());
+
+        assertEquals(expectedOutput,out.toString());
     }
 
-    @Test
-    public void saveCalculationResultToHistory() {
-        historyManager.saveCalculationResultToHistory("1 + 3",4.0);
+    @ParameterizedTest
+    @CsvFileSource(resources = "/history-test-data.csv",delimiter = ',')
+    public void saveCalculationResultToHistory(String expression,Double calculationResult, String output) {
+        CalculationHistory history = new CalculationHistory(expression,calculationResult);
+
+        historyManager.saveCalculationResultToHistory(expression,history);
+        CalculationHistory findOne = historyManager.findCalculationHistoryByExpression(expression);
+
+        assertNotNull(findOne);
         assertFalse(historyManager.calculationHistoryNotExist());
+        Assertions.assertThat(history).isEqualTo(findOne);
     }
 }

@@ -6,14 +6,17 @@ package calculator.module.history;
 *
 **/
 public class CalculationHistory {
-    private final String content;
+    private final String expression;
+    private final Double calculationResult;
 
-    public CalculationHistory(String expression,Number result){
-        this.content = expression + " = " + result.toString();
+    public CalculationHistory(String expression,Double result){
+        this.expression = expression;
+        this.calculationResult = result;
     }
+
     @Override
     public String toString(){
-        return content;
+        return expression + " = " + calculationResult.toString();
     }
 
 
