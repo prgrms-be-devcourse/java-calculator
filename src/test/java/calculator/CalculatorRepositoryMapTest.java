@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.repository.CalculatorRepository;
+import calculator.repository.CalculatorRepositoryMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,8 +10,8 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CalculatorRepositoryTest {
-    private CalculatorRepository repository = new CalculatorRepository();
+class CalculatorRepositoryMapTest {
+    private CalculatorRepositoryMap repository = new CalculatorRepositoryMap();
 
     String formula1 = "1 + 2 + 3";
     String formula2 = "2 + 3 + 4";

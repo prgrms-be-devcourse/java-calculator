@@ -2,18 +2,18 @@ package calculator.engine;
 
 
 import calculator.repository.CalculatorRepository;
-import calculator.repository.ICalculatorRepository;
+import calculator.repository.CalculatorRepositoryMap;
 
 import java.util.List;
 import java.util.Stack;
 
 public class Calculator implements Runnable {
-    private final ICalculatorRepository repository;
+    private final CalculatorRepository repository;
     private final Console console;
     private final Postfix postfix;
 
     public Calculator() {
-        this.repository = new CalculatorRepository();
+        this.repository = new CalculatorRepositoryMap();
         this.postfix = new Postfix();
         this.console = new Console();
     }
