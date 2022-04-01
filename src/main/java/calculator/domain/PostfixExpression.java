@@ -3,14 +3,19 @@ package calculator.domain;
 import java.util.List;
 import java.util.Stack;
 
+import calculator.utils.PostfixParser;
 import calculator.utils.ValidatorString;
 
 public class PostfixExpression {
 
     private final List<String> expression;
 
-    public PostfixExpression(List<String> expression) {
+    private PostfixExpression(List<String> expression) {
         this.expression = expression;
+    }
+
+    public static PostfixExpression from(String expression) {
+        return new PostfixExpression(PostfixParser.parse(expression));
     }
 
     public Double calculate() {
