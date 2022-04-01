@@ -41,17 +41,16 @@ public class CalculationServiceImpl implements CalculationService {
 
         for (String token : postfixTokens) {
             if (!Algebraic.isOperator(token) && !Parentheses.isOperator(token)) {
-                // 숫자일 경우 stack에 넣기
+                // 숫자일 경우
                 stack.add(token);
             } else if (stack.size() == 1) {
-                // 연산자이고 stack에 숫자(피연산자)가 1개만 있는 경우
-                // 피연산자 0이 있다는 가정하에 계산
+                // 연산자이고 피연산자 1개
                 String x = stack.pop();
                 String result = calculate(ZERO, x, Algebraic.MIN.getSymbol());
 
                 stack.add(result);
             } else {
-                // 2개의 피연산자를 뽑아낸다
+                // 연산자이고 피연산자 2개
                 String x = stack.pop();
                 String y = stack.pop();
 
