@@ -72,11 +72,7 @@ public class Postfix {
             case "+":
             case "-":
                 return 1;
-            case "*":
-            case "/":
-                return 2;
-        }
 
-        return -1;
+        return 2; //정규식을 거쳤기 때문에 괄호, 더하기 빼기가 아니라면 곱하기, 나누기만 나오게 된다.
     }
 }
