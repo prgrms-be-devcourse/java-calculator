@@ -2,10 +2,13 @@ package com.kimhunki.java.calculator.engine;
 
 import com.kimhunki.java.calculator.Console;
 import com.kimhunki.java.calculator.db.ResultRepository;
-import com.kimhunki.java.calculator.model.Calculate;
-import com.kimhunki.java.calculator.strategy.CalculateStrategy;
-import com.kimhunki.java.calculator.model.Query;
-import com.kimhunki.java.calculator.strategy.QueryStrategy;
+import com.kimhunki.java.calculator.db.MemoryResultRepository;
+import com.kimhunki.java.calculator.enums.MenuNumber;
+import com.kimhunki.java.calculator.io.Input;
+import com.kimhunki.java.calculator.io.Output;
+import com.kimhunki.java.calculator.model.*;
+import com.kimhunki.java.calculator.strategy.CalculatorStrategy;
+import com.kimhunki.java.calculator.strategy.VerificationStrategy;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -14,46 +17,35 @@ import java.util.ArrayList;
 public class Selector implements Runnable
 {
 
-    Console console;
-
+    Input input;
+    Output output;
+    Parser parser;
+    ResultRepository resultRepository;
     @Override
     public void run()
     {
-        CalculateStrategy calculate = new Calculate(console);// 2번 계산 기능을 위한 인스턴스
-        QueryStrategy query = new Query(console);
-        ResultRepository resultRepository = new ResultRepository(new ArrayList<>());
+
+        Calculator calculator = new Calculator(input,output,parser,new RegularExpressionVerification(),new InfixCalculator(parser,new Operator()));// 2번 계산 기능을 위한 인스턴스
+        Query query = new Query(output);
         while(true)
         {
-            System.out.println("1. 조회\n2. 계산\n\n");
-            String selectString =  console.input("선택 : ");
-            if(parse(selectString))
-            {
-                selectModel(selectString,calculate,query,resultRepository,console);
+            output.menuOutput();
+            String selectString =  input.input("선택 : ");
+            MenuNumber menuNumber = parser.menuParser(selectString);
+            if(menuNumber.equals(MenuNumber.ONE) ){
+                query.printResult(resultRepository);
+            }
+            else if(menuNumber.equals(MenuNumber.TWO)){
+                calculator.calculate(resultRepository);
+            }
+            else if(menuNumber.equals(MenuNumber.THREE)){
+                output.end();
+                break;
             }
             else
-                console.inputError();
-
+                output.inputError();
         }
     }
 
-    private boolean parse(String selectString)
-    {
-        if(selectString.equals("1") || selectString.equals("2"))
-            return true;
-        return false;
-    }
 
-    private void selectModel(String selectString,CalculateStrategy calculate, QueryStrategy query,ResultRepository resultRepository,Console console)
-    {
-        if (selectString.equals("1")){
-            if (resultRepository.getResultList().size() > 0)
-                query.printResult(resultRepository);
-            else
-                console.inputError();
-        }
-
-        else if(selectString.equals("2"))
-            calculate.calculate(resultRepository);
-
-    }
 }
