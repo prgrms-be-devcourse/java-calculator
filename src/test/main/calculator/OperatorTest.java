@@ -48,4 +48,14 @@ public class OperatorTest {
         assertThat(result).isEqualTo(answer);
     }
 
+    @Test
+    @DisplayName("사칙연산 성공")
+    void arithmeticOperation() {
+        String input = "2 + 8 / 2 + 6 * 4";
+        double answer = 2 + 8 / 2 + 6 * 4;
+        double result = Double.parseDouble(operator.calculate(input));
+
+        assertThat(result).isEqualTo(answer);
+    }
+
 }
