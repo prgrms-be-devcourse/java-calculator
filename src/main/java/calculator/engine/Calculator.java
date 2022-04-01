@@ -11,16 +11,18 @@ public class Calculator implements Runnable {
     private final CalculatorRepository repository;
     private final Console console;
     private final Postfix postfix;
+    private boolean isRunning;
 
     public Calculator() {
         this.repository = new CalculatorRepositoryMap();
         this.postfix = new Postfix();
         this.console = new Console();
+        this.isRunning = true;
     }
 
     @Override
     public void run() {
-        while(true) {
+        while(isRunning) {
             String input = console.runMessage();
             doAction(input);
         }
@@ -101,8 +103,11 @@ public class Calculator implements Runnable {
                 }
             }
         } catch (IllegalAccessException e) {
-            console.print(e.getMessage());
+            console.print("입력값을 확인해 주세요.");
             calculate(console.input());
+        } catch (Exception e) {
+            console.print("예상하지 못한 오류가 발생하였습니다.");
+            exit();
         }
 
         String answer = String.valueOf(stack.get(0));
@@ -115,6 +120,6 @@ public class Calculator implements Runnable {
 
     public void exit() {
         console.exitMessage();
-        System.exit(0);
+        this.isRunning = false;
     }
 }
