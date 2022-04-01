@@ -18,8 +18,8 @@ public class ArithmeticOperator implements Operator {
                     .filter(op -> op.equals(s))
                     .findAny();
             if (operator.isPresent()){
-                double a = stack.pop();
                 double b = stack.pop();
+                double a = stack.pop();
                 switch(operator.get()){
                     case "+":
                         stack.push(a + b);
