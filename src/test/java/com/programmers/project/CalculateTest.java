@@ -9,6 +9,7 @@ import java.util.*;
 
 public class CalculateTest {
     Calculator calculator = new Calculator();
+    Verifier vf = new Verifier();
 
     @Test
     void 후위연산() {
@@ -38,6 +39,6 @@ public class CalculateTest {
 
         Assertions.assertEquals(13+2*4, result);
     }
-
+    
 
 }
