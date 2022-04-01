@@ -5,11 +5,9 @@ import java.util.Map;
 
 public interface Output extends AutoCloseable {
 
+	void sendAllResults(Map<?, ? extends Number> map);
 
-  void sendAllResults(Map<?, ? extends Number> map);
+	void close() throws IOException;
 
-
-  void close() throws IOException;
-
-  void sendMessage(String s);
+	void sendMessage(String s);
 }

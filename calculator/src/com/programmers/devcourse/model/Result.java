@@ -7,12 +7,11 @@ import lombok.Getter;
 @Getter
 public class Result<K, V extends Number> {
 
-  private K key;
-  private V value;
+	private K key;
+	private V value;
 
-
-  @Override
-  public String toString() {
-    return this.key + " = " + this.value;
-  }
+	@Override
+	public String toString() {
+		return this.key + " = " + this.value;
+	}
 }

@@ -4,12 +4,11 @@ import java.io.IOException;
 
 public interface Input extends AutoCloseable {
 
-  int getMenuSelection() throws IOException;
+	int getMenuSelection() throws IOException;
 
-  String getExpression() throws IOException;
+	String getExpression() throws IOException;
 
-
-  void close() throws IOException;
+	void close() throws IOException;
 }
 
 
