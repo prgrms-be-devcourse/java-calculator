@@ -48,22 +48,23 @@ class CalculatorRepositoryTest {
     }
 
     @Test
-    @DisplayName("리포지토리 저장 & 조회 테스트")
+    @DisplayName("리포지토리 조회 테스트")
     void test_02() throws Exception {
-        String empty = repository.search();
-        assertThat(empty).contains("데이터가 존재하지 않습니다.");
-
-
-        Map<String, String> storage = repository.getStorage();
-        assertThat(storage).isNotNull();
-        assertThat(storage.size()).isEqualTo(3);
-        assertThat(storage).extractingByKey(formula1).isEqualTo(answer1);
-
         String search = repository.search();
         String result1 = formula1 + " = " + answer1;
         String result2 = formula2 + " = " + answer2;
         String result3 = formula3 + " = " + answer3;
 
-        assertThat(search).contains(result1, result2, result3);
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        sb.append(result1).append("\n");
+        sb.append(result2).append("\n");
+        sb.append(result3).append("\n");
+
+        assertThat(search).isEqualTo(sb.toString()); //저장된 식과 값만 형식에 맞게 출력해야 한다.
+
+        repository.clear();
+        String empty = repository.search();
+        assertThat(empty).containsOnlyOnce("데이터가 존재하지 않습니다."); //저장소가 비어있을 때 조회 시 해당 경고문을 리턴해야 한다.
     }
 }
