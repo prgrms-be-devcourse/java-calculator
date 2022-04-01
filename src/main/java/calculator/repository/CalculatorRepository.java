@@ -13,7 +13,18 @@ public class CalculatorRepository implements ICalculatorRepository {
 
     @Override
     public void save(String formula, String answer) {
-        storage.put(formula, answer);
+        StringBuilder sb = new StringBuilder();
+
+        String[] form = formula.replaceAll(" ", "").split("");
+        for(int i = 0; i < form.length; i++) {
+            if(i < form.length - 1) {
+                sb.append(form[i]).append(" ");
+            } else {
+                sb.append(form[i]);
+            }
+        }
+
+        storage.put(sb.toString(), answer);
     }
 
     @Override
@@ -22,7 +33,8 @@ public class CalculatorRepository implements ICalculatorRepository {
         sb.append("\n");
 
         if(storage.isEmpty()) {
-            return "데이터가 존재하지 않습니다.\n";
+            sb.append("데이터가 존재하지 않습니다.\n");
+            return sb.toString();
         }
 
         for (Map.Entry<String, String> items : storage.entrySet()) {
