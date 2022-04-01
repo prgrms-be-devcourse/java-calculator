@@ -1,7 +1,8 @@
 package com.waterfogsw.service;
 
 import com.waterfogsw.converter.Converter;
-import com.waterfogsw.domain.Operator;
+import com.waterfogsw.domain.Algebraic;
+import com.waterfogsw.domain.Parentheses;
 import com.waterfogsw.exception.DoubleOverflow;
 import com.waterfogsw.exception.NotExistsOperator;
 import com.waterfogsw.tokenizer.Tokenizer;
@@ -39,14 +40,14 @@ public class CalculationServiceImpl implements CalculationService {
         Stack<String> stack = new Stack<>();
 
         for (String token : postfixTokens) {
-            if (!Operator.isOperator(token)) {
+            if (!Algebraic.isOperator(token) && !Parentheses.isOperator(token)) {
                 // 숫자일 경우 stack에 넣기
                 stack.add(token);
             } else if (stack.size() == 1) {
                 // 연산자이고 stack에 숫자(피연산자)가 1개만 있는 경우
                 // 피연산자 0이 있다는 가정하에 계산
                 String x = stack.pop();
-                String result = calculate(ZERO, x, Operator.MIN.getSymbol());
+                String result = calculate(ZERO, x, Algebraic.MIN.getSymbol());
 
                 stack.add(result);
             } else {
@@ -72,7 +73,7 @@ public class CalculationServiceImpl implements CalculationService {
         Double yDouble = Double.parseDouble(y);
 
         // 연산자에 따른 계산 수행
-        Operator operator = Operator.getOperator(op);
+        Algebraic operator = Algebraic.getOperator(op);
         Double result = operator.calculate(xDouble, yDouble);
 
         return String.valueOf(result);
