@@ -1,7 +1,7 @@
 package calculator.model.operator;
 
-import calculator.model.token.Tokenizationable;
+import calculator.model.expression.ExpressionableToken;
 
-public interface Operator extends Tokenizationable {
+public interface Operator extends ExpressionableToken {
 
 }

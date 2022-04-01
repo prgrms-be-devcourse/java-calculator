@@ -1,11 +1,11 @@
 package calculator.model.operand;
 
-import calculator.model.operator.BinaryOperator;
+import calculator.model.expression.ExpressionableToken;
+import calculator.model.operator.binary.BinaryOperator;
 import calculator.model.operator.bracket.CloseBracketOperator;
-import calculator.model.token.Tokenizationable;
 
-public class Operand implements Tokenizationable {
-    private String value;
+public class Operand implements ExpressionableToken {
+    private final String value;
 
     public static boolean isOperand(String target){
         double numeric;
@@ -20,16 +20,13 @@ public class Operand implements Tokenizationable {
         this.value = value;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
-    public boolean couldOtherTokenComeNext(Tokenizationable other) {
-        return other instanceof BinaryOperator || other instanceof CloseBracketOperator;
-    }
-
     @Override
-    public String getValue(String value) {
-        return null;
+    public boolean couldOtherTokenComeNext(ExpressionableToken other) {
+        return other instanceof BinaryOperator || other instanceof CloseBracketOperator;
     }
 }

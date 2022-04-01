@@ -26,7 +26,7 @@ public class OperatorFactoryImpl implements OperatorFactory {
             case ")":
                 return new CloseBracketOperator();
             default:
-                throw new InvalidOperatorTypeException("OperatorFactory error");
+                throw new InvalidOperatorTypeException("정의되지 않은 연산자가 연산자로 분류됨");
         }
     }
 }

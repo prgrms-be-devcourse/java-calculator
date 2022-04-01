@@ -20,10 +20,6 @@ public enum OperatorType {
         return symbol;
     }
 
-    public int getPriority(){
-        return priority;
-    }
-
     public boolean hasLowerPriority(OperatorType other) { // priority 값이 비교 대상보다 크거나 같아야 우선순위가 낮다.
         return this.priority >= other.priority;
     }

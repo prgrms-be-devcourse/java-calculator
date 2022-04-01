@@ -1,9 +1,9 @@
 package calculator.model.operator.bracket;
 
-import calculator.model.operator.BinaryOperator;
+import calculator.model.expression.ExpressionableToken;
 import calculator.model.operator.Operator;
 import calculator.model.operator.OperatorType;
-import calculator.model.token.Tokenizationable;
+import calculator.model.operator.binary.BinaryOperator;
 
 public class CloseBracketOperator implements Operator {
     private final OperatorType type;
@@ -12,12 +12,12 @@ public class CloseBracketOperator implements Operator {
     }
 
     @Override
-    public boolean couldOtherTokenComeNext(Tokenizationable other) {
+    public boolean couldOtherTokenComeNext(ExpressionableToken other) {
         return other instanceof BinaryOperator || other instanceof CloseBracketOperator;
     }
 
     @Override
-    public String getValue(String value) {
+    public String getValue() {
         return type.getSymbol();
     }
 }

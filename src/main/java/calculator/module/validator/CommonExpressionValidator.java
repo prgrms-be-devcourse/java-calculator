@@ -1,10 +1,10 @@
 package calculator.module.validator;
 
 import calculator.model.expression.Expression;
+import calculator.model.expression.ExpressionableToken;
 import calculator.model.operand.Operand;
 import calculator.model.operator.bracket.CloseBracketOperator;
 import calculator.model.operator.bracket.OpenBracketOperator;
-import calculator.model.token.Tokenizationable;
 import calculator.module.validator.exception.InvalidExpressionException;
 
 import java.util.Stack;
@@ -27,47 +27,47 @@ public class CommonExpressionValidator implements ExpressionValidator{
 
     @Override
     public void validateExpression(Expression expression) throws InvalidExpressionException {
-        Tokenizationable[] tokens = expression.getTokenArray();
+        ExpressionableToken[] tokens = expression.getTokenArray();
         checkExpressionLengthOverZero(tokens);
         checkIsBracketPairCorrect(tokens);
         checkExpressionOrder(tokens);
     }
 
     // 잘못된 괄호가 있는지 먼저 검증 필요.
-    private void checkExpressionOrder(Tokenizationable [] tokens) throws InvalidExpressionException {
+    private void checkExpressionOrder(ExpressionableToken[] tokens) throws InvalidExpressionException {
         int length = tokens.length;
         checkStartWithOpenBracketOrOperand(tokens[0]);
         checkMiddleTokenOrder(tokens);
         checkEndWithCloseBracketOrOperand(tokens[length-1]);
     }
 
-    private void checkStartWithOpenBracketOrOperand(Tokenizationable token) throws InvalidExpressionException{
+    private void checkStartWithOpenBracketOrOperand(ExpressionableToken token) throws InvalidExpressionException{
         if(!(token instanceof OpenBracketOperator || token instanceof Operand))
             throw new InvalidExpressionException(EXPRESSION_ORDER_INVALID_MESSAGE);
     }
 
-    private void checkMiddleTokenOrder(Tokenizationable [] tokens) throws InvalidExpressionException{
+    private void checkMiddleTokenOrder(ExpressionableToken[] tokens) throws InvalidExpressionException{
         int length = tokens.length;
         for(int i = 1; i < length-2; i++) {
-            Tokenizationable cur = tokens[i];
-            Tokenizationable next = tokens[i+1];
+            ExpressionableToken cur = tokens[i];
+            ExpressionableToken next = tokens[i+1];
             if(!cur.couldOtherTokenComeNext(next))
                 throw new InvalidExpressionException(EXPRESSION_ORDER_INVALID_MESSAGE);
         }
     }
 
-    private void checkEndWithCloseBracketOrOperand(Tokenizationable token) throws InvalidExpressionException{
+    private void checkEndWithCloseBracketOrOperand(ExpressionableToken token) throws InvalidExpressionException{
         if(!(token instanceof CloseBracketOperator || token instanceof Operand))
             throw new InvalidExpressionException(EXPRESSION_ORDER_INVALID_MESSAGE);
     }
 
-    private void checkExpressionLengthOverZero(Tokenizationable[] tokens) throws InvalidExpressionException {
+    private void checkExpressionLengthOverZero(ExpressionableToken[] tokens) throws InvalidExpressionException {
         if(tokens.length == 0) throw new InvalidExpressionException(EXPRESSION_SIZE_ZERO_MESSAGE);
     }
 
-    private void checkIsBracketPairCorrect(Tokenizationable[] tokens) throws InvalidExpressionException {
+    private void checkIsBracketPairCorrect(ExpressionableToken[] tokens) throws InvalidExpressionException {
         Stack<String> stack = new Stack<>();
-        for (Tokenizationable token : tokens) {
+        for (ExpressionableToken token : tokens) {
             if(token instanceof OpenBracketOperator)
                 stack.push("(");
             else if(token instanceof CloseBracketOperator){
