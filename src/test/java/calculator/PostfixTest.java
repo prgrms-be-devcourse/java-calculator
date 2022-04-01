@@ -36,8 +36,21 @@ class PostfixTest {
     }
 
     @Test
-    @DisplayName("계산식 & 후위식 변환 테스트")
+    @DisplayName("계산식 정규식 테스트")
     void test_02() throws Exception {
+        String formula1 = "1 + 1";
+        assertThat(postfix.isCorrectFormula(formula1)).isTrue();
+
+        String formula2 = "abc";
+        assertThat(postfix.isCorrectFormula(formula2)).isFalse();
+
+        String formula3 = "(1 + 1) * 2 / 3";
+        assertThat(postfix.isCorrectFormula(formula3)).isTrue();
+    }
+
+    @Test
+    @DisplayName("계산식 & 후위식 변환 테스트")
+    void test_03() throws Exception {
         String formula = "abc";
         assertThrows(IllegalArgumentException.class, () -> {
             postfix.makeToPostfix(formula);
