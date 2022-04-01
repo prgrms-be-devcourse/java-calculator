@@ -54,7 +54,7 @@ public class Main {
 
     private void showHistory(Output output, History history) {
         Map<Integer, String> memory = history.getMemory();
-        for (int key = 1; key <= memory.size(); key++) {
+        for (int key : memory.keySet()) {
             output.output(memory.get(key));
         }
         output.output("\n");
