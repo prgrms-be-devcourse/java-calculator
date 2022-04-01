@@ -1,6 +1,7 @@
 package calculator.repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MemoryResultRepository implements ResultRepository {
@@ -14,7 +15,7 @@ public class MemoryResultRepository implements ResultRepository {
 
     @Override
     public List<String> findAll() {
-        return new ArrayList<>(store);
+        return Collections.unmodifiableList(store);
     }
 
     public void clearStore() {
