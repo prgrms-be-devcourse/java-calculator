@@ -2,6 +2,7 @@ package com.programmers.devcourse.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,6 +57,19 @@ class ResultRepositoryTest {
 
 
     });
+  }
+
+  @DisplayName("ResultRepository getAll()은 내부 데이터의 복제본 Map을 반환해야 한다.")
+  @Test
+  void getAllShouldReturnCopiedMapOfResultRepository() {
+    Map<String, Double> modifiedMap = repository.getAll();
+    modifiedMap.put("1 + 5", 6.0);
+    modifiedMap.put("1 + 1", 4.0);
+
+    Map<String, Double> unmodifiedMap = repository.getAll();
+    assertThat(unmodifiedMap.size()).isEqualTo(3);
+    assertThat(unmodifiedMap).doesNotContainKey("1 + 5");
+    assertThat(unmodifiedMap.get("1 + 1")).isEqualTo(2.0);
   }
 
 

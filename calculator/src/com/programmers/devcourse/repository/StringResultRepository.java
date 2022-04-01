@@ -19,7 +19,7 @@ public class StringResultRepository implements ResultRepository<String, Double> 
 
   @Override
   public Map<String, Double> getAll() {
-    return resultMap;
+    return new LinkedHashMap<>(this.resultMap);
 
   }
 
