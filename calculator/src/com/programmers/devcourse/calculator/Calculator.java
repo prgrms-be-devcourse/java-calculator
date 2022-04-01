@@ -30,7 +30,7 @@ public class Calculator {
 
   public void start() {
     Mode mode;
-    try {
+    try (input; output;) {
       label:
       while (true) {
         mode = Mode.from(input.getMenuSelection());
@@ -42,38 +42,21 @@ public class Calculator {
             handleExpressionFromConsole();
             break;
           case EXIT:
+            output.sendMessage("계산기 종료");
             break label;
           default:
-            output.sendMessage("일치하는 메뉴가 없습니다.");
+            output.sendMessage("일치하는 메뉴가 없습니다.\n");
             break;
         }
       }
 
-    } catch (IOException | NumberFormatException e) {
-
-      if (e instanceof IOException) {
-        e.printStackTrace();
-
-      }
-      output.sendMessage("입력 형식이 적합하지 않습니다.");
-
-    } finally {
-      try {
-        closeResources();
-      } catch (IOException ex) {
-        ex.printStackTrace();
-      }
+    } catch (IOException e) {
+      e.printStackTrace();
+      output.sendMessage("입출력 오류");
     }
-
 
   }
 
-  private void closeResources() throws IOException {
-    output.close();
-    if (input != output) {
-      input.close();
-    }
-  }
 
   private void handleExpressionFromConsole() throws IOException {
     String expression = input.getExpression();

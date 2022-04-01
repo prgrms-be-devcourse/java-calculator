@@ -7,16 +7,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-public class Console implements Input, Output {
+public class Console implements Input, Output, AutoCloseable {
 
   private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+  private final String MENU = "1. 조회\n2. 계산\n3. 종료";
+
   @Override
   public int getMenuSelection() throws IOException {
-    System.out.println("1. 조회");
-    System.out.println("2. 계산\n");
+    System.out.println(MENU);
     System.out.print("선택 : ");
-    int mode = Integer.parseInt(br.readLine());
+    int mode = 999;
+    try {
+
+      mode = Integer.parseInt(br.readLine());
+    } catch (NumberFormatException ignored) {
+    }
     System.out.println();
     return mode;
   }
@@ -26,9 +32,9 @@ public class Console implements Input, Output {
     return br.readLine();
   }
 
+
   @Override
   public void close() throws IOException {
-    System.out.println("계산기 종료");
     br.close();
   }
 
