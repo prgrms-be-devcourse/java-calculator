@@ -28,9 +28,27 @@ public class Console implements Input, Output
         System.out.println(s);
     }
 
-    //    @Override
-//    public String result(String expression)
-//    {
-//
-//    }
+    @Override
+    public void menuOutput()
+    {
+        System.out.println("1. 조회\n2. 계산\n3. 종료\n\n");
+    }
+
+    @Override
+    public void emptyRepository()
+    {
+        System.out.println("아무 결과도 찾을 수 없습니다.");
+    }
+
+    @Override
+    public void end()
+    {
+        System.out.println("계산기를 종료합니다.");
+    }
+
+    @Override
+    public void divError()
+    {
+        System.out.println("0으로 나눌 수 없습니다.");
+    }
 }

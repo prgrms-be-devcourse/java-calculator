@@ -5,5 +5,12 @@ public interface Output
     void inputError();
 
     void output(String s);
-//    String result(String s);
+
+    void menuOutput();
+
+    void emptyRepository();
+
+    void end();
+
+    void divError();
 }
