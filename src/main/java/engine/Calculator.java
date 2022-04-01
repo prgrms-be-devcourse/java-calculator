@@ -25,52 +25,55 @@ public class Calculator implements Runnable {
         while (true) {
             console.printFunction(function);
             String inputString = console.inputFunction("선택 : ");
-            if (!function.hasFunction(inputString)) {
-                console.inputFunctionError();
-                continue;
-            }
-            if (inputString.equals(FUNCTION_ONE)) {
-                console.printRecord(record);
-            }
-            if (inputString.equals(FUNCTION_TWO)) {
-                Element element = new Element(new Stack<Integer>(), new Stack<Character>());
-                Optional<String> expression = checkExpression(console.inputExpression(), element.getCalculateOperators());
-                if (expression.isEmpty()) {
-                    console.inputExpressionError();
-                    continue;
-                }
 
-                int answer = calculate(expression.get().replace(" ", ""), element);
-                console.outputCalculateAnswer(answer);
-                record.addRecord(expression.get(), answer);
-            }
-            if(inputString.equals(FUNCTION_THREE)) {
-                console.printExitMessage();
-                break;
+            switch (inputString) {
+                case FUNCTION_ONE:
+                    console.printRecord(record);
+                    break;
+
+                case FUNCTION_TWO:
+                    Element element = new Element(new Stack<Integer>(), new Stack<Character>());
+                    String expression = console.inputExpression();
+                    if (!isExpressionCorrect(expression, element.getCalculateOperators())) {
+                        console.inputExpressionError();
+                        continue;
+                    }
+
+                    int answer = calculate(expression.replace(" ", ""), element);
+                    console.outputCalculateAnswer(answer);
+                    record.addRecord(expression, answer);
+                    break;
+
+                case FUNCTION_THREE:
+                    console.printExitMessage();
+                    return;
+
+                default:
+                    console.inputFunctionError();
             }
         }
     }
 
 
-    private Optional<String> checkExpression(String expression, List<Character> calculateOperators) {
+    private boolean isExpressionCorrect(String expression, List<Character> calculateOperators) {
 
         boolean isCorrectExpression = expression.replace(" ", "").chars()
                 .filter(c -> !calculateOperators.contains((char) c))
                 .allMatch(c -> Utility.isNumber((char) c));
-        if (!isCorrectExpression) return Optional.empty();
+        if (!isCorrectExpression) return false;
 
         isCorrectExpression = calculateOperators.stream()
                 .anyMatch(c -> expression.endsWith(Character.toString(c)) || expression.startsWith(Character.toString(c)));
-        if (isCorrectExpression) return Optional.empty();
+        if (isCorrectExpression) return false;
 
-        if (expression.isBlank()) return Optional.empty();
+        if (expression.isBlank()) return false;
 
-        if (!isExpressionOrderCorrect(expression, calculateOperators)) return Optional.empty();
+        if (!isOrderCorrect(expression, calculateOperators)) return false;
 
-        return Optional.of(expression);
+        return true;
     }
 
-    private boolean isExpressionOrderCorrect(String expression, List<Character> calculateOperators) {
+    private boolean isOrderCorrect(String expression, List<Character> calculateOperators) {
         boolean needCheck = false;
         Stack<Character> stack = new Stack<Character>();
         char expressionArr[] = expression.toCharArray();
@@ -103,6 +106,7 @@ public class Calculator implements Runnable {
 
         StringBuffer str1 = new StringBuffer("");
         StringBuffer str2 = new StringBuffer("");
+        int midResult = 0;
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
             if (c == '-' || c == '+') {
@@ -118,9 +122,11 @@ public class Calculator implements Runnable {
                     }
                     if (!Utility.isNumber(expression.charAt(j))) break;
                 }
+
+                if (c == '*') midResult = Utility.bufferStringToInt(str1) * Utility.bufferStringToInt(str2);
+                if (c == '/') midResult = Utility.bufferStringToInt(str1) / Utility.bufferStringToInt(str2);
                 str1.setLength(0);
-                if (c == '*') str1.append(Utility.bufferStringToInt(str1) * Utility.bufferStringToInt(str2));
-                if (c == '/') str1.append(Utility.bufferStringToInt(str1) / Utility.bufferStringToInt(str2));
+                str1.append(midResult);
                 str2.setLength(0);
             }
             if (Utility.isNumber(c)) {
@@ -135,8 +141,8 @@ public class Calculator implements Runnable {
 
         Stack<Integer> numbers = element.getNumbers();
         Stack<Character> operation = element.getOperation();
-
-        for (int i = 0; i < numbers.size(); i++) {
+        int originalNumberStackSize = numbers.size();
+        for (int i = 0; i < originalNumberStackSize; i++) {
             if (operation.peek() == '+') {
                 midAnswer += numbers.peek();
             }
