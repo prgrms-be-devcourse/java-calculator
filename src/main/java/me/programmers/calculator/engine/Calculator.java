@@ -10,13 +10,13 @@ public class Calculator {
     private final String MUL = "*";
     private final String DIV = "/";
 
-    public long calculate(String problem) {
+    public long calculateFormula(String problem) {
         List<String> posteriorProblem = Posterior.convertToPosterior(problem);  // 후위표기식 변환 1+2*3 -> 123*+
-        return fourOperations(posteriorProblem);
+        return fourArithmeticOperations(posteriorProblem);
     }
 
     // 후위표기식 계산
-    private long fourOperations (List<String> problem) {
+    private long fourArithmeticOperations(List<String> problem) {
         Stack<Long> calcStack = new Stack<>();
         for (String s : problem) {
             long res = 0;

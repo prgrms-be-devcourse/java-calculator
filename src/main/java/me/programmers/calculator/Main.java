@@ -31,7 +31,7 @@ public class Main {
                     showHistory(output, history);
                     break;
                 case CALCULATE:
-                    calculateProblem(input, output, history, calculator, validator);
+                    calculateNumberFormula(input, output, history, calculator, validator);
                     break;
                 default:
                     output.output("숫자를 잘못 입력했습니다.\n");
@@ -40,11 +40,11 @@ public class Main {
         }
     }
 
-    private void calculateProblem(Input input, Output output, History history, Calculator calculator, Validator validator) {
+    private void calculateNumberFormula(Input input, Output output, History history, Calculator calculator, Validator validator) {
         try {
             String problemString = input.problemInput();
             validator.problemValidate(problemString);
-            long result = calculator.calculate(problemString);
+            long result = calculator.calculateFormula(problemString);
             history.saveMemory(problemString, result);
             output.output(result + "\n");
         } catch (Exception e) {

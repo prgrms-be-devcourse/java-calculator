@@ -13,7 +13,7 @@ class CalculatorTest {
         // given
         String problem = "1+2";
         // when
-        long sum = calculator.calculate(problem);
+        long sum = calculator.calculateFormula(problem);
         // then
         assertEquals(sum, 3);
     }
@@ -23,7 +23,7 @@ class CalculatorTest {
         // given
         String problem = "2500000000+1";
         // when
-        long sum = calculator.calculate(problem);
+        long sum = calculator.calculateFormula(problem);
         // then
         assertEquals(sum, 2500000001L);
     }
@@ -33,7 +33,7 @@ class CalculatorTest {
         // given
         String problem = "1-2";
         // when
-        long sum = calculator.calculate(problem);
+        long sum = calculator.calculateFormula(problem);
         // then
         assertEquals(sum, -1);
     }
@@ -43,7 +43,7 @@ class CalculatorTest {
         // given
         String problem = "1*2";
         // when
-        long sum = calculator.calculate(problem);
+        long sum = calculator.calculateFormula(problem);
         // then
         assertEquals(sum, 2);
     }
@@ -53,7 +53,7 @@ class CalculatorTest {
         // given
         String problem = "2/1";
         // when
-        long sum = calculator.calculate(problem);
+        long sum = calculator.calculateFormula(problem);
         // then
         assertEquals(sum, 2);
     }
@@ -62,7 +62,7 @@ class CalculatorTest {
     void divideByZeroTest() {
         assertThrows(ArithmeticException.class, () -> {
             String problem = "2/0";
-            calculator.calculate(problem);
+            calculator.calculateFormula(problem);
         });
     }
 
@@ -71,7 +71,7 @@ class CalculatorTest {
         // given
         String problem = "3+2*4-3/3";
         // when
-        long sum = calculator.calculate(problem);
+        long sum = calculator.calculateFormula(problem);
         // then
         assertEquals(sum, 10);
     }
