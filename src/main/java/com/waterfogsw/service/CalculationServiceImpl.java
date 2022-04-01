@@ -46,7 +46,7 @@ public class CalculationServiceImpl implements CalculationService {
             } else if (stack.size() == 1) {
                 // 연산자이고 피연산자 1개
                 String x = stack.pop();
-                String result = calculate(ZERO, x, Algebraic.getOperator(token));
+                String result = calculate(ZERO, x, token);
 
                 stack.add(result);
             } else {
@@ -54,7 +54,7 @@ public class CalculationServiceImpl implements CalculationService {
                 String x = stack.pop();
                 String y = stack.pop();
 
-                String result = calculate(y, x, Algebraic.getOperator(token));
+                String result = calculate(y, x, token);
                 stack.add(String.valueOf(result));
             }
         }
@@ -67,12 +67,12 @@ public class CalculationServiceImpl implements CalculationService {
     }
 
 
-    private String calculate(String x, String y, Algebraic op) throws NotExistsOperator {
+    private String calculate(String x, String y, String op) throws NotExistsOperator {
         Double xDouble = Double.parseDouble(x);
         Double yDouble = Double.parseDouble(y);
+        Algebraic algebraic = Algebraic.getOperator(op);
 
-        // 연산자에 따른 계산 수행
-        Double result = op.calculate(xDouble, yDouble);
+        Double result = algebraic.calculate(xDouble, yDouble);
 
         return String.valueOf(result);
     }
