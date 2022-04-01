@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
@@ -31,8 +32,9 @@ public enum Algebraic implements Operator {
     }
 
     public static boolean isOperator(String symbol) {
-        return Stream.of(values()).
-                anyMatch(op -> op.getSymbol().equals(symbol));
+        return Stream.of(values())
+                .filter(Objects::nonNull)
+                .anyMatch(op -> op.getSymbol().equals(symbol));
     }
 
     public Double calculate(Double x, Double y) {

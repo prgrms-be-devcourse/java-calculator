@@ -4,6 +4,7 @@ import com.waterfogsw.exception.NotExistsOperator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -17,8 +18,9 @@ public enum Parentheses implements Operator {
     private int priority;
 
     public static boolean isOperator(String opCode) {
-        return Stream.of(values()).
-                anyMatch(op -> op.getSymbol().equals(opCode));
+        return Stream.of(values())
+                .filter(Objects::nonNull)
+                .anyMatch(op -> op.getSymbol().equals(opCode));
     }
 
     public static Optional<Parentheses> findOperator(String symbol) {
