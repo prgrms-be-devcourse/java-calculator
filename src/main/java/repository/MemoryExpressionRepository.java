@@ -4,6 +4,7 @@ import model.Expression;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemoryExpressionRepository implements ExpressionRepository {
     private static final List<Expression> store = new ArrayList<>();
@@ -15,6 +16,6 @@ public class MemoryExpressionRepository implements ExpressionRepository {
 
     @Override
     public List<Expression> findAll() {
-        return store;
+        return store.stream().collect(Collectors.toUnmodifiableList());
     }
 }
