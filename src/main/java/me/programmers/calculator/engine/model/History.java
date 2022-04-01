@@ -12,7 +12,7 @@ public class History {
         return memory;
     }
 
-    public void saveMemory(String problem, long result) {
+    public synchronized void saveMemory(String problem, long result) {
         memory.put(order++, problem + "=" + result);
     }
 }
