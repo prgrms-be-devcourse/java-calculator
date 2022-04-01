@@ -4,13 +4,11 @@ import repository.MemoryExpressionRepository;
 import service.ExpressionService;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Console console = new Console(scanner);
+        Console console = new Console();
         ExpressionService expressionService = new ExpressionService(new MemoryExpressionRepository());
 
         while(true) {

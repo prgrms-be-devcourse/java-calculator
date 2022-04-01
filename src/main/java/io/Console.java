@@ -5,11 +5,7 @@ import java.util.Scanner;
 
 public class Console implements Input, Output{
 
-    private final Scanner scanner;
-
-    public Console(Scanner scanner) {
-        this.scanner = scanner;
-    }
+    private static final Scanner scanner = new Scanner(System.in);
 
     @Override
     public int choiceInput() {
