@@ -1,20 +1,22 @@
 package calculator.module.arithmetic;
 
+import calculator.DependencyConfigurer;
+import calculator.model.expression.Expression;
+import calculator.model.expression.ExpressionFactory;
+import calculator.module.validator.exception.InvalidExpressionException;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class StackArithmeticModuleTest {
     StackArithmeticModule arithmeticModule = new StackArithmeticModule();
+    DependencyConfigurer dependencyConfigurer = new DependencyConfigurer();
+    ExpressionFactory expressionFactory = dependencyConfigurer.expressionFactory();
+
     @ParameterizedTest
-    @CsvFileSource(resources = "/arithmetic-module-test-data.csv",delimiter = '=')
-    void calculateTest(String expression,double answer) {
+    @CsvFileSource(resources = "/arithmetic_module-test-data.csv",delimiter = '=')
+    void calculateTest(String input,Double answer) throws InvalidExpressionException {
+        Expression expression = expressionFactory.createExpression(input);
         double calculationResult = arithmeticModule.calculate(expression);
         Assertions.assertThat(calculationResult).isEqualTo(answer);
     }
