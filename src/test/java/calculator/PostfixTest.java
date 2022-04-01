@@ -43,12 +43,12 @@ class PostfixTest {
 
         String formula1 = "30 + 30";
         List<String> strings = postfix.makeToPostfix(formula1);
-        String result = strings.stream().collect(Collectors.joining(" "));
+        String result = String.join(" ", strings);
         assertThat(result).isEqualTo("30 30 +");
 
         String formula2 = "(30 + 30) * 40 / 10";
         List<String> strings2 = postfix.makeToPostfix(formula2);
-        String result2 = strings2.stream().collect(Collectors.joining(" "));
+        String result2 = String.join(" ", strings2);
         assertThat(result2).isEqualTo("30 30 + 40 * 10 /");
     }
 }
