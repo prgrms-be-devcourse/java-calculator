@@ -2,20 +2,23 @@ package com.kimhunki.java.calculator.model;
 
 import com.kimhunki.java.calculator.Console;
 import com.kimhunki.java.calculator.db.ResultRepository;
-import com.kimhunki.java.calculator.strategy.QueryStrategy;
+import com.kimhunki.java.calculator.io.Output;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class Query implements QueryStrategy
+public class Query
 {
-    Console console;
+    Output output;
 
-    @Override
     public void printResult(ResultRepository resultRepository)
     {
-        for(int i=0; i<resultRepository.getResultList().size(); i++)
-            console.output(resultRepository.getResultList().get(i));
+        if (!resultRepository.getRepository().isEmpty())
+        {
+            for (String s : resultRepository.getRepository())
+                output.output(s);
+
+        } else output.emptyRepository();
+
+
     }
-
-
 }
