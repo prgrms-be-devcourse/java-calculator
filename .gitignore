@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/java,intellij,git
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij,git
+# Created by https://www.toptal.com/developers/gitignore/api/intellij,java,git,gradle
+# Edit at https://www.toptal.com/developers/gitignore?templates=intellij,java,git,gradle
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
@@ -152,4 +152,27 @@ fabric.properties
 hs_err_pid*
 replay_pid*
 
-# End of https://www.toptal.com/developers/gitignore/api/java,intellij,git
+### Gradle ###
+.gradle
+**/build/
+!src/**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+# Cache of project
+.gradletasknamecache
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# End of https://www.toptal.com/developers/gitignore/api/intellij,java,git,gradle
