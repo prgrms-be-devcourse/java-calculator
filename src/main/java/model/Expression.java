@@ -40,7 +40,9 @@ public class Expression {
         Pattern pattern = Pattern.compile(NUM_REGEX + "|" + OPERATOR_REGEX);
         boolean isAllMatched = Arrays.stream(splitExp)
                 .allMatch(e -> pattern.matcher(e).find());
-        if(!isAllMatched) throw new IllegalArgumentException("연산자 혹은 숫자만 입력해주세요");
+        if(!isAllMatched) {
+            throw new IllegalArgumentException("연산자 혹은 숫자만 입력해주세요");
+        }
     }
 
     private void validateOperatorNumberCount(String[] splitExp) {
@@ -50,6 +52,8 @@ public class Expression {
         long operatorCnt = Arrays.stream(splitExp)
                 .filter(exp -> exp.matches(OPERATOR_REGEX))
                 .count();
-        if(numCnt != operatorCnt+1) throw new IllegalArgumentException("연산자와 숫자가 제대로 입력되지 않았습니다.");
+        if(numCnt != operatorCnt+1) {
+            throw new IllegalArgumentException("연산자와 숫자가 제대로 입력되지 않았습니다.");
+        }
     }
 }

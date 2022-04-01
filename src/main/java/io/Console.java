@@ -23,7 +23,9 @@ public class Console implements Input, Output{
 
     @Override
     public void printAllExpressions(List<String> expressions) {
-        if(expressions.isEmpty()) System.out.println("저장된 계산식이 없습니다.");
+        if(expressions.isEmpty()) {
+            System.out.println("저장된 계산식이 없습니다.");
+        }
         expressions.forEach(System.out::println);
     }
 
