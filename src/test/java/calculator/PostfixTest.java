@@ -49,7 +49,7 @@ class PostfixTest {
     }
 
     @Test
-    @DisplayName("계산식 & 후위식 변환 테스트")
+    @DisplayName("정규식에 맞지 않는 식이 들어올 경우 예외 발생 & 후위식 변환")
     void test_03() throws Exception {
         String formula = "abc";
         assertThrows(IllegalArgumentException.class, () -> {
@@ -61,9 +61,14 @@ class PostfixTest {
         String result = String.join(" ", strings);
         assertThat(result).isEqualTo("30 30 +");
 
-        String formula2 = "(30 + 30) * 40 / 10";
+        String formula2 = "(30 + 30)";
         List<String> strings2 = postfix.makeToPostfix(formula2);
         String result2 = String.join(" ", strings2);
-        assertThat(result2).isEqualTo("30 30 + 40 * 10 /");
+        assertThat(result2).isEqualTo("30 30 +");
+
+        String formula3 = "(-3 + -3) * 2";
+        List<String> strings3 = postfix.makeToPostfix(formula3);
+        String result3 = String.join(" ", strings3);
+        assertThat(result3).isEqualTo("-3 -3 + 2 *");
     }
 }
