@@ -11,7 +11,7 @@ public class Expression {
     private static final String NUM_REGEX = "[0-9]+";
     private static final String OPERATOR_REGEX = "[+\\-*/]";
     private final String expression;
-    private Double calcResult = null;
+    private Double calcResult;
 
     public Expression(String expression) {
         validateExpressions(expression);
