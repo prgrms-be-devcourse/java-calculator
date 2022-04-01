@@ -57,5 +57,4 @@ public class OperatorTest {
 
         assertThat(result).isEqualTo(answer);
     }
-
 }
