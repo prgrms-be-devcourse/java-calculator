@@ -13,4 +13,6 @@ public interface Output {
     void outputCalculateAnswer(int answer);
 
     void printRecord(Record record);
+
+    void printExitMessage();
 }

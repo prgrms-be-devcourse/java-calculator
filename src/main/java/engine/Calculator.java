@@ -17,6 +17,7 @@ public class Calculator implements Runnable {
     private static final Function function = new Function();
     private static final String FUNCTION_ONE = "1";
     private static final String FUNCTION_TWO = "2";
+    private static final String FUNCTION_THREE = "3";
 
 
     @Override
@@ -42,6 +43,10 @@ public class Calculator implements Runnable {
                 int answer = calculate(expression.get().replace(" ", ""), element);
                 console.outputCalculateAnswer(answer);
                 record.addRecord(expression.get(), answer);
+            }
+            if(inputString.equals(FUNCTION_THREE)) {
+                console.printExitMessage();
+                break;
             }
         }
     }

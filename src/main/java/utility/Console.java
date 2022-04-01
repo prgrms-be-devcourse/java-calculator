@@ -39,6 +39,11 @@ public class Console implements Output, Input {
     }
 
     @Override
+    public void printExitMessage() {
+        System.out.println("계산기 종료.");
+    }
+
+    @Override
     public String inputFunction(String s) {
         System.out.print(s);
         return scanner.nextLine().trim();

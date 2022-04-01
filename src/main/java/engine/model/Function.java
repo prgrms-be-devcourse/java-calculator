@@ -14,6 +14,7 @@ public class Function {
         this.function = new HashMap<>();
         function.put("1", "1. 조회");
         function.put("2", "2. 계산");
+        function.put("3", "3. 종료");
     }
 
     public boolean hasFunction(String functionNumber) {
