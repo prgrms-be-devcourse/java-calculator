@@ -14,7 +14,7 @@ class PostfixTest {
     private Postfix postfix = new Postfix();
 
     @Test
-    @DisplayName("우선순위 테스트")
+    @DisplayName("우선순위 테스트 & 입력값 이상 있을 경우 예외가 터져야 한다.")
     void test_01() throws Exception {
         int two1 = postfix.priority("/");
         int two2 = postfix.priority("*");
@@ -22,7 +22,6 @@ class PostfixTest {
         int one2 = postfix.priority("-");
         int zero1 = postfix.priority("(");
         int zero2 = postfix.priority(")");
-        int minusOne = postfix.priority("a");
 
         assertThat(two1).isEqualTo(2);
         assertThat(two2).isEqualTo(2);
@@ -30,7 +29,10 @@ class PostfixTest {
         assertThat(one2).isEqualTo(1);
         assertThat(zero1).isEqualTo(0);
         assertThat(zero2).isEqualTo(0);
-        assertThat(minusOne).isEqualTo(-1);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            postfix.priority("abc");
+        });
     }
 
     @Test
