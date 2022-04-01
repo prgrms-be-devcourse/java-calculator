@@ -64,7 +64,7 @@ public class Postfix {
         return Pattern.matches("^[0-9()*-/+]*$", formula.trim().replaceAll(" ", ""));
     }
 
-    public int priority(String operator) throws Exception {
+    public int priority(String operator) throws IllegalAccessException {
         switch (operator) {
             case "(":
             case ")":
