@@ -13,18 +13,9 @@ public class CalculatorRepositoryMap implements CalculatorRepository {
 
     @Override
     public void save(String formula, String answer) {
-        StringBuilder sb = new StringBuilder();
+        formula = formula.trim().replaceAll(" +", " ");
 
-        String[] form = formula.replaceAll(" ", "").split("");
-        for(int i = 0; i < form.length; i++) {
-            if(i < form.length - 1) {
-                sb.append(form[i]).append(" ");
-            } else {
-                sb.append(form[i]);
-            }
-        }
-
-        storage.put(sb.toString(), answer);
+        storage.put(formula, answer);
     }
 
     @Override
