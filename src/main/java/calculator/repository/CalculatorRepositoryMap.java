@@ -29,20 +29,16 @@ public class CalculatorRepositoryMap implements CalculatorRepository {
 
     @Override
     public String search() {
+        if(storage.isEmpty()) {
+            return "\n데이터가 존재하지 않습니다.\n";
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
 
-        if(storage.isEmpty()) {
-            sb.append("데이터가 존재하지 않습니다.\n");
-            return sb.toString();
-        }
-
-        for (Map.Entry<String, String> items : storage.entrySet()) {
-            String formula = items.getKey();
-            String answer = items.getValue();
-
-            sb.append(formula).append(" = ").append(answer).append("\n");
-        }
+        storage.keySet().forEach(key -> {
+            sb.append(key).append(" = ").append(storage.get(key)).append("\n");
+        });
 
         return sb.toString();
     }
