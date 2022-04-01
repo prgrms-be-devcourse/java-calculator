@@ -40,11 +40,16 @@ public class Postfix {
                             stack.push("(");
                         }
                     } else if (s.contains(")")) {
-                        while (!stack.isEmpty() && !stack.peek().equals("(")) {
-                            arr.add(stack.pop());
-                        }
+                        int idx = s.indexOf(")");
+                        arr.add(s.substring(0, idx));
+                        int count = s.substring(idx).length();
+                        for(int i = 0; i < count; i++) {
+                            while (!stack.isEmpty() && !stack.peek().equals("(")) {
+                                arr.add(stack.pop());
+                            }
 
-                        stack.pop();
+                            stack.pop();
+                        }
                     } else {
                         arr.add(s);
                     }
