@@ -64,7 +64,7 @@ public class Postfix {
         return Pattern.matches("^[0-9()*-/+]*$", formula.trim().replaceAll(" ", ""));
     }
 
-    public int priority(String operator) {
+    public int priority(String operator) throws Exception {
         switch (operator) {
             case "(":
             case ")":
@@ -72,8 +72,13 @@ public class Postfix {
             case "+":
             case "-":
                 return 1;
+            case "*":
+            case "/":
+                return 2;
+            default:
+                break;
         }
 
-        return 2; //정규식을 거쳤기 때문에 괄호, 더하기 빼기가 아니라면 곱하기, 나누기만 나오게 된다.
+        throw new IllegalArgumentException();
     }
 }
