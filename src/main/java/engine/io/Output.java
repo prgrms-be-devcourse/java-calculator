@@ -4,7 +4,7 @@ import engine.model.Function;
 import engine.model.Record;
 
 public interface Output {
-    void outputFunction(Function function);
+    void printFunction(Function function);
 
     void inputFunctionError();
 

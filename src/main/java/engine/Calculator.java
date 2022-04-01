@@ -1,123 +1,148 @@
 package engine;
 
-import engine.io.Input;
-import engine.io.Output;
 import engine.model.Element;
 import engine.model.Function;
 import engine.model.Record;
 import lombok.AllArgsConstructor;
+import utility.Console;
+import utility.Utility;
 
 import java.util.*;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
 
-    private Output output;
-    private Input input;
-    private Function function;
+    private Console console;
     private Record record;
+    private static final Function function = new Function();
+    private static final String FUNCTION_ONE = "1";
+    private static final String FUNCTION_TWO = "2";
+
 
     @Override
     public void run() {
         while (true) {
-            output.outputFunction(function);
-            String inputString = input.inputFunction("선택 : ");
-            Optional<Integer> inputFunctionNumber = function.check(inputString);
-            if (inputFunctionNumber.isEmpty()) {
-                output.inputFunctionError();
+            console.printFunction(function);
+            String inputString = console.inputFunction("선택 : ");
+            if (!function.hasFunction(inputString)) {
+                console.inputFunctionError();
                 continue;
             }
-            if (inputFunctionNumber.get().equals(1)) { //enum사용하도록 변경
-                output.printRecord(record);
+            if (inputString.equals(FUNCTION_ONE)) {
+                console.printRecord(record);
             }
-            if (inputFunctionNumber.get().equals(2)) {
+            if (inputString.equals(FUNCTION_TWO)) {
                 Element element = new Element(new Stack<Integer>(), new Stack<Character>());
-                Optional<String> expression = parse(input.inputExpression(), element.getCalculateOperators());
+                Optional<String> expression = checkExpression(console.inputExpression(), element.getCalculateOperators());
                 if (expression.isEmpty()) {
-                    output.inputExpressionError();
+                    console.inputExpressionError();
                     continue;
                 }
 
-                int answer = calculate(expression.get().replaceAll(" ", ""), element);
-                output.outputCalculateAnswer(answer);
+                int answer = calculate(expression.get().replace(" ", ""), element);
+                console.outputCalculateAnswer(answer);
                 record.addRecord(expression.get(), answer);
             }
         }
     }
 
 
-    private Optional<String> parse(String expression, List<Character> calculateOperators) {
-        boolean isCorrectExpression = expression.replace(" ","").chars()
-                .filter(c -> c != '*' && c != '+' && c != '/' && c != '-')
-                .allMatch(c -> c >= '0' && c <= '9');
+    private Optional<String> checkExpression(String expression, List<Character> calculateOperators) {
+
+        boolean isCorrectExpression = expression.replace(" ", "").chars()
+                .filter(c -> !calculateOperators.contains((char) c))
+                .allMatch(c -> Utility.isNumber((char) c));
         if (!isCorrectExpression) return Optional.empty();
 
-        isCorrectExpression = calculateOperators.stream().anyMatch(c -> expression.endsWith(Character.toString(c))||
-                expression.startsWith(Character.toString(c)));
+        isCorrectExpression = calculateOperators.stream()
+                .anyMatch(c -> expression.endsWith(Character.toString(c)) || expression.startsWith(Character.toString(c)));
         if (isCorrectExpression) return Optional.empty();
 
-        if (expression.replace(" ","").equals("")) return Optional.empty();
+        if (expression.isBlank()) return Optional.empty();
 
+        if (!isExpressionOrderCorrect(expression, calculateOperators)) return Optional.empty();
+
+        return Optional.of(expression);
+    }
+
+    private boolean isExpressionOrderCorrect(String expression, List<Character> calculateOperators) {
         boolean needCheck = false;
         Stack<Character> stack = new Stack<Character>();
-        for (int i = 0; i < expression.length(); i++) {
-            char ch = expression.charAt(i);
+        char expressionArr[] = expression.toCharArray();
+        for (char ch : expressionArr) {
             if (ch == ' ') {
                 needCheck = true;
                 continue;
             }
             if (!stack.isEmpty()) {
                 if (calculateOperators.stream().anyMatch(c -> c.equals(stack.peek()) && stack.peek().equals(ch)))
-                    return Optional.empty();
+                    return false;
             }
             if (needCheck) {
-                if ((ch >= '0' && ch <= '9') && (stack.peek() >= '0' && stack.peek() <= '9')) return Optional.empty();
+                if (Utility.isNumber(ch) && Utility.isNumber(stack.peek())) return false;
             }
             needCheck = false;
             stack.push(ch);
         }
-        return Optional.of(expression);
+        return true;
     }
 
     private int calculate(String expression, Element element) {
-        String str1 = "";
-        String str2 = "";
+
+        int answer = doMultipleAndDivideFirst(expression, element);
+        answer = doAddAndSubtractNext(answer, element);
+        return answer;
+    }
+
+    private int doMultipleAndDivideFirst(String expression, Element element) {
+
+        StringBuffer str1 = new StringBuffer("");
+        StringBuffer str2 = new StringBuffer("");
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
             if (c == '-' || c == '+') {
                 element.getOperation().push(c);
-                element.getNumbers().push(Integer.parseInt(str1));
-                str1 = "";
+                element.getNumbers().push(Utility.bufferStringToInt(str1));
+                str1.setLength(0);
             }
             if (c == '*' || c == '/') {
                 for (int j = i + 1; j < expression.length(); j++) {
-                    if (expression.charAt(j) >= '0' && expression.charAt(j) <= '9') {
-                        str2 += expression.charAt(j);
+                    if (Utility.isNumber(expression.charAt(j))) {
+                        str2.append(expression.charAt(j));
                         i++;
                     }
-                    if (!(expression.charAt(j) >= '0' && expression.charAt(j) <= '9')) break;
+                    if (!Utility.isNumber(expression.charAt(j))) break;
                 }
-                if (c == '*') str1 = Integer.toString(Integer.parseInt(str1) * Integer.parseInt(str2));
-                if (c == '/') str1 = Integer.toString(Integer.parseInt(str1) / Integer.parseInt(str2));
-                str2 = "";
+                str1.setLength(0);
+                if (c == '*') str1.append(Utility.bufferStringToInt(str1) * Utility.bufferStringToInt(str2));
+                if (c == '/') str1.append(Utility.bufferStringToInt(str1) / Utility.bufferStringToInt(str2));
+                str2.setLength(0);
             }
-            if (c >= '0' && c <= '9') {
-                str1 += c;
+            if (Utility.isNumber(c)) {
+                str1.append(c);
             }
         }
-        int answer = Integer.parseInt(str1);
-        int size = element.getNumbers().size();
-        for (int i = 0; i < size; i++) {
-            if (element.getOperation().peek() == '+') {
-                answer += element.getNumbers().peek();
+
+        return Utility.bufferStringToInt(str1);
+    }
+
+    private int doAddAndSubtractNext(int midAnswer, Element element) {
+
+        Stack<Integer> numbers = element.getNumbers();
+        Stack<Character> operation = element.getOperation();
+
+        for (int i = 0; i < numbers.size(); i++) {
+            if (operation.peek() == '+') {
+                midAnswer += numbers.peek();
             }
-            if (element.getOperation().peek() == '-') {
-                answer = element.getNumbers().peek() - answer;
+            if (operation.peek() == '-') {
+                midAnswer = numbers.peek() - midAnswer;
             }
-            element.getOperation().pop();
-            element.getNumbers().pop();
+            operation.pop();
+            numbers.pop();
         }
-        return answer;
+
+        return midAnswer;
     }
 
 }
