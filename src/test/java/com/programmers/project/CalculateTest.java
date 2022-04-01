@@ -39,6 +39,6 @@ public class CalculateTest {
 
         Assertions.assertEquals(13+2*4, result);
     }
-    
+
 
 }
