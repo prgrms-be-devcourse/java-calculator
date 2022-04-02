@@ -1,6 +1,7 @@
 package calculator.engine;
 
 
+import calculator.exception.DivisionByZero;
 import calculator.repository.CalculatorRepository;
 import calculator.repository.CalculatorRepositoryMap;
 
@@ -11,6 +12,7 @@ public class Calculator implements Runnable {
     private final CalculatorRepository repository;
     private final Console console;
     private final Postfix postfix;
+    private static Stack<Integer> stack;
     private boolean isRunning;
 
     public Calculator() {
@@ -23,7 +25,7 @@ public class Calculator implements Runnable {
     @Override
     public void run() {
         while(isRunning) {
-            String input = console.runMessage();
+            String input = console.initMessage();
             doAction(input);
         }
     }
@@ -40,7 +42,8 @@ public class Calculator implements Runnable {
                 exit();
                 break;
             default:
-                doAction(console.errorMessage());
+                console.illegalExceptionMessage();
+                console.print(console.initMessage());
                 break;
         }
     }
@@ -50,73 +53,77 @@ public class Calculator implements Runnable {
     }
 
     public String calculate(String formula) {
-        StringBuilder sb = new StringBuilder();
-        Stack<Integer> stack = new Stack<>();
+        String answer = "";
         try {
-            List<String> strings = postfix.makeToPostfix(formula);
-            for(String s : strings) {
-                switch(s) {
-                    case "+":
-                        if (stack.size() >= 2) {
-                            Integer a = stack.pop();
-                            Integer b = stack.pop();
-                            stack.push(a + b);
-                        }
-                        break;
-                    case "-":
-                        if (stack.size() >= 2) {
-                            Integer a = stack.pop();
-                            Integer b = stack.pop();
-                            stack.push(b - a);
-                        }
-                        break;
-                    case "*":
-                        if (stack.size() >= 2) {
-                            Integer a = stack.pop();
-                            Integer b = stack.pop();
-                            stack.push(a * b);
-                        }
-                        break;
-                    case "/":
-                        if (stack.size() >= 2) {
-                            Integer a = stack.pop();
-                            Integer b = stack.pop();
+            List<String> postfixFormula = postfix.makeToPostfix(formula);
 
-                            try {
-                                if(a == 0) {
-                                    throw new Exception("0으로 값을 나눌 수 없습니다.");
-                                }
+            stack = new Stack<>();
 
-                                stack.push(b / a);
-                            } catch(Exception e) {
-                                console.print(e.getMessage());
-                                calculate(console.input());
-                            }
-                        }
-                        break;
-                    case "(":
-                    case ")":
-                        break;
-                    default:
-                        stack.push(Integer.parseInt(s));
-                        break;
-                }
-            }
+            doCalculate(postfixFormula);
+
+            answer = String.valueOf(stack.get(0));
+            repository.save(formula, answer);
         } catch (IllegalAccessException e) {
-            console.print("입력값을 확인해 주세요.");
-            calculate(console.input());
+            console.illegalExceptionMessage();
         } catch (Exception e) {
-            console.print("예상하지 못한 오류가 발생하였습니다.");
+            console.exceptionMessage();
             exit();
         }
 
-        String answer = String.valueOf(stack.get(0));
-        repository.save(formula, answer);
-
-        sb.append(formula).append("\n").append(answer).append("\n");
-
-        return sb.toString();
+        return answer;
     }
+
+    private void doCalculate(List<String> postfixFormula) {
+        for (String s : postfixFormula) {
+            switch (s) {
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    try {
+                        doOperation(s);
+                    } catch (DivisionByZero divisionByZero) {
+                        console.divisionByZero();
+                        calculate(console.input());
+                    } catch (Exception e) {
+                        exit();
+                    }
+                    break;
+                default:
+                    stack.push(Integer.parseInt(s));
+                    break;
+            }
+        }
+    }
+
+    private void doOperation(String operator) throws DivisionByZero {
+        if(stack.size() >= 2) {
+            Integer a = stack.pop();
+            Integer b = stack.pop();
+
+            switch (operator) {
+                case "+":
+                    stack.push(a + b);
+                    break;
+                case "-":
+                    stack.push(b - a);
+                    break;
+                case "*":
+                    stack.push(a * b);
+                    break;
+                case "/":
+                    if(a == 0) {
+                        throw new DivisionByZero();
+                    }
+
+                    stack.push(b / a);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
 
     public void exit() {
         console.exitMessage();
