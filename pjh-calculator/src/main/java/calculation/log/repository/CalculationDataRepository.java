@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class CalcDataRepository implements DataRepository<CalculationData, Long> {
+public class CalculationDataRepository implements DataRepository<CalculationData, Long> {
 
   private Long idSequence;
 
   private Map<Long, CalculationData> store;
 
-  public CalcDataRepository() {
+  public CalculationDataRepository() {
     this.idSequence = 0L;
     this.store = new LinkedHashMap<>();
   }

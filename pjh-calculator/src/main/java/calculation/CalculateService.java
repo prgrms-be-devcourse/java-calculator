@@ -11,14 +11,14 @@ import java.util.NoSuchElementException;
 public class CalculateService {
 
   private final BigDecimalCalculator calculator;
-  private final Logger<CalculationData> logService;
+  private final Logger<CalculationData> logger;
   private final Input input;
   private final Output output;
 
 
-  public CalculateService(BigDecimalCalculator calculator, Logger logService, Input input, Output output) {
+  public CalculateService(BigDecimalCalculator calculator, Logger logger, Input input, Output output) {
     this.calculator = calculator;
-    this.logService = logService;
+    this.logger = logger;
     this.input = input;
     this.output = output;
   }
@@ -46,10 +46,10 @@ public class CalculateService {
       throw new IllegalArgumentException("잘못된 명령어 입력 입니다.");
     }
     if (type == 1) {
-      logService.printLog();
+      logger.printLog();
     } else {
       CalculationData calcData = calculator.execute(input.input());
-      logService.log(calcData);
+      logger.log(calcData);
       output.printAnswer(calcData);
     }
   }

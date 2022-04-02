@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class CalcDataRepositoryTest {
 
-  DataRepository<CalculationData, Long> calcDataRepository = new CalcDataRepository();
+  DataRepository<CalculationData, Long> calcDataRepository = new CalculationDataRepository();
 
   @DisplayName("저장 테스트")
   @Test
