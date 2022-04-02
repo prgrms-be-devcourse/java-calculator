@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class OperatorTypeTest {
@@ -22,6 +23,15 @@ class OperatorTypeTest {
     @ParameterizedTest
     @ValueSource(strings = {"5", "", " ", "//", "s", "++"})
     void from_notOperand_throwException(String notOperator) {
+        assertThatThrownBy(() -> OperatorType.from(notOperator))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("[ERROR] 연산자가 아닙니다. 다시 입력해주세요.");
+    }
+
+    @DisplayName("from은 공백이거나 null이면 예외를 던진다.")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void from_nullAndEmpty_throwException(String notOperator) {
         assertThatThrownBy(() -> OperatorType.from(notOperator))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 연산자가 아닙니다. 다시 입력해주세요.");
