@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import calculation.Alu;
+import calculation.ArithmeticLogicUnit;
 import calculation.DivideByZeroException;
 import calculation.RecordRepository;
 import calculation.Record;
@@ -15,11 +15,11 @@ public class Calculator implements Runnable {
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private final RecordRepository recordRepository;
 	private final InputParser inputParser;
-	private final Alu alu;
+	private final ArithmeticLogicUnit arithmeticLogicUnit;
 
-	public Calculator(InputParser inputParser, Alu alu, RecordRepository recordRepository) {
+	public Calculator(InputParser inputParser, ArithmeticLogicUnit arithmeticLogicUnit, RecordRepository recordRepository) {
 		this.inputParser = inputParser;
-		this.alu = alu;
+		this.arithmeticLogicUnit = arithmeticLogicUnit;
 		this.recordRepository = recordRepository;
 	}
 
@@ -66,7 +66,7 @@ public class Calculator implements Runnable {
 	private void calculateAndPrintResult(String input) {
 
 		Input in = new Input(input, inputParser);
-		Record record = alu.process(in);
+		Record record = arithmeticLogicUnit.process(in);
 		System.out.println(record.getResult());
 		recordRepository.addRecord(record);
 

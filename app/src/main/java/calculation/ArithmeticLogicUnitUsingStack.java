@@ -9,11 +9,11 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
 
-public class AluUsingStack implements Alu {
+public class ArithmeticLogicUnitUsingStack implements ArithmeticLogicUnit {
 
 	private Map<String, Integer> precedence = new HashMap<>();
 
-	public AluUsingStack() {
+	public ArithmeticLogicUnitUsingStack() {
 		setUpPrecedence(precedence);
 	}
 
