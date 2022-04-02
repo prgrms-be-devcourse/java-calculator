@@ -22,7 +22,7 @@ public class Console implements Input, Output {
         sb.append("3. 종료").append("\n");
         sb.append("선택 : ");
 
-        System.out.print(sb.toString());
+        System.out.print(sb);
 
         String input = input();
 
@@ -37,9 +37,18 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public String errorMessage() {
-        System.out.println("입력값을 다시 확인해주세요.\n");
-        return initMessage();
+    public void illegalExceptionMessage() {
+        System.out.println("입력값을 다시 확인해주세요.");
+    }
+
+    @Override
+    public void exceptionMessage() {
+        System.out.println("알수없는 오류가 발생하였습니다.");
+    }
+
+    @Override
+    public void divisionByZero() {
+        System.out.println();
     }
 
     @Override
