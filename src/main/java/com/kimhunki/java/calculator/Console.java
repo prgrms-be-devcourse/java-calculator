@@ -5,50 +5,46 @@ import com.kimhunki.java.calculator.io.Output;
 
 import java.util.Scanner;
 
-public class Console implements Input, Output
-{
+public class Console implements Input, Output {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String input(String s)
-    {
-        System.out.print(s);
+    public String input( ) {
         return scanner.nextLine();
     }
 
     @Override
-    public void inputError()
-    {
+    public void select( ) {
+        System.out.println();
+    }
+
+    @Override
+    public void inputError( ) {
         System.out.println("입력이 잘못되었습니다.");
     }
 
     @Override
-    public void output(String s)
-    {
+    public void output(String s) {
         System.out.println(s);
     }
 
     @Override
-    public void menuOutput()
-    {
+    public void menuOutput( ) {
         System.out.println("1. 조회\n2. 계산\n3. 종료\n\n");
     }
 
     @Override
-    public void emptyRepository()
-    {
+    public void emptyRepository( ) {
         System.out.println("아무 결과도 찾을 수 없습니다.");
     }
 
     @Override
-    public void end()
-    {
+    public void end( ) {
         System.out.println("계산기를 종료합니다.");
     }
 
     @Override
-    public void divError()
-    {
+    public void divError( ) {
         System.out.println("0으로 나눌 수 없습니다.");
     }
 }

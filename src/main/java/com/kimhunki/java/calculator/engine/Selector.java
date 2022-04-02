@@ -14,36 +14,30 @@ import lombok.AllArgsConstructor;
 import java.util.ArrayList;
 
 @AllArgsConstructor
-public class Selector implements Runnable
-{
-
+public class Selector implements Runnable {
     Input input;
     Output output;
     Parser parser;
     ResultRepository resultRepository;
-    @Override
-    public void run()
-    {
 
-        Calculator calculator = new Calculator(input,output,parser,new RegularExpressionVerification(),new InfixCalculator(parser,new Operator()));// 2번 계산 기능을 위한 인스턴스
+    @Override
+    public void run( ) {
+
+        Calculator calculator = new Calculator(input, output, parser, new RegularExpressionVerification(), new InfixCalculator(parser, new Operator()));// 2번 계산 기능을 위한 인스턴스
         Query query = new Query(output);
-        while(true)
-        {
+        while (true) {
             output.menuOutput();
-            String selectString =  input.input("선택 : ");
+            output.select();
+            String selectString = input.input();
             MenuNumber menuNumber = parser.menuParser(selectString);
-            if(menuNumber.equals(MenuNumber.ONE) ){
+            if (menuNumber.equals(MenuNumber.ONE)) {
                 query.printResult(resultRepository);
-            }
-            else if(menuNumber.equals(MenuNumber.TWO)){
+            } else if (menuNumber.equals(MenuNumber.TWO)) {
                 calculator.calculate(resultRepository);
-            }
-            else if(menuNumber.equals(MenuNumber.THREE)){
+            } else if (menuNumber.equals(MenuNumber.THREE)) {
                 output.end();
                 break;
-            }
-            else
-                output.inputError();
+            } else output.inputError();
         }
     }
 

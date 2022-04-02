@@ -25,7 +25,7 @@ public class Calculator
     public void calculate(ResultRepository resultRepository)
     {
 
-        String expression =  input.input("");
+        String expression =  input.input();
         if(!verification.verify(expression)){
             output.inputError();
             return;

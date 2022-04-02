@@ -2,9 +2,8 @@ package com.kimhunki.java.calculator.db;
 
 import java.util.List;
 
-public interface ResultRepository
-{
+public interface ResultRepository {
     void addResult(String result);
 
-    List<String> getRepository();
+    List<String> getRepository( );
 }

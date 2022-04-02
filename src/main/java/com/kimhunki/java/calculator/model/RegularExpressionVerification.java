@@ -9,26 +9,22 @@ import java.util.regex.Pattern;
 
 import static com.kimhunki.java.calculator.model.RegularExpressionPattern.*;
 
-public class RegularExpressionVerification implements VerificationStrategy
-{
+public class RegularExpressionVerification implements VerificationStrategy {
     // 민성님 코드를 참고했습니다.
 
-    public boolean verify(String expression)
-    {
+    public boolean verify(String expression) {
         int tokenCnt = 0;
-        boolean flag = true;
-        if(acceptablePattern.matcher(expression).matches()) return true;// 일단 이상한 부호 들어가면
+        boolean flag = false;
+        if (!acceptablePattern.matcher(expression).matches()) return true;// 일단 이상한 부호 들어가면
         Matcher matcher = pattern.matcher(expression);
-        while(matcher.find())
-        {
+        while (matcher.find()) {
             String group = matcher.group();
-            if(isNumberInWrongPosition(tokenCnt,group) || isOperatorInWrongPosition(tokenCnt,group))
-                flag = false;
+            if (isNumberInWrongPosition(tokenCnt, group) || isOperatorInWrongPosition(tokenCnt, group)) flag = true;
             tokenCnt++;
 
         }
-        if(isAppropriateTokenCount(tokenCnt))
-            flag = false;
+        //        System.out.println(flag);
+        if (isAppropriateTokenCount(tokenCnt)) flag = true;
         return flag;
     }
 
@@ -40,8 +36,7 @@ public class RegularExpressionVerification implements VerificationStrategy
         return tokenCount % 2 != 0 && !operatorPattern.matcher(group).matches();
     }
 
-    private boolean isNumberInWrongPosition(int tokenCount, String group)
-    {
+    private boolean isNumberInWrongPosition(int tokenCount, String group) {
         return tokenCount % 2 == 0 && !numberPattern.matcher(group).matches();
     }
 

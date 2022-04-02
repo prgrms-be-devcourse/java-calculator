@@ -11,13 +11,11 @@ import com.kimhunki.java.calculator.strategy.CalculatorStrategy;
 
 import java.util.ArrayList;
 
-public class App
-{
-    public static void main(String[] args)
-    {
+public class App {
+    public static void main(String[] args) {
         Console console = new Console();
         Parser parser = new Parser();
         ResultRepository resultRepository = new MemoryResultRepository(new ArrayList<>());
-        new Selector(console,console,parser,resultRepository).run();
+        new Selector(console, console, parser, resultRepository).run();
     }
 }

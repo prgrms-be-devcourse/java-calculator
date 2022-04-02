@@ -1,6 +1,5 @@
 package com.kimhunki.java.calculator.io;
 
-public interface Input
-{
-    String input(String s);
+public interface Input {
+    String input();
 }

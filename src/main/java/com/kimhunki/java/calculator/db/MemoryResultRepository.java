@@ -5,18 +5,16 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-public class MemoryResultRepository implements ResultRepository
-{
+public class MemoryResultRepository implements ResultRepository {
     private List<String> resultList;
+
     @Override
-    public void addResult(String result)
-    {
+    public void addResult(String result) {
         resultList.add(result);
     }
 
     @Override
-    public List<String> getRepository()
-    {
+    public List<String> getRepository( ) {
         return resultList;
     }
 

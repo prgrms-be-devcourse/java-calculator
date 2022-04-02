@@ -5,8 +5,7 @@ import com.kimhunki.java.calculator.enums.Operations;
 
 import java.util.List;
 
-public interface ParserStrategy
-{
+public interface ParserStrategy {
     MenuNumber menuParser(String selectString);
 
     List<String> expressionParser(String expression);

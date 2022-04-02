@@ -1,6 +1,5 @@
 package com.kimhunki.java.calculator.strategy;
 
-public interface VerificationStrategy
-{
+public interface VerificationStrategy {
     boolean verify(String expression);
 }
