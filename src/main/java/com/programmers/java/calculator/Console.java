@@ -13,7 +13,7 @@ public class Console {
     private ArithmeticModule arithmeticModule;
 
     public void printMenu(){
-        output.menu();
+        output.printMenu();
     }
 
     public Integer selectMenu() {

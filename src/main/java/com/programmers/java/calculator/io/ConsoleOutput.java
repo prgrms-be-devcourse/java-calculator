@@ -5,12 +5,12 @@ import java.util.List;
 public class ConsoleOutput implements Output{
 
     @Override
-    public void inputError() {
+    public void printInputError() {
         System.out.println("잘못된 입력입니다.");
     }
 
     @Override
-    public void menu() {
+    public void printMenu() {
         System.out.println("\n1. 조회\n2. 계산\n");
     }
 
