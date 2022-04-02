@@ -10,7 +10,7 @@ public class Postfix {
     static Stack<String> stack;
     static List<String> arr;
 
-    public List<String> makeToPostfix(String formula) throws IllegalAccessException {
+    public List<String> makeToPostfix(String formula) throws IllegalArgumentException {
         if(!isCorrectFormula(formula)) {
             throw new IllegalArgumentException();
         }
@@ -78,7 +78,7 @@ public class Postfix {
         return Pattern.matches("^[0-9()*-/+]*$", formula.trim().replaceAll(" ", ""));
     }
 
-    public int priority(String operator) throws IllegalAccessException {
+    public int priority(String operator) throws IllegalArgumentException {
         switch (operator) {
             case "(":
             case ")":
