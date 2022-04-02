@@ -1,7 +1,7 @@
 import io.Input;
 import io.Output;
 import service.CalculatorService;
-import validation.Validate;
+import validation.ValidateService;
 
 public class Application {
     public static void main(String[] args) {
@@ -10,9 +10,9 @@ public class Application {
         Input input = appConfig.input();
         Output output = appConfig.output();
         CalculatorService calculatorService = appConfig.calculationService();
-        Validate validate = appConfig.validate();
+        ValidateService validateService = appConfig.validateService();
 
-        Calculator calculator = new Calculator(input,output, calculatorService, validate);
+        Calculator calculator = new Calculator(input, output, calculatorService, validateService);
         calculator.run();
     }
 }
