@@ -8,7 +8,14 @@ public class Console implements Input, Output {
     @Override
     public String ReturnInput(String s) {
         System.out.println(s);
+        System.out.print("선택 : ");
         return sc.nextLine();
+    }
+
+    @Override
+    public String FormulaInput(String s) {
+        System.out.println(s);
+        return  sc.nextLine();
     }
 
     @Override
@@ -18,11 +25,6 @@ public class Console implements Input, Output {
         } else if (s.equals("EmptyMap")) {
             System.out.println("계산 이력이 존재하지 않습니다.\n");
         }
-    }
-
-    @Override
-    public void FindAllSelect(int number) {
-        System.out.println(number + " 번을 선택하셨습니다.");
     }
 
     @Override
