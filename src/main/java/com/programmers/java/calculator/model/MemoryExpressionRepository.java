@@ -8,7 +8,7 @@ import java.util.Map;
 public class MemoryExpressionRepository implements ExpressionRepository{
 
     private final Map<String, String> cache = new HashMap<>();
-    private final ArrayList<String> memory = new ArrayList<>();
+    private final List<String> memory = new ArrayList<>();
 
     @Override
     public void save(String expression, String result) {
