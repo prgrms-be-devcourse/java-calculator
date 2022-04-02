@@ -1,6 +1,6 @@
 package calculation.io;
 
-import calculation.model.CalcData;
+import calculation.model.CalculationData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class BufferedIO implements Input, Output {
   }
 
   @Override
-  public void printAnswer(CalcData calcData) throws IOException {
+  public void printAnswer(CalculationData calcData) throws IOException {
     bw.write(calcData.getExpression() + " = " + calcData.getAnswer() + "\n");
     bw.flush();
   }

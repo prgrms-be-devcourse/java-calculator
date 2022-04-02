@@ -1,6 +1,6 @@
 package calculation.io;
 
-import calculation.model.CalcData;
+import calculation.model.CalculationData;
 import java.io.IOException;
 
 public interface Output {
@@ -9,5 +9,5 @@ public interface Output {
 
   void printErrorMsg(String errorMsg) throws IOException;
 
-  void printAnswer(CalcData calcData) throws IOException;
+  void printAnswer(CalculationData calcData) throws IOException;
 }

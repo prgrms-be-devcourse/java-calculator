@@ -1,7 +1,7 @@
 package calculation.calculator.engine;
 
 import calculation.calculator.expression.NormalExpressionService;
-import calculation.model.CalcData;
+import calculation.model.CalculationData;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Stack;
@@ -14,7 +14,7 @@ public class BigDecimalCalculator {
     this.expService = expService;
   }
 
-  public CalcData execute(String exp) {
+  public CalculationData execute(String exp) {
     if (!expService.checkExpression(exp)) {
       throw new IllegalArgumentException("잘못된 연산식 입니다.");
     }

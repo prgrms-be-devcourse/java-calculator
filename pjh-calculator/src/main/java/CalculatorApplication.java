@@ -4,7 +4,7 @@ import calculation.calculator.expression.ArithmeticLogic;
 import calculation.calculator.expression.NormalArithmeticLogic;
 import calculation.calculator.expression.NormalExpressionService;
 import calculation.io.BufferedIO;
-import calculation.log.CalcLogger;
+import calculation.log.CalculationLogger;
 import calculation.log.repository.CalcDataRepository;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,7 +24,7 @@ public class CalculatorApplication {
     ArithmeticLogic arithmeticLogic = new NormalArithmeticLogic();
     BigDecimalCalculator calEngine = new BigDecimalCalculator(new NormalExpressionService(arithmeticLogic));
 
-    CalcLogger calcLogService = new CalcLogger(new CalcDataRepository());
+    CalculationLogger calcLogService = new CalculationLogger(new CalcDataRepository());
 
     new CalculateService(calEngine, calcLogService, io, io).run();
   }

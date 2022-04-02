@@ -2,7 +2,7 @@ package calculation.log.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculation.model.CalcData;
+import calculation.model.CalculationData;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class CalcDataRepositoryTest {
 
-  DataRepository<CalcData, Long> calcDataRepository = new CalcDataRepository();
+  DataRepository<CalculationData, Long> calcDataRepository = new CalcDataRepository();
 
   @DisplayName("저장 테스트")
   @Test
@@ -21,10 +21,10 @@ class CalcDataRepositoryTest {
     //given
     String expression = "1 + 2 + 3";
     BigDecimal answer = new BigDecimal(6.0);
-    calcDataRepository.save(new CalcData(expression,answer));
+    calcDataRepository.save(new CalculationData(expression,answer));
 
     //when
-    Optional<CalcData> foundData = calcDataRepository.findById(0L);
+    Optional<CalculationData> foundData = calcDataRepository.findById(0L);
 
     //then
     assertThat(foundData.isPresent()).isTrue();
@@ -40,10 +40,10 @@ class CalcDataRepositoryTest {
   }, delimiter = ':')
   void findAll(String expression, BigDecimal answer) {
     //given
-    calcDataRepository.save(new CalcData(expression,answer));
+    calcDataRepository.save(new CalculationData(expression,answer));
 
     //when
-    List<CalcData> foundData = calcDataRepository.findAll();
+    List<CalculationData> foundData = calcDataRepository.findAll();
 
     //then
     assertThat(foundData.get(0).getExpression()).isEqualTo(expression);

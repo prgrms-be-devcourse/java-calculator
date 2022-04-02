@@ -2,7 +2,7 @@ package calculation.model;
 
 import java.math.BigDecimal;
 
-public class CalcData {
+public class CalculationData {
 
   private Long id;
   private String expression;
@@ -24,7 +24,7 @@ public class CalcData {
     return answer;
   }
 
-  public CalcData(String expression, BigDecimal answer) {
+  public CalculationData(String expression, BigDecimal answer) {
     this.expression = expression;
     this.answer = answer;
   }
