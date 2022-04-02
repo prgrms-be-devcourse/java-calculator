@@ -4,7 +4,6 @@ import io.Output;
 import repository.CalculatorMemoryRepository;
 import repository.CalculatorRepository;
 import service.CalculatorService;
-import validation.Validate;
 import validation.ValidateService;
 
 public class AppConfig {
@@ -26,7 +25,7 @@ public class AppConfig {
         );
     }
 
-    public Validate validate(){
+    public ValidateService validateService(){
         return new ValidateService();
     }
 
