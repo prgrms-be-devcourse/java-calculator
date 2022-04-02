@@ -1,13 +1,15 @@
 package calculation;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
-import com.google.common.primitives.Longs;
-import input.Input;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
+
+import com.google.common.primitives.Longs;
+
+import input.Input;
 
 public class ArithmeticLogicUnitUsingStack implements ArithmeticLogicUnit {
 
@@ -46,7 +48,6 @@ public class ArithmeticLogicUnitUsingStack implements ArithmeticLogicUnit {
 
 		// inputs 을 순회하면서 operators 가 비어있지 않은 경우 -> operators 의 top 에 있는 연산자와 현재 연산자의 우선순위를 비교한다
 		// 현재 연산자의 우선순위가 더 낮거나 같을 경우, 스택에서 값을 2개 꺼내 연산한다.
-
 		for (int i = 0; i < inputs.length; i++) {
 			// precedence 에 없는 값 -> 숫자
 			if (!precedence.containsKey(inputs[i])) {
@@ -60,6 +61,7 @@ public class ArithmeticLogicUnitUsingStack implements ArithmeticLogicUnit {
 				op2 = values.pollLast();
 				op1 = values.pollLast();
 				result = operate(op1, op2, operators.pollLast());
+
 				// 연산 결과를 values 에 push
 				values.add(result);
 			}
@@ -69,7 +71,9 @@ public class ArithmeticLogicUnitUsingStack implements ArithmeticLogicUnit {
 		while (!operators.isEmpty()) {
 			op2 = values.pollLast();
 			op1 = values.pollLast();
+
 			result = operate(op1, op2, operators.pollLast());
+
 			values.add(result);
 		}
 		return values.getLast();
@@ -83,11 +87,11 @@ public class ArithmeticLogicUnitUsingStack implements ArithmeticLogicUnit {
 		return false;
 	}
 
-
 	// 피연산자 1,2, 연산자
 	private long operate(Long op1, Long op2, String op3) {
 		checkArgument(op1 != null, "피연산자1(op1) 은 반드시 주어져야 합니다");
 		checkArgument(op2 != null, "피연산자2(op2) 은 반드시 주어져야 합니다");
+
 		Operator operator = null;
 
 		switch (op3) {
@@ -104,9 +108,7 @@ public class ArithmeticLogicUnitUsingStack implements ArithmeticLogicUnit {
 				operator = Operator.DIVIDE;
 				break;
 		}
-
 		return operator.operate(op1, op2);
 	}
-
 
 }

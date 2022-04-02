@@ -1,12 +1,12 @@
 import java.io.BufferedReader;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+
 import calculation.ArithmeticLogicUnit;
 import calculation.DivideByZeroException;
-import calculation.RecordRepository;
 import calculation.Record;
+import calculation.RecordRepository;
 import input.Input;
 import input.InputParser;
 
@@ -17,7 +17,8 @@ public class Calculator implements Runnable {
 	private final InputParser inputParser;
 	private final ArithmeticLogicUnit arithmeticLogicUnit;
 
-	public Calculator(InputParser inputParser, ArithmeticLogicUnit arithmeticLogicUnit, RecordRepository recordRepository) {
+	public Calculator(InputParser inputParser, ArithmeticLogicUnit arithmeticLogicUnit,
+		RecordRepository recordRepository) {
 		this.inputParser = inputParser;
 		this.arithmeticLogicUnit = arithmeticLogicUnit;
 		this.recordRepository = recordRepository;
@@ -52,6 +53,7 @@ public class Calculator implements Runnable {
 
 	private void printHistory() {
 		List allRecord = recordRepository.findAllRecord();
+
 		if (allRecord.isEmpty()) {
 			System.out.println("히스토리가 없습니다");
 		}
@@ -60,6 +62,7 @@ public class Calculator implements Runnable {
 
 	private String getSelection() throws IOException {
 		System.out.println("1. 조회\n2. 계산\n3. 종료\n\n선택 : ");
+
 		return br.readLine();
 	}
 
@@ -67,6 +70,7 @@ public class Calculator implements Runnable {
 
 		Input in = new Input(input, inputParser);
 		Record record = arithmeticLogicUnit.process(in);
+
 		System.out.println(record.getResult());
 		recordRepository.addRecord(record);
 

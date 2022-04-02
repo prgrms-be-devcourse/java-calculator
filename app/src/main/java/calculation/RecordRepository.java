@@ -1,6 +1,5 @@
 package calculation;
 
-
 import java.util.List;
 
 public interface RecordRepository<T> {

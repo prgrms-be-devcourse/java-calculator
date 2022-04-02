@@ -1,8 +1,6 @@
 package calculation;
 
-
-import static com.google.common.base.Preconditions.checkArgument;
-
+import static com.google.common.base.Preconditions.*;
 
 import java.util.Objects;
 
@@ -14,6 +12,7 @@ public class Record {
 	public Record(String originExpression, String result) {
 		checkArgument(originExpression != null, "originExpression 이 반드시 제공되어야 합니다");
 		checkArgument(result != null, "result 가 반드시 제공되어야 합니다.");
+
 		this.originExpression = originExpression;
 		this.result = result;
 	}
@@ -26,7 +25,8 @@ public class Record {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Record record = (Record) o;
+		Record record = (Record)o;
+
 		return originExpression.equals(record.originExpression);
 	}
 

@@ -1,6 +1,6 @@
 package input;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.regex.Pattern;
 
@@ -11,7 +11,6 @@ public class Input {
 	private final String patternString = "[^\\d\\+\\-\\*\\/\\s]";
 	private final int MAX_LENGTH = 18;
 	private final int MIN_LENGTH = 1;
-
 
 	public Input(String expression, InputParser inputParser) {
 		checkArgument(expression != null, "주어지는 식이 null 일 수 없습니다");
@@ -28,6 +27,7 @@ public class Input {
 	// 유효하지 않은 글자 포함 여부 검증
 	private void validateByRegex(String expression) {
 		Pattern pattern = Pattern.compile(patternString);
+
 		if (pattern.matcher(expression).find()) {
 			throw new IllegalArgumentException("식에 유효하지 않은값이 포함되어있습니다");
 		}
