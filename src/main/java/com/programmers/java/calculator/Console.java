@@ -7,10 +7,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Console {
-    private Input input;
-    private Output output;
-    private ExpressionRepository expressionRepository;
-    private ArithmeticModule arithmeticModule;
+    private final Input input;
+    private final Output output;
+    private final ExpressionRepository expressionRepository;
+    private final ArithmeticModule arithmeticModule;
 
     public void printMenu(){
         output.printMenu();
