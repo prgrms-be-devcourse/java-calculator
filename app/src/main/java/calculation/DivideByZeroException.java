@@ -1,4 +1,4 @@
-package model.engine;
+package calculation;
 
 public class DivideByZeroException extends IllegalArgumentException {
 

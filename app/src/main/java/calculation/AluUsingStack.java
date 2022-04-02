@@ -1,14 +1,13 @@
-package model.engine;
+package calculation;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.primitives.Longs;
+import input.Input;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
-import model.history.Record;
-import model.input.Input;
 
 public class AluUsingStack implements Alu {
 

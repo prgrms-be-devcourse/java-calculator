@@ -1,12 +1,11 @@
-import model.Calculator;
-import model.history.HistoryRepositoryList;
-import model.history.Record;
-import model.engine.AluUsingStack;
-import model.input.ParserWithBlank;
+import calculation.RecordRepositoryList;
+import calculation.Record;
+import calculation.AluUsingStack;
+import input.InputParserWithBlank;
 
 public class App {
 
 	public static void main(String[] args) {
-		new Calculator(new ParserWithBlank(), new AluUsingStack(), new HistoryRepositoryList<Record>()).run();
+		new Calculator(new InputParserWithBlank(), new AluUsingStack(), new RecordRepositoryList<Record>()).run();
 	}
 }

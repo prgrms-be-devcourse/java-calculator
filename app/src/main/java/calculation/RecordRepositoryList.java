@@ -1,9 +1,9 @@
-package model.history;
+package calculation;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class HistoryRepositoryList<T> implements HistoryRepository<T> {
+public class RecordRepositoryList<T> implements RecordRepository<T> {
 
 	private LinkedList<T> list = new LinkedList<>();
 

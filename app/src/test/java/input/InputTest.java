@@ -1,4 +1,4 @@
-package model.input;
+package input;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 
 public class InputTest {
 
-	private Parser blankParser;
+	private InputParser blankInputParser;
 
 	@BeforeEach
 	public void setUp() {
-		blankParser = new ParserWithBlank();
+		blankInputParser = new InputParserWithBlank();
 	}
 
 	/**
@@ -22,7 +22,7 @@ public class InputTest {
 	public void 제한길이보다_긴_입력으로_생성하려는경우_예외를던진다() {
 		String expression = "1 + 2 + 3 * 1 + 234 - 1111";
 		Assertions.assertThrows(
-			IllegalArgumentException.class, () -> new Input(expression, blankParser)
+			IllegalArgumentException.class, () -> new Input(expression, blankInputParser)
 		);
 	}
 
@@ -30,7 +30,7 @@ public class InputTest {
 	public void 빈_문자열을_입력으로_생성하려는경우_예외를던진다() {
 		String expression = "";
 		Assertions.assertThrows(
-			IllegalArgumentException.class, () -> new Input(expression, blankParser)
+			IllegalArgumentException.class, () -> new Input(expression, blankInputParser)
 		);
 	}
 
@@ -38,20 +38,20 @@ public class InputTest {
 	public void 유효하지않은_문자가포함된_입력으로_생성하려는경우_예외를던진다() {
 		String expression = "1 + 2 + 3 * 1 + # 234";
 		Assertions.assertThrows(
-			IllegalArgumentException.class, () -> new Input(expression, blankParser)
+			IllegalArgumentException.class, () -> new Input(expression, blankInputParser)
 		);
 	}
 
 	@Test
 	public void 제약조건을_만족하는_입력으로_생성하려는경우_생성성공() {
 		String expression = "1 + 3 / 1 - 11 * 1";
-		Input success = new Input(expression, blankParser);
+		Input success = new Input(expression, blankInputParser);
 		Assertions.assertEquals( expression, success.getOriginalExpression());
 	}
 
 	@Test
 	public void 입력값을_파싱한_결과를_제공한다() {
-		Input validInput = new Input("1 + 2 * 3 - 1", blankParser);
+		Input validInput = new Input("1 + 2 * 3 - 1", blankInputParser);
 		String[] expected = new String[]{"1", "+", "2", "*", "3", "-", "1"};
 
 		Assertions.assertTrue(

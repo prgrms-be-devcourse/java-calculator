@@ -1,28 +1,26 @@
-package model;
-
 import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import model.engine.Alu;
-import model.engine.DivideByZeroException;
-import model.history.HistoryRepository;
-import model.history.Record;
-import model.input.Input;
-import model.input.Parser;
+import calculation.Alu;
+import calculation.DivideByZeroException;
+import calculation.RecordRepository;
+import calculation.Record;
+import input.Input;
+import input.InputParser;
 
 public class Calculator implements Runnable {
 
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	private final HistoryRepository historyRepository;
-	private final Parser parser;
+	private final RecordRepository recordRepository;
+	private final InputParser inputParser;
 	private final Alu alu;
 
-	public Calculator(Parser parser, Alu alu, HistoryRepository historyRepository) {
-		this.parser = parser;
+	public Calculator(InputParser inputParser, Alu alu, RecordRepository recordRepository) {
+		this.inputParser = inputParser;
 		this.alu = alu;
-		this.historyRepository = historyRepository;
+		this.recordRepository = recordRepository;
 	}
 
 	@Override
@@ -53,7 +51,7 @@ public class Calculator implements Runnable {
 	}
 
 	private void printHistory() {
-		List allRecord = historyRepository.findAllRecord();
+		List allRecord = recordRepository.findAllRecord();
 		if (allRecord.isEmpty()) {
 			System.out.println("히스토리가 없습니다");
 		}
@@ -67,10 +65,10 @@ public class Calculator implements Runnable {
 
 	private void calculateAndPrintResult(String input) {
 
-		Input in = new Input(input, parser);
+		Input in = new Input(input, inputParser);
 		Record record = alu.process(in);
 		System.out.println(record.getResult());
-		historyRepository.addRecord(record);
+		recordRepository.addRecord(record);
 
 	}
 

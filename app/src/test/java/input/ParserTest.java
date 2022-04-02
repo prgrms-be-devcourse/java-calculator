@@ -1,4 +1,4 @@
-package model.input;
+package input;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
-	private Parser parser;
+	private InputParser inputParser;
 	private String validTarget;
 
 	@BeforeEach
 	public void setUp() {
 		validTarget = "1 + 2 * 3 - 1";
-		parser = new ParserWithBlank();
+		inputParser = new InputParserWithBlank();
 
 	}
 
@@ -22,7 +22,7 @@ public class ParserTest {
 		String[] expected = new String[]{"1", "+", "2", "*", "3", "-", "1"};
 
 		Assertions.assertTrue(
-			Arrays.equals(expected, parser.parse(validTarget))
+			Arrays.equals(expected, inputParser.parse(validTarget))
 		);
 	}
 

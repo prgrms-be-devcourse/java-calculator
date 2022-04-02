@@ -1,9 +1,9 @@
-package model.history;
+package calculation;
 
 
 import java.util.List;
 
-public interface HistoryRepository<T> {
+public interface RecordRepository<T> {
 
 	List<T> findAllRecord();
 
