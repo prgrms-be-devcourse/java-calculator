@@ -11,11 +11,10 @@ public class CalculationDataRepository implements DataRepository<CalculationData
 
   private Long idSequence;
 
-  private Map<Long, CalculationData> store;
+  private static final Map<Long, CalculationData> store = new LinkedHashMap<>();
 
   public CalculationDataRepository() {
     this.idSequence = 0L;
-    this.store = new LinkedHashMap<>();
   }
 
   @Override
