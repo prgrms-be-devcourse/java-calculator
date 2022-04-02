@@ -14,12 +14,9 @@ public class Calculation implements Command {
 
     private final Database database;
 
-    public Calculation(Database database) {
-        this.database = database;
-    }
-
-    public void setMathExpression(String mathExpression) {
+    public Calculation(String mathExpression, Database database) {
         this.mathExpression = mathExpression;
+        this.database = database;
     }
 
     @Override

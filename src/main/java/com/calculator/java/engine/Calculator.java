@@ -29,11 +29,6 @@ public class Calculator {
 
                 Command command = getCommand(selectedCommand).orElseThrow(TerminationException::new);
 
-                if(command instanceof Calculation) {
-                    String mathExpression = console.inputMathExpression();
-                    ((Calculation) command).setMathExpression(mathExpression);
-                }
-
                 String result = command.doCommand();
                 console.output(result);
 
@@ -48,14 +43,15 @@ public class Calculator {
         }
     }
 
-    private Optional<Command> getCommand(String selectedCommand) throws WrongInputException {
+    private Optional<Command> getCommand(String selectedCommand) throws IOException, WrongInputException {
         CommandTypes commandType = CommandTypes.strToCommandType(selectedCommand);
 
         switch (commandType) {
             case INQUIRY:
                 return Optional.of(new Inquiry(database));
             case CALCULATION:
-                return Optional.of(new Calculation(database));
+                String mathExpression = console.inputMathExpression();
+                return Optional.of(new Calculation(mathExpression, database));
             default:
                 return Optional.empty();
         }
