@@ -15,53 +15,41 @@ import java.util.stream.Collectors;
 
 public class Calculator {
     private final ArithmeticOperation arithmeticOperation;
-    private Operand operand;
-    private Operator operator;
 
     public Calculator(ArithmeticOperation arithmeticOperation) {
         this.arithmeticOperation = arithmeticOperation;
     }
 
     public Double calculate(String inputStr) {
-        return applyOperator(parseInput(inputStr));
+        return applyOperator(parseInput(inputStr)).number;
     }
 
     public Expression parseInput(String inputStr) {
         String operatorPattern = "[\\+\\*-/]";
-        Operator operator = new Operator(inputStr, operatorPattern);
-        Operand operand = new Operand(inputStr, operatorPattern);
-        return new Expression(operator, operand);
+        return new Expression(inputStr, operatorPattern);
     }
 
-    public Double applyOperator(Expression expression) {
-        List<String> operators = expression.getOperator().operators;
-        Double[] operands = expression.getOperand().operands;
+    public Operand applyOperator(Expression expression) {
+        List<Operator> operators = expression.getOperators();
+        List<Operand> operands = expression.getOperands();
 
-        Stack<Double> operandStack = new Stack<>();
-        operandStack.push(operands[0]);
+        Stack<Operand> operandStack = new Stack<>();
+        operandStack.push(operands.get(0));
         for (int i = 0; i < operators.size(); i++) {
-            if (operators.get(i).equals("*") || operators.get(i).equals("/")) {
-                Double prevVal = operandStack.pop();
-                Double curVal = operands[i + 1];
-                if (operators.get(i).equals("*")) {
-                    operandStack.push(arithmeticOperation.multiply(prevVal, curVal));
-                } else {
-                    operandStack.push(arithmeticOperation.divide(prevVal, curVal));
-                }
+            if (operators.get(i) == Operator.MULTIPLY || operators.get(i) == Operator.DIVIDE) {
+                Operand prevVal = operandStack.pop();
+                Operand curVal = operands.get(i + 1);
+                operandStack.push(arithmeticOperation.operation(prevVal, curVal, operators.get(i)));
             } else {
-                operandStack.push(operands[i + 1]);
+                operandStack.push(operands.get(i + 1));
             }
         }
 
-        List<String> remainOperator = operators.stream().filter(s -> (s.equals("+") || s.equals("-"))).toList();
-        Double[] operandArray = operandStack.toArray(Double[]::new);
-        Double result = operandArray[0];
+        List<Operator> remainOperator = operators.stream().filter(s -> (s == Operator.PLUS || s == Operator.MINUS)).toList();
+        Operand[] operandArray = operandStack.toArray(Operand[]::new);
+        Operand result = operandArray[0];
         for (int i = 0; i < remainOperator.size(); i++) {
-            if (remainOperator.get(i).equals("+")) {
-                result = arithmeticOperation.add(result, operandArray[i + 1]);
-            } else {
-                result = arithmeticOperation.subtract(result, operandArray[i + 1]);
-            }
+            result = arithmeticOperation.operation(result, operandArray[i + 1], remainOperator.get(i));
         }
         return result;
     }

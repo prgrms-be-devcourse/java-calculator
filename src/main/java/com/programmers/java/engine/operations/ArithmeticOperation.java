@@ -1,8 +1,8 @@
 package com.programmers.java.engine.operations;
 
+import com.programmers.java.engine.domain.Operand;
+import com.programmers.java.engine.domain.Operator;
+
 public interface ArithmeticOperation {
-    Double add(Double a, Double b);
-    Double subtract(Double a, Double b);
-    Double multiply(Double a, Double b);
-    Double divide(Double a, Double b);
+    Operand operation(Operand a, Operand b, Operator opt);
 }
