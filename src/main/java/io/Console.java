@@ -4,20 +4,19 @@ import java.util.Scanner;
 
 public class Console implements Input, Output {
 
-    private Scanner sc = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String inputFormula() {
-        return sc.nextLine();
+    public String inputFormula(String prompt) {
+        System.out.println(prompt);
+        return scanner.nextLine();
     }
 
     @Override
     public String inputCommand(String prompt) {
         System.out.println(prompt);
-
         System.out.print("선택 : ");
-        String s = sc.nextLine();
-        return s;
+        return scanner.nextLine();
     }
 
     @Override
