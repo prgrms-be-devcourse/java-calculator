@@ -6,13 +6,14 @@ import calculator.repository.CalculatorRepository;
 import calculator.repository.CalculatorRepositoryMap;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 
 public class Calculator implements Runnable {
     private final CalculatorRepository repository;
     private final Console console;
     private final Postfix postfix;
-    private static Stack<Integer> stack;
+    private Stack<Integer> stack;
     private boolean isRunning;
 
     public Calculator() {
@@ -52,7 +53,7 @@ public class Calculator implements Runnable {
     }
 
     public void calculate(String formula) {
-        String answer = "";
+        String answer;
         try {
             List<String> postfixFormula = postfix.makeToPostfix(formula);
             stack = new Stack<>();
@@ -62,7 +63,7 @@ public class Calculator implements Runnable {
             answer = String.valueOf(stack.get(0));
             repository.save(formula, answer);
 
-            System.out.println(answer + "\n");;
+            System.out.println(answer + "\n");
         } catch (DivisionByZero e) {
             console.divisionByZero();
             calculate(console.input());
