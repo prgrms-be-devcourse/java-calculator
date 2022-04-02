@@ -20,13 +20,11 @@ public class Console implements Input, Output {
         sb.append("1. 조회").append("\n");
         sb.append("2. 계산").append("\n");
         sb.append("3. 종료").append("\n");
-        sb.append("선택 : ");
+        sb.append("\n선택 : ");
 
         System.out.print(sb);
 
         String input = input();
-
-        System.out.println();
 
         return input;
     }
@@ -38,21 +36,26 @@ public class Console implements Input, Output {
 
     @Override
     public void illegalExceptionMessage() {
-        System.out.println("입력값을 다시 확인해주세요.");
+        System.out.println("\n잘못된 식을 입력하셨습니다. 다시 입력해주세요.");
     }
 
     @Override
     public void exceptionMessage() {
-        System.out.println("알수없는 오류가 발생하였습니다.");
+        System.out.println("\n알수없는 오류가 발생하였습니다.\n");
     }
 
     @Override
     public void divisionByZero() {
-        System.out.println();
+        System.out.println("\n0으로 값을 나눌 수 없습니다. 식을 다시 입력해주세요.");
     }
 
     @Override
     public void exitMessage() {
         System.out.println("계산기를 종료합니다.");
+    }
+
+    @Override
+    public void selectionError() {
+        System.out.println("\n번호를 확인해주세요.\n");
     }
 }
