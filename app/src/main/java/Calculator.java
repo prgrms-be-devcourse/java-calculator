@@ -37,8 +37,6 @@ public class Calculator implements Runnable {
 						break;
 					case "3":
 						return;
-					default:
-						continue;
 				}
 			} catch (DivideByZeroException e) {
 				System.out.println(e.getMessage());
