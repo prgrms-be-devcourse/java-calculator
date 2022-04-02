@@ -16,11 +16,17 @@ public class Console implements Input, Output {
 
     @Override
     public String initMessage() {
-        System.out.println("1. 조회");
-        System.out.println("2. 계산");
-        System.out.println("3. 종료");
+        StringBuilder sb = new StringBuilder();
+        sb.append("1. 조회").append("\n");
+        sb.append("2. 계산").append("\n");
+        sb.append("3. 종료").append("\n");
+        sb.append("선택 : ");
+
+        System.out.print(sb.toString());
+
         String input = input();
-        System.out.println("선택 : " + input);
+
+        System.out.println();
 
         return input;
     }
