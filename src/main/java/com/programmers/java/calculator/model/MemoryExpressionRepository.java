@@ -22,8 +22,8 @@ public class MemoryExpressionRepository implements ExpressionRepository{
     }
 
     @Override
-    public String findById(String expression) {
-        return expression + " = " + cache.get(expression);
+    public String findById(String id) {
+        return id + " = " + cache.get(id);
     }
 
     public boolean cached(String expression) {

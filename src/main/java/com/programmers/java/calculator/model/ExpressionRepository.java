@@ -6,6 +6,6 @@ import java.util.Optional;
 public interface ExpressionRepository {
     void save(String expression, String result);
     List<String> findAll();
-    String findById(String expression);
+    String findById(String id);
     boolean cached(String expression);
 }
