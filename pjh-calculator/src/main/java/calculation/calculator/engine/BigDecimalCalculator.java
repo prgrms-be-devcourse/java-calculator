@@ -3,8 +3,9 @@ package calculation.calculator.engine;
 import calculation.calculator.expression.NormalExpressionService;
 import calculation.model.CalculationData;
 import java.math.BigDecimal;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 public class BigDecimalCalculator {
 
@@ -20,16 +21,19 @@ public class BigDecimalCalculator {
     }
     List<String> parse = expService.parse(exp);
     List<String> expression = expService.convertToPostfix(parse);
-    Stack<BigDecimal> stk = new Stack<>();
-    for (String token : expression) {
-      if (stk.size() >= 2 && expService.isOperator(token)) {
-        BigDecimal numB = stk.pop();
-        BigDecimal numA = stk.pop();
-        stk.push(expService.calculate(token, numA, numB));
-      } else {
-        stk.push(new BigDecimal(token));
-      }
+    Deque<BigDecimal> stack = new ArrayDeque<>();
+    expression.stream().forEach((token)-> push(stack,token));
+    return new CalculationData(exp, stack.pop());
+  }
+
+  private void push(Deque<BigDecimal> stack, String token)
+  {
+    if (stack.size() >= 2 && expService.isOperator(token)) {
+      BigDecimal numB = stack.pop();
+      BigDecimal numA = stack.pop();
+      stack.push(expService.calculate(token, numA, numB));
+    } else {
+      stack.push(new BigDecimal(token));
     }
-    return new CalcData(exp, stk.pop());
   }
 }
