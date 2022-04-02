@@ -22,9 +22,7 @@ public class CalculatorService {
 
         if (list.contains("+")||list.contains("-")) calc(list, "+","-");
 
-        StringBuilder sb = new StringBuilder();
-        String result = sb.append(list.get(0)).toString();
-
+        String result = list.get(0);
         return result;
     }
 
@@ -41,44 +39,42 @@ public class CalculatorService {
         }
     }
 
-
     public String saveResult(Data data) {
         String saveResult = calculatorRepository.save(data);
         return saveResult;
     }
 
     private List<String> createList(String calculationFormula) {
-        String[] s = calculationFormula.split(" ");
+        String[] spaceSplitArray = calculationFormula.split(" ");
 
         List<String> list = new ArrayList<>();
-        for (String s1 : s) {
-            list.add(s1);
+        for (String spaceSplitValue : spaceSplitArray) {
+            list.add(spaceSplitValue);
         }
         return list;
     }
 
     private void calc(List<String> list, String operator1, String operator2) {
 
-        for (int i = 1; i < list.size(); i+=2) {
+        for (int operatorIndex = 1; operatorIndex < list.size(); operatorIndex += 2) {
+            String formulaOperator = list.get(operatorIndex);
 
-            String s = list.get(i);
+            if (formulaOperator.equals(operator1) || formulaOperator.equals(operator2)) {
+                double b = Double.parseDouble(list.remove(operatorIndex + 1));
+                list.remove(operatorIndex);
+                double a = Double.parseDouble(list.remove(operatorIndex - 1));
 
-            if (s.equals(operator1)||s.equals(operator2)) {
-                double b = Double.parseDouble(list.remove(i + 1));
-                list.remove(i);
-                double a = Double.parseDouble(list.remove(i - 1));
-
-                if (s.equals("*")) {
-                    list.add(i - 1, String.valueOf(a * b));
-                } else if (s.equals("/")) {
-                    list.add(i - 1, String.valueOf(a / b));
-                } else if (s.equals("+")) {
-                    list.add(i - 1, String.valueOf(a + b));
+                if (formulaOperator.equals("*")) {
+                    list.add(operatorIndex - 1, String.valueOf(a * b));
+                } else if (formulaOperator.equals("/")) {
+                    list.add(operatorIndex - 1, String.valueOf(a / b));
+                } else if (formulaOperator.equals("+")) {
+                    list.add(operatorIndex - 1, String.valueOf(a + b));
                 } else {
-                    list.add(i - 1, String.valueOf(a - b));
+                    list.add(operatorIndex - 1, String.valueOf(a - b));
                 }
 
-                i -= 2;
+                operatorIndex -= 2;
             }
         }
 
