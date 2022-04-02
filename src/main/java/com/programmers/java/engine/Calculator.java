@@ -46,12 +46,7 @@ public class Calculator {
                 if (operators.get(i).equals("*")) {
                     operandStack.push(arithmeticOperation.multiply(prevVal, curVal));
                 } else {
-                    try{
-                        operandStack.push(arithmeticOperation.divide(prevVal, curVal));
-                    }
-                    catch(ArithmeticException e){
-                        throw new ArithmeticException("0으로 나누는 것은 안됩니다.");
-                    }
+                    operandStack.push(arithmeticOperation.divide(prevVal, curVal));
                 }
             } else {
                 operandStack.push(operands[i + 1]);
