@@ -36,32 +36,38 @@ public class Calculator implements Runnable {
             }
             int selectNum = Parse(inputString);
             if (selectNum == INQUIRE) {
-                Find(selectNum);
+                Find();
             } else if (selectNum == CALCULATE) {
-                Calculate(selectNum);
+                Calculate();
             } else {
                 output.Error("Input");
             }
         }
     }
 
-    private void Find(int selectNum) {
-        input.FindAllSelect(selectNum);
+    private void Find() {
         if (formulaRepository.size() < 1) {
             output.Error("EmptyMap");
         } else {
             formulaRepository.findAll();
         }
+        System.out.println();
     }
 
-    private void Calculate(int selectNum) {
-        String inputFormula = input.ReturnInput(selectNum + " 번을 선택하셨습니다. 식을 입력해주세요");
+    private void Calculate() {
+        String inputFormula = input.FormulaInput("식을 입력해주세요");
         Optional<Formula> validFormula = validService.Validation(inputFormula);
+        long result = 0;
         if (validFormula.isEmpty()) {
             output.Error("Input");
         } else {
             Formula postFixFormula = new Formula(postFixService.makePostFixFormula(validFormula.get()));
-            Long result = calcService.calculate(postFixFormula.getFormula());
+            if (formulaRepository.isCacheExit(inputFormula)) {
+                result = formulaRepository.cache(inputFormula);
+            }
+            else {
+                result = calcService.calculate(postFixFormula.getFormula());
+            }
             formulaRepository.save(inputFormula, result);
             output.PrintCalcResult(result);
         }
