@@ -27,10 +27,12 @@ public class Console {
     public void executeCalculation(){
         String expression = input.input("");
         String result;
-        if (expressionRepository.cached(expression))
+        if (expressionRepository.cached(expression)) {
             result = expressionRepository.findById(expression);
-        else
+        }
+        else {
             result = arithmeticModule.execute(expression);
+        }
         expressionRepository.save(expression, result);
         output.print(result);
     }
