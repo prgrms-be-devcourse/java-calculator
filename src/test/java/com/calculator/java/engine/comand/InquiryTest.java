@@ -15,9 +15,9 @@ class InquiryTest {
         String exp2 = "11 + 22 / 2 * 3 = 44";
         String exp3 = "11 * 22 + 33 * -22 - 44 + 55 = -473";
 
-        database.add("11 + 22", 33);
-        database.add("11 + 22 / 2 * 3", 44);
-        database.add("11 * 22 + 33 * -22 - 44 + 55", -473);
+        database.add("11 + 22", "33");
+        database.add("11 + 22 / 2 * 3", "44");
+        database.add("11 * 22 + 33 * -22 - 44 + 55", "-473");
 
         String result = selection.doCommand();
 

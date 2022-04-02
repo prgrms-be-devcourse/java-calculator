@@ -26,10 +26,11 @@ public class Calculation implements Command {
         if(!multiplyAndDivide(elements)) {
             return IMPOSSIBLE;
         }else{
-            int result = plusAndMinus(elements);
+            String result = handleResultFormat(plusAndMinus(elements));
+
             saveResult(mathExpression, result);
 
-            return Integer.toString(result);
+            return result;
         }
     }
 
@@ -44,12 +45,13 @@ public class Calculation implements Command {
                 int indexOfLastElement = elements.size() - 1;
                 if (i > 0 && (elements.get(indexOfLastElement).equals("*") || elements.get(indexOfLastElement).equals("/"))) {
                     String operator = elements.remove(indexOfLastElement);
-                    int num1 = Integer.parseInt(elements.remove(indexOfLastElement - 1));
-                    int num2 = Integer.parseInt(element);
+
+                    double num1 = Double.parseDouble(elements.remove(indexOfLastElement - 1));
+                    double num2 = Double.parseDouble(element);
 
                     if(operator.equals("/") && num2 == 0) return false;
 
-                    element = Integer.toString(calculate(num1, num2, operator));
+                    element = Double.toString(calculate(num1, num2, operator));
                 }
             }
 
@@ -59,12 +61,12 @@ public class Calculation implements Command {
         return true;
     }
 
-    private int plusAndMinus(List<String> elements) {
+    private double plusAndMinus(List<String> elements) {
         int numOfElements = elements.size();
-        int result = Integer.parseInt(elements.get(0));
+        double result = Double.parseDouble(elements.get(0));
 
         for (int i = 2; i < numOfElements; i += 2) {
-            int num = Integer.parseInt(elements.get(i));
+            double num = Double.parseDouble(elements.get(i));
             String operator = elements.get(i - 1);
             result = calculate(result, num, operator);
         }
@@ -72,7 +74,7 @@ public class Calculation implements Command {
         return result;
     }
 
-    private int calculate(int num1, int num2, String operate) {
+    private double calculate(double num1, double num2, String operate) {
         return switch (operate) {
             case "+" -> num1 + num2;
             case "-" -> num1 - num2;
@@ -81,7 +83,17 @@ public class Calculation implements Command {
         };
     }
 
-    private void saveResult(String mathExpression, int result) {
+    private String handleResultFormat(double calculationResult) {
+        String result = String.format("%.1f", calculationResult);
+
+        if(result.contains(".0")) {
+            return result.replace(".0", "");
+        }else {
+            return result;
+        }
+    }
+
+    private void saveResult(String mathExpression, String result) {
         database.add(mathExpression, result);
     }
 }

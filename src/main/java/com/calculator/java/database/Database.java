@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 public class Database {
     private final Map<String, String> records = new LinkedHashMap<>();
 
-    public void add(String expression, int result) {
-        records.put(expression, Integer.toString(result));
+    public void add(String expression, String result) {
+        records.put(expression, result);
     }
 
     public List<String> get() {

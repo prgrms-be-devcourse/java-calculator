@@ -39,7 +39,7 @@ public class Validator {
 
     private boolean isNumber(String element) {
         try {
-            Integer.parseInt(element);
+            Double.parseDouble(element);
             return true;
         } catch (NumberFormatException numberFormatException) {
             return false;

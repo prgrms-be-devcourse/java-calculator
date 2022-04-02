@@ -9,8 +9,8 @@ class DatabaseTest {
 
     @Test
     void 데이터_조회_테스트() {
-        database.add("1 + 2 + 3", 6);
-        database.add("1 + 2", 3);
+        database.add("1 + 2 + 3", "6");
+        database.add("1 + 2", "3");
 
         assertThat(database.get().size()).isEqualTo(2);
         assertThat(database.get().get(0)).isEqualTo("1 + 2 + 3 = 6");

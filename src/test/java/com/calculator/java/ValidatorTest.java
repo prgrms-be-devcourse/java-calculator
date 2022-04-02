@@ -17,11 +17,13 @@ class ValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1 + 2 + 3", "3 - -2 + 3 * 200 / 20"})
+    @ValueSource(strings = {"1 + 2 + 3", "3 - -2 + 3 * 200 / 20", "0.1 + 1", "1 * 2.123"})
     void 정상_수식_테스트(String exp) {
         boolean isValid = validator.validateMathExpression(exp);
         assertThat(isValid).isTrue();
     }
+
+
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2 + 3 = ", "+2+ 3", "121 a fd", "1  + 2", "1"})
