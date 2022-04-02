@@ -4,81 +4,78 @@ import entity.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorRepositoryTest {
-    CalculatorRepository cr = new CalculatorMemoryRepository();
+    CalculatorRepository calculatorRepository = new CalculatorMemoryRepository();
 
     @BeforeEach
     void before(){
-        cr.clear();
+        calculatorRepository.clear();
+    }
+
+    @ParameterizedTest
+    @DisplayName("데이터 저장 테스트")
+    @CsvSource({
+            "0, a, resultA",
+            "1, b, resultB",
+            "2, c, resultC",
+            "3, d, resultD",
+            "4, e, resultE"
+    })
+    void save(Long id, String formula, String result) {
+        Data data = new Data(id, formula, result);
+
+        String saveResult = calculatorRepository.save(data);
+
+        assertThat(saveResult).isEqualTo(data.getResult());
+    }
+
+    @ParameterizedTest
+    @DisplayName("ID로 데이터 조회 테스트")
+    @CsvSource({
+            "0, a, resultA",
+            "1, b, resultB",
+            "2, c, resultC",
+            "3, d, resultD",
+            "4, e, resultE"
+    })
+    void findById(Long id, String formula, String result) {
+        Data data = new Data(id, formula, result);
+        calculatorRepository.save(data);
+
+        Data findData = calculatorRepository.findById(id);
+
+        assertThat(findData).isEqualTo(data);
     }
 
     @Test
-    @DisplayName("데이터 저장")
-    void save() {
-        Data data1 = new Data(0L, "a", "resultA");
-        Data data2 = new Data(1L, "b", "resultB");
-        Data data3 = new Data(2L, "c", "resultC");
-
-        String saveResult1 = cr.save(data1);
-        String saveResult2 = cr.save(data2);
-        String saveResult3 = cr.save(data3);
-
-        assertEquals(saveResult1, "resultA");
-        assertEquals(saveResult2, "resultB");
-        assertEquals(saveResult3, "resultC");
-
-    }
-
-    @Test
-    @DisplayName("ID로 데이터 조회")
-    void findById() {
-
-        Data data1 = new Data(0L, "a", "resultA");
-        Data data2 = new Data(1L, "b", "resultB");
-        Data data3 = new Data(2L, "c", "resultC");
-
-        cr.save(data1);
-        cr.save(data2);
-        cr.save(data3);
-
-        Data findData = cr.findById(0L);
-
-        assertEquals(data1.getId(), findData.getId());
-        assertEquals(data1.getCalculationFormula(), findData.getCalculationFormula());
-        assertEquals(data1.getResult(), findData.getResult());
-    }
-
-    @Test
-    @DisplayName("저장 데이터 모두 조회")
+    @DisplayName("저장 데이터 모두 조회 테스트")
     void findAll() {
 
-        Data data1 = new Data(0L, "a", "resultA");
-        Data data2 = new Data(1L, "b", "resultB");
-        Data data3 = new Data(2L, "c", "resultC");
+        List<Data> dataList = new ArrayList<>();
 
+        for (Long id = 0L; id < 10; id++) {
+            Data data = new Data(id, "formula" + id, "result" + id);
+            dataList.add(data);
+            calculatorRepository.save(data);
+        }
 
-        cr.save(data1);
-        cr.save(data2);
-        cr.save(data3);
+        List<Data> findDataList = calculatorRepository.findAll();
 
-        List<Data> dataL = List.of(data1, data2, data3);
-        List<Data> dataList = cr.findAll();
-
-        assertEquals(dataList,dataL);
+        assertThat(findDataList).isEqualTo(dataList);
     }
 
     @Test
-    @DisplayName("저장소 초기화")
+    @DisplayName("저장소 초기화 테스트")
     void clear() {
-
-        cr.clear();
-
-        assertTrue(cr.findAll().isEmpty());
+        calculatorRepository.clear();
+        assertThat(calculatorRepository.findAll().isEmpty()).isTrue();
     }
 }

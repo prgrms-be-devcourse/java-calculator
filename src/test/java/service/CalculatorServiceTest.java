@@ -1,51 +1,41 @@
 package service;
 
 import entity.Data;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import repository.CalculatorMemoryRepository;
 import repository.CalculatorRepository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.*;
+
 
 public class CalculatorServiceTest {
-    CalculatorRepository cr = new CalculatorMemoryRepository();
-    CalculatorService cs = new CalculatorService(cr);
+    CalculatorRepository calculatorRepository = new CalculatorMemoryRepository();
+    CalculatorService calculatorService = new CalculatorService(calculatorRepository);
 
-
-    @Test
-    void calculate() {
-        String formula1 = "1 + 3 + 4"; //8.0
-        String formula2 = "2 * 2 * 2"; //8.0
-        String formula3 = "2 / 2 / 2"; //0.5
-        String formula4 = "1 - 1 - 1"; //-1.0
-        String formula5 = "2 + 2 * 4 - 1 * 10 / 5"; // 8.0;
-
-        String result1 = cs.calculate(formula1);
-        String result2 = cs.calculate(formula2);
-        String result3 = cs.calculate(formula3);
-        String result4 = cs.calculate(formula4);
-        String result5 = cs.calculate(formula5);
-
-
-        assertEquals("8.0", result1);
-        assertEquals("8.0", result2);
-        assertEquals("0.5", result3);
-        assertEquals("-1.0", result4);
-        assertEquals("8.0", result5);
-
+    @ParameterizedTest
+    @DisplayName("계산식 연산 후 결과 출력 테스트")
+    @CsvSource({
+            "1 + 3 + 4, 8.0",
+            "2 * 2 * 2, 8.0",
+            "2 / 2 / 2, 0.5",
+            "1 - 1 - 1, -1.0",
+            "2 + 2 * 4 - 1 * 10 / 5, 8.0"
+    })
+    void calculate(String formula, String result) {
+        assertThat(calculatorService.calculate(formula)).isEqualTo(result);
     }
 
     @Test
+    @DisplayName("전체 조회 테스트")
     void showAllResult() {
+        for (Long id = 0L; id < 10; id++) {
+            Data data = new Data(id, "formula" + id, "result" + id);
+            calculatorService.saveResult(data);
+        }
 
-        Data data1 = new Data(0L, "a", "resultA");
-        Data data2 = new Data(1L, "b", "resultB");
-        Data data3 = new Data(2L, "c", "resultC");
-
-        cs.saveResult(data1);
-        cs.saveResult(data2);
-        cs.saveResult(data3);
-
-        cr.clear();
+        calculatorService.showAllResult();
     }
 }
