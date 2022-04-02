@@ -5,9 +5,10 @@ import entity.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CalculatorMemoryRepository implements CalculatorRepository{
-    private static HashMap<Long, Data> store = new HashMap<>();
+    private static Map<Long, Data> store = new HashMap<>();
 
     @Override
     public String save(Data data) {
