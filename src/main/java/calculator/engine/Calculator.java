@@ -36,14 +36,13 @@ public class Calculator implements Runnable {
                 console.print(search());
                 break;
             case "2":
-                console.print(calculate(console.input()));
+                calculate(console.input());
                 break;
             case "3":
                 exit();
                 break;
             default:
-                console.illegalExceptionMessage();
-                console.print(console.initMessage());
+                console.selectionError();
                 break;
         }
     }
@@ -52,42 +51,38 @@ public class Calculator implements Runnable {
         return repository.search();
     }
 
-    public String calculate(String formula) {
+    public void calculate(String formula) {
         String answer = "";
         try {
             List<String> postfixFormula = postfix.makeToPostfix(formula);
-
             stack = new Stack<>();
 
             doCalculate(postfixFormula);
 
             answer = String.valueOf(stack.get(0));
             repository.save(formula, answer);
-        } catch (IllegalAccessException e) {
+
+            System.out.println(answer + "\n");;
+        } catch (DivisionByZero e) {
+            console.divisionByZero();
+            calculate(console.input());
+        } catch (IllegalArgumentException e) {
             console.illegalExceptionMessage();
+            calculate(console.input());
         } catch (Exception e) {
-            console.exceptionMessage();
+            console.exitMessage();
             exit();
         }
-
-        return answer;
     }
 
-    private void doCalculate(List<String> postfixFormula) {
+    private void doCalculate(List<String> postfixFormula) throws DivisionByZero {
         for (String s : postfixFormula) {
             switch (s) {
                 case "+":
                 case "-":
                 case "*":
                 case "/":
-                    try {
-                        doOperation(s);
-                    } catch (DivisionByZero divisionByZero) {
-                        console.divisionByZero();
-                        calculate(console.input());
-                    } catch (Exception e) {
-                        exit();
-                    }
+                    doOperation(s);
                     break;
                 default:
                     stack.push(Integer.parseInt(s));
