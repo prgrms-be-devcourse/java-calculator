@@ -15,14 +15,14 @@ public class Operator {
                 Double n2 = Double.parseDouble(stack.pop()); // 역순으로 뽑아냄
                 Double n1 = Double.parseDouble(stack.pop());
 
-                String res = switch (postfix.get(i)){
+                String calculationResult = switch (postfix.get(i)){
                     case "+" -> Double.toString(n1 + n2);
                     case "-" -> Double.toString(n1 - n2);
                     case "*" -> Double.toString(n1 * n2);
                     case "/" -> Double.toString(n1 / n2);
                     default -> "";
                 };
-                stack.push(res);
+                stack.push(calculationResult);
             }
         }
 
