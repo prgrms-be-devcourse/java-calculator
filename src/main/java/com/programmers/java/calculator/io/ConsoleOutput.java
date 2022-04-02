@@ -15,11 +15,17 @@ public class ConsoleOutput implements Output{
     }
 
     @Override
-    public void logs(List<String> log) {
+    public void printLogs(List<String> log) {
         log.forEach(System.out::println);
     }
 
+
     public void print(String res){
         System.out.println(res);
+    }
+
+    @Override
+    public void printCloseConsole() {
+        System.out.println("프로그램을 종료합니다.");
     }
 }

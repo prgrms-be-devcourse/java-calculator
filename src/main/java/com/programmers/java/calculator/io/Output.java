@@ -5,6 +5,7 @@ import java.util.List;
 public interface Output {
     void printInputError();
     void printMenu();
-    void logs(List<String> log);
+    void printLogs(List<String> log);
     void print(String content);
+    void printCloseConsole();
 }

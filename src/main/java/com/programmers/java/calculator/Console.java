@@ -12,6 +12,11 @@ public class Console {
     private final ExpressionRepository expressionRepository;
     private final ArithmeticModule arithmeticModule;
 
+    public void printInputError(){
+        output.printInputError();
+        exit();
+    }
+
     public void printMenu(){
         output.printMenu();
     }
@@ -21,7 +26,7 @@ public class Console {
     }
 
     public void printLogs(){
-        output.logs(expressionRepository.findAll());
+        output.printLogs(expressionRepository.findAll());
     }
 
     public void executeCalculation(){
@@ -35,5 +40,9 @@ public class Console {
         }
         expressionRepository.save(expression, result);
         output.print(result);
+    }
+
+    private void exit() {
+        output.printCloseConsole();
     }
 }
