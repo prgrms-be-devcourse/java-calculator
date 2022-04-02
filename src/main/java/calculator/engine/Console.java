@@ -15,7 +15,7 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public String runMessage() {
+    public String initMessage() {
         System.out.println("1. 조회");
         System.out.println("2. 계산");
         System.out.println("3. 종료");
@@ -33,7 +33,7 @@ public class Console implements Input, Output {
     @Override
     public String errorMessage() {
         System.out.println("입력값을 다시 확인해주세요.\n");
-        return runMessage();
+        return initMessage();
     }
 
     @Override
