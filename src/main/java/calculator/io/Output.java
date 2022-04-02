@@ -7,4 +7,5 @@ public interface Output {
     void exceptionMessage();
     void divisionByZero();
     void exitMessage();
+    void selectionError();
 }
