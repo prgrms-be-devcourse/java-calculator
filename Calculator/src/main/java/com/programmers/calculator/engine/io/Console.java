@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Console implements Input, Output  {
 
     private final Scanner scanner = new Scanner(System.in);
-    private CalculatorRepository repository = new MemoryCalculatorRepository();
 
     @Override
     public String optionInput()  {
@@ -23,8 +22,7 @@ public class Console implements Input, Output  {
 
     @Override
     public String calculationInput() {
-        String str = scanner.nextLine();
-        return str;
+        return scanner.nextLine();
     }
 
     @Override
@@ -33,8 +31,8 @@ public class Console implements Input, Output  {
     }
 
     @Override
-    public void lookUp(List<String> list) {
-        list.stream().forEach(System.out::println);
+    public void print(List<String> list) {
+        list.forEach(System.out::println);
         System.out.println();
     }
 }

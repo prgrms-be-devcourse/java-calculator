@@ -23,7 +23,7 @@ public class Calculator implements Runnable{
             String option = input.optionInput();
             if(option.equals("1")) {
                 List<String> list = repository.findAll();
-                output.lookUp(list);
+                output.print(list);
             } else if (option.equals("2")) {
                 String inputString  = input.calculationInput();
                 if (!validator.validate(inputString)) {
@@ -122,7 +122,6 @@ public class Calculator implements Runnable{
     public boolean isStringInteger(String str) {
         if(str.isEmpty()) return false;
         long count = str.chars().filter(Character::isDigit).count();
-        if (count == 0) return false;
-        return true;
+        return count != 0;
     }
 }

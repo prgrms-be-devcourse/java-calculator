@@ -3,8 +3,7 @@ package com.programmers.calculator.engine.repository;
 import java.util.List;
 
 public interface CalculatorRepository {
-
-    public long save (String history);
-    public String findOne(long sequence);
-    public List<String> findAll();
+    long save (String history);
+    String findOne(long sequence);
+    List<String> findAll();
 }

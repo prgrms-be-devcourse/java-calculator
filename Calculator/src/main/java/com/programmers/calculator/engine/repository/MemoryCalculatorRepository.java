@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MemoryCalculatorRepository implements CalculatorRepository{
-    private Map<Long, String> results = new HashMap<>();
+    private final Map<Long, String> results = new HashMap<>();
     private long sequence = 0L;
 
     public long save (String history) {
