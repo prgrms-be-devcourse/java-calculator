@@ -96,7 +96,7 @@
 
 - [google convention](https://google.github.io/styleguide/javaguide.html)
 
-### 피드백
+### 1차 피드백
 - [X] .gitignore도 깔끔하게 관리하기
 - [X] 사칙연산 enum을 이용한 전략패턴으로 구현해보기
 - [X] matches는 비싼 행위 대안 생각해보기
@@ -110,3 +110,16 @@
 - [X] 차후 select가 생기면 어떻게 찾을 수 있을까?
 - [ ] 단순히 콘솔 프로그램인데 서비스가 필요하다고 생각이 드는가?
 - [X] test에 Mockito를 사용한 이유.
+
+### 2차 피드백
+- [ ] build.gradle 관리
+  - java version 관리
+  - 사용하지 않는 라이브러리 제거
+- [ ] 람다 활용하기
+- [ ] 함수형 인터페이스 활용하기
+- [ ] Service 없애기
+- [ ] Error 출력을 outputView에서 출력
+- [ ] 정적 메서드를 사용한 이유?
+- [ ] 불변 및 멀티스레드에 생각
+- [ ] 문자열 상수로 바꾸기
+- [ ] 모든 메서드 1depth로 리팩토링
