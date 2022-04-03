@@ -22,7 +22,7 @@ public class MemoryRepositoryTest {
     void store() {
         //given
         //when
-        memoryRepository.store(Record.createRecord("1 + 2 * 3 + 4", new Result(11)));
+        memoryRepository.store(new Record("1 + 2 * 3 + 4", new Result(11)));
 
         //then
         assertThat(memoryRepository.getRecordsSize()).isEqualTo(1);
@@ -33,7 +33,7 @@ public class MemoryRepositoryTest {
     void testFindById() {
         //given
         //when
-        memoryRepository.store(Record.createRecord("1 + 2 * 3 + 4", new Result(11)));
+        memoryRepository.store(new Record("1 + 2 * 3 + 4", new Result(11)));
 
         //then
         Record record = memoryRepository.findById((long) 1);

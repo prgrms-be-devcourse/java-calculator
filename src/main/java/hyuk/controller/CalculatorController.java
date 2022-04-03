@@ -67,7 +67,7 @@ public class CalculatorController {
         String formula = inputView.inputFormula();
 
         Result result = calculator.calculate(new PostOrderFormula(formula));
-        saveRecord(Record.createRecord(formula, result));
+        saveRecord(new Record(formula, result));
 
         outputView.printResult(new ResultDTO(result));
     }

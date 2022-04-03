@@ -8,14 +8,9 @@ public class Record {
     private String formula;
     private Integer result;
 
-    private Record() {
-    }
-
-    public static Record createRecord(String formula, Result result) {
-        Record record = new Record();
-        record.formula = formula;
-        record.result = result.showResult();
-        return record;
+    public Record(String formula, Result result) {
+        this.formula = formula;
+        this.result = result.showResult();
     }
 
     public Long getId() {

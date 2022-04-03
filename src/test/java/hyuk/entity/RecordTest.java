@@ -16,7 +16,7 @@ public class RecordTest {
         Result result = new Result(11);
 
         //when
-        Record record = Record.createRecord(formula, result);
+        Record record = new Record(formula, result);
 
         //then
         assertThat(record.getId()).isNull();
