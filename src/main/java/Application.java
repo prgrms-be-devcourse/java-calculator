@@ -16,10 +16,7 @@ public class Application {
             int choice = console.choiceInput();
             if(choice == 1) {
                 List<Expression> expressions = expressionRepository.findAll();
-                console.printAllExpressions(expressions
-                        .stream()
-                        .map(exp -> exp.getExpression() + " = " + exp.getCalcResult())
-                        .collect(Collectors.toList()));
+                console.printAllExpressions(expressions);
             } else if(choice == 2) {
                 String exprInput = console.expressionInput();
                 Expression expression = new Expression(exprInput);
