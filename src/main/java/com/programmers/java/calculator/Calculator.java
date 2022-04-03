@@ -20,10 +20,7 @@ public class Calculator implements Runnable {
             switch (number){
                 case SEARCH -> console.printLogs();
                 case CALCULATE -> console.executeCalculation();
-                default -> {
-                    number = INPUT_ERROR;
-                    console.printInputError();
-                }
+                case INPUT_ERROR -> console.printInputError();
             }
         }
     }

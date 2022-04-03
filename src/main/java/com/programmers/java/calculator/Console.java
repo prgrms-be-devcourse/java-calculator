@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Console {
+    private final int IO_ERROR_CODE = -1;
     private final Input input;
     private final Output output;
     private final ExpressionRepository expressionRepository;
@@ -22,7 +23,11 @@ public class Console {
     }
 
     public Integer selectMenu() {
-        return Integer.parseInt(input.input("선택 : "));
+        try {
+            return Integer.parseInt(input.input("선택 : "));
+        } catch (NumberFormatException e){
+            return IO_ERROR_CODE;
+        }
     }
 
     public void printLogs(){
