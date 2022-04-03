@@ -1,40 +1,25 @@
 package hyuk.calculator;
 
 import java.util.Arrays;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
-    PLUS("+") {
-        @Override
-        public Integer apply(int firstOperand, int secondOperand) {
-            return firstOperand + secondOperand;
+    PLUS("+", (firstOperand, secondOperand) -> firstOperand + secondOperand),
+    MINUS("-", (firstOperand, secondOperand) -> firstOperand - secondOperand),
+    DIVIDE("/", (firstOperand, secondOperand) -> {
+        if (secondOperand == 0) {
+            throw new IllegalStateException("0으로 나눌 수 없습니다.");
         }
-    },
-    MINUS("-") {
-        @Override
-        public Integer apply(int firstOperand, int secondOperand) {
-            return firstOperand - secondOperand;
-        }
-    },
-    DIVIDE("/") {
-        @Override
-        public Integer apply(int firstOperand, int secondOperand) {
-            if (secondOperand == 0) {
-                throw new IllegalStateException("0으로 나눌 수 없습니다.");
-            }
-            return firstOperand / secondOperand;
-        }
-    },
-    MULTIPLY("*") {
-        @Override
-        public Integer apply(int firstOperand, int secondOperand) {
-            return firstOperand * secondOperand;
-        }
-    };
+        return firstOperand / secondOperand;
+    }),
+    MULTIPLY("*", (firstOperand, secondOperand) -> firstOperand * secondOperand);
 
     private final String textOperator;
+    private final BinaryOperator<Integer> binaryOperator;
 
-    Operator(final String textOperator) {
+    Operator(final String textOperator, final BinaryOperator<Integer> binaryOperator) {
         this.textOperator = textOperator;
+        this.binaryOperator = binaryOperator;
     }
 
     public static Operator of(final String symbol) {
@@ -48,6 +33,7 @@ public enum Operator {
         return textOperator.equals(symbol);
     }
 
-    public abstract Integer apply(int firstOperand, int secondOperand);
-
+    public Integer apply(int firstOperand, int secondOperand) {
+        return binaryOperator.apply(firstOperand, secondOperand);
+    }
 }
