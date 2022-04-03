@@ -35,11 +35,15 @@ public class Operator {
 
         String res = stack.getFirst();
         if (validator.isDecimal(res)) // 실수
-            return res;
+            return roundSecondDecimal(Double.parseDouble(res));
 
         if (res.contains("."))
             return res.substring(0, res.indexOf(".")); // 정수인데 . 포함된 경우
 
         return res; // 그냥 정수
+    }
+
+    private String roundSecondDecimal(Double number){
+        return String.format("%.2f", number);
     }
 }
