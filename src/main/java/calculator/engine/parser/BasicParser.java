@@ -1,6 +1,5 @@
-package calculator.serviceImpl;
+package calculator.engine.parser;
 
-import calculator.service.Parser;
 import static calculator.engine.utils.Util.*;
 import static java.lang.Character.isWhitespace;
 
@@ -20,18 +19,21 @@ public class BasicParser implements Parser {
             sb.append('-');
             i++;
         }
-        return parsing(command, len, sb, i);
+        return validateAndRemake(command, len, sb, i);
     }
 
-    private String parsing(String command, int len, StringBuilder sb, int i) {
+    private String validateAndRemake(String command, int len, StringBuilder sb, int i) {
         boolean existOp = false;
         boolean dotExist = false;
+
         while (i < len) {
-            if (!isNumberWithWhite(command.charAt(i)))
+            if (!isNumberWithWhite(command.charAt(i))) {
                 return null;
+            }
             while (i < len && isNumberWithWhite(command.charAt(i))) {
-                if (isNumber(command.charAt(i)))
+                if (isNumber(command.charAt(i))) {
                     sb.append(command.charAt(i));
+                }
                 i++;
             }
             if (i < len && command.charAt(i) == '.') {

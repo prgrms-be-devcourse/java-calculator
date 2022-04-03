@@ -1,8 +1,7 @@
-package calculator.serviceImpl;
+package calculator.engine.sorter;
 
 import calculator.engine.model.OperatorOrder;
 import calculator.engine.utils.Operator;
-import calculator.service.Sorter;
 import calculator.engine.utils.Util;
 
 import java.util.Collections;

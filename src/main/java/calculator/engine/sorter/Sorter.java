@@ -1,4 +1,4 @@
-package calculator.service;
+package calculator.engine.sorter;
 
 import calculator.engine.model.OperatorOrder;
 

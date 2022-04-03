@@ -1,13 +1,18 @@
 package calculator;
 
-import calculator.engine.Calculator;
 import calculator.config.AppConfig;
+import calculator.engine.Calculator;
 
 public class App {
+
     public static void main(String[] args) {
         AppConfig appConfig = new AppConfig();
-        new Calculator(appConfig.calculationService(),
+        new Calculator(appConfig.console(),
                 appConfig.console(),
-                appConfig.console()).run();
+                appConfig.calculation(),
+                appConfig.parser(),
+                appConfig.sorter(),
+                appConfig.calculationRepository()
+        ).run();
     }
 }

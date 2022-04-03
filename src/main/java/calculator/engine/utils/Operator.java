@@ -3,7 +3,7 @@ package calculator.engine.utils;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    DIVISION('/', 0, (a, b) -> a / b),
+    DIVIDE('/', 0, (a, b) -> a / b),
     MULTIPLY('*', 0, (a, b) -> a * b),
     ADD('+', 1, (a, b) -> a + b),
     MINUS('-', 1, (a, b) -> a - b);

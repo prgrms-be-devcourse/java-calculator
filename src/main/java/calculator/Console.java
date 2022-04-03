@@ -2,7 +2,6 @@ package calculator;
 
 import calculator.engine.io.Input;
 import calculator.engine.io.Output;
-import calculator.engine.model.CalculationDto;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,8 +28,8 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void calcResultPrint(CalculationDto calculate) {
-        System.out.println(calculate);
+    public void calcResultPrint(String saveData) {
+        System.out.println(saveData);
     }
 
     @Override

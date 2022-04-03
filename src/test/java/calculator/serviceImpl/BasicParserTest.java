@@ -1,6 +1,7 @@
 package calculator.serviceImpl;
 
-import calculator.service.Parser;
+import calculator.engine.parser.BasicParser;
+import calculator.engine.parser.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

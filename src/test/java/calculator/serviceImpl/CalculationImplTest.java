@@ -1,22 +1,45 @@
 package calculator.serviceImpl;
 
-import calculator.service.Calculate;
-import calculator.service.Sorter;
+import calculator.engine.calculate.CalculateImpl;
+import calculator.engine.sorter.BasicSorter;
+import calculator.engine.model.OperatorOrder;
+import calculator.engine.utils.Util;
+import calculator.engine.calculate.Calculate;
+import calculator.engine.sorter.Sorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
-import static calculator.engine.utils.Operator.*;
+import java.util.*;
 
 public class CalculationImplTest {
 
+    private Calculate calculation = new CalculateImpl();
     private Sorter sorter = new BasicSorter();
-    private Calculate calculation = new CalculateImpl(sorter);
+
+    private void initCalculateData(String[] splitArr, Double[] nums, List<OperatorOrder> orderedOperators) {
+        for (int i = 0; i < splitArr.length; i++) {
+            if (i % 2 == 0)
+                nums[i] = Double.valueOf(splitArr[i]);
+            else {
+                orderedOperators.add(new OperatorOrder(splitArr[i].charAt(0), i));
+            }
+        }
+        sorter.sort(orderedOperators);
+    }
+
+    private void testFunction(String command, double expected) {
+        // when
+        String[] splitArr = command.split(" ");
+        Double[] nums = new Double[splitArr.length];
+        List<OperatorOrder> orderedOperators = new ArrayList<>();
+        initCalculateData(splitArr, nums, orderedOperators);
+        double actual = calculation.calculate(nums, orderedOperators);
+        System.out.printf("command : [%s], expected: [%s], actual : [%f]\n", command, expected, actual);
+        // then
+        Assertions.assertEquals(expected, actual);
+    }
 
     @ParameterizedTest
     @CsvSource({ // given
@@ -25,11 +48,7 @@ public class CalculationImplTest {
             "1 + 2 + 3 + 4 + 5, 15"
     })
     public void 계산_덧셈_테스트(String command, double expected) {
-        // when
-        double actual = calculation.calc(command);
-        System.out.printf("command : [%s], expected: [%s], actual : [%f]\n", command, expected, actual);
-        // then
-        Assertions.assertEquals(expected, actual);
+        testFunction(command, expected);
     }
 
     @ParameterizedTest
@@ -39,26 +58,18 @@ public class CalculationImplTest {
             "-1 - 5, -6"
     })
     public void 계산_뺄셈_테스트(String command, double expected) {
-        // when
-        double actual = calculation.calc(command);
-        System.out.printf("command : [%s], expected: [%s], actual : [%f]\n", command, expected, actual);
-        // then
-        Assertions.assertEquals(expected, actual);
+        testFunction(command, expected);
     }
 
     @ParameterizedTest
     @CsvSource({ // given
-            "2 * 2 * -1, -4",
+            "-2 * 2 * 1, -4",
             "2 * 2 * 1, 4",
             "-2 * 2 * 1, -4",
             "2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2, 1024"
     })
     public void 계산_곱셈_테스트(String command, double expected) {
-        // when
-        double actual = calculation.calc(command);
-        System.out.printf("command : [%s], expected: [%s], actual : [%f]\n", command, expected, actual);
-        // then
-        Assertions.assertEquals(expected, actual);
+        testFunction(command, expected);
     }
 
     @ParameterizedTest
@@ -69,11 +80,7 @@ public class CalculationImplTest {
             "20 / 2 / 2 / 2 / 2 / 2, 0.625",
     })
     public void 계산_나눗셈_테스트(String command, double expected) {
-        // when
-        double actual = calculation.calc(command);
-        System.out.printf("command : [%s], expected: [%s], actual : [%f]\n", command, expected, actual);
-        // then
-        Assertions.assertEquals(expected, actual);
+        testFunction(command, expected);
     }
 
     @ParameterizedTest
@@ -84,7 +91,11 @@ public class CalculationImplTest {
     public void 계산_나눗셈_0으로나누는_경우_테스트(String command) {
         // when
         System.out.printf("command : [%s]\n", command);
-        Assertions.assertThrows(RuntimeException.class, () -> calculation.calc(command));
+        String[] splitArr = command.split(" ");
+        Double[] nums = new Double[splitArr.length];
+        List<OperatorOrder> orderedOperators = new ArrayList<>();
+        initCalculateData(splitArr, nums, orderedOperators);
+        Assertions.assertThrows(RuntimeException.class, () -> calculation.calculate(nums, orderedOperators));
     }
 
     @ParameterizedTest
@@ -94,11 +105,7 @@ public class CalculationImplTest {
             "1 * 0 + 1 - 1 / 10, 0.9"
     })
     public void 계산_혼합_테스트(String command, double expected) {
-        // when
-        double actual = calculation.calc(command);
-        System.out.printf("command : [%s], expected: [%s], actual : [%f]\n", command, expected, actual);
-        // then
-        Assertions.assertEquals(expected, actual);
+        testFunction(command, expected);
     }
 
     @Test
@@ -123,27 +130,13 @@ public class CalculationImplTest {
             // all
             char op2 = ops.get(getNextOpIdx(r, 2));
 
-            double temp = calculate(op2, num2, num3);
-            double expected = calculate(op1, num1, temp);
+            double temp = Util.callExec(op2, num2, num3);
+            double expected = Util.callExec(op1, num1, temp);
 
             StringBuilder sb = new StringBuilder();
             sb.append(num1 + " " + op1 + " " + num2 + " " + op2 + " " + num3);
-
-            double actual = calculation.calc(sb.toString());
-            // System.out.printf("command : [%s], expected: [%f], actual : [%f]\n", sb.toString(), expected, actual);
-            Assertions.assertEquals(expected, actual);
+            testFunction(sb.toString(), expected);
         }
-    }
-
-    private static double calculate(char sign, double a, double b) {
-        if (sign == MULTIPLY.getSign())
-            return MULTIPLY.exec(a, b);
-        else if (sign == DIVISION.getSign()) {
-            return DIVISION.exec(a, b);
-        } else if (sign == ADD.getSign())
-            return ADD.exec(a, b);
-        else
-            return MINUS.exec(a, b);
     }
 
     private int getNextOpIdx(Random r, int i) {

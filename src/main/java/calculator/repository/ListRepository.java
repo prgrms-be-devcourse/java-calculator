@@ -1,7 +1,5 @@
 package calculator.repository;
 
-import calculator.engine.model.CalculationDto;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +8,10 @@ public class ListRepository implements CalculationRepository {
     private final List<String> list = new ArrayList<>();
 
     @Override
-    public void save(CalculationDto calculationDto) {
-        list.add(calculationDto.toString());
+    public String save(String command, Double result) {
+        String resultData = command + " = " + String.valueOf(result);
+        list.add(resultData);
+        return resultData;
     }
 
     @Override

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Util {
 
     private static Map<Character, Operator> map = null;
@@ -41,7 +40,7 @@ public class Util {
 
     public static double callExec(char sign, double a, double b) {
         Operator op = getOperatorMap().getOrDefault(sign, null);
-        if (sign == Operator.DIVISION.getSign() && b == 0)
+        if (sign == Operator.DIVIDE.getSign() && b == 0)
             throw new RuntimeException("0으로 나눌 수 없습니다.");
         return op.exec(a, b);
     }

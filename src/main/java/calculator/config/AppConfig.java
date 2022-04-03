@@ -1,10 +1,14 @@
 package calculator.config;
 
+import calculator.engine.calculate.Calculate;
+import calculator.engine.calculate.CalculateImpl;
 import calculator.Console;
+import calculator.engine.parser.BasicParser;
+import calculator.engine.parser.Parser;
+import calculator.engine.sorter.BasicSorter;
+import calculator.engine.sorter.Sorter;
 import calculator.repository.CalculationRepository;
 import calculator.repository.ListRepository;
-import calculator.service.*;
-import calculator.serviceImpl.*;
 
 public class AppConfig {
 
@@ -21,18 +25,10 @@ public class AppConfig {
     }
 
     public Calculate calculation() {
-        return new CalculateImpl(sorter());
+        return new CalculateImpl();
     }
 
     public CalculationRepository calculationRepository() {
         return new ListRepository();
-    }
-
-    public CalculationServiceImpl calculationService() {
-        return new CalculationServiceImpl(
-                calculationRepository(),
-                parser(),
-                calculation()
-        );
     }
 }

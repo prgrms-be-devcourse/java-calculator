@@ -13,19 +13,15 @@
 
 ### 기능(Interface)
 
-- CalculateService
-    - 사용자의 입력을 전달받아 계산 및 저장.
-    - 계산결과를 조회.
-
 - Parser
-    - 입력 문자열 유효성 검사.
-    - 피연산자와 연산자를 스페이스 단위로 구분하여 새로운 문자열 반환
+    - 수식의 유효성을 검사 후 스페이스 1개 단위의 명령어를 반환 함.
+    - 유효성 검사 실패의 경우 null 반환
 
 - Sorter
     - 연산자 우선순위, 인덱스 위치를 기준으로 정렬
 
 - Calculate
-    - 정렬 된 연산자를 기준으로 계산을 수행
+    - 올바른 수식에 대한 계산을 수행
 
 
 ### 실행 방법
@@ -41,3 +37,38 @@ cd java-calculator;
 ./gradlew.bat build;
 ./gradlew.bat run;
 ```
+
+### 개선 사항
+ 
+1. 명사 표현 DIVISION 변경
+  - DIVIDE로 변경
+
+2. 입력에 대한 if 분기 처리를 switch-case 변경(Calculator.java)
+
+3. Parse.parsing 메소드 명 변경
+  - validateAndRemake로 변경
+      - 유효성 실패 시 null반환
+      - 성공 시 스페이스 1개로 구분한 새로운 문자열 반환
+  
+4. 스프링의 색을 완전히 빼고 각 객체의 역할, 책임 만을 생각하여 다시 작성
+  - AS-IS
+    - 계산기(Calculator) 객체는 CalculationService에 의존하여 계산 및 조회 기능을 처리
+      - `CalculationService.calculate(계산)`
+      - `CalculationService.findAll(조회)`
+        
+    - 계산 서비스 객체(Calculate)에서 정렬 후 계산.
+      - 계산 서비스 객체(Calculate)는 Sorter를 의존
+        
+    - Dto 사용
+
+  - TO-BE
+    - 계산기(Calculator) 객체는 계산, 파싱, 정렬에 대한 기능을 주입받아 처리
+        - CalculationService를 제거
+        
+    - 계산 서비스 객체(Calculate)가 계산 기능만을 처리하도록 변경
+        - sort는 계산기 객체(Calculator)에서 호출 됨
+    
+    - Service, ServiceImpl 디렉터리를 제거
+        - engine 하위에 기능 클래스 별도 관리(calculate, parser, sorter)
+    
+    - Dto 제거
