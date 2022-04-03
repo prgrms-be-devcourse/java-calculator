@@ -1,6 +1,6 @@
 package service;
 
-import model.Calculator;
+import model.Operator;
 import model.Expression;
 import repository.ExpressionRepository;
 
@@ -28,9 +28,9 @@ public class ExpressionService {
     public double calculateExpression(String exprInput) {
         Expression expression = new Expression(exprInput);
         List<String> exprResults = new ArrayList<>();
-        Calculator calculator = new Calculator();
-        multiplyAndDivide(expression, calculator, exprResults);
-        plusAndMinus(expression, calculator, exprResults);
+        Operator operator = new Operator();
+        multiplyAndDivide(expression, operator, exprResults);
+        plusAndMinus(expression, operator, exprResults);
         expRepository.save(expression);
         return expression.getCalcResult();
     }
@@ -40,15 +40,15 @@ public class ExpressionService {
      * 예를 들어, 10 + 1 * 9 - 10 / 2 가 입력되었다면
      * 리스트에는 ["10", "+", "9", "-", "5"]가 저장됩니다.
      */
-    private void multiplyAndDivide(Expression expression, Calculator calculator, List<String> exprResults) {
+    private void multiplyAndDivide(Expression expression, Operator operator, List<String> exprResults) {
         String[] splitExpr = expression.getExpression().split(" ");
         for(int i = 0; i< splitExpr.length; i++){
             if(splitExpr[i].equals("*") || splitExpr[i].equals("/")){
-                String operator = splitExpr[i];
+                String op = splitExpr[i];
                 int lastIndex = exprResults.size()-1;
                 double firstNum = parseDouble(exprResults.get(lastIndex));
                 double secondNum = parseDouble(splitExpr[i + 1]);
-                double resultNum = calculator.calculate(firstNum, secondNum, operator);
+                double resultNum = operator.operate(firstNum, secondNum, op);
                 exprResults.remove(lastIndex);
                 exprResults.add(String.valueOf(resultNum));
                 i++;
@@ -62,12 +62,12 @@ public class ExpressionService {
      * 연산자를 기준으로 덧셈, 뺄셈 계산을 수행합니다.
      * 수행된 결과는 Expression 객체에 결과값 필드인 calcResult를 set해 넣어줍니다.
      */
-    private void plusAndMinus(Expression expression, Calculator calculator, List<String> exprResults) {
+    private void plusAndMinus(Expression expression, Operator calculator, List<String> exprResults) {
         double resultNum = parseDouble(exprResults.get(0));
         for(int i = 1; i< exprResults.size(); i+=2){
             String operator = exprResults.get(i);
             double secondNum = parseDouble(exprResults.get(i+1));
-            resultNum = calculator.calculate(resultNum, secondNum, operator);
+            resultNum = calculator.operate(resultNum, secondNum, operator);
         }
         expression.setCalcResult(resultNum);
     }

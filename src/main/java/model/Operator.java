@@ -1,8 +1,8 @@
 package model;
 
-public class Calculator {
+public class Operator {
 
-    public double calculate(double firstNum, double secondNum, String operation) {
+    public double operate(double firstNum, double secondNum, String operation) {
         switch (operation) {
             case "+":
                 return plus(firstNum, secondNum);
