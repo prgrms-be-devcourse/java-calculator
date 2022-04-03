@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class ValidatorService {
     public boolean checkNumsAndSymbol(String str) {
-        String regex = "[^0-9+\\-*\\/\\s]|[\\s]{2,}";
+        String regex = "[^0-9+\\-*\\/\\s]|[\\s]{2,}|[0-9][+\\-*\\/]";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(str);
 
