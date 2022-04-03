@@ -112,7 +112,7 @@
 - [X] test에 Mockito를 사용한 이유.
 
 ### 2차 피드백
-- [ ] build.gradle 관리
+- [X] build.gradle 관리
   - java version 관리
   - 사용하지 않는 라이브러리 제거
 - [ ] 람다 활용하기
