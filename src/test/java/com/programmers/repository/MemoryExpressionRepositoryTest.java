@@ -1,6 +1,6 @@
-package repository;
+package com.programmers.repository;
 
-import model.Expression;
+import com.programmers.model.Expression;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

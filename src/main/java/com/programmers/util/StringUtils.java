@@ -1,4 +1,4 @@
-package util;
+package com.programmers.util;
 
 public class StringUtils {
     private static final String BLANK = " ";

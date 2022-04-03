@@ -1,6 +1,6 @@
-package model;
+package com.programmers.model;
 
-import util.StringUtils;
+import com.programmers.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
