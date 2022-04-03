@@ -7,6 +7,9 @@ public class ConsoleInputView implements InputView {
 
     private static final String MENU_ERROR_MSG = "1 또는 2를 입력해주세요.";
     private static final String FORMULA_ERROR_MSG = "정규 표현식이 아닙니다.";
+    private static final String PRINT = "1";
+    private static final String CALCULATE = "2";
+
     private final Scanner scanner;
 
     public ConsoleInputView(Scanner scanner) {
@@ -16,7 +19,7 @@ public class ConsoleInputView implements InputView {
     public String selectMenu() {
         String menu = scanner.nextLine();
 
-        if (menu.equals("1") || menu.equals("2")) {
+        if (menu.equals(PRINT) || menu.equals(CALCULATE)) {
             return menu;
         }
         throw new IllegalStateException(MENU_ERROR_MSG);
@@ -36,15 +39,27 @@ public class ConsoleInputView implements InputView {
         }
 
         for (int i = 0; i < tokens.length; ++i) {
-            if (i % 2 == 0) {
-                if (!isOperand(tokens[i])) {
-                    throw new IllegalStateException(FORMULA_ERROR_MSG);
-                }
-                continue;
-            }
-            if (!isOperator(tokens[i])) {
-                throw new IllegalStateException(FORMULA_ERROR_MSG);
-            }
+            validate(tokens, i);
+        }
+    }
+
+    private void validate(String[] tokens, int i) {
+        if (i % 2 == 0) {
+            validateOperand(tokens, i);
+            return;
+        }
+        validateOperator(tokens, i);
+    }
+
+    private void validateOperator(String[] tokens, int i) {
+        if (!isOperator(tokens[i])) {
+            throw new IllegalStateException(FORMULA_ERROR_MSG);
+        }
+    }
+
+    private void validateOperand(String[] tokens, int i) {
+        if (!isOperand(tokens[i])) {
+            throw new IllegalStateException(FORMULA_ERROR_MSG);
         }
     }
 
