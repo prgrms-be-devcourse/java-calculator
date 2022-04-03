@@ -16,7 +16,7 @@ public class CalculatorTest {
         PostOrderFormula postOrderFormula = new PostOrderFormula("1 + 2 * 3 + 4");
 
         //when
-        Result result = calculator.calculate(postOrderFormula);
+        Result result = calculator.calculates(postOrderFormula);
 
         //then
         assertThat(result.showResult()).isEqualTo(11);
