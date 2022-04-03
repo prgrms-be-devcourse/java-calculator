@@ -8,6 +8,7 @@ import java.util.List;
 
 public class PostOrderFormula {
 
+    public static final String SPACE = " ";
     private List<String> postOrderFormula;
 
     public PostOrderFormula(String formula) {
@@ -18,7 +19,7 @@ public class PostOrderFormula {
         Deque<String> stack = new ArrayDeque<>();
         List<String> postOrderFormula = new ArrayList<>();
 
-        String[] tokens = formula.split(" ");
+        String[] tokens = formula.split(SPACE);
         for (String token : tokens) {
             if (isOperand(token)) {
                 postOrderFormula.add(token);
