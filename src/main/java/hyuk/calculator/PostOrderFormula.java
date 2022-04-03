@@ -21,11 +21,7 @@ public class PostOrderFormula {
 
         String[] tokens = formula.split(SPACE);
         for (String token : tokens) {
-            if (isOperand(token)) {
-                postOrderFormula.add(token);
-                continue;
-            }
-            putOperator(postOrderFormula, stack, token);
+            translate(stack, postOrderFormula, token);
         }
 
         while (!stack.isEmpty()) {
@@ -34,23 +30,24 @@ public class PostOrderFormula {
         return postOrderFormula;
     }
 
+    private void translate(Deque<String> stack, List<String> postOrderFormula, String token) {
+        if (isOperand(token)) {
+            postOrderFormula.add(token);
+            return;
+        }
+        putOperator(postOrderFormula, stack, token);
+    }
+
     private void putOperator(List<String> postOrderFormula, Deque<String> stack, String token) {
-        while (!stack.isEmpty()) {
-            if (checkPriority(token, stack.getLast())) {
-                break;
-            }
+        while (!stack.isEmpty() && !checkPriority(token, stack.getLast())) {
             postOrderFormula.add(stack.pollLast());
         }
         stack.addLast(token);
     }
 
     private boolean checkPriority(String pushOperator, String topOperator) {
-        if (pushOperator.equals("*") || pushOperator.equals("/")) {
-            if (topOperator.equals("+") || topOperator.equals("-")) {
-                return true;
-            }
-        }
-        return false;
+        return (pushOperator.equals("*") || pushOperator.equals("/")) && (topOperator.equals("+")
+            || topOperator.equals("-"));
     }
 
     private boolean isOperand(String token) {
