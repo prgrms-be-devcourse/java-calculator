@@ -1,34 +1,40 @@
 package model;
 
-public class Operator {
+import java.util.Arrays;
+import java.util.function.BiFunction;
 
-    public double operate(double firstNum, double secondNum, String operation) {
-        switch (operation) {
-            case "+":
-                return plus(firstNum, secondNum);
-            case "-":
-                return minus(firstNum, secondNum);
-            case "*":
-                return multiply(firstNum, secondNum);
-            case "/":
-                return divide(firstNum, secondNum);
-            default:
-                throw new IllegalArgumentException("잘못된 연산자가 입력되었습니다");
-        }
-    }
-
-    private double plus(double firstNum, double secondNum){
-        return firstNum + secondNum;
-    }
-    private double minus(double firstNum, double secondNum){
-        return firstNum - secondNum;
-    }
-    private double multiply(double firstNum, double secondNum){
-        return firstNum * secondNum;
-    }
-    private double divide(double firstNum, double secondNum){
-        if(secondNum == 0 || Double.isInfinite(secondNum))
+public enum Operator {
+    PLUS("+", (firstNum, secondNum) -> firstNum + secondNum ),
+    MINUS("-", (firstNum, secondNum) -> firstNum - secondNum),
+    MULTIPLY("*", (firstNum, secondNum) -> firstNum * secondNum),
+    DIVIDE("/", (firstNum, secondNum) -> {
+        if(secondNum == 0 || Double.isInfinite(secondNum)){
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
         return firstNum / secondNum;
+    });
+
+    private final String operator;
+    private final BiFunction<Double, Double, Double> expression;
+
+    Operator(String operator, BiFunction<Double, Double, Double> expression){
+        this.operator = operator;
+        this.expression = expression;
+    }
+
+    public double operate(double firstNum, double secondNum) {
+        return expression.apply(firstNum, secondNum);
+    }
+
+    public static Operator findOperator(String operator) {
+        return Arrays
+                .stream(values())
+                .filter(op -> op.operator.equals(operator))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 연산자가 입력되었습니다"));
+    }
+
+    public static boolean isMultiPlyOrDivide(String operator){
+        return operator.equals("*") || operator.equals("/");
     }
 }
