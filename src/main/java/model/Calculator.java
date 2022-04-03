@@ -1,7 +1,5 @@
 package model;
 
-import util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +8,7 @@ import static java.lang.Double.parseDouble;
 public class Calculator {
     public static double calculate(Expression expression) {
         List<String> exprResults = new ArrayList<>();
-        String[] splitExpr = StringUtils.splitByBlank(expression.getExpression());
-        multiplyAndDivide(splitExpr, exprResults);
+        multiplyAndDivide(expression, exprResults);
         return plusAndMinus(exprResults);
     }
 
@@ -20,7 +17,8 @@ public class Calculator {
      * 예를 들어, 10 + 1 * 9 - 10 / 2 가 입력되었다면
      * 리스트에는 ["10", "+", "9", "-", "5"]가 저장됩니다.
      */
-    private static void multiplyAndDivide(String[] splitExpr, List<String> exprResults) {
+    private static void multiplyAndDivide(Expression expression, List<String> exprResults) {
+        String[] splitExpr = expression.getSplitExpressions();
         for(int i = 0; i< splitExpr.length; i++){
             if(Operator.isMultiPlyOrDivide(splitExpr[i])){
                 Operator operator = Operator.findOperator(splitExpr[i]);
