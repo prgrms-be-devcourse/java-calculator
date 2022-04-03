@@ -13,11 +13,13 @@ public class Expression {
     private static final String NUM_REGEX = "[0-9]+";
     private static final String OPERATOR_REGEX = "[+\\-*/]";
     private final String expression;
+    private final String[] splitExpressions;
     private Double calcResult;
 
     public Expression(String expression) {
         validateExpressions(expression);
         this.expression = expression;
+        this.splitExpressions = StringUtils.splitByBlank(expression);
     }
 
     public String getExpression() {
@@ -26,6 +28,10 @@ public class Expression {
 
     public Double getCalcResult() {
         return calcResult;
+    }
+
+    public String[] getSplitExpressions() {
+        return splitExpressions;
     }
 
     public void setCalcResult(Double calcResult) {
