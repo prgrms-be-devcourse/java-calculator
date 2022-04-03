@@ -5,7 +5,6 @@ import repository.ExpressionRepository;
 import repository.MemoryExpressionRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
@@ -25,7 +24,6 @@ public class Application {
                 expression.setCalcResult(resultNum);
 
                 expressionRepository.save(expression);
-
                 console.printCalculatedNumber(expression.getCalcResult());
             } else {
                 console.printChooseWrongNumber();
