@@ -9,10 +9,14 @@ import java.util.Scanner;
 
 public class Console implements Input, Output {
     private final Scanner sc = new Scanner(System.in);
-
+    
     @Override
     public int action() {
-        return sc.nextInt();
+        try {
+            return Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     @Override
@@ -40,6 +44,7 @@ public class Console implements Input, Output {
 
     @Override
     public void showArithmeticResults(List<CalcData> list) {
+        System.out.println();
         list.forEach((v) ->
                 System.out.println(v.getCalcFormula() + " = " + v.getResult()));
         System.out.println();
