@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LogRepository implements Repository{
 
-    private final Map<Long, String> map = new HashMap<>();
+    private static final Map<Long, String> map = new HashMap<>();
     Long index = -1L;
 
     @Override
