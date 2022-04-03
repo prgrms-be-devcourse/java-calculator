@@ -41,7 +41,7 @@ public class CalculatorController {
 
             process(menu);
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "\n");
+            outputView.printException(e);
         }
     }
 
@@ -67,7 +67,6 @@ public class CalculatorController {
         String formula = inputView.inputFormula();
 
         Result result = calculator.calculate(new PostOrderFormula(formula));
-
         saveRecord(Record.createRecord(formula, result));
 
         outputView.printResult(new ResultDTO(result));
