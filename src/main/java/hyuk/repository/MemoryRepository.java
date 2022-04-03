@@ -3,15 +3,16 @@ package hyuk.repository;
 import hyuk.entity.Record;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class MemoryRepository implements Repository {
 
-    private static long SEQUENCE = 0;
-    private Map<Long, Record> records = new HashMap<>();
+    private final AtomicLong SEQUENCE = new AtomicLong(1);
+    private final Map<Long, Record> records = new HashMap<>();
 
     @Override
     public void store(Record record) {
-        record.setId(++SEQUENCE);
+        record.setId(SEQUENCE.getAndIncrement());
         records.put(record.getId(), record);
     }
 
@@ -28,6 +29,6 @@ public class MemoryRepository implements Repository {
     @Override
     public void removeAll() {
         records.clear();
-        SEQUENCE = 0;
+        SEQUENCE.set(1);
     }
 }

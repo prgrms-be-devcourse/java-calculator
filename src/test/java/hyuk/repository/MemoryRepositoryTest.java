@@ -28,16 +28,41 @@ public class MemoryRepositoryTest {
         assertThat(memoryRepository.getRecordsSize()).isEqualTo(1);
     }
 
+    @DisplayName("여러 레코드 저장")
+    @Test
+    void stores() {
+        //given
+        //when
+        memoryRepository.store(new Record("1 + 2 * 3 + 4", new Result(11)));
+        memoryRepository.store(new Record("1 + 2 * 3 + 4", new Result(11)));
+
+        //then
+        assertThat(memoryRepository.getRecordsSize()).isEqualTo(2);
+    }
+
     @DisplayName("id로 레코드 찾는 기능 테스트")
     @Test
     void testFindById() {
         //given
         //when
-        memoryRepository.store(new Record("1 + 2 * 3 + 4", new Result(11)));
+        Record record = new Record("1 + 2 * 3 + 4", new Result(11));
+        memoryRepository.store(record);
 
         //then
-        Record record = memoryRepository.findById((long) 1);
-        assertThat(record).isEqualTo(record);
+        assertThat(memoryRepository.findById((long) 1)).isEqualTo(record);
+    }
+
+    @DisplayName("id로 레코드 찾기 test - 여러 레코드가 저장된 경우")
+    @Test
+    void testFindById_2() {
+        //given
+        //when
+        memoryRepository.store(new Record("1 + 2 * 3 + 4", new Result(11)));
+        Record record = new Record("1 + 2  + 3", new Result(11));
+        memoryRepository.store(record);
+
+        //then
+        assertThat(memoryRepository.findById((long) 2)).isEqualTo(record);
     }
 
 }
