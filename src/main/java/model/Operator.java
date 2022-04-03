@@ -8,9 +8,7 @@ public enum Operator {
     MINUS("-", (firstNum, secondNum) -> firstNum - secondNum),
     MULTIPLY("*", (firstNum, secondNum) -> firstNum * secondNum),
     DIVIDE("/", (firstNum, secondNum) -> {
-        if(secondNum == 0 || Double.isInfinite(secondNum)){
-            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-        }
+        validateDivideByZero(secondNum);
         return firstNum / secondNum;
     });
 
@@ -20,6 +18,12 @@ public enum Operator {
     Operator(String operator, BiFunction<Double, Double, Double> expression){
         this.operator = operator;
         this.expression = expression;
+    }
+
+    private static void validateDivideByZero(Double secondNum) {
+        if(secondNum == 0 || Double.isInfinite(secondNum)){
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
     }
 
     public double operate(double firstNum, double secondNum) {
