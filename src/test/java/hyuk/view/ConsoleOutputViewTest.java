@@ -1,5 +1,6 @@
 package hyuk.view;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import hyuk.calculator.Result;
@@ -8,7 +9,6 @@ import hyuk.model.ResultDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -47,7 +47,7 @@ public class ConsoleOutputViewTest {
         consoleOutputView.printMenu();
 
         //then
-        Assertions.assertThat(output.toString())
+        assertThat(output.toString())
             .isEqualTo("1. 조회\n" +
                 "2. 계산\n" +
                 "\n" +
@@ -62,7 +62,7 @@ public class ConsoleOutputViewTest {
         consoleOutputView.printResult(new ResultDTO(new Result(10)));
 
         //then
-        Assertions.assertThat(output.toString())
+        assertThat(output.toString())
             .isEqualTo("10\n\n");
     }
 
@@ -76,8 +76,20 @@ public class ConsoleOutputViewTest {
         consoleOutputView.printRecords(recordsDTO);
 
         //then
-        Assertions.assertThat(output.toString())
+        assertThat(output.toString())
             .isEqualTo("1 + 2 * 3 + 4 = 11\n\n");
+    }
+
+    @DisplayName("예외 출력")
+    @Test
+    void printException() {
+        //given
+        //when
+        consoleOutputView.printException(new IllegalStateException("예외 메시지"));
+
+        //then
+        assertThat(output.toString())
+            .isEqualTo("예외 메시지\n\n");
     }
 
 }

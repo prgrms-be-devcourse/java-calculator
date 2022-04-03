@@ -12,4 +12,6 @@ public interface OutputView {
     void printRecords(RecordsDTO logDTO);
 
     void printEmptySpace();
+
+    void printException(Exception e);
 }
