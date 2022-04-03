@@ -1,4 +1,5 @@
 package service;
+import model.Calculator;
 import model.Expression;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class ExpressionServiceTest {
         //given
         String expression = "1 + 2";
         //when
-        double resultNum = expressionService.calculateExpression(expression);
+        double resultNum = Calculator.calculate(expression);
         //then
         assertThat(resultNum).isEqualTo(3);
     }
