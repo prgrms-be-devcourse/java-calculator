@@ -5,9 +5,13 @@ package com.programmers.java.calculator;
 
 import com.programmers.java.calculator.engine.Calculation;
 import com.programmers.java.calculator.engine.model.Arithmetic;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
     private Calculation calculation;
@@ -17,32 +21,68 @@ public class CalculatorTest {
         calculation = new Calculation();
     }
 
+    @DisplayName("후위 표기식 변환 검증")
     @Test
     public void checkToPostfix() {
-        Assertions.assertEquals(
-                calculation.toPostfix(new Arithmetic(new String[]{"1", "+", "2", "*", "3", "-", "4"})).toString(),
-                new Arithmetic(new String[]{"1", "2", "3", "*", "+", "4", "-"}).toString());
+        //given
+        Arithmetic arithmetic1 = new Arithmetic(new String[]{"1", "+", "2", "*", "3", "-", "4"});
+        Arithmetic arithmetic2 = new Arithmetic(new String[]{"100", "+", "-200", "+", "-300", "+", "-400"});
+        Arithmetic arithmetic3 = new Arithmetic(new String[]{"1", "/", "2", "*", "3", "-", "4"});
+
+        String[] answer1 = (new String[]{"1", "2", "3", "*", "+", "4", "-"});
+        String[] answer2 = (new String[]{"100", "-200", "+", "-300", "+", "-400", "+"});
+        String[] answer3 = (new String[]{"1", "2", "/", "3", "*", "4", "-"});
+
+        //when
+        String[] result1 = calculation.toPostfix(arithmetic1).getArithmetic();
+        String[] result2 = calculation.toPostfix(arithmetic2).getArithmetic();
+        String[] result3 = calculation.toPostfix(arithmetic3).getArithmetic();
+
+        //then
+        assertThat(result1).isEqualTo(answer1);
+        assertThat(result2).isEqualTo(answer2);
+        assertThat(result3).isEqualTo(answer3);
     }
 
+    @DisplayName("계산결과 검증")
     @Test
     public void checkCalculation() {
-        Assertions.assertEquals(
-                calculation.doCalculation(new Arithmetic(new String[]{"1", "2", "3", "*", "+", "4", "-"}))
-                        .orElseThrow(), 3.0);
+        //given
+        Arithmetic arithmetic1 = new Arithmetic(new String[]{"1", "2", "3", "*", "+", "4", "-"});
+        Arithmetic arithmetic2 = new Arithmetic(new String[]{"100", "-200", "+", "-300", "+", "-400", "+"});
+        Arithmetic arithmetic3 = new Arithmetic(new String[]{"1", "2", "/", "3", "*", "4", "-"});
+
+        Double answer1 = 3.0;
+        Double answer2 = -800.0;
+        Double answer3 = -2.5;
+
+        //when
+        Optional<Double> result1 = calculation.doCalculation(arithmetic1);
+        Optional<Double> result2 = calculation.doCalculation(arithmetic2);
+        Optional<Double> result3 = calculation.doCalculation(arithmetic3);
+
+        //then
+        assertThat(result1).hasValue(answer1);
+        assertThat(result2).hasValue(answer2);
+        assertThat(result3).hasValue(answer3);
     }
 
+    @DisplayName("0으로 나눌 경우 검증")
     @Test
     public void checkDivisionByZero() {
-        Assertions.assertEquals(
-                calculation.doCalculation(new Arithmetic(new String[]{"1", "0", "/"}))
-                        .orElseThrow(), Double.POSITIVE_INFINITY);
+        //given
+        Arithmetic arithmetic1 = new Arithmetic(new String[]{"1", "0", "/"});
+        Arithmetic arithmetic2 = new Arithmetic(new String[]{"-1", "0", "/"});
+        Arithmetic arithmetic3 = new Arithmetic(new String[]{"0", "0", "/"});
 
-        Assertions.assertEquals(
-                calculation.doCalculation(new Arithmetic(new String[]{"-1", "0", "/"}))
-                        .orElseThrow(), Double.NEGATIVE_INFINITY);
+        //when
+        Double result1 = calculation.doCalculation(arithmetic1).orElse(null);
+        Double result2 = calculation.doCalculation(arithmetic2).orElse(null);
+        Double result3 = calculation.doCalculation(arithmetic3).orElse(null);
 
-        Assertions.assertEquals(
-                calculation.doCalculation(new Arithmetic(new String[]{"0", "0", "/"}))
-                        .orElseThrow(), Double.NaN);
+        //then
+        assertThat(result1).isInfinite();
+        assertThat(result2).isInfinite();
+        assertThat(result3).isNaN();
     }
 }
