@@ -23,10 +23,13 @@ public class Application {
             } else if(choice == 2) {
                 String exprInput = console.expressionInput();
                 Expression expression = new Expression(exprInput);
-                String[] splitExpressions = exprInput.split(" ");
-                double calculatedNum = Calculator.calculate(exprInput);
+
+                double resultNum = Calculator.calculate(expression);
+                expression.setCalcResult(resultNum);
+
                 expressionRepository.save(expression);
-                console.printCalculatedNumber(calculatedNum);
+
+                console.printCalculatedNumber(expression.getCalcResult());
             } else {
                 console.printChooseWrongNumber();
                 break;

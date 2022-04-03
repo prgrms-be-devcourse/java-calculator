@@ -1,17 +1,19 @@
 package model;
 
+import util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
 public class Calculator {
-    public static double calculate(String expression) {
+    public static double calculate(Expression expression) {
         List<String> exprResults = new ArrayList<>();
         Operator operator = new Operator();
-        String[] splitExpressions = expression.split(" ");
-        multiplyAndDivide(splitExpressions, operator, exprResults);
-        return plusAndMinus(splitExpressions, operator, exprResults);
+        String[] splitExpr = StringUtils.splitByBlank(expression.getExpression());
+        multiplyAndDivide(splitExpr, operator, exprResults);
+        return plusAndMinus(operator, exprResults);
     }
 
     /**
@@ -37,10 +39,9 @@ public class Calculator {
     }
 
     /**
-     * 연산자를 기준으로 덧셈, 뺄셈 계산을 수행합니다.
-     * 수행된 결과는 Expression 객체에 결과값 필드인 calcResult를 set해 넣어줍니다.
+     * 연산자를 기준으로 덧셈, 뺄셈 계산을 수행해 결과값을 반환합니다.
      */
-    private static double plusAndMinus(String[] splitExpr, Operator operator, List<String> exprResults) {
+    private static double plusAndMinus(Operator operator, List<String> exprResults) {
         double resultNum = parseDouble(exprResults.get(0));
         for(int i = 1; i< exprResults.size(); i+=2){
             String op = exprResults.get(i);
