@@ -4,6 +4,7 @@ import com.programmers.java.calculator.engine.model.Arithmetic;
 import com.programmers.java.calculator.engine.utils.RegularExpression;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Optional;
 
 public class Calculation {
@@ -36,15 +37,15 @@ public class Calculation {
 
     public Optional<Double> doCalculation(Arithmetic postfix) {
         String[] arithmetic = postfix.getArithmetic();
-        ArrayDeque<Double> deque = new ArrayDeque<>();
+        Deque<Double> deque = new ArrayDeque<>();
 
-        for (String s : arithmetic) {
-            if (RegularExpression.isNumeric(s)) {
-                deque.push(Double.parseDouble(s));
+        for (String operandOrOperator : arithmetic) {
+            if (RegularExpression.isNumeric(operandOrOperator)) {
+                deque.push(Double.parseDouble(operandOrOperator));
             } else {
                 Double b = deque.pop();
                 Double a = deque.pop();
-                Optional<Double> result = calc(a, b, s);
+                Optional<Double> result = calc(a, b, operandOrOperator);
                 if (result.isEmpty()) {
                     return Optional.empty();
                 } else {
