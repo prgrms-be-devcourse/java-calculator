@@ -1,5 +1,7 @@
 package model;
 
+import util.StringUtils;
+
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -31,7 +33,7 @@ public class Expression {
     }
 
     private void validateExpressions(String expression) {
-        String[] splitExp = expression.split(" ");
+        String[] splitExp = StringUtils.splitByBlank(expression);
         validateOperatorNumberCount(splitExp);
         validateAllMatchWithRegex(splitExp);
     }
