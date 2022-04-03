@@ -1,10 +1,5 @@
-package service;
-import model.Calculator;
-import model.Expression;
-import org.assertj.core.api.Assertions;
+package model;
 import org.junit.jupiter.api.Test;
-import repository.ExpressionRepository;
-import repository.MemoryExpressionRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +8,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ExpressionServiceTest {
-    ExpressionRepository expressionRepository = new MemoryExpressionRepository();
-    ExpressionService expressionService = new ExpressionService(expressionRepository);
+class CalculatorTest {
 
     @Test
     public void 덧셈계산_성공() {
@@ -32,7 +25,7 @@ class ExpressionServiceTest {
         //given
         String expression = "1 - 2";
         //when
-        double resultNum = expressionService.calculateExpression(expression);
+        double resultNum = Calculator.calculate(expression);
         //then
         assertThat(resultNum).isEqualTo(-1);
     }
@@ -42,7 +35,7 @@ class ExpressionServiceTest {
         //given
         String expression = "1 * 2";
         //when
-        double resultNum = expressionService.calculateExpression(expression);
+        double resultNum = Calculator.calculate(expression);
         //then
         assertThat(resultNum).isEqualTo(2);
     }
@@ -52,7 +45,7 @@ class ExpressionServiceTest {
         //given
         String expression = "4 / 2";
         //when
-        double resultNum = expressionService.calculateExpression(expression);
+        double resultNum = Calculator.calculate(expression);
         //then
         assertThat(resultNum).isEqualTo(2);
     }
@@ -64,26 +57,10 @@ class ExpressionServiceTest {
         //when
         List<Double> resultNums = expressions
                 .stream()
-                .map(exp -> expressionService.calculateExpression(exp))
+                .map(Calculator::calculate)
                 .collect(Collectors.toList());
         //then
         assertThat(resultNums).containsExactly((double)26,(double)-11);
-    }
-
-    @Test
-    public void 사칙연산_수행후_수식클래스에_값이_저장된다(){
-        //given
-        String exp = "4 + 9 / 3 - 1 + 2 * 10";
-        Double resultNum = (double)26;
-        Expression expression = new Expression(exp);
-        expression.setCalcResult(resultNum);
-        //when
-        expressionService.calculateExpression(exp);
-        List<Expression> allExpression = expressionService.findAllExpression();
-        //then
-        assertThat(allExpression.size()).isEqualTo(1);
-        assertThat(allExpression.get(0).getExpression()).isEqualTo(exp);
-        assertThat(allExpression.get(0).getCalcResult()).isEqualTo(resultNum);
     }
 
     @Test
@@ -92,7 +69,7 @@ class ExpressionServiceTest {
         String expression = "";
         //when
         //then
-        assertThatThrownBy(() -> expressionService.calculateExpression(expression))
+        assertThatThrownBy(() -> Calculator.calculate(expression))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("연산자와 숫자가 제대로 입력되지 않았습니다.");
     }
@@ -103,7 +80,7 @@ class ExpressionServiceTest {
         String expression = "* 1 - 2";
         //when
         //then
-        assertThatThrownBy(() -> expressionService.calculateExpression(expression))
+        assertThatThrownBy(() -> Calculator.calculate(expression))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("연산자와 숫자가 제대로 입력되지 않았습니다.");
     }
@@ -114,7 +91,7 @@ class ExpressionServiceTest {
         String expression = "a 1 - 2";
         //when
         //then
-        assertThatThrownBy(() -> expressionService.calculateExpression(expression))
+        assertThatThrownBy(() -> Calculator.calculate(expression))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("연산자 혹은 숫자만 입력해주세요");
     }
