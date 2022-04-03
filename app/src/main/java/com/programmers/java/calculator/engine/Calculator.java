@@ -32,32 +32,35 @@ public class Calculator implements Runnable{
 
             switch (choice) {
                 case printLog -> repository.output();
-                case calculate -> runCalculate(input, output, repository);
+                case calculate -> checkValidate(input, output, repository);
                 default -> output.inputError();
             }
         }
     }
 
-    private static void runCalculate(Console input, Console output, Repository repository) {
+    private static void checkValidate(Console input, Console output, Repository repository) {
         {
-            Calculation calculation = new Calculation();
             String inputString = input.input("\n");
             Optional<Arithmetic> arithmetic = new Validation().checkValid(inputString);
             if (arithmetic.isEmpty()) {
                 output.inputError();
             } else {
-                Arithmetic postfix = calculation.toPostfix(arithmetic.get());
-                Optional<Double> result = calculation.doCalculation(postfix);
-
-                if (result.isEmpty()) {
-                    output.calcError();
-                } else {
-                    output.outputCalculationResult(result.get());
-                    repository.save(arithmeticToString(inputString, result.get()));
-                }
+                runCalculate(output, arithmetic.get(), repository, inputString);
             }
         }
+    }
 
+    private static void runCalculate(Console output, Arithmetic arithmetic, Repository repository, String inputString) {
+        Calculation calculation = new Calculation();
+        Arithmetic postfix = calculation.toPostfix(arithmetic);
+        Optional<Double> result = calculation.doCalculation(postfix);
+
+        if (result.isEmpty()) {
+            output.calcError();
+        } else {
+            output.outputCalculationResult(result.get());
+            repository.save(arithmeticToString(inputString, result.get()));
+        }
     }
 
     private static String arithmeticToString(String arithmetic, Double result) {
