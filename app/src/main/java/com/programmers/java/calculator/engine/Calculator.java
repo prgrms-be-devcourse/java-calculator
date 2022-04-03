@@ -1,8 +1,6 @@
 package com.programmers.java.calculator.engine;
 
-import com.programmers.java.calculator.Console;
-import com.programmers.java.calculator.engine.io.Input;
-import com.programmers.java.calculator.engine.io.Output;
+import com.programmers.java.calculator.engine.io.Console;
 import com.programmers.java.calculator.engine.model.Arithmetic;
 import com.programmers.java.calculator.engine.repository.LogRepository;
 import com.programmers.java.calculator.engine.repository.Repository;
@@ -12,11 +10,12 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class Calculator implements Runnable{
-    private Input input;
-    private Output output;
-    Validation validation = new Validation();
-    Calculation calculation = new Calculation();
-    Repository repository = new LogRepository();
+    private Console input;
+    private Console output;
+    private Repository repository = new LogRepository();
+
+    static final String printLog = "1";
+    static final String calculate = "2";
 
     public Calculator(Console input, Console output) {
         this.input = input;
@@ -32,30 +31,36 @@ public class Calculator implements Runnable{
             String choice = (input.input("선택 : "));
 
             switch (choice) {
-                case "1" -> repository.output();
-                case "2" -> {
-                    String inputString = input.input("\n");
-                    Optional<Arithmetic> arithmetic = validation.checkValid(inputString);
-                    if (arithmetic.isEmpty()) {
-                        output.inputError();
-                    } else {
-                        Arithmetic postfix = calculation.toPostfix(arithmetic.get());
-                        Optional<Double> result = calculation.doCalculation(postfix);
-
-                        if (result.isEmpty()) {
-                            output.calcError();
-                        } else {
-                            output.outputCalculationResult(result.get());
-                            repository.save(arithmeticToString(inputString, result.get()));
-                        }
-                    }
-                }
+                case printLog -> repository.output();
+                case calculate -> runCalculate(input, output, repository);
                 default -> output.inputError();
             }
         }
     }
 
-    private String arithmeticToString (String arithmetic, Double result) {
+    private static void runCalculate(Console input, Console output, Repository repository) {
+        {
+            Calculation calculation = new Calculation();
+            String inputString = input.input("\n");
+            Optional<Arithmetic> arithmetic = new Validation().checkValid(inputString);
+            if (arithmetic.isEmpty()) {
+                output.inputError();
+            } else {
+                Arithmetic postfix = calculation.toPostfix(arithmetic.get());
+                Optional<Double> result = calculation.doCalculation(postfix);
+
+                if (result.isEmpty()) {
+                    output.calcError();
+                } else {
+                    output.outputCalculationResult(result.get());
+                    repository.save(arithmeticToString(inputString, result.get()));
+                }
+            }
+        }
+
+    }
+
+    private static String arithmeticToString(String arithmetic, Double result) {
         return arithmetic + " = " + result;
     }
 }
