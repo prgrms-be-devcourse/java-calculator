@@ -8,4 +8,7 @@
     <file type="web" url="file://$PROJECT_DIR$/app" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="adopt-openjdk-16" project-jdk-type="JavaSDK" />
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
 </project>
