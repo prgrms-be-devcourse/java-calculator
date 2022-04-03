@@ -37,6 +37,6 @@ public class Output {
         Map<String,Float> resultMap = saveWithMap.getResultMap();
         BiConsumer<String, Float> biconsumer = (key, val) ->
                 System.out.println(key + " = " + val);
-        resultMap.forEach(biconsumer);
+        resultMap.forEach((s, aFloat) -> System.out.println(s + " = " + aFloat));
     }
 }
