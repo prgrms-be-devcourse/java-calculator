@@ -4,7 +4,6 @@ import java.util.regex.Pattern;
 
 public class RegularExpression {
     private RegularExpression() {
-        throw new AssertionError();
     }
 
     public static boolean isSum (String str) {
