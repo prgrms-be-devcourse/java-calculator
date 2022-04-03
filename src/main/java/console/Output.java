@@ -8,7 +8,7 @@ import java.util.function.BiConsumer;
 
 public class Output {
     private final Input input;
-    private SaveWithMap saveWithMap;
+    private final SaveWithMap saveWithMap;
 
     public Output(){
         input = new Input(this);
