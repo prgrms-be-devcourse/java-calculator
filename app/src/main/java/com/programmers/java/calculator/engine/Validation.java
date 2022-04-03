@@ -10,18 +10,18 @@ public class Validation {
         if (input == null) return Optional.empty();
 
         String[] splitTokens = input.split("\\s");
-        boolean flag = true;
+        boolean checkNumeric = true;
 
         for (String splitToken : splitTokens) {
-            if (flag) {
-                flag = false;
+            if (checkNumeric) {
+                checkNumeric = false;
                 if (!RegularExpression.isNumeric(splitToken)) return Optional.empty();
             } else {
-                flag = true;
+                checkNumeric = true;
                 if (!RegularExpression.isOperator(splitToken)) return Optional.empty();
             }
         }
-        if (flag) return Optional.empty();
+        if (checkNumeric) return Optional.empty();
 
         return Optional.of(new Arithmetic(splitTokens));
     }
