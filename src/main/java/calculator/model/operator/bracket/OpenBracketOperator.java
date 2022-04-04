@@ -5,19 +5,13 @@ import calculator.model.operand.Operand;
 import calculator.model.operator.Operator;
 import calculator.model.operator.OperatorType;
 
-public class OpenBracketOperator implements Operator {
-    private final OperatorType type;
+public class OpenBracketOperator extends Operator {
     public OpenBracketOperator() {
-        type = OperatorType.CLOSED_BRACKET;
+        super(OperatorType.CLOSED_BRACKET);
     }
 
     @Override
     public boolean couldOtherTokenComeNext(ExpressionableToken other) {
         return other instanceof Operand || other instanceof OpenBracketOperator;
-    }
-
-    @Override
-    public String getValue() {
-        return type.getSymbol();
     }
 }
