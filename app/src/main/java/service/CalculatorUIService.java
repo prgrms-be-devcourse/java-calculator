@@ -25,7 +25,6 @@ public class CalculatorUIService {
             int number = Integer.parseInt(scanner.nextLine());
             System.out.println();
             if (number != 1 && number != 2) {
-                // 1과 2 둘 중 하나를 선택해 달라는 메세지 요청
                 System.out.println("1과 2중에서만 골라주세요. :)");
                 continue;
             }
