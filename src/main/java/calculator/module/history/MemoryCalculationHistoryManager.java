@@ -1,25 +1,29 @@
 package calculator.module.history;
 
-import java.util.ArrayList;
-import java.util.List;
+import calculator.module.ui.UserInterface;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
 *
 * MemoryCalculationHistoryManager 설명
 *   계산 이력 조회 기능을 담당하는 클래스
-*
 **/
 public class MemoryCalculationHistoryManager implements CalculationHistoryManager {
-    private final List<CalculationHistory> calculationHistoryStore;
+    private final Map<String,CalculationHistory> calculationHistoryStore;
     private final static String HISTORY_NOT_EXIST_MESSAGE = "계산 이력이 없습니다.";
+    private final UserInterface userInterface;
 
-    public MemoryCalculationHistoryManager(){
-        calculationHistoryStore = new ArrayList<>();
+    public MemoryCalculationHistoryManager(UserInterface userInterface){
+        this.userInterface = userInterface;
+        calculationHistoryStore = new HashMap<>();
     }
 
     @Override
     public void printAllCalculationHistory() {
         if(calculationHistoryNotExist()){
-            System.out.println(HISTORY_NOT_EXIST_MESSAGE);
+            userInterface.printMessage(HISTORY_NOT_EXIST_MESSAGE);
         }
         else {
             printHistory();
@@ -27,8 +31,12 @@ public class MemoryCalculationHistoryManager implements CalculationHistoryManage
     }
 
     @Override
-    public void saveCalculationResultToHistory(String expression, Double result) {
-        calculationHistoryStore.add(new CalculationHistory(expression, result));
+    public void saveCalculationResultToHistory(String expression, CalculationHistory history) {
+        calculationHistoryStore.put(expression,history);
+    }
+
+    public CalculationHistory findCalculationHistoryByExpression(String expression){
+        return calculationHistoryStore.get(expression);
     }
 
     public boolean calculationHistoryNotExist(){
@@ -36,7 +44,9 @@ public class MemoryCalculationHistoryManager implements CalculationHistoryManage
     }
 
     private void printHistory(){
-        calculationHistoryStore.forEach(System.out::println);
+        calculationHistoryStore.forEach((expression,calculationHistory) -> {
+            userInterface.printMessage(calculationHistory.toString());
+        });
     }
 
 }
