@@ -52,7 +52,7 @@ public class Calculator implements Runnable {
     }
 
     public String cal(String input) {
-        String formula[] = parse(input);
+        String[] formula = parse(input);
 
         /** 후위 계산식으로 변경 **/
         Stack<Double> operandStack = new Stack<>();
