@@ -1,24 +1,18 @@
-import engine.io.Input;
-import engine.io.Output;
+import engine.io.InputConsole;
+import engine.io.OutputConsole;
 
 import java.util.Scanner;
 
-public class Console implements Input, Output {
+public class Console implements InputConsole, OutputConsole {
 
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String initialInput() {
+    public String menuInput() {
         System.out.println("1. 조회");
         System.out.println("2. 계산");
         System.out.println();
         System.out.print("선택 : ");
-        return scanner.nextLine();
-    }
-
-    @Override
-    public String input(String prompt) {
-        System.out.print(prompt);
         return scanner.nextLine();
     }
 

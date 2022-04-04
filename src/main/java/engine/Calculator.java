@@ -10,20 +10,20 @@ public class Calculator implements Runnable {
 
     private final CalculatorRepository repository;
 
-    private final Input input;
-    private final Output output;
+    private final InputConsole inputConsole;
+    private final OutputConsole outputConsole;
 
-    public Calculator(CalculatorRepository repository, Input input, Output output) {
+    public Calculator(CalculatorRepository repository, InputConsole inputConsole, OutputConsole outputConsole) {
         this.repository = repository;
-        this.input = input;
-        this.output = output;
+        this.inputConsole = inputConsole;
+        this.outputConsole = outputConsole;
     }
 
     @Override
     public void run() {
 
         while (true) {
-            String inputString = input.initialInput();
+            String inputString = inputConsole.menuInput();
 
             int inputValue = Integer.parseInt(inputString);
 
@@ -32,20 +32,20 @@ public class Calculator implements Runnable {
                     case 1:     //조회
                         List<String> formulaList = repository.findAllValues();
                         for (String f : formulaList) {
-                            output.formula(f);
+                            outputConsole.formula(f);
                         }
                         break;
                     case 2:     //계산
-                        String inputFormula = input.input();
+                        String inputFormula = inputConsole.input();
                         String answer = cal(inputFormula);
-                        output.output(answer);
+                        outputConsole.output(answer);
                         save(inputFormula, answer);
                         break;
                     default:
-                        output.inputError();
+                        outputConsole.inputError();
                 }
             } catch (ArithmeticException e) {
-                output.inputError();
+                outputConsole.inputError();
             }
         }
 
