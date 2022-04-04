@@ -1,9 +1,10 @@
 package calculator.module.arithmetic;
 
 import calculator.model.expression.Expression;
+import calculator.model.expression.ExpressionableToken;
 import calculator.model.operand.Operand;
 import calculator.model.operator.binary.BinaryOperator;
-import calculator.model.expression.ExpressionableToken;
+
 import java.util.List;
 import java.util.Stack;
 
@@ -37,7 +38,7 @@ public class StackArithmeticModule implements ArithmeticModule{
             else if(token instanceof BinaryOperator){
                 double secondOperand = Double.parseDouble(operandStack.pop().getValue());
                 double firstOperand = Double.parseDouble(operandStack.pop().getValue());
-                double result = ((BinaryOperator) token).doBinaryCalculate(firstOperand,secondOperand);
+                double result = ((BinaryOperator) token).calculate(firstOperand,secondOperand);
                 operandStack.push(new Operand(Double.toString(result)));
             }
         }
