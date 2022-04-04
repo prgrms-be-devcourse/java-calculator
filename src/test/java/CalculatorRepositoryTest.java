@@ -1,14 +1,12 @@
 import engine.repository.CalculatorRepository;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@AllArgsConstructor
 public class CalculatorRepositoryTest {
 
     private CalculatorRepository repository;
@@ -25,7 +23,6 @@ public class CalculatorRepositoryTest {
         //given
         repository.save("3.9 * 9 / 3.0 + 2.02 = 13.72");
         repository.save("1 / 3.0 = 0.33");
-
 
         //when
         List<String> formula = repository.findAllValues();
