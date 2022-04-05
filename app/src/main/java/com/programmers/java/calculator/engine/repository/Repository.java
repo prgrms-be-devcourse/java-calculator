@@ -3,5 +3,7 @@ package com.programmers.java.calculator.engine.repository;
 public interface Repository {
     void save(String string);
 
-    void output();
+    void printLog();
+
+    String findById(Long id);
 }

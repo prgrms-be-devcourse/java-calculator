@@ -14,14 +14,19 @@ public class LogRepository implements Repository{
     }
 
     @Override
-    public void output() {
+    public void printLog() {
         if (index == -1L) {
             System.out.println("계산 이력이 없습니다.\n");
         } else {
             for (Long l = 0L; l <= index; l++) {
-                System.out.println(map.get(l));
+                System.out.println(findById(l));
             }
             System.out.println();
         }
+    }
+
+    @Override
+    public String findById(Long id) {
+        return map.get(id);
     }
 }
