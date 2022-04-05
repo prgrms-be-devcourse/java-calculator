@@ -22,11 +22,11 @@ import calculator.module.validator.exception.InvalidExpressionException;
 **/
 
 public class Calculator {
-    private final static String INVALID_COMMAND_OPTION_MESSAGE ="잘못된 명령입니다.";
-    private final static String CALCULATION_GUILD_MESSAGE ="계산 수식을 입력하세요. 연산자(괄호 포함)와 숫자는 반드시 공백으로 구분해주세요.";
-    private final static String SHOW_HISTORY = "1";
-    private final static String CALCULATE = "2";
-    private final static String QUIT = "3";
+    private static final String INVALID_COMMAND_OPTION_MESSAGE ="잘못된 명령입니다.";
+    private static final String CALCULATION_GUILD_MESSAGE ="계산 수식을 입력하세요. 연산자(괄호 포함)와 숫자는 반드시 공백으로 구분해주세요.";
+    private static final String SHOW_HISTORY = "1";
+    private static final String CALCULATE = "2";
+    private static final String QUIT = "3";
 
     private final CalculationHistoryManager calculationHistoryManager;
     private final ArithmeticModule arithmeticModule;
@@ -50,7 +50,7 @@ public class Calculator {
         boolean isUserSelectQuit = false;
         String commandOption;
         while(!isUserSelectQuit){
-            printCommandOptionGuideText();
+            userInterface.showMenu();
             commandOption = userInterface.inputString();
             switch (commandOption){
                 case SHOW_HISTORY:
@@ -82,15 +82,6 @@ public class Calculator {
         }catch (InvalidExpressionException e) {
             userInterface.printMessage(e.getMessage());
         }
-    }
-
-    private void printCommandOptionGuideText(){
-        userInterface.printMessage("=============================");
-        userInterface.printMessage("1.조회");
-        userInterface.printMessage("2.계산");
-        userInterface.printMessage("3.종료");
-        userInterface.printMessage("=============================");
-        userInterface.printMessage("명령을 입력하세요 : ");
     }
 
     private void printInvalidCommandOptionSelectedMessage(){
