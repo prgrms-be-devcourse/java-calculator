@@ -9,7 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,18 +26,41 @@ public class CalculatorTest {
     @Test
     public void checkToPostfix() {
         //given
-        Arithmetic arithmetic1 = new Arithmetic(new String[]{"1", "+", "2", "*", "3", "-", "4"});
-        Arithmetic arithmetic2 = new Arithmetic(new String[]{"100", "+", "-200", "+", "-300", "+", "-400"});
-        Arithmetic arithmetic3 = new Arithmetic(new String[]{"1", "/", "2", "*", "3", "-", "4"});
+        Arithmetic arithmetic1 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "+", "2", "*", "3", "-", "4")));
+        Arithmetic arithmetic2 = new Arithmetic(new ArrayList<>(Arrays.asList("100", "+", "-200", "+", "-300", "+", "-400")));
+        Arithmetic arithmetic3 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "/", "2", "*", "3", "-", "4")));
 
         String[] answer1 = (new String[]{"1", "2", "3", "*", "+", "4", "-"});
         String[] answer2 = (new String[]{"100", "-200", "+", "-300", "+", "-400", "+"});
         String[] answer3 = (new String[]{"1", "2", "/", "3", "*", "4", "-"});
 
         //when
-        String[] result1 = calculation.toPostfix(arithmetic1).getArithmetic();
-        String[] result2 = calculation.toPostfix(arithmetic2).getArithmetic();
-        String[] result3 = calculation.toPostfix(arithmetic3).getArithmetic();
+        Arithmetic result1 = calculation.toPostfix(arithmetic1);
+        Arithmetic result2 = calculation.toPostfix(arithmetic2);
+        Arithmetic result3 = calculation.toPostfix(arithmetic3);
+
+        //then
+        assertThat(result1.getArithmetic().toArray(String[]::new)).isEqualTo(answer1);
+        assertThat(result2.getArithmetic().toArray(String[]::new)).isEqualTo(answer2);
+        assertThat(result3.getArithmetic().toArray(String[]::new)).isEqualTo(answer3);
+    }
+
+    @DisplayName("계산결과 검증")
+    @Test
+    public void checkCalculation() {
+        //given
+        Arithmetic arithmetic1 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "2", "3", "*", "+", "4", "-")));
+        Arithmetic arithmetic2 = new Arithmetic(new ArrayList<>(Arrays.asList("100", "-200", "+", "-300", "+", "-400", "+")));
+        Arithmetic arithmetic3 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "2", "/", "3", "*", "4", "-")));
+
+        Double answer1 = 3.0;
+        Double answer2 = -800.0;
+        Double answer3 = -2.5;
+
+        //when
+        double result1 = calculation.doCalculation(arithmetic1);
+        double result2 = calculation.doCalculation(arithmetic2);
+        double result3 = calculation.doCalculation(arithmetic3);
 
         //then
         assertThat(result1).isEqualTo(answer1);
@@ -44,41 +68,18 @@ public class CalculatorTest {
         assertThat(result3).isEqualTo(answer3);
     }
 
-    @DisplayName("계산결과 검증")
-    @Test
-    public void checkCalculation() {
-        //given
-        Arithmetic arithmetic1 = new Arithmetic(new String[]{"1", "2", "3", "*", "+", "4", "-"});
-        Arithmetic arithmetic2 = new Arithmetic(new String[]{"100", "-200", "+", "-300", "+", "-400", "+"});
-        Arithmetic arithmetic3 = new Arithmetic(new String[]{"1", "2", "/", "3", "*", "4", "-"});
-
-        Double answer1 = 3.0;
-        Double answer2 = -800.0;
-        Double answer3 = -2.5;
-
-        //when
-        Optional<Double> result1 = calculation.doCalculation(arithmetic1);
-        Optional<Double> result2 = calculation.doCalculation(arithmetic2);
-        Optional<Double> result3 = calculation.doCalculation(arithmetic3);
-
-        //then
-        assertThat(result1).hasValue(answer1);
-        assertThat(result2).hasValue(answer2);
-        assertThat(result3).hasValue(answer3);
-    }
-
     @DisplayName("0으로 나눌 경우 검증")
     @Test
     public void checkDivisionByZero() {
         //given
-        Arithmetic arithmetic1 = new Arithmetic(new String[]{"1", "0", "/"});
-        Arithmetic arithmetic2 = new Arithmetic(new String[]{"-1", "0", "/"});
-        Arithmetic arithmetic3 = new Arithmetic(new String[]{"0", "0", "/"});
+        Arithmetic arithmetic1 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "0", "/")));
+        Arithmetic arithmetic2 = new Arithmetic(new ArrayList<>(Arrays.asList("-1", "0", "/")));
+        Arithmetic arithmetic3 = new Arithmetic(new ArrayList<>(Arrays.asList("0", "0", "/")));
 
         //when
-        Double result1 = calculation.doCalculation(arithmetic1).orElse(null);
-        Double result2 = calculation.doCalculation(arithmetic2).orElse(null);
-        Double result3 = calculation.doCalculation(arithmetic3).orElse(null);
+        Double result1 = calculation.doCalculation(arithmetic1);
+        Double result2 = calculation.doCalculation(arithmetic2);
+        Double result3 = calculation.doCalculation(arithmetic3);
 
         //then
         assertThat(result1).isInfinite();
