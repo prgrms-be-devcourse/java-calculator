@@ -34,7 +34,7 @@ public enum Operator {
     public int comparePriority(Operator op) {
         int x=this.priority;
         int y = op.priority;
-        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+        return Integer.compare(x, y);
     }
 
     private boolean isEqualsOperator(String oper) {
