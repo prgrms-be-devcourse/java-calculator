@@ -42,16 +42,18 @@ public class Calculator implements Runnable {
                         save(inputFormula, answer);
                         break;
                     default:
-                        outputConsole.inputError();
+                        outputConsole.inputErrorMessage();
                 }
             } catch (ArithmeticException e) {
-                outputConsole.inputError();
+                outputConsole.arithmeticErrorMessage();
+            } catch (IllegalArgumentException e) {
+                outputConsole.illegalArgumentErrorMessage();
             }
         }
 
     }
 
-    public String cal(String input) {
+    public String cal(String input) throws ArithmeticException, IllegalArgumentException {
         String[] formula = parse(input);
 
         /** 후위 계산식으로 변경 **/
@@ -94,7 +96,7 @@ public class Calculator implements Runnable {
         return String.format("%.2f", answer);
     }
 
-    private double cal(String operator, double x, double y) throws ArithmeticException {
+    private double cal(String operator, double x, double y) throws ArithmeticException, IllegalArgumentException {
         return Operator.getOperator(operator).calculate(x, y);
     }
 

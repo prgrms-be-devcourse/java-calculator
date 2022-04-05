@@ -4,10 +4,18 @@ import java.util.*;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+",1, (num1, num2) -> num1 + num2),
-    MINUS("-",1,(num1,num2) -> num1-num2),
-    MULTIPLY("*",2, (num1, num2) -> num1 * num2),
-    DIVIDE("/", 2, (num1, num2) -> num1 / num2),;
+    PLUS("+", 1, (num1, num2) -> num1 + num2),
+    MINUS("-", 1, (num1, num2) -> num1 - num2),
+    MULTIPLY("*", 2, (num1, num2) -> num1 * num2),
+    DIVIDE("/", 2, (num1, num2) ->
+    {
+        double answer = num1 / num2;
+        if (isRealNumber(answer)) {
+            return answer;
+        } else {
+            throw new ArithmeticException();
+        }
+    });
 
     private final String operator;
     private final int priority;
@@ -19,7 +27,7 @@ public enum Operator {
         this.expression = expression;
     }
 
-    public double calculate(double num1, double num2) {
+    public double calculate(double num1, double num2) throws ArithmeticException {
         return expression.apply(num1, num2);
     }
 
@@ -28,16 +36,20 @@ public enum Operator {
         return Arrays.stream(values())
                 .filter(o -> o.isEqualsOperator(oper))
                 .findFirst().orElseThrow(()
-                        -> new IllegalArgumentException("올바른 연산자가 아닙니다."));
+                        -> new IllegalArgumentException());
     }
 
     public int comparePriority(Operator op) {
-        int x=this.priority;
+        int x = this.priority;
         int y = op.priority;
         return Integer.compare(x, y);
     }
 
     private boolean isEqualsOperator(String oper) {
         return this.operator.equals(oper);
+    }
+
+    public static boolean isRealNumber(double answer) {
+        return Double.isFinite(answer) && !Double.isNaN(answer);
     }
 }
