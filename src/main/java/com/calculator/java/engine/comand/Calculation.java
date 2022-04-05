@@ -2,6 +2,7 @@ package com.calculator.java.engine.comand;
 
 
 import com.calculator.java.database.Database;
+import com.calculator.java.global.Enum.Operators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,11 +75,13 @@ public class Calculation implements Command {
         return result;
     }
 
-    private double calculate(double num1, double num2, String operate) {
-        return switch (operate) {
-            case "+" -> num1 + num2;
-            case "-" -> num1 - num2;
-            case "*" -> num1 * num2;
+    private double calculate(double num1, double num2, String operator) {
+
+
+        return switch (Operators.findOperator(operator)) {
+            case PLUS -> num1 + num2;
+            case MINUS -> num1 - num2;
+            case MULTIPLICATION -> num1 * num2;
             default -> num1 / num2;
         };
     }
