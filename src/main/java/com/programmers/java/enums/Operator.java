@@ -31,8 +31,7 @@ public enum Operator {
 
     private static Operator getOperator(String operator) {
         return Arrays.stream(values())
-                .filter(Objects::nonNull)
-                .filter(o -> o.operator.equals(operator))
+                .filter(o -> Objects.equals(o.operator, operator))
                 .findFirst().get();
     }
 
