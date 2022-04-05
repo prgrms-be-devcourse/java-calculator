@@ -10,9 +10,7 @@ public abstract class BinaryOperator extends Operator{
     protected BinaryOperator(OperatorType operatorType) {
         super(operatorType);
     }
-
-    public abstract Double calculate(Double firstOperand, Double secondOperand);
-
+    
     @Override
     public boolean couldOtherTokenComeNext(ExpressionableToken other) {
         return other instanceof Operand || other instanceof OpenBracketOperator;

@@ -19,6 +19,9 @@ public class Operand extends ExpressionableToken {
         }
     }
 
+    public Double getDoubleValue(){
+        return Double.parseDouble(super.getValue());
+    }
 
     @Override
     public boolean couldOtherTokenComeNext(ExpressionableToken other) {

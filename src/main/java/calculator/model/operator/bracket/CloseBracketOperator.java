@@ -1,13 +1,11 @@
 package calculator.model.operator.bracket;
 
 import calculator.model.expression.ExpressionableToken;
-import calculator.model.operator.Operator;
-import calculator.model.operator.OperatorType;
 import calculator.model.operator.binary.BinaryOperator;
 
-public class CloseBracketOperator extends Operator {
+public class CloseBracketOperator extends ExpressionableToken {
     public CloseBracketOperator() {
-        super(OperatorType.CLOSED_BRACKET);
+        super("(");
     }
 
     @Override

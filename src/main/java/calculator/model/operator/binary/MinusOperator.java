@@ -1,5 +1,6 @@
 package calculator.model.operator.binary;
 
+import calculator.model.operand.OperandPool;
 import calculator.model.operator.OperatorType;
 
 public class MinusOperator extends BinaryOperator {
@@ -9,7 +10,8 @@ public class MinusOperator extends BinaryOperator {
 
 
     @Override
-    public Double calculate(Double firstOperand, Double secondOperand) {
-        return firstOperand - secondOperand;
+    public Double calculate(OperandPool operandPool) {
+        Double[] operands = operandPool.getTwoOperand();
+        return  operands[0] - operands[1];
     }
 }

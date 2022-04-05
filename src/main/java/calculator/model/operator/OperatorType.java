@@ -1,8 +1,6 @@
 package calculator.model.operator;
 
 public enum OperatorType {
-    OPENED_BRACKET("(",0),
-    CLOSED_BRACKET(")",0),
     TIMES("*",1),
     DIVIDER("/",1),
     PLUS("+",2),
