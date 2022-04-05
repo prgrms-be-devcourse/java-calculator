@@ -43,7 +43,7 @@ public class Calculator implements Runnable {
                 exit();
                 break;
             default:
-                console.selectionError();
+                console.errorMessage(new IllegalArgumentException());
                 break;
         }
     }
@@ -63,16 +63,20 @@ public class Calculator implements Runnable {
             answer = String.valueOf(stack.get(0));
             repository.save(formula, answer);
 
-            System.out.println(answer + "\n");
-        } catch (DivisionByZero e) {
-            console.divisionByZero();
-            calculate(console.input());
-        } catch (IllegalArgumentException e) {
-            console.illegalExceptionMessage();
-            calculate(console.input());
+            console.print(answer + "\n");
         } catch (Exception e) {
-            console.exitMessage();
-            exit();
+            console.errorMessage(e);
+            doByException(e);
+        }
+    }
+
+    private void doByException(Exception e) {
+        if(e instanceof DivisionByZero) {
+            calculate(console.input());
+        } else if(e instanceof IllegalArgumentException) {
+            doAction(console.initMessage());
+        } else {
+            exit(gi
         }
     }
 

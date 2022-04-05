@@ -1,6 +1,7 @@
 package calculator.engine;
 
 
+import calculator.exception.DivisionByZero;
 import calculator.io.Input;
 import calculator.io.Output;
 
@@ -34,28 +35,20 @@ public class Console implements Input, Output {
         System.out.println(str);
     }
 
-    @Override
-    public void illegalExceptionMessage() {
-        System.out.println("\n잘못된 식을 입력하셨습니다. 다시 입력해주세요.");
-    }
-
-    @Override
-    public void exceptionMessage() {
-        System.out.println("\n알수없는 오류가 발생하였습니다.\n");
-    }
-
-    @Override
-    public void divisionByZero() {
-        System.out.println("\n0으로 값을 나눌 수 없습니다. 식을 다시 입력해주세요.");
-    }
 
     @Override
     public void exitMessage() {
-        System.out.println("계산기를 종료합니다.");
+        System.out.println("\n계산기를 종료합니다.");
     }
 
     @Override
-    public void selectionError() {
-        System.out.println("\n번호를 확인해주세요.\n");
+    public void errorMessage(Exception e) {
+        if(e instanceof DivisionByZero) {
+            System.out.println("0으로 값을 나눌 수 없습니다.\n");
+        } else if (e instanceof IllegalArgumentException) {
+            System.out.println("\n입력값을 확인해 주세요.\n");
+        } else {
+            System.out.println("예상하지 못한 오류가 발생하였습니다.\n");
+        }
     }
 }
