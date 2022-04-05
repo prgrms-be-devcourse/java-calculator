@@ -6,6 +6,11 @@ import java.util.List;
 import static java.lang.Double.parseDouble;
 
 public class Calculator {
+
+    private Calculator() {
+
+    }
+
     public static double calculate(Expression expression) {
         List<String> exprResults = new ArrayList<>();
         multiplyAndDivide(expression, exprResults);
