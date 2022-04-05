@@ -51,7 +51,7 @@ class HistoryServiceImplTest {
 
         //then
         Assertions.assertThat(false).isEqualTo(resultList.isEmpty());
-        org.junit.jupiter.api.Assertions.assertNotNull(resultList.get(0));
+        Assertions.assertThat(resultList.get(0)).isNotEqualTo(null);
 
         Assertions.assertThat(resultList.get(0).getFormula()).isEqualTo(formula1);
         Assertions.assertThat(resultList.get(0).getResult()).isEqualTo(result1);
