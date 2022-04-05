@@ -76,8 +76,6 @@ public class Calculation implements Command {
     }
 
     private double calculate(double num1, double num2, String operator) {
-
-
         return switch (Operators.findOperator(operator)) {
             case PLUS -> num1 + num2;
             case MINUS -> num1 - num2;

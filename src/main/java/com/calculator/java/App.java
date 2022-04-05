@@ -9,8 +9,8 @@ import com.calculator.java.global.Enum.CommandTypes;
 public class App {
     public static void main(String[] args)  {
          Console console = new Console(new Validator(CommandTypes.values()));
-
          Calculator calculator = new Calculator(console);
+
          calculator.run();
     }
 }
