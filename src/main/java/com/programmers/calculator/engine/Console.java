@@ -1,8 +1,9 @@
-package com.programmers.calculator;
+package com.programmers.calculator.engine;
 
 import com.programmers.calculator.engine.io.Input;
 import com.programmers.calculator.engine.io.Output;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -26,12 +27,19 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printEmpty() {
+    public void printEnter() {
         System.out.println();
     }
 
     @Override
-    public void printExpressionAndResult(String expression, int result) {
-        System.out.println(expression + " = " + result);
+    public void printRepository(List<String> data) {
+        for(String result : data) {
+            System.out.println(result);
+        }
+    }
+
+    @Override
+    public void emptyError() {
+        System.out.println("저장된 계산이 없습니다.");
     }
 }

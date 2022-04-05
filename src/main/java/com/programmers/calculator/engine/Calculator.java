@@ -1,59 +1,16 @@
 package com.programmers.calculator.engine;
 
 import com.programmers.calculator.engine.exception.Validator;
-import com.programmers.calculator.engine.io.Input;
-import com.programmers.calculator.engine.io.Output;
-import com.programmers.calculator.engine.repository.Result;
+import com.programmers.calculator.engine.repository.Repository;
 
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class Calculator implements Runnable{
-    private final Input input;
-    private final Output output;
-    private final Result expressionAndResult; // 연산식, 결과 저장
-
-    public Calculator(Input input, Output output) {
-        this.input = input;
-        this.output = output;
-        expressionAndResult = new Result(output);
-    }
-
-    @Override
-    public void run() {
-        while(true) {
-            String s = input.input("1. 조회\n2. 계산\n3. 종료\n\n선택 : ");
-            output.printEmpty();
-            boolean close = false;
-            switch(s) {
-                case "1" :
-                    expressionAndResult.print();
-                    break;
-                case "2" :
-                    String expression = input.input("수식 입력 : ");
-                    Optional<Integer> result = calc(expression);
-                    if(!result.isPresent()) { // 예외 처리
-                        output.inputError();
-                    } else {
-                        output.printResult(result.get()); // 결과 출력
-                    }
-                    break;
-                case "3" :
-                    close = true;
-                    break;
-                default :
-                    output.inputError();
-                    break;
-            }
-
-            if(close) break;
-
-            output.printEmpty();
-        }
-    }
+public class Calculator {
+    private final Repository repository = new Repository(); // 연산식, 결과 저장
 
     // 연산식을 후위표기법으로 변환 -> Optional null체크 -> 후위표기법 계산하고 출력 -> map에 연산식, 결과 저장
-    public Optional<Integer> calc(String expression) {
+    public Optional<Integer> calculate(String expression) {
         Optional<List<String>> postfix = infixToPostfix(expression);
 
         // 예외 출력
@@ -64,7 +21,7 @@ public class Calculator implements Runnable{
         // 후위표기법 연산
         Stack<String> stack = new Stack<>();
         for(String s : postfix.get()) {
-            if(Pattern.matches(Regex.getNumRegex(), s) && !s.equals("-")) {
+            if(Pattern.matches(Regex.NUM, s) && !s.equals("-")) {
                 stack.push(s);
             } else {
                 int num2 = Integer.parseInt(stack.pop());
@@ -77,7 +34,7 @@ public class Calculator implements Runnable{
         }
 
         int result = Integer.parseInt(stack.pop());
-        expressionAndResult.put(expression, result); // map에 저장
+        repository.put(expression, result); // map에 저장
         return Optional.of(result);
     }
 
@@ -85,29 +42,29 @@ public class Calculator implements Runnable{
     public Optional<List<String>> infixToPostfix(String infix) {
         List<String> postfix = new ArrayList<>();
         Stack<String> stack = new Stack<>();
-        String[] numsNSymbols = Arrays.stream(infix.split(" ")) // " "로 split & 공백 제거
+        String[] numsAndSymbols = Arrays.stream(infix.split(" ")) // " "로 split & 공백 제거
                 .filter(s -> !s.equals(" "))
                 .toArray(String[]::new);
 
         // 예외 체크
-        if(!Validator.check(numsNSymbols)) {
+        if(!Validator.exceptionCheck(numsAndSymbols)) {
             return Optional.empty();
         }
 
         // 중위 표기법 => 후위표기법 변환
-        for(String s : numsNSymbols) {
-            if (Pattern.matches(Regex.getNumRegex(), s) && !s.equals("-")) {
-                postfix.add(s);
-            } else if (s.equals("(")) {
-                stack.push(s);
-            } else if (Operator.isOperator(s)) {
-                if (!stack.isEmpty() && Operator.getPriority(stack.peek()) >= Operator.getPriority(s)) {
+        for(String numAndSymbol : numsAndSymbols) {
+            if (Pattern.matches(Regex.NUM, numAndSymbol) && !numAndSymbol.equals("-")) {
+                postfix.add(numAndSymbol);
+            } else if (numAndSymbol.equals("(")) {
+                stack.push(numAndSymbol);
+            } else if (Operator.isOperator(numAndSymbol)) {
+                if (!stack.isEmpty() && Operator.getPriority(stack.peek()) >= Operator.getPriority(numAndSymbol)) {
                     postfix.add(stack.pop());
-                    stack.push(s);
+                    stack.push(numAndSymbol);
                 } else {
-                    stack.push(s);
+                    stack.push(numAndSymbol);
                 }
-            } else if (s.equals(")")) {
+            } else if (numAndSymbol.equals(")")) {
                 while (!stack.isEmpty() && !stack.peek().equals("(")) {
                     postfix.add(stack.pop());
                 }
@@ -120,5 +77,19 @@ public class Calculator implements Runnable{
         }
 
         return Optional.of(postfix);
+    }
+
+    public Optional<List<String>> getData() {
+        Map<String, Integer> map = repository.getRepository();
+        if(map.isEmpty()) return Optional.empty();
+
+        List<String> data = new ArrayList<>();
+
+        for (String expression : map.keySet()) {
+            int result = map.get(expression);
+            data.add(expression + " = " + result);
+        }
+
+        return Optional.of(data);
     }
 }

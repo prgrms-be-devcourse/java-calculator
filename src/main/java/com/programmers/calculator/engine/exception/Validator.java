@@ -7,14 +7,14 @@ import java.util.Stack;
 import java.util.regex.Pattern;
 
 public class Validator {
-    public static boolean check(String[] numsNSymbols) {
+    public static boolean exceptionCheck(String[] numsAndSymbols) {
         boolean ret = true;
         Stack<String> parentheses = new Stack<>();
         String lastString = "";
 
-        for(String s : numsNSymbols) {
+        for(String numAndSymbol : numsAndSymbols) {
             // (정수) lastString이 초기상태인 경우, "("인 경우, 사칙연산인 경우 제외하면 error
-            if (Pattern.matches(Regex.getNumRegex(), s) && !s.equals("-")) {
+            if (Pattern.matches(Regex.NUM, numAndSymbol) && !numAndSymbol.equals("-")) {
                 if(!lastString.equals("") &&
                         !lastString.equals("(") &&
                         !Operator.isOperator(lastString)) {
@@ -23,27 +23,27 @@ public class Validator {
                 }
             }
             // ("(") lastString이 초기상태인 경우, 사칙연산인 경우, "("인 경우 제외하면 error
-            else if (s.equals("(")) {
+            else if (numAndSymbol.equals("(")) {
                 if(!lastString.equals("") &&
                         !Operator.isOperator(lastString) &&
                         !lastString.equals("(")) {
                     ret = false;
                     break;
                 } else {
-                    parentheses.push(s);
+                    parentheses.push(numAndSymbol);
                 }
             }
             // (사칙연산) lastString이 정수인 경우, ")"인 경우 제외하면 error
-            else if (Operator.isOperator(s)) {
-                if (!Pattern.matches(Regex.getNumRegex(), lastString)
+            else if (Operator.isOperator(numAndSymbol)) {
+                if (!Pattern.matches(Regex.NUM, lastString)
                         && !lastString.equals(")")) {
                     ret = false;
                     break;
                 }
             }
             // (")") lastString이 정수인 경우, ")"인 경우 제외하면 error
-            else if (s.equals(")")) {
-                if (!Pattern.matches(Regex.getNumRegex(), lastString) &&
+            else if (numAndSymbol.equals(")")) {
+                if (!Pattern.matches(Regex.NUM, lastString) &&
                         !lastString.equals(")")) {
                     ret = false;
                     break;
@@ -61,7 +61,7 @@ public class Validator {
                 break;
             }
 
-            lastString = s;
+            lastString = numAndSymbol;
         }
 
         if(!parentheses.isEmpty()) ret = false;
