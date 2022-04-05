@@ -13,7 +13,7 @@ public class Operator {
 
         for (int i = 0; i < postfix.size(); i++) {
             stack.addLast(postfix.get(i));
-            if (validator.isOperator(postfix.get(i))){
+            if (validator.isOperator(postfix.get(i))) {
                 stack.removeLast();
 
                 Double n2 = Double.parseDouble(stack.getLast()); // 역순으로 뽑아냄
@@ -22,7 +22,7 @@ public class Operator {
                 Double n1 = Double.parseDouble(stack.getLast());
                 stack.removeLast();
 
-                String calculationResult = switch (postfix.get(i)){
+                String calculationResult = switch (postfix.get(i)) {
                     case "+" -> Double.toString(n1 + n2);
                     case "-" -> Double.toString(n1 - n2);
                     case "*" -> Double.toString(n1 * n2);
@@ -34,16 +34,17 @@ public class Operator {
         }
 
         String res = stack.getFirst();
-        if (validator.isDecimal(res)) // 실수
+        if (validator.isDecimal(res)) {// 실수
             return roundSecondDecimal(Double.parseDouble(res));
+        }
 
-        if (res.contains("."))
+        if (res.contains(".")) {
             return res.substring(0, res.indexOf(".")); // 정수인데 . 포함된 경우
-
+        }
         return res; // 그냥 정수
     }
 
-    private String roundSecondDecimal(Double number){
+    private String roundSecondDecimal(Double number) {
         return String.format("%.2f", number);
     }
 }
