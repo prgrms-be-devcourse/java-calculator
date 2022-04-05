@@ -28,11 +28,10 @@ public enum Operator {
 
     /**
      * s 와 일치하는 연산자 enum 값을 반환한다.
-     * @throws IllegalArgumentException : s 가 연산자가 아닌 경우 던져진다.
      */
     private static Operator getOperator(String s)  throws IllegalArgumentException {
         return Arrays.stream(Operator.values()).filter(operator -> operator.operator.equals(s))
-                .findFirst().orElseThrow(IllegalArgumentException::new);
+                .findFirst().orElseThrow(() -> new IllegalArgumentException("s는 연산자가 아닙니다."));
     }
 
     /**

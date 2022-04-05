@@ -44,7 +44,7 @@ public class PostfixConverter {
     }
 
     private static void checkEmptyExpression(String[] split) throws IllegalArgumentException{
-        if (isEmptyExpression(split)) throw new IllegalArgumentException();
+        if (isEmptyExpression(split)) throw new IllegalArgumentException("split은 비어있는 수식입니다.");
     }
 
     private static boolean isEmptyExpression(String[] expressions) {
@@ -53,21 +53,19 @@ public class PostfixConverter {
 
     /**
      * 후위 표기식 변환 과정에서 문자가 숫자인 경우 호출되며, 숫자를 후위표기식에 넣어준다.
-     * @throws IllegalArgumentException : number 가 숫자가 아닌 경우 던져진다.
      */
     private static void executeNumberProcess(String number, List<String> postfix) throws IllegalArgumentException {
         if (!StringUtils.isNumber(number)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("number는 숫자가 아닙니다.");
         }
         postfix.add(number);
     }
 
     /**
      * 후위 표기식 변환 과정에서 문자가 연산자인 경우에 호출되며, 우선 순위에 따라 연산자가 처리된다.
-     * @throws IllegalArgumentException : operator 가 연산자가 아닌 경우 던져진다.
      */
     private static void executeOperatorProcess(String operator, List<String> postfix, Stack<String> stack) throws IllegalArgumentException {
-        if (!Operator.isOperator(operator)) throw new IllegalArgumentException();
+        if (!Operator.isOperator(operator)) throw new IllegalArgumentException("operator는 연산자가 아닙니다.");
 
         if (stack.isEmpty() || Priority.getPriority(stack.peek()) < Priority.getPriority(operator)) {
             stack.push(operator);
