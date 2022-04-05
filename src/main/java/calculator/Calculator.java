@@ -24,9 +24,6 @@ import calculator.module.validator.exception.InvalidExpressionException;
 public class Calculator {
     private static final String INVALID_COMMAND_OPTION_MESSAGE ="잘못된 명령입니다.";
     private static final String CALCULATION_GUILD_MESSAGE ="계산 수식을 입력하세요. 연산자(괄호 포함)와 숫자는 반드시 공백으로 구분해주세요.";
-    private static final String SHOW_HISTORY = "1";
-    private static final String CALCULATE = "2";
-    private static final String QUIT = "3";
 
     private final CalculationHistoryManager calculationHistoryManager;
     private final ArithmeticModule arithmeticModule;
@@ -48,22 +45,23 @@ public class Calculator {
 
     public void run(){
         boolean isUserSelectQuit = false;
-        String commandOption;
+        String userInput;
         while(!isUserSelectQuit){
             userInterface.showMenu();
-            commandOption = userInterface.inputString();
-            switch (commandOption){
-                case SHOW_HISTORY:
+            userInput = userInterface.inputString();
+            CommandOption command = CommandOption.createCommandOption(userInput);
+            switch (command){
+                case SHOW_HISTORY :
                     calculationHistoryManager.printAllCalculationHistory();
                     break;
-                case CALCULATE :
+                case CALCULATION :
                     startCalculateProcess();
                     break;
                 case QUIT :
                     isUserSelectQuit = true;
                     break;
                 default :
-                    printInvalidCommandOptionSelectedMessage();
+                    userInterface.printMessage(INVALID_COMMAND_OPTION_MESSAGE);
                     break;
             }
         }
@@ -84,8 +82,5 @@ public class Calculator {
         }
     }
 
-    private void printInvalidCommandOptionSelectedMessage(){
-        userInterface.printMessage(INVALID_COMMAND_OPTION_MESSAGE);
-    }
 }
 
