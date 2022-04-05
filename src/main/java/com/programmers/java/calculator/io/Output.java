@@ -8,4 +8,5 @@ public interface Output {
     void printLogs(List<String> log);
     void print(String content);
     void printCloseConsole();
+    void printRuntimeError();
 }

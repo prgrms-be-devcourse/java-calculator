@@ -28,4 +28,9 @@ public class ConsoleOutput implements Output{
     public void printCloseConsole() {
         System.out.println("프로그램을 종료합니다.");
     }
+
+    @Override
+    public void printRuntimeError() {
+        System.out.println("Runtime Error!");
+    }
 }

@@ -29,6 +29,12 @@ public class RepositoryTest {
     }
 
     @Test
+    @DisplayName("데이터 저장 여부 확인하기")
+    public void save() {
+        assertThat(expressionRepository.save("11 + 11 - 11 * 11 / 11", "11")).isEqualTo(true);
+    }
+
+    @Test
     @DisplayName("중복 데이터 캐시 여부 확인하기")
     public void cached() {
         expressionRepository.save("11 + 11 - 11 * 11 / 11", "11");

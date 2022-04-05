@@ -43,8 +43,11 @@ public class Console {
         else {
             result = arithmeticModule.execute(expression);
         }
-        expressionRepository.save(expression, result);
-        output.print(result);
+        if (expressionRepository.save(expression, result)) {
+            output.print(result);
+        }else{
+            output.printRuntimeError();
+        }
     }
 
     private void exit() {

@@ -11,9 +11,14 @@ public class MemoryExpressionRepository implements ExpressionRepository{
     private final List<String> memory = new ArrayList<>();
 
     @Override
-    public void save(String expression, String result) {
-        cache.put(expression, result);
-        memory.add(expression + " = " + result);
+    public boolean save(String expression, String result) {
+        try {
+            cache.put(expression, result);
+            memory.add(expression + " = " + result);
+            return true;
+        } catch (RuntimeException r) {
+            return false;
+        }
     }
 
     @Override
