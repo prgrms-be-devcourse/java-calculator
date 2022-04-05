@@ -18,7 +18,8 @@ public class CalculationTest {
     })
     @DisplayName("정수로만 이루어진 식 계산하기")
     public void integerCalculationTest(String expression, String calculationResult){
-        assertThat(arithmeticModule.execute(expression)).isEqualTo(calculationResult);
+        String compareValue = arithmeticModule.execute(expression);
+        assertThat(compareValue).isEqualTo(calculationResult);
     }
 
     @ParameterizedTest
@@ -28,6 +29,7 @@ public class CalculationTest {
     })
     @DisplayName("실수를 포함한 식 계산하기")
     public void realNumberCalculationTest(String expression, String calculationResult){
-        assertThat(arithmeticModule.execute(expression)).isEqualTo(calculationResult);
+        String compareValue = arithmeticModule.execute(expression);
+        assertThat(compareValue).isEqualTo(calculationResult);
     }
 }
