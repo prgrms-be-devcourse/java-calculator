@@ -9,16 +9,20 @@ import com.programmers.repository.MemoryExpressionRepository;
 import java.util.List;
 
 public class Application {
+    private static final int SELECT_CHOICE = 1;
+    private static final int CALCULATE_CHOICE = 2;
+
     public static void main(String[] args) {
         Console console = new Console();
         ExpressionRepository expressionRepository = new MemoryExpressionRepository();
+        int choice;
 
-        while(true) {
-            int choice = console.choiceInput();
-            if(choice == 1) {
+        do {
+            choice = console.choiceInput();
+            if(choice == SELECT_CHOICE) {
                 List<Expression> expressions = expressionRepository.findAll();
                 console.printAllExpressions(expressions);
-            } else if(choice == 2) {
+            } else if(choice == CALCULATE_CHOICE) {
                 String exprInput = console.expressionInput();
                 Expression expression = new Expression(exprInput);
 
@@ -27,11 +31,10 @@ public class Application {
 
                 expressionRepository.save(expression);
                 console.printCalculatedNumber(expression.getCalcResult());
-            } else {
-                console.printChooseWrongNumber();
-                break;
             }
-        }
+        } while (choice == SELECT_CHOICE || choice == CALCULATE_CHOICE);
+
+        console.printExit();
     }
 
 }

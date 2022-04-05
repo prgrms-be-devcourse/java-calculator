@@ -40,7 +40,7 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void printChooseWrongNumber() {
-        System.out.println("잘못된 번호 선택입니다");
+    public void printExit() {
+        System.out.println("프로그램을 종료합니다");
     }
 }
