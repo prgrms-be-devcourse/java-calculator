@@ -1,10 +1,14 @@
 package com.programmers.java;
 
+import com.programmers.java.enums.Menu;
 import com.programmers.java.io.Input;
 import com.programmers.java.io.Output;
 import com.programmers.java.validator.Validator;
 import com.programmers.java.service.CalculateService;
 import com.programmers.java.service.HistoryService;
+
+import static com.programmers.java.enums.Menu.CALCULATE;
+import static com.programmers.java.enums.Menu.SELECT;
 
 
 public class Calculator {
@@ -14,7 +18,6 @@ public class Calculator {
     private final CalculateService calculateService;
     private final HistoryService findService;
     private final Validator validator;
-    private static final String COMMAND_HISTORY = "1", COMMAND_CALCULATE = "2";
 
     public Calculator(Input input, Output output, CalculateService calculateService, HistoryService findService, Validator validator) {
         this.input = input;
@@ -29,12 +32,13 @@ public class Calculator {
 
             output.printMenu();
             String inputMenu = input.inputMenu();
+            Menu menu = Menu.getMenu(inputMenu);
 
-            switch (inputMenu) {
-                case COMMAND_HISTORY:
+            switch (menu) {
+                case SELECT:
                     executeFindHistory();
                     break;
-                case COMMAND_CALCULATE:
+                case CALCULATE:
                     executeCalculateFormula();
                     break;
                 default:
