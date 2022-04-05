@@ -34,4 +34,10 @@ public class MemoryExpressionRepository implements ExpressionRepository{
     public boolean cached(String expression) {
         return cache.containsKey(expression);
     }
+
+    @Override
+    public void clear() {
+        cache.clear();
+        memory.clear();
+    }
 }

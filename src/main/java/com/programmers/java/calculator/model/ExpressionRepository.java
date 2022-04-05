@@ -8,4 +8,5 @@ public interface ExpressionRepository {
     List<String> findAll();
     String findById(String id);
     boolean cached(String expression);
+    void clear();
 }

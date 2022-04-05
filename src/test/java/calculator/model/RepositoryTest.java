@@ -2,12 +2,19 @@ package calculator.model;
 
 import com.programmers.java.calculator.model.ExpressionRepository;
 import com.programmers.java.calculator.model.MemoryExpressionRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RepositoryTest {
     private final ExpressionRepository expressionRepository = new MemoryExpressionRepository();
+
+    @BeforeEach
+    @DisplayName("모든 테스트 실행 전 repository 초기화")
+    public void clear() {
+        expressionRepository.clear();
+    }
 
     @Test
     @DisplayName("Repository에 저장된 특정 계산 결과 가져오기")
