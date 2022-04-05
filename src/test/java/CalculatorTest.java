@@ -29,17 +29,4 @@ public class CalculatorTest {
         assertEquals(valueExpected, result);
 
     }
-
-    /* IllegalArgumentException test */
-    @Test
-    public void exceptionThrownTest() throws Exception {
-
-        String input = "8 ) 0";
-
-        Exception exception = assertThrows(IllegalArgumentException.class,
-                () -> {
-                    String result = calculator.cal(input);
-                });
-    }
-
 }
