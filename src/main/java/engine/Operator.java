@@ -26,7 +26,7 @@ public enum Operator {
     //일치하는 enum return
     public static Operator getOperator(String oper) {
         return Arrays.stream(values())
-                .filter(o -> o.operator.equals(oper))
+                .filter(o -> o.isEqualsOperator(oper))
                 .findFirst().orElseThrow(()
                         -> new IllegalArgumentException("올바른 연산자가 아닙니다."));
     }
@@ -35,5 +35,9 @@ public enum Operator {
         int x=this.priority;
         int y = op.priority;
         return (x < y) ? -1 : ((x == y) ? 0 : 1);
+    }
+
+    private boolean isEqualsOperator(String oper) {
+        return this.operator.equals(oper);
     }
 }
