@@ -58,7 +58,7 @@ public class Calculator implements Runnable {
         Stack<Double> operandStack = new Stack<>();
         Stack<String> operatorStack = new Stack<>();
 
-        double answer = Double.valueOf(formula[0]);
+        double answer = Double.parseDouble(formula[0]);
         operandStack.push(answer);
 
         for (int i = 1; i < formula.length; i += 2) {
