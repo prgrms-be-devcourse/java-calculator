@@ -3,13 +3,11 @@ package com.programmers.java.calculator.engine;
 import com.programmers.java.calculator.engine.model.Arithmetic;
 import com.programmers.java.calculator.engine.utils.RegularExpression;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Optional;
+import java.util.*;
 
 public class Calculation {
     public Arithmetic toPostfix(Arithmetic arithmetic) {
-        String[] infix = arithmetic.getArithmetic();
+        String[] infix = arithmetic.getArithmetic().toArray(String[]::new);
         String[] postfix = new String[infix.length];
         ArrayDeque<String> arrayDeque = new ArrayDeque<>();
         int index = 0;
@@ -32,37 +30,33 @@ public class Calculation {
         while (!arrayDeque.isEmpty()) {
             postfix[index++] = arrayDeque.pop();
         }
-        return new Arithmetic(postfix);
+        return new Arithmetic(new ArrayList<>(Arrays.asList(postfix)));
     }
 
-    public Optional<Double> doCalculation(Arithmetic postfix) {
-        String[] arithmetic = postfix.getArithmetic();
+    public double doCalculation(Arithmetic postfix) {
+        String[] arithmetic = postfix.getArithmetic().toArray(String[]::new);
         Deque<Double> deque = new ArrayDeque<>();
 
         for (String operandOrOperator : arithmetic) {
             if (RegularExpression.isNumeric(operandOrOperator)) {
                 deque.push(Double.parseDouble(operandOrOperator));
             } else {
-                Double b = deque.pop();
-                Double a = deque.pop();
-                Optional<Double> result = calc(a, b, operandOrOperator);
-                if (result.isEmpty()) {
-                    return Optional.empty();
-                } else {
-                    deque.push(result.get());
-                }
+                double b = deque.pop();
+                double a = deque.pop();
+                double result = calc(a, b, operandOrOperator);
+                deque.push(result);
             }
         }
-        return Optional.ofNullable(deque.poll());
+        return deque.pop();
     }
 
-    public Optional<Double> calc(Double operandA, Double operandB, String Operator) {
-        Optional<Double> result;
+    public double calc(double operandA, double operandB, String Operator) {
+        double result;
         switch (Operator) {
-            case "+" -> result = Optional.of(operandA + operandB);
-            case "-" -> result = Optional.of(operandA - operandB);
-            case "*" -> result = Optional.of(operandA * operandB);
-            case "/" -> result = Optional.of(operandA / operandB);
+            case "+" -> result = operandA + operandB;
+            case "-" -> result = operandA - operandB;
+            case "*" -> result = operandA * operandB;
+            case "/" -> result = operandA / operandB;
 
             default -> throw new IllegalStateException("Unexpected value: " + Operator);
         }
