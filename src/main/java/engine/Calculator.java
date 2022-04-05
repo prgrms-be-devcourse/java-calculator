@@ -63,7 +63,7 @@ public class Calculator implements Runnable {
 
         for (int i = 1; i < formula.length; i += 2) {
             String pushOper = formula[i];
-            double operand = Double.valueOf(formula[i + 1]);
+            double operand = Double.parseDouble(formula[i + 1]);
 
             if (!operatorStack.isEmpty()) {
                 Operator op = Operator.getOperator(operatorStack.peek());
