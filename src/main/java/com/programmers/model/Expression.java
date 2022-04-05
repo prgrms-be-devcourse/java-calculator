@@ -27,6 +27,9 @@ public class Expression {
     }
 
     public Double getCalcResult() {
+        if(calcResult == null) {
+            throw new IllegalStateException("연산에 대한 결과값은 연산 수행 후 조회가 가능합니다.");
+        }
         return calcResult;
     }
 
