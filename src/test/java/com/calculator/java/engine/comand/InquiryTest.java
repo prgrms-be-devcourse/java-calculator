@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InquiryTest {
-    Database database = new Database();
+    Database database = Database.getInstance();
     Command selection = new Inquiry(database);
 
     @Test

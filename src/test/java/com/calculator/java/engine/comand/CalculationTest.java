@@ -14,7 +14,7 @@ class CalculationTest {
     @ParameterizedTest(name = "{2}: {0} = {1}")
     @MethodSource("calculationTestParameter")
     void 연산_테스트(String exp, String result) {
-        Command calculation = new Calculation(exp, new Database());
+        Command calculation = new Calculation(exp, Database.getInstance());
 
         String calculationResult = calculation.doCommand();
 

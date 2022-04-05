@@ -14,11 +14,9 @@ import java.util.Optional;
 
 public class Calculator {
     private Console console;
-    private Database database;
 
-    public Calculator(Console console, Database database) {
+    public Calculator(Console console) {
         this.console = console;
-        this.database = database;
     }
 
     public void run() {
@@ -48,10 +46,10 @@ public class Calculator {
 
         switch (commandType) {
             case INQUIRY:
-                return Optional.of(new Inquiry(database));
+                return Optional.of(new Inquiry(Database.getInstance()));
             case CALCULATION:
                 String mathExpression = console.inputMathExpression();
-                return Optional.of(new Calculation(mathExpression, database));
+                return Optional.of(new Calculation(mathExpression, Database.getInstance()));
             default:
                 return Optional.empty();
         }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DatabaseTest {
-    Database database = new Database();
+    Database database = Database.getInstance();
 
     @Test
     void 데이터_조회_테스트() {
