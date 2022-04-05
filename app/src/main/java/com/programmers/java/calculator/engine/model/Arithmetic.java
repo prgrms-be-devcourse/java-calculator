@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+
 @ToString
 @AllArgsConstructor
 @Getter
 public class Arithmetic {
-    private String[] arithmetic;
+    private ArrayList<String> arithmetic;
 }
