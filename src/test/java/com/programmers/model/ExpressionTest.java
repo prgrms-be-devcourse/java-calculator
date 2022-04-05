@@ -7,6 +7,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ExpressionTest {
 
     @Test
+    public void 연산이_수행되지_않은상태에서_결과값을_가져올수없다() {
+        //given
+        String stringExpression = "1 + 2";
+        //when
+        Expression expression = new Expression(stringExpression);
+        //then
+        assertThatThrownBy(() -> expression.getCalcResult())
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("연산에 대한 결과값은 연산 수행 후 조회가 가능합니다.");
+    }
+
+    @Test
     public void 빈공백이_들어오면_오류가_발생한다(){
         //given
         String stringExpression = "";
