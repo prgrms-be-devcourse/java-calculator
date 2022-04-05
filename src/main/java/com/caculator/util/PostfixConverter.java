@@ -69,12 +69,12 @@ public class PostfixConverter {
     private static void executeOperatorProcess(String operator, List<String> postfix, Stack<String> stack) throws IllegalArgumentException {
         if (!Operator.isOperator(operator)) throw new IllegalArgumentException();
 
-        if (stack.isEmpty() || Operator.getPriority(stack.peek()) < Operator.getPriority(operator)) {
+        if (stack.isEmpty() || Priority.getPriority(stack.peek()) < Priority.getPriority(operator)) {
             stack.push(operator);
             return;
         }
 
-        while (!stack.isEmpty() && Operator.getPriority(stack.peek()) >= Operator.getPriority(operator)) {
+        while (!stack.isEmpty() && Priority.getPriority(stack.peek()) >= Priority.getPriority(operator)) {
             postfix.add(stack.pop());
         }
 

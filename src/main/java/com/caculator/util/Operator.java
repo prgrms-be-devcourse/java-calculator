@@ -4,19 +4,17 @@ import java.util.Arrays;
 import java.util.function.ToLongBiFunction;
 
 public enum Operator {
-    ADD("+", 1,(n1, n2) -> n1 + n2),
-    SUBTRACT("-", 1,(n1, n2) -> n1 - n2),
-    MULTIPLY("*", 2,(n1, n2) -> n1 * n2),
-    DIVIDE("/", 2,(n1, n2) -> n1 / n2);
+    ADD("+",(n1, n2) -> n1 + n2),
+    SUBTRACT("-", (n1, n2) -> n1 - n2),
+    MULTIPLY("*", (n1, n2) -> n1 * n2),
+    DIVIDE("/", (n1, n2) -> n1 / n2);
 
-    private final int priority;
     private final String operator;
     private final ToLongBiFunction<Long, Long> function;
 
-    Operator(String operator, int priority, ToLongBiFunction<Long, Long> function) {
+    Operator(String operator, ToLongBiFunction<Long, Long> function) {
         this.operator = operator;
         this.function = function;
-        this.priority = priority;
     }
 
     /**
@@ -43,16 +41,5 @@ public enum Operator {
     public static boolean isOperator(String s) {
         return Arrays.stream(Operator.values())
                 .anyMatch(operator -> operator.operator.equals(s));
-    }
-
-    /**
-     * operator 연산자의 우선 순위를 반환한다.
-     * @throws IllegalArgumentException : operator 가 연산자가 아닌 경우 던져진다.
-     */
-    public static int getPriority(String operatorStr) throws IllegalArgumentException {
-        return Arrays.stream(values())
-                .filter(op -> op.operator.equals(operatorStr))
-                .findAny().orElseThrow(IllegalArgumentException::new)
-                .priority;
     }
 }
