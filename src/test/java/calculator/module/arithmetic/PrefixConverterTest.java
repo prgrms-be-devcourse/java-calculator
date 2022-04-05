@@ -1,6 +1,6 @@
 package calculator.module.arithmetic;
 
-import calculator.DependencyConfigurer;
+import calculator.config.DependencyConfigurer;
 import calculator.model.expression.Expression;
 import calculator.model.expression.ExpressionFactory;
 import calculator.model.expression.ExpressionableToken;
@@ -14,7 +14,7 @@ import java.util.List;
 class PrefixConverterTest {
     private final PrefixConverter converter = new PrefixConverter();
     DependencyConfigurer dependencyConfigurer = new DependencyConfigurer();
-    ExpressionFactory expressionFactory = dependencyConfigurer.expressionFactory();
+    ExpressionFactory expressionFactory = dependencyConfigurer.createExpressionFactoryWithDependency();
 
     @ParameterizedTest
     @CsvFileSource(resources = "/prefix_converter-test-data.csv",delimiter = '=')
@@ -29,6 +29,6 @@ class PrefixConverterTest {
         }
 
         sb.deleteCharAt(sb.length()-1);
-        Assertions.assertThat(sb.toString()).isEqualTo(expected);
+        Assertions.assertThat(sb.toString()).hasToString(expected);
     }
 }

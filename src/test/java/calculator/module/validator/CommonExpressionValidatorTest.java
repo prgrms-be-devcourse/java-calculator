@@ -1,6 +1,6 @@
 package calculator.module.validator;
 
-import calculator.DependencyConfigurer;
+import calculator.config.DependencyConfigurer;
 import calculator.model.expression.Expression;
 import calculator.model.expression.ExpressionFactory;
 import calculator.module.validator.exception.InvalidExpressionException;
@@ -11,24 +11,20 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 class CommonExpressionValidatorTest {
     CommonExpressionValidator validator = new CommonExpressionValidator();
     DependencyConfigurer dependencyConfigurer = new DependencyConfigurer();
-    ExpressionFactory expressionFactory = dependencyConfigurer.expressionFactory();
+    ExpressionFactory expressionFactory = dependencyConfigurer.createExpressionFactoryWithDependency();
 
     @ParameterizedTest
     @CsvFileSource(resources = "/invalid-expression-data.csv")
-    public void validatorTestWithIncorrectData(String input) throws InvalidExpressionException {
+    void validatorTestWithIncorrectData(String input) throws InvalidExpressionException {
         Expression expression = expressionFactory.createExpression(input);
-        Assertions.assertThrows(InvalidExpressionException.class,()->{
-            validator.validateExpression(expression);
-        });
+        Assertions.assertThrows(InvalidExpressionException.class,()-> validator.validateExpression(expression));
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/valid-expression-data.csv")
-    public void validatorTestWithCorrectData(String input) throws InvalidExpressionException {
+    void validatorTestWithCorrectData(String input) throws InvalidExpressionException {
         Expression expression = expressionFactory.createExpression(input);
-        Assertions.assertDoesNotThrow(()->{
-            validator.validateExpression(expression);
-        });
+        Assertions.assertDoesNotThrow(()-> validator.validateExpression(expression));
     }
 
 }
