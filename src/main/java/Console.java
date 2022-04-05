@@ -32,7 +32,17 @@ public class Console implements InputConsole, OutputConsole {
     }
 
     @Override
-    public void inputError() {
+    public void inputErrorMessage() {
         System.out.println("잘못된 입력입니다.");
+    }
+
+    @Override
+    public void illegalArgumentErrorMessage() {
+        System.out.println("잘못된 연산자 입력입니다.");
+    }
+
+    @Override
+    public void arithmeticErrorMessage() {
+        System.out.println("0으로 나눌 수 없습니다.");
     }
 }

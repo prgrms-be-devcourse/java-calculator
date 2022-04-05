@@ -6,6 +6,9 @@ public interface OutputConsole {
 
     void formula(String formula);
 
-    void inputError();
+    void inputErrorMessage();
 
+    void illegalArgumentErrorMessage();
+
+    void arithmeticErrorMessage();
 }
