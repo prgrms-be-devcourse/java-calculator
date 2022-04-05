@@ -1,7 +1,5 @@
-import engine.Calculator;
-import engine.repository.CalculatorRepository;
 
-public class App {
+public class CalculatorApplication {
     public static void main(String[] args) {
         new AppConfig().calculator().run();
     }
