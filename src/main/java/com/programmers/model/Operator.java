@@ -39,6 +39,6 @@ public enum Operator {
     }
 
     public static boolean isMultiPlyOrDivide(String operator){
-        return operator.equals("*") || operator.equals("/");
+        return operator.equals(MULTIPLY.operator) || operator.equals(DIVIDE.operator);
     }
 }
