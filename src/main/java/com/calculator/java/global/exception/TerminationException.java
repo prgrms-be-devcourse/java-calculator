@@ -1,4 +1,4 @@
-package com.calculator.java.exception;
+package com.calculator.java.global.exception;
 
 public class TerminationException extends RuntimeException{
     public TerminationException() {

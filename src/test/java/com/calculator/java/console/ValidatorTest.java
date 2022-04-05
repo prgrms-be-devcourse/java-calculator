@@ -1,6 +1,7 @@
-package com.calculator.java;
+package com.calculator.java.console;
 
-import com.calculator.java.engine.comand.CommandTypes;
+import com.calculator.java.console.Validator;
+import com.calculator.java.global.Enum.CommandTypes;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

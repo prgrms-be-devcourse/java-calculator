@@ -1,7 +1,7 @@
-package com.calculator.java;
+package com.calculator.java.console;
 
-import com.calculator.java.engine.comand.CommandTypes;
-import com.calculator.java.exception.WrongInputException;
+import com.calculator.java.global.Enum.CommandTypes;
+import com.calculator.java.global.exception.WrongInputException;
 
 import java.io.*;
 import java.util.*;

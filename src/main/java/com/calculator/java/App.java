@@ -1,9 +1,11 @@
 package com.calculator.java;
 
 
+import com.calculator.java.console.Console;
+import com.calculator.java.console.Validator;
 import com.calculator.java.database.Database;
 import com.calculator.java.engine.Calculator;
-import com.calculator.java.engine.comand.CommandTypes;
+import com.calculator.java.global.Enum.CommandTypes;
 
 public class App {
     public static void main(String[] args)  {

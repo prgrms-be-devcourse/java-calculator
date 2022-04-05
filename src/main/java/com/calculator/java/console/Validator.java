@@ -1,6 +1,7 @@
-package com.calculator.java;
+package com.calculator.java.console;
 
-import com.calculator.java.engine.comand.CommandTypes;
+import com.calculator.java.global.Enum.CommandTypes;
+import com.calculator.java.global.Enum.Operators;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +48,6 @@ public class Validator {
     }
 
     private boolean isOperator(String element) {
-        List<String> operators = Arrays.asList("+", "-", "*", "/");
-        return operators.contains(element);
+        return Operators.containsOperator(element);
     }
 }
