@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CalculateServiceTest {
 
@@ -34,5 +35,14 @@ class CalculateServiceTest {
 
         // then
         assertEquals(-9, result);
+    }
+
+    @Test
+    @DisplayName("분모가 0인 경우")
+    void divisionByZero() {
+        String input = "3 / 0";
+
+        Exception exception = assertThrows(ArithmeticException.class, () -> calculateService.CalValue(input));
+        assertEquals("0으로 나눌 수 없습니다.", exception.getMessage());
     }
 }
