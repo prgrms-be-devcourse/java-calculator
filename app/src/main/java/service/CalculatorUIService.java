@@ -10,6 +10,9 @@ public class CalculatorUIService {
     ResultRepository resultRepository = new ResultRepository();
     CalculateService calculateService = new CalculateService();
 
+    private static final int RECORD = 1;
+    private static final int CALCULATE = 2;
+
 
     public void showInterface() {
         Scanner scanner = new Scanner(System.in);
@@ -18,20 +21,27 @@ public class CalculatorUIService {
         while (true) {
             expId += 1;
 
-            System.out.println("1. 조회");
-            System.out.println("2. 계산");
-            System.out.print("선택 : ");
+            showMenu();
 
-            int number = Integer.parseInt(scanner.nextLine());
+            String selectMenu = scanner.nextLine();
+            boolean isNumeric = selectMenu.chars().allMatch(Character::isDigit);
+            if (!isNumeric) {
+                System.out.println("숫자를 입력해주세요.");
+                continue;
+            }
+
+            int menu = Integer.parseInt(selectMenu);
+
             System.out.println();
-            if (number != 1 && number != 2) {
+
+            if (menu != RECORD && menu != CALCULATE) {
                 System.out.println("1과 2중에서만 골라주세요. :)");
                 continue;
             }
 
-            if (number == 1) {
+            if (menu == RECORD) {
                 resultRepository.showRecord();
-            } else if (number == 2) {
+            } else {
                 String userInput = scanner.nextLine();
                 double result = calculateService.CalValue(userInput);
                 System.out.println(result);
@@ -41,5 +51,11 @@ public class CalculatorUIService {
 
             }
         }
+    }
+
+    private void showMenu() {
+        System.out.println("1. 조회");
+        System.out.println("2. 계산");
+        System.out.print("선택 : ");
     }
 }
