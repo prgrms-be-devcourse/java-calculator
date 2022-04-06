@@ -40,7 +40,7 @@ public class CalculatorUIService {
             }
 
             if (menu == RECORD) {
-                resultRepository.showRecord();
+                calculateService.showRecord();
             } else {
                 String userInput = scanner.nextLine();
                 double result = calculateService.CalValue(userInput);
