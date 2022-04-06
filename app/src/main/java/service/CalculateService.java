@@ -1,5 +1,7 @@
 package service;
 
+import repository.ResultRepository;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,13 +38,19 @@ public class CalculateService {
 
         for (int i = 1; i < calList.size(); i += 2) {
             if (calList.get(i).equals("+")) {
-                result += Double.valueOf(calList.get(i+1));
+                result += Double.valueOf(calList.get(i + 1));
             } else if (calList.get(i).equals("-")) {
-                result -= Double.valueOf(calList.get(i+1));
+                result -= Double.valueOf(calList.get(i + 1));
             }
         }
 
 
         return result;
+    }
+    public void showRecord() {
+
+        for (Long key : ResultRepository.db.keySet()) {
+            System.out.println(ResultRepository.db.get(key).getExpressionWithResult());
+        }
     }
 }
