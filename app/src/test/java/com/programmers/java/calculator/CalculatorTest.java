@@ -9,8 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,9 +25,9 @@ public class CalculatorTest {
     @Test
     public void checkToPostfix() {
         //given
-        Arithmetic arithmetic1 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "+", "2", "*", "3", "-", "4")));
-        Arithmetic arithmetic2 = new Arithmetic(new ArrayList<>(Arrays.asList("100", "+", "-200", "+", "-300", "+", "-400")));
-        Arithmetic arithmetic3 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "/", "2", "*", "3", "-", "4")));
+        Arithmetic arithmetic1 = new Arithmetic(List.of("1", "+", "2", "*", "3", "-", "4"));
+        Arithmetic arithmetic2 = new Arithmetic(List.of("100", "+", "-200", "+", "-300", "+", "-400"));
+        Arithmetic arithmetic3 = new Arithmetic(List.of("1", "/", "2", "*", "3", "-", "4"));
 
         String[] answer1 = (new String[]{"1", "2", "3", "*", "+", "4", "-"});
         String[] answer2 = (new String[]{"100", "-200", "+", "-300", "+", "-400", "+"});
@@ -49,9 +48,9 @@ public class CalculatorTest {
     @Test
     public void checkCalculation() {
         //given
-        Arithmetic arithmetic1 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "2", "3", "*", "+", "4", "-")));
-        Arithmetic arithmetic2 = new Arithmetic(new ArrayList<>(Arrays.asList("100", "-200", "+", "-300", "+", "-400", "+")));
-        Arithmetic arithmetic3 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "2", "/", "3", "*", "4", "-")));
+        Arithmetic arithmetic1 = new Arithmetic(List.of("1", "2", "3", "*", "+", "4", "-"));
+        Arithmetic arithmetic2 = new Arithmetic(List.of("100", "-200", "+", "-300", "+", "-400", "+"));
+        Arithmetic arithmetic3 = new Arithmetic(List.of("1", "2", "/", "3", "*", "4", "-"));
 
         Double answer1 = 3.0;
         Double answer2 = -800.0;
@@ -72,9 +71,9 @@ public class CalculatorTest {
     @Test
     public void checkDivisionByZero() {
         //given
-        Arithmetic arithmetic1 = new Arithmetic(new ArrayList<>(Arrays.asList("1", "0", "/")));
-        Arithmetic arithmetic2 = new Arithmetic(new ArrayList<>(Arrays.asList("-1", "0", "/")));
-        Arithmetic arithmetic3 = new Arithmetic(new ArrayList<>(Arrays.asList("0", "0", "/")));
+        Arithmetic arithmetic1 = new Arithmetic(List.of("1", "0", "/"));
+        Arithmetic arithmetic2 = new Arithmetic(List.of("-1", "0", "/"));
+        Arithmetic arithmetic3 = new Arithmetic(List.of("0", "0", "/"));
 
         //when
         Double result1 = calculation.doCalculation(arithmetic1);
