@@ -13,7 +13,7 @@ public class InputParser {
 
     public String[] parse(String inputFormula) {
         if (inputFormula == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("계산식이 입력되지 않았습니다.");
         }
         String[] splittedInputFormula = inputFormula.split(seperator);
 
