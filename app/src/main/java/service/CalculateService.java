@@ -48,7 +48,6 @@ public class CalculateService {
         return result;
     }
     public void showRecord() {
-
         for (Long key : ResultRepository.db.keySet()) {
             System.out.println(ResultRepository.db.get(key).getExpressionWithResult());
         }
