@@ -15,7 +15,7 @@ public class Console {
     }
 
     public void outputChoiceMessage() {
-        System.out.println("1. 조회\n2. 계산\n");
+        System.out.println("0. 종료\n1. 조회\n2. 계산\n");
     }
 
     public void outputCalculationResult(Double input) {
