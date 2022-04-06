@@ -7,34 +7,34 @@ import java.util.*;
 
 public class Calculation {
     public Arithmetic toPostfix(Arithmetic arithmetic) {
-        String[] infix = arithmetic.getArithmetic().toArray(String[]::new);
-        String[] postfix = new String[infix.length];
-        ArrayDeque<String> arrayDeque = new ArrayDeque<>();
+        List<String> infix = arithmetic.getArithmetic();
+        String[] postfix = new String[infix.size()];
+        Deque<String> arrayDeque = new ArrayDeque<>();
         int index = 0;
 
-        for (int i = 0; i < infix.length; i++) {
+        for (int i = 0; i < infix.size(); i++) {
             if (i % 2 == 0) {
-                postfix[index++] = (infix[i]);
+                postfix[index++] = infix.get(i);
             } else {
                 if (!arrayDeque.isEmpty()) {
-                    if (!(RegularExpression.isSum(arrayDeque.peek()) && RegularExpression.isMulti(infix[i]))) {
+                    if (!(RegularExpression.isSum(arrayDeque.peek()) && RegularExpression.isMulti(infix.get(i)))) {
                         while (!arrayDeque.isEmpty()) {
                             postfix[index++] = arrayDeque.pop();
                         }
                     }
                 }
-                arrayDeque.push(infix[i]);
+                arrayDeque.push(infix.get(i));
             }
         }
 
         while (!arrayDeque.isEmpty()) {
             postfix[index++] = arrayDeque.pop();
         }
-        return new Arithmetic(new ArrayList<>(Arrays.asList(postfix)));
+        return new Arithmetic((List.of(postfix)));
     }
 
     public double doCalculation(Arithmetic postfix) {
-        String[] arithmetic = postfix.getArithmetic().toArray(String[]::new);
+        List<String> arithmetic = postfix.getArithmetic();
         Deque<Double> deque = new ArrayDeque<>();
 
         for (String operandOrOperator : arithmetic) {
