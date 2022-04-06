@@ -7,7 +7,7 @@ import java.util.*;
 public class ResultRepository {
 
 
-    private static Map<Long, Expression> db = new HashMap<>();
+    public static Map<Long, Expression> db = new HashMap<>();
 
     public void save(Expression expression) {
         db.put(expression.getId(), expression);
