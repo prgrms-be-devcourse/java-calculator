@@ -23,9 +23,10 @@ public class RepositoryTest {
     @Test
     void testSave() {
         //given
-        repository.save("2 + 3 = 5");
-
         String result = "2 + 3 = 5";
+
+        //when
+        repository.save(result);
 
         //then
         assertThat(repository.findById(0L)).isEqualTo(result);
@@ -34,12 +35,17 @@ public class RepositoryTest {
     @Test
     void testPrint() {
         //given
-        repository.save("2 + 3 = 5");
-        repository.save("8 * 20 = 160");
-        repository.save("-3 - -5 = 2");
-        repository.printLog();
+        String arithmetic = "2 + 3 = 5";
+        String arithmetic2 = "8 * 20 = 160";
+        String arithmetic3 = "-3 - -5 = 2";
 
         String result = "2 + 3 = 5" + lineSeparator() + "8 * 20 = 160" + lineSeparator() + "-3 - -5 = 2";
+
+        //when
+        repository.save(arithmetic);
+        repository.save(arithmetic2);
+        repository.save(arithmetic3);
+        repository.printLog();
 
         //then
         assertThat(outputStream.toString().trim()).isEqualTo(result);
