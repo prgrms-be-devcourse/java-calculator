@@ -1,19 +1,22 @@
 package calculator.engine.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HistoryDatabase {
-    private ArrayList<String> histories;
+    private static int count;
+    private Map<Integer, String> histories;
 
     public HistoryDatabase() {
-        this.histories = new ArrayList<>();
+        count = 0;
+        this.histories = new HashMap<>();
     }
 
     public void addHistory(String arith, Double result) {
-        histories.add(arith + " = " + Math.round(result * 1000) / 1000.0);
+        histories.put(++count, arith + " = " + Math.round(result * 1000) / 1000.0);
     }
 
-    public ArrayList<String> getHistories() {
+    public Map<Integer, String> getHistories() {
         return this.histories;
     }
 }

@@ -4,7 +4,7 @@ import calculator.engine.io.Input;
 import calculator.engine.io.Output;
 import calculator.engine.model.Menu;
 
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -33,9 +33,9 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void calcHistory(ArrayList<String> histories) {
-        for (String s : histories) {
-            System.out.println(s);
-        }
+    public void calcHistory(Map<Integer, String> histories) {
+        histories.forEach((id, value) -> {
+            System.out.println(id + ": " + value);
+        });
     }
 }

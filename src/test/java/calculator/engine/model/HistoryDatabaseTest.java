@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -23,9 +23,13 @@ public class HistoryDatabaseTest {
     void testAddHistory() {
         database.addHistory("3*(4+1)-5+9/2", 14.5);
         database.addHistory("43+23/8+(2+9)*11", 166.8);
-        ArrayList<String> result = database.getHistories();
+        Map<Integer, String> result = database.getHistories();
 
-        assertThat(result).isEqualTo(new ArrayList<String>(Arrays.asList("3*(4+1)-5+9/2 = 14.5", "43+23/8+(2+9)*11 = 166.8")));
+        Map<Integer, String> test = new HashMap<>();
+        test.put(1, "3*(4+1)-5+9/2 = 14.5");
+        test.put(2, "43+23/8+(2+9)*11 = 166.8");
+
+        assertThat(result).isEqualTo(test);
     }
 
 }
