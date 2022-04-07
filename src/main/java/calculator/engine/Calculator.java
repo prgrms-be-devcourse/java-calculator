@@ -6,16 +6,20 @@ import calculator.engine.model.HistoryDatabase;
 import calculator.engine.model.Menu;
 import calculator.engine.model.PostfixCalculator;
 import calculator.engine.model.PostfixConverter;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 public class Calculator implements Runnable {
     private final Input input;
     private final Output output;
     private final HistoryDatabase database;
+
+    public Calculator(Input input, Output output, HistoryDatabase database) {
+        this.input = input;
+        this.output = output;
+        this.database = database;
+    }
 
     @Override
     public void run() {
