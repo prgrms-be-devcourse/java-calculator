@@ -41,10 +41,7 @@ public class Calculator implements Runnable {
             String arith = input.inputArith();
 
             // 계산
-            String[] infix = Input.parse(arith);
-            ArrayList<String> postfix = PostfixConverter.convertToPostfix(infix);
-            System.out.println(postfix);
-            Double result = PostfixCalculator.getResult(postfix);
+            Double result = calculate(arith);
 
             // 계산 결과 저장
             database.addHistory(arith, result);
@@ -52,5 +49,11 @@ public class Calculator implements Runnable {
             // 계산 결과 출력
             output.calcResult(result);
         }
+    }
+
+    private Double calculate(String arith) {
+        String[] infix = Input.parse(arith);
+        ArrayList<String> postfix = PostfixConverter.convertToPostfix(infix);
+        return PostfixCalculator.getResult(postfix);
     }
 }
