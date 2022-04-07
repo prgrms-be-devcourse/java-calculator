@@ -8,7 +8,7 @@ import calculator.engine.model.PostfixCalculator;
 import calculator.engine.model.PostfixConverter;
 import lombok.AllArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -54,7 +54,8 @@ public class Calculator implements Runnable {
 
     private Double calculate(String arith) {
         String[] infix = Input.parse(arith);
-        ArrayList<String> postfix = PostfixConverter.convertToPostfix(infix);
+        var postfixConverter = new PostfixConverter();
+        List<String> postfix = postfixConverter.convertToPostfix(infix);
         return PostfixCalculator.getResult(postfix);
     }
 }

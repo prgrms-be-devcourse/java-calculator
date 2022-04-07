@@ -1,12 +1,9 @@
 package calculator.engine.model;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.Stack;
+import java.util.*;
 
 public interface PostfixCalculator {
-    static Double getResult(ArrayList<String> postfix) {
+    static Double getResult(List<String> postfix) {
         Deque<Double> stack = new ArrayDeque<>();
 
         for (String token : postfix) {
