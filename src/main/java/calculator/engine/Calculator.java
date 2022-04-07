@@ -21,15 +21,16 @@ public class Calculator implements Runnable {
     public void run() {
 
         while (true) {
+            // 메뉴 선택 입력
             Optional<Menu> selectedMenu = input.inputMenu();
 
             // '1. 조회'나 '2. 계산'인 경우
-            if (selectedMenu.isPresent()) {
-                runCalculator(selectedMenu.get());
-            } else {        // 종료
-                break;
-            }
-
+            selectedMenu.ifPresentOrElse(menu -> {
+                        runCalculator(menu);        // 계산기 실행
+                    }, () -> {
+                        System.exit(0);        // 종료
+                    }
+            );
         }
     }
 
