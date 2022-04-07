@@ -12,4 +12,8 @@ public class ResultRepository {
         db.put(expression.getId(), expression);
     }
 
+    public List<Expression> findAll() {
+        return new ArrayList<>(db.values());
+    }
+
 }
