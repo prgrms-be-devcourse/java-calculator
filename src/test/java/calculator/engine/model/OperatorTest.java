@@ -3,6 +3,8 @@ package calculator.engine.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class OperatorTest {
@@ -39,22 +41,10 @@ public class OperatorTest {
     @DisplayName("우선순위 비교 테스트")
     void testComparePriority() {
         Operator operator = Operator.PLUS;
-        assertThat(operator.comparePriority(Operator.PLUS)).isEqualTo(0);
-        assertThat(operator.comparePriority(Operator.MINUS)).isEqualTo(0);
-        assertThat(operator.comparePriority(Operator.MULTIPLY)).isEqualTo(-1);
-        assertThat(operator.comparePriority(Operator.DIVIDE)).isEqualTo(-1);
+        assertThat(operator.comparePriority(Optional.of(Operator.PLUS))).isEqualTo(0);
+        assertThat(operator.comparePriority(Optional.of(Operator.MINUS))).isEqualTo(0);
+        assertThat(operator.comparePriority(Optional.of(Operator.MULTIPLY))).isEqualTo(-1);
+        assertThat(operator.comparePriority(Optional.of(Operator.DIVIDE))).isEqualTo(-1);
     }
 
-    @Test
-    @DisplayName("우선순위 반환 테스트")
-    void testGetPriority() {
-        Operator op1 = Operator.PLUS;
-        Operator op2 = Operator.MINUS;
-        Operator op3 = Operator.MULTIPLY;
-        Operator op4 = Operator.DIVIDE;
-        assertThat(op1.getPriority()).isEqualTo(1);
-        assertThat(op2.getPriority()).isEqualTo(1);
-        assertThat(op3.getPriority()).isEqualTo(2);
-        assertThat(op4.getPriority()).isEqualTo(2);
-    }
 }

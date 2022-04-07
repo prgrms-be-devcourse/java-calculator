@@ -30,12 +30,11 @@ public interface PostfixConverter {
                 }
                 stack.pop();
             }
-
-            // 연산자인 경우
+            
             else {
                 while (!stack.isEmpty() &&
                         !Operator.getOperator(stack.peek()).isEmpty() &&
-                        Operator.getOperator(s).get().comparePriority(Operator.getOperator(stack.peek()).get()) <= 0) {
+                        Operator.getOperator(s).get().comparePriority(Operator.getOperator(stack.peek())) <= 0) {
                     result.add(stack.pop());
                 }
                 stack.push(s);
