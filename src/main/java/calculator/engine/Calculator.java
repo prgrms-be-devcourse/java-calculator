@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
-    private Input input;
-    private Output output;
-    private HistoryDatabase database;
+    private final Input input;
+    private final Output output;
+    private final HistoryDatabase database;
 
     @Override
     public void run() {
