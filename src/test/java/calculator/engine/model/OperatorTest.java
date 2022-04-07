@@ -2,6 +2,8 @@ package calculator.engine.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Optional;
 
@@ -27,14 +29,11 @@ public class OperatorTest {
         assertThat(Operator.getOperator("/").get()).isEqualTo(Operator.DIVIDE);
     }
 
-    @Test
     @DisplayName("Operator(+, -, *, /) 인지 체크")
-    void testIsOperator() {
-        assertThat(Operator.isOperator("@")).isEqualTo(false);
-        assertThat(Operator.isOperator("+")).isEqualTo(true);
-        assertThat(Operator.isOperator("-")).isEqualTo(true);
-        assertThat(Operator.isOperator("*")).isEqualTo(true);
-        assertThat(Operator.isOperator("/")).isEqualTo(true);
+    @ParameterizedTest
+    @ValueSource(strings = {"+", "-", "*", "/"})
+    void testIsOperator(String  token) {
+        assertThat(Operator.isOperator(token)).isEqualTo(true);
     }
 
     @Test
