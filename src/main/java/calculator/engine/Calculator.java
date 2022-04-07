@@ -3,11 +3,13 @@ package calculator.engine;
 import calculator.engine.io.Input;
 import calculator.engine.io.Output;
 import calculator.engine.model.HistoryDatabase;
+import calculator.engine.model.Menu;
 import calculator.engine.model.PostfixCalculator;
 import calculator.engine.model.PostfixConverter;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
@@ -19,28 +21,36 @@ public class Calculator implements Runnable {
     public void run() {
 
         while (true) {
-            String selectedMenu = input.input("\n1. 조회\n2. 계산\n(1, 2 이외의 문자를 입력하면 종료됩니다.)\n\n\n선택 :");
+            Optional<Menu> selectedMenu = input.inputMenu();
 
-            if (selectedMenu.equals("1") || selectedMenu.equals("조회")) {
-                output.calcHistory(database.getHistories());
-            } else if (selectedMenu.equals("2") || selectedMenu.equals("계산")) {
-                // 입력받음
-                String arith = input.input("계산식을 입력해주세요: ");
-
-                // 계산
-                String[] infix = Input.parse(arith);
-                ArrayList<String> postfix = PostfixConverter.convertToPostfix(infix);
-                System.out.println(postfix);
-                Double result = PostfixCalculator.getResult(postfix);
-
-                // 계산 결과 저장
-                database.addHistory(arith, result);
-
-                // 계산 결과 출력
-                output.calcResult(result);
-            } else {
+            // '1. 조회'나 '2. 계산'인 경우
+            if (selectedMenu.isPresent()) {
+                runCalculator(selectedMenu.get());
+            } else {        // 종료
                 break;
             }
+
+        }
+    }
+
+    private void runCalculator(Menu selectedMenu) {
+        if (selectedMenu.equals(Menu.INQUIRY)) {
+            output.calcHistory(database.getHistories());
+        } else {
+            // 입력받음
+            String arith = input.inputArith();
+
+            // 계산
+            String[] infix = Input.parse(arith);
+            ArrayList<String> postfix = PostfixConverter.convertToPostfix(infix);
+            System.out.println(postfix);
+            Double result = PostfixCalculator.getResult(postfix);
+
+            // 계산 결과 저장
+            database.addHistory(arith, result);
+
+            // 계산 결과 출력
+            output.calcResult(result);
         }
     }
 }
