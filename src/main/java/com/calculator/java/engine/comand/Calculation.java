@@ -10,8 +10,9 @@ import java.util.StringTokenizer;
 
 public class Calculation implements Command {
     private final String IMPOSSIBLE = "계산할 수 없습니다.";
+
     private final Database database;
-    private String mathExpression;
+    private final String mathExpression;
     
     public Calculation(String mathExpression, Database database) {
         this.mathExpression = mathExpression;

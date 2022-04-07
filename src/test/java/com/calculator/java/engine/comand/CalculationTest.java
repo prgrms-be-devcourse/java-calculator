@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculationTest {
-
     @ParameterizedTest(name = "{2}: {0} = {1}")
     @MethodSource("calculationTestParameter")
     void 연산_테스트(String exp, String result) {
@@ -21,7 +20,7 @@ class CalculationTest {
         assertThat(calculationResult).isEqualTo(result);
     }
 
-    private static Stream<Arguments> calculationTestParameter()throws Throwable {
+    private static Stream<Arguments> calculationTestParameter() {
         return Stream.of(
                 Arguments.of("11 + 22", "33", "더하기"),
                 Arguments.of("11 + 22 + 33 + -22 + 44 + 55", "143", "더하기"),
