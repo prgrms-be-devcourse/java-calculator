@@ -21,9 +21,6 @@ dependencies {
 
 }
 
-application {
-    mainClass = 'java.calculator.App'
-}
 
 tasks.named('test') {
     useJUnitPlatform()
