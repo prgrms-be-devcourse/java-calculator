@@ -30,7 +30,7 @@ class HistoryServiceImplTest {
         historyService.save(formula, result);
 
         //then
-        org.junit.jupiter.api.Assertions.assertNotNull(repository.findAll().get(0));
+        Assertions.assertThat(repository.findAll().get(0)).isNotEqualTo(null);
         Assertions.assertThat(repository.findAll().get(0).getFormula()).isEqualTo(formula);
         Assertions.assertThat(repository.findAll().get(0).getResult()).isEqualTo(result);
     }
