@@ -2,10 +2,11 @@ package Calculator;
 
 import Calculate.*;
 import IO.*;
+import Result.ErrorCode;
+import Result.Result;
 import Validator.*;
 import Record.*;
 import lombok.RequiredArgsConstructor;
-
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -18,35 +19,41 @@ public class Calculator{
     private final RecordRepository recordRepository;
 
     public boolean calculatorProcess(Menu menu) {
+        Result result = null;
         switch (menu) {
             case RECORD:
-                recordProcess();
+                result = recordProcess();
                 break;
             case CALC:
-                calcProcess();
+                result = calcProcess();
                 break;
             case ERROR:
-                output.errorPrint(ErrorCode.INVALID_MENU_NUMBER);
+                result = new Result(ErrorCode.INVALID_MENU_NUMBER);
                 break;
             case EXIT:
                 return false;
         }
+        if (result.hasError()) {
+            result.printError();
+        }
         return true;
     }
 
-    private void calcProcess() {
+    private Result calcProcess() {
         String expression = input.input("수식을 입력해주세요").replaceAll(" ","");
         if (!check(expression)) {
-            return;
+            return new Result(ErrorCode.INVALID_EXPRESS);
         }
         long calcResult = calc(expression);
         output.output(String.valueOf(calcResult));
         recordRepository.save(new Record(expression + " = " + calcResult));
+        return new Result();
     }
 
-    private void recordProcess() {
+    private Result recordProcess() {
         Map<Long, Record> recordMap = recordRepository.findAll();
         output.allCalcRecord(recordMap);
+        return new Result();
     }
 
     private boolean check(String expression) {
@@ -77,6 +84,4 @@ public class Calculator{
         long calcResult = calculate.calc(expression);
         return calcResult;
     }
-
-
 }
