@@ -13,7 +13,6 @@ public class StackCalculate implements Calculate{
 
     @Override
     public long calc(String expression) {
-
         List<Long> numbers = stringArrToListLong(
                 expression.split(RegularExpressionType.OPERATION_EXPRESSION.getRegExp())
         );
@@ -69,8 +68,10 @@ public class StackCalculate implements Calculate{
     }
 
     private List<Long> stringArrToListLong(String[] numberString) {
+        final String spacing = " ";
+        final String noSpacing ="";
         return Arrays.stream(numberString)
-                .map(str -> str.replaceAll(" ",""))
+                .map(str -> str.replaceAll(spacing,noSpacing))
                 .map(Long::parseLong)
                 .collect(Collectors.toList());
     }
