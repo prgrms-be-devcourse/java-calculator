@@ -27,9 +27,6 @@ public class Calculator{
             case CALC:
                 result = calcProcess();
                 break;
-            case ERROR:
-                result = new Result(ErrorCode.INVALID_MENU_NUMBER);
-                break;
             case EXIT:
                 return false;
         }

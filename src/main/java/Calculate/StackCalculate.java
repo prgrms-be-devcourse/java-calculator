@@ -77,10 +77,10 @@ public class StackCalculate implements Calculate{
     }
 
     private List<Operation> stringArrToListOperation(String[] operationString) {
+        operationString = Arrays.copyOfRange(operationString, 1, operationString.length);
         List<Operation> collect = Arrays.stream(operationString)
                 .map(Operation::getOperation)
                 .collect(Collectors.toList());
-        collect.remove(0);
         return collect;
     }
 }

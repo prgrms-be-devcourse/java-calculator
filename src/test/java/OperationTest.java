@@ -11,7 +11,7 @@ class OperationTest {
     void _1() {
         String symbol = "+";
         Operation op = Operation.getOperation(symbol);
-        assertThat(op.getSymbol().equals(symbol));
+        assertThat(op.getType().equals(symbol));
     }
 
     @Test
@@ -19,7 +19,7 @@ class OperationTest {
     void _2() {
         String symbol = "*";
         Operation op = Operation.getOperation(symbol);
-        assertThat(op.getSymbol().equals(symbol));
+        assertThat(op.getType().equals(symbol));
     }
 
     @Test
@@ -27,7 +27,7 @@ class OperationTest {
     void _3() {
         String symbol = "-";
         Operation op = Operation.getOperation(symbol);
-        assertThat(op.getSymbol().equals(symbol));
+        assertThat(op.getType().equals(symbol));
     }
 
     @Test
@@ -35,7 +35,7 @@ class OperationTest {
     void _4() {
         String symbol = "/";
         Operation op = Operation.getOperation(symbol);
-        assertThat(op.getSymbol().equals(symbol));
+        assertThat(op.getType().equals(symbol));
     }
 
     @Test

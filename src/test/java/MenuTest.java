@@ -23,13 +23,6 @@ class MenuTest {
     }
 
     @Test
-    @DisplayName("문자열 asd로 error 메뉴얼을 가져온다")
-    public void _3() {
-        String s = "asd";
-        Menu menu = Menu.getManual(s);
-        assertThat(menu).isEqualTo(Menu.ERROR);
-    }
-    @Test
 
     @DisplayName("문자열 3로 exit 메뉴얼을 가져온다")
     public void _4() {

@@ -1,5 +1,6 @@
 package Calculator;
 
+import Config.EnumInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -7,23 +8,20 @@ import java.util.Arrays;
 
 @RequiredArgsConstructor
 @Getter
-public enum OperationPriority {
-    ADD(Operation.ADD, 1),
-    MINUS(Operation.MINUS, 1),
-    MUL(Operation.MUL, 2),
-    DIV(Operation.DIV, 2);
+public enum OperationPriority implements EnumInterface {
+    ADD("+", 1),
+    MINUS("-", 1),
+    MUL("*", 2),
+    DIV("/", 2);
 
-    private final Operation operation;
+    private final String type;
     private final int priority;
 
-    public static int getPriorityByOperation(Operation operation) {
-        return Arrays.stream(OperationPriority.values())
-                .filter(operationPriority -> operationPriority.getOperation().equals(operation))
-                .findFirst()
-                .get().getPriority();
+    public static int getPriorityByOperation(String type) {
+        return EnumInterface.find(type, values()).getPriority();
     }
 
     public static boolean compareByOperation(Operation operation1, Operation operation2) {
-        return getPriorityByOperation(operation1) < getPriorityByOperation(operation2);
+        return getPriorityByOperation(operation1.getType()) < getPriorityByOperation(operation2.getType());
     }
 }
