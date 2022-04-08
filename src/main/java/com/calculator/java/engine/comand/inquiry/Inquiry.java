@@ -1,6 +1,7 @@
-package com.calculator.java.engine.comand;
+package com.calculator.java.engine.comand.inquiry;
 
 import com.calculator.java.database.Database;
+import com.calculator.java.engine.comand.Command;
 
 import java.util.List;
 

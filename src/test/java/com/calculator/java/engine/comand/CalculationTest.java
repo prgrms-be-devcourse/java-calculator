@@ -1,6 +1,8 @@
 package com.calculator.java.engine.comand;
 
 import com.calculator.java.database.Database;
+import com.calculator.java.engine.comand.calculation.Calculation;
+import com.calculator.java.engine.comand.calculation.MathExpression;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,7 +15,7 @@ class CalculationTest {
     @ParameterizedTest(name = "{2}: {0} = {1}")
     @MethodSource("calculationTestParameter")
     void 연산_테스트(String exp, String result) {
-        Command calculation = new Calculation(exp, Database.getInstance());
+        Command calculation = new Calculation(new MathExpression(exp), Database.getInstance());
 
         String calculationResult = calculation.doCommand();
 

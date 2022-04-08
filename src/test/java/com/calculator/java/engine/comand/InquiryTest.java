@@ -1,6 +1,7 @@
 package com.calculator.java.engine.comand;
 
 import com.calculator.java.database.Database;
+import com.calculator.java.engine.comand.inquiry.Inquiry;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

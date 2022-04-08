@@ -1,13 +1,14 @@
 package com.calculator.java.engine;
 
 import com.calculator.java.console.Console;
+import com.calculator.java.engine.comand.calculation.MathExpression;
 import com.calculator.java.global.Enum.CommandTypes;
 import com.calculator.java.global.exception.TerminationException;
 import com.calculator.java.global.exception.WrongInputException;
 import com.calculator.java.database.Database;
-import com.calculator.java.engine.comand.Calculation;
+import com.calculator.java.engine.comand.calculation.Calculation;
 import com.calculator.java.engine.comand.Command;
-import com.calculator.java.engine.comand.Inquiry;
+import com.calculator.java.engine.comand.inquiry.Inquiry;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class Calculator {
                 return Optional.of(new Inquiry(Database.getInstance()));
             case CALCULATION:
                 String mathExpression = console.inputMathExpression();
-                return Optional.of(new Calculation(mathExpression, Database.getInstance()));
+                return Optional.of(new Calculation(new MathExpression(mathExpression), Database.getInstance()));
             default:
                 return Optional.empty();
         }

@@ -1,7 +1,8 @@
-package com.calculator.java.engine.comand;
+package com.calculator.java.engine.comand.calculation;
 
 
 import com.calculator.java.database.Database;
+import com.calculator.java.engine.comand.Command;
 import com.calculator.java.global.Enum.Operators;
 
 import java.util.ArrayList;
@@ -11,10 +12,10 @@ import java.util.StringTokenizer;
 public class Calculation implements Command {
     private final String IMPOSSIBLE = "계산할 수 없습니다.";
 
+    private final MathExpression mathExpression;
     private final Database database;
-    private final String mathExpression;
-    
-    public Calculation(String mathExpression, Database database) {
+
+    public Calculation(MathExpression mathExpression, Database database) {
         this.mathExpression = mathExpression;
         this.database = database;
     }
@@ -28,14 +29,14 @@ public class Calculation implements Command {
         }else{
             String result = handleResultFormat(plusAndMinus(elements));
 
-            saveResult(mathExpression, result);
+            saveResult(result);
 
             return result;
         }
     }
 
     private boolean multiplyAndDivide(List<String> elements) {
-        StringTokenizer st = new StringTokenizer(mathExpression);
+        StringTokenizer st = new StringTokenizer(mathExpression.getMathExpression());
         int numOfElements = st.countTokens();
 
         for (int i = 0; i < numOfElements; i++) {
@@ -93,7 +94,7 @@ public class Calculation implements Command {
         }
     }
 
-    private void saveResult(String mathExpression, String result) {
-        database.add(mathExpression, result);
+    private void saveResult(String result) {
+        database.add(mathExpression.getMathExpression(), result);
     }
 }
