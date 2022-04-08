@@ -10,14 +10,13 @@ import java.util.function.BiFunction;
 @Getter
 @RequiredArgsConstructor
 public enum Operation{
-    ADD("+", (num1, num2) -> num1 + num2, 1),
-    MINUS("-", (num1, num2) -> num1 - num2, 1),
-    MUL("*", (num1, num2) -> num1 * num2, 2),
-    DIV("/", (num1, num2) -> num1 / num2, 2);
+    ADD("+", (num1, num2) -> num1 + num2),
+    MINUS("-", (num1, num2) -> num1 - num2),
+    MUL("*", (num1, num2) -> num1 * num2),
+    DIV("/", (num1, num2) -> num1 / num2);
 
     private final String symbol;
     private final BiFunction<Long, Long, Long> expression;
-    private final int priority;
     private static final Map<String, Operation> map = new HashMap<>();
 
     static {
