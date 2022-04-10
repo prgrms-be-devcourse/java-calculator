@@ -7,7 +7,7 @@ import com.calculator.java.global.exception.TerminationException;
 import com.calculator.java.global.exception.WrongInputException;
 import com.calculator.java.database.Database;
 import com.calculator.java.engine.comand.calculation.Calculation;
-import com.calculator.java.engine.comand.Command;
+import com.calculator.java.engine.comand.Commandable;
 import com.calculator.java.engine.comand.inquiry.Inquiry;
 
 import java.io.IOException;
@@ -26,9 +26,9 @@ public class Calculator {
                 console.showCommandType();
                 String selectedCommand = console.inputCommandType();
 
-                Command command = getCommand(selectedCommand).orElseThrow(TerminationException::new);
+                Commandable commandable = getCommand(selectedCommand).orElseThrow(TerminationException::new);
 
-                String result = command.doCommand();
+                String result = commandable.doCommand();
                 console.output(result);
 
             }catch (WrongInputException wrongInputException) {
@@ -42,7 +42,7 @@ public class Calculator {
         }
     }
 
-    private Optional<Command> getCommand(String selectedCommand) throws IOException, WrongInputException {
+    private Optional<Commandable> getCommand(String selectedCommand) throws IOException, WrongInputException {
         CommandTypes commandType = CommandTypes.findCommandType(selectedCommand);
 
         switch (commandType) {

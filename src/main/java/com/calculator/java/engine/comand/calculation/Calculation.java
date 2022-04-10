@@ -2,14 +2,14 @@ package com.calculator.java.engine.comand.calculation;
 
 
 import com.calculator.java.database.Database;
-import com.calculator.java.engine.comand.Command;
+import com.calculator.java.engine.comand.Commandable;
 import com.calculator.java.global.Enum.Operators;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Calculation implements Command {
+public class Calculation implements Commandable {
     private final String IMPOSSIBLE = "계산할 수 없습니다.";
 
     private final MathExpression mathExpression;

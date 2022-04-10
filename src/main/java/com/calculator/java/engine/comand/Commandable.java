@@ -1,5 +1,5 @@
 package com.calculator.java.engine.comand;
 
-public interface Command {
+public interface Commandable {
     String doCommand();
 }

@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class InquiryTest {
     Database database = Database.getInstance();
-    Command selection = new Inquiry(database);
+    Commandable selection = new Inquiry(database);
 
     @Test
     void 계산_이력_테스트 () {

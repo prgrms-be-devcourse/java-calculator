@@ -1,11 +1,11 @@
 package com.calculator.java.engine.comand.inquiry;
 
 import com.calculator.java.database.Database;
-import com.calculator.java.engine.comand.Command;
+import com.calculator.java.engine.comand.Commandable;
 
 import java.util.List;
 
-public class Inquiry implements Command {
+public class Inquiry implements Commandable {
     private final Database database;
 
     public Inquiry(Database database) {
