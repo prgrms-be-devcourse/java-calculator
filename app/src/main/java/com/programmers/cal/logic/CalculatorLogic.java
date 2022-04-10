@@ -11,16 +11,14 @@ public class CalculatorLogic {
     private static final String DIVISION = "/";
 
     // 합 계산
-    public static double Calculation(String formula) {
-        Stack<Double> formulaStack = priorityCalculation(formula);
-        double result = formulaStack.stream().mapToDouble(Double::doubleValue).sum();
+    public static double calculateTheSum(String formula) {
+        Stack<Double> formulaStack = calculateThePriority(formula);
 
-        return result;
+        return formulaStack.stream().mapToDouble(Double::doubleValue).sum();
     }
 
     // 우선순위 계산
-    private static Stack<Double> priorityCalculation(String formula) {
-
+    private static Stack<Double> calculateThePriority(String formula) {
         Stack<Double> stack = new Stack<>();
         StringTokenizer st = new StringTokenizer(formula, " ");
 
