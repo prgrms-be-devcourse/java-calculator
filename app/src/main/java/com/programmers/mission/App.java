@@ -3,8 +3,13 @@
  */
 package com.programmers.mission;
 
+import com.programmers.mission.controller.CalculationController;
+import com.programmers.mission.view.ConsoleView;
+
 public class App {
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+	public static void main(String[] args) {
+		ConsoleView consoleView = new ConsoleView();
+		CalculationController calculationController = new CalculationController(consoleView, consoleView);
+		calculationController.runCalculationProgram();
+	}
 }
