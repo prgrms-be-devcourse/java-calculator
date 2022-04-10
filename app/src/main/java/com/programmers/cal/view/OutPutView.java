@@ -5,11 +5,15 @@ import java.util.List;
 
 public class OutPutView {
 
-    public static void calculatorResult(double value) {
+    public static void showsTheMenu() {
+        System.out.println(OutputMessage.READY.getMessage());
+    }
+
+    public static void showsTheCalculationResult(double value) {
         System.out.println(value);
     }
 
-    public static void calculatorHistory(List<Formula> formulaList) {
+    public static void showsTheCalculationHistory(List<Formula> formulaList) {
         formulaList.forEach(System.out::println);
     }
 
