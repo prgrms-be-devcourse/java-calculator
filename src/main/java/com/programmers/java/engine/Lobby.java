@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import static com.programmers.java.engine.Menu.*;
+
 /*
  * Lobby : 로비
  * - 사용자가 로비에서 메뉴를 선택하고 결과를 확인한다.
@@ -26,7 +28,7 @@ public class Lobby implements Runnable {
     private Output output;
     private History history;
     private Calculator calculator;
-    private final String validExpRegex="\\d+(\\.\\d+)*( [\\+\\-\\*\\/] \\d+(\\.\\d+)*)*";
+
     /* run : 실행로직을 가지고 있는 메소드 */
     @Override
     public void run() {
@@ -35,46 +37,32 @@ public class Lobby implements Runnable {
             menus.append(m.ordinal()).append(".").append(m).append("\n");
         }
 
-        final int EXIT = Menu.EXIT.ordinal();
-        final int LOOKUP = Menu.LOOKUP.ordinal();
-        final int CALCULATE = Menu.CALCULATE.ordinal();
-
         while (true) {
             try {
                 System.out.println('\n' + menus.toString());
-
-                int userOption = input.optionInput("선택 : ");
-                if (userOption == EXIT) {
-                    output.exitMessage();
-                    break;
-                } else if (userOption == LOOKUP) {
-                    System.out.println(history.searchAll());
-                } else if (userOption == CALCULATE) {
-                    output.informFormat();
-                    String userStr = input.strInput("계산식을 입력해주세요 : ");
-                    String[] parsedUserStr = parse(userStr, validExpRegex);
-                    String ans = calculator.calculate(parsedUserStr);
-                    System.out.println(ans);
-                    history.save(new Expression(userStr, ans));
-                } else {
-                    output.inputError();
+                Menu userOption = input.optionInput("선택 : ");
+                switch (userOption) {
+                    case EXIT:
+                        output.exitMessage();
+                        break;
+                    case LOOKUP:
+                        System.out.println(history.searchAll());
+                        continue;
+                    case CALCULATE:
+                        output.informFormat();
+                        String userStr = input.expressionInput("계산식을 입력해주세요 : ");
+                        String ans = calculator.calculate(userStr.split(" "));
+                        System.out.println(ans);
+                        history.save(new Expression(userStr, ans));
+                        continue;
+                    default:
+                        continue;
                 }
+                break;
             } catch (Exception e) {
                 output.errorMessage(e);
             }
         }
 
-    }
-
-    /*
-     * parse : 사용자가 입력한 문자열에 대해 파싱을 하는 함수
-     * - 길이 검사
-     * - 공백 기준으로 split 후, 각 문자가 연산자인지, 피연산자인지 검사
-     * - 정상적이면 String[]을 반환하고, 아니라면 ParsedException을 throw한다.
-     * */
-    public String[] parse(String userStr, String regex) throws Exception {
-
-        if (!Pattern.matches(regex, userStr)) throw new ParsedException();
-        return userStr.split(" ");
     }
 }
