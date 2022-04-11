@@ -12,28 +12,6 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 
 /*
-Menu : 사용자가 선택하는 메뉴
-- 메뉴 옵션과 상수를 enum을 통해 한 곳에서 관리한다.
-*/
-enum Menu{
-    EXIT("종료"),
-    LOOKUP("조회"),
-    CALCULATE("계산");
-
-    private final String prompt;
-
-    Menu(String prompt) {
-        this.prompt=prompt;
-    }
-
-    @Override
-    public String toString(){
-        return prompt;
-    }
-}
-
-
-/*
 * Lobby : 로비
 * - 사용자가 로비에서 메뉴를 선택하고 결과를 확인한다.
 * - 고민 : output에 대한 깔끔한 관리의 어려움 / 어떤 것은 System.out. 어떤 것은 output..
