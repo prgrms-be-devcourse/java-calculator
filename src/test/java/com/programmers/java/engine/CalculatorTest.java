@@ -1,9 +1,8 @@
 package com.programmers.java.engine;
 
-import com.programmers.java.OperationImpl;
+import com.programmers.java.engine.domain.BasicOperator;
 import com.programmers.java.engine.domain.Expression;
 import com.programmers.java.engine.domain.Operand;
-import com.programmers.java.engine.domain.Operator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import java.util.List;
 
 
 public class CalculatorTest {
-    Calculator calculator = new Calculator(new OperationImpl());
+    Calculator calculator = new Calculator();
 
     @Test
     @DisplayName("입력 변환 테스트")
@@ -26,7 +25,7 @@ public class CalculatorTest {
                 new Operand(4.0),
                 new Operand(2.0)));
         Assertions.assertThat(expression.getOperators()).isEqualTo(List.of(
-                Operator.PLUS, Operator.MULTIPLY, Operator.MINUS, Operator.DIVIDE));
+                BasicOperator.PLUS, BasicOperator.MULTIPLY, BasicOperator.MINUS, BasicOperator.DIVIDE));
     }
 
     @Test
@@ -49,11 +48,8 @@ public class CalculatorTest {
     @DisplayName("곱셈 나눗셈 테스트. 3")
     public void multiplyAndDivideTest3() {
         String inputStr = "1*2*3*4/0";
-        try {
-            Double result = calculator.calculate(inputStr);
-        } catch (Exception e) {
-            Assertions.assertThat(e.getMessage()).isEqualTo("0으로 나누는 것은 안됩니다.");
-        }
+        Assertions.assertThatExceptionOfType(ArithmeticException.class).isThrownBy(
+                () -> calculator.calculate(inputStr));
     }
 
     @Test
