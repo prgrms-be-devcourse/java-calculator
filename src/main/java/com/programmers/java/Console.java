@@ -40,7 +40,7 @@ public class Console implements Output, Input {
     /* errorMessage : 예외 상황에 대해 메시지를 출력해주는 메소드 */
     @Override
     public void errorMessage(Exception e) {
-        System.out.println("msg : "+e.toString());
+        System.out.println("msg : " + e.toString());
     }
 
     /* exitMessage : 프로그램을 종료 메시지를 출력하는 메소드 */
