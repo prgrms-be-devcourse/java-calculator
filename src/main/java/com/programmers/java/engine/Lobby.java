@@ -48,7 +48,7 @@ public class Lobby implements Runnable {
                     output.exitMessage();
                     break;
                 } else if (userOption == LOOKUP) {
-                    history.searchAll();
+                    System.out.println(history.searchAll());
                 } else if (userOption == CALCULATE) {
                     output.informFormat();
                     String userStr = input.strInput("계산식을 입력해주세요 : ");

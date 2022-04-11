@@ -19,11 +19,13 @@ public class History {
         history.add(e);
     }
 
-    public void searchAll() {
-        if (history.isEmpty()) System.out.println("아직 계산한 이력이 없습니다.");
+    public String searchAll() {
+        if (history.isEmpty()) return "아직 계산한 이력이 없습니다.";
 
+        StringBuilder sb = new StringBuilder();
         for (Expression expression : history) {
-            System.out.println(expression);
+            sb.append(expression).append("\n");
         }
+        return sb.toString();
     }
 }
