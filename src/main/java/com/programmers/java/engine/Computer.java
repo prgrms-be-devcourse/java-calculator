@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
-import com.programmers.java.engine.operations.ArithmeticOperation;
 
 public class Computer implements Runnable{
     Input input;
@@ -14,10 +13,10 @@ public class Computer implements Runnable{
     List<String> db = new ArrayList<>();
     private final String OPTION_MESSAGE = "1. 조회\n2. 계산\n\n선택 : ";
 
-    public Computer(Input input, Output output, ArithmeticOperation arithmeticOperation){
+    public Computer(Input input, Output output){
         this.input = input;
         this.output = output;
-        calculator = new Calculator(arithmeticOperation);
+        calculator = new Calculator();
     }
 
     @Override
@@ -28,8 +27,12 @@ public class Computer implements Runnable{
                 int optNum = parseOption(option);
                 mainJob(optNum);
             }
+
             catch(NumberFormatException e){
                 output.inputError();
+            }
+            catch(ArithmeticException e){
+                output.error(e.getMessage());
             }
         }
     }
@@ -40,14 +43,9 @@ public class Computer implements Runnable{
         }
         else if(optNum == 2){
             String inputStr = input.input();
-            try{
-                Double answer = calculator.calculate(inputStr);
-                output.output(String.valueOf(answer));
-                db.add(String.format("%s = %s", inputStr, answer));
-            }
-            catch(ArithmeticException e){
-                output.error(e.getMessage());
-            }
+            Double answer = calculator.calculate(inputStr);
+            output.output(String.valueOf(answer));
+            db.add(String.format("%s = %s", inputStr, answer));
         }
     }
 
@@ -59,17 +57,10 @@ public class Computer implements Runnable{
     }
 
     private int parseOption(String option){
-        try{
-            int res = Integer.parseInt(option);
-            if(res >=1 && res <=2){
-                return res;
-            }
-            else{
-                throw new NumberFormatException();
-            }
+        int res = Integer.parseInt(option);
+        if(res < 1 || res > 2){
+            throw new IllegalArgumentException("option의 범위에서 벗어납니다.");
         }
-        catch(NumberFormatException e){
-            throw e;
-        }
+        return res;
     }
 }
