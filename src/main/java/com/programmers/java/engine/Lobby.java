@@ -11,6 +11,7 @@ import com.programmers.java.engine.model.Operator;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 /*
  * Lobby : 로비
@@ -25,7 +26,7 @@ public class Lobby implements Runnable {
     private Output output;
     private History history;
     private Calculator calculator;
-
+    private final String validExpRegex="\\d+(\\.\\d+)*( [\\+\\-\\*\\/] \\d+(\\.\\d+)*)*";
     /* run : 실행로직을 가지고 있는 메소드 */
     @Override
     public void run() {
@@ -51,7 +52,7 @@ public class Lobby implements Runnable {
                 } else if (userOption == CALCULATE) {
                     output.informFormat();
                     String userStr = input.strInput("계산식을 입력해주세요 : ");
-                    String[] parsedUserStr = parse(userStr);
+                    String[] parsedUserStr = parse(userStr, validExpRegex);
                     String ans = calculator.calculate(parsedUserStr);
                     System.out.println(ans);
                     history.save(new Expression(userStr, ans));
@@ -71,20 +72,9 @@ public class Lobby implements Runnable {
      * - 공백 기준으로 split 후, 각 문자가 연산자인지, 피연산자인지 검사
      * - 정상적이면 String[]을 반환하고, 아니라면 ParsedException을 throw한다.
      * */
-    public String[] parse(String userStr) throws Exception {
-        if (userStr.length() % 2 == 0) throw new ParsedException();
+    public String[] parse(String userStr, String regex) throws Exception {
 
-        String[] parsedStr = userStr.split(" ");
-        for (String str : parsedStr) {
-            try {
-                Optional<Operator> arg = Operator.getOperator(str);
-                if (arg.isEmpty()) {
-                    Double.parseDouble(str);
-                }
-            } catch (NumberFormatException nfe) {
-                throw new ParsedException();
-            }
-        }
-        return parsedStr;
+        if (!Pattern.matches(regex, userStr)) throw new ParsedException();
+        return userStr.split(" ");
     }
 }

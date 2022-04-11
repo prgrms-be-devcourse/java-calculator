@@ -12,7 +12,6 @@ import java.util.Stack;
 public class Calculator {
 
     private final ArrayList<String> posixList = new ArrayList<>();
-
     /*
      * calculate : String[]을 받아 계산식을 계산 후 답을 String으로 반환하는 메소드
      * */

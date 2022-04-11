@@ -4,17 +4,25 @@ import com.programmers.java.engine.Lobby;
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console implements Output, Input {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final int ERROR_OPTION = -1;
 
     /* optionInput : prompt를 출력하고 정수를 입력 받는 메소드 */
     @Override
     public int optionInput(String prompt) {
         System.out.println(prompt);
-        return scanner.nextInt();
+        int userOption = ERROR_OPTION;
+        try {
+            userOption = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            scanner.nextLine(); //버퍼비우기
+        }
+        return userOption;
     }
 
     /* strInput : prompt를 출력하고 문자열 한줄을 입력 받는 메소드 */
