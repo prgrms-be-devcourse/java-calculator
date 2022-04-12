@@ -7,5 +7,8 @@ import com.programmers.mission.message.ErrorMessage;
 
 public interface Output {
 	void write(DefaultMessage message) throws IOException;
+
 	void write(ErrorMessage message) throws IOException;
+
+	void print(ErrorMessage message);
 }

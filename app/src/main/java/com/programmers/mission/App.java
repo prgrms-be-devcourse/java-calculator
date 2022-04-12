@@ -4,12 +4,16 @@
 package com.programmers.mission;
 
 import com.programmers.mission.controller.CalculationController;
+import com.programmers.mission.validation.CalculatorValidation;
 import com.programmers.mission.view.ConsoleView;
 
 public class App {
 	public static void main(String[] args) {
 		ConsoleView consoleView = new ConsoleView();
-		CalculationController calculationController = new CalculationController(consoleView, consoleView);
+		CalculatorValidation calculatorValidation = new CalculatorValidation();
+		CalculationController calculationController = new CalculationController(consoleView, consoleView,
+				calculatorValidation);
 		calculationController.runCalculationProgram();
 	}
 }
+

@@ -1,10 +1,13 @@
 package com.programmers.mission.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 
+import com.programmers.mission.exception.NotSupportedMenu;
 import com.programmers.mission.message.DefaultMessage;
 import com.programmers.mission.message.ErrorMessage;
 import com.programmers.mission.model.MenuType;
+import com.programmers.mission.validation.InputValidation;
 import com.programmers.mission.view.Input;
 import com.programmers.mission.view.Output;
 
@@ -12,10 +15,13 @@ public class CalculationController {
 
 	private final Input input;
 	private final Output output;
+	private final InputValidation validation;
 
-	public CalculationController(Input input, Output output) {
+	public CalculationController(Input input, Output output,
+			InputValidation validation) {
 		this.input = input;
 		this.output = output;
+		this.validation = validation;
 	}
 
 	public void runCalculationProgram() {
@@ -23,37 +29,47 @@ public class CalculationController {
 			try {
 				String menu = input.readInput(DefaultMessage.MENU_LIST);
 
-				if (isOccuredInputOutputException(menu)) {
+				if (!validation.isMatchServiceType(menu)) {
+					output.write(ErrorMessage.CLIENT_ERROR);
 					continue;
 				}
 
-				if (MenuType.EXIT.isService(menu)) {
-					break;
-				}
+				MenuType menuType = this.getMenuType(menu);
 
-				if (MenuType.LOOK_UP.isService(menu)) {
+				switch (menuType) {
+					case LOOK_UP -> {
 
-				} else if (MenuType.CALCULATE.isService(menu)) {
-					String expression = input.readInput(DefaultMessage.NONE);
-					/**
-					 * 1. todo : validation check
-					 * 	   1. 유효한 선택 값인지 (입력 값 : [1-2])
-					 *
-					 * 2. todo : 계산을 선택한 경우
-					 *     1. 연산식 유효성 검증
-					 *       1-1. 숫자 검증 (연산자로 잘라냈을 때, 숫자로만 이루어 져있는지 검증)
-					 */
+					}
+					case CALCULATE -> {
+						String expression = input.readInput(DefaultMessage.NONE);
+
+						if (!validation.isProperExpression(expression)) {
+							output.write(ErrorMessage.CLIENT_ERROR);
+							continue;
+						}
+
+					}
+					case EXIT -> {
+						output.write(DefaultMessage.EXIT);
+						return;
+					}
+
 				}
 
 				output.write(DefaultMessage.NEW_LINE);
 			} catch (IOException ioException) {
 				ioException.printStackTrace();
-				throw new RuntimeException(ErrorMessage.INTERNAL_ERROR.toString());
+				output.print(ErrorMessage.INTERNAL_ERROR);
 			}
 		}
 	}
 
-	private boolean isOccuredInputOutputException(String clientInput) {
-		return clientInput.equals(ErrorMessage.INTERNAL_ERROR.toString());
+	public MenuType getMenuType(String menu) {
+		return Arrays.stream(MenuType.values())
+				.filter(menuType -> menuType.isService(menu))
+				.findAny()
+				.orElseThrow(() -> new NotSupportedMenu(ErrorMessage.CLIENT_ERROR));
+
 	}
+
 }
