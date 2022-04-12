@@ -32,6 +32,12 @@ public class ConsoleView implements Input, Output {
 	}
 
 	@Override
+	public void write(String message) throws IOException {
+		writer.write(message + "\n");
+		writer.flush();
+	}
+
+	@Override
 	public void print(ErrorMessage message) {
 		System.out.println(message.toString());
 	}

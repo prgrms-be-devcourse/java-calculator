@@ -1,11 +1,11 @@
 package com.programmers.mission.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
 
-import com.programmers.mission.exception.NotSupportedMenu;
+import com.programmers.mission.exception.NotSupportedMenuException;
 import com.programmers.mission.message.DefaultMessage;
 import com.programmers.mission.message.ErrorMessage;
+import com.programmers.mission.model.CalculationResult;
 import com.programmers.mission.model.MenuType;
 import com.programmers.mission.validation.InputValidation;
 import com.programmers.mission.view.Input;
@@ -34,7 +34,7 @@ public class CalculationController {
 					continue;
 				}
 
-				MenuType menuType = this.getMenuType(menu);
+				MenuType menuType = MenuType.getMenuType(menu);
 
 				switch (menuType) {
 					case LOOK_UP -> {
@@ -48,28 +48,22 @@ public class CalculationController {
 							continue;
 						}
 
+						CalculationResult calculationResult = new CalculationResult(expression);
+						output.write(calculationResult.toString());
+
 					}
 					case EXIT -> {
 						output.write(DefaultMessage.EXIT);
 						return;
 					}
-
 				}
 
 				output.write(DefaultMessage.NEW_LINE);
-			} catch (IOException ioException) {
+			} catch (IOException | NotSupportedMenuException ioException) {
 				ioException.printStackTrace();
 				output.print(ErrorMessage.INTERNAL_ERROR);
 			}
 		}
-	}
-
-	public MenuType getMenuType(String menu) {
-		return Arrays.stream(MenuType.values())
-				.filter(menuType -> menuType.isService(menu))
-				.findAny()
-				.orElseThrow(() -> new NotSupportedMenu(ErrorMessage.CLIENT_ERROR));
-
 	}
 
 }

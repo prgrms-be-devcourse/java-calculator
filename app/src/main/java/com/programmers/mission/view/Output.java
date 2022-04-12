@@ -10,5 +10,7 @@ public interface Output {
 
 	void write(ErrorMessage message) throws IOException;
 
+	void write(String message) throws IOException;
+
 	void print(ErrorMessage message);
 }

@@ -4,13 +4,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
 
+import com.programmers.mission.exception.ZeroDivisionException;
+import com.programmers.mission.message.ErrorMessage;
+
 public enum OperatorType {
 	ADDICTIVE(2, Long::sum),
 	MINUS(2, (left, right) -> left - right),
 	MULTIPLICATION(1, (left, right) -> left * right),
 	DIVISION(1, (left, right) -> {
 		if (right == 0) {
-			throw new RuntimeException("zero is not divide .. check the expression ");
+			throw new ZeroDivisionException(ErrorMessage.ZERO_DIVISION_ERROR);
 		}
 		return left / right;
 	});
