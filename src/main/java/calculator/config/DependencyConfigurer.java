@@ -23,9 +23,9 @@ import calculator.module.validator.ExpressionValidator;
 public class DependencyConfigurer {
     public Calculator createCalculatorWithDependency() {
         return new Calculator(createUserInterfaceWithDependency(),
-                createCalculationHistoryManagerWithDependency(),
-                createCalculationProcessorWithDependency()
-        );
+                              createCalculationHistoryManagerWithDependency(),
+                              createCalculationProcessorWithDependency()
+                              );
     }
 
     public CalculationHistoryManager createCalculationHistoryManagerWithDependency() {
@@ -33,12 +33,10 @@ public class DependencyConfigurer {
     }
 
     public CalculationProcessor createCalculationProcessorWithDependency() {
-        return new CalculationProcessor(createCalculationHistoryManagerWithDependency(),
-                createArithmeticModuleWithDependency(),
-                createUserInterfaceWithDependency(),
-                createExpressionValidatorWithDependency(),
-                createExpressionFactoryWithDependency()
-        );
+        return new CalculationProcessor(createArithmeticModuleWithDependency(),
+                                        createExpressionValidatorWithDependency(),
+                                        createExpressionFactoryWithDependency()
+                                        );
     }
 
     public ArithmeticModule createArithmeticModuleWithDependency() {

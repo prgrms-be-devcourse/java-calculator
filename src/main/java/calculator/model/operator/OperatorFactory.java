@@ -1,6 +1,5 @@
 package calculator.model.operator;
 
-
 import calculator.module.validator.exception.InvalidTokenException;
 
 public interface OperatorFactory {
