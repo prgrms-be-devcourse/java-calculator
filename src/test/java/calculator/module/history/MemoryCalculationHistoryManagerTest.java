@@ -1,6 +1,6 @@
 package calculator.module.history;
 
-import calculator.DependencyConfigurer;
+import calculator.config.DependencyConfigurer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryCalculationHistoryManagerTest {
     DependencyConfigurer dependencyConfigurer = new DependencyConfigurer();
-    MemoryCalculationHistoryManager historyManager =  new MemoryCalculationHistoryManager(dependencyConfigurer.userInterface());
+    MemoryCalculationHistoryManager historyManager =  new MemoryCalculationHistoryManager(dependencyConfigurer.createUserInterfaceWithDependency());
 
     @ParameterizedTest
     @CsvFileSource(resources = "/history-test-data.csv",delimiter = ',')
-    public void printAllCalculationHistoryTest(String expression,Double calculationResult, String expectedOutput){
+    void printAllCalculationHistoryTest(String expression,Double calculationResult, String expectedOutput){
         expectedOutput += "\n";
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
@@ -31,7 +31,7 @@ class MemoryCalculationHistoryManagerTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/history-test-data.csv",delimiter = ',')
-    public void saveCalculationResultToHistory(String expression,Double calculationResult, String output) {
+    void saveCalculationResultToHistory(String expression,Double calculationResult, String output) {
         CalculationHistory history = new CalculationHistory(expression,calculationResult);
 
         historyManager.saveCalculationResultToHistory(expression,history);

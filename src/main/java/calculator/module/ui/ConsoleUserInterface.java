@@ -12,6 +12,16 @@ public class ConsoleUserInterface implements UserInterface{
     }
 
     @Override
+    public void showMenu(){
+        printMessage("=============================");
+        printMessage("1.조회");
+        printMessage("2.계산");
+        printMessage("3.종료");
+        printMessage("=============================");
+        printMessage("명령을 입력하세요 : ");
+    }
+
+    @Override
     public void printMessage(String message) {
         System.out.println(message);
     }

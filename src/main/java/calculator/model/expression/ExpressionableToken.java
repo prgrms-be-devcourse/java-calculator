@@ -1,9 +1,14 @@
 package calculator.model.expression;
-/**
-* ExpressionableToken 설명
-* 수식에서 사용될 수 있는 토큰임을 나타내는 인터페이스
-**/
-public interface ExpressionableToken {
-    boolean couldOtherTokenComeNext(ExpressionableToken other);
-    String getValue();
+
+public abstract class ExpressionableToken {
+    private final String value;
+    protected ExpressionableToken(String value){
+        this.value = value;
+    }
+
+    public abstract boolean couldOtherTokenComeNext(ExpressionableToken other);
+
+    public String getValue() {
+        return value;
+    }
 }

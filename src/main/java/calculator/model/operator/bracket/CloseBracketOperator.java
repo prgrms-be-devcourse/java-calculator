@@ -1,14 +1,11 @@
 package calculator.model.operator.bracket;
 
 import calculator.model.expression.ExpressionableToken;
-import calculator.model.operator.Operator;
-import calculator.model.operator.OperatorType;
 import calculator.model.operator.binary.BinaryOperator;
 
-public class CloseBracketOperator implements Operator {
-    private final OperatorType type;
+public class CloseBracketOperator extends ExpressionableToken {
     public CloseBracketOperator() {
-        type = OperatorType.CLOSED_BRACKET;
+        super("(");
     }
 
     @Override
@@ -16,8 +13,4 @@ public class CloseBracketOperator implements Operator {
         return other instanceof BinaryOperator || other instanceof CloseBracketOperator;
     }
 
-    @Override
-    public String getValue() {
-        return type.getSymbol();
-    }
 }
