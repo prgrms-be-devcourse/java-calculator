@@ -56,10 +56,11 @@ public class CalculationResult {
 				if (benchmark.isHighPriority(comparison)) {
 					postFix.add(operatorPocket.pop());
 				} else {
-					operatorPocket.add(token);
 					break;
 				}
 			}
+
+			operatorPocket.add(token);
 		}
 	}
 
