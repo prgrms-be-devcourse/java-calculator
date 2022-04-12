@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class CalculationHistoryManager implements HistoryManager<CalculationResult> {
-	private static int id = 1;
-	private static final Map<Integer, CalculationResult> histories = new HashMap<>();
+	private static long id = 1;
+	private static final Map<Long, CalculationResult> histories = new HashMap<>();
 
 	@Override
 	public void save(CalculationResult calculationResult) {

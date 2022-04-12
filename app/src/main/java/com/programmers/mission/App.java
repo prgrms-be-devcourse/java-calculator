@@ -4,6 +4,9 @@
 package com.programmers.mission;
 
 import com.programmers.mission.controller.CalculationController;
+import com.programmers.mission.model.CalculationHistoryManager;
+import com.programmers.mission.model.CalculationResult;
+import com.programmers.mission.model.HistoryManager;
 import com.programmers.mission.validation.CalculatorValidation;
 import com.programmers.mission.view.ConsoleView;
 
@@ -11,8 +14,10 @@ public class App {
 	public static void main(String[] args) {
 		ConsoleView consoleView = new ConsoleView();
 		CalculatorValidation calculatorValidation = new CalculatorValidation();
+		HistoryManager<CalculationResult> calculationHistoryManager = new CalculationHistoryManager();
 		CalculationController calculationController = new CalculationController(consoleView, consoleView,
-				calculatorValidation);
+				calculatorValidation, calculationHistoryManager);
+
 		calculationController.runCalculationProgram();
 	}
 }

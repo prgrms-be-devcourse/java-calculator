@@ -1,11 +1,14 @@
 package com.programmers.mission.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.programmers.mission.exception.NotSupportedMenuException;
 import com.programmers.mission.message.DefaultMessage;
 import com.programmers.mission.message.ErrorMessage;
 import com.programmers.mission.model.CalculationResult;
+import com.programmers.mission.model.HistoryManager;
 import com.programmers.mission.model.MenuType;
 import com.programmers.mission.validation.InputValidation;
 import com.programmers.mission.view.Input;
@@ -16,12 +19,14 @@ public class CalculationController {
 	private final Input input;
 	private final Output output;
 	private final InputValidation validation;
+	private final HistoryManager<CalculationResult> historyManager;
 
-	public CalculationController(Input input, Output output,
-			InputValidation validation) {
+	public CalculationController(Input input, Output output, InputValidation validation,
+			HistoryManager<CalculationResult> historyManager) {
 		this.input = input;
 		this.output = output;
 		this.validation = validation;
+		this.historyManager = historyManager;
 	}
 
 	public void runCalculationProgram() {
@@ -38,7 +43,18 @@ public class CalculationController {
 
 				switch (menuType) {
 					case LOOK_UP -> {
+						List<CalculationResult> histories = historyManager.getHistories();
 
+						if (histories.isEmpty()) {
+							output.write(DefaultMessage.NOT_EXIST_DATA);
+							continue;
+						}
+
+						String result = histories.stream()
+								.map(CalculationResult::toString)
+								.collect(Collectors.joining("\n"));
+
+						output.write(result);
 					}
 					case CALCULATE -> {
 						String expression = input.readInput(DefaultMessage.NONE);
@@ -49,11 +65,12 @@ public class CalculationController {
 						}
 
 						CalculationResult calculationResult = new CalculationResult(expression);
-						output.write(calculationResult.toString());
-
+						historyManager.save(calculationResult);
+						output.write(calculationResult.getValue());
 					}
 					case EXIT -> {
 						output.write(DefaultMessage.EXIT);
+
 						return;
 					}
 				}

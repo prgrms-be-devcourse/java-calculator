@@ -20,6 +20,15 @@ public class CalculationResult {
 		this.value = calculate(this.expression);
 	}
 
+	@Override
+	public String toString() {
+		return expression + " = " + value;
+	}
+
+	public String getValue() {
+		return this.value;
+	}
+
 	private List<String> toPostFix(String expression) {
 		List<String> postFix = new ArrayList<>();
 		Deque<String> operatorPocket = new ArrayDeque<>();
@@ -86,10 +95,5 @@ public class CalculationResult {
 		});
 
 		return String.valueOf(numbers.stream().mapToLong(Long::valueOf).sum());
-	}
-
-	@Override
-	public String toString() {
-		return expression + "\n" + value;
 	}
 }
