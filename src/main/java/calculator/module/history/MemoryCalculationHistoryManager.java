@@ -12,7 +12,7 @@ import java.util.Map;
 **/
 public class MemoryCalculationHistoryManager implements CalculationHistoryManager {
     private final Map<String,CalculationHistory> calculationHistoryStore;
-    private final static String HISTORY_NOT_EXIST_MESSAGE = "계산 이력이 없습니다.";
+    private static final String HISTORY_NOT_EXIST_MESSAGE = "계산 이력이 없습니다.";
     private final UserInterface userInterface;
 
     public MemoryCalculationHistoryManager(UserInterface userInterface){
@@ -44,9 +44,7 @@ public class MemoryCalculationHistoryManager implements CalculationHistoryManage
     }
 
     private void printHistory(){
-        calculationHistoryStore.forEach((expression,calculationHistory) -> {
-            userInterface.printMessage(calculationHistory.toString());
-        });
+        calculationHistoryStore.forEach((expression,calculationHistory) -> userInterface.printMessage(calculationHistory.toString()));
     }
 
 }

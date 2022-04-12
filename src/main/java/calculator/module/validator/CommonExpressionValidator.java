@@ -21,9 +21,9 @@ import java.util.Stack;
 **/
 
 public class CommonExpressionValidator implements ExpressionValidator{
-    private final static String BRACKET_PAIR_NOT_CORRECT_MESSAGE = "괄호가 올바르지 않습니다";
-    private final static String EXPRESSION_SIZE_ZERO_MESSAGE = "한 글자 이상 입력해주세요";
-    private final static String EXPRESSION_ORDER_INVALID_MESSAGE = "잘못된 수식입니다.";
+    private static final String BRACKET_PAIR_NOT_CORRECT_MESSAGE = "괄호가 올바르지 않습니다";
+    private static final String EXPRESSION_SIZE_ZERO_MESSAGE = "한 글자 이상 입력해주세요";
+    private static final String EXPRESSION_ORDER_INVALID_MESSAGE = "잘못된 수식입니다.";
 
     @Override
     public void validateExpression(Expression expression) throws InvalidExpressionException {
