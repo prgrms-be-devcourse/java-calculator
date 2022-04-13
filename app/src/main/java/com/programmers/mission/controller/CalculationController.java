@@ -20,12 +20,44 @@ public class CalculationController {
 	private final InputValidation validation;
 	private final HistoryManager<CalculationResult> historyManager;
 
-	public CalculationController(Input input, Output output, InputValidation validation,
-			HistoryManager<CalculationResult> historyManager) {
-		this.input = input;
-		this.output = output;
-		this.validation = validation;
-		this.historyManager = historyManager;
+	private CalculationController(CalculationControllerBuilder calculationControllerBuilder) {
+		this.input = calculationControllerBuilder.input;
+		this.output = calculationControllerBuilder.output;
+		this.validation = calculationControllerBuilder.validation;
+		this.historyManager = calculationControllerBuilder.historyManager;
+	}
+
+	public static class CalculationControllerBuilder {
+
+		private Input input;
+		private Output output;
+		private InputValidation validation;
+		private HistoryManager<CalculationResult> historyManager;
+
+		public CalculationControllerBuilder Input(Input input) {
+			this.input = input;
+			return this;
+		}
+
+		public CalculationControllerBuilder Output(Output output) {
+			this.output = output;
+			return this;
+		}
+
+		public CalculationControllerBuilder Validation(InputValidation validation) {
+			this.validation = validation;
+			return this;
+		}
+
+		public CalculationControllerBuilder HistoryManager(
+				HistoryManager<CalculationResult> historyManager) {
+			this.historyManager = historyManager;
+			return this;
+		}
+
+		public CalculationController build() {
+			return new CalculationController(this);
+		}
 	}
 
 	public void runCalculationProgram() {

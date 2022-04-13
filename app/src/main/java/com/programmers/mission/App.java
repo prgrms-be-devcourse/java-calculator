@@ -15,8 +15,12 @@ public class App {
 		ConsoleView consoleView = new ConsoleView();
 		CalculatorValidation calculatorValidation = new CalculatorValidation();
 		HistoryManager<CalculationResult> calculationHistoryManager = new CalculationHistoryManager();
-		CalculationController calculationController = new CalculationController(consoleView, consoleView,
-				calculatorValidation, calculationHistoryManager);
+		CalculationController calculationController = new CalculationController.CalculationControllerBuilder()
+				.Input(consoleView)
+				.Output(consoleView)
+				.Validation(calculatorValidation)
+				.HistoryManager(calculationHistoryManager)
+				.build();
 
 		calculationController.runCalculationProgram();
 	}
