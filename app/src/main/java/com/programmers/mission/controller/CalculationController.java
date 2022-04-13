@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.programmers.mission.exception.NotSupportedMenuException;
+import com.programmers.mission.exception.NotSupportedOperatorException;
+import com.programmers.mission.exception.ZeroDivisionException;
 import com.programmers.mission.message.DefaultMessage;
 import com.programmers.mission.message.ErrorMessage;
 import com.programmers.mission.model.CalculationResult;
@@ -108,7 +111,10 @@ public class CalculationController {
 				}
 
 				output.write(DefaultMessage.NEW_LINE);
-			} catch (IOException | RuntimeException exception) {
+			} catch (IOException | NotSupportedMenuException | NotSupportedOperatorException | ZeroDivisionException  exception) {
+				exception.printStackTrace();
+				output.print(ErrorMessage.INTERNAL_ERROR);
+			} catch (Exception exception){
 				exception.printStackTrace();
 				output.print(ErrorMessage.INTERNAL_ERROR);
 			}
