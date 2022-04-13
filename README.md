@@ -22,7 +22,12 @@
     - [x]  곱하기
     - [x]  나누기
     - [x]  우선순위(사칙연산)
-- 계산 목록 조회 기능
+- [x] : 계산 목록 조회 기능
+
+
+## UML
+
+![계산기 UML](https://user-images.githubusercontent.com/67587446/163115199-26ecb14b-a4c8-4ee9-a9da-3f20c334928f.png)
 
     
 ### 실행결과(콘솔)
