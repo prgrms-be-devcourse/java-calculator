@@ -21,7 +21,7 @@ public class ConsoleView implements Input, Output {
 
 	@Override
 	public void write(DefaultMessage message) throws IOException {
-		writer.write(message.toString() + "\n");
+		writer.write(message.toString());
 		writer.flush();
 	}
 

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.programmers.mission.exception.NotSupportedMenuException;
 import com.programmers.mission.message.DefaultMessage;
 import com.programmers.mission.message.ErrorMessage;
 import com.programmers.mission.model.CalculationResult;
@@ -65,6 +64,7 @@ public class CalculationController {
 						}
 
 						CalculationResult calculationResult = new CalculationResult(expression);
+
 						historyManager.save(calculationResult);
 						output.write(calculationResult.getValue());
 					}
@@ -76,8 +76,8 @@ public class CalculationController {
 				}
 
 				output.write(DefaultMessage.NEW_LINE);
-			} catch (IOException | NotSupportedMenuException ioException) {
-				ioException.printStackTrace();
+			} catch (IOException | RuntimeException exception) {
+				exception.printStackTrace();
 				output.print(ErrorMessage.INTERNAL_ERROR);
 			}
 		}
