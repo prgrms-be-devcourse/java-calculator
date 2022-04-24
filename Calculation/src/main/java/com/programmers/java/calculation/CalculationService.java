@@ -37,12 +37,12 @@ public class CalculationService implements Runnable {
                 System.out.println("계산 선택");
                 String inputForCal = input.input("식을 입력해주세요.");
 
-                Optional<Double> result = getOutput(inputForCal);
-                if (result.isEmpty()) {
+                Optional<Double> resultOutput = getOutput(inputForCal);
+                if (resultOutput.isEmpty()) {
                     output.wrongInput();
                     continue;
                 }
-                saveOutput(result.get(), getFrontOfOutput(inputForCal));
+                saveOutput(resultOutput.get(), getFrontOfOutput(inputForCal));
 
             } else {
                 output.wrongInput();
@@ -61,8 +61,8 @@ public class CalculationService implements Runnable {
         }
 
         List<String> resultList = parsing.makeArray(inputRemoveSpase);
-        Optional<Double> result = calculate.fourRules(resultList);
-        return result;
+        Optional<Double> output = calculate.fourRules(resultList);
+        return output;
     }
 
     private void saveOutput(Double result, StringBuilder saveInput) {
