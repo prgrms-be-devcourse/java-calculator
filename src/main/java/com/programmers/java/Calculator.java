@@ -1,86 +1,102 @@
 package com.programmers.java;
 
-import com.programmers.java.engine.io.Input;
-import com.programmers.java.engine.io.Output;
-import com.programmers.java.engine.model.Formula;
-import com.programmers.java.engine.repository.FormulaRepository;
-import com.programmers.java.engine.service.*;
-import com.programmers.java.engine.service.utils.Function;
-
+import java.util.List;
 import java.util.Optional;
+
+import com.programmers.java.engine.io.Console;
+import com.programmers.java.engine.model.FormulaAndResult;
+import com.programmers.java.engine.repository.MemoryFormulaRepository;
+import com.programmers.java.engine.service.CalculationService;
+import com.programmers.java.engine.service.FormulaValidationService;
+import com.programmers.java.engine.service.PostFixService;
+import com.programmers.java.engine.utils.Function;
 
 public class Calculator implements Runnable {
 
-    private static final int ERROR = -1;
-    private static final int INQUIRE = 1;
-    private static final int CALCULATE = 2;
-    private final Input input;
-    private final Output output;
+	private static final int EXIT = -100;
+	private static final int INVALID_INPUT = -1;
+	private static final int INQUIRE = 1;
+	private static final int CALCULATE = 2;
 
-    ValidationService validService = new ValidationService();
-    PostFixService postFixService = new PostFixService();
-    FormulaRepository formulaRepository = new FormulaRepository();
-    CalcService calcService = new CalcService();
+	private final FormulaValidationService formulaValidationService = new FormulaValidationService();
+	private final PostFixService postFixService = new PostFixService();
+	private final MemoryFormulaRepository formulaRepository = new MemoryFormulaRepository();
+	private final CalculationService calculationService = new CalculationService();
+	private final Console console = new Console();
 
-    public Calculator(Input input, Output output) {
-        this.input = input;
-        this.output = output;
-    }
+	@Override
+	public void run() {
+		boolean isRunnable = true;
 
-    @Override
-    public void run() {
-        while (true) {
-            String inputString = input.ReturnInput("1. 조회" + "\n2. 계산");
-            if (inputString.isEmpty()) {
-                break;
-            }
-            int selectNum = Parse(inputString);
-            if (selectNum == INQUIRE) {
-                Find();
-            } else if (selectNum == CALCULATE) {
-                Calculate();
-            } else {
-                output.Error("Input");
-            }
-        }
-    }
+		while (isRunnable) {
+			String input = console.input("1. 조회" + "\n2. 계산");
+			int inputNumber = Parse(input);
 
-    private void Find() {
-        if (formulaRepository.size() < 1) {
-            output.Error("EmptyMap");
-        } else {
-            formulaRepository.findAll();
-        }
-        System.out.println();
-    }
+			switch (inputNumber) {
+				case INQUIRE: {
+					inquiryHistory();
+					break;
+				}
+				case CALCULATE: {
+					calculate();
+					break;
+				}
+				case EXIT: {
+					isRunnable = false;
+					break;
+				}
+				default: {
+					console.printInfoMessage("잘못된 입력입니다.");
+					break;
+				}
+			}
+		}
+	}
 
-    private void Calculate() {
-        String inputFormula = input.FormulaInput("식을 입력해주세요");
-        Optional<Formula> validFormula = validService.Validation(inputFormula);
-        long result = 0;
-        if (validFormula.isEmpty()) {
-            output.Error("Input");
-        } else {
-            Formula postFixFormula = new Formula(postFixService.makePostFixFormula(validFormula.get()));
-            if (formulaRepository.isCacheExit(inputFormula)) {
-                result = formulaRepository.cache(inputFormula);
-            }
-            else {
-                result = calcService.calculate(postFixFormula.getFormula());
-            }
-            formulaRepository.save(inputFormula, result);
-            output.PrintCalcResult(result);
-        }
-    }
+	private void inquiryHistory() {
+		List<FormulaAndResult> history = formulaRepository.findAll();
+		if (history.isEmpty()) {
+			console.printInfoMessage("계산 기록이 존재하지 않습니다.");
 
-    private int Parse(String inputString) {
-        if (inputString.length() > 1 || !Function.isStrDigit(inputString)) {
-            return ERROR;
-        } else if (Integer.parseInt(inputString) == 1) {
-            return INQUIRE;
-        } else if (Integer.parseInt(inputString) == 2) {
-            return CALCULATE;
-        }
-        return ERROR;
-    }
+			return;
+		}
+		console.printHistory(history);
+	}
+
+	private void calculate() {
+		String inputFormula = console.input("식을 입력해주세요.");
+		Optional<String> formulaOrEmpty = checkValidFormula(inputFormula);
+		if (formulaOrEmpty.isEmpty()) {
+			return;
+		}
+
+		String[] postFixFormula = postFixService.makePostFixFormula(formulaOrEmpty.get());
+		long result = calculationService.calculate(postFixFormula);
+		formulaRepository.save(new FormulaAndResult(inputFormula, result));
+
+		console.printCalcResultMessage(result);
+	}
+
+	private Optional<String> checkValidFormula(String inputFormula) {
+		Optional<String> formulaOrEmpty = formulaValidationService.validation(inputFormula);
+
+		if (formulaOrEmpty.isEmpty()) {
+			console.printInfoMessage("잘못된 입력입니다.");
+
+			return Optional.empty();
+		}
+		return formulaOrEmpty;
+	}
+
+	private int Parse(String inputString) {
+		if (inputString.isBlank()) {
+			return EXIT;
+		}
+
+		if (!Function.isStrDigit(inputString)) {
+			return INVALID_INPUT;
+		}
+
+		return Integer.parseInt(inputString);
+	}
 }
