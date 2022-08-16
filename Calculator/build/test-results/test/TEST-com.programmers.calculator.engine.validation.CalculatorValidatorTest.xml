@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.programmers.calculator.engine.validation.CalculatorValidatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-03-30T10:49:29" hostname="DESKTOP-4DH71IR" time="0.003">
+  <properties/>
+  <testcase name="숫자 혹은 operation이 아닌 문자가 들어오는 경우" classname="com.programmers.calculator.engine.validation.CalculatorValidatorTest" time="0.002"/>
+  <testcase name="operation +-*/이 아닌 다른 문자가 들어오는 경우" classname="com.programmers.calculator.engine.validation.CalculatorValidatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
