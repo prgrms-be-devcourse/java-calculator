@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.InputMismatchException;
 
-public class BaseInput {
+public interface BaseInput {
 
-    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    default String read() {
+        BufferedReader br =
+                new BufferedReader(new InputStreamReader(System.in));
 
-    public String read() {
         String inputValue = "";
         try {
             inputValue = br.readLine();
