@@ -1,15 +1,8 @@
 package calculator.menu;
 
-import calculator.exception.MenuException;
-
 import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-import static calculator.exception.MenuException.*;
+import static calculator.exception.MenuException.MENU_FIND_NULL_EXCEPTION;
 
 public enum MenuEnum {
 
@@ -24,7 +17,11 @@ public enum MenuEnum {
         this.menu = menu;
     }
 
-    public static MenuEnum findMenuById(int id) {
+    public static void process(int id) {
+        findMenuById(id).menu.process();
+    }
+
+    private static MenuEnum findMenuById(int id) {
         return Arrays.stream(MenuEnum.values())
                 .filter(menu -> menu.id == id)
                 .findFirst()

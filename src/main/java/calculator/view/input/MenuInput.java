@@ -2,7 +2,8 @@ package calculator.view.input;
 
 public class MenuInput implements BaseInput {
 
-    public String inputMenu() {
+    @Override
+    public String input() {
         return read();
     }
 }

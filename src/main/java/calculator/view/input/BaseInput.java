@@ -7,6 +7,8 @@ import java.util.InputMismatchException;
 
 public interface BaseInput {
 
+    <T> T input();
+
     default String read() {
         BufferedReader br =
                 new BufferedReader(new InputStreamReader(System.in));
