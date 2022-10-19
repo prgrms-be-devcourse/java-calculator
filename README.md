@@ -14,7 +14,7 @@
 3. 실제 진행할 PR규칙은 멘토+팀원들과 정하여 진행해주세요 :) 
     - ← head repo : `여러분repo` compare : `main`로 할지
     - 또는 ← head repo : `여러분repo` compare : `github_id`로 할지
-- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
+- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-76339434b23e4aa49e1d97fb2ab1ec5f)
 
 ### 과제를 통해 기대하는 역량
 
