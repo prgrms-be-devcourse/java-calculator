@@ -3,12 +3,11 @@
  */
 package com.programmers.java;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import com.programmers.java.io.Screen;
+import com.programmers.java.repository.RepositoryImpl;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        new Calculator(new Screen(), new RepositoryImpl()).run();
     }
 }
