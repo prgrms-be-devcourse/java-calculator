@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+version = '1.0.0'
+sourceCompatibility = 17
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+test {
+    useJUnitPlatform()
+}
