@@ -1,13 +1,15 @@
 package calculator.io;
 
+import calculator.engine.io.Output;
+import calculator.engine.io.SelectOption;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WriterTest {
+class OutputTest {
 
     @DisplayName("선택 옵션 출력 테스트")
     @Test
     void test1() {
-        new Writer().printSelectOption(SelectOption.getLiterals());
+        new Output().printSelectOption(SelectOption.getLiterals());
     }
 }

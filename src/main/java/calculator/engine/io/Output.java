@@ -1,9 +1,9 @@
-package calculator.io;
+package calculator.engine.io;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Writer {
+public class Output {
     public void printSelectOption(List<String> selectOptions) {
         AtomicInteger index = new AtomicInteger();
         selectOptions.forEach(

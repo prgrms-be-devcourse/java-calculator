@@ -1,4 +1,4 @@
-package calculator.io;
+package calculator.engine.io;
 
 public class UserSelection {
     private SelectOption selection;

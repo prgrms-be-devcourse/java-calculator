@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.engine.model;
 
 public class CalculationResult {
 }
