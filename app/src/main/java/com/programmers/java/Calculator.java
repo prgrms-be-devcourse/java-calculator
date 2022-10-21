@@ -21,10 +21,11 @@ public class Calculator implements Runnable {
 
             switch (chosenNumber) {
                 case 1:
-                    // 조회 로직
+                    screen.printHistory(repository.findAllHistory());
                     break;
                 case 2:
                     String formula = screen.inputFormula();
+                    // 중위표기법 -> 후위표기법 로직
                     // 계산 로직
                     break;
                 default:
