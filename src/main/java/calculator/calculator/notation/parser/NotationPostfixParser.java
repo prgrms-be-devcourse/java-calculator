@@ -6,7 +6,7 @@ import java.util.Deque;
 import java.util.List;
 
 import static calculator.calculator.operator.OperatorPriority.*;
-import static calculator.calculator.operator.OperatorPriority.isOperator;
+import static calculator.calculator.operator.Operators.isOperator;
 
 public class NotationPostfixParser implements NotationParser {
 

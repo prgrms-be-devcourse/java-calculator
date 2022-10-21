@@ -23,10 +23,6 @@ public enum OperatorPriority {
                 .orElseThrow(() -> new NullPointerException());
     }
 
-    public static boolean isOperator(String inputOperator) {
-        return findOptionalOperator(inputOperator).isPresent();
-    }
-
     public boolean isSameOrMoreImportantThan(String inputOperator) {
         return priority >= findPriority(inputOperator);
     }
