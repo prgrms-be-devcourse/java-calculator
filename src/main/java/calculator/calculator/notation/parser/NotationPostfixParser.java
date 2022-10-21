@@ -1,11 +1,14 @@
 package calculator.calculator.notation.parser;
 
+import calculator.calculator.operator.Operators;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
 import static calculator.calculator.operator.OperatorPriority.*;
+import static calculator.calculator.operator.Operators.*;
 import static calculator.calculator.operator.Operators.isOperator;
 
 public class NotationPostfixParser implements NotationParser {
@@ -36,10 +39,9 @@ public class NotationPostfixParser implements NotationParser {
         }
     }
 
-    private static boolean checkPopAll(Deque<String> operators, String formula) {
-        return !operators.isEmpty() &&
-                findOperator(operators.peekLast())
-                        .isSameOrMoreImportantThan(formula);
+    private static boolean checkPopAll(Deque<String> operators, String operator) {
+        return !operators.isEmpty()
+                && isLeftSameOrMoreImportantThan(operators.peekLast(), operator);
     }
-    
+
 }
