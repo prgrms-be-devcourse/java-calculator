@@ -1,4 +1,4 @@
-package calculator.calculator;
+package calculator.engine;
 
 public class PostfixCalculator implements Calculator{
 

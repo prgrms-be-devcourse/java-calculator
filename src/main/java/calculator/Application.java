@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.controller.ProcessController;
-import calculator.controller.RunningState;
+import calculator.engine.ProcessController;
+import calculator.engine.RunningState;
 
 public class Application {
     public static void main(String[] args) {

@@ -1,6 +1,4 @@
-package calculator.console;
-
-import calculator.domain.SelectOption;
+package calculator.io;
 
 public class Console {
     private final Reader reader;
@@ -13,5 +11,6 @@ public class Console {
 
     public void getUserSelection() {
         writer.printSelectOption(SelectOption.getLiterals());
+        reader.readSelection();
     }
 }

@@ -1,4 +1,4 @@
-package calculator.controller;
+package calculator.engine;
 
 public class RunningState {
     private boolean state;

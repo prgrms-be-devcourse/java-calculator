@@ -1,4 +1,4 @@
-package calculator.calculator;
+package calculator.engine;
 
 public class PostfixConverter implements ExpressionConverter{
 

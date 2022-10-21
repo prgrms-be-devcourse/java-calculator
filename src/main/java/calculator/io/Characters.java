@@ -1,4 +1,4 @@
-package calculator.console;
+package calculator.io;
 
 public enum Characters {
     BLANK(" "),

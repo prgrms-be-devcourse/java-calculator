@@ -1,6 +1,6 @@
-package calculator.controller;
+package calculator.engine;
 
-import calculator.console.Console;
+import calculator.io.Console;
 
 public class ProcessController {
     private final Console console;
