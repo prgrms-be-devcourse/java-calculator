@@ -21,8 +21,15 @@ public class NotationPostfixParser implements NotationParser {
             handleOperator(notation, formula);
             handleOperand(notation, formula);
         });
+        handleLastOperands(notation);
 
         return notation;
+    }
+
+    private void handleLastOperands(List<String> notation) {
+        while(!operators.isEmpty()) {
+            notation.add(operators.pollLast());
+        }
     }
 
     private void initParser() {
