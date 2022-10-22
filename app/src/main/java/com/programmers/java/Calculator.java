@@ -3,6 +3,8 @@ package com.programmers.java;
 import com.programmers.java.io.Screen;
 import com.programmers.java.repository.Repository;
 
+import java.util.Stack;
+
 public class Calculator implements Runnable {
     private final Screen screen;
     private final Repository repository;
@@ -28,13 +30,45 @@ public class Calculator implements Runnable {
                 case 2:
                     String formula = screen.inputFormula();
                     String parsedFormula = parser.changeInfixToPostfix(formula);
-                    // 계산
-                    // 저장
-                    // 출력
+                    int calculateResult = Integer.parseInt(calculate(parsedFormula));
+                    repository.save(formula, calculateResult);
+                    screen.printFormulaResult(calculateResult);
                     break;
                 default:
                     return;
             }
         }
+    }
+
+    public String calculate(String parsedFormula) {
+        Stack<Integer> numbers = new Stack<>();
+
+        for (int i = 0; i < parsedFormula.length(); i++) {
+            char c = parsedFormula.charAt(i);
+
+            if (c >= '0' && c <= '9') {
+                numbers.push(c - '0');
+            } else {
+                int num2 = numbers.pop();
+                int num1 = numbers.pop();
+
+                switch (c) {
+                    case '+':
+                        numbers.push(num1 + num2);
+                        break;
+                    case '-':
+                        numbers.push(num1 - num2);
+                        break;
+                    case '/':
+                        numbers.push(num1 / num2);
+                        break;
+                    case '*':
+                        numbers.push(num1 * num2);
+                        break;
+                }
+            }
+        }
+
+        return numbers.pop().toString();
     }
 }
