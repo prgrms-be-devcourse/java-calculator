@@ -8,6 +8,6 @@ import com.programmers.java.repository.RepositoryImpl;
 
 public class App {
     public static void main(String[] args) {
-        new Calculator(new Screen(), new RepositoryImpl()).run();
+        new Calculator(new Screen(), new RepositoryImpl(), new FormulaParser()).run();
     }
 }

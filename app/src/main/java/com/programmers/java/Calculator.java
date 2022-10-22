@@ -6,11 +6,13 @@ import com.programmers.java.repository.Repository;
 public class Calculator implements Runnable {
     private final Screen screen;
     private final Repository repository;
+    private final FormulaParser parser;
     private final String MENU = "1. 조회\n2. 계산\n\n선택 : ";
 
-    public Calculator(Screen screen, Repository repository) {
+    public Calculator(Screen screen, Repository repository, FormulaParser parser) {
         this.screen = screen;
         this.repository = repository;
+        this.parser = parser;
     }
 
     @Override
@@ -25,8 +27,10 @@ public class Calculator implements Runnable {
                     break;
                 case 2:
                     String formula = screen.inputFormula();
-                    // 중위표기법 -> 후위표기법 로직
-                    // 계산 로직
+                    String parsedFormula = parser.changeInfixToPostfix(formula);
+                    // 계산
+                    // 저장
+                    // 출력
                     break;
                 default:
                     return;
