@@ -4,6 +4,8 @@ import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Screen;
 import com.programmers.java.repository.Repository;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Stack;
 
 public class Calculator implements Runnable {
@@ -32,8 +34,8 @@ public class Calculator implements Runnable {
                         break;
                     case 2:
                         String formula = screen.inputFormula();
-                        String parsedFormula = parser.changeInfixToPostfix(formula);
-                        int calculateResult = Integer.parseInt(calculate(parsedFormula));
+                        String[] parsedFormula = parser.changeInfixToPostfix(formula);
+                        int calculateResult = calculate(parsedFormula);
                         repository.save(formula, calculateResult);
                         screen.printFormulaResult(calculateResult);
                         break;
@@ -47,35 +49,35 @@ public class Calculator implements Runnable {
         }
     }
 
-    public String calculate(String parsedFormula) {
+    public int calculate(String[] parsedFormula) {
         Stack<Integer> numbers = new Stack<>();
+        HashSet<String> operator = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
 
-        for (int i = 0; i < parsedFormula.length(); i++) {
-            char c = parsedFormula.charAt(i);
 
-            if (c >= '0' && c <= '9') {
-                numbers.push(c - '0');
+        for (int i = 0; i < parsedFormula.length; i++) {
+            if (!operator.contains(parsedFormula[i])) {
+                numbers.push(Integer.parseInt(parsedFormula[i]));
             } else {
                 int num2 = numbers.pop();
                 int num1 = numbers.pop();
 
-                switch (c) {
-                    case '+':
+                switch (parsedFormula[i]) {
+                    case "+":
                         numbers.push(num1 + num2);
                         break;
-                    case '-':
+                    case "-":
                         numbers.push(num1 - num2);
                         break;
-                    case '/':
+                    case "/":
                         numbers.push(num1 / num2);
                         break;
-                    case '*':
+                    case "*":
                         numbers.push(num1 * num2);
                         break;
                 }
             }
         }
 
-        return numbers.pop().toString();
+        return numbers.pop();
     }
 }

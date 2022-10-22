@@ -9,10 +9,13 @@ class CalculateTest {
     @Test
     void calculate() {
         Calculator calculator = new Calculator(new Screen(), new RepositoryImpl(), new FormulaParser());
-        String postfixFormula = "12+3/5+7-";
+        String[] postfixFormula1 = {"1", "2", "+", "3", "/", "5", "-", "7", "-"};
+        String[] postfixFormula2 = {"12", "23", "+"};
 
-        String result = calculator.calculate(postfixFormula);
+        int result1 = calculator.calculate(postfixFormula1);
+        int result2 = calculator.calculate(postfixFormula2);
 
-        Assertions.assertEquals(result, "-1");
+        Assertions.assertEquals(result1, -11);
+        Assertions.assertEquals(result2, 35);
     }
 }
