@@ -14,6 +14,16 @@ public class HistoryRepository implements Repository {
     }
 
     @Override
+    public boolean haveFormulaResult(String formula) {
+        return repository.containsKey(formula);
+    }
+
+    @Override
+    public int findFormulaResult(String formula) {
+        return repository.get(formula);
+    }
+
+    @Override
     public List<String> findAllHistory() {
         List<String> history = new ArrayList<>();
 

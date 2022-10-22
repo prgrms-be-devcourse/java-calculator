@@ -34,8 +34,14 @@ public class Calculator implements Runnable {
                         break;
                     case 2:
                         String formula = console.inputFormula();
-                        int calculateResult = calculate(parser.changeInfixToPostfix(formula));
-                        repository.save(formula, calculateResult);
+                        int calculateResult;
+
+                        if (repository.haveFormulaResult(formula)) {
+                            calculateResult = repository.findFormulaResult(formula);
+                        } else {
+                            calculateResult = calculate(parser.changeInfixToPostfix(formula));
+                            repository.save(formula, calculateResult);
+                        }
                         console.printFormulaResult(calculateResult);
                         break;
                     default:
