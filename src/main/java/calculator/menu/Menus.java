@@ -34,6 +34,7 @@ public enum Menus {
 
     public static void process() {
         menuOutput().printMenus();
+        menuOutput().printSelectedSign();
         Long menuId = menuInput().askMenuId();
         Menu findMenu = findMenuById(menuId);
 

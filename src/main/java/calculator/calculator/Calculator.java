@@ -10,7 +10,7 @@ public abstract class Calculator {
     NotationParser notationParser;
     FormulaParser formulaParser;
 
-    public final Double calculate(String formula) {
+    public Double calculate(String formula) {
         return calculation.calculate(
                 notationParser.parseFrom(
                         formulaParser.parseFrom(formula)));
