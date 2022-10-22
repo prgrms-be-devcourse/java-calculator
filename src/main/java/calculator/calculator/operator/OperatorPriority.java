@@ -13,12 +13,11 @@ public enum OperatorPriority {
         this.priority = priority;
     }
 
-    public static boolean isLeftSameOrMoreImportantThanRight(Integer leftPriority, Integer rightPriority) {
-        return leftPriority >= rightPriority;
-    }
+    public static boolean isLeftSameOrMoreImportantThanRight(
+            OperatorPriority leftPriority,
+            OperatorPriority rightPriority) {
 
-    public Integer findPriority() {
-        return priority;
+        return leftPriority.priority >= rightPriority.priority;
     }
 
 }

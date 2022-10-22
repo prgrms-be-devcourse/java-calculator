@@ -34,10 +34,9 @@ public enum Operators {
     }
 
     public static boolean isLeftSameOrMoreImportantThan(String leftOperator, String rightOperator) {
-        Integer leftPriority = findOperator(leftOperator).priority.findPriority();
-        Integer rightPriority = findOperator(rightOperator).priority.findPriority();
-
-        return OperatorPriority.isLeftSameOrMoreImportantThanRight(leftPriority, rightPriority);
+        return isLeftSameOrMoreImportantThanRight(
+                findOperator(leftOperator).priority,
+                findOperator(rightOperator).priority);
     }
 
     private static Operators findOperator(String inputOperator) {
