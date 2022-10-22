@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static calculator.calculator.formula.ParseUnit.NO_SPACE;
 import static calculator.calculator.formula.ParseUnit.SPACE;
+import static calculator.calculator.operator.Operators.isOperator;
 
 public class FormulaBasicParser implements FormulaParser {
 
@@ -17,24 +17,25 @@ public class FormulaBasicParser implements FormulaParser {
         return generateFormula(parseNoSpace(formula));
     }
 
-    private List<String> generateFormula(String formula) {
+    private List<String> generateFormula(final String formula) {
         List<String> formulas = new ArrayList<>();
         AtomicInteger beforeIdx = new AtomicInteger(0);
 
         IntStream.range(0, formula.length())
-                .filter(checkLetter(formula))
                 .forEach(idx -> {
-                    formulas.add(
-                            formula.substring(beforeIdx.getAndSet(idx), idx));
-                    formulas.add(
-                            String.valueOf(formula.charAt(idx)));
+                    boolean checkOperator = isOperator(formula.substring(idx, idx + 1));
+                    if (checkOperator) {
+                        formulas.add(
+                                formula.substring(beforeIdx.getAndSet(idx), idx + 1));
+                    }
+                    if (!checkOperator) {
+                        formulas.add(
+                                formula.substring(idx, idx + 1));
+                        beforeIdx.set(idx + 1);
+                    }
                 });
 
         return formulas;
-    }
-
-    private IntPredicate checkLetter(final String formula) {
-        return idx -> Character.isLetter(formula.charAt(idx));
     }
 
     private static String parseNoSpace(final String formula) {
