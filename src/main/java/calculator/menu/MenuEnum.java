@@ -1,6 +1,6 @@
 package calculator.menu;
 
-import calculator.view.input.CalculatorInput;
+import calculator.view.input.MenuInput;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -33,8 +33,8 @@ public enum MenuEnum {
                 .menu;
     }
 
-    private static CalculatorInput menuInput() {
-        return new CalculatorInput();
+    private static MenuInput menuInput() {
+        return new MenuInput();
     }
 
     private static Long askMenuId() {
