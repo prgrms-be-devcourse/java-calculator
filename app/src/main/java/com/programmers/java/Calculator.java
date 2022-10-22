@@ -1,5 +1,6 @@
 package com.programmers.java;
 
+import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Screen;
 import com.programmers.java.repository.Repository;
 
@@ -21,21 +22,27 @@ public class Calculator implements Runnable {
     public void run() {
         while (true) {
             screen.printMenu(MENU);
-            int chosenNumber = screen.inputMenuNumber();
 
-            switch (chosenNumber) {
-                case 1:
-                    screen.printHistory(repository.findAllHistory());
-                    break;
-                case 2:
-                    String formula = screen.inputFormula();
-                    String parsedFormula = parser.changeInfixToPostfix(formula);
-                    int calculateResult = Integer.parseInt(calculate(parsedFormula));
-                    repository.save(formula, calculateResult);
-                    screen.printFormulaResult(calculateResult);
-                    break;
-                default:
-                    return;
+            try {
+                int chosenNumber = screen.inputMenuNumber();
+
+                switch (chosenNumber) {
+                    case 1:
+                        screen.printHistory(repository.findAllHistory());
+                        break;
+                    case 2:
+                        String formula = screen.inputFormula();
+                        String parsedFormula = parser.changeInfixToPostfix(formula);
+                        int calculateResult = Integer.parseInt(calculate(parsedFormula));
+                        repository.save(formula, calculateResult);
+                        screen.printFormulaResult(calculateResult);
+                        break;
+                    default:
+                        throw new MenuInputException();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println();
             }
         }
     }

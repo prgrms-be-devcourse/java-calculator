@@ -1,5 +1,7 @@
 package com.programmers.java.io;
 
+import com.programmers.java.exception.MenuInputException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,8 +9,15 @@ public class Screen implements Input, Output {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public int inputMenuNumber() {
-        int chosenNumber = Integer.parseInt(scanner.nextLine());
+    public int inputMenuNumber() throws MenuInputException{
+        int chosenNumber;
+
+        try {
+            chosenNumber = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new MenuInputException();
+        }
+
         System.out.println();
         return chosenNumber;
     }

@@ -1,7 +1,7 @@
 package com.programmers.java.io;
 
 public interface Input {
-    int inputMenuNumber();
+    int inputMenuNumber() throws Exception;
 
     String inputFormula();
 }
