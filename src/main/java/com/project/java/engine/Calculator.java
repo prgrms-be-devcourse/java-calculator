@@ -8,7 +8,8 @@ import java.io.IOException;
 
 @AllArgsConstructor
 public class Calculator {
-    private final String GREETING = "번호를 입력해주세요.";
+    private static final String MESSAGE = "번호를 입력해주세요 : ";
+    private static final String MESSAGE_EXPRESSION = "계산식을 입력해주세요 : ";
     private int result;
     private Input input;
     private Output output;
@@ -16,14 +17,21 @@ public class Calculator {
     public void run() throws IOException {
 
         while(true) {
-            String cmd = input.getInput(GREETING);
+            String cmd = input.getInput(MESSAGE);
             switch(cmd) {
                 case "1" :
                     break;
                 case "2" :
-                    break;
-            }
+                    String expression = input.getExpression(MESSAGE_EXPRESSION);
+                    if(!input.validateInput(expression)) {
+                        System.out.println("ERROR");
+                        continue;
+                    }
 
+                    break;
+                default:
+                    output.inputError();
+            }
         }
     }
 }
