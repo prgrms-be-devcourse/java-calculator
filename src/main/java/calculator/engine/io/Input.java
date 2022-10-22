@@ -11,9 +11,9 @@ public class Input {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public UserSelection readSelection() {
-
-    }
+//    public UserSelection readSelection() {
+//
+//    }
 
     private String read() throws IOException {
         return bufferedReader.readLine();

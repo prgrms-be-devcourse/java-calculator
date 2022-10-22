@@ -10,7 +10,7 @@ public class Console {
     }
 
     public void getUserSelection() {
-        output.printSelectOption(SelectOption.getLiterals());
-        reader.readSelection();
+//        output.printSelectOption(SelectOption.getLiterals());
+//        reader.readSelection();
     }
 }

@@ -10,7 +10,8 @@ public enum Characters {
         this.character = character;
     }
 
-    public String toLiteral() {
+    @Override
+    public String toString() {
         return character;
     }
 }
