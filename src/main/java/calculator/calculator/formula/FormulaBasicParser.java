@@ -1,4 +1,4 @@
-package calculator.formula;
+package calculator.calculator.formula;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,8 +8,8 @@ import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static calculator.formula.ParseUnit.NO_SPACE;
-import static calculator.formula.ParseUnit.SPACE;
+import static calculator.calculator.formula.ParseUnit.NO_SPACE;
+import static calculator.calculator.formula.ParseUnit.SPACE;
 
 public class FormulaBasicParser implements FormulaParser {
 
