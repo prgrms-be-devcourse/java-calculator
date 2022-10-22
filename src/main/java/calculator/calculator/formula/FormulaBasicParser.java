@@ -16,35 +16,51 @@ import static calculator.exception.FormulaException.FORMULA_BASIC_PARSER_EXCEPTI
 
 public class FormulaBasicParser implements FormulaParser {
 
+    private final List<String> formulas;
+
+    public FormulaBasicParser() {
+        this.formulas = new ArrayList<>();
+    }
+
     @Override
     public List<String> parseFrom(final String formula) {
         return generateFormula(parseNoSpace(formula));
     }
 
     private List<String> generateFormula(final String formula) {
-        List<String> formulas = new ArrayList<>();
-        AtomicInteger beforeIdx = new AtomicInteger(0);
+        initFormulaParser();
 
+        AtomicInteger beforeIdx = new AtomicInteger(0);
         IntStream.range(0, formula.length())
                 .forEach(idx -> {
-                    String word = formula.substring(idx, idx + 1);
-                    if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, word)) {
+                    if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, formula.substring(idx, idx + 1))) {
                         throw new IllegalArgumentException(FORMULA_BASIC_PARSER_EXCEPTION.message);
                     }
-
-                    boolean checkOperator = isOperator(word);
-                    if (checkOperator) {
-                        formulas.add(
-                                formula.substring(beforeIdx.getAndSet(idx), idx + 1));
-                    }
-                    if (!checkOperator) {
-                        formulas.add(
-                                formula.substring(idx, idx + 1));
-                        beforeIdx.set(idx + 1);
-                    }
+                    handleOperator(formula, beforeIdx, idx);
+                    handlerOperand(formula, beforeIdx, idx);
                 });
 
         return formulas;
+    }
+
+    private void handlerOperand(String formula, AtomicInteger beforeIdx, int idx) {
+        String word = formula.substring(idx, idx + 1);
+        if (isOperator(word)) {
+            formulas.add(word);
+            beforeIdx.set(idx + 1);
+        }
+    }
+
+    private void handleOperator(String formula, AtomicInteger beforeIdx, int idx) {
+        String word = formula.substring(idx, idx + 1);
+        if (!isOperator(word)) {
+            formulas.add(
+                    formula.substring(beforeIdx.getAndSet(idx), idx + 1));
+        }
+    }
+
+    private void initFormulaParser() {
+        formulas.clear();
     }
 
     private static String parseNoSpace(final String formula) {
