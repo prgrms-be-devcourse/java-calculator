@@ -11,6 +11,7 @@ public class CalculationHistory implements History {
     private static final int HISTORY_FORMULA_INDEX = 0;
     private static final int HISTORY_ANSWER_INDEX = 1;
 
+    @Override
     public void save(String... history) {
         String formula = history[HISTORY_FORMULA_INDEX];
         Double answer = Double.parseDouble(history[HISTORY_ANSWER_INDEX]);
@@ -25,6 +26,7 @@ public class CalculationHistory implements History {
         return formula.length() == 0 || answer.isNaN();
     }
 
+    @Override
     public Collection<?> findAllHistories() {
         return cloneHistories().entrySet();
     }
