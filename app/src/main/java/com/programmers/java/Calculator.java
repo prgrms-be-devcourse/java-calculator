@@ -1,6 +1,6 @@
 package com.programmers.java;
 
-import com.programmers.java.exception.MenuInputException;
+import com.programmers.java.exception.ChosenNumberNotInMenuException;
 import com.programmers.java.io.Screen;
 import com.programmers.java.repository.Repository;
 
@@ -34,17 +34,15 @@ public class Calculator implements Runnable {
                         break;
                     case 2:
                         String formula = screen.inputFormula();
-                        String[] parsedFormula = parser.changeInfixToPostfix(formula);
-                        int calculateResult = calculate(parsedFormula);
+                        int calculateResult = calculate(parser.changeInfixToPostfix(formula));
                         repository.save(formula, calculateResult);
                         screen.printFormulaResult(calculateResult);
                         break;
                     default:
-                        throw new MenuInputException();
+                        throw new ChosenNumberNotInMenuException();
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println();
+                screen.printErrorMessage(e.getMessage());
             }
         }
     }
