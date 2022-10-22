@@ -6,13 +6,29 @@ import java.io.InputStreamReader;
 
 public class Console implements Input, Output{
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private final String MENU = "1.조회\n2.계산";
+    private static final String MENU = "1.조회\n2.계산";
+
+    private static final String NUMBER_OPERATION_REGULAR = "^[+\\-*/]*$\\d+";
+    private static final String SPECIAL_CHARACTER_VALIDATOR_REGEX = "[^\\w+\\-*/]";
 
     @Override
-    public String getInput(String greeting) throws IOException {
+    public String getInput(String message) throws IOException {
         printMenu();
-        System.out.print(greeting);
+        System.out.print(message);
         return br.readLine();
+    }
+
+    @Override
+    public String getExpression(String message) throws IOException {
+        System.out.print(message);
+        return br.readLine();
+    }
+
+    @Override
+    public boolean validateInput(String input) {
+        String validateResult = input.replaceAll(SPECIAL_CHARACTER_VALIDATOR_REGEX, "");
+        if(validateResult.length() != input.length()) return false;
+        return false;
     }
 
     @Override
