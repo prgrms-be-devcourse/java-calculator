@@ -2,15 +2,25 @@ package calculator.view.output;
 
 import calculator.calculator.operator.Operators;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import static calculator.view.output.TextUnit.*;
 import static java.util.stream.IntStream.range;
 
 public class MenuHistoryOutput implements BaseOutput {
 
-    public void printHistories(HashMap<String, Double> histories) {
-        print(createHistories(histories) + ENTER.unit);
+    public void printHistories(Collection<?> histories) {
+        HashMap<String, Double> newHistories = new HashMap<>();
+
+        histories.stream()
+                .map(history -> (Map.Entry<String, Double>) history)
+                .forEach(parsedHistory -> newHistories.put(
+                        parsedHistory.getKey(),
+                        parsedHistory.getValue()));
+
+        print(createHistories(newHistories) + ENTER.unit);
     }
 
     private String createHistories(HashMap<String, Double> histories) {
@@ -29,7 +39,7 @@ public class MenuHistoryOutput implements BaseOutput {
     }
 
     private static void handleAnswer(HashMap<String, Double> histories, StringBuilder textBuilder, String formula, int idx) {
-        if (idx == formula.length() -1) {
+        if (idx == formula.length() - 1) {
             textBuilder.append(SPACE.unit)
                     .append(EQUAL.unit)
                     .append(SPACE.unit)

@@ -1,14 +1,20 @@
 package calculator.calculator.history;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import static calculator.exception.HistoryException.HISTORY_SAVE_EXCEPTION;
 
-public class CalculationHistory {
+public class CalculationHistory implements History {
 
     private static final HashMap<String, Double> histories = new HashMap<>();
+    private static final int HISTORY_FORMULA_INDEX = 0;
+    private static final int HISTORY_ANSWER_INDEX = 1;
 
-    public void save(String formula, Double answer) {
+    public void save(String... history) {
+        String formula = history[HISTORY_FORMULA_INDEX];
+        Double answer = Double.parseDouble(history[HISTORY_ANSWER_INDEX]);
+
         if (checkSaveFormWrong(formula, answer)) {
             throw new IllegalArgumentException(HISTORY_SAVE_EXCEPTION.message);
         }
@@ -19,8 +25,8 @@ public class CalculationHistory {
         return formula.length() == 0 || answer.isNaN();
     }
 
-    public HashMap<String, Double> findAllHistories() {
-        return cloneHistories();
+    public Collection<?> findAllHistories() {
+        return cloneHistories().entrySet();
     }
 
     private HashMap<String, Double> cloneHistories() {
