@@ -1,5 +1,5 @@
 package calculator.engine.calculator;
 
-public enum Operator {
+public enum ArithmeticOperator {
 
 }

@@ -1,5 +1,5 @@
 package calculator.engine.calculator;
 
-public interface Calculator{
+public interface ArithmeticCalculator {
 
 }
