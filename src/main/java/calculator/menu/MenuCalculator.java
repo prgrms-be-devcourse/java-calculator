@@ -16,7 +16,9 @@ public class MenuCalculator implements Menu {
 
     @Override
     public void process() {
-        Double result = calculator.calculate(input.inputFormula());
+        Double result =
+                calculator.calculate(
+                        input.askFormula());
     }
 
 }
