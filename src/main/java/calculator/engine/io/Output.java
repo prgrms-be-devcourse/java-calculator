@@ -1,5 +1,5 @@
 package calculator.engine.io;
 
-public class Output {
+public interface Output {
 
 }
