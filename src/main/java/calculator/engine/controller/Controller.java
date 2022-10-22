@@ -1,4 +1,4 @@
-package calculator.engine;
+package calculator.engine.controller;
 
 public class Controller implements Runnable{
 
