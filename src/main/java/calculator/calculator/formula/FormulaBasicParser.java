@@ -1,6 +1,5 @@
 package calculator.calculator.formula;
 
-import calculator.exception.FormulaException;
 import calculator.util.regex.RegexUtil;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.stream.IntStream;
 import static calculator.calculator.formula.ParseUnit.NO_SPACE;
 import static calculator.calculator.formula.ParseUnit.SPACE;
 import static calculator.calculator.operator.Operators.isOperator;
-import static calculator.exception.FormulaException.*;
+import static calculator.exception.FormulaException.FORMULA_BASIC_PARSER_EXCEPTION;
 
 public class FormulaBasicParser implements FormulaParser {
 
