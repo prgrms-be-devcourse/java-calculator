@@ -4,6 +4,8 @@ public enum TextUnit {
 
     DOT("."),
     SPACE(" "),
+    NO_SPACE(""),
+    EQUAL("="),
     ENTER("\n");
 
     public final String unit;
