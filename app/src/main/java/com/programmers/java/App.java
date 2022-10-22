@@ -3,11 +3,11 @@
  */
 package com.programmers.java;
 
-import com.programmers.java.io.Screen;
-import com.programmers.java.repository.RepositoryImpl;
+import com.programmers.java.io.Console;
+import com.programmers.java.repository.HistoryRepository;
 
 public class App {
     public static void main(String[] args) {
-        new Calculator(new Screen(), new RepositoryImpl(), new FormulaParser()).run();
+        new Calculator(new Console(), new HistoryRepository(), new FormulaParser()).run();
     }
 }

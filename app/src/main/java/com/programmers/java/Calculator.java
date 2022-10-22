@@ -1,7 +1,7 @@
 package com.programmers.java;
 
 import com.programmers.java.exception.ChosenNumberNotInMenuException;
-import com.programmers.java.io.Screen;
+import com.programmers.java.io.Console;
 import com.programmers.java.repository.Repository;
 
 import java.util.Arrays;
@@ -9,13 +9,13 @@ import java.util.HashSet;
 import java.util.Stack;
 
 public class Calculator implements Runnable {
-    private final Screen screen;
+    private final Console console;
     private final Repository repository;
     private final FormulaParser parser;
     private final String MENU = "1. 조회\n2. 계산\n\n선택 : ";
 
-    public Calculator(Screen screen, Repository repository, FormulaParser parser) {
-        this.screen = screen;
+    public Calculator(Console console, Repository repository, FormulaParser parser) {
+        this.console = console;
         this.repository = repository;
         this.parser = parser;
     }
@@ -23,26 +23,26 @@ public class Calculator implements Runnable {
     @Override
     public void run() {
         while (true) {
-            screen.printMenu(MENU);
+            console.printMenu(MENU);
 
             try {
-                int chosenNumber = screen.inputMenuNumber();
+                int chosenNumber = console.inputMenuNumber();
 
                 switch (chosenNumber) {
                     case 1:
-                        screen.printHistory(repository.findAllHistory());
+                        console.printHistory(repository.findAllHistory());
                         break;
                     case 2:
-                        String formula = screen.inputFormula();
+                        String formula = console.inputFormula();
                         int calculateResult = calculate(parser.changeInfixToPostfix(formula));
                         repository.save(formula, calculateResult);
-                        screen.printFormulaResult(calculateResult);
+                        console.printFormulaResult(calculateResult);
                         break;
                     default:
                         throw new ChosenNumberNotInMenuException();
                 }
             } catch (Exception e) {
-                screen.printErrorMessage(e.getMessage());
+                console.printErrorMessage(e.getMessage());
             }
         }
     }

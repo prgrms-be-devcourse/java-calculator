@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class RepositoryImpl implements Repository {
+public class HistoryRepository implements Repository {
     private static HashMap<String, Integer> repository = new LinkedHashMap<>();
 
     @Override

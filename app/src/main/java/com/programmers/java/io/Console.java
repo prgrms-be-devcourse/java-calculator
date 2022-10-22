@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Screen implements Input, Output, Validate {
+public class Console implements Input, Output, Validate {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override

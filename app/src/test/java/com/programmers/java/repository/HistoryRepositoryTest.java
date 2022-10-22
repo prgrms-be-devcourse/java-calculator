@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class RepositoryImplTest {
+class HistoryRepositoryTest {
 
-    Repository repository = new RepositoryImpl();
+    Repository repository = new HistoryRepository();
 
     @Test
     void findAllHistory() {
