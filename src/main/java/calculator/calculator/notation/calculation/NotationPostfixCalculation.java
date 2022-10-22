@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static calculator.calculator.operator.Operators.isOperator;
+import static calculator.exception.NotationException.NOTATION_POSTFIX_NULL_EXCEPTION;
 
 public class NotationPostfixCalculation implements NotationCalculation {
 
@@ -50,8 +51,9 @@ public class NotationPostfixCalculation implements NotationCalculation {
     }
 
     private Double getOperand() {
-        return Optional.ofNullable(operands.pollLast())
-                .orElseThrow(() -> new NullPointerException());
+        return Optional.ofNullable(operands)
+                .orElseThrow(() -> new NullPointerException(NOTATION_POSTFIX_NULL_EXCEPTION.message))
+                .pollLast();
     }
 
 }

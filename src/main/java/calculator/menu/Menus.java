@@ -13,7 +13,6 @@ public enum Menus {
     MENU_HISTORY_FINDER(1L, "조회", new MenuHistoryFinder()),
     MENU_CALCULATOR(2L,"계산", new MenuCalculator());
 
-    private static final String a= "";
     private final Long id;
     private final String title;
     private final Menu menu;

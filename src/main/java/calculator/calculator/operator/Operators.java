@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import static calculator.calculator.operator.OperatorCalculation.*;
 import static calculator.calculator.operator.OperatorPriority.*;
+import static calculator.exception.OperatorException.OPERATORS_EXCEPTION_NULL_FIND;
 
 public enum Operators {
 
@@ -43,6 +44,6 @@ public enum Operators {
         return Arrays.stream(Operators.values())
                 .filter(operator -> operator.operator.equals(inputOperator))
                 .findFirst()
-                .orElseThrow(() -> new NullPointerException());
+                .orElseThrow(() -> new NullPointerException(OPERATORS_EXCEPTION_NULL_FIND.message));
     }
 }

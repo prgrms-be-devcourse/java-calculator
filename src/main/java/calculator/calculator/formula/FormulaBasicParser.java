@@ -1,5 +1,8 @@
 package calculator.calculator.formula;
 
+import calculator.exception.FormulaException;
+import calculator.util.regex.RegexUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,9 +13,11 @@ import java.util.stream.IntStream;
 import static calculator.calculator.formula.ParseUnit.NO_SPACE;
 import static calculator.calculator.formula.ParseUnit.SPACE;
 import static calculator.calculator.operator.Operators.isOperator;
+import static calculator.exception.FormulaException.*;
 
 public class FormulaBasicParser implements FormulaParser {
 
+    @Override
     public List<String> parseFrom(final String formula) {
         return generateFormula(parseNoSpace(formula));
     }
@@ -23,7 +28,12 @@ public class FormulaBasicParser implements FormulaParser {
 
         IntStream.range(0, formula.length())
                 .forEach(idx -> {
-                    boolean checkOperator = isOperator(formula.substring(idx, idx + 1));
+                    String word = formula.substring(idx, idx + 1);
+                    if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, word)) {
+                        throw new IllegalArgumentException(FORMULA_BASIC_PARSER_EXCEPTION.message);
+                    }
+
+                    boolean checkOperator = isOperator(word);
                     if (checkOperator) {
                         formulas.add(
                                 formula.substring(beforeIdx.getAndSet(idx), idx + 1));
