@@ -1,31 +1,44 @@
 package calculator.menu;
 
+import calculator.view.input.CalculatorInput;
+
 import java.util.Arrays;
+import java.util.Objects;
 
 import static calculator.exception.MenuException.MENU_FIND_NULL_EXCEPTION;
 
 public enum MenuEnum {
 
-    MENU_CALCULATOR(1, new MenuCalculator()),
-    MENU_HISTORY_FINDER(2, new MenuHistoryFinder());
+    MENU_CALCULATOR(1L, new MenuCalculator()),
+    MENU_HISTORY_FINDER(2L, new MenuHistoryFinder());
 
-    private final int id;
+    private final Long id;
     private final Menu menu;
 
-    MenuEnum(int id, Menu menu) {
+    MenuEnum(Long id, Menu menu) {
         this.id = id;
         this.menu = menu;
     }
 
-    public static void process(int id) {
-        findMenuById(id).menu.process();
+    public static void process() {
+        Long menuId = askMenuId();
+        findMenuById(menuId).process();
     }
 
-    private static MenuEnum findMenuById(int id) {
+    private static Menu findMenuById(Long id) {
         return Arrays.stream(MenuEnum.values())
-                .filter(menu -> menu.id == id)
+                .filter(menu -> Objects.equals(menu.id, id))
                 .findFirst()
-                .orElseThrow(() -> new NullPointerException(MENU_FIND_NULL_EXCEPTION.message));
+                .orElseThrow(() -> new NullPointerException(MENU_FIND_NULL_EXCEPTION.message))
+                .menu;
+    }
+
+    private static CalculatorInput menuInput() {
+        return new CalculatorInput();
+    }
+
+    private static Long askMenuId() {
+        return menuInput().inputMenuNumber();
     }
 
 }
