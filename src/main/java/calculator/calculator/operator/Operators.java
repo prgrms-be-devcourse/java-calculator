@@ -27,7 +27,7 @@ public enum Operators {
                 .anyMatch(operator -> operator.operator.equals(inputOperator));
     }
 
-    public static Double calculate(String leftOperand, String operator, String rightOperand) {
+    public static Double calculate(Double leftOperand, String operator, Double rightOperand) {
         return findOperator(operator).calculation
                 .doCalculation(leftOperand, rightOperand);
     }

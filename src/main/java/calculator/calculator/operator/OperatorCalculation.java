@@ -15,10 +15,7 @@ public enum OperatorCalculation {
         this.calculation = calculation;
     }
 
-    public Double doCalculation(String leftOperand, String rightOperand) {
-        return calculation.applyAsDouble(
-                Double.parseDouble(leftOperand),
-                Double.parseDouble(rightOperand)
-        );
+    public Double doCalculation(Double leftOperand, Double rightOperand) {
+        return calculation.applyAsDouble(leftOperand, rightOperand);
     }
 }
