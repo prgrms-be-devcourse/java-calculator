@@ -1,4 +1,4 @@
-package calculator.engine.io;
+package calculator.engine.io.enums;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public enum SelectOption {
     CALCULATE(1, "계산"),
-    INQUIRY(2, "조회"),
+    QUERY(2, "조회"),
     EXIT(0, "종료");
 
     private final Integer index;
@@ -31,5 +31,9 @@ public enum SelectOption {
                 .append(Characters.BLANK)
                 .append(literal)
                 .toString();
+    }
+
+    public Integer getIndex() {
+        return index;
     }
 }
