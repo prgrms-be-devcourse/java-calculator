@@ -26,6 +26,15 @@ public class BaseCalculatorTest {
     }
 
     @Test
+    void calculate_0으로나누는경우(){
+        when(calculation.division(2, 0)).thenThrow(ArithmeticException.class);
+
+        Assertions.assertThrows(ArithmeticException.class, () -> {
+            calculator.calculate(EXPRESSION_div_0);
+        });
+    }
+
+    @Test
     void calculate_곱셈과나눗셈(){
         when(calculation.multiplication(2, 3)).thenReturn(6);
         when(calculation.division(6, 4)).thenReturn(1);
