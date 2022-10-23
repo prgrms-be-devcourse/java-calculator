@@ -150,7 +150,7 @@ public class Calculator implements Runnable {
 
         // validate: 잘못된 연산자나 숫자인지 체크
         for (String token : tokens) {
-            if (!Pattern.matches(OPERATOR_REGEX, token) || !Pattern.matches(NUMBER_REGEX, token)) {
+            if (!Pattern.matches(OPERATOR_REGEX, token) && !Pattern.matches(NUMBER_REGEX, token)) {
                 return Optional.empty();
             }
         }
