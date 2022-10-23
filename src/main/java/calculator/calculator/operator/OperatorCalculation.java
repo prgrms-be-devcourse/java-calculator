@@ -3,18 +3,13 @@ package calculator.calculator.operator;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.ToDoubleBiFunction;
 
 import static calculator.exception.OperatorException.OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO;
 
 public enum OperatorCalculation {
 
     PLUS_CALCULATOR(BigDecimal::add),
-    MINUS_CALCULATOR((leftOperand, rightOperand) -> {
-        BigDecimal minusRightOperand = BigDecimal.valueOf(-rightOperand.doubleValue());
-        return leftOperand.add(minusRightOperand);
-    }),
+    MINUS_CALCULATOR(BigDecimal::subtract),
     MULTIPLY_CALCULATOR(BigDecimal::multiply),
     DIVIDE_CALCULATOR((leftOperand, rightOperand) -> {
         if (rightOperand.doubleValue() == 0D) {
