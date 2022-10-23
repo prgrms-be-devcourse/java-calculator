@@ -58,6 +58,16 @@ public class Calculator implements Runnable {
         return String.join("", postFix);
     }
 
+    public boolean isNum(String s){
+        return s.matches("^[0-9]*$");
+    }
+
+    public String toString(String s){
+        return Arrays.stream(s.replace(" ", "").split(""))
+                .map(i -> i + " ")
+                .collect(Collectors.joining(""));
+    }
+
     public Result calculate(String s) {
         String exp = toPostfix(s);
         Stack<Integer> nums = new Stack<>();
