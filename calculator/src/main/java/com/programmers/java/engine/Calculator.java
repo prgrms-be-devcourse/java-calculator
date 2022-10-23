@@ -10,9 +10,15 @@ import com.programmers.java.engine.operator.Minus;
 import com.programmers.java.engine.operator.Multiply;
 import com.programmers.java.engine.operator.Plus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class Calculator implements Runnable {
+    private final String OPERATOR_REGEX = "[+\\-*/]";
+    private final String NUMBER_REGEX = "\\d+(\\.\\d+)?";
 
     private Plus plus;
     private Minus minus;
@@ -39,7 +45,7 @@ public class Calculator implements Runnable {
             String inputOption = this.input.input("1. 조회\n2. 계산\n\n선택 : ");
 
             // check validate
-            Optional<Integer> option = parse(inputOption);
+            Optional<Integer> option = parseOption(inputOption);
             // incorrect -> continue
             if (option.isEmpty()) {
                 output.inputError();
@@ -56,7 +62,7 @@ public class Calculator implements Runnable {
             // Option 2. Use calculator
             if (option.get().equals(2)) {
                 String inputExpression = this.input.input("\n");
-                Optional<Expression> expression = makeExpression(inputExpression);
+                Optional<Expression> expression = parseExpression(inputExpression);
 
                 if (expression.isEmpty()) {
                     output.inputError();
@@ -70,15 +76,47 @@ public class Calculator implements Runnable {
         }
     }
 
-    private Double calculate(Expression expression) {
+    public Double calculate(Expression expression) {
         return null;
     }
 
-    private Optional<Expression> makeExpression(String inputExpression) {
-        return null;
+    public Optional<Expression> parseExpression(String inputExpression) {
+
+        // 숫자와 연산자 추출
+        String[] tokens = inputExpression.split(" ");
+
+        List<String> operators = new ArrayList<>();
+        List<Double> numbers = new ArrayList<>();
+
+        for (String token : tokens) {
+            if (Pattern.matches(OPERATOR_REGEX, token)) {
+                operators.add(token);
+            } else if (Pattern.matches(NUMBER_REGEX, token)) {
+                numbers.add(Double.parseDouble(token));
+            }
+        }
+
+        return Optional.of(
+                new Expression(
+                        operators, numbers
+                )
+        );
     }
 
-    private Optional<Integer> parse(String inputOption) {
-        return null;
+    public Optional<Integer> parseOption(String inputOption) {
+        Integer result = 0;
+
+        // validate: 숫자형인지 체크
+        try {
+            result = Integer.parseInt(inputOption);
+        } catch (NumberFormatException exception) {
+            return Optional.empty();
+        }
+
+        // validate: 1이나 2인지 체크
+        if (result == 1 || result == 2) {
+            return Optional.of(result);
+        }
+        return Optional.empty();
     }
 }
