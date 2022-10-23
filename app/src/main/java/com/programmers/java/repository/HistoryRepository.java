@@ -1,16 +1,18 @@
 package com.programmers.java.repository;
 
+import com.programmers.java.model.History;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 public class HistoryRepository implements Repository {
-    private static HashMap<String, Integer> repository = new LinkedHashMap<>();
+    private static HashMap<String, History> repository = new LinkedHashMap<>();
 
     @Override
-    public void save(String formula, Integer result) {
-        repository.put(formula, result);
+    public void save(String formula, History history) {
+        repository.put(formula, history);
     }
 
     @Override
@@ -20,15 +22,15 @@ public class HistoryRepository implements Repository {
 
     @Override
     public int findFormulaResult(String formula) {
-        return repository.get(formula);
+        return repository.get(formula).getResult();
     }
 
     @Override
-    public List<String> findAllHistory() {
-        List<String> history = new ArrayList<>();
+    public List<History> findAllHistory() {
+        List<History> history = new ArrayList<>();
 
         repository.keySet()
-                .forEach(i -> history.add(i + "=" + repository.get(i).toString()));
+                .forEach(i -> history.add(repository.get(i)));
 
         return history;
     }

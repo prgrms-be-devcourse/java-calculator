@@ -2,6 +2,7 @@ package com.programmers.java;
 
 import com.programmers.java.exception.ChosenNumberNotInMenuException;
 import com.programmers.java.io.Console;
+import com.programmers.java.model.History;
 import com.programmers.java.repository.Repository;
 
 import java.util.Arrays;
@@ -9,10 +10,12 @@ import java.util.HashSet;
 import java.util.Stack;
 
 public class Calculator implements Runnable {
-    private final Console console;
-    private final Repository repository;
-    private final FormulaParser parser;
-    private final String MENU = "1. 조회\n2. 계산\n\n선택 : ";
+    private final String newLine = System.lineSeparator();
+    private final String MENU = "1. 조회" + newLine + "2. 계산" + newLine + newLine + "선택 : ";
+
+    private Console console;
+    private Repository repository;
+    private FormulaParser parser;
 
     public Calculator(Console console, Repository repository, FormulaParser parser) {
         this.console = console;
@@ -34,15 +37,14 @@ public class Calculator implements Runnable {
                         break;
                     case 2:
                         String formula = console.inputFormula();
-                        int calculateResult;
 
                         if (repository.haveFormulaResult(formula)) {
-                            calculateResult = repository.findFormulaResult(formula);
+                            console.printFormulaResult(repository.findFormulaResult(formula));
                         } else {
-                            calculateResult = calculate(parser.changeInfixToPostfix(formula));
-                            repository.save(formula, calculateResult);
+                            int calculateResult = calculate(parser.changeInfixToPostfix(formula));
+                            repository.save(formula, new History(formula, calculateResult));
+                            console.printFormulaResult(calculateResult);
                         }
-                        console.printFormulaResult(calculateResult);
                         break;
                     default:
                         throw new ChosenNumberNotInMenuException();

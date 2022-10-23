@@ -2,6 +2,7 @@ package com.programmers.java.io;
 
 import com.programmers.java.exception.FormulaInputException;
 import com.programmers.java.exception.MenuInputNotNumberException;
+import com.programmers.java.model.History;
 
 import java.util.List;
 import java.util.Scanner;
@@ -29,8 +30,8 @@ public class Console implements Input, Output, Validate {
     }
 
     @Override
-    public void printHistory(List<String> history) {
-        history.forEach(System.out::println);
+    public void printHistory(List<History> history) {
+        history.forEach(i-> System.out.println(i.getHistory()));
     }
 
     @Override
