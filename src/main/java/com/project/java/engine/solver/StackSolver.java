@@ -2,9 +2,7 @@ package com.project.java.engine.solver;
 
 import com.project.java.exception.ZeroDivisionException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class StackSolver implements Solver {
 
@@ -12,10 +10,13 @@ public class StackSolver implements Solver {
     private static final String NUMBER_REGULAR = "[0-9]+";
 
     @Override
-    public int calculate(String expression) throws ZeroDivisionException {
+    public Map<Integer, List<String>> calculate(String expression) throws ZeroDivisionException {
         List<String> expressionList = makeExpressionToList(expression);
         List<String> postfix = makeInfixToPostfix(expressionList);
-        return calculatePostfix(postfix);
+        int result = calculatePostfix(postfix);
+        Map<Integer, List<String>> resultMap = new HashMap<>();
+        resultMap.put(result, expressionList);
+        return resultMap;
     }
 
     private List<String> makeInfixToPostfix(List<String> infix) {
