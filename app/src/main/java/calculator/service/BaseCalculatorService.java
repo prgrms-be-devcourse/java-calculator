@@ -43,7 +43,7 @@ public class BaseCalculatorService implements CalculatorService {
     }
 
     private String makeIntroduction() {
-        String introduction = "";
+        String introduction = "\n";
         for (Command c : Command.values()) {
             introduction = introduction.concat(c.getCode() + ". " + c.getCommand() + "\n");
         }
