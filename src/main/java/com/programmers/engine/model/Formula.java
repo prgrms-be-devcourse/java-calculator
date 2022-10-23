@@ -4,9 +4,9 @@ package com.programmers.engine.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.annotation.processing.SupportedSourceVersion;
-
-@Getter @Setter
+@Setter @Getter
 public class Formula {
     private String content;
+    public void addData(DataBase db){db.addData(this.content);}
+    public void clearContent(){this.content = "";};
 }

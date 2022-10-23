@@ -23,7 +23,13 @@ public class Calculator implements Runnable{
             if (state == 1) dataBase.showAll(); //  DB 조회
             else if (state == 2){
                 formula.setContent(input.input(""));  // 실질적인 계산
+                //
+                // validate
+                // 식에 문제가 없으면, 계산 진행
+                //
                 System.out.println(formula.getContent());
+                formula.addData(dataBase); // 일단 무조건 저장 : 만약 데이터가 올바르지 않으면 저장안할거임
+                formula.clearContent();
             }
             else break;
         }

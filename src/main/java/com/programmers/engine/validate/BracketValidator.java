@@ -1,4 +1,6 @@
 package com.programmers.engine.validate;
 
-public class BracketValidator {
+@FunctionalInterface
+public interface BracketValidator{
+    public boolean validateBracket(String s);
 }

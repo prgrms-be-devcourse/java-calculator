@@ -1,4 +1,6 @@
 package com.programmers.engine.validate;
 
-public class NumOperatorValidator {
+@FunctionalInterface
+public interface NumOperatorValidator{
+    public boolean validateNumberNOperator(String s);
 }
