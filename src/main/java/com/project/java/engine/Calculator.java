@@ -2,6 +2,8 @@ package com.project.java.engine;
 
 import com.project.java.engine.io.Input;
 import com.project.java.engine.io.Output;
+import com.project.java.engine.solver.Solver;
+import com.project.java.exception.ZeroDivisionException;
 import lombok.AllArgsConstructor;
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ public class Calculator {
     private int result;
     private Input input;
     private Output output;
+    private Solver solver;
 
     public void run() throws IOException {
 
@@ -24,10 +27,16 @@ public class Calculator {
                 case "2" :
                     String expression = input.getExpression(MESSAGE_EXPRESSION);
                     if(!input.validateInput(expression)) {
-                        System.out.println("ERROR");
+                        output.inputError();
                         continue;
                     }
-
+                    try {
+                        solver.calculate(expression);
+                    } catch(ZeroDivisionException e) {
+                        e.printStackTrace();
+                        output.inputError();
+                        continue;
+                    }
                     break;
                 default:
                     output.inputError();

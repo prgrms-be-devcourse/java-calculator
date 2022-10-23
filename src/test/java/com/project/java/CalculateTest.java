@@ -1,26 +1,43 @@
-package com.project.java.engine.solver;
+package com.project.java;
 
 import com.project.java.exception.ZeroDivisionException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class StackSolver implements Solver {
+public class CalculateTest {
 
     private static final String OPER_REGULAR = "[+\\-*/]";
     private static final String NUMBER_REGULAR = "[0-9]+";
 
-    @Override
-    public int calculate(String expression) throws ZeroDivisionException {
-        List<String> expressionList = makeExpressionToList(expression);
-        List<String> postfix = makeInfixToPostfix(expressionList);
-        return calculatePostfix(postfix);
+    @Test
+    public void expressionToList() throws Exception {
+        //given
+        String expression = "1 34+ 2 * 3";
+        ArrayList<String> splittedValues = new ArrayList<>();
+        // when
+        expression = expression.replace(" ", "");
+        String[] nums = expression.split(OPER_REGULAR);
+        String[] opers = expression.split(NUMBER_REGULAR);
+        splittedValues.add(String.valueOf(Integer.parseInt(nums[0])));
+        for (int i = 1; i < opers.length; i++) {
+            splittedValues.add(opers[i]);
+            splittedValues.add(String.valueOf(Integer.parseInt(nums[i])));
+        }
+        //then
+        Assertions.assertLinesMatch(splittedValues, List.of("134", "+", "2", "*", "3"));
     }
 
-    private List<String> makeInfixToPostfix(List<String> infix) {
+    @Test
+    public void infixToPostFix() throws Exception {
+        //given
+        ArrayList<String> infix = new ArrayList<String>(List.of("134", "+", "2", "*", "3"));
         Stack<String> stack = new Stack<>();
         ArrayList<String> postfix = new ArrayList<>();
+        // when
         for (String element : infix) {
             if (element.equals("+") || element.equals("-") || element.equals("*") || element.equals("/")) {
                 int priority = getPriority(element);
@@ -35,30 +52,21 @@ public class StackSolver implements Solver {
         while (!stack.isEmpty()) {
             postfix.add(stack.pop());
         }
-        return postfix;
+        //then
+        Assertions.assertLinesMatch(postfix, List.of("134", "2", "3", "*", "+"));
     }
 
-    private int getPriority(String oper) {
+    int getPriority(String oper) {
         if (oper.equals("+") || oper.equals("-")) return 1;
         else return 2;
     }
 
-    private List<String> makeExpressionToList(String expression) {
-        ArrayList<String> splittedValues = new ArrayList<>();
-        expression = expression.replace(" ", "");
-        String[] nums = expression.split(OPER_REGULAR);
-        String[] opers = expression.split(NUMBER_REGULAR);
-        splittedValues.add(String.valueOf(Integer.parseInt(nums[0])));
-        for (int i = 1; i < opers.length; i++) {
-            splittedValues.add(opers[i]);
-            splittedValues.add(String.valueOf(Integer.parseInt(nums[i])));
-        }
-        return splittedValues;
-    }
-
-    private int calculatePostfix(List<String> postfix) throws ZeroDivisionException {
+    @Test
+    public void calculatePostfix() throws Exception {
+        //given
+        ArrayList<String> postfix = new ArrayList<>(List.of("134", "2", "3", "*", "+", "6", "+"));
         Stack<Integer> stack = new Stack<>();
-
+        // when
         for (String element : postfix) {
             if (element.equals("+") || element.equals("-") || element.equals("*") || element.equals("/")) {
                 int second = stack.pop();
@@ -82,6 +90,7 @@ public class StackSolver implements Solver {
                 stack.push(Integer.parseInt(element));
             }
         }
-        return stack.pop();
+        //then
+        Assertions.assertEquals(stack.pop(), 146);
     }
 }

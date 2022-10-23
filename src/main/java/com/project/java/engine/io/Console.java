@@ -7,9 +7,7 @@ import java.io.InputStreamReader;
 public class Console implements Input, Output{
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final String MENU = "1.조회\n2.계산";
-
-    private static final String NUMBER_OPERATION_REGULAR = "^[+\\-*/]*$\\d+";
-    private static final String SPECIAL_CHARACTER_VALIDATOR_REGEX = "[^\\w+\\-*/]";
+    private static final String SPECIAL_CHARACTER_VALIDATOR_REGEX = "[^\\w+\\-*/\\s]";
 
     @Override
     public String getInput(String message) throws IOException {
@@ -28,7 +26,7 @@ public class Console implements Input, Output{
     public boolean validateInput(String input) {
         String validateResult = input.replaceAll(SPECIAL_CHARACTER_VALIDATOR_REGEX, "");
         if(validateResult.length() != input.length()) return false;
-        return false;
+        return true;
     }
 
     @Override
