@@ -33,30 +33,37 @@ public class FormulaBasicParser implements FormulaParser {
         AtomicInteger beforeIdx = new AtomicInteger(0);
         IntStream.range(0, formula.length())
                 .forEach(idx -> {
-                    if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, formula.substring(idx, idx + 1))) {
+                    if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, getCurrWord(formula, idx))) {
                         throw new IllegalArgumentException(FORMULA_BASIC_PARSER_EXCEPTION.message);
                     }
-                    handleOperator(formula, beforeIdx, idx);
-                    handlerOperand(formula, beforeIdx, idx);
+                    handleFormula(formula, beforeIdx, idx);
                 });
+        handleLastFormula(formula, beforeIdx);
 
         return formulas;
     }
 
-    private void handlerOperand(String formula, AtomicInteger beforeIdx, int idx) {
-        String word = formula.substring(idx, idx + 1);
-        if (isOperator(word)) {
-            formulas.add(word);
-            beforeIdx.set(idx + 1);
+    private void handleFormula(String formula, AtomicInteger beforeIdx, int idx) {
+        if (isOperator(getCurrWord(formula, idx))) {
+            formulas.add(getCurrOperand(formula, beforeIdx.getAndSet(idx + 1), idx));
+            formulas.add(getCurrWord(formula, idx));
         }
     }
 
-    private void handleOperator(String formula, AtomicInteger beforeIdx, int idx) {
-        String word = formula.substring(idx, idx + 1);
-        if (!isOperator(word)) {
-            formulas.add(
-                    formula.substring(beforeIdx.getAndSet(idx), idx + 1));
-        }
+    private void handleLastFormula(String formula, AtomicInteger beforeIdx) {
+        formulas.add(getLastOperand(formula, beforeIdx));
+    }
+
+    private static String getCurrWord(String formula, int idx) {
+        return formula.substring(idx, idx + 1);
+    }
+
+    private static String getCurrOperand(String formula, int beforeIdx, int idx) {
+        return formula.substring(beforeIdx, idx);
+    }
+
+    private static String getLastOperand(String formula, AtomicInteger beforeIdx) {
+        return formula.substring(beforeIdx.get());
     }
 
     private void initFormulaParser() {
