@@ -3,6 +3,7 @@ package com.project.java.engine.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class Console implements Input, Output{
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,7 +31,7 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void outputResult(String str) {
+    public void printResult(String str) {
         System.out.println(str);
     }
 
@@ -42,5 +43,16 @@ public class Console implements Input, Output{
     @Override
     public void inputError() {
         System.out.println("입력이 잘못되었습니다.");
+    }
+
+    @Override
+    public void messageEmpty() {
+        System.out.println("내역이 없습니다.");
+    }
+
+    @Override
+    public void printHistory(List<String> historyList) {
+        historyList.stream()
+                .forEach(System.out::println);
     }
 }
