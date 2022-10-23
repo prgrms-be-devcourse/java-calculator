@@ -10,6 +10,5 @@ import java.util.List;
 @Getter
 @ToString
 public class Expression {
-    List<String> operators;
-    List<Double> numbers;
+    String[] tokens;
 }

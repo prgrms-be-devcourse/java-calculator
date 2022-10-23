@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,18 +42,54 @@ class CalculatorTest {
     }
 
     @Test
-    public void 식_변환_테스트() {
+    public void 식_토큰화_테스트() {
         //given
         String ex1 = "14 + 2.0 * 3.1 - 0.1 / 214";
-        String[] op1 = {"+", "*", "-", "/"};
-        Double[] num1 = {14.0, 2.0, 3.1, 0.1, 214.0};
+        String[] op1 = {"14", "+", "2.0", "*", "3.1", "-", "0.1", "/", "214"};
 
         //when
         Optional<Expression> expression = calculator.parseExpression(ex1);
 
         //then
         System.out.println(expression.get());
-        assertArrayEquals(op1, expression.get().getOperators().toArray());
-        assertArrayEquals(num1, expression.get().getNumbers().toArray());
+        assertArrayEquals(op1, expression.get().getTokens());
+    }
+
+    @Test
+    public void 후위연산_변환_테스트() {
+        //given
+        String[] ex1 = {"14", "+", "2.0", "*", "3.1", "-", "0.1", "/", "214"};
+        String[] ans1 = {"14", "2.0", "3.1", "*", "+", "0.1", "214", "/", "-"};
+        String[] ex2 = {"3", "*", "2", "-", "5"};
+        String[] ans2 = {"3", "2", "*", "5", "-"};
+
+        //when
+        String[] postfix1 = calculator.makePostfix(ex1);
+        String[] postfix2 = calculator.makePostfix(ex2);
+
+        //then
+        System.out.println(Arrays.toString(postfix1));
+        System.out.println(Arrays.toString(postfix2));
+        assertArrayEquals(ans1, postfix1);
+        assertArrayEquals(ans2, postfix2);
+    }
+
+    @Test
+    public void 연산_테스트() {
+        //given
+        String[] ex1 = {"14", "2.0", "3.1", "*", "+", "10", "2", "/", "-"};
+        String[] ex2 = {"3", "2", "*", "5", "-"};
+        Double ans1 = 15.2;
+        Double ans2 = 1.0;
+
+        //when
+        Double result1 = calculator.getResult(ex1);
+        Double result2 = calculator.getResult(ex2);
+
+        //then
+        System.out.println(result1);
+        System.out.println(result2);
+        assertEquals(ans1, result1);
+        assertEquals(ans2, result2);
     }
 }
