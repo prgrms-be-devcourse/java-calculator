@@ -34,14 +34,18 @@ public class FormulaBasicParser implements FormulaParser {
         AtomicInteger beforeIdx = new AtomicInteger(0);
         IntStream.range(0, formula.length())
                 .forEach(idx -> {
-                    if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, getCurrWord(formula, idx))) {
-                        throw new IllegalArgumentException(FORMULA_BASIC_PARSER_EXCEPTION.message);
-                    }
+                    checkFormulaRegex(formula, idx);
                     handleFormula(formula, beforeIdx, idx);
                 });
         handleLastFormula(formula, beforeIdx);
 
         return formulas;
+    }
+
+    private static void checkFormulaRegex(String formula, int idx) {
+        if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, getCurrWord(formula, idx))) {
+            throw new IllegalArgumentException(FORMULA_BASIC_PARSER_EXCEPTION.message);
+        }
     }
 
     private void handleFormula(String formula, AtomicInteger beforeIdx, int idx) {
