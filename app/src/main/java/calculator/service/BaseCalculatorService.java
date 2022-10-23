@@ -24,18 +24,22 @@ public class BaseCalculatorService implements CalculatorService {
         System.out.println(introduction);
 
         while (reader.hasNextLine()) {
-            String command = reader.nextLine();
-            System.out.println("선택 : " + command);
+                String command = reader.nextLine();
+                System.out.println("선택 : " + command);
 
-            if (command.equals(GETALLDATA.getCode())) {
-                getAllData();
-            } else if (command.equals(CALCULATE.getCode())) {
-                calculate();
-            } else if (command.equals(EXIT.getCode())) {
-                exit();
-                break;
-            } else {
-                System.out.println("> 다시 입력해주세요");
+            try {
+                if (command.equals(GETALLDATA.getCode())) {
+                    getAllData();
+                } else if (command.equals(CALCULATE.getCode())) {
+                    calculate();
+                } else if (command.equals(EXIT.getCode())) {
+                    exit();
+                    break;
+                } else {
+                    System.out.println("> 다시 입력해주세요");
+                }
+            } catch (ArithmeticException e) {
+                System.out.println("> 0으로 나눌 수 없습니다. 다시 입력해주세요");
             }
 
             System.out.println(introduction);
