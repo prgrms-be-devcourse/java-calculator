@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 import static calculator.calculator.formula.ParseUnit.NO_SPACE;
 import static calculator.calculator.formula.ParseUnit.SPACE;
 import static calculator.calculator.operator.Operators.isOperator;
+import static calculator.exception.FormulaException.FORMULA_BASIC_NULL_EXCEPTION;
 import static calculator.exception.FormulaException.FORMULA_BASIC_PARSER_EXCEPTION;
 
 public class FormulaBasicParser implements FormulaParser {
@@ -44,14 +45,48 @@ public class FormulaBasicParser implements FormulaParser {
     }
 
     private void handleFormula(String formula, AtomicInteger beforeIdx, int idx) {
-        if (isOperator(getCurrWord(formula, idx))) {
-            formulas.add(getCurrOperand(formula, beforeIdx.getAndSet(idx + 1), idx));
-            formulas.add(getCurrWord(formula, idx));
+        String estimatedWord = estimateWordInFormula(formula, idx);
+
+        if (isOperator(estimatedWord)) {
+            handleOperandInFormula(formula, beforeIdx, idx);
+            handlerOperatorInFormula(formula, idx);
         }
     }
 
+    private static String estimateWordInFormula(String formula, int idx) {
+        String estimatedWord = getCurrWord(formula, idx);
+        if (estimatedWord.length() == 0) {
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+        }
+
+        return estimatedWord;
+    }
+
+    private void handlerOperatorInFormula(String formula, int idx) {
+        String operator = getCurrWord(formula, idx);
+        if (operator.length() == 0) {
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+        }
+
+        formulas.add(operator);
+    }
+
+    private void handleOperandInFormula(String formula, AtomicInteger beforeIdx, int idx) {
+        String operand = getCurrOperand(formula, beforeIdx.getAndSet(idx + 1), idx);
+        if (operand.length() == 0) {
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+        }
+
+        formulas.add(operand);
+    }
+
     private void handleLastFormula(String formula, AtomicInteger beforeIdx) {
-        formulas.add(getLastOperand(formula, beforeIdx));
+        String lastOperand = getLastOperand(formula, beforeIdx);
+        if (lastOperand.length() == 0) {
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+        }
+
+        formulas.add(lastOperand);
     }
 
     private static String getCurrWord(String formula, int idx) {
