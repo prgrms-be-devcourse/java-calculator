@@ -3,18 +3,19 @@ package com.programmers.java.data;
 import lombok.Getter;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Getter
 public class Store {
     private List<Result> store;
 
     public Store() {
-        this.store = new ArrayList<Result>();
+        this.store = new ArrayList<>();
     }
 
-    public Result getResult(String s){
-        return null;
+    public Optional<Result> getResult(String s){
+        return store.stream()
+                .filter(i -> i.getExp().equals(s))
+                .findFirst();
     }
 
     public boolean contain(String expression) {
