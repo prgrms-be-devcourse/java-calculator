@@ -6,6 +6,8 @@ import calculator.calculator.history.CalculationHistory;
 import calculator.calculator.history.History;
 import calculator.view.input.MenuCalculatorInput;
 
+import java.math.BigDecimal;
+
 public class MenuCalculator implements Menu {
 
     private final History history;
@@ -21,7 +23,7 @@ public class MenuCalculator implements Menu {
     @Override
     public void process() {
         String formula = input.askFormula();
-        Double result = calculator.calculate(formula);
+        BigDecimal result = calculator.calculate(formula);
 
         history.save(formula, String.valueOf(result));
     }

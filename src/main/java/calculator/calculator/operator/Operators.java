@@ -1,5 +1,6 @@
 package calculator.calculator.operator;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static calculator.calculator.operator.OperatorCalculation.*;
@@ -28,7 +29,7 @@ public enum Operators {
                 .anyMatch(operator -> operator.operator.equals(inputOperator));
     }
 
-    public static Double calculate(Double leftOperand, String operator, Double rightOperand) {
+    public static BigDecimal calculate(BigDecimal leftOperand, String operator, BigDecimal rightOperand) {
         return findOperator(operator).calculation
                 .doCalculation(leftOperand, rightOperand);
     }

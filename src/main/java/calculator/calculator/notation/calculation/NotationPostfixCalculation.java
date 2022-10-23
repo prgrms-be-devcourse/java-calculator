@@ -2,6 +2,7 @@ package calculator.calculator.notation.calculation;
 
 import calculator.calculator.operator.Operators;
 
+import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
@@ -12,10 +13,10 @@ import static calculator.exception.NotationException.NOTATION_POSTFIX_NULL_EXCEP
 
 public class NotationPostfixCalculation implements NotationCalculation {
 
-    private final Deque<Double> operands = new ArrayDeque<>();
+    private final Deque<BigDecimal> operands = new ArrayDeque<>();
 
     @Override
-    public Double calculate(List<String> formulas) {
+    public BigDecimal calculate(List<String> formulas) {
         initCalculation();
 
         formulas.forEach(formula -> {
@@ -32,14 +33,16 @@ public class NotationPostfixCalculation implements NotationCalculation {
 
     private void handleOperand(String formula) {
         if (isOperand(formula)) {
-            operands.addLast(Double.parseDouble(formula));
+            operands.addLast(
+                    BigDecimal.valueOf(
+                            Double.parseDouble(formula)));
         }
     }
 
     private void handleOperator(String formula) {
         if (isOperator(formula)) {
-            Double rightOperand = getOperand();
-            Double leftOperand = getOperand();
+            BigDecimal rightOperand = getOperand();
+            BigDecimal leftOperand = getOperand();
             operands.add(
                     Operators.calculate(leftOperand, formula, rightOperand)
             );
@@ -50,7 +53,7 @@ public class NotationPostfixCalculation implements NotationCalculation {
         return !isOperator(formula);
     }
 
-    private Double getOperand() {
+    private BigDecimal getOperand() {
         return Optional.ofNullable(operands)
                 .orElseThrow(() -> new NullPointerException(NOTATION_POSTFIX_NULL_EXCEPTION.message))
                 .pollLast();

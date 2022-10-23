@@ -1,28 +1,34 @@
 package calculator.calculator.operator;
 
+import java.math.BigDecimal;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.ToDoubleBiFunction;
 
 import static calculator.exception.OperatorException.OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO;
 
 public enum OperatorCalculation {
 
-    PLUS_CALCULATOR((leftOperand, rightOperand) -> leftOperand + rightOperand),
-    MINUS_CALCULATOR((leftOperand, rightOperand) -> leftOperand - rightOperand),
-    MULTIPLY_CALCULATOR((leftOperand, rightOperand) -> leftOperand * rightOperand),
+    PLUS_CALCULATOR(BigDecimal::add),
+    MINUS_CALCULATOR((leftOperand, rightOperand) -> {
+        BigDecimal minusRightOperand = BigDecimal.valueOf(-rightOperand.doubleValue());
+        return leftOperand.add(minusRightOperand);
+    }),
+    MULTIPLY_CALCULATOR(BigDecimal::multiply),
     DIVIDE_CALCULATOR((leftOperand, rightOperand) -> {
-        if (rightOperand == 0D) {
+        if (rightOperand.doubleValue() == 0D) {
             throw new IllegalArgumentException(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.message);
         }
-        return leftOperand / rightOperand;
+        return leftOperand.divide(rightOperand);
     });
 
-    private final ToDoubleBiFunction<Double, Double> calculation;
+    private final BiFunction<BigDecimal, BigDecimal, BigDecimal> calculation;
 
-    OperatorCalculation(ToDoubleBiFunction<Double, Double> calculation) {
+    OperatorCalculation(BiFunction<BigDecimal, BigDecimal, BigDecimal> calculation) {
         this.calculation = calculation;
     }
 
-    public Double doCalculation(Double leftOperand, Double rightOperand) {
-        return calculation.applyAsDouble(leftOperand, rightOperand);
+    public BigDecimal doCalculation(BigDecimal leftOperand, BigDecimal rightOperand) {
+        return calculation.apply(leftOperand, rightOperand);
     }
 }
