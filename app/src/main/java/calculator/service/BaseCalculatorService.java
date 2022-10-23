@@ -29,19 +29,20 @@ public class BaseCalculatorService implements CalculatorService {
 
             if (command.equals(GETALLDATA.getCode())) {
                 getAllData();
-            }
-            else if (command.equals(CALCULATE.getCode())) {
+            } else if (command.equals(CALCULATE.getCode())) {
                 calculate();
+            } else if (command.equals(EXIT.getCode())) {
+                exit();
+                break;
+            } else {
+                System.out.println("> 다시 입력해주세요");
             }
-           else {
-               System.out.println("> 다시 입력해주세요");
-           }
 
             System.out.println(introduction);
         }
     }
 
-    private String makeIntroduction(){
+    private String makeIntroduction() {
         String introduction = "";
         for (Command c : Command.values()) {
             introduction = introduction.concat(c.getCode() + ". " + c.getCommand() + "\n");
