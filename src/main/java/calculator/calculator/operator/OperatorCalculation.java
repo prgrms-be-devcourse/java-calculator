@@ -1,6 +1,7 @@
 package calculator.calculator.operator;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.ToDoubleBiFunction;
@@ -19,7 +20,7 @@ public enum OperatorCalculation {
         if (rightOperand.doubleValue() == 0D) {
             throw new IllegalArgumentException(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.message);
         }
-        return leftOperand.divide(rightOperand);
+        return leftOperand.divide(rightOperand, 15, RoundingMode.HALF_UP);
     });
 
     private final BiFunction<BigDecimal, BigDecimal, BigDecimal> calculation;
