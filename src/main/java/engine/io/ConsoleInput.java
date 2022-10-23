@@ -10,4 +10,9 @@ public class ConsoleInput implements Input{
         System.out.println(msg);
         return sc.nextLine();
     }
+
+    @Override
+    public String getCalculateSentence(String msg) {
+        return sc.nextLine();
+    }
 }
