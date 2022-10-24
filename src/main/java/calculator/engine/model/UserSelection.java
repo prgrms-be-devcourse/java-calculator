@@ -1,6 +1,6 @@
 package calculator.engine.model;
 
-import calculator.engine.io.enums.SelectOption;
+import calculator.application.io.enums.SelectOption;
 
 public class UserSelection {
     private final SelectOption selection;

@@ -1,6 +1,6 @@
 package calculator.engine.io;
 
-import calculator.engine.io.enums.SelectOption;
+import calculator.application.io.enums.SelectOption;
 import org.junit.jupiter.api.Test;
 
 class SelectOptionTest {

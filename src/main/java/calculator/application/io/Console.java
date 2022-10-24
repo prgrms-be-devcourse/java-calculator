@@ -1,6 +1,6 @@
-package calculator.engine.io;
+package calculator.application.io;
 
-import calculator.engine.io.enums.Message;
+import calculator.application.io.enums.Message;
 import calculator.engine.model.UserSelection;
 
 import java.util.List;

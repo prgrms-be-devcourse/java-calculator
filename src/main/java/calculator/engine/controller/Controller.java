@@ -1,12 +1,9 @@
 package calculator.engine.controller;
 
-import calculator.engine.io.Input;
-import calculator.engine.io.Output;
-import calculator.engine.io.enums.SelectOption;
-import calculator.engine.model.CalculationResult;
-import calculator.engine.model.Expression;
+import calculator.application.io.Input;
+import calculator.application.io.Output;
+import calculator.application.io.enums.SelectOption;
 import calculator.engine.model.UserSelection;
-import calculator.engine.repository.History;
 
 public class Controller implements Runnable{
     private final Input input;

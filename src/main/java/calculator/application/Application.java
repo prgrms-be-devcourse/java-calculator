@@ -2,7 +2,7 @@ package calculator.application;
 
 import calculator.engine.controller.Calculator;
 import calculator.engine.controller.Controller;
-import calculator.engine.io.Console;
+import calculator.application.io.Console;
 
 public class Application {
     public static void main(String[] args) {

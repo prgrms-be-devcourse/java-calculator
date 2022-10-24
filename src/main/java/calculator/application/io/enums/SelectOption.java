@@ -1,4 +1,4 @@
-package calculator.engine.io.enums;
+package calculator.application.io.enums;
 
 import java.util.Arrays;
 import java.util.List;
