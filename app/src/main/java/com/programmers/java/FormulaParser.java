@@ -6,45 +6,27 @@ public class FormulaParser {
     public String[] changeInfixToPostfix(String formula) {
         Stack<String> formulaCharStack = new Stack<>();
         HashSet<String> operatorSet = new HashSet<>(Arrays.asList("+", "-", "/", "*"));
-        List<String> formulaSplit = new ArrayList<>();
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < formula.length(); i++) {
-            sb.append(formula.charAt(i));
-
-            if (!Character.isDigit(formula.charAt(i))) {
-                formulaSplit.add(sb.toString());
-                sb.setLength(0);
-                continue;
-            }
-            if ((i + 1) != formula.length() && !Character.isDigit(formula.charAt(i + 1))) {
-                formulaSplit.add(sb.toString());
-                sb.setLength(0);
-            }
-            if ((i + 1) == formula.length()) {
-                formulaSplit.add(sb.toString());
-            }
-        }
+        String[] formulaSplit = formula.split("((?=[-+/*()])|(?<=[-+/*()]))");
 
         List<String> postfixFormula = new ArrayList<>();
 
-        for (int i = 0; i < formulaSplit.size(); i++) {
-            if (operatorSet.contains(formulaSplit.get(i))) {
-                while (!formulaCharStack.isEmpty() && getPriority(formulaCharStack.peek()) >= getPriority(formulaSplit.get(i))) {
+        for (int i = 0; i < formulaSplit.length; i++) {
+            if (operatorSet.contains(formulaSplit[i])) {
+                while (!formulaCharStack.isEmpty() && getPriority(formulaCharStack.peek()) >= getPriority(formulaSplit[i])) {
                     postfixFormula.add(formulaCharStack.pop());
                 }
 
-                formulaCharStack.push(formulaSplit.get(i));
-            } else if (formulaSplit.get(i).equals("(")) {
-                formulaCharStack.push(formulaSplit.get(i));
-            } else if (formulaSplit.get(i).equals(")")) {
+                formulaCharStack.push(formulaSplit[i]);
+            } else if (formulaSplit[i].equals("(")) {
+                formulaCharStack.push(formulaSplit[i]);
+            } else if (formulaSplit[i].equals(")")) {
                 while (!formulaCharStack.isEmpty() && !formulaCharStack.peek().equals("(")) {
                     postfixFormula.add(formulaCharStack.pop());
                 }
 
                 formulaCharStack.pop();
             } else {
-                postfixFormula.add(formulaSplit.get(i));
+                postfixFormula.add(formulaSplit[i]);
             }
         }
 
