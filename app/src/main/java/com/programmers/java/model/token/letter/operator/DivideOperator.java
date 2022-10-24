@@ -1,5 +1,6 @@
 package com.programmers.java.model.token.letter.operator;
 
+import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.model.token.Token;
 import com.programmers.java.model.token.letter.bracket.OpenBracket;
 import com.programmers.java.model.token.letter.number.Number;
@@ -25,11 +26,11 @@ public class DivideOperator extends Operator {
     }
 
     @Override
-    public int calculate(int num1, int num2) {
+    public int calculate(int num1, int num2) throws DivideByZeroException {
         try {
             return num1 / num2;
-        } catch (ArithmeticException e) {
-            throw new ArithmeticException();
+        } catch (Exception e) {
+            throw new DivideByZeroException();
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.programmers.java.model.token.letter.operator;
 
+import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.model.token.Token;
 
 public abstract class Operator extends Token {
@@ -17,5 +18,5 @@ public abstract class Operator extends Token {
         return false;
     }
 
-    public abstract int calculate(int num1, int num2);
+    public abstract int calculate(int num1, int num2) throws DivideByZeroException;
 }
