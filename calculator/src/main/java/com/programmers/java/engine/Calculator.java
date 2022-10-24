@@ -18,18 +18,12 @@ public class Calculator implements Runnable {
     private final String OPERATOR_REGEX = "[+\\-*/]";
     private final String NUMBER_REGEX = "\\d+(\\.\\d+)?";
 
-    private Plus plus;
-    private Minus minus;
-    private Multiply multiply;
-    private Divide divide;
+    private Operator operator;
     private Input input;
     private Output output;
 
     public Calculator(Operator operator, Console console) {
-        this.plus = operator;
-        this.minus = operator;
-        this.multiply = operator;
-        this.divide = operator;
+        this.operator = operator;
         this.input = console;
         this.output = console;
     }
@@ -103,13 +97,13 @@ public class Calculator implements Runnable {
                 lhs = stack.pop();
 
                 if (token.equals("+")) {
-                    stack.push(plus.plus(lhs, rhs));
+                    stack.push(operator.plus(lhs, rhs));
                 } else if (token.equals("-")) {
-                    stack.push(minus.minus(lhs, rhs));
+                    stack.push(operator.minus(lhs, rhs));
                 } else if (token.equals("*")) {
-                    stack.push(multiply.multiply(lhs, rhs));
+                    stack.push(operator.multiply(lhs, rhs));
                 } else if (token.equals("/")) {
-                    stack.push(divide.divide(lhs, rhs));
+                    stack.push(operator.divide(lhs, rhs));
                 }
             }
         }

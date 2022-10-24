@@ -1,5 +1,7 @@
 package com.programmers.java.engine.operator;
 
 public interface Plus {
-    double plus(Double lhs, Double rhs);
+    default double plus(Double lhs, Double rhs) {
+        return lhs+rhs;
+    }
 }

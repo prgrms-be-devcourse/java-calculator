@@ -1,5 +1,7 @@
 package com.programmers.java.engine.operator;
 
 public interface Divide {
-    double divide(Double lhs, Double rhs);
+    default double divide(Double lhs, Double rhs) {
+        return lhs/rhs;
+    }
 }

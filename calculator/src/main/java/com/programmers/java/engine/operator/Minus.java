@@ -1,5 +1,7 @@
 package com.programmers.java.engine.operator;
 
 public interface Minus {
-    double minus(Double lhs, Double rhs);
+    default double minus(Double lhs, Double rhs) {
+        return lhs-rhs;
+    }
 }
