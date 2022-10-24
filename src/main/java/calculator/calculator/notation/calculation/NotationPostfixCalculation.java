@@ -34,8 +34,7 @@ public class NotationPostfixCalculation implements NotationCalculation {
     private void handleOperand(String formula) {
         if (isOperand(formula)) {
             operands.addLast(
-                    BigDecimal.valueOf(
-                            Double.parseDouble(formula)));
+                    new BigDecimal(formula));
         }
     }
 
@@ -43,9 +42,9 @@ public class NotationPostfixCalculation implements NotationCalculation {
         if (isOperator(formula)) {
             BigDecimal rightOperand = getOperand();
             BigDecimal leftOperand = getOperand();
-            operands.add(
+            operands.add(new BigDecimal(
                     Operators.calculate(leftOperand, formula, rightOperand)
-            );
+            ));
         }
     }
 
