@@ -26,7 +26,11 @@ public class Console implements Input, Output {
 
     @Override
     public void printAnswer(Double answer) {
-        System.out.println(answer);
+        if (answer == Math.floor(answer)) {
+            System.out.printf("%d\n\n", answer.intValue());
+        } else {
+            System.out.printf("%.3f\n\n", answer);
+        }
     }
 
     @Override
