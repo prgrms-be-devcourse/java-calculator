@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
-import java.util.Optional;
 
 import static calculator.calculator.operator.Operators.isOperator;
 import static calculator.exception.NotationException.NOTATION_POSTFIX_NULL_EXCEPTION;
