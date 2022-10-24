@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import static calculator.Fixture.*;
+import static calculator.fixture.Fixture.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
