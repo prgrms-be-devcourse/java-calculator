@@ -9,7 +9,9 @@ import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static calculator.calculator.operator.OperatorCalculation.*;
+import static calculator.exception.OperatorException.OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class OperatorCalculationTest {
 
@@ -99,6 +101,19 @@ class OperatorCalculationTest {
                         BigDecimal.valueOf(rightOperand))
                 .doubleValue();
         assertThat(result).isEqualTo(expect);
+    }
+
+    @ParameterizedTest(name = "[{index}] formula = ({0}) / ({1})")
+    @MethodSource("whenDivideZeroCalculationThenExceptionDummy")
+    @DisplayName("0 나누기 연산 실패 예외처리 테스트")
+    void whenDivideZeroCalculationThenExceptionTest(double leftOperand, double rightOperand) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() ->
+                        DIVIDE_CALCULATOR.doCalculation(
+                                BigDecimal.valueOf(leftOperand),
+                                BigDecimal.valueOf(rightOperand)))
+                .withMessageMatching(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.message);
+
     }
 
     static Stream<Arguments> whenPlusIntegerCalculationThenSuccessDummy() {
@@ -384,6 +399,30 @@ class OperatorCalculationTest {
                 Arguments.arguments(-100.4, 10.2, -9.843137254901961),
                 Arguments.arguments(-1000.4, 10.2, -98.07843137254902),
                 Arguments.arguments(-2_000_000_000.4, 2_000_000.2, -999.99990020001)
+        );
+    }
+
+    static Stream<Arguments> whenDivideZeroCalculationThenExceptionDummy() {
+        return Stream.of(
+                Arguments.arguments(0, 0),
+                Arguments.arguments(1, 0),
+                Arguments.arguments(10, 0),
+                Arguments.arguments(100, 0),
+                Arguments.arguments(1000, 0),
+                Arguments.arguments(-1, 0),
+                Arguments.arguments(-10, 0),
+                Arguments.arguments(-100, 0),
+                Arguments.arguments(-1000, 0),
+
+                Arguments.arguments(0.123, 0),
+                Arguments.arguments(1.123, 0),
+                Arguments.arguments(10.123, 0),
+                Arguments.arguments(100.123, 0),
+                Arguments.arguments(1000.123, 0),
+                Arguments.arguments(-1.123, 0),
+                Arguments.arguments(-10.123, 0),
+                Arguments.arguments(-100.123, 0),
+                Arguments.arguments(-1000.123, 0)
         );
     }
 }
