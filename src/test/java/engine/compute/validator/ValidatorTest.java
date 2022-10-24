@@ -1,7 +1,7 @@
 package engine.compute.validator;
 
 import engine.exception.NotValidInputException;
-import engine.model.InputExpressionFactory;
+import engine.operate.ExpressionFactory;
 import engine.model.Token;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,12 +11,12 @@ import java.util.List;
 
 class ValidatorTest {
     ExpressionValidator validator;
-    InputExpressionFactory factory;
+    ExpressionFactory factory;
 
     @BeforeEach
     void setting() {
         validator = new SimpleExpressionValidator();
-        factory = new InputExpressionFactory(validator);
+        factory = new ExpressionFactory(validator);
     }
 
     @Test
