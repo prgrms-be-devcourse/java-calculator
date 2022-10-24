@@ -9,7 +9,7 @@ import com.programmers.java.util.FormulaParser;
 import com.programmers.java.util.Validator;
 
 public class App {
-    public static void main(String[] args) {
-        new Calculator(new Console(), new HistoryRepository(), new Validator(), new FormulaParser()).run();
-    }
+	public static void main(String[] args) {
+		new Calculator(new Console(), new HistoryRepository(), new Validator(), new FormulaParser()).run();
+	}
 }

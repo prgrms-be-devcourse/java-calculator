@@ -1,9 +1,9 @@
 package com.programmers.java.exception;
 
 public class MenuInputException extends Exception {
-    private static final String errorMessage = "메뉴의 숫자를 입력해주세요.";
+	private static final String errorMessage = "메뉴의 숫자를 입력해주세요.";
 
-    public MenuInputException() {
-        super(errorMessage);
-    }
+	public MenuInputException() {
+		super(errorMessage);
+	}
 }

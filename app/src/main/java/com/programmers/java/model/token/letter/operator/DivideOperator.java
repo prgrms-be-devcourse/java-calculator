@@ -6,31 +6,31 @@ import com.programmers.java.model.token.letter.bracket.OpenBracket;
 import com.programmers.java.model.token.letter.number.Number;
 
 public class DivideOperator extends Operator {
-    public DivideOperator(String token) {
-        super(token);
-    }
+	public DivideOperator(String token) {
+		super(token);
+	}
 
-    public static boolean isDivide(String token) {
-        if (token.equals("/")) {
-            return true;
-        }
-        return false;
-    }
+	public static boolean isDivide(String token) {
+		if (token.equals("/")) {
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    public boolean checkNextTokenCorrect(Token nextToken) {
-        if (nextToken instanceof Number || nextToken instanceof OpenBracket) {
-            return true;
-        }
-        return false;
-    }
+	@Override
+	public boolean checkNextTokenCorrect(Token nextToken) {
+		if (nextToken instanceof Number || nextToken instanceof OpenBracket) {
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    public int calculate(int num1, int num2) throws DivideByZeroException {
-        try {
-            return num1 / num2;
-        } catch (Exception e) {
-            throw new DivideByZeroException();
-        }
-    }
+	@Override
+	public int calculate(int num1, int num2) throws DivideByZeroException {
+		try {
+			return num1 / num2;
+		} catch (Exception e) {
+			throw new DivideByZeroException();
+		}
+	}
 }
