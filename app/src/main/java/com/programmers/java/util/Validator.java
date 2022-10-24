@@ -1,10 +1,10 @@
-package com.programmers.java;
+package com.programmers.java.util;
 
 import com.programmers.java.exception.FormulaInputException;
-import com.programmers.java.model.token.Number;
 import com.programmers.java.model.token.Token;
 import com.programmers.java.model.token.letter.bracket.CloseBracket;
 import com.programmers.java.model.token.letter.bracket.OpenBracket;
+import com.programmers.java.model.token.letter.number.Number;
 import com.programmers.java.model.token.letter.operator.*;
 
 import java.util.Stack;

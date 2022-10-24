@@ -1,7 +1,7 @@
 package com.programmers.java.model.token.letter.bracket;
 
-import com.programmers.java.model.token.Number;
 import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.letter.number.Number;
 
 public class OpenBracket extends Token {
     public OpenBracket(String token) {

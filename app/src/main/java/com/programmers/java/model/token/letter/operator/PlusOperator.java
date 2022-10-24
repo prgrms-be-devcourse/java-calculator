@@ -1,8 +1,8 @@
 package com.programmers.java.model.token.letter.operator;
 
-import com.programmers.java.model.token.Number;
 import com.programmers.java.model.token.Token;
 import com.programmers.java.model.token.letter.bracket.OpenBracket;
+import com.programmers.java.model.token.letter.number.Number;
 
 public class PlusOperator extends Operator {
     public PlusOperator(String token) {

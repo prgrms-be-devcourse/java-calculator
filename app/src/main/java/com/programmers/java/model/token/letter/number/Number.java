@@ -1,5 +1,6 @@
-package com.programmers.java.model.token;
+package com.programmers.java.model.token.letter.number;
 
+import com.programmers.java.model.token.Token;
 import com.programmers.java.model.token.letter.bracket.CloseBracket;
 import com.programmers.java.model.token.letter.operator.Operator;
 

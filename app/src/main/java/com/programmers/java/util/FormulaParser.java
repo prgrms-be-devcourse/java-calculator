@@ -1,4 +1,4 @@
-package com.programmers.java;
+package com.programmers.java.util;
 
 import com.programmers.java.model.token.letter.bracket.CloseBracket;
 import com.programmers.java.model.token.letter.bracket.OpenBracket;

@@ -4,6 +4,7 @@ import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Console;
 import com.programmers.java.model.History;
 import com.programmers.java.repository.Repository;
+import com.programmers.java.util.FormulaParser;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,7 +1,7 @@
-package com.programmers.java.io;
+package com.programmers.java;
 
-import com.programmers.java.Validator;
 import com.programmers.java.exception.FormulaInputException;
+import com.programmers.java.util.Validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
