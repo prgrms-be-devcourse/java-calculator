@@ -54,9 +54,10 @@ public class NotationPostfixCalculation implements NotationCalculation {
     }
 
     private BigDecimal getOperand() {
-        return Optional.ofNullable(operands)
-                .orElseThrow(() -> new NullPointerException(NOTATION_POSTFIX_NULL_EXCEPTION.message))
-                .pollLast();
+        if (operands.isEmpty()) {
+            throw new NullPointerException(NOTATION_POSTFIX_NULL_EXCEPTION.message);
+        }
+        return operands.pollLast();
     }
 
 }
