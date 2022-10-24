@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ccaa40e-a7e1-43d1-b9a7-19db48afc247" name="Changes" comment="src 폴더 추가 (App 파일 추가)" />
+    <list default="true" id="2ccaa40e-a7e1-43d1-b9a7-19db48afc247" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,18 +15,8 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2GaRwMzCQThsDiCODKLX0gvKAkt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -38,10 +28,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/sohyeon/KDT/java-calculator/calculator",
-    "nodejs_package_manager_path": "npm"
+    "last_opened_file_path": "/Users/sohyeon/KDT/java-calculator/calculator"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -53,34 +41,11 @@
       <option name="presentableId" value="Default" />
       <updated>1666624947592</updated>
       <workItem from="1666624949067" duration="7000" />
-      <workItem from="1666625084292" duration="828000" />
+      <workItem from="1666625084292" duration="4000" />
     </task>
-    <task id="LOCAL-00001" summary="src 폴더 추가 (App 파일 추가)">
-      <created>1666625232003</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1666625232003</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="src 폴더 추가 (App 파일 추가)" />
-    <option name="LAST_COMMIT_MESSAGE" value="src 폴더 추가 (App 파일 추가)" />
   </component>
 </project>
