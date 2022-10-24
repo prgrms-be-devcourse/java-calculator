@@ -25,8 +25,8 @@ public class BaseCalculatorServiceTest {
         CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
-        String answer = out.toString().substring(LEN_OF_INTRO_N_CMD()+2, LEN_OF_INTRO_N_CMD() + STRING_OF_DATA.length() + 2);
-        Assertions.assertThat(STRING_OF_DATA).isEqualTo(answer);
+        String answer = out.toString().substring(LEN_OF_INTRO_N_CMD(), LEN_OF_INTRO_N_CMD() + STRING_OF_DATA.length() + 2).trim();
+        Assertions.assertThat(STRING_OF_DATA.trim()).isEqualTo(answer);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class BaseCalculatorServiceTest {
         CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
-        String answer = out.toString().substring(LEN_OF_INTRO_N_CMD() + NEG_FOR_EXIT, LEN_OF_INTRO_N_CMD() + NEG_FOR_EXIT + EXIT_PROGRAM.length() + 2).trim();
+        String answer = out.toString().substring(LEN_OF_INTRO_N_CMD() + NEG_FOR_EXIT).trim();
         Assertions.assertThat(EXIT_PROGRAM).isEqualTo(answer);
     }
 
