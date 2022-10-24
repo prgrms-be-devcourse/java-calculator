@@ -20,7 +20,8 @@ public class CalculationHistory implements History {
         if (checkSaveFormWrong(formula, answer)) {
             throw new IllegalArgumentException(HISTORY_SAVE_EXCEPTION.message);
         }
-        histories.put(formula, answer);
+
+        histories.put(formula, answer.stripTrailingZeros());
     }
 
     private static boolean checkSaveFormWrong(String formula, BigDecimal answer) {
