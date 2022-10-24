@@ -1,48 +1,53 @@
 package com.programmers.java;
 
-import java.util.*;
+import com.programmers.java.model.token.letter.bracket.CloseBracket;
+import com.programmers.java.model.token.letter.bracket.OpenBracket;
+import com.programmers.java.model.token.letter.operator.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class FormulaParser {
     public String[] changeInfixToPostfix(String formula) {
-        Stack<String> formulaCharStack = new Stack<>();
-        HashSet<String> operatorSet = new HashSet<>(Arrays.asList("+", "-", "/", "*"));
-        String[] formulaSplit = formula.split("((?=[-+/*()])|(?<=[-+/*()]))");
+        Stack<String> stack = new Stack<>();
+        String[] tokens = formula.split("((?=[-+/*()])|(?<=[-+/*()]))");
 
         List<String> postfixFormula = new ArrayList<>();
 
-        for (int i = 0; i < formulaSplit.length; i++) {
-            if (operatorSet.contains(formulaSplit[i])) {
-                while (!formulaCharStack.isEmpty() && getPriority(formulaCharStack.peek()) >= getPriority(formulaSplit[i])) {
-                    postfixFormula.add(formulaCharStack.pop());
-                }
+        for (int i = 0; i < tokens.length; i++) {
+            String token = tokens[i];
 
-                formulaCharStack.push(formulaSplit[i]);
-            } else if (formulaSplit[i].equals("(")) {
-                formulaCharStack.push(formulaSplit[i]);
-            } else if (formulaSplit[i].equals(")")) {
-                while (!formulaCharStack.isEmpty() && !formulaCharStack.peek().equals("(")) {
-                    postfixFormula.add(formulaCharStack.pop());
+            if (Operator.isOperator(token)) {
+                while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(token)) {
+                    postfixFormula.add(stack.pop());
                 }
-
-                formulaCharStack.pop();
+                stack.push(token);
+            } else if (OpenBracket.isOpen(token)) {
+                stack.push(token);
+            } else if (CloseBracket.isClose(token)) {
+                while (!stack.isEmpty() && !OpenBracket.isOpen(stack.peek())) {
+                    postfixFormula.add(stack.pop());
+                }
+                stack.pop();
             } else {
-                postfixFormula.add(formulaSplit[i]);
+                postfixFormula.add(token);
             }
         }
 
-        while (!formulaCharStack.isEmpty()) {
-            postfixFormula.add(formulaCharStack.pop());
+        while (!stack.isEmpty()) {
+            postfixFormula.add(stack.pop());
         }
 
         return postfixFormula.toArray(String[]::new);
     }
 
     public int getPriority(String operator) {
-        if (operator.equals("*") || operator.equals("/")) {
+        if (MultiplyOperator.isMultiply(operator) || DivideOperator.isDivide(operator)) {
             return 2;
-        } else if (operator.equals("+") || operator.equals("-")) {
+        } else if (PlusOperator.isPlus(operator) || MinusOperator.isMinus(operator)) {
             return 1;
-        } else if (operator.equals("(") || operator.equals(")")) {
+        } else if (OpenBracket.isOpen(operator) || CloseBracket.isClose(operator)) {
             return 0;
         }
 

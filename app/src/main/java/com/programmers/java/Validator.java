@@ -1,119 +1,108 @@
 package com.programmers.java;
 
 import com.programmers.java.exception.FormulaInputException;
-import com.programmers.java.exception.MenuInputException;
+import com.programmers.java.model.token.Number;
+import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.letter.bracket.CloseBracket;
+import com.programmers.java.model.token.letter.bracket.OpenBracket;
+import com.programmers.java.model.token.letter.operator.*;
 
 import java.util.Stack;
 
 public class Validator {
-    private FormulaParser parser;
+    public String validateFormula(String formula) throws FormulaInputException {
+        String[] tokens = formula.split("((?=[^0-9])|(?<=[^0-9]))");
 
-    public Validator(FormulaParser parser) {
-        this.parser = parser;
-    }
-
-    public int checkMenuInputIsNumber(String chosenNumber) throws MenuInputException {
-        try {
-            return Integer.parseInt(chosenNumber);
-        } catch (NumberFormatException e) {
-            throw new MenuInputException();
+        if (validateTokenIsCorrectLetter(tokens)
+                && validateBracketIsCouple(tokens)
+                && validateFormulaOrderIsCorrect(tokens)) {
+            return formula;
         }
+        throw new FormulaInputException();
     }
 
-    public String formulaValidate(String formula) throws FormulaInputException {
-        String[] formulaSplit = formula.split("((?=[^0-9])|(?<=[^0-9]))");
-        Stack<String> openBracket = new Stack<>();
-
-        for (String token : formulaSplit) {
-            if (!(isNumber(token) || isOperator(token) || isOpenBracket(token) || isCloseBracket(token))) {
-                throw new FormulaInputException();
+    private boolean validateTokenIsCorrectLetter(String[] tokens) {
+        for (String token : tokens) {
+            if (!(Number.isNumber(token)
+                    || Operator.isOperator(token)
+                    || OpenBracket.isOpen(token)
+                    || CloseBracket.isClose(token))) {
+                return false;
             }
         }
+        return true;
+    }
 
-        if (formulaSplit.length == 0) {
-            throw new FormulaInputException();
-        }
+    private boolean validateBracketIsCouple(String[] tokens) {
+        Stack<String> openBracketStack = new Stack<>();
 
-        for (String token : formulaSplit) {
-            if (token.equals("(")) {
-                openBracket.push(token);
-            } else if (token.equals(")")) {
-                if (openBracket.isEmpty()) {
-                    throw new FormulaInputException();
+        for (String token : tokens) {
+            if (OpenBracket.isOpen(token)) {
+                openBracketStack.push(token);
+            } else if (CloseBracket.isClose(token)) {
+                if (openBracketStack.isEmpty()) {
+                    return false;
                 } else {
-                    if (openBracket.peek().equals("(")) {
-                        openBracket.pop();
+                    if (OpenBracket.isOpen(openBracketStack.peek())) {
+                        openBracketStack.pop();
                     }
                 }
             }
         }
-        if (!openBracket.isEmpty()) {
-            throw new FormulaInputException();
-        }
-
-        if (!(formulaSplit[0].equals("(") || isNumber(formulaSplit[0]))) {
-            throw new FormulaInputException();
-        }
-        for (int i = 0; i < formulaSplit.length - 1; i++) {
-            if (isNumber(formulaSplit[i])) {
-                if (!(isOperator(formulaSplit[i + 1]) || isCloseBracket(formulaSplit[i + 1]))) {
-                    throw new FormulaInputException();
-                }
-            }
-            if (isOperator(formulaSplit[i])) {
-                if (!(isNumber(formulaSplit[i + 1]) || isOpenBracket(formulaSplit[i + 1]))) {
-                    throw new FormulaInputException();
-                }
-            }
-            if (isOpenBracket(formulaSplit[i])) {
-                if (!(isNumber(formulaSplit[i + 1]) || isOpenBracket(formulaSplit[i + 1]))) {
-                    throw new FormulaInputException();
-                }
-            }
-            if (isCloseBracket(formulaSplit[i])) {
-                if (!(isOperator(formulaSplit[i + 1]) || isCloseBracket(formulaSplit[i + 1]))) {
-                    throw new FormulaInputException();
-                }
-            }
-        }
-
-        if (!(isNumber(formulaSplit[formulaSplit.length - 1]) || isCloseBracket(formulaSplit[formulaSplit.length - 1]))) {
-            throw new FormulaInputException();
-        }
-
-        return formula;
-    }
-
-    public boolean isNumber(String token) {
-        try {
-            int number = Integer.parseInt(token);
-            return true;
-        } catch (NumberFormatException e) {
+        if (!openBracketStack.isEmpty()) {
             return false;
         }
+        return true;
     }
 
-    public boolean isOperator(String token) {
-        if (token.equals("+") || token.equals("-") || token.equals("/") || token.equals("*")) {
+    private boolean validateFormulaOrderIsCorrect(String[] tokens) {
+        return validateFirstTokenIsCorrect(tokens)
+                && validateMiddleTokenIsCorrect(tokens)
+                && validateLastTokenIsCorrect(tokens);
+    }
+
+    private boolean validateMiddleTokenIsCorrect(String[] tokens) {
+        for (int i = 0; i < tokens.length - 1; i++) {
+            String curStringToken = tokens[i];
+            String nextStringToken = tokens[i + 1];
+            Token curToken = validateCorrectToken(curStringToken);
+
+            if (!curToken.checkNextTokenCorrect(nextStringToken)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validateFirstTokenIsCorrect(String[] tokens) {
+        if (OpenBracket.isOpen(tokens[0]) || Number.isNumber(tokens[0])) {
             return true;
         }
-
         return false;
     }
 
-    public boolean isOpenBracket(String token) {
-        if (token.equals("(")) {
+    private boolean validateLastTokenIsCorrect(String[] tokens) {
+        if (Number.isNumber(tokens[tokens.length - 1]) || CloseBracket.isClose(tokens[tokens.length - 1])) {
             return true;
         }
-
         return false;
     }
 
-    public boolean isCloseBracket(String token) {
-        if (token.equals(")")) {
-            return true;
+    public Token validateCorrectToken(String token) {
+        if (Number.isNumber(token)) {
+            return new Number(token);
+        } else if (PlusOperator.isPlus(token)) {
+            return new PlusOperator(token);
+        } else if (MinusOperator.isMinus(token)) {
+            return new MinusOperator(token);
+        } else if (MultiplyOperator.isMultiply(token)) {
+            return new MultiplyOperator(token);
+        } else if (DivideOperator.isDivide(token)) {
+            return new DivideOperator(token);
+        } else if (OpenBracket.isOpen(token)) {
+            return new OpenBracket(token);
+        } else {
+            return new CloseBracket(token);
         }
-
-        return false;
     }
 }

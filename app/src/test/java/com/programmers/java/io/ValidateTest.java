@@ -1,6 +1,5 @@
 package com.programmers.java.io;
 
-import com.programmers.java.FormulaParser;
 import com.programmers.java.Validator;
 import com.programmers.java.exception.FormulaInputException;
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 class ValidateTest {
-    Validator validator = new Validator(new FormulaParser());
+    Validator validator = new Validator();
 
     @Test
     void formulaInputValidate() {
@@ -26,6 +25,6 @@ class ValidateTest {
 
 
         Arrays.stream(formula)
-                .forEach(i -> Assertions.assertThrows(FormulaInputException.class, () -> validator.formulaValidate(i)));
+                .forEach(i -> Assertions.assertThrows(FormulaInputException.class, () -> validator.validateFormula(i)));
     }
 }
