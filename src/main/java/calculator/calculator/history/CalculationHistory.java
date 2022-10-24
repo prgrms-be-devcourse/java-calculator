@@ -21,10 +21,28 @@ public class CalculationHistory implements History {
             throw new IllegalArgumentException(HISTORY_SAVE_EXCEPTION.message);
         }
 
-        histories.put(formula, answer.stripTrailingZeros());
+        saveEachCase(formula, answer);
     }
 
-    private static boolean checkSaveFormWrong(String formula, BigDecimal answer) {
+    private void saveEachCase(String formula, BigDecimal answer) {
+        if (checkDecimal(answer)) {
+            histories.put(formula, answer.stripTrailingZeros());
+        }
+
+        if (checkInteger(answer)) {
+            histories.put(formula, answer);
+        }
+    }
+
+    private boolean checkInteger(BigDecimal answer) {
+        return !answer.toString().contains(".");
+    }
+
+    private boolean checkDecimal(BigDecimal answer) {
+        return answer.toString().contains(".");
+    }
+
+    private boolean checkSaveFormWrong(String formula, BigDecimal answer) {
         return formula.length() == 0 || answer == null;
     }
 
