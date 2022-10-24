@@ -5,13 +5,12 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
 public class MapHistory implements History {
-    private Map<String, Integer> map = new HashMap<>();
+    private Map<String, Double> map = new HashMap<>();
     private StringBuilder sb = new StringBuilder();
 
     @Override
-    public void save(String calculation, int answer) {
+    public void save(String calculation, double answer) {
         map.put(calculation, answer);
     }
 
