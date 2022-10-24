@@ -1,7 +1,8 @@
 package calculator.application.io.enums;
 
 public enum Message {
-    SELECT("선택 : ");
+    INPUT_SELECT_GUIDE("선택 : "),
+    INPUT_EXPRESSION_GUIDE("식 입력 : ");
 
     private final String literal;
 
