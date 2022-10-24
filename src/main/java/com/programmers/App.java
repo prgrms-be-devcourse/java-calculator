@@ -1,7 +1,12 @@
 package com.programmers;
 
+import com.programmers.pages.Page;
+import com.programmers.pages.PageList;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Page currPage = PageFactory.createPage(PageList.START);
+        currPage.run();
+
     }
 }
