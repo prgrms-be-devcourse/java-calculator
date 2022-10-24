@@ -6,17 +6,14 @@ import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
 import com.programmers.java.engine.model.Expression;
 import com.programmers.java.engine.model.History;
-import com.programmers.java.engine.operator.Divide;
-import com.programmers.java.engine.operator.Minus;
-import com.programmers.java.engine.operator.Multiply;
-import com.programmers.java.engine.operator.Plus;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.Stack;
 import java.util.regex.Pattern;
 
+import static com.programmers.java.application.config.Constant.*;
+
 public class Calculator implements Runnable {
-    private final String OPERATOR_REGEX = "[+\\-*/]";
-    private final String NUMBER_REGEX = "\\d+(\\.\\d+)?";
 
     private Operator operator;
     private Input input;
