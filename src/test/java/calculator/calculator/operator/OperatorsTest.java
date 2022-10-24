@@ -35,13 +35,13 @@ class OperatorsTest {
     void whenFindOperatorAndCalculateThenSuccessTest(double leftOperand,
                                                      String operator,
                                                      double rightOperand,
-                                                     double expect) {
+                                                     String expect) {
 
-        double result = Operators.calculate(
+        String result = Operators.calculate(
                 BigDecimal.valueOf(leftOperand),
                 operator,
-                BigDecimal.valueOf(rightOperand))
-                .doubleValue();
+                BigDecimal.valueOf(rightOperand));
+
         assertThat(result).isEqualTo(expect);
     }
 
@@ -86,15 +86,15 @@ class OperatorsTest {
 
     static Stream<Arguments> whenFindOperatorAndCalculateThenSuccessDummy() {
         return Stream.of(
-                Arguments.arguments(1, "+", 2, 3),
-                Arguments.arguments(1, "-", 2, -1),
-                Arguments.arguments(1, "*", 2, 2),
-                Arguments.arguments(1, "/", 2, 0.5),
+                Arguments.arguments(1, "+", 2, "3.0"),
+                Arguments.arguments(1, "-", 2, "-1.0"),
+                Arguments.arguments(1, "*", 2, "2.00"),
+                Arguments.arguments(1, "/", 2, "0.500000000000000"),
 
-                Arguments.arguments(1.1, "+", 2.2, 3.3),
-                Arguments.arguments(1.1, "-", 2.2, -1.1),
-                Arguments.arguments(1.1, "*", 2.2, 2.42),
-                Arguments.arguments(1.1, "/", 2.2, 0.5)
+                Arguments.arguments(1.1, "+", 2.2, "3.3"),
+                Arguments.arguments(1.1, "-", 2.2, "-1.1"),
+                Arguments.arguments(1.1, "*", 2.2, "2.42"),
+                Arguments.arguments(1.1, "/", 2.2, "0.500000000000000")
         );
     }
 
