@@ -8,42 +8,36 @@ import static calculator.exception.HistoryException.HISTORY_SAVE_EXCEPTION;
 
 public class CalculationHistory implements History {
 
-    private static final HashMap<String, BigDecimal> histories = new HashMap<>();
+    private static final HashMap<String, String> histories = new HashMap<>();
     private static final int HISTORY_FORMULA_INDEX = 0;
     private static final int HISTORY_ANSWER_INDEX = 1;
 
     @Override
     public void save(String... history) {
         String formula = history[HISTORY_FORMULA_INDEX];
-        BigDecimal answer = new BigDecimal(history[HISTORY_ANSWER_INDEX]);
+        String answer = history[HISTORY_ANSWER_INDEX];
 
         if (checkSaveFormWrong(formula, answer)) {
-            throw new IllegalArgumentException(HISTORY_SAVE_EXCEPTION.message);
+            throw new NumberFormatException(HISTORY_SAVE_EXCEPTION.message);
         }
 
         saveEachCase(formula, answer);
     }
 
-    private void saveEachCase(String formula, BigDecimal answer) {
+    private void saveEachCase(String formula, String answer) {
         if (checkDecimal(answer)) {
-            histories.put(formula, answer.stripTrailingZeros());
+            answer = new BigDecimal(answer).stripTrailingZeros().toString();
         }
 
-        if (checkInteger(answer)) {
-            histories.put(formula, answer);
-        }
+        histories.put(formula, answer);
     }
 
-    private boolean checkInteger(BigDecimal answer) {
-        return !answer.toString().contains(".");
+    private boolean checkDecimal(String answer) {
+        return answer.contains(".");
     }
 
-    private boolean checkDecimal(BigDecimal answer) {
-        return answer.toString().contains(".");
-    }
-
-    private boolean checkSaveFormWrong(String formula, BigDecimal answer) {
-        return formula.length() == 0 || answer == null;
+    private boolean checkSaveFormWrong(String formula, String answer) {
+        return formula.length() == 0 || answer.length() == 0;
     }
 
     @Override
@@ -51,7 +45,7 @@ public class CalculationHistory implements History {
         return cloneHistories().entrySet();
     }
 
-    private HashMap<String, Double> cloneHistories() {
-        return (HashMap<String, Double>) histories.clone();
+    private HashMap<String, String> cloneHistories() {
+        return (HashMap<String, String>) histories.clone();
     }
 }

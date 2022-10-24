@@ -2,7 +2,6 @@ package calculator.view.output;
 
 import calculator.calculator.operator.Operators;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +12,10 @@ import static java.util.stream.IntStream.range;
 public class MenuHistoryOutput implements BaseOutput {
 
     public void printHistories(Collection<?> histories) {
-        HashMap<String, BigDecimal> newHistories = new HashMap<>();
+        HashMap<String, String> newHistories = new HashMap<>();
 
         histories.stream()
-                .map(history -> (Map.Entry<String, BigDecimal>) history)
+                .map(history -> (Map.Entry<String, String>) history)
                 .forEach(parsedHistory -> newHistories.put(
                         parsedHistory.getKey(),
                         parsedHistory.getValue()));
@@ -24,22 +23,25 @@ public class MenuHistoryOutput implements BaseOutput {
         print(createHistories(newHistories) + ENTER.unit);
     }
 
-    private String createHistories(HashMap<String, BigDecimal> histories) {
+    private String createHistories(HashMap<String, String> histories) {
         StringBuilder textBuilder = new StringBuilder();
 
         histories.keySet()
-                .forEach((formula) ->
-                        range(0, formula.length())
-                                .forEach(idx -> {
-                                    handleOperator(textBuilder, formula.substring(idx, idx + 1));
-                                    handleOperand(textBuilder, formula.substring(idx, idx + 1));
-                                    handleAnswer(histories, textBuilder, formula, idx);
-                                }));
+                .forEach((formula) -> range(0, formula.length())
+                        .forEach(idx -> {
+                            handleOperator(textBuilder, formula.substring(idx, idx + 1));
+                            handleOperand(textBuilder, formula.substring(idx, idx + 1));
+                            handleAnswer(histories, textBuilder, formula, idx);
+                        }));
 
         return textBuilder.toString();
     }
 
-    private static void handleAnswer(HashMap<String, BigDecimal> histories, StringBuilder textBuilder, String formula, int idx) {
+    private static void handleAnswer(HashMap<String, String> histories,
+                                     StringBuilder textBuilder,
+                                     String formula,
+                                     int idx) {
+
         if (idx == formula.length() - 1) {
             textBuilder.append(SPACE.unit)
                     .append(EQUAL.unit)
