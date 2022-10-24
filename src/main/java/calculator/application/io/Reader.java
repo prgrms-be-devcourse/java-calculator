@@ -1,12 +1,14 @@
 package calculator.application.io;
 
 import calculator.application.io.enums.SelectOption;
-import calculator.engine.model.UserSelection;
+import calculator.application.model.UserSelection;
+import calculator.engine.model.Expression;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -17,6 +19,12 @@ public class Reader {
         Integer inputNumber = readNumber();
         SelectOption selection = parseToSelectOption(inputNumber);
         return new UserSelection(selection);
+    }
+
+    public Expression readExpression() {
+        String expressionLiteral = readLine();
+        List<String> expression = Parser.toList(expressionLiteral);
+        return new Expression(expression);
     }
 
     private SelectOption parseToSelectOption(Integer inputNumber) {

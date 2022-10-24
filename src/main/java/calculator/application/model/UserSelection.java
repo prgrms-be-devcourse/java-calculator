@@ -1,4 +1,4 @@
-package calculator.engine.model;
+package calculator.application.model;
 
 import calculator.application.io.enums.SelectOption;
 

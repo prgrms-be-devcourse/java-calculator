@@ -3,7 +3,8 @@ package calculator.engine.controller;
 import calculator.application.io.Input;
 import calculator.application.io.Output;
 import calculator.application.io.enums.SelectOption;
-import calculator.engine.model.UserSelection;
+import calculator.application.model.UserSelection;
+import calculator.engine.model.Expression;
 
 public class Controller implements Runnable{
     private final Input input;
@@ -25,11 +26,11 @@ public class Controller implements Runnable{
 
             // if selection is `calculate`, request expression to customer
             // then calculate expression & record result to history
-//            if (selection.isEqualTo(SelectOption.CALCULATE)) {
-////                Expression expression = input.getExpression();
-////                CalculationResult result = calculator.calculate(expression);
-////                hisotry.record(result);
-//            }
+            if (selection.isEqualTo(SelectOption.CALCULATE)) {
+                Expression expression = input.getExpression();
+//                CalculationResult result = calculator.calculate(expression);
+//                hisotry.record(result);
+            }
 
             // if selection is `QUERY`, request repository to show history
             // prompt all calculation records
