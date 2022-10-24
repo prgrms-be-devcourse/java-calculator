@@ -12,4 +12,9 @@ public class ConsoleOutput implements Output{
     public void showHistory(History history) {
         System.out.println(history.getAll());
     }
+
+    @Override
+    public void printAnswer(String answer) {
+        System.out.println(answer);
+    }
 }

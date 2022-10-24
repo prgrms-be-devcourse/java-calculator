@@ -6,4 +6,6 @@ public interface Output {
     void printError(String message);
 
     void showHistory(History history);
+
+    void printAnswer(String answer);
 }
