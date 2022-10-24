@@ -17,6 +17,8 @@ public class Calculator implements Runnable {
 	private final String MENU = "1. 조회" + newLine + "2. 계산" + newLine + newLine + "선택 : ";
 	private final String LOOKUP = "1";
 	private final String CALCULATION = "2";
+	private final String EXIT = "3";
+	private final String EXIT_MESSAGE = "계산기를 종료합니다.";
 
 	private Console console;
 	private Repository repository;
@@ -51,6 +53,9 @@ public class Calculator implements Runnable {
 							console.printFormulaResult(calculateResult);
 						}
 						break;
+					case EXIT:
+						console.printExit(EXIT_MESSAGE);
+						return;
 					default:
 						throw new MenuInputException();
 				}
