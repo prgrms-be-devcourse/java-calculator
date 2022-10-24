@@ -1,6 +1,5 @@
 package com.programmers.java.io;
 
-import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.model.History;
 
 import java.util.List;
@@ -10,7 +9,7 @@ public class Console implements Input, Output {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String inputMenuNumber() throws MenuInputException {
+    public String inputMenuNumber() {
         String chosenNumber = scanner.nextLine();
         System.out.println();
         return chosenNumber;
@@ -18,7 +17,7 @@ public class Console implements Input, Output {
 
     @Override
     public String inputFormula() {
-        String formula = scanner.nextLine();
+        String formula = scanner.nextLine().replaceAll(" ", "");
         return formula;
     }
 

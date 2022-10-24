@@ -1,10 +1,7 @@
 package com.programmers.java.io;
 
-import com.programmers.java.exception.FormulaInputException;
-import com.programmers.java.exception.MenuInputException;
-
 public interface Input {
-    String inputMenuNumber() throws MenuInputException;
+    String inputMenuNumber();
 
-    String inputFormula() throws FormulaInputException;
+    String inputFormula();
 }

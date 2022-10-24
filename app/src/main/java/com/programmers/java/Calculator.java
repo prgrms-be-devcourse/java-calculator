@@ -5,6 +5,7 @@ import com.programmers.java.io.Console;
 import com.programmers.java.model.History;
 import com.programmers.java.repository.Repository;
 import com.programmers.java.util.FormulaParser;
+import com.programmers.java.util.Validator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,11 +19,13 @@ public class Calculator implements Runnable {
 
     private Console console;
     private Repository repository;
+    private Validator validator;
     private FormulaParser parser;
 
-    public Calculator(Console console, Repository repository, FormulaParser parser) {
+    public Calculator(Console console, Repository repository, Validator validator, FormulaParser parser) {
         this.console = console;
         this.repository = repository;
+        this.validator = validator;
         this.parser = parser;
     }
 
@@ -37,7 +40,7 @@ public class Calculator implements Runnable {
                         console.printHistory(repository.findAllHistory());
                         break;
                     case CALCULATION:
-                        String formula = console.inputFormula();
+                        String formula = validator.validateFormula(console.inputFormula());
 
                         if (repository.haveFormulaResult(formula)) {
                             console.printFormulaResult(repository.findFormulaResult(formula));

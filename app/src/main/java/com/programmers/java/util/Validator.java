@@ -14,6 +14,7 @@ public class Validator {
         String[] tokens = formula.split("((?=[^0-9])|(?<=[^0-9]))");
 
         if (validateTokenIsCorrectLetter(tokens)
+                && validateFormulaNotEmpty(tokens)
                 && validateBracketIsCouple(tokens)
                 && validateFormulaOrderIsCorrect(tokens)) {
             return formula;
@@ -29,6 +30,13 @@ public class Validator {
                     || CloseBracket.isClose(token))) {
                 return false;
             }
+        }
+        return true;
+    }
+
+    private boolean validateFormulaNotEmpty(String[] tokens) {
+        if (tokens == null) {
+            return false;
         }
         return true;
     }
