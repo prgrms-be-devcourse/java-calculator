@@ -6,7 +6,7 @@ public class App {
     public static void main(String[] args) {
         Console console = new Console();
 
-        new Calculator(console).run();
+        new Calculator(console, console).run();
 
     }
 }
