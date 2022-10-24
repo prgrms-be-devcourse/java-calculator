@@ -1,7 +1,6 @@
 package com.project.java.engine.data;
 
 import lombok.AllArgsConstructor;
-import lombok.ToString;
 
 @AllArgsConstructor
 public class SaveFormat {

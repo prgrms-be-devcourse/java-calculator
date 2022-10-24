@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface Repository {
-    void save(Map<Integer, List<String>> expression);
+    void save(Map<String, Double> expression, String formattedResult);
     List<String> findAll();
 }

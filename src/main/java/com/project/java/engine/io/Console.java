@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class Console implements Input, Output{
+public class Console implements Input, Output {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static final String MENU = "1.조회\n2.계산";
+    private static final String MENU = "1.조회\n2.계산\n종료하시려면 q or Q를 눌러주세요.";
     private static final String SPECIAL_CHARACTER_VALIDATOR_REGEX = "[^\\w+\\-*/\\s]";
 
     @Override
@@ -26,13 +26,22 @@ public class Console implements Input, Output{
     @Override
     public boolean validateInput(String input) {
         String validateResult = input.replaceAll(SPECIAL_CHARACTER_VALIDATOR_REGEX, "");
-        if(validateResult.length() != input.length()) return false;
+        if (validateResult.length() != input.length()) return false;
         return true;
     }
 
     @Override
-    public void printResult(String str) {
-        System.out.println(str);
+    public String printResult(Double result) {
+        String formattedResult;
+        if (Math.floor(result) == result) {
+            double doubleResult = result;
+            int intResult = (int) doubleResult;
+            formattedResult = String.valueOf(intResult);
+        } else {
+            formattedResult = String.format("%.4f", result);
+        }
+        System.out.println(formattedResult);
+        return formattedResult;
     }
 
     @Override
