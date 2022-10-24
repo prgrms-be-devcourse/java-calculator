@@ -5,6 +5,7 @@ import com.programmers.java.application.Operator;
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
 import com.programmers.java.engine.model.Expression;
+import com.programmers.java.engine.model.History;
 import com.programmers.java.engine.operator.Divide;
 import com.programmers.java.engine.operator.Minus;
 import com.programmers.java.engine.operator.Multiply;
@@ -35,6 +36,7 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
+        History history = new History();
 
         // Loop
         while (true) {
@@ -51,7 +53,7 @@ public class Calculator implements Runnable {
 
             // Option 1. Show history
             if (option.get().equals(1)) {
-                String inputHistory = input.readFile("\n");
+                String inputHistory = input.readHistory(history);
 
                 output.printHistory(inputHistory);
             }
@@ -66,8 +68,12 @@ public class Calculator implements Runnable {
                     continue;
                 }
 
+                // 계산
                 Double answer = calculate(expression.get());
                 output.printAnswer(answer);
+
+                // 계산 저장
+                history.addEquation(inputExpression, answer);
             }
 
         }
