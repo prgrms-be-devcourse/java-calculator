@@ -40,7 +40,7 @@ public class Console implements Input, Output {
         } else {
             formattedResult = String.format("%.4f", result);
         }
-        System.out.println(formattedResult);
+        System.out.println("\n" + formattedResult);
         return formattedResult;
     }
 
