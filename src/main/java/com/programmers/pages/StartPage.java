@@ -1,12 +1,17 @@
 package com.programmers.pages;
 
 
+import com.programmers.engine.parser.Parser;
+import lombok.Builder;
+
 import java.util.Optional;
-public class StartPage extends Page {
+
+public class StartPage extends Page<PageList> {
 
 
-    public StartPage(String content, String prompt, PageList nextPage) {
-        super(content, prompt, nextPage);
+    @Builder
+    public StartPage(String content, String prompt, PageList nextPage, Parser<PageList> parser) {
+        super(content, prompt, nextPage, parser);
     }
 
     @Override
@@ -15,31 +20,16 @@ public class StartPage extends Page {
             String inputString;
             outputData(getContent());
             inputString = input(getPrompt());
-            Optional<String> parsedInput = this.parse(inputString);
-
-            if (parsedInput.isEmpty()) {
+            getParser().parseInput(inputString);
+            try{
+                PageList parsedInput = getParser().getParsedInput();
+                setNextPage(parsedInput);
+            }catch (Exception e){
                 inputError();
                 continue;
             }
-            if (parsedInput.get().equals("1")) {
-                setNextPage(PageList.LOOKUP);
-                break;
-            }
-            if(parsedInput.get().equals("2")){
-                setNextPage(PageList.CALCULATE);
-                break;
-            }
-
         }
 
     }
 
-    @Override
-    protected Optional<String> parse(String inputString) {
-        return switch (inputString) {
-            case "1" -> Optional.of("1");
-            case "2" -> Optional.of("2");
-            default -> Optional.empty();
-        };
-    }
 }
