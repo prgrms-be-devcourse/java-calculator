@@ -3,12 +3,12 @@ package com.programmers.java;
 import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Console;
 import com.programmers.java.model.History;
+import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.letter.operator.Operator;
 import com.programmers.java.repository.Repository;
 import com.programmers.java.util.FormulaParser;
 import com.programmers.java.util.Validator;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Stack;
 
 public class Calculator implements Runnable {
@@ -59,32 +59,21 @@ public class Calculator implements Runnable {
         }
     }
 
-    public int calculate(String[] parsedFormula) {
+    public int calculate(String[] parsedTokens) {
         Stack<Integer> numbers = new Stack<>();
-        HashSet<String> operator = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
 
+        for (int i = 0; i < parsedTokens.length; i++) {
+            String token = parsedTokens[i];
 
-        for (int i = 0; i < parsedFormula.length; i++) {
-            if (!operator.contains(parsedFormula[i])) {
-                numbers.push(Integer.parseInt(parsedFormula[i]));
+            if (!Operator.isOperator(token)) {
+                numbers.push(Integer.parseInt(token));
             } else {
                 int num2 = numbers.pop();
                 int num1 = numbers.pop();
 
-                switch (parsedFormula[i]) {
-                    case "+":
-                        numbers.push(num1 + num2);
-                        break;
-                    case "-":
-                        numbers.push(num1 - num2);
-                        break;
-                    case "/":
-                        numbers.push(num1 / num2);
-                        break;
-                    case "*":
-                        numbers.push(num1 * num2);
-                        break;
-                }
+                Token operator = validator.validateCorrectToken(token);
+                int result = ((Operator) operator).calculate(num1, num2);
+                numbers.push(result);
             }
         }
 
