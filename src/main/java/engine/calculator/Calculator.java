@@ -2,11 +2,10 @@ package engine.calculator;
 
 import engine.Option;
 import engine.compute.Computer;
-import engine.exception.notValidInputException;
+import engine.exception.NotValidInputException;
 import engine.history.History;
 import engine.io.Input;
 import engine.io.Output;
-import lombok.AllArgsConstructor;
 
 public class Calculator implements Runnable{
     Input input;
@@ -46,7 +45,7 @@ public class Calculator implements Runnable{
                     output.printAnswer(answer);
                 }
 
-            } catch (notValidInputException e) {
+            } catch (NotValidInputException e) {
                 output.printError(e.getMessage());
 
             }
