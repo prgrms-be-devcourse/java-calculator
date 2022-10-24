@@ -11,5 +11,5 @@ public abstract class Token {
         return token;
     }
 
-    public abstract boolean checkNextTokenCorrect(String token);
+    public abstract boolean checkNextTokenCorrect(Token nextToken);
 }

@@ -15,13 +15,9 @@ public class OpenBracket extends Token {
         return false;
     }
 
-    public Token getType(String token) {
-        return new OpenBracket(token);
-    }
-
     @Override
-    public boolean checkNextTokenCorrect(String token) {
-        if (getType(token) instanceof Number || getType(token) instanceof OpenBracket) {
+    public boolean checkNextTokenCorrect(Token nextToken) {
+        if (nextToken instanceof Number || nextToken instanceof OpenBracket) {
             return true;
         }
         return false;

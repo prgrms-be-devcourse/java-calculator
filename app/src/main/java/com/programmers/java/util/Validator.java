@@ -71,11 +71,10 @@ public class Validator {
 
     private boolean validateMiddleTokenIsCorrect(String[] tokens) {
         for (int i = 0; i < tokens.length - 1; i++) {
-            String curStringToken = tokens[i];
-            String nextStringToken = tokens[i + 1];
-            Token curToken = validateCorrectToken(curStringToken);
+            Token curToken = validateCorrectToken(tokens[i]);
+            Token nextToken = validateCorrectToken(tokens[i + 1]);
 
-            if (!curToken.checkNextTokenCorrect(nextStringToken)) {
+            if (!curToken.checkNextTokenCorrect(nextToken)) {
                 return false;
             }
         }

@@ -15,13 +15,9 @@ public class CloseBracket extends Token {
         return false;
     }
 
-    public Token getType(String token) {
-        return new CloseBracket(token);
-    }
-
     @Override
-    public boolean checkNextTokenCorrect(String token) {
-        if (getType(token) instanceof Operator || getType(token) instanceof CloseBracket) {
+    public boolean checkNextTokenCorrect(Token nextToken) {
+        if (nextToken instanceof Operator || nextToken instanceof CloseBracket) {
             return true;
         }
         return false;
