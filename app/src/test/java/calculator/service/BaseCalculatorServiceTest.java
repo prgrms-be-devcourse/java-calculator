@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
-import static calculator.Fixture.*;
+import static calculator.fixture.Fixture.*;
 import static calculator.domain.Command.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

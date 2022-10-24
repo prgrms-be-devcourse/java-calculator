@@ -1,4 +1,4 @@
-package calculator;
+package calculator.fixture;
 
 import calculator.domain.Command;
 
