@@ -3,7 +3,6 @@ package com.programmers.java.engine;
 import com.programmers.java.application.Console;
 import com.programmers.java.application.Operator;
 import com.programmers.java.engine.model.Expression;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -12,15 +11,15 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorTest {
+class CalculatorImplTest {
 
-    private static Calculator calculator;
+    private static CalculatorImpl calculatorImpl;
 
     @BeforeAll
     public static void init() {
         Console console = new Console();
         Operator operator = new Operator();
-        calculator = new Calculator(operator, console);
+        calculatorImpl = new CalculatorImpl(operator, console);
     }
 
     @Test
@@ -31,9 +30,9 @@ class CalculatorTest {
         String option3 = "a";
 
         //when
-        Optional<Integer> integer1 = calculator.parseOption(option1);
-        Optional<Integer> integer2 = calculator.parseOption(option2);
-        Optional<Integer> integer3 = calculator.parseOption(option3);
+        Optional<Integer> integer1 = calculatorImpl.parseOption(option1);
+        Optional<Integer> integer2 = calculatorImpl.parseOption(option2);
+        Optional<Integer> integer3 = calculatorImpl.parseOption(option3);
 
         //then
         assertEquals(integer1, Optional.of(1));
@@ -48,7 +47,7 @@ class CalculatorTest {
         String[] op1 = {"14", "+", "2.0", "*", "3.1", "-", "0.1", "/", "214"};
 
         //when
-        Optional<Expression> expression = calculator.parseExpression(ex1);
+        Optional<Expression> expression = calculatorImpl.parseExpression(ex1);
 
         //then
         System.out.println(expression.get());
@@ -64,8 +63,8 @@ class CalculatorTest {
         String[] ans2 = {"3", "2", "*", "5", "-"};
 
         //when
-        String[] postfix1 = calculator.makePostfix(ex1);
-        String[] postfix2 = calculator.makePostfix(ex2);
+        String[] postfix1 = calculatorImpl.makePostfix(ex1);
+        String[] postfix2 = calculatorImpl.makePostfix(ex2);
 
         //then
         System.out.println(Arrays.toString(postfix1));
@@ -83,8 +82,8 @@ class CalculatorTest {
         Double ans2 = 1.0;
 
         //when
-        Double result1 = calculator.getResult(ex1);
-        Double result2 = calculator.getResult(ex2);
+        Double result1 = calculatorImpl.getResult(ex1);
+        Double result2 = calculatorImpl.getResult(ex2);
 
         //then
         System.out.println(result1);
