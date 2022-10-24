@@ -1,10 +1,10 @@
 package com.programmers.java.io;
 
 import com.programmers.java.exception.FormulaInputException;
-import com.programmers.java.exception.MenuInputNotNumberException;
+import com.programmers.java.exception.MenuInputException;
 
 public interface Input {
-    int inputMenuNumber() throws MenuInputNotNumberException;
+    String inputMenuNumber() throws MenuInputException;
 
     String inputFormula() throws FormulaInputException;
 }

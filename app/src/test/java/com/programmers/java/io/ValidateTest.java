@@ -1,5 +1,7 @@
 package com.programmers.java.io;
 
+import com.programmers.java.FormulaParser;
+import com.programmers.java.Validator;
 import com.programmers.java.exception.FormulaInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -7,9 +9,10 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 class ValidateTest {
+    Validator validator = new Validator(new FormulaParser());
+
     @Test
     void formulaInputValidate() {
-        Console console = new Console();
         String[] formula = new String[9];
         formula[0] = "(1*3)?5"; // 연산자, 숫자. 괄호가 아닌 다른 문자가 들어옴
         formula[1] = "AAAbbb"; // 연산자, 숫자. 괄호가 아닌 다른 문자가 들어옴
@@ -23,6 +26,6 @@ class ValidateTest {
 
 
         Arrays.stream(formula)
-                .forEach(i -> Assertions.assertThrows(FormulaInputException.class, () -> console.formulaValidate(i)));
+                .forEach(i -> Assertions.assertThrows(FormulaInputException.class, () -> validator.formulaValidate(i)));
     }
 }

@@ -1,6 +1,6 @@
 package com.programmers.java;
 
-import com.programmers.java.exception.ChosenNumberNotInMenuException;
+import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Console;
 import com.programmers.java.model.History;
 import com.programmers.java.repository.Repository;
@@ -12,6 +12,8 @@ import java.util.Stack;
 public class Calculator implements Runnable {
     private final String newLine = System.lineSeparator();
     private final String MENU = "1. 조회" + newLine + "2. 계산" + newLine + newLine + "선택 : ";
+    private final String LOOKUP = "1";
+    private final String CALCULATION = "2";
 
     private Console console;
     private Repository repository;
@@ -29,13 +31,11 @@ public class Calculator implements Runnable {
             console.printMenu(MENU);
 
             try {
-                int chosenNumber = console.inputMenuNumber();
-
-                switch (chosenNumber) {
-                    case 1:
+                switch (console.inputMenuNumber()) {
+                    case LOOKUP:
                         console.printHistory(repository.findAllHistory());
                         break;
-                    case 2:
+                    case CALCULATION:
                         String formula = console.inputFormula();
 
                         if (repository.haveFormulaResult(formula)) {
@@ -47,7 +47,7 @@ public class Calculator implements Runnable {
                         }
                         break;
                     default:
-                        throw new ChosenNumberNotInMenuException();
+                        throw new MenuInputException();
                 }
             } catch (Exception e) {
                 console.printErrorMessage(e.getMessage());
