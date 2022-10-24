@@ -8,24 +8,22 @@ import java.util.List;
 import java.util.Stack;
 
 public class SimpleExpressionValidator implements ExpressionValidator {
+    private final String errorMsg = "잘못된 수식이 입력되었습니다";
 
     @Override
     public List<Token> validateToken(List<Token> tokenList) {
         //Token으로 쪼개진 연산자, 피연산자를 검사한다.
         for (Token token : tokenList) {
             //숫자, 연산자 둘 다 아닌 문자인 경우 exception 발생
-            if (!isNumber(token)) {
-                throw new NotValidInputException("잘못된 수식이 입력되었습니다.");
-            }
-            if (!isOperator(token)) {
-                throw new NotValidInputException("잘못된 수식이 입력되었습니다.");
+            if (!(isNumber(token) || isOperator(token))) {
+                throw new NotValidInputException(errorMsg);
             }
         }
 
         checkFirstAndLastElement(tokenList);
 
         if (!isCorrectOrder(tokenList)) {
-            throw new NotValidInputException("잘못된 수식이 입력되었습니다.");
+            throw new NotValidInputException(errorMsg);
         }
 
         return tokenList;
@@ -33,10 +31,10 @@ public class SimpleExpressionValidator implements ExpressionValidator {
 
     private void checkFirstAndLastElement(List<Token> tokenList) {
         if (!isNumber(tokenList.get(0))) {
-            throw new NotValidInputException("잘못된 수식이 입력되었습니다.");
+            throw new NotValidInputException(errorMsg);
         }
         if (!isNumber(tokenList.get(tokenList.size() - 1))) {
-            throw new NotValidInputException("잘못된 수식이 입력되었습니다.");
+            throw new NotValidInputException(errorMsg);
         }
     }
 

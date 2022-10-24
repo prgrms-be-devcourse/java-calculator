@@ -1,6 +1,6 @@
 package engine.calculator;
 
-import engine.Option;
+import engine.option.Option;
 import engine.compute.Computer;
 import engine.exception.NotValidInputException;
 import engine.history.History;
@@ -39,7 +39,7 @@ public class Calculator implements Runnable{
                 } else {
                     String userInputExpression = input.getCalculateSentence("계산할 식을 입력해주세요.");
 
-                    double answer = computer.compute(userInputExpression); //연산 처리 의탁
+                    String answer = computer.compute(userInputExpression); //연산 처리 의탁
 
                     history.save(userInputExpression, answer);
                     output.printAnswer(answer);
