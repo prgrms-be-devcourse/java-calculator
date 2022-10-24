@@ -21,8 +21,8 @@ public class BaseCalculatorTest {
         when(calculation.addition(1, 1)).thenReturn(2);
         when(calculation.subtraction(2, 5)).thenReturn(-3);
 
-        int answer = calculator.calculate(EXPRESSION_add_min);
-        assertThat(answer).isEqualTo(EXPRESSION_add_min_answer);
+        int answer = calculator.calculate(EXP_OF_ADD_N_MIN);
+        assertThat(answer).isEqualTo(ANSWER_OF_ADD_N_MIN);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class BaseCalculatorTest {
         when(calculation.division(2, 0)).thenThrow(ArithmeticException.class);
 
         Assertions.assertThrows(ArithmeticException.class, () -> {
-            calculator.calculate(EXPRESSION_div_0);
+            calculator.calculate(EXP_OF_DIV_BY_0);
         });
     }
 
@@ -39,8 +39,8 @@ public class BaseCalculatorTest {
         when(calculation.multiplication(2, 3)).thenReturn(6);
         when(calculation.division(6, 4)).thenReturn(1);
 
-        int answer = calculator.calculate(EXPRESSION_div_mul);
-        assertThat(answer).isEqualTo(EXPRESSION_div_mul_answer);
+        int answer = calculator.calculate(EXP_OF_DIV_N_MUL);
+        assertThat(answer).isEqualTo(ANSWER_OF_DIV_N_MUL);
     }
 
     @Test
@@ -48,8 +48,8 @@ public class BaseCalculatorTest {
         when(calculation.addition(2, 1)).thenReturn(3);
         when(calculation.division(4, 4)).thenReturn(1);
 
-        int answer = calculator.calculate(EXPRESSION_add_div);
-        assertThat(answer).isEqualTo(EXPRESSION_add_div_answer);
+        int answer = calculator.calculate(EXP_OF_ADD_N_DIV);
+        assertThat(answer).isEqualTo(ANSWER_OF_ADD_N_DIV);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class BaseCalculatorTest {
         when(calculation.addition(3, 5)).thenReturn(8);
         when(calculation.multiplication(2, 8)).thenReturn(16);
 
-        int answer = calculator.calculate(EXPRESSION_bracket);
-        assertThat(answer).isEqualTo(EXPRESSION_bracket_answer);
+        int answer = calculator.calculate(EXP_OF_BRACKET);
+        assertThat(answer).isEqualTo(ANSWER_OF_BRACKET);
     }
 }
