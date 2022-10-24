@@ -3,6 +3,9 @@ package calculator.service;
 import calculator.domain.Calculator;
 import calculator.domain.Command;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,12 +14,19 @@ import static calculator.domain.Command.*;
 public class BaseCalculatorService implements CalculatorService {
 
     private final Calculator calculator;
-
-    Scanner reader = new Scanner(System.in);
-    StringBuilder writer = new StringBuilder();
+    private final Scanner reader;
+    private final PrintStream writer;
 
     public BaseCalculatorService(Calculator calculator) {
         this.calculator = calculator;
+        this.reader = new Scanner(System.in);
+        this.writer = new PrintStream(System.out);
+    }
+
+    public BaseCalculatorService(Calculator calculator, InputStream input, OutputStream output) {
+        this.calculator = calculator;
+        this.reader = new Scanner(input);
+        this.writer = new PrintStream(output);
     }
 
     public void run() {
@@ -24,8 +34,8 @@ public class BaseCalculatorService implements CalculatorService {
         System.out.println(introduction);
 
         while (reader.hasNextLine()) {
-                String command = reader.nextLine();
-                System.out.println("선택 : " + command);
+            String command = reader.nextLine();
+            writer.println("선택 : " + command);
 
             try {
                 if (command.equals(GETALLDATA.getCode())) {
@@ -36,13 +46,13 @@ public class BaseCalculatorService implements CalculatorService {
                     exit();
                     break;
                 } else {
-                    System.out.println("> 다시 입력해주세요");
+                    writer.println("> 다시 입력해주세요");
                 }
             } catch (ArithmeticException e) {
-                System.out.println("> 0으로 나눌 수 없습니다. 다시 입력해주세요");
+                writer.println("> 0으로 나눌 수 없습니다. 다시 입력해주세요");
             }
 
-            System.out.println(introduction);
+            writer.println(introduction);
         }
     }
 
@@ -55,26 +65,26 @@ public class BaseCalculatorService implements CalculatorService {
     }
 
     private void getAllData() {
+        StringBuilder sb = new StringBuilder();
         List<String> data = calculator.getAllData();
         for (String datum : data) {
-            writer.append(datum).append("\n");
+            sb.append(datum).append("\n");
         }
         if (data.size() == 0)
-            System.out.println("> 조회할 데이터가 없습니다");
+            writer.println("> 조회할 데이터가 없습니다");
         else {
-            System.out.println(writer);
-            writer.setLength(0);
+            writer.println(sb);
         }
     }
 
     private void calculate() {
         String expression = reader.nextLine();
         int answer = calculator.calculate(expression);
-        System.out.println(answer);
+        writer.println(answer);
     }
 
     private void exit() {
-        System.out.println("> 계산기 프로젝트를 종료합니다");
+        writer.println("> 계산기 프로젝트를 종료합니다");
         reader.close();
     }
 }
