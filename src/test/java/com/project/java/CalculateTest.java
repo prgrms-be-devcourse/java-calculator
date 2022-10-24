@@ -93,4 +93,16 @@ public class CalculateTest {
         //then
         Assertions.assertEquals(stack.pop(), 146);
     }
+
+    @Test
+    public void doubleCalculationLimitTest() throws Exception {
+        //given
+        double a = Integer.MAX_VALUE;
+        double b = Integer.MAX_VALUE;
+        // when
+        double c = a + b;
+        //then
+        System.out.println(Double.valueOf(c).longValue());
+        Assertions.assertEquals(c, a * 2);
+    }
 }

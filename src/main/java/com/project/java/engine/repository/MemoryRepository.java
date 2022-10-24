@@ -1,5 +1,6 @@
 package com.project.java.engine.repository;
 
+import com.project.java.engine.data.ResultFormat;
 import com.project.java.engine.data.SaveFormat;
 
 import java.util.ArrayList;
@@ -13,10 +14,8 @@ public class MemoryRepository implements Repository{
     private int idx = 0;
 
     @Override
-    public void save(Map<String ,Double> expression, String formattedResult) {
-        for (String key : expression.keySet()) {
-            memoryRepository.add(new SaveFormat(++idx, key + formattedResult));
-        }
+    public void save(ResultFormat result) {
+        memoryRepository.add(new SaveFormat(++idx, result.getExpression() + result.formatResult()));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.project.java.engine;
 
+import com.project.java.engine.data.ResultFormat;
 import com.project.java.engine.io.Input;
 import com.project.java.engine.io.Output;
 import com.project.java.engine.repository.Repository;
@@ -47,16 +48,15 @@ public class Calculator {
             output.inputError();
             return;
         }
-        Map<String, Double> resultMap;
+        ResultFormat result;
         try {
-            resultMap = solver.calculate(expression);
+            result = solver.calculate(expression);
         } catch (ZeroDivisionException e) {
             output.inputError();
             return;
         }
-        String result = resultMap.keySet().stream().toList().get(0);
-        String formattedResult = output.printResult(resultMap.get(result));
-        repository.save(resultMap, formattedResult);
+        output.printResult(result);
+        repository.save(result);
     }
 
     private void retrieveAll() {

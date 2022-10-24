@@ -1,5 +1,7 @@
 package com.project.java.engine.io;
 
+import com.project.java.engine.data.ResultFormat;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,17 +33,9 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public String printResult(Double result) {
-        String formattedResult;
-        if (Math.floor(result) == result) {
-            double doubleResult = result;
-            int intResult = (int) doubleResult;
-            formattedResult = String.valueOf(intResult);
-        } else {
-            formattedResult = String.format("%.4f", result);
-        }
+    public void printResult(ResultFormat result) {
+        String formattedResult = result.formatResult();
         System.out.println("\n" + formattedResult);
-        return formattedResult;
     }
 
     @Override

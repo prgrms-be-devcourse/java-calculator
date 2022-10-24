@@ -1,9 +1,11 @@
 package com.project.java.engine.io;
 
+import com.project.java.engine.data.ResultFormat;
+
 import java.util.List;
 
 public interface Output {
-    String printResult(Double result);
+    void printResult(ResultFormat result);
     void printMenu();
     void inputError();
     void messageEmpty();

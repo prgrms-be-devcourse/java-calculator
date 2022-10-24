@@ -1,6 +1,7 @@
 package com.project.java.engine.solver;
 
 import com.project.java.engine.converter.StringExpressionConverter;
+import com.project.java.engine.data.ResultFormat;
 import com.project.java.exception.ZeroDivisionException;
 
 import java.util.*;
@@ -11,16 +12,14 @@ public class StackSolver implements Solver {
     private static final String NUMBER_REGULAR = "[0-9]+";
 
     @Override
-    public Map<String, Double> calculate(String expression) throws ZeroDivisionException {
+    public ResultFormat calculate(String expression) throws ZeroDivisionException {
         List<String> expressionList = makeExpressionToList(expression);
         List<String> postfix = makeInfixToPostfix(expressionList);
         double result = calculatePostfix(postfix);
 
         String convertedExpression = new StringExpressionConverter<String>(expressionList).convert();
 
-        Map<String, Double> resultMap = new HashMap<>();
-        resultMap.put(convertedExpression, result);
-        return resultMap;
+        return new ResultFormat(convertedExpression, result);
     }
 
     private List<String> makeInfixToPostfix(List<String> infix) {
