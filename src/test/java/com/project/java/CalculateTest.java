@@ -1,7 +1,12 @@
 package com.project.java;
 
+import com.project.java.engine.data.ResultFormat;
+import com.project.java.engine.solver.Solver;
+import com.project.java.engine.solver.StackSolver;
 import com.project.java.exception.ZeroDivisionException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,6 +17,7 @@ public class CalculateTest {
 
     private static final String OPER_REGULAR = "[+\\-*/]";
     private static final String NUMBER_REGULAR = "[0-9]+";
+    Solver solver = new StackSolver();
 
     @Test
     public void expressionToList() throws Exception {
@@ -95,14 +101,13 @@ public class CalculateTest {
     }
 
     @Test
-    public void doubleCalculationLimitTest() throws Exception {
+    public void calculationRangeLimitTest() throws Exception {
         //given
-        double a = Integer.MAX_VALUE;
-        double b = Integer.MAX_VALUE;
+        String expression = "2111111111 + 2111111111";
         // when
-        double c = a + b;
+        ResultFormat calculate = solver.calculate(expression);
         //then
-        System.out.println(Double.valueOf(c).longValue());
-        Assertions.assertEquals(c, a * 2);
+
+        Assertions.assertEquals(calculate.getResult(), 4222222222L);
     }
 }

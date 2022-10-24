@@ -52,10 +52,11 @@ public class StackSolver implements Solver {
         expression = expression.replace(" ", "");
         String[] nums = expression.split(OPER_REGULAR);
         String[] opers = expression.split(NUMBER_REGULAR);
-        splittedValues.add(String.valueOf(Integer.parseInt(nums[0])));
+        // 0001 0002 제거하기 위해 Long.parseLong 후 String.valueOf
+        splittedValues.add(String.valueOf(Long.parseLong(nums[0])));
         for (int i = 1; i < opers.length; i++) {
             splittedValues.add(opers[i]);
-            splittedValues.add(String.valueOf(Integer.parseInt(nums[i])));
+            splittedValues.add(String.valueOf(Long.parseLong(nums[i])));
         }
         return splittedValues;
     }
