@@ -4,19 +4,19 @@ import java.util.List;
 
 public interface Output {
 
-    void requestInput();
+	void requestInput();
 
-    void printAnswer(String result);
+	void printAnswer(String result);
 
-    void printFormulas(List<String> list);
+	void printFormulas(List<String> list);
 
-    void printExit();
+	void printExit();
 
-    void printWrongOrder();
+	void printWrongOrder();
 
-    void printDivideZero();
+	void printDivideZero();
 
-    void printNoData();
+	void printNoData();
 
-    void printWrongFormula();
+	void printWrongFormula();
 }

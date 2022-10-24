@@ -4,12 +4,12 @@ import java.util.List;
 
 public interface Repository {
 
-    void save(String formula, String answer);
+	void save(String formula, String answer);
 
-    String find(String formula);
+	String find(String formula);
 
-    boolean isExist(String formula);
+	boolean isExist(String formula);
 
-    List<String> findAll();
+	List<String> findAll();
 
 }
