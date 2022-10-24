@@ -12,7 +12,7 @@ public class MenuOutput implements BaseOutput {
     private static final String MENU_SELECTED_SIGN = "선택 : ";
 
     public void printSelectedSign() {
-        print(MENU_SELECTED_SIGN + ENTER.unit);
+        print(MENU_SELECTED_SIGN);
     }
 
     public void printMenus() {
@@ -27,5 +27,9 @@ public class MenuOutput implements BaseOutput {
                         + menu.getTitle()
                         + ENTER.unit
                 ).collect(Collectors.joining());
+    }
+
+    public void printAfter() {
+        print(ENTER.unit);
     }
 }
