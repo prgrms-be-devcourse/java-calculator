@@ -1,6 +1,6 @@
-package calculator.engine.io;
+package calculator.application.io;
 
-import calculator.engine.io.enums.SelectOption;
+import calculator.application.io.enums.SelectOption;
 import calculator.engine.model.UserSelection;
 
 import java.io.BufferedReader;

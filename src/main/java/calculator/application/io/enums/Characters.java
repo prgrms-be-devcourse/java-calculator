@@ -1,4 +1,4 @@
-package calculator.engine.io.enums;
+package calculator.application.io.enums;
 
 public enum Characters {
     BLANK(" "),
