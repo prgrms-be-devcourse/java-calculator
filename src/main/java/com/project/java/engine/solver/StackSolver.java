@@ -1,5 +1,6 @@
 package com.project.java.engine.solver;
 
+import com.project.java.engine.converter.StringExpressionConverter;
 import com.project.java.exception.ZeroDivisionException;
 
 import java.util.*;
@@ -10,12 +11,15 @@ public class StackSolver implements Solver {
     private static final String NUMBER_REGULAR = "[0-9]+";
 
     @Override
-    public Map<Integer, List<String>> calculate(String expression) throws ZeroDivisionException {
+    public Map<String, Double> calculate(String expression) throws ZeroDivisionException {
         List<String> expressionList = makeExpressionToList(expression);
         List<String> postfix = makeInfixToPostfix(expressionList);
-        int result = calculatePostfix(postfix);
-        Map<Integer, List<String>> resultMap = new HashMap<>();
-        resultMap.put(result, expressionList);
+        double result = calculatePostfix(postfix);
+
+        String convertedExpression = new StringExpressionConverter<String>(expressionList).convert();
+
+        Map<String, Double> resultMap = new HashMap<>();
+        resultMap.put(convertedExpression, result);
         return resultMap;
     }
 
@@ -57,13 +61,13 @@ public class StackSolver implements Solver {
         return splittedValues;
     }
 
-    private int calculatePostfix(List<String> postfix) throws ZeroDivisionException {
-        Stack<Integer> stack = new Stack<>();
+    private double calculatePostfix(List<String> postfix) throws ZeroDivisionException {
+        Stack<Double> stack = new Stack<>();
 
         for (String element : postfix) {
             if (element.equals("+") || element.equals("-") || element.equals("*") || element.equals("/")) {
-                int second = stack.pop();
-                int first = stack.pop();
+                double second = stack.pop();
+                double first = stack.pop();
                 if (element.equals("/") && second == 0) throw new ZeroDivisionException("0으로 나눌 수 없습니다.");
                 switch (element) {
                     case "+":
@@ -80,7 +84,7 @@ public class StackSolver implements Solver {
                         break;
                 }
             } else {
-                stack.push(Integer.parseInt(element));
+                stack.push(Double.parseDouble(element));
             }
         }
         return stack.pop();

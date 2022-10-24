@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @AllArgsConstructor
 public class Calculator {
@@ -23,12 +22,12 @@ public class Calculator {
 
     public void run() throws IOException {
 
-        while(true) {
+        while (true) {
             String cmd = input.getInput(MESSAGE);
-            switch(cmd) {
+            switch (cmd) {
                 case "1":
                     List<String> historyList = repository.findAll();
-                    if(historyList.size() ==0) {
+                    if (historyList.size() == 0) {
                         output.messageEmpty();
                     } else {
                         output.printHistory(historyList);
@@ -40,17 +39,20 @@ public class Calculator {
                         output.inputError();
                         continue;
                     }
-                    Map<Integer, List<String>> resultMap;
+                    Map<String, Double> resultMap;
                     try {
                         resultMap = solver.calculate(expression);
                     } catch (ZeroDivisionException e) {
                         output.inputError();
                         continue;
                     }
-                    Integer result = resultMap.keySet().stream().toArray(Integer[]::new)[0];
-                    output.printResult(String.valueOf(result));
-                    repository.save(resultMap);
+                    String result = resultMap.keySet().stream().toList().get(0);
+                    String formattedResult = output.printResult(resultMap.get(result));
+                    repository.save(resultMap, formattedResult);
                     break;
+                case "q":
+                case "Q":
+                    return;
                 default:
                     output.inputError();
             }

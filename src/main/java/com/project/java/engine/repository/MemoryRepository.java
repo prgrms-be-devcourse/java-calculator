@@ -13,14 +13,9 @@ public class MemoryRepository implements Repository{
     private int idx = 0;
 
     @Override
-    public void save(Map<Integer, List<String>> expression) {
-        for (Integer key : expression.keySet()) {
-            StringBuffer sb = new StringBuffer();
-            for(String numOper : expression.get(key)) {
-                sb.append(numOper).append(" ");
-            }
-            sb.append("= ").append(key);
-            memoryRepository.add(new SaveFormat(++idx, sb.toString()));
+    public void save(Map<String ,Double> expression, String formattedResult) {
+        for (String key : expression.keySet()) {
+            memoryRepository.add(new SaveFormat(++idx, key + formattedResult));
         }
     }
 

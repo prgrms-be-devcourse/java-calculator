@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface Solver {
-    Map<Integer, List<String>> calculate(String expression) throws ZeroDivisionException;
+    Map<String, Double> calculate(String expression) throws ZeroDivisionException;
 }
