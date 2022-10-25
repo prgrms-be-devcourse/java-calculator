@@ -4,24 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4c3cbbe-dce4-4920-be4e-e6a7c46228bb" name="Changes" comment="테스트 파일 추가 : 파싱, 우선순위, 사칙연산 기능 테스트">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/programmers/calculate/Collection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="a4c3cbbe-dce4-4920-be4e-e6a7c46228bb" name="Changes" comment="롬복 및 배열 지양 -&gt; 생성자, Collection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/programmers/calculate/engine/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/programmers/calculate/engine/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.programmers.calculate.engine.CalculatorTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/com.programmers.calculate.engine.CalculatorTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.programmers.calculate.engine.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/com.programmers.calculate.engine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-com.programmers.calculate.engine.CalculatorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-com.programmers.calculate.engine.CalculatorTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programmers/calculate/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/programmers/calculate/CalculatorHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programmers/calculate/engine/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/programmers/calculate/engine/Calculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,17 +38,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -73,7 +57,7 @@
       <recent name="com.programmers.calculate.engine" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.CalculatorTest">
+  <component name="RunManager" selected="Application.com.programmers.calculate.App">
     <configuration name="com.programmers.calculate.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.programmers.calculate.App" />
       <module name="calculator.main" />
@@ -182,8 +166,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.CalculatorTest" />
-        <item itemvalue="Gradle.CalculatorTest.사칙연산" />
-        <item itemvalue="Gradle.CalculatorTest.우선순위" />
         <item itemvalue="Gradle.CalculatorTest.파싱" />
         <item itemvalue="Application.com.programmers.calculate.App" />
       </list>
@@ -197,7 +179,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666632453975</updated>
-      <workItem from="1666632455733" duration="9551000" />
+      <workItem from="1666632455733" duration="10841000" />
     </task>
     <task id="LOCAL-00001" summary="계산 이력 저장 및 조회 기능 추가">
       <created>1666680344950</created>
@@ -213,7 +195,28 @@
       <option name="project" value="LOCAL" />
       <updated>1666681854164</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="롬복 지양 : 생성자 추가">
+      <created>1666684015803</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666684015803</updated>
+    </task>
+    <task id="LOCAL-00004" summary="배열 지양 : Collection 활용">
+      <created>1666684041047</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666684041047</updated>
+    </task>
+    <task id="LOCAL-00005" summary="롬복 및 배열 지양 -&gt; 생성자, Collection">
+      <created>1666684062817</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666684062817</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +236,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="계산 이력 저장 및 조회 기능 추가" />
     <MESSAGE value="테스트 파일 추가 : 파싱, 우선순위, 사칙연산 기능 테스트" />
-    <option name="LAST_COMMIT_MESSAGE" value="테스트 파일 추가 : 파싱, 우선순위, 사칙연산 기능 테스트" />
+    <MESSAGE value="롬복 지양 : 생성자 추가" />
+    <MESSAGE value="배열 지양 : Collection 활용" />
+    <MESSAGE value="롬복 및 배열 지양 -&gt; 생성자, Collection" />
+    <option name="LAST_COMMIT_MESSAGE" value="롬복 및 배열 지양 -&gt; 생성자, Collection" />
   </component>
 </project>
