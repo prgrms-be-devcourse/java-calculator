@@ -1,21 +1,26 @@
 package com.programmers.java.engin;
 
+import com.programmers.java.Console;
 import com.programmers.java.engin.io.Calculation;
 import com.programmers.java.engin.io.Input;
 import com.programmers.java.engin.io.Output;
 import com.programmers.java.engin.model.Logs;
-import lombok.AllArgsConstructor;
 
-import java.util.List;
 import java.util.Optional;
 
 
-@AllArgsConstructor
 public class Calculator implements Runnable{
 
     private Calculation calculation;
     private Input input;
     private Output output;
+
+    public Calculator(Calculation calculation, Input input, Output output) {
+        this.calculation = calculation;
+        this.input = input;
+        this.output = output;
+    }
+
 
     @Override
     public void run() {
