@@ -2,7 +2,7 @@ package engine.compute.converter;
 
 import engine.compute.validator.ExpressionValidator;
 import engine.model.Token;
-import engine.operate.Operator;
+import engine.compute.operate.Operator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

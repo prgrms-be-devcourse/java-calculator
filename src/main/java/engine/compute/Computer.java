@@ -3,7 +3,7 @@ package engine.compute;
 import engine.compute.validator.ExpressionValidator;
 import engine.model.Token;
 import engine.compute.converter.ExpressionConverter;
-import engine.operate.OperateMachine;
+import engine.compute.operate.OperateMachine;
 
 import java.util.List;
 

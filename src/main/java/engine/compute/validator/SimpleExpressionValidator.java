@@ -2,7 +2,7 @@ package engine.compute.validator;
 
 import engine.exception.NotValidInputException;
 import engine.model.Token;
-import engine.operate.Operator;
+import engine.compute.operate.Operator;
 
 import java.util.List;
 import java.util.Stack;

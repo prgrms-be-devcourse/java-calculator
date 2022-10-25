@@ -1,6 +1,7 @@
 package engine.operate;
 
 import engine.compute.converter.ExpressionConverter;
+import engine.compute.operate.OperateMachine;
 import engine.compute.validator.ExpressionValidator;
 import engine.compute.validator.SimpleExpressionValidator;
 import engine.exception.NotValidInputException;
