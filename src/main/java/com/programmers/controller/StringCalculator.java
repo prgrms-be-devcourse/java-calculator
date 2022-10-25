@@ -71,27 +71,27 @@ public class StringCalculator {
 
     }
 
-    private int findSignIndex(String inputString, String sign1, String sign2) {
-        int sign1_Index = inputString.indexOf(sign1);
-        int sign2_Index = inputString.indexOf(sign2);
+    private int findSignIndex(String inputString, String signOne, String signTwo) {
+        int signOneIndex = inputString.indexOf(signOne);
+        int signTwoIndex = inputString.indexOf(signTwo);
         String selectSign;
         int index;
 
-        if (sign1_Index != NOT_FIND_RESULT && sign2_Index != NOT_FIND_RESULT) {
-            if (sign1_Index < sign2_Index) {
-                selectSign = sign1;
-                index = sign1_Index;
+        if (signOneIndex != NOT_FIND_RESULT && signTwoIndex != NOT_FIND_RESULT) {
+            if (signOneIndex < signTwoIndex) {
+                selectSign = signOne;
+                index = signOneIndex;
             } else {
-                selectSign = sign2;
-                index = sign2_Index;
+                selectSign = signTwo;
+                index = signTwoIndex;
             }
         } else {
-            if (sign1_Index != NOT_FIND_RESULT) {
-                selectSign = sign1;
-                index = sign1_Index;
+            if (signOneIndex != NOT_FIND_RESULT) {
+                selectSign = signOne;
+                index = signOneIndex;
             } else {
-                selectSign = sign2;
-                index = sign2_Index;
+                selectSign = signTwo;
+                index = signTwoIndex;
             }
         }
 
