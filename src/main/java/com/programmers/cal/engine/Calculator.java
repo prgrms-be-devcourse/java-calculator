@@ -2,6 +2,7 @@ package com.programmers.cal.engine;
 
 import com.programmers.cal.engine.io.Input;
 import com.programmers.cal.engine.io.Output;
+import com.programmers.cal.engine.validator.Validator;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ public class Calculator implements Runnable {
 
     private Input input;
     private Output output;
+    private Validator validator;
 
     @Builder
     public Calculator(Input input, Output output) {
@@ -54,9 +56,10 @@ public class Calculator implements Runnable {
     private void calculate() {
 
         //식을 입력받고
-        input.inputOrder();
+        String inputString = input.inputOrder();
 
         //validate(숫자, 연산자, 숫자 순인지)
+        validator.validate(inputString);
 
         //parse
 
