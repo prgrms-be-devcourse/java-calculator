@@ -15,11 +15,4 @@ public class History {
         equations.put(expression, answer);
     }
 
-    public boolean checkInt(Answer answer) {
-        if (answer.getValue() == Math.floor(answer.getValue())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

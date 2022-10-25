@@ -11,4 +11,12 @@ public class Answer {
     public Answer(Double value) {
         this.value = value;
     }
+
+    public boolean checkInt() {
+        if (this.value == Math.floor(this.value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

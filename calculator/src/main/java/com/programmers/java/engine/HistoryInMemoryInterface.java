@@ -20,7 +20,7 @@ public class HistoryInMemoryInterface implements HistoryRepository{
         StringBuilder stringBuilder = new StringBuilder("\n");
 
         for (Map.Entry<String, Answer> equation : history.getEquations().entrySet()) {
-            if (history.checkInt(equation.getValue())) {
+            if (equation.getValue().checkInt()) {
                 stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue().getValue().intValue()).append("\n");
             } else {
                 stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue()).append("\n");

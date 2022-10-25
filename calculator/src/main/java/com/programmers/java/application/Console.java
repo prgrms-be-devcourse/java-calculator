@@ -22,7 +22,7 @@ public class Console implements Input, Output {
 
     @Override
     public void printAnswer(Answer answer) {
-        if (checkInt(answer)) {
+        if (answer.checkInt()) {
             System.out.printf("%d\n\n", answer.getValue().intValue());
         } else {
             System.out.printf("%.3f\n\n", answer.getValue());
@@ -32,13 +32,5 @@ public class Console implements Input, Output {
     @Override
     public void printHistory(String inputHistory) {
         System.out.println(inputHistory);
-    }
-
-    private boolean checkInt(Answer answer) {
-        if (answer.getValue() == Math.floor(answer.getValue())) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }
