@@ -16,6 +16,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="calculator.main" options="--add-modules java.base" />
+      <module name="calculator.test" options="--add-modules java.base" />
     </option>
   </component>
 </project>

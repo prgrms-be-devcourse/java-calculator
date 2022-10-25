@@ -49,7 +49,7 @@ public class Calculator implements Runnable {
         history.save(expression);
     }
 
-    private int calculate(Queue<String> queue) {
+    protected int calculate(Queue<String> queue) {
         Stack<String> stack = new Stack<>();
 
         while (!queue.isEmpty()) {
@@ -80,7 +80,7 @@ public class Calculator implements Runnable {
         return Integer.parseInt(stack.pop());
     }
 
-    private Queue<String> parse(String inputString) {
+    protected Queue<String> parse(String inputString) {
         StringTokenizer st = new StringTokenizer(inputString, " ");
         Queue<String> queue = new LinkedList<>();
         Stack<String> stack = new Stack<>();
@@ -101,7 +101,7 @@ public class Calculator implements Runnable {
         return queue;
     }
 
-    private int getPriority(String str) {
+    protected int getPriority(String str) {
         switch (str) {
             case "*":
             case "/":
