@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.programmers.java.calculator.service.impl.CalculatorServiceImpl;
 import org.programmers.java.calculator.util.verifiaction.FormulaVerification;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -26,7 +28,19 @@ public class CalculatorController {
     }
 
     private String getAnswer(String input) {
-        FormulaVerification.formulaVerifiaction(input);
+        List<String> token = parse(input);
+        List<String> postfixNotation = toPostfixNotation(token);
         return "";
+    }
+
+
+    private List<String> parse(String input) {
+        List<String> tokens = Arrays.asList(input.split(" "));
+        FormulaVerification.formulaVerifiaction(tokens);
+        return tokens;
+    }
+
+    private List<String> toPostfixNotation(List<String> token) {
+
     }
 }

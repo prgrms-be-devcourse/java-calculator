@@ -7,16 +7,15 @@ import java.util.regex.Pattern;
 
 public class FormulaVerification {
 
-    public static void formulaVerifiaction(String input) {
-        List<String> tokens = Arrays.asList(input.split(" "));
+    public static void formulaVerifiaction(List<String> token) {
         List<String> numbers = new ArrayList<>();
         List<String> operators = new ArrayList<>();
 
-        for (int i = 0; i < tokens.size(); i++) {
+        for (int i = 0; i < token.size(); i++) {
             if (i % 2 == 0) {
-                numbers.add(tokens.get(i));
+                numbers.add(token.get(i));
             } else {
-                operators.add(tokens.get(i));
+                operators.add(token.get(i));
             }
         }
 
