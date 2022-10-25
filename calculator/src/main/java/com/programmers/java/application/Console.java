@@ -2,9 +2,7 @@ package com.programmers.java.application;
 
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
-import com.programmers.java.engine.model.History;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -14,21 +12,6 @@ public class Console implements Input, Output {
     public String input(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
-    }
-
-    @Override
-    public String readHistory(History history) {
-        StringBuilder stringBuilder = new StringBuilder("\n");
-
-        for (Map.Entry<String, Double> equation : history.getEquations().entrySet()) {
-            if (checkInt(equation.getValue())) {
-                stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue().intValue()).append("\n");
-            } else {
-                stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue()).append("\n");
-            }
-        }
-
-        return stringBuilder.toString();
     }
 
     @Override

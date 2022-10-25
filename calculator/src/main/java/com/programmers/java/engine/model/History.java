@@ -14,4 +14,12 @@ public class History {
     public void addEquation(String expression, Double answer) {
         equations.put(expression, answer);
     }
+
+    public boolean checkInt(Double answer) {
+        if (answer == Math.floor(answer)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

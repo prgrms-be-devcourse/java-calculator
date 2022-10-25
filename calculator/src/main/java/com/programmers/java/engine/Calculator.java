@@ -4,7 +4,7 @@ import com.programmers.java.engine.model.Expression;
 
 import java.util.Optional;
 
-public interface Calculator extends Runnable {
+public interface Calculator {
     // 식으로 값 계산 (후위 연산 변환 + 계산)
     Double calculate(Expression expression);
 

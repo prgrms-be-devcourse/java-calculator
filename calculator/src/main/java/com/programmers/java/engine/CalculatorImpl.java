@@ -1,72 +1,19 @@
 package com.programmers.java.engine;
 
-import com.programmers.java.application.Console;
 import com.programmers.java.application.Operator;
 import com.programmers.java.engine.model.Expression;
-import com.programmers.java.engine.model.History;
+import lombok.AllArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
 import static com.programmers.java.application.config.Constant.*;
 
+@AllArgsConstructor
 public class CalculatorImpl implements Calculator {
 
     private Operator operator;
-    private Console console;
-
-    public CalculatorImpl(Operator operator, Console console) {
-        this.operator = operator;
-        this.console = console;
-    }
-
-    @Override
-    public void run() {
-        History history = new History();
-
-        // Loop
-        while (true) {
-            // input option
-            String inputOption = this.console.input("1. 조회\n2. 계산\n\n선택 : ");
-
-            // check validate
-            Optional<Integer> option = parseOption(inputOption);
-            // incorrect -> continue
-            if (option.isEmpty()) {
-                console.inputError();
-                continue;
-            }
-
-            // Option 1. Show history
-            if (option.get().equals(1)) {
-                String inputHistory = console.readHistory(history);
-
-                console.printHistory(inputHistory);
-            }
-
-            // Option 2. Use calculator
-            if (option.get().equals(2)) {
-                String inputExpression = this.console.input("\n");
-                Optional<Expression> expression = parseExpression(inputExpression);
-
-                if (expression.isEmpty()) {
-                    console.inputError();
-                    continue;
-                }
-
-                // 계산
-                Double answer = calculate(expression.get());
-                console.printAnswer(answer);
-
-                // 계산 저장
-                history.addEquation(inputExpression, answer);
-            }
-
-        }
-    }
 
     @Override
     public Double calculate(Expression expression) {

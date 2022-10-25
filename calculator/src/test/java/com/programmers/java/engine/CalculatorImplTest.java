@@ -1,6 +1,5 @@
 package com.programmers.java.engine;
 
-import com.programmers.java.application.Console;
 import com.programmers.java.application.Operator;
 import com.programmers.java.engine.model.Expression;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorImplTest {
 
@@ -17,9 +17,8 @@ class CalculatorImplTest {
 
     @BeforeAll
     public static void init() {
-        Console console = new Console();
         Operator operator = new Operator();
-        calculatorImpl = new CalculatorImpl(operator, console);
+        calculatorImpl = new CalculatorImpl(operator);
     }
 
     @Test
