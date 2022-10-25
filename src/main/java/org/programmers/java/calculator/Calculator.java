@@ -13,7 +13,6 @@ public class Calculator implements Runnable {
     private static boolean POWER = true;
     @Override
     public void run() {
-
         while (POWER) {
             console.printMeun();
             Menu menu = Menu.selectMenu(console.read());
@@ -22,14 +21,13 @@ public class Calculator implements Runnable {
     }
 
     private void execution(Menu menu) {
-        String result = switch (menu) {
+        String answer = switch (menu) {
             case RECORD -> calculatorController.record();
             case CALCULATE -> calculatorController.calculate(console.read());
             case EXIT -> off();
             case ERROR -> "잘못된 입력 입니다.\n";
         };
-
-        console.print(result);
+        console.print(answer);
     }
 
     private String off() {

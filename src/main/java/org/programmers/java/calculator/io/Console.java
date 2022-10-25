@@ -11,12 +11,13 @@ public class Console implements Input, Output {
 
   @Override
   public String read() {
+    System.out.println("");
     return sc.nextLine();
   }
 
   @Override
   public void print(String message) {
-
+    System.out.println(message + "\n");
   }
 
   @Override
@@ -25,8 +26,7 @@ public class Console implements Input, Output {
             메뉴를 선택하시오.
             1. 조회
             2. 계산
-            3. 종료
-            """);
+            3. 종료""");
   }
 
   @Override

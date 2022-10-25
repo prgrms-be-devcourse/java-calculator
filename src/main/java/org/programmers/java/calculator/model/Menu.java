@@ -1,5 +1,6 @@
 package org.programmers.java.calculator.model;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -30,12 +31,15 @@ public enum Menu {
         this.code = code;
     }
 
-    private static final Map<Integer, Menu> BY_CODE =
-            Stream.of(values()).collect(Collectors.toMap(Menu::getCode, Function.identity()));
+//    private static final Map<Integer, Menu> BY_CODE =
+//            Stream.of(values()).collect(Collectors.toMap(Menu::getCode, Function.identity()));
 
     public static Menu selectMenu(String input) {
         int code = toCode(input);
-        return BY_CODE.get(code);
+        return Arrays.stream(Menu.values())
+                .filter(meun -> meun.code == code)
+                .findFirst()
+                .orElse(ERROR);
     }
 
     private static int toCode(String num) {
