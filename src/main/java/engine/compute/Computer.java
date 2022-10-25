@@ -1,8 +1,8 @@
 package engine.compute;
 
 import engine.compute.validator.ExpressionValidator;
-import engine.operate.ExpressionFactory;
 import engine.model.Token;
+import engine.operate.ExpressionFactory;
 import engine.operate.OperateMachine;
 
 import java.util.List;
@@ -34,5 +34,4 @@ public class Computer {
         //4. 연산 후 값 반환
         return operateMachine.doCalculate(postFix);
     }
-
 }

@@ -1,13 +1,13 @@
 package engine.calculator;
 
-import engine.option.Option;
 import engine.compute.Computer;
 import engine.exception.NotValidInputException;
 import engine.history.History;
 import engine.io.Input;
 import engine.io.Output;
+import engine.option.Option;
 
-public class Calculator implements Runnable{
+public class Calculator implements Runnable {
     Input input;
     Output output;
     History history;
@@ -51,6 +51,4 @@ public class Calculator implements Runnable{
             }
         }
     }
-
-
 }

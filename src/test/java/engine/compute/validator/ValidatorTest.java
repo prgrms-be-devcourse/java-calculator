@@ -1,8 +1,8 @@
 package engine.compute.validator;
 
 import engine.exception.NotValidInputException;
-import engine.operate.ExpressionFactory;
 import engine.model.Token;
+import engine.operate.ExpressionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -69,5 +69,5 @@ class ValidatorTest {
                 () -> validator.validateToken(tokens2));
 
         List<Token> tokens3 = factory.convertUserInputToToken("3+ 5 / 2 * 7.2 +5.09");
-       }
+    }
 }

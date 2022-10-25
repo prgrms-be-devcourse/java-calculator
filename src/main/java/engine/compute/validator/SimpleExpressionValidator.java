@@ -1,8 +1,8 @@
 package engine.compute.validator;
 
-import engine.operate.Operator;
 import engine.exception.NotValidInputException;
 import engine.model.Token;
+import engine.operate.Operator;
 
 import java.util.List;
 import java.util.Stack;
@@ -12,9 +12,7 @@ public class SimpleExpressionValidator implements ExpressionValidator {
 
     @Override
     public List<Token> validateToken(List<Token> tokenList) {
-        //Token으로 쪼개진 연산자, 피연산자를 검사한다.
         for (Token token : tokenList) {
-            //숫자, 연산자 둘 다 아닌 문자인 경우 exception 발생
             if (!(isNumber(token) || isOperator(token))) {
                 throw new NotValidInputException(errorMsg);
             }
@@ -59,17 +57,17 @@ public class SimpleExpressionValidator implements ExpressionValidator {
         Stack<Token> st = new Stack<>();
 
         for (Token token : tokenList) {
-            if(isOperator(token)){
-                if(st.isEmpty()){
+            if (isOperator(token)) {
+                if (st.isEmpty()) {
                     return false;
                 }
                 st.pop();
 
-            }else{
+            } else {
                 st.push(token);
             }
         }
 
-        return st.size() == 1 ? true : false;
+        return st.size() == 1;
     }
 }

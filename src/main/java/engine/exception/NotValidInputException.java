@@ -1,6 +1,6 @@
 package engine.exception;
 
-public class NotValidInputException extends RuntimeException{
+public class NotValidInputException extends RuntimeException {
     public NotValidInputException() {
         super();
     }

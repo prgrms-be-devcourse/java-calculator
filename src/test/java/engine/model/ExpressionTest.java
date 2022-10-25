@@ -31,7 +31,7 @@ class ExpressionTest {
     @Test
     void 후위식전환테스트2() {
         Assertions.assertThrowsExactly(NotValidInputException.class,
-                () ->factory.convertUserInputToToken("3 * * 5 - 4 / 2"));
+                () -> factory.convertUserInputToToken("3 * * 5 - 4 / 2"));
     }
 
     @Test

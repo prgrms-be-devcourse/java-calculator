@@ -16,6 +16,7 @@ class OperateMachineTest {
     OperateMachine machine;
     ExpressionFactory factory;
     ExpressionValidator validator;
+
     @BeforeEach
     void setting() {
         validator = new SimpleExpressionValidator();

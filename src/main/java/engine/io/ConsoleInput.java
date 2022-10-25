@@ -2,7 +2,7 @@ package engine.io;
 
 import java.util.Scanner;
 
-public class ConsoleInput implements Input{
+public class ConsoleInput implements Input {
     private final Scanner sc = new Scanner(System.in);
 
     @Override

@@ -1,13 +1,11 @@
 package engine.history;
 
-import lombok.Getter;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class MapHistory implements History {
-    private Map<String, String> map = new HashMap<>();
-    private StringBuilder sb = new StringBuilder();
+    private final Map<String, String> map = new HashMap<>();
+    private final StringBuilder sb = new StringBuilder();
 
     @Override
     public void save(String calculation, String answer) {
@@ -17,7 +15,7 @@ public class MapHistory implements History {
     @Override
     public String getAll() {
         for (String s : map.keySet()) {
-            sb.append(s+" = ").append(map.get(s)).append('\n');
+            sb.append(s + " = ").append(map.get(s)).append('\n');
         }
 
         return sb.toString();

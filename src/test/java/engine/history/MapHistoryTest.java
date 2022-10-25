@@ -10,14 +10,13 @@ class MapHistoryTest {
     void saveTest() {
         MapHistory mapHistory = new MapHistory();
 
-        mapHistory.save("1+1", 2);
+        mapHistory.save("1+1", "2");
         Assertions.assertEquals(mapHistory.getMap().size(), 1);
 
-        mapHistory.save("2+2", 4);
+        mapHistory.save("2+2", "4");
         Assertions.assertEquals(mapHistory.getMap().size(), 2);
 
         String all = mapHistory.getAll();
         System.out.println(all);
     }
-
 }
