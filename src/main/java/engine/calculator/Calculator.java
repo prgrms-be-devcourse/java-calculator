@@ -8,10 +8,10 @@ import engine.io.Output;
 import engine.option.Option;
 
 public class Calculator implements Runnable {
-    Input input;
-    Output output;
-    History history;
-    Computer computer;
+    private Input input;
+    private Output output;
+    private History history;
+    private Computer computer;
 
     public Calculator(Input input, Output output, History history, Computer computer) {
         this.input = input;

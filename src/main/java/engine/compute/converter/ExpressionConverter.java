@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class ExpressionConverter {
-    ExpressionValidator expressionValidator;
+    private ExpressionValidator expressionValidator;
 
     public ExpressionConverter(ExpressionValidator expressionValidator) {
         this.expressionValidator = expressionValidator;

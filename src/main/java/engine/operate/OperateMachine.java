@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class OperateMachine {
-    ExpressionValidator validator;
+    private ExpressionValidator validator;
 
     public OperateMachine(ExpressionValidator validator) {
         this.validator = validator;
