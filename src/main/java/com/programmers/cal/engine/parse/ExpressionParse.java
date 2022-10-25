@@ -8,27 +8,26 @@ public class ExpressionParse implements Parse {
     @Override
     public List<String> getTokenList(String inputString) {
 
-        char[] arr = inputString.replaceAll("\\p{Z}","").toCharArray();
-        List<String> list= new ArrayList<>();
+        char[] arr = inputString.replaceAll("\\p{Z}", "").toCharArray();
+        List<String> list = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
+        builder.append(arr[0]);
 
-        for(int i=0; i<arr.length; i++) {
-            if(Character.isDigit(arr[i])) {
+        for (int i = 1; i < arr.length; i++) {
+            if (Character.isDigit(arr[i])) {
                 builder.append(arr[i]);
-            }else{
-                if(builder.length() == 0){
+            } else {
+                if (builder.length() == 0) {
                     builder.append(arr[i]);
-                }else{
+                } else {
                     list.add(builder.toString());
                     list.add(String.valueOf(arr[i]));
                     builder.setLength(0);
                 }
             }
-
-            if(i == arr.length-1){
-                list.add(builder.toString());
-            }
         }
+
+        list.add(builder.toString());
 
         return list;
     }
