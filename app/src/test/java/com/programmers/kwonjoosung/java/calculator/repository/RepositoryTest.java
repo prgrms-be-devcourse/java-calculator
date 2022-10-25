@@ -9,7 +9,7 @@ public class RepositoryTest {
     static Repository repository;
     @Test
     @DisplayName("데이터베이스 동작 테스트") // 데이터 저장 후 내역 받아오기
-    void CacheTest(){
+    void repositoryTest(){
         //given
         repository = new Memory();
         String[] expression = new String[]{"12","+","12"};

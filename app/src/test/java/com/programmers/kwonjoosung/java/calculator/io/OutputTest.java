@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OutputTest {
     static Output output;
     @BeforeAll
-    @DisplayName("입력")
-    static void startInput(){
+    @DisplayName("출력")
+    static void startOutput(){
         output = new Console();
     }
     static ByteArrayOutputStream outputStream ;
@@ -23,7 +23,7 @@ public class OutputTest {
         System.setOut(new PrintStream(outputStream));
     }
     @AfterEach
-    void tearDown() {
+    void reset() {
         System.setOut(standardOut);
     }
     @Test
