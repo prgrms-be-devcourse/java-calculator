@@ -25,7 +25,6 @@ public abstract class Page <T> implements Input, Output,Runnable{
     protected void setNextPage(PageList nextPage) {
         this.nextPage = nextPage;
     }
-
     @Override
     public String input(String prompt) {
         this.prompt = prompt;
@@ -35,14 +34,5 @@ public abstract class Page <T> implements Input, Output,Runnable{
             System.out.print(this.prompt);
             return scanner.nextLine();
         }
-    }
-    @Override
-    public void inputError() {
-        System.out.println("잘못된 입력입니다!");
-    }
-
-    @Override
-    public <T> void outputData(T data) {
-        System.out.println(data);
     }
 }

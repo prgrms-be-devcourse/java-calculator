@@ -1,6 +1,7 @@
 package com.programmers.engine.repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MemoryRepository implements Repository {
@@ -8,7 +9,12 @@ public class MemoryRepository implements Repository {
     private List<String> logs = new ArrayList<>();
 
     @Override
-    public String getData() {
+    public Collection<String> readData() {
+        return new ArrayList<>(logs);
+    }
+
+    @Override
+    public String printData() {
         String logsString = sb.toString();
         return logsString;
     }

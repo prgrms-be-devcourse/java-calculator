@@ -1,64 +1,55 @@
 package com.programmers.engine.caculator;
 
+import com.programmers.engine.model.CaculatorParseData;
+import com.programmers.util.Operator;
 import lombok.Getter;
 
-import java.util.List;
-import java.util.Objects;
+import java.text.DecimalFormat;
+import java.util.Collection;
 import java.util.Stack;
 
 @Getter
-public class PostfixCaculator implements Caculator{
+public class PostfixCaculator implements Caculator {
 
-    private String expression;
-    private Stack<String> parsedExpression;
-    private double result;
-    public String getAllExpression() {
-        return expression +"="+ this.getResult();
-    }
-    public String getResult(){
-        String result = String.format("%.2f",this.result);
-        return result;
+    private Double result;
+    public String getResult() throws Exception{
+        if(this.result == null){
+            throw new Exception("계산결과가 잘못됐습니다. 계산식을 다시 확인해 주세요");
+        }
+        DecimalFormat formatter = new DecimalFormat("0.##");
+//        String result = String.format("%.2f", this.result);
+//        return result;
+        return formatter.format(this.result);
+
     }
 
 
     @Override
-    public void caculate(List<String> operatorAndNumbers) {
+    public void caculate(CaculatorParseData operatorAndNumbersSortedByPostfix) {
         Stack<Double> postfixStack = new Stack<>();
-        for (String operatorAndNumber : operatorAndNumbers) {
+        Collection<?> allList = operatorAndNumbersSortedByPostfix.getAllList();
+        for (Object o : allList) {
+            if (o instanceof Double) {
+                postfixStack.push((Double) o);
+            } else if (o instanceof Character) {
+                double right = postfixStack.pop();
+                double left = postfixStack.pop();
+                try{
+                    double result = Operator.caculate((Character) o, left, right);// 0 나누기 에러처리같은거 해줘야함
+                    postfixStack.push(result);
+                }catch (ArithmeticException e){
+                    this.result = null;
+                    return ;
+                }
+
+            }
+        }
+        if(postfixStack.size()==1){
+            this.result = postfixStack.pop();
+        }else {
+            this.result = null;
         }
     }
 
-    @Override
-    public boolean isSucessfull() {
-        return false;
-    }
 
-//    private String[] tokenize() throws Exception{
-//        StringBuffer sb = new StringBuffer();
-//        char[] tokens = this.expression.toCharArray();
-//        String[] result = new String[]{};
-//        for (char token : tokens) {
-//            switch(token){
-//                case '+' ->{
-//
-//                }
-//                case '-' ->{
-//
-//                }
-//                case '/' ->{
-//
-//                }
-//                case  '*' ->{
-//
-//                }
-//                default ->{
-//                    if('0'<=token&& token<='9'){
-//                        sb.append(token);
-//                    }else{
-//                        throw new Exception("잘못된 식 입니다.");
-//                    }
-//                }
-//            }
-//        }
-//    }
 }

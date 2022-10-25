@@ -6,7 +6,6 @@ import com.programmers.util.Operator;
 
 import java.util.Collection;
 import java.util.EmptyStackException;
-import java.util.List;
 import java.util.Stack;
 
 public class PostfixCaculatorParser extends CaculatorParser {

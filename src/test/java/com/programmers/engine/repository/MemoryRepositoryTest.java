@@ -2,9 +2,6 @@ package com.programmers.engine.repository;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryRepositoryTest {
@@ -17,7 +14,7 @@ class MemoryRepositoryTest {
 
         assertEquals("10 + 2 = 12\n" +
                 "12 / 3 = 4\n" +
-                "4 - 2 = 2\n",myRepository.getData());
+                "4 - 2 = 2\n",myRepository.printData());
     }
 
 }

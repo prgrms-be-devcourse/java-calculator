@@ -24,9 +24,9 @@ public class StartPage extends Page<PageList> {
             try{
                 PageList parsedInput = getParser().getParsedInput();
                 setNextPage(parsedInput);
+                break;
             }catch (Exception e){
-                inputError();
-                continue;
+                this.error();
             }
         }
 

@@ -4,7 +4,7 @@ import com.programmers.engine.parser.Parser;
 import com.programmers.engine.repository.Repository;
 import lombok.Builder;
 
-import java.util.Optional;
+import java.util.Collection;
 
 public class LookupPage extends Page {
     Repository repo;
@@ -17,8 +17,12 @@ public class LookupPage extends Page {
     @Override
     public void run() {
         while(true){
-            outputData(repo.getData());
+            if(repo.readData().size()==0){
+                outputData(getContent());
+            }
+            outputData(repo.printData());
             setNextPage(PageList.START);
+            input(getPrompt());
             break;
         }
     }
