@@ -2,6 +2,7 @@ package com.programmers.calculate.engine;
 
 import com.programmers.calculate.engine.io.Input;
 import com.programmers.calculate.engine.io.Output;
+import com.programmers.calculate.engine.model.History;
 import lombok.AllArgsConstructor;
 
 import java.util.*;
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
 public class Calculator implements Runnable {
     Input input;
     Output output;
-
+    History history;
 
     @Override
     public void run() {
@@ -23,13 +24,16 @@ public class Calculator implements Runnable {
 
             switch (num) {
                 case 1:
-                    System.out.println("조회 선택");
+                    System.out.println();
+                    history.findAll();
+                    System.out.println();
                     break;
                 case 2:
                     String inputString = input.inputExpression();
                     Queue<String> queue = parse(inputString);
                     int answer = calculate(queue);
                     System.out.println(answer + "\n");
+                    saveExpression(inputString, answer);
                     break;
                 case 3:
                     flag = false;
@@ -38,6 +42,11 @@ public class Calculator implements Runnable {
                     output.valueError();
             }
         }
+    }
+
+    private void saveExpression(String inputString, int answer) {
+        String expression = inputString + " = " + answer;
+        history.save(expression);
     }
 
     private int calculate(Queue<String> queue) {
