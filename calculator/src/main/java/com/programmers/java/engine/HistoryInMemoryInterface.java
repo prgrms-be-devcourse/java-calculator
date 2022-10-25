@@ -4,6 +4,8 @@ import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Equation;
 import com.programmers.java.engine.model.History;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class HistoryInMemoryInterface implements HistoryRepository{
@@ -16,17 +18,18 @@ public class HistoryInMemoryInterface implements HistoryRepository{
     }
 
     @Override
-    public String findAll() {
-        StringBuilder stringBuilder = new StringBuilder("\n");
+    public List<Equation> findAll() {
+        ArrayList<Equation> equationList = new ArrayList<>();
 
         for (Map.Entry<String, Answer> equation : history.getEquations().entrySet()) {
-            if (equation.getValue().checkInt()) {
-                stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue().getValue().intValue()).append("\n");
-            } else {
-                stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue()).append("\n");
-            }
+            equationList.add(
+                    Equation.builder()
+                            .expression(equation.getKey())
+                            .answer(equation.getValue())
+                            .build()
+            );
         }
 
-        return stringBuilder.toString();
+        return equationList;
     }
 }

@@ -7,6 +7,7 @@ import com.programmers.java.engine.model.Expression;
 import com.programmers.java.engine.model.MenuType;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -32,9 +33,9 @@ public class Menu implements Runnable {
 
             // Option 1. Show history
             if (option.get() == MenuType.HISTORY) {
-                String inputHistory = historyRepository.findAll();
+                List<Equation> history = historyRepository.findAll();
 
-                console.printHistory(inputHistory);
+                console.printHistory(history);
             }
 
             // Option 2. Use calculator

@@ -3,7 +3,9 @@ package com.programmers.java.application;
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
 import com.programmers.java.engine.model.Answer;
+import com.programmers.java.engine.model.Equation;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -30,7 +32,18 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printHistory(String inputHistory) {
-        System.out.println(inputHistory);
+    public void printHistory(List<Equation> history) {
+        StringBuilder stringBuilder = new StringBuilder("\n");
+
+        for (Equation equation : history) {
+            stringBuilder.append(equation.getExpression()).append(" = ");
+            if (equation.getAnswer().checkInt()) {
+                stringBuilder.append(equation.getAnswer().getValue().intValue()).append("\n");
+            } else {
+                stringBuilder.append(equation.getAnswer().getValue()).append("\n");
+            }
+        }
+
+        System.out.println(stringBuilder);
     }
 }
