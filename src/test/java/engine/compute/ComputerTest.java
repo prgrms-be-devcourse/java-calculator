@@ -2,22 +2,22 @@ package engine.compute;
 
 import engine.compute.validator.ExpressionValidator;
 import engine.compute.validator.SimpleExpressionValidator;
-import engine.operate.ExpressionFactory;
+import engine.compute.converter.ExpressionConverter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ComputerTest {
 
-    ExpressionFactory factory;
+    ExpressionConverter converter;
     ExpressionValidator validator;
     Computer computer;
 
     @BeforeEach
     void setting() {
         validator = new SimpleExpressionValidator();
-        factory = new ExpressionFactory(validator);
-        computer = new Computer(validator, factory);
+        converter = new ExpressionConverter(validator);
+        computer = new Computer(validator, converter);
     }
 
     @Test

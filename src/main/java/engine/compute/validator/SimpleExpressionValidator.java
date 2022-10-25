@@ -27,15 +27,6 @@ public class SimpleExpressionValidator implements ExpressionValidator {
         return tokenList;
     }
 
-    private void checkFirstAndLastElement(List<Token> tokenList) {
-        if (!isNumber(tokenList.get(0))) {
-            throw new NotValidInputException(errorMsg);
-        }
-        if (!isNumber(tokenList.get(tokenList.size() - 1))) {
-            throw new NotValidInputException(errorMsg);
-        }
-    }
-
     @Override
     public boolean isNumber(Token token) {
         String tokenValue = token.getToken();
@@ -69,5 +60,14 @@ public class SimpleExpressionValidator implements ExpressionValidator {
         }
 
         return st.size() == 1;
+    }
+
+    private void checkFirstAndLastElement(List<Token> tokenList) {
+        if (!isNumber(tokenList.get(0))) {
+            throw new NotValidInputException(errorMsg);
+        }
+        if (!isNumber(tokenList.get(tokenList.size() - 1))) {
+            throw new NotValidInputException(errorMsg);
+        }
     }
 }

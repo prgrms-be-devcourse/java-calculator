@@ -47,7 +47,6 @@ public class Calculator implements Runnable {
 
             } catch (NotValidInputException e) {
                 output.printError(e.getMessage());
-
             }
         }
     }

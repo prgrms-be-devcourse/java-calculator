@@ -1,5 +1,6 @@
 package engine.operate;
 
+import engine.compute.converter.ExpressionConverter;
 import engine.compute.validator.ExpressionValidator;
 import engine.compute.validator.SimpleExpressionValidator;
 import engine.exception.NotValidInputException;
@@ -14,21 +15,21 @@ import java.util.List;
 class OperateMachineTest {
 
     OperateMachine machine;
-    ExpressionFactory factory;
+    ExpressionConverter converter;
     ExpressionValidator validator;
 
     @BeforeEach
     void setting() {
         validator = new SimpleExpressionValidator();
         machine = new OperateMachine(validator);
-        factory = new ExpressionFactory(validator);
+        converter = new ExpressionConverter(validator);
     }
 
 
     @Test
     void 사칙연산테스트() {
-        List<Token> tokens = factory.convertUserInputToToken("3*5 - 4/2");
-        List<Token> postFix = factory.convertToPostFix(tokens);
+        List<Token> tokens = converter.convertUserInputToToken("3*5 - 4/2");
+        List<Token> postFix = converter.convertToPostFix(tokens);
 
         String result = machine.doCalculate(postFix);
         Assertions.assertEquals("13.00", result);
@@ -36,8 +37,8 @@ class OperateMachineTest {
 
     @Test
     void 사칙연산테스트2() {
-        List<Token> tokens = factory.convertUserInputToToken("8 / 2 * 5 + 4 - 4 / 2 + 5");
-        List<Token> postFix = factory.convertToPostFix(tokens);
+        List<Token> tokens = converter.convertUserInputToToken("8 / 2 * 5 + 4 - 4 / 2 + 5");
+        List<Token> postFix = converter.convertToPostFix(tokens);
 
         String result = machine.doCalculate(postFix);
 
@@ -46,8 +47,8 @@ class OperateMachineTest {
 
     @Test
     void zero로나누는경우() {
-        List<Token> tokens = factory.convertUserInputToToken("8 / 0");
-        List<Token> postFix = factory.convertToPostFix(tokens);
+        List<Token> tokens = converter.convertUserInputToToken("8 / 0");
+        List<Token> postFix = converter.convertToPostFix(tokens);
 
         Assertions.assertThrowsExactly(NotValidInputException.class,
                 () -> machine.doCalculate(postFix));

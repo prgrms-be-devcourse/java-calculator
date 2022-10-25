@@ -1,17 +1,18 @@
-package engine.operate;
+package engine.compute.converter;
 
 import engine.compute.validator.ExpressionValidator;
 import engine.model.Token;
+import engine.operate.Operator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-public class ExpressionFactory {
+public class ExpressionConverter {
     ExpressionValidator expressionValidator;
 
-    public ExpressionFactory(ExpressionValidator expressionValidator) {
+    public ExpressionConverter(ExpressionValidator expressionValidator) {
         this.expressionValidator = expressionValidator;
     }
 
