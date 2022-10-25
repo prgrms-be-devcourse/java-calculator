@@ -3,13 +3,16 @@ package com.project.java.engine.solver;
 import com.project.java.engine.converter.StringExpressionConverter;
 import com.project.java.engine.data.ResultFormat;
 import com.project.java.exception.ZeroDivisionException;
+import lombok.AllArgsConstructor;
 
 import java.util.*;
 
+@AllArgsConstructor
 public class StackSolver implements Solver {
 
     private static final String OPER_REGULAR = "[+\\-*/]";
     private static final String NUMBER_REGULAR = "[0-9]+";
+    private PriorityStrategy priorityStrategy;
 
     @Override
     public ResultFormat calculate(String expression) throws ZeroDivisionException {
@@ -42,9 +45,9 @@ public class StackSolver implements Solver {
         return postfix;
     }
 
-    private int getPriority(String oper) {
-        if (oper.equals("+") || oper.equals("-")) return 1;
-        else return 2;
+    @Override
+    public int getPriority(String oper) {
+        return priorityStrategy.getPriority(oper);
     }
 
     private List<String> makeExpressionToList(String expression) {

@@ -5,4 +5,6 @@ import com.project.java.exception.ZeroDivisionException;
 
 public interface Solver {
     ResultFormat calculate(String expression) throws ZeroDivisionException;
+
+    int getPriority(String oper);
 }
