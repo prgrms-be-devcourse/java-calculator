@@ -5,6 +5,7 @@ import com.programmers.cal.engine.io.Output;
 import com.programmers.cal.engine.operation.Operation;
 import com.programmers.cal.engine.parse.Parse;
 import com.programmers.cal.engine.postfix.Postfix;
+import com.programmers.cal.engine.repository.Repository;
 import com.programmers.cal.engine.validator.Validator;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,22 +26,24 @@ public class Calculator implements Runnable {
     private Parse parse;
     private Postfix postfix;
     private Operation operation;
+    private Repository repository;
 
     @Builder
-    public Calculator(Input input, Output output, Validator validator, Parse parse, Postfix postfix, Operation operation) {
+    public Calculator(Input input, Output output, Validator validator, Parse parse,
+             Postfix postfix, Operation operation, Repository repository) {
         this.input = input;
         this.output = output;
         this.validator = validator;
         this.parse = parse;
         this.postfix = postfix;
         this.operation = operation;
+        this.repository = repository;
     }
 
     @Override
     public void run() {
 
         while (true) {
-
             output.requestInput();
             String inputString = input.inputOrder();
 
@@ -57,43 +60,39 @@ public class Calculator implements Runnable {
                 default:
                     output.printWrongOrder();
             }
-
         }
     }
 
     private void printRecord() {
-        output.printRecord();
+        List<String> recordList = repository.findAll();
+
+        if(recordList.isEmpty()){
+            output.printNoRecord();
+        }else{
+            output.printRecord(recordList);
+        }
     }
 
     private void calculate() {
-
-        //식을 입력받고
         String inputString = input.inputOrder();
 
-        //validate(숫자, 연산자, 숫자 순인지)
-        boolean isExpression = validator.isExpression(inputString);
-
-        if(!isExpression){
+        if(!validator.isExpression(inputString)){
             output.printWrongOrder();
             return;
         }
 
-        //parse
         List<String> tokens = parse.getTokenList(inputString);
 
-        //입력받은 식을 계산해서
         try {
             List<String> postfixTokens = postfix.toPostfix(tokens);
             String result = operation.calculate(postfixTokens);
 
-            //결과출력
+            repository.save(inputString, result);
+
             output.printResult(result);
         } catch(Exception e) {
             output.printZeroDivision();
         }
-
-        //기록 저장
-
     }
 
     private void exit() {
