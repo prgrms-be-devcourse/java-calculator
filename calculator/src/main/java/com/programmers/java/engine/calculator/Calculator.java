@@ -1,4 +1,4 @@
-package com.programmers.java.engine;
+package com.programmers.java.engine.calculator;
 
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
