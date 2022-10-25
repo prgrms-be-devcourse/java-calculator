@@ -3,17 +3,19 @@ package com.programmers.calculate.engine;
 import com.programmers.calculate.engine.io.Input;
 import com.programmers.calculate.engine.io.Output;
 import com.programmers.calculate.engine.model.History;
-import lombok.AllArgsConstructor;
 
 import java.util.*;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-@AllArgsConstructor
 public class Calculator implements Runnable {
     Input input;
     Output output;
     History history;
+
+    public Calculator(Input input, Output output, History history) {
+        this.input = input;
+        this.output = output;
+        this.history = history;
+    }
 
     @Override
     public void run() {
