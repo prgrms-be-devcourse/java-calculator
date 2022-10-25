@@ -81,9 +81,10 @@ public class StringCalculator {
             if (sign1_Index < sign2_Index) {
                 selectSign = sign1;
                 index = sign1_Index;
+            } else {
+                selectSign = sign2;
+                index = sign2_Index;
             }
-            selectSign = sign2;
-            index = sign2_Index;
         } else {
             if (sign1_Index != NOT_FIND_RESULT) {
                 selectSign = sign1;

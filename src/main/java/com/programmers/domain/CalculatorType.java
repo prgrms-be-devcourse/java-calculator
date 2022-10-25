@@ -3,20 +3,18 @@ package com.programmers.domain;
 import java.util.function.BinaryOperator;
 
 public enum CalculatorType {
-    PLUS('+', (num1, num2) -> num1 + num2),
-    MINUS('-', (num1, num2) -> num1 - num2),
-    MULTIPLY('*', (num1, num2) -> num1 * num2),
-    DIVIDE('/', (num1, num2) -> {
+    PLUS((num1, num2) -> num1 + num2),
+    MINUS((num1, num2) -> num1 - num2),
+    MULTIPLY((num1, num2) -> num1 * num2),
+    DIVIDE((num1, num2) -> {
         isDividedByZero(num2);
         return num1 / num2;
     });
 
     public static final int ZERO_NUMBER = 0;
-    private char type;
     private BinaryOperator<Integer> expression;
 
-    CalculatorType(char type, BinaryOperator<Integer> expression) {
-        this.type = type;
+    CalculatorType(BinaryOperator<Integer> expression) {
         this.expression = expression;
     }
 
