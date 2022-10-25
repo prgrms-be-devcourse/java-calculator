@@ -1,10 +1,8 @@
 package org.programmers.java.calculator.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.programmers.java.calculator.io.Console;
-import org.programmers.java.calculator.model.Formula;
-import org.programmers.java.calculator.model.Menu;
 import org.programmers.java.calculator.service.impl.CalculatorServiceImpl;
+import org.programmers.java.calculator.util.verifiaction.FormulaVerification;
 
 import java.util.Optional;
 
@@ -28,6 +26,7 @@ public class CalculatorController {
     }
 
     private String getAnswer(String input) {
-        Formula formula = new Formula(input);
+        FormulaVerification.formulaVerifiaction(input);
+        return "";
     }
 }

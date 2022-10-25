@@ -20,11 +20,11 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     public Optional<String> find(String input) {
-        calculatorRepositoryImpl.find(input);
+        return calculatorRepositoryImpl.find(input);
     }
 
     @Override
-    public void 라save(String input, String answer) {
+    public void save(String input, String answer) {
         calculatorRepositoryImpl.save(input, answer);
     }
 }
