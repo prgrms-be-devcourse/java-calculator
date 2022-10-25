@@ -1,9 +1,9 @@
 package com.programmers.java.engine;
 
 import com.programmers.java.application.Console;
+import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Equation;
 import com.programmers.java.engine.model.Expression;
-import com.programmers.java.engine.model.History;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
@@ -57,7 +57,7 @@ public class Menu implements Runnable {
         Optional<Expression> expression = calculator.parseExpression(inputExpression);
 
         // 계산
-        Double answer = calculator.calculate(expression.get());
+        Answer answer = calculator.calculate(expression.get());
         console.printAnswer(answer);
 
         return Equation.builder()

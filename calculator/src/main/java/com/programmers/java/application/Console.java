@@ -2,6 +2,7 @@ package com.programmers.java.application;
 
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
+import com.programmers.java.engine.model.Answer;
 
 import java.util.Scanner;
 
@@ -20,11 +21,11 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printAnswer(Double answer) {
+    public void printAnswer(Answer answer) {
         if (checkInt(answer)) {
-            System.out.printf("%d\n\n", answer.intValue());
+            System.out.printf("%d\n\n", answer.getValue().intValue());
         } else {
-            System.out.printf("%.3f\n\n", answer);
+            System.out.printf("%.3f\n\n", answer.getValue());
         }
     }
 
@@ -33,8 +34,8 @@ public class Console implements Input, Output {
         System.out.println(inputHistory);
     }
 
-    private boolean checkInt(Double answer) {
-        if (answer == Math.floor(answer)) {
+    private boolean checkInt(Answer answer) {
+        if (answer.getValue() == Math.floor(answer.getValue())) {
             return true;
         } else {
             return false;

@@ -1,5 +1,6 @@
 package com.programmers.java.engine;
 
+import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Equation;
 import com.programmers.java.engine.model.History;
 
@@ -18,9 +19,9 @@ public class HistoryInMemoryInterface implements HistoryRepository{
     public String findAll() {
         StringBuilder stringBuilder = new StringBuilder("\n");
 
-        for (Map.Entry<String, Double> equation : history.getEquations().entrySet()) {
+        for (Map.Entry<String, Answer> equation : history.getEquations().entrySet()) {
             if (history.checkInt(equation.getValue())) {
-                stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue().intValue()).append("\n");
+                stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue().getValue().intValue()).append("\n");
             } else {
                 stringBuilder.append(equation.getKey()).append(" = ").append(equation.getValue()).append("\n");
             }

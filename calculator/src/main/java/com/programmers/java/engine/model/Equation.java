@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 public class Equation {
     String expression;
-    Double answer;
+    Answer answer;
 
     @Builder
-    public Equation(String expression, Double answer) {
+    public Equation(String expression, Answer answer) {
         this.expression = expression;
         this.answer = answer;
     }

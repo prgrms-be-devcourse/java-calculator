@@ -1,6 +1,7 @@
 package com.programmers.java.engine;
 
 import com.programmers.java.application.Operator;
+import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -87,13 +88,13 @@ class CalculatorImplTest {
         Double ans2 = 1.0;
 
         //when
-        Double result1 = calculatorImpl.getResult(ex1);
-        Double result2 = calculatorImpl.getResult(ex2);
+        Answer result1 = calculatorImpl.getResult(ex1);
+        Answer result2 = calculatorImpl.getResult(ex2);
 
         //then
-        System.out.println(result1);
-        System.out.println(result2);
-        assertEquals(ans1, result1);
-        assertEquals(ans2, result2);
+        System.out.println(result1.getValue());
+        System.out.println(result2.getValue());
+        assertEquals(ans1, result1.getValue());
+        assertEquals(ans2, result2.getValue());
     }
 }

@@ -1,6 +1,7 @@
 package com.programmers.java.engine;
 
 import com.programmers.java.application.Operator;
+import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
 import lombok.AllArgsConstructor;
 
@@ -16,19 +17,19 @@ public class CalculatorImpl implements Calculator {
     private Operator operator;
 
     @Override
-    public Double calculate(Expression expression) {
+    public Answer calculate(Expression expression) {
 
         // 후위연산으로 식 변경
         String[] postTokens = makePostfix(expression.getTokens());
 
         // 식 계산
-        Double result = getResult(postTokens);
+        Answer result = getResult(postTokens);
 
         return result;
     }
 
     @Override
-    public Double getResult(String[] postTokens) {
+    public Answer getResult(String[] postTokens) {
         Stack<Double> stack = new Stack<>();
         Double lhs = 0.0;
         Double rhs = 0.0;
@@ -52,7 +53,9 @@ public class CalculatorImpl implements Calculator {
             }
         }
 
-        return stack.peek();
+        return Answer.builder()
+                .value(stack.peek())
+                .build();
     }
 
     @Override
