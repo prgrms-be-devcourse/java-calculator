@@ -81,8 +81,8 @@ public class Validator {
 
 	private void validateMiddleOrderIsCorrect(String[] tokens) throws FormulaInputException {
 		for (int i = 0; i < tokens.length - 1; i++) {
-			TokenType curToken = validateTokenType(tokens[i]);
-			TokenType nextToken = validateTokenType(tokens[i + 1]);
+			TokenType curToken = makeTokenType(tokens[i]);
+			TokenType nextToken = makeTokenType(tokens[i + 1]);
 
 			if (!curToken.checkNextTokenCorrect(nextToken)) {
 				throw new FormulaInputException();
@@ -156,7 +156,7 @@ public class Validator {
 		return false;
 	}
 
-	public TokenType validateTokenType(String token) {
+	public TokenType makeTokenType(String token) {
 		if (isNumber(token)) {
 			return new Numbers(token);
 		} else if (isPlus(token)) {

@@ -82,7 +82,7 @@ public class Calculator implements Runnable {
 				int num2 = numbers.pop();
 				int num1 = numbers.pop();
 
-				TokenType operator = validator.validateTokenType(token);
+				TokenType operator = validator.makeTokenType(token);
 				int result = ((Operator)operator).calculate(num1, num2);
 				numbers.push(result);
 			}
