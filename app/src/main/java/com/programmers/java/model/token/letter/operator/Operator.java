@@ -2,21 +2,19 @@ package com.programmers.java.model.token.letter.operator;
 
 import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.letter.bracket.Letter;
+import com.programmers.java.model.token.letter.bracket.OpenBracket;
+import com.programmers.java.model.token.number.Number;
 
-public abstract class Operator extends Token {
-	public Operator(String token) {
-		super(token);
-	}
+public interface Operator extends Letter {
 
-	public static boolean isOperator(String token) {
-		if (token.equals("+")
-			|| token.equals("-")
-			|| token.equals("*")
-			|| token.equals("/")) {
+	@Override
+	default boolean checkNextTokenCorrect(Token nextToken) {
+		if (nextToken instanceof Number || nextToken instanceof OpenBracket) {
 			return true;
 		}
 		return false;
 	}
 
-	public abstract int calculate(int num1, int num2) throws DivideByZeroException;
+	int calculate(int num1, int num2) throws DivideByZeroException;
 }

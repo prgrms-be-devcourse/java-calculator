@@ -1,18 +1,17 @@
 package com.programmers.java.model.token.letter.bracket;
 
 import com.programmers.java.model.token.Token;
-import com.programmers.java.model.token.letter.number.Number;
 
-public class OpenBracket extends Token {
+public class OpenBracket implements Letter {
+
+	private final int priority = 0;
+
 	public OpenBracket(String token) {
-		super(token);
 	}
 
-	public static boolean isOpen(String token) {
-		if (token.equals("(")) {
-			return true;
-		}
-		return false;
+	@Override
+	public int getPriority() {
+		return priority;
 	}
 
 	@Override

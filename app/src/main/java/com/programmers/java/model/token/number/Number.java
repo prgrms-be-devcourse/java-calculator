@@ -1,21 +1,12 @@
-package com.programmers.java.model.token.letter.number;
+package com.programmers.java.model.token.number;
 
 import com.programmers.java.model.token.Token;
 import com.programmers.java.model.token.letter.bracket.CloseBracket;
 import com.programmers.java.model.token.letter.operator.Operator;
 
-public class Number extends Token {
-	public Number(String token) {
-		super(token);
-	}
+public class Number implements Token {
 
-	public static boolean isNumber(String token) {
-		try {
-			Integer.parseInt(token);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
+	public Number(String token) {
 	}
 
 	@Override

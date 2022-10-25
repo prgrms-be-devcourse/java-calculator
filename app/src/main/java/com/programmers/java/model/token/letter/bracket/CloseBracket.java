@@ -3,16 +3,16 @@ package com.programmers.java.model.token.letter.bracket;
 import com.programmers.java.model.token.Token;
 import com.programmers.java.model.token.letter.operator.Operator;
 
-public class CloseBracket extends Token {
+public class CloseBracket implements Letter {
+
+	private final int priority = 0;
+
 	public CloseBracket(String token) {
-		super(token);
 	}
 
-	public static boolean isClose(String token) {
-		if (token.equals(")")) {
-			return true;
-		}
-		return false;
+	@Override
+	public int getPriority() {
+		return priority;
 	}
 
 	@Override
