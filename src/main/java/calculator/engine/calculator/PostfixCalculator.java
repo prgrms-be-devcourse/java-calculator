@@ -1,5 +1,11 @@
 package calculator.engine.calculator;
 
-public class PostfixCalculator implements ArithmeticCalculator {
+import calculator.engine.model.CalculationResult;
+import calculator.engine.model.Expression;
 
+public class PostfixCalculator implements ArithmeticCalculator {
+    @Override
+    public CalculationResult calculate(Expression postfix) {
+        return null;
+    }
 }
