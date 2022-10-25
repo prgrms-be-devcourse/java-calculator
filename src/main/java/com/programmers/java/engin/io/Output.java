@@ -5,7 +5,7 @@ import com.programmers.java.engin.model.Logs;
 public interface Output {
     void logView(Logs logs);
 
-    void answer(int result);
+    void answer(String result);
 
     void errorMessage(String s);
 }

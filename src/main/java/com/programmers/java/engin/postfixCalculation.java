@@ -2,15 +2,17 @@ package com.programmers.java.engin;
 
 import com.programmers.java.engin.io.Calculation;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.function.Consumer;
 
 public class postfixCalculation implements Calculation {
+    DecimalFormat df = new DecimalFormat("#.##");
 
     @Override
-    public int getResult(String expression) {
+    public String getResult(String expression) {
         List<String> postfix = toPostfix(expression);
         return calculate(postfix);
     }
@@ -22,6 +24,7 @@ public class postfixCalculation implements Calculation {
         1. () 연산자는 없다고 가정
         2. 연산자와 숫자 사이 공백이 있는 형태의 input이 들어온다는 가정
         3. 나눗셈 소수점 자리 버림
+        4. 피연산자로 음수 안됌
         * */
         Stack<String> stack = new Stack<>();
         List<String> postfix = new ArrayList<>();
@@ -53,29 +56,36 @@ public class postfixCalculation implements Calculation {
         else return 2;
     }
 
-    private int calculate(List<String> list) {
-        Stack<Integer> stack = new Stack<>();
+    private String calculate(List<String> list) {
+        Stack<Double> stack = new Stack<>();
         list.forEach(new Consumer<String>() {
             @Override
             public void accept(String data) {
                 if (data.matches("^[0-9]*$")) {
-                    stack.push(Integer.valueOf(data));
+                    stack.push(Double.parseDouble(data));
                 } else {
-                    int num1 = stack.pop();
-                    int num2 = stack.pop();
-                    int temp;
+                    double num1 = stack.pop();
+                    double num2 = stack.pop();
+                    double temp;
 
-                    if (data.equals("+")) temp = num1 + num2;
-                    else if (data.equals("-")) temp = num1 - num2;
-                    else if (data.equals("*")) temp = num1 * num2;
-                    else temp = num1 / num2;
-
+                    if (data.equals("+")) temp = num2 + num1;
+                    else if (data.equals("-")) temp = num2 - num1;
+                    else if (data.equals("*")) temp = num2 * num1;
+                    else {
+                        if (num2*num1 != 0 ) {
+                            temp = num2 / num1;
+                            temp = Math.round(temp * 1000) / 1000.0;
+                        }else{
+                            return;
+                        }
+                    }
                     stack.push(temp);
                 }
             }
         });
 
-        return stack.pop();
+
+        return df.format(stack.pop());
     }
 
 }

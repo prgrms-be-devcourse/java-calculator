@@ -25,7 +25,7 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void answer(int result) {
+    public void answer(String result) {
         System.out.println(result+"\n");
     }
 

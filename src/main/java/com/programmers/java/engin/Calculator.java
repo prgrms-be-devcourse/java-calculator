@@ -29,7 +29,7 @@ public class Calculator implements Runnable{
                 output.logView(logs);
             } else if (inputMenu.equals("2")) {
                 String expression = input.input();
-                int result = calculation.getResult(expression);
+                String result = calculation.getResult(expression);
                 logs.add(expression + " = " + result);
                 output.answer(result);
             } else if (inputMenu.equals("-1")) {
