@@ -1,11 +1,23 @@
 package com.programmers.kwonjoosung.java.calculator;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
-    }
+    /*
+     * 테스트 케이스
+     * 1. 정상 입력인 경우
+     * 1.1 기본 계산
+     * 1.2 우선 순위
+     * 1.3 히스토리 확인하기
+     * 2. 예외 처리
+     * 2.1 숫자가 아닌 문자 및 특수문자(연산자 제외)가 입력된 경우
+     * 2.2 입력(스페이스)이 올바르지 못한 경우
+     * 2.3 0으로 나누려고 한 경우
+     * 2.4 너무 큰 숫자를 계산하려고 한 경우
+     * 2.5 연산자로 시작하거나 연산자로 끝나는 경우
+     * 2.6 연산자가 부족한 경우
+     * 2.7 연산자가 연속으로 나오는 경우
+     * 2.8 실수(소수)를 입력한 경우
+     */
+    // 통합테스트를 어떻게 해야 할지 잘 모르겠습니다.
+    // input, output을 테스트하기 어렵네요..
 }
