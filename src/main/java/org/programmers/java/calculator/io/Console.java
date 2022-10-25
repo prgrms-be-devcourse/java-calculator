@@ -26,7 +26,6 @@ public class Console implements Input, Output {
             1. 조회
             2. 계산
             3. 종료
-            
             """);
   }
 

@@ -9,6 +9,7 @@ public enum Menu {
 
     RECORD("Record",1),
     CALCULATE("Calculate",2),
+    EXIT("Exit", 3),
     ERROR("Error",-1);
 
     private static final int BAD_REQUEST = -1;
