@@ -20,6 +20,9 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    //AssertJ
+    testImplementation 'org.assertj:assertj-core:3.23.1'
 }
 
 test {
