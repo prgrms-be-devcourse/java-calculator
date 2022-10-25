@@ -1,36 +1,27 @@
 package com.programmers.domain;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class CalculatorTypeTest {
 
-    @Test
-    void plus() {
-        assertEquals(CalculatorType.PLUS.calculate(10, 5), 15);
+    @ParameterizedTest
+    @MethodSource
+    void calculate(char sign, int numOne, int numTwo, int result) {
+        assertEquals(CalculatorType.selectType(sign).calculate(numOne, numTwo), result);
     }
 
-    @Test
-    void minus() {
-        assertEquals(CalculatorType.MINUS.calculate(10, 100), -90);
-    }
-
-    @Test
-    void multiply() {
-        assertEquals(CalculatorType.MULTIPLY.calculate(10, 10), 100);
-    }
-
-    @Test
-    void divide() {
-        assertEquals(CalculatorType.DIVIDE.calculate(100, 10), 10);
-    }
-
-    @Test
-    void dividedByZeroException() {
-        assertThrows(ArithmeticException.class, () -> {
-            CalculatorType.DIVIDE.calculate(100, 0);
-        });
+    static Stream<Arguments> calculate() {
+        return Stream.of(
+                arguments('+', 10, 10, 20),
+                arguments('-', 10, 100, -90),
+                arguments('*', 10, 10, 100),
+                arguments('/', 1000, 10, 100));
     }
 }
