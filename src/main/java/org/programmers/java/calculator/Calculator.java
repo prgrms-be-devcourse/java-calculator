@@ -20,7 +20,7 @@ public class Calculator implements Runnable {
     private void execution(Menu menu) {
         String result = switch (menu) {
             case RECORD -> calculatorController.record();
-            case CALCULATE -> null;
+            case CALCULATE -> calculatorController.calculate(console.read());
             case ERROR -> "잘못된 입력 입니다.\n";
         };
 
