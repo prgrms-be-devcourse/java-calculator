@@ -25,8 +25,8 @@ public class ToPostfixParser {
 
 			if (validator.isOperator(token)) {
 				TokenType operator = validator.validateTokenType(token);
-				TokenType stackPeek = validator.validateTokenType(stack.peek());
-				while (!stack.isEmpty() && ((Letter)operator).haveLowerPriority((Letter)stackPeek)) {
+				while (!stack.isEmpty() && ((Letter)operator).haveLowerPriority(
+					(Letter)validator.validateTokenType(stack.peek()))) {
 					postfixFormula.add(stack.pop());
 				}
 				stack.push(token);

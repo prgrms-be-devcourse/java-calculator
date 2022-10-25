@@ -17,35 +17,36 @@ public class Validator {
 	public String validateFormula(String formula) throws FormulaInputException {
 		String[] tokens = formula.split("((?=[^0-9])|(?<=[^0-9]))");
 
-		if (validateTokenIsCorrectType(tokens)
-			&& validateFormulaNotEmpty(tokens)
-			&& validateBracketIsCouple(tokens)
-			&& validateFormulaOrderIsCorrect(tokens)) {
-			return formula;
+		try {
+			validateTokenIsCorrectType(tokens);
+			validateFormulaNotEmpty(tokens);
+			validateBracketIsCouple(tokens);
+			validateFormulaOrderIsCorrect(tokens);
+		} catch (Exception e) {
+			throw new FormulaInputException();
 		}
-		throw new FormulaInputException();
+
+		return formula;
 	}
 
-	private boolean validateTokenIsCorrectType(String[] tokens) {
+	private void validateTokenIsCorrectType(String[] tokens) throws FormulaInputException {
 		for (String token : tokens) {
 			if (!(isNumber(token)
 				|| isOperator(token)
 				|| isOpenBracket(token)
 				|| isCloseBracket(token))) {
-				return false;
+				throw new FormulaInputException();
 			}
 		}
-		return true;
 	}
 
-	private boolean validateFormulaNotEmpty(String[] tokens) {
+	private void validateFormulaNotEmpty(String[] tokens) throws FormulaInputException {
 		if (tokens == null) {
-			return false;
+			throw new FormulaInputException();
 		}
-		return true;
 	}
 
-	private boolean validateBracketIsCouple(String[] tokens) {
+	private void validateBracketIsCouple(String[] tokens) throws FormulaInputException {
 		Stack<String> openBracketStack = new Stack<>();
 
 		for (String token : tokens) {
@@ -53,7 +54,7 @@ public class Validator {
 				openBracketStack.push(token);
 			} else if (isCloseBracket(token)) {
 				if (openBracketStack.isEmpty()) {
-					return false;
+					throw new FormulaInputException();
 				} else {
 					if (isOpenBracket(openBracketStack.peek())) {
 						openBracketStack.pop();
@@ -62,47 +63,44 @@ public class Validator {
 			}
 		}
 		if (!openBracketStack.isEmpty()) {
-			return false;
+			throw new FormulaInputException();
 		}
-		return true;
 	}
 
-	private boolean validateFormulaOrderIsCorrect(String[] tokens) {
-		return validateFirstOrderIsCorrect(tokens)
-			&& validateMiddleOrderIsCorrect(tokens)
-			&& validateLastOrderIsCorrect(tokens);
+	private void validateFormulaOrderIsCorrect(String[] tokens) throws FormulaInputException {
+		validateFirstOrderIsCorrect(tokens);
+		validateMiddleOrderIsCorrect(tokens);
+		validateLastOrderIsCorrect(tokens);
 	}
 
-	private boolean validateFirstOrderIsCorrect(String[] tokens) {
-		if (isOpenBracket(tokens[0]) || isNumber(tokens[0])) {
-			return true;
+	private void validateFirstOrderIsCorrect(String[] tokens) throws FormulaInputException {
+		if (!(isOpenBracket(tokens[0]) || isNumber(tokens[0]))) {
+			throw new FormulaInputException();
 		}
-		return false;
 	}
 
-	private boolean validateMiddleOrderIsCorrect(String[] tokens) {
+	private void validateMiddleOrderIsCorrect(String[] tokens) throws FormulaInputException {
 		for (int i = 0; i < tokens.length - 1; i++) {
 			TokenType curToken = validateTokenType(tokens[i]);
 			TokenType nextToken = validateTokenType(tokens[i + 1]);
 
 			if (!curToken.checkNextTokenCorrect(nextToken)) {
-				return false;
+				throw new FormulaInputException();
 			}
 		}
-		return true;
 	}
 
-	private boolean validateLastOrderIsCorrect(String[] tokens) {
-		if (isNumber(tokens[tokens.length - 1]) || isCloseBracket(tokens[tokens.length - 1])) {
-			return true;
+	private void validateLastOrderIsCorrect(String[] tokens) throws FormulaInputException {
+		if (!(isNumber(tokens[tokens.length - 1]) || isCloseBracket(tokens[tokens.length - 1]))) {
+			throw new FormulaInputException();
 		}
-		return false;
 	}
 
 	public boolean isNumber(String token) {
 		if (Character.isDigit(token.charAt(0))) {
 			return true;
 		}
+
 		return false;
 	}
 
