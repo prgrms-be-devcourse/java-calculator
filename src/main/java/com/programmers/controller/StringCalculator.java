@@ -6,7 +6,6 @@ import com.programmers.view.InputView;
 import com.programmers.view.ResultView;
 
 public class StringCalculator {
-    private static final int NOT_FIND_RESULT = -1;
     private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final char BLANK = ' ';
@@ -34,7 +33,7 @@ public class StringCalculator {
         }
     }
 
-    private int calculateAll(String inputString) {
+    int calculateAll(String inputString) {
         while (inputString.contains(MULTIPLY) || inputString.contains(DIVIDE)) {
             int priorityIndex = findSignIndex(inputString, MULTIPLY, DIVIDE);
             inputString = calculateOne(inputString, priorityIndex);
@@ -72,34 +71,25 @@ public class StringCalculator {
     }
 
     private int findSignIndex(String inputString, String signOne, String signTwo) {
-        int signOneIndex = inputString.indexOf(signOne);
-        int signTwoIndex = inputString.indexOf(signTwo);
-        String selectSign;
-        int index;
+        int signOneIndex = findIndex(inputString, signOne);
+        int signTwoIndex = findIndex(inputString, signTwo);
 
-        if (signOneIndex != NOT_FIND_RESULT && signTwoIndex != NOT_FIND_RESULT) {
-            if (signOneIndex < signTwoIndex) {
-                selectSign = signOne;
-                index = signOneIndex;
-            } else {
-                selectSign = signTwo;
-                index = signTwoIndex;
-            }
-        } else {
-            if (signOneIndex != NOT_FIND_RESULT) {
-                selectSign = signOne;
-                index = signOneIndex;
-            } else {
-                selectSign = signTwo;
-                index = signTwoIndex;
-            }
+        return Math.min(signOneIndex, signTwoIndex);
+    }
+
+    private int findIndex(String inputString, String sign) {
+        if (inputString.contains(sign)) {
+            int result = inputString.indexOf(sign);
+            return subtractProcessing(sign, result);
         }
+        return Integer.MAX_VALUE;
+    }
 
-        if (selectSign.equals(SUBTRACT)) {
-            return (++index);
+    private int subtractProcessing(String sign, int result) {
+        if (sign.equals(SUBTRACT)) {
+            return ++result;
         }
-
-        return index;
+        return result;
     }
 
 }

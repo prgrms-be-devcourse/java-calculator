@@ -1,6 +1,7 @@
 package com.programmers.domain;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -23,5 +24,12 @@ class CalculatorTypeTest {
                 arguments('-', 10, 100, -90),
                 arguments('*', 10, 10, 100),
                 arguments('/', 1000, 10, 100));
+    }
+
+    @Test
+    void divideZero() {
+        assertThrows(ArithmeticException.class, () -> {
+            CalculatorType.DIVIDE.calculate(100, 0);
+        });
     }
 }
