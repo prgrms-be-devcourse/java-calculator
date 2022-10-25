@@ -26,11 +26,11 @@ public class Console implements Input, Output {
 
     @Override
     public void answer(int result) {
-        System.out.println(result);
+        System.out.println(result+"\n");
     }
 
     @Override
     public void errorMessage(String message) {
-        System.out.println(message);
+        System.out.println(message+"\n");
     }
 }

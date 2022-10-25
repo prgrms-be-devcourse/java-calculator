@@ -7,12 +7,16 @@ import java.util.List;
 public class Logs {
     List<String> logs = new ArrayList<>();
 
-    public void add(String log) {
+    public void add(String log) { // 최대 50개 까지 저장
         logs.add(log);
+        if (logs.size() == 51){
+            logs.remove(0);
+        }
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        if (logs.size() == 0) return "\n";
+        return "\n" + String.join("\n",logs) + "\n";
     }
 }

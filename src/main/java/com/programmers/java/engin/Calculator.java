@@ -23,7 +23,7 @@ public class Calculator implements Runnable{
         Logs logs = new Logs(); // run 메소드 안에 있는게 맞나 
 
         while(true){
-            String inputMenu = input.input("1. 조회\n2. 계산\n선택 : ");
+            String inputMenu = input.input("1. 조회\n2. 계산\n\n선택 : ");
 
             if (inputMenu.equals("1")){
                 output.logView(logs);
