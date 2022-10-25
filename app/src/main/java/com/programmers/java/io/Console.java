@@ -33,7 +33,7 @@ public class Console implements Input, Output {
 	}
 
 	@Override
-	public void printFormulaResult(Integer result) {
+	public void printFormulaResult(int result) {
 		System.out.println(result);
 		System.out.println();
 	}

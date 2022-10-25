@@ -9,7 +9,7 @@ public interface Output {
 
 	void printHistory(List<History> history);
 
-	void printFormulaResult(Integer result);
+	void printFormulaResult(int result);
 
 	void printExit(String exitMessage);
 
