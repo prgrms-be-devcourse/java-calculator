@@ -9,10 +9,6 @@ public class History {
 		this.result = result;
 	}
 
-	public String getFormula() {
-		return formula;
-	}
-
 	public int getResult() {
 		return result;
 	}
