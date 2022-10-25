@@ -43,15 +43,21 @@ class CalculatorImplTest {
     @Test
     public void 식_토큰화_테스트() {
         //given
-        String ex1 = "14 + 2.0 * 3.1 - 0.1 / 214";
-        String[] op1 = {"14", "+", "2.0", "*", "3.1", "-", "0.1", "/", "214"};
+        String expression1 = "14 + 2.0 * 3.1 - 0.1 / 214";
+        String[] tokenizedExpression1 = {"14", "+", "2.0", "*", "3.1", "-", "0.1", "/", "214"};
+        String expression2 = "1 / 0";
+        String[] tokenizedExpression2 = {"1", "/", "0"};
 
         //when
-        Optional<Expression> expression = calculatorImpl.parseExpression(ex1);
+        Optional<Expression> resultExpression1 = calculatorImpl.parseExpression(expression1);
+        Optional<Expression> resultExpression2 = calculatorImpl.parseExpression(expression1);
 
         //then
-        System.out.println(expression.get());
-        assertArrayEquals(op1, expression.get().getTokens());
+        System.out.println(resultExpression1.get());
+        assertArrayEquals(tokenizedExpression1, resultExpression1.get().getTokens());
+
+        System.out.println(resultExpression1.get());
+        assertArrayEquals(tokenizedExpression1, resultExpression1.get().getTokens());
     }
 
     @Test

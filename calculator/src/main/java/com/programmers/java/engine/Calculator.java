@@ -4,7 +4,7 @@ import com.programmers.java.engine.model.Expression;
 
 import java.util.Optional;
 
-public interface Calculator {
+public interface Calculator extends Runnable {
     // 식으로 값 계산 (후위 연산 변환 + 계산)
     Double calculate(Expression expression);
 
@@ -19,4 +19,6 @@ public interface Calculator {
 
     // 사용자의 옵션을 Integer 로 변환
     Optional<Integer> parseOption(String inputOption);
+
+
 }

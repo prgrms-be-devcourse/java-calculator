@@ -5,14 +5,15 @@ import com.programmers.java.application.Operator;
 import com.programmers.java.engine.model.Expression;
 import com.programmers.java.engine.model.History;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import static com.programmers.java.application.config.Constant.NUMBER_REGEX;
-import static com.programmers.java.application.config.Constant.OPERATOR_REGEX;
+import static com.programmers.java.application.config.Constant.*;
 
-public class CalculatorImpl implements Runnable, Calculator {
+public class CalculatorImpl implements Calculator {
 
     private Operator operator;
     private Console console;
@@ -88,7 +89,7 @@ public class CalculatorImpl implements Runnable, Calculator {
         for (String token : postTokens) {
             if (Pattern.matches(NUMBER_REGEX, token)) {
                 stack.push(Double.parseDouble(token));
-            } else if (Pattern.matches(OPERATOR_REGEX, token)) {
+            } else if (Pattern.matches(ALL_OPERATOR_REGEX, token)) {
                 rhs = stack.pop();
                 lhs = stack.pop();
 
@@ -114,7 +115,7 @@ public class CalculatorImpl implements Runnable, Calculator {
         int index = 0;
 
         for (String token : tokens) {
-            if (Pattern.matches(OPERATOR_REGEX, token)) {
+            if (Pattern.matches(ALL_OPERATOR_REGEX, token)) {
                 while (!stack.isEmpty() && (getRank(token) <= (getRank(stack.peek())))) {
                     postTokens[index++] = stack.pop();
                 }
@@ -131,14 +132,14 @@ public class CalculatorImpl implements Runnable, Calculator {
         return postTokens;
     }
 
+    // 연산자 우선순위 파악, 숫자 높을 수록 우선순위 높음
     private Integer getRank(String token) {
-        if (Pattern.matches("[+\\-]", token)) {
+        if (Pattern.matches(ADD_MINUS_OPERATOR_REGEX, token)) {
             return 1;
         } else {
             return 2;
         }
     }
-
 
     @Override
     public Optional<Expression> parseExpression(String inputExpression) {
@@ -148,7 +149,7 @@ public class CalculatorImpl implements Runnable, Calculator {
 
         // validate: 잘못된 연산자나 숫자인지 체크
         for (String token : tokens) {
-            if (!Pattern.matches(OPERATOR_REGEX, token) && !Pattern.matches(NUMBER_REGEX, token)) {
+            if (!Pattern.matches(ALL_OPERATOR_REGEX, token) && !Pattern.matches(NUMBER_REGEX, token)) {
                 return Optional.empty();
             }
         }

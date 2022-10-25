@@ -33,7 +33,7 @@ public class Console implements Input, Output {
 
     @Override
     public void inputError() {
-        System.out.println("\n입력이 잘못되었습니다.");
+        System.out.println("입력이 잘못되었습니다.\n");
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Console implements Input, Output {
         System.out.println(inputHistory);
     }
 
-    public boolean checkInt(Double answer) {
+    private boolean checkInt(Double answer) {
         if (answer == Math.floor(answer)) {
             return true;
         } else {
