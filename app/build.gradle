@@ -1,0 +1,19 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+}
+
+application {
+    mainClass = 'com.programmers.kwonjoosung.java.calculator.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
