@@ -27,7 +27,7 @@ public class Calculator {
     public void run() throws IOException {
 
         while (true) {
-            Command command = Command.valueOf(input.getInput(MESSAGE));
+            Command command = Command.valueOfCommand(input.getInput(MESSAGE));
 
             switch (command) {
                 case RETRIEVE -> {
