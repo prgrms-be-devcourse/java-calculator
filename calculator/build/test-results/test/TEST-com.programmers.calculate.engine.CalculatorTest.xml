@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.programmers.calculate.engine.CalculatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-25T07:39:29" hostname="gimsohyeon-ui-MacBookPro.local" time="0.012">
-  <properties/>
-  <testcase name="파싱()" classname="com.programmers.calculate.engine.CalculatorTest" time="0.01"/>
-  <testcase name="사칙연산()" classname="com.programmers.calculate.engine.CalculatorTest" time="0.001"/>
-  <testcase name="우선순위()" classname="com.programmers.calculate.engine.CalculatorTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
