@@ -71,7 +71,7 @@ public class Calculator implements Runnable {
 		for (int i = 0; i < parsedTokens.length; i++) {
 			String token = parsedTokens[i];
 
-			if (!Operator.isOperator(token)) {
+			if (!validator.isOperator(token)) {
 				numbers.push(Integer.parseInt(token));
 			} else {
 				int num2 = numbers.pop();

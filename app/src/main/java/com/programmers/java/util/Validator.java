@@ -6,14 +6,14 @@ import com.programmers.java.exception.FormulaInputException;
 import com.programmers.java.model.token.Token;
 import com.programmers.java.model.token.letter.bracket.CloseBracket;
 import com.programmers.java.model.token.letter.bracket.OpenBracket;
-import com.programmers.java.model.token.letter.number.Number;
 import com.programmers.java.model.token.letter.operator.DivideOperator;
 import com.programmers.java.model.token.letter.operator.MinusOperator;
 import com.programmers.java.model.token.letter.operator.MultiplyOperator;
-import com.programmers.java.model.token.letter.operator.Operator;
 import com.programmers.java.model.token.letter.operator.PlusOperator;
+import com.programmers.java.model.token.number.Number;
 
 public class Validator {
+
 	public String validateFormula(String formula) throws FormulaInputException {
 		String[] tokens = formula.split("((?=[^0-9])|(?<=[^0-9]))");
 
@@ -28,10 +28,10 @@ public class Validator {
 
 	private boolean validateTokenIsCorrectLetter(String[] tokens) {
 		for (String token : tokens) {
-			if (!(Number.isNumber(token)
-				|| Operator.isOperator(token)
-				|| OpenBracket.isOpen(token)
-				|| CloseBracket.isClose(token))) {
+			if (!(isNumber(token)
+				|| isOperator(token)
+				|| isOpenBracket(token)
+				|| isCloseBracket(token))) {
 				return false;
 			}
 		}
@@ -49,13 +49,13 @@ public class Validator {
 		Stack<String> openBracketStack = new Stack<>();
 
 		for (String token : tokens) {
-			if (OpenBracket.isOpen(token)) {
+			if (isOpenBracket(token)) {
 				openBracketStack.push(token);
-			} else if (CloseBracket.isClose(token)) {
+			} else if (isCloseBracket(token)) {
 				if (openBracketStack.isEmpty()) {
 					return false;
 				} else {
-					if (OpenBracket.isOpen(openBracketStack.peek())) {
+					if (isOpenBracket(openBracketStack.peek())) {
 						openBracketStack.pop();
 					}
 				}
@@ -86,31 +86,90 @@ public class Validator {
 	}
 
 	private boolean validateFirstTokenIsCorrect(String[] tokens) {
-		if (OpenBracket.isOpen(tokens[0]) || Number.isNumber(tokens[0])) {
+		if (isOpenBracket(tokens[0]) || isNumber(tokens[0])) {
 			return true;
 		}
 		return false;
 	}
 
 	private boolean validateLastTokenIsCorrect(String[] tokens) {
-		if (Number.isNumber(tokens[tokens.length - 1]) || CloseBracket.isClose(tokens[tokens.length - 1])) {
+		if (isNumber(tokens[tokens.length - 1]) || isCloseBracket(tokens[tokens.length - 1])) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isNumber(String token) {
+		if (Character.isDigit(token.charAt(0))) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isOperator(String token) {
+		if (isPlus(token)
+			|| isMinus(token)
+			|| isMultiply(token)
+			|| isDivide(token)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isPlus(String token) {
+		if (token.equals("+")) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isMinus(String token) {
+		if (token.equals("-")) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isMultiply(String token) {
+		if (token.equals("*")) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isDivide(String token) {
+		if (token.equals("/")) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isOpenBracket(String token) {
+		if (token.equals("(")) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isCloseBracket(String token) {
+		if (token.equals(")")) {
 			return true;
 		}
 		return false;
 	}
 
 	public Token validateCorrectToken(String token) {
-		if (Number.isNumber(token)) {
+		if (isNumber(token)) {
 			return new Number(token);
-		} else if (PlusOperator.isPlus(token)) {
+		} else if (isPlus(token)) {
 			return new PlusOperator(token);
-		} else if (MinusOperator.isMinus(token)) {
+		} else if (isMinus(token)) {
 			return new MinusOperator(token);
-		} else if (MultiplyOperator.isMultiply(token)) {
+		} else if (isMultiply(token)) {
 			return new MultiplyOperator(token);
-		} else if (DivideOperator.isDivide(token)) {
+		} else if (isDivide(token)) {
 			return new DivideOperator(token);
-		} else if (OpenBracket.isOpen(token)) {
+		} else if (isOpenBracket(token)) {
 			return new OpenBracket(token);
 		} else {
 			return new CloseBracket(token);
