@@ -15,7 +15,7 @@ import com.programmers.java.util.Validator;
 
 public class Calculator implements Runnable {
 	private final String NEW_LINE = System.lineSeparator();
-	private final String MENU = "1. 조회" + NEW_LINE + "2. 계산" + NEW_LINE + NEW_LINE + "선택 : ";
+	private final String MENU = "1. 조회" + NEW_LINE + "2. 계산" + NEW_LINE + "3. 종료" + NEW_LINE + NEW_LINE + "선택 : ";
 	private final String LOOKUP = "1";
 	private final String CALCULATION = "2";
 	private final String EXIT = "3";
