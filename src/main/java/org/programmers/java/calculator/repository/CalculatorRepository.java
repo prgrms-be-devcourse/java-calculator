@@ -1,6 +1,10 @@
 package org.programmers.java.calculator.repository;
 
 
-public interface CalculatorRepository<K, V> {
+import java.util.List;
 
+public interface CalculatorRepository<K, V> {
+    List<String> findAll();
+
+    void save();
 }
