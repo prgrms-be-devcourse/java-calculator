@@ -3,6 +3,7 @@ package com.programmers.java.engine;
 import com.programmers.java.application.Operator;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
+import com.programmers.java.engine.model.MenuType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -30,12 +31,12 @@ class CalculatorImplTest {
         String option3 = "a";
 
         //when
-        Optional<Integer> integer1 = calculatorImpl.parseOption(option1);
-        Optional<Integer> integer2 = calculatorImpl.parseOption(option2);
-        Optional<Integer> integer3 = calculatorImpl.parseOption(option3);
+        Optional<MenuType> integer1 = calculatorImpl.parseOption(option1);
+        Optional<MenuType> integer2 = calculatorImpl.parseOption(option2);
+        Optional<MenuType> integer3 = calculatorImpl.parseOption(option3);
 
         //then
-        assertEquals(integer1, Optional.of(1));
+        assertEquals(integer1, Optional.of(MenuType.HISTORY));
         assertEquals(integer2, Optional.empty());
         assertEquals(integer3, Optional.empty());
     }

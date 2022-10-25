@@ -2,6 +2,7 @@ package com.programmers.java.engine;
 
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
+import com.programmers.java.engine.model.MenuType;
 
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public interface Calculator {
     Optional<Expression> parseExpression(String inputExpression);
 
     // 사용자의 옵션을 Integer 로 변환
-    Optional<Integer> parseOption(String inputOption);
+    Optional<MenuType> parseOption(String inputOption);
 
 
 }

@@ -4,6 +4,7 @@ import com.programmers.java.application.Console;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Equation;
 import com.programmers.java.engine.model.Expression;
+import com.programmers.java.engine.model.MenuType;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
@@ -22,7 +23,7 @@ public class Menu implements Runnable {
             String inputOption = this.console.input("1. 조회\n2. 계산\n\n선택 : ");
 
             // check validate
-            Optional<Integer> option = calculator.parseOption(inputOption);
+            Optional<MenuType> option = calculator.parseOption(inputOption);
             // incorrect -> continue
             if (option.isEmpty()) {
                 console.inputError();
@@ -30,14 +31,14 @@ public class Menu implements Runnable {
             }
 
             // Option 1. Show history
-            if (option.get().equals(1)) {
+            if (option.get() == MenuType.HISTORY) {
                 String inputHistory = historyRepository.findAll();
 
                 console.printHistory(inputHistory);
             }
 
             // Option 2. Use calculator
-            if (option.get().equals(2)) {
+            if (option.get() == MenuType.CALCULATE) {
 //                if (expression.isEmpty()) {
 //                    console.inputError();
 //                    continue;

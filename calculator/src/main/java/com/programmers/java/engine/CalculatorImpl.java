@@ -3,6 +3,7 @@ package com.programmers.java.engine;
 import com.programmers.java.application.Operator;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
+import com.programmers.java.engine.model.MenuType;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
@@ -112,7 +113,7 @@ public class CalculatorImpl implements Calculator {
     }
 
     @Override
-    public Optional<Integer> parseOption(String inputOption) {
+    public Optional<MenuType> parseOption(String inputOption) {
         Integer result = 0;
 
         // validate: 숫자형인지 체크
@@ -123,9 +124,12 @@ public class CalculatorImpl implements Calculator {
         }
 
         // validate: 1이나 2인지 체크
-        if (result == 1 || result == 2) {
-            return Optional.of(result);
+        if (result == 1) {
+            return Optional.of(MenuType.HISTORY);
+        } else if (result == 2) {
+            return Optional.of(MenuType.CALCULATE);
         }
+
         return Optional.empty();
     }
 }
