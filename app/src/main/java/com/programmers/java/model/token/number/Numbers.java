@@ -1,16 +1,16 @@
 package com.programmers.java.model.token.number;
 
-import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.TokenType;
 import com.programmers.java.model.token.letter.bracket.CloseBracket;
 import com.programmers.java.model.token.letter.operator.Operator;
 
-public class Number implements Token {
+public class Numbers implements TokenType {
 
-	public Number(String token) {
+	public Numbers(String token) {
 	}
 
 	@Override
-	public boolean checkNextTokenCorrect(Token nextToken) {
+	public boolean checkNextTokenCorrect(TokenType nextToken) {
 		if (nextToken instanceof Operator || nextToken instanceof CloseBracket) {
 			return true;
 		} else {

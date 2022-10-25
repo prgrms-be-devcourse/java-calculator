@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.io.Console;
 import com.programmers.java.repository.HistoryRepository;
-import com.programmers.java.util.FormulaParser;
+import com.programmers.java.util.ToPostfixParser;
 import com.programmers.java.util.Validator;
 
 class CalculateTest {
 	@Test
 	void calculate() throws DivideByZeroException {
 		Calculator calculator = new Calculator(new Console(), new HistoryRepository(), new Validator(),
-			new FormulaParser());
+			new ToPostfixParser(new Validator()));
 		String[] postfixFormula1 = {"1", "2", "+", "3", "/", "5", "-", "7", "-"};
 		String[] postfixFormula2 = {"12", "23", "+"};
 

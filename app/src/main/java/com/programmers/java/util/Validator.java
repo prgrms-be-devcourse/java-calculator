@@ -3,21 +3,21 @@ package com.programmers.java.util;
 import java.util.Stack;
 
 import com.programmers.java.exception.FormulaInputException;
-import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.TokenType;
 import com.programmers.java.model.token.letter.bracket.CloseBracket;
 import com.programmers.java.model.token.letter.bracket.OpenBracket;
 import com.programmers.java.model.token.letter.operator.DivideOperator;
 import com.programmers.java.model.token.letter.operator.MinusOperator;
 import com.programmers.java.model.token.letter.operator.MultiplyOperator;
 import com.programmers.java.model.token.letter.operator.PlusOperator;
-import com.programmers.java.model.token.number.Number;
+import com.programmers.java.model.token.number.Numbers;
 
 public class Validator {
 
 	public String validateFormula(String formula) throws FormulaInputException {
 		String[] tokens = formula.split("((?=[^0-9])|(?<=[^0-9]))");
 
-		if (validateTokenIsCorrectLetter(tokens)
+		if (validateTokenIsCorrectType(tokens)
 			&& validateFormulaNotEmpty(tokens)
 			&& validateBracketIsCouple(tokens)
 			&& validateFormulaOrderIsCorrect(tokens)) {
@@ -26,7 +26,7 @@ public class Validator {
 		throw new FormulaInputException();
 	}
 
-	private boolean validateTokenIsCorrectLetter(String[] tokens) {
+	private boolean validateTokenIsCorrectType(String[] tokens) {
 		for (String token : tokens) {
 			if (!(isNumber(token)
 				|| isOperator(token)
@@ -68,15 +68,22 @@ public class Validator {
 	}
 
 	private boolean validateFormulaOrderIsCorrect(String[] tokens) {
-		return validateFirstTokenIsCorrect(tokens)
-			&& validateMiddleTokenIsCorrect(tokens)
-			&& validateLastTokenIsCorrect(tokens);
+		return validateFirstOrderIsCorrect(tokens)
+			&& validateMiddleOrderIsCorrect(tokens)
+			&& validateLastOrderIsCorrect(tokens);
 	}
 
-	private boolean validateMiddleTokenIsCorrect(String[] tokens) {
+	private boolean validateFirstOrderIsCorrect(String[] tokens) {
+		if (isOpenBracket(tokens[0]) || isNumber(tokens[0])) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean validateMiddleOrderIsCorrect(String[] tokens) {
 		for (int i = 0; i < tokens.length - 1; i++) {
-			Token curToken = validateCorrectToken(tokens[i]);
-			Token nextToken = validateCorrectToken(tokens[i + 1]);
+			TokenType curToken = validateTokenType(tokens[i]);
+			TokenType nextToken = validateTokenType(tokens[i + 1]);
 
 			if (!curToken.checkNextTokenCorrect(nextToken)) {
 				return false;
@@ -85,14 +92,7 @@ public class Validator {
 		return true;
 	}
 
-	private boolean validateFirstTokenIsCorrect(String[] tokens) {
-		if (isOpenBracket(tokens[0]) || isNumber(tokens[0])) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean validateLastTokenIsCorrect(String[] tokens) {
+	private boolean validateLastOrderIsCorrect(String[] tokens) {
 		if (isNumber(tokens[tokens.length - 1]) || isCloseBracket(tokens[tokens.length - 1])) {
 			return true;
 		}
@@ -158,9 +158,9 @@ public class Validator {
 		return false;
 	}
 
-	public Token validateCorrectToken(String token) {
+	public TokenType validateTokenType(String token) {
 		if (isNumber(token)) {
-			return new Number(token);
+			return new Numbers(token);
 		} else if (isPlus(token)) {
 			return new PlusOperator(token);
 		} else if (isMinus(token)) {

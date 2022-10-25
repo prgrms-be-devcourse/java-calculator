@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.programmers.java.model.token.Token;
-import com.programmers.java.model.token.letter.bracket.Letter;
+import com.programmers.java.model.token.TokenType;
+import com.programmers.java.model.token.letter.Letter;
 
-public class FormulaParser {
+public class ToPostfixParser {
 
 	private Validator validator;
 
-	public FormulaParser(Validator validator) {
+	public ToPostfixParser(Validator validator) {
 		this.validator = validator;
 	}
 
@@ -24,8 +24,8 @@ public class FormulaParser {
 			String token = tokens[i];
 
 			if (validator.isOperator(token)) {
-				Token operator = validator.validateCorrectToken(token);
-				Token stackPeek = validator.validateCorrectToken(stack.peek());
+				TokenType operator = validator.validateTokenType(token);
+				TokenType stackPeek = validator.validateTokenType(stack.peek());
 				while (!stack.isEmpty() && ((Letter)operator).haveLowerPriority((Letter)stackPeek)) {
 					postfixFormula.add(stack.pop());
 				}

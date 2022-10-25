@@ -1,6 +1,7 @@
 package com.programmers.java.model.token.letter.bracket;
 
-import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.TokenType;
+import com.programmers.java.model.token.letter.Letter;
 
 public class OpenBracket implements Letter {
 
@@ -15,7 +16,7 @@ public class OpenBracket implements Letter {
 	}
 
 	@Override
-	public boolean checkNextTokenCorrect(Token nextToken) {
+	public boolean checkNextTokenCorrect(TokenType nextToken) {
 		if (nextToken instanceof Number || nextToken instanceof OpenBracket) {
 			return true;
 		}

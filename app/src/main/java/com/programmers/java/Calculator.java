@@ -6,10 +6,10 @@ import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Console;
 import com.programmers.java.model.History;
-import com.programmers.java.model.token.Token;
+import com.programmers.java.model.token.TokenType;
 import com.programmers.java.model.token.letter.operator.Operator;
 import com.programmers.java.repository.Repository;
-import com.programmers.java.util.FormulaParser;
+import com.programmers.java.util.ToPostfixParser;
 import com.programmers.java.util.Validator;
 
 public class Calculator implements Runnable {
@@ -23,9 +23,9 @@ public class Calculator implements Runnable {
 	private Console console;
 	private Repository repository;
 	private Validator validator;
-	private FormulaParser parser;
+	private ToPostfixParser parser;
 
-	public Calculator(Console console, Repository repository, Validator validator, FormulaParser parser) {
+	public Calculator(Console console, Repository repository, Validator validator, ToPostfixParser parser) {
 		this.console = console;
 		this.repository = repository;
 		this.validator = validator;
@@ -77,7 +77,7 @@ public class Calculator implements Runnable {
 				int num2 = numbers.pop();
 				int num1 = numbers.pop();
 
-				Token operator = validator.validateCorrectToken(token);
+				TokenType operator = validator.validateTokenType(token);
 				int result = ((Operator)operator).calculate(num1, num2);
 				numbers.push(result);
 			}
