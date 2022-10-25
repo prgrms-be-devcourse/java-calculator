@@ -7,7 +7,7 @@ import com.programmers.java.engin.model.Logs;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -29,9 +29,13 @@ public class Calculator implements Runnable{
                 output.logView(logs);
             } else if (inputMenu.equals("2")) {
                 String expression = input.input();
-                String result = calculation.getResult(expression);
-                logs.add(expression + " = " + result);
-                output.answer(result);
+                Optional<String> result = calculation.getResult(expression);
+                if (result.isEmpty()){
+                    output.errorMessage("잘못된 입력입니다.");
+                    continue;
+                }
+                logs.add(expression + " = " + result.get());
+                output.answer(result.get());
             } else if (inputMenu.equals("-1")) {
                 break;
             } else {
