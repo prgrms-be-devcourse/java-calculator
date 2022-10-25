@@ -10,4 +10,6 @@ public interface Output {
     void printResult(String result);
 
     void printExit();
+
+    void printZeroDivision();
 }
