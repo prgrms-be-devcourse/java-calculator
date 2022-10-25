@@ -3,6 +3,7 @@ package com.programmers.java;
 import java.util.Stack;
 
 import com.programmers.java.exception.DivideByZeroException;
+import com.programmers.java.exception.FormulaInputException;
 import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Console;
 import com.programmers.java.model.History;
@@ -13,8 +14,8 @@ import com.programmers.java.util.ToPostfixParser;
 import com.programmers.java.util.Validator;
 
 public class Calculator implements Runnable {
-	private final String newLine = System.lineSeparator();
-	private final String MENU = "1. 조회" + newLine + "2. 계산" + newLine + newLine + "선택 : ";
+	private final String NEW_LINE = System.lineSeparator();
+	private final String MENU = "1. 조회" + NEW_LINE + "2. 계산" + NEW_LINE + NEW_LINE + "선택 : ";
 	private final String LOOKUP = "1";
 	private final String CALCULATION = "2";
 	private final String EXIT = "3";
@@ -43,15 +44,7 @@ public class Calculator implements Runnable {
 						console.printHistory(repository.findAllHistory());
 						break;
 					case CALCULATION:
-						String formula = validator.validateFormula(console.inputFormula());
-
-						if (repository.haveFormulaResult(formula)) {
-							console.printFormulaResult(repository.findFormulaResult(formula));
-						} else {
-							int calculateResult = calculate(parser.changeInfixToPostfix(formula));
-							repository.save(formula, new History(formula, calculateResult));
-							console.printFormulaResult(calculateResult);
-						}
+						calculateProcess();
 						break;
 					case EXIT:
 						console.printExit(EXIT_MESSAGE);
@@ -62,6 +55,18 @@ public class Calculator implements Runnable {
 			} catch (Exception e) {
 				console.printErrorMessage(e.getMessage());
 			}
+		}
+	}
+
+	private void calculateProcess() throws FormulaInputException, DivideByZeroException {
+		String formula = validator.validateFormula(console.inputFormula());
+
+		if (repository.haveFormulaResult(formula)) {
+			console.printFormulaResult(repository.findFormulaResult(formula));
+		} else {
+			int calculateResult = calculate(parser.changeInfixToPostfix(formula));
+			repository.save(formula, new History(formula, calculateResult));
+			console.printFormulaResult(calculateResult);
 		}
 	}
 

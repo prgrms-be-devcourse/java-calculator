@@ -5,12 +5,17 @@ package com.programmers.java;
 
 import com.programmers.java.io.Console;
 import com.programmers.java.repository.HistoryRepository;
+import com.programmers.java.repository.Repository;
 import com.programmers.java.util.ToPostfixParser;
 import com.programmers.java.util.Validator;
 
 public class App {
 	public static void main(String[] args) {
-		new Calculator(new Console(), new HistoryRepository(), new Validator(),
-			new ToPostfixParser(new Validator())).run();
+		Console console = new Console();
+		Repository repository = new HistoryRepository();
+		Validator validator = new Validator();
+		ToPostfixParser parser = new ToPostfixParser(validator);
+
+		new Calculator(console, repository, validator, parser).run();
 	}
 }
