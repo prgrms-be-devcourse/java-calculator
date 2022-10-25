@@ -94,9 +94,11 @@ public class StringCalculator {
                 index = sign2_Index;
             }
         }
+
         if (selectSign.equals(SUBTRACT)) {
             return (++index);
         }
+
         return index;
     }
 
