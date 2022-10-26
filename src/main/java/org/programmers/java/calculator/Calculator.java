@@ -38,6 +38,5 @@ public class Calculator implements Runnable {
         return "종료 합니다.";
     }
 
-
 }
 
