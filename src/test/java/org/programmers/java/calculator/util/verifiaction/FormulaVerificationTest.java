@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FormulaVerificationTest {
 
     @Test
-    @DisplayName("정상 플러스 입력에 대한 검증하라")
+    @DisplayName("플러스 입력에 대한 검증하라")
     void formulaVerifiactionPlus() {
         //given
         String input = "1 + 1";
@@ -25,7 +25,7 @@ class FormulaVerificationTest {
     }
 
     @Test
-    @DisplayName("정상 마이너스 입력에 대한 검증하라")
+    @DisplayName("마이너스 입력에 대한 검증하라")
     void formulaVerifiactionMinus() {
         //given
         String input = "1 - 1";
@@ -39,7 +39,7 @@ class FormulaVerificationTest {
     }
 
     @Test
-    @DisplayName("정상 곱하기 입력에 대한 검증하라")
+    @DisplayName("곱하기 입력에 대한 검증하라")
     void formulaVerifiactionMultiply() {
         //given
         String input = "1 * 1";
@@ -53,7 +53,7 @@ class FormulaVerificationTest {
     }
 
     @Test
-    @DisplayName("정상 나누기 입력에 대한 검증하라")
+    @DisplayName("나누기 입력에 대한 검증하라")
     void formulaVerifiactionDivide() {
         //given
         String input = "1 / 1";
