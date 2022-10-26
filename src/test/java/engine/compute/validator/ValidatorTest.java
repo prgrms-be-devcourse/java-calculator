@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class ValidatorTest {
-    ExpressionValidator validator;
-    ExpressionConverter converter;
+    private ExpressionValidator validator;
+    private ExpressionConverter converter;
 
     @BeforeEach
     void setting() {
@@ -28,11 +28,27 @@ class ValidatorTest {
     }
 
     @Test
-    void isOperatorTest() {
+    void isPlusOperatorTest() {
         Assertions.assertEquals(validator.isOperator(new Token("+")), true);
+    }
+
+    @Test
+    void isMinusOperatorTest() {
         Assertions.assertEquals(validator.isOperator(new Token("-")), true);
+    }
+
+    @Test
+    void isMultiplyOperatorTest() {
         Assertions.assertEquals(validator.isOperator(new Token("/")), true);
+    }
+
+    @Test
+    void isDivideOperatorTest() {
         Assertions.assertEquals(validator.isOperator(new Token("*")), true);
+    }
+
+    @Test
+    void isWrongOperatorTest() {
         Assertions.assertEquals(validator.isOperator(new Token("1")), false);
         Assertions.assertEquals(validator.isOperator(new Token("a")), false);
         Assertions.assertEquals(validator.isOperator(new Token("0")), false);

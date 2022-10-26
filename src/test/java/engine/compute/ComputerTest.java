@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class ComputerTest {
 
-    ExpressionConverter converter;
-    ExpressionValidator validator;
-    Computer computer;
+    private ExpressionConverter converter;
+    private ExpressionValidator validator;
+    private Computer computer;
 
     @BeforeEach
     void setting() {
@@ -33,5 +33,6 @@ class ComputerTest {
 
         String result3 = computer.compute("1-23-4-5");
         Assertions.assertEquals("-31.00", result3);
+
     }
 }

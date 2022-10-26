@@ -15,9 +15,9 @@ import java.util.List;
 
 class OperateMachineTest {
 
-    OperateMachine machine;
-    ExpressionConverter converter;
-    ExpressionValidator validator;
+    private OperateMachine machine;
+    private ExpressionConverter converter;
+    private ExpressionValidator validator;
 
     @BeforeEach
     void setting() {

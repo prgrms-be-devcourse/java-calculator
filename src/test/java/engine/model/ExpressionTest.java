@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class ExpressionTest {
-    ExpressionValidator validator;
-    ExpressionConverter converter;
+    private ExpressionValidator validator;
+    private ExpressionConverter converter;
 
     @BeforeEach
     void setting() {
@@ -22,23 +22,17 @@ class ExpressionTest {
 
     @Test
     void 후위식전환테스트() {
-        List<Token> tokens = converter.convertUserInputToToken("3 * 5 - 4 / 2"); // 13
+        List<Token> tokens = converter.convertUserInputToToken("3 * 5 - 4 / 2");
         List<Token> result = converter.convertToPostFix(tokens);
 
-        result.stream().forEach(i -> System.out.println(i.getToken()));
+        StringBuilder sb = new StringBuilder();
+        result.stream().forEach(postFixedToken -> sb.append(postFixedToken.getToken()));
+        Assertions.assertEquals("35*42/-", sb.toString());
     }
 
     @Test
     void 후위식전환테스트2() {
         Assertions.assertThrowsExactly(NotValidInputException.class,
                 () -> converter.convertUserInputToToken("3 * * 5 - 4 / 2"));
-    }
-
-    @Test
-    void 후위식전환테스트3() {
-        List<Token> tokens = converter.convertUserInputToToken("3 / 5 * 4 + 2");
-        List<Token> result = converter.convertToPostFix(tokens);
-
-        result.stream().forEach(i -> System.out.println(i.getToken()));
     }
 }
