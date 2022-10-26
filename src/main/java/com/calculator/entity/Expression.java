@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Expression {
     private String infix;   // 중위 표기법
-    private int result;
+    private double result;
 
     @Override
     public String toString() {

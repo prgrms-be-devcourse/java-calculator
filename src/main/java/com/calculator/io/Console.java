@@ -19,7 +19,7 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void output(int result) {
+    public void output(double result) {
         System.out.println(result);
     }
 }

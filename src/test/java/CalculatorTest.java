@@ -1,13 +1,16 @@
 import com.calculator.Application;
 import com.calculator.common.Calculator;
+import com.calculator.entity.Expression;
 import com.calculator.io.Console;
+import com.calculator.repository.MapRepository;
+import com.calculator.repository.Repository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -15,6 +18,7 @@ public class CalculatorTest {
 
     static Console console;
     static Calculator calculator;
+    static Repository repository;
 
     @BeforeAll
     static void App() {
@@ -23,6 +27,7 @@ public class CalculatorTest {
         calculator = Calculator.builder()
                 .input(console)
                 .output(console)
+                .repository(new MapRepository())
                 .build();
     }
 
@@ -38,8 +43,8 @@ public class CalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"(2 + 4) / (6 - 3), 2", "1 + 2 * 4 - 2, 7", "2 * ( 6 / 3 + 7), 18"})
     @DisplayName("사칙연산 계산")
-    void calculate(String input, int result) {
-        int calculate = calculator.calculate(input);
+    void calculate(String input, double result) {
+        double calculate = calculator.calculate(input);
 
         assertThat(calculate).isEqualTo(result);
     }
