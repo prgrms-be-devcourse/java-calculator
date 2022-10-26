@@ -3,10 +3,8 @@ package com.programmers.java.engine.calculator;
 import com.programmers.java.application.Operator;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
-import com.programmers.java.engine.model.MenuType;
 import lombok.AllArgsConstructor;
 
-import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -88,7 +86,7 @@ public class CalculatorImpl implements Calculator {
     }
 
     @Override
-    public Optional<Expression> parseExpression(String inputExpression) {
+    public Expression parseExpression(String inputExpression) {
 
         // 숫자와 연산자 추출
         String[] tokens = inputExpression.split(" ");
@@ -96,35 +94,11 @@ public class CalculatorImpl implements Calculator {
         // validate: 잘못된 연산자나 숫자인지 체크
         for (String token : tokens) {
             if (!isMatchRegex(token, ALL_OPERATOR_REGEX) && !isMatchRegex(token, NUMBER_REGEX)) {
-                return Optional.empty();
+
             }
         }
 
-        return Optional.of(
-                new Expression(
-                     tokens
-                )
-        );
+        return new Expression(tokens);
     }
 
-    @Override
-    public Optional<MenuType> parseOption(String inputOption) {
-        Integer result = 0;
-
-        // validate: 숫자형인지 체크
-        try {
-            result = Integer.parseInt(inputOption);
-        } catch (NumberFormatException exception) {
-            return Optional.empty();
-        }
-
-        // validate: 1이나 2인지 체크
-        if (result == 1) {
-            return Optional.of(MenuType.HISTORY);
-        } else if (result == 2) {
-            return Optional.of(MenuType.CALCULATE);
-        }
-
-        return Optional.empty();
-    }
 }

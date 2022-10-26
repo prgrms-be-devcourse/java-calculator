@@ -8,8 +8,6 @@ import com.programmers.java.engine.model.Equation;
 import com.programmers.java.engine.model.Expression;
 import lombok.AllArgsConstructor;
 
-import java.util.Optional;
-
 @AllArgsConstructor
 public class CalculatorOption implements Option {
     private Console console;
@@ -25,9 +23,9 @@ public class CalculatorOption implements Option {
 
     private Equation useCalculator() {
         String inputExpression = console.input("\n");
-        Optional<Expression> expression = calculator.parseExpression(inputExpression);
+        Expression expression = calculator.parseExpression(inputExpression);
 
-        Answer answer = calculator.calculate(expression.get());
+        Answer answer = calculator.calculate(expression);
         console.printAnswer(answer);
 
         return Equation.builder()

@@ -1,5 +1,7 @@
 package com.programmers.java.engine.model;
 
+import com.programmers.java.application.exception.UnknownOptionException;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -28,8 +30,8 @@ public enum MenuType {
                     .collect(Collectors.toMap(MenuType::getValue, Function.identity()))
     );
 
-    public static MenuType findMenuType(String option) {
+    public static MenuType findMenuType(String option) throws UnknownOptionException {
         return Optional.ofNullable(menuMaps.get(option))
-                .orElseThrow();
+                .orElseThrow(() -> new UnknownOptionException("1, 2, 3 중 하나를 입력해주세요.\n"));
     }
 }
