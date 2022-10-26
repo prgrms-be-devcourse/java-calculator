@@ -17,7 +17,7 @@ public class MapRepositoryTest {
     MapRepository repository = new MapRepository();
 
     @Test
-    @DisplayName("repo 조회")
+    @DisplayName("map 전체 조회 성공")
     void find() {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
@@ -25,9 +25,11 @@ public class MapRepositoryTest {
         Expression expression = new Expression("(2 + 4) / (6 - 3)", 2);
 
         repository.save(expression);
-        repository.findAll();
+        repository.save(expression);
 
-        assertThat(out.toString()).isEqualTo("(2 + 4) / (6 - 3) = 2\n");
+        int size = repository.findAll();
+
+        assertThat(size).isEqualTo(2);
     }
 
     @Test
