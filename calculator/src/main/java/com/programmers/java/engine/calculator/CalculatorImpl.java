@@ -15,8 +15,6 @@ import static com.programmers.java.application.config.Constant.*;
 @AllArgsConstructor
 public class CalculatorImpl implements Calculator {
 
-    private Operator operator;
-
     @Override
     public Answer calculate(Expression expression) {
 
@@ -36,27 +34,24 @@ public class CalculatorImpl implements Calculator {
         Double rhs = 0.0;
 
         for (String token : postTokens) {
-            if (Pattern.matches(NUMBER_REGEX, token)) {
+            if (isMatchRegex(token, NUMBER_REGEX)) {
                 stack.push(Double.parseDouble(token));
-            } else if (Pattern.matches(ALL_OPERATOR_REGEX, token)) {
+            } else if (isMatchRegex(token, ALL_OPERATOR_REGEX)) {
                 rhs = stack.pop();
                 lhs = stack.pop();
 
-                if (token.equals("+")) {
-                    stack.push(operator.plus(lhs, rhs));
-                } else if (token.equals("-")) {
-                    stack.push(operator.minus(lhs, rhs));
-                } else if (token.equals("*")) {
-                    stack.push(operator.multiply(lhs, rhs));
-                } else if (token.equals("/")) {
-                    stack.push(operator.divide(lhs, rhs));
-                }
+                Answer answer = Operator.calculate(token, lhs, rhs);
+                stack.push(answer.getValue());
             }
         }
 
         return Answer.builder()
                 .value(stack.peek())
                 .build();
+    }
+
+    private boolean isMatchRegex(String token, String regex) {
+        return Pattern.matches(regex, token);
     }
 
     @Override
@@ -66,12 +61,12 @@ public class CalculatorImpl implements Calculator {
         int index = 0;
 
         for (String token : tokens) {
-            if (Pattern.matches(ALL_OPERATOR_REGEX, token)) {
+            if (isMatchRegex(token, ALL_OPERATOR_REGEX)) {
                 while (!stack.isEmpty() && (getRank(token) <= (getRank(stack.peek())))) {
                     postTokens[index++] = stack.pop();
                 }
                 stack.push(token);
-            } else if (Pattern.matches(NUMBER_REGEX, token)) {
+            } else if (isMatchRegex(token, NUMBER_REGEX)) {
                 postTokens[index++] = token;
             }
         }
@@ -85,7 +80,7 @@ public class CalculatorImpl implements Calculator {
 
     // 연산자 우선순위 파악, 숫자 높을 수록 우선순위 높음
     private Integer getRank(String token) {
-        if (Pattern.matches(ADD_MINUS_OPERATOR_REGEX, token)) {
+        if (isMatchRegex(token, ADD_MINUS_OPERATOR_REGEX)) {
             return 1;
         } else {
             return 2;
@@ -100,7 +95,7 @@ public class CalculatorImpl implements Calculator {
 
         // validate: 잘못된 연산자나 숫자인지 체크
         for (String token : tokens) {
-            if (!Pattern.matches(ALL_OPERATOR_REGEX, token) && !Pattern.matches(NUMBER_REGEX, token)) {
+            if (!isMatchRegex(token, ALL_OPERATOR_REGEX) && !isMatchRegex(token, NUMBER_REGEX)) {
                 return Optional.empty();
             }
         }

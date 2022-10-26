@@ -28,7 +28,7 @@ public enum MenuType {
                     .collect(Collectors.toMap(MenuType::getValue, Function.identity()))
     );
 
-    public static MenuType find(String option) {
+    public static MenuType findMenuType(String option) {
         return Optional.ofNullable(menuMaps.get(option))
                 .orElseThrow();
     }

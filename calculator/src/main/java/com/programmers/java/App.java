@@ -1,7 +1,6 @@
 package com.programmers.java;
 
 import com.programmers.java.application.Console;
-import com.programmers.java.application.Operator;
 import com.programmers.java.engine.Menu;
 import com.programmers.java.engine.calculator.Calculator;
 import com.programmers.java.engine.calculator.CalculatorImpl;
@@ -14,9 +13,8 @@ import com.programmers.java.engine.option.Option;
 
 public class App {
     private static Console console = new Console();
-    private static Operator operator = new Operator();
     private static HistoryRepository historyRepository = new HistoryInMemoryInterface();
-    private static Calculator calculator = new CalculatorImpl(operator);
+    private static Calculator calculator = new CalculatorImpl();
     private static Menu menu = new Menu();
     private static Option option;
 
@@ -31,14 +29,13 @@ public class App {
                             "선택 : "
             );
 
-            MenuType menuType = MenuType.find(inputOption);
+            MenuType menuType = MenuType.findMenuType(inputOption);
 
             if (menuType == MenuType.HISTORY) option = new HistoryOption(console, historyRepository);
             else if (menuType == MenuType.CALCULATE) option = new CalculatorOption(console, historyRepository, calculator);
             else if (menuType == MenuType.EXIT) break;
             else break;
 
-//            new Menu(console, calculator, historyRepository, option).run();
             menu.processMenu(option);
         }
     }
