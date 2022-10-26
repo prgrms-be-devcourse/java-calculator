@@ -13,6 +13,8 @@ public enum Menus {
     MENU_HISTORY_FINDER(1L, "조회", new MenuHistoryFinder()),
     MENU_CALCULATOR(2L,"계산", new MenuCalculator());
 
+    private static final MenuInput menuInput = new MenuInput();
+    private static final MenuOutput menuOutput = new MenuOutput();
     private final Long id;
     private final String title;
     private final Menu menu;
@@ -23,20 +25,12 @@ public enum Menus {
         this.menu = menu;
     }
 
-    private static MenuInput menuInput() {
-        return new MenuInput();
-    }
-
-    private static MenuOutput menuOutput() {
-        return new MenuOutput();
-    }
-
     public static void process() {
-        menuOutput().printMenus();
-        menuOutput().printSelectedSign();
-        Long menuId = menuInput().askMenuId();
+        menuOutput.printMenus();
+        menuOutput.printSelectedSign();
+        Long menuId = menuInput.askMenuId();
         Menu findMenu = findMenuById(menuId);
-        menuOutput().printAfter();
+        menuOutput.printAfter();
 
         findMenu.process();
     }
