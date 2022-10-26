@@ -1,31 +1,39 @@
 package org.programmers.java.calculator.util.postfix;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.programmers.java.calculator.model.Operator;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 import java.util.Stack;
 
 public class InfixToPostfixTranslator {
 
-    public static String infixToPostfix(List<String> tokens) {
-        StringBuffer sb = new StringBuffer();
-        Stack<Operator> stack = new Stack<>();
+    InfixToPostfixTranslator() {
 
-        middleProcess(tokens, sb, stack);
-        extractRemainOperatorFromStack(sb, stack);
+    }
+
+    public static String infixToPostfix(List<String> tokens) {
+        StringBuilder sb = new StringBuilder();
+        Deque<Operator> deque = new ArrayDeque<>();
+
+        middleProcess(tokens, sb, deque);
+        extractRemainOperatorFromStack(sb, deque);
 
         return sb.toString();
     }
 
-    private static void extractRemainOperatorFromStack(StringBuffer sb, Stack<Operator> stack) {
-        while (!stack.isEmpty()){
-            Operator pop = stack.pop();
+    private static void extractRemainOperatorFromStack(StringBuilder sb, Deque<Operator> deque) {
+        while (!deque.isEmpty()){
+            Operator pop = deque.pop();
             if(Operator.OPEN_BRACKET.equals(pop)) throw new IllegalStateException();//남은 연산자에 (가 있으면 오류
             sb.append(pop.getCharValue());
         }
     }
 
-    private static void middleProcess(List<String> tokens, StringBuffer sb, Stack<Operator> stack) {
+    private static void middleProcess(List<String> tokens, StringBuilder sb, Deque<Operator> deque) {
         for (int i = 0; i < tokens.size(); i++) {
             char character = tokens.get(i).charAt(0);
 
@@ -39,21 +47,21 @@ public class InfixToPostfixTranslator {
 
 
             if (Operator.CLOSE_BRACKET.equals(inputOperator)) {//닫는 괄호가 나온 경우
-                if (stack.isEmpty()) throw new IllegalStateException();//스택이 비어있으면 오류
-                Operator poppedOperator = stack.pop();
+                if (deque.isEmpty()) throw new IllegalStateException();//스택이 비어있으면 오류
+                Operator poppedOperator = deque.pop();
                 while (!Operator.OPEN_BRACKET.equals(poppedOperator)) {
                     sb.append(poppedOperator.getCharValue());
-                    if (stack.isEmpty()) throw new IllegalStateException();
-                    poppedOperator = stack.pop();
+                    if (deque.isEmpty()) throw new IllegalStateException();
+                    poppedOperator = deque.pop();
                 }
             }
 
             else {//닫는 괄호 이외의 연산자
-                while (!stack.isEmpty() &&
-                        stack.peek().getPriorityInStack() >= inputOperator.getPriorityAsInput()) {
-                    sb.append(stack.pop().getCharValue());
+                while (!deque.isEmpty() &&
+                        deque.peek().getPriorityInStack() >= inputOperator.getPriorityAsInput()) {
+                    sb.append(deque.pop().getCharValue());
                 }
-                stack.push(inputOperator);
+                deque.push(inputOperator);
             }
         }
     }
