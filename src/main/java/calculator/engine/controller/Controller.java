@@ -27,22 +27,25 @@ public class Controller implements Runnable{
 
         while (state.isRunning()) {
             UserSelection selection = input.getUserSelection(SelectOption.getLiterals());
+            runUserInquiry(state, selection);
+        }
+    }
 
-            if (selection.isEqualTo(SelectOption.CALCULATE)) {
-                Expression infix = input.getExpression();
-                CalculationResult result = calculator.calculate(infix);
-                output.logResult(result.toString());
-                history.record(infix, result);
-            }
+    private void runUserInquiry(RunningState state, UserSelection selection) {
+        if (selection.isEqualTo(SelectOption.CALCULATE)) {
+            Expression infix = input.getExpression();
+            CalculationResult result = calculator.calculate(infix);
+            output.logResult(result.toString());
+            history.record(infix, result);
+        }
 
-            if (selection.isEqualTo(SelectOption.QUERY)) {
-                output.logHistory(history.getLiterals());
-            }
+        if (selection.isEqualTo(SelectOption.QUERY)) {
+            output.logHistory(history.getLiterals());
+        }
 
-            if (selection.isEqualTo(SelectOption.EXIT)) {
-                output.logExit();
-                state.exit();
-            }
+        if (selection.isEqualTo(SelectOption.EXIT)) {
+            output.logExit();
+            state.exit();
         }
     }
 }
