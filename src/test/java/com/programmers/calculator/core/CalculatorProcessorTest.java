@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("StringCalculatorProcessor 테스트")
-class StringCalculatorProcessorTest {
+class CalculatorProcessorTest {
 
-    private final CalculatorProcessor calculatorProcessor = new StringCalculatorProcessor();
+    private final CalculatorProcessor calculatorProcessor = new CalculatorProcessor();
 
     @DisplayName("calculate() 테스트 - 나눗셈과 곱셉이 없는 연산 테스트")
     @ParameterizedTest

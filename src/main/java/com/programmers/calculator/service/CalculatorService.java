@@ -2,9 +2,8 @@ package com.programmers.calculator.service;
 
 import com.programmers.calculator.controller.io.ConsoleResponse;
 import com.programmers.calculator.controller.io.Response;
-import com.programmers.calculator.core.CalculatorProcessor;
 import com.programmers.calculator.core.Expression;
-import com.programmers.calculator.core.StringCalculatorProcessor;
+import com.programmers.calculator.core.CalculatorProcessor;
 import com.programmers.calculator.domain.CalculateHistory;
 import com.programmers.calculator.repository.Repository;
 import com.programmers.calculator.util.DecimalUtil;
@@ -17,7 +16,7 @@ public class CalculatorService {
 
     private final Repository<Long, CalculateHistory> repository;
 
-    private final CalculatorProcessor calculatorProcessor = new StringCalculatorProcessor();
+    private final CalculatorProcessor calculatorProcessor = new CalculatorProcessor();
 
     public CalculatorService(Repository<Long, CalculateHistory> repository) {
         this.repository = repository;
