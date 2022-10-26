@@ -36,7 +36,7 @@ public class CalculatorController {
 
     private List<String> parse(String input) {
         List<String> tokens = Arrays.asList(input.replace(" ", "").split(""));
-        FormulaVerification.formulaVerifiaction(tokens);
+//        FormulaVerification.formulaVerifiaction(tokens);
         return tokens;
     }
 }

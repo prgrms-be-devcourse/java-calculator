@@ -11,7 +11,6 @@ public class Console implements Input, Output {
 
   @Override
   public String read() {
-    System.out.println("");
     return sc.nextLine();
   }
 
@@ -22,11 +21,14 @@ public class Console implements Input, Output {
 
   @Override
   public void printMeun() {
-    System.out.println("""
+    System.out.print(
+            """
             메뉴를 선택하시오.
             1. 조회
             2. 계산
-            3. 종료""");
+            3. 종료
+            """);
+    System.out.print("선택 : ");
   }
 
   @Override

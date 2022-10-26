@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class CalculatorServiceImpl implements CalculatorService {
-
     private final CalculatorRepository calculatorRepository = new CalculatorRepositoryImpl();
 
     public String calculationResult() {

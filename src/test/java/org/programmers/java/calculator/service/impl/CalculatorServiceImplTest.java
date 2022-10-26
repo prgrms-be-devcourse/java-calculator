@@ -6,8 +6,6 @@ import org.programmers.java.calculator.repository.impl.CalculatorRepositoryImpl;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorServiceImplTest {
@@ -63,7 +61,6 @@ class CalculatorServiceImplTest {
 
         //then
         assertEquals("",sb.toString(),"성공");
-
     }
 
     @Test

@@ -18,6 +18,7 @@ public class Calculator implements Runnable {
         while (power) {
             output.printMeun();
             Menu menu = Menu.selectMenu(input.read());
+            System.out.println();
             execution(menu);
         }
     }

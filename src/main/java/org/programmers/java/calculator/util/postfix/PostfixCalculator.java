@@ -28,11 +28,11 @@ public class PostfixCalculator {
 
         }
 
-        if(deque.size() != 1) throw new IllegalStateException("수식에 오류가 있습니다");
+        if(deque.size() != 1) throw new IllegalStateException("잘못된 공식이 입력되었습니다.");
         return deque.pollFirst();
     }
 
     private void checkValid(Operator inputOperator) {
-        if(Operator.NOT_DEFINED.equals(inputOperator))  throw new IllegalStateException();
+        if(Operator.NOT_DEFINED.equals(inputOperator))  throw new IllegalStateException("잘못된 공식이 입력되었습니다.");
     }
 }
