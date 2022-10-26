@@ -8,7 +8,7 @@ class ValidateExpressionTest {
     @Test
     void 수식_검증() {
         //given
-        String input = "1 + 2 + 3";
+        String input = "0 + 11 + 2 + 312";
         //when
         boolean result = validateExpression.isValidExpression(input);
         //then
