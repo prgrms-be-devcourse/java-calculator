@@ -5,13 +5,14 @@ import engine.exception.NotValidInputException;
 import engine.history.History;
 import engine.io.Input;
 import engine.io.Output;
-import engine.option.Option;
+
+import static engine.option.Option.*;
 
 public class Calculator implements Runnable {
-    private Input input;
-    private Output output;
-    private History history;
-    private Computer computer;
+    private final Input input;
+    private final Output output;
+    private final History history;
+    private final Computer computer;
 
     public Calculator(Input input, Output output, History history, Computer computer) {
         this.input = input;
@@ -22,19 +23,19 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-        String sb = Option.makeOptionList();
+        String sb = makeOptionList();
         boolean exitFlag = true;
 
-
         while (exitFlag) {
-            String userCommand = input.showOption(sb);
+            input.showOption(sb);
+            String userCommand = input.getUserInputOption();
 
             try {
-                int command = Option.checkUserInput(userCommand.trim());
+                checkUserInput(userCommand);
 
-                if (command == 0) {
+                if (userCommand.equals(EXIT.getOption())) {
                     exitFlag = false;
-                } else if (command == 1) {
+                } else if (userCommand.equals(HISTORY.getOption())) {
                     output.showHistory(history);
                 } else {
                     String userInputExpression = input.getCalculateSentence("계산할 식을 입력해주세요.");

@@ -9,8 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+import static engine.compute.operate.Operator.*;
+
+
 public class ExpressionConverter {
-    private ExpressionValidator expressionValidator;
+    private final ExpressionValidator expressionValidator;
 
     public ExpressionConverter(ExpressionValidator expressionValidator) {
         this.expressionValidator = expressionValidator;
@@ -19,45 +22,48 @@ public class ExpressionConverter {
     public List<Token> convertUserInputToToken(String input) {
         List<Token> tokenList = new ArrayList<>();
 
-        Arrays.stream(input.split("(?=[+/*-])|(?<=[+/*-])")).forEach(s -> tokenList.add(new Token(s.trim())));
+        Arrays.stream(input.split("(?=[+/*-])|(?<=[+/*-])"))
+                .forEach(s -> tokenList.add(new Token(s.trim())));
 
         return tokenList;
     }
 
     public List<Token> convertToPostFix(List<Token> availTokens) {
         List<Token> postFix = new ArrayList<>();
-        Stack<String> st = new Stack<>();
+        Stack<String> stack = new Stack<>();
 
         for (Token token : availTokens) {
             if (expressionValidator.isNumber(token)) {
                 postFix.add(token);
             } else {
                 String operator = token.getToken();
-                switch (operator) {
-                    case "+":
-                    case "-":
-                    case "*":
-                    case "/":
+                Operator operatorEnum = getOperator(operator);
 
-                        while (!st.isEmpty() && isHigherPriority(st.peek(), operator)) {
-                            postFix.add(new Token(st.pop()));
+                switch (operatorEnum) {
+                    case PLUS:
+                    case MINUS:
+                    case MULTIPLY:
+                    case DIVIDE:
+
+                        while (!stack.isEmpty() && isHigherPriority(stack.peek(), operator)) {
+                            postFix.add(new Token(stack.pop()));
                         }
 
-                        st.push(operator);
+                        stack.push(operator);
                         break;
                 }
             }
         }
-        while (!st.isEmpty()) {
-            postFix.add(new Token(st.pop()));
+        while (!stack.isEmpty()) {
+            postFix.add(new Token(stack.pop()));
         }
 
         return postFix;
     }
 
     private boolean isHigherPriority(String peek, String newOne) {
-        int stackPeekOnePriority = Operator.getOperator(peek).getPriority();
-        int nextOperatorPriority = Operator.getOperator(newOne).getPriority();
+        int stackPeekOnePriority = getOperator(peek).getPriority();
+        int nextOperatorPriority = getOperator(newOne).getPriority();
 
         return stackPeekOnePriority >= nextOperatorPriority;
     }

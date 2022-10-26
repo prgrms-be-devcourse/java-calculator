@@ -6,14 +6,19 @@ public class ConsoleInput implements Input {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String showOption(String message) {
+    public void showOption(String message) {
         System.out.println(message);
-        return scanner.nextLine();
     }
 
     @Override
     public String getCalculateSentence(String message) {
         System.out.println(message);
         return scanner.nextLine();
+    }
+
+    @Override
+    public String getUserInputOption() {
+        String userInput = scanner.nextLine();
+        return userInput.trim();
     }
 }

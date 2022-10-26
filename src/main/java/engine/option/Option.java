@@ -23,14 +23,15 @@ public enum Option {
         return sb.toString();
     }
 
-    public static int checkUserInput(String userCommand) {
+    public static String checkUserInput(String userCommand) {
         if (userCommand.length() != 1 || !Character.isDigit(userCommand.charAt(0)))
             throw new NotValidInputException("잘못된 입력값입니다.");
 
-        int comm = Integer.parseInt(userCommand);
+        if (userCommand.equals(EXIT.option)
+                || userCommand.equals(HISTORY.option)
+                || userCommand.equals(CALCULATE.option)){
 
-        if (comm == 0 || comm == 1 || comm == 2){
-            return comm;
+            return userCommand;
         }
         else{
             throw new NotValidInputException("잘못된 입력값입니다.");
@@ -39,6 +40,10 @@ public enum Option {
 
     public String getCommand() {
         return command;
+    }
+
+    public String getOption() {
+        return option;
     }
 
     @Override

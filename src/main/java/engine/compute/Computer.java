@@ -10,9 +10,9 @@ import java.util.List;
 
 public class Computer {
 
-    private ExpressionValidator expressionValidator;
-    private ExpressionConverter expressionConverter;
-    private OperateMachine operateMachine;
+    private final ExpressionValidator expressionValidator;
+    private final ExpressionConverter expressionConverter;
+    private final OperateMachine operateMachine;
 
 
     public Computer(ExpressionValidator expressionValidator, ExpressionConverter expressionConverter) {
