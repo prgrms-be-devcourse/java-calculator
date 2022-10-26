@@ -4,15 +4,11 @@ package com.programmers.engine.model;
 import com.programmers.engine.stack.Bracket;
 import com.programmers.engine.stack.Operator;
 import com.programmers.engine.validate.Validator;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Stack;
 import java.util.function.Consumer;
 
 // @Setter @Getter
