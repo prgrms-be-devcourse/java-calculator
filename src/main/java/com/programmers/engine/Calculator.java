@@ -61,10 +61,10 @@ public class Calculator implements Runnable{
 
                     if (formula.validate(bracketValidator)){
                             if (formula.validate(numOperatorValidator)){
-                                System.out.println("식에 문제 없음, 계산 진행");
                                 formula.printFormula();
                                 ans = calculate(formula);
                                 System.out.println(ans);
+                                addToDB(dataBase, formula, ans);
                                 formula.clearContent();
                             }else{
                                 output.numOperatorValidationError();
@@ -157,8 +157,8 @@ public class Calculator implements Runnable{
         if (isDividedByZero.get()) return BigDecimal.valueOf(Integer.MAX_VALUE); // 0으로 나누는 에러가 발생했다
         else return numStack.peek();
     }
-    private void addToDB(DataBase db, Formula formula){
-
+    private void addToDB(DataBase db, Formula formula, BigDecimal ans){
+        formula.addDataToDB(db, ans);
     }
 
     private Optional<BigDecimal> arithmetic(BigDecimal b1, BigDecimal b2, Operator op){
