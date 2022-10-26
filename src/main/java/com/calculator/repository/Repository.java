@@ -4,6 +4,6 @@ import com.calculator.entity.Expression;
 
 public interface Repository {
     void findAll();
-    Expression findById(int id);
+    Expression findByInfix(String infix);
     int save(Expression expression);
 }
