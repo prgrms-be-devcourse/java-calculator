@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.programmers.java.calculator.repository.impl.CalculatorRepositoryImpl;
 import org.programmers.java.calculator.service.CalculatorService;
 
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -14,8 +15,13 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     public String record() {
         StringBuffer sb = new StringBuffer();
-        calculatorRepositoryImpl.findAll()
-                .forEach(i -> sb.append(i).append("\n"));
+        LinkedHashMap<String, String> findAll = calculatorRepositoryImpl.findAll();
+        findAll.forEach((key, value) -> {
+            sb.append(key);
+            sb.append(" = ");
+            sb.append(value);
+            sb.append("\n");
+        });
         return sb.toString();
     }
 
