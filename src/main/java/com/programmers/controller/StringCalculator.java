@@ -1,30 +1,40 @@
 package com.programmers.controller;
 
-import com.programmers.domain.CalculatorResult;
 import com.programmers.domain.CalculatorType;
+import com.programmers.domain.Result;
 import com.programmers.view.InputView;
 import com.programmers.view.ResultView;
 
 public class StringCalculator {
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
-    private static final char BLANK = ' ';
-    private static final int INTERVAL = 2;
-    private static final String ADD = "+";
-    private static final String SUBTRACT = " - ";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
+    private final int ZERO = 0;
+    private final int ONE = 1;
+    private final int TERMINAL_NUMBER = 3;
+    private final char BLANK = ' ';
+    private final int INTERVAL = 2;
+    private final String ADD = "+";
+    private final String SUBTRACT = " - ";
+    private final String MULTIPLY = "*";
+    private final String DIVIDE = "/";
 
-    private static CalculatorResult calculatorResult = new CalculatorResult();
+    private Result calculatorResult;
+
+    public StringCalculator(Result calculatorResult) {
+        this.calculatorResult = calculatorResult;
+    }
 
     public void play() {
         while (true) {
             int selectNum = InputView.selectMenu();
 
+            if (selectNum == TERMINAL_NUMBER) {
+                break;
+            }
+
             if (selectNum == ONE) {
-                ResultView.inquire(calculatorResult.getCalculatorResult());
+                ResultView.inquire(calculatorResult.getResult());
                 continue;
             }
+
             String inputString = InputView.inputString();
 
             int result = calculateAll(inputString);
@@ -33,7 +43,7 @@ public class StringCalculator {
         }
     }
 
-    int calculateAll(String inputString) {
+    private int calculateAll(String inputString) {
         while (inputString.contains(MULTIPLY) || inputString.contains(DIVIDE)) {
             int priorityIndex = findSignIndex(inputString, MULTIPLY, DIVIDE);
             inputString = calculateOne(inputString, priorityIndex);
@@ -59,15 +69,12 @@ public class StringCalculator {
         }
         indexOne++;
 
-        int num1 = Integer.parseInt(inputString.substring(indexOne, index - ONE));
-        int num2 = Integer.parseInt(inputString.substring(index + INTERVAL, indexTwo));
+        int numOne = Integer.parseInt(inputString.substring(indexOne, index - ONE));
+        int numTwo = Integer.parseInt(inputString.substring(index + INTERVAL, indexTwo));
 
-        CalculatorType currentType = CalculatorType.selectType(inputString.charAt(index));
-
-        int result = currentType.calculate(num1, num2);
+        int result = CalculatorType.selectType(inputString.charAt(index)).calculate(numOne, numTwo);
 
         return inputString.substring(ZERO, indexOne) + result + inputString.substring(indexTwo);
-
     }
 
     private int findSignIndex(String inputString, String signOne, String signTwo) {
@@ -91,5 +98,4 @@ public class StringCalculator {
         }
         return result;
     }
-
 }

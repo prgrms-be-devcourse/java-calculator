@@ -4,7 +4,7 @@ package com.programmers.domain;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CalculatorResult {
+public class CalculatorResult implements Result<String, Integer> {
 
     private Map<String, Integer> calculatorResult;
 
@@ -12,11 +12,14 @@ public class CalculatorResult {
         this.calculatorResult = new LinkedHashMap<>();
     }
 
-    public Map<String, Integer> getCalculatorResult() {
+    @Override
+    public void addResult(String input, Integer result) {
+        calculatorResult.put(input, result);
+    }
+
+    @Override
+    public Map<String, Integer> getResult() {
         return calculatorResult;
     }
 
-    public void addResult(String inputString, int result) {
-        calculatorResult.put(inputString, result);
-    }
 }

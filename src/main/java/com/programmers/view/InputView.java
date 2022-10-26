@@ -8,9 +8,9 @@ public class InputView {
 
     public static int selectMenu() {
         while (true) {
-            System.out.print("1. 조회 \n2. 계산 \n\n선택: ");
+            System.out.print("1. 조회 \n2. 계산\n3. 종료  \n\n선택: ");
             String selectNum = scanner.nextLine();
-            if (selectNum.equals("1") || selectNum.equals("2")) {
+            if (selectNum.equals("1") || selectNum.equals("2") || selectNum.equals("3")) {
                 return Integer.parseInt(selectNum);
             }
             System.out.println("잘못 입력하셨습니다! 1 또는 2 만 선택 가능합니다");
