@@ -3,19 +3,28 @@ package calculator.engine.calculator;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.function.BinaryOperator;
 
 public enum ArithmeticOperator {
-    ADDITION("+", OperatorPriority.SECOND),
-    SUBTRACTION("-", OperatorPriority.SECOND),
-    MULTIPLICATION("*", OperatorPriority.FIRST),
-    DIVISION("/", OperatorPriority.FIRST);
+    ADDITION("+", OperatorPriority.SECOND, (firstOperand, secondOperand) -> firstOperand + secondOperand),
+    SUBTRACTION("-", OperatorPriority.SECOND, (firstOperand, secondOperand) -> firstOperand - secondOperand),
+    MULTIPLICATION("*", OperatorPriority.FIRST, (firstOperand, secondOperand) -> firstOperand * secondOperand),
+    DIVISION("/", OperatorPriority.FIRST, (firstOperand, secondOperand) -> {
+        try {
+            return firstOperand / secondOperand;
+        } catch (ArithmeticException exception) {
+            throw new ArithmeticException();
+        }
+    });
 
     private final String symbol;
     private final OperatorPriority priority;
+    private final BinaryOperator<Integer> operation;
 
-    ArithmeticOperator(String symbol, OperatorPriority priority) {
+    ArithmeticOperator(String symbol, OperatorPriority priority, BinaryOperator<Integer> operation) {
         this.symbol = symbol;
         this.priority = priority;
+        this.operation = operation;
     }
 
     public static boolean isOperator(String target) {
@@ -37,5 +46,9 @@ public enum ArithmeticOperator {
 
     public String getSymbol() {
         return symbol;
+    }
+
+    public Integer calculate(Integer firstOperand, Integer secondOperand) {
+        return this.operation.apply(firstOperand, secondOperand);
     }
 }
