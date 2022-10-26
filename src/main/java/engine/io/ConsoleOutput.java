@@ -10,7 +10,7 @@ public class ConsoleOutput implements Output {
 
     @Override
     public void showHistory(History history) {
-        System.out.println(history.getAll());
+        System.out.println(history.convertToString());
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class SimpleExpressionValidator implements ExpressionValidator {
-    private final String errorMsg = "잘못된 수식이 입력되었습니다";
+    private final static String errorMsg = "잘못된 수식이 입력되었습니다";
 
     @Override
     public List<Token> validateToken(List<Token> tokenList) {

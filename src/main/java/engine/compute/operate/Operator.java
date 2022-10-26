@@ -28,8 +28,8 @@ public enum Operator {
         return exp.equals(PLUS.operator) || exp.equals(MINUS.operator) || exp.equals(MULTIPLY.operator) || exp.equals(DIVIDE.operator);
     }
 
-    public static Operator getOperator(String operator) {
-        return Arrays.stream(Operator.values()).filter(o -> o.operator.equals(operator)).findFirst().get();
+    public static Operator getOperator(String operatorString) {
+        return Arrays.stream(values()).filter(operatorEnum -> operatorEnum.operator.equals(operatorString)).findFirst().get();
 
     }
 

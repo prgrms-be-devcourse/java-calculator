@@ -1,7 +1,7 @@
 package engine.history;
 
 public interface History {
-    void save(String calculation, String answer);
+    void save(String calculateSentence, String answer);
 
-    String getAll();
+    String convertToString();
 }

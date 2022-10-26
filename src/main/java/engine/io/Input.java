@@ -1,9 +1,9 @@
 package engine.io;
 
 public interface Input {
-    void showOption(String msg);
+    void showOption(String guideMessage);
 
-    String getCalculateSentence(String msg);
+    String getCalculateSentence(String guideMessage);
 
     String getUserInputOption();
 }
