@@ -36,12 +36,11 @@ public class Reader {
     }
 
     private Integer readNumber() {
-        // TODO: 입력 0, 1, 2를 제외한 숫자에 대한 예외처리 (parseToSelectOption 메서드에서 NSEE 로 잡히긴 하는데, 더 효율적으로 처리할 수 없을까..?)
         String inputLiteral = readLine();
-        return Integer.valueOf(inputLiteral); // TODO: Integer.valueOf()의 예외 처리
+        return Integer.valueOf(inputLiteral);
     }
 
-    private String readLine() { // TODO: 더 구체적인 예외처리
+    private String readLine() {
         try {
             return bufferedReader.readLine();
         } catch (IOException e) {
