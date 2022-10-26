@@ -32,4 +32,9 @@ public class Console implements Input, Output{
     public void logResult(String result) {
         printer.printLine(Message.RESULT_GUIDE + result);
     }
+
+    @Override
+    public void logExit() {
+        printer.print(Message.EXIT_ALERT);
+    }
 }
