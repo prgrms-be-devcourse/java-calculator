@@ -22,4 +22,9 @@ public class Console implements Input, Output{
         printer.print(Message.INPUT_EXPRESSION_GUIDE);
         return reader.readExpression();
     }
+
+    @Override
+    public void log(List<String> literals) {
+        printer.printLiterals(literals);
+    }
 }

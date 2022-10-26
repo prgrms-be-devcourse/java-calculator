@@ -1,4 +1,45 @@
 package calculator.engine.repository;
 
-public class CalculationHistory implements History{
+import calculator.application.io.enums.Characters;
+import calculator.engine.model.CalculationResult;
+import calculator.engine.model.Expression;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class CalculationHistory implements History {
+    private final Map<Long, Map<Expression, CalculationResult>> history = new LinkedHashMap<>();
+    private long sequence = 0L;
+
+    @Override
+    public void record(Expression infix, CalculationResult result) {
+        Map<Expression, CalculationResult> operation = new HashMap<>();
+        operation.put(infix, result);
+        history.put(++sequence, operation);
+    }
+
+    @Override
+    public List<String> getLiterals() {
+        return history.keySet().stream()
+                .flatMap(sequence -> history.get(sequence).keySet().stream()
+                        .map(expression ->
+                                sequence.toString()
+                                        + Characters.DOT
+                                        + Characters.BLANK
+                                        + expression.getLiteral()
+                                        + Characters.BLANK
+                                        + Characters.EQUALS_SIGN
+                                        + Characters.BLANK
+                                        + history.get(sequence).get(expression).getResult()
+                        )
+                )
+                .collect(Collectors.toList());
+    }
+
+    public Map<Long, Map<Expression, CalculationResult>> getHistory() {
+        return history;
+    }
 }
