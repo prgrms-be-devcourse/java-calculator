@@ -5,22 +5,34 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
 
-    Console console;
-    Calculator calculator;
+    static Console console;
+    static Calculator calculator;
 
     @BeforeAll
-    void App() {
-        this.console = new Console();
+    static void App() {
+        console = new Console();
 
-        this.calculator = Calculator.builder()
+        calculator = Calculator.builder()
                 .input(console)
                 .output(console)
                 .build();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"(1 + 2) / (5 - 3), 12+53-/", "1 + 2 * 4 - 2, 124*+2-", "2 * ( 6 / 3 + 7), 263/7+*"})
+    @DisplayName("중위표기법 -> 후위표기법 변환")
+    void change(String input, String after) {
+        String change = calculator.change(input);
+
+        assertThat(change).isEqualTo(after);
     }
 
     @Test
