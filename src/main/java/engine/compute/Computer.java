@@ -22,11 +22,11 @@ public class Computer {
     }
 
     public String compute(String input) {
-        List<Token> tokens = expressionConverter.convertUserInputToToken(input);
+        List<Token> tokens = expressionConverter.convertUserInputToTokenList(input);
 
-        List<Token> availTokens = expressionValidator.validateToken(tokens);
+        List<Token> validatedTokenList = expressionValidator.getValidatedTokenList(tokens);
 
-        List<Token> postFix = expressionConverter.convertToPostFix(availTokens);
+        List<Token> postFix = expressionConverter.convertToPostFix(validatedTokenList);
 
         return operateMachine.doCalculate(postFix);
     }

@@ -16,7 +16,7 @@ class MapHistoryTest {
         mapHistory.save("2+2", "4");
         Assertions.assertEquals(mapHistory.getMap().size(), 2);
 
-        String all = mapHistory.getAll();
+        String all = mapHistory.convertToString();
         System.out.println(all);
     }
 }

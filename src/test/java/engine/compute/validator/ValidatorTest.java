@@ -20,7 +20,7 @@ class ValidatorTest {
     }
 
     @Test
-    void isNumberTest() {
+    void 입력값이숫자인지검증() {
         Assertions.assertEquals(validator.isNumber(new Token("3.14")), true);
         Assertions.assertEquals(validator.isNumber(new Token("314")), true);
         Assertions.assertEquals(validator.isNumber(new Token("0.14")), true);
@@ -56,34 +56,43 @@ class ValidatorTest {
     }
 
     @Test
-    void isCorrectOrderTest() {
-        List<Token> tokens1 = converter.convertUserInputToToken("3+5");
+    void 연산식순서검증테스트1() {
+        List<Token> tokens1 = converter.convertUserInputToTokenList("3+5");
         Assertions.assertEquals(validator.isCorrectOrder(tokens1), true);
-
-        List<Token> tokens4 = converter.convertUserInputToToken("3+5 * 4 / 2");
+    }
+    @Test
+    void 연산식순서검증테스트2() {
+        List<Token> tokens4 = converter.convertUserInputToTokenList("3+5 * 4 / 2");
         Assertions.assertEquals(validator.isCorrectOrder(tokens4), true);
-
-        List<Token> tokens2 = converter.convertUserInputToToken("35+");
+    }
+    @Test
+    void 연산식순서검증테스트3() {
+        List<Token> tokens2 = converter.convertUserInputToTokenList("35+");
         Assertions.assertEquals(validator.isCorrectOrder(tokens2), false);
+    }
 
-        List<Token> tokens3 = converter.convertUserInputToToken("++35");
+    @Test
+    void 연산식순서검증테스트4() {
+        List<Token> tokens3 = converter.convertUserInputToTokenList("++35");
         Assertions.assertEquals(validator.isCorrectOrder(tokens3), false);
-
-
-        List<Token> tokens5 = converter.convertUserInputToToken("3++5 * 4 / 2");
+    }
+    @Test
+    void 연산식순서검증테스트5() {
+        List<Token> tokens5 = converter.convertUserInputToTokenList("3++5 * 4 / 2");
         Assertions.assertEquals(validator.isCorrectOrder(tokens5), false);
     }
 
     @Test
-    void allValidationTest() {
-        List<Token> tokens1 = converter.convertUserInputToToken("35+");
+    void 잘못된연산식테스트1() {
+        List<Token> tokens = converter.convertUserInputToTokenList("35+");
         Assertions.assertThrowsExactly(NotValidInputException.class,
-                () -> validator.validateToken(tokens1));
+                () -> validator.getValidatedTokenList(tokens));
+    }
 
-        List<Token> tokens2 = converter.convertUserInputToToken("3++5 * 4 / 2 +");
+    @Test
+    void 잘못된연산식테스트2() {
+        List<Token> tokens = converter.convertUserInputToTokenList("3++5 * 4 / 2 +");
         Assertions.assertThrowsExactly(NotValidInputException.class,
-                () -> validator.validateToken(tokens2));
-
-        List<Token> tokens3 = converter.convertUserInputToToken("3+ 5 / 2 * 7.2 +5.09");
+                () -> validator.getValidatedTokenList(tokens));
     }
 }

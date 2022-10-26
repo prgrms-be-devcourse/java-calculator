@@ -19,8 +19,8 @@ public class OperateMachine {
 
         for (Token token : postFix) {
             if (validator.isNumber(token)) {
-                double d = Double.parseDouble(token.getToken());
-                st.push(d);
+                double storedValue = Double.parseDouble(token.getToken());
+                st.push(storedValue);
 
             }
             if (validator.isOperator(token)) {
@@ -33,11 +33,11 @@ public class OperateMachine {
                 st.push(result);
             }
         }
-        return numberFormatting(st.pop());
+        return formatReturnString(st.pop());
     }
 
     //소수점 두자리까지만 출력
-    private String numberFormatting(double num) {
+    private String formatReturnString(double num) {
         DecimalFormat df = new DecimalFormat(NUMBER_FORMAT);
         return df.format(num);
     }

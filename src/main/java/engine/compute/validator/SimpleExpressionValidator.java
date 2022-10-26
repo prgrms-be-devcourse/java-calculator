@@ -11,7 +11,7 @@ public class SimpleExpressionValidator implements ExpressionValidator {
     private final static String errorMsg = "잘못된 수식이 입력되었습니다";
 
     @Override
-    public List<Token> validateToken(List<Token> tokenList) {
+    public List<Token> getValidatedTokenList(List<Token> tokenList) {
         for (Token token : tokenList) {
             if (!(isNumber(token) || isOperator(token))) {
                 throw new NotValidInputException(errorMsg);

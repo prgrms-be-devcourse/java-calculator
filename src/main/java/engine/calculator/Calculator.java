@@ -23,11 +23,11 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-        String sb = makeOptionList();
+        String optionList = makeOptionList();
         String userCommand = "";
 
         while (!userCommand.equals(EXIT.getOption())) {
-            input.showOption(sb);
+            input.showOption(optionList);
             userCommand = input.getUserInputOption();
 
             try {

@@ -29,7 +29,7 @@ class OperateMachineTest {
 
     @Test
     void 사칙연산테스트() {
-        List<Token> tokens = converter.convertUserInputToToken("3*5 - 4/2");
+        List<Token> tokens = converter.convertUserInputToTokenList("3*5 - 4/2");
         List<Token> postFix = converter.convertToPostFix(tokens);
 
         String result = machine.doCalculate(postFix);
@@ -38,7 +38,7 @@ class OperateMachineTest {
 
     @Test
     void 사칙연산테스트2() {
-        List<Token> tokens = converter.convertUserInputToToken("8 / 2 * 5 + 4 - 4 / 2 + 5");
+        List<Token> tokens = converter.convertUserInputToTokenList("8 / 2 * 5 + 4 - 4 / 2 + 5");
         List<Token> postFix = converter.convertToPostFix(tokens);
 
         String result = machine.doCalculate(postFix);
@@ -48,7 +48,7 @@ class OperateMachineTest {
 
     @Test
     void zero로나누는경우() {
-        List<Token> tokens = converter.convertUserInputToToken("8 / 0");
+        List<Token> tokens = converter.convertUserInputToTokenList("8 / 0");
         List<Token> postFix = converter.convertToPostFix(tokens);
 
         Assertions.assertThrowsExactly(NotValidInputException.class,

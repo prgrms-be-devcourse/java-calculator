@@ -5,7 +5,7 @@ import engine.model.Token;
 import java.util.List;
 
 public interface ExpressionValidator {
-    List<Token> validateToken(List<Token> tokenList);
+    List<Token> getValidatedTokenList(List<Token> tokenList);
 
     boolean isNumber(Token token);
 

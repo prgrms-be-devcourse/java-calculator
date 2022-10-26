@@ -22,7 +22,7 @@ class ExpressionTest {
 
     @Test
     void 후위식전환테스트() {
-        List<Token> tokens = converter.convertUserInputToToken("3 * 5 - 4 / 2");
+        List<Token> tokens = converter.convertUserInputToTokenList("3 * 5 - 4 / 2");
         List<Token> result = converter.convertToPostFix(tokens);
 
         StringBuilder sb = new StringBuilder();
@@ -33,6 +33,6 @@ class ExpressionTest {
     @Test
     void 후위식전환테스트2() {
         Assertions.assertThrowsExactly(NotValidInputException.class,
-                () -> converter.convertUserInputToToken("3 * * 5 - 4 / 2"));
+                () -> converter.convertUserInputToTokenList("3 * * 5 - 4 / 2"));
     }
 }
