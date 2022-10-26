@@ -6,19 +6,21 @@ import java.util.*;
 
 public class CalculatorRepositoryImpl implements CalculatorRepository<String, String> {
 
-    private final LinkedHashMap<String, String> memory = new LinkedHashMap<>();
+    private final HashMap<String, String> cache = new HashMap<>();
+    private final ArrayList<String> memory = new ArrayList<>();
 
-    public LinkedHashMap<String, String> findAll() {
+    public ArrayList<String> findAll() {
         return memory;
     }
 
     @Override
     public void save(String input, String answer) {
-        memory.put(input, answer);
+        memory.add(input + " = " + answer);
+        cache.put(input, answer);
     }
 
     @Override
     public Optional<String> find(String input) {
-        return Optional.ofNullable(memory.get(input));
+        return Optional.ofNullable(cache.get(input));
     }
 }

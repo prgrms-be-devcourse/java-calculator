@@ -137,4 +137,19 @@ class CalculatorServiceImplTest {
 
     }
 
+    @Test
+    @DisplayName("같은 값 입력 하고 같은 값 출력 테스트")
+    void test() {
+        //given
+        String input = "1 + 1";
+        String answer = "2";
+        calculatorRepository.save(input, answer);
+
+        //when
+        Optional<String> find = calculatorRepository.find("1 + 1");
+
+        //then
+        assertEquals(find.get(), "2");
+
+    }
 }
