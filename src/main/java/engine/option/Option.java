@@ -23,17 +23,13 @@ public enum Option {
         return sb.toString();
     }
 
-    public static String checkUserInput(String userCommand) {
+    public static void checkUserInput(String userCommand) {
         if (userCommand.length() != 1 || !Character.isDigit(userCommand.charAt(0)))
             throw new NotValidInputException("잘못된 입력값입니다.");
 
-        if (userCommand.equals(EXIT.option)
-                || userCommand.equals(HISTORY.option)
-                || userCommand.equals(CALCULATE.option)){
-
-            return userCommand;
-        }
-        else{
+        if (userCommand.equals(EXIT.option) || userCommand.equals(HISTORY.option) || userCommand.equals(CALCULATE.option)) {
+            return;
+        } else {
             throw new NotValidInputException("잘못된 입력값입니다.");
         }
     }
