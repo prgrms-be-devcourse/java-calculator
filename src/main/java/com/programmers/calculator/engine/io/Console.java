@@ -17,7 +17,7 @@ public class Console implements Input, Output {
 
     @Override
     public String formulaInput(String formulaPrompt) {
-        System.out.println(formulaPrompt);
+        System.out.print(formulaPrompt);
         return scanner.nextLine();
     }
 
