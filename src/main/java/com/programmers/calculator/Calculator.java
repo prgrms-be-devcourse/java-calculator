@@ -10,8 +10,16 @@ public class Calculator {
         this.view = view;
     }
 
-
     public void run() {
+        while (true) {
+            try {
+                view.show();
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+                return;
+            }
 
+        }
     }
+
 }
