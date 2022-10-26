@@ -8,7 +8,7 @@ public class HashMapRepository implements Repository {
     private final HashMap<Long, String> results = new LinkedHashMap<>();
 
     @Override
-    public void saveResult(String input, int output) {
+    public void saveResult(String input, long output) {
         String result = input + " = " + output;
         results.put(order++, result);
     }

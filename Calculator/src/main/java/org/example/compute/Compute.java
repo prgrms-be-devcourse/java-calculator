@@ -13,4 +13,6 @@ public interface Compute {
     List<String> convertTokenToPostfix(List<String> tokens);
 
     long calculate(List<String> postfix);
+
+    long compute(String input);
 }

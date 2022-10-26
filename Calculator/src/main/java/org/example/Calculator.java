@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.compute.Compute;
 import org.example.io.Input;
 import org.example.io.Output;
 import org.example.repository.Repository;
@@ -11,13 +12,15 @@ public class Calculator {
     private Input input;
     private Output output;
     private Validate validate;
+    private Compute compute;
     private Repository repository;
 
 
-    public Calculator(Input input, Output output, Validate validate, Repository repository) {
+    public Calculator(Input input, Output output, Validate validate, Compute compute, Repository repository) {
         this.input = input;
         this.output = output;
         this.validate = validate;
+        this.compute = compute;
         this.repository = repository;
     }
 
@@ -33,11 +36,11 @@ public class Calculator {
                 // 유효한 입력인지 확인
                 if(!validate.isValidExpression(expression)) continue;
                 // 계산
-
+                long answer = compute.compute(expression);
                 // repository 에 저장
-                repository.saveResult(expression,1);
-                // 출력
-                output.printCalculatedResult(1);
+                repository.saveResult(expression,answer);
+                // 계산 결과 출력
+                output.printCalculatedResult(answer);
             }
         }
     }

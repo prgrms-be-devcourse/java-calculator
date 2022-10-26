@@ -9,7 +9,7 @@ public class ConsoleOutput implements Output{
         System.out.println();
     }
     @Override
-    public void printCalculatedResult(int result) {
+    public void printCalculatedResult(long result) {
         System.out.println(result);
         System.out.println();
     }
