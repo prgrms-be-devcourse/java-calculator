@@ -12,8 +12,8 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     private final CalculatorRepository calculatorRepository;
 
-    public String record() {
-        StringBuffer sb = new StringBuffer();
+    public String calculationResult() {
+        StringBuilder sb = new StringBuilder();
         calculatorRepository.findAll().forEach(find -> {
             sb.append(find);
             sb.append("\n");

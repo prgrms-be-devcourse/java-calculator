@@ -1,13 +1,14 @@
 package org.programmers.java.calculator.service.impl;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.programmers.java.calculator.repository.impl.CalculatorRepositoryImpl;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorServiceImplTest {
 
@@ -15,21 +16,22 @@ class CalculatorServiceImplTest {
     private final CalculatorRepositoryImpl calculatorRepository = new CalculatorRepositoryImpl();
 
     @Test
-    @DisplayName("saveTest : 1개 저장")
-    void save() {
+    @DisplayName("하나의 값 저장 테스트")
+    void saveOne() {
         //given
         String input = "1 + 1 * 2";
         String answer = "3";
-        calculatorRepository.save(input, answer);
 
         //when
+        Long saveId = calculatorRepository.save(input, answer);
+
         //then
-        assertEquals(1, 1);
+        assertEquals(0L, saveId);
     }
 
     @Test
-    @DisplayName("saveTest : 2개 저장")
-    void save1() {
+    @DisplayName("2개의 값 저장 테스트")
+    void saveTwo() {
         //given
         String input = "1 + 1 * 2";
         String answer = "3";
@@ -38,34 +40,34 @@ class CalculatorServiceImplTest {
         String answer1 = "12";
 
         //when
-        calculatorRepository.save(input, answer);
-        calculatorRepository.save(input1, answer1);
+        Long saveId0 = calculatorRepository.save(input, answer);
+        Long saveId1 = calculatorRepository.save(input1, answer1);
 
         //then
-        assertEquals(1, 1);
+        assertEquals(0L, saveId0);
+        assertEquals(1L, saveId1);
+
     }
 
     @Test
-    @DisplayName("findAllTest : 0개 조회")
+    @DisplayName("없는 값 조회 테스트")
     void recordZero() {
         //given
         StringBuffer sb = new StringBuffer();
 
         //when
-        calculatorRepository.findAll().forEach((key, value) ->{
-            sb.append(key);
-            sb.append(" = ");
-            sb.append(value);
+        calculatorRepository.findAll().forEach(find ->{
+            sb.append(find);
             sb.append("\n");
         });
 
         //then
-        assertEquals(sb.toString(), "");
+        assertEquals("",sb.toString(),"성공");
 
     }
 
     @Test
-    @DisplayName("findAllTest : 1개 조회")
+    @DisplayName("조회 테스트")
     void recordOne() {
         //given
         StringBuffer sb = new StringBuffer();
@@ -75,10 +77,8 @@ class CalculatorServiceImplTest {
         calculatorRepository.save(input, answer);
 
         //when
-        calculatorRepository.findAll().forEach((key, value) ->{
-            sb.append(key);
-            sb.append(" = ");
-            sb.append(value);
+        calculatorRepository.findAll().forEach(find ->{
+            sb.append(find);
             sb.append("\n");
         });
 
@@ -90,7 +90,7 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    @DisplayName("findAllTest : 2개 조회")
+    @DisplayName("다중 값 조회 테스트")
     void recordTwo() {
         //given
         StringBuffer sb = new StringBuffer();
@@ -104,10 +104,8 @@ class CalculatorServiceImplTest {
         calculatorRepository.save(input, answer);
 
         //when
-        calculatorRepository.findAll().forEach((key, value) ->{
-            sb.append(key);
-            sb.append(" = ");
-            sb.append(value);
+        calculatorRepository.findAll().forEach(find ->{
+            sb.append(find);
             sb.append("\n");
         });
 
@@ -122,7 +120,7 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    @DisplayName("findTest : 조회")
+    @DisplayName("이미 저장된 값 조회 테스트")
     void find() {
         //given
         String input = "1 + 1";
@@ -133,7 +131,7 @@ class CalculatorServiceImplTest {
         Optional<String> find = calculatorRepository.find("1 + 1");
 
         //then
-        assertEquals(find.get(), "2");
+        assertEquals("2", find.get(), "성공");
 
     }
 
@@ -141,15 +139,27 @@ class CalculatorServiceImplTest {
     @DisplayName("같은 값 입력 하고 같은 값 출력 테스트")
     void test() {
         //given
+        StringBuffer sb = new StringBuffer();
+
         String input = "1 + 1";
         String answer = "2";
         calculatorRepository.save(input, answer);
 
+        String input1 = "1 + 1";
+        String answer1 = "2";
+        calculatorRepository.save(input1, answer1);
+
         //when
-        Optional<String> find = calculatorRepository.find("1 + 1");
+        calculatorRepository.findAll().forEach(find ->{
+            sb.append(find);
+            sb.append("\n");
+        });
 
         //then
-        assertEquals(find.get(), "2");
+        assertEquals(sb.toString(), """
+                1 + 1 = 2
+                1 + 1 = 2
+                """);
 
     }
 }

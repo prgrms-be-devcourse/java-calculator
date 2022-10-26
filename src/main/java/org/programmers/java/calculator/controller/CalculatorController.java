@@ -2,7 +2,8 @@ package org.programmers.java.calculator.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.programmers.java.calculator.service.CalculatorService;
-import org.programmers.java.calculator.util.postfix.InfixToPostfixTranslator;
+import org.programmers.java.calculator.util.postfix.PostfixCalculator;
+import org.programmers.java.calculator.util.postfix.PostfixTranslator;
 import org.programmers.java.calculator.util.verifiaction.FormulaVerification;
 
 import java.util.*;
@@ -10,9 +11,10 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CalculatorController {
     private final CalculatorService calculatorService;
+    private final PostfixTranslator postfixTranslator;
 
-    public String record() {
-        return calculatorService.record();
+    public String calculationResult() {
+        return calculatorService.calculationResult();
     }
 
     public String calculate(String input) {
@@ -20,15 +22,15 @@ public class CalculatorController {
         if (cache.isPresent()) {
             return cache.get();
         } else {
-            String answer = getAnswer(input);
+            String answer = getAnswer(input).toString();
             calculatorService.save(input, answer);
             return answer;
         }
     }
 
-    private String getAnswer(String input) {
+    private Double getAnswer(String input) {
         List<String> token = parse(input);
-        String answer = InfixToPostfixTranslator.infixToPostfix(token);
+        Double answer = postfixTranslator.infixToPostfix(token);
         return answer;
     }
 

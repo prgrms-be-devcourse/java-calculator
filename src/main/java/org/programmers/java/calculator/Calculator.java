@@ -10,10 +10,10 @@ public class Calculator implements Runnable {
 
     private final CalculatorController calculatorController;
     private final Console console;
-    private static boolean POWER = true;
+    private boolean power = true;
     @Override
     public void run() {
-        while (POWER) {
+        while (power) {
             console.printMeun();
             Menu menu = Menu.selectMenu(console.read());
             execution(menu);
@@ -22,7 +22,7 @@ public class Calculator implements Runnable {
 
     private void execution(Menu menu) {
         String answer = switch (menu) {
-            case RECORD -> calculatorController.record();
+            case RECORD -> calculatorController.calculationResult();
             case CALCULATE -> calculatorController.calculate(console.read());
             case EXIT -> off();
             case ERROR -> "잘못된 입력 입니다.\n";
@@ -31,7 +31,7 @@ public class Calculator implements Runnable {
     }
 
     private String off() {
-        POWER = false;
+        power = false;
         return "종료 합니다.";
     }
 

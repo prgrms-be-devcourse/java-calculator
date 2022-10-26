@@ -11,7 +11,7 @@ import org.programmers.java.calculator.service.impl.CalculatorServiceImpl;
 public class App {
     public static void main(String[] args) {
 
-        CalculatorRepository<String, String> calculatorRepository = new CalculatorRepositoryImpl();
+        CalculatorRepository<String> calculatorRepository = new CalculatorRepositoryImpl();
         CalculatorService calculatorService = new CalculatorServiceImpl(calculatorRepository);
         CalculatorController calculatorController = new CalculatorController(calculatorService);
         Console console = new Console();

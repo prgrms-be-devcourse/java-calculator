@@ -4,7 +4,7 @@ package org.programmers.java.calculator.service;
 import java.util.Optional;
 
 public interface CalculatorService {
-    String record();
+    String calculationResult();
 
     Optional<String> find(String input);
 
