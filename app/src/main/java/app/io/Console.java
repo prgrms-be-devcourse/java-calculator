@@ -1,0 +1,55 @@
+package app.io;
+
+import app.calculator.Answer;
+import app.calculator.Select;
+
+import java.util.Scanner;
+
+// 사용자 입출력값
+public class Console implements Input, Output{
+
+    private Scanner scanner = new Scanner(System.in);
+
+    @Override
+    public Select selectInput() {
+        System.out.println("1. 조회 \n2. 계산\n3. 종료");
+        int selectNumber = scanner.nextInt();
+        selectOutput(selectNumber);
+
+        if (selectNumber == 1) return Select.LOOK_UP;
+        else if (selectNumber == 2) return Select.CALCULATE;
+        else if (selectNumber == 3) return Select.EXIT;
+        return null;
+    }
+
+    @Override
+    public String calculateInput() {
+        scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public void selectOutput(int selectNumber) {
+        System.out.println("선택 : " + selectNumber);
+    }
+
+    @Override
+    public void lookUpOutput(String calculateHistory) {
+        System.out.println(calculateHistory);
+    }
+
+    @Override
+    public void calculateOutput(Answer calculateResult) {
+        System.out.println(calculateResult.getCorrectAnswer());
+    }
+
+    @Override
+    public void inputError() {
+        System.out.println("잘못된 입력값입니다.");
+    }
+
+    @Override
+    public void calculateError() {
+        System.out.println("잘못된 계산입니다. (나눗셈에 0이 포함될 수 없습니다.)");
+    }
+}
