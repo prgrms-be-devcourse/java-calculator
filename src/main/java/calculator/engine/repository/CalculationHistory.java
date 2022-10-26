@@ -1,13 +1,11 @@
 package calculator.engine.repository;
 
 import calculator.application.io.enums.Characters;
+import calculator.application.io.enums.Message;
 import calculator.engine.model.CalculationResult;
 import calculator.engine.model.Expression;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CalculationHistory implements History {
@@ -23,6 +21,12 @@ public class CalculationHistory implements History {
 
     @Override
     public List<String> getLiterals() {
+        if (history.isEmpty()) {
+            List<String> literal = new ArrayList<>();
+            literal.add(Message.EMPTY_HISTORY_ALERT.toString());
+            return literal;
+        }
+
         return history.keySet().stream()
                 .flatMap(sequence -> history.get(sequence).keySet().stream()
                         .map(expression ->
