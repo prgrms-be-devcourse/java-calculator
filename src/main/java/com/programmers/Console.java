@@ -28,7 +28,7 @@ public class Console implements Input, Output {
 
     @Override
     public void wrongChoice() {
-        System.out.println("Wrong choice please input 1 number");
+        System.out.println("Wrong choice please choose in 1, 2 or 3");
     }
 
     @Override
@@ -39,5 +39,10 @@ public class Console implements Input, Output {
     @Override
     public void bracketValidationError() {
         System.out.println("Validation Error : check brackets");
+    }
+
+    @Override
+    public void caution() {
+        System.out.println("아직 완벽하지 않은 계산기입니다\n 계산식을 입력할 때, 수와 연산자는 공백으로 분리해서 입력해주세요!");
     }
 }

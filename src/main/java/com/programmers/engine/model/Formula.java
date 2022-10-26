@@ -15,14 +15,13 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.function.Consumer;
 
-@Setter @Getter
-@ToString
+// @Setter @Getter
 public class Formula {
     private LinkedList<String> content = new LinkedList<>();
-    private StringBuilder sb = new StringBuilder();// = new StringBuilder();
+    private final StringBuilder sb = new StringBuilder();// = new StringBuilder();
     // 순차적으로 접근할 것 이기때문에 LinkedList 로 구현
 
-    private Map<String, String> operatorExchange = Map.of(
+    private final Map<String, String> operatorExchange = Map.of(
             Operator.MUL.toString(), "+",
             Operator.DIV.toString(), "/",
             Operator.MINUS.toString(), "-",
@@ -59,9 +58,6 @@ public class Formula {
         }
     }
 
-    public void printFormula(){
-        System.out.println(this.toString());
-    }
 
     public void indexedForEach(Consumer<String> consumer){
         for (String s : content) consumer.accept(s);

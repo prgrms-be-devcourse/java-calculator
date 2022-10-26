@@ -48,7 +48,7 @@ public class Calculator implements Runnable{
     @Override
     public void run() {
         while(true){
-            String inputString = input.input("1. 조회\n2. 계산\n선택 : ");
+            String inputString = input.input("1. 조회\n2. 계산\n3. 종료\n선택 : ");
             if(inputString.length() == 1) {
                 Optional<Integer> num = parse(inputString);
                 BigDecimal ans = BigDecimal.valueOf(0);
@@ -57,12 +57,11 @@ public class Calculator implements Runnable{
                     dataBase.showAll();
                 } // DB 조회
                 else if (num.get() == 2) {
+                    output.caution();
                     formula.makeFormula(input.input("계산식 입력 : ")); // 계산식 입력 받기
-                    // formula.printFormula();
 
                     if (formula.validate(bracketValidator)){
                             if (formula.validate(numOperatorValidator)){
-                                formula.printFormula();
                                 ans = calculate(formula);
                                 System.out.println(ans);
                                 addToDB(dataBase, formula, ans);
@@ -104,9 +103,9 @@ public class Calculator implements Runnable{
 
 
         formula.indexedForEach((a) -> {
-            System.out.println("cur : " + a);
-            System.out.println("oper stack : " + operatorStack.toString());
-            System.out.println("numstack : " + numStack.toString() + "\n");
+//            System.out.println("cur : " + a);
+//            System.out.println("oper stack : " + operatorStack.toString());
+//            System.out.println("numstack : " + numStack.toString() + "\n");
 
             if(a.equals(Bracket.CLOSE.toString())){ // 닫는 괄호면 무조건 숫자 2개 pop 해서 계산하기
                 isBracketOpened.set(false);

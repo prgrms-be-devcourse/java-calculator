@@ -15,4 +15,6 @@ public interface Output {
     void numOperatorValidationError();
 
     void bracketValidationError();
+
+    void caution();
 }
