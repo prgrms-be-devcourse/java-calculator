@@ -1,17 +1,17 @@
 package org.programmers.java.calculator.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.programmers.java.calculator.service.CalculatorService;
 import org.programmers.java.calculator.service.impl.CalculatorServiceImpl;
+import org.programmers.java.calculator.util.postfix.PostfixCalculator;
 import org.programmers.java.calculator.util.postfix.PostfixTranslator;
 import org.programmers.java.calculator.util.verifiaction.FormulaVerification;
 
 import java.util.*;
 
-@RequiredArgsConstructor
 public class CalculatorController {
     private final CalculatorService calculatorService = new CalculatorServiceImpl();
     private final PostfixTranslator postfixTranslator = new PostfixTranslator();
+    private final PostfixCalculator postfixCalculator = new PostfixCalculator();
 
     public String calculationResult() {
         return calculatorService.calculationResult();
@@ -31,20 +31,21 @@ public class CalculatorController {
 
     private String getAnswer(String input) {
         parse(input);
-        String answer = infixToPostfix(input);
+        String postfixExpression = infixToPostfix(input);
+        String  answer = postfixCalculator(postfixExpression).toString();
         return answer;
     }
 
-    private String infixToPostfix(String token) {
-        try {
-            return postfixTranslator.infixToPostfix(token).toString();
-        } catch (IllegalArgumentException | ArithmeticException | IllegalStateException exception) {
-            return exception.getMessage();
-        }
+    private Double postfixCalculator(String info) {
+        return postfixCalculator.calculate(info);
     }
 
-    private String parse(String input) {
+    private String infixToPostfix(String token) {
+        return postfixTranslator.infixToPostfix(token).toString();
+    }
+
+    private void parse(String input) {
         List<String> tokens = Arrays.asList(input.split(" "));
-        return FormulaVerification.formulaVerifiaction(tokens);
+        FormulaVerification.formulaVerifiaction(tokens);
     }
 }

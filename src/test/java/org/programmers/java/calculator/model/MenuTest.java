@@ -8,19 +8,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class MenuTest {
 
     @Test
-    @DisplayName("메뉴를 선택하세요")
+    @DisplayName("입력값에 따라서 반환되는 메뉴를 검증하라")
     void selectMenu() {
-        Menu menuRecord = Menu.selectMenu("1");
-        Menu menuCalculate = Menu.selectMenu("2");
-        Menu menuExit = Menu.selectMenu("3");
-        Menu Error = Menu.selectMenu("-1");
+        //give
+        String inputRecord = "1";
+        String inputCalculate = "2";
+        String inputExit = "3";
+        String inputError = "-1";
+
+        //when
+        Menu selectMenuRecord = Menu.selectMenu(inputRecord);
+        Menu selectMenuCalculate = Menu.selectMenu(inputCalculate);
+        Menu selectMenuExit = Menu.selectMenu(inputExit);
+        Menu selectMenuError = Menu.selectMenu(inputError);
+
+        //then
+        assertEquals(Menu.RECORD, selectMenuRecord);
+        assertEquals(Menu.CALCULATE, selectMenuCalculate);
+        assertEquals(Menu.EXIT, selectMenuExit);
+        assertEquals(Menu.ERROR, selectMenuError);
     }
 
-    @Test
-    void values() {
-    }
 
-    @Test
-    void valueOf() {
-    }
 }

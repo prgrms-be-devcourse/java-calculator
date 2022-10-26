@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class FormulaVerification {
 
-    public static String formulaVerifiaction(List<String> tokens) {
+    public static void formulaVerifiaction(List<String> tokens) {
 
         List<String> numbers = new ArrayList<>();
         List<String> operators = new ArrayList<>();
@@ -26,8 +26,6 @@ public class FormulaVerification {
 
         numberVerification(numbers);
         operatorVerification(operators);
-
-        return "검증 완료";
     }
 
     private static void numberVerification(List<String> numbers) {

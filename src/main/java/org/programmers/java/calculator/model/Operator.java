@@ -25,7 +25,7 @@ public enum Operator {
                 .findAny().orElse(NOT_DEFINED);
     }
 
-    public double execute(Double i1, Double i2) {
+    public Double execute(Double i1, Double i2) {
         if ((this.equals(DIVIDE) || this.equals(REMAIN)) && i2 == 0) {
             throw new IllegalStateException("0으로 나눔!");
         }
