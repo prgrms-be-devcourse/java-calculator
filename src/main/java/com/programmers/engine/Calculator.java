@@ -102,6 +102,10 @@ public class Calculator implements Runnable{
 
 
         formula.indexedForEach((a) -> {
+            System.out.println("cur : " + a);
+            System.out.println("oper stack : " + operatorStack.toString());
+            System.out.println("numstack : " + numStack.toString() + "\n");
+
             if(a.equals(Bracket.CLOSE.toString())){ // 닫는 괄호면 무조건 숫자 2개 pop 해서 계산하기
                 BigDecimal tmp1 = numStack.pop();
                 BigDecimal tmp2 = numStack.pop();
@@ -121,8 +125,11 @@ public class Calculator implements Runnable{
                 if (operatorStack.isEmpty()) operatorStack.push(map.get(a));
                 // 연산자 스택이 비어있으면 무조건 그냥 넣기
                 else if((operatorStack.peek().equals(Operator.PLUS) || operatorStack.peek().equals(Operator.MINUS))
-                || ((operatorStack.peek().equals(Operator.MUL) || operatorStack.peek().equals(Operator.DIV)) &&
-                        (map.get(a).equals(Operator.MUL) || map.get(a).equals(Operator.DIV)))){
+                 && (a.equals(Operator.DIV.toString()) || a.equals(Operator.MUL.toString()))){
+                    // 유일하게 연산자를 그냥 push 해도 되는 경우
+                    // stack의 맨 위 연산자가 지금 검사하는 연산자보다 우선순위가 더 높은 경우
+                    operatorStack.push(map.get(a));
+                }else{
                     // 지금 들어온 연산자가 스택의 연산자보다 우선순위가 더 높거나 같으면 ? -> 2개 pop 하고 연산 진행
                     // 그리고 결과를 숫자 스택에 push 하고 지금의 연산자를 push 함
                     BigDecimal t1 = numStack.pop();
@@ -135,15 +142,18 @@ public class Calculator implements Runnable{
                         numStack.push(t1); //  숫자 맞추기 위해 넣기
                         isDividedByZero.set(true); // 이거는 에러가 났다
                     }
-                }
-                else{ // 스택 맨 위에 있는 연산자보다 지금 연산자가 우선순위가 더 높음 -> 그냥 push
                     operatorStack.push(map.get(a));
                 }
+//                else if((operatorStack.peek().equals(Operator.PLUS) || operatorStack.peek().equals(Operator.MINUS))
+//                || ((operatorStack.peek().equals(Operator.MUL) || operatorStack.peek().equals(Operator.DIV)) &&
+//                        (map.get(a).equals(Operator.MUL) || map.get(a).equals(Operator.DIV)))){
+//
+//                }
             }
             else numStack.push(BigDecimal.valueOf(Double.parseDouble(a))); // 숫자는 그냥 숫자 stack 에 넣기
                 });
 
-        if (!operatorStack.isEmpty()){
+        while (!operatorStack.isEmpty()){
             BigDecimal a1 = numStack.pop();
             BigDecimal a2 = numStack.pop();
             Operator o = operatorStack.pop();
