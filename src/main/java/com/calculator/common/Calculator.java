@@ -12,7 +12,7 @@ import java.util.Stack;
 @Builder
 public class Calculator implements Runnable {
 
-    private int result;
+    private double result;
 
     private Input input;
     private Output output;
@@ -44,14 +44,26 @@ public class Calculator implements Runnable {
         repository.findAll();
     }
 
-    public int calculate(String input) {
-        int result = 0;
+    public double calculate(String input) {
+        double result = 0;
 
         String after = change(input);
 
         // 후위 표기법 계산
+        Stack<Double> stack = new Stack<>();
+        for (int i = 0; i < after.length(); i++) {
+            if (Character.isDigit(after.charAt(i))) {
+                stack.push((double) after.charAt(i) - '0');
+            } else {
+                Double b = stack.pop();
+                Double a = stack.pop();
 
+                EOperator eOperator = findEnumByName(after.charAt(i));
+                stack.push(eOperator.calculate(a, b));
+            }
+        }
 
+        result = stack.pop();
         save(input, result);
 
         return result;
@@ -124,7 +136,7 @@ public class Calculator implements Runnable {
         return null;
     }
 
-    private void save(String infix, int result) {
+    private void save(String infix, double result) {
         Expression expression = new Expression(infix, result);
         repository.save(expression);
     }
