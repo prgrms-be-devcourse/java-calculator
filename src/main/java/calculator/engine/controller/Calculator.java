@@ -13,7 +13,6 @@ public class Calculator {
 
     public CalculationResult calculate(Expression infix) {
         Expression postfix = converter.toPostfix(infix);
-        CalculationResult result = calculator.calculate(postfix);
-        return new CalculationResult();
+        return calculator.calculate(postfix);
     }
 }
