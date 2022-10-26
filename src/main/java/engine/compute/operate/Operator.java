@@ -6,7 +6,10 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", 1, (n1, n2) -> n1 + n2), MINUS("-", 1, (n1, n2) -> n1 - n2), MULTIPLY("*", 2, (n1, n2) -> n1 * n2), DIVIDE("/", 2, (n1, n2) -> {
+    PLUS("+", 1, (n1, n2) -> n1 + n2),
+    MINUS("-", 1, (n1, n2) -> n1 - n2),
+    MULTIPLY("*", 2, (n1, n2) -> n1 * n2),
+    DIVIDE("/", 2, (n1, n2) -> {
         if (n2 == 0) throw new NotValidInputException("0으로 나눌 수 없습니다.");
         return n1 / n2;
     });

@@ -3,16 +3,17 @@ package engine.io;
 import java.util.Scanner;
 
 public class ConsoleInput implements Input {
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String showOption(String msg) {
-        System.out.println(msg);
-        return sc.nextLine();
+    public String showOption(String message) {
+        System.out.println(message);
+        return scanner.nextLine();
     }
 
     @Override
-    public String getCalculateSentence(String msg) {
-        return sc.nextLine();
+    public String getCalculateSentence(String message) {
+        System.out.println(message);
+        return scanner.nextLine();
     }
 }

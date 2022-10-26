@@ -29,10 +29,12 @@ public enum Option {
 
         int comm = Integer.parseInt(userCommand);
 
-        if (comm == 0 || comm == 1 || comm == 2)
+        if (comm == 0 || comm == 1 || comm == 2){
             return comm;
-        else
+        }
+        else{
             throw new NotValidInputException("잘못된 입력값입니다.");
+        }
     }
 
     public String getCommand() {

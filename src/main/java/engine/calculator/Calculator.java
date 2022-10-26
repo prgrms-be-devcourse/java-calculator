@@ -30,16 +30,16 @@ public class Calculator implements Runnable {
             String userCommand = input.showOption(sb);
 
             try {
-                int comm = Option.checkUserInput(userCommand.trim());
+                int command = Option.checkUserInput(userCommand.trim());
 
-                if (comm == 0) {
+                if (command == 0) {
                     exitFlag = false;
-                } else if (comm == 1) {
+                } else if (command == 1) {
                     output.showHistory(history);
                 } else {
                     String userInputExpression = input.getCalculateSentence("계산할 식을 입력해주세요.");
 
-                    String answer = computer.compute(userInputExpression); //연산 처리 의탁
+                    String answer = computer.compute(userInputExpression);
 
                     history.save(userInputExpression, answer);
                     output.printAnswer(answer);

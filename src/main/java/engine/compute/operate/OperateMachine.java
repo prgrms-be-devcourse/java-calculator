@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class OperateMachine {
     private ExpressionValidator validator;
-
+    private static final String NUMBER_FORMAT = "0.00";
     public OperateMachine(ExpressionValidator validator) {
         this.validator = validator;
     }
@@ -38,7 +38,7 @@ public class OperateMachine {
 
     //소수점 두자리까지만 출력
     private String numberFormatting(double num) {
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat df = new DecimalFormat(NUMBER_FORMAT);
         return df.format(num);
     }
 }
