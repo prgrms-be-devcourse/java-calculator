@@ -1,39 +1,15 @@
-# java_calculator
-자바 계산기 구현 미션 Repository입니다.
-
-### 이곳은 공개 Repo입니다.
-1. 여러분의 포트폴리오로 사용하셔도 됩니다.
-2. 때문에 이 repo를 fork한 뒤
-3. 여러분의 개인 Repo에 작업하며 
-4. 이 Repo에 PR을 보내어 멘토의 코드 리뷰와 피드백을 받으세요.
-
-### Branch 명명 규칙 + 팀의 PR규칙 정하기
-1. 여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
-2. prgrms-be-devcourse/spring-board 레포로 PR시 branch는 gituser_id을 적어주세요 :)  
-    - base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 `github_id`
-3. 실제 진행할 PR규칙은 멘토+팀원들과 정하여 진행해주세요 :) 
-    - ← head repo : `여러분repo` compare : `main`로 할지
-    - 또는 ← head repo : `여러분repo` compare : `github_id`로 할지
-- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
-
-### 과제를 통해 기대하는 역량
-
-- 깃허브를 통한 코드리뷰를 경험해보자
-- 기본적인 테스트 코드 작성 및 활용하는 능력해보자
-- 스스로 OOP를 생각하고 코드로 옮길 수 있는 능력해보자
-
-### 요구사항
-- 콘솔로 구현입니다.(스윙으로 구현하시는 분들 계실까봐) 
-- 객체지향적인 코드로 계산기 구현하기
-    - [ ]  더하기
-    - [ ]  빼기
-    - [ ]  곱하기
-    - [ ]  나누기
-    - [ ]  우선순위(사칙연산)
-- [ ]  테스트 코드 구현하기
-- [ ]  계산 이력을 맵으로 데이터 저장기능 만들기
+# 과제 요구사항
+- 객체지향적인 코드로 콘솔객 계산기 구현하기
+    - [X]  더하기
+    - [X]  빼기
+    - [X]  곱하기
+    - [X]  나누기
+    - [X]  우선순위(사칙연산)
+- [X]  테스트 코드 구현하기
+- [X]  계산 이력을 맵으로 데이터 저장기능 만들기
     - 애플리케이션이 동작하는 동안 데이터베이스 외에 데이터를 저장할 수 있는 방법을 고안해보세요.
-- (선택) 정규식 사용
+- 정규식 사용 - (숫자, 연산자, 수식 판별)
+
 
 ### 실행결과(콘솔)
 ```
@@ -65,5 +41,33 @@
 
 3 - 2 * 2
 -1
+
 ```
 
+# 설명
+
+## 다이어그램
+<img width="746" alt="스크린샷 2022-10-26 오후 1 32 39" src="https://user-images.githubusercontent.com/86050295/198039950-dd206640-8ceb-41d5-bd78-afaf0cc2dd58.png">
+
+
+## 인터페이스 & 객체
+- `Controller` : 입력을 받고, 그 입력을 Validator들로 검사한 후
+Calcuator로 계산해 Repository에 저장하는 역할을 하는 인터페이스 입니다.
+- `Validator` : 입력이 특정 조건을 만족하는지 검사하기 위한 인터페이스입니다.
+- `Calculator` : String 입력을 받아, double형 계산 결과를 반환하는 인터페이스 입니다.
+- `Repository` : 계산 이력을 저장하고, 조회 할 수 있게 하는 인터페이스입니다.
+
+<br>
+
+- `FormValidator` : 주어진 식의 괄호짝이 맞는지 검사하는 객체 입니다.
+- `MathExpressionValidator` : 주어진 식이 올바른 식 인지를 검사하는 객체 입니다.
+- `FormValidator` : 입력이 받고자하는 형태로 들어오는지 검사하는 객체 입니다.
+    
+    받고자 하는 형태 - 숫자(공백)연산자(공백)숫자 (단, 가장 첫 글자에 연산자를 허용하지 않음)
+    ex) 1 + 2 * ( 1 + 3 )
+    
+<br>
+
+- `Console` : Controller를 구현한 클래스입니다
+- `PostfixCalculator` : 후위 연산으로 Calculator를 구현한 객체입니다.
+- `InMemoryRepository` : 계산 이력을 HashMap에 저장하고, 조회 할 수 있게 하는 객체입니다.
