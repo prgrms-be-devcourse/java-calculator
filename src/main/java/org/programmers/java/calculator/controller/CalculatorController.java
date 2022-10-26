@@ -2,6 +2,7 @@ package org.programmers.java.calculator.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.programmers.java.calculator.service.CalculatorService;
+import org.programmers.java.calculator.service.impl.CalculatorServiceImpl;
 import org.programmers.java.calculator.util.postfix.PostfixTranslator;
 import org.programmers.java.calculator.util.verifiaction.FormulaVerification;
 
@@ -9,7 +10,7 @@ import java.util.*;
 
 @RequiredArgsConstructor
 public class CalculatorController {
-    private final CalculatorService calculatorService;
+    private final CalculatorService calculatorService = new CalculatorServiceImpl();
     private final PostfixTranslator postfixTranslator = new PostfixTranslator();
 
     public String calculationResult() {

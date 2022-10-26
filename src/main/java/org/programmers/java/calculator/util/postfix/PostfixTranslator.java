@@ -8,16 +8,15 @@ import java.util.List;
 
 public class PostfixTranslator {
 
+    private final PostfixCalculator postfixCalculator = new PostfixCalculator();
+
     public Double infixToPostfix(List<String> tokens) {
         StringBuilder sb = new StringBuilder();
         Deque<Operator> deque = new ArrayDeque<>();
 
         translator(tokens, sb, deque);
         extractRemainOperatorFromDeque(sb, deque);
-        double postfixCalculator = new PostfixCalculator().calculate(sb.toString());
-
-
-        return postfixCalculator;
+        return postfixCalculator.calculate(sb.toString());
     }
 
     private void extractRemainOperatorFromDeque(StringBuilder sb, Deque<Operator> deque) {

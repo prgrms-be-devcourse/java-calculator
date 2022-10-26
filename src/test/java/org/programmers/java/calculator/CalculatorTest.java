@@ -13,9 +13,7 @@ class CalculatorTest {
     @Test
     void run() {
         //given
-        CalculatorRepositoryImpl calculatorRepositoryImpl = new CalculatorRepositoryImpl();
-        CalculatorServiceImpl calculatorServiceImpl = new CalculatorServiceImpl(calculatorRepositoryImpl);
-        CalculatorController calculatorController = new CalculatorController(calculatorServiceImpl);
+        CalculatorController calculatorController = new CalculatorController();
         Console console = new Console();
         Calculator calculator = new Calculator(calculatorController, console);
 

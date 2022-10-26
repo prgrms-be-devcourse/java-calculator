@@ -3,6 +3,7 @@ package org.programmers.java.calculator.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.programmers.java.calculator.repository.CalculatorRepository;
+import org.programmers.java.calculator.repository.impl.CalculatorRepositoryImpl;
 import org.programmers.java.calculator.service.CalculatorService;
 
 import java.util.Optional;
@@ -10,7 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CalculatorServiceImpl implements CalculatorService {
 
-    private final CalculatorRepository calculatorRepository;
+    private final CalculatorRepository calculatorRepository = new CalculatorRepositoryImpl();
 
     public String calculationResult() {
         StringBuilder sb = new StringBuilder();

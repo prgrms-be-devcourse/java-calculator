@@ -3,20 +3,17 @@ package org.programmers.java;
 import org.programmers.java.calculator.Calculator;
 import org.programmers.java.calculator.controller.CalculatorController;
 import org.programmers.java.calculator.io.Console;
-import org.programmers.java.calculator.repository.CalculatorRepository;
-import org.programmers.java.calculator.repository.impl.CalculatorRepositoryImpl;
-import org.programmers.java.calculator.service.CalculatorService;
-import org.programmers.java.calculator.service.impl.CalculatorServiceImpl;
+import org.programmers.java.calculator.io.Input;
+import org.programmers.java.calculator.io.Output;
 
 public class App {
     public static void main(String[] args) {
 
-        CalculatorRepository<String> calculatorRepository = new CalculatorRepositoryImpl();
-        CalculatorService calculatorService = new CalculatorServiceImpl(calculatorRepository);
-        CalculatorController calculatorController = new CalculatorController(calculatorService);
-        Console console = new Console();
+        CalculatorController calculatorController = new CalculatorController();
+        Input input = new Console();
+        Output output = new Console();
 
-        Calculator calculator = new Calculator(calculatorController, console);
+        Calculator calculator = new Calculator(calculatorController, input, output);
         calculator.run();
     }
 }

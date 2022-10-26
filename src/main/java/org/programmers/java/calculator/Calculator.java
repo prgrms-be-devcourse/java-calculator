@@ -2,20 +2,22 @@ package org.programmers.java.calculator;
 
 import lombok.RequiredArgsConstructor;
 import org.programmers.java.calculator.controller.CalculatorController;
-import org.programmers.java.calculator.io.Console;
+import org.programmers.java.calculator.io.Input;
+import org.programmers.java.calculator.io.Output;
 import org.programmers.java.calculator.model.Menu;
 
 @RequiredArgsConstructor
 public class Calculator implements Runnable {
 
     private final CalculatorController calculatorController;
-    private final Console console;
+    private final Input input;
+    private final Output output;
     private boolean power = true;
     @Override
     public void run() {
         while (power) {
-            console.printMeun();
-            Menu menu = Menu.selectMenu(console.read());
+            output.printMeun();
+            Menu menu = Menu.selectMenu(input.read());
             execution(menu);
         }
     }
@@ -23,11 +25,11 @@ public class Calculator implements Runnable {
     private void execution(Menu menu) {
         String answer = switch (menu) {
             case RECORD -> calculatorController.calculationResult();
-            case CALCULATE -> calculatorController.calculate(console.read());
+            case CALCULATE -> calculatorController.calculate(input.read());
             case EXIT -> off();
             case ERROR -> "잘못된 입력 입니다.\n";
         };
-        console.print(answer);
+        output.print(answer);
     }
 
     private String off() {
