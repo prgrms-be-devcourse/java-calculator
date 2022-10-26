@@ -2,7 +2,8 @@ package calculator.application.io.enums;
 
 public enum Characters {
     BLANK(" "),
-    DOT(".");
+    DOT("."),
+    EQUALS_SIGN("=");
 
     private final String character;
 
