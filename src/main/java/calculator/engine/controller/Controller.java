@@ -23,7 +23,9 @@ public class Controller implements Runnable{
 
     @Override
     public void run() {
-        while(true) {
+        RunningState state = new RunningState();
+
+        while (state.isRunning()) {
             UserSelection selection = input.getUserSelection(SelectOption.getLiterals());
 
             if (selection.isEqualTo(SelectOption.CALCULATE)) {
@@ -37,8 +39,10 @@ public class Controller implements Runnable{
                 output.logHistory(history.getLiterals());
             }
 
-            // TODO: Exit
-
+            if (selection.isEqualTo(SelectOption.EXIT)) {
+                output.logExit();
+                state.exit();
+            }
         }
     }
 }

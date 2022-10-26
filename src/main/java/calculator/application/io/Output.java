@@ -7,4 +7,6 @@ public interface Output {
     void logHistory(List<String> history);
 
     void logResult(String result);
+
+    void logExit();
 }
