@@ -6,9 +6,8 @@ import java.util.List;
 
 @AllArgsConstructor
 public class StringExpressionConverter<T> {
-    List<T> list;
 
-    public String convert() {
+    public String convert(List<T> list) {
         StringBuffer sb = new StringBuffer();
         for (T t : list) {
             sb.append(t).append(" ");

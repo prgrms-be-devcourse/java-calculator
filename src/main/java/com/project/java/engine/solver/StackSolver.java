@@ -13,6 +13,7 @@ public class StackSolver implements Solver {
     private static final String OPER_REGULAR = "[+\\-*/]";
     private static final String NUMBER_REGULAR = "[0-9]+";
     private PriorityStrategy priorityStrategy;
+    private StringExpressionConverter<String> stringExpressionConverter;
 
     @Override
     public ResultFormat calculate(String expression) throws ZeroDivisionException {
@@ -20,7 +21,7 @@ public class StackSolver implements Solver {
         List<String> postfix = makeInfixToPostfix(expressionList);
         double result = calculatePostfix(postfix);
 
-        String convertedExpression = new StringExpressionConverter<String>(expressionList).convert();
+        String convertedExpression = stringExpressionConverter.convert(expressionList);
 
         return new ResultFormat(convertedExpression, result);
     }
