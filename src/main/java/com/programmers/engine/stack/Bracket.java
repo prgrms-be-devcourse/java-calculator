@@ -1,4 +1,5 @@
 package com.programmers.engine.stack;
 
-public class NumStack extends MyStack{
+public enum Bracket {
+    OPEN, CLOSE
 }
