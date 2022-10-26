@@ -27,7 +27,7 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"(1 + 2) / (5 - 3), 12+53-/", "1 + 2 * 4 - 2, 124*+2-", "2 * ( 6 / 3 + 7), 263/7+*"})
+    @CsvSource(value = {"(2 + 4) / (6 - 3), 24+63-/", "1 + 2 * 4 - 2, 124*+2-", "2 * ( 6 / 3 + 7), 263/7+*"})
     @DisplayName("중위표기법 -> 후위표기법 변환")
     void change(String input, String after) {
         String change = calculator.change(input);
@@ -35,30 +35,13 @@ public class CalculatorTest {
         assertThat(change).isEqualTo(after);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"(2 + 4) / (6 - 3), 2", "1 + 2 * 4 - 2, 7", "2 * ( 6 / 3 + 7), 18"})
     @DisplayName("사칙연산 계산")
-    void sum() {
-        // +
-        String input = "1 + 2";
+    void calculate(String input, int result) {
+        int calculate = calculator.calculate(input);
 
-        // -
-        String input2 = "3 - 1";
-
-        // *
-        String input3 = "3 * 8";
-
-        // /
-        String input4 = "9 / 3";
-
-        int answer = calculator.calculate(input);
-        int answer2 = calculator.calculate(input2);
-        int answer3 = calculator.calculate(input3);
-        int answer4 = calculator.calculate(input4);
-
-        assertThat(answer).isEqualTo(3);
-        assertThat(answer2).isEqualTo(2);
-        assertThat(answer3).isEqualTo(24);
-        assertThat(answer4).isEqualTo(3);
+        assertThat(calculate).isEqualTo(result);
     }
 
 }
