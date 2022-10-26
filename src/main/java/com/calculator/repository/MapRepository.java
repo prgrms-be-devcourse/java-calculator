@@ -12,9 +12,9 @@ public class MapRepository implements Repository {
 
     private Map<Integer, Expression> map = new HashMap<>();
 
-    public void forEach(Consumer<String> consumer) {
+    public void forEach(Consumer<Expression> consumer) {
         for (int i = 0; i < map.size(); i++) {
-            consumer.accept(map.get(i).toString());
+            consumer.accept(map.get(i));
         }
     }
 
