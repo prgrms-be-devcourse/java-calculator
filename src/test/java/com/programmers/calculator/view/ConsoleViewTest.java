@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Console View 테스트")
 class ConsoleViewTest {
 
     private ConsoleView consoleView;
@@ -119,7 +120,6 @@ class ConsoleViewTest {
         String outPut = output.toString();
         assertTrue(outPut.contains(expressionStr1 + " = " + result1));
         assertTrue(outPut.contains(expressionStr2 + " = " + result2));
-
     }
 
     @DisplayName("read() 테스트 - 스캐너로부터 입력을 받아 ConsoleRequest 를 반환한다.")
@@ -132,8 +132,8 @@ class ConsoleViewTest {
         Scanner scanner = new Scanner(System.in);
 
         consoleView = new ConsoleView(controller, scanner);
-        //when
 
+        //when
         Request read = consoleView.read();
 
         //then
@@ -150,8 +150,8 @@ class ConsoleViewTest {
 
         String writeStr = "write";
         ConsoleResponse consoleResponse = new ConsoleResponse(writeStr);
-        //when
 
+        //when
         consoleView.write(consoleResponse);
 
         //then
@@ -187,13 +187,11 @@ class ConsoleViewTest {
     }
 
     private InputStream createInputStreamSequence(String... inputs) {
-
         List<InputStream> inputStreams = Arrays.stream(inputs)
                 .map(input -> this.generateUserInput(input + "\n"))
                 .collect(Collectors.toList());
 
         return new SequenceInputStream(Collections.enumeration(inputStreams));
     }
-
 
 }
