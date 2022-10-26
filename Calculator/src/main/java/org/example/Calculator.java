@@ -26,14 +26,17 @@ public class Calculator {
 
     public void calculate() throws IOException {
         while (true) {
-            output.printMenu("1. 조회\n2. 계산");
-            int menuNumber = input.selectMenu("선택 : ");
+            output.printMenu("1. 조회\n2. 계산\n3. 종료");
+            String selectedMenu = input.selectMenu("선택 : ");
+            // 유효한 메뉴인지 확인
+            if (!validate.isValidMenu(selectedMenu)) continue;
+            int menuNumber = Integer.parseInt(selectedMenu);
 
             if (Menu.HISTORY.getNumber() == menuNumber) {
                 output.printSavedResults(repository);
             } else if (Menu.CALCULATE.getNumber() == menuNumber) {
                 String expression = input.input();
-                // 유효한 입력인지 확인
+                // 유효한 수식인지 확인
                 if(!validate.isValidExpression(expression)) continue;
                 // 계산
                 long answer = compute.compute(expression);

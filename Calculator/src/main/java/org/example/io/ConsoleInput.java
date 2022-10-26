@@ -8,9 +8,9 @@ public class ConsoleInput implements Input {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public int selectMenu(String s) throws IOException {
+    public String selectMenu(String s) throws IOException {
         System.out.print(s);
-        return Integer.parseInt(br.readLine());
+        return br.readLine();
     }
 
     @Override
