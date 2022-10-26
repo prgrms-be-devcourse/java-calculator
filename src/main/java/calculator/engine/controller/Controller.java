@@ -29,11 +29,12 @@ public class Controller implements Runnable{
             if (selection.isEqualTo(SelectOption.CALCULATE)) {
                 Expression infix = input.getExpression();
                 CalculationResult result = calculator.calculate(infix);
+                output.logResult(result.toString());
                 history.record(infix, result);
             }
 
             if (selection.isEqualTo(SelectOption.QUERY)) {
-                output.log(history.getLiterals());
+                output.logHistory(history.getLiterals());
             }
 
             // TODO: Exit

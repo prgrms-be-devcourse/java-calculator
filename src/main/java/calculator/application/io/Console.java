@@ -24,7 +24,12 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void log(List<String> literals) {
-        printer.printLiterals(literals);
+    public void logHistory(List<String> history) {
+        printer.printLiterals(history);
+    }
+
+    @Override
+    public void logResult(String result) {
+        printer.printLine(Message.RESULT_GUIDE + result);
     }
 }
