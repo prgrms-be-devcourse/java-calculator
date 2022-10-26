@@ -47,9 +47,18 @@ public class Calculator implements Runnable {
     public double calculate(String input) {
         double result = 0;
 
+        Expression findExpression = repository.findByInfix(input);
+        if (findExpression != null) {
+            // 이미 존재하는 계산식의 경우 계산은 건너뛰고 map에서 객체 꺼내서 내역에만 한번더 저장처리
+            result = findExpression.getResult();
+
+            repository.save(findExpression);
+            return result;
+        }
+
         String after = change(input);
 
-        // 후위 표기법 계산
+        // 후위표기법 계산
         Stack<Double> stack = new Stack<>();
         for (int i = 0; i < after.length(); i++) {
             if (Character.isDigit(after.charAt(i))) {
@@ -64,13 +73,18 @@ public class Calculator implements Runnable {
         }
 
         result = stack.pop();
-        save(input, result);
+
+        // 계산 완료 후 map에 저장
+        Expression expression = new Expression(input, result);
+        repository.save(expression);
 
         return result;
     }
 
+    /**
+     * 중위표기법 -> 후위표기법 변환
+     */
     public String change(String input) {
-        // 중위표기법 -> 후위표기법 변환
         input = input.replaceAll("\\s", "");
 
         Stack<Character> stack = new Stack<>();
@@ -134,10 +148,5 @@ public class Calculator implements Runnable {
         }
 
         return null;
-    }
-
-    private void save(String infix, double result) {
-        Expression expression = new Expression(infix, result);
-        repository.save(expression);
     }
 }
