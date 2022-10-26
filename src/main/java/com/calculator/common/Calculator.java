@@ -47,10 +47,12 @@ public class Calculator implements Runnable {
     public int calculate(String input) {
         int result = 0;
 
-        save(change(input), result);
+        String after = change(input);
 
         // 후위 표기법 계산
 
+
+        save(input, result);
 
         return result;
     }
@@ -122,8 +124,8 @@ public class Calculator implements Runnable {
         return null;
     }
 
-    private void save(String operator, int result) {
-        Expression expression = new Expression(operator, result);
+    private void save(String infix, int result) {
+        Expression expression = new Expression(infix, result);
         repository.save(expression);
     }
 }

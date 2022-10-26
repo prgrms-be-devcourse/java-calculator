@@ -4,6 +4,11 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Expression {
-    private String operators;     // 후위 표기법
+    private String infix;   // 중위 표기법
     private int result;
+
+    @Override
+    public String toString() {
+        return infix + " = " + result;
+    }
 }
