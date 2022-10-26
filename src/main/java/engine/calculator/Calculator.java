@@ -24,31 +24,34 @@ public class Calculator implements Runnable {
     @Override
     public void run() {
         String sb = makeOptionList();
-        boolean exitFlag = true;
+        String userCommand = "";
 
-        while (exitFlag) {
+        while (!userCommand.equals(EXIT.getOption())) {
             input.showOption(sb);
-            String userCommand = input.getUserInputOption();
+            userCommand = input.getUserInputOption();
 
             try {
                 checkUserInput(userCommand);
-
-                if (userCommand.equals(EXIT.getOption())) {
-                    exitFlag = false;
-                } else if (userCommand.equals(HISTORY.getOption())) {
-                    output.showHistory(history);
-                } else {
-                    String userInputExpression = input.getCalculateSentence("계산할 식을 입력해주세요.");
-
-                    String answer = computer.compute(userInputExpression);
-
-                    history.save(userInputExpression, answer);
-                    output.printAnswer(answer);
-                }
+                executeUserCommand(userCommand);
 
             } catch (NotValidInputException e) {
                 output.printError(e.getMessage());
             }
+        }
+    }
+
+    private void executeUserCommand(String userCommand) {
+        if (userCommand.equals(EXIT.getOption())) {
+            return;
+        } else if (userCommand.equals(HISTORY.getOption())) {
+            output.showHistory(history);
+        } else {
+            String userInputExpression = input.getCalculateSentence("계산할 식을 입력해주세요.");
+
+            String answer = computer.compute(userInputExpression);
+
+            history.save(userInputExpression, answer);
+            output.printAnswer(answer);
         }
     }
 }
