@@ -24,9 +24,9 @@ public class Calculator implements Runnable {
             try {
                 int inputType = this.input.inputType();
 
-                if (inputType == 1) {
+                if (inputType == EType.FIND.ordinal() + 1) {
                     getMap();
-                } else if (inputType == 2) {
+                } else if (inputType == EType.CAL.ordinal() + 1) {
                     this.result = calculate(this.input.inputNum());
                     output.output(result);
                 } else {
@@ -36,7 +36,6 @@ public class Calculator implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
