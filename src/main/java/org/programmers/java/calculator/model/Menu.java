@@ -27,9 +27,6 @@ public enum Menu {
         this.code = code;
     }
 
-//    private static final Map<Integer, Menu> BY_CODE =
-//            Stream.of(values()).collect(Collectors.toMap(Menu::getCode, Function.identity()));
-
     public static Menu selectMenu(String input) {
         int code = toCode(input);
         return Arrays.stream(Menu.values())

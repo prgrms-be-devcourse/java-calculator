@@ -1,20 +1,22 @@
 package org.programmers.java.calculator.util.verifiaction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class FormulaVerification {
 
-    public static void formulaVerifiaction(List<String> token) {
+    public static String formulaVerifiaction(List<String> tokens) {
+
         List<String> numbers = new ArrayList<>();
         List<String> operators = new ArrayList<>();
 
-        for (int i = 0; i < token.size(); i++) {
+        for (int i = 0; i < tokens.size(); i++) {
             if (i % 2 == 0) {
-                numbers.add(token.get(i));
+                numbers.add(tokens.get(i));
             } else {
-                operators.add(token.get(i));
+                operators.add(tokens.get(i));
             }
         }
 
@@ -24,6 +26,8 @@ public class FormulaVerification {
 
         numberVerification(numbers);
         operatorVerification(operators);
+
+        return "검증 완료";
     }
 
     private static void numberVerification(List<String> numbers) {
@@ -36,12 +40,28 @@ public class FormulaVerification {
     }
 
     private static void operatorVerification(List<String> operators) {
-        // ( +, -, *, / ) 이 친구들만 거르려고 합니다.
         Pattern operatorPattern = Pattern.compile("[+-/*]");
         operators.stream().filter(token -> !operatorPattern.matcher(token).matches()).findAny().ifPresent(
                 t->{
                     throw new IllegalArgumentException("잘못된 연산자가 입력되었습니다.");
                 }
         );
+    }
+
+    private static void blankVerification(String input) {
+        Pattern blankPattern = Pattern.compile("[+-/*][0-9]");
+        List<String> token = Arrays.asList(input.split(""));
+
+        for (int i = 0; i < token.size(); i++) {
+            if (i % 2 == 0) {
+                if (!blankPattern.matcher(token.get(i)).matches()) {
+
+                }
+            } else {
+                if (!token.get(i).isBlank()) {
+                    throw new IllegalArgumentException("잘못된 공식이 입력되었습니다.");
+                }
+            }
+        }
     }
 }

@@ -9,11 +9,7 @@ import org.programmers.java.calculator.io.Output;
 public class App {
     public static void main(String[] args) {
 
-        CalculatorController calculatorController = new CalculatorController();
-        Input input = new Console();
-        Output output = new Console();
-
-        Calculator calculator = new Calculator(calculatorController, input, output);
+        Calculator calculator = new Calculator();
         calculator.run();
     }
 }

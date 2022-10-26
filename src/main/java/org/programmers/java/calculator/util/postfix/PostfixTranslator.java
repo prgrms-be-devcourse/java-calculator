@@ -3,6 +3,7 @@ package org.programmers.java.calculator.util.postfix;
 import org.programmers.java.calculator.model.Operator;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
@@ -10,9 +11,11 @@ public class PostfixTranslator {
 
     private final PostfixCalculator postfixCalculator = new PostfixCalculator();
 
-    public Double infixToPostfix(List<String> tokens) {
+    public Double infixToPostfix(String input) {
         StringBuilder sb = new StringBuilder();
         Deque<Operator> deque = new ArrayDeque<>();
+
+        List<String> tokens = Arrays.asList(input.split(" "));
 
         translator(tokens, sb, deque);
         extractRemainOperatorFromDeque(sb, deque);

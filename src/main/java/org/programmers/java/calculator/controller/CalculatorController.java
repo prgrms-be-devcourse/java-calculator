@@ -20,6 +20,7 @@ public class CalculatorController {
     public String calculate(String input) {
         Optional<String> cache = calculatorService.find(input);
         if (cache.isPresent()) {
+            calculatorService.save(input, cache.get());
             return cache.get();
         } else {
             String answer = getAnswer(input).toString();
@@ -28,15 +29,22 @@ public class CalculatorController {
         }
     }
 
-    private Double getAnswer(String input) {
-        List<String> token = parse(input);
-        Double answer = postfixTranslator.infixToPostfix(token);
+    private String getAnswer(String input) {
+        parse(input);
+        String answer = infixToPostfix(input);
         return answer;
     }
 
-    private List<String> parse(String input) {
+    private String infixToPostfix(String token) {
+        try {
+            return postfixTranslator.infixToPostfix(token).toString();
+        } catch (IllegalArgumentException | ArithmeticException | IllegalStateException exception) {
+            return exception.getMessage();
+        }
+    }
+
+    private String parse(String input) {
         List<String> tokens = Arrays.asList(input.split(" "));
-        FormulaVerification.formulaVerifiaction(tokens);
-        return tokens;
+        return FormulaVerification.formulaVerifiaction(tokens);
     }
 }

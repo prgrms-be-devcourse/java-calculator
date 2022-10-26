@@ -15,10 +15,9 @@ class FormulaVerificationTest {
     void formulaVerifiactionPlus() {
         //given
         String input = "1 + 1";
-        List<String> stringList = Arrays.asList(input.split(" "));
 
         //when
-        FormulaVerification.formulaVerifiaction(stringList);
+        FormulaVerification.formulaVerifiaction(input);
 
         //then
         assertEquals(1, 1);
@@ -29,10 +28,9 @@ class FormulaVerificationTest {
     void formulaVerifiactionMinus() {
         //given
         String input = "1 - 1";
-        List<String> stringList = Arrays.asList(input.split(" "));
 
         //when
-        FormulaVerification.formulaVerifiaction(stringList);
+        FormulaVerification.formulaVerifiaction(input);
 
         //then
         assertEquals(1, 1);
@@ -43,10 +41,9 @@ class FormulaVerificationTest {
     void formulaVerifiactionMultiply() {
         //given
         String input = "1 * 1";
-        List<String> stringList = Arrays.asList(input.split(" "));
 
         //when
-        FormulaVerification.formulaVerifiaction(stringList);
+        FormulaVerification.formulaVerifiaction(input);
 
         //then
         assertEquals(1, 1);
@@ -57,11 +54,10 @@ class FormulaVerificationTest {
     void formulaVerifiactionDivide() {
         //given
         String input = "1 / 1";
-        List<String> stringList = Arrays.asList(input.split(" "));
-
+        List<String> tokens = Arrays.asList(input.split(" "));
 
         //when
-        FormulaVerification.formulaVerifiaction(stringList);
+        FormulaVerification.formulaVerifiaction(tokens);
 
         //then
         assertEquals(1, 1);
@@ -96,34 +92,34 @@ class FormulaVerificationTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList);
+            FormulaVerification.formulaVerifiaction(input);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList1);
+            FormulaVerification.formulaVerifiaction(input1);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList2);
+            FormulaVerification.formulaVerifiaction(input2);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList3);
+            FormulaVerification.formulaVerifiaction(input3);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList4);
+            FormulaVerification.formulaVerifiaction(input4);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList5);
+            FormulaVerification.formulaVerifiaction(input5);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList6);
+            FormulaVerification.formulaVerifiaction(input6);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList7);
+            FormulaVerification.formulaVerifiaction(input7);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList8);
+            FormulaVerification.formulaVerifiaction(input8);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            FormulaVerification.formulaVerifiaction(stringList9);
+            FormulaVerification.formulaVerifiaction(input9);
         });
     }
 }
