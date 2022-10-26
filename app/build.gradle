@@ -23,6 +23,9 @@ dependencies {
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
+    // Assertj 추가
+    testCompile 'org.assertj:assertj-core:3.11.1'
+
 }
 
 application {
