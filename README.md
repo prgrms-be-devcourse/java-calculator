@@ -40,7 +40,11 @@
 # 설계하기
 
 - 게산기 설계하기
-  - ![UML](./UML.png)
+![UML](./UML.png)
+  - Calculator : 계산기를 구동 시키는 클래스
+  - CalculatorController : 입력 받은 데이터 검증 및 서비스와 연결
+  - CalculatorService : repository와 연결하여 데이터 관리
+  - Console : Console 창에서 데이터 입력과 출력을 담당
 
 ### 요구사항
 - 콘솔로 구현입니다.
@@ -58,8 +62,7 @@
 
 ### 동작환경, 데이터의 범위
 
-- 계산공식 사용 ( +, -, *, /, (, ) )
-
+- 계산공식 사용 ( +, -, *, / )
 - Console 창에서 동작하는 프로그램 제작
 - 0 ~ 9 숫자 사용
 
