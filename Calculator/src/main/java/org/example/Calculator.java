@@ -44,6 +44,8 @@ public class Calculator {
                 repository.saveResult(expression,answer);
                 // 계산 결과 출력
                 output.printCalculatedResult(answer);
+            } else if (Menu.EXIT.getNumber() == menuNumber) {
+                break;
             }
         }
     }
