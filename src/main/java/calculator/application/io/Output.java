@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface Output {
 
-    void log(List<String> literals);
+    void logHistory(List<String> history);
+
+    void logResult(String result);
 }

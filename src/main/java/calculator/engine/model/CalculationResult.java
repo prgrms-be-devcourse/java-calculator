@@ -12,4 +12,9 @@ public class CalculationResult {
     public BigDecimal getResult() {
         return result;
     }
+
+    @Override
+    public String toString() {
+        return result.toString();
+    }
 }
