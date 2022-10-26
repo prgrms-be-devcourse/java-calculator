@@ -16,10 +16,11 @@ public class MapRepository implements Repository {
     private Map<Integer, Expression> map = new HashMap<>();
 
     @Override
-    public void findAll() {
+    public int findAll() {
         Collection<Expression> values = map.values();
 
         values.forEach(System.out::println);
+        return values.size();
     }
 
     /**
