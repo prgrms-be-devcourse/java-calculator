@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Calculator implements Runnable{
@@ -99,6 +100,7 @@ public class Calculator implements Runnable{
         Stack<BigDecimal> numStack = new Stack<>();
 
         AtomicBoolean isDividedByZero = new AtomicBoolean(false);
+        AtomicBoolean isBracketOpened = new AtomicBoolean(false);
 
 
         formula.indexedForEach((a) -> {
@@ -107,6 +109,7 @@ public class Calculator implements Runnable{
             System.out.println("numstack : " + numStack.toString() + "\n");
 
             if(a.equals(Bracket.CLOSE.toString())){ // 닫는 괄호면 무조건 숫자 2개 pop 해서 계산하기
+                isBracketOpened.set(false);
                 BigDecimal tmp1 = numStack.pop();
                 BigDecimal tmp2 = numStack.pop();
 
@@ -119,6 +122,8 @@ public class Calculator implements Runnable{
                     isDividedByZero.set(true); // 이거는 에러가 났다
                 }
                 //reuslt.ifPresent(numStack::push);
+            }else if (a.equals(Bracket.OPEN.toString())){
+                isBracketOpened.set(true);
             }
             else if(map.containsKey(a)){
                 // 연산자가 나온 경우 > 이거는 연산자의 우선순위에 따라서 잘 결정해야함
@@ -129,7 +134,10 @@ public class Calculator implements Runnable{
                     // 유일하게 연산자를 그냥 push 해도 되는 경우
                     // stack의 맨 위 연산자가 지금 검사하는 연산자보다 우선순위가 더 높은 경우
                     operatorStack.push(map.get(a));
-                }else{
+                }else if (isBracketOpened.get()){
+                    operatorStack.push(map.get(a));
+                }
+                else{
                     // 지금 들어온 연산자가 스택의 연산자보다 우선순위가 더 높거나 같으면 ? -> 2개 pop 하고 연산 진행
                     // 그리고 결과를 숫자 스택에 push 하고 지금의 연산자를 push 함
                     BigDecimal t1 = numStack.pop();
@@ -144,11 +152,6 @@ public class Calculator implements Runnable{
                     }
                     operatorStack.push(map.get(a));
                 }
-//                else if((operatorStack.peek().equals(Operator.PLUS) || operatorStack.peek().equals(Operator.MINUS))
-//                || ((operatorStack.peek().equals(Operator.MUL) || operatorStack.peek().equals(Operator.DIV)) &&
-//                        (map.get(a).equals(Operator.MUL) || map.get(a).equals(Operator.DIV)))){
-//
-//                }
             }
             else numStack.push(BigDecimal.valueOf(Double.parseDouble(a))); // 숫자는 그냥 숫자 stack 에 넣기
                 });
