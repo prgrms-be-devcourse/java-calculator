@@ -19,7 +19,7 @@ public class Expression {
 
     @Override
     public String toString() {
-        return infix + " = " + result;
+        return infix + " = " + String.valueOf(result).replaceAll(".0$", "");
     }
 
     @Override
