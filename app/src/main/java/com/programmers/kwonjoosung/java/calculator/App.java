@@ -8,7 +8,10 @@ import com.programmers.kwonjoosung.java.calculator.repository.Memory;
 import com.programmers.kwonjoosung.java.calculator.repository.HashMapCache;
 
 public class App {
-    public static void main(String[] args) {new App().run();}
+    public static void main(String[] args) {
+        new App().run();
+    }
+
     public void run() { // 빌더 패턴과 DI 고려해보기
 
         Memory memory = new Memory();
@@ -17,6 +20,7 @@ public class App {
         HashMapCache cache = new HashMapCache();
         BasicParser parser = new BasicParser();
 
+        // 어플리케이션 조합 및 실행
         CalculatorController.builder()
                 .HISTORY(memory)
                 .CACHE(cache)

@@ -4,26 +4,29 @@ import java.util.Scanner;
 
 public class Console implements Input, Output { // String으로 입력받고 String 타입 데이터 출력
     private static Scanner scanner = new Scanner(System.in);
+
     @Override
     public int inputMenu() {
         System.out.print("선택: ");
 
-        int menu ;
+        int menu;
         try {
             String data = scanner.nextLine();
             menu = Integer.parseInt(data);
             return menu;
-        }catch (NumberFormatException ne){
+        } catch (NumberFormatException ne) {
             System.out.println("숫자를 입력해주세요.");
         }
 
         return -1; // 메뉴에 속하지 못하는 값 리턴
     }
+
     @Override
     public String inputExpression() {
         System.out.print("식 >> ");
         return scanner.nextLine();
     }
+
     @Override
     public void inputNext() {
         System.out.print("계속하려면 아무 키나 누르십시오...");
@@ -51,14 +54,17 @@ public class Console implements Input, Output { // String으로 입력받고 Str
     public void printExit() {
         System.out.println("프로그램을 종료합니다.");
     }
+
     @Override
     public void printMenuError() {
         System.out.println("1 ~ 2번 메뉴 중 하나를 선택해주세요(종료는 99)");
     }
+
     @Override
     public void printNullError() {
         System.out.println("조회할 데이터가 없습니다.");
     }
+
     @Override
     public void printError(String message) {
         System.out.println("오류 발생!");

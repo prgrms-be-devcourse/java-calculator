@@ -4,5 +4,6 @@ import java.util.Optional;
 
 public interface Cache {
     void add(String[] expression, String result);
+
     Optional<String> getResult(String[] expression);
 }

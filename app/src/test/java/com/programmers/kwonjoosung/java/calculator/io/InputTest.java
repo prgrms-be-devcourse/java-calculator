@@ -12,18 +12,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InputTest {
     static Input input;
+
     public static InputStream generateUserInput(String input) {
         return new ByteArrayInputStream(input.getBytes());
     }
 
     @BeforeAll
     @DisplayName("입력")
-    static void startInput(){
+    static void startInput() {
         input = new Console();
     }
+
     @Test
     @DisplayName("메뉴 입력 테스트")
-    void inputMenuTest(){
+    void inputMenuTest() {
         // given
         InputStream in = generateUserInput("2\n");
         System.setIn(in);
@@ -33,11 +35,12 @@ public class InputTest {
         // when
         menu = input.inputMenu();
         //then
-        assertEquals(2,menu);
+        assertEquals(2, menu);
     }
+
     @Test
     @DisplayName("식 입력 테스트")
-    void inputExpressionTest(){
+    void inputExpressionTest() {
         //given
         InputStream in = generateUserInput("1 + 1\n");
         System.setIn(in);
@@ -46,6 +49,6 @@ public class InputTest {
         //when
         String expression = input.inputExpression();
         //then
-        assertEquals("1 + 1",expression);
+        assertEquals("1 + 1", expression);
     }
 }

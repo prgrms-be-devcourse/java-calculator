@@ -9,12 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OutputTest {
     static Output output;
+
     @BeforeAll
     @DisplayName("출력")
-    static void startOutput(){
+    static void startOutput() {
         output = new Console();
     }
-    static ByteArrayOutputStream outputStream ;
+
+    static ByteArrayOutputStream outputStream;
     final PrintStream standardOut = System.out;
 
     @BeforeEach
@@ -22,13 +24,15 @@ public class OutputTest {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
     }
+
     @AfterEach
     void reset() {
         System.setOut(standardOut);
     }
+
     @Test
     @DisplayName("출력 테스트")
-    void printlnTest(){
+    void printlnTest() {
         // given
         String result = "출력";
         // when
@@ -36,9 +40,10 @@ public class OutputTest {
         // then
         assertEquals(result, outputStream.toString().trim());
     }
+
     @Test
     @DisplayName("메뉴 출력 테스트")
-    void printMenuTest(){
+    void printMenuTest() {
         // given
         String result = "1. 조회\r\n2. 계산";
         // when
@@ -46,9 +51,10 @@ public class OutputTest {
         // then
         assertEquals(result, outputStream.toString().trim());
     }
+
     @Test
     @DisplayName("종료 출력 테스트")
-    void printExitTest(){
+    void printExitTest() {
         // given
         String result = "프로그램을 종료합니다.";
         //when
@@ -56,9 +62,10 @@ public class OutputTest {
         // then
         assertEquals(result, outputStream.toString().trim());
     }
+
     @Test
     @DisplayName("에러 출력 테스트")
-    void printError(){
+    void printError() {
         // given
         String result = "오류 발생!\r\n오류";
         // when
@@ -66,9 +73,10 @@ public class OutputTest {
         // then
         assertEquals(result, outputStream.toString().trim());
     }
+
     @Test
     @DisplayName("메뉴 에러 출력 테스트")
-    void printMenuError(){
+    void printMenuError() {
         // given
         String result = "1 ~ 2번 메뉴 중 하나를 선택해주세요(종료는 99)";
         // when
@@ -76,9 +84,10 @@ public class OutputTest {
         // then
         assertEquals(result, outputStream.toString().trim());
     }
+
     @Test
     @DisplayName("조회 값 없음 출력 테스트")
-    void printNullError(){
+    void printNullError() {
         // given
         String result = "조회할 데이터가 없습니다.";
         // when
