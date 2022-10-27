@@ -11,18 +11,17 @@ public interface BaseInput {
 
     default String read() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String inputValue = "";
 
         try {
-            inputValue = br.readLine();
+            String inputValue = br.readLine();
 
             if (inputValue.length() == 0) {
                 throw new IOException();
             }
+
+            return inputValue;
         } catch (IOException e) {
             throw new InputMismatchException(BASE_INPUT_EXCEPTION.getMessage());
         }
-
-        return inputValue;
     }
 }
