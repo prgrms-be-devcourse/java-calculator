@@ -7,10 +7,12 @@ import java.util.Scanner;
 
 public class ConsoleIOController extends IOController {
     private final Scanner scanner;
+    private final PrintStream printer;
 
     public ConsoleIOController(InputStream reader, OutputStream writer) {
         super(reader, writer);
         this.scanner = new Scanner(reader);
+        this.printer = new PrintStream(writer);
     }
 
     public String read() {
@@ -18,6 +20,6 @@ public class ConsoleIOController extends IOController {
     }
 
     public void print(Object message) {
-        new PrintStream(writer).print(message.toString());
+        printer.print(message.toString());
     }
 }
