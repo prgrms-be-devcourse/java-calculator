@@ -44,7 +44,7 @@ public class FormulaBasicParser implements FormulaParser {
 
     private static void checkFormulaRegex(String formula, int idx) {
         if (RegexUtil.checkWrong(RegexUtil.REGEX_FORMULA_WORD, getCurrWord(formula, idx))) {
-            throw new IllegalArgumentException(FORMULA_BASIC_PARSER_EXCEPTION.message);
+            throw new IllegalArgumentException(FORMULA_BASIC_PARSER_EXCEPTION.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class FormulaBasicParser implements FormulaParser {
     private static String estimateWordInFormula(String formula, int idx) {
         String estimatedWord = getCurrWord(formula, idx);
         if (estimatedWord.length() == 0) {
-            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
         return estimatedWord;
@@ -69,7 +69,7 @@ public class FormulaBasicParser implements FormulaParser {
     private void handlerOperatorInFormula(String formula, int idx) {
         String operator = getCurrWord(formula, idx);
         if (operator.length() == 0) {
-            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
         formulas.add(operator);
@@ -78,7 +78,7 @@ public class FormulaBasicParser implements FormulaParser {
     private void handleOperandInFormula(String formula, AtomicInteger beforeIdx, int idx) {
         String operand = getCurrOperand(formula, beforeIdx.getAndSet(idx + 1), idx);
         if (operand.length() == 0) {
-            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
         formulas.add(operand);
@@ -87,7 +87,7 @@ public class FormulaBasicParser implements FormulaParser {
     private void handleLastFormula(String formula, AtomicInteger beforeIdx) {
         String lastOperand = getLastOperand(formula, beforeIdx);
         if (lastOperand.length() == 0) {
-            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.message);
+            throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
         formulas.add(lastOperand);
@@ -110,8 +110,8 @@ public class FormulaBasicParser implements FormulaParser {
     }
 
     private static String parseNoSpace(final String formula) {
-        return Arrays.stream(formula.split(NO_SPACE.unit))
-                .filter(word -> !word.equals(SPACE.unit))
+        return Arrays.stream(formula.split(NO_SPACE.getUnit()))
+                .filter(word -> !word.equals(SPACE.getUnit()))
                 .collect(Collectors.joining());
     }
 }

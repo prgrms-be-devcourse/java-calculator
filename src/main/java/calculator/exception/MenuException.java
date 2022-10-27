@@ -4,9 +4,13 @@ public enum MenuException {
 
     MENU_FIND_NULL_EXCEPTION("존재하지 않는 기능 번호 입니다.");
 
-    public final String message;
+    private final String message;
 
     MenuException(String message) {
         this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

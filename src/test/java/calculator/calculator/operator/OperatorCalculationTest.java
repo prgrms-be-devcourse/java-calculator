@@ -112,7 +112,7 @@ class OperatorCalculationTest {
                         DIVIDE_CALCULATOR.doCalculation(
                                 BigDecimal.valueOf(leftOperand),
                                 BigDecimal.valueOf(rightOperand)))
-                .withMessageMatching(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.message);
+                .withMessageMatching(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.getMessage());
 
     }
 

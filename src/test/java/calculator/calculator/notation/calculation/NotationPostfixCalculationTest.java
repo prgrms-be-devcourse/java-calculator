@@ -30,7 +30,7 @@ class NotationPostfixCalculationTest {
     void whenCalculatePostfixNotationThenExceptionTest(List<String> notation) {
         assertThatExceptionOfType(NullPointerException.class)
                 .isThrownBy(() -> notationPostfixCalculation.calculate(notation))
-                .withMessageMatching(NOTATION_POSTFIX_NULL_EXCEPTION.message);
+                .withMessageMatching(NOTATION_POSTFIX_NULL_EXCEPTION.getMessage());
     }
 
     static Stream<Arguments> whenCalculatePostfixNotationThenSuccessDummy() {

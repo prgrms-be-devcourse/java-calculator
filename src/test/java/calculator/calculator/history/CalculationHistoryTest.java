@@ -49,7 +49,7 @@ class CalculationHistoryTest {
     void whenSaveWrongHistoryThenExceptionTest(String formula, String answer) {
         assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(() -> history.save(formula, answer))
-                .withMessageMatching(HISTORY_SAVE_EXCEPTION.message);
+                .withMessageMatching(HISTORY_SAVE_EXCEPTION.getMessage());
     }
 
     private int saveHistories(List<String> formula, List<String> answer) {

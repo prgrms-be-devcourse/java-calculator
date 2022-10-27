@@ -47,7 +47,7 @@ class FormulaBasicParserTest {
     void whenUnreadableFormulaThenExceptionTest(String formula) {
         assertThatExceptionOfType(NullPointerException.class)
                 .isThrownBy(() -> parser.parseFrom(formula))
-                .withMessageMatching(FORMULA_BASIC_NULL_EXCEPTION.message);
+                .withMessageMatching(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
     }
     @ParameterizedTest(name = "[{index}] : formula = {0}")
     @MethodSource(value = "whenWrongFormulaThenExceptionDummy")
@@ -55,7 +55,7 @@ class FormulaBasicParserTest {
     void whenWrongFormulaThenExceptionTest(String formula) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> parser.parseFrom(formula))
-                .withMessageMatching(FORMULA_BASIC_PARSER_EXCEPTION.message);
+                .withMessageMatching(FORMULA_BASIC_PARSER_EXCEPTION.getMessage());
     }
 
     static Stream<Arguments> whenIntegerFormulaThenSuccessDummy() {

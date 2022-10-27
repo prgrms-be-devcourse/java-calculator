@@ -18,7 +18,7 @@ public class CalculationHistory implements History {
         String answer = history[HISTORY_ANSWER_INDEX];
 
         if (checkSaveFormWrong(formula, answer)) {
-            throw new NumberFormatException(HISTORY_SAVE_EXCEPTION.message);
+            throw new NumberFormatException(HISTORY_SAVE_EXCEPTION.getMessage());
         }
 
         saveEachCase(formula, answer);

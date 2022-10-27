@@ -13,7 +13,7 @@ public enum OperatorCalculation {
     MULTIPLY_CALCULATOR(BigDecimal::multiply),
     DIVIDE_CALCULATOR((leftOperand, rightOperand) -> {
         if (rightOperand.doubleValue() == 0D) {
-            throw new IllegalArgumentException(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.message);
+            throw new IllegalArgumentException(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.getMessage());
         }
         return leftOperand.divide(rightOperand, 15, RoundingMode.HALF_UP);
     });

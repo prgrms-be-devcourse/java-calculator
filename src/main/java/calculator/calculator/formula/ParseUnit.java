@@ -5,9 +5,13 @@ public enum ParseUnit {
     SPACE(" "),
     NO_SPACE("");
 
-    public final String unit;
+    private final String unit;
 
     ParseUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 }

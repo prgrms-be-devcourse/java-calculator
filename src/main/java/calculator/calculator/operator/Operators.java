@@ -45,6 +45,6 @@ public enum Operators {
         return Arrays.stream(Operators.values())
                 .filter(operator -> operator.operator.equals(inputOperator))
                 .findFirst()
-                .orElseThrow(() -> new NullPointerException(OPERATORS_EXCEPTION_NULL_FIND.message));
+                .orElseThrow(() -> new NullPointerException(OPERATORS_EXCEPTION_NULL_FIND.getMessage()));
     }
 }

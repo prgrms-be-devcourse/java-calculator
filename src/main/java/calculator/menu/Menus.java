@@ -39,7 +39,7 @@ public enum Menus {
         return Arrays.stream(Menus.values())
                 .filter(menu -> Objects.equals(menu.id, id))
                 .findFirst()
-                .orElseThrow(() -> new NullPointerException(MENU_FIND_NULL_EXCEPTION.message))
+                .orElseThrow(() -> new NullPointerException(MENU_FIND_NULL_EXCEPTION.getMessage()))
                 .menu;
     }
 

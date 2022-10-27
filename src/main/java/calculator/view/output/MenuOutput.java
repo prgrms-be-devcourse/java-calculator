@@ -16,20 +16,20 @@ public class MenuOutput implements BaseOutput {
     }
 
     public void printMenus() {
-        print(createMenus() + ENTER.unit);
+        print(createMenus() + ENTER.getUnit());
     }
 
     private String createMenus() {
         return Arrays.stream(Menus.values())
                 .map(menu -> menu.getId()
-                        + DOT.unit
-                        + SPACE.unit
+                        + DOT.getUnit()
+                        + SPACE.getUnit()
                         + menu.getTitle()
-                        + ENTER.unit
+                        + ENTER.getUnit()
                 ).collect(Collectors.joining());
     }
 
     public void printAfter() {
-        print(ENTER.unit);
+        print(ENTER.getUnit());
     }
 }

@@ -20,7 +20,7 @@ public interface BaseInput {
                 throw new IOException();
             }
         } catch (IOException e) {
-            throw new InputMismatchException(BASE_INPUT_EXCEPTION.message);
+            throw new InputMismatchException(BASE_INPUT_EXCEPTION.getMessage());
         }
 
         return inputValue;

@@ -53,7 +53,7 @@ public class NotationPostfixCalculation implements NotationCalculation {
 
     private BigDecimal getOperand() {
         if (operands.isEmpty()) {
-            throw new NullPointerException(NOTATION_POSTFIX_NULL_EXCEPTION.message);
+            throw new NullPointerException(NOTATION_POSTFIX_NULL_EXCEPTION.getMessage());
         }
         return operands.pollLast();
     }

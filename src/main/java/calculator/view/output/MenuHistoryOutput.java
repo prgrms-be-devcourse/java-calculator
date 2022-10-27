@@ -20,7 +20,7 @@ public class MenuHistoryOutput implements BaseOutput {
                         parsedHistory.getKey(),
                         parsedHistory.getValue()));
 
-        print(createHistories(newHistories) + ENTER.unit);
+        print(createHistories(newHistories) + ENTER.getUnit());
     }
 
     private String createHistories(HashMap<String, String> histories) {
@@ -43,11 +43,11 @@ public class MenuHistoryOutput implements BaseOutput {
                                      int idx) {
 
         if (idx == formula.length() - 1) {
-            textBuilder.append(SPACE.unit)
-                    .append(EQUAL.unit)
-                    .append(SPACE.unit)
+            textBuilder.append(SPACE.getUnit())
+                    .append(EQUAL.getUnit())
+                    .append(SPACE.getUnit())
                     .append(histories.get(formula))
-                    .append(ENTER.unit);
+                    .append(ENTER.getUnit());
         }
     }
 
@@ -59,9 +59,9 @@ public class MenuHistoryOutput implements BaseOutput {
 
     private static void handleOperator(StringBuilder textBuilder, String word) {
         if (Operators.isOperator(word)) {
-            textBuilder.append(SPACE.unit)
+            textBuilder.append(SPACE.getUnit())
                     .append(word)
-                    .append(SPACE.unit);
+                    .append(SPACE.getUnit());
         }
     }
 }

@@ -8,9 +8,13 @@ public enum TextUnit {
     EQUAL("="),
     ENTER("\n");
 
-    public final String unit;
+    private final String unit;
 
     TextUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 }
