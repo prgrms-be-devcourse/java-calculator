@@ -7,25 +7,19 @@ public enum Symbol {
     ADD("+", (num1, num2) -> num1 + num2),
     SUBTRACT("-", (num1, num2) -> num1 - num2),
     MULTIPLY("*", (num1, num2) -> num1 * num2),
-    DIVIDE("/", (num1, num2) -> num1 / num2),
-    BRACKET_OPEN("("),
-    BRACKET_CLOSE(")");
+    DIVIDE("/", (num1, num2) -> num1 / num2);
 
 
     private String symbol;
-    private BiFunction<Double, Double, Double> expression;
+    private BiFunction<Double, Double, Double> formula;
 
-    Symbol(String symbol, BiFunction<Double, Double, Double> expression) {
+    Symbol(String symbol, BiFunction<Double, Double, Double> formula) {
         this.symbol = symbol;
-        this.expression = expression;
-    }
-
-    Symbol(String symbol) {
-        this.symbol = symbol;
+        this.formula = formula;
     }
 
     public static double calculate(String symbol, double num1, double num2) {
-        return getSymbol(symbol).expression.apply(num1, num2);
+        return getSymbol(symbol).formula.apply(num1, num2);
     }
 
     private static Symbol getSymbol(String symbol) {
