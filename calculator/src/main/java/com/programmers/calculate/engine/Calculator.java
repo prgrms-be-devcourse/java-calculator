@@ -88,7 +88,9 @@ public class Calculator implements Runnable {
             String str = st.nextToken();
             int priority = getPriority(str);
 
-            if (str.matches("-?\\d+")) queue.add(str);
+            if (str.matches("-?\\d+")) {
+                queue.add(str);
+            }
             else {
                 while (!stack.isEmpty() && getPriority(stack.peek()) <= priority) queue.add(stack.pop());
                 stack.push(str);
