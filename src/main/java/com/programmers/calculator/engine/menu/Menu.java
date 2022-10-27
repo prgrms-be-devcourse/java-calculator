@@ -3,7 +3,6 @@ package com.programmers.calculator.engine.menu;
 import com.programmers.calculator.utils.InputException;
 
 import java.util.Arrays;
-import java.util.function.Function;
 
 public enum Menu {
     //조회
@@ -36,7 +35,7 @@ public enum Menu {
 
     public static String chooseMenu(String commandInput) {
         return getMenu(commandInput).toString();
-        //여기서 바로 menu 메서드를 호출할 수 있는지?? Function<> 으로 되는지?
+        //여기서 바로 menu 메서드를 호출할 수 있는지?? Function<> 으로 되는환?
     }
 
     private static Menu getMenu(String command) {
