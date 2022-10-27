@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +18,7 @@ class PostfixCalculatorTest {
     @MethodSource("whenCalculateIntegerWithPostfixCalculatorThenSuccessDummy")
     @DisplayName("정수형 연산식, 후위 표기식 연산 성공 테스트")
     void whenCalculateIntegerWithPostfixCalculatorThenSuccessTest(String formula, String expect) {
-        String result = calculator.calculate(formula).toString();
+        BigDecimal result = calculator.calculate(formula);
         assertThat(result).isEqualTo(expect);
     }
 
@@ -25,7 +26,7 @@ class PostfixCalculatorTest {
     @MethodSource("whenCalculateDoubleWithPostfixCalculatorThenSuccessDummy")
     @DisplayName("실수형 연산식, 후위 표기식 연산 성공 테스트")
     void whenCalculateDoubleWithPostfixCalculatorThenSuccessTest(String formula, String expect) {
-        String result = calculator.calculate(formula).toString();
+        BigDecimal result = calculator.calculate(formula);
         assertThat(result).isEqualTo(expect);
     }
 
