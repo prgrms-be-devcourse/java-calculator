@@ -1,4 +1,4 @@
-package com.programmers.calculate.engine.io;
+package com.programmers.calculate.engine.model.io;
 
 public interface Input {
 

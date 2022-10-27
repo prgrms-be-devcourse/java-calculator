@@ -1,6 +1,6 @@
 package com.programmers.calculate;
 
-import com.programmers.calculate.engine.io.Output;
+import com.programmers.calculate.engine.model.io.Output;
 import com.programmers.calculate.engine.model.History;
 
 import java.util.*;

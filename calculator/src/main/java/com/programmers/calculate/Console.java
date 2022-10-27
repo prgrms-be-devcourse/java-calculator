@@ -1,7 +1,7 @@
 package com.programmers.calculate;
 
-import com.programmers.calculate.engine.io.Input;
-import com.programmers.calculate.engine.io.Output;
+import com.programmers.calculate.engine.model.io.Input;
+import com.programmers.calculate.engine.model.io.Output;
 
 import java.util.ArrayList;
 import java.util.List;
