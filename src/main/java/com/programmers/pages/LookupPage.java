@@ -1,26 +1,24 @@
 package com.programmers.pages;
 
 import com.programmers.engine.parser.Parser;
-import com.programmers.engine.repository.Repository;
+import com.programmers.engine.repository.HistoryRepository;
 import lombok.Builder;
 
-import java.util.Collection;
-
 public class LookupPage extends Page {
-    Repository repo;
+    HistoryRepository historyRepository;
     @Builder
-    public LookupPage(String content, String prompt, PageList nextPage, Parser parser,Repository repo) {
+    public LookupPage(String content, String prompt, PageList nextPage, Parser parser, HistoryRepository repo) {
         super(content, prompt, nextPage, parser);
-        this.repo = repo;
+        this.historyRepository = repo;
     }
 
     @Override
     public void render() {
         while(true){
-            if(repo.readData().size()==0){
+            if(historyRepository.readData().size()==0){
                 outputData(getContent());
             }
-            outputData(repo.printData());
+            outputData(historyRepository.printData());
             setNextPage(PageList.START);
             input(getPrompt());
             break;

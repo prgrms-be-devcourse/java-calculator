@@ -8,6 +8,6 @@ public interface Output  {
         System.out.println(errorMessage);
     }
     default void outputData(Object data){
-        System.out.println(data);
+        System.out.println(data.toString());
     };
 }

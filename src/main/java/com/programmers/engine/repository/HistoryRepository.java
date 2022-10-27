@@ -1,9 +1,8 @@
 package com.programmers.engine.repository;
 
 import java.util.Collection;
-import java.util.List;
 
-public interface Repository {
+public interface HistoryRepository {
     default public void loadData(){
         //아무것도 하지 않는다.
     };

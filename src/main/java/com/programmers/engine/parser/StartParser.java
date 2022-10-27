@@ -2,8 +2,6 @@ package com.programmers.engine.parser;
 
 import com.programmers.pages.PageList;
 
-import java.util.Optional;
-
 public class StartParser extends Parser<PageList>{
 
     @Override
@@ -11,16 +9,16 @@ public class StartParser extends Parser<PageList>{
         this.originInput = input;
          switch (input) {
             case "1" -> {
-                this.parsedInput=PageList.LOOKUP;
+                this.parsedResultData =PageList.LOOKUP;
             }
             case "2" -> {
-                this.parsedInput = PageList.CALCULATE;
+                this.parsedResultData = PageList.CALCULATE;
             }
             case "3" -> {
-                this.parsedInput = PageList.NONE;
+                this.parsedResultData = PageList.NONE;
             }
             default -> {
-                this.parsedInput = null;
+                this.parsedResultData = null;
             }
         };
     }

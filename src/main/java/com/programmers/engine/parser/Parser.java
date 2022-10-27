@@ -1,20 +1,16 @@
 package com.programmers.engine.parser;
 
-import com.programmers.pages.PageList;
-
-import java.util.Optional;
-
 public abstract class Parser<T> {
 
 
     protected String originInput;
-    protected T parsedInput;
+    protected T parsedResultData; //Enum | Collection<String>
     public abstract void parseInput(String input);
-    public T getParsedInput() throws Exception{
-        if(this.parsedInput == null){
+    public T getParsedResultData() throws Exception{
+        if(this.parsedResultData == null){
             throw new Exception("잘못된 입력 입니다.");
         }else{
-            return this.parsedInput;
+            return this.parsedResultData;
         }
     };
     public String getOriginalInput(){

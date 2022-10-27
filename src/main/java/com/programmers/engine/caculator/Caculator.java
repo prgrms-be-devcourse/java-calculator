@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Stack;
 
 public interface Caculator {
-    public  void caculate(CaculatorParseData operatorAndNumbers);
+    public void caculate(CaculatorParseData operatorAndNumbers);
+
     public String getResult() throws Exception;
 }

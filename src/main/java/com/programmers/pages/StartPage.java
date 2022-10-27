@@ -4,8 +4,6 @@ package com.programmers.pages;
 import com.programmers.engine.parser.Parser;
 import lombok.Builder;
 
-import java.util.Optional;
-
 public class StartPage extends Page<PageList> {
 
 
@@ -22,7 +20,7 @@ public class StartPage extends Page<PageList> {
             inputString = input(getPrompt());
             getParser().parseInput(inputString);
             try{
-                PageList parsedInput = getParser().getParsedInput();
+                PageList parsedInput = getParser().getParsedResultData();
                 setNextPage(parsedInput);
                 break;
             }catch (Exception e){

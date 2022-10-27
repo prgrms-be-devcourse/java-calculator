@@ -6,7 +6,7 @@ import com.programmers.engine.caculator.PostfixCaculator;
 import com.programmers.engine.parser.StartParser;
 import com.programmers.engine.parser.caculator.PostfixCaculatorParser;
 import com.programmers.engine.repository.MemoryRepository;
-import com.programmers.engine.repository.Repository;
+import com.programmers.engine.repository.HistoryRepository;
 import com.programmers.pages.*;
 
 import java.util.HashMap;
@@ -16,22 +16,23 @@ public class App {
 
     public static void main(String[] args) {
         Map<PageList, Page> pages = new HashMap<>();
-        Repository myRepository  = new MemoryRepository();
-        Caculator myCaculator = new PostfixCaculator();
+        HistoryRepository myRepository = new MemoryRepository();
         MypageFactory mypageFactory = new MypageFactory(myRepository);
 
         for (PageList key : PageList.values()) {
             pages.put(key, mypageFactory.createPage(key));
         }
-        PageManager pageManager = new PageManager(pages,PageList.START);
+        PageManager pageManager = new PageManager(pages, PageList.START);
         pageManager.run();
     }
 
     static class MypageFactory implements PageFactory {
-        Repository myRepo;
-        MypageFactory(Repository reopsitory){
+        HistoryRepository myRepo;
+
+        MypageFactory(HistoryRepository reopsitory) {
             this.myRepo = reopsitory;
         }
+
         @Override
         public Page createPage(PageList type) {
             {

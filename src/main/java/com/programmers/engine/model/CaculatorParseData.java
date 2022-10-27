@@ -9,13 +9,16 @@ import java.util.List;
 @ToString
 public class CaculatorParseData {
     private final List<Object> list = new ArrayList<>();
-    public void add(Double d){
+
+    public void add(Double d) {
         list.add(d);
     }
-    public void add(Character c){
+
+    public void add(Character c) {
         list.add(c);
     }
-    public Collection<?> getAllList(){
+
+    public Collection<?> getAllList() {
         return new ArrayList<>(list);
     }
 }

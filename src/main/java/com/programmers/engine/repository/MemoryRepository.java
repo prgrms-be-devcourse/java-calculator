@@ -3,7 +3,7 @@ package com.programmers.engine.repository;
 import java.sql.Timestamp;
 import java.util.*;
 
-public class MemoryRepository implements Repository {
+public class MemoryRepository implements HistoryRepository {
     final StringBuffer sb = new StringBuffer();
 //    private List<String> logs = new ArrayList<>();
     private Map<Timestamp,String> logs = new TreeMap<>();
