@@ -10,11 +10,13 @@ import java.util.List;
 public class MemoryRepository implements Repository{
 
     private List<SaveFormat> memoryRepository = new ArrayList<>();
-    private int idx = 0;
+    private Sequencer sequencer;
+
+    public MemoryRepository(Sequencer sequencer) { this.sequencer = sequencer; }
 
     @Override
     public void save(ResultFormat result) {
-        memoryRepository.add(new SaveFormat(++idx, result.getExpression() + result.formatResult()));
+        memoryRepository.add(new SaveFormat(sequencer.getSequence(), result.getExpression() + result.formatResult()));
     }
 
     @Override
