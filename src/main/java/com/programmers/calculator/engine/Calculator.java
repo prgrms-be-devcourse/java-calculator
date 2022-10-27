@@ -13,7 +13,6 @@ public class Calculator implements Runnable {
     private Input input;
     private Output output;
     private Conversion conversion;
-
     private Calculate calculate;
     private Storage storage;
 

@@ -2,7 +2,6 @@ package com.programmers.calculator.engine.calculation;
 
 import java.util.List;
 import java.util.Stack;
-import java.util.function.Consumer;
 
 public class CalculatePostfix implements Calculate {
     private final String NUMBER = "^[0-9]*$";

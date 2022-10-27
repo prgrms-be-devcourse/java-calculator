@@ -25,7 +25,7 @@ public class ConversionFormula implements Conversion {
                 continue;
             }
 
-            if (token.equals("(")){
+            if (token.equals("(")) {
                 symbolStack.add(token);
                 continue;
             }
