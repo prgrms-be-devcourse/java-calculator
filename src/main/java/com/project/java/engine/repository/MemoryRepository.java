@@ -1,22 +1,22 @@
 package com.project.java.engine.repository;
 
+import com.project.java.engine.data.ResultFormat;
 import com.project.java.engine.data.SaveFormat;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class MemoryRepository implements Repository{
 
     private List<SaveFormat> memoryRepository = new ArrayList<>();
-    private int idx = 0;
+    private Sequencer sequencer;
+
+    public MemoryRepository(Sequencer sequencer) { this.sequencer = sequencer; }
 
     @Override
-    public void save(Map<String ,Double> expression, String formattedResult) {
-        for (String key : expression.keySet()) {
-            memoryRepository.add(new SaveFormat(++idx, key + formattedResult));
-        }
+    public void save(ResultFormat result) {
+        memoryRepository.add(new SaveFormat(sequencer.getSequence(), result.getExpression() + result.formatResult()));
     }
 
     @Override

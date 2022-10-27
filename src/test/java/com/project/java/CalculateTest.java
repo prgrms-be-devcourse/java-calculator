@@ -1,7 +1,13 @@
 package com.project.java;
 
+import com.project.java.engine.data.ResultFormat;
+import com.project.java.engine.solver.FourWayPriorityStrategy;
+import com.project.java.engine.solver.Solver;
+import com.project.java.engine.solver.StackSolver;
 import com.project.java.exception.ZeroDivisionException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,6 +18,7 @@ public class CalculateTest {
 
     private static final String OPER_REGULAR = "[+\\-*/]";
     private static final String NUMBER_REGULAR = "[0-9]+";
+    Solver solver = new StackSolver(new FourWayPriorityStrategy());
 
     @Test
     public void expressionToList() throws Exception {
@@ -92,5 +99,16 @@ public class CalculateTest {
         }
         //then
         Assertions.assertEquals(stack.pop(), 146);
+    }
+
+    @Test
+    public void calculationRangeLimitTest() throws Exception {
+        //given
+        String expression = "2111111111 + 2111111111";
+        // when
+        ResultFormat calculate = solver.calculate(expression);
+        //then
+
+        Assertions.assertEquals(calculate.getResult(), 4222222222L);
     }
 }
