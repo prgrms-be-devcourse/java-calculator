@@ -11,7 +11,7 @@ public class ConversionFormula implements Conversion {
 
     @Override
     public List<String> splitFormula(String formula) {
-        List<String> tokenList = new ArrayList<>(Arrays.asList(formula.split("")));
+        List<String> tokenList = new ArrayList<>(Arrays.asList(formula.split(" ")));
         return tokenList;
     }
 
@@ -26,11 +26,17 @@ public class ConversionFormula implements Conversion {
                 continue;
             }
 
+            if (token.equals("(")){
+                symbolStack.add(token);
+                continue;
+            }
+
             if (token.equals(")")) {
                 while (!symbolStack.peek().equals("(")) {
                     postfix.add(symbolStack.pop());
                 }
                 symbolStack.pop();
+                continue;
             }
 
             while (!symbolStack.isEmpty() && priorityCheck(symbolStack.peek(), token)) {

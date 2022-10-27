@@ -1,7 +1,5 @@
 package com.programmers.calculator.engine.io;
 
-import com.programmers.calculator.utils.InputException;
-
 import java.util.Scanner;
 
 public class Console implements Input, Output {

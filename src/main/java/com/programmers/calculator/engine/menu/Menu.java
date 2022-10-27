@@ -36,7 +36,7 @@ public enum Menu {
 
     public static String chooseMenu(String commandInput) {
         return getMenu(commandInput).toString();
-        //여기서 바로 menu 메서드를 호출할 수 있는지?? Function<> 으로 됩니까?
+        //여기서 바로 menu 메서드를 호출할 수 있는지?? Function<> 으로 되는지?
     }
 
     private static Menu getMenu(String command) {
