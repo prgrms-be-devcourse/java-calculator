@@ -20,7 +20,6 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-
         while (true) {
             String selectNumber = input.selectNumber();
 
@@ -28,18 +27,13 @@ public class Calculator implements Runnable {
                 System.out.println();
                 history.findAll(output);
                 System.out.println();
-            }
-
-            else if (selectNumber.equals(Menu.CALCULATE.getValue())) {
+            } else if (selectNumber.equals(Menu.CALCULATE.getValue())) {
                 String inputString = input.inputExpression();
                 Queue<String> queue = parse(inputString);
                 int answer = calculate(queue);
                 System.out.println(answer + "\n");
                 saveExpression(inputString, answer);
-            }
-
-            else if (selectNumber.equals(Menu.EXIT.getValue())) break;
-
+            } else if (selectNumber.equals(Menu.EXIT.getValue())) break;
             else output.valueError();
         }
     }
@@ -101,8 +95,8 @@ public class Calculator implements Runnable {
         return queue;
     }
 
-    protected int getPriority(String str) {
-        switch (str) {
+    protected int getPriority(String operator) {
+        switch (operator) {
             case "*":
             case "/":
                 return 1;
