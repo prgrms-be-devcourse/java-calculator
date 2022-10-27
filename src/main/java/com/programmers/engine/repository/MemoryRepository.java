@@ -1,16 +1,16 @@
 package com.programmers.engine.repository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.*;
 
 public class MemoryRepository implements Repository {
     final StringBuffer sb = new StringBuffer();
-    private List<String> logs = new ArrayList<>();
+//    private List<String> logs = new ArrayList<>();
+    private Map<Timestamp,String> logs = new TreeMap<>();
 
     @Override
     public Collection<String> readData() {
-        return new ArrayList<>(logs);
+         return logs.values();
     }
 
     @Override
@@ -21,7 +21,9 @@ public class MemoryRepository implements Repository {
 
     @Override
     public void addData(String data) {
-        logs.add(data);
+//        logs.add(data);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        logs.put(timestamp,data);
         sb.append(data);
         sb.append("\n");
     }
