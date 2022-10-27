@@ -17,7 +17,7 @@ public class OperationManager implements Operation {
                 double second = Double.parseDouble(stack.pop());
                 double first = Double.parseDouble(stack.pop());
 
-                if(token.equals("/") && second == 0) throw new ArithmeticException();
+                if(token.equals("/") && second == 0) throw new ArithmeticException("0으로 나눌 수 없음");
 
                 switch (token) {
                     case "+":
