@@ -3,7 +3,7 @@ package com.programmers.cal.engine;
 import com.programmers.cal.engine.io.Input;
 import com.programmers.cal.engine.io.Output;
 import com.programmers.cal.engine.operation.Operation;
-import com.programmers.cal.engine.parse.Parse;
+import com.programmers.cal.engine.parse.Parser;
 import com.programmers.cal.engine.postfix.Postfix;
 import com.programmers.cal.engine.repository.Repository;
 import com.programmers.cal.engine.validator.Validator;
@@ -23,18 +23,18 @@ public class Calculator implements Runnable {
     private Input input;
     private Output output;
     private Validator validator;
-    private Parse parse;
+    private Parser parser;
     private Postfix postfix;
     private Operation operation;
     private Repository repository;
 
     @Builder
-    public Calculator(Input input, Output output, Validator validator, Parse parse,
-             Postfix postfix, Operation operation, Repository repository) {
+    public Calculator(Input input, Output output, Validator validator, Parser parser,
+                      Postfix postfix, Operation operation, Repository repository) {
         this.input = input;
         this.output = output;
         this.validator = validator;
-        this.parse = parse;
+        this.parser = parser;
         this.postfix = postfix;
         this.operation = operation;
         this.repository = repository;
@@ -49,13 +49,13 @@ public class Calculator implements Runnable {
 
             switch (inputString) {
                 case PRINT_RECORD:
-                    printRecord();
+                    printRecordProcess();
                     break;
                 case CALCULATE:
-                    calculate();
+                    calculateProcess();
                     break;
                 case EXIT:
-                    exit();
+                    exitProcess();
                     return;
                 default:
                     output.printWrongOrder();
@@ -63,39 +63,38 @@ public class Calculator implements Runnable {
         }
     }
 
-    private void printRecord() {
+    private void printRecordProcess() {
         List<String> recordList = repository.findAll();
 
-        if(recordList.isEmpty()){
+        if (recordList.isEmpty()) {
             output.printNoRecord();
-        }else{
+        } else {
             output.printRecord(recordList);
         }
     }
 
-    private void calculate() {
+    private void calculateProcess() {
         String inputString = input.inputOrder();
 
-        if(!validator.isExpression(inputString)){
+        if (!validator.isExpression(inputString)) {
             output.printWrongOrder();
             return;
         }
 
-        List<String> tokens = parse.getTokenList(inputString);
+        List<String> tokens = parser.getTokenList(inputString);
 
         try {
             List<String> postfixTokens = postfix.toPostfix(tokens);
             String result = operation.calculate(postfixTokens);
 
             repository.save(inputString, result);
-
             output.printResult(result);
-        } catch(Exception e) {
+        } catch (Exception e) {
             output.printZeroDivision();
         }
     }
 
-    private void exit() {
+    private void exitProcess() {
         output.printExit();
     }
 }

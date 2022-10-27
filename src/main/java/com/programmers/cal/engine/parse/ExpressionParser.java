@@ -3,25 +3,25 @@ package com.programmers.cal.engine.parse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionParse implements Parse {
+public class ExpressionParser implements Parser {
 
     @Override
     public List<String> getTokenList(String inputString) {
 
-        char[] arr = inputString.replaceAll("\\p{Z}", "").toCharArray();
+        char[] elements = inputString.replaceAll("\\p{Z}", "").toCharArray();
         List<String> list = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
-        builder.append(arr[0]);
+        builder.append(elements[0]);
 
-        for (int i = 1; i < arr.length; i++) {
-            if (Character.isDigit(arr[i])) {
-                builder.append(arr[i]);
+        for (int i = 1; i < elements.length; i++) {
+            if (Character.isDigit(elements[i])) {
+                builder.append(elements[i]);
             } else {
                 if (builder.length() == 0) {
-                    builder.append(arr[i]);
+                    builder.append(elements[i]);
                 } else {
                     list.add(builder.toString());
-                    list.add(String.valueOf(arr[i]));
+                    list.add(String.valueOf(elements[i]));
                     builder.setLength(0);
                 }
             }

@@ -18,7 +18,7 @@ public class RepositoryTest {
 
     @Test
     @DisplayName("기록 저장 성공")
-    public void successRecord(){
+    public void successRecord() {
         //given
         Map<String, String> map = new LinkedHashMap<>();
 

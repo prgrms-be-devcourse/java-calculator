@@ -1,7 +1,7 @@
 package com.programmers.cal;
 
-import com.programmers.cal.engine.parse.ExpressionParse;
-import com.programmers.cal.engine.parse.Parse;
+import com.programmers.cal.engine.parse.ExpressionParser;
+import com.programmers.cal.engine.parse.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,9 +10,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ParseTest {
+public class ParserTest {
 
-    Parse parse = new ExpressionParse();
+    Parser parser = new ExpressionParser();
 
     @Test
     @DisplayName("파싱 성공")
@@ -27,8 +27,8 @@ public class ParseTest {
         List<String> expected3 = Arrays.asList("-12", "+", "-34", "+", "-45");
 
         //then
-        assertThat(parse.getTokenList((inputString1))).isEqualTo(expected1);
-        assertThat(parse.getTokenList((inputString2))).isEqualTo(expected2);
-        assertThat(parse.getTokenList((inputString3))).isEqualTo(expected3);
-    }    
+        assertThat(parser.getTokenList((inputString1))).isEqualTo(expected1);
+        assertThat(parser.getTokenList((inputString2))).isEqualTo(expected2);
+        assertThat(parser.getTokenList((inputString3))).isEqualTo(expected3);
+    }
 }

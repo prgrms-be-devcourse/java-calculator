@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostfixManager implements Postfix{
+public class PostfixManager implements Postfix {
 
     private int getPriority(String operator) {
         if (operator.equals("+") || operator.equals("-")) return 1;

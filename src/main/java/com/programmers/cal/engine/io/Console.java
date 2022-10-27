@@ -43,6 +43,6 @@ public class Console implements Input, Output {
 
     @Override
     public void printNoRecord() {
-        System.out.println(Message.RECORD_MESSAGE);
+        System.out.println(Message.NO_RECORD_MESSAGE);
     }
 }
