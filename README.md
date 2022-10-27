@@ -1,6 +1,19 @@
 # java_calculator
 자바 계산기 구현 미션 Repository입니다.
 
+# 작동방법
+
+1. 프로젝트를 다운로드 합니다.
+   1. ```cd {work_space}```
+   2. ```git clone https://github.com/cloudwi/java-calculator.git```
+   3. 인텔리제이 환경 -> open project -> Run 'App.main()'
+---
+2. 메뉴를 선택합니다.
+   1. 조회 : 지금까지 계산한 결과를 출력합니다.
+   2. 2 계산 : 계산 공식을 입력하세요.
+      1. 정상 예시 ) "1 + 1", "2 + 2 * 2"
+      2. 비정상 예시 ) "1+ 1", "2 ++ 2", "2 + 2 +"
+
 [//]: # ()
 [//]: # (### 이곳은 공개 Repo입니다.)
 
