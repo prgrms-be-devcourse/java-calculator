@@ -1,9 +1,8 @@
 package com.programmers.java.application.config;
 
-import com.programmers.java.application.exception.DoubleMultiplyDivideException;
 import com.programmers.java.application.exception.EmptyExpressionException;
 import com.programmers.java.application.exception.OnlyNumberException;
-import com.programmers.java.application.exception.WrongOrderOperatorException;
+import com.programmers.java.application.exception.WrongUsedOperatorException;
 
 public interface Validator {
     void validEmptyExpression(String expression) throws EmptyExpressionException;
@@ -12,9 +11,7 @@ public interface Validator {
 
     void validZeroDivisionExpression(String expression);
 
-    void validWrongOrderOperator(String expression) throws WrongOrderOperatorException;
-
-    void validMultiplyDivideDouble(String expression) throws DoubleMultiplyDivideException;
+    void validWrongOrderOperator(String expression) throws WrongUsedOperatorException;
 
     void validateNumberOperator(String[] tokens);
 

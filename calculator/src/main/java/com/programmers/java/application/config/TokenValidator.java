@@ -30,16 +30,9 @@ public class TokenValidator implements Validator {
     }
 
     @Override
-    public void validWrongOrderOperator(String expression) throws WrongOrderOperatorException {
+    public void validWrongOrderOperator(String expression) throws WrongUsedOperatorException {
         if (Pattern.matches(ADD_MINUS_NEXT_MULTIPLY_DIVIDE_OPERATOR_REGEX, expression)) {
-            throw new WrongOrderOperatorException();
-        }
-    }
-
-    @Override
-    public void validMultiplyDivideDouble(String expression) throws DoubleMultiplyDivideException {
-        if (Pattern.matches(DOUBLE_MULTIPLY_DIVIDE_OPERATOR_REGEX, expression)) {
-            throw new DoubleMultiplyDivideException();
+            throw new WrongUsedOperatorException();
         }
     }
 
@@ -47,7 +40,7 @@ public class TokenValidator implements Validator {
     public void validateNumberOperator(String[] tokens) {
         for (String token : tokens) {
             if (!Pattern.matches(NUMBER_OPERATOR_REGEX, token)) {
-                throw new NonNumberOperatorException();
+                throw new UnsupportedNumberOperatorException();
             }
         }
     }

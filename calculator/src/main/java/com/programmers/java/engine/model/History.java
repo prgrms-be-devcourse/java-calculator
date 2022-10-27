@@ -18,7 +18,7 @@ public class History {
     }
 
     public List<Equation> mapToList() {
-        ArrayList<Equation> equationList = new ArrayList<>();
+        List<Equation> equationList = new ArrayList<>();
 
         for (Map.Entry<Expression, Answer> equation : equations.entrySet()) {
             equationList.add(

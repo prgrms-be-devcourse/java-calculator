@@ -17,19 +17,19 @@ public class CalculatorImpl implements Calculator {
     private Validator validator;
 
     @Override
-    public Answer calculate(Expression expression) {
+    public Answer getAnswer(Expression expression) {
 
         // 후위연산으로 식 변경
         String[] postTokens = makePostfix(expression.getTokens());
 
         // 식 계산
-        Answer result = getResult(postTokens);
+        Answer result = calculate(postTokens);
 
         return result;
     }
 
     @Override
-    public Answer getResult(String[] postTokens) {
+    public Answer calculate(String[] postTokens) {
         Stack<Double> stack = new Stack<>();
         Double lhs = 0.0;
         Double rhs = 0.0;
@@ -108,9 +108,6 @@ public class CalculatorImpl implements Calculator {
 
         // validate: 연산자 순서를 잘못 입력했을 경우 (-,+ 다음 /, *)
         validator.validWrongOrderOperator(expression);
-
-        // validate: 곱하기와 나누기 연산을 연속해서 2번 이상 했을 경우
-        validator.validMultiplyDivideDouble(expression);
     }
 
     private void validateTokens(String[] tokens) {

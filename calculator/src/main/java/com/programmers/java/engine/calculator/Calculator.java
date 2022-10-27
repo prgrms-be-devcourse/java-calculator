@@ -5,10 +5,10 @@ import com.programmers.java.engine.model.Expression;
 
 public interface Calculator {
     // 식으로 값 계산 (후위 연산 변환 + 계산)
-    Answer calculate(Expression expression);
+    Answer getAnswer(Expression expression);
 
     // 후위연산으로 계산
-    Answer getResult(String[] postTokens);
+    Answer calculate(String[] postTokens);
 
     // 후위 연산으로 변환
     String[] makePostfix(String[] tokens);

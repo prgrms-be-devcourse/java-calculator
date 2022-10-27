@@ -30,7 +30,7 @@ public class CalculatorOption implements Option {
         try {
             expression = calculator.parseExpression(inputExpression);
 
-            answer = calculator.calculate(expression);
+            answer = calculator.getAnswer(expression);
         } catch (OnlyNumberException exception) {
             expression = Expression.builder()
                     .tokens(new String[]{inputExpression})
