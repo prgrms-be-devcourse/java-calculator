@@ -44,15 +44,6 @@ public class Console implements Input, Output {
             }
         }
 
-//        for (Equation equation : history) {
-//            stringBuilder.append(equation.getExpression()).append(" = ");
-//            if (equation.getAnswer().checkInt()) {
-//                stringBuilder.append(equation.getAnswer().getValue().intValue()).append("\n");
-//            } else {
-//                stringBuilder.append(equation.getAnswer().getValue()).append("\n");
-//            }
-//        }
-
         System.out.println(stringBuilder);
     }
 }

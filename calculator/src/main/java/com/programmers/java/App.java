@@ -46,7 +46,7 @@ public class App {
             try {
                 menu.processMenu(option);
             } catch (EmptyExpressionException | ZeroDivisionException | WrongOrderOperatorException | DoubleMultiplyDivideException | NonNumberOperatorException | OutboundMaxValueException exception) {
-                System.out.println(exception.getMessage());
+                System.out.println("유효한 식이 아닙니다.\n");
             }
         }
     }

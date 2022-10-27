@@ -151,16 +151,16 @@ class CalculatorImplTest {
 //        //then
 //    }
 
-//    @Test
-//    public void zero_division_테스트() {
-//        //given
-//        String expression1 = "-11/0+1/2";
-//        String expression2 = "-11/1";
-//
-//        //when
-//        calculatorImpl.validZeroDivisionExpression(expression1);
-//        calculatorImpl.validZeroDivisionExpression(expression2);
-//
-//        //then
-//    }
+    @Test
+    public void zero_division_테스트() {
+        //given
+        String expression1 = "-1+1/0+1/2";
+        String expression2 = "-11/1";
+
+        //when
+        calculatorImpl.validZeroDivisionExpression(expression1);
+        calculatorImpl.validZeroDivisionExpression(expression2);
+
+        //then
+    }
 }

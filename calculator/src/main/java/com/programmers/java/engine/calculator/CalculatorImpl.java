@@ -98,7 +98,7 @@ public class CalculatorImpl implements Calculator {
 
     private void validEmptyExpression(String expression) throws EmptyExpressionException {
         if (expression.length() == 0) {
-            throw new EmptyExpressionException("식을 입력해주세요.\n");
+            throw new EmptyExpressionException();
         }
     }
 
@@ -108,21 +108,21 @@ public class CalculatorImpl implements Calculator {
         }
     }
 
-    private void validZeroDivisionExpression(String expression) {
+    public void validZeroDivisionExpression(String expression) {
         if (Pattern.matches(ZERO_DIVIDE_REGEX, expression)) {
-            throw new ZeroDivisionException("0으로 나눌 수 없습니다.\n");
+            throw new ZeroDivisionException();
         }
     }
 
     public void validWrongOrderOperator(String expression) throws WrongOrderOperatorException {
         if (Pattern.matches(ADD_MINUS_NEXT_MULTIPLY_DIVIDE_OPERATOR_REGEX, expression)) {
-            throw new WrongOrderOperatorException("잘못된 연산자 순서입니다.\n");
+            throw new WrongOrderOperatorException();
         }
     }
 
     private void validMultiplyDivideDouble(String expression) throws DoubleMultiplyDivideException {
         if (Pattern.matches(DOUBLE_MULTIPLY_DIVIDE_OPERATOR_REGEX, expression)) {
-            throw new DoubleMultiplyDivideException("연산자의 사용이 잘못되었습니다.\n");
+            throw new DoubleMultiplyDivideException();
         }
     }
 
@@ -155,7 +155,7 @@ public class CalculatorImpl implements Calculator {
     private void validateNumberOperator(String[] tokens) {
         for (String token : tokens) {
             if (!Pattern.matches(NUMBER_OPERATOR_REGEX, token)) {
-                throw new NonNumberOperatorException("숫자와 연산자만 입력해주세요.\n");
+                throw new NonNumberOperatorException();
             }
         }
     }
@@ -163,7 +163,7 @@ public class CalculatorImpl implements Calculator {
     private void validateOutBoundNumber(String[] tokens) {
         for (String token : tokens) {
             if (!Pattern.matches(AVAILABLE_VALUE_REGEX, token)) {
-                throw new OutboundMaxValueException("숫자가 너무 큽니다.\n");
+                throw new OutboundMaxValueException();
             }
         }
     }
@@ -175,12 +175,14 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public Expression parseExpression(String inputExpression) throws Exception {
+        String nonSpaceExpression = makeNonSpaceString(inputExpression);
+
         // validate expression
-        validateExpression(inputExpression);
+        validateExpression(nonSpaceExpression);
 
         // 공백 제거
         // 숫자와 연산자 추출
-        String[] tokens = numberOperatorTokenizer(makeNonSpaceString(inputExpression));
+        String[] tokens = numberOperatorTokenizer(nonSpaceExpression);
 
         // validate tokens
         validateTokens(tokens);
