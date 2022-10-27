@@ -1,4 +1,4 @@
-package com.programmers.calculator.engine;
+package com.programmers.calculator;
 
 import com.programmers.calculator.engine.calculation.Calculate;
 import com.programmers.calculator.engine.conversion.Conversion;

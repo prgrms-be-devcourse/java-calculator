@@ -1,6 +1,5 @@
 package com.programmers.calculator;
 
-import com.programmers.calculator.engine.Calculator;
 import com.programmers.calculator.engine.calculation.Calculate;
 import com.programmers.calculator.engine.calculation.CalculatePostfix;
 import com.programmers.calculator.engine.conversion.Conversion;
