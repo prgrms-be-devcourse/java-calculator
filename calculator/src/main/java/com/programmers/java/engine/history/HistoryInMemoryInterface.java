@@ -1,12 +1,9 @@
 package com.programmers.java.engine.history;
 
-import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Equation;
 import com.programmers.java.engine.model.History;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HistoryInMemoryInterface implements HistoryRepository{
 
@@ -19,16 +16,7 @@ public class HistoryInMemoryInterface implements HistoryRepository{
 
     @Override
     public List<Equation> findAll() {
-        ArrayList<Equation> equationList = new ArrayList<>();
-
-        for (Map.Entry<String, Answer> equation : history.getEquations().entrySet()) {
-            equationList.add(
-                    Equation.builder()
-                            .expression(equation.getKey())
-                            .answer(equation.getValue())
-                            .build()
-            );
-        }
+        List<Equation> equationList = history.mapToList();
 
         return equationList;
     }

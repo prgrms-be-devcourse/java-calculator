@@ -5,11 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class Equation {
-    String expression;
+    Expression expression;
     Answer answer;
 
     @Builder
-    public Equation(String expression, Answer answer) {
+    public Equation(Expression expression, Answer answer) {
         this.expression = expression;
         this.answer = answer;
     }

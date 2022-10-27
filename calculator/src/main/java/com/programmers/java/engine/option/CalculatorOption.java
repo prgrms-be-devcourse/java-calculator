@@ -29,8 +29,13 @@ public class CalculatorOption implements Option {
         String inputExpression = console.input("\n");
         try {
             expression = calculator.parseExpression(inputExpression);
+
             answer = calculator.calculate(expression);
         } catch (OnlyNumberException exception) {
+            expression = Expression.builder()
+                    .tokens(new String[]{inputExpression})
+                    .build();
+
             answer = Answer.builder()
                     .value(Double.parseDouble(inputExpression))
                     .build();
@@ -39,7 +44,7 @@ public class CalculatorOption implements Option {
         console.printAnswer(answer);
 
         return Equation.builder()
-                .expression(inputExpression)
+                .expression(expression)
                 .answer(answer)
                 .build();
     }
