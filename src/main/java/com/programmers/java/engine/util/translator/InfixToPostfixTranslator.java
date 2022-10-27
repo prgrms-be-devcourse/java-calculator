@@ -33,7 +33,7 @@ public class InfixToPostfixTranslator extends Translator {
                             // "(" 괄호 제거
                             this.deque.pop();
                         } else {
-                            // 연산 가능한 연산자인 경우
+                            // 연산 가능한 연산자인 경우 (괄호 연산자의 경우 스택에 들어갈 때와 스택 안에서 새로 들어올 연산자와 비교할 때 우선 순위가 다름)
                             while (!this.deque.isEmpty() && Operator.getISP(this.deque.peekFirst()) >= Operator.getICP(operator)) {
                                 expression.append(this.deque.pop().toString()).append(" ");
                             }
