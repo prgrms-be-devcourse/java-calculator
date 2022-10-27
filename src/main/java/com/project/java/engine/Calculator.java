@@ -5,6 +5,7 @@ import com.project.java.engine.io.Input;
 import com.project.java.engine.io.Output;
 import com.project.java.engine.repository.Repository;
 import com.project.java.engine.solver.Solver;
+import com.project.java.exception.ContinuousOperatorException;
 import com.project.java.exception.ZeroDivisionException;
 import com.project.java.utils.Command;
 import lombok.AllArgsConstructor;
@@ -34,7 +35,9 @@ public class Calculator {
                     retrieveAll();
                 }
                 case CALCULATE -> {
-                    calculate();
+                    ResultFormat result = calculate();
+                    output.printResult(result);
+                    repository.save(result);
                 }
                 case QUIT, ANOTHER_QUIT -> {return;}
                 default -> output.inputError();
@@ -42,21 +45,24 @@ public class Calculator {
         }
     }
 
-    private void calculate() throws IOException {
+    private ResultFormat calculate() throws IOException {
         String expression = input.getExpression(MESSAGE_EXPRESSION);
         if (!input.validateInput(expression)) {
             output.inputError();
-            return;
+            return makeInvalidResult(expression);
         }
         ResultFormat result;
         try {
             result = solver.calculate(expression);
-        } catch (ZeroDivisionException e) {
+        } catch (ZeroDivisionException | ContinuousOperatorException e) {
             output.inputError();
-            return;
+            return makeInvalidResult(expression);
         }
-        output.printResult(result);
-        repository.save(result);
+        return result;
+    }
+
+    private ResultFormat makeInvalidResult(String expression) {
+        return new ResultFormat(expression, Long.MIN_VALUE);
     }
 
     private void retrieveAll() {

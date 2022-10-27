@@ -12,7 +12,11 @@ public class ResultFormat {
 
     public String formatResult() {
         String formattedResult;
-        if(Math.floor(result) == result) {
+        if(result == Long.MIN_VALUE) {
+            // Long.MIN_VALUE 라면 오류인 문제이므로 출력하지 않음
+            formattedResult = "";
+        }
+        else if(Math.floor(result) == result) {
             long longResult = (long) result;
             formattedResult = String.valueOf(longResult);
         } else {
