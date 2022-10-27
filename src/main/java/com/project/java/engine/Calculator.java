@@ -12,9 +12,6 @@ import lombok.AllArgsConstructor;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
-import static com.project.java.utils.Command.*;
 
 @AllArgsConstructor
 public class Calculator {
@@ -35,7 +32,8 @@ public class Calculator {
                     retrieveAll();
                 }
                 case CALCULATE -> {
-                    ResultFormat result = calculate();
+                    String expression = input.getExpression(MESSAGE_EXPRESSION);
+                    ResultFormat result = calculate(expression);
                     output.printResult(result);
                     repository.save(result);
                 }
@@ -45,8 +43,8 @@ public class Calculator {
         }
     }
 
-    private ResultFormat calculate() throws IOException {
-        String expression = input.getExpression(MESSAGE_EXPRESSION);
+    private ResultFormat calculate(String expression) throws IOException {
+
         if (!input.validateInput(expression)) {
             output.inputError();
             return makeInvalidResult(expression);
