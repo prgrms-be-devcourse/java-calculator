@@ -6,6 +6,8 @@ import java.util.Objects;
 
 @AllArgsConstructor
 public class Expression {
+    private final static String pattern2 = ".0$";
+
     private String infix;   // 중위 표기법
     private double result;
 
@@ -19,7 +21,7 @@ public class Expression {
 
     @Override
     public String toString() {
-        return infix + " = " + String.valueOf(result).replaceAll(".0$", "");
+        return infix + " = " + String.valueOf(result).replaceAll(pattern2, "");
     }
 
     @Override

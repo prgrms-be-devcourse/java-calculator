@@ -5,12 +5,13 @@ import com.calculator.io.Input;
 import com.calculator.io.Output;
 import com.calculator.repository.Repository;
 import lombok.Builder;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.util.Stack;
 
 @Builder
-public class Calculator implements Runnable {
+public class Calculator {
 
     private double result;
 
@@ -18,11 +19,12 @@ public class Calculator implements Runnable {
     private Output output;
     private Repository repository;
 
-    @Override
-    public void run() {
+    private ValidatorHandler validator;
+
+    public void run() throws BaseException, IOException {
         while (true) {
             try {
-                int inputType = this.input.inputType();
+                int inputType = validator.typeError(this.input.inputType());
 
                 if (inputType == EType.FIND.ordinal() + 1) {
                     getMap();
@@ -33,8 +35,8 @@ public class Calculator implements Runnable {
                     return;
                 }
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                throw e;
             }
         }
     }
@@ -43,41 +45,45 @@ public class Calculator implements Runnable {
         repository.findAll();
     }
 
-    public double calculate(String input) {
-        double result = 0;
+    public double calculate(String input) throws BaseException {
+        try {
+            double result = 0;
 
-        Expression findExpression = repository.findByInfix(input);
-        if (findExpression != null) {
-            // 이미 존재하는 계산식의 경우 계산은 건너뛰고 map에서 객체 꺼내서 내역에만 한번더 저장처리
-            result = findExpression.getResult();
+            Expression findExpression = repository.findByInfix(input);
+            if (findExpression != null) {
+                // 이미 존재하는 계산식의 경우 계산은 건너뛰고 map에서 객체 꺼내서 내역에만 한번더 저장처리
+                result = findExpression.getResult();
 
-            repository.save(findExpression);
-            return result;
-        }
-
-        String after = change(input);
-
-        // 후위표기법 계산
-        Stack<Double> stack = new Stack<>();
-        for (int i = 0; i < after.length(); i++) {
-            if (Character.isDigit(after.charAt(i))) {
-                stack.push((double) after.charAt(i) - '0');
-            } else {
-                Double b = stack.pop();
-                Double a = stack.pop();
-
-                EOperator eOperator = findEnumByName(after.charAt(i));
-                stack.push(eOperator.calculate(a, b));
+                repository.save(findExpression);
+                return result;
             }
+
+            String after = change(input);
+
+            // 후위표기법 계산
+            Stack<Double> stack = new Stack<>();
+            for (int i = 0; i < after.length(); i++) {
+                if (Character.isDigit(after.charAt(i))) {
+                    stack.push((double) after.charAt(i) - '0');
+                } else {
+                    Double b = stack.pop();
+                    Double a = stack.pop();
+
+                    EOperator eOperator = findEnumByName(after.charAt(i));
+                    stack.push(eOperator.calculate(a, b));
+                }
+            }
+
+            result = stack.pop();
+
+            // 계산 완료 후 map에 저장
+            Expression expression = new Expression(input, result);
+            repository.save(expression);
+
+            return result;
+        } catch (BaseException e) {
+            throw e;
         }
-
-        result = stack.pop();
-
-        // 계산 완료 후 map에 저장
-        Expression expression = new Expression(input, result);
-        repository.save(expression);
-
-        return result;
     }
 
     /**

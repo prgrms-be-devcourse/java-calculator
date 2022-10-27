@@ -2,6 +2,8 @@ package com.calculator.common;
 
 import java.util.function.BiFunction;
 
+import static com.calculator.common.ExceptionStatus.*;
+
 public enum EOperator {
 
     ADD('+', 2, Double::sum),
@@ -29,8 +31,12 @@ public enum EOperator {
         return priority;
     }
 
-    public Double calculate(double a, double b) {
-        return this.biFunction.apply(a, b);
+    public Double calculate(double a, double b) throws BaseException {
+        try {
+            return this.biFunction.apply(a, b);
+        } catch (ArithmeticException e) {
+            throw new BaseException(DIVIDE_ZERO_ERROR);
+        }
     }
 
     public int compare(EOperator e) {

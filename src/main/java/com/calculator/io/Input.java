@@ -1,5 +1,8 @@
 package com.calculator.io;
 
+import com.calculator.common.BaseException;
+import com.calculator.common.ValidatorHandler;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +10,6 @@ import java.io.InputStreamReader;
 public interface Input {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    int inputType() throws IOException;
-    String inputNum() throws IOException;
+    String inputType() throws IOException;
+    String inputNum() throws IOException, BaseException;
 }
