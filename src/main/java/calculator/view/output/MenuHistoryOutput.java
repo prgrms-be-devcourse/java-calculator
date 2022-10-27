@@ -12,7 +12,7 @@ import static java.util.stream.IntStream.range;
 public class MenuHistoryOutput implements BaseOutput {
 
     public void printHistories(Collection<?> histories) {
-        HashMap<String, String> newHistories = new HashMap<>();
+        Map<String, String> newHistories = new HashMap<>();
 
         histories.stream()
                 .map(history -> (Map.Entry<String, String>) history)
@@ -23,7 +23,7 @@ public class MenuHistoryOutput implements BaseOutput {
         print(createHistories(newHistories) + ENTER.getUnit());
     }
 
-    private String createHistories(HashMap<String, String> histories) {
+    private String createHistories(Map<String, String> histories) {
         StringBuilder textBuilder = new StringBuilder();
 
         histories.keySet()
@@ -37,7 +37,7 @@ public class MenuHistoryOutput implements BaseOutput {
         return textBuilder.toString();
     }
 
-    private static void handleAnswer(HashMap<String, String> histories,
+    private static void handleAnswer(Map<String, String> histories,
                                      StringBuilder textBuilder,
                                      String formula,
                                      int idx) {
