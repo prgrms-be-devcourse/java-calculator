@@ -15,7 +15,7 @@ public class StartPage extends Page<PageList> {
     }
 
     @Override
-    public void run() {
+    public void render() {
         while (true) {
             String inputString;
             outputData(getContent());

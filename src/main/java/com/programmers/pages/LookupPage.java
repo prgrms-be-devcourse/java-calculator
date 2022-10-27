@@ -15,7 +15,7 @@ public class LookupPage extends Page {
     }
 
     @Override
-    public void run() {
+    public void render() {
         while(true){
             if(repo.readData().size()==0){
                 outputData(getContent());

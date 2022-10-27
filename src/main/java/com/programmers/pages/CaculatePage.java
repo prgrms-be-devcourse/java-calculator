@@ -20,7 +20,7 @@ public class CaculatePage extends Page<CaculatorParseData> {
     }
 
     @Override
-    public void run() {
+    public void render() {
         while (true) {
             String inputString = input(getPrompt());
             getParser().parseInput(inputString);

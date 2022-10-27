@@ -15,7 +15,7 @@ public class PageManager implements Runnable {
     @Override
     public void run() {
         while(true){
-            currPage.run();
+            currPage.render();
             if(currPage.getNextPage() == PageList.NONE){
                 break;
             }

@@ -13,7 +13,7 @@ import java.util.Scanner;
 @EqualsAndHashCode
 @Getter
 @AllArgsConstructor
-public abstract class Page <T> implements Input, Output,Runnable{
+public abstract class Page <T> implements Input, Output{
     private final Scanner scanner = new Scanner(System.in);
     private String content;
     private String prompt;
@@ -35,4 +35,5 @@ public abstract class Page <T> implements Input, Output,Runnable{
             return scanner.nextLine();
         }
     }
+    public abstract void render();
 }
