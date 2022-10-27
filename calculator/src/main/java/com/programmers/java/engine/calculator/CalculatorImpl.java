@@ -1,11 +1,12 @@
 package com.programmers.java.engine.calculator;
 
 import com.programmers.java.application.Operator;
+import com.programmers.java.application.exception.*;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
 import lombok.AllArgsConstructor;
 
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static com.programmers.java.application.config.Constant.*;
@@ -85,20 +86,145 @@ public class CalculatorImpl implements Calculator {
         }
     }
 
-    @Override
-    public Expression parseExpression(String inputExpression) {
+    // 공백 제거
+    private String makeNonSpaceString(String input) {
+        return input.replace(" ", "");
+    }
 
-        // 숫자와 연산자 추출
-        String[] tokens = inputExpression.split(" ");
+    // 숫자와 연산자로 토큰화
+    public String[] numberOperatorTokenizer(String str) {
+        return str.split(SPLIT_TOKENIZER_REGEX);
+    }
 
-        // validate: 잘못된 연산자나 숫자인지 체크
+    private void validEmptyExpression(String expression) throws EmptyExpressionException {
+        if (expression.length() == 0) {
+            throw new EmptyExpressionException("식을 입력해주세요.\n");
+        }
+    }
+
+    private void validateOnlyNumber(String expression) throws OnlyNumberException {
+        if (Pattern.matches(NUMBER_REGEX, expression)) {
+            throw new OnlyNumberException();
+        }
+    }
+
+    private void validZeroDivisionExpression(String expression) {
+        if (Pattern.matches(ZERO_DIVIDE_REGEX, expression)) {
+            throw new ZeroDivisionException("0으로 나눌 수 없습니다.\n");
+        }
+    }
+
+    public void validWrongOrderOperator(String expression) throws WrongOrderOperatorException {
+        if (Pattern.matches(ADD_MINUS_NEXT_MULTIPLY_DIVIDE_OPERATOR_REGEX, expression)) {
+            throw new WrongOrderOperatorException("잘못된 연산자 순서입니다.\n");
+        }
+    }
+
+    private void validMultiplyDivideDouble(String expression) throws DoubleMultiplyDivideException {
+        if (Pattern.matches(DOUBLE_MULTIPLY_DIVIDE_OPERATOR_REGEX, expression)) {
+            throw new DoubleMultiplyDivideException("연산자의 사용이 잘못되었습니다.\n");
+        }
+    }
+
+
+    private void validateExpression(String expression) throws Exception {
+        // validate: 식을 입력하지 않았을 경우
+        validEmptyExpression(expression);
+
+        // validate: 숫자만 입력할 경우
+        validateOnlyNumber(expression);
+
+        // validate: 0으로 나눈 경우
+        validZeroDivisionExpression(expression);
+
+        // validate: 연산자 순서를 잘못 입력했을 경우 (-,+ 다음 /, *)
+        validWrongOrderOperator(expression);
+
+        // validate: 곱하기와 나누기 연산을 연속해서 2번 이상 했을 경우
+        validMultiplyDivideDouble(expression);
+    }
+
+    private void validateTokens(String[] tokens) {
+        // validate: 숫자와 연산자 이외에 문자가 있는 경우
+        validateNumberOperator(tokens);
+
+        // validate: 최대 크기 보다 큰 경우
+        validateOutBoundNumber(tokens);
+    }
+
+    private void validateNumberOperator(String[] tokens) {
         for (String token : tokens) {
-            if (!isMatchRegex(token, ALL_OPERATOR_REGEX) && !isMatchRegex(token, NUMBER_REGEX)) {
+            if (!Pattern.matches(NUMBER_OPERATOR_REGEX, token)) {
+                throw new NonNumberOperatorException("숫자와 연산자만 입력해주세요.\n");
+            }
+        }
+    }
 
+    private void validateOutBoundNumber(String[] tokens) {
+        for (String token : tokens) {
+            if (!Pattern.matches(AVAILABLE_VALUE_REGEX, token)) {
+                throw new OutboundMaxValueException("숫자가 너무 큽니다.\n");
+            }
+        }
+    }
+
+    private String[] stringListToStringArray(List<String> list) {
+        String[] array = new String[list.size()];
+        return list.toArray(array);
+    }
+
+    @Override
+    public Expression parseExpression(String inputExpression) throws Exception {
+        // validate expression
+        validateExpression(inputExpression);
+
+        // 공백 제거
+        // 숫자와 연산자 추출
+        String[] tokens = numberOperatorTokenizer(makeNonSpaceString(inputExpression));
+
+        // validate tokens
+        validateTokens(tokens);
+
+        List<String> tokenList = new ArrayList<>(Arrays.asList(tokens));
+        List<String> expressionTokenList = new LinkedList<>();
+
+        String originToken = null;
+        String firstToken = tokenList.get(0);
+        String secondToken = tokenList.get(1);
+
+        expressionTokenList.add(firstToken);
+        if (firstToken.equals("-")) {
+            expressionTokenList.remove(0);
+            expressionTokenList.add(firstToken + secondToken);
+        }
+
+        for (int i = 1; i < tokenList.size(); i++) {
+            String curToken = tokenList.get(i);
+            String prevToken = tokenList.get(i - 1);
+
+            if (prevToken.matches(ALL_OPERATOR_REGEX) && curToken.matches(ADD_MINUS_OPERATOR_REGEX)) {
+                String prevPrevToken = tokenList.get(i - 2);
+
+                if (!prevPrevToken.matches(ADD_MINUS_OPERATOR_REGEX)) originToken = curToken;
+                else break;
+
+            } else if (originToken != null && originToken.equals("-")) {
+                expressionTokenList.add(originToken + curToken);
+                originToken = null;
+            } else {
+                expressionTokenList.add(curToken);
             }
         }
 
-        return new Expression(tokens);
+        if (firstToken.equals("+")) {
+            expressionTokenList.remove(0);
+        } else if (firstToken.equals("-")) {
+            expressionTokenList.remove(1);
+        }
+
+        return Expression.builder()
+                .tokens(stringListToStringArray(expressionTokenList))
+                .build();
     }
 
 }

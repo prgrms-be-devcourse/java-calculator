@@ -1,7 +1,7 @@
 package com.programmers.java;
 
 import com.programmers.java.application.Console;
-import com.programmers.java.application.exception.UnknownOptionException;
+import com.programmers.java.application.exception.*;
 import com.programmers.java.engine.Menu;
 import com.programmers.java.engine.calculator.Calculator;
 import com.programmers.java.engine.calculator.CalculatorImpl;
@@ -19,7 +19,7 @@ public class App {
     private static Menu menu = new Menu();
     private static Option option;
 
-    public static void main(String[] args) throws UnknownOptionException {
+    public static void main(String[] args) throws Exception {
         while (true) {
             // input option
             String inputOption = console.input(
@@ -43,7 +43,11 @@ public class App {
             else if (menuType == MenuType.EXIT) break;
             else break;
 
-            menu.processMenu(option);
+            try {
+                menu.processMenu(option);
+            } catch (EmptyExpressionException | ZeroDivisionException | WrongOrderOperatorException | DoubleMultiplyDivideException | NonNumberOperatorException | OutboundMaxValueException exception) {
+                System.out.println(exception.getMessage());
+            }
         }
     }
 }

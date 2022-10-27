@@ -1,5 +1,7 @@
 package com.programmers.java.engine.calculator;
 
+import com.programmers.java.application.exception.EmptyExpressionException;
+import com.programmers.java.application.exception.WrongOrderOperatorException;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
 
@@ -14,6 +16,6 @@ public interface Calculator {
     String[] makePostfix(String[] tokens);
 
     // 사용자의 식을 Expression 으로 변환
-    Expression parseExpression(String inputExpression);
+    Expression parseExpression(String inputExpression) throws EmptyExpressionException, WrongOrderOperatorException, Exception;
 
 }

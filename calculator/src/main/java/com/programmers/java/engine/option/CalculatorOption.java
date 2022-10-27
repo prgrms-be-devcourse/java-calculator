@@ -1,6 +1,7 @@
 package com.programmers.java.engine.option;
 
 import com.programmers.java.application.Console;
+import com.programmers.java.application.exception.OnlyNumberException;
 import com.programmers.java.engine.calculator.Calculator;
 import com.programmers.java.engine.history.HistoryRepository;
 import com.programmers.java.engine.model.Answer;
@@ -15,17 +16,26 @@ public class CalculatorOption implements Option {
     private Calculator calculator;
 
     @Override
-    public void runOption() {
+    public void runOption() throws Exception {
         Equation equation = useCalculator();
 
         historyRepository.save(equation);
     }
 
-    private Equation useCalculator() {
-        String inputExpression = console.input("\n");
-        Expression expression = calculator.parseExpression(inputExpression);
+    private Equation useCalculator() throws Exception {
+        Answer answer;
+        Expression expression;
 
-        Answer answer = calculator.calculate(expression);
+        String inputExpression = console.input("\n");
+        try {
+            expression = calculator.parseExpression(inputExpression);
+            answer = calculator.calculate(expression);
+        } catch (OnlyNumberException exception) {
+            answer = Answer.builder()
+                    .value(Double.parseDouble(inputExpression))
+                    .build();
+        }
+
         console.printAnswer(answer);
 
         return Equation.builder()
