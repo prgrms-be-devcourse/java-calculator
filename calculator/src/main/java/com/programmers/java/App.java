@@ -1,6 +1,8 @@
 package com.programmers.java;
 
 import com.programmers.java.application.Console;
+import com.programmers.java.application.config.TokenValidator;
+import com.programmers.java.application.config.Validator;
 import com.programmers.java.application.exception.*;
 import com.programmers.java.engine.Menu;
 import com.programmers.java.engine.calculator.Calculator;
@@ -15,7 +17,8 @@ import com.programmers.java.engine.option.Option;
 public class App {
     private static Console console = new Console();
     private static HistoryRepository historyRepository = new HistoryInMemoryInterface();
-    private static Calculator calculator = new CalculatorImpl();
+    private static Validator validator = new TokenValidator();
+    private static Calculator calculator = new CalculatorImpl(validator);
     private static Menu menu = new Menu();
     private static Option option;
 
@@ -45,7 +48,7 @@ public class App {
 
             try {
                 menu.processMenu(option);
-            } catch (EmptyExpressionException | ZeroDivisionException | WrongOrderOperatorException | DoubleMultiplyDivideException | NonNumberOperatorException | OutboundMaxValueException exception) {
+            } catch (Exception exception) {
                 System.out.println("유효한 식이 아닙니다.\n");
             }
         }

@@ -1,5 +1,7 @@
 package com.programmers.java.engine;
 
+import com.programmers.java.application.config.TokenValidator;
+import com.programmers.java.application.config.Validator;
 import com.programmers.java.engine.calculator.CalculatorImpl;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
@@ -14,10 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CalculatorImplTest {
 
     private static CalculatorImpl calculatorImpl;
+    private static Validator validator = new TokenValidator();
 
     @BeforeAll
     public static void init() {
-        calculatorImpl = new CalculatorImpl();
+        calculatorImpl = new CalculatorImpl(validator);
     }
 
     @Test
@@ -97,70 +100,5 @@ class CalculatorImplTest {
         System.out.println(Arrays.toString(tokens1));
         System.out.println(Arrays.toString(tokens2));
         System.out.println(Arrays.toString(tokens3));
-    }
-
-//    @Test
-//    public void 세개_이상_연산자_테스트() throws TooManyOperatorException {
-//        // given
-//        String[] tokens1 = {"-", "-", "-"};
-//        String[] tokens2 = {"-", "-", "1", "-", "-"};
-//        String[] tokens3 = {"-", "1", "+", "-", "-"};
-//
-//        //when
-//        calculatorImpl.validMoreThanTwoOperator(tokens2);
-//        calculatorImpl.validMoreThanTwoOperator(tokens3);
-//        calculatorImpl.validMoreThanTwoOperator(tokens1);
-//    }
-
-    @Test
-    public void 잘못된_연산자_순서_테스트() throws Exception {
-        //given
-        String expression1 = "1+3-/2+1";
-        String expression2 = "1-/1231+24";
-
-        //when
-        calculatorImpl.validWrongOrderOperator(expression1);
-        calculatorImpl.validWrongOrderOperator(expression2);
-
-        //then
-    }
-//
-//    @Test
-//    public void 빈_식_테스트() throws EmptyExpressionException {
-//        //given
-//        String expression1 = "";
-//
-//        //when
-//        calculatorImpl.validEmptyExpression(expression1);
-//
-//        //then
-//    }
-
-//    @Test
-//    public void 곱하기_나누기_연속_두번_테스트() throws DoubleMultiplyDivideException {
-//        //given
-//        String expression1 = "1//2";
-//        String expression2 = "1++212";
-//        String expression3 = "+1**212";
-//
-//        //when
-//        calculatorImpl.validMultiplyDivideDouble(expression1);
-//        calculatorImpl.validMultiplyDivideDouble(expression2);
-//        calculatorImpl.validMultiplyDivideDouble(expression3);
-//
-//        //then
-//    }
-
-    @Test
-    public void zero_division_테스트() {
-        //given
-        String expression1 = "-1+1/0+1/2";
-        String expression2 = "-11/1";
-
-        //when
-        calculatorImpl.validZeroDivisionExpression(expression1);
-        calculatorImpl.validZeroDivisionExpression(expression2);
-
-        //then
     }
 }
