@@ -37,7 +37,7 @@ class OperatorsTest {
                                                      double rightOperand,
                                                      String expect) {
 
-        String result = Operators.calculate(
+        BigDecimal result = Operators.calculate(
                 BigDecimal.valueOf(leftOperand),
                 operator,
                 BigDecimal.valueOf(rightOperand));

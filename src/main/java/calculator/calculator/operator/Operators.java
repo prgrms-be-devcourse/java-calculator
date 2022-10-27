@@ -29,10 +29,9 @@ public enum Operators {
                 .anyMatch(operator -> operator.operator.equals(inputOperator));
     }
 
-    public static String calculate(BigDecimal leftOperand, String operator, BigDecimal rightOperand) {
+    public static BigDecimal calculate(BigDecimal leftOperand, String operator, BigDecimal rightOperand) {
         return findOperator(operator).calculation
-                .doCalculation(leftOperand, rightOperand)
-                .toString();
+                .doCalculation(leftOperand, rightOperand);
     }
 
     public static boolean isLeftSameOrMoreImportantThan(String leftOperator, String rightOperator) {
