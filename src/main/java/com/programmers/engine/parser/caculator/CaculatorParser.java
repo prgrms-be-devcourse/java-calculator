@@ -43,8 +43,12 @@ public abstract class CaculatorParser extends Parser<CaculatorParseData> {
                     }
                 }
                 case '=' ->{
-                    tokenizeInput.add(Double.parseDouble(sb.toString()));
-                    sb.delete(0,sb.length());
+                    if(i==(originCharArray.length-1)){
+                        tokenizeInput.add(Double.parseDouble(sb.toString()));
+                        sb.delete(0,sb.length());
+                    }else{
+                        return null;
+                    }
                 }
                 case '0','1','2','3','4','5','6','7','8','9','.' ->{
                     sb.append(c);
