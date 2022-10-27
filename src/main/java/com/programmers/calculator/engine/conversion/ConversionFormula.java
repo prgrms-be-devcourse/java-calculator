@@ -48,9 +48,6 @@ public class ConversionFormula implements Conversion {
             postfix.add(symbolStack.pop());
         }
 
-        for (String s : postfix) {
-            System.out.print(s + ", ");
-        }
         return postfix;
     }
 
