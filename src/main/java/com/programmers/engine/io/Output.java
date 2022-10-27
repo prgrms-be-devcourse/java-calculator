@@ -17,4 +17,6 @@ public interface Output {
     void bracketValidationError();
 
     void caution();
+
+    void divdeByZeroError();
 }

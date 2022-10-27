@@ -45,4 +45,9 @@ public class Console implements Input, Output {
     public void caution() {
         System.out.println("아직 완벽하지 않은 계산기입니다\n 계산식을 입력할 때, 수와 연산자는 공백으로 분리해서 입력해주세요!");
     }
+
+    @Override
+    public void divdeByZeroError() {
+        System.out.println("Divided By Zero Error!!");
+    }
 }

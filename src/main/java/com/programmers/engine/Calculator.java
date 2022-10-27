@@ -64,8 +64,11 @@ public class Calculator implements Runnable{
                             if (formula.validate(numOperatorValidator)){
                                 ans = calculate(formula);
                                 System.out.println(ans);
-                                addToDB(dataBase, formula, ans);
-                                formula.clearContent();
+                                if (!ans.equals(BigDecimal.valueOf(Integer.MAX_VALUE))) {
+                                    addToDB(dataBase, formula, ans);
+                                    formula.clearContent();
+                                }else
+                                    output.divdeByZeroError();
                             }else{
                                 output.numOperatorValidationError();
                             }
@@ -170,10 +173,12 @@ public class Calculator implements Runnable{
         else return numStack.peek();
     }
     private void addToDB(DataBase db, Formula formula, BigDecimal ans){
+        // DBfh 저장하는 메소드
         formula.addDataToDB(db, ans);
     }
 
     private Optional<BigDecimal> arithmetic(BigDecimal b1, BigDecimal b2, Operator op){
+        // 단순 사칙연산을 위한 메소드
         if          (op.equals(Operator.MINUS))     return Optional.of(b2.subtract(b1));
         else if     (op.equals(Operator.PLUS))      return Optional.of(b2.add(b1));
         else if     (op.equals(Operator.MUL))       return Optional.of(b2.multiply(b1));
