@@ -25,7 +25,7 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void valueError() {
+    public void printErrorMessage() {
         System.out.println("잘못된 입력 값입니다.");
     }
 

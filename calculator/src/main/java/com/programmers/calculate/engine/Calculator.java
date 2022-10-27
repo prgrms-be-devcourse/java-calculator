@@ -34,7 +34,7 @@ public class Calculator implements Runnable {
                 System.out.println(answer + "\n");
                 saveExpression(inputString, answer);
             } else if (selectNumber.equals(Menu.EXIT.getValue())) break;
-            else output.valueError();
+            else output.printErrorMessage();
         }
     }
 
