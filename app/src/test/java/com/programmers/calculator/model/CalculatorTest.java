@@ -2,15 +2,9 @@ package com.programmers.calculator.model;
 
 import com.programmers.calculator.AppConfig;
 import com.programmers.calculator.controller.Controller;
-import com.programmers.calculator.domain.OperationResult;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import javax.security.sasl.AuthenticationException;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,18 +38,18 @@ class ArithmeticOperationCalculatorTest {
         }
 
         // when
-        OperationResult operationResult0 = calculator.calculate(inputFormula[0], parsedInputFormula[0]).get();
-        OperationResult operationResult1 = calculator.calculate(inputFormula[1], parsedInputFormula[1]).get();
-        OperationResult operationResult2 = calculator.calculate(inputFormula[2], parsedInputFormula[2]).get();
-        OperationResult operationResult3 = calculator.calculate(inputFormula[3], parsedInputFormula[3]).get();
-        OperationResult operationResult4 = calculator.calculate(inputFormula[4], parsedInputFormula[4]).get();
+        var operation0 = calculator.calculate(inputFormula[0], parsedInputFormula[0]);
+        var operation1 = calculator.calculate(inputFormula[1], parsedInputFormula[1]);
+        var operation2 = calculator.calculate(inputFormula[2], parsedInputFormula[2]);
+        var operation3 = calculator.calculate(inputFormula[3], parsedInputFormula[3]);
+        var operation4 = calculator.calculate(inputFormula[4], parsedInputFormula[4]);
 
         // then
-        assertEquals("2", operationResult0.getResult());
-        assertEquals("4", operationResult1.getResult());
-        assertEquals("13", operationResult2.getResult());
-        assertEquals("1.33", operationResult3.getResult());
-        assertEquals("12.6", operationResult4.getResult());
+        assertEquals("2", operation0.getResult());
+        assertEquals("4", operation1.getResult());
+        assertEquals("13", operation2.getResult());
+        assertEquals("1.33", operation3.getResult());
+        assertEquals("12.6", operation4.getResult());
     }
 
     @Test
@@ -66,6 +60,7 @@ class ArithmeticOperationCalculatorTest {
         String[] parsedInputFormula = new String[]{"10", "*","10", "/", "0"};
 
         // when, then
-        assertEquals(Optional.empty(), calculator.calculate(inputFormula, parsedInputFormula));
+        //assertEquals(Optional.empty(), calculator.calculate(inputFormula, parsedInputFormula));
+        assertThrows(ArithmeticException.class, () -> calculator.calculate(inputFormula, parsedInputFormula));
     }
 }

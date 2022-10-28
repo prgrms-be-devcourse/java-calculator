@@ -1,26 +1,23 @@
 package com.programmers.calculator.controller;
 
-import com.programmers.calculator.domain.OperationResult;
+import com.programmers.calculator.entity.Operation;
 import com.programmers.calculator.model.Calculator;
 import com.programmers.calculator.model.Validator;
-import com.programmers.calculator.repository.ResultRepository;
-import com.programmers.calculator.view.Input;
-import com.programmers.calculator.view.Output;
+import com.programmers.calculator.repository.Repository;
+import com.programmers.calculator.view.Console;
 
 import java.util.Optional;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public class Controller {
-    private ResultRepository repository;
-    private Input input;
-    private Output output;
-    private Calculator calculator;
+    private final Repository repository;
+    private final Console console;
+    private final Calculator calculator;
+    //private Map<String, >
 
-    public Controller(ResultRepository repository, Input input, Output output, Calculator calculator) {
+    public Controller(Repository repository, Console console, Calculator calculator) {
         this.repository = repository;
-        this.input = input;
-        this.output = output;
+        this.console = console;
         this.calculator = calculator;
     }
 
@@ -41,13 +38,13 @@ public class Controller {
     }
 
     public int inputMode() {
-        output.printlnString("");
-        output.printlnString("1.조회");
-        output.printlnString("2.계산");
-        output.printlnString("");
-        output.printString("선택 : ");
+        console.printlnString("");
+        console.printlnString("1.조회");
+        console.printlnString("2.계산");
+        console.printlnString("");
+        console.printString("선택 : ");
 
-        String inputModeStr = input.inputStr();
+        String inputModeStr = console.inputStr();
         if (!Pattern.matches(Validator.NUMBER_REGEX, inputModeStr))
             return -1;
 
@@ -55,17 +52,16 @@ public class Controller {
     }
 
     public void calculateFomula() {
-        String inputString = input.inputStr();
+        String inputString = console.inputStr();
         String[] parsedInputStr = parseFolmula(inputString);
 
         Validator.isRightSpacing(parsedInputStr);
         Validator.isRightOperatorAndNumbers(parsedInputStr);
 
-        Optional<OperationResult> operationResult = calculator.calculate(inputString, parsedInputStr);
-        Validator.isDivisionZero(operationResult);
+        Operation operation = calculator.calculate(inputString, parsedInputStr);
 
-        repository.save(operationResult.get());
-        System.out.println(operationResult.get());
+        repository.save(operation);
+        System.out.println(operation);
     }
     public String[] parseFolmula(String inputStr) {
         return inputStr.trim().split("\\s+");
@@ -73,16 +69,16 @@ public class Controller {
 
     public void printHistory() {
         if (repository.isEmpty()) {
-            output.printNoHistory();
+            console.printNoHistory();
         } else {
             long index = 0L;
 
             while (true) {
-                Optional<OperationResult> data = repository.findById(index++);
+                Optional<Operation> data = repository.findById(index++);
                 if (data.isEmpty())
                     break;
 
-                output.printHistory(data.get());
+                console.printHistory(data.get());
             }
         }
     }

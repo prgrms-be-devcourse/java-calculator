@@ -1,14 +1,13 @@
-package com.programmers.calculator.model;
+package com.programmers.calculator;
 
-import com.programmers.calculator.domain.OperationResult;
-
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class Validator {
     public static final String OPERATOR_REGEX = "[\\+\\-\\*/]";
     public static final String NUMBER_REGEX = "^\\d*\\.?\\d*$";
+
+    private Validator() {}
 
     public static void isRightSpacing(String[] parsedInputStr) {
         if (parsedInputStr.length <= 1 || parsedInputStr.length % 2 == 0) {
@@ -26,12 +25,6 @@ public class Validator {
 
         if (numericCheck + operatorCheck != parsedInputStr.length) {
             throw new IllegalArgumentException("올바른 연산자와 숫자가 아닙니다.");
-        }
-    }
-
-    public static void isDivisionZero(Optional<OperationResult> operationResult) {
-        if (operationResult.equals(Optional.empty())) {
-            throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
     }
 }
