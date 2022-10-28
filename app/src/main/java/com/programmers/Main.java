@@ -5,6 +5,7 @@ import com.programmers.io.Console;
 import com.programmers.io.Input;
 import com.programmers.io.Output;
 import com.programmers.memory.Memory;
+import com.programmers.verification.Verification;
 
 public class Main {
 
@@ -13,22 +14,31 @@ public class Main {
     Output output = new Console();
     Calculator calculator = new Calculator();
     Memory memory = new Memory();
+    Verification verification = new Verification();
+
+    String choice, calcForm;
+    Double answer;
 
     while (true) {
-      String choice = input.getChoice("1.계산 \n2.조회 \n3.나가기");
+      choice = input.getChoice("1.계산 \n2.조회 \n3.나가기");
       switch (choice) {
         case "1":
-          String calcForm = input.getForm("계산할 식을 입력해주세요");
-          Double answer = memory.contains(calcForm) ? memory.cacheFind(calcForm)
-              : calculator.getAnswer(calcForm);
+          calcForm = input.getForm("계산할 식을 입력해주세요");
+          if (verification.verify(calcForm)) {
+            answer = memory.contains(calcForm) ? memory.cacheFind(calcForm)
+                : calculator.getAnswer(calcForm);
 
-          memory.save(calcForm + " = " + answer);
-          memory.cacheSave(calcForm, answer);
+            memory.save(calcForm + " = " + answer);
+            memory.cacheSave(calcForm, answer);
 
-          output.printAnswer(answer);
+            output.printAnswer(answer.toString());
+          } else {
+            output.printAnswer("제대로 된 계산식이 아닙니다.");
+          }
+
           break;
         case "2":
-          memory.findAll();
+          output.printMemory(memory.findAll());
           break;
         case "3":
           return;
