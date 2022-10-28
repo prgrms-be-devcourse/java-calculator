@@ -29,7 +29,10 @@ public enum Operator {
     }
 
     public static Operator getOperator(String operatorString) {
-        return Arrays.stream(values()).filter(operatorEnum -> operatorEnum.operator.equals(operatorString)).findFirst().get();
+        return Arrays.stream(values())
+                    .filter(operatorEnum -> operatorEnum.operator.equals(operatorString))
+                    .findFirst()
+                    .get();
 
     }
 

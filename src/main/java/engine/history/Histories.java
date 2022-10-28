@@ -1,7 +1,9 @@
 package engine.history;
 
-public interface Histories {
+import java.util.Map;
+
+public interface Histories <T>{
     void save(String calculateSentence, String answer);
 
-    String convertToString();
+    T getHistories();
 }

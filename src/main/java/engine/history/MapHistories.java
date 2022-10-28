@@ -3,9 +3,8 @@ package engine.history;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapHistories implements Histories {
+public class MapHistories implements Histories{
     private final Map<String, String> map = new HashMap<>();
-    private final StringBuilder sb = new StringBuilder();
 
     @Override
     public void save(String calculateSentence, String answer) {
@@ -13,15 +12,7 @@ public class MapHistories implements Histories {
     }
 
     @Override
-    public String convertToString() {
-        for (String s : map.keySet()) {
-            sb.append(s + " = ").append(map.get(s)).append('\n');
-        }
-
-        return sb.toString();
-    }
-
-    public Map<String, String> getMap() {
+    public Map<String, String> getHistories() {
         return map;
     }
 }
