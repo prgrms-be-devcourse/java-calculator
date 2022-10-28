@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    ADD("+",2, (num1, num2) -> num1 + num2),
-    SUBTRACT("-",2, (num1, num2) -> num1 - num2),
-    MULTIPLY("*", 3,(num1, num2) -> num1 * num2),
+    ADD("+", 2, (num1, num2) -> num1 + num2),
+    SUBTRACT("-", 2, (num1, num2) -> num1 - num2),
+    MULTIPLY("*", 3, (num1, num2) -> num1 * num2),
     DIVIDE("/", 3, (num1, num2) -> num1 / num2);
 
     private final String operator;
