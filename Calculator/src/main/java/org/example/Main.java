@@ -6,7 +6,7 @@ import org.example.io.ConsoleInput;
 import org.example.io.ConsoleOutput;
 import org.example.io.Input;
 import org.example.io.Output;
-import org.example.repository.HashMapRepository;
+import org.example.repository.ArrayListRepository;
 import org.example.repository.Repository;
 import org.example.validate.Validate;
 import org.example.validate.ValidateExpression;
@@ -19,9 +19,9 @@ public class Main {
         Output consoleOutput = new ConsoleOutput();
         Validate validateExpression = new ValidateExpression();
         Compute computeArithmeticOperation = new ComputeArithmeticOperation();
-        Repository hashMapRepository = new HashMapRepository();
+        Repository arrayListRepository = new ArrayListRepository();
 
 
-        new Calculator(consoleInput, consoleOutput, validateExpression, computeArithmeticOperation ,hashMapRepository).run();
+        new Calculator(consoleInput, consoleOutput, validateExpression, computeArithmeticOperation ,arrayListRepository).run();
     }
 }

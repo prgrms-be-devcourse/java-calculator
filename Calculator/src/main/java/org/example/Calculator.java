@@ -43,7 +43,7 @@ public class Calculator {
         return input.selectMenu("선택 : ");
     }
     private boolean validateInput(String input) {
-        return validate.isValidExpression(input);
+        return validate.isValidMenu(input);
     }
     private Menu selectMenu(String input) {
         int menuNumber = Integer.parseInt(input);
