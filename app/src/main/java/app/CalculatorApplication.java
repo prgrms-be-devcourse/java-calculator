@@ -8,7 +8,7 @@ import app.storage.MapStorage;
 import app.storage.Storage;
 import app.validator.InputValidator;
 
-public class App {
+public class CalculatorApplication {
 
     public static void main(String[] args) {
 
