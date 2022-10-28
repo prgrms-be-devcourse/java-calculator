@@ -35,7 +35,7 @@ public class OperateManager implements Operator {
     }
 
     @Override
-    public double addOrSubtract(Stack<String> st) {
+    public double addOrSubtract (Stack<String> st) {
         double result = Double.parseDouble(st.get(0));
         for(int i = 1; i < st.size(); i+=2) {
             String op = st.get(i);
