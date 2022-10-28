@@ -1,5 +1,5 @@
 import engine.calculator.Calculator;
-import engine.compute.ComputeService;
+import engine.compute.ComputeServiceImpl;
 import engine.compute.Computer;
 import engine.compute.converter.ExpressionConverter;
 import engine.compute.validator.SimpleExpressionValidator;
@@ -13,7 +13,7 @@ public class Main {
                 new ConsoleOutput(),
                 new MapHistories(),
                 new Computer(
-                        new ComputeService(new SimpleExpressionValidator(),
+                        new ComputeServiceImpl(new SimpleExpressionValidator(),
                                 new ExpressionConverter(new SimpleExpressionValidator()))
 
                 )
