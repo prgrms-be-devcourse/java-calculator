@@ -1,8 +1,6 @@
 package com.programmers.calculator.processor;
 
 import com.programmers.calculator.entity.Operation;
-import com.programmers.calculator.io.Console;
-import com.programmers.calculator.storage.OperationRepository;
 
 import java.util.*;
 import java.util.regex.Pattern;

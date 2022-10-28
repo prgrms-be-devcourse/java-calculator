@@ -1,34 +1,30 @@
 package com.programmers.calculator;
 
-import com.programmers.calculator.entity.Operation;
 import com.programmers.calculator.io.Console;
 import com.programmers.calculator.processor.Calculator;
 import com.programmers.calculator.processor.Validator;
-import com.programmers.calculator.storage.OperationRepository;
+import com.programmers.calculator.storage.OperationStorage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class Main {
-    private final OperationRepository operationRepository;
+    private final OperationStorage operationStorage;
     private final Console console;
     private final Calculator calculator;
-    private final ModeExcuter modeExcuter;
+    private final ModeExecuter modeExecuter;
 
-    public Main(OperationRepository operationRepository, Console console, Calculator calculator, ModeExcuter modeExcuter) {
-        this.operationRepository = operationRepository;
+    public Main(OperationStorage operationStorage, Console console, Calculator calculator, ModeExecuter modeExecuter) {
+        this.operationStorage = operationStorage;
         this.console = console;
         this.calculator = calculator;
-        this.modeExcuter = modeExcuter;
+        this.modeExecuter = modeExecuter;
     }
 
     public void run() {
         while (true) {
             int mode = inputMode();
             try {
-                modeExcuter.excute(operationRepository, calculator, console, mode);
+                modeExecuter.excute(operationStorage, calculator, console, mode);
             } catch(IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

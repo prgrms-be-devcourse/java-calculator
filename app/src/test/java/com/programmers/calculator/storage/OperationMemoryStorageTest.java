@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OperationMemoryStorageTest {
 
-    private OperationRepository operationRepository;
+    private OperationStorage operationStorage;
 
     @BeforeEach
     void beforeEach() {
-        operationRepository = new OperationMemoryStorage();
+        operationStorage = new OperationMemoryStorage();
     }
 
     @Test
@@ -23,10 +23,10 @@ class OperationMemoryStorageTest {
         Operation operation = new Operation("1 + 1", "2");
 
         // when
-        operationRepository.save(operation);
+        operationStorage.save(operation);
 
         // then
-        assertEquals(1L, operationRepository.length());
+        assertEquals(1L, operationStorage.length());
     }
 
     @Test
@@ -37,11 +37,11 @@ class OperationMemoryStorageTest {
         Operation operationB = new Operation("5 + 4", "9");
 
         // when
-        operationRepository.save(operationA);
-        operationRepository.save(operationB);
+        operationStorage.save(operationA);
+        operationStorage.save(operationB);
 
         // then
-        assertEquals(operationRepository.findById(0L).get(), operationA);
+        assertEquals(operationStorage.findById(0L).get(), operationA);
     }
 
     @Test
@@ -51,15 +51,15 @@ class OperationMemoryStorageTest {
         Operation operationA = new Operation("2 + 4", "6");
 
         // when
-        operationRepository.save(operationA); // 내부에서 id 0으로 세팅됨.
+        operationStorage.save(operationA); // 내부에서 id 0으로 세팅됨.
 
         // then
-        assertEquals(Optional.empty(), operationRepository.findById(1000));
+        assertEquals(Optional.empty(), operationStorage.findById(1000));
     }
 
     @Test
     @DisplayName("저장소가 비어있는지를 확인한다.")
     void isEmpty() {
-        assertEquals(true, operationRepository.isEmpty());
+        assertEquals(true, operationStorage.isEmpty());
     }
 }

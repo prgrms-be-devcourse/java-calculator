@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class OperationMemoryStorage implements OperationRepository {
+public class OperationMemoryStorage implements OperationStorage {
 
     private final Map<Long, Operation> repository;
     private long id = 0L;

@@ -1,7 +1,7 @@
 package com.programmers.calculator.io;
 
 import com.programmers.calculator.entity.Operation;
-import com.programmers.calculator.storage.OperationRepository;
+import com.programmers.calculator.storage.OperationStorage;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -24,11 +24,11 @@ public class Console{
     public void printOperation(Operation result) {
         System.out.println(result);
     }
-    public void printHistory(OperationRepository operationRepository) {
+    public void printHistory(OperationStorage operationStorage) {
         long index = 0L;
 
         while (true) {
-            Optional<Operation> data = operationRepository.findById(index++);
+            Optional<Operation> data = operationStorage.findById(index++);
             if (data.isEmpty())
                 break;
 
