@@ -23,7 +23,7 @@ public class CalculatorTest {
         Integer answer = 3;
 
         // when
-        int result = calculator.calculate(expression).getCorrectAnswer();
+        Integer result = calculator.calculate(expression).getCorrectAnswer();
 
         // then
         Assertions.assertThat(result).isEqualTo(answer);
@@ -37,7 +37,7 @@ public class CalculatorTest {
         Integer answer = 3;
 
         // when
-        int result = calculator.calculate(expression).getCorrectAnswer();
+        Integer result = calculator.calculate(expression).getCorrectAnswer();
 
         // then
         Assertions.assertThat(result).isEqualTo(answer);
@@ -51,7 +51,7 @@ public class CalculatorTest {
         Integer answer = 20;
 
         // when
-        int result = calculator.calculate(expression).getCorrectAnswer();
+        Integer result = calculator.calculate(expression).getCorrectAnswer();
 
         // then
         Assertions.assertThat(result).isEqualTo(answer);
@@ -65,7 +65,7 @@ public class CalculatorTest {
         Integer answer = 5;
 
         // when
-        int result = calculator.calculate(expression).getCorrectAnswer();
+        Integer result = calculator.calculate(expression).getCorrectAnswer();
 
         // then
         Assertions.assertThat(result).isEqualTo(answer);
@@ -79,26 +79,23 @@ public class CalculatorTest {
         Integer answer = 5;
 
         // when
-        int result = calculator.calculate(expression).getCorrectAnswer();
+        Integer result = calculator.calculate(expression).getCorrectAnswer();
 
         // then
         Assertions.assertThat(result).isEqualTo(answer);
     }
 
-    @DisplayName("분모, 분자에 0이 들어간 나눗셈인 경우 예외 확인")
+    @DisplayName("분모에 0이 들어간 나눗셈인 경우 예외 확인")
     @Test
     void divisionContainZeroTest() {
         // given
         List<String> momZero = List.of("1", "0", "/");
-        List<String> sonZero = List.of("0", "1", "/");
 
         // when
         Answer momZeroResult = calculator.calculate(momZero);
-        Answer sonZeroResult = calculator.calculate(sonZero);
 
         // then
         assertFalse(momZeroResult.isCorrectAnswer());
-        assertFalse(sonZeroResult.isCorrectAnswer());
     }
 
 }
