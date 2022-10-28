@@ -1,4 +1,4 @@
-package com.programmers.calculator;
+package com.programmers.calculator.processor;
 
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;

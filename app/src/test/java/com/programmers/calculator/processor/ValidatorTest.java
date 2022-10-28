@@ -1,31 +1,19 @@
-package com.programmers.calculator.model;
+package com.programmers.calculator.processor;
 
-import com.programmers.calculator.AppConfig;
-import com.programmers.calculator.controller.Controller;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidatorTest {
-
-    AppConfig appConfig;
-    Controller controller;
-
-    @BeforeEach
-    void beforeEach() {
-        appConfig = new AppConfig();
-        controller = appConfig.createController();
-    }
+    Calculator calculator = new Calculator();
 
     @Test
     @DisplayName("띄어쓰기가 올바르지 않은 경우 예외가 발생한다.")
     void isRightSpacing() {
         // given
         String inputStr = "1+1";
-        String[] parsedInputStr = controller.parseFolmula(inputStr);
+        String[] parsedInputStr = calculator.parseFolmula(inputStr);
 
         // when, then
         assertThrows(IllegalArgumentException.class, () -> Validator.isRightSpacing(parsedInputStr));
@@ -45,7 +33,7 @@ class ValidatorTest {
 
         String[][] parsedInputFormula = new String[inputFormula.length][];
         for (int i = 0; i < 5; i++) {
-            parsedInputFormula[i] = controller.parseFolmula(inputFormula[i]);
+            parsedInputFormula[i] = calculator.parseFolmula(inputFormula[i]);
         }
 
         // when, then
