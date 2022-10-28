@@ -9,4 +9,5 @@ public interface Output {
     void calculateOutput(Answer calculateResult);
     void inputError();
     void calculateError();
+    void quitProgram();
 }

@@ -52,4 +52,9 @@ public class Console implements Input, Output{
     public void calculateError() {
         System.out.println("잘못된 계산입니다. (나눗셈에 0이 포함될 수 없습니다.)");
     }
+
+    @Override
+    public void quitProgram() {
+        System.out.println("프로그램을 종료합니다.");
+    }
 }

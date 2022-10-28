@@ -26,9 +26,10 @@ public class Calculator {
 
     public void run() {
 
-        while (true) {
+        Select selectInput = Select.NONE;
+        while (selectInput != Select.EXIT) {
 
-            Select selectInput = input.selectInput();
+            selectInput = input.selectInput();
 
             if (!validator.validateSelectInput(selectInput)) {
                 output.inputError();
@@ -53,9 +54,8 @@ public class Calculator {
                     output.calculateOutput(answer);
                     storage.save(expression, answer);
                 }
-
-            } else {
-                break;
+            } else if (selectInput == Select.EXIT) {
+                output.quitProgram();
             }
         }
     }
