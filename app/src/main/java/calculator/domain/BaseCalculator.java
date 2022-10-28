@@ -18,7 +18,7 @@ public class BaseCalculator implements Calculator {
     }
 
     @Override
-    public int calculate(String expression) {
+    public String calculate(String expression) {
         Stack<Integer> stack = new Stack<>();
         String postFix = transToPostfix(expression);
 
@@ -34,7 +34,7 @@ public class BaseCalculator implements Calculator {
                 stack.push(operator.calculate(b, a));
             }
         }
-        int answer = stack.pop();
+        String answer = String.valueOf(stack.pop());
         saveCalculationData(expression, answer);
         return answer;
     }
@@ -70,7 +70,7 @@ public class BaseCalculator implements Calculator {
         return postFix;
     }
 
-    private void saveCalculationData(String expression, int answer) {
-        calculatorRepository.save(expression + " = " + answer);
+    private void saveCalculationData(String expression, String answer) {
+        calculatorRepository.save(new CalculationResult(expression, answer));
     }
 }
