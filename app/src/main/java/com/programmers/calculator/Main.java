@@ -1,38 +1,36 @@
-package com.programmers.calculator.controller;
+package com.programmers.calculator;
 
 import com.programmers.calculator.entity.Operation;
-import com.programmers.calculator.model.Calculator;
-import com.programmers.calculator.model.Validator;
-import com.programmers.calculator.repository.Repository;
-import com.programmers.calculator.view.Console;
+import com.programmers.calculator.io.Console;
+import com.programmers.calculator.processor.Calculator;
+import com.programmers.calculator.processor.Validator;
+import com.programmers.calculator.storage.OperationRepository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-public class Controller {
-    private final Repository repository;
+public class Main {
+    private final OperationRepository operationRepository;
     private final Console console;
     private final Calculator calculator;
-    //private Map<String, >
+    private final ModeExcuter modeExcuter;
 
-    public Controller(Repository repository, Console console, Calculator calculator) {
-        this.repository = repository;
+    public Main(OperationRepository operationRepository, Console console, Calculator calculator, ModeExcuter modeExcuter) {
+        this.operationRepository = operationRepository;
         this.console = console;
         this.calculator = calculator;
+        this.modeExcuter = modeExcuter;
     }
 
     public void run() {
         while (true) {
             int mode = inputMode();
-            switch (mode) {
-                case 1:
-                    printHistory();
-                    break;
-                case 2:
-                    calculateFomula();
-                    break;
-                default:
-                    throw new IllegalArgumentException("잘못된 기능을 입력하셨습니다.");
+            try {
+                modeExcuter.excute(operationRepository, calculator, console, mode);
+            } catch(IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -46,40 +44,8 @@ public class Controller {
 
         String inputModeStr = console.inputStr();
         if (!Pattern.matches(Validator.NUMBER_REGEX, inputModeStr))
-            return -1;
+            throw new IllegalArgumentException("잘못된 기능을 입력하셨습니다.");
 
         return Integer.parseInt(inputModeStr);
-    }
-
-    public void calculateFomula() {
-        String inputString = console.inputStr();
-        String[] parsedInputStr = parseFolmula(inputString);
-
-        Validator.isRightSpacing(parsedInputStr);
-        Validator.isRightOperatorAndNumbers(parsedInputStr);
-
-        Operation operation = calculator.calculate(inputString, parsedInputStr);
-
-        repository.save(operation);
-        System.out.println(operation);
-    }
-    public String[] parseFolmula(String inputStr) {
-        return inputStr.trim().split("\\s+");
-    }
-
-    public void printHistory() {
-        if (repository.isEmpty()) {
-            console.printNoHistory();
-        } else {
-            long index = 0L;
-
-            while (true) {
-                Optional<Operation> data = repository.findById(index++);
-                if (data.isEmpty())
-                    break;
-
-                console.printHistory(data.get());
-            }
-        }
     }
 }
