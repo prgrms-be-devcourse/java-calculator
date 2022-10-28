@@ -26,6 +26,7 @@ public class BaseCalculatorServiceTest {
     @Test
     void getAllData() {
         String EXPRESSION = "1+1";
+        String CALCULATION_RESULT = "1+1 = 2";
 
         Calculator calculator = new BaseCalculator(new MapCalculatorRepository());
         calculator.calculate(EXPRESSION);
@@ -37,8 +38,8 @@ public class BaseCalculatorServiceTest {
         CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
-        String answer = out.toString().substring(LEN_OF_INTRO() + LEN_OF_CMD, LEN_OF_INTRO() + LEN_OF_CMD + EXPRESSION.length() + 2).trim();
-        Assertions.assertThat(EXPRESSION.trim()).isEqualTo(answer);
+        String answer = out.toString().substring(LEN_OF_INTRO() + LEN_OF_CMD, LEN_OF_INTRO() + LEN_OF_CMD + CALCULATION_RESULT.length() + 2).trim();
+        Assertions.assertThat(CALCULATION_RESULT).isEqualTo(answer);
     }
 
     @Test
