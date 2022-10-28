@@ -1,6 +1,7 @@
 package com.programmers.java.engin;
 
 import com.programmers.java.engin.io.Calculation;
+import com.programmers.java.engin.model.Operator;
 
 import java.text.DecimalFormat;
 import java.util.*;

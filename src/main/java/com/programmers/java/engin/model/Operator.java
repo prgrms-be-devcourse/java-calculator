@@ -1,4 +1,4 @@
-package com.programmers.java.engin;
+package com.programmers.java.engin.model;
 
 import java.util.Arrays;
 
