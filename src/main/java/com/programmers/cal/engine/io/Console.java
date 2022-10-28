@@ -1,5 +1,8 @@
 package com.programmers.cal.engine.io;
 
+import com.programmers.cal.engine.model.Answer;
+import com.programmers.cal.engine.model.Record;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,13 +25,13 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printRecord(List<String> recordList) {
-        recordList.forEach(System.out::println);
+    public void printRecord(Record record) {
+        record.getEquations().forEach(System.out::println);
     }
 
     @Override
-    public void printResult(String result) {
-        System.out.println(result);
+    public void printResult(Answer answer) {
+        System.out.println(answer.getAnswer());
     }
 
     @Override

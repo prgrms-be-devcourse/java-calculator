@@ -1,14 +1,17 @@
 package com.programmers.cal.engine.parse;
 
+import com.programmers.cal.engine.model.InputData;
+import com.programmers.cal.engine.model.OriginalExpression;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExpressionParser implements Parser {
 
     @Override
-    public List<String> getTokenList(String inputString) {
+    public OriginalExpression getTokenList(InputData inputData) {
 
-        char[] elements = inputString.replaceAll("\\p{Z}", "").toCharArray();
+        char[] elements = inputData.getInputString().replaceAll("\\p{Z}", "").toCharArray();
         List<String> list = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         builder.append(elements[0]);
@@ -29,6 +32,9 @@ public class ExpressionParser implements Parser {
 
         list.add(builder.toString());
 
-        return list;
+        return OriginalExpression.builder()
+                .inputExpression(inputData)
+                .originalTokens(list)
+                .build();
     }
 }

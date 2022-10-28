@@ -2,6 +2,7 @@ package com.programmers.cal.engine;
 
 import com.programmers.cal.engine.io.Input;
 import com.programmers.cal.engine.io.Output;
+import com.programmers.cal.engine.model.*;
 import com.programmers.cal.engine.operation.Operation;
 import com.programmers.cal.engine.parse.Parser;
 import com.programmers.cal.engine.postfix.Postfix;
@@ -27,6 +28,9 @@ public class Calculator implements Runnable {
     private Postfix postfix;
     private Operation operation;
     private Repository repository;
+
+    private InputData inputData = new InputData();
+    private Equation equation = new Equation();
 
     @Builder
     public Calculator(Input input, Output output, Validator validator, Parser parser,
@@ -64,31 +68,33 @@ public class Calculator implements Runnable {
     }
 
     private void printRecordProcess() {
-        List<String> recordList = repository.findAll();
+        Record record = repository.findAll();
 
-        if (recordList.isEmpty()) {
+        if (record.isEmpty(record)) {
             output.printNoRecord();
         } else {
-            output.printRecord(recordList);
+            output.printRecord(record);
         }
     }
 
     private void calculateProcess() {
-        String inputString = input.inputOrder();
 
-        if (!validator.isExpression(inputString)) {
+        inputData = inputData.toInputData(input.inputOrder());
+
+        if (!validator.isExpression(inputData)) {
             output.printWrongOrder();
             return;
         }
 
-        List<String> tokens = parser.getTokenList(inputString);
+        OriginalExpression originalTokens = parser.getTokenList(inputData);
 
         try {
-            List<String> postfixTokens = postfix.toPostfix(tokens);
-            String result = operation.calculate(postfixTokens);
+            PostfixExpression postfixTokens = postfix.toPostfix(originalTokens);
+            Answer answer = operation.calculate(postfixTokens);
+            equation = equation.toEquation(inputData, answer);
 
-            repository.save(inputString, result);
-            output.printResult(result);
+            repository.save(equation);
+            output.printResult(answer);
         } catch (Exception e) {
             output.printZeroDivision();
         }
@@ -97,4 +103,5 @@ public class Calculator implements Runnable {
     private void exitProcess() {
         output.printExit();
     }
+
 }

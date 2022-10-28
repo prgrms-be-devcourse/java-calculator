@@ -1,7 +1,10 @@
 package com.programmers.cal.engine.postfix;
 
+import com.programmers.cal.engine.model.OriginalExpression;
+import com.programmers.cal.engine.model.PostfixExpression;
+
 import java.util.List;
 
 public interface Postfix {
-    List<String> toPostfix(List<String> tokens);
+    PostfixExpression toPostfix(OriginalExpression tokens);
 }

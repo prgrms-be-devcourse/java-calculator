@@ -1,15 +1,22 @@
 package com.programmers.cal.engine.operation;
 
+import com.programmers.cal.engine.model.Answer;
+import com.programmers.cal.engine.model.PostfixExpression;
+import com.programmers.cal.engine.postfix.Postfix;
+
+import java.beans.Expression;
 import java.util.List;
 import java.util.Stack;
 
 public class OperationManager implements Operation {
 
+    private Postfix postfix;
+
     @Override
-    public String calculate(List<String> postfixTokens) {
+    public Answer calculate(PostfixExpression postfixTokens) {
         Stack<String> stack = new Stack<>();
 
-        for (String token : postfixTokens) {
+        for (String token : postfixTokens.getPostfixTokens()) {
             if (Character.isDigit(token.charAt(token.length() - 1))) {
                 stack.push(token);
             } else {
@@ -36,6 +43,8 @@ public class OperationManager implements Operation {
             }
         }
 
-        return stack.pop();
+        return Answer.builder()
+                .answer(stack.pop())
+                .build();
     }
 }

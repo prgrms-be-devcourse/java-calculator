@@ -1,5 +1,8 @@
 package com.programmers.cal.engine.io;
 
+import com.programmers.cal.engine.model.Answer;
+import com.programmers.cal.engine.model.Record;
+
 import java.util.List;
 
 public interface Output {
@@ -7,9 +10,9 @@ public interface Output {
 
     void printWrongOrder();
 
-    void printRecord(List<String> recordList);
+    void printRecord(Record record);
 
-    void printResult(String result);
+    void printResult(Answer answer);
 
     void printExit();
 
