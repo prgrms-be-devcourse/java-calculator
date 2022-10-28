@@ -20,7 +20,10 @@ public enum Operator {
     }
 
     public static Operator getOperator(String newOperator) {
-        return Arrays.stream(Operator.values()).filter(o -> o.operator.equals(newOperator)).findFirst().get();
+        return Arrays.stream(Operator.values())
+                .filter(o -> o.operator.equals(newOperator))
+                .findFirst()
+                .get();
     }
 
     public long calculate(long num1, long num2) {
