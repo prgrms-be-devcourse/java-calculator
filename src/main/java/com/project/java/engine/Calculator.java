@@ -13,10 +13,12 @@ import lombok.AllArgsConstructor;
 import java.io.IOException;
 import java.util.List;
 
+import static com.project.java.utils.ConstantMessageUtil.MESSAGE;
+import static com.project.java.utils.ConstantMessageUtil.MESSAGE_EXPRESSION;
+
 @AllArgsConstructor
 public class Calculator {
-    private static final String MESSAGE = "번호를 입력해주세요 : ";
-    private static final String MESSAGE_EXPRESSION = "계산식을 입력해주세요 : ";
+
     private Input input;
     private Output output;
     private Solver solver;

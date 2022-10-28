@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static com.project.java.utils.ConstatntRegexUtil.NUMBER_REGULAR;
+import static com.project.java.utils.ConstatntRegexUtil.OPER_REGULAR;
+
 @AllArgsConstructor
 public class StackSolver implements Solver {
 
-    private static final String OPER_REGULAR = "[+\\-*/]";
-    private static final String NUMBER_REGULAR = "[0-9]+";
+
     private PriorityStrategy priorityStrategy;
 
     @Override
