@@ -22,7 +22,7 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
+        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO_N_CMD(), LEN_OF_INTRO_N_CMD() + STRING_OF_DATA.length() + 2).trim();
@@ -38,7 +38,7 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
+        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO_N_CMD(), LEN_OF_INTRO_N_CMD() + GETALLDATA_NO_DATA_TO_GET.length() + 2).trim();
@@ -53,7 +53,7 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
+        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO_N_CMD(), LEN_OF_INTRO_N_CMD() + 4).trim();
@@ -69,7 +69,7 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
+        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO_N_CMD(), LEN_OF_INTRO_N_CMD() + CALCULATE_DIV_BY_0.length() + 2).trim();
@@ -84,7 +84,7 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
+        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO_N_CMD() + NEG_FOR_EXIT).trim();
@@ -100,7 +100,7 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new BaseCalculatorService(calculator, System.in, System.out);
+        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO_N_CMD(), LEN_OF_INTRO_N_CMD() + WRONG_COMMAND.length() + 2).trim();
