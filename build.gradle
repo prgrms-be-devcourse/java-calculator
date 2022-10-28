@@ -2,6 +2,11 @@ plugins {
     id 'java'
 }
 
+java {
+    sourceCompatibility = "11"  //컴파일 버전
+    targetCompatibility = "11"  //실행 최소 버전? JVM버전?
+}
+
 group 'com.programmers.calculator'
 version '1.0-SNAPSHOT'
 
