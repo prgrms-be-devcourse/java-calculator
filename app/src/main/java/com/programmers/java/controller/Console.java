@@ -29,7 +29,7 @@ public class Console implements Controller {
 
         if ("0".equals(choice)) {
             System.out.println("프로그램을 종료합니다");
-            return;
+            return ;
         } else if ("1".equals(choice)) {
             this.lookUpProcess();
         } else if ("2".equals(choice)) {
@@ -69,13 +69,13 @@ public class Console implements Controller {
         double result = 0;
 
         if (this.isNotValidated(input)) {
-            return;
+            return ;
         }
 
-        Optional<Double> cashed = repository.findOne(input);
-        if (cashed.isPresent()) {
-            System.out.println(cashed.get());
-            return;
+        Optional<Double> isInMemory = repository.findOne(input);
+        if (isInMemory.isPresent()) {
+            System.out.println(isInMemory.get());
+            return ;
         }
 
         try {
