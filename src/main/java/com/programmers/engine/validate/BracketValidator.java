@@ -13,17 +13,17 @@ public class BracketValidator implements Validator{
         LinkedList<String> newList = new LinkedList<>();
         openBracket.set(0); closeBracket.set(0);
         linkedList.forEach(
-                (l) -> {
-                    if (l.equals("(")) {
+                (element) -> {
+                    if (element.equals("(")) {
                         openBracket.getAndIncrement();
                         newList.add(Bracket.OPEN.toString());
                     }
-                    else if (l.equals(")")) {
+                    else if (element.equals(")")) {
                         closeBracket.getAndIncrement();
                         newList.add(Bracket.CLOSE.toString());
                     }
                     else{
-                        newList.add(l);
+                        newList.add(element);
                     }
                 }
         );
