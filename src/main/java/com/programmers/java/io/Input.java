@@ -1,7 +1,7 @@
 package com.programmers.java.io;
 
 public interface Input {
-    String input();
+    String getExpression();
 
-    int select(String s);
+    String getOrder();
 }

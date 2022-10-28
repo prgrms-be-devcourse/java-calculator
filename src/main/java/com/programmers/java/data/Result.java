@@ -5,8 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-
 public class Result {
     private String exp;
-    private int answer;
+    private Double answer;
 }

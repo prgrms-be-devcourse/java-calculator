@@ -3,9 +3,11 @@ package com.programmers.java.io;
 import com.programmers.java.data.Result;
 
 public interface Output {
-    void output(Result res);
+    void putResult(String s);
 
-    void error();
+    void putError(String e);
 
-    void outputAnswer(Result calculate);
+    void putAnswer(Double d);
+
+    void putEnd();
 }
