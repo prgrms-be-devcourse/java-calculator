@@ -3,7 +3,7 @@ package calculator.domain;
 public enum Command {
     GETALLDATA("조회", "1"),
     CALCULATE("계산", "2"),
-    EXIT("종료", "-1");
+    EXIT("종료", "0");
 
     private final String code;
     private final String command;
