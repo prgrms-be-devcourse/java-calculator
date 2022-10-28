@@ -9,7 +9,6 @@ import java.util.List;
 public interface Solver {
     ResultFormat calculate(String expression) throws ZeroDivisionException, ContinuousOperatorException;
     String convertExpression(List<String> expression);
-    List<String> convertInfix(List<String> infix);
 
     int getPriority(String oper);
 }

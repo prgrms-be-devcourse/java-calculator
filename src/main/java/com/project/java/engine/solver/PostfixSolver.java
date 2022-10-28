@@ -13,7 +13,7 @@ import static com.project.java.utils.ConstatntRegexUtil.NUMBER_REGULAR;
 import static com.project.java.utils.ConstatntRegexUtil.OPER_REGULAR;
 
 @AllArgsConstructor
-public class StackSolver implements Solver {
+public class PostfixSolver implements Solver {
 
 
     private PriorityStrategy priorityStrategy;
@@ -21,7 +21,7 @@ public class StackSolver implements Solver {
     @Override
     public ResultFormat calculate(String expression) throws ZeroDivisionException, ContinuousOperatorException {
         List<String> expressionList = makeExpressionToList(expression);
-        List<String> postfix = convertInfix(expressionList);
+        List<String> postfix = convertInfixToPostfix(expressionList);
         double result = calculatePostfix(postfix);
 
         String convertedExpression = convertExpression(expressionList);
@@ -37,9 +37,13 @@ public class StackSolver implements Solver {
         return sb.toString();
     }
 
-
     @Override
-    public List<String> convertInfix(List<String> infix) {
+    public int getPriority(String oper) {
+        return priorityStrategy.getPriority(oper);
+    }
+
+
+    private List<String> convertInfixToPostfix(List<String> infix) {
         Stack<String> stack = new Stack<>();
         List<String> postfix = new ArrayList<>();
         for (String element : infix) {
@@ -68,10 +72,7 @@ public class StackSolver implements Solver {
         }
     }
 
-    @Override
-    public int getPriority(String oper) {
-        return priorityStrategy.getPriority(oper);
-    }
+
 
     private List<String> makeExpressionToList(String expression) throws ContinuousOperatorException {
         List<String> splittedValues = new ArrayList<>();
