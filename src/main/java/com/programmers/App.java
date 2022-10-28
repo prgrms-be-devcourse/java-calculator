@@ -11,10 +11,11 @@ public class App {
         Console console = new Console();
         DataBase dataBase = new DataBase();
         Formula formula = new Formula();
-        BracketValidator validator1 = new BracketValidator();
-        NumOperatorValidator validator2 = new NumOperatorValidator();
+        BracketValidator bracketValidator = new BracketValidator();
+        NumOperatorValidator numOperatorValidator = new NumOperatorValidator();
 
         //new Calculator(console, console, validator1, validator2, dataBase, formula).run();
-        new Calculator(console, console, dataBase, formula, validator1, validator2).run();
+        new Calculator(console, console, dataBase,
+                formula, bracketValidator, numOperatorValidator).run();
     }
 }

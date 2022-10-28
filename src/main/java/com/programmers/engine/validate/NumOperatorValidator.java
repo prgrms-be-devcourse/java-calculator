@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NumOperatorValidator implements Validator{
-    AtomicInteger numCnt = new AtomicInteger();
-    AtomicInteger OperatorCnt =  new AtomicInteger();
-    String Operators = "+-*/";
+    private final AtomicInteger numCnt = new AtomicInteger();
+    private final AtomicInteger operatorCnt =  new AtomicInteger();
+    String operators = "+-*/";
     Map<String, Operator> operatorMap = Map.of(
             "+", Operator.PLUS,
             "-", Operator.MINUS,
@@ -21,21 +21,21 @@ public class NumOperatorValidator implements Validator{
     @Override
     public LinkedList<String> validate(LinkedList<String> linkedList) {
         LinkedList<String> newList = new LinkedList<>();
-        numCnt.set(0); OperatorCnt.set(0);
+        numCnt.set(0); operatorCnt.set(0);
         linkedList.forEach(
-                (l) -> {
-                    if (Operators.contains(l)) {
-                        newList.add(operatorMap.get(l).toString());
-                        OperatorCnt.getAndIncrement();
+                (word) -> {
+                    if (operators.contains(word)) {
+                        newList.add(operatorMap.get(word).toString());
+                        operatorCnt.getAndIncrement();
                     }
                     else  {
-                        newList.add(l);
-                        if (!l.equals(Bracket.OPEN.toString()) && !l.equals(Bracket.CLOSE.toString()))
+                        newList.add(word);
+                        if (!word.equals(Bracket.OPEN.toString()) && !word.equals(Bracket.CLOSE.toString()))
                             numCnt.getAndIncrement();
                     }
                 }
         );
-        if (numCnt.get() - 1 != OperatorCnt.get()) return new LinkedList<>();
+        if (numCnt.get() - 1 != operatorCnt.get()) return new LinkedList<>();
         return newList;
     }
 }

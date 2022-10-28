@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BracketValidator implements Validator{
-    AtomicInteger openBracket = new AtomicInteger();
-    AtomicInteger closeBracket = new AtomicInteger();
+    private final AtomicInteger openBracket = new AtomicInteger();
+    private final AtomicInteger closeBracket = new AtomicInteger();
     @Override
     public LinkedList<String> validate(LinkedList<String> linkedList) {
         LinkedList<String> newList = new LinkedList<>();
