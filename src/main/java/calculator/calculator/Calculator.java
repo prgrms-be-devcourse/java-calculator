@@ -6,11 +6,17 @@ import calculator.calculator.notation.parser.NotationParser;
 
 import java.math.BigDecimal;
 
-public abstract class Calculator {
+public class Calculator {
 
-    NotationCalculation calculation;
-    NotationParser notationParser;
-    FormulaParser formulaParser;
+    private final NotationCalculation calculation;
+    private final NotationParser notationParser;
+    private final FormulaParser formulaParser;
+
+    public Calculator(NotationCalculation calculation, NotationParser notationParser, FormulaParser formulaParser) {
+        this.calculation = calculation;
+        this.notationParser = notationParser;
+        this.formulaParser = formulaParser;
+    }
 
     public BigDecimal calculate(String formula) {
         return calculation.calculate(
