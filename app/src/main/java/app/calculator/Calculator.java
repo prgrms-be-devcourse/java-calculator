@@ -5,8 +5,9 @@ import app.io.Output;
 import app.storage.Storage;
 import app.validator.InputValidator;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 public class Calculator {
 
@@ -62,7 +63,7 @@ public class Calculator {
 
     // 후위표기법의 연산식을 계산
     public Answer calculate(List<String> postfixExpression) {
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         for (String element : postfixExpression) {
             if (element.matches("\\d+")) stack.push(Integer.parseInt(element));
             else {

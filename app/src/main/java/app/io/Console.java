@@ -8,28 +8,27 @@ import java.util.Scanner;
 // 사용자 입출력값
 public class Console implements Input, Output{
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     public Select selectInput() {
         System.out.println("1. 조회 \n2. 계산\n3. 종료");
-        int selectNumber = scanner.nextInt();
+        String selectNumber = scanner.nextLine();
         selectOutput(selectNumber);
 
-        if (selectNumber == 1) return Select.LOOK_UP;
-        else if (selectNumber == 2) return Select.CALCULATE;
-        else if (selectNumber == 3) return Select.EXIT;
+        if (selectNumber.equals("1")) return Select.LOOK_UP;
+        else if (selectNumber.equals("2")) return Select.CALCULATE;
+        else if (selectNumber.equals("3")) return Select.EXIT;
         return null;
     }
 
     @Override
     public String calculateInput() {
-        scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
     @Override
-    public void selectOutput(int selectNumber) {
+    public void selectOutput(String selectNumber) {
         System.out.println("선택 : " + selectNumber);
     }
 
