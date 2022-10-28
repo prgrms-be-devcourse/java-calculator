@@ -7,8 +7,8 @@ import java.util.TreeMap;
 
 public class MemoryRepository implements HistoryRepository {
     final StringBuffer sb = new StringBuffer();
-//    private List<String> logs = new ArrayList<>();
-    private Map<Timestamp,String> logs = new TreeMap<>();
+    //    private List<String> logs = new ArrayList<>();
+    private Map<Timestamp, String> logs = new TreeMap<>();
 
     @Override
     public Collection<String> readData() {
@@ -17,15 +17,18 @@ public class MemoryRepository implements HistoryRepository {
 
     @Override
     public String printData() {
+        Collection<String> allRecord =readData();
+        if(allRecord.isEmpty()){
+            return "저장된 데이터가 없습니다.";
+        }
         String logsString = sb.toString();
         return logsString;
     }
 
     @Override
     public void addData(String data) {
-//        logs.add(data);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        logs.put(timestamp,data);
+        logs.put(timestamp, data);
         sb.append(data);
         sb.append("\n");
     }
