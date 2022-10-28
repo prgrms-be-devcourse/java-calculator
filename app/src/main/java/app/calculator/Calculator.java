@@ -2,6 +2,7 @@ package app.calculator;
 
 import app.io.Input;
 import app.io.Output;
+import app.storage.MapStorage;
 import app.storage.Storage;
 import app.validator.InputValidator;
 
@@ -45,6 +46,11 @@ public class Calculator {
 
                 if (!validator.validateCalculateInputValue(expression)) {
                     output.inputError();
+                    continue;
+                }
+
+                if (storage instanceof MapStorage && ((MapStorage) storage).existExpression(expression)) {
+                    output.calculateOutput(((MapStorage) storage).getExistAnswer(expression));
                     continue;
                 }
 
