@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class Memory {
 
@@ -26,7 +27,11 @@ public class Memory {
     memory.add(calcForm);
   }
 
-  public void findAll() {
-    memory.forEach(System.out::println);
+  public List<String> findAll() {
+    if(memory.isEmpty()) {
+      throw new NoSuchElementException("저장된 내역이 없습니다");
+    } else {
+     return memory;
+    }
   }
 }
