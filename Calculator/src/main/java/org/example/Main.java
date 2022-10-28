@@ -22,6 +22,6 @@ public class Main {
         Repository hashMapRepository = new HashMapRepository();
 
 
-        new Calculator(consoleInput, consoleOutput, validateExpression, computeArithmeticOperation ,hashMapRepository).calculate();
+        new Calculator(consoleInput, consoleOutput, validateExpression, computeArithmeticOperation ,hashMapRepository).run();
     }
 }

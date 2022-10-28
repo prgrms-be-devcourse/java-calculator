@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.compute.Compute;
+import org.example.compute.ComputeManager;
 import org.example.io.Input;
 import org.example.io.Output;
 import org.example.repository.Repository;
@@ -24,35 +25,49 @@ public class Calculator {
         this.repository = repository;
     }
 
-    public void calculate() throws IOException {
-        while (true) {
-            output.printMenu("1. 조회\n2. 계산\n3. 종료");
-            String selectedMenu = input.selectMenu("선택 : ");
+    public void run() throws IOException {
+        ComputeManager computeManager = new ComputeManager(true);
+        while(computeManager.getState()){
+            printMenu();
+            String input = getInput();
+            if(!validateInput(input)) continue;
+            Menu selectedMenu = selectMenu(input);
+            runByMenu(computeManager,selectedMenu);
+        }
+    }
 
-            if (!validate.isValidMenu(selectedMenu)) continue;
-            int menuNumber = Integer.parseInt(selectedMenu);
-
-            if (Menu.HISTORY.getNumber() == menuNumber) {
+    private void printMenu() {
+        output.printMenu("1. 조회\n2. 계산\n3. 종료");
+    }
+    private String getInput() throws IOException {
+        return input.selectMenu("선택 : ");
+    }
+    private boolean validateInput(String input) {
+        return validate.isValidExpression(input);
+    }
+    private Menu selectMenu(String input) {
+        int menuNumber = Integer.parseInt(input);
+        return Menu.getMenu(menuNumber);
+    }
+    private void runByMenu(ComputeManager computeManager, Menu selectedMenu) throws IOException {
+        switch (selectedMenu) {
+            case HISTORY:
                 output.printSavedResults(repository);
-            } else if (Menu.CALCULATE.getNumber() == menuNumber) {
+                break;
+            case CALCULATE:
                 String expression = input.input();
 
-                if(!validate.isValidExpression(expression)) continue;
+                if(!validate.isValidExpression(expression)) return;
 
                 long answer = compute.compute(expression);
 
-                repository.saveResult(expression,answer);
+                repository.saveResult(expression, answer);
 
                 output.printCalculatedResult(answer);
-            } else if (Menu.EXIT.getNumber() == menuNumber) {
                 break;
-            }
+            case EXIT:
+                computeManager.setState(false);
+                break;
         }
     }
-    // test code로 확인할 부분
-    // 유효한 메뉴인지 확인
-    // 유효한 수식인지 확인
-    // 계산
-    // repository 에 저장
-    // 계산 결과 출력
 }

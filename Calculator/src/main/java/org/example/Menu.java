@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public enum Menu {
     HISTORY(1),
     CALCULATE(2),
@@ -13,5 +15,12 @@ public enum Menu {
 
     public int getNumber() {
         return number;
+    }
+
+    public static Menu getMenu(int menuNumber) {
+        return Arrays.stream(Menu.values())
+                .filter(o -> o.number == menuNumber)
+                .findFirst()
+                .get();
     }
 }
