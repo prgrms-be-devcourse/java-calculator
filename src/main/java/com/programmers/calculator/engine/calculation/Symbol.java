@@ -7,7 +7,12 @@ public enum Symbol {
     ADD("+", (num1, num2) -> num1 + num2),
     SUBTRACT("-", (num1, num2) -> num1 - num2),
     MULTIPLY("*", (num1, num2) -> num1 * num2),
-    DIVIDE("/", (num1, num2) -> num1 / num2);
+    DIVIDE("/", (num1, num2) -> {
+        if (num2 == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
+        return num1 / num2;
+    });
 
 
     private String symbol;
@@ -25,6 +30,8 @@ public enum Symbol {
     private static Symbol getSymbol(String symbol) {
         return Arrays.stream(values())
                 .filter(o -> o.symbol.equals(symbol))
-                .findFirst().orElseThrow(() -> new IllegalArgumentException("올바른 연산자가 아닙니다."));
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException(symbol + " 은 올바른 연산자가 아닙니다."));
     }
 }
