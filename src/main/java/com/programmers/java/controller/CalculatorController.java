@@ -52,7 +52,7 @@ public class CalculatorController implements Runnable {
             validator.validate(exp);
             Double answer = c.calculate(exp);
             output.putAnswer(answer);
-        } catch (ArithmeticException | IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             output.putError(e.getMessage());
         }
     }
