@@ -37,7 +37,7 @@ public class CalculationHistory implements History {
     }
 
     private boolean checkSaveFormWrong(String formula, String answer) {
-        return formula.length() == 0 || answer.length() == 0;
+        return formula.isBlank() || answer.isBlank();
     }
 
     @Override

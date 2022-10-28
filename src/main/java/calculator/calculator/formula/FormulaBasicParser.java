@@ -59,7 +59,7 @@ public class FormulaBasicParser implements FormulaParser {
 
     private static String estimateWordInFormula(String formula, int idx) {
         String estimatedWord = getCurrWord(formula, idx);
-        if (estimatedWord.length() == 0) {
+        if (estimatedWord.isBlank()) {
             throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
@@ -68,7 +68,7 @@ public class FormulaBasicParser implements FormulaParser {
 
     private void handlerOperatorInFormula(String formula, int idx) {
         String operator = getCurrWord(formula, idx);
-        if (operator.length() == 0) {
+        if (operator.isBlank()) {
             throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
@@ -77,7 +77,7 @@ public class FormulaBasicParser implements FormulaParser {
 
     private void handleOperandInFormula(String formula, AtomicInteger beforeIdx, int idx) {
         String operand = getCurrOperand(formula, beforeIdx.getAndSet(idx + 1), idx);
-        if (operand.length() == 0) {
+        if (operand.isBlank()) {
             throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
@@ -86,7 +86,7 @@ public class FormulaBasicParser implements FormulaParser {
 
     private void handleLastFormula(String formula, AtomicInteger beforeIdx) {
         String lastOperand = getLastOperand(formula, beforeIdx);
-        if (lastOperand.length() == 0) {
+        if (lastOperand.isBlank()) {
             throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 

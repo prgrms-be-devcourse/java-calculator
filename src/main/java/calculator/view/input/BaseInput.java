@@ -15,7 +15,7 @@ public interface BaseInput {
         try {
             String inputValue = br.readLine();
 
-            if (inputValue.length() == 0) {
+            if (inputValue.isEmpty()) {
                 throw new IOException();
             }
 
