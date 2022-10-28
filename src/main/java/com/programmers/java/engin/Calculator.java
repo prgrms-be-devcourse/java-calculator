@@ -15,6 +15,8 @@ public class Calculator implements Runnable{
     private Input input;
     private Output output;
 
+    Logs logs = new Logs();
+
     public Calculator(Calculation calculation, Input input, Output output) {
         this.calculation = calculation;
         this.input = input;
@@ -25,8 +27,6 @@ public class Calculator implements Runnable{
     @Override
     public void run() {
 
-        Logs logs = new Logs(); // run 메소드 안에 있는게 맞나 
-
         while(true){
             String inputMenu = input.input("1. 조회\n2. 계산\n\n선택 : ");
 
@@ -34,19 +34,24 @@ public class Calculator implements Runnable{
                 output.logView(logs);
             } else if (inputMenu.equals("2")) {
                 String expression = input.input();
-                Optional<String> result = calculation.getResult(expression);
-                if (result.isEmpty()){
-                    output.errorMessage("잘못된 입력입니다.");
-                    continue;
-                }
-                logs.add(expression + " = " + result.get());
-                output.answer(result.get());
+                runCalculation(expression);
             } else if (inputMenu.equals("-1")) {
                 break;
             } else {
-                output.errorMessage("잘못된 입력입니다.");
+                output.errorMessage("잘못된 입력입니다. 메뉴를 다시 선택해주세요.");
             }
 
+        }
+    }
+
+    private void runCalculation(String expression){
+        try{
+            String result = calculation.getResult(expression);
+            logs.add(expression ,result);
+            output.answer(result);
+        }catch (Exception error){
+            error.printStackTrace();
+            output.errorMessage(error.getMessage());
         }
     }
 

@@ -4,10 +4,13 @@ import com.programmers.java.engin.io.Input;
 import com.programmers.java.engin.io.Output;
 import com.programmers.java.engin.model.Logs;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
+
     private final Scanner scanner = new Scanner(System.in);
+
     @Override
     public String input() {
         return scanner.nextLine();
@@ -21,7 +24,11 @@ public class Console implements Input, Output {
 
     @Override
     public void logView(Logs logs) {
-        System.out.println(logs.toString());
+        List<String> outputLogs = logs.getLogs();
+        if (outputLogs.size() == 0) System.out.println();
+        else{
+            System.out.println("\n" + String.join("\n",outputLogs) + "\n");
+        }
     }
 
     @Override
