@@ -73,8 +73,8 @@ public class Calculator {
                 else if (element.equals("-")) stack.push(firstOperand - secondOperand);
                 else if (element.equals("*")) stack.push(firstOperand * secondOperand);
                 else if (element.equals("/")) {
-                    if (firstOperand == 0 || secondOperand == 0) {
-                        output.calculateError();
+                    if (secondOperand == 0) {
+                        output.divideByZeroError();
                         return Answer.createAbnormalAnswer();
                     }
                     stack.push(firstOperand / secondOperand);

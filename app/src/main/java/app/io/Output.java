@@ -8,6 +8,6 @@ public interface Output {
     void lookUpOutput(String calculateHistory);
     void calculateOutput(Answer calculateResult);
     void inputError();
-    void calculateError();
+    void divideByZeroError();
     void quitProgram();
 }

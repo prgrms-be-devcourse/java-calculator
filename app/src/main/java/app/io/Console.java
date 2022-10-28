@@ -48,8 +48,8 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void calculateError() {
-        System.out.println("잘못된 계산입니다. (나눗셈에 0이 포함될 수 없습니다.)");
+    public void divideByZeroError() {
+        System.out.println("잘못된 계산입니다. (0으로 나눌 수 없습니다.)");
     }
 
     @Override
