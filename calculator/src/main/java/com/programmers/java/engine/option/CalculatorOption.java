@@ -9,6 +9,8 @@ import com.programmers.java.engine.model.Equation;
 import com.programmers.java.engine.model.Expression;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class CalculatorOption implements Option {
     private Console console;
@@ -33,7 +35,7 @@ public class CalculatorOption implements Option {
             answer = calculator.getAnswer(expression);
         } catch (OnlyNumberException exception) {
             expression = Expression.builder()
-                    .tokens(new String[]{inputExpression})
+                    .tokens(List.of(inputExpression))
                     .build();
 
             answer = Answer.builder()

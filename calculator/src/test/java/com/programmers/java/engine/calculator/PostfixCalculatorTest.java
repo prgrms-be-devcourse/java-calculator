@@ -3,24 +3,27 @@ package com.programmers.java.engine.calculator;
 import com.programmers.java.application.config.TokenValidator;
 import com.programmers.java.application.config.Validator;
 import com.programmers.java.application.exception.*;
+import com.programmers.java.application.util.PostfixUtils;
 import com.programmers.java.engine.model.Answer;
 import com.programmers.java.engine.model.Expression;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class CalculatorImplTest {
+class PostfixCalculatorTest {
 
     private static Calculator calculator;
     private static Validator validator = new TokenValidator();
+    private static PostfixUtils postfixUtils = new PostfixUtils();
 
     @BeforeAll
     public static void init() {
-        calculator = new CalculatorImpl(validator);
+        calculator = new PostfixCalculator(validator, postfixUtils);
     }
 
     @Nested
@@ -115,9 +118,9 @@ class CalculatorImplTest {
             String userInput1 = "-1+-1";
             String userInput2 = "-12.2*-3.31";
             String userInput3 = "1 +3- - 2*1";
-            String[] result1 = {"-1", "+", "-1"};
-            String[] result2 = {"-12.2", "*", "-3.31"};
-            String[] result3 = {"1", "+", "3", "-", "-2", "*", "1"};
+            List<String> result1 = List.of("-1", "+", "-1");
+            List<String> result2 = List.of("-12.2", "*", "-3.31");
+            List<String> result3 = List.of("1", "+", "3", "-", "-2", "*", "1");
 
             //when
             Expression resultExpression1 = calculator.parseExpression(userInput1);
@@ -125,44 +128,21 @@ class CalculatorImplTest {
             Expression resultExpression3 = calculator.parseExpression(userInput3);
 
             //then
-            System.out.println(Arrays.toString(resultExpression1.getTokens()));
-            System.out.println(Arrays.toString(resultExpression2.getTokens()));
-            System.out.println(Arrays.toString(resultExpression3.getTokens()));
-            assertArrayEquals(result1, resultExpression1.getTokens());
-            assertArrayEquals(result2, resultExpression2.getTokens());
-            assertArrayEquals(result3, resultExpression3.getTokens());
+            System.out.println(resultExpression1.getTokens());
+            System.out.println(resultExpression2.getTokens());
+            System.out.println(resultExpression3.getTokens());
+            assertEquals(result1, resultExpression1.getTokens());
+            assertEquals(result2, resultExpression2.getTokens());
+            assertEquals(result3, resultExpression3.getTokens());
         }
     }
-
-    @Nested
-    public class 후위연산_변환_테스트 {
-        @Test
-        public void 후위연산_변환_성공() {
-            //given
-            String[] ex1 = {"14", "+", "2.0", "*", "3.1", "-", "0.1", "/", "214"};
-            String[] ans1 = {"14", "2.0", "3.1", "*", "+", "0.1", "214", "/", "-"};
-            String[] ex2 = {"-12.2", "*", "-3.31"};
-            String[] ans2 = {"-12.2", "-3.31", "*"};
-
-            //when
-            String[] postfix1 = calculator.makePostfix(ex1);
-            String[] postfix2 = calculator.makePostfix(ex2);
-
-            //then
-            System.out.println(Arrays.toString(postfix1));
-            System.out.println(Arrays.toString(postfix2));
-            assertArrayEquals(ans1, postfix1);
-            assertArrayEquals(ans2, postfix2);
-        }
-    }
-
 
 
     @Test
     public void 연산_테스트() {
         //given
-        String[] ex1 = {"14", "2.0", "3.1", "*", "+", "10", "2", "/", "-"};
-        String[] ex2 = {"3", "-2", "*", "5", "-"};
+        List<String> ex1 = List.of("14", "2.0", "3.1", "*", "+", "10", "2", "/", "-");
+        List<String> ex2 = List.of("3", "-2", "*", "5", "-");
         Double ans1 = 15.2;
         Double ans2 = -11.0;
 

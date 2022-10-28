@@ -16,4 +16,8 @@ public interface Validator {
     void validateNumberOperator(String[] tokens);
 
     void validateOutBoundNumber(String[] tokens);
+
+    void validateExpression(String expression) throws Exception;
+
+    void validateTokens(String[] tokens);
 }

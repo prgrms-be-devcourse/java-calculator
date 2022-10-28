@@ -12,8 +12,7 @@ import java.util.stream.Stream;
 public enum MenuType {
     HISTORY("1"),
     CALCULATE("2"),
-    EXIT("3"),
-    UNKNOWN("-1");
+    EXIT("3");
 
     final private String value;
 

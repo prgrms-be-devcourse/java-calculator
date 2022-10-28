@@ -4,25 +4,21 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @ToString
 public class Expression {
-    private String[] tokens;
+    private List<String> tokens;
     private String originExpression;
 
     @Builder
-    public Expression(String[] tokens) {
+    public Expression(List<String> tokens) {
         this.tokens = tokens;
         this.originExpression = initOriginExpression();
     }
 
     private String initOriginExpression() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < tokens.length-1; i++) {
-            stringBuilder.append(tokens[i]).append(" ");
-        }
-        stringBuilder.append(tokens[tokens.length - 1]);
-
-        return stringBuilder.toString();
+        return String.join(" ", tokens);
     }
 }

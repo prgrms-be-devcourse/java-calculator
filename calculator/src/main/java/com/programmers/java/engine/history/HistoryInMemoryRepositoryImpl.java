@@ -5,7 +5,7 @@ import com.programmers.java.engine.model.History;
 
 import java.util.List;
 
-public class HistoryInMemoryInterface implements HistoryRepository{
+public class HistoryInMemoryRepositoryImpl implements HistoryRepository{
 
     private History history = new History();
 
@@ -16,8 +16,6 @@ public class HistoryInMemoryInterface implements HistoryRepository{
 
     @Override
     public List<Equation> findAll() {
-        List<Equation> equationList = history.mapToList();
-
-        return equationList;
+        return history.mapToList();
     }
 }
