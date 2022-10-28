@@ -13,7 +13,6 @@ public interface Output {
 
     void showRecord(RecordControllerResponseDto record);
 
-    void showError();
 
     public void showError(Exception e);
 }

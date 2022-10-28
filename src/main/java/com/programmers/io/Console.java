@@ -33,10 +33,6 @@ public class Console implements Input, Output {
         showText(record.allRecord);
     }
     @Override
-    public void showError(){
-        showText("잘못된 입력 입니다.");
-    }
-    @Override
     public void showError(Exception e) {
         showText(e.getMessage());
     }

@@ -55,7 +55,7 @@ public class TokenizeService implements Service {
                 }
                 default -> {
                     sb.delete(0,sb.length());
-                    throw new Exception("잘못된 입력입니다.");
+                    throw new Exception("잘못된 식입니다.");
 
                 }
             }
