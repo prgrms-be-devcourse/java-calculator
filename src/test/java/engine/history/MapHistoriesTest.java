@@ -8,9 +8,13 @@ class MapHistoriesTest {
 
     @Test
     void saveTest1() {
+        //given
         MapHistories mapHistories = new MapHistories();
 
+        //when
         mapHistories.save("1+1", "2");
+
+        //then
         Assertions.assertEquals(1, mapHistories.getHistories().size());
     }
 

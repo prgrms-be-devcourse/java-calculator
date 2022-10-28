@@ -57,41 +57,82 @@ class ValidatorTest {
 
     @Test
     void 연산식순서검증테스트1() {
-        List<Token> tokens1 = converter.convertUserInputToTokenList("3+5");
-        Assertions.assertEquals(validator.isCorrectOrder(tokens1), true);
+        //given
+        String expression = "3+5";
+        List<Token> tokens;
+
+        //when
+        tokens = converter.convertUserInputToTokenList(expression);
+
+        //then
+        Assertions.assertEquals(validator.isCorrectOrder(tokens), true);
     }
     @Test
     void 연산식순서검증테스트2() {
-        List<Token> tokens4 = converter.convertUserInputToTokenList("3+5 * 4 / 2");
-        Assertions.assertEquals(validator.isCorrectOrder(tokens4), true);
+        //given
+        String expression = "3+5 * 4 / 2";
+        List<Token> tokens;
+
+        //when
+        tokens = converter.convertUserInputToTokenList(expression);
+
+        //then
+        Assertions.assertEquals(validator.isCorrectOrder(tokens), true);
     }
     @Test
     void 연산식순서검증테스트3() {
-        List<Token> tokens2 = converter.convertUserInputToTokenList("35+");
-        Assertions.assertEquals(validator.isCorrectOrder(tokens2), false);
+        //given
+        String expression = "35+";
+        List<Token> tokens;
+
+        //when
+        tokens = converter.convertUserInputToTokenList(expression);
+
+        //then
+        Assertions.assertEquals(validator.isCorrectOrder(tokens), false);
     }
 
     @Test
     void 연산식순서검증테스트4() {
-        List<Token> tokens3 = converter.convertUserInputToTokenList("++35");
-        Assertions.assertEquals(validator.isCorrectOrder(tokens3), false);
+        //given
+        String expression = "++35";
+        List<Token> tokens;
+
+        //when
+        tokens = converter.convertUserInputToTokenList(expression);
+
+        //then
+        Assertions.assertEquals(validator.isCorrectOrder(tokens), false);
     }
     @Test
     void 연산식순서검증테스트5() {
-        List<Token> tokens5 = converter.convertUserInputToTokenList("3++5 * 4 / 2");
-        Assertions.assertEquals(validator.isCorrectOrder(tokens5), false);
+        //given
+        String expression = "3++5 * 4 / 2";
+        List<Token> tokens;
+
+        //when
+        tokens = converter.convertUserInputToTokenList(expression);
+
+        //then
+        Assertions.assertEquals(validator.isCorrectOrder(tokens), false);
     }
 
     @Test
     void 잘못된연산식테스트1() {
-        List<Token> tokens = converter.convertUserInputToTokenList("35+");
+        //given
+        String expression = "35+";
+        List<Token> tokens = converter.convertUserInputToTokenList(expression);
+
         Assertions.assertThrowsExactly(NotValidInputException.class,
                 () -> validator.getValidatedTokenList(tokens));
     }
 
     @Test
     void 잘못된연산식테스트2() {
-        List<Token> tokens = converter.convertUserInputToTokenList("3++5 * 4 / 2 +");
+        //given
+        String expression = "3++5 * 4 / 2 +";
+        List<Token> tokens = converter.convertUserInputToTokenList(expression);
+
         Assertions.assertThrowsExactly(NotValidInputException.class,
                 () -> validator.getValidatedTokenList(tokens));
     }

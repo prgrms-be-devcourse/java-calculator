@@ -22,11 +22,15 @@ class ExpressionTest {
 
     @Test
     void 후위식전환테스트() {
+        //given
         List<Token> tokens = converter.convertUserInputToTokenList("3 * 5 - 4 / 2");
         List<Token> result = converter.convertToPostFix(tokens);
-
         StringBuilder sb = new StringBuilder();
+
+        //when
         result.stream().forEach(postFixedToken -> sb.append(postFixedToken.getToken()));
+
+        //then
         Assertions.assertEquals("35*42/-", sb.toString());
     }
 
