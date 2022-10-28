@@ -50,7 +50,7 @@ public class Calculator implements Runnable {
 
                 continue;
             }
-            //if else 없이 Symbol 에서 잘 처리해주면 된다고 생각하는데 잘 모르겠습니다.
+
             if (userInputMenu.equals(Menu.LOOKUP.toString())) {
                 storage.findAll();
             }
