@@ -1,4 +1,4 @@
-package com.programmers.calculator.domain;
+package com.programmers.calculator.entity;
 
 public class Operation {
 
