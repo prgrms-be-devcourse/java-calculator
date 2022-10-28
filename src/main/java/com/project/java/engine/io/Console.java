@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import static com.project.java.utils.ConstantMessageUtil.MENU;
+import static com.project.java.utils.ConstatntRegexUtil.SPECIAL_CHARACTER_VALIDATOR_REGEX;
+
 public class Console implements Input, Output {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static final String MENU = "1.조회\n2.계산\n종료하시려면 q or Q를 눌러주세요.";
-    private static final String SPECIAL_CHARACTER_VALIDATOR_REGEX = "[^\\w+\\-*/\\s]";
 
     @Override
     public String getInput(String message) throws IOException {
