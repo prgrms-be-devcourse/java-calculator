@@ -59,7 +59,7 @@ public class Console implements Controller {
     }
 
     private void lookUpProcess() {
-        for (Map.Entry<String, Double> entry : this.repository.findAll().entrySet()) {
+        for (Map.Entry<String, Double> entry : repository.findAll().entrySet()) {
             System.out.println(entry.getKey() + " = " + entry.getValue());
         }
     }
@@ -72,7 +72,7 @@ public class Console implements Controller {
             return;
         }
 
-        Optional<Double> cashed = this.repository.findOne(input);
+        Optional<Double> cashed = repository.findOne(input);
         if (cashed.isPresent()) {
             System.out.println(cashed.get());
             return;
@@ -88,7 +88,7 @@ public class Console implements Controller {
             return;
         }
 
-        this.repository.save(input, result);
+        repository.save(input, result);
         System.out.println(result);
     }
 }
