@@ -12,7 +12,7 @@ public class InputValidator {
 
     // 올바른 연산식인지 검증합니다.
     public boolean validateCalculateInputValue(String calculateInput) {
-        calculateInput = calculateInput.replace(" ", "");
+        calculateInput = calculateInput.replaceAll(RegexConstant.WHITESPACE, "");
         return isNumberAndOperator(calculateInput) && isCorrectExpression(calculateInput);
     }
 
@@ -20,7 +20,7 @@ public class InputValidator {
     private boolean isNumberAndOperator(String calculateInput) {
 
         for (String element : calculateInput.split("")) {
-            if (!element.matches("\\d+||[+\\-*/]")) return false;
+            if (!element.matches(RegexConstant.CORRECT_EXPRESSION)) return false;
         }
 
         return true;

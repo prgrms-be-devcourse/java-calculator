@@ -1,5 +1,7 @@
 package app.calculator;
 
+import app.validator.RegexConstant;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -18,7 +20,7 @@ public class BasicPostfixMaker implements PostfixMaker{
 
         expressionList
                 .forEach(val -> {
-                    if (val.matches("\\d+")) {
+                    if (val.matches(RegexConstant.NUMBERS)) {
                         postfixList.add(val);
                     } else {
                         if (stack.isEmpty()) stack.push(val);
@@ -45,7 +47,7 @@ public class BasicPostfixMaker implements PostfixMaker{
         List<String> expressionList = new ArrayList<>();
         StringBuilder numberStringBuilder = new StringBuilder();
 
-        for (char val : expression.replace(" ", "").toCharArray()) {
+        for (char val : expression.replaceAll(RegexConstant.WHITESPACE, "").toCharArray()) {
             if (Character.isDigit(val)) {
                 numberStringBuilder.append(val);
             } else {

@@ -5,6 +5,7 @@ import app.io.Output;
 import app.storage.MapStorage;
 import app.storage.Storage;
 import app.validator.InputValidator;
+import app.validator.RegexConstant;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -71,7 +72,7 @@ public class Calculator {
     public Answer calculate(List<String> postfixExpression) {
         Deque<Integer> stack = new ArrayDeque<>();
         for (String element : postfixExpression) {
-            if (element.matches("\\d+")) stack.push(Integer.parseInt(element));
+            if (element.matches(RegexConstant.NUMBERS)) stack.push(Integer.parseInt(element));
             else {
                 int secondOperand = stack.pop();
                 int firstOperand = stack.pop();
