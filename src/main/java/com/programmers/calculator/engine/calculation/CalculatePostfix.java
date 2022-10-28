@@ -31,11 +31,8 @@ public class CalculatePostfix implements Calculate {
     }
 
     void calculateStack(String token) {
-        double number1, number2;
-        number2 = stack.pop();
-        number1 = stack.pop();
+        Double number2 = stack.pop();
+        Double number1 = stack.pop();
         stack.push(Symbol.calculate(token, number1, number2));
     }
-
-
 }
