@@ -1,5 +1,7 @@
 package calculator.repository;
 
+import calculator.domain.CalculationResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,16 @@ public class ListCalculatorRepository implements CalculatorRepository {
     }
 
     @Override
-    public void save(String expression) {
-        repository.add(expression);
+    public void save(CalculationResult result) {
+        repository.add(format(result));
     }
 
     @Override
     public List<String> getAll() {
         return repository;
+    }
+
+    private String format(CalculationResult result){
+        return result.getExpression() + " = " + result.getAnswer();
     }
 }

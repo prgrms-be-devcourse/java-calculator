@@ -17,7 +17,7 @@ public class BaseCalculatorTest {
 
     @Test
     void calculate_더하기랑빼기() {
-        int answer = calculator.calculate(EXP_OF_ADD_N_MIN);
+        String answer = calculator.calculate(EXP_OF_ADD_N_MIN);
         assertThat(answer).isEqualTo(ANSWER_OF_ADD_N_MIN);
     }
 
@@ -30,19 +30,19 @@ public class BaseCalculatorTest {
 
     @Test
     void calculate_곱셈과나눗셈() {
-        int answer = calculator.calculate(EXP_OF_DIV_N_MUL);
+        String answer = calculator.calculate(EXP_OF_DIV_N_MUL);
         assertThat(answer).isEqualTo(ANSWER_OF_DIV_N_MUL);
     }
 
     @Test
     void calculate_더하기와나눗셈() {
-        int answer = calculator.calculate(EXP_OF_ADD_N_DIV);
+        String answer = calculator.calculate(EXP_OF_ADD_N_DIV);
         assertThat(answer).isEqualTo(ANSWER_OF_ADD_N_DIV);
     }
 
     @Test
     void calculate_괄호() {
-        int answer = calculator.calculate(EXP_OF_BRACKET);
+        String answer = calculator.calculate(EXP_OF_BRACKET);
         assertThat(answer).isEqualTo(ANSWER_OF_BRACKET);
     }
 }

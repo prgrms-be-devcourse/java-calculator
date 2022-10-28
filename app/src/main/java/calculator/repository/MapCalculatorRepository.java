@@ -1,22 +1,24 @@
 package calculator.repository;
 
+import calculator.domain.CalculationResult;
+
 import java.util.*;
 
 public class MapCalculatorRepository implements CalculatorRepository {
 
-    private final Map<Integer, String> repository;
+    private final Map<String, String> repository;
 
     public MapCalculatorRepository() {
         this.repository = new LinkedHashMap<>();
     }
 
     @Override
-    public void save(String expression) {
-        repository.put(repository.size(), expression);
+    public void save(CalculationResult result) {
+        repository.put(result.getExpression(), result.getAnswer());
     }
 
     @Override
     public List<String> getAll() {
-        return new ArrayList<>(repository.values());
+        return repository.entrySet().stream().map(e -> e.getKey() + " = " + e.getValue()).toList();
     }
 }

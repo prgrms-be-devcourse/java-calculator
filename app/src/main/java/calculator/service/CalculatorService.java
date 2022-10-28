@@ -79,7 +79,7 @@ public class CalculatorService {
 
     private void calculate() {
         String expression = reader.nextLine();
-        int answer = calculator.calculate(expression);
+        String answer = calculator.calculate(expression);
         writer.println(answer);
     }
 
