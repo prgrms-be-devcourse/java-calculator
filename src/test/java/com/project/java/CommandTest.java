@@ -1,6 +1,6 @@
 package com.project.java;
 
-import com.project.java.utils.Command;
+import com.project.java.utils.MenuSelectCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +12,10 @@ public class CommandTest {
         String input2 = "2";
         String input3 = "1++1";
         // when
-        Command retrieve = Command.valueOfCommand(input1);
-        Command calculate = Command.valueOfCommand(input2);
+        MenuSelectCommand retrieve = MenuSelectCommand.valueOfCommand(input1);
+        MenuSelectCommand calculate = MenuSelectCommand.valueOfCommand(input2);
         //then
-        Assertions.assertEquals(Command.RETRIEVE, retrieve);
-        Assertions.assertEquals(Command.CALCULATE, calculate);
+        Assertions.assertEquals(MenuSelectCommand.RETRIEVE, retrieve);
+        Assertions.assertEquals(MenuSelectCommand.CALCULATE, calculate);
     }
 }

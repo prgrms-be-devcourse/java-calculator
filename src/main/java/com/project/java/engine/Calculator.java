@@ -7,7 +7,7 @@ import com.project.java.engine.repository.Repository;
 import com.project.java.engine.solver.Solver;
 import com.project.java.exception.ContinuousOperatorException;
 import com.project.java.exception.ZeroDivisionException;
-import com.project.java.utils.Command;
+import com.project.java.utils.MenuSelectCommand;
 import lombok.AllArgsConstructor;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class Calculator {
     public void run() throws IOException {
 
         while (true) {
-            Command command = Command.valueOfCommand(input.getInput(MESSAGE));
+            MenuSelectCommand command = MenuSelectCommand.valueOfCommand(input.getInput(MESSAGE));
 
             switch (command) {
                 case RETRIEVE -> {
