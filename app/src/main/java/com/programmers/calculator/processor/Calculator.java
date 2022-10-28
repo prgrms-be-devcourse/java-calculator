@@ -1,6 +1,8 @@
-package com.programmers.calculator;
+package com.programmers.calculator.processor;
 
 import com.programmers.calculator.entity.Operation;
+import com.programmers.calculator.io.Console;
+import com.programmers.calculator.storage.OperationRepository;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -59,4 +61,22 @@ public class Calculator {
 
         return operation;
     }
+
+    public String[] parseFolmula(String inputStr) {
+        return inputStr.trim().split("\\s+");
+    }
+
+    public Operation excute(String inputString) {
+        String[] parsedInputStr = parseFolmula(inputString);
+
+        try {
+            Validator.isRightSpacing(parsedInputStr);
+            Validator.isRightOperatorAndNumbers(parsedInputStr);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return calculate(inputString, parsedInputStr);
+    }
+
 }

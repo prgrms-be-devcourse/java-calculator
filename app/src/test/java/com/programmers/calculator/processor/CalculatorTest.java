@@ -1,24 +1,12 @@
-package com.programmers.calculator.model;
+package com.programmers.calculator.processor;
 
-import com.programmers.calculator.AppConfig;
-import com.programmers.calculator.controller.Controller;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ArithmeticOperationCalculatorTest {
-
-    AppConfig appConfig = new AppConfig();
-    Controller controller;
-    Calculator calculator;
-
-    @BeforeEach
-    void beforeEach() {
-        controller = appConfig.createController();
-        calculator = new ArithmeticOperationCalculator();
-    }
+class CalculatorTest {
+    Calculator calculator = new Calculator();
 
     @Test
     @DisplayName("올바른 수식이 넣으면 연산결과를 반환한다.")
@@ -34,7 +22,7 @@ class ArithmeticOperationCalculatorTest {
 
         String[][] parsedInputFormula = new String[inputFormula.length][];
         for (int i = 0; i < 5; i++) {
-            parsedInputFormula[i] = controller.parseFolmula(inputFormula[i]);
+            parsedInputFormula[i] = calculator.parseFolmula(inputFormula[i]);
         }
 
         // when
