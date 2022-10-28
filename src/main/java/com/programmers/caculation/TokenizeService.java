@@ -22,6 +22,7 @@ public class TokenizeService implements Service {
             switch (c) {
                 case '*', '/', '+', '-' -> {//가장 앞에 오는 +, -는 통과하게, 가장 마지막이 연산자로 띁나면 실패하게
                     if (i == (expressionCharArray.length - 1)) {
+                        sb.delete(0,sb.length());
                         throw new Exception("연산자는 가장 마지막에 올 수 없습니다.");
                     }
                     try {
@@ -34,6 +35,7 @@ public class TokenizeService implements Service {
                         if ((i == 0 && c == '+') || (i == 0 && c == '-')) {
                             sb.append(c);
                         } else {
+                            sb.delete(0,sb.length());
                             throw new Exception("연산자는 연달아 두번 이상 올 수 없습니다.");
                         }
                     }
@@ -44,6 +46,7 @@ public class TokenizeService implements Service {
                         tokenizedInput.add(number);
                         sb.delete(0, sb.length());
                     } else {
+                        sb.delete(0,sb.length());
                         throw new Exception("=의 뒤에는 숫자를 넣을 수 없습니다.");
                     }
                 }
@@ -51,7 +54,9 @@ public class TokenizeService implements Service {
                     sb.append(c);
                 }
                 default -> {
+                    sb.delete(0,sb.length());
                     throw new Exception("잘못된 입력입니다.");
+
                 }
             }
         }
