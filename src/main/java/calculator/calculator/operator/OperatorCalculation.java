@@ -2,7 +2,7 @@ package calculator.calculator.operator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 import static calculator.exception.OperatorException.OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO;
 
@@ -18,9 +18,9 @@ public enum OperatorCalculation {
         return leftOperand.divide(rightOperand, 15, RoundingMode.HALF_UP);
     });
 
-    private final BiFunction<BigDecimal, BigDecimal, BigDecimal> calculation;
+    private final BinaryOperator<BigDecimal> calculation;
 
-    OperatorCalculation(BiFunction<BigDecimal, BigDecimal, BigDecimal> calculation) {
+    OperatorCalculation(BinaryOperator<BigDecimal> calculation) {
         this.calculation = calculation;
     }
 
