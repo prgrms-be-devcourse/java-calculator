@@ -13,8 +13,8 @@ import static engine.compute.operate.Operator.getOperator;
 
 
 public class ExpressionConverter {
-    private final ExpressionValidator expressionValidator;
     public static final String operatorRegEx = "(?=[+/*-])|(?<=[+/*-])";
+    private final ExpressionValidator expressionValidator;
 
     public ExpressionConverter(ExpressionValidator expressionValidator) {
         this.expressionValidator = expressionValidator;
@@ -37,7 +37,7 @@ public class ExpressionConverter {
                 postFix.add(token);
             }
 
-            if(expressionValidator.isOperator(token)){
+            if (expressionValidator.isOperator(token)) {
                 sortOperatorByPriority(postFix, stack, token);
             }
         }

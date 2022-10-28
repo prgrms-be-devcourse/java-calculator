@@ -17,7 +17,7 @@ class ComputerTest {
     void setting() {
         validator = new SimpleExpressionValidator();
         converter = new ExpressionConverter(validator);
-        computer = new Computer(validator, converter);
+        computer = new Computer(new ComputeService(validator, converter));
     }
 
     @Test

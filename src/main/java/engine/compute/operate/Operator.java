@@ -25,19 +25,20 @@ public enum Operator {
     }
 
     public static boolean isOperator(String exp) {
-        return exp.equals(PLUS.operator) || exp.equals(MINUS.operator) || exp.equals(MULTIPLY.operator) || exp.equals(DIVIDE.operator);
+        return Arrays.stream(Operator.values())
+                .anyMatch(operatorElement -> operatorElement.operator.equals(exp));
     }
 
     public static Operator getOperator(String operatorString) {
         return Arrays.stream(values())
-                    .filter(operatorEnum -> operatorEnum.operator.equals(operatorString))
-                    .findFirst()
-                    .get();
+                .filter(operatorEnum -> operatorEnum.operator.equals(operatorString))
+                .findFirst()
+                .get();
 
     }
 
-    public double calculate(double n1, double n2) {
-        return expression.apply(n1, n2);
+    public double calculate(double operand1, double operand2) {
+        return expression.apply(operand1, operand2);
     }
 
     public int getPriority() {

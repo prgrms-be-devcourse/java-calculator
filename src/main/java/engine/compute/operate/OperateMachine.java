@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Stack;
 
 public class OperateMachine {
-    private final ExpressionValidator validator;
     private static final String NUMBER_FORMAT = "0.00";
+    private final ExpressionValidator validator;
+
     public OperateMachine(ExpressionValidator validator) {
         this.validator = validator;
     }

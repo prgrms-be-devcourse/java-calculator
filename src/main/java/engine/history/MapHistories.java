@@ -3,7 +3,7 @@ package engine.history;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapHistories implements Histories{
+public class MapHistories implements Histories {
     private final Map<String, String> map = new HashMap<>();
 
     @Override
