@@ -10,11 +10,11 @@ import java.util.Stack;
 
 public class Calculator {
 
-    private Input input;
-    private Output output;
-    private Storage storage;
-    private PostfixMaker postfixMaker;
-    private InputValidator validator;
+    private final Input input;
+    private final Output output;
+    private final Storage storage;
+    private final PostfixMaker postfixMaker;
+    private final InputValidator validator;
 
     public Calculator(Input input, Output output, Storage storage, PostfixMaker postfixMaker, InputValidator validator) {
         this.input = input;
