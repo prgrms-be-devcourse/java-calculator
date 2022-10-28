@@ -29,8 +29,9 @@ public class Formula {
 
     public void addDataToDB(DataBase db, BigDecimal result){
         for (String s : content) {
-            if (operatorExchange.containsKey(s))    sb.append(operatorExchange.get(s));
-            else                                    sb.append(s);
+//            if (operatorExchange.containsKey(s))    sb.append(operatorExchange.get(s));
+//            else                                    sb.append(s);
+            
             sb.append(" ");
         }
         sb.append("= "); sb.append(result); // 결과 포함해서 저장
@@ -47,11 +48,11 @@ public class Formula {
 
     public Boolean validate(Validator validator) {
         LinkedList<String> value = validator.validate(content);
-        if      (value.size() == 0) return false;
-        else    {
-            this.content = value;
-            return true;
-        }
+
+        if (value.size() == 0) return false;
+
+        this.content = value;
+        return true;
     }
 
 

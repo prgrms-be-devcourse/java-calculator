@@ -54,7 +54,7 @@ public class Calculator implements Runnable{
                 BigDecimal ans = BigDecimal.valueOf(0);
 
                 if (num.get() == 1) {
-                    dataBase.showAll();
+                    dataBase.showAll(output);
                 } // DB 조회
                 else if (num.get() == 2) {
                     output.caution();

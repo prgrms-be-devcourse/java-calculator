@@ -2,8 +2,10 @@ package com.programmers.engine.io;
 
 import com.programmers.engine.model.DataBase;
 
+import java.util.LinkedList;
+
 public interface Output {
-    void showAll(DataBase db);
+    void showAll(LinkedList<String> l);
 
     void inputError();
 
@@ -19,4 +21,6 @@ public interface Output {
     void caution();
 
     void divdeByZeroError();
+
+    void dbNoDate();
 }

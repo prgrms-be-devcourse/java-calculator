@@ -3,6 +3,7 @@ package com.programmers;
 import com.programmers.engine.io.*;
 import com.programmers.engine.model.DataBase;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -15,8 +16,8 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void showAll(DataBase db) {
-        db.showAll();
+    public void showAll(LinkedList<String> l) {
+        l.forEach(System.out::println);
     }
 
     @Override
@@ -49,5 +50,10 @@ public class Console implements Input, Output {
     @Override
     public void divdeByZeroError() {
         System.out.println("Divided By Zero Error!!");
+    }
+
+    @Override
+    public void dbNoDate() {
+        System.out.println("저장된 데이터가 없습니다");
     }
 }
