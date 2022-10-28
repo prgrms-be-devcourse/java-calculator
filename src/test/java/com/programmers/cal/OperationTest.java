@@ -1,5 +1,7 @@
 package com.programmers.cal;
 
+import com.programmers.cal.engine.model.Answer;
+import com.programmers.cal.engine.model.PostfixExpression;
 import com.programmers.cal.engine.operation.Operation;
 import com.programmers.cal.engine.operation.OperationManager;
 import org.junit.jupiter.api.DisplayName;
@@ -22,10 +24,12 @@ public class OperationTest {
         String expected = "60.0";
 
         //when
-        String result = operation.calculate(input);
+        Answer result = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input)
+                .build());
 
         //then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result.getAnswer()).isEqualTo(expected);
     }
 
     @Test
@@ -36,10 +40,12 @@ public class OperationTest {
         String expected = "-36.0";
 
         //when
-        String result = operation.calculate(input);
+        Answer result = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input)
+                .build());
 
         //then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result.getAnswer()).isEqualTo(expected);
     }
 
     @Test
@@ -50,10 +56,12 @@ public class OperationTest {
         String expected = "72.0";
 
         //when
-        String result = operation.calculate(input);
+        Answer result = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input)
+                .build());
 
         //then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result.getAnswer()).isEqualTo(expected);
     }
 
     @Test
@@ -64,10 +72,12 @@ public class OperationTest {
         String expected = "3.0";
 
         //when
-        String result = operation.calculate(input);
+        Answer result = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input)
+                .build());
 
         //then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result.getAnswer()).isEqualTo(expected);
     }
 
     @Test
@@ -81,12 +91,16 @@ public class OperationTest {
         String expected2 = "80.0";
 
         //when
-        String result1 = operation.calculate(input1);
-        String result2 = operation.calculate(input2);
+        Answer result1 = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input1)
+                .build());
+        Answer result2 = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input2)
+                .build());
 
         //then
-        assertThat(result1).isEqualTo(expected1);
-        assertThat(result2).isEqualTo(expected2);
+        assertThat(result1.getAnswer()).isEqualTo(expected1);
+        assertThat(result2.getAnswer()).isEqualTo(expected2);
     }
 
     @Test
@@ -100,12 +114,16 @@ public class OperationTest {
         String expected2 = "60.0";
 
         //when
-        String result1 = operation.calculate(input1);
-        String result2 = operation.calculate(input2);
+        Answer result1 = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input1)
+                .build());
+        Answer result2 = operation.calculate(PostfixExpression.builder()
+                .postfixTokens(input2)
+                .build());
 
         //then
-        assertThat(result1).isEqualTo(expected1);
-        assertThat(result2).isEqualTo(expected2);
+        assertThat(result1.getAnswer()).isEqualTo(expected1);
+        assertThat(result2.getAnswer()).isEqualTo(expected2);
     }
 
 
@@ -115,7 +133,11 @@ public class OperationTest {
 
         try {
             List<String> input = Arrays.asList("12", "32", "0", "/", "+");
-            operation.calculate(input);
+
+            operation.calculate(PostfixExpression.builder()
+                    .postfixTokens(input)
+                    .build());
+
         } catch (ArithmeticException e) {
             assertThat(e.getMessage()).isEqualTo("0으로 나눌 수 없음");
         }
