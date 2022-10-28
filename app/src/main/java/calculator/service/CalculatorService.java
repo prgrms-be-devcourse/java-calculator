@@ -16,6 +16,7 @@ public class CalculatorService {
     private final Calculator calculator;
     private final Scanner reader;
     private final PrintStream writer;
+    boolean exit = false;
 
     public CalculatorService(Calculator calculator) {
         this.calculator = calculator;
@@ -33,27 +34,23 @@ public class CalculatorService {
         String introduction = makeIntroduction();
         System.out.println(introduction);
 
-        while (reader.hasNextLine()) {
-            String command = reader.nextLine();
-            writer.println("선택 : " + command);
-
+        while (!exit && reader.hasNextLine()) {
             try {
-                if (command.equals(GETALLDATA.getCode())) {
-                    getAllData();
-                } else if (command.equals(CALCULATE.getCode())) {
-                    calculate();
-                } else if (command.equals(EXIT.getCode())) {
-                    exit();
-                    break;
-                } else {
-                    writer.println("> 다시 입력해주세요");
+                Command command = getCommand(reader.nextLine());
+                writer.println("선택 : " + command.getCode());
+
+                switch (command) {
+                    case GETALLDATA -> getAllData();
+                    case CALCULATE -> calculate();
+                    case EXIT -> exit();
                 }
-            } catch (ArithmeticException e) {
-                writer.println("> 0으로 나눌 수 없습니다. 다시 입력해주세요");
+            } catch (RuntimeException e) {
+                writer.println("> " + e.getMessage());
             }
 
-            writer.println(introduction);
+            if (!exit) writer.println(introduction);
         }
+        reader.close();
     }
 
     private String makeIntroduction() {
@@ -85,6 +82,6 @@ public class CalculatorService {
 
     private void exit() {
         writer.println("> 계산기 프로젝트를 종료합니다");
-        reader.close();
+        exit = true;
     }
 }

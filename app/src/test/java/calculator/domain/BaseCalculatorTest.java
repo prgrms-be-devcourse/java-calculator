@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.exception.DividedByZeroException;
 import calculator.repository.CalculatorRepository;
 import calculator.repository.MapCalculatorRepository;
 
@@ -26,7 +27,7 @@ public class BaseCalculatorTest {
     @Test
     void calculate_0으로나누는경우() {
         String EXP_OF_DIV_BY_0 = "2 / 0";
-        Assertions.assertThrows(ArithmeticException.class, () -> {
+        Assertions.assertThrows(DividedByZeroException.class, () -> {
             calculator.calculate(EXP_OF_DIV_BY_0);
         });
     }

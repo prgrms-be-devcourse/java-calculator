@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.exception.IllegalOperatorException;
 import calculator.repository.CalculatorRepository;
 
 import java.util.List;
@@ -18,8 +19,9 @@ public class BaseCalculator implements Calculator {
     }
 
     @Override
-    public String calculate(String expression) {
+    public String calculate(String expression) throws RuntimeException {
         Stack<Integer> stack = new Stack<>();
+        expression = expressionFormat(expression);
         String postFix = transToPostfix(expression);
 
         char[] array = postFix.toCharArray();
@@ -45,6 +47,10 @@ public class BaseCalculator implements Calculator {
         else return 0;
     }
 
+    private String expressionFormat(String expression) {
+        return expression.replace(" ", "").trim();
+    }
+
     private String transToPostfix(String inFix) {
         char[] array = inFix.toCharArray();
         Stack<Character> stack = new Stack<>();
@@ -57,11 +63,12 @@ public class BaseCalculator implements Calculator {
                     postFix += (char) stack.pop();
                 stack.pop();
             } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-                while (!stack.isEmpty() && (precedence((char) stack.peek()) >= precedence(c)))
+                while (!stack.isEmpty() && (precedence(stack.peek()) >= precedence(c)))
                     postFix += (char) stack.pop();
                 stack.push(c);
             } else if ('0' <= c && c <= '9')
                 postFix += c;
+            else throw new IllegalOperatorException();
         }
 
         while (!stack.isEmpty())
