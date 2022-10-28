@@ -11,7 +11,7 @@ import com.programmers.java.validator.ParenthesesValidator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class App {
+public class CalculatorApp {
     public static void main(String[] args) {
         List<InputValidator> validatorList = new ArrayList<>();
         validatorList.add(new FormValidator());
