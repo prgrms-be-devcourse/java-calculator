@@ -2,7 +2,7 @@ package engine.calculator;
 
 import engine.compute.Computer;
 import engine.exception.NotValidInputException;
-import engine.history.History;
+import engine.history.Histories;
 import engine.io.Input;
 import engine.io.Output;
 
@@ -11,13 +11,13 @@ import static engine.option.Option.*;
 public class Calculator implements Runnable {
     private final Input input;
     private final Output output;
-    private final History history;
+    private final Histories histories;
     private final Computer computer;
 
-    public Calculator(Input input, Output output, History history, Computer computer) {
+    public Calculator(Input input, Output output, Histories histories, Computer computer) {
         this.input = input;
         this.output = output;
-        this.history = history;
+        this.histories = histories;
         this.computer = computer;
     }
 
@@ -44,13 +44,13 @@ public class Calculator implements Runnable {
         if (userCommand.equals(EXIT.getOption())) {
             return;
         } else if (userCommand.equals(HISTORY.getOption())) {
-            output.showHistory(history);
+            output.showHistory(histories);
         } else {
             String userInputExpression = input.getCalculateSentence("계산할 식을 입력해주세요.");
 
             String answer = computer.compute(userInputExpression);
 
-            history.save(userInputExpression, answer);
+            histories.save(userInputExpression, answer);
             output.printAnswer(answer);
         }
     }

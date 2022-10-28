@@ -3,7 +3,7 @@ package engine.history;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapHistory implements History {
+public class MapHistories implements Histories {
     private final Map<String, String> map = new HashMap<>();
     private final StringBuilder sb = new StringBuilder();
 
@@ -20,7 +20,6 @@ public class MapHistory implements History {
 
         return sb.toString();
     }
-
 
     public Map<String, String> getMap() {
         return map;

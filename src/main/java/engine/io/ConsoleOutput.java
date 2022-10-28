@@ -1,6 +1,6 @@
 package engine.io;
 
-import engine.history.History;
+import engine.history.Histories;
 
 public class ConsoleOutput implements Output {
     @Override
@@ -9,8 +9,8 @@ public class ConsoleOutput implements Output {
     }
 
     @Override
-    public void showHistory(History history) {
-        System.out.println(history.convertToString());
+    public void showHistory(Histories histories) {
+        System.out.println(histories.convertToString());
     }
 
     @Override

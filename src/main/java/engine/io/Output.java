@@ -1,11 +1,11 @@
 package engine.io;
 
-import engine.history.History;
+import engine.history.Histories;
 
 public interface Output {
     void printError(String message);
 
-    void showHistory(History history);
+    void showHistory(Histories histories);
 
     void printAnswer(String answer);
 }
