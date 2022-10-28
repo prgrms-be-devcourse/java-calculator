@@ -6,12 +6,9 @@ import java.util.List;
 import java.util.Stack;
 
 public class BaseCalculator implements Calculator {
-
-    private final Calculation calculation;
     private final CalculatorRepository calculatorRepository;
 
-    public BaseCalculator(Calculation calculation, CalculatorRepository calculatorRepository) {
-        this.calculation = calculation;
+    public BaseCalculator(CalculatorRepository calculatorRepository) {
         this.calculatorRepository = calculatorRepository;
     }
 
@@ -33,10 +30,8 @@ public class BaseCalculator implements Calculator {
                 int a = stack.pop();
                 int b = stack.pop();
 
-                if (c == '+') stack.push(calculation.addition(b, a));
-                else if (c == '-') stack.push(calculation.subtraction(b, a));
-                else if (c == '*') stack.push(calculation.multiplication(b, a));
-                else if (c == '/') stack.push(calculation.division(b, a));
+                Operator operator = Operator.getOperator(c);
+                stack.push(operator.calculate(b, a));
             }
         }
         int answer = stack.pop();
