@@ -34,7 +34,7 @@ public class Calculator implements Runnable {
         while (true) {
             String userInputMenu = Menu.chooseMenu(input.menuInput(MENU_PROMPT));
 
-            if (userInputMenu.equals("3")) {
+            if (userInputMenu.equals(Menu.END.toString())) {
                 output.endNotification();
                 break;
             }
@@ -48,13 +48,12 @@ public class Calculator implements Runnable {
 
                 System.out.println("결과 : " + result + "\n");
 
-
-                //if else 없이 Symbol 에서 잘 처리해주면 된다고 생각하는데 잘 모르겠습니다.
-            } else if (userInputMenu.equals(Menu.LOOKUP.toString())) {
+                continue;
+            }
+            //if else 없이 Symbol 에서 잘 처리해주면 된다고 생각하는데 잘 모르겠습니다.
+            if (userInputMenu.equals(Menu.LOOKUP.toString())) {
                 storage.findAll();
             }
-
-
         }
     }
 
