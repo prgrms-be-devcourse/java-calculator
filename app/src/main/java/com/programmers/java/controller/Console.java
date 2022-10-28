@@ -5,18 +5,17 @@ import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.repository.Repository;
 import com.programmers.java.validator.InputValidator;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class Console implements Controller {
     private static final Scanner scanner = new Scanner(System.in);
-    private final List<InputValidator> validatorList;
+    private final InputValidator[] validatorList;
     private final Calculator calculator;
     private final Repository repository;
 
-    public Console(List<InputValidator> validatorList, Calculator calculator, Repository repository) {
+    public Console(Calculator calculator, Repository repository, InputValidator... validatorList) {
         this.validatorList = validatorList;
         this.calculator = calculator;
         this.repository = repository;
@@ -29,7 +28,7 @@ public class Console implements Controller {
 
         if ("0".equals(choice)) {
             System.out.println("프로그램을 종료합니다");
-            return ;
+            return;
         } else if ("1".equals(choice)) {
             this.lookUpProcess();
         } else if ("2".equals(choice)) {
@@ -69,13 +68,13 @@ public class Console implements Controller {
         double result = 0;
 
         if (this.isNotValidated(input)) {
-            return ;
+            return;
         }
 
         Optional<Double> isInMemory = repository.findOne(input);
         if (isInMemory.isPresent()) {
             System.out.println(isInMemory.get());
-            return ;
+            return;
         }
 
         try {
