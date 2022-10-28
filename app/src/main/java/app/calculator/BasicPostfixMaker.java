@@ -53,7 +53,7 @@ public class BasicPostfixMaker implements PostfixMaker{
             } else {
                 expressionList.add(numberStringBuilder.toString());
                 expressionList.add(String.valueOf(val));
-                numberStringBuilder = new StringBuilder();
+                numberStringBuilder.setLength(0);
             }
         }
         expressionList.add(numberStringBuilder.toString());
