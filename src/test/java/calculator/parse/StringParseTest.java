@@ -20,7 +20,7 @@ class StringParseTest {
 		String expect = "1+2/3-4";
 
 		//when
-		String parseStr = stringParse.parse(origin);
+		String parseStr = stringParse.parseBlank(origin);
 
 		//then
 		Assertions.assertEquals(expect, parseStr);
