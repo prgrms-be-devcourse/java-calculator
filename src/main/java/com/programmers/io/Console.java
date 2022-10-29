@@ -18,11 +18,7 @@ public class Console implements Input, Output {
     public void showMenu() {
         showText("1.조회\n2.계산\n3.종료");
     }
-
-    public void showCaculate() {
-        showPrompt("식을 입력해 주세요 :");
-    }
-
+    
     @Override
     public void showCaculateResult(CaculationControllerResponseDto result) {
         showText(result.result);
