@@ -1,9 +1,7 @@
 package com.programmers.cal.engine.io;
 
-import lombok.Getter;
 import lombok.ToString;
 
-@Getter
 public enum Message {
     MENU_MESSAGE("\n번호를 입력하세요\n1. 조회\n2. 계산\n3. 종료\n선택 : "),
     WRONG_ORDER_MESSAGE("잘못된 입력입니다."),
