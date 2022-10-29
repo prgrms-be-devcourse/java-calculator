@@ -2,32 +2,29 @@ package com.programmers.java;
 
 import java.util.Stack;
 
-import com.programmers.java.exception.DivideByZeroException;
-import com.programmers.java.exception.FormulaInputException;
 import com.programmers.java.exception.MenuInputException;
-import com.programmers.java.io.Console;
+import com.programmers.java.io.Input;
+import com.programmers.java.io.Menu;
+import com.programmers.java.io.Message;
+import com.programmers.java.io.Output;
 import com.programmers.java.model.History;
-import com.programmers.java.model.token.TokenType;
-import com.programmers.java.model.token.letter.operator.Operator;
-import com.programmers.java.repository.Repository;
-import com.programmers.java.util.ToPostfixParser;
-import com.programmers.java.util.Validator;
+import com.programmers.java.model.token.letter.Operator;
+import com.programmers.java.repository.HistoryRepository;
+import com.programmers.java.util.FormulaValidator;
+import com.programmers.java.util.PostfixParser;
 
 public class Calculator implements Runnable {
-	private final String NEW_LINE = System.lineSeparator();
-	private final String MENU = "1. 조회" + NEW_LINE + "2. 계산" + NEW_LINE + "3. 종료" + NEW_LINE + NEW_LINE + "선택 : ";
-	private final String LOOKUP = "1";
-	private final String CALCULATION = "2";
-	private final String EXIT = "3";
-	private final String EXIT_MESSAGE = "계산기를 종료합니다.";
 
-	private Console console;
-	private Repository repository;
-	private Validator validator;
-	private ToPostfixParser parser;
+	private Input input;
+	private Output output;
+	private HistoryRepository repository;
+	private FormulaValidator validator;
+	private PostfixParser parser;
 
-	public Calculator(Console console, Repository repository, Validator validator, ToPostfixParser parser) {
-		this.console = console;
+	public Calculator(Input input, Output output, HistoryRepository repository,
+		FormulaValidator validator, PostfixParser parser) {
+		this.input = input;
+		this.output = output;
 		this.repository = repository;
 		this.validator = validator;
 		this.parser = parser;
@@ -36,54 +33,58 @@ public class Calculator implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			console.printMenu(MENU);
+			output.response(Message.MENU_TABLE.getMessage());
+			Menu menu = Menu.selectMenu(input.request());
 
 			try {
-				switch (console.inputMenuNumber()) {
+				switch (menu) {
 					case LOOKUP:
-						console.printHistory(repository.findAllHistory());
+						output.responseHistory(repository.findAllHistory());
 						break;
 					case CALCULATION:
 						calculateProcess();
 						break;
 					case EXIT:
-						console.printExit(EXIT_MESSAGE);
+						output.response(Message.EXIT_MESSAGE.getMessage());
 						return;
 					default:
 						throw new MenuInputException();
 				}
 			} catch (Exception e) {
-				console.printErrorMessage(e.getMessage());
+				output.response(e.getMessage());
 			}
 		}
 	}
 
-	private void calculateProcess() throws FormulaInputException, DivideByZeroException {
-		String formula = validator.validateFormula(console.inputFormula());
+	private void calculateProcess() throws Exception {
+		output.response(Message.FORMULA_REQUEST.getMessage());
+		String formula = input.request().replaceAll(" ", "");
+		String validatedFormula = validator.validateFormula(formula);
 
-		if (repository.haveFormulaResult(formula)) {
-			console.printFormulaResult(repository.findFormulaResult(formula));
+		if (repository.haveResult(validatedFormula)) {
+			output.responseResult(repository.findResult(validatedFormula));
 		} else {
-			int calculateResult = calculate(parser.changeInfixToPostfix(formula));
-			repository.save(formula, new History(formula, calculateResult));
-			console.printFormulaResult(calculateResult);
+			String[] postfixFormula = parser.changeInfixToPostfix(validatedFormula);
+			int calculateResult = calculate(postfixFormula);
+			repository.save(validatedFormula, new History(validatedFormula, calculateResult));
+			output.responseResult(calculateResult);
 		}
 	}
 
-	public int calculate(String[] parsedTokens) throws DivideByZeroException {
+	public int calculate(String[] parsedTokens) {
 		Stack<Integer> numbers = new Stack<>();
 
 		for (int i = 0; i < parsedTokens.length; i++) {
 			String token = parsedTokens[i];
 
-			if (!validator.isOperator(token)) {
+			if (!Operator.isOperator(token)) {
 				numbers.push(Integer.parseInt(token));
 			} else {
 				int num2 = numbers.pop();
 				int num1 = numbers.pop();
 
-				TokenType operator = validator.makeTokenType(token);
-				int result = ((Operator)operator).calculate(num1, num2);
+				Operator operator = Operator.getOperatorType(token);
+				int result = operator.calculate(num1, num2);
 				numbers.push(result);
 			}
 		}

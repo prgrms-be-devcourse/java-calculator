@@ -3,13 +3,13 @@ package com.programmers.java;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.programmers.java.util.ToPostfixParser;
-import com.programmers.java.util.Validator;
+import com.programmers.java.model.token.TokenTypeFactory;
+import com.programmers.java.util.PostfixParser;
 
 class ToPostfixParserTest {
 	@Test
 	void changeInfixToPostfix() {
-		ToPostfixParser parser = new ToPostfixParser(new Validator());
+		PostfixParser parser = new PostfixParser(new TokenTypeFactory());
 		String infixFormula1 = "1+2*3";
 		String infixFormula2 = "(1+2)/3";
 

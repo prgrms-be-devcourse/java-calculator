@@ -5,13 +5,9 @@ import java.util.List;
 import com.programmers.java.model.History;
 
 public interface Output {
-	void printMenu(String menu);
+	void response(String value);
 
-	void printHistory(List<History> history);
+	void responseResult(int result);
 
-	void printFormulaResult(int result);
-
-	void printExit(String exitMessage);
-
-	void printErrorMessage(String errorMessage);
+	void responseHistory(List<History> history);
 }

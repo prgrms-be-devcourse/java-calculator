@@ -5,15 +5,21 @@ import org.junit.jupiter.api.Test;
 
 import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.io.Console;
+import com.programmers.java.model.token.TokenTypeFactory;
 import com.programmers.java.repository.HistoryRepository;
-import com.programmers.java.util.ToPostfixParser;
-import com.programmers.java.util.Validator;
+import com.programmers.java.repository.MemoryHistoryRepository;
+import com.programmers.java.util.FormulaValidator;
+import com.programmers.java.util.PostfixParser;
 
 class CalculateTest {
 	@Test
 	void calculate() throws DivideByZeroException {
-		Calculator calculator = new Calculator(new Console(), new HistoryRepository(), new Validator(),
-			new ToPostfixParser(new Validator()));
+		Console console = new Console();
+		HistoryRepository repository = new MemoryHistoryRepository();
+		TokenTypeFactory tokenTypeFactory = new TokenTypeFactory();
+		FormulaValidator validator = new FormulaValidator(tokenTypeFactory);
+		PostfixParser parser = new PostfixParser(tokenTypeFactory);
+		Calculator calculator = new Calculator(console, console, repository, validator, parser);
 		String[] postfixFormula1 = {"1", "2", "+", "3", "/", "5", "-", "7", "-"};
 		String[] postfixFormula2 = {"12", "23", "+"};
 

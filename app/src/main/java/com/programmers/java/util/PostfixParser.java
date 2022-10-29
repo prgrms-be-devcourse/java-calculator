@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.programmers.java.model.token.TokenType;
+import com.programmers.java.model.token.TokenTypeFactory;
 import com.programmers.java.model.token.letter.Letter;
+import com.programmers.java.model.token.letter.Operator;
 
-public class ToPostfixParser {
+public class PostfixParser {
+	TokenTypeFactory tokenFactory;
 
-	private Validator validator;
-
-	public ToPostfixParser(Validator validator) {
-		this.validator = validator;
+	public PostfixParser(TokenTypeFactory tokenFactory) {
+		this.tokenFactory = tokenFactory;
 	}
 
 	public String[] changeInfixToPostfix(String formula) {
@@ -23,17 +23,17 @@ public class ToPostfixParser {
 		for (int i = 0; i < tokens.length; i++) {
 			String token = tokens[i];
 
-			if (validator.isOperator(token)) {
-				TokenType operator = validator.makeTokenType(token);
-				while (!stack.isEmpty() && ((Letter)operator).haveLowerPriority(
-					(Letter)validator.makeTokenType(stack.peek()))) {
+			if (Operator.isOperator(token)) {
+				Operator operator = Operator.getOperatorType(token);
+				while (!stack.isEmpty() && operator.haveLowerPriority(
+					(Letter)(tokenFactory.createTokenType(stack.peek())))) {
 					postfixFormula.add(stack.pop());
 				}
 				stack.push(token);
-			} else if (validator.isOpenBracket(token)) {
+			} else if (token.equals("(")) {
 				stack.push(token);
-			} else if (validator.isCloseBracket(token)) {
-				while (!stack.isEmpty() && !validator.isOpenBracket(stack.peek())) {
+			} else if (token.equals(")")) {
+				while (!stack.isEmpty() && !(stack.peek()).equals("(")) {
 					postfixFormula.add(stack.pop());
 				}
 				stack.pop();

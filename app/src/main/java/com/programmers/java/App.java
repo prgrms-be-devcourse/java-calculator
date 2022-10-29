@@ -4,18 +4,20 @@
 package com.programmers.java;
 
 import com.programmers.java.io.Console;
+import com.programmers.java.model.token.TokenTypeFactory;
 import com.programmers.java.repository.HistoryRepository;
-import com.programmers.java.repository.Repository;
-import com.programmers.java.util.ToPostfixParser;
-import com.programmers.java.util.Validator;
+import com.programmers.java.repository.MemoryHistoryRepository;
+import com.programmers.java.util.FormulaValidator;
+import com.programmers.java.util.PostfixParser;
 
 public class App {
 	public static void main(String[] args) {
 		Console console = new Console();
-		Repository repository = new HistoryRepository();
-		Validator validator = new Validator();
-		ToPostfixParser parser = new ToPostfixParser(validator);
+		HistoryRepository repository = new MemoryHistoryRepository();
+		TokenTypeFactory tokenTypeFactory = new TokenTypeFactory();
+		FormulaValidator validator = new FormulaValidator(tokenTypeFactory);
+		PostfixParser parser = new PostfixParser(tokenTypeFactory);
 
-		new Calculator(console, repository, validator, parser).run();
+		new Calculator(console, console, repository, validator, parser).run();
 	}
 }

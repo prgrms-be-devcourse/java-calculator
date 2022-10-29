@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.programmers.java.exception.FormulaInputException;
-import com.programmers.java.util.Validator;
+import com.programmers.java.model.token.TokenTypeFactory;
+import com.programmers.java.util.FormulaValidator;
 
 class ValidateTest {
-	Validator validator = new Validator();
+	FormulaValidator validator = new FormulaValidator(new TokenTypeFactory());
 
 	@Test
 	void validateWrongFormula() {
@@ -26,7 +26,7 @@ class ValidateTest {
 		formula.add("(1+3+4)3"); // 마지막 문자 잘못됨
 
 		formula.stream()
-			.forEach(i -> Assertions.assertThrows(FormulaInputException.class, () -> validator.validateFormula(i)));
+			.forEach(i -> Assertions.assertThrows(Exception.class, () -> validator.validateFormula(i)));
 	}
 
 	@Test

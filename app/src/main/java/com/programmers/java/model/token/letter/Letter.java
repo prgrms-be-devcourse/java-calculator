@@ -4,8 +4,8 @@ import com.programmers.java.model.token.TokenType;
 
 public interface Letter extends TokenType {
 
-	default boolean haveLowerPriority(Letter token) {
-		return getPriority() <= token.getPriority();
+	default boolean haveLowerPriority(Letter letter) {
+		return getPriority() <= letter.getPriority();
 	}
 
 	int getPriority();

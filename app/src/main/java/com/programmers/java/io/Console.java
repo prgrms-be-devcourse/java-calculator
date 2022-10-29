@@ -9,43 +9,24 @@ public class Console implements Input, Output {
 	private final Scanner scanner = new Scanner(System.in);
 
 	@Override
-	public String inputMenuNumber() {
-		String chosenNumber = scanner.nextLine();
-		System.out.println();
-		return chosenNumber;
+	public String request() {
+		return scanner.nextLine();
 	}
 
 	@Override
-	public String inputFormula() {
-		String formula = scanner.nextLine().replaceAll(" ", "");
-		return formula;
+	public void response(String value) {
+		System.out.print(value);
 	}
 
 	@Override
-	public void printMenu(String menu) {
-		System.out.print(menu);
-	}
-
-	@Override
-	public void printHistory(List<History> history) {
-		history.forEach(i -> System.out.println(i.getHistory()));
-		System.out.println();
-	}
-
-	@Override
-	public void printFormulaResult(int result) {
+	public void responseResult(int result) {
 		System.out.println(result);
 		System.out.println();
 	}
 
 	@Override
-	public void printExit(String exitMessage) {
-		System.out.println(exitMessage);
-	}
-
-	@Override
-	public void printErrorMessage(String errorMessage) {
-		System.out.println(errorMessage);
+	public void responseHistory(List<History> history) {
+		history.forEach(i -> System.out.println(i.toString()));
 		System.out.println();
 	}
 }

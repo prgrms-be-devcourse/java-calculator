@@ -9,7 +9,7 @@ import com.programmers.java.model.History;
 
 class HistoryRepositoryTest {
 
-	Repository repository = new HistoryRepository();
+	HistoryRepository repository = new MemoryHistoryRepository();
 
 	@Test
 	void findAllHistory() {
@@ -23,6 +23,6 @@ class HistoryRepositoryTest {
 		List<History> history = repository.findAllHistory();
 
 		Assertions.assertEquals(history.size(), 2);
-		Assertions.assertEquals(history.get(0).getHistory(), "1+2+3=6");
+		Assertions.assertEquals(history.get(0).toString(), "1+2+3=6");
 	}
 }
