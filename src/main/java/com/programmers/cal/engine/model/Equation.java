@@ -16,7 +16,7 @@ public class Equation {
         this.answer = answer;
     }
 
-    public Equation toEquation(InputData inputData, Answer answer) {
+    public static Equation toEquation(InputData inputData, Answer answer) {
         return Equation.builder()
                 .inputData(inputData)
                 .answer(answer)

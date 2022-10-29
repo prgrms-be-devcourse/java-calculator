@@ -1,6 +1,8 @@
 package com.programmers.cal.engine.model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
@@ -12,7 +14,7 @@ public class InputData {
         this.inputString = inputString;
     }
 
-    public InputData toInputData(String inputString) {
+    public static InputData toInputData(String inputString) {
         return InputData.builder()
                 .inputString(inputString)
                 .build();

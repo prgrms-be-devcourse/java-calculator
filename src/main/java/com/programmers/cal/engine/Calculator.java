@@ -14,9 +14,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
-import java.util.List;
-
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Calculator implements Runnable {
 
@@ -27,9 +24,6 @@ public class Calculator implements Runnable {
     private Postfix postfix;
     private Operation operation;
     private Repository repository;
-
-    private InputData inputData = new InputData();
-    private Equation equation = new Equation();
 
     @Builder
     public Calculator(Input input, Output output, Validator validator, Parser parser,
@@ -81,7 +75,7 @@ public class Calculator implements Runnable {
 
     private void calculateProcess() {
 
-        inputData = inputData.toInputData(input.inputOrder());
+        InputData inputData = InputData.toInputData(input.inputOrder());
 
         if (!validator.isExpression(inputData)) {
             output.printWrongOrder();
@@ -93,7 +87,7 @@ public class Calculator implements Runnable {
         try {
             PostfixExpression postfixTokens = postfix.toPostfix(originalTokens);
             Answer answer = operation.calculate(postfixTokens);
-            equation = equation.toEquation(inputData, answer);
+            Equation equation = Equation.toEquation(inputData, answer);
 
             repository.save(equation);
             output.printResult(answer);
