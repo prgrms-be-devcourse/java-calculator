@@ -8,14 +8,14 @@ import calculator.repository.FormulaResult;
 import calculator.repository.Repository;
 import calculator.validator.Validator;
 
-public interface CalculatorFactory<T extends FormulaResult, ID> {
+public interface CalculatorFactory<T extends FormulaResult, U> {
 	Input createInput();
 
-	Output createOutput();
+	Output<T> createOutput();
 
 	Operation createOperation();
 
-	Repository<T, ID> createRepository();
+	Repository<T, U> createRepository();
 
 	Validator createValidator();
 

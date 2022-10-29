@@ -7,9 +7,9 @@ import calculator.repository.FormulaResult;
 
 public class PostfixCalculator extends Calculator implements Runnable {
 
-	CalculatorFactory calculatorFactory;
+	CalculatorFactory<FormulaResult, String> calculatorFactory;
 
-	public PostfixCalculator(CalculatorFactory calculatorFactory) {
+	public PostfixCalculator(CalculatorFactory<FormulaResult, String> calculatorFactory) {
 		this.calculatorFactory = calculatorFactory;
 	}
 

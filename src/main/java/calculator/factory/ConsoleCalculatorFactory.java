@@ -13,7 +13,7 @@ import calculator.repository.ResultRepository;
 import calculator.validator.FormulaValidator;
 import calculator.validator.Validator;
 
-public class ConsoleCalculatorFactory implements CalculatorFactory {
+public class ConsoleCalculatorFactory implements CalculatorFactory<FormulaResult, String> {
 
 	@Override
 	public Input createInput() {
@@ -22,7 +22,7 @@ public class ConsoleCalculatorFactory implements CalculatorFactory {
 	}
 
 	@Override
-	public Output createOutput() {
+	public Output<FormulaResult> createOutput() {
 		return new Console();
 	}
 
