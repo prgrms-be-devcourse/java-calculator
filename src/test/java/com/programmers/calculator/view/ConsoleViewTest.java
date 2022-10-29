@@ -1,7 +1,10 @@
 package com.programmers.calculator.view;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.programmers.calculator.controller.ConsoleController;
-import com.programmers.calculator.controller.Controller;
 import com.programmers.calculator.controller.io.ConsoleRequest;
 import com.programmers.calculator.controller.io.ConsoleResponse;
 import com.programmers.calculator.controller.io.Request;
@@ -10,6 +13,16 @@ import com.programmers.calculator.repository.IdGenerator;
 import com.programmers.calculator.repository.InMemoryRepository;
 import com.programmers.calculator.repository.Repository;
 import com.programmers.calculator.service.CalculatorService;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.io.SequenceInputStream;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,21 +31,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 @DisplayName("Console View 테스트")
 class ConsoleViewTest {
 
     private ConsoleView consoleView;
 
-    private Controller controller;
+    private ConsoleController controller;
 
     private Repository<Long, CalculateHistory> repository;
 

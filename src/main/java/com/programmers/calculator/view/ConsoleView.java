@@ -1,10 +1,9 @@
 package com.programmers.calculator.view;
 
-import com.programmers.calculator.controller.Controller;
+import com.programmers.calculator.controller.ConsoleController;
 import com.programmers.calculator.controller.io.ConsoleRequest;
 import com.programmers.calculator.controller.io.Request;
 import com.programmers.calculator.controller.io.Response;
-
 import java.util.Map;
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ public class ConsoleView implements View {
 
     private final Map<Command, Runnable> mapping;
 
-    public ConsoleView(Controller controller, Scanner console) {
+    public ConsoleView(ConsoleController controller, Scanner console) {
         this.scanner = console;
         mapping = Map.of(
                 Command.INQUIRY,

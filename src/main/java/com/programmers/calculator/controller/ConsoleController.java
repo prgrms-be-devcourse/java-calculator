@@ -5,7 +5,7 @@ import com.programmers.calculator.controller.io.Response;
 import com.programmers.calculator.core.Expression;
 import com.programmers.calculator.service.CalculatorService;
 
-public class ConsoleController implements Controller {
+public class ConsoleController{
 
     private final CalculatorService calculatorService;
 
@@ -13,12 +13,10 @@ public class ConsoleController implements Controller {
         this.calculatorService = calculatorService;
     }
 
-    @Override
     public Response inquiry() {
         return calculatorService.findAllOrderById();
     }
 
-    @Override
     public Response calculate(Request request) {
         return calculatorService.process(new Expression(request.getInput()));
     }
