@@ -6,7 +6,7 @@ import com.programmers.calculator.controller.io.ConsoleResponse;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ConsoleView implements View {
+public class ConsoleView  {
 
     private final Scanner scanner;
 
@@ -28,7 +28,6 @@ public class ConsoleView implements View {
         );
     }
 
-    @Override
     public void show() {
         System.out.println("0. 종료");
         System.out.println("1. 조회");
@@ -44,13 +43,11 @@ public class ConsoleView implements View {
         mapping.get(command).run();
     }
 
-    @Override
     public ConsoleRequest read() {
         String input = scanner.nextLine();
         return new ConsoleRequest(input);
     }
 
-    @Override
     public void write(ConsoleResponse response) {
         System.out.println(response.result());
         System.out.println();

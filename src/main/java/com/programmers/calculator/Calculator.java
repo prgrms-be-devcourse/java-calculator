@@ -1,12 +1,12 @@
 package com.programmers.calculator;
 
-import com.programmers.calculator.view.View;
+import com.programmers.calculator.view.ConsoleView;
 
 public class Calculator {
 
-    private final View view;
+    private final ConsoleView view;
 
-    public Calculator(View view) {
+    public Calculator(ConsoleView view) {
         this.view = view;
     }
 
