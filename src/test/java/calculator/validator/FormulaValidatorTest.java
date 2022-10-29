@@ -60,4 +60,15 @@ class FormulaValidatorTest {
 		Assertions.assertFalse(formulaValidator.isFormula(origin3));
 
 	}
+
+	@Test
+	@DisplayName("나누기 0 유무 검증")
+	void test5() {
+
+		//given
+		String origin1 = "3/0";
+
+		Assertions.assertTrue(formulaValidator.isDivideZero(origin1));
+
+	}
 }
