@@ -20,7 +20,7 @@ public class BaseCalculator implements Calculator {
     }
 
     @Override
-    public String calculate(String expression) throws RuntimeException {
+    public String calculate(String expression) {
         Stack<Integer> stack = new Stack<>();
         expression = expressionFormat(expression);
 
@@ -48,12 +48,6 @@ public class BaseCalculator implements Calculator {
         return answer;
     }
 
-    private int precedence(char c) {
-        if (c == '*' || c == '/') return 2;
-        else if (c == '+' || c == '-') return 1;
-        else return 0;
-    }
-
     private String expressionFormat(String expression) {
         return expression.replace(" ", "").trim();
     }
@@ -70,7 +64,7 @@ public class BaseCalculator implements Calculator {
                     postFix += (char) stack.pop();
                 stack.pop();
             } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-                while (!stack.isEmpty() && (precedence(stack.peek()) >= precedence(c)))
+                while (!stack.isEmpty() && (Operator.getPriority(stack.peek()) <= Operator.getPriority(c)))
                     postFix += (char) stack.pop();
                 stack.push(c);
             } else if ('0' <= c && c <= '9')
@@ -85,6 +79,7 @@ public class BaseCalculator implements Calculator {
     }
 
     private void saveCalculationData(String expression, String answer) {
-        calculatorRepository.save(new CalculationResult(expression, answer));
+        CalculationResultHistory calculationResult = new CalculationResultHistory(expression, answer);
+        calculatorRepository.save(calculationResult);
     }
 }
