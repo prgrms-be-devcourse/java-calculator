@@ -22,26 +22,41 @@ public class Expression {
 
     private void validate(String expressionString) {
         validateBlack(expressionString);
-        String[] expressionSplitArray = expressionString.split(" ");
-        validateExpressionRule(expressionSplitArray);
+        validateExpressionRule(this.expressionSplitList());
     }
 
-    private void validateExpressionRule(String[] expressionSplitArray) {
-        if (!isNumber(expressionSplitArray[0]) ) {
-            throw new IllegalArgumentException("첫 번째 인덱스의 피연산자가 숫자가 아닙니다");
-        }
+    private void validateExpressionRule(List<String> expressionSplitList) {
+        validateExpressionStartWithNumber(expressionSplitList);
 
-        if (!isNumber(expressionSplitArray[expressionSplitArray.length - 1])) {
-            throw new IllegalArgumentException("마지막 인덱스의 피연산자가 숫자가 아닙니다");
-        }
+        validateExpressionEndWithNumber(expressionSplitList);
 
-        if (expressionSplitArray.length % 2 == 0) {
+        validateExpressionLengthOdd(expressionSplitList);
+
+        validateExpressionIndex(expressionSplitList);
+    }
+
+    private void validateExpressionIndex(List<String> expressionSplitList) {
+        for (int i = 0; i < expressionSplitList.size(); i++) {
+            validateOperatorIndex(i, expressionSplitList.get(i));
+            validateNumberIndex(i, expressionSplitList.get(i));
+        }
+    }
+
+    private void validateExpressionLengthOdd(List<String> expressionSplitList) {
+        if (expressionSplitList.size() % 2 == 0) {
             throw new IllegalArgumentException("식이 잘못되었습니다.");
         }
+    }
 
-        for (int i = 0; i < expressionSplitArray.length; i++) {
-            validateOperatorIndex(i, expressionSplitArray[i]);
-            validateNumberIndex(i, expressionSplitArray[i]);
+    private void validateExpressionStartWithNumber(List<String> expressionSplitList) {
+        if (!isNumber(expressionSplitList.get(0))) {
+            throw new IllegalArgumentException("첫 번째 인덱스의 피연산자가 숫자가 아닙니다");
+        }
+    }
+
+    private void validateExpressionEndWithNumber(List<String> expressionSplitList) {
+        if (!isNumber(expressionSplitList.get(expressionSplitList.size() - 1)) {
+            throw new IllegalArgumentException("마지막 인덱스의 피연산자가 숫자가 아닙니다");
         }
     }
 
