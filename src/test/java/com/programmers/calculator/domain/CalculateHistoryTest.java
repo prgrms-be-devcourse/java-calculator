@@ -23,6 +23,7 @@ class CalculateHistoryTest {
 
         //then
         assertEquals(history, calculateHistory.getHistory());
+        assertNotNull(calculateHistory.getId());
     }
 
 }

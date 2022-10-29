@@ -9,10 +9,14 @@ import com.programmers.calculator.domain.CalculateHistory;
 import com.programmers.calculator.repository.InMemoryRepository;
 import com.programmers.calculator.service.CalculatorService;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("ConsoleController 테스트")
 class ConsoleControllerTest {
 
@@ -20,11 +24,16 @@ class ConsoleControllerTest {
     private InMemoryRepository inMemoryRepository;
     private CalculatorService calculatorService;
 
-    @BeforeEach
-    void beforeEach() {
+    @BeforeAll
+    void setUp() {
         inMemoryRepository = new InMemoryRepository();
         calculatorService = new CalculatorService(inMemoryRepository);
         consoleController = new ConsoleController(calculatorService);
+    }
+
+    @AfterEach
+    void clear() {
+        inMemoryRepository.deleteAll();
     }
 
     @DisplayName("조회 요청 테스트 - inquery() 호출시 계산식과 결과가 순서대로 정렬된 문자열을 반환한다")

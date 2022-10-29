@@ -8,10 +8,14 @@ import com.programmers.calculator.core.Expression;
 import com.programmers.calculator.domain.CalculateHistory;
 import com.programmers.calculator.repository.InMemoryRepository;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("CalculatorServiceTest")
 class CalculatorServiceTest {
 
@@ -19,10 +23,15 @@ class CalculatorServiceTest {
 
     private InMemoryRepository inMemoryRepository;
 
-    @BeforeEach
+    @BeforeAll
     void setUp() {
         inMemoryRepository = new InMemoryRepository();
         calculatorService = new CalculatorService(inMemoryRepository);
+    }
+
+    @AfterEach
+    void clear() {
+        inMemoryRepository.deleteAll();
     }
 
     @DisplayName("연산 테스트 - 연산을 하면 연산결과를 반환하고 Repository에 저장된다.")

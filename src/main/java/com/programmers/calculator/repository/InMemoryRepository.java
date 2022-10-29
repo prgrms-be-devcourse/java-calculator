@@ -22,4 +22,9 @@ public class InMemoryRepository implements Repository<Long, CalculateHistory> {
         return new ArrayList<>(database.values());
     }
 
+    @Override
+    public void deleteAll() {
+        database.clear();
+    }
+
 }

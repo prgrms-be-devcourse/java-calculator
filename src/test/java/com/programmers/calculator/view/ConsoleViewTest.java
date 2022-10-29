@@ -23,13 +23,16 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("Console View 테스트")
 class ConsoleViewTest {
 
@@ -41,10 +44,15 @@ class ConsoleViewTest {
 
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
-    @BeforeEach
+    @BeforeAll
     void setUp() {
         repository = new InMemoryRepository();
         controller = new ConsoleController(new CalculatorService(repository));
+    }
+
+    @AfterEach
+    void clear() {
+        repository.deleteAll();
         System.setOut(new PrintStream(output));
     }
 

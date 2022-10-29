@@ -1,24 +1,27 @@
 package com.programmers.calculator.repository;
 
-import com.programmers.calculator.controller.io.Response;
-import com.programmers.calculator.core.Expression;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.programmers.calculator.domain.CalculateHistory;
+import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("InMemoryRepository 테스트")
 class InMemoryRepositoryTest {
 
-    private InMemoryRepository inMemoryRepository;
+    private final InMemoryRepository inMemoryRepository = new InMemoryRepository();
 
-    @BeforeEach
-    void setUp() {
-        inMemoryRepository = new InMemoryRepository();
+    @AfterEach
+    void clean() {
+        inMemoryRepository.deleteAll();
     }
 
     @DisplayName("저장 테스트 - 정상 저장되면 id값이 null이 아니다")
@@ -116,5 +119,29 @@ class InMemoryRepositoryTest {
         assertEquals(0, calculateHistories.size());
     }
 
+    @DisplayName("삭제 테스트 - deleteAll() 메서드를 호출하면 조회했을 때 빈 리스트가 반횐된다.")
+    @Test
+    void deleteTestReturnEmptyList() {
+        //given
+        String expressionStr1 = "1 + 1 + 1";
+        Number result1 = 3;
+
+        String expressionStr2 = "2 * 2 * 2";
+        Number result2 = 8;
+
+        String expressionStr3 = "3 * 3 / 3";
+        Number result3 = 3;
+
+        inMemoryRepository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr1, result1));
+        inMemoryRepository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr2, result2));
+        inMemoryRepository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr3, result3));
+        //when
+        inMemoryRepository.deleteAll();
+
+        //then
+        List<CalculateHistory> calculateHistories = inMemoryRepository.findAll();
+
+        assertTrue(calculateHistories.isEmpty());
+    }
 
 }
