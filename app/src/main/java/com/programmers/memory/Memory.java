@@ -28,10 +28,10 @@ public class Memory {
   }
 
   public List<String> findAll() {
-    if(memory.isEmpty()) {
+    if (memory.isEmpty()) {
       throw new NoSuchElementException("저장된 내역이 없습니다");
     } else {
-     return memory;
+      return memory;
     }
   }
 }
