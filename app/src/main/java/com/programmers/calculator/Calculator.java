@@ -43,10 +43,7 @@ public class Calculator {
       } else {
         char oper = numericOrOper.charAt(0);
 
-        while (!collectionOfOpers.isEmpty() && compareOperatorPriorities(collectionOfOpers.peek(),
-            oper)) {
-          postFix.add(collectionOfOpers.pop());
-        }
+        OperPrecedenceComparison(postFix, collectionOfOpers, oper);
         collectionOfOpers.push(oper);
 
       }
@@ -55,6 +52,14 @@ public class Calculator {
       postFix.add(collectionOfOpers.pop());
     }
     return postFix;
+  }
+
+  private void OperPrecedenceComparison(ArrayList<Object> postFix,
+      Stack<Character> collectionOfOpers, char oper) {
+    while (!collectionOfOpers.isEmpty() && compareOperatorPriorities(collectionOfOpers.peek(),
+        oper)) {
+      postFix.add(collectionOfOpers.pop());
+    }
   }
 
   private Double calculatePostfix(ArrayList<Object> postfix) {
