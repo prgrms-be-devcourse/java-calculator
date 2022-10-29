@@ -37,25 +37,15 @@ public class IntegerCalculator implements Runnable {
         while (true) {
 
             commandLine.printOptionMessage();
-            int option = -1;
-            try {
-                option = commandLine.readOption();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+            int option = commandLine.readOption();
 
             if (option == CommandOption.INQUIRY.value) {
                 commandLine.printList(appMemoryCache.getAll());
             } else if (option == CommandOption.CALCULATE.value) {
 
-                String expressionStr ="";
-                try {
-                    expressionStr = commandLine.readExpression();
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
+                String expressionStr = commandLine.readExpression();
 
-                if(!validator.validate(expressionStr)) {
+                if (!validator.validate(expressionStr)) {
                     continue;
                 }
 
@@ -68,13 +58,8 @@ public class IntegerCalculator implements Runnable {
 
                 appMemoryCache.save(expressionStr + "=" + result);
                 inFixToPostFixConverter.clearPostfixList();
-            }
-            else if (option == CommandOption.EXIT.value) {
-                try {
-                    commandLine.stopCommandLine();
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
+            } else if (option == CommandOption.EXIT.value) {
+                commandLine.stopCommandLine();
                 break;
             }
         }

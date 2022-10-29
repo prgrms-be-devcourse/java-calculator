@@ -30,8 +30,13 @@ public class CommandLine {
         System.out.print("1. 조회 2. 계산 3. 종료 \n\n선택: ");
     }
 
-    public int readOption() throws IOException {
-        String optionStr = bufferedReader.readLine();
+    public int readOption() {
+        String optionStr = null;
+        try {
+            optionStr = bufferedReader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         if (!validator.isNumber(optionStr)) {
             System.out.println("선택값이 유효하지 않습니다.");
@@ -49,11 +54,21 @@ public class CommandLine {
         return optionInt;
     }
 
-    public String readExpression() throws IOException {
-        return bufferedReader.readLine();
+    public String readExpression() {
+        try {
+            return bufferedReader.readLine();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
-    public void stopCommandLine() throws IOException {
-        bufferedReader.close();
+    public void stopCommandLine() {
+        try {
+            bufferedReader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.exit(0);
     }
 
