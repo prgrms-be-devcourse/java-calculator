@@ -48,12 +48,12 @@ class ConsoleViewTest {
     void setUp() {
         repository = new InMemoryRepository();
         controller = new ConsoleController(new CalculatorService(repository));
+        System.setOut(new PrintStream(output));
     }
 
     @AfterEach
     void clear() {
         repository.deleteAll();
-        System.setOut(new PrintStream(output));
     }
 
     @AfterEach
