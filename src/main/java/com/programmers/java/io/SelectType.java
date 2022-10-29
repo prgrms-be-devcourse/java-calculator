@@ -1,5 +1,6 @@
 package com.programmers.java.io;
 
+import com.programmers.java.exception.SelectException;
 import lombok.Getter;
 
 @Getter
@@ -18,6 +19,6 @@ public enum SelectType {
         for (SelectType type : SelectType.values()) {
             if (type.getSelect().equals(s)) return type;
         }
-        throw new IllegalArgumentException("옳지 않은 입력입니다. 보기에 있는 숫자를 입력해주세요.");
+        throw new SelectException("옳지 않은 입력입니다. 보기에 있는 숫자를 입력해주세요.");
     }
 }

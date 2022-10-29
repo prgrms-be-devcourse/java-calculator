@@ -2,7 +2,10 @@ package com.programmers.java.calculator;
 
 import com.programmers.java.calculator.parser.InfixToPostFixParser;
 import com.programmers.java.calculator.validator.InfixValidator;
+import com.programmers.java.controller.CalculatorController;
 import com.programmers.java.data.MapRepository;
+import com.programmers.java.exception.CalculateException;
+import com.programmers.java.exception.ValidateException;
 import com.programmers.java.io.console.ConsoleInput;
 import com.programmers.java.io.console.ConsoleOutput;
 import com.programmers.java.io.Input;
@@ -35,7 +38,7 @@ public class CalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"(3", "3 4", "3 - 4)", "3 4 -"})
     void testValidateFalse(String exp) {
-        assertThrows(IllegalArgumentException.class, () -> validator.validate(exp));
+        assertThrows(ValidateException.class, () -> validator.validate(exp));
     }
 
     @DisplayName("우선순위 연산 테스트")
@@ -49,7 +52,6 @@ public class CalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"3/0", "2/(4/2-2)"})
     void zeroDivisionExceptionTest(String exp) {
-
-        assertThrows(ArithmeticException.class, () -> c.calculate(exp));
+        assertThrows(CalculateException.class, () -> c.calculate(exp));
     }
 }

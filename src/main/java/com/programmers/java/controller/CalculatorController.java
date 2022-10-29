@@ -2,11 +2,14 @@ package com.programmers.java.controller;
 
 import com.programmers.java.calculator.Calculator;
 import com.programmers.java.calculator.ConsoleCalculator;
+import com.programmers.java.exception.CalculateException;
 import com.programmers.java.calculator.parser.InfixToPostFixParser;
 import com.programmers.java.calculator.validator.InfixValidator;
 import com.programmers.java.data.MapRepository;
+import com.programmers.java.exception.ValidateException;
 import com.programmers.java.io.Input;
 import com.programmers.java.io.Output;
+import com.programmers.java.exception.SelectException;
 import com.programmers.java.io.SelectType;
 import lombok.AllArgsConstructor;
 
@@ -40,7 +43,7 @@ public class CalculatorController implements Runnable {
                         return;
                     }
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (SelectException e) {
                 output.putError(e.getMessage());
             }
         }
@@ -52,7 +55,7 @@ public class CalculatorController implements Runnable {
             validator.validate(exp);
             Double answer = c.calculate(exp);
             output.putAnswer(answer);
-        } catch (RuntimeException e) {
+        } catch (CalculateException | ValidateException e) {
             output.putError(e.getMessage());
         }
     }

@@ -1,23 +1,25 @@
 package com.programmers.java.calculator.validator;
 
+import com.programmers.java.exception.ValidateException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InfixValidator implements Validator{
+public class InfixValidator implements Validator {
 
-    private final String operator =  "^[+*/-]$";
+    private final String operator = "^[+*/-]$";
     private final String formula = "^([-|+*/(]?\\d*[)]?)*$";
     private final String bracket = "^[()]$";
     private final String start = "^[-+(]?\\d*$";
 
     public void validate(String s) {
 
-        if(!s.matches(formula)) validationException();
+        if (!s.matches(formula)) validationException();
 
         String[] exp = s.split("");
 
-        if(!exp[0].matches(start) | exp[exp.length-1].matches(operator)) validationException();
+        if (!exp[0].matches(start) | exp[exp.length - 1].matches(operator)) validationException();
 
         // 식 유효성 검사
         long countNum = Arrays.stream(exp).filter(i -> i.matches("^\\d$")).count();
@@ -45,6 +47,6 @@ public class InfixValidator implements Validator{
     }
 
     private void validationException() {
-        throw new IllegalArgumentException("옳지 않은 입력입니다. 수식을 다시 한번 확인해주세요.");
+        throw new ValidateException("옳지 않은 입력입니다. 수식을 다시 한번 확인해주세요.");
     }
 }

@@ -1,5 +1,6 @@
 package com.programmers.java.calculator;
 
+import com.programmers.java.exception.CalculateException;
 import lombok.Getter;
 
 import java.util.function.BiFunction;
@@ -10,7 +11,7 @@ public enum CalculateType {
     MINUS("-", (num1, num2) -> num1 - num2),
     MULTIPLY("*", (num1, num2) -> num1 * num2),
     DIVISION("/", (num1, num2) -> {
-        if (num2.intValue() == 0) throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        if (num2.intValue() == 0) throw new CalculateException("0으로 나눌 수 없습니다.");
         return num1 / num2;
     });
 
@@ -31,7 +32,7 @@ public enum CalculateType {
         for (CalculateType type : CalculateType.values()) {
             if (type.getOperation().equals(o)) return type;
         }
-        throw new IllegalArgumentException("잘못된 연산자입니다.");
+        throw new CalculateException("잘못된 연산자입니다.");
     }
 
 
