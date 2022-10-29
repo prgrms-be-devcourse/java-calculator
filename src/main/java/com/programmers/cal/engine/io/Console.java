@@ -3,7 +3,6 @@ package com.programmers.cal.engine.io;
 import com.programmers.cal.engine.model.Answer;
 import com.programmers.cal.engine.model.Record;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {

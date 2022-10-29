@@ -4,8 +4,6 @@ import com.programmers.cal.engine.model.Answer;
 import com.programmers.cal.engine.model.PostfixExpression;
 import com.programmers.cal.engine.postfix.Postfix;
 
-import java.beans.Expression;
-import java.util.List;
 import java.util.Stack;
 
 public class OperationManager implements Operation {
