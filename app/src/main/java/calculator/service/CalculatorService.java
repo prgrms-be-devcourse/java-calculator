@@ -2,42 +2,34 @@ package calculator.service;
 
 import calculator.domain.Calculator;
 import calculator.domain.Command;
+import calculator.io.Input;
+import calculator.io.Output;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.List;
-import java.util.Scanner;
 
 import static calculator.domain.Command.*;
 
 public class CalculatorService {
 
     private final Calculator calculator;
-    private final Scanner reader;
-    private final PrintStream writer;
+    private final Input input;
+    private final Output output;
     boolean exit = false;
 
-    public CalculatorService(Calculator calculator) {
+    public CalculatorService(Calculator calculator, Input input, Output output) {
         this.calculator = calculator;
-        this.reader = new Scanner(System.in);
-        this.writer = new PrintStream(System.out);
-    }
-
-    public CalculatorService(Calculator calculator, InputStream input, OutputStream output) {
-        this.calculator = calculator;
-        this.reader = new Scanner(input);
-        this.writer = new PrintStream(output);
+        this.input = input;
+        this.output = output;
     }
 
     public void run() {
         String introduction = makeIntroduction();
         System.out.println(introduction);
 
-        while (!exit && reader.hasNextLine()) {
+        while (!exit) {
             try {
-                Command command = getCommand(reader.nextLine());
-                writer.println("선택 : " + command.getCode());
+                Command command = getCommand(input.readLine());
+                output.write("선택 : " + command.getCode());
 
                 switch (command) {
                     case GETALLDATA -> getAllData();
@@ -45,12 +37,12 @@ public class CalculatorService {
                     case EXIT -> exit();
                 }
             } catch (RuntimeException e) {
-                writer.println("> " + e.getMessage());
+                output.write("> " + e.getMessage());
             }
 
-            if (!exit) writer.println(introduction);
+            if (!exit) output.write(introduction);
         }
-        reader.close();
+        input.close();
     }
 
     private String makeIntroduction() {
@@ -68,20 +60,20 @@ public class CalculatorService {
             sb.append(datum).append("\n");
         }
         if (data.size() == 0)
-            writer.println("> 조회할 데이터가 없습니다");
+            output.write("> 조회할 데이터가 없습니다");
         else {
-            writer.println(sb);
+            output.write(sb.toString());
         }
     }
 
     private void calculate() {
-        String expression = reader.nextLine();
+        String expression = input.readLine();
         String answer = calculator.calculate(expression);
-        writer.println(answer);
+        output.write(answer);
     }
 
     private void exit() {
-        writer.println("> 계산기 프로젝트를 종료합니다");
+        output.write("> 계산기 프로젝트를 종료합니다");
         exit = true;
     }
 }

@@ -1,13 +1,15 @@
 package calculator.service;
 
 import calculator.domain.*;
+import calculator.io.ConsoleInput;
+import calculator.io.ConsoleOutput;
+import calculator.io.Input;
+import calculator.io.Output;
 import calculator.repository.MapCalculatorRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static calculator.domain.Command.*;
 
@@ -28,14 +30,16 @@ public class BaseCalculatorServiceTest {
         String EXPRESSION = "1+1";
         String CALCULATION_RESULT = "1+1 = 2";
 
-        Calculator calculator = new BaseCalculator(new MapCalculatorRepository());
-        calculator.calculate(EXPRESSION);
-
         System.setIn(new ByteArrayInputStream((GETALLDATA.getCode() + "\n" + EXIT.getCode() + "\n").getBytes()));
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
+        Input input = new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)));
+        Output output = new ConsoleOutput(new BufferedWriter(new OutputStreamWriter(System.out)));
+        Calculator calculator = new BaseCalculator(new MapCalculatorRepository());
+        calculator.calculate(EXPRESSION);
+
+        CalculatorService calculatorService = new CalculatorService(calculator, input, output);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO() + LEN_OF_CMD, LEN_OF_INTRO() + LEN_OF_CMD + CALCULATION_RESULT.length() + 2).trim();
@@ -52,7 +56,10 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
+        Input input = new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)));
+        Output output = new ConsoleOutput(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+        CalculatorService calculatorService = new CalculatorService(calculator, input, output);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO() + LEN_OF_CMD, LEN_OF_INTRO() + LEN_OF_CMD + GETALLDATA_NO_DATA_TO_GET.length() + 2).trim();
@@ -69,11 +76,14 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
+        Input input = new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)));
+        Output output = new ConsoleOutput(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+        CalculatorService calculatorService = new CalculatorService(calculator, input, output);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO() + LEN_OF_CMD, LEN_OF_INTRO() + LEN_OF_CMD + 4).trim();
-        Assertions.assertThat(String.valueOf(ANSWER_OF_ADD_N_MIN)).isEqualTo(answer);
+        Assertions.assertThat(ANSWER_OF_ADD_N_MIN).isEqualTo(answer);
     }
 
     @Test
@@ -86,7 +96,10 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
+        Input input = new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)));
+        Output output = new ConsoleOutput(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+        CalculatorService calculatorService = new CalculatorService(calculator, input, output);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO() + LEN_OF_CMD, LEN_OF_INTRO() + LEN_OF_CMD + CALCULATE_DIV_BY_0.length() + 2).trim();
@@ -102,7 +115,10 @@ public class BaseCalculatorServiceTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
+        Input input = new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)));
+        Output output = new ConsoleOutput(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+        CalculatorService calculatorService = new CalculatorService(calculator, input, output);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO() + LEN_OF_CMD).trim();
@@ -116,11 +132,14 @@ public class BaseCalculatorServiceTest {
 
         Calculator calculator = new BaseCalculator(new MapCalculatorRepository());
 
-        System.setIn(new ByteArrayInputStream((wrongCommand + "\n").getBytes()));
+        System.setIn(new ByteArrayInputStream((wrongCommand + "\n" + EXIT.getCode() + "\n").getBytes()));
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        CalculatorService calculatorService = new CalculatorService(calculator, System.in, System.out);
+        Input input = new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)));
+        Output output = new ConsoleOutput(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+        CalculatorService calculatorService = new CalculatorService(calculator, input, output);
         calculatorService.run();
 
         String answer = out.toString().substring(LEN_OF_INTRO(), LEN_OF_INTRO() + WRONG_COMMAND.length() + 2).trim();
