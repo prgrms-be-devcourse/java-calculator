@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import calculator.exception.DividedByZeroException;
-import calculator.exception.IllegalOperatorException;
+import calculator.exception.InvalidOperatorException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,13 +35,13 @@ public enum Operator {
     }
 
     public static Operator getOperator(char operator) {
-        if (!operators.containsKey(operator)) throw new IllegalOperatorException();
+        if (!operators.containsKey(operator)) throw new InvalidOperatorException();
         return operators.get(operator);
     }
 
     public static int getPriority(char operator) {
         if ('(' == operator || operator == ')') return Integer.MAX_VALUE;
-        else if (!operators.containsKey(operator)) throw new IllegalOperatorException();
+        else if (!operators.containsKey(operator)) throw new InvalidOperatorException();
         return operators.get(operator).priority.order;
     }
 

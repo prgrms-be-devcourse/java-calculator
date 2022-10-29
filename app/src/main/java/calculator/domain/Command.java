@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.exception.NoCommandException;
+import calculator.exception.InvalidCommandException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public enum Command {
     }
 
     public static Command getCommand(String command) {
-        if (!commands.containsKey(command)) throw new NoCommandException();
+        if (!commands.containsKey(command)) throw new InvalidCommandException();
         return commands.get(command);
     }
 
