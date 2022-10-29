@@ -1,10 +1,10 @@
 package calculator.domain;
 
-public class CalculationResult {
+public class CalculationResultHistory {
     private String expression;
     private String answer;
 
-    public CalculationResult(String expression, String answer){
+    public CalculationResultHistory(String expression, String answer){
         this.expression = expression;
         this.answer = answer;
     }

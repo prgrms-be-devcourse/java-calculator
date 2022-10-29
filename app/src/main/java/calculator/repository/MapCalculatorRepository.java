@@ -1,6 +1,6 @@
 package calculator.repository;
 
-import calculator.domain.CalculationResult;
+import calculator.domain.CalculationResultHistory;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ public class MapCalculatorRepository implements CalculatorRepository {
     }
 
     @Override
-    public void save(CalculationResult result) {
+    public void save(CalculationResultHistory result) {
         repository.put(result.getExpression(), result.getAnswer());
     }
 
