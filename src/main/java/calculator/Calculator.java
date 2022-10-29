@@ -10,7 +10,7 @@ import calculator.validator.Validator;
 
 public abstract class Calculator implements Runnable {
 	Input input;
-	Output output;
+	Output<FormulaResult> output;
 	Operation operation;
 	Repository<FormulaResult, String> repository;
 	Validator validator;
