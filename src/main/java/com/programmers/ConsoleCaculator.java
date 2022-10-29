@@ -39,9 +39,13 @@ public class ConsoleCaculator {
                 exitLogic();
             }
             default -> {
-                console.showError(new Exception("잘못된 입력입니다.[1,2,3]중 1개를 입력해 주세요"));
+                wrongInputLogic();
             }
         }
+    }
+
+    private void wrongInputLogic() {
+        console.showError(new Exception("잘못된 입력입니다.[1,2,3]중 1개를 입력해 주세요"));
     }
 
     private void recordLogic() {
