@@ -34,7 +34,7 @@
 2. 때문에 이 repo를 fork한 뒤
 3. 여러분의 개인 Repo에 작업하며
 4. 이 Repo에 PR을 보내어 멘토의 코드 리뷰와 피드백을 받으세요.
-
+  
 ### Branch 명명 규칙 + 팀의 PR규칙 정하기
 1. 여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
 2. prgrms-be-devcourse/spring-board 레포로 PR시 branch는 gituser_id을 적어주세요 :)
