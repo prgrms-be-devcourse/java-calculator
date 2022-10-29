@@ -6,7 +6,7 @@ import java.util.List;
 public class StringParse implements Parse {
 
 	@Override
-	public String parse(String s) {
+	public String parseBlank(String s) {
 		return s.trim().replace(" ", "");
 	}
 
@@ -14,5 +14,4 @@ public class StringParse implements Parse {
 	public List<String> toList(String s) {
 		return Arrays.asList(s.split("(?=[+/*-])|(?<=[+/*-])"));
 	}
-
 }
