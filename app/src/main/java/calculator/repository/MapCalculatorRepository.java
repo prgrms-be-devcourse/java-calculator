@@ -24,8 +24,6 @@ public class MapCalculatorRepository implements CalculatorRepository {
 
     @Override
     public Optional<String> getResultFromExpression(String expression) {
-        if (repository.containsKey(expression))
-            return Optional.of(repository.get(expression));
-        else return Optional.empty();
+        return Optional.ofNullable(repository.get(expression));
     }
 }
