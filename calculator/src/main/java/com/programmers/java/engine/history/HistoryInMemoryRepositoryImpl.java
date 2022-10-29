@@ -9,8 +9,12 @@ public class HistoryInMemoryRepositoryImpl implements HistoryRepository{
     private History history = new History();
 
     @Override
-    public void save(Equation equation) {
-        history.addEquation(equation.getExpression(), equation.getAnswer());
+    public Equation save(Equation equation) {
+        if (history.isNew(equation)) {
+            history.addEquation(equation.getExpression(), equation.getAnswer());
+        }
+
+        return equation;
     }
 
     @Override

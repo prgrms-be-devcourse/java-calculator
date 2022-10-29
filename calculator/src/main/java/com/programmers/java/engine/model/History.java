@@ -32,4 +32,11 @@ public class History {
         return equationList;
     }
 
+    public boolean isNew(Equation equation) {
+        if (equations.containsKey(equation)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
