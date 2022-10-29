@@ -2,10 +2,13 @@ package com.programmers.calculator.core;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Expression {
 
     private final String expressionString;
+
+    private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     public Expression(String expressionString) {
         validate(expressionString);
@@ -27,11 +30,8 @@ public class Expression {
 
     private void validateExpressionRule(List<String> expressionSplitList) {
         validateExpressionStartWithNumber(expressionSplitList);
-
         validateExpressionEndWithNumber(expressionSplitList);
-
         validateExpressionLengthOdd(expressionSplitList);
-
         validateExpressionIndex(expressionSplitList);
     }
 
@@ -55,7 +55,7 @@ public class Expression {
     }
 
     private void validateExpressionEndWithNumber(List<String> expressionSplitList) {
-        if (!isNumber(expressionSplitList.get(expressionSplitList.size() - 1)) {
+        if (!isNumber(expressionSplitList.get(expressionSplitList.size() - 1))) {
             throw new IllegalArgumentException("마지막 인덱스의 피연산자가 숫자가 아닙니다");
         }
     }
@@ -73,12 +73,7 @@ public class Expression {
     }
 
     private boolean isNumber(String value) {
-        try {
-            Double.parseDouble(value);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return pattern.matcher(value).matches();
     }
 
     private void validateBlack(String expressionString) {
@@ -86,4 +81,5 @@ public class Expression {
             throw new IllegalArgumentException("입력값이 비어있습니다.");
         }
     }
+
 }
