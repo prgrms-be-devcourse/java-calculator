@@ -16,11 +16,4 @@ public class Record {
         this.equations = equations;
     }
 
-    public boolean isEmpty(Record record) {
-        if (record.getEquations().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
 }

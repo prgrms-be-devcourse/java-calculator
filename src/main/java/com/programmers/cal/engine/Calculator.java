@@ -1,5 +1,6 @@
 package com.programmers.cal.engine;
 
+import com.programmers.cal.engine.exception.NoRecordException;
 import com.programmers.cal.engine.exit.Exit;
 import com.programmers.cal.engine.io.Input;
 import com.programmers.cal.engine.io.MenuType;
@@ -57,12 +58,11 @@ public class Calculator {
     }
 
     private void printRecordProcess() {
-        Record record = repository.findAll();
-
-        if (record.isEmpty(record)) {
-            output.printNoRecord();
-        } else {
+        try {
+            Record record = repository.findAll();
             output.printRecord(record);
+        } catch (NoRecordException e) {
+            output.printNoRecord();
         }
     }
 

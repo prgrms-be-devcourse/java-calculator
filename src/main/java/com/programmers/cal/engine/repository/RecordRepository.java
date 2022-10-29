@@ -1,5 +1,6 @@
 package com.programmers.cal.engine.repository;
 
+import com.programmers.cal.engine.exception.NoRecordException;
 import com.programmers.cal.engine.model.Equation;
 import com.programmers.cal.engine.model.InputData;
 import com.programmers.cal.engine.model.Record;
@@ -20,6 +21,10 @@ public class RecordRepository implements Repository {
 
     @Override
     public Record findAll() {
+        if(map == null || map.isEmpty()){
+            throw new NoRecordException();
+        }
+
         List<Equation> recordList = map.values().stream()
                 .collect(Collectors.toList());
 
