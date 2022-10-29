@@ -1,5 +1,6 @@
 package com.programmers.calculator.domain;
 
+import com.programmers.calculator.repository.IdGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,8 @@ class CalculateHistoryTest {
         String history = expressionStr + " = " + result;
 
         //when
-        CalculateHistory calculateHistory = new CalculateHistory(expressionStr, 2);
+        CalculateHistory calculateHistory = new CalculateHistory(IdGenerator.getInstance()
+            .generateId(), expressionStr, 2);
 
         //then
         assertEquals(history, calculateHistory.getHistory());

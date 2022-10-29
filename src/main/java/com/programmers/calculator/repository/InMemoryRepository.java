@@ -13,10 +13,7 @@ public class InMemoryRepository implements Repository<Long, CalculateHistory> {
 
     @Override
     public CalculateHistory save(CalculateHistory entity) {
-        Long id = IdGenerator.getInstance().generateId();
-
-        entity.setId(id);
-        database.put(id, entity);
+        database.put(entity.getId(), entity);
         return entity;
     }
 

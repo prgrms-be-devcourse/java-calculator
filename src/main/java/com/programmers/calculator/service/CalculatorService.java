@@ -5,6 +5,7 @@ import com.programmers.calculator.controller.io.Response;
 import com.programmers.calculator.core.Expression;
 import com.programmers.calculator.core.CalculatorProcessor;
 import com.programmers.calculator.domain.CalculateHistory;
+import com.programmers.calculator.repository.IdGenerator;
 import com.programmers.calculator.repository.Repository;
 import com.programmers.calculator.util.DecimalUtil;
 
@@ -23,11 +24,12 @@ public class CalculatorService {
     }
 
     public Response process(Expression expression) {
-        Number result = calculatorProcessor.calculate(expression);
+        Number calculateResult = calculatorProcessor.calculate(expression);
 
         String expressionString = expression.getExpressionString();
 
-        CalculateHistory calculateHistory = new CalculateHistory(expressionString, result);
+        CalculateHistory calculateHistory =
+            new CalculateHistory(IdGenerator.getInstance().generateId(), expressionString, calculateResult);
 
         CalculateHistory savedHistory = repository.save(calculateHistory);
 
@@ -42,9 +44,9 @@ public class CalculatorService {
         }
 
         String result = calculateHistories.stream()
-                .sorted(Comparator.comparingLong(CalculateHistory::getId))
-                .map(CalculateHistory::getHistory)
-                .collect(Collectors.joining("\n"));
+            .sorted(Comparator.comparingLong(CalculateHistory::getId))
+            .map(CalculateHistory::getHistory)
+            .collect(Collectors.joining("\n"));
 
         return new ConsoleResponse(result);
     }

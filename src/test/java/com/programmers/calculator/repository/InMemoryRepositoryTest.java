@@ -27,8 +27,7 @@ class InMemoryRepositoryTest {
         //given
         String expression = "1 + 1";
         Number result = 2;
-        CalculateHistory calculateHistory = new CalculateHistory(expression, result);
-
+        CalculateHistory calculateHistory = new CalculateHistory(IdGenerator.getInstance().generateId(), expression, result);
         //when
         CalculateHistory savedCalculateHistory = inMemoryRepository.save(calculateHistory);
 
@@ -48,7 +47,7 @@ class InMemoryRepositoryTest {
         //given
         String expression = "1 + 1";
         Number result = 2;
-        CalculateHistory calculateHistory = new CalculateHistory(expression, result);
+        CalculateHistory calculateHistory = new CalculateHistory(IdGenerator.getInstance().generateId(), expression, result);
 
         //when
         CalculateHistory savedCalculateHistory = inMemoryRepository.save(calculateHistory);
@@ -67,7 +66,7 @@ class InMemoryRepositoryTest {
         //given
         String expression = "1 + 1";
         Number result = 2;
-        CalculateHistory calculateHistory = new CalculateHistory(expression, result);
+        CalculateHistory calculateHistory = new CalculateHistory(IdGenerator.getInstance().generateId(), expression, result);
 
         //when
         CalculateHistory savedCalculateHistory = inMemoryRepository.save(calculateHistory);
@@ -94,9 +93,9 @@ class InMemoryRepositoryTest {
         String expressionStr3 = "3 * 3 / 3";
         Number result3 = 3;
 
-        inMemoryRepository.save(new CalculateHistory(expressionStr1, result1));
-        inMemoryRepository.save(new CalculateHistory(expressionStr2, result2));
-        inMemoryRepository.save(new CalculateHistory(expressionStr3, result3));
+        inMemoryRepository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr1, result1));
+        inMemoryRepository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr2, result2));
+        inMemoryRepository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr3, result3));
 
         //when
         List<CalculateHistory> calculateHistories = inMemoryRepository.findAll();

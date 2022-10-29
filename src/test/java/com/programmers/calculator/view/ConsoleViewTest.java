@@ -6,6 +6,7 @@ import com.programmers.calculator.controller.io.ConsoleRequest;
 import com.programmers.calculator.controller.io.ConsoleResponse;
 import com.programmers.calculator.controller.io.Request;
 import com.programmers.calculator.domain.CalculateHistory;
+import com.programmers.calculator.repository.IdGenerator;
 import com.programmers.calculator.repository.InMemoryRepository;
 import com.programmers.calculator.repository.Repository;
 import com.programmers.calculator.service.CalculatorService;
@@ -110,8 +111,8 @@ class ConsoleViewTest {
         String expressionStr2 = "2 * 2 + 5 + 5";
         Number result2 = 14;
 
-        repository.save(new CalculateHistory(expressionStr1, result1));
-        repository.save(new CalculateHistory(expressionStr2, result2));
+        repository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr1, result1));
+        repository.save(new CalculateHistory(IdGenerator.getInstance().generateId(), expressionStr2, result2));
 
         //when
         consoleView.show();

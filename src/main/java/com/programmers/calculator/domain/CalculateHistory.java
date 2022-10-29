@@ -4,22 +4,19 @@ import com.programmers.calculator.util.DecimalUtil;
 
 public class CalculateHistory {
 
-    private Long id;
+    private final Long id;
 
-    private String history;
+    private final String history;
 
-    private String expression;
+    private final String expression;
 
-    private Number result;
+    private final Number result;
 
-    public CalculateHistory(String expression, Number result) {
+    public CalculateHistory(Long id, String expression, Number result) {
+        this.id = id;
         this.expression = expression;
         this.result = result;
         this.history = expression + " = " + DecimalUtil.formatToString(result);
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getHistory() {
