@@ -4,6 +4,7 @@ import calculator.exception.IllegalOperatorException;
 import calculator.repository.CalculatorRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Stack;
 
 public class BaseCalculator implements Calculator {
@@ -22,6 +23,12 @@ public class BaseCalculator implements Calculator {
     public String calculate(String expression) throws RuntimeException {
         Stack<Integer> stack = new Stack<>();
         expression = expressionFormat(expression);
+
+        Optional<String> history = calculatorRepository.getResultFromExpression(expression);
+        if (history.isPresent()) {
+            return history.get();
+        }
+
         String postFix = transToPostfix(expression);
 
         char[] array = postFix.toCharArray();

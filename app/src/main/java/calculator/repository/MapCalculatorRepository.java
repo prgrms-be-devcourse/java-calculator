@@ -21,4 +21,11 @@ public class MapCalculatorRepository implements CalculatorRepository {
     public List<String> getAll() {
         return repository.entrySet().stream().map(e -> e.getKey() + " = " + e.getValue()).toList();
     }
+
+    @Override
+    public Optional<String> getResultFromExpression(String expression) {
+        if (repository.containsKey(expression))
+            return Optional.of(repository.get(expression));
+        else return Optional.empty();
+    }
 }
