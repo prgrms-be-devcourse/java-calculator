@@ -5,19 +5,17 @@ public class Verification {
   public boolean verify(String input) {
 
     String[] split = input.split(" ");
-    String operation = "+-*/";
-    String num = "^[0-9]*$";
-    boolean flag = true;
+    final String OPERATION = "+-*/";
+    final String NUM = "^[0-9]*$";
 
     for (int i = 0; i < split.length; i++) {
-      if (!((i % 2 == 0 && split[i].matches(num)) ||
-          (i % 2 == 1 && operation.contains(split[i]))) ||
-          operation.contains(split[split.length - 1])) {
-        flag = false;
-        break;
+      if (!((i % 2 == 0 && split[i].matches(NUM)) ||
+          (i % 2 == 1 && OPERATION.contains(split[i]))) ||
+          OPERATION.contains(split[split.length - 1])) {
+        return false;
       }
     }
-    return flag;
+    return true;
   }
 
 }
