@@ -1,18 +1,18 @@
 package com.programmers.calculator.core;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.List;
 
 public class CalculatorProcessor {
 
     public Number calculate(Expression expression) {
-        String[] expressionArray = expression.expressionSplitArray();
+        List<String> expressionSplitList = expression.expressionSplitList();
 
         Deque<String> deque = new ArrayDeque<>();
 
-        Iterator<String> iterator = Arrays.stream(expressionArray).iterator();
+        Iterator<String> iterator = expressionSplitList.iterator();
 
         while (iterator.hasNext()) {
             String inputStr = iterator.next();

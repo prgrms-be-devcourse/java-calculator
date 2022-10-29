@@ -1,5 +1,8 @@
 package com.programmers.calculator.core;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Expression {
 
     private final String expressionString;
@@ -9,8 +12,8 @@ public class Expression {
         this.expressionString = expressionString;
     }
 
-    public String[] expressionSplitArray() {
-        return expressionString.split(" ");
+    public List<String> expressionSplitList() {
+        return Arrays.asList(expressionString.split(" "));
     }
 
     public String getExpressionString() {

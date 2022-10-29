@@ -1,5 +1,7 @@
 package com.programmers.calculator.core;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -93,11 +95,13 @@ class ExpressionTest {
         Expression expression = new Expression(expressionStr);
 
         //then
-        String[] expressionSplitArray = expression.expressionSplitArray();
+        List<String> expressionSplitArray = expression.expressionSplitList();
 
-        String[] expressionStrSplit = expressionStr.split(" ");
+        List<String> expressionStrSplit = Arrays.asList(expressionStr.split(" "));
 
-        assertArrayEquals(expressionStrSplit, expressionSplitArray);
+//        assertArrayEquals(expressionStrSplit, expressionSplitArray);
+
+        assertEquals(expressionStrSplit, expressionSplitArray);
     }
 
     @DisplayName("문자열 반환 테스트 - 정상적으로 생성된다면 입력값 문자열을 리턴한다.")
