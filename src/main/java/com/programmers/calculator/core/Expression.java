@@ -25,7 +25,7 @@ public class Expression {
 
     private void validate(String expressionString) {
         validateBlack(expressionString);
-        validateExpressionRule(this.expressionSplitList());
+        validateExpressionRule(Arrays.asList(expressionString.split(" ")));
     }
 
     private void validateExpressionRule(List<String> expressionSplitList) {
