@@ -18,8 +18,8 @@ public class MapCalculatorRepository implements CalculatorRepository {
     }
 
     @Override
-    public List<String> getAll() {
-        return repository.entrySet().stream().map(e -> e.getKey() + " = " + e.getValue()).toList();
+    public List<CalculationResultHistory> getAll() {
+        return repository.entrySet().stream().map(e -> new CalculationResultHistory(e.getKey(), e.getValue())).toList();
     }
 
     @Override

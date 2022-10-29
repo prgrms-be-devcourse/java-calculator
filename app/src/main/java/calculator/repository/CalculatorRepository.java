@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface CalculatorRepository {
     void save(CalculationResultHistory result);
-    List<String> getAll();
+    List<CalculationResultHistory> getAll();
     Optional<String> getResultFromExpression(String expression);
 }

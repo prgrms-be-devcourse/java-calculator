@@ -15,7 +15,7 @@ public class BaseCalculator implements Calculator {
     }
 
     @Override
-    public List<String> getAllData() {
+    public List<CalculationResultHistory> getAllData() {
         return calculatorRepository.getAll();
     }
 

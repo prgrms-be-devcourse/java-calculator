@@ -1,9 +1,11 @@
 package calculator.service;
 
+import calculator.domain.CalculationResultHistory;
 import calculator.domain.Calculator;
 import calculator.domain.Command;
 import calculator.io.Input;
 import calculator.io.Output;
+import calculator.repository.CalculatorRepository;
 
 import java.util.List;
 
@@ -55,11 +57,11 @@ public class CalculatorService {
 
     private void getAllData() {
         StringBuilder sb = new StringBuilder();
-        List<String> data = calculator.getAllData();
-        for (String datum : data) {
-            sb.append(datum).append("\n");
+        List<CalculationResultHistory> histories = calculator.getAllData();
+        for (CalculationResultHistory history : histories) {
+            sb.append(history).append("\n");
         }
-        if (data.size() == 0)
+        if (histories.size() == 0)
             output.write("> 조회할 데이터가 없습니다");
         else {
             output.write(sb.toString());
