@@ -33,8 +33,7 @@ public enum Operator {
         return Arrays.stream(values())
                 .filter(operatorEnum -> operatorEnum.operator.equals(operatorString))
                 .findFirst()
-                .get();
-
+                .orElseThrow(NotValidInputException::new);
     }
 
     public double calculate(double operand1, double operand2) {
