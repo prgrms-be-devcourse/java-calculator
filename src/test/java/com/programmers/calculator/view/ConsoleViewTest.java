@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.programmers.calculator.controller.ConsoleController;
 import com.programmers.calculator.controller.io.ConsoleRequest;
 import com.programmers.calculator.controller.io.ConsoleResponse;
-import com.programmers.calculator.controller.io.Request;
 import com.programmers.calculator.domain.CalculateHistory;
 import com.programmers.calculator.repository.IdGenerator;
 import com.programmers.calculator.repository.InMemoryRepository;
@@ -139,11 +138,10 @@ class ConsoleViewTest {
         consoleView = new ConsoleView(controller, scanner);
 
         //when
-        Request read = consoleView.read();
+        ConsoleRequest read = consoleView.read();
 
         //then
-        assertEquals(input, read.getInput());
-        assertTrue(read instanceof ConsoleRequest);
+        assertEquals(input, read.getExpression());
     }
 
     @DisplayName("write() 테스트 - Response 를 받아 System.out.println 로 출력한다.")

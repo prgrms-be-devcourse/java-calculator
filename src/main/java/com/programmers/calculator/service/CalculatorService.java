@@ -1,14 +1,12 @@
 package com.programmers.calculator.service;
 
 import com.programmers.calculator.controller.io.ConsoleResponse;
-import com.programmers.calculator.controller.io.Response;
-import com.programmers.calculator.core.Expression;
 import com.programmers.calculator.core.CalculatorProcessor;
+import com.programmers.calculator.core.Expression;
 import com.programmers.calculator.domain.CalculateHistory;
 import com.programmers.calculator.repository.IdGenerator;
 import com.programmers.calculator.repository.Repository;
 import com.programmers.calculator.util.DecimalUtil;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +21,7 @@ public class CalculatorService {
         this.repository = repository;
     }
 
-    public Response process(Expression expression) {
+    public ConsoleResponse process(Expression expression) {
         Number calculateResult = calculatorProcessor.calculate(expression);
 
         String expressionString = expression.getExpressionString();
@@ -36,7 +34,7 @@ public class CalculatorService {
         return new ConsoleResponse(DecimalUtil.formatToString(savedHistory.getResult()));
     }
 
-    public Response findAllOrderById() {
+    public ConsoleResponse findAllOrderById() {
         List<CalculateHistory> calculateHistories = repository.findAll();
 
         if (calculateHistories.isEmpty()) {

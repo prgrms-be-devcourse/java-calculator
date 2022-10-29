@@ -1,18 +1,17 @@
 package com.programmers.calculator.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.programmers.calculator.controller.io.ConsoleRequest;
-import com.programmers.calculator.controller.io.Response;
+import com.programmers.calculator.controller.io.ConsoleResponse;
 import com.programmers.calculator.core.Expression;
 import com.programmers.calculator.domain.CalculateHistory;
 import com.programmers.calculator.repository.InMemoryRepository;
 import com.programmers.calculator.service.CalculatorService;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("ConsoleController 테스트")
 class ConsoleControllerTest {
@@ -44,7 +43,7 @@ class ConsoleControllerTest {
         calculatorService.process(new Expression(expressionStr3));
 
         //when
-        Response response = consoleController.inquiry();
+        ConsoleResponse response = consoleController.inquiry();
 
         //then
         assertEquals(
@@ -58,7 +57,7 @@ class ConsoleControllerTest {
     @Test
     void inquiryReturnNoStoredDataMessage() {
         // given & when
-        Response response = consoleController.inquiry();
+        ConsoleResponse response = consoleController.inquiry();
 
         //then
         assertEquals("저장된 데이터가 없습니다.", response.result());
@@ -73,7 +72,7 @@ class ConsoleControllerTest {
         String calculateResult1 = "1 + 1 + 1 = 3";
 
         //when
-        Response response = consoleController.calculate(new ConsoleRequest(expressionStr1));
+        ConsoleResponse response = consoleController.calculate(new ConsoleRequest(expressionStr1));
         List<CalculateHistory> calculateHistories = inMemoryRepository.findAll();
 
         //then

@@ -1,6 +1,6 @@
 package com.programmers.calculator.controller.io;
 
-public class ConsoleResponse implements Response {
+public class ConsoleResponse {
 
     private final String result;
 

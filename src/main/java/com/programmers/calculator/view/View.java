@@ -1,14 +1,14 @@
 package com.programmers.calculator.view;
 
-import com.programmers.calculator.controller.io.Request;
-import com.programmers.calculator.controller.io.Response;
+import com.programmers.calculator.controller.io.ConsoleRequest;
+import com.programmers.calculator.controller.io.ConsoleResponse;
 
 public interface View {
 
     void show();
 
-    Request read();
+    ConsoleRequest read();
 
-    void write(Response response);
+    void write(ConsoleResponse response);
 
 }

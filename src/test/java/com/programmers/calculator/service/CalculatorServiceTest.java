@@ -1,17 +1,16 @@
 package com.programmers.calculator.service;
 
-import com.programmers.calculator.controller.io.Response;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import com.programmers.calculator.controller.io.ConsoleResponse;
 import com.programmers.calculator.core.Expression;
 import com.programmers.calculator.domain.CalculateHistory;
 import com.programmers.calculator.repository.InMemoryRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @DisplayName("CalculatorServiceTest")
 class CalculatorServiceTest {
@@ -35,7 +34,7 @@ class CalculatorServiceTest {
         Expression expression = new Expression(expressionStr);
 
         //when
-        Response process = calculatorService.process(expression);
+        ConsoleResponse process = calculatorService.process(expression);
         List<CalculateHistory> calculateHistories = inMemoryRepository.findAll();
 
         //then
@@ -62,7 +61,7 @@ class CalculatorServiceTest {
         calculatorService.process(new Expression(expressionStr3));
 
         //when
-        Response response = calculatorService.findAllOrderById();
+        ConsoleResponse response = calculatorService.findAllOrderById();
 
         //then
         assertEquals(
@@ -76,7 +75,7 @@ class CalculatorServiceTest {
     @Test
     void findAllNotData() {
         // given & when
-        Response response = calculatorService.findAllOrderById();
+        ConsoleResponse response = calculatorService.findAllOrderById();
 
         //then
         assertEquals("저장된 데이터가 없습니다.", response.result());

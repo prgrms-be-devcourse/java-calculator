@@ -1,16 +1,15 @@
 package com.programmers.calculator.controller.io;
 
-public class ConsoleRequest implements Request {
+public class ConsoleRequest {
 
-    private final String input;
+    private final String expression;
 
-    public ConsoleRequest(String input) {
-        this.input = input;
+    public ConsoleRequest(String expression) {
+        this.expression = expression;
     }
 
-    @Override
-    public String getInput() {
-        return this.input;
+    public String getExpression() {
+        return this.expression;
     }
 
 }

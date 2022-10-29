@@ -16,7 +16,7 @@ class ConsoleRequestTest {
         //when
         ConsoleRequest consoleRequest = new ConsoleRequest(inputValue);
         //then
-        assertEquals(inputValue, consoleRequest.getInput());
+        assertEquals(inputValue, consoleRequest.getExpression());
     }
 
 }
