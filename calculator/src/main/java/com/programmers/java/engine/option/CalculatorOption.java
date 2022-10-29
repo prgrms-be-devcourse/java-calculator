@@ -46,7 +46,7 @@ public class CalculatorOption implements Option {
         console.printAnswer(answer);
 
         return Equation.builder()
-                .expression(expression)
+                .expression(expression.getStringExpression())
                 .answer(answer)
                 .build();
     }

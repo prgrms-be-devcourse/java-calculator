@@ -6,10 +6,16 @@ import lombok.Getter;
 @Getter
 public class Answer {
     private Double value;
+    private String stringValue;
 
     @Builder
     public Answer(Double value) {
         this.value = value;
+        if (checkInt()) {
+            stringValue = String.valueOf(value.longValue());
+        } else {
+            stringValue = String.format("%.3f", value);
+        }
     }
 
     public boolean checkInt() {

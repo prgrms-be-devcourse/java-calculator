@@ -24,7 +24,8 @@ public class App {
     private static Menu menu = new Menu();
     private static Option option;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+
         while (true) {
             // input option
             String inputOption = console.input(
@@ -56,6 +57,9 @@ public class App {
             }
         }
     }
+
+
+
 
     private static MenuType makeMenu(String inputOption) {
         MenuType menuType;

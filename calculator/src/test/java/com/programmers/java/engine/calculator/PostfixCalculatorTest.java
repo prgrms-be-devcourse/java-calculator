@@ -141,14 +141,20 @@ class PostfixCalculatorTest {
     @Test
     public void 연산_테스트() {
         //given
-        List<String> ex1 = List.of("14", "2.0", "3.1", "*", "+", "10", "2", "/", "-");
-        List<String> ex2 = List.of("3", "-2", "*", "5", "-");
+        List<String> tokens1 = List.of("14", "2.0", "3.1", "*", "+", "10", "2", "/", "-");
+        Expression expression1 = Expression.builder()
+                .tokens(tokens1)
+                .build();
+        List<String> tokens2 = List.of("3", "-2", "*", "5", "-");
+        Expression expression2 = Expression.builder()
+                .tokens(tokens2)
+                .build();
         Double ans1 = 15.2;
         Double ans2 = -11.0;
 
         //when
-        Answer result1 = calculator.calculate(ex1);
-        Answer result2 = calculator.calculate(ex2);
+        Answer result1 = calculator.calculate(expression1);
+        Answer result2 = calculator.calculate(expression2);
 
         //then
         System.out.println(result1.getValue());

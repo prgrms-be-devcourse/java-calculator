@@ -3,10 +3,8 @@ package com.programmers.java.engine.option;
 
 import com.programmers.java.application.Console;
 import com.programmers.java.engine.history.HistoryRepository;
-import com.programmers.java.engine.model.Equation;
+import com.programmers.java.engine.model.EquationRecord;
 import lombok.AllArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 public class HistoryOption implements Option {
@@ -15,8 +13,8 @@ public class HistoryOption implements Option {
 
     @Override
     public void runOption() {
-        List<Equation> historyRepositoryAll = historyRepository.findAll();
+        EquationRecord record = historyRepository.findAll();
 
-        console.printHistory(historyRepositoryAll);
+        console.printHistory(record);
     }
 }

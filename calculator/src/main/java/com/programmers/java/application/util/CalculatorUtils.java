@@ -1,5 +1,7 @@
 package com.programmers.java.application.util;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static com.programmers.java.application.config.Constant.ADD_MINUS_OPERATOR_REGEX;
@@ -10,8 +12,8 @@ public class CalculatorUtils {
         return input.replace(" ", "");
     }
 
-    public static String[] numberOperatorTokenizer(String str) {
-        return str.split(SPLIT_TOKENIZER_REGEX);
+    public static List<String> numberOperatorTokenizer(String str) {
+        return Arrays.asList(str.split(SPLIT_TOKENIZER_REGEX));
     }
 
     public static boolean isMatchRegex(String token, String regex) {

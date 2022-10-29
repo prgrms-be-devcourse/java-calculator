@@ -2,6 +2,7 @@ package com.programmers.java.application.config;
 
 import com.programmers.java.application.exception.*;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static com.programmers.java.application.config.Constant.*;
@@ -37,7 +38,7 @@ public class TokenValidator implements Validator {
     }
 
     @Override
-    public void validateNumberOperator(String[] tokens) {
+    public void validateNumberOperator(List<String> tokens) {
         for (String token : tokens) {
             if (!Pattern.matches(NUMBER_OPERATOR_REGEX, token)) {
                 throw new UnsupportedNumberOperatorException();
@@ -46,7 +47,7 @@ public class TokenValidator implements Validator {
     }
 
     @Override
-    public void validateOutBoundNumber(String[] tokens) {
+    public void validateOutBoundNumber(List<String> tokens) {
         for (String token : tokens) {
             if (!Pattern.matches(AVAILABLE_VALUE_REGEX, token)) {
                 throw new OutboundMaxValueException();
@@ -70,7 +71,7 @@ public class TokenValidator implements Validator {
     }
 
     @Override
-    public void validateTokens(String[] tokens) {
+    public void validateTokens(List<String> tokens) {
         // validate: 숫자와 연산자 이외에 문자가 있는 경우
         validateNumberOperator(tokens);
 

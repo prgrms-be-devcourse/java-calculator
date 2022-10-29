@@ -1,9 +1,8 @@
 package com.programmers.java.engine.history;
 
 import com.programmers.java.engine.model.Equation;
+import com.programmers.java.engine.model.EquationRecord;
 import com.programmers.java.engine.model.History;
-
-import java.util.List;
 
 public class HistoryInMemoryRepositoryImpl implements HistoryRepository{
 
@@ -15,7 +14,9 @@ public class HistoryInMemoryRepositoryImpl implements HistoryRepository{
     }
 
     @Override
-    public List<Equation> findAll() {
-        return history.mapToList();
+    public EquationRecord findAll() {
+        return EquationRecord.builder()
+                .record(history.mapToList())
+                .build();
     }
 }

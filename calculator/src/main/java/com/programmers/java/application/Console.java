@@ -3,9 +3,8 @@ package com.programmers.java.application;
 import com.programmers.java.engine.io.Input;
 import com.programmers.java.engine.io.Output;
 import com.programmers.java.engine.model.Answer;
-import com.programmers.java.engine.model.Equation;
+import com.programmers.java.engine.model.EquationRecord;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -24,26 +23,11 @@ public class Console implements Input, Output {
 
     @Override
     public void printAnswer(Answer answer) {
-        if (answer.checkInt()) {
-            System.out.printf("%d\n\n", answer.getValue().intValue());
-        } else {
-            System.out.printf("%.3f\n\n", answer.getValue());
-        }
+        System.out.println(answer.getStringValue() + "\n");
     }
 
     @Override
-    public void printHistory(List<Equation> history) {
-        StringBuilder stringBuilder = new StringBuilder("\n");
-
-        for (Equation equation : history) {
-            stringBuilder.append(equation.getExpression().getOriginExpression()).append(" = ");
-            if (equation.getAnswer().checkInt()) {
-                stringBuilder.append(equation.getAnswer().getValue().intValue()).append("\n");
-            } else {
-                stringBuilder.append(equation.getAnswer().getValue()).append("\n");
-            }
-        }
-
-        System.out.println(stringBuilder);
+    public void printHistory(EquationRecord record) {
+        System.out.println(record.toString());
     }
 }

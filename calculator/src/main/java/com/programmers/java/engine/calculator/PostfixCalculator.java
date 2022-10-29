@@ -23,17 +23,18 @@ public class PostfixCalculator implements Calculator {
     public Answer getAnswer(Expression expression) {
 
         // 후위연산으로 식 변경
-        List<String> postTokens = postfixUtils.makePostfix(expression);
+        Expression postfixExpression = postfixUtils.makePostfix(expression);
 
         // 식 계산
-        Answer result = calculate(postTokens);
+        Answer result = calculate(postfixExpression);
 
         return result;
     }
 
     @Override
-    public Answer calculate(List<String> postTokens) {
-        Stack<Double> stack = new Stack<>();
+    public Answer calculate(Expression postfixExpression) {
+        List<String> postTokens = postfixExpression.getTokens();
+        Deque<Double> stack = new LinkedList<>();
         Double lhs = 0.0;
         Double rhs = 0.0;
 
@@ -54,65 +55,19 @@ public class PostfixCalculator implements Calculator {
                 .build();
     }
 
-    private List<String> combineUnaryOperator(List<String> tokenList) {
-        List<String> expressionTokenList = new LinkedList<>();
 
-        String bufferToken = null;
-        String firstToken = tokenList.get(0);
-
-        expressionTokenList.add(firstToken);
-        if (firstToken.equals("-")) {
-            expressionTokenList.remove(0);
-            expressionTokenList.add(firstToken + tokenList.get(1));
-        }
-
-        for (int i = 1; i < tokenList.size(); i++) {
-            String curToken = tokenList.get(i);
-            String prevToken = tokenList.get(i - 1);
-
-            if (prevToken.matches(ALL_OPERATOR_REGEX) && curToken.matches(ADD_MINUS_OPERATOR_REGEX)) {
-                String prevPrevToken = tokenList.get(i - 2);
-
-                if (!prevPrevToken.matches(ADD_MINUS_OPERATOR_REGEX)) bufferToken = curToken;
-                else break;
-
-            } else if (bufferToken != null && bufferToken.equals("-")) {
-                expressionTokenList.add(bufferToken + curToken);
-                bufferToken = null;
-            } else {
-                expressionTokenList.add(curToken);
-            }
-        }
-
-        if (firstToken.equals("+")) {
-            expressionTokenList.remove(0);
-        } else if (firstToken.equals("-")) {
-            expressionTokenList.remove(1);
-        }
-
-        return expressionTokenList;
-    }
 
     @Override
     public Expression parseExpression(String inputExpression) throws Exception {
         String nonSpaceExpression = makeNonSpaceString(inputExpression);
 
-        // validate expression
         validator.validateExpression(nonSpaceExpression);
 
-        // 공백 제거
-        // 숫자와 연산자 추출
-        String[] tokens = numberOperatorTokenizer(nonSpaceExpression);
-
-        // validate tokens
-        validator.validateTokens(tokens);
-
-        List<String> tokenList = new ArrayList<>(Arrays.asList(tokens));
-        List<String> expressionTokenList = combineUnaryOperator(tokenList);
-
         return Expression.builder()
-                .tokens(expressionTokenList)
+                .tokens(numberOperatorTokenizer(nonSpaceExpression))
+                .validator(validator)
                 .build();
     }
+
 
 }

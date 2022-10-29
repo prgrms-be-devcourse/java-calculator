@@ -11,16 +11,16 @@ import java.util.Map;
 @NoArgsConstructor
 @Getter
 public class History {
-    private Map<Expression, Answer> equations = new LinkedHashMap<>();
+    private Map<StringExpression, Answer> equations = new LinkedHashMap<>();
 
-    public void addEquation(Expression expression, Answer answer) {
+    public void addEquation(StringExpression expression, Answer answer) {
         equations.put(expression, answer);
     }
 
     public List<Equation> mapToList() {
         List<Equation> equationList = new ArrayList<>();
 
-        for (Map.Entry<Expression, Answer> equation : equations.entrySet()) {
+        for (Map.Entry<StringExpression, Answer> equation : equations.entrySet()) {
             equationList.add(
                     Equation.builder()
                             .expression(equation.getKey())
