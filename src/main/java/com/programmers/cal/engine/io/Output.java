@@ -14,7 +14,7 @@ public interface Output {
 
     void printResult(Answer answer);
 
-    void printExit();
+    void printExit(Message exitMessage);
 
     void printZeroDivision();
 

@@ -35,8 +35,8 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printExit() {
-        System.out.println(Message.EXIT_MESSAGE);
+    public void printExit(Message exitMessage) {
+        System.out.println(exitMessage);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.programmers.cal.engine;
 
 import com.programmers.cal.engine.exception.WrongOrderException;
+import com.programmers.cal.engine.exit.Exit;
 import com.programmers.cal.engine.io.Input;
 import com.programmers.cal.engine.io.MenuType;
 import com.programmers.cal.engine.io.Output;
@@ -24,6 +25,7 @@ public class Calculator implements Runnable {
     private Postfix postfix;
     private Operation operation;
     private Repository repository;
+    private Exit exit;
 
     @Builder
     public Calculator(Input input, Output output, Validator validator, Parser parser,
@@ -54,7 +56,7 @@ public class Calculator implements Runnable {
                         calculateProcess();
                         break;
                     case EXIT:
-                        exitProcess();
+                        output.printExit(exit.getExitMessage());
                         return;
                 }
             } catch (WrongOrderException e) {
@@ -94,10 +96,6 @@ public class Calculator implements Runnable {
         } catch (Exception e) {
             output.printZeroDivision();
         }
-    }
-
-    private void exitProcess() {
-        output.printExit();
     }
 
 }
