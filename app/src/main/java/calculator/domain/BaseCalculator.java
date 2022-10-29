@@ -1,6 +1,6 @@
 package calculator.domain;
 
-import calculator.exception.IllegalOperatorException;
+import calculator.exception.InvalidOperatorException;
 import calculator.repository.CalculatorRepository;
 
 import java.util.List;
@@ -69,7 +69,7 @@ public class BaseCalculator implements Calculator {
                 stack.push(c);
             } else if ('0' <= c && c <= '9')
                 postFix += c;
-            else throw new IllegalOperatorException();
+            else throw new InvalidOperatorException();
         }
 
         while (!stack.isEmpty())
