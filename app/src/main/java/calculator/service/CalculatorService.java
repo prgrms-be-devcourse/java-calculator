@@ -5,7 +5,6 @@ import calculator.domain.Calculator;
 import calculator.domain.Command;
 import calculator.io.Input;
 import calculator.io.Output;
-import calculator.repository.CalculatorRepository;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class CalculatorService {
     private final Calculator calculator;
     private final Input input;
     private final Output output;
-    boolean exit = false;
 
     public CalculatorService(Calculator calculator, Input input, Output output) {
         this.calculator = calculator;
@@ -25,6 +23,7 @@ public class CalculatorService {
     }
 
     public void run() {
+        boolean exit = false;
         String introduction = makeIntroduction();
         System.out.println(introduction);
 
@@ -36,7 +35,10 @@ public class CalculatorService {
                 switch (command) {
                     case GETALLDATA -> getAllData();
                     case CALCULATE -> calculate();
-                    case EXIT -> exit();
+                    case EXIT -> {
+                        exit();
+                        exit = true;
+                    }
                 }
             } catch (RuntimeException e) {
                 output.write("> " + e.getMessage());
@@ -76,6 +78,5 @@ public class CalculatorService {
 
     private void exit() {
         output.write("> 계산기 프로젝트를 종료합니다");
-        exit = true;
     }
 }
