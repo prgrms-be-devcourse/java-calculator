@@ -1,9 +1,9 @@
 package com.programmers.cal.engine;
 
-import com.programmers.cal.engine.exception.WrongOrderException;
 import com.programmers.cal.engine.exit.Exit;
 import com.programmers.cal.engine.io.Input;
 import com.programmers.cal.engine.io.MenuType;
+import com.programmers.cal.engine.io.Message;
 import com.programmers.cal.engine.io.Output;
 import com.programmers.cal.engine.model.*;
 import com.programmers.cal.engine.operation.Operation;
@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Calculator implements Runnable {
+public class Calculator {
 
     private Input input;
     private Output output;
@@ -29,7 +29,7 @@ public class Calculator implements Runnable {
 
     @Builder
     public Calculator(Input input, Output output, Validator validator, Parser parser,
-                      Postfix postfix, Operation operation, Repository repository) {
+                      Postfix postfix, Operation operation, Repository repository, Exit exit) {
         this.input = input;
         this.output = output;
         this.validator = validator;
@@ -37,32 +37,23 @@ public class Calculator implements Runnable {
         this.postfix = postfix;
         this.operation = operation;
         this.repository = repository;
+        this.exit = exit;
     }
 
-    @Override
-    public void run() {
+    public boolean run(MenuType menuType) {
 
-        while (true) {
-            try {
-                output.requestInput();
-                String inputString = input.inputOrder();
-                MenuType menuType = MenuType.getMenuType(inputString);
-
-                switch (menuType) {
-                    case PRINT_RECORD:
-                        printRecordProcess();
-                        break;
-                    case CALCULATE:
-                        calculateProcess();
-                        break;
-                    case EXIT:
-                        output.printExit(exit.getExitMessage());
-                        return;
-                }
-            } catch (WrongOrderException e) {
-                output.printWrongOrder();
-            }
+        switch (menuType) {
+            case PRINT_RECORD:
+                printRecordProcess();
+                break;
+            case CALCULATE:
+                calculateProcess();
+                break;
+            case EXIT:
+                exitProcess();
+                return false;
         }
+        return true;
     }
 
     private void printRecordProcess() {
@@ -96,6 +87,11 @@ public class Calculator implements Runnable {
         } catch (Exception e) {
             output.printZeroDivision();
         }
+    }
+
+    private void exitProcess() {
+        Message exitMessage = exit.getExitMessage();
+        output.printExit(exitMessage);
     }
 
 }
