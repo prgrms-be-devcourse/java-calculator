@@ -1,25 +1,16 @@
 package com.programmers;
 
-import com.programmers.caculation.*;
-import com.programmers.caculation.caculator.PostfixCaculator;
-import com.programmers.caculation.parser.PostfixParser;
-import com.programmers.caculation.toeknizer.NumberOpTokenizerUsingCharArray;
+import com.programmers.caculation.CaculationController;
+import com.programmers.config.AppConfig;
 import com.programmers.io.Console;
 import com.programmers.record.RecordController;
-import com.programmers.repository.HistoryRepository;
-import com.programmers.repository.MemoryRepository;
 
 public class ConsoleCaculator {
     private boolean exitSign = false;
 
-    Console console = new Console();
-    HistoryRepository historyRepository = new MemoryRepository();
-    RecordController recordController = RecordController.builder().historyRepository(historyRepository).build();
-    CaculationController caculationController = CaculationController.builder()
-            .caculateService(new CaculateService(new PostfixCaculator()))
-            .parseService(new ParseService(new PostfixParser()))
-            .historyRepository(historyRepository)
-            .tokenizeService(new TokenizeService(new NumberOpTokenizerUsingCharArray())).build();
+    Console console = AppConfig.myConsole;
+    RecordController recordController = AppConfig.recordController;
+    CaculationController caculationController = AppConfig.caculationController;
 
     public void start() {
         while (!exitSign) {
