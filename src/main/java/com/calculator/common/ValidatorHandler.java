@@ -6,7 +6,7 @@ import static com.calculator.common.ExceptionStatus.*;
 
 public class ValidatorHandler {
 
-    private final String pattern = "^[+\\-*/0-9]*$";
+    private static final String EXPRESSION_PATTERN = "^[+\\-*/()\\d]*$";
 
     /**
      * input type error
@@ -32,7 +32,7 @@ public class ValidatorHandler {
      * num, operator error
      */
     public void inputError(String input) throws BaseException {
-        if (!Pattern.matches(pattern, input)) {
+        if (!Pattern.matches(EXPRESSION_PATTERN, input)) {
             throw new BaseException(NOT_NUM_ERROR);
         }
     }
