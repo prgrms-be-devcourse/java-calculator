@@ -1,13 +1,13 @@
 package calculator;
 
 import calculator.config.AppConfig;
-import calculator.service.CalculatorService;
+import calculator.controller.CalculatorController;
 
 public class App {
 
     public static void main(String[] args) {
         AppConfig appConfig = new AppConfig();
-        CalculatorService calculatorService = appConfig.calculatorService();
+        CalculatorController calculatorService = appConfig.calculatorService();
         calculatorService.run();
     }
 }
