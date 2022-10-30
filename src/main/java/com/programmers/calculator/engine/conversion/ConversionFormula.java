@@ -1,12 +1,16 @@
 package com.programmers.calculator.engine.conversion;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class ConversionFormula implements Conversion {
     private final String NUMBER = "^[0-9]*$";
+    private final Map<String, Integer> symbolMap = new HashMap<>() {{
+        put("(", 0);
+        put("+", 1);
+        put("-", 1);
+        put("*", 2);
+        put("/", 2);
+    }};
 
     @Override
     public List<String> splitFormula(String formula) {
@@ -56,17 +60,7 @@ public class ConversionFormula implements Conversion {
     }
 
     private int priority(String symbol) {
-        switch (symbol) {
-            case "(":
-                return 0;
-
-            case "+":
-            case "-":
-                return 1;
-
-            default:
-                return 2;
-        }
+        return symbolMap.get(symbol);
     }
 
     private boolean isHighPriority(String peekSymbol, String tempSymbol) {
