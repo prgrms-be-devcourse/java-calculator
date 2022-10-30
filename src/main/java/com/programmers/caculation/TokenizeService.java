@@ -7,13 +7,14 @@ import com.programmers.caculation.model.NumberAndOperator;
 import com.programmers.caculation.toeknizer.Tokenizer;
 import lombok.AllArgsConstructor;
 
-import java.util.Collection;
+import java.util.List;
+
 @AllArgsConstructor
 public class TokenizeService implements Service {
     private Tokenizer tokenizer;
     TokenizeResponseDto tokenize(TokenizeRequestDto tokenizeRequestDto) throws Exception{
         String expression = tokenizeRequestDto.value;
-        Collection<NumberAndOperator> tokenizedExpression = tokenizer.tokenize(expression);
+        List<NumberAndOperator> tokenizedExpression = tokenizer.tokenize(expression);
         return TokenizeResponseDto.from(tokenizedExpression);
     }
 }

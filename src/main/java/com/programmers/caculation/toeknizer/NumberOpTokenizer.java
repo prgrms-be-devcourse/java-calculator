@@ -3,7 +3,6 @@ package com.programmers.caculation.toeknizer;
 import com.programmers.caculation.model.NumberAndOperator;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class NumberOpTokenizer implements Tokenizer {
@@ -12,7 +11,7 @@ public class NumberOpTokenizer implements Tokenizer {
     private NumberAndOperator op;
 
     @Override
-    public Collection<NumberAndOperator> tokenize(String expression) throws Exception {
+    public List<NumberAndOperator> tokenize(String expression) throws Exception {
         List<NumberAndOperator> tokenizedInput = new ArrayList<>();
         char[] expressionCharArray = expression.replace(" ", "").toCharArray();
         for (int i = 0; i < expressionCharArray.length; i++) {

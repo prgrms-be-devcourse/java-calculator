@@ -3,12 +3,13 @@ package com.programmers.caculation.dto;
 import com.programmers.caculation.model.NumberAndOperator;
 import lombok.AllArgsConstructor;
 
-import java.util.Collection;
+import java.util.List;
+
 @AllArgsConstructor
 public class TokenizeResponseDto {
-    public final Collection<NumberAndOperator> value;
+    public final List<NumberAndOperator> value;
 
-    public static final TokenizeResponseDto from(Collection<NumberAndOperator> value){
+    public static TokenizeResponseDto from(List<NumberAndOperator> value){
         return new TokenizeResponseDto(value);
     }
 }

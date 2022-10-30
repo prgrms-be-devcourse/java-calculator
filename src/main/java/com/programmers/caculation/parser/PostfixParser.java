@@ -8,7 +8,7 @@ import java.util.*;
 
 public class PostfixParser implements Parser {
     @Override
-    public ParseResponseDto parse(Collection<NumberAndOperator> numOrOp) {
+    public ParseResponseDto parse(List<NumberAndOperator> numOrOp) {
         Stack<Character> operatorStack = new Stack<>();
         List<NumberAndOperator> parseResult = new ArrayList<>();
         for (NumberAndOperator o : numOrOp) {

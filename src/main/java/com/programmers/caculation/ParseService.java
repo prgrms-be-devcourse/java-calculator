@@ -6,12 +6,12 @@ import com.programmers.caculation.model.NumberAndOperator;
 import com.programmers.caculation.parser.Parser;
 import lombok.AllArgsConstructor;
 
-import java.util.Collection;
+import java.util.List;
+
 @AllArgsConstructor
 public class ParseService implements Service {
     private Parser parser;
-    public ParseResponseDto parseRequest(Collection<NumberAndOperator> numOrOp){
-        ParseResponseDto parsedExpression = parser.parse(numOrOp);
-        return parsedExpression;
+    public ParseResponseDto parseRequest(List<NumberAndOperator> numOrOp){
+        return parser.parse(numOrOp);
     }
 }
