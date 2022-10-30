@@ -45,14 +45,15 @@ public class Calculator implements Runnable {
 
                 String result = formula + " = " + calculate.calculate(postfix);
                 storage.save(result);
-
-                System.out.println("결과 : " + result + "\n");
+                output.calculateResult(result);
 
                 continue;
             }
 
             if (userInputMenu.equals(Menu.LOOKUP.toString())) {
-                storage.findAll();
+                output.formulaList(storage.findAll());
+
+                continue;
             }
         }
     }
