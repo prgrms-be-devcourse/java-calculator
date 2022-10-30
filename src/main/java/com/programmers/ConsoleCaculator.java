@@ -21,13 +21,11 @@ public class ConsoleCaculator {
     }
 
     private void excuteByUserInput(String userInput) {
-        switch (userInput) {
-            case "1" -> recordLogic();
-
-            case "2" -> calculationLogic();
-
-            case "3" -> exitLogic();
-
+        Menu inputMenu =Menu.getMenu(userInput);
+        switch (inputMenu) {
+            case RECORD -> recordLogic();
+            case CACULATION -> calculationLogic();
+            case EXIT -> exitLogic();
             default -> wrongInputLogic();
 
         }
