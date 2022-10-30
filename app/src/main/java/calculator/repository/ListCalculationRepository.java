@@ -24,10 +24,7 @@ public class ListCalculationRepository implements CalculatorRepository {
 
     @Override
     public Optional<String> getResultFromExpression(String expression) {
-        for (CalculationResultHistory his : repository) {
-            if (his.getExpression().equals(expression))
-                return Optional.of(his.getAnswer());
-        }
-        return Optional.empty();
+        Optional<CalculationResultHistory> history = repository.stream().filter(f -> f.getExpression().equals(expression)).findAny();
+        return Optional.ofNullable(history.get().getAnswer());
     }
 }
