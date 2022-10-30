@@ -7,7 +7,6 @@ import java.util.Map;
 public class CalculatorResult implements Result<Integer, String> {
 
     private Map<Integer, String> calculatorResult;
-
     private int index;
 
     public CalculatorResult() {

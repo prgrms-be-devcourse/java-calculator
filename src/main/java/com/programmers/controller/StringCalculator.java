@@ -16,6 +16,7 @@ public class StringCalculator {
     private static final String MULTIPLY = "*";
     private static final String DIVIDE = "/";
     private static final String MIDDLEMAN = " = ";
+    private static final int WRONG_NUMBER = -1;
 
     private final Result calculatorResult;
 
@@ -25,7 +26,12 @@ public class StringCalculator {
 
     public void play() {
         while (true) {
+            ResultView.selectMenuView();
             int selectNum = InputView.selectMenu();
+
+            if (selectNum == WRONG_NUMBER) {
+                continue;
+            }
 
             if (selectNum == TERMINAL_NUMBER) {
                 break;
