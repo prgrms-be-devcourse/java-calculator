@@ -34,7 +34,6 @@ public class InputView {
                 System.out.println("제대로된 수식을 입력해주세요.");
                 continue;
             }
-
             String result = transformFormula(inputString);
             System.out.println("result: " + result);
             return result;
@@ -47,13 +46,17 @@ public class InputView {
 
         for (int i = 0; i < inputString.length(); i++) {
             char current = inputString.charAt(i);
-            if (CalculatorType.containType(current) && !isNegative(inputString, i)) {
-                stringBuilder.append(" " + current + " ");
-                continue;
-            }
-            stringBuilder.append(current);
+            addFormula(current, isNegative(inputString, i), stringBuilder);
         }
         return stringBuilder.toString();
+    }
+
+    private static void addFormula(char current, boolean isNegative, StringBuilder stringBuilder) {
+        if (CalculatorType.containType(current) && !isNegative) {
+            stringBuilder.append(" " + current + " ");
+            return;
+        }
+        stringBuilder.append(current);
     }
 
     private static boolean isNegative(String inputString, int index) {

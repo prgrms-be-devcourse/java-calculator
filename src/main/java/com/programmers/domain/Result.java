@@ -6,5 +6,5 @@ public interface Result<K, V> {
 
     void addResult(V result);
 
-    public Map<K, V> getResult();
+    Map<K, V> getResult();
 }
