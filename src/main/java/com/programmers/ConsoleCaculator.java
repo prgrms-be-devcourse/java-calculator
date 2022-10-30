@@ -10,6 +10,8 @@ import com.programmers.repository.HistoryRepository;
 import com.programmers.repository.MemoryRepository;
 
 public class ConsoleCaculator {
+    private boolean exitSign = false;
+
     Console console = new Console();
     HistoryRepository historyRepository = new MemoryRepository();
     RecordController recordController = RecordController.builder().historyRepository(historyRepository).build();
@@ -20,7 +22,7 @@ public class ConsoleCaculator {
             .tokenizeService(new TokenizeService(new NumberOpTokenizer())).build();
 
     public void start() {
-        while (true) {
+        while (!exitSign) {
             console.showMenu();
             String userInput = console.getinputWithPrompt("선택 :");
             excuteByUserInput(userInput);
@@ -29,18 +31,14 @@ public class ConsoleCaculator {
 
     private void excuteByUserInput(String userInput) {
         switch (userInput) {
-            case "1" -> {
-                recordLogic();
-            }
-            case "2" -> {
-                calculationLogic();
-            }
-            case "3" -> {
-                exitLogic();
-            }
-            default -> {
-                wrongInputLogic();
-            }
+            case "1" -> recordLogic();
+
+            case "2" -> calculationLogic();
+
+            case "3" -> exitLogic();
+
+            default -> wrongInputLogic();
+
         }
     }
 
@@ -60,7 +58,8 @@ public class ConsoleCaculator {
             console.showError(e);
         }
     }
+
     private void exitLogic() {
-        System.exit(0);
+        this.exitSign = true;
     }
 }
