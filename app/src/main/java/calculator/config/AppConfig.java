@@ -7,6 +7,7 @@ import calculator.io.ConsoleOutput;
 import calculator.io.Input;
 import calculator.io.Output;
 import calculator.repository.MapCalculatorRepository;
+import calculator.controller.CalculatorController;
 import calculator.service.CalculatorService;
 
 import java.io.*;
@@ -16,9 +17,10 @@ public class AppConfig {
     private static final Calculator calculator = new BaseCalculator(new MapCalculatorRepository());
     private static final Input input = new ConsoleInput(new BufferedReader(new InputStreamReader(System.in)));
     private static final Output output = new ConsoleOutput(new BufferedWriter(new OutputStreamWriter(System.out)));
-    private static final CalculatorService calculatorService = new CalculatorService(calculator, input, output);
+    private static final CalculatorService calculatorService = new CalculatorService(calculator);
+    private static final CalculatorController calculatorController = new CalculatorController(calculatorService, input, output);
 
-    public CalculatorService calculatorService() {
-        return calculatorService;
+    public CalculatorController calculatorService() {
+        return calculatorController;
     }
 }
