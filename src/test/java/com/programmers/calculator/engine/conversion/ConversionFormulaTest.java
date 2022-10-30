@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class ConversionFormulaTest {
-    Conversion conversion = new ConversionFormula();
+    private Conversion conversion = new ConversionFormula();
 
     @Test
     public void 후위표기법_변환_확인() {
