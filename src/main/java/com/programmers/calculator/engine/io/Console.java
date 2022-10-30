@@ -25,10 +25,6 @@ public class Console implements Input, Output {
         System.out.println(e);
     }
 
-    @Override
-    public void formulaList() {
-
-    }
 
     @Override
     public void endNotification() {
