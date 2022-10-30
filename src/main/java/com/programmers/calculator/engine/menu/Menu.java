@@ -6,23 +6,15 @@ import java.util.Arrays;
 
 public enum Menu {
     //조회
-//    LOOKUP("1", (formula, result) -> new 조회로직),
     LOOKUP("1"),
 
     //계산
-//    CALCULATION("2", (null, history) -> new 계산로직),
     CALCULATION("2"),
 
     //종료
     END("3");
 
     private String commandInput;
-//    private Function<String, String> userMenu;
-
-//    Menu(String commandInput, Function<String, String> userMenu) {
-//        this.commandInput = commandInput;
-//        this.userMenu = userMenu;
-//    }
 
     Menu(String commandInput) {
         this.commandInput = commandInput;
@@ -35,7 +27,6 @@ public enum Menu {
 
     public static String chooseMenu(String commandInput) {
         return getMenu(commandInput).toString();
-        //여기서 바로 menu 메서드를 호출할 수 있는지?? Function<> 으로 되는환?
     }
 
     private static Menu getMenu(String command) {
