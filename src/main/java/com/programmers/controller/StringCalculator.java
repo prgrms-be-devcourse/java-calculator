@@ -6,17 +6,18 @@ import com.programmers.view.InputView;
 import com.programmers.view.ResultView;
 
 public class StringCalculator {
-    private final int ZERO = 0;
-    private final int ONE = 1;
-    private final int TERMINAL_NUMBER = 3;
-    private final char BLANK = ' ';
-    private final int INTERVAL = 2;
-    private final String ADD = "+";
-    private final String SUBTRACT = " - ";
-    private final String MULTIPLY = "*";
-    private final String DIVIDE = "/";
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int TERMINAL_NUMBER = 3;
+    private static final char BLANK = ' ';
+    private static final int INTERVAL = 2;
+    private static final String ADD = "+";
+    private static final String SUBTRACT = " - ";
+    private static final String MULTIPLY = "*";
+    private static final String DIVIDE = "/";
+    private static final String MIDDLEMAN = " = ";
 
-    private Result calculatorResult;
+    private final Result calculatorResult;
 
     public StringCalculator(Result calculatorResult) {
         this.calculatorResult = calculatorResult;
@@ -38,7 +39,7 @@ public class StringCalculator {
             String inputString = InputView.inputString();
 
             int result = calculateAll(inputString);
-            calculatorResult.addResult(inputString, result);
+            calculatorResult.addResult(inputString + MIDDLEMAN + result);
             ResultView.calculateResult(result);
         }
     }
@@ -72,7 +73,8 @@ public class StringCalculator {
         int numOne = Integer.parseInt(inputString.substring(indexOne, index - ONE));
         int numTwo = Integer.parseInt(inputString.substring(index + INTERVAL, indexTwo));
 
-        int result = CalculatorType.selectType(inputString.charAt(index)).calculate(numOne, numTwo);
+        CalculatorType type = CalculatorType.selectType(inputString.charAt(index));
+        int result = type.calculate(numOne, numTwo);
 
         return inputString.substring(ZERO, indexOne) + result + inputString.substring(indexTwo);
     }

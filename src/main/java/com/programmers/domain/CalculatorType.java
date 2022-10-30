@@ -12,13 +12,17 @@ public enum CalculatorType {
         return num1 / num2;
     });
 
-    private static int ZERO_NUMBER = 0;
-    private char type;
-    private BinaryOperator<Integer> expression;
+    private static final int ZERO_NUMBER = 0;
+    private final char type;
+    private final BinaryOperator<Integer> expression;
 
     CalculatorType(char type, BinaryOperator<Integer> expression) {
         this.type = type;
         this.expression = expression;
+    }
+
+    public char getType() {
+        return type;
     }
 
     public Integer calculate(int num1, int num2) {
@@ -32,6 +36,14 @@ public enum CalculatorType {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("제대로된 사칙연산기호를 입력해 주세요. 입력 값: " + sign));
     }
+
+    public static boolean containType(char inputType) {
+        return Arrays.asList(CalculatorType.values())
+                .stream()
+                .map(calculatorType -> calculatorType.type)
+                .anyMatch(type -> type == inputType);
+    }
+
 
     private static void isDividedByZero(int numberTwo) {
         if (numberTwo == ZERO_NUMBER) {

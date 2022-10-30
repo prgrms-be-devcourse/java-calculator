@@ -6,7 +6,7 @@ import com.programmers.domain.Result;
 
 public class JavaCalculator {
     public static void main(String[] args) {
-        Result calculatorResult = new CalculatorResult();
+        Result<Integer, String> calculatorResult = new CalculatorResult();
         StringCalculator stringCalculator = new StringCalculator(calculatorResult);
         stringCalculator.play();
     }

@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface Result<K, V> {
 
-    void addResult(K input, V result);
+    void addResult(V result);
 
     public Map<K, V> getResult();
 }
