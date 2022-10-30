@@ -10,8 +10,7 @@ public class ConversionFormula implements Conversion {
 
     @Override
     public List<String> splitFormula(String formula) {
-        List<String> tokenList = new ArrayList<>(Arrays.asList(formula.split(" ")));
-        return tokenList;
+        return new ArrayList<>(Arrays.asList(formula.split(" ")));
     }
 
     @Override
@@ -20,34 +19,40 @@ public class ConversionFormula implements Conversion {
         Stack<String> symbolStack = new Stack<>();
 
         for (String token : tokenList) {
-            if (token.matches(NUMBER)) {
-                postfix.add(token);
-                continue;
-            }
-
-            if (token.equals("(")) {
-                symbolStack.add(token);
-                continue;
-            }
-
-            if (token.equals(")")) {
-                while (!symbolStack.peek().equals("(")) {
-                    postfix.add(symbolStack.pop());
-                }
-                symbolStack.pop();
-                continue;
-            }
-
-            while (!symbolStack.isEmpty() && priorityCheck(symbolStack.peek(), token)) {
-                postfix.add(symbolStack.pop());
-            }
-            symbolStack.add(token);
+            divisionTokens(postfix, symbolStack, token);
         }
+
         while (!symbolStack.isEmpty()) {
             postfix.add(symbolStack.pop());
         }
 
         return postfix;
+    }
+
+    private void divisionTokens(List<String> postfix, Stack<String> symbolStack, String token) {
+        if (token.matches(NUMBER)) {
+            postfix.add(token);
+            return;
+        }
+
+        if (token.equals("(")) {
+            symbolStack.add(token);
+            return;
+        }
+
+        if (token.equals(")")) {
+            while (!symbolStack.peek().equals("(")) {
+                postfix.add(symbolStack.pop());
+            }
+            symbolStack.pop();
+            return;
+        }
+        if (token.equals("+") || token.equals("*") || token.equals("-") || token.equals("/")){
+            while (!symbolStack.isEmpty() && isHighPriority(symbolStack.peek(), token)) {
+                postfix.add(symbolStack.pop());
+            }
+            symbolStack.add(token);
+        }
     }
 
     private int priority(String symbol) {
@@ -64,11 +69,10 @@ public class ConversionFormula implements Conversion {
         }
     }
 
-    private boolean priorityCheck(String peekSymbol, String tempSymbol) {
+    private boolean isHighPriority(String peekSymbol, String tempSymbol) {
         return priority(peekSymbol) >= priority(tempSymbol);
     }
 
-    //이렇게 사용해도 되는지 궁금합니다.
     @Override
     public List<String> formulaToPostfixTokens(String formula) {
         List<String> formulaToken = splitFormula(formula);
