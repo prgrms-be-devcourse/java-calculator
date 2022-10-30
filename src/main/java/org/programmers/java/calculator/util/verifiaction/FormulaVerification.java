@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class FormulaVerification {
 
-    public static void formulaVerifiaction(List<String> tokens) {
+    public void formulaVerifiaction(List<String> tokens) {
 
         List<String> numbers = new ArrayList<>();
         List<String> operators = new ArrayList<>();
@@ -28,7 +28,7 @@ public class FormulaVerification {
         operatorVerification(operators);
     }
 
-    private static void numberVerification(List<String> numbers) {
+    private void numberVerification(List<String> numbers) {
         Pattern numberPattern = Pattern.compile("[0-9]");
         numbers.stream().filter(token -> !numberPattern.matcher(token).matches()).findAny().ifPresent(
                 t -> {
@@ -37,7 +37,7 @@ public class FormulaVerification {
         );
     }
 
-    private static void operatorVerification(List<String> operators) {
+    private void operatorVerification(List<String> operators) {
         Pattern operatorPattern = Pattern.compile("[+-/*]");
         operators.stream().filter(token -> !operatorPattern.matcher(token).matches()).findAny().ifPresent(
                 t->{
@@ -46,7 +46,7 @@ public class FormulaVerification {
         );
     }
 
-    private static void blankVerification(String input) {
+    private void blankVerification(String input) {
         Pattern blankPattern = Pattern.compile("[+-/*][0-9]");
         List<String> token = Arrays.asList(input.split(""));
 

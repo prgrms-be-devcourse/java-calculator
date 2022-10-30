@@ -3,16 +3,16 @@ package org.programmers.java.calculator.util.verifiaction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FormulaVerificationTest {
+
+    private final FormulaVerification formulaVerification = new FormulaVerification();
 
     @Test
     @DisplayName("정상적인 입력을 맞았을때 오류가 일어나지 않는지 검증하라")
@@ -22,7 +22,7 @@ class FormulaVerificationTest {
         List<String> tokens = Arrays.asList(input.split(" "));
 
         //when
-        FormulaVerification.formulaVerifiaction(tokens);
+        formulaVerification.formulaVerifiaction(tokens);
 
         //then
     }
@@ -37,7 +37,6 @@ class FormulaVerificationTest {
         //when
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> FormulaVerification.formulaVerifiaction(tokens));
-
+        assertThrows(IllegalArgumentException.class, () -> formulaVerification.formulaVerifiaction(tokens));
     }
 }

@@ -5,11 +5,10 @@ import org.programmers.java.calculator.processing.Processing;
 import org.programmers.java.calculator.io.Console;
 import org.programmers.java.calculator.model.Menu;
 
-@RequiredArgsConstructor
 public class Calculator{
 
     private final Processing processing = new Processing();
-    private final Console console;
+    private final Console console = new Console();
 
     private boolean power = true;
 

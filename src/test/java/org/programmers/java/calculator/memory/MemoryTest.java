@@ -1,15 +1,14 @@
-package org.programmers.java.calculator.memory.impl;
+package org.programmers.java.calculator.memory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.programmers.java.calculator.memory.Memory;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorRepositoryImplTest {
+class MemoryTest {
 
     Memory memory = new Memory();
 
@@ -25,7 +24,7 @@ class CalculatorRepositoryImplTest {
         memory.save(input, answer);
 
         //when
-        ArrayList<String> findAll = memory.∑findAll();
+        List<String> findAll = memory.findAll();
 
 
         //then
@@ -57,7 +56,7 @@ class CalculatorRepositoryImplTest {
 
         memory.save(input, answer);
         //when
-        Optional<String> find = memory.find(input);
+        Optional<String> find = memory.findCache(input);
 
         //then
         assertEquals("2.0", find.get());
