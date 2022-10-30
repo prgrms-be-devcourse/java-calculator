@@ -3,7 +3,7 @@ package com.programmers;
 import com.programmers.caculation.*;
 import com.programmers.caculation.caculator.PostfixCaculator;
 import com.programmers.caculation.parser.PostfixParser;
-import com.programmers.caculation.toeknizer.NumberOpTokenizer;
+import com.programmers.caculation.toeknizer.NumberOpTokenizerUsingCharArray;
 import com.programmers.io.Console;
 import com.programmers.record.RecordController;
 import com.programmers.repository.HistoryRepository;
@@ -19,7 +19,7 @@ public class ConsoleCaculator {
             .caculateService(new CaculateService(new PostfixCaculator()))
             .parseService(new ParseService(new PostfixParser()))
             .historyRepository(historyRepository)
-            .tokenizeService(new TokenizeService(new NumberOpTokenizer())).build();
+            .tokenizeService(new TokenizeService(new NumberOpTokenizerUsingCharArray())).build();
 
     public void start() {
         while (!exitSign) {
