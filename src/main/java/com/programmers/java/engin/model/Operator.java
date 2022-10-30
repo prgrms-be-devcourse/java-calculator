@@ -38,7 +38,7 @@ public enum Operator {
         return Arrays.stream(values())
                 .filter(operator -> operator.textOperator.equals(symbol))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("입력 오류 : 잘못된 연산자 혹은 문자가 포함되어 있습니다."));
+                .orElseThrow(() -> new RuntimeException("잘못된 연산식 입니다."));
     }
 
     public abstract double result(double num1, double num2);

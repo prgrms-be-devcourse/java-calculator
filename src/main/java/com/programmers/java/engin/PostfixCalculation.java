@@ -59,7 +59,7 @@ public class PostfixCalculation implements Calculation {
                 tempDeque.push(Double.parseDouble(element));
             } else {
                 if(tempDeque.size() < 2){
-                    throw new RuntimeException("입력 오류 : 연산자와 피연산자 사이에 공백이 있어야합니다.");
+                    throw new RuntimeException("잘못된 연산식 입니다.");
                 }
                 double num1 = tempDeque.pop();
                 double num2 = tempDeque.pop();

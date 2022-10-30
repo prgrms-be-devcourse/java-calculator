@@ -15,6 +15,8 @@ public class Calculator implements Runnable{
     private Input input;
     private Output output;
 
+    static final String NEWLINE = System.lineSeparator();
+
     Logs logs = new Logs();
 
     public Calculator(Calculation calculation, Input input, Output output) {
@@ -28,7 +30,7 @@ public class Calculator implements Runnable{
     public void run() {
 
         while(true){
-            String inputMenu = input.input("1. 조회\n2. 계산\n\n선택 : ");
+            String inputMenu = input.input("1. 조회"+NEWLINE+"2. 계산"+NEWLINE+NEWLINE+"선택 : ");
 
             if (inputMenu.equals("1")){
                 output.logView(logs);
@@ -50,7 +52,6 @@ public class Calculator implements Runnable{
             logs.add(expression ,result);
             output.answer(result);
         }catch (Exception error){
-            error.printStackTrace();
             output.errorMessage(error.getMessage());
         }
     }
