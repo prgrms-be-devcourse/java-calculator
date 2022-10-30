@@ -4,26 +4,16 @@ import java.util.Arrays;
 
 public enum Menu {
 
-    RECORD("Record",1),
-    CALCULATE("Calculate",2),
-    EXIT("Exit", 3),
-    ERROR("Error",-1);
+    MEMORY(1),
+    CALCULATE(2),
+    EXIT( 3),
+    ERROR(-1);
 
     private static final int BAD_REQUEST = -1;
 
-    private final String label;
     private final int code;
 
-    private String getLabel() {
-        return this.label;
-    }
-
-    private int getCode() {
-        return this.code;
-    }
-
-    Menu(String label, int code) {
-        this.label = label;
+    Menu(int code) {
         this.code = code;
     }
 

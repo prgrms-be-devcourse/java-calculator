@@ -1,7 +1,8 @@
-package org.programmers.java.calculator.repository.impl;
+package org.programmers.java.calculator.memory.impl;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.programmers.java.calculator.memory.Memory;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorRepositoryImplTest {
 
-    CalculatorRepositoryImpl calculatorRepository = new CalculatorRepositoryImpl();
+    Memory memory = new Memory();
 
     @Test
     @DisplayName("전체 값의 출력이 제대로 이루어지는 검증하라")
@@ -19,12 +20,12 @@ class CalculatorRepositoryImplTest {
         String input = "1 + 1";
         String answer = "2.0";
 
-        calculatorRepository.save(input, answer);
-        calculatorRepository.save(input, answer);
-        calculatorRepository.save(input, answer);
+        memory.save(input, answer);
+        memory.save(input, answer);
+        memory.save(input, answer);
 
         //when
-        ArrayList<String> findAll = calculatorRepository.findAll();
+        ArrayList<String> findAll = memory.∑findAll();
 
 
         //then
@@ -41,7 +42,7 @@ class CalculatorRepositoryImplTest {
         String answer = "2.0";
 
         //when
-        Long id = calculatorRepository.save(input, answer);
+        Long id = memory.save(input, answer);
 
         //then
         assertEquals(0L, id);
@@ -54,9 +55,9 @@ class CalculatorRepositoryImplTest {
         String input = "1 + 1";
         String answer = "2.0";
 
-        calculatorRepository.save(input, answer);
+        memory.save(input, answer);
         //when
-        Optional<String> find = calculatorRepository.find(input);
+        Optional<String> find = memory.find(input);
 
         //then
         assertEquals("2.0", find.get());

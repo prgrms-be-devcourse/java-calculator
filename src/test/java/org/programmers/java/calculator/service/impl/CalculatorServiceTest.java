@@ -2,13 +2,13 @@ package org.programmers.java.calculator.service.impl;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.programmers.java.calculator.repository.impl.CalculatorRepositoryImpl;
+import org.programmers.java.calculator.service.CalculatorService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CalculatorServiceImplTest {
+class CalculatorServiceTest {
 
-    private final CalculatorServiceImpl calculatorService = new CalculatorServiceImpl();
+    private final CalculatorService calculatorService = new CalculatorService();
     @Test
     @DisplayName("기록을 조회하여 출력이 올바른지 검증하라")
     void calculationResult() {

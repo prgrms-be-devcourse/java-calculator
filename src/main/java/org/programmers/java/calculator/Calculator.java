@@ -1,47 +1,42 @@
 package org.programmers.java.calculator;
 
 import lombok.RequiredArgsConstructor;
-import org.programmers.java.calculator.controller.CalculatorController;
+import org.programmers.java.calculator.processing.Processing;
 import org.programmers.java.calculator.io.Console;
-import org.programmers.java.calculator.io.Input;
-import org.programmers.java.calculator.io.Output;
 import org.programmers.java.calculator.model.Menu;
 
 @RequiredArgsConstructor
-public class Calculator implements Runnable {
+public class Calculator{
 
-    private final CalculatorController calculatorController = new CalculatorController();
-    private final Input input = new Console();
-    private final Output output = new Console();
+    private final Processing processing = new Processing();
+    private final Console console;
 
     private boolean power = true;
-    @Override
+
     public void run() {
         while (power) {
-            output.printMeun();
-            Menu menu = Menu.selectMenu(input.read());
+            console.printMeun();
+            Menu menu = Menu.selectMenu(console.read());
             execution(menu);
         }
     }
 
     private void execution(Menu menu) {
         String answer = switch (menu) {
-            case RECORD -> calculatorController.calculationResult();
-            case CALCULATE -> calculate(input.read());
+            case MEMORY -> processing.getMemory();
+            case CALCULATE -> calculate(console.read());
             case EXIT -> off();
             case ERROR -> "잘못된 입력 입니다.\n";
         };
-        output.print(answer);
+        console.print(answer);
     }
 
     private String calculate(String input) {
         try {
-            return calculatorController.calculate(input);
+            return processing.calculate(input);
         } catch (IllegalArgumentException | IllegalStateException | ArithmeticException e) {
             return e.getMessage();
         }
-
-
     }
 
     private String off() {

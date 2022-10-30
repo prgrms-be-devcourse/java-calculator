@@ -1,13 +1,13 @@
-package org.programmers.java.calculator.controller;
+package org.programmers.java.calculator.processing;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorControllerTest {
+class ProcessingTest {
 
-    CalculatorController calculatorController = new CalculatorController();
+    Processing calculatorController = new Processing();
 
     @Test
     @DisplayName("입력 값에 따라서 반환되는 결과를 검증하라")
@@ -17,7 +17,7 @@ class CalculatorControllerTest {
         calculatorController.calculate(input);
 
         //when
-        String Result = calculatorController.calculationResult();
+        String Result = calculatorController.getMemory();
 
         //then
         assertEquals("0. 1 + 1 = 2.0", Result);

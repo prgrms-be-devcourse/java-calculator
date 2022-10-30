@@ -1,25 +1,19 @@
 package org.programmers.java.calculator.io;
 
-import lombok.RequiredArgsConstructor;
-import org.programmers.java.calculator.controller.CalculatorController;
-
 import java.util.Scanner;
 
-public class Console implements Input, Output {
+public class Console {
 
   private final Scanner sc = new Scanner(System.in);
 
-  @Override
   public String read() {
     return sc.nextLine();
   }
 
-  @Override
   public void print(String message) {
     System.out.println(message + "\n");
   }
 
-  @Override
   public void printMeun() {
     System.out.print(
             """
@@ -31,7 +25,6 @@ public class Console implements Input, Output {
     System.out.print("선택 : ");
   }
 
-  @Override
   public void printError() {
     System.out.println("""
             잘못된 입력 입니다.

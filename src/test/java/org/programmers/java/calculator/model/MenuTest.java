@@ -23,7 +23,7 @@ class MenuTest {
         Menu selectMenuError = Menu.selectMenu(inputError);
 
         //then
-        assertEquals(Menu.RECORD, selectMenuRecord);
+        assertEquals(Menu.MEMORY, selectMenuRecord);
         assertEquals(Menu.CALCULATE, selectMenuCalculate);
         assertEquals(Menu.EXIT, selectMenuExit);
         assertEquals(Menu.ERROR, selectMenuError);
