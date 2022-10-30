@@ -13,6 +13,17 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class CalculatorTypeTest {
 
     @ParameterizedTest
+    @ValueSource(chars = {'+', '-', '*', '/', '&'})
+    void containType(char sign) {
+        if (sign == '+' || sign == '-' || sign == '*' || sign == '/') {
+            assertTrue(CalculatorType.containType(sign));
+            return;
+        }
+        assertFalse(CalculatorType.containType(sign));
+
+    }
+
+    @ParameterizedTest
     @MethodSource
     void calculate(char sign, int numOne, int numTwo, int result) {
         assertEquals(CalculatorType.selectType(sign).calculate(numOne, numTwo), result);

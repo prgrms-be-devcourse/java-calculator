@@ -21,10 +21,6 @@ public enum CalculatorType {
         this.expression = expression;
     }
 
-    public char getType() {
-        return type;
-    }
-
     public Integer calculate(int num1, int num2) {
         return this.expression.apply(num1, num2);
     }
