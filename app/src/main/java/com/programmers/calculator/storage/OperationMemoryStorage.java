@@ -31,7 +31,7 @@ public class OperationMemoryStorage implements OperationStorage {
     }
 
     @Override
-    public long length() {
-        return id;
+    public long totalCount() {
+        return repository.size();
     }
 }

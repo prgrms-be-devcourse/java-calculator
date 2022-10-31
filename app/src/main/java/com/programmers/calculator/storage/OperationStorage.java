@@ -8,5 +8,5 @@ public interface OperationStorage {
     void save(Operation operation);
     Optional<Operation> findById(long id);
     boolean isEmpty();
-    long length();
+    long totalCount();
 }
