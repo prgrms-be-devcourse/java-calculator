@@ -5,9 +5,10 @@ import com.calculator.io.Input;
 import com.calculator.io.Output;
 import com.calculator.repository.Repository;
 import lombok.Builder;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 @Builder
@@ -15,21 +16,21 @@ public class Calculator {
 
     private double result;
 
-    private Input input;
-    private Output output;
-    private Repository repository;
+    private final Input input;
+    private final Output output;
+    private final Repository repository;
 
     private ValidatorHandler validator;
 
     public void run() throws BaseException, IOException {
         while (true) {
             try {
-                int inputType = validator.typeError(this.input.inputType());
+                int inputType = validator.typeError(input.inputType());
 
-                if (inputType == EType.FIND.ordinal() + 1) {
+                if (inputType == EType.FIND.getNum()) {
                     getMap();
-                } else if (inputType == EType.CAL.ordinal() + 1) {
-                    this.result = calculate(this.input.inputNum());
+                } else if (inputType == EType.CAL.getNum()) {
+                    result = calculate(input.inputNum());
                     output.output(result);
                 } else {
                     return;
@@ -47,21 +48,21 @@ public class Calculator {
 
     public double calculate(String input) throws BaseException {
         try {
-            double result = 0;
+            double calculatedValue = 0;
 
             Expression findExpression = repository.findByInfix(input);
             if (findExpression != null) {
                 // 이미 존재하는 계산식의 경우 계산은 건너뛰고 map에서 객체 꺼내서 내역에만 한번더 저장처리
-                result = findExpression.getResult();
+                calculatedValue = findExpression.getResult();
 
                 repository.save(findExpression);
-                return result;
+                return calculatedValue;
             }
 
-            String after = change(input);
+            String after = changePostfix(input);
 
             // 후위표기법 계산
-            Stack<Double> stack = new Stack<>();
+            Deque<Double> stack = new ArrayDeque<>();
             for (int i = 0; i < after.length(); i++) {
                 if (Character.isDigit(after.charAt(i))) {
                     stack.push((double) after.charAt(i) - '0');
@@ -74,13 +75,13 @@ public class Calculator {
                 }
             }
 
-            result = stack.pop();
+            calculatedValue = stack.pop();
 
             // 계산 완료 후 map에 저장
-            Expression expression = new Expression(input, result);
+            Expression expression = new Expression(input, calculatedValue);
             repository.save(expression);
 
-            return result;
+            return calculatedValue;
         } catch (BaseException e) {
             throw e;
         }
@@ -89,25 +90,24 @@ public class Calculator {
     /**
      * 중위표기법 -> 후위표기법 변환
      */
-    public String change(String input) {
+    public String changePostfix(String input) {
         input = input.replaceAll("\\s", "");
 
-        Stack<Character> stack = new Stack<>();
-        StringBuffer sb = new StringBuffer();
+        Deque<Character> stack = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
 
-        char[] chars = input.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (Character.isDigit(chars[i])) {
-                sb.append(chars[i]);
+        for (char chars: input.toCharArray()) {
+            if (Character.isDigit(chars)) {
+                sb.append(chars);
                 continue;
             }
 
-            if (chars[i] == EOperator.LEFT.getName()) {
-                stack.push(chars[i]);
+            if (chars == EOperator.LEFT.getName()) {
+                stack.push(chars);
                 continue;
             }
 
-            if (chars[i] == EOperator.RIGHT.getName()) {
+            if (chars == EOperator.RIGHT.getName()) {
                 while (true) {
                     Character pop = stack.pop();
 
@@ -125,7 +125,7 @@ public class Calculator {
                     break;
                 }
 
-                int compare = findEnumByName(chars[i]).compare(findEnumByName(stack.peek()));
+                int compare = findEnumByName(chars).compare(findEnumByName(stack.peek()));
                 if (compare < 0) {
                     break;
                 }
@@ -133,7 +133,7 @@ public class Calculator {
                 sb.append(stack.pop());
 
             }
-            stack.push(chars[i]);
+            stack.push(chars);
         }
 
         while (!stack.isEmpty()) {
