@@ -9,9 +9,7 @@ public class Calculator {
     private final Operator operator = new Operator();
     private Deque<String> deque = new LinkedList<>();
 
-    public Operation calculate(String formula, String[] parsedInputStr) {
-        int notationSize = parsedInputStr.length;
-        String[] postfixNotation = new String[notationSize];
+    private void changePostfixExpression(String[] parsedInputStr, String[] postfixNotation) {
         int postfixIndex = 0;
 
         /** 후위표현식으로의 변환 **/
@@ -31,7 +29,9 @@ public class Calculator {
             postfixNotation[postfixIndex] = deque.pollLast();
             postfixIndex += 1;
         }
+    }
 
+    private void calculatePostfixExpression(String[] postfixNotation) {
         /** 후위표현식을 이용한 계산 **/
         for (int i = 0; i < postfixNotation.length; i++) {
             if (Pattern.matches(Validator.NUMBER_REGEX, postfixNotation[i])) { // 숫자
@@ -44,7 +44,9 @@ public class Calculator {
                 deque.addLast(result.toString());
             }
         }
+    }
 
+    private Operation makeOperationResultByDataType(String formula) {
         String totalStr = deque.pollLast();
         double doubleTotal = Double.parseDouble(totalStr);
         int integerTotal = (int) doubleTotal;
@@ -60,6 +62,20 @@ public class Calculator {
         return operation;
     }
 
+    public Operation calculate(String formula, String[] parsedInputStr) {
+        int notationSize = parsedInputStr.length;
+        String[] postfixNotation = new String[notationSize];
+        int postfixIndex = 0;
+
+        /** 후위표현식으로의 변환 **/
+        changePostfixExpression(parsedInputStr, postfixNotation);
+
+        /** 후위표현식을 이용한 계산 **/
+        calculatePostfixExpression(postfixNotation);
+
+        return makeOperationResultByDataType(formula);
+    }
+
     public String[] parseFolmula(String inputStr) {
         return inputStr.trim().split("\\s+");
     }
@@ -67,14 +83,9 @@ public class Calculator {
     public Operation excute(String inputString) {
         String[] parsedInputStr = parseFolmula(inputString);
 
-        try {
-            Validator.isRightSpacing(parsedInputStr);
-            Validator.isRightOperatorAndNumbers(parsedInputStr);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        Validator.isRightSpacing(parsedInputStr);
+        Validator.isRightOperatorAndNumbers(parsedInputStr);
 
         return calculate(inputString, parsedInputStr);
     }
-
 }
