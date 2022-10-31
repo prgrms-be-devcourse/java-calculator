@@ -1,13 +1,24 @@
 package com.programmers.console;
 
-public enum Menu {
-  calc("1"),
-  inquiry("2"),
-  outSide("3");
+import java.util.stream.Stream;
 
-  private String str;
+public enum Menu{
+  CALC("1"),
+  INQUIRY("2"),
+  OUTSIDE("3"),
+  NORESULT("-1");
+
+  private final String str;
 
   Menu(String str) {
     this.str = str;
   }
+
+  public static Menu exist(String choice) {
+    return Stream.of(values())
+        .filter(num -> num.str.equals(choice))
+        .findFirst()
+        .orElse(NORESULT);
+  }
+
 }

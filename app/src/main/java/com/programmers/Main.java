@@ -15,16 +15,16 @@ public class Main {
     Verification verification = new Verification();
 
     while (true) {
+
       Menu menu = console.getCommand("1.계산 \n2.조회 \n3.나가기");
+
       switch (menu) {
-        case calc:
+        case CALC:
           String calcForm = console.getExpression("계산할 식을 입력해주세요");
           if (verification.verify(calcForm)) {
-            Double answer = memory.contains(calcForm) ? memory.cacheFind(calcForm)
-                : calculator.getAnswer(calcForm);
+            Double answer = calculator.getAnswer(calcForm);
 
             memory.save(calcForm + " = " + answer);
-            memory.cacheSave(calcForm, answer);
 
             console.print(answer.toString());
           } else {
@@ -32,12 +32,16 @@ public class Main {
           }
 
           break;
-        case inquiry:
+        case INQUIRY:
           console.print(memory.findAll());
           break;
-        case outSide:
+        case OUTSIDE:
           return;
+        case NORESULT:
+          console.print("다시 선택해주세요");
+          break;
       }
+
     }
 
   }
