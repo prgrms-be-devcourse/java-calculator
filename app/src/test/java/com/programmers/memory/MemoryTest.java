@@ -42,28 +42,5 @@ public class MemoryTest {
     assertEquals(expect, result);
   }
 
-  @DisplayName("입력받은 계산식이 캐시에 담겨저있을때 true를 리턴한다.")
-  @Test
-  void cacheHasForm() {
-    //given
-    memory.cacheSave("2 + 3", 5.0);
-    //when
-    String input = "2 + 3";
-    boolean result = memory.contains(input);
-    //then
-    assertTrue(result);
-  }
-
-  @DisplayName("입력받은 계산식이 캐시에 담겨저있지 않을 때 false를 리턴한다.")
-  @Test
-  void cacheDoesntHaveForm() {
-    //given
-    memory.cacheSave("2 + 3", 5.0);
-    //when
-    String input = "3 + 3";
-    boolean result = memory.contains(input);
-    //then
-    assertFalse(result);
-  }
 
 }
