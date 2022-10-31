@@ -2,8 +2,8 @@ package com.programmers.calculator.entity;
 
 public class Operation {
 
-    private String formula;
-    private String result;
+    private final String formula;
+    private final String result;
 
     public Operation(String formula, String result) {
         this.formula = formula;
