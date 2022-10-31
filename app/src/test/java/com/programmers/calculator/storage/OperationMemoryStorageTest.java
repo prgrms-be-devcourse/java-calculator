@@ -26,7 +26,7 @@ class OperationMemoryStorageTest {
         operationStorage.save(operation);
 
         // then
-        assertEquals(1L, operationStorage.length());
+        assertEquals(1L, operationStorage.totalCount());
     }
 
     @Test
