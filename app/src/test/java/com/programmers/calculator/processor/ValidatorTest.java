@@ -2,6 +2,8 @@ package com.programmers.calculator.processor;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,28 +21,18 @@ class ValidatorTest {
         assertThrows(IllegalArgumentException.class, () -> Validator.isRightSpacing(parsedInputStr));
     }
 
-    @Test
+
     @DisplayName("연산자가 아니거나 숫자가 잘못된 경우 예외가 발생한다.")
-    void isRightOperatorAndNumbers() {
-        // given
-        String[] inputFormula = new String[] {
-                "1+1 * 1",
-                "1 @ 3 + 1",
-                "1 + 3 * ~",
-                "1 ) 3 * 4",
-                "3.1 ( 4.2 + 5.3"
-        };
-
-        String[][] parsedInputFormula = new String[inputFormula.length][];
-        for (int i = 0; i < 5; i++) {
-            parsedInputFormula[i] = calculator.parseFolmula(inputFormula[i]);
-        }
-
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1+1 * 1",
+            "1 @ 3 + 1",
+            "1 + 3 * ~",
+            "1 ) 3 * 4",
+            "3.1 ( 4.2 + 5.3"
+    })
+    void isRightOperatorAndNumbers(String formula) {
         // when, then
-        assertThrows(IllegalArgumentException.class, () -> Validator.isRightOperatorAndNumbers(parsedInputFormula[0]));
-        assertThrows(IllegalArgumentException.class, () -> Validator.isRightOperatorAndNumbers(parsedInputFormula[1]));
-        assertThrows(IllegalArgumentException.class, () -> Validator.isRightOperatorAndNumbers(parsedInputFormula[2]));
-        assertThrows(IllegalArgumentException.class, () -> Validator.isRightOperatorAndNumbers(parsedInputFormula[3]));
-        assertThrows(IllegalArgumentException.class, () -> Validator.isRightOperatorAndNumbers(parsedInputFormula[4]));
+        assertThrows(IllegalArgumentException.class, () -> Validator.isRightOperatorAndNumbers(calculator.parseFolmula(formula)));
     }
 }
