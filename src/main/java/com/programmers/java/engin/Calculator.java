@@ -4,9 +4,10 @@ import com.programmers.java.Console;
 import com.programmers.java.engin.io.Calculation;
 import com.programmers.java.engin.io.Input;
 import com.programmers.java.engin.io.Output;
-import com.programmers.java.engin.model.Logs;
+import com.programmers.java.engin.model.Log;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Calculator implements Runnable{
@@ -17,7 +18,7 @@ public class Calculator implements Runnable{
 
     static final String NEWLINE = System.lineSeparator();
 
-    Logs logs = new Logs();
+    List<Log> logs = new ArrayList<>();
 
     public Calculator(Calculation calculation, Input input, Output output) {
         this.calculation = calculation;
@@ -33,7 +34,7 @@ public class Calculator implements Runnable{
             String inputMenu = input.input("1. 조회"+NEWLINE+"2. 계산"+NEWLINE+NEWLINE+"선택 : ");
 
             if (inputMenu.equals("1")){
-                output.logView(logs);
+                output.logsView(logs);
             } else if (inputMenu.equals("2")) {
                 String expression = input.input();
                 runCalculation(expression);
@@ -49,7 +50,7 @@ public class Calculator implements Runnable{
     private void runCalculation(String expression){
         try{
             String result = calculation.getResult(expression);
-            logs.add(expression ,result);
+            logs.add(new Log(expression ,result));
             output.answer(result);
         }catch (Exception error){
             output.errorMessage(error.getMessage());
