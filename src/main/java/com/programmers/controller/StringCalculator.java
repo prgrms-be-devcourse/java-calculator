@@ -1,6 +1,7 @@
 package com.programmers.controller;
 
 import com.programmers.domain.CalculatorType;
+import com.programmers.domain.Formula;
 import com.programmers.domain.Result;
 import com.programmers.view.InputView;
 import com.programmers.view.ResultView;
@@ -44,7 +45,7 @@ public class StringCalculator {
             String inputString = InputView.inputString();
 
             int result = calculateAll(inputString);
-            calculatorResult.addResult(inputString, result);
+            calculatorResult.addResult(new Formula(inputString, result));
             ResultView.calculateResult(result);
         }
     }

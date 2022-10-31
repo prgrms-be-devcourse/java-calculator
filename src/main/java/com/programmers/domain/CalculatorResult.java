@@ -1,6 +1,5 @@
 package com.programmers.domain;
 
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,10 +12,11 @@ public class CalculatorResult implements Result<Integer, Formula> {
         this.index = 0;
         this.calculatorResult = new LinkedHashMap<>();
     }
+    
 
     @Override
-    public void addResult(String problem, int answer) {
-        calculatorResult.put(index++, new Formula(problem, answer));
+    public void addResult(Formula formula) {
+        calculatorResult.put(index++, formula);
     }
 
     @Override
