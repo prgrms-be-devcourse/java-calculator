@@ -10,13 +10,8 @@ public class Console{
     private Scanner sc = new Scanner(System.in);
 
     public String inputStr() {
+        System.out.println("\n1. 조회\n2. 계산\n\n선택 : ");
         return sc.nextLine();
-    }
-    public void printString(String str) {
-        System.out.print(str);
-    }
-    public void printlnString(String str) {
-        System.out.println(str);
     }
     public void printNoOperation() {
         System.out.println("출력할 결과가 없습니다.");
@@ -24,7 +19,7 @@ public class Console{
     public void printOperation(Operation result) {
         System.out.println(result);
     }
-    public void printHistory(OperationStorage operationStorage) {
+    public void printLastAllOperation(OperationStorage operationStorage) {
         long index = 0L;
 
         while (true) {
