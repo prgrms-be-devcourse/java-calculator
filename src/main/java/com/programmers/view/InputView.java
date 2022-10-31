@@ -35,7 +35,6 @@ public class InputView {
                 continue;
             }
             String result = transformFormula(inputString);
-            System.out.println("result: " + result);
             return result;
 
         }

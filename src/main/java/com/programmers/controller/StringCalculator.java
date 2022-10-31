@@ -15,7 +15,6 @@ public class StringCalculator {
     private static final String SUBTRACT = " - ";
     private static final String MULTIPLY = "*";
     private static final String DIVIDE = "/";
-    private static final String MIDDLEMAN = " = ";
     private static final int WRONG_NUMBER = -1;
 
     private final Result calculatorResult;
@@ -45,7 +44,7 @@ public class StringCalculator {
             String inputString = InputView.inputString();
 
             int result = calculateAll(inputString);
-            calculatorResult.addResult(inputString + MIDDLEMAN + result);
+            calculatorResult.addResult(inputString, result);
             ResultView.calculateResult(result);
         }
     }

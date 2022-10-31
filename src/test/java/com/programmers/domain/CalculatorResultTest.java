@@ -1,28 +1,37 @@
 package com.programmers.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.*;
 
 public class CalculatorResultTest {
 
-    Result<Integer, String> stringResult = new CalculatorResult();
+    Result<Integer, Formula> stringResult = new CalculatorResult();
 
-    @Test
-    void addResultAndGetResultTest() {
+    @ParameterizedTest
+    @MethodSource
+    void addResultAndGetResultTest(String problem, int answer) {
         //given
-        stringResult.addResult("1 + 1 = 2");
-        stringResult.addResult("1 * 1 = 1");
+        stringResult.addResult(problem, answer);
 
-        //when
-        Map<Integer, String> answers = new LinkedHashMap<>();
-        answers.put(0, "1 + 1 = 2");
-        answers.put(1, "1 * 1 = 1");
+        Map<Integer, Formula> result = new LinkedHashMap<>();
+        result.put(0, new Formula(problem, answer));
 
-        //then
-        assertEquals(stringResult.getResult(), answers);
+        assertEquals(result, stringResult.getResult());
+    }
+
+
+    static Stream<Arguments> addResultAndGetResultTest() {
+        return Stream.of(
+                arguments("1 + 1", 2),
+                arguments("1 * 1", 1));
     }
 }

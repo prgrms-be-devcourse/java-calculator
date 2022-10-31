@@ -1,5 +1,7 @@
 package com.programmers.view;
 
+import com.programmers.domain.Formula;
+
 import java.util.Map;
 
 public class ResultView {
@@ -18,9 +20,10 @@ public class ResultView {
         System.out.println(result + System.lineSeparator());
     }
 
-    public static void inquire(Map<Integer, String> results) {
-        for (Map.Entry<Integer, String> entry : results.entrySet()) {
-            System.out.println(entry.getValue());
+    public static void inquire(Map<Integer, Formula> results) {
+        for (Map.Entry<Integer, Formula> entry : results.entrySet()) {
+            Formula formula = entry.getValue();
+            System.out.println(formula.getFormula());
         }
     }
 }
