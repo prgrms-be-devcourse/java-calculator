@@ -1,9 +1,11 @@
 package com.programmers.calculator;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 public class Calculator {
 
@@ -31,10 +33,10 @@ public class Calculator {
     return str.matches("[0-9]+");
   }
 
-  private ArrayList<Object> toPostfix(String input) {
-    ArrayList<Object> postFix = new ArrayList<>();
+  private List<Object> toPostfix(String input) {
+    List<Object> postFix = new ArrayList<>();
     String[] calculationForm = input.split(" ");
-    Stack<Character> collectionOfOpers = new Stack<>();
+    Deque<Character> collectionOfOpers = new ArrayDeque<>();
 
     for (String numericOrOper : calculationForm) {
       if (isNumeric(numericOrOper)) {
@@ -54,16 +56,16 @@ public class Calculator {
     return postFix;
   }
 
-  private void OperPrecedenceComparison(ArrayList<Object> postFix,
-      Stack<Character> collectionOfOpers, char oper) {
+  private void OperPrecedenceComparison(List<Object> postFix,
+      Deque<Character> collectionOfOpers, char oper) {
     while (!collectionOfOpers.isEmpty() && compareOperatorPriorities(collectionOfOpers.peek(),
         oper)) {
       postFix.add(collectionOfOpers.pop());
     }
   }
 
-  private Double calculatePostfix(ArrayList<Object> postfix) {
-    Stack<Double> numbersStack = new Stack<>();
+  private Double calculatePostfix(List<Object> postfix) {
+    Deque<Double> numbersStack = new ArrayDeque<>();
     for (Object numericOrOper : postfix) {
       if (numericOrOper instanceof Double num) {
         numbersStack.push(num);
