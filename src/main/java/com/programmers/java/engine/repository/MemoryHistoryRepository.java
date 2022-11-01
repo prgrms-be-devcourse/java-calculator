@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MemoryHistoryRepository implements HistoryRepository {
+    private final Map<Integer, Expression> map;
     private int counter;
-    private Map<Integer, Expression> map;
 
     public MemoryHistoryRepository() {
         this.counter = 0;
@@ -41,4 +41,11 @@ public class MemoryHistoryRepository implements HistoryRepository {
         counter = 0;
         map.clear();
     }
+
+    @Override
+    public int size() {
+        return map.size();
+    }
+
+
 }

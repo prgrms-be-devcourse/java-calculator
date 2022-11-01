@@ -10,4 +10,6 @@ public interface HistoryRepository {
     List<Expression> load();
 
     void clear();
+
+    int size();
 }
