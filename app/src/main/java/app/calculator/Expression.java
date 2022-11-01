@@ -1,5 +1,6 @@
 package app.calculator;
 
+import app.exception.AbnormalExpressionException;
 import app.validator.RegexConstant;
 
 public class Expression {
@@ -8,6 +9,7 @@ public class Expression {
 
     public Expression(String inputExpression) {
         this.inputExpression = inputExpression;
+        validateInputExpression();
     }
 
     public String getExpressionValue() {
@@ -15,9 +17,11 @@ public class Expression {
     }
 
     // 올바른 연산식인지 검증합니다.
-    public boolean validateInputExpression() {
+    public void validateInputExpression() {
         String removeWhiteSpaceInputExpression = inputExpression.replaceAll(RegexConstant.WHITESPACE, "");
-        return isNumberAndOperator(removeWhiteSpaceInputExpression) && isCorrectExpression(removeWhiteSpaceInputExpression);
+        if (!isNumberAndOperator(removeWhiteSpaceInputExpression) || !isCorrectExpression(removeWhiteSpaceInputExpression)) {
+            throw new AbnormalExpressionException();
+        }
     }
 
     // 숫자와 올바른 연산자로 구성되어 있는지 정규식을 사용하여 검증합니다.

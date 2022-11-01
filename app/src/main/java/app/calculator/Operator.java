@@ -24,7 +24,9 @@ public enum Operator {
 
     public static Integer calculate(String inputSignature, int operand1, int operand2) {
         Operator operator = findOperator(inputSignature);
-        if (DIVIDE.checkDivideByZero(operator, operand2)) throw new DivideByZeroException();
+        if (DIVIDE.checkDivideByZero(operator, operand2)) {
+            throw new DivideByZeroException();
+        }
         return operator.operation.apply(operand1, operand2);
     }
 
