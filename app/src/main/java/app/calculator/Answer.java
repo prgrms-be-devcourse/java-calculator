@@ -5,19 +5,15 @@ package app.calculator;
 값을 가지는 클래스를 생성합니다.
  */
 public class Answer {
-    private Integer correctAnswer;
-    private String abnormalAnswer;
+
+    private final Integer correctAnswer;
 
     private Answer(Integer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
-    private Answer() {
-        this.abnormalAnswer = "ABNORMAL_ANSWER";
-    }
-
     public static Answer createAbnormalAnswer() {
-        return new Answer();
+        return new Answer(null);
     }
 
     public static Answer createCorrectAnswer(Integer correctAnswer) {
