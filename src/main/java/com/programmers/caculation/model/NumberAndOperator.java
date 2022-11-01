@@ -1,5 +1,7 @@
 package com.programmers.caculation.model;
 
+import java.util.Objects;
+
 public class NumberAndOperator {
     private Double number;
     private Character operator;
@@ -13,19 +15,11 @@ public class NumberAndOperator {
     }
 
     public boolean isNumber() {
-        if (number != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return Objects.isNull(this.operator);
     }
 
     public boolean isOperator() {
-        if (operator != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return Objects.isNull(this.number);
     }
 
     public Character getOperator() {
