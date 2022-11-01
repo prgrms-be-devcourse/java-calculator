@@ -13,13 +13,13 @@ public class RepositoryTest {
         // 데이터 저장 후 내역 받아오기
     void repositoryTest() {
         //given
-        repository = new Memory();
-        String[] expression = new String[]{"12", "+", "12"};
+        repository = new MemoryCalculationRepository();
+        String expression = "12 + 12";
         String result = "24";
         String answer = "12 + 12 = 24";
         //when
         repository.save(expression, result);
         //then
-        assertEquals(answer, repository.getHistory(0).orElse(""));
+        assertEquals(answer, repository.findAll().get(0));
     }
 }

@@ -1,9 +1,9 @@
 package com.programmers.kwonjoosung.java.calculator.repository;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface Repository {
-    void save(String[] expression, String result);
+    void save(String expression, String result);
 
-    Optional<String> getHistory(int index);
+    List<String> findAll();
 }
