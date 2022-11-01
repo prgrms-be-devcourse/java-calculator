@@ -2,13 +2,15 @@ package com.programmers.engine.stack;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Bracket {
     OPEN("("),
-    CLOSE(")");
+    CLOSE(")"),
+    NOT_BRACKET("Not Bracket");
     private final String symbol;
 
     private static final Map<String, Bracket> map =
@@ -23,7 +25,10 @@ public enum Bracket {
     public String getSymbol(){
         return symbol;
     }
-    public static Bracket find(String symbol){
-        return map.getOrDefault(symbol, null);
+    public static Optional<Bracket> find(String symbol){
+        if (map.containsKey(symbol))
+            return Optional.of(map.get(symbol));
+        else
+            return Optional.empty();
     }
 }

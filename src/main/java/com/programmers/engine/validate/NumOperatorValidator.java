@@ -21,8 +21,8 @@ public class NumOperatorValidator implements Validator{
     public LinkedList<String> validate(LinkedList<String> linkedList) {
         LinkedList<String> newList = new LinkedList<>();
         numCnt.set(0); operatorCnt.set(0);
-        linkedList.forEach(
-                (element) -> {
+
+        linkedList.forEach((element) -> {
                     if (operators.contains(element)) {
                         newList.add(operatorMap.get(element));
                         operatorCnt.getAndIncrement();
@@ -34,6 +34,7 @@ public class NumOperatorValidator implements Validator{
                     }
                 }
         );
+
         if (numCnt.get() - 1 != operatorCnt.get()) return new LinkedList<>();
         return newList;
     }

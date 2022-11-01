@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,8 +26,8 @@ class BracketTest {
         generateFormula();
 
         testFormula.forEach((bracket) -> {
-            if(Bracket.find(bracket).equals(OPEN))  openCnt.getAndIncrement();
-            else                                    closeCnt.getAndIncrement();
+            if(Bracket.find(bracket).equals(OPEN))      openCnt.getAndIncrement();
+            else if(Bracket.find(bracket).equals(CLOSE)) closeCnt.getAndIncrement();
         });
 
         assertEquals(openCnt.get(), 5);

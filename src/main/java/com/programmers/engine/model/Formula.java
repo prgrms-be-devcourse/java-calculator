@@ -29,15 +29,12 @@ public class Formula {
 
     public void addDataToDB(DataBase db, BigDecimal result){
         for (String s : content) {
-//            if (operatorExchange.containsKey(s))    sb.append(operatorExchange.get(s));
-//            else                                    sb.append(s);
             
             sb.append(" ");
         }
-        sb.append("= "); sb.append(result); // 결과 포함해서 저장
-        db.addData(sb.toString()); // Stream 으로 바꿀예정
-        sb.setLength(0); // 길이를 0으로 설정해서 저장: 새로 선언하는 것 보다 시간이 절약됨
-        // LinkedList 를 하나의 스트링으로 저장
+        sb.append("= "); sb.append(result);
+        db.addData(sb.toString());
+        sb.setLength(0);
     }
     public void clearContent(){content.clear();};
     public void makeFormula(String s){
