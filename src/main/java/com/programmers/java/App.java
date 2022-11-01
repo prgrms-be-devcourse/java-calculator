@@ -3,7 +3,7 @@ package com.programmers.java;
 import com.programmers.java.engine.CalculatorController;
 import com.programmers.java.engine.calculator.PostfixCalculator;
 import com.programmers.java.engine.io.ConsoleIOController;
-import com.programmers.java.engine.repository.MemoryHistory;
+import com.programmers.java.engine.repository.MemoryHistoryRepository;
 import com.programmers.java.engine.util.translator.InfixToPostfixTranslator;
 
 public class App {
@@ -13,7 +13,7 @@ public class App {
                 new ConsoleIOController(System.in, System.out),
                 new PostfixCalculator(),
                 new InfixToPostfixTranslator(),
-                new MemoryHistory()
+                new MemoryHistoryRepository()
         ).run();
     }
 }

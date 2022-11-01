@@ -4,7 +4,7 @@ import com.programmers.java.engine.model.Expression;
 
 import java.util.List;
 
-public interface History {
+public interface HistoryRepository {
     void save(Expression expression);
 
     List<Expression> load();
