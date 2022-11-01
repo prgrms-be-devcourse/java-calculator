@@ -7,6 +7,7 @@ import com.programmers.engine.validate.BracketValidator;
 import com.programmers.engine.validate.NumOperatorValidator;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -165,7 +166,7 @@ public class Calculator implements Runnable{
                 return Optional.empty();
             }
             else
-                return Optional.of(b2.divide(b1, 2, BigDecimal.ROUND_HALF_DOWN));
+                return Optional.of(b2.divide(b1, 2, RoundingMode.HALF_UP));
         }
     }
 
