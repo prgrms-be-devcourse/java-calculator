@@ -1,6 +1,6 @@
 package com.programmers.kwonjoosung.java.calculator.utils;
 
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,13 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
-    static Parser parser;
-
-    @BeforeAll
-    @DisplayName("시작")
-    static void setParser() {
-        parser = new BasicParser();
-    }
 
     @Test
     @DisplayName("연산식 오류")
@@ -22,7 +15,7 @@ public class ParserTest {
         // given
         String expression = "1 + 1 - ";
         //when & then
-        assertThrows(IllegalArgumentException.class, () -> parser.parsing(expression));
+        assertThrows(IllegalArgumentException.class, () -> Parser.parsing(expression));
     }
 
     @Test
@@ -31,7 +24,7 @@ public class ParserTest {
         // given
         String expression = "1 + 1 = 2";
         //when & then
-        assertThrows(IllegalArgumentException.class, () -> parser.parsing(expression));
+        assertThrows(IllegalArgumentException.class, () -> Parser.parsing(expression));
     }
 
     @Test
@@ -40,7 +33,7 @@ public class ParserTest {
         // given
         String expression = "";
         //when & then
-        assertThrows(IllegalArgumentException.class, () -> parser.parsing(expression));
+        assertThrows(IllegalArgumentException.class, () -> Parser.parsing(expression));
     }
 
     @Test
@@ -49,7 +42,7 @@ public class ParserTest {
         // given
         String expression = "1 * * 1";
         //when & then
-        assertThrows(IllegalArgumentException.class, () -> parser.parsing(expression));
+        assertThrows(IllegalArgumentException.class, () -> Parser.parsing(expression));
     }
 
     @Test
@@ -58,7 +51,7 @@ public class ParserTest {
         // given
         String expression = "1 1 *";
         //when & then
-        assertThrows(IllegalArgumentException.class, () -> parser.parsing(expression));
+        assertThrows(IllegalArgumentException.class, () -> Parser.parsing(expression));
     }
 
     @Test
@@ -68,7 +61,7 @@ public class ParserTest {
         String expression = "11 + 12 - 13 + -14 / 15.5";
         String[] answer = new String[]{"11", "+", "12", "-", "13", "+", "-14", "/", "15.5"};
         //when
-        String[] result = parser.parsing(expression);
+        String[] result = Parser.parsing(expression);
         //then
         boolean valid = false;
         for (int i = 0; i < answer.length; i++) {
@@ -85,7 +78,7 @@ public class ParserTest {
         String expression = "1 +          1        ";
         // when
         String[] answer = new String[]{"1", "+", "1"};
-        String[] result = parser.parsing(expression);
+        String[] result = Parser.parsing(expression);
         // then
         boolean valid = false;
         for (int i = 0; i < answer.length; i++) {
