@@ -11,6 +11,8 @@ import com.programmers.caculation.parser.PostfixParser;
 import com.programmers.caculation.toeknizer.NumberOpTokenizerUsingCharArray;
 import com.programmers.caculation.toeknizer.Tokenizer;
 import com.programmers.io.Console;
+import com.programmers.io.ConsoleInput;
+import com.programmers.io.ConsoleOutput;
 import com.programmers.record.RecordController;
 import com.programmers.repository.HistoryRepository;
 import com.programmers.repository.MemoryRepository;
@@ -25,7 +27,7 @@ public class AppConfig {
     private static final Caculator caculator = new PostfixCaculator();
     private static final CaculateService caculateService = new CaculateService(caculator);
 
-    public static final Console myConsole = new Console();
+    public static final Console myConsole = new Console(new ConsoleInput(), new ConsoleOutput());
 
     public static final CaculationController caculationController =
             CaculationController.builder()

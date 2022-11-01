@@ -4,42 +4,42 @@ package com.programmers.io;
 import com.programmers.caculation.dto.CaculationControllerResponseDto;
 import com.programmers.record.dto.RecordControllerResponseDto;
 
-import java.util.Scanner;
+public class Console {
+    private final Input input;
+    private final Output output;
 
-public class Console implements Input, Output {
-    private final Scanner scanner = new Scanner(System.in);
+    public Console(Input input, Output output) {
+        this.input = input;
+        this.output = output;
+    }
 
-    @Override
     public String getinputWithPrompt(String prompt) {
         showPrompt(prompt);
-        return scanner.nextLine();
+        return input.getinput();
     }
 
     public void showMenu() {
-        showText("1.조회\n2.계산\n3.종료");
+        output.showText("1.조회\n2.계산\n3.종료");
     }
-    
-    @Override
+
+
     public void showCaculateResult(CaculationControllerResponseDto result) {
-        showText(result.result);
+        output.showText(result.result);
     }
 
-    @Override
+
     public void showRecord(RecordControllerResponseDto record) {
-        showText(record.allRecord);
+        output.showText(record.allRecord);
     }
-    @Override
+
     public void showError(Exception e) {
-        showText(e.getMessage());
+        output.showText(e.getMessage());
     }
 
-    @Override
+
     public void showPrompt(String prompt) {
-        System.out.print(prompt);
+        output.showPrompt(prompt);
     }
 
-    @Override
-    public void showText(String text) {
-        System.out.println(text);
-    }
+
 }
