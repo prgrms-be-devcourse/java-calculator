@@ -1,5 +1,6 @@
 package app.calculator;
 
+import app.exception.DivideByZeroException;
 import app.io.Console;
 import app.storage.MapStorage;
 import app.validator.InputValidator;
@@ -92,10 +93,7 @@ public class CalculatorTest {
         List<String> momZero = List.of("1", "0", "/");
 
         // when
-        Answer momZeroResult = calculator.calculate(momZero);
-
-        // then
-        assertFalse(momZeroResult.isCorrectAnswer());
+        assertThrows(DivideByZeroException.class, () -> calculator.calculate(momZero));
     }
 
 }

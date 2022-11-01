@@ -1,6 +1,7 @@
 package app.validator;
 
 import app.calculator.Select;
+import app.exception.SelectInputValidateException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,15 +20,10 @@ class InputValidatorTest {
         Select calculateInput = Select.CALCULATE;
         Select exitInput = Select.EXIT;
 
-        // when
-        boolean lookUpResult = inputValidator.validateSelectInput(lookUpInput);
-        boolean calculateResult = inputValidator.validateSelectInput(calculateInput);
-        boolean exitResult = inputValidator.validateSelectInput(exitInput);
-
-        // then
-        Assertions.assertTrue(lookUpResult);
-        Assertions.assertTrue(calculateResult);
-        Assertions.assertTrue(exitResult);
+        // when, then
+        Assertions.assertDoesNotThrow(() -> inputValidator.validateSelectInput(lookUpInput));
+        Assertions.assertDoesNotThrow(() -> inputValidator.validateSelectInput(calculateInput));
+        Assertions.assertDoesNotThrow(() -> inputValidator.validateSelectInput(exitInput));
     }
 
     @DisplayName("번호 선택 입력값 검증 확인 - 비정상 입력값")
@@ -36,10 +32,8 @@ class InputValidatorTest {
         // given
         Select abnormalInput = null;
 
-        // when
-        boolean result = inputValidator.validateSelectInput(abnormalInput);
+        // when, then
+        assertThrows(SelectInputValidateException.class, () -> inputValidator.validateSelectInput(abnormalInput));
 
-        //then
-        Assertions.assertFalse(result);
     }
 }
