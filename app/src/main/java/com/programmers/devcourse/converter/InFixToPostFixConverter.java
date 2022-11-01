@@ -4,7 +4,6 @@ import com.programmers.devcourse.calculator.Operator;
 import com.programmers.devcourse.validation.Validator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class InFixToPostFixConverter implements ExpressionConverter {
     private Deque<Character> stack = new ArrayDeque<>();
@@ -68,20 +67,16 @@ public class InFixToPostFixConverter implements ExpressionConverter {
     }
 
 
-    public List<String> getPostfixList() {
+    @Override
+    public List<String> getConvertedList() {
         return postfixList;
     }
 
-    public void clearPostfixList() {
+    @Override
+    public void clearConvertedList() {
         postfixList.clear();
     }
 
-    public void printPostfixList() {
-        for (String postFix : postfixList) {
-            System.out.print(postFix + " ");
-        }
-        System.out.println();
-    }
 
     @Override
     public String toString() {

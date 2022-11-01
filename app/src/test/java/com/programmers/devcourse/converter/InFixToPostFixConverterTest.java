@@ -17,13 +17,13 @@ class InFixToPostFixConverterTest {
 
     @AfterEach
     void clear() {
-        inFixToPostFixConverter.clearPostfixList();
+        inFixToPostFixConverter.clearConvertedList();
     }
 
     @Test
     @DisplayName("중위표기식 후위표기로 변환")
     void convert() {
         inFixToPostFixConverter.convert("(1-2)");
-        assertTrue(inFixToPostFixConverter.getPostfixList().equals(Arrays.asList("1", "2", "-")));
+        assertTrue(inFixToPostFixConverter.getConvertedList().equals(Arrays.asList("1", "2", "-")));
     }
 }

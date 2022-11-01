@@ -3,45 +3,49 @@ package com.programmers.devcourse.calculator;
 import com.programmers.devcourse.cache.AppMemoryCache;
 import com.programmers.devcourse.cli.CommandLine;
 import com.programmers.devcourse.cli.CommandOption;
+import com.programmers.devcourse.converter.ExpressionConverter;
 import com.programmers.devcourse.converter.InFixToPostFixConverter;
 import com.programmers.devcourse.validation.Validator;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
-public class IntegerCalculator implements Runnable {
+public class IntegerCalculator {
 
-    private Map<String, Operator> operators = new HashMap<>();
-    private Validator validator;
-    private CommandLine commandLine;
-    private AppMemoryCache appMemoryCache;
+    private final Map<String, Operator> operators = new HashMap<>();
+    private final Validator validator;
+    private final CommandLine commandLine;
+    private final AppMemoryCache appMemoryCache;
 
-    private InFixToPostFixConverter inFixToPostFixConverter;
+    private final ExpressionConverter expressionConverter;
 
     private List<String> expression = new ArrayList<>();
-    private Deque<Integer> stack = new ArrayDeque<>();
+    private final Deque<Integer> stack = new ArrayDeque<>();
 
     public IntegerCalculator() {
         for (Operator value : Operator.values()) {
-            operators.put(value.operatorStr, value);
+            operators.put(value.getOperatorStr(), value);
         }
         validator = Validator.getInstance();
         commandLine = CommandLine.getInstance();
         appMemoryCache = AppMemoryCache.getInstance();
-        inFixToPostFixConverter = new InFixToPostFixConverter();
+        expressionConverter = new InFixToPostFixConverter();
     }
 
-    @Override
-    public void run() {
+    public void run(boolean calculatorRunning) {
 
-        while (true) {
+        while (calculatorRunning) {
 
             commandLine.printOptionMessage();
             int option = commandLine.readOption();
 
-            if (option == CommandOption.INQUIRY.value) {
+            if (option == CommandOption.INQUIRY.getValue()) {
                 commandLine.printList(appMemoryCache.getAll());
-            } else if (option == CommandOption.CALCULATE.value) {
+            } else if (option == CommandOption.CALCULATE.getValue()) {
 
                 String expressionStr = commandLine.readExpression();
 
@@ -49,16 +53,15 @@ public class IntegerCalculator implements Runnable {
                     continue;
                 }
 
-                inFixToPostFixConverter.convert(expressionStr);
-                expression = inFixToPostFixConverter.getPostfixList();
-                inFixToPostFixConverter.printPostfixList();
+                expressionConverter.convert(expressionStr);
+                expression = expressionConverter.getConvertedList();
 
                 int result = calculate();
                 System.out.println(calculate());
 
                 appMemoryCache.save(expressionStr + "=" + result);
-                inFixToPostFixConverter.clearPostfixList();
-            } else if (option == CommandOption.EXIT.value) {
+                expressionConverter.clearConvertedList();
+            } else if (option == CommandOption.EXIT.getValue()) {
                 commandLine.stopCommandLine();
                 break;
             }
@@ -67,19 +70,7 @@ public class IntegerCalculator implements Runnable {
     }
 
     public int calculate() {
-        for (String token : this.expression) {
-            if (validator.isNumber(token)) {
-                stack.addLast(Integer.parseInt(token));
-            } else {
-                int num1 = stack.removeLast();
-                int num2 = stack.removeLast();
-                int tempResult = operators.get(token).calculate(num2, num1);
-                stack.addLast(tempResult);
-            }
-        }
-
-        return stack.removeLast();
-
+        return this.calculate(this.expression);
     }
 
     public int calculate(List<String> expression) {
