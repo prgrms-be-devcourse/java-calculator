@@ -7,36 +7,35 @@ import java.util.*;
 // 후위표현식을 List 형태로 반환
 public class BasicPostfixMaker implements PostfixMaker{
 
-    // 연산식 리스트 -> 후위식 표기법 리스트로 변환 (갈아 엎자)
+    // 연산식 리스트 -> 후위식 표기법 리스트로 변환
     @Override
     public List<String> makePostfix(Expression expression) {
 
         Deque<String> stack = new ArrayDeque<>();
         List<String> expressionList = makeExpressionList(expression.getExpressionValue());
-
         List<String> postfixList = new ArrayList<>();
 
-        expressionList
-                .forEach(val -> {
+        expressionList.forEach(val -> {
                     if (val.matches(RegexConstant.NUMBERS)) {
                         postfixList.add(val);
                     } else {
-                        if (stack.isEmpty()) stack.push(val);
-                        else {
-                            if (isNowOperatorHigherPriority(stack.peek(), val)) {
-                                stack.push(val);
-                            } else {
-                                while (!stack.isEmpty() && !isNowOperatorHigherPriority(stack.peek(), val)) {
-                                    postfixList.add(stack.pop());
-                                }
-                                stack.push(val);
-                            }
-                        }
-                    }
-                });
+                        fillStackWithOperators(stack, val, postfixList);
+                    }});
+
         while (!stack.isEmpty()) postfixList.add(stack.pop());
 
         return postfixList;
+    }
+
+    private void fillStackWithOperators(Deque<String> stack, String operator, List<String> postfixList) {
+        if (stack.isEmpty() || isNowOperatorHigherPriority(stack.peek(), operator)) {
+            stack.push(operator);
+        } else {
+            while (!stack.isEmpty() && !isNowOperatorHigherPriority(stack.peek(), operator)) {
+                postfixList.add(stack.pop());
+            }
+            stack.push(operator);
+        }
     }
 
     // 연산식 문자열 -> 연산식 리스트
