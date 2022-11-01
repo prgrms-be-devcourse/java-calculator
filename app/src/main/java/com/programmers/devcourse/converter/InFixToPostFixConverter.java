@@ -6,15 +6,15 @@ import com.programmers.devcourse.validation.Validator;
 import java.util.*;
 
 public class InFixToPostFixConverter implements ExpressionConverter {
-    private Deque<Character> stack = new ArrayDeque<>();
-    private List<String> postfixList = new ArrayList<>();
+    private final Deque<Character> stack = new ArrayDeque<>();
+    private final List<String> postfixList = new ArrayList<>();
 
-    private Map<String, Operator> operators = new HashMap<>();
-    private Validator validator;
+    private final Map<String, Operator> operators = new HashMap<>();
+    private final Validator validator;
 
     public InFixToPostFixConverter() {
         for (Operator value : Operator.values()) {
-            operators.put(value.operatorStr, value);
+            operators.put(value.getOperatorStr(), value);
         }
         this.validator = Validator.getInstance();
     }
@@ -55,7 +55,7 @@ public class InFixToPostFixConverter implements ExpressionConverter {
                     stack.addLast(input);
                 } else {
                     while (!stack.isEmpty() && !stack.getLast().equals('(')
-                            && operators.get(String.valueOf(input)).precedence <= operators.get(stack.getLast().toString()).precedence) {
+                            && operators.get(String.valueOf(input)).getPrecedence() <= operators.get(stack.getLast().toString()).getPrecedence()) {
 
                         postfixList.add(stack.removeLast().toString());
                     }

@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class CommandLine {
-    BufferedReader bufferedReader;
-    private Validator validator;
+    private BufferedReader bufferedReader;
+    private final Validator validator;
+    private static final int NOT_VALID = -1;
 
     private CommandLine() {
         this.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +32,7 @@ public class CommandLine {
     }
 
     public int readOption() {
-        String optionStr = null;
+        String optionStr;
         try {
             optionStr = bufferedReader.readLine();
         } catch (IOException e) {
@@ -40,15 +41,18 @@ public class CommandLine {
 
         if (!validator.isNumber(optionStr)) {
             System.out.println("선택값이 유효하지 않습니다.");
-            return -1;
+            return NOT_VALID;
         }
 
         int optionInt = Integer.parseInt(optionStr);
-        Optional<CommandOption> find = Arrays.stream(CommandOption.values()).filter(option -> option.value == optionInt).findFirst();
+        Optional<CommandOption> find = Arrays
+                .stream(CommandOption.values())
+                .filter(option -> option.getValue() == optionInt)
+                .findFirst();
 
         if (find.isEmpty()) {
             System.out.println("선택값이 유효하지 않습니다.");
-            return -1;
+            return NOT_VALID;
         }
 
         return optionInt;
@@ -57,12 +61,12 @@ public class CommandLine {
     public String readExpression() {
         try {
             return bufferedReader.readLine();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
+
     public void stopCommandLine() {
         try {
             bufferedReader.close();

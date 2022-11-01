@@ -7,6 +7,6 @@ import com.programmers.devcourse.calculator.IntegerCalculator;
 
 public class CalculationRunner {
     public static void main(String[] args) {
-        new IntegerCalculator().run();
+        new IntegerCalculator().run(true);
     }
 }

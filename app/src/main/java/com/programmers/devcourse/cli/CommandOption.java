@@ -5,8 +5,13 @@ public enum CommandOption {
     CALCULATE(2),
     EXIT(3);
 
-    public int value;
+    private final int value;
+
     CommandOption(int value) {
         this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
