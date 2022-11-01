@@ -40,16 +40,6 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void inputError() {
-        System.out.println("잘못된 입력값입니다.");
-    }
-
-    @Override
-    public void divideByZeroError() {
-        System.out.println("잘못된 계산입니다. (0으로 나눌 수 없습니다.)");
-    }
-
-    @Override
     public void quitProgram() {
         System.out.println("프로그램을 종료합니다.");
     }
