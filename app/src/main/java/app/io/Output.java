@@ -7,7 +7,5 @@ public interface Output {
     void selectOutput(String selectNumber);
     void lookUpOutput(String calculateHistory);
     void calculateOutput(Answer calculateResult);
-    void inputError();
-    void divideByZeroError();
     void quitProgram();
 }
