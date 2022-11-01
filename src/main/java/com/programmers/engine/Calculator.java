@@ -25,6 +25,9 @@ public class Calculator implements Runnable{
 
     private final NumOperatorValidator numOperatorValidator;
 
+    private Operator operator;
+    private Bracket bracket;
+
     Map<String, Operator> map = Map.of(
             Operator.MUL.toString(), Operator.MUL,
             Operator.DIV.toString(), Operator.DIV,
@@ -47,54 +50,67 @@ public class Calculator implements Runnable{
 
     @Override
     public void run() {
-        while(true){
+        while(true) {
             String inputString = input.input("1. 조회\n2. 계산\n3. 종료\n선택 : ");
-            if(inputString.length() == 1) {
-                Optional<Integer> num = parse(inputString);
-                BigDecimal ans = BigDecimal.valueOf(0);
-
-                if (num.get() == 1) {
-                    dataBase.showAll(output);
-                } // DB 조회
-                else if (num.get() == 2) {
-                    output.caution();
-                    formula.makeFormula(input.input("계산식 입력 : ")); // 계산식 입력 받기
-
-                    if (formula.validate(bracketValidator)){
-                            if (formula.validate(numOperatorValidator)){
-                                ans = calculate(formula);
-                                System.out.println(ans);
-                                if (!ans.equals(BigDecimal.valueOf(Integer.MAX_VALUE))) {
-                                    addToDB(dataBase, formula, ans);
-                                    formula.clearContent();
-                                }else
-                                    output.divdeByZeroError();
-                            }else{
-                                output.numOperatorValidationError();
-                            }
-                    }else{
-                        output.bracketValidationError();
-                    }
-
-                } else if (num.isEmpty()) output.inputError();
-
-                else break;
-            }
-            else{
+            if (inputString.length() != 1) {
                 output.wrongChoice();
+                continue;
             }
+
+            Optional<Integer> num = parse(inputString);
+            BigDecimal ans = BigDecimal.valueOf(0);
+
+            if (num.get() == 1) {
+                dataBase.showAll(output);
+                continue;
+            } else if (num.get() != 2)
+                break;
+            else if (num.isEmpty()) {
+                output.inputError();
+                continue;
+            }
+
+            output.caution();
+            formula.makeFormula(input.input("계산식 입력 : "));
+
+            if (!formula.validate(bracketValidator)) {
+                output.bracketValidationError();
+                continue;
+            }
+
+            if (!formula.validate(numOperatorValidator)) {
+                output.numOperatorValidationError();
+                continue;
+            }
+
+            ans = calculate(formula);
+            System.out.println(ans);
+
+            if (!ans.equals(BigDecimal.valueOf(Integer.MAX_VALUE))) {
+                addToDB(dataBase, formula, ans);
+                formula.clearContent();
+            } else
+                output.divdeByZeroError();
+
         }
+
+
         output.bye();
+
     }
 
     private Optional<Integer> parse(String inputString){
         if (inputString.length() == 0) return Optional.empty();
+
         int tmp;
+
         try {
             tmp = Integer.parseInt(inputString);
-        }catch (Exception e){
+        }
+        catch (Exception e){
             return Optional.empty();
         }
+
         return Optional.of(tmp);
     }
     private BigDecimal calculate(Formula formula){
@@ -106,9 +122,6 @@ public class Calculator implements Runnable{
 
 
         formula.indexedForEach((a) -> {
-//            System.out.println("cur : " + a);
-//            System.out.println("oper stack : " + operatorStack.toString());
-//            System.out.println("numstack : " + numStack.toString() + "\n");
 
             if(a.equals(Bracket.CLOSE.toString())){ // 닫는 괄호면 무조건 숫자 2개 pop 해서 계산하기
                 isBracketOpened.set(false);
@@ -120,10 +133,9 @@ public class Calculator implements Runnable{
                 Optional<BigDecimal> reuslt = arithmetic(tmp1, tmp2, tmpOp);
                 if (reuslt.isPresent()) numStack.push(reuslt.get());
                 else {
-                    numStack.push(tmp1); //  숫자 맞추기 위해 넣기
-                    isDividedByZero.set(true); // 이거는 에러가 났다
+                    numStack.push(tmp1);
+                    isDividedByZero.set(true);
                 }
-                //reuslt.ifPresent(numStack::push);
             }else if (a.equals(Bracket.OPEN.toString())){
                 isBracketOpened.set(true);
             }

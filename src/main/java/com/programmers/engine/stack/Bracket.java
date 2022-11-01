@@ -9,8 +9,7 @@ import java.util.stream.Stream;
 
 public enum Bracket {
     OPEN("("),
-    CLOSE(")"),
-    NOT_BRACKET("Not Bracket");
+    CLOSE(")");
     private final String symbol;
 
     private static final Map<String, Bracket> map =
