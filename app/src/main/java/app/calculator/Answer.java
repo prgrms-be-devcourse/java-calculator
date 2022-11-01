@@ -12,16 +12,8 @@ public class Answer {
         this.correctAnswer = correctAnswer;
     }
 
-    public static Answer createAbnormalAnswer() {
-        return new Answer(null);
-    }
-
     public static Answer createCorrectAnswer(Integer correctAnswer) {
         return new Answer(correctAnswer);
-    }
-
-    public boolean isCorrectAnswer() {
-        return this.correctAnswer != null;
     }
 
     public Integer getCorrectAnswer() {
