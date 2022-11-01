@@ -1,15 +1,17 @@
 package com.calculator.entity;
 
-import lombok.AllArgsConstructor;
-
 import java.util.Objects;
 
-@AllArgsConstructor
 public class Expression {
     private final static String pattern2 = ".0$";
 
     private String infix;   // 중위 표기법
     private double result;
+
+    public Expression(String infix, double result) {
+        this.infix = infix;
+        this.result = result;
+    }
 
     public String getInfix() {
         return infix;

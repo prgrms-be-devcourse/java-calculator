@@ -18,13 +18,7 @@ public class Application {
         Console console = new Console(validatorHandler);
 
         try {
-            Calculator.builder()
-                    .input(console)
-                    .output(console)
-                    .repository(mapRepository)
-                    .validator(validatorHandler)
-                    .build()
-                    .run();
+            new Calculator(console, console, mapRepository, validatorHandler).run();
         } catch (BaseException e) {
             System.out.println(e.getStatus().getMessage());
         } catch (IOException e) {

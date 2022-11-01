@@ -2,14 +2,16 @@ package com.calculator.io;
 
 import com.calculator.common.BaseException;
 import com.calculator.common.ValidatorHandler;
-import lombok.AllArgsConstructor;
 
 import java.io.IOException;
 
-@AllArgsConstructor
 public class Console implements Input, Output{
 
     private ValidatorHandler validatorHandler;
+
+    public Console(ValidatorHandler validatorHandler) {
+        this.validatorHandler = validatorHandler;
+    }
 
     @Override
     public String inputType() throws IOException {

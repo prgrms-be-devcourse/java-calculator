@@ -1,7 +1,6 @@
 package com.calculator.io;
 
 import com.calculator.common.BaseException;
-import com.calculator.common.ValidatorHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;

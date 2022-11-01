@@ -4,14 +4,11 @@ import com.calculator.entity.Expression;
 import com.calculator.io.Input;
 import com.calculator.io.Output;
 import com.calculator.repository.Repository;
-import lombok.Builder;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 
-@Builder
 public class Calculator {
 
     private double result;
@@ -20,7 +17,14 @@ public class Calculator {
     private final Output output;
     private final Repository repository;
 
-    private ValidatorHandler validator;
+    private final ValidatorHandler validator;
+
+    public Calculator(Input input, Output output, Repository repository, ValidatorHandler validator) {
+        this.input = input;
+        this.output = output;
+        this.repository = repository;
+        this.validator = validator;
+    }
 
     public void run() throws BaseException, IOException {
         while (true) {
