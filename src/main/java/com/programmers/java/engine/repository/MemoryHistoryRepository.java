@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryHistory implements History {
+public class MemoryHistoryRepository implements HistoryRepository {
     private int counter;
     private Map<Integer, Expression> map;
 
-    public MemoryHistory() {
+    public MemoryHistoryRepository() {
         this.counter = 0;
         this.map = new HashMap<>();
     }
