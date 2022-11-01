@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InputTest {
-    static Input input;
+    static Console input;
 
     public static InputStream generateUserInput(String input) {
         return new ByteArrayInputStream(input.getBytes());

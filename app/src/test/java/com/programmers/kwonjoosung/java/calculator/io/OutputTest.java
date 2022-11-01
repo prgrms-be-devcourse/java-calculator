@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OutputTest {
-    static Output output;
+    static Console output;
 
     @BeforeAll
     @DisplayName("출력")
