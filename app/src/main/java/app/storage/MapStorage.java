@@ -14,7 +14,7 @@ public class MapStorage implements Storage {
     @Override
     public String save(Expression expression, Answer answer) {
         if (!existExpression(expression)) storage.put(expression.getExpressionValue(), answer);
-        return expression + " = " + answer.getCorrectAnswer();
+        return expression.getExpressionValue() + " = " + answer.getCorrectAnswer();
     }
 
     @Override
