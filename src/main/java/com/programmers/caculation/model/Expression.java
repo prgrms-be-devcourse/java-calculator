@@ -2,7 +2,7 @@ package com.programmers.caculation.model;
 
 public class Expression {
     final String originExpression;
-    String result;
+    final String result;
     String allExpression;
 
 
@@ -11,21 +11,17 @@ public class Expression {
         this.result = result;
     }
 
-    public String getExpression() {
-        return this.originExpression;
-    }
-
-    public String getResult() throws Exception {
+    public String getResult() {
         return this.result;
     }
 
-    public String getAllExpression() throws Exception {
+    public String getAllExpression() {
         if (this.allExpression == null) {
-            StringBuffer sb = new StringBuffer();
-            sb.append(this.originExpression);
-            sb.append('=');
-            sb.append(getResult());
-            this.allExpression = sb.toString();
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(this.originExpression);
+            stringBuilder.append('=');
+            stringBuilder.append(getResult());
+            this.allExpression = stringBuilder.toString();
         }
         return this.allExpression;
     }
