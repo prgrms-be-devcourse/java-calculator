@@ -23,8 +23,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     implementation 'org.junit.jupiter:junit-jupiter-params:5.9.1'
-
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 }
 
 application {
