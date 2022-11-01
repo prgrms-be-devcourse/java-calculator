@@ -6,16 +6,18 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", (operand1, operand2) -> operand1 + operand2),
-    MINUS("-", (operand1, operand2) -> operand1 - operand2),
-    MULTIPLY("*", (operand1, operand2) -> operand1 * operand2),
-    DIVIDE("/", (operand1, operand2) -> operand1 / operand2);
+    PLUS("+", 1, (operand1, operand2) -> operand1 + operand2),
+    MINUS("-", 1, (operand1, operand2) -> operand1 - operand2),
+    MULTIPLY("*", 2, (operand1, operand2) -> operand1 * operand2),
+    DIVIDE("/", 2, (operand1, operand2) -> operand1 / operand2);
 
     private final String signature;
-    private BiFunction<Integer, Integer, Integer> operation;
+    private final Integer priority;
+    private final BiFunction<Integer, Integer, Integer> operation;
 
-    Operator(String signature, BiFunction<Integer, Integer, Integer> operation) {
+    Operator(String signature, Integer priority, BiFunction<Integer, Integer, Integer> operation) {
         this.signature = signature;
+        this.priority = priority;
         this.operation = operation;
     }
 
@@ -38,5 +40,13 @@ public enum Operator {
 
     private boolean checkDivideByZero(Operator operator, int operand2) {
         return operator == Operator.DIVIDE && operand2 == 0;
+    }
+
+    public static Integer findPriority(String inputSignature) {
+        return findOperator(inputSignature).getPriority();
+    }
+
+    private Integer getPriority() {
+        return priority;
     }
 }

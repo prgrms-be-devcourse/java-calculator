@@ -60,7 +60,6 @@ public class BasicPostfixMaker implements PostfixMaker{
 
     // 스택에 쌓여있는 연산자 간의 우선순위를 판단
     private boolean isNowOperatorHigherPriority(String prev, String now) {
-        if (prev.equals("*") || prev.equals("/")) return false;
-        else return !now.equals("+") && !now.equals("-");
+        return Operator.findPriority(prev) < Operator.findPriority(now);
     }
 }
