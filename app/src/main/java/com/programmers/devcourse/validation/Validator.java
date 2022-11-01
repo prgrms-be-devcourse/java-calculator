@@ -14,26 +14,28 @@ public class Validator {
     }
 
     public boolean isNotBlank(String input) {
-        boolean isEmpty =input.isEmpty();
-        if(isEmpty) {
-            System.out.println(ValidationMessage.EMPTY.messageStr);
+        boolean isEmpty = input.isEmpty();
+        if (isEmpty) {
+            System.out.println(ValidationMessage.EMPTY.getMessageStr());
         }
         return !isEmpty;
     }
 
     public boolean isValidToken(String input) {
-        boolean isValid = input.matches("^[(\\)\\d\\s+\\-*/]*$");
-        if(!isValid) {
-            System.out.println(ValidationMessage.NOT_VALID_TOKEN.messageStr);
+        boolean isNumberOrOperatorOrParentheses = input.matches("^[()\\d\\s+\\-*/]*$");
+        if (!isNumberOrOperatorOrParentheses) {
+            System.out.println(ValidationMessage.NOT_VALID_TOKEN.getMessageStr());
         }
-        return isValid;
+        return isNumberOrOperatorOrParentheses;
     }
 
     public boolean isNumber(String input) {
         return input.matches("\\d+");
     }
 
-    public boolean isNumber(char input) { return isNumber(String.valueOf(input));}
+    public boolean isNumber(char input) {
+        return isNumber(String.valueOf(input));
+    }
 
 
 }
