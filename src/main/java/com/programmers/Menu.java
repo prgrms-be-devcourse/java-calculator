@@ -11,8 +11,9 @@ public enum Menu {
 
     public static Menu getMenu(String string){
         try {
-            String name = Arrays.stream(values()).filter(element->element.value.equals(string)).toString();
-            return Menu.valueOf(name);
+            String[] enumName = Arrays.stream(values()).filter(element->element.value.equals(string))
+                    .map(Enum::toString).toArray(String[]::new);
+            return Menu.valueOf(enumName[0]);
          } catch(Exception e){
             return DEFAULT;
         }
