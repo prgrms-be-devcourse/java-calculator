@@ -16,10 +16,7 @@ public class Console implements Input, Output{
         String selectNumber = scanner.nextLine();
         selectOutput(selectNumber);
 
-        if (selectNumber.equals("1")) return Select.LOOK_UP;
-        else if (selectNumber.equals("2")) return Select.CALCULATE;
-        else if (selectNumber.equals("3")) return Select.EXIT;
-        return null;
+        return Select.findSelect(selectNumber);
     }
 
     @Override
