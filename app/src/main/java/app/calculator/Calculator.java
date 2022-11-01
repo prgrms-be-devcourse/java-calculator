@@ -1,9 +1,7 @@
 package app.calculator;
 
-import app.exception.DivideByZeroException;
 import app.io.Input;
 import app.io.Output;
-import app.storage.MapStorage;
 import app.storage.Storage;
 import app.validator.InputValidator;
 import app.validator.RegexConstant;
@@ -11,6 +9,8 @@ import app.validator.RegexConstant;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
+
+import static app.calculator.Select.*;
 
 public class Calculator {
 
@@ -31,40 +31,31 @@ public class Calculator {
     public void run() {
 
         Select selectInput = Select.NONE;
-        while (selectInput != Select.EXIT) {
+        while (selectInput != EXIT) {
+            try {
+                selectInput = input.selectInput();
+                validator.validateSelectInput(selectInput);
 
-            selectInput = input.selectInput();
-
-            if (!validator.validateSelectInput(selectInput)) {
-                output.inputError();
-                continue;
-            }
-
-            if (selectInput == Select.LOOK_UP) {
-                output.lookUpOutput(storage.findAll());
-
-            } else if (selectInput == Select.CALCULATE){
-                Expression expression = new Expression(input.calculateInput());
-
-                if (!expression.validateInputExpression()) {
-                    output.inputError();
-                    continue;
+                switch (selectInput) {
+                    case LOOK_UP:
+                        output.lookUpOutput(storage.findAll());
+                        break;
+                    case CALCULATE:
+                        Expression expression = new Expression(input.calculateInput());
+                        storage.checkStorageAndFindAnswer(storage, expression)
+                                .ifPresentOrElse(output::calculateOutput, () -> {
+                                    List<String> postfixExpression = postfixMaker.makePostfix(expression);
+                                    Answer answer = calculate(postfixExpression);
+                                    output.calculateOutput(answer);
+                                    storage.save(expression, answer);
+                                });
+                        break;
+                    case EXIT:
+                        output.quitProgram();
+                        break;
                 }
-
-                if (storage instanceof MapStorage && ((MapStorage) storage).existExpression(expression)) {
-                    output.calculateOutput(((MapStorage) storage).getExistAnswer(expression));
-                    continue;
-                }
-
-                List<String> postfixExpression = postfixMaker.makePostfix(expression);
-                Answer answer = calculate(postfixExpression);
-
-                if (answer.isCorrectAnswer()) {
-                    output.calculateOutput(answer);
-                    storage.save(expression, answer);
-                }
-            } else if (selectInput == Select.EXIT) {
-                output.quitProgram();
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -79,12 +70,7 @@ public class Calculator {
             else {
                 int secondOperand = stack.pop();
                 int firstOperand = stack.pop();
-                try {
-                    stack.push(Operator.calculate(element, firstOperand, secondOperand));
-                } catch (DivideByZeroException e) {
-                    output.divideByZeroError();
-                    return Answer.createAbnormalAnswer();
-                }
+                stack.push(Operator.calculate(element, firstOperand, secondOperand));
             }
         }
 
