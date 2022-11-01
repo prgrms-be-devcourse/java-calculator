@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OperatorTest {
     List<String> testFormula;
+    Operator operator;
     void generateFormula(){
         testFormula = new ArrayList<>();
         String formula = "5 + 6 - 10 / 10";
@@ -31,11 +32,11 @@ class OperatorTest {
         generateFormula();
 
         testFormula.forEach((element) -> {
-            if (Operator.find(element).equals(Optional.of(PLUS)))
+            if (operator.find(element).equals(Optional.of(PLUS)))
                 plusCnt.getAndIncrement();
-            else if (Operator.find(element).equals(Optional.of(DIV)))
+            else if (operator.find(element).equals(Optional.of(DIV)))
                 minusCnt.getAndIncrement();
-            else if (Operator.find(element).equals(Optional.of(MINUS)))
+            else if (operator.find(element).equals(Optional.of(MINUS)))
                 divideCnt.getAndIncrement();
         });
 
