@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProcessingTest {
+class ProcessorTest {
 
-    Processing calculatorController = new Processing();
+    Processor calculatorController = new Processor();
 
     @Test
     @DisplayName("입력 값에 따라서 반환되는 결과를 검증하라")

@@ -7,7 +7,7 @@ import org.programmers.java.calculator.util.verifiaction.FormulaVerification;
 
 import java.util.*;
 
-public class Processing {
+public class Processor {
     private final PostfixTranslator postfixTranslator = new PostfixTranslator();
     private final PostfixCalculator postfixCalculator = new PostfixCalculator();
     private final FormulaVerification formulaVerification = new FormulaVerification();
@@ -37,7 +37,7 @@ public class Processing {
 
     private String getAnswer(String input) {
         verification(input);
-        String  answer = postfixCalculator.calculate(
+        String answer = postfixCalculator.calculate(
                 postfixTranslator.infixToPostfix(input)
         ).toString();
         return answer;
