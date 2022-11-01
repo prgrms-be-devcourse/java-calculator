@@ -5,7 +5,7 @@ import com.programmers.calculator.io.Console;
 import com.programmers.calculator.processor.Calculator;
 import com.programmers.calculator.storage.OperationStorage;
 
-public class CommandPasade {
+public class CommandFasade {
     public void excute(OperationStorage operationStorage, Calculator calculator, Console console, int command) {
         switch (command) {
             case 1: // 주어진 연산 수행

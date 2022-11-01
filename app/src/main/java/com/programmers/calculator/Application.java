@@ -1,5 +1,6 @@
 package com.programmers.calculator;
 
+
 import com.programmers.calculator.io.Console;
 import com.programmers.calculator.processor.Calculator;
 import com.programmers.calculator.processor.Validator;
@@ -12,20 +13,20 @@ public class Application {
     private final OperationStorage operationStorage;
     private final Console console;
     private final Calculator calculator;
-    private final CommandPasade commandPasade;
+    private final CommandFasade commandFasade;
 
     public Application() {
         this.operationStorage = new OperationMemoryStorage();
         this.console = new Console();
         this.calculator = new Calculator();
-        this.commandPasade = new CommandPasade();
+        this.commandFasade = new CommandFasade();
     }
 
     public void run() {
         while (true) {
             try {
                 int mode = inputMode();
-                commandPasade.excute(operationStorage, calculator, console, mode);
+                commandFasade.excute(operationStorage, calculator, console, mode);
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
