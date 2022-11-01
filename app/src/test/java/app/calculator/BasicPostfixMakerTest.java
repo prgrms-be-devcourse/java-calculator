@@ -14,7 +14,7 @@ public class BasicPostfixMakerTest {
     @Test
     void infixToPostfixTest() {
         // given
-        String infix = "1 + 2 * 3 + 4 / 5";
+        Expression infix = new Expression("1 + 2 * 3 + 4 / 5");
         List<String> answer = List.of("1", "2", "3", "*", "+", "4", "5", "/", "+");
 
         // when

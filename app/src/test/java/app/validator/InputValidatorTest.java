@@ -42,43 +42,4 @@ class InputValidatorTest {
         //then
         Assertions.assertFalse(result);
     }
-
-    @DisplayName("게신시 연산식 입력값 검증 확인 - 정상 입력값")
-    void validateCorrectCalculateInputValueTest() {
-        // given
-        String correctInput = "1 + 2 * 3 / 4 - 5";
-
-        // when
-        boolean result = inputValidator.validateCalculateInputValue(correctInput);
-
-        // then
-        Assertions.assertTrue(result);
-    }
-
-    @DisplayName("계산시 연산식 입력값 검증 확인 - 비정상 입력값 1 : 숫자, 사칙연산을 제외한 문자가 입력되었을 경우")
-    @Test
-    void validateAbnormalCalculateInputValueTest() {
-        // given
-        String abnormalInput = "1 + 2 ^ 3";
-
-        // when
-        boolean result = inputValidator.validateCalculateInputValue(abnormalInput);
-
-        // then
-        Assertions.assertFalse(result);
-    }
-
-    @DisplayName("계산시 연산식 입력값 검증 확인 - 비정상 입력값 2 : 연산식이 연속으로 배치됐을 경우")
-    @Test
-    void validateInCorrectExpressionInputValueTest() {
-        // given
-        String abnormalInput = "1 ++ 2 -- 3";
-
-        // when
-        boolean result = inputValidator.validateCalculateInputValue(abnormalInput);
-
-        // then
-        Assertions.assertFalse(result);
-    }
-
 }

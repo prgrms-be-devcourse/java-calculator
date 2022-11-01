@@ -1,6 +1,7 @@
 package app.storage;
 
 import app.calculator.Answer;
+import app.calculator.Expression;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,7 @@ class ListStorageTest {
     @Test
     void saveTest() {
         // given
-        String expression = "1 + 2 + 3";
+        Expression expression = new Expression("1 + 2 + 3");
         Integer expressionAnswer = 6;
         String testAnswer = "1 + 2 + 3 = 6";
 
@@ -36,8 +37,8 @@ class ListStorageTest {
     @Test
     void findAllTest() {
         // given
-        listStorage.save("1 + 2 + 3", Answer.createCorrectAnswer(6));
-        listStorage.save("10 - 5", Answer.createCorrectAnswer(5));
+        listStorage.save(new Expression("1 + 2 + 3"), Answer.createCorrectAnswer(6));
+        listStorage.save(new Expression("10 - 5"), Answer.createCorrectAnswer(5));
         String answer = "1 + 2 + 3 = 6\n10 - 5 = 5\n";
 
         // when
