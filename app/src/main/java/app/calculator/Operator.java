@@ -4,6 +4,7 @@ import app.exception.DivideByZeroException;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     PLUS("+", 1, (operand1, operand2) -> operand1 + operand2),
@@ -15,7 +16,7 @@ public enum Operator {
     private final Integer priority;
     private final BiFunction<Integer, Integer, Integer> operation;
 
-    Operator(String signature, Integer priority, BiFunction<Integer, Integer, Integer> operation) {
+    Operator(String signature, Integer priority, BinaryOperator<Integer> operation) {
         this.signature = signature;
         this.priority = priority;
         this.operation = operation;
