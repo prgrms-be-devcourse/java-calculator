@@ -1,5 +1,6 @@
 package app.calculator;
 
+import app.exception.DivideByZeroException;
 import app.io.Input;
 import app.io.Output;
 import app.storage.MapStorage;
@@ -78,15 +79,11 @@ public class Calculator {
             else {
                 int secondOperand = stack.pop();
                 int firstOperand = stack.pop();
-                if (element.equals("+")) stack.push(firstOperand + secondOperand);
-                else if (element.equals("-")) stack.push(firstOperand - secondOperand);
-                else if (element.equals("*")) stack.push(firstOperand * secondOperand);
-                else if (element.equals("/")) {
-                    if (secondOperand == 0) {
-                        output.divideByZeroError();
-                        return Answer.createAbnormalAnswer();
-                    }
-                    stack.push(firstOperand / secondOperand);
+                try {
+                    stack.push(Operator.calculate(element, firstOperand, secondOperand));
+                } catch (DivideByZeroException e) {
+                    output.divideByZeroError();
+                    return Answer.createAbnormalAnswer();
                 }
             }
         }
