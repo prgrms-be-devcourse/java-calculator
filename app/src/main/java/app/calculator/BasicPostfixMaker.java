@@ -2,19 +2,17 @@ package app.calculator;
 
 import app.validator.RegexConstant;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 // 후위표현식을 List 형태로 반환
 public class BasicPostfixMaker implements PostfixMaker{
 
-    // 연산식 리스트 -> 후위식 표기법 리스트로 변환
+    // 연산식 리스트 -> 후위식 표기법 리스트로 변환 (갈아 엎자)
     @Override
-    public List<String> makePostfix(String expression) {
+    public List<String> makePostfix(Expression expression) {
 
-        Stack<String> stack = new Stack<>();
-        List<String> expressionList = makeExpressionList(expression);
+        Deque<String> stack = new ArrayDeque<>();
+        List<String> expressionList = makeExpressionList(expression.getExpressionValue());
 
         List<String> postfixList = new ArrayList<>();
 
@@ -42,12 +40,12 @@ public class BasicPostfixMaker implements PostfixMaker{
     }
 
     // 연산식 문자열 -> 연산식 리스트
-    private List<String> makeExpressionList(String expression) {
+    private List<String> makeExpressionList(String expresionValue) {
 
         List<String> expressionList = new ArrayList<>();
         StringBuilder numberStringBuilder = new StringBuilder();
 
-        for (char val : expression.replaceAll(RegexConstant.WHITESPACE, "").toCharArray()) {
+        for (char val : expresionValue.replaceAll(RegexConstant.WHITESPACE, "").toCharArray()) {
             if (Character.isDigit(val)) {
                 numberStringBuilder.append(val);
             } else {

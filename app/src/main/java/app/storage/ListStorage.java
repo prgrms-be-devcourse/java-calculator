@@ -1,6 +1,7 @@
 package app.storage;
 
 import app.calculator.Answer;
+import app.calculator.Expression;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,8 +13,8 @@ public class ListStorage implements Storage{
 
     // 저장소에 값을 저장합니다.
     @Override
-    public String save(String expression, Answer answer) {
-        storage.add(expression + " = " + answer.getCorrectAnswer());
+    public String save(Expression expression, Answer answer) {
+        storage.add(expression.getExpressionValue() + " = " + answer.getCorrectAnswer());
 
         return storage.get(storage.size() - 1);
     }

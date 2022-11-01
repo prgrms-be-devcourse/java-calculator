@@ -43,9 +43,9 @@ public class Calculator {
                 output.lookUpOutput(storage.findAll());
 
             } else if (selectInput == Select.CALCULATE){
-                String expression = input.calculateInput();
+                Expression expression = new Expression(input.calculateInput());
 
-                if (!validator.validateCalculateInputValue(expression)) {
+                if (!expression.validateInputExpression()) {
                     output.inputError();
                     continue;
                 }
@@ -68,11 +68,13 @@ public class Calculator {
         }
     }
 
-    // 후위표기법의 연산식을 계산
+    // 후위표기법의 연산식을 계산  -> enum + 함수형 인터페이스를 활용해서 코드를 줄여보자.
     public Answer calculate(List<String> postfixExpression) {
         Deque<Integer> stack = new ArrayDeque<>();
         for (String element : postfixExpression) {
-            if (element.matches(RegexConstant.NUMBERS)) stack.push(Integer.parseInt(element));
+            if (element.matches(RegexConstant.NUMBERS)) {
+                stack.push(Integer.parseInt(element));
+            }
             else {
                 int secondOperand = stack.pop();
                 int firstOperand = stack.pop();

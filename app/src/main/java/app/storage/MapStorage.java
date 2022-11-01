@@ -1,6 +1,7 @@
 package app.storage;
 
 import app.calculator.Answer;
+import app.calculator.Expression;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,8 +12,8 @@ public class MapStorage implements Storage {
     private static final Map<String, Answer> storage = new LinkedHashMap<>();
 
     @Override
-    public String save(String expression, Answer answer) {
-        if (!existExpression(expression)) storage.put(expression, answer);
+    public String save(Expression expression, Answer answer) {
+        if (!existExpression(expression)) storage.put(expression.getExpressionValue(), answer);
         return expression + " = " + answer.getCorrectAnswer();
     }
 
@@ -31,11 +32,11 @@ public class MapStorage implements Storage {
         storage.clear();
     }
 
-    public boolean existExpression(String expression) {
-        return storage.containsKey(expression);
+    public boolean existExpression(Expression expression) {
+        return storage.containsKey(expression.getExpressionValue());
     }
 
-    public Answer getExistAnswer(String expression) {
-        return storage.get(expression);
+    public Answer getExistAnswer(Expression expression) {
+        return storage.get(expression.getExpressionValue());
     }
 }
