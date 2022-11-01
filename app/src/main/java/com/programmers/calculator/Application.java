@@ -26,7 +26,8 @@ public class Application {
         while (true) {
             try {
                 int mode = inputMode();
-                commandFasade.excute(operationStorage, calculator, console, mode);
+                CommandStatus command = CommandStatus.selectCommand(mode);
+                commandFasade.excute(operationStorage, calculator, console, command);
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
