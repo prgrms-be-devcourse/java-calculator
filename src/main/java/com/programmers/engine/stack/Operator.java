@@ -27,14 +27,14 @@ public enum Operator {
     public String getSymbol(){
         return symbol;
     }
-    public Optional<Operator> find(String symbol){
+    public static Optional<Operator> find(String symbol){
         if (map.containsKey(symbol))
             return Optional.of(map.get(symbol));
         else
             return Optional.empty();
     }
 
-    public int getPriority(Operator operator){
+    public static int getPriority(Operator operator){
         if (operator.equals(PLUS) || operator.equals(MINUS))
             return -1;
         else

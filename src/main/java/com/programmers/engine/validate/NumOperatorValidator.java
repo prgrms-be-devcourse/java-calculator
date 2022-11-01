@@ -10,21 +10,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class NumOperatorValidator implements Validator{
     private final AtomicInteger numCnt = new AtomicInteger();
     private final AtomicInteger operatorCnt =  new AtomicInteger();
-    String operators = "+-*/";
-    Map<String, String> operatorMap = Map.of(
-            "+", Operator.PLUS.toString(),
-            "-", Operator.MINUS.toString(),
-            "*", Operator.MUL.toString(),
-            "/", Operator.DIV.toString()
-    );
+
     @Override
     public LinkedList<String> validate(LinkedList<String> linkedList) {
         LinkedList<String> newList = new LinkedList<>();
         numCnt.set(0); operatorCnt.set(0);
 
         linkedList.forEach((element) -> {
-                    if (operators.contains(element)) {
-                        newList.add(operatorMap.get(element));
+                    if(Operator.find(element).isPresent()){
+                        newList.add(Operator.find(element).get().toString());
                         operatorCnt.getAndIncrement();
                     }
                     else  {
@@ -35,7 +29,9 @@ public class NumOperatorValidator implements Validator{
                 }
         );
 
-        if (numCnt.get() - 1 != operatorCnt.get()) return new LinkedList<>();
-        return newList;
+        if (numCnt.get() - 1 != operatorCnt.get())
+            return new LinkedList<>();
+        return
+                newList;
     }
 }

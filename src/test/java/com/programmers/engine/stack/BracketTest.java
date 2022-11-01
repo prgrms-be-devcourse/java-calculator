@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.programmers.engine.stack.Bracket.*;
@@ -15,8 +16,10 @@ class BracketTest {
     List<String> testFormula;
     void generateFormula(){
         testFormula = new ArrayList<>();
-        for(int i = 0; i < 10; i++) testFormula.add(i % 2 == 0 ? "(" : ")");
+        for(int i = 0; i < 10; i++)
+            testFormula.add(i % 2 == 0 ? "(" : ")");
     }
+
     @DisplayName("find test")
     @Test
     void find() {
@@ -26,8 +29,10 @@ class BracketTest {
         generateFormula();
 
         testFormula.forEach((bracket) -> {
-            if(Bracket.find(bracket).equals(OPEN))      openCnt.getAndIncrement();
-            else if(Bracket.find(bracket).equals(CLOSE)) closeCnt.getAndIncrement();
+            if(Bracket.find(bracket).equals(Optional.of(OPEN)))
+                openCnt.getAndIncrement();
+            else if(Bracket.find(bracket).equals(Optional.of(CLOSE)))
+                closeCnt.getAndIncrement();
         });
 
         assertEquals(openCnt.get(), 5);

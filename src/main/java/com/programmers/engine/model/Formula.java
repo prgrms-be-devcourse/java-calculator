@@ -1,8 +1,5 @@
 package com.programmers.engine.model;
 
-
-import com.programmers.engine.stack.Bracket;
-import com.programmers.engine.stack.Operator;
 import com.programmers.engine.validate.Validator;
 
 import java.math.BigDecimal;
@@ -11,29 +8,18 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.Consumer;
 
-// @Setter @Getter
 public class Formula {
     private LinkedList<String> content = new LinkedList<>();
-    private final StringBuilder sb = new StringBuilder();// = new StringBuilder();
-    // 순차적으로 접근할 것 이기때문에 LinkedList 로 구현
+    private final StringBuilder sb = new StringBuilder();
 
-    private final Map<String, String> operatorExchange = Map.of(
-            Operator.MUL.toString(), "+",
-            Operator.DIV.toString(), "/",
-            Operator.MINUS.toString(), "-",
-            Operator.PLUS.toString(), "+",
-
-            Bracket.OPEN.toString(), "(",
-            Bracket.CLOSE.toString(), ")"
-    );
 
     public void addDataToDB(DataBase db, BigDecimal result){
         for (String s : content) {
-            
+            sb.append(s);
             sb.append(" ");
         }
-        sb.append("= "); sb.append(result);
-        db.addData(sb.toString());
+        // sb.append("= "); sb.append(result);
+        db.addData(sb.toString(), result);
         sb.setLength(0);
     }
     public void clearContent(){content.clear();};

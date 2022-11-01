@@ -19,21 +19,9 @@ public class Calculator implements Runnable{
     private final Output output;
     private final DataBase dataBase;
     private final Formula formula;
-
     private final BracketValidator bracketValidator;
 
     private final NumOperatorValidator numOperatorValidator;
-
-    private Operator operator;
-    private Bracket bracket;
-
-    Map<String, Operator> map = Map.of(
-            Operator.MUL.toString(), Operator.MUL,
-            Operator.DIV.toString(), Operator.DIV,
-            Operator.PLUS.toString(), Operator.PLUS,
-            Operator.MINUS.toString(), Operator.MINUS
-    );
-
 
     public Calculator(Input input, Output output, DataBase dataBase, Formula formula,
                       BracketValidator bracketValidator, NumOperatorValidator numOperatorValidator){
@@ -44,7 +32,6 @@ public class Calculator implements Runnable{
         this.bracketValidator = bracketValidator;
         this.numOperatorValidator = numOperatorValidator;
     }
-
 
 
     @Override
@@ -90,12 +77,8 @@ public class Calculator implements Runnable{
                 formula.clearContent();
             } else
                 output.divdeByZeroError();
-
         }
-
-
         output.bye();
-
     }
 
     private Optional<Integer> parse(String inputString){
@@ -121,20 +104,20 @@ public class Calculator implements Runnable{
 
         formula.indexedForEach((a) -> {
 
-            if (a.equals(Bracket.CLOSE.toString())) { // 닫는 괄호면 무조건 숫자 2개 pop 해서 계산하기
+            if(Bracket.find(a).equals(Optional.of(Bracket.CLOSE))){
                 isBracketOpened.set(false);
                 pop2AndCal(numDq, operatorDq, isDividedByZero);
             }
-            else if (a.equals(Bracket.OPEN.toString())) {
+            else if (Bracket.find(a).equals(Optional.of(Bracket.OPEN))) {
                 isBracketOpened.set(true);
             }
-            else if (operator.find(a).isPresent()) {
+            else if (Operator.find(a).isPresent()) {
                 if (operatorDq.isEmpty()) {
-                    operatorDq.addFirst(operator.find(a).get());
+                    operatorDq.addFirst(Operator.find(a).get());
                 }
 
-                else if (operator.getPriority(operatorDq.pollFirst()) <= operator.getPriority(operator.find(a).get())) {
-                    operatorDq.addFirst(operator.find(a).get());
+                else if (Operator.getPriority(operatorDq.pollFirst()) <= Operator.getPriority(Operator.find(a).get())) {
+                    operatorDq.addFirst(Operator.find(a).get());
                 }
             }
             else
@@ -145,7 +128,7 @@ public class Calculator implements Runnable{
             pop2AndCal(numDq, operatorDq, isDividedByZero);
         }
         if (isDividedByZero.get())
-            return BigDecimal.valueOf(Integer.MAX_VALUE); // 0으로 나누는 에러가 발생했다
+            return BigDecimal.valueOf(Integer.MAX_VALUE);
         else
             return numDq.pollFirst();
     }

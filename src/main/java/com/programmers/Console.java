@@ -56,4 +56,9 @@ public class Console implements Input, Output {
     public void dbNoDate() {
         System.out.println("저장된 데이터가 없습니다");
     }
+
+    @Override
+    public void simplePrint(String s) {
+        System.out.println(s);
+    }
 }

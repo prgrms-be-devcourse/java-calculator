@@ -23,4 +23,6 @@ public interface Output {
     void divdeByZeroError();
 
     void dbNoDate();
+
+    void simplePrint(String s);
 }

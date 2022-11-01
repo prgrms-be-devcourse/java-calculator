@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BracketValidator implements Validator{
     private final AtomicInteger openBracket = new AtomicInteger();
     private final AtomicInteger closeBracket = new AtomicInteger();
+
     @Override
     public LinkedList<String> validate(LinkedList<String> linkedList) {
         LinkedList<String> newList = new LinkedList<>();
@@ -27,7 +28,8 @@ public class BracketValidator implements Validator{
                     }
                 }
         );
-        if (openBracket.get() != closeBracket.get()) return new LinkedList<>();
+        if (openBracket.get() != closeBracket.get())
+            return new LinkedList<>();
         return newList;
     }
 }

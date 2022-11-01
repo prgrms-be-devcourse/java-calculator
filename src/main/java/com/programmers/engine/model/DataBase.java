@@ -2,13 +2,21 @@ package com.programmers.engine.model;
 
 import com.programmers.engine.io.Output;
 
-import java.util.LinkedList;
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class DataBase {
-    private final LinkedList<String> data = new LinkedList<>();
+    private final Map<Integer, Log> logs = new LinkedHashMap<>();
+
     public void showAll(Output output) {
-        if (data.isEmpty()) output.dbNoDate();
-        else                output.showAll(data);
+        if (logs.isEmpty())
+            output.dbNoDate();
+        else {
+            logs.forEach((order, log) -> log.show());
+        }
     }
-    public void addData(String s){data.add(s);}
+    public void addData(String s, BigDecimal result){
+        logs.put(logs.size(), new Log(s, result));
+    }
 }
