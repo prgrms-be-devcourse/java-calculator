@@ -1,11 +1,14 @@
 package com.programmers.kwonjoosung.java.calculator.service;
 
+import com.programmers.kwonjoosung.java.calculator.utils.Parser;
+
 import java.text.DecimalFormat;
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.Iterator;
 
-public class BasicCalculator implements Calculator { // deque 자료구조를 활용하여 rotate 하면서 계산하기
+public class ArithmeticCalculator { // deque 자료구조를 활용하여 rotate 하면서 계산하기
     private final static String ADD = "+";
     private final static String SUB = "-";
     private final static String MUL = "*";
@@ -18,20 +21,16 @@ public class BasicCalculator implements Calculator { // deque 자료구조를 �
      * 연산자 우선순위 적용
      * </p>
      *
-     * @param expression 계산하고 싶은 식
+     * @param data 계산하고 싶은 식
      * @return 계산된 결과
      */
-    @Override
-    public String calculate(String[] expression) {
-        // 우선 순위 연산을 먼저 적용하고 남은 식을 다음 계산에서 진행한 후에 결과 반환
-        return calculateNext(
-                calculatePriority(
-                        Arrays.stream(expression).iterator()));
+    public String calculate(String data) {
+        String[] expression = Parser.parsing(data);
+        return calculateNext(calculatePriority(Arrays.stream(expression).iterator()));
     }
 
-    private ArrayDeque<String> calculatePriority(Iterator<String> expression) {
-        // 우선 연산 오직 곱셈과 나눗셈만 가능
-        ArrayDeque<String> deque = new ArrayDeque<>();
+    private Deque<String> calculatePriority(Iterator<String> expression) {
+        Deque<String> deque = new ArrayDeque<>();
 
         while (expression.hasNext()) {
             String data = expression.next();
@@ -45,8 +44,7 @@ public class BasicCalculator implements Calculator { // deque 자료구조를 �
         return deque;
     }
 
-    private String calculateNext(ArrayDeque<String> expression) {
-        // 나중 연산 오직 덧셈과 뺄셈만 가능
+    private String calculateNext(Deque<String> expression) {
         while (expression.size() > 1) {
             String data = expression.pollFirst();
             if (ADD.equals(data) || SUB.equals(data)) {
