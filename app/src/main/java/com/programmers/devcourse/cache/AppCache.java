@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface AppCache {
     void save(String expression);
+
     List<String> getAll();
 }
