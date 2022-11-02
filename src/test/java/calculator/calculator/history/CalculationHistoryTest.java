@@ -19,18 +19,8 @@ class CalculationHistoryTest {
     private final History history = new CalculationHistory();
 
     @ParameterizedTest(name = "[{index}] formula = {0}, answer = {1}")
-    @MethodSource("whenSaveHistoryThenSuccessDummy")
-    @DisplayName("연산 결과 저장 성공 테스트")
-    void whenSaveHistoryThenSuccessTest(List<String> formula, List<String> answer) {
-        int expectSize = saveHistories(formula, answer);
-        int savedSize = history.findAllHistories().size();
-
-        assertThat(savedSize).isEqualTo(expectSize);
-    }
-
-    @ParameterizedTest(name = "[{index}] formula = {0}, answer = {1}")
-    @MethodSource("whenFindHistoryThenSuccessDummy")
-    @DisplayName("연산 결과 조회 성공 테스트")
+    @MethodSource("whenHistoryThenSuccessDummy")
+    @DisplayName("연산 결과 저장, 조회 성공 테스트")
     void whenFindHistoryThenSuccessTest(List<String> formula, List<String> answer) {
         saveHistories(formula, answer);
 
@@ -63,28 +53,7 @@ class CalculationHistoryTest {
         return expectSize;
     }
 
-    static Stream<Arguments> whenSaveHistoryThenSuccessDummy() {
-        return Stream.of(
-                Arguments.arguments(
-                        List.of("1"),
-                        List.of("1")
-                ),
-                Arguments.arguments(
-                        List.of("1", "1 + 2"),
-                        List.of("1", "3")
-                ),
-                Arguments.arguments(
-                        List.of("1", "1 + 2", "1 + 2 + 3"),
-                        List.of("1", "3", "6")
-                ),
-                Arguments.arguments(
-                        List.of("1", "1 + 2", "1 + 2 + 3", "1 + 2 + 3 + 4", "1 + 2 + 3 + 4 + 5"),
-                        List.of("1", "3", "6", "10", "15")
-                )
-        );
-    }
-
-    static Stream<Arguments> whenFindHistoryThenSuccessDummy() {
+    static Stream<Arguments> whenHistoryThenSuccessDummy() {
         return Stream.of(
                 Arguments.arguments(
                         List.of("1"),
