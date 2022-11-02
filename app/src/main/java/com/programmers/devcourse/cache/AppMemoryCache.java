@@ -1,12 +1,15 @@
 package com.programmers.devcourse.cache;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AppMemoryCache implements AppCache {
-    private ArrayList<String> cacheList = new ArrayList<>();
-
+    private final Map<Integer, String> map = new LinkedHashMap<>();
+    int index;
     private AppMemoryCache() {
+        this.index = 0;
     }
 
     private static class LazyHolder {
@@ -19,11 +22,11 @@ public class AppMemoryCache implements AppCache {
 
     @Override
     public void save(String expression) {
-        cacheList.add(expression);
+        map.put(index++,expression);
     }
 
     @Override
     public List<String> getAll() {
-        return cacheList;
+        return new ArrayList<>(map.values());
     }
 }
