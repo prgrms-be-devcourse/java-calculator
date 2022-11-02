@@ -35,14 +35,13 @@ public class CalculatorService {
     }
 
     public ConsoleResponse findAllOrderById() {
-        List<CalculateHistory> calculateHistories = repository.findAll();
+        List<CalculateHistory> calculateHistories = repository.findAllById();
 
         if (calculateHistories.isEmpty()) {
             return new ConsoleResponse("저장된 데이터가 없습니다.");
         }
 
         String result = calculateHistories.stream()
-            .sorted(Comparator.comparingLong(CalculateHistory::getId))
             .map(CalculateHistory::getHistory)
             .collect(Collectors.joining("\n"));
 

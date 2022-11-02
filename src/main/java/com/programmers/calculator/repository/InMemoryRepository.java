@@ -3,9 +3,11 @@ package com.programmers.calculator.repository;
 import com.programmers.calculator.domain.CalculateHistory;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class InMemoryRepository implements Repository<Long, CalculateHistory> {
 
@@ -27,4 +29,11 @@ public class InMemoryRepository implements Repository<Long, CalculateHistory> {
         database.clear();
     }
 
+    @Override
+    public List<CalculateHistory> findAllById() {
+        return database.values().stream()
+            .sorted(Comparator.comparing(CalculateHistory::getId))
+            .collect(Collectors.toList());
+    }
+    
 }

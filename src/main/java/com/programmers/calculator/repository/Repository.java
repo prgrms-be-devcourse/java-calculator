@@ -9,4 +9,7 @@ public interface Repository<K, V> {
     List<V> findAll();
 
     void deleteAll();
+
+    List<V> findAllById();
+
 }
