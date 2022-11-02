@@ -11,7 +11,7 @@ public class App {
 
         new CalculatorController(
                 new ConsoleIOController(System.in, System.out),
-                new PostfixCalculator(),
+                new PostfixCalculator(Integer.class),
                 new InfixToPostfixTranslator(),
                 new MemoryHistoryRepository()
         ).run();

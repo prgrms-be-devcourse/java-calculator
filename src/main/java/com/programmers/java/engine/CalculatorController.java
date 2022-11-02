@@ -3,7 +3,7 @@ package com.programmers.java.engine;
 import com.programmers.java.engine.calculator.Calculator;
 import com.programmers.java.engine.io.IOController;
 import com.programmers.java.engine.model.Expression;
-import com.programmers.java.engine.repository.History;
+import com.programmers.java.engine.repository.HistoryRepository;
 import com.programmers.java.engine.util.Menu;
 import com.programmers.java.engine.util.translator.Translator;
 
@@ -11,13 +11,13 @@ public class CalculatorController implements Runnable {
     private final IOController ioController;
     private final Calculator calculator;
     private final Translator translator;
-    private final History history;
+    private final HistoryRepository historyRepository;
 
-    public CalculatorController(IOController ioController, Calculator calculator, Translator translator, History history) {
+    public CalculatorController(IOController ioController, Calculator calculator, Translator translator, HistoryRepository historyRepository) {
         this.ioController = ioController;
         this.calculator = calculator;
         this.translator = translator;
-        this.history = history;
+        this.historyRepository = historyRepository;
     }
 
     @Override
@@ -48,15 +48,15 @@ public class CalculatorController implements Runnable {
 
 
     private void lookup() {
-        history.load().stream()
+        historyRepository.load().stream()
                 .forEach(expression -> ioController.print(expression + "\n"));
     }
 
     private void calculate() {
         Expression expression = new Expression(ioController.read());
-        int result = (int) calculator.calculate(translator.translate(expression));
+        Number result = calculator.calculate(translator.translate(expression));
         ioController.print(result + "\n");
         expression.add(" = " + result);
-        history.save(expression);
+        historyRepository.save(expression);
     }
 }

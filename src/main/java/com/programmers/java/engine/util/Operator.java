@@ -7,22 +7,22 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", 1, 1, (x, y) -> (int) (x + y)),
-    MINUS("-", 1, 1, (x, y) -> (int) (x - y)),
-    MULTIPLY("*", 2, 2, (x, y) -> (int) (x * y)),
+    PLUS("+", 1, 1, (x, y) -> x + y),
+    MINUS("-", 1, 1, (x, y) -> x - y),
+    MULTIPLY("*", 2, 2, (x, y) -> x * y),
     DIVIDE("/", 2, 2, (x, y) -> {
         if (y == 0) throw new OperatorException("0 으로 나눌 수 없습니다.\n");
-        return (int) (x / y);
+        return x / y;
     }),
     LEFT_BRACKET("(", 3, 0, null),
     RIGHT_BRACKET(")", 3, 3, null);
 
-    private String operator;
-    private int icp;
-    private int isp;
-    private BiFunction<Double, Double, Integer> expression;
+    private final String operator;
+    private final int icp;
+    private final int isp;
+    private final BiFunction<Double, Double, Double> expression;
 
-    Operator(String operator, int icp, int isp, BiFunction<Double, Double, Integer> expression) {
+    Operator(String operator, int icp, int isp, BiFunction<Double, Double, Double> expression) {
         this.operator = operator;
         this.expression = expression;
         this.icp = icp;
@@ -48,7 +48,7 @@ public enum Operator {
         return operator.isp;
     }
 
-    public int calculate(double x, double y) {
+    public double calculate(double x, double y) {
         return expression.apply(x, y);
     }
 

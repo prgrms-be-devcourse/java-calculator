@@ -8,10 +8,16 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
-public class PostfixCalculator implements Calculator<Integer> {
+public class PostfixCalculator implements Calculator {
+    private final Class type;
+
+    public <T extends Number> PostfixCalculator(Class<T> type) {
+        this.type = type;
+    }
+
     @Override
-    public Integer calculate(Expression expression) {
-        Deque<Double> deque = new ArrayDeque<>();
+    public Number calculate(Expression expression) {
+        Deque<Number> deque = new ArrayDeque<>();
         List<String> tokens = Arrays.asList(expression.toString().trim().split(" "));
 
         tokens.stream()
@@ -23,12 +29,12 @@ public class PostfixCalculator implements Calculator<Integer> {
                         Operator operator = Operator.findOperator(token);
 
                         // 연산자인 경우 추출 -> 계산 -> 스택에 삽입 (연산 순서에 주의)
-                        double y = deque.pollFirst();
-                        double x = deque.pollFirst();
-                        deque.addFirst((double) operator.calculate(x, y));
+                        Number y = deque.pollFirst();
+                        Number x = deque.pollFirst();
+                        deque.addFirst(operator.calculate(x.doubleValue(), y.doubleValue()));
                     }
                 });
 
-        return deque.pop().intValue();
+        return Calculator.cast(deque.pop(), type);
     }
 }
