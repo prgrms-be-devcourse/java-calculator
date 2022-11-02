@@ -24,8 +24,6 @@ public class Calculator {
         if (findExpression.isPresent()) {
             // 이미 존재하는 계산식의 경우 계산은 건너뛰고 map에서 객체 꺼내서 내역에만 한번더 저장처리
             calculatedValue = findExpression.get().getResult();
-
-            repository.save(findExpression.get());
             return calculatedValue;
         }
 
