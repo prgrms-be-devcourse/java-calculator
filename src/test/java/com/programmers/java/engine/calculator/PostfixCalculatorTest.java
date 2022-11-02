@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class PostfixCalculatorTest {
     @Test
     @DisplayName("0으로 나누지 않는 후위 표현식 연산 테스트")
-    public void calcTest() {
+    public void nonDivideByZeroTest() {
         Calculator calculator = new PostfixCalculator(Integer.class);
         Expression expression = new Expression("3 5 2 * 7 2 - / + ");
         Number result = calculator.calculate(expression);
@@ -19,13 +19,11 @@ public class PostfixCalculatorTest {
 
     @Test
     @DisplayName("0으로 나누는 후위 표현식 연산 테스트")
-    public void calcTest2() {
-        OperatorException exception = Assertions.assertThrows(OperatorException.class, () -> {
+    public void divideByZeroTest() {
+        Assertions.assertThrows(OperatorException.class, () -> {
             Calculator calculator = new PostfixCalculator(Integer.class);
             Expression expression = new Expression("3 5 2 * 7 7 - / + ");
             Number result = calculator.calculate(expression);
         });
-
-        Assertions.assertEquals(exception.getMessage(), "0 으로 나눌 수 없습니다.\n");
     }
 }
