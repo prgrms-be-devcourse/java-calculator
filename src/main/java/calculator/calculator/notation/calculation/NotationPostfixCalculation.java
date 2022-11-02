@@ -1,11 +1,11 @@
 package calculator.calculator.notation.calculation;
 
+import calculator.calculator.formula.Formula;
 import calculator.calculator.operator.Operators;
 
 import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.List;
 
 import static calculator.calculator.operator.Operators.isOperator;
 import static calculator.exception.NotationException.NOTATION_POSTFIX_NULL_EXCEPTION;
@@ -15,15 +15,16 @@ public class NotationPostfixCalculation implements NotationCalculation {
     private final Deque<BigDecimal> operands = new ArrayDeque<>();
 
     @Override
-    public BigDecimal calculate(List<String> formulas) {
+    public CalculationResult calculate(Formula formulas) {
         initCalculation();
 
-        formulas.forEach(formula -> {
+        formulas.getFormula()
+                .forEach(formula -> {
             handleOperator(formula);
             handleOperand(formula);
         });
 
-        return getOperand();
+        return new CalculationResult(getOperand());
     }
 
     private void initCalculation() {

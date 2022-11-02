@@ -1,7 +1,7 @@
 package calculator.calculator.notation.parser;
 
-import java.util.List;
+import calculator.calculator.formula.Formula;
 
 public interface NotationParser {
-    List<String> parseFrom(List<String> formulas);
+    Formula parseFrom(Formula formulas);
 }

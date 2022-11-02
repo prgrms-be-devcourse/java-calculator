@@ -1,5 +1,6 @@
 package calculator.calculator.notation.parser;
 
+import calculator.calculator.formula.Formula;
 import calculator.calculator.formula.FormulaBasicParser;
 import calculator.calculator.formula.FormulaParser;
 import org.junit.jupiter.api.DisplayName;
@@ -21,8 +22,8 @@ class NotationPostfixParserTest {
     @MethodSource(value = "whenParseNotationThenSuccessDummy")
     @DisplayName("후위 표기법 파싱 성공 테스트")
     void whenParseNotationThenSuccessTest(String formula, String expect) {
-        List<String> parsedToFormula = formulaParser.parseFrom(formula);
-        List<String> parsedToNotation = notationParser.parseFrom(parsedToFormula);
+        Formula parsedToFormula = formulaParser.parseFrom(formula);
+        List<String> parsedToNotation = notationParser.parseFrom(parsedToFormula).getFormula();
 
         String result = parsedToNotation.toString();
 

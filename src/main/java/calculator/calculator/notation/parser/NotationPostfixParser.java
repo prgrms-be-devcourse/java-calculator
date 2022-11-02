@@ -1,5 +1,7 @@
 package calculator.calculator.notation.parser;
 
+import calculator.calculator.formula.Formula;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -13,21 +15,22 @@ public class NotationPostfixParser implements NotationParser {
     private final Deque<String> operators = new ArrayDeque<>();
 
     @Override
-    public List<String> parseFrom(List<String> formulas) {
+    public Formula parseFrom(Formula formulas) {
         initParser();
 
-        List<String> notation = new ArrayList<>();
-        formulas.forEach(formula -> {
-            handleOperator(notation, formula);
-            handleOperand(notation, formula);
-        });
-        handleLastOperands(notation);
+        Formula notation = new Formula(new ArrayList<>());
+        formulas.getFormula()
+                .forEach(formula -> {
+                    handleOperator(notation, formula);
+                    handleOperand(notation, formula);
+                });
+        handleLastOperands(notation.getFormula());
 
         return notation;
     }
 
     private void handleLastOperands(List<String> notation) {
-        while(!operators.isEmpty()) {
+        while (!operators.isEmpty()) {
             notation.add(operators.pollLast());
         }
     }
@@ -36,15 +39,15 @@ public class NotationPostfixParser implements NotationParser {
         operators.clear();
     }
 
-    private void handleOperand(List<String> notation, String formula) {
+    private void handleOperand(Formula notation, String formula) {
         if (!isOperator(formula)) {
             notation.add(formula);
         }
     }
 
-    private void handleOperator(List<String> notation, String formula) {
+    private void handleOperator(Formula notation, String formula) {
         if (isOperator(formula)) {
-            addOperationsByComparingPriority(notation, formula);
+            addOperationsByComparingPriority(notation.getFormula(), formula);
             operators.add(formula);
         }
     }

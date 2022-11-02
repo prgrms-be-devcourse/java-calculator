@@ -4,7 +4,6 @@ import calculator.util.regex.RegexUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,18 +16,18 @@ import static calculator.exception.FormulaException.FORMULA_BASIC_PARSER_EXCEPTI
 
 public class FormulaBasicParser implements FormulaParser {
 
-    private final List<String> formulas;
+    private final Formula formula;
 
     public FormulaBasicParser() {
-        this.formulas = new ArrayList<>();
+        this.formula = new Formula(new ArrayList<>());
     }
 
     @Override
-    public List<String> parseFrom(final String formula) {
+    public Formula parseFrom(final String formula) {
         return generateFormula(parseNoSpace(formula));
     }
 
-    private List<String> generateFormula(final String formula) {
+    private Formula generateFormula(final String formula) {
         initFormulaParser();
 
         AtomicInteger beforeIdx = new AtomicInteger(0);
@@ -39,7 +38,7 @@ public class FormulaBasicParser implements FormulaParser {
                 });
         handleLastFormula(formula, beforeIdx);
 
-        return formulas;
+        return this.formula;
     }
 
     private static void checkFormulaRegex(String formula, int idx) {
@@ -72,7 +71,7 @@ public class FormulaBasicParser implements FormulaParser {
             throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
-        formulas.add(operator);
+        this.formula.add(operator);
     }
 
     private void handleOperandInFormula(String formula, AtomicInteger beforeIdx, int idx) {
@@ -81,7 +80,7 @@ public class FormulaBasicParser implements FormulaParser {
             throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
-        formulas.add(operand);
+        this.formula.add(operand);
     }
 
     private void handleLastFormula(String formula, AtomicInteger beforeIdx) {
@@ -90,7 +89,7 @@ public class FormulaBasicParser implements FormulaParser {
             throw new NullPointerException(FORMULA_BASIC_NULL_EXCEPTION.getMessage());
         }
 
-        formulas.add(lastOperand);
+        this.formula.add(lastOperand);
     }
 
     private static String getCurrWord(String formula, int idx) {
@@ -106,7 +105,7 @@ public class FormulaBasicParser implements FormulaParser {
     }
 
     private void initFormulaParser() {
-        formulas.clear();
+        formula.clear();
     }
 
     private static String parseNoSpace(final String formula) {

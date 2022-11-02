@@ -12,7 +12,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static calculator.exception.HistoryException.HISTORY_SAVE_EXCEPTION;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatList;
 
 class CalculationHistoryTest {
 
@@ -42,15 +43,13 @@ class CalculationHistoryTest {
                 .withMessageMatching(HISTORY_SAVE_EXCEPTION.getMessage());
     }
 
-    private int saveHistories(List<String> formula, List<String> answer) {
+    private void saveHistories(List<String> formula, List<String> answer) {
         int expectSize = formula.size();
         IntStream.range(0, expectSize)
                 .forEach(curr -> history.save(
                         formula.get(curr),
                         answer.get(curr)
                 ));
-
-        return expectSize;
     }
 
     static Stream<Arguments> whenHistoryThenSuccessDummy() {

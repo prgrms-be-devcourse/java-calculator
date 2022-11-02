@@ -1,8 +1,7 @@
 package calculator.calculator.notation.calculation;
 
-import java.math.BigDecimal;
-import java.util.List;
+import calculator.calculator.formula.Formula;
 
 public interface NotationCalculation {
-    BigDecimal calculate(List<String> formulas);
+    CalculationResult calculate(Formula formula);
 }

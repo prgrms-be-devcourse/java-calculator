@@ -26,7 +26,7 @@ class PostfixCalculatorTest {
     @MethodSource("whenCalculateIntegerWithPostfixCalculatorThenSuccessDummy")
     @DisplayName("정수형 연산식, 후위 표기식 연산 성공 테스트")
     void whenCalculateIntegerWithPostfixCalculatorThenSuccessTest(String formula, String expect) {
-        BigDecimal result = calculator.calculate(formula);
+        BigDecimal result = calculator.calculate(formula).getCalculationResult();
         assertThat(result).isEqualTo(expect);
     }
 
@@ -34,7 +34,7 @@ class PostfixCalculatorTest {
     @MethodSource("whenCalculateDoubleWithPostfixCalculatorThenSuccessDummy")
     @DisplayName("실수형 연산식, 후위 표기식 연산 성공 테스트")
     void whenCalculateDoubleWithPostfixCalculatorThenSuccessTest(String formula, String expect) {
-        BigDecimal result = calculator.calculate(formula);
+        BigDecimal result = calculator.calculate(formula).getCalculationResult();
         assertThat(result).isEqualTo(expect);
     }
 

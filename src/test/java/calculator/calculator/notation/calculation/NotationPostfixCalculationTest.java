@@ -1,5 +1,6 @@
 package calculator.calculator.notation.calculation;
 
+import calculator.calculator.formula.Formula;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +21,10 @@ class NotationPostfixCalculationTest {
     @MethodSource("whenCalculatePostfixNotationThenSuccessDummy")
     @DisplayName("후위 표기식 연산 성공 테스트")
     void whenCalculatePostfixNotationThenSuccessTest(List<String> notation, String expect) {
-        String result = notationPostfixCalculation.calculate(notation).toString();
+        Formula formula = new Formula(notation);
+        String result = notationPostfixCalculation.calculate(formula)
+                .getCalculationResult()
+                .toString();
         assertThat(result).isEqualTo(expect);
     }
 
@@ -28,8 +32,9 @@ class NotationPostfixCalculationTest {
     @MethodSource("whenCalculatePostfixNotationThenExceptionDummy")
     @DisplayName("후위 표기법 연산 오류 예외처리 테스트")
     void whenCalculatePostfixNotationThenExceptionTest(List<String> notation) {
+        Formula formula = new Formula(notation);
         assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> notationPostfixCalculation.calculate(notation))
+                .isThrownBy(() -> notationPostfixCalculation.calculate(formula))
                 .withMessageMatching(NOTATION_POSTFIX_NULL_EXCEPTION.getMessage());
     }
 

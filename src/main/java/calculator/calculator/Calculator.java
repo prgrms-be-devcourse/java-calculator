@@ -1,6 +1,7 @@
 package calculator.calculator;
 
 import calculator.calculator.formula.FormulaParser;
+import calculator.calculator.notation.calculation.CalculationResult;
 import calculator.calculator.notation.calculation.NotationCalculation;
 import calculator.calculator.notation.parser.NotationParser;
 
@@ -18,7 +19,7 @@ public class Calculator {
         this.formulaParser = formulaParser;
     }
 
-    public BigDecimal calculate(String formula) {
+    public CalculationResult calculate(String formula) {
         return calculation.calculate(
                         notationParser.parseFrom(
                                 formulaParser.parseFrom(formula)));
