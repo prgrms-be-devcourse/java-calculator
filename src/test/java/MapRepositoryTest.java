@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,7 +37,7 @@ public class MapRepositoryTest {
 
         repository.save(expression);
 
-        Expression byInfix = repository.findByInfix("(2 + 4) / (6 - 3)");
+        Expression byInfix = repository.findByInfix("(2 + 4) / (6 - 3)").get();
 
         assertThat(expression.equals(byInfix)).isTrue();
     }
@@ -44,8 +45,8 @@ public class MapRepositoryTest {
     @Test
     @DisplayName("findByInfix(): map에 일치하는 계산식이 없음")
     void x() {
-        Expression byInfix = repository.findByInfix("1 + 2");
+        Optional<Expression> byInfix = repository.findByInfix("1 + 2");
 
-        assertThat(byInfix).isNull();
+        assertThat(byInfix.isEmpty()).isTrue();
     }
 }

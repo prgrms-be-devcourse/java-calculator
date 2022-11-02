@@ -27,7 +27,7 @@ public class ValidateTest {
             InputStream in = new ByteArrayInputStream(input.getBytes());
             System.setIn(in);
 
-            console.inputNum();
+            console.command();
         } catch (BusinessException e) {
             assertThat(e.getMessage()).isEqualTo(NOT_NUM_ERROR.getMessage());
         }

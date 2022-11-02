@@ -6,6 +6,5 @@ import java.io.InputStreamReader;
 public interface Input {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    String inputType();
-    String inputNum();
+    String command();
 }

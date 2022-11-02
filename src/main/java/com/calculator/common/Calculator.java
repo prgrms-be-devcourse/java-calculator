@@ -1,73 +1,43 @@
 package com.calculator.common;
 
 import com.calculator.entity.Expression;
-import com.calculator.io.Input;
-import com.calculator.io.Output;
 import com.calculator.repository.Repository;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Optional;
 
 import static com.calculator.common.ExceptionStatus.DIVIDE_ZERO_ERROR;
 
 public class Calculator {
-    private final Input input;
-    private final Output output;
+
     private final Repository repository;
 
-    private boolean isExited = false;
-
-    public Calculator(Input input, Output output, Repository repository) {
-        this.input = input;
-        this.output = output;
+    public Calculator(Repository repository) {
         this.repository = repository;
-    }
-
-    public void run() {
-        String result = "";
-        while (!isExited) {
-            try {
-                String inputType = input.inputType();
-                MenuType menuType = MenuType.of(inputType);
-
-                switch (menuType) {
-                    case FIND:
-                        getMap();
-                        break;
-                    case CAL:
-                        String inputString = input.inputNum();
-                        result = calculate(inputString);
-                        output.outputDisplay(result);
-                        break;
-                    case END:
-                        isExited = true;
-                        break;
-                }
-            } catch (BusinessException businessException) {
-                output.outputDisplay(businessException.getMessage());
-            }
-        }
-    }
-
-    public void getMap() {
-        repository.findAll();
     }
 
     public String calculate(String input) {
         String calculatedValue = "";
 
-        Expression findExpression = repository.findByInfix(input);
-        if (findExpression != null) {
+        Optional<Expression> findExpression = repository.findByInfix(input);
+        if (findExpression.isPresent()) {
             // 이미 존재하는 계산식의 경우 계산은 건너뛰고 map에서 객체 꺼내서 내역에만 한번더 저장처리
-            calculatedValue = findExpression.getResult();
+            calculatedValue = findExpression.get().getResult();
 
-            repository.save(findExpression);
+            repository.save(findExpression.get());
             return calculatedValue;
         }
 
+        calculatedValue = calculatePostfix(input);
+        return calculatedValue;
+    }
+
+    private String calculatePostfix(String input) {
+        // 후위표기법 계산
+        String calculatedValue = "";
         String after = changePostfix(input);
 
-        // 후위표기법 계산
         Deque<Double> stack = new ArrayDeque<>();
         for (int i = 0; i < after.length(); i++) {
             if (Character.isDigit(after.charAt(i))) {
@@ -86,14 +56,9 @@ public class Calculator {
                 stack.push(calculate);
             }
         }
-
         calculatedValue = String.valueOf(stack.pop());
 
-        // 계산 완료 후 map에 저장
-        Expression expression = new Expression(input, calculatedValue);
-        repository.save(expression);
-
-        return expression.getResult();
+        return calculatedValue;
     }
 
     /**

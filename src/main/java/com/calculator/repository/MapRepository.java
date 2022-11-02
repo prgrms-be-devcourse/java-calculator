@@ -20,12 +20,8 @@ public class MapRepository implements Repository {
         return values.size();
     }
 
-    /**
-     * 효율성 측면에서 어떻게 개선시킬 수 있을까요?
-     * map의 구조를 어떻게 변경하면 좋을지 궁금합니다!
-     */
     @Override
-    public Expression findByInfix(String infix) {
+    public Optional<Expression> findByInfix(String infix) {
         Collection<Expression> values = map.values();
 
         Optional<Expression> first = values.stream()
@@ -33,9 +29,9 @@ public class MapRepository implements Repository {
                 .findFirst();
 
         if (first.isEmpty()) {
-            return null;
+            return Optional.empty();
         } else {
-            return first.get();
+            return first;
         }
     }
 

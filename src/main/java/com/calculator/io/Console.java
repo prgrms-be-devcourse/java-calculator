@@ -13,24 +13,8 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public String inputType() {
-        System.out.println("\n1. 조회\n2. 계산\n3. 끝");
-        System.out.print("\n선택 : ");
-
-        String input = null;
-        try {
-            input = br.readLine();
-        } catch (IOException ioException) {
-            System.out.println(ioException.getMessage());
-        }
-        System.out.println();
-        return input;
-    }
-
-    @Override
-    public String inputNum() {
+    public String command() {
         String input = "";
-
         try {
             input = br.readLine();
             validatorHandler.inputError(input);
@@ -42,7 +26,7 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void outputDisplay(String output) {
+    public void display(String output) {
         System.out.println(output);
     }
 }
