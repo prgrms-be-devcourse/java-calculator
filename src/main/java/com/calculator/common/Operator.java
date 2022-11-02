@@ -10,9 +10,7 @@ public enum Operator {
     ADD('+', 2, Double::sum),
     SUB('-', 2, (a, b) -> a - b),
     MUL('*', 1, (a, b) -> a * b),
-    DIV('/', 1, (a, b) -> a / b),
-    LEFT('(',3, null),
-    RIGHT(')', 3, null),;
+    DIV('/', 1, (a, b) -> a / b);
 
     private final char name;
     private final int priority;

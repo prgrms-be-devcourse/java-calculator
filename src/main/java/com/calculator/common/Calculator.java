@@ -111,16 +111,16 @@ public class Calculator {
                 continue;
             }
 
-            if (chars == Operator.LEFT.getName()) {
+            if (chars == '(') {
                 postfixDeque.push(chars);
                 continue;
             }
 
-            if (chars == Operator.RIGHT.getName()) {
+            if (chars == ')') {
                 while (true) {
                     Character pop = postfixDeque.pop();
 
-                    if (pop.equals(Operator.LEFT.getName())) {
+                    if (pop.equals('(')) {
                         break;
                     }
                     sb.append(pop);
@@ -130,7 +130,7 @@ public class Calculator {
 
             while (!postfixDeque.isEmpty()) {
                 // peek()의 우선순위보다 현재 연산자의 우선순위가 높아질 때까지 진행
-                if (postfixDeque.peek().equals(Operator.LEFT.getName())) {
+                if (postfixDeque.peek().equals('(')) {
                     break;
                 }
 
