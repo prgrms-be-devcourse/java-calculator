@@ -48,6 +48,10 @@ public class CalculatorController implements Runnable {
 
 
     private void lookup() {
+        if (historyRepository.size() == 0) {
+            ioController.print("저장된 내역이 없습니다.\n");
+        }
+
         historyRepository.load().stream()
                 .forEach(expression -> ioController.print(expression + "\n"));
     }

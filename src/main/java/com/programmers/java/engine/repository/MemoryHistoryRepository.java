@@ -1,6 +1,5 @@
 package com.programmers.java.engine.repository;
 
-import com.programmers.java.engine.exception.HistoryException;
 import com.programmers.java.engine.model.Expression;
 
 import java.util.ArrayList;
@@ -9,23 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 public class MemoryHistoryRepository implements HistoryRepository {
-    private final Map<Integer, Expression> map;
+    private final Map<Integer, Expression> history;
     private int counter;
 
     public MemoryHistoryRepository() {
         this.counter = 0;
-        this.map = new HashMap<>();
+        this.history = new HashMap<>();
     }
 
     @Override
     public List<Expression> load() {
-        if (map.isEmpty()) {
-            throw new HistoryException("저장된 내역이 없습니다.\n");
-        }
-
         List<Expression> result = new ArrayList<>();
         for (int i = 0; i < counter; i++) {
-            result.add(map.get(i));
+            result.add(history.get(i));
         }
 
         return result;
@@ -33,18 +28,18 @@ public class MemoryHistoryRepository implements HistoryRepository {
 
     @Override
     public void save(Expression expression) {
-        map.put(counter++, expression);
+        history.put(counter++, expression);
     }
 
     @Override
     public void clear() {
         counter = 0;
-        map.clear();
+        history.clear();
     }
 
     @Override
     public int size() {
-        return map.size();
+        return history.size();
     }
 
 
