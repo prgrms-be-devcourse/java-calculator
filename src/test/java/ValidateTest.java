@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ValidateTest {
 
     ValidatorHandler validatorHandler = new ValidatorHandler();
-    Console console = new Console(validatorHandler);
 
     @Test
     @DisplayName("입력 계산식 오류")
@@ -27,7 +26,7 @@ public class ValidateTest {
             InputStream in = new ByteArrayInputStream(input.getBytes());
             System.setIn(in);
 
-            console.command();
+            validatorHandler.inputError(input);
         } catch (BusinessException e) {
             assertThat(e.getMessage()).isEqualTo(NOT_NUM_ERROR.getMessage());
         }

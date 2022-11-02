@@ -1,10 +1,8 @@
 import com.calculator.common.BusinessException;
-import com.calculator.common.ValidatorHandler;
-import com.calculator.io.Console;
+import com.calculator.common.Calculator;
 import com.calculator.repository.MapRepository;
 import com.calculator.repository.Repository;
 import com.calculator.service.CalculateService;
-import com.calculator.common.Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,15 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CalculatorTest {
 
-    private Console console;
     private Calculator calculator;
     private Repository repository;
-    private ValidatorHandler validatorHandler;
     private CalculateService calculateService;
 
     @BeforeEach
     void App() {
-        console = new Console(validatorHandler);
         repository = new MapRepository();
         calculator = new Calculator(repository);
         calculateService = new CalculateService(repository, calculator);

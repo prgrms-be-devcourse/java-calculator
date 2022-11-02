@@ -12,10 +12,10 @@ public class Application {
     public static void main(String[] args) {
         MapRepository mapRepository = new MapRepository();
         ValidatorHandler validatorHandler = new ValidatorHandler();
-        Console console = new Console(validatorHandler);
+        Console console = new Console();
         Calculator calculator = new Calculator(mapRepository);
         CalculateService calculateService = new CalculateService(mapRepository, calculator);
 
-        new CalculateController(console, console, calculateService).run();
+        new CalculateController(console, console, calculateService, validatorHandler).run();
     }
 }
