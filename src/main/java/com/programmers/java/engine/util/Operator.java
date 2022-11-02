@@ -3,7 +3,6 @@ package com.programmers.java.engine.util;
 import com.programmers.java.engine.exception.OperatorException;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -30,14 +29,10 @@ public enum Operator {
     }
 
     public static Operator findOperator(String operator) {
-        Optional<Operator> match = Arrays.stream(Operator.values())
+        return Arrays.stream(Operator.values())
                 .filter(target -> target.operator.equals(operator))
-                .findFirst();
-
-        if (match.isEmpty()) {
-            throw new OperatorException("올바른 수식을 입력해주세요.\n숫자와 연산자 사이는 공백이 필요하고 사칙 연산과 괄호 외 지원하지 않습니다.\n");
-        }
-        return match.get();
+                .findAny()
+                .orElseThrow(() -> new OperatorException("올바른 수식을 입력해주세요.\n숫자와 연산자 사이는 공백이 필요하고 사칙 연산과 괄호 외 지원하지 않습니다.\n"));
     }
 
     public static int getICP(Operator operator) {
