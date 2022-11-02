@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class PostfixCalculatorTest {
     @Test
-    @DisplayName("0으로 나누지 않는 후위 표현식 연산 테스트")
+    @DisplayName("0으로 나누지 않는 경우 연산이 정상적으로 이루어지는지 테스트")
     public void nonDivideByZeroTest() {
         Calculator calculator = new PostfixCalculator(Integer.class);
         Expression expression = new Expression("3 5 2 * 7 2 - / + ");
@@ -18,7 +18,7 @@ public class PostfixCalculatorTest {
     }
 
     @Test
-    @DisplayName("0으로 나누는 후위 표현식 연산 테스트")
+    @DisplayName("0으로 나누는 경우 예외가 발생하는지 테스트")
     public void divideByZeroTest() {
         Assertions.assertThrows(OperatorException.class, () -> {
             Calculator calculator = new PostfixCalculator(Integer.class);

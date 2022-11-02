@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class MemoryHistoryRepositoryTest {
     @Test
-    @DisplayName("2개 수식 저장 후 개수 테스트")
+    @DisplayName("2개 수식 저장 후 개수가 2개인지 테스트")
     public void savedCountTest() {
         HistoryRepository historyRepository = new MemoryHistoryRepository();
         historyRepository.save(new Expression("1 + 2 + 3"));
