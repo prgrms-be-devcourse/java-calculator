@@ -7,12 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class CommandLine {
-    private BufferedReader bufferedReader;
+    private final BufferedReader bufferedReader;
     private final Validator validator;
-    private static final int NOT_VALID = -1;
 
     private CommandLine() {
         this.bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -41,21 +39,15 @@ public class CommandLine {
 
         if (!validator.isNumber(optionStr)) {
             System.out.println("선택값이 유효하지 않습니다.");
-            return NOT_VALID;
+            return CommandOption.NOT_VALID.getValue();
         }
 
         int optionInt = Integer.parseInt(optionStr);
-        Optional<CommandOption> find = Arrays
+        return Arrays
                 .stream(CommandOption.values())
                 .filter(option -> option.getValue() == optionInt)
-                .findFirst();
-
-        if (find.isEmpty()) {
-            System.out.println("선택값이 유효하지 않습니다.");
-            return NOT_VALID;
-        }
-
-        return optionInt;
+                .findFirst()
+                .orElse(CommandOption.NOT_VALID).getValue();
     }
 
     public String readExpression() {

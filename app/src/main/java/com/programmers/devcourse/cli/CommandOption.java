@@ -3,7 +3,9 @@ package com.programmers.devcourse.cli;
 public enum CommandOption {
     INQUIRY(1),
     CALCULATE(2),
-    EXIT(3);
+    EXIT(3),
+
+    NOT_VALID(4);
 
     private final int value;
 
