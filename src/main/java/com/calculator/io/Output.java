@@ -1,5 +1,5 @@
 package com.calculator.io;
 
 public interface Output {
-    void output(double result);
+    void outputDisplay(String output);
 }

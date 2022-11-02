@@ -3,27 +3,27 @@ package com.calculator.entity;
 import java.util.Objects;
 
 public class Expression {
-    private final static String pattern2 = ".0$";
+    private final static String DELETE_DOT_ZERO = ".0$";
 
     private String infix;   // 중위 표기법
-    private double result;
+    private String result;
 
-    public Expression(String infix, double result) {
+    public Expression(String infix, String result) {
         this.infix = infix;
-        this.result = result;
+        this.result = String.valueOf(result).replaceAll(DELETE_DOT_ZERO, "");
     }
 
     public String getInfix() {
         return infix;
     }
 
-    public double getResult() {
+    public String getResult() {
         return result;
     }
 
     @Override
     public String toString() {
-        return infix + " = " + String.valueOf(result).replaceAll(pattern2, "");
+        return infix + " = " + result;
     }
 
     @Override

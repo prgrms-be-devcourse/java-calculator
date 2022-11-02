@@ -1,42 +1,48 @@
 package com.calculator.io;
 
-import com.calculator.common.BaseException;
 import com.calculator.common.ValidatorHandler;
 
 import java.io.IOException;
 
 public class Console implements Input, Output{
 
-    private ValidatorHandler validatorHandler;
+    private final ValidatorHandler validatorHandler;
 
     public Console(ValidatorHandler validatorHandler) {
         this.validatorHandler = validatorHandler;
     }
 
     @Override
-    public String inputType() throws IOException {
+    public String inputType() {
         System.out.println("\n1. 조회\n2. 계산\n3. 끝");
         System.out.print("\n선택 : ");
 
-        String input = br.readLine();
+        String input = null;
+        try {
+            input = br.readLine();
+        } catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
+        }
         System.out.println();
         return input;
     }
 
     @Override
-    public String inputNum() throws BaseException, IOException {
-        try {
-            String input = br.readLine();
-            validatorHandler.inputError(input);
+    public String inputNum() {
+        String input = "";
 
-            return input;
-        } catch (Exception e) {
-            throw e;
+        try {
+            input = br.readLine();
+            validatorHandler.inputError(input);
+        } catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
         }
+
+        return input;
     }
 
     @Override
-    public void output(double result) {
-        System.out.println(String.valueOf(result).replaceAll(".0$", ""));
+    public void outputDisplay(String output) {
+        System.out.println(output);
     }
 }

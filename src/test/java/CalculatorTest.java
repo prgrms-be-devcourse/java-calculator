@@ -1,4 +1,4 @@
-import com.calculator.common.BaseException;
+import com.calculator.common.BusinessException;
 import com.calculator.common.Calculator;
 import com.calculator.common.ValidatorHandler;
 import com.calculator.io.Console;
@@ -10,12 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Stack;
-
 import static com.calculator.common.ExceptionStatus.DIVIDE_ZERO_ERROR;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CalculatorTest {
 
@@ -28,8 +26,7 @@ public class CalculatorTest {
     void App() {
         console = new Console(validatorHandler);
 
-        calculator = new Calculator(console, console, repository, validatorHandler);
-
+        calculator = new Calculator(console, console, new MapRepository());
     }
 
     @ParameterizedTest
@@ -44,8 +41,8 @@ public class CalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"(2 + 4) / (6 - 3), 2", "1 + 2 * 4 - 2, 7", "2 * ( 6 / 3 + 7), 18"})
     @DisplayName("사칙연산 계산")
-    void calculate(String input, double result) throws BaseException {
-        double calculate = calculator.calculate(input);
+    void calculate(String input, String result) throws BusinessException {
+        String calculate = calculator.calculate(input);
 
         assertThat(calculate).isEqualTo(result);
     }
@@ -53,22 +50,7 @@ public class CalculatorTest {
     @Test
     @DisplayName("0으로 나눴을 때 오류")
     void divZero() {
-        try {
-            calculator.calculate("4 / 0");
-        } catch (BaseException e) {
-            assertThat(e.getStatus().getMessage()).isEqualTo(DIVIDE_ZERO_ERROR.getMessage());
-        }
-    }
-
-    @Test
-    void df() {
-        Stack<Integer> s = new Stack();
-        s.push(1);
-        s.push(2);
-
-        s.remove(0);
-        for (Integer ss : s) {
-            System.out.println(ss);
-        }
+        BusinessException businessException = assertThrows(BusinessException.class, () -> calculator.calculate("4 / 0"));
+        assertEquals(businessException.getMessage(), DIVIDE_ZERO_ERROR.getMessage());
     }
 }

@@ -1,14 +1,9 @@
 package com.calculator;
 
-import com.calculator.common.BaseException;
-import com.calculator.common.ValidatorHandler;
-import com.calculator.repository.MapRepository;
 import com.calculator.common.Calculator;
+import com.calculator.common.ValidatorHandler;
 import com.calculator.io.Console;
-
-import java.io.IOException;
-
-import static com.calculator.common.ExceptionStatus.*;
+import com.calculator.repository.MapRepository;
 
 public class Application {
 
@@ -17,12 +12,6 @@ public class Application {
         ValidatorHandler validatorHandler = new ValidatorHandler();
         Console console = new Console(validatorHandler);
 
-        try {
-            new Calculator(console, console, mapRepository, validatorHandler).run();
-        } catch (BaseException e) {
-            System.out.println(e.getStatus().getMessage());
-        } catch (IOException e) {
-            System.out.println(new BaseException(IO_ERROR).getMessage());
-        }
+        new Calculator(console, console, mapRepository).run();
     }
 }

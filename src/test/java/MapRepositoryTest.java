@@ -1,16 +1,13 @@
 import com.calculator.entity.Expression;
 import com.calculator.repository.MapRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.Map;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MapRepositoryTest {
 
@@ -22,7 +19,7 @@ public class MapRepositoryTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        Expression expression = new Expression("(2 + 4) / (6 - 3)", 2);
+        Expression expression = new Expression("(2 + 4) / (6 - 3)", "2");
 
         repository.save(expression);
         repository.save(expression);
@@ -35,7 +32,7 @@ public class MapRepositoryTest {
     @Test
     @DisplayName("save(), findByInfix(): map에 계산식이 존재하는 경우")
     void save() {
-        Expression expression = new Expression("(2 + 4) / (6 - 3)", 2);
+        Expression expression = new Expression("(2 + 4) / (6 - 3)", "2");
 
         repository.save(expression);
 

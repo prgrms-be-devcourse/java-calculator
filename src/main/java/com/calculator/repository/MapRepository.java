@@ -10,7 +10,7 @@ import java.util.Optional;
 public class MapRepository implements Repository {
 
     // key는 1부터 시작 (idx)
-    private Map<Integer, Expression> map = new HashMap<>();
+    private final Map<Integer, Expression> map = new HashMap<>();
 
     @Override
     public int findAll() {
