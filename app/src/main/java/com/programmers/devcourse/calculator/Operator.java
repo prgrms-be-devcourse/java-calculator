@@ -18,7 +18,7 @@ public enum Operator {
         this.precedence = precedence;
     }
 
-    public int calculate(Integer num1, Integer num2) {
+    public int calculate(int num1, int num2) {
         return this.expression.apply(num1, num2);
     }
 
