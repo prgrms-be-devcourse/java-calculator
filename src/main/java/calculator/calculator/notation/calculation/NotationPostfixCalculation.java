@@ -46,7 +46,7 @@ public class NotationPostfixCalculation implements NotationCalculation {
         }
     }
 
-    private static boolean isOperand(String formula) {
+    private boolean isOperand(String formula) {
         return !isOperator(formula);
     }
 

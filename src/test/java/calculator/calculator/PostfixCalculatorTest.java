@@ -1,5 +1,8 @@
 package calculator.calculator;
 
+import calculator.calculator.formula.FormulaBasicParser;
+import calculator.calculator.notation.calculation.NotationPostfixCalculation;
+import calculator.calculator.notation.parser.NotationPostfixParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,7 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PostfixCalculatorTest {
 
-    private final Calculator calculator = new PostfixCalculator();
+    private final Calculator calculator =
+            new Calculator(
+                    new NotationPostfixCalculation(),
+                    new NotationPostfixParser(),
+                    new FormulaBasicParser()
+            );
 
     @ParameterizedTest(name = "[{index}] formula = {0}, expect = {1}")
     @MethodSource("whenCalculateIntegerWithPostfixCalculatorThenSuccessDummy")
