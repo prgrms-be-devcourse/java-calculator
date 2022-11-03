@@ -40,9 +40,9 @@ class OperatorTest {
 
     private static Stream<Arguments> validParameters(){
         return Stream.of(
-                Arguments.of(1,2,"%","입력 오류 : 잘못된 연산자 혹은 문자가 포함되어 있습니다."),
-                Arguments.of(3,5,"dd","입력 오류 : 잘못된 연산자 혹은 문자가 포함되어 있습니다."),
-                Arguments.of(77,3,"&","입력 오류 : 잘못된 연산자 혹은 문자가 포함되어 있습니다.")
+                Arguments.of(1,2,"%","잘못된 연산식 입니다."),
+                Arguments.of(3,5,"dd","잘못된 연산식 입니다."),
+                Arguments.of(77,3,"&","잘못된 연산식 입니다.")
         );
     }
 
