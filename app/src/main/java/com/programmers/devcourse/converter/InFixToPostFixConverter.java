@@ -14,7 +14,7 @@ public class InFixToPostFixConverter implements ExpressionConverter {
 
     public InFixToPostFixConverter() {
         for (Operator value : Operator.values()) {
-            operators.put(value.getOperatorStr(), value);
+            operators.put(value.getOperator(), value);
         }
         this.validator = Validator.getInstance();
     }

@@ -5,7 +5,8 @@ public enum CommandOption {
     CALCULATE(2),
     EXIT(3),
 
-    NOT_VALID(4);
+    NOT_VALID(4),
+    ERROR(5);
 
     private final int value;
 

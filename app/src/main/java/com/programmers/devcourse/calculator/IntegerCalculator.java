@@ -28,7 +28,7 @@ public class IntegerCalculator {
 
     public IntegerCalculator() {
         for (Operator value : Operator.values()) {
-            operators.put(value.getOperatorStr(), value);
+            operators.put(value.getOperator(), value);
         }
         validator = Validator.getInstance();
         commandLine = CommandLine.getInstance();
@@ -38,10 +38,10 @@ public class IntegerCalculator {
 
     public void run(boolean calculatorRunning) {
 
-        while (calculatorRunning) {
-
+        int option;
+        do {
             commandLine.printOptionMessage();
-            int option = commandLine.readOption();
+            option = commandLine.readOption();
 
             if (option == CommandOption.INQUIRY.getValue()) {
                 commandLine.printList(appMemoryCache.getAll());
@@ -57,7 +57,7 @@ public class IntegerCalculator {
                 expression = expressionConverter.getConvertedList();
 
                 int result = calculate();
-                System.out.println(calculate());
+                System.out.println(result);
 
                 appMemoryCache.save(expressionStr + "=" + result);
                 expressionConverter.clearConvertedList();
@@ -65,9 +65,9 @@ public class IntegerCalculator {
                 commandLine.stopCommandLine();
                 break;
             }
-        }
-
+        } while (calculatorRunning && option != CommandOption.ERROR.getValue());
     }
+
 
     public int calculate() {
         return this.calculate(this.expression);
@@ -78,9 +78,9 @@ public class IntegerCalculator {
             if (validator.isNumber(token)) {
                 stack.addLast(Integer.parseInt(token));
             } else {
-                int num1 = stack.removeLast();
-                int num2 = stack.removeLast();
-                int tempResult = operators.get(token).calculate(num2, num1);
+                int rightNum = stack.removeLast();
+                int leftNum = stack.removeLast();
+                int tempResult = operators.get(token).calculate(leftNum, rightNum);
                 stack.addLast(tempResult);
             }
         }

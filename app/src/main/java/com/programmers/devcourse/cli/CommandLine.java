@@ -65,7 +65,6 @@ public class CommandLine {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.exit(0);
     }
 
     public void printList(List<String> list) {

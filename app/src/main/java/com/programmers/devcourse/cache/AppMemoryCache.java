@@ -7,7 +7,8 @@ import java.util.Map;
 
 public class AppMemoryCache implements AppCache {
     private final Map<Integer, String> map = new LinkedHashMap<>();
-    int index;
+    private int index;
+
     private AppMemoryCache() {
         this.index = 0;
     }
@@ -22,7 +23,7 @@ public class AppMemoryCache implements AppCache {
 
     @Override
     public void save(String expression) {
-        map.put(index++,expression);
+        map.put(index++, expression);
     }
 
     @Override

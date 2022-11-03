@@ -9,11 +9,11 @@ public enum Operator {
     MUL("*", (n1, n2) -> n1 * n2,2),
     DIV("/", (n1, n2) -> n1 / n2,2);
 
-    private final String operatorStr;
+    private final String operator;
     private final BinaryOperator<Integer> expression;
     private final int precedence;
     Operator(String operatorStr, BinaryOperator<Integer> expression, int precedence) {
-        this.operatorStr = operatorStr;
+        this.operator = operatorStr;
         this.expression = expression;
         this.precedence = precedence;
     }
@@ -22,8 +22,8 @@ public enum Operator {
         return this.expression.apply(num1, num2);
     }
 
-    public String getOperatorStr() {
-        return operatorStr;
+    public String getOperator() {
+        return operator;
     }
 
     public int getPrecedence() {
