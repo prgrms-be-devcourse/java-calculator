@@ -10,16 +10,16 @@ import static calculator.exception.MenuException.MENU_FIND_NULL_EXCEPTION;
 
 public enum Menus {
 
-    MENU_HISTORY_FINDER(1L, "조회", new MenuHistoryFinder()),
-    MENU_CALCULATOR(2L,"계산", new MenuCalculator());
+    MENU_HISTORY_FINDER(1, "조회", new MenuHistoryFinder()),
+    MENU_CALCULATOR(2,"계산", new MenuCalculator());
 
     private static final MenuInput menuInput = new MenuInput();
     private static final MenuOutput menuOutput = new MenuOutput();
-    private final Long id;
+    private final int id;
     private final String title;
     private final Menu menu;
 
-    Menus(Long id, String title, Menu menu) {
+    Menus(int id, String title, Menu menu) {
         this.id = id;
         this.title = title;
         this.menu = menu;
@@ -28,14 +28,14 @@ public enum Menus {
     public static void process() {
         menuOutput.printMenus();
         menuOutput.printSelectedSign();
-        Long menuId = menuInput.askMenuId();
+        int menuId = menuInput.askMenuId();
         Menu findMenu = findMenuById(menuId);
         menuOutput.printAfter();
 
         findMenu.process();
     }
 
-    private static Menu findMenuById(Long id) {
+    private static Menu findMenuById(int id) {
         return Arrays.stream(Menus.values())
                 .filter(menu -> Objects.equals(menu.id, id))
                 .findFirst()
@@ -43,7 +43,7 @@ public enum Menus {
                 .menu;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
