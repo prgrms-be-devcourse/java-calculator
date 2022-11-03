@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.math.BigDecimal;
 import java.util.stream.Stream;
 
-import static calculator.calculator.operator.OperatorCalculation.*;
 import static calculator.exception.OperatorException.OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -19,7 +18,7 @@ class OperatorCalculationTest {
     @MethodSource("whenPlusIntegerCalculationThenSuccessDummy")
     @DisplayName("정수형 더하기 연산 성공 테스트")
     void whenPlusIntegerCalculationThenSuccessTest(int leftOperand, int rightOperand, String expect) {
-        BigDecimal result = PLUS_CALCULATOR.doCalculation(
+        BigDecimal result = Operators.PLUS.doCalculation(
                 BigDecimal.valueOf(leftOperand),
                 BigDecimal.valueOf(rightOperand));
         assertThat(result).isEqualTo(expect);
@@ -29,7 +28,7 @@ class OperatorCalculationTest {
     @MethodSource("whenMinusIntegerCalculationThenSuccessDummy")
     @DisplayName("정수형 빼기 연산 성공 테스트")
     void whenMinusIntegerCalculationThenSuccessTest(int leftOperand, int rightOperand, String expect) {
-        BigDecimal result = MINUS_CALCULATOR.doCalculation(
+        BigDecimal result = Operators.MINUS.doCalculation(
                 BigDecimal.valueOf(leftOperand),
                 BigDecimal.valueOf(rightOperand));
         assertThat(result).isEqualTo(expect);
@@ -39,7 +38,7 @@ class OperatorCalculationTest {
     @MethodSource("whenMultiplyIntegerCalculationThenSuccessDummy")
     @DisplayName("정수형 곱하기 연산 성공 테스트")
     void whenMultiplyIntegerCalculationThenSuccessTest(int leftOperand, int rightOperand, String expect) {
-        BigDecimal result = MULTIPLY_CALCULATOR.doCalculation(
+        BigDecimal result = Operators.MULTIPLY.doCalculation(
                 BigDecimal.valueOf(leftOperand),
                 BigDecimal.valueOf(rightOperand));
         assertThat(result).isEqualTo(expect);
@@ -49,7 +48,7 @@ class OperatorCalculationTest {
     @MethodSource("whenDivideIntegerCalculationThenSuccessDummy")
     @DisplayName("정수형 나누기 연산 성공 테스트")
     void whenDivideIntegerCalculationThenSuccessTest(int leftOperand, int rightOperand, String expect) {
-        BigDecimal result = DIVIDE_CALCULATOR.doCalculation(
+        BigDecimal result = Operators.DIVIDE.doCalculation(
                  BigDecimal.valueOf(leftOperand),
                  BigDecimal.valueOf(rightOperand));
         assertThat(result).isEqualTo(expect);
@@ -59,7 +58,7 @@ class OperatorCalculationTest {
     @MethodSource("whenPlusDoubleCalculationThenSuccessDummy")
     @DisplayName("소수형 더하기 연산 성공 테스트")
     void whenPlusDoubleCalculationThenSuccessTest(double leftOperand, double rightOperand, String expect) {
-        BigDecimal result = PLUS_CALCULATOR.doCalculation(
+        BigDecimal result = Operators.PLUS.doCalculation(
                 BigDecimal.valueOf(leftOperand),
                 BigDecimal.valueOf(rightOperand));
         assertThat(result).isEqualTo(expect);
@@ -69,7 +68,7 @@ class OperatorCalculationTest {
     @MethodSource("whenMinusDoubleCalculationThenSuccessDummy")
     @DisplayName("소수형 빼기 연산 성공 테스트")
     void whenMinusDoubleCalculationThenSuccessTest(double leftOperand, double rightOperand, String expect) {
-        BigDecimal result = MINUS_CALCULATOR.doCalculation(
+        BigDecimal result = Operators.MINUS.doCalculation(
                 BigDecimal.valueOf(leftOperand),
                 BigDecimal.valueOf(rightOperand));
         assertThat(result).isEqualTo(expect);
@@ -79,7 +78,7 @@ class OperatorCalculationTest {
     @MethodSource("whenMultiplyDoubleCalculationThenSuccessDummy")
     @DisplayName("소수형 곱하기 연산 성공 테스트")
     void whenMultiplyDoubleCalculationThenSuccessTest(double leftOperand, double rightOperand, String expect) {
-        BigDecimal result = MULTIPLY_CALCULATOR.doCalculation(
+        BigDecimal result = Operators.MULTIPLY.doCalculation(
                 BigDecimal.valueOf(leftOperand),
                 BigDecimal.valueOf(rightOperand));
         assertThat(result).isEqualTo(expect);
@@ -89,7 +88,7 @@ class OperatorCalculationTest {
     @MethodSource("whenDivideDoubleCalculationThenSuccessDummy")
     @DisplayName("소수형 나누기 연산 성공 테스트")
     void whenDivideDoubleCalculationThenSuccessTest(double leftOperand, double rightOperand, String expect) {
-        String result = DIVIDE_CALCULATOR.doCalculation(
+        String result = Operators.DIVIDE.doCalculation(
                 BigDecimal.valueOf(leftOperand),
                 BigDecimal.valueOf(rightOperand))
                 .toString();
@@ -102,7 +101,7 @@ class OperatorCalculationTest {
     void whenDivideZeroCalculationThenExceptionTest(double leftOperand, double rightOperand) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
-                        DIVIDE_CALCULATOR.doCalculation(
+                        Operators.DIVIDE.doCalculation(
                                 BigDecimal.valueOf(leftOperand),
                                 BigDecimal.valueOf(rightOperand)))
                 .withMessageMatching(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.getMessage());

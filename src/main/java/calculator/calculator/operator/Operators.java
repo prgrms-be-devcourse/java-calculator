@@ -1,24 +1,30 @@
 package calculator.calculator.operator;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.function.BinaryOperator;
 
-import static calculator.calculator.operator.OperatorCalculation.*;
-import static calculator.calculator.operator.OperatorPriority.*;
 import static calculator.exception.OperatorException.OPERATORS_EXCEPTION_NULL_FIND;
+import static calculator.exception.OperatorException.OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO;
 
 public enum Operators {
 
-    PLUS("+", PLUS_CALCULATOR, PLUS_PRIORITY),
-    MINUS("-", MINUS_CALCULATOR, MINUS_PRIORITY),
-    MULTIPLY("*", MULTIPLY_CALCULATOR, MULTIPLY_PRIORITY),
-    DIVIDE("/", DIVIDE_CALCULATOR, DIVIDE_PRIORITY);
+    PLUS("+", BigDecimal::add, 1),
+    MINUS("-", BigDecimal::subtract, 1),
+    MULTIPLY("*", BigDecimal::multiply, 2),
+    DIVIDE("/", (leftOperand, rightOperand) -> {
+        if (rightOperand.doubleValue() == 0D) {
+            throw new IllegalArgumentException(OPERATOR_CALCULATION_EXCEPTION_DIVIDE_ZERO.getMessage());
+        }
+        return leftOperand.divide(rightOperand, 15, RoundingMode.HALF_UP);
+    }, 2);
 
     private final String operator;
-    private final OperatorCalculation calculation;
-    private final OperatorPriority priority;
+    private final BinaryOperator<BigDecimal> calculation;
+    private final int priority;
 
-    Operators(String operator, OperatorCalculation calculation, OperatorPriority priority) {
+    Operators(String operator, BinaryOperator<BigDecimal> calculation, int priority) {
         this.operator = operator;
         this.calculation = calculation;
         this.priority = priority;
@@ -30,14 +36,15 @@ public enum Operators {
     }
 
     public static BigDecimal calculate(BigDecimal leftOperand, String operator, BigDecimal rightOperand) {
-        return findOperator(operator).calculation
-                .doCalculation(leftOperand, rightOperand);
+        return findOperator(operator).doCalculation(leftOperand, rightOperand);
+    }
+
+    public BigDecimal doCalculation(BigDecimal leftOperand, BigDecimal rightOperand) {
+        return calculation.apply(leftOperand, rightOperand);
     }
 
     public static boolean isLeftSameOrMoreImportantThan(String leftOperator, String rightOperator) {
-        return isLeftSameOrMoreImportantThanRight(
-                findOperator(leftOperator).priority,
-                findOperator(rightOperator).priority);
+        return findOperator(leftOperator).priority >= findOperator(rightOperator).priority;
     }
 
     private static Operators findOperator(String inputOperator) {
