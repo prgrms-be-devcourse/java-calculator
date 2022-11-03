@@ -21,7 +21,7 @@ class FormulaBasicParserTest {
     @MethodSource(value = "whenIntegerFormulaThenSuccessDummy")
     @DisplayName("정수 연산식 기본 파싱 성공 테스트")
     void whenIntegerFormulaThenSuccessTest(String formula, List<String> answerFormulas) {
-        List<String> parsedFormulas = parser.parseFrom(formula).getFormula();
+        List<String> parsedFormulas = parser.parseFrom(formula).getFormulaPieces();
         assertThat(parsedFormulas).containsExactlyElementsOf(answerFormulas);
     }
 
@@ -29,7 +29,7 @@ class FormulaBasicParserTest {
     @MethodSource(value = "whenDoubleFormulaThenSuccessDummy")
     @DisplayName("소수 연산식 기본 파싱 성공 테스트")
     void whenDoubleFormulaThenSuccessTest(String formula, List<String> answerFormulas) {
-        List<String> parsedFormulas = parser.parseFrom(formula).getFormula();
+        List<String> parsedFormulas = parser.parseFrom(formula).getFormulaPieces();
         assertThat(parsedFormulas).containsExactlyElementsOf(answerFormulas);
     }
 
@@ -37,7 +37,7 @@ class FormulaBasicParserTest {
     @MethodSource(value = "whenIntegerAndDoubleFormulaThenSuccessDummy")
     @DisplayName("정수, 소수 복합 연산식 기본 파싱 성공 테스트")
     void whenIntegerAndDoubleFormulaThenSuccessTest(String formula, List<String> answerFormulas) {
-        List<String> parsedFormulas = parser.parseFrom(formula).getFormula();
+        List<String> parsedFormulas = parser.parseFrom(formula).getFormulaPieces();
         assertThat(parsedFormulas).containsExactlyElementsOf(answerFormulas);
     }
 

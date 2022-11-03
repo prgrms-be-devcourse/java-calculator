@@ -23,7 +23,7 @@ class NotationPostfixParserTest {
     @DisplayName("후위 표기법 파싱 성공 테스트")
     void whenParseNotationThenSuccessTest(String formula, String expect) {
         Formula parsedToFormula = formulaParser.parseFrom(formula);
-        List<String> parsedToNotation = notationParser.parseFrom(parsedToFormula).getFormula();
+        List<String> parsedToNotation = notationParser.parseFrom(parsedToFormula).getFormulaPieces();
 
         String result = parsedToNotation.toString();
 

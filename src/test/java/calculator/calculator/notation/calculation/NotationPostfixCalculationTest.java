@@ -23,7 +23,7 @@ class NotationPostfixCalculationTest {
     void whenCalculatePostfixNotationThenSuccessTest(List<String> notation, String expect) {
         Formula formula = new Formula(notation);
         String result = notationPostfixCalculation.calculate(formula)
-                .getCalculationResult()
+                .getResult()
                 .toString();
         assertThat(result).isEqualTo(expect);
     }
