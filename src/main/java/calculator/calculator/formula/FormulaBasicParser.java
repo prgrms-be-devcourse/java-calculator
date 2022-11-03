@@ -16,10 +16,9 @@ import static calculator.exception.FormulaException.FORMULA_BASIC_PARSER_EXCEPTI
 
 public class FormulaBasicParser implements FormulaParser {
 
-    private final Formula formula;
+    private Formula formula;
 
     public FormulaBasicParser() {
-        this.formula = new Formula(new ArrayList<>());
     }
 
     @Override
@@ -105,7 +104,7 @@ public class FormulaBasicParser implements FormulaParser {
     }
 
     private void initFormulaParser() {
-        formula.clear();
+        this.formula = new Formula(new ArrayList<>());
     }
 
     private static String parseNoSpace(final String formula) {

@@ -3,6 +3,7 @@ package calculator.menu;
 import calculator.calculator.Calculator;
 import calculator.calculator.formula.FormulaBasicParser;
 import calculator.calculator.history.CalculationHistory;
+import calculator.calculator.history.CalculationHistoryForm;
 import calculator.calculator.history.History;
 import calculator.calculator.notation.calculation.NotationPostfixCalculation;
 import calculator.calculator.notation.parser.NotationPostfixParser;
@@ -30,12 +31,11 @@ public class MenuCalculator implements Menu {
     @Override
     public void process() {
         String formula = input.askFormula();
-        String result = calculator.calculate(formula).toString();
+        CalculationHistoryForm calculationHistoryForm = calculator.calculate(formula);
 
-        history.save(formula, result);
+        history.save(calculationHistoryForm);
 
-        output.printAnswer(result);
-        output.printAfter();
+        output.printAnswer(calculationHistoryForm);
     }
 
 }

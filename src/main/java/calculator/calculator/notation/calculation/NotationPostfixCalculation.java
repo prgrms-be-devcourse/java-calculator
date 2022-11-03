@@ -15,14 +15,14 @@ public class NotationPostfixCalculation implements NotationCalculation {
     private final Deque<BigDecimal> operands = new ArrayDeque<>();
 
     @Override
-    public CalculationResult calculate(Formula formulas) {
+    public CalculationResult calculate(Formula formula) {
         initCalculation();
 
-        formulas.getFormula()
-                .forEach(formula -> {
-            handleOperator(formula);
-            handleOperand(formula);
-        });
+        formula.getFormulaPieces()
+                .forEach(formulaPiece -> {
+                    handleOperator(formulaPiece);
+                    handleOperand(formulaPiece);
+                });
 
         return new CalculationResult(getOperand());
     }

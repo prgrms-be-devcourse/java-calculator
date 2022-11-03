@@ -1,51 +1,44 @@
 package calculator.calculator.history;
 
-import java.math.BigDecimal;
-import java.util.Collection;
+import calculator.calculator.formula.Formula;
+import calculator.calculator.notation.calculation.CalculationResult;
+
 import java.util.HashMap;
+import java.util.Map;
 
 import static calculator.exception.HistoryException.HISTORY_SAVE_EXCEPTION;
 
 public class CalculationHistory implements History {
 
-    private static final HashMap<String, String> histories = new HashMap<>();
-    private static final int HISTORY_FORMULA_INDEX = 0;
-    private static final int HISTORY_ANSWER_INDEX = 1;
+    private static final Map<Formula, CalculationResult> histories = new HashMap<>();
 
     @Override
-    public void save(String... history) {
-        String formula = history[HISTORY_FORMULA_INDEX];
-        String answer = history[HISTORY_ANSWER_INDEX];
+    public void save(CalculationHistoryForm calculationHistoryForm) {
+        Formula formula = calculationHistoryForm.getFormula();
+        CalculationResult calculationResult = calculationHistoryForm.getCalculationResult();
 
-        if (checkSaveFormWrong(formula, answer)) {
+        if (checkSaveFormWrong(formula, calculationResult)) {
             throw new NumberFormatException(HISTORY_SAVE_EXCEPTION.getMessage());
         }
 
-        saveEachCase(formula, answer);
+        saveEachCase(formula, calculationResult);
     }
 
-    private void saveEachCase(String formula, String answer) {
-        if (checkDecimal(answer)) {
-            answer = new BigDecimal(answer).stripTrailingZeros().toString();
-        }
-
-        histories.put(formula, answer);
+    private void saveEachCase(Formula formula, CalculationResult calculationResult) {
+        histories.put(formula, calculationResult);
     }
 
-    private boolean checkDecimal(String answer) {
-        return answer.contains(".");
-    }
-
-    private boolean checkSaveFormWrong(String formula, String answer) {
-        return formula.isBlank() || answer.isBlank();
+    private boolean checkSaveFormWrong(Formula formula, CalculationResult answer) {
+        String saveFormula = formula.getFormulaWithNoSpace();
+        String saveCalculationResult = answer.getResult().toPlainString();
+        return saveFormula.isBlank() || saveCalculationResult.isBlank();
     }
 
     @Override
-    public Collection<?> findAllHistories() {
-        return cloneHistories().entrySet();
-    }
-
-    private HashMap<String, String> cloneHistories() {
-        return (HashMap<String, String>) histories.clone();
+    public Map<Formula, CalculationResult> findAllHistories() {
+        Map<Formula, CalculationResult> cloneHistories = new HashMap<>();
+        histories.forEach((formula, calculationResult) ->
+                cloneHistories.put(formula.clone(), calculationResult.clone()));
+        return cloneHistories;
     }
 }

@@ -19,12 +19,12 @@ public class NotationPostfixParser implements NotationParser {
         initParser();
 
         Formula notation = new Formula(new ArrayList<>());
-        formulas.getFormula()
+        formulas.getFormulaPieces()
                 .forEach(formula -> {
                     handleOperator(notation, formula);
                     handleOperand(notation, formula);
                 });
-        handleLastOperands(notation.getFormula());
+        handleLastOperands(notation.getFormulaPieces());
 
         return notation;
     }
@@ -47,7 +47,7 @@ public class NotationPostfixParser implements NotationParser {
 
     private void handleOperator(Formula notation, String formula) {
         if (isOperator(formula)) {
-            addOperationsByComparingPriority(notation.getFormula(), formula);
+            addOperationsByComparingPriority(notation.getFormulaPieces(), formula);
             operators.add(formula);
         }
     }

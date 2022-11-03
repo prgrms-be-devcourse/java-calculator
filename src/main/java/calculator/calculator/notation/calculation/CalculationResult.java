@@ -4,13 +4,17 @@ import java.math.BigDecimal;
 
 public class CalculationResult {
 
-    private final BigDecimal calculationResult;
+    private final BigDecimal result;
 
     public CalculationResult(BigDecimal calculationResult) {
-        this.calculationResult = calculationResult;
+        this.result = calculationResult;
     }
 
-    public BigDecimal getCalculationResult() {
-        return calculationResult;
+    public BigDecimal getResult() {
+        return result;
+    }
+
+    public CalculationResult clone() {
+        return new CalculationResult(result);
     }
 }

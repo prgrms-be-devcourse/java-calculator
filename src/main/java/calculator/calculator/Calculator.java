@@ -1,11 +1,11 @@
 package calculator.calculator;
 
+import calculator.calculator.formula.Formula;
 import calculator.calculator.formula.FormulaParser;
+import calculator.calculator.history.CalculationHistoryForm;
 import calculator.calculator.notation.calculation.CalculationResult;
 import calculator.calculator.notation.calculation.NotationCalculation;
 import calculator.calculator.notation.parser.NotationParser;
-
-import java.math.BigDecimal;
 
 public class Calculator {
 
@@ -19,9 +19,11 @@ public class Calculator {
         this.formulaParser = formulaParser;
     }
 
-    public CalculationResult calculate(String formula) {
-        return calculation.calculate(
-                        notationParser.parseFrom(
-                                formulaParser.parseFrom(formula)));
+    public CalculationHistoryForm calculate(String formula) {
+        Formula parsedFormula = formulaParser.parseFrom(formula);
+        Formula parsedNotation = notationParser.parseFrom(parsedFormula);
+        CalculationResult calculationResult = calculation.calculate(parsedNotation);
+
+        return new CalculationHistoryForm(parsedFormula, calculationResult);
     }
 }

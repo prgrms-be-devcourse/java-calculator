@@ -1,8 +1,11 @@
 package calculator.calculator.history;
 
-import java.util.Collection;
+import calculator.calculator.formula.Formula;
+import calculator.calculator.notation.calculation.CalculationResult;
+
+import java.util.Map;
 
 public interface History {
-    void save(String... history);
-    Collection<?> findAllHistories();
+    void save(CalculationHistoryForm calculationResult);
+    Map<Formula, CalculationResult> findAllHistories();
 }
