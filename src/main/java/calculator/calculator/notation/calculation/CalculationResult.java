@@ -1,16 +1,14 @@
 package calculator.calculator.notation.calculation;
 
-import java.math.BigDecimal;
-
 public class CalculationResult {
 
-    private final BigDecimal result;
+    private final String result;
 
-    public CalculationResult(BigDecimal calculationResult) {
+    public CalculationResult(String calculationResult) {
         this.result = calculationResult;
     }
 
-    public BigDecimal getResult() {
+    public String getResult() {
         return result;
     }
 

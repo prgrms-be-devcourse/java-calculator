@@ -24,9 +24,7 @@ public class MenuHistoryOutput implements BaseOutput {
     }
 
     private static void handleCalculationResult(StringBuilder textBuilder, CalculationResult calculationResult) {
-        String result = calculationResult.getResult()
-                .stripTrailingZeros()
-                .toPlainString();
+        String result = calculationResult.getResult();
         textBuilder.append(EQUAL.getUnit())
                 .append(SPACE.getUnit())
                 .append(result)

@@ -47,25 +47,25 @@ class NotationPostfixCalculationTest {
                 Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "+", "5", "+"), "15"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "+", "5", "-"), "5"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "5", "*", "+"), "26"),
-                Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "5", "/", "+"), "6.800000000000000"),
+                Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "5", "/", "+"), "6.8"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "-", "5", "+"), "7"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "4", "*", "+", "5", "+"), "20"),
-                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "+"), "8.750000000000000"),
+                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "+"), "8.75"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "-", "4", "+", "5", "+"), "9"),
                 Arguments.arguments(List.of("1", "2", "3", "*", "+", "4", "+", "5", "+"), "16"),
                 Arguments.arguments(List.of("1", "2", "3", "/", "+", "4", "+", "5", "+"), "10.666666666666667"),
                 Arguments.arguments(List.of("1", "2", "-", "3", "+", "4", "+", "5", "+"), "11"),
                 Arguments.arguments(List.of("1", "2", "*", "3", "+", "4", "+", "5", "+"), "14"),
-                Arguments.arguments(List.of("1", "2", "/", "3", "+", "4", "+", "5", "+"), "12.500000000000000"),
+                Arguments.arguments(List.of("1", "2", "/", "3", "+", "4", "+", "5", "+"), "12.5"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "-", "5", "-"), "-3"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "5", "*", "-"), "-14"),
-                Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "5", "/", "-"), "5.200000000000000"),
+                Arguments.arguments(List.of("1", "2", "+", "3", "+", "4", "5", "/", "-"), "5.2"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "4", "*", "+", "5", "-"), "10"),
-                Arguments.arguments(List.of("1", "2", "+", "3", "4", "*", "+", "5", "/"), "3.000000000000000"),
+                Arguments.arguments(List.of("1", "2", "+", "3", "4", "*", "+", "5", "/"), "3"),
                 Arguments.arguments(List.of("1", "2", "+", "3", "4", "*", "+", "5", "*"), "75"),
-                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "-"), "-1.250000000000000"),
-                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "*"), "18.750000000000000"),
-                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "/"), "0.750000000000000")
+                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "-"), "-1.25"),
+                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "*"), "18.75"),
+                Arguments.arguments(List.of("1", "2", "+", "3", "4", "/", "+", "5", "/"), "0.75")
         );
     }
 

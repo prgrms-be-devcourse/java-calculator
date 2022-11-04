@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,16 +29,13 @@ class CalculationHistoryTest {
         List<String> findResults = storage.findAllHistories()
                 .values()
                 .stream()
-                .map(calculationResult ->
-                        calculationResult.getResult()
-                                .stripTrailingZeros()
-                                .toPlainString())
+                .map(CalculationResult::getResult)
                 .collect(Collectors.toUnmodifiableList());
 
         assertThatList(findResults).containsAll(answers);
     }
 
-    @ParameterizedTest(name = "[{index}] formula = {0}, answer = {0}")
+    @ParameterizedTest(name = "[{index}] formula = {0}, answer = {1}")
     @MethodSource("whenSaveHistoryThenExceptionDummy")
     @DisplayName("연산 결과 저장 실패 예외처리 테스트")
     void whenSaveWrongHistoryThenExceptionTest(List<List<String>> formulas, List<String> answers) {
@@ -54,7 +50,7 @@ class CalculationHistoryTest {
                 .collect(Collectors.toList());
 
         List<CalculationResult> parsedResults = results.stream()
-                .map(result -> new CalculationResult(new BigDecimal(result)))
+                .map(CalculationResult::new)
                 .collect(Collectors.toList());
 
         IntStream.range(0, formulas.size())
@@ -97,7 +93,7 @@ class CalculationHistoryTest {
         return Stream.of(
                 Arguments.arguments(
                         List.of(List.of("1", "+", "2")),
-                        List.of("")
+                        List.of(" ")
                 ),
                 Arguments.arguments(
                         List.of(List.of("")),
@@ -105,7 +101,7 @@ class CalculationHistoryTest {
                 ),
                 Arguments.arguments(
                         List.of(List.of("1", "*", "2", "/", "2", "+", "2")),
-                        List.of("")
+                        List.of(" ")
                 )
         );
     }

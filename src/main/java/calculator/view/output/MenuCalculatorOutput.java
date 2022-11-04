@@ -10,8 +10,8 @@ public class MenuCalculatorOutput implements BaseOutput {
         print(calculationHistoryForm
                 .getCalculationResult()
                 .getResult()
-                .stripTrailingZeros()
-                .toPlainString() + ENTER.getUnit() + ENTER.getUnit());
+                + ENTER.getUnit()
+                + ENTER.getUnit());
     }
 
 }

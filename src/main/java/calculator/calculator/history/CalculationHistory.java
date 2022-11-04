@@ -30,7 +30,7 @@ public class CalculationHistory implements History {
 
     private boolean checkSaveFormWrong(Formula formula, CalculationResult answer) {
         String saveFormula = formula.getFormulaWithNoSpace();
-        String saveCalculationResult = answer.getResult().toPlainString();
+        String saveCalculationResult = answer.getResult();
         return saveFormula.isBlank() || saveCalculationResult.isBlank();
     }
 

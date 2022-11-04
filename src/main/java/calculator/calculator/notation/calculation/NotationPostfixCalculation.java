@@ -24,7 +24,7 @@ public class NotationPostfixCalculation implements NotationCalculation {
                     handleOperand(formulaPiece);
                 });
 
-        return new CalculationResult(getOperand());
+        return new CalculationResult(getOperand().stripTrailingZeros().toPlainString());
     }
 
     private void initCalculation() {
