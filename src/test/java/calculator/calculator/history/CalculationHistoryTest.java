@@ -22,7 +22,7 @@ class CalculationHistoryTest {
     private final History storage = new CalculationHistory();
 
     @ParameterizedTest(name = "[{index}] formula = {0}, answer = {1}")
-    @MethodSource("historyDummy")
+    @MethodSource("whenSaveHistoryThenSuccessDummy")
     @DisplayName("연산 결과 저장, 조회 성공 테스트")
     void whenFindHistoryThenSuccessTest(List<List<String>> formulas, List<String> answers) {
         saveHistories(formulas, answers);
