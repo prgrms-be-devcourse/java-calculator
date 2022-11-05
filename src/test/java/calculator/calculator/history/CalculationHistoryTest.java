@@ -13,12 +13,13 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static calculator.exception.HistoryException.HISTORY_SAVE_EXCEPTION;
+import static calculator.exception.HistoryException.HISTORY_SAVE_OVERLAP_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatList;
 
 class CalculationHistoryTest {
 
-    private final History storage = new CalculationHistory();
+    private static final History storage = new CalculationHistory();
 
     @ParameterizedTest(name = "[{index}] formula = {0}, answer = {1}")
     @MethodSource("whenSaveHistoryThenSuccessDummy")
@@ -42,6 +43,22 @@ class CalculationHistoryTest {
         assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(() -> saveHistories(formulas, answers))
                 .withMessageMatching(HISTORY_SAVE_EXCEPTION.getMessage());
+    }
+
+    @ParameterizedTest(name = "[{index}] formula = {0}, answer = {1}")
+    @MethodSource("whenSaveOverlapHistoryThenExceptionDummy")
+    @DisplayName("연산식 중복 저장 실패 예외처리 테스트")
+    void whenSaveOverlapHistoryThenExceptionTest(List<List<String>> formulas, List<String> answers) {
+        Formula formula = new Formula(formulas.get(0));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> saveOverlapHistory(formula, answers))
+                .withMessageMatching(HISTORY_SAVE_OVERLAP_EXCEPTION.getMessage());
+    }
+
+    private static void saveOverlapHistory(Formula formula, List<String> answers) {
+        answers.stream()
+                .map(answer -> new CalculationHistoryForm(formula, new CalculationResult(answer)))
+                .forEach(storage::save);
     }
 
     private void saveHistories(List<List<String>> formulas, List<String> results) {
@@ -102,6 +119,21 @@ class CalculationHistoryTest {
                 Arguments.arguments(
                         List.of(List.of("1", "*", "2", "/", "2", "+", "2")),
                         List.of(" ")
+                )
+        );
+    }
+
+    static Stream<Arguments> whenSaveOverlapHistoryThenExceptionDummy() {
+        return Stream.of(
+                Arguments.arguments(
+                        List.of(List.of("1", "+", "2")),
+                        List.of("3", "3", "3", "3", "3")),
+                Arguments.arguments(
+                        List.of(List.of("1", "-", "2")),
+                        List.of("-1", "-1", "-1", "-1", "-1")),
+                Arguments.arguments(
+                        List.of(List.of("1", "*", "2")),
+                        List.of("2", "2", "2", "2", "2")
                 )
         );
     }
