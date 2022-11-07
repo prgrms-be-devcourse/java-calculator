@@ -11,8 +11,8 @@ public class ConsoleIOController extends IOController {
 
     public ConsoleIOController(InputStream reader, OutputStream writer) {
         super(reader, writer);
-        this.scanner = new Scanner(reader);
-        this.printer = new PrintStream(writer);
+        this.scanner = new Scanner(this.reader);
+        this.printer = new PrintStream(this.writer);
     }
 
     public String read() {
