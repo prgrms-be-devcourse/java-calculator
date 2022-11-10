@@ -1,5 +1,6 @@
 package com.programmers.java;
 
+import java.util.List;
 import java.util.Stack;
 
 import com.programmers.java.exception.MenuInputException;
@@ -34,12 +35,14 @@ public class Calculator implements Runnable {
 	public void run() {
 		while (true) {
 			output.response(Message.MENU_TABLE.getMessage());
-			Menu menu = Menu.selectMenu(input.request());
+			String chosenMenu = input.request();
+			Menu menu = Menu.selectMenu(chosenMenu);
 
 			try {
 				switch (menu) {
 					case LOOKUP:
-						output.responseHistory(repository.findAllHistory());
+						List<History> allHistory = repository.findAllHistory();
+						output.responseHistory(allHistory);
 						break;
 					case CALCULATION:
 						calculateProcess();
@@ -62,7 +65,8 @@ public class Calculator implements Runnable {
 		String validatedFormula = validator.validateFormula(formula);
 
 		if (repository.haveResult(validatedFormula)) {
-			output.responseResult(repository.findResult(validatedFormula));
+			int result = repository.findResult(validatedFormula);
+			output.responseResult(result);
 		} else {
 			String[] postfixFormula = parser.changeInfixToPostfix(validatedFormula);
 			int calculateResult = calculate(postfixFormula);
@@ -77,15 +81,15 @@ public class Calculator implements Runnable {
 		for (int i = 0; i < parsedTokens.length; i++) {
 			String token = parsedTokens[i];
 
-			if (!Operator.isOperator(token)) {
-				numbers.push(Integer.parseInt(token));
-			} else {
+			if (Operator.isOperator(token)) {
 				int num2 = numbers.pop();
 				int num1 = numbers.pop();
 
 				Operator operator = Operator.getOperatorType(token);
 				int result = operator.calculate(num1, num2);
 				numbers.push(result);
+			} else {
+				numbers.push(Integer.parseInt(token));
 			}
 		}
 
