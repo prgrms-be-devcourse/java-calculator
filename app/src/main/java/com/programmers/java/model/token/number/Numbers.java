@@ -12,12 +12,10 @@ public class Numbers implements TokenType {
 	}
 
 	public static boolean isNumbers(String token) {
-		try {
-			Integer.parseInt(token);
+		if (!token.equals("") && token.chars().allMatch(Character::isDigit)) {
 			return true;
-		} catch (NumberFormatException e) {
-			return false;
 		}
+		return false;
 	}
 
 	@Override
