@@ -19,21 +19,13 @@ public class FormulaValidator {
 		this.tokenFactory = tokenFactory;
 	}
 
-	public String validateFormula(String formula) throws
-		WrongTokenTypeException,
-		EmptyFormulaException,
-		WrongBracketCountException,
-		WrongTokenOrderException {
+	public String validateFormula(String formula) {
 		String[] tokens = formula.split("((?=[^0-9])|(?<=[^0-9]))");
 
-		try {
-			validateTokenIsCorrectType(tokens);
-			validateFormulaNotEmpty(tokens);
-			validateBracketIsCouple(tokens);
-			validateFormulaOrderIsCorrect(tokens);
-		} catch (Exception e) {
-			throw e;
-		}
+		validateTokenIsCorrectType(tokens);
+		validateFormulaNotEmpty(tokens);
+		validateBracketIsCouple(tokens);
+		validateFormulaOrderIsCorrect(tokens);
 
 		return formula;
 	}

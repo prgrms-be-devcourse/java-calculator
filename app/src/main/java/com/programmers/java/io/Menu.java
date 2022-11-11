@@ -2,6 +2,8 @@ package com.programmers.java.io;
 
 import java.util.Arrays;
 
+import com.programmers.java.exception.MenuInputException;
+
 public enum Menu {
 	LOOKUP("1"), CALCULATION("2"), EXIT("3");
 
@@ -15,6 +17,6 @@ public enum Menu {
 		return Arrays.stream(Menu.values())
 			.filter(num -> num.value.equals(choice))
 			.findFirst()
-			.orElseThrow();
+			.orElseThrow(MenuInputException::new);
 	}
 }
