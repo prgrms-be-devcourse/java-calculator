@@ -5,9 +5,9 @@ import java.util.List;
 import com.programmers.java.model.History;
 
 public interface Output {
-	void response(String value);
+	void write(String value);
 
-	void responseResult(int result);
+	void writeResult(int result);
 
-	void responseHistory(List<History> history);
+	void writeAllHistory(List<History> history);
 }

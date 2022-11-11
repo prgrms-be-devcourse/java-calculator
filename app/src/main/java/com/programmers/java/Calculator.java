@@ -34,38 +34,38 @@ public class Calculator implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			output.response(Message.MENU_TABLE.getMessage());
-			String chosenMenu = input.request();
+			output.write(Message.MENU_TABLE.getMessage());
+			String chosenMenu = input.read();
 			Menu menu = Menu.selectMenu(chosenMenu);
 
 			try {
 				switch (menu) {
 					case LOOKUP:
 						List<History> allHistory = repository.findAllHistory();
-						output.responseHistory(allHistory);
+						output.writeAllHistory(allHistory);
 						break;
 					case CALCULATION:
 						calculateProcess();
 						break;
 					case EXIT:
-						output.response(Message.EXIT_MESSAGE.getMessage());
+						output.write(Message.EXIT_MESSAGE.getMessage());
 						return;
 					default:
 						throw new MenuInputException();
 				}
 			} catch (RuntimeException e) {
-				output.response(e.getMessage());
+				output.write(e.getMessage());
 			}
 		}
 	}
 
 	private void calculateProcess() {
-		output.response(Message.FORMULA_REQUEST.getMessage());
-		String formula = input.request().replaceAll(" ", "");
+		output.write(Message.FORMULA_REQUEST.getMessage());
+		String formula = input.read().replaceAll(" ", "");
 		String validatedFormula = validator.validateFormula(formula);
 
 		repository.findHistory(validatedFormula)
-			.ifPresentOrElse(result -> output.responseResult(result.getResult())
+			.ifPresentOrElse(result -> output.writeResult(result.getResult())
 				, () -> doCalculate(validatedFormula));
 	}
 
@@ -94,6 +94,6 @@ public class Calculator implements Runnable {
 		String[] postfixFormula = parser.changeInfixToPostfix(validatedFormula);
 		int calculateResult = calculate(postfixFormula);
 		repository.save(validatedFormula, new History(validatedFormula, calculateResult));
-		output.responseResult(calculateResult);
+		output.writeResult(calculateResult);
 	}
 }

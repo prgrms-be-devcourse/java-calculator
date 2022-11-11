@@ -1,5 +1,5 @@
 package com.programmers.java.io;
 
 public interface Input {
-	String request();
+	String read();
 }

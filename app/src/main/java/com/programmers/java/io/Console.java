@@ -9,23 +9,23 @@ public class Console implements Input, Output {
 	private final Scanner scanner = new Scanner(System.in);
 
 	@Override
-	public String request() {
+	public String read() {
 		return scanner.nextLine();
 	}
 
 	@Override
-	public void response(String value) {
-		System.out.print(value);
+	public void write(String value) {
+		System.out.println(value);
 	}
 
 	@Override
-	public void responseResult(int result) {
+	public void writeResult(int result) {
 		System.out.println(result);
 		System.out.println();
 	}
 
 	@Override
-	public void responseHistory(List<History> history) {
+	public void writeAllHistory(List<History> history) {
 		history.forEach(i -> System.out.println(i.toString()));
 		System.out.println();
 	}
