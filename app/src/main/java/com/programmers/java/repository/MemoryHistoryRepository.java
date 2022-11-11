@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
 import com.programmers.java.model.History;
 
@@ -16,13 +17,8 @@ public class MemoryHistoryRepository implements HistoryRepository {
 	}
 
 	@Override
-	public boolean haveResult(String formula) {
-		return repository.containsKey(formula);
-	}
-
-	@Override
-	public int findResult(String formula) {
-		return repository.get(formula).getResult();
+	public Optional<History> findHistory(String formula) {
+		return Optional.ofNullable(repository.get(formula));
 	}
 
 	@Override

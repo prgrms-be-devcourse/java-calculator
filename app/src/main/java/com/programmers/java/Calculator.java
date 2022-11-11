@@ -64,15 +64,9 @@ public class Calculator implements Runnable {
 		String formula = input.request().replaceAll(" ", "");
 		String validatedFormula = validator.validateFormula(formula);
 
-		if (repository.haveResult(validatedFormula)) {
-			int result = repository.findResult(validatedFormula);
-			output.responseResult(result);
-		} else {
-			String[] postfixFormula = parser.changeInfixToPostfix(validatedFormula);
-			int calculateResult = calculate(postfixFormula);
-			repository.save(validatedFormula, new History(validatedFormula, calculateResult));
-			output.responseResult(calculateResult);
-		}
+		repository.findHistory(validatedFormula)
+			.ifPresentOrElse(result -> output.responseResult(result.getResult())
+				, () -> doCalculate(validatedFormula));
 	}
 
 	public int calculate(String[] parsedTokens) {
@@ -94,5 +88,12 @@ public class Calculator implements Runnable {
 		}
 
 		return numbers.pop();
+	}
+
+	private void doCalculate(String validatedFormula) {
+		String[] postfixFormula = parser.changeInfixToPostfix(validatedFormula);
+		int calculateResult = calculate(postfixFormula);
+		repository.save(validatedFormula, new History(validatedFormula, calculateResult));
+		output.responseResult(calculateResult);
 	}
 }
