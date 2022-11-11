@@ -53,13 +53,13 @@ public class Calculator implements Runnable {
 					default:
 						throw new MenuInputException();
 				}
-			} catch (Exception e) {
+			} catch (RuntimeException e) {
 				output.response(e.getMessage());
 			}
 		}
 	}
 
-	private void calculateProcess() throws Exception {
+	private void calculateProcess() {
 		output.response(Message.FORMULA_REQUEST.getMessage());
 		String formula = input.request().replaceAll(" ", "");
 		String validatedFormula = validator.validateFormula(formula);

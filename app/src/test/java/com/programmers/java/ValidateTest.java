@@ -26,7 +26,7 @@ class ValidateTest {
 		formula.add("(1+3+4)3"); // 마지막 문자 잘못됨
 
 		formula.stream()
-			.forEach(i -> Assertions.assertThrows(Exception.class, () -> validator.validateFormula(i)));
+			.forEach(i -> Assertions.assertThrows(RuntimeException.class, () -> validator.validateFormula(i)));
 	}
 
 	@Test

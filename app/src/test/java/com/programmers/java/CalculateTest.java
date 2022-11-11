@@ -3,7 +3,6 @@ package com.programmers.java;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.programmers.java.exception.DivideByZeroException;
 import com.programmers.java.io.Console;
 import com.programmers.java.model.token.TokenTypeFactory;
 import com.programmers.java.repository.HistoryRepository;
@@ -13,7 +12,7 @@ import com.programmers.java.util.PostfixParser;
 
 class CalculateTest {
 	@Test
-	void calculate() throws DivideByZeroException {
+	void calculate() {
 		Console console = new Console();
 		HistoryRepository repository = new MemoryHistoryRepository();
 		TokenTypeFactory tokenTypeFactory = new TokenTypeFactory();

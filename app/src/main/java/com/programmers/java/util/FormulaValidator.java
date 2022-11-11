@@ -38,7 +38,7 @@ public class FormulaValidator {
 		return formula;
 	}
 
-	private void validateTokenIsCorrectType(String[] tokens) throws WrongTokenTypeException {
+	private void validateTokenIsCorrectType(String[] tokens) {
 		for (String token : tokens) {
 			if (!(Numbers.isNumbers(token)
 				|| Operator.isOperator(token)
@@ -49,13 +49,13 @@ public class FormulaValidator {
 		}
 	}
 
-	private void validateFormulaNotEmpty(String[] tokens) throws EmptyFormulaException {
+	private void validateFormulaNotEmpty(String[] tokens) {
 		if (tokens == null) {
 			throw new EmptyFormulaException();
 		}
 	}
 
-	private void validateBracketIsCouple(String[] tokens) throws WrongBracketCountException {
+	private void validateBracketIsCouple(String[] tokens) {
 		Stack<String> openBracketStack = new Stack<>();
 
 		for (String token : tokens) {
@@ -76,19 +76,19 @@ public class FormulaValidator {
 		}
 	}
 
-	private void validateFormulaOrderIsCorrect(String[] tokens) throws WrongTokenOrderException {
+	private void validateFormulaOrderIsCorrect(String[] tokens) {
 		validateFirstOrderIsCorrect(tokens);
 		validateMiddleOrderIsCorrect(tokens);
 		validateLastOrderIsCorrect(tokens);
 	}
 
-	private void validateFirstOrderIsCorrect(String[] tokens) throws WrongTokenOrderException {
+	private void validateFirstOrderIsCorrect(String[] tokens) {
 		if (!(tokens[0].equals("(") || Numbers.isNumbers(tokens[0]))) {
 			throw new WrongTokenOrderException();
 		}
 	}
 
-	private void validateMiddleOrderIsCorrect(String[] tokens) throws WrongTokenOrderException {
+	private void validateMiddleOrderIsCorrect(String[] tokens) {
 		for (int i = 0; i < tokens.length - 1; i++) {
 			TokenType curToken = tokenFactory.createTokenType(tokens[i]);
 			TokenType nextToken = tokenFactory.createTokenType(tokens[i + 1]);
@@ -99,7 +99,7 @@ public class FormulaValidator {
 		}
 	}
 
-	private void validateLastOrderIsCorrect(String[] tokens) throws WrongTokenOrderException {
+	private void validateLastOrderIsCorrect(String[] tokens) {
 		if (!(Numbers.isNumbers(tokens[tokens.length - 1]) || tokens[tokens.length - 1].equals(")"))) {
 			throw new WrongTokenOrderException();
 		}
