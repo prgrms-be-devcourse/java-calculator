@@ -3,7 +3,6 @@ package com.programmers.java;
 import java.util.List;
 import java.util.Stack;
 
-import com.programmers.java.exception.MenuInputException;
 import com.programmers.java.io.Input;
 import com.programmers.java.io.Menu;
 import com.programmers.java.io.Message;
@@ -34,39 +33,23 @@ public class Calculator implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			output.write(Message.MENU_TABLE.getMessage());
-			String chosenMenu = input.read();
-			Menu menu = Menu.selectMenu(chosenMenu);
-
 			try {
+				output.write(Message.MENU_TABLE.getMessage());
+				String chosenMenu = input.read();
+				Menu menu = Menu.selectMenu(chosenMenu);
+
 				switch (menu) {
-					case LOOKUP:
-						List<History> allHistory = repository.findAllHistory();
-						output.writeAllHistory(allHistory);
-						break;
-					case CALCULATION:
-						calculateProcess();
-						break;
-					case EXIT:
+					case LOOKUP -> lookUpProcess();
+					case CALCULATION -> calculateProcess();
+					case EXIT -> {
 						output.write(Message.EXIT_MESSAGE.getMessage());
 						return;
-					default:
-						throw new MenuInputException();
+					}
 				}
 			} catch (RuntimeException e) {
 				output.write(e.getMessage());
 			}
 		}
-	}
-
-	private void calculateProcess() {
-		output.write(Message.FORMULA_REQUEST.getMessage());
-		String formula = input.read().replaceAll(" ", "");
-		String validatedFormula = validator.validateFormula(formula);
-
-		repository.findHistory(validatedFormula)
-			.ifPresentOrElse(result -> output.writeResult(result.getResult())
-				, () -> doCalculate(validatedFormula));
 	}
 
 	public int calculate(String[] parsedTokens) {
@@ -88,6 +71,21 @@ public class Calculator implements Runnable {
 		}
 
 		return numbers.pop();
+	}
+
+	private void lookUpProcess() {
+		List<History> allHistory = repository.findAllHistory();
+		output.writeAllHistory(allHistory);
+	}
+
+	private void calculateProcess() {
+		output.write(Message.FORMULA_REQUEST.getMessage());
+		String formula = input.read().replaceAll(" ", "");
+		String validatedFormula = validator.validateFormula(formula);
+
+		repository.findHistory(validatedFormula)
+			.ifPresentOrElse(result -> output.writeResult(result.getResult())
+				, () -> doCalculate(validatedFormula));
 	}
 
 	private void doCalculate(String validatedFormula) {
