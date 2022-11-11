@@ -12,7 +12,7 @@ import com.programmers.java.util.PostfixParser;
 
 class CalculateTest {
 	@Test
-	void calculate() {
+	void calculateByPostfixFormulaTest() {
 		Console console = new Console();
 		HistoryRepository repository = new MemoryHistoryRepository();
 		TokenTypeFactory tokenTypeFactory = new TokenTypeFactory();
