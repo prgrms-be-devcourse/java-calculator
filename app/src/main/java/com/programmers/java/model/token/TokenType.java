@@ -4,5 +4,5 @@ public interface TokenType {
 
 	String getValue();
 
-	boolean checkNextTokenCorrect(TokenType nextToken);
+	boolean checkNextTokenCorrect(String nextToken);
 }

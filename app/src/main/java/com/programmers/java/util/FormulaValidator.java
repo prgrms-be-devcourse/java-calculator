@@ -83,9 +83,8 @@ public class FormulaValidator {
 	private void validateMiddleOrderIsCorrect(String[] tokens) {
 		for (int i = 0; i < tokens.length - 1; i++) {
 			TokenType curToken = tokenFactory.createTokenType(tokens[i]);
-			TokenType nextToken = tokenFactory.createTokenType(tokens[i + 1]);
 
-			if (!curToken.checkNextTokenCorrect(nextToken)) {
+			if (!curToken.checkNextTokenCorrect(tokens[i + 1])) {
 				throw new WrongTokenOrderException();
 			}
 		}

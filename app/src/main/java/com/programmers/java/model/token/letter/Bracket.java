@@ -3,23 +3,22 @@ package com.programmers.java.model.token.letter;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import com.programmers.java.model.token.TokenType;
 import com.programmers.java.model.token.number.Numbers;
 
 public enum Bracket implements Letter {
 	OPEN_BRACKET("(", 0, t -> {
-		return t instanceof Numbers || t.getValue().equals("(");
+		return Numbers.isNumbers(t) || t.equals("(");
 	}),
 	CLOSE_BRACKET(")", 0, t -> {
-		return t instanceof Operator || t.getValue().equals(")");
+		return Operator.isOperator(t) || t.equals(")");
 	});
 
 	private String type;
 	private int priority;
-	private Predicate<TokenType> checkNextTokenCorrectFunction;
+	private Predicate<String> checkNextTokenCorrectFunction;
 
 	Bracket(String type, int priority,
-		Predicate<TokenType> checkNextTokenCorrectFunction) {
+		Predicate<String> checkNextTokenCorrectFunction) {
 		this.type = type;
 		this.priority = priority;
 		this.checkNextTokenCorrectFunction = checkNextTokenCorrectFunction;
@@ -38,7 +37,7 @@ public enum Bracket implements Letter {
 	}
 
 	@Override
-	public boolean checkNextTokenCorrect(TokenType nextToken) {
+	public boolean checkNextTokenCorrect(String nextToken) {
 		return checkNextTokenCorrectFunction.test(nextToken);
 	}
 

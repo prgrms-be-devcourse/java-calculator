@@ -24,8 +24,8 @@ public class Numbers implements TokenType {
 	}
 
 	@Override
-	public boolean checkNextTokenCorrect(TokenType nextToken) {
-		if (nextToken instanceof Operator || nextToken.getValue().equals(")")) {
+	public boolean checkNextTokenCorrect(String nextToken) {
+		if (Operator.isOperator(nextToken) || nextToken.equals(")")) {
 			return true;
 		} else {
 			return false;

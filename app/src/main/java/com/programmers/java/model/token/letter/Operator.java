@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-import com.programmers.java.model.token.TokenType;
 import com.programmers.java.model.token.number.Numbers;
 
 public enum Operator implements Letter {
@@ -53,8 +52,8 @@ public enum Operator implements Letter {
 	}
 
 	@Override
-	public boolean checkNextTokenCorrect(TokenType nextToken) {
-		return (nextToken instanceof Numbers || nextToken.getValue().equals("("));
+	public boolean checkNextTokenCorrect(String nextToken) {
+		return (Numbers.isNumbers(nextToken) || nextToken.equals("("));
 	}
 
 	@Override
