@@ -10,9 +10,9 @@ import java.util.*;
 public class PostfixCalculation implements Calculation {
     DecimalFormat resultBuffer = new DecimalFormat("#.##");
 
-    static final String NUMBER_FILTER = "^[0-9]*$";
-    static final int HIGH_PRIORITY = 1;
-    static final int LOW_PRIORITY = 2;
+    private static final String NUMBER_FILTER = "^[0-9]*$";
+    private static final int HIGH_PRIORITY = 1;
+    private static final int LOW_PRIORITY = 2;
 
 
     @Override
@@ -47,8 +47,10 @@ public class PostfixCalculation implements Calculation {
         return postfix;
     }
 
-    private int getPriority(String s) {
-        if (s.equals("*") || s.equals("/")) return HIGH_PRIORITY;
+    private int getPriority(String operator) {
+        Operator operatorType = Operator.of(operator);
+        if (Objects.equals(operatorType,Operator.MULTIPLICATION) ||Objects.equals(operatorType,Operator.DIVISION))
+            return HIGH_PRIORITY;
         else return LOW_PRIORITY;
     }
 
