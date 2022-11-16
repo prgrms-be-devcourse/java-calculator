@@ -2,7 +2,7 @@ package com.programmers.java.engin.model;
 
 import java.util.Arrays;
 
-public enum Operator {
+public enum OperatorType {
     ADDITION("+"){
         @Override
         public double result(double num1, double num2) {
@@ -30,13 +30,13 @@ public enum Operator {
 
     private final String textOperator;
 
-    Operator(final String textOperator) {
+    OperatorType(final String textOperator) {
         this.textOperator = textOperator;
     }
 
-    public static Operator of(final String symbol){
+    public static OperatorType of(final String symbol){
         return Arrays.stream(values())
-                .filter(operator -> operator.textOperator.equals(symbol))
+                .filter(operatorType -> operatorType.textOperator.equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("잘못된 연산식 입니다."));
     }

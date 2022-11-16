@@ -1,7 +1,7 @@
 package com.programmers.java.engin.io;
 
-import java.util.Optional;
+import com.programmers.java.engin.model.InputExpression;
 
 public interface Calculation {
-    String getResult(String input);
+    String getResult(InputExpression expression);
 }

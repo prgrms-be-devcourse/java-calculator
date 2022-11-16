@@ -1,7 +1,8 @@
 package com.programmers.java.engin;
 
 import com.programmers.java.engin.io.Calculation;
-import com.programmers.java.engin.model.Operator;
+import com.programmers.java.engin.model.InputExpression;
+import com.programmers.java.engin.model.OperatorType;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -11,48 +12,14 @@ public class PostfixCalculation implements Calculation {
     DecimalFormat resultBuffer = new DecimalFormat("#.##");
 
     private static final String NUMBER_FILTER = "^[0-9]*$";
-    private static final int HIGH_PRIORITY = 1;
-    private static final int LOW_PRIORITY = 2;
 
 
     @Override
-    public String getResult(String expression) {
-        List<String> postfix = toPostfix(expression);
+    public String getResult(InputExpression expression) {
+        List<String> postfix = expression.getPostfixExpression();
         return calculate(postfix);
     }
 
-    private List<String> toPostfix(String expression) {
-        Deque<String> tempDeque = new ArrayDeque<>();
-        List<String> postfix = new ArrayList<>();
-        for (String element : expression.split(" ")){
-            if (element.matches(NUMBER_FILTER)){
-                postfix.add(element);
-            }else{
-                if (tempDeque.isEmpty()){
-                    tempDeque.push(element);
-                } else {
-                    String popped = tempDeque.pop();
-                    if (getPriority(element)>getPriority(popped)){
-                        postfix.add(popped);
-                    }else{
-                        tempDeque.push(popped);
-                    }
-                    tempDeque.push(element);
-                }
-            }
-        }
-        while(!tempDeque.isEmpty()){
-            postfix.add(tempDeque.pop());
-        }
-        return postfix;
-    }
-
-    private int getPriority(String operator) {
-        Operator operatorType = Operator.of(operator);
-        if (Objects.equals(operatorType,Operator.MULTIPLICATION) ||Objects.equals(operatorType,Operator.DIVISION))
-            return HIGH_PRIORITY;
-        else return LOW_PRIORITY;
-    }
 
     private String calculate(List<String> expression) {
         Deque<Double> tempDeque = new ArrayDeque<>();
@@ -67,7 +34,7 @@ public class PostfixCalculation implements Calculation {
                 double num2 = tempDeque.pop();
                 double temp ;
 
-                temp = Operator.of(element).result(num2,num1);
+                temp = OperatorType.of(element).result(num2,num1);
                 tempDeque.push(temp);
             }
         }

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OperatorTest {
+class OperatorTypeTest {
 
     DecimalFormat resultBuffer = new DecimalFormat("#.##");
 
@@ -18,7 +18,7 @@ class OperatorTest {
     @MethodSource("calculateParameters")
     @DisplayName("사칙연산 계산")
     void calculate(String name, double num1, double num2, String operator, String result) {
-        assertEquals(resultBuffer.format(Operator.of(operator).result(num1,num2)),result);
+        assertEquals(resultBuffer.format(OperatorType.of(operator).result(num1,num2)),result);
     }
 
     private static Stream<Arguments> calculateParameters() {
@@ -34,7 +34,7 @@ class OperatorTest {
     @MethodSource("validParameters")
     @DisplayName("연산자 유효성 검사")
     void validOperator(double num1, double num2, String operator, String errMsg){
-        Exception error = assertThrows(Exception.class,()-> Operator.of(operator));
+        Exception error = assertThrows(Exception.class,()-> OperatorType.of(operator));
         assertEquals(error.getMessage(),errMsg);
     }
 

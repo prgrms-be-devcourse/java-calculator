@@ -3,14 +3,13 @@ package com.programmers.java.engin;
 import com.programmers.java.engin.io.Calculation;
 import com.programmers.java.engin.io.Input;
 import com.programmers.java.engin.io.Output;
+import com.programmers.java.engin.model.ConsoleInputExpression;
+import com.programmers.java.engin.model.InputExpression;
 import com.programmers.java.engin.model.Log;
 import com.programmers.java.engin.model.LogGroups;
 
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class Calculator implements Runnable{
+public class Calculator implements Runnable {
 
     private final Calculation calculation;
     private final Input input;
@@ -30,15 +29,12 @@ public class Calculator implements Runnable{
     @Override
     public void run() {
         Boolean running = true;
-        while(running){
-            String inputMenu = input.input("1. 조회"+NEWLINE+"2. 계산"+NEWLINE+NEWLINE+"선택 : ");
+        while (running) {
+            String inputMenu = input.input("1. 조회" + NEWLINE + "2. 계산" + NEWLINE + NEWLINE + "선택 : ");
 
-            switch (inputMenu){
+            switch (inputMenu) {
                 case "1" -> output.logsView(logGroups.getAllLogs());
-                case "2" -> {
-                    String expression = input.input();
-                    runCalculation(expression);
-                }
+                case "2" -> runCalculation();
                 case "-1" -> running = false;
                 default -> output.errorMessage("잘못된 입력입니다. 메뉴를 다시 선택해주세요.");
             }
@@ -46,12 +42,13 @@ public class Calculator implements Runnable{
         }
     }
 
-    private void runCalculation(String expression){
-        try{
-            String result = calculation.getResult(expression);
-            logGroups.insertLog(new Log(expression ,result));
+    private void runCalculation() {
+        InputExpression inputExpression = new ConsoleInputExpression(input.input());
+        try {
+            String result = calculation.getResult(inputExpression);
+            logGroups.insertLog(new Log(inputExpression, result));
             output.answer(result);
-        }catch (Exception error){
+        } catch (Exception error) {
             output.errorMessage(error.getMessage());
         }
     }
