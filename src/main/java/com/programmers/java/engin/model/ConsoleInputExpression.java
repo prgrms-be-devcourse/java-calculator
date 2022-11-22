@@ -2,6 +2,8 @@ package com.programmers.java.engin.model;
 
 import java.util.*;
 
+import static com.programmers.java.engin.model.OperatorType.getPriority;
+
 public class ConsoleInputExpression implements InputExpression {
     private final String expression;
     private static final int HIGH_PRIORITY = 1;
@@ -29,7 +31,7 @@ public class ConsoleInputExpression implements InputExpression {
                     tempDeque.push(element);
                 } else {
                     String popped = tempDeque.pop();
-                    if (getPriority(element)>getPriority(popped)){
+                    if (getPriority(element,popped)){
                         postfix.add(popped);
                     }else{
                         tempDeque.push(popped);
@@ -44,10 +46,4 @@ public class ConsoleInputExpression implements InputExpression {
         return postfix;
     }
 
-    private int getPriority(String operator) {
-        OperatorType operatorType = OperatorType.of(operator);
-        if (Objects.equals(operatorType, OperatorType.MULTIPLICATION) ||Objects.equals(operatorType, OperatorType.DIVISION))
-            return HIGH_PRIORITY;
-        else return LOW_PRIORITY;
-    }
 }

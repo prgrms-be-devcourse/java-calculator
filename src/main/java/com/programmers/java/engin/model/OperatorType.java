@@ -1,27 +1,28 @@
 package com.programmers.java.engin.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public enum OperatorType {
-    ADDITION("+"){
+    ADDITION("+",2){
         @Override
         public double result(double num1, double num2) {
             return num1 + num2;
         }
     },
-    SUBTRACTION("-"){
+    SUBTRACTION("-",2){
         @Override
         public double result(double num1, double num2) {
             return num1 - num2;
         }
     },
-    MULTIPLICATION("*"){
+    MULTIPLICATION("*",1){
         @Override
         public double result(double num1, double num2) {
             return num1 * num2;
         }
     },
-    DIVISION("/"){
+    DIVISION("/",1){
         @Override
         public double result(double num1, double num2) {
             return num1/num2;
@@ -29,9 +30,11 @@ public enum OperatorType {
     };
 
     private final String textOperator;
+    private final int priority;
 
-    OperatorType(final String textOperator) {
+    OperatorType(final String textOperator, int priority) {
         this.textOperator = textOperator;
+        this.priority = priority;
     }
 
     public static OperatorType of(final String symbol){
@@ -39,6 +42,12 @@ public enum OperatorType {
                 .filter(operatorType -> operatorType.textOperator.equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("잘못된 연산식 입니다."));
+    }
+
+    public static Boolean getPriority(String firstElem, String secondElem){
+        if (OperatorType.of(firstElem).priority > OperatorType.of(secondElem).priority)
+            return true;
+        return false;
     }
 
     public abstract double result(double num1, double num2);
