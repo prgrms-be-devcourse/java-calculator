@@ -12,4 +12,11 @@ class OperationTest {
         int result = operation.add(1, 2);
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    void subtract() {
+        Operation operation = new Operation();
+        int result = operation.subtract(1, 2);
+        assertThat(result).isEqualTo(-1);
+    }
 }
