@@ -24,7 +24,7 @@ class CalculatorTest {
         // then
         assertThat(result).isEqualTo(4);
     }
-    
+
     @Test
     void 계산이력을_조회한다() {
         // given

@@ -6,8 +6,6 @@ import com.javacalculator.dto.CalculatorRequest;
 import com.javacalculator.view.InputView;
 import com.javacalculator.view.OutputView;
 
-import java.util.Map;
-
 public class CalculatorController {
 
     public static void main(String[] args) {
