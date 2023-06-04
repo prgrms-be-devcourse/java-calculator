@@ -18,7 +18,7 @@ public class InputView {
         return sc;
     }
 
-    public static Menu selectInput() throws InputMismatchException, CalculatorException {
+    public static Menu selectMenuInput() throws InputMismatchException, CalculatorException {
         return switch (getInstance().nextInt()) {
             case 1 -> Menu.CHECK;
             case 2 -> Menu.CALCULATE;

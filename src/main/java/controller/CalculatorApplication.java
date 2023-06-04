@@ -11,9 +11,9 @@ public class CalculatorApplication {
         boolean runFlag = true;
         while (runFlag) {
             OutputView.printSelectMenu();
-            switch (InputView.selectInput()) {
-                case CHECK -> System.out.println("조회"); //todo: 계산기 객체에게 책임 전달
-                case CALCULATE -> System.out.println("계산");//todo: 저장소 객체에게 책임 전달
+            switch (InputView.selectMenuInput()) {
+                case CHECK -> System.out.println("조회"); //todo: 계산기 객체에게 계산 서비스 책임 전달
+                case CALCULATE -> System.out.println("계산"); //todo: 저장소 객체에게 연산 기록 서비스 책임 전달
                 case END -> runFlag = false;
             }
         }
