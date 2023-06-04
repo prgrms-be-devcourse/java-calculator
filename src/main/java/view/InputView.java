@@ -28,10 +28,12 @@ public class InputView {
     }
 
     public static String formulaInput() {
+        getInstance().nextLine(); //개행문자 제거
+        System.out.println();
         return getInstance().nextLine();
     }
 
-    public static void close() {
+    public static void closeScanner() {
         if (getInstance() != null) {
             getInstance().close();
         }

@@ -24,8 +24,12 @@ public class OutputView {
         System.out.println(Menu.CHECK.getDescription());
         System.out.println(Menu.CALCULATE.getDescription());
         System.out.println(Menu.END.getDescription());
+        System.out.println();
         System.out.print(INPUT);
     }
+
+
+
 
     public static void printErrorMessage(String em) {
         System.out.println(em);

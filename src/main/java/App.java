@@ -1,19 +1,22 @@
 import controller.CalculatorApplication;
 import exception.ErrorMessage;
+import model.Calculator;
+import model.CalculatorImpl;
+import repository.CalculateLogRepository;
+import repository.CalculateLogRepositoryImpl;
 import view.OutputView;
 
 import java.util.InputMismatchException;
 
 public class App {
     public static void main(String[] args) {
-        //todo 연산 결과 저장소 생성
+        Calculator calculator =  new CalculatorImpl();
+        CalculateLogRepository repository =  new CalculateLogRepositoryImpl();
 
-        //todo 계산기 생성
-
-        CalculatorApplication ca = new CalculatorApplication(); //런타임 시점에 의존관계 주입
+        CalculatorApplication app = new CalculatorApplication(calculator, repository); //런타임 시점에 의존관계 주입
         try {
-            ca.run();
-        } catch (RuntimeException e) {
+            app.run();
+        } catch (Exception e) {
             if (e instanceof InputMismatchException) {
                 OutputView.printErrorMessage(ErrorMessage.INVALID_CHAR);
             }
