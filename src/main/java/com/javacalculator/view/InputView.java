@@ -5,7 +5,6 @@ import com.javacalculator.dto.CalculatorRequest;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class InputView {
 
@@ -19,7 +18,9 @@ public class InputView {
     public static int inputMenuNumber() {
         try {
             System.out.printf("%n선택 : ");
-            return SCANNER.nextInt();
+            int number = SCANNER.nextInt();
+            System.out.println();
+            return number;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력한 값이 정수가 아닙니다.");
         }
