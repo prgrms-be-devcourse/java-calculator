@@ -1,15 +1,23 @@
 package com.javacalculator.domain;
 
+import com.javacalculator.dto.CalculatorRequest;
+
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Calculator {
 
-    public int calculate(List<Integer> operands, List<String> operators) {
+    private Map<String, Integer> histories = new LinkedHashMap<>();
+
+    public int calculate(CalculatorRequest request) {
+        List<Integer> operands = request.getOperands();
         int priority = 0;
         while (operands.size() != 1) {
-            calculateSub(operands, operators, priority++);
+            calculateSub(operands, request.getOperators(), priority++);
         }
 
+        saveHistory(request.getExpression(), operands.get(0));
         return operands.get(0);
     }
 
@@ -28,5 +36,13 @@ public class Calculator {
             operands.add(i, result);
             i -= 1;
         }
+    }
+
+    private void saveHistory(String expression, int result) {
+        histories.put(expression, result);
+    }
+
+    public Map<String, Integer> getHistories() {
+        return histories;
     }
 }
