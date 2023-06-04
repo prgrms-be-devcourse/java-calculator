@@ -4,17 +4,19 @@ import java.util.Arrays;
 import java.util.function.BinaryOperator;
 
 public enum Operator {
-    ADDITION("+", (e1, e2) -> e1 + e2),
-    SUBTRACTION("-", (e1, e2) -> e1 - e2),
-    MULTIPLICATION("*", (e1, e2) -> e1 * e2),
-    DIVISION("/", (e1, e2) -> e1 / e2);
+    ADDITION("+", (e1, e2) -> e1 + e2, 1),
+    SUBTRACTION("-", (e1, e2) -> e1 - e2, 1),
+    MULTIPLICATION("*", (e1, e2) -> e1 * e2, 0),
+    DIVISION("/", (e1, e2) -> e1 / e2, 0);
 
     private final String symbol;
     private final BinaryOperator<Integer> expression;
+    private final int priority;
 
-    Operator(String symbol, BinaryOperator<Integer> expression) {
+    Operator(String symbol, BinaryOperator<Integer> expression, int priority) {
         this.symbol = symbol;
         this.expression = expression;
+        this.priority = priority;
     }
 
     public static Operator from(String symbol) {
@@ -27,5 +29,9 @@ public enum Operator {
 
     public int operate(int e1, int e2) {
         return expression.apply(e1, e2);
+    }
+
+    public boolean isSame(int priority) {
+        return this.priority == priority;
     }
 }
