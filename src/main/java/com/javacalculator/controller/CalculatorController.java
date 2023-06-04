@@ -18,8 +18,7 @@ public class CalculatorController {
             Menu menu = Menu.from(InputView.inputMenuNumber());
 
             if (menu == Menu.FIRST) {
-                Map<String, Integer> histories = calculator.getHistories();
-                OutputView.outputHistories(histories);
+                OutputView.outputHistories(calculator.getHistories());
                 continue;
             }
 
