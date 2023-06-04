@@ -1,12 +1,18 @@
 package org.programmers.java.console;
 
 import org.programmers.java.message.InfoMsg;
+import org.programmers.java.validation.Validation;
 
 import java.util.Map;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
+    private Validation validation;
     private final Scanner scanner = new Scanner(System.in);
+
+    public Console(Validation validation) {
+        this.validation = validation;
+    }
 
     @Override
     public String numInput() {
@@ -17,7 +23,8 @@ public class Console implements Input, Output {
     @Override
     public String calculationInput() {
         String calculationInput = scanner.nextLine();
-        return calculationInput;
+        Boolean validationCheck = validation.calculateValidation(calculationInput);
+        return validationCheck == true ? calculationInput : "";
     }
 
     @Override

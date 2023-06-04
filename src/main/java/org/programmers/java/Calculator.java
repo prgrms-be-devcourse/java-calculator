@@ -23,6 +23,9 @@ public class Calculator {
                 case "1":
                     break;
                 case "2":
+                    String formula = input.calculationInput();
+                    if(formula.equals("")) break;
+                    System.out.println("계산기 동작");
                     break;
                 case "3":
                     output.exitMsg();
