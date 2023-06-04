@@ -12,4 +12,14 @@ public class Calculator {
         this.operation = operation;
         this.answer = answer;
     }
+
+    public String getOperation() {
+
+        return operation;
+    }
+
+    public String getAnswer() {
+
+        return answer;
+    }
 }

@@ -1,6 +1,15 @@
 package console;
 
+import java.util.Scanner;
+
 public class InputView {
 
-    //TODO : 입력 UI
+    private final Scanner scanner = new Scanner(System.in);
+
+    public String inputMenuSelection() {
+
+        OutputView.outputByMenu();
+
+        return scanner.nextLine();
+    }
 }
