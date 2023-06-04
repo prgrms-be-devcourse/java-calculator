@@ -1,5 +1,5 @@
 # java_calculator
-KDT-Programmers 백엔드 데브코스에서 진행하는 자바 계산기 구현 미션 저장소입니다.
+KDT-Programmers 백엔드 데브코스에서 진행하는 OOP를 활용한 자바 계산기 구현 미션 저장소입니다.
 
 ### Branch 명명 규칙 + 팀의 PR규칙
 - prgrms-be-devcourse/spring-board 레포로 PR 시 branch는 git_user_id  
