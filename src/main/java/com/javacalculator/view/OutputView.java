@@ -13,4 +13,8 @@ public class OutputView {
             System.out.printf("%d. %s%n", menu.getNumber(), menu.getName());
         }
     }
+
+    public static void outputCalculatedResult(int result) {
+        System.out.println(result);
+    }
 }
