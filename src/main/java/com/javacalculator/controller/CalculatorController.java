@@ -6,13 +6,22 @@ import com.javacalculator.dto.CalculatorRequest;
 import com.javacalculator.view.InputView;
 import com.javacalculator.view.OutputView;
 
+import java.util.Map;
+
 public class CalculatorController {
 
     public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+
         while (true) {
             OutputView.outputMenu();
             Menu menu = Menu.from(InputView.inputMenuNumber());
-            Calculator calculator = new Calculator();
+
+            if (menu == Menu.FIRST) {
+                Map<String, Integer> histories = calculator.getHistories();
+                OutputView.outputHistories(histories);
+                continue;
+            }
 
             if (menu == Menu.SECOND) {
                 CalculatorRequest request = InputView.inputExpression();
