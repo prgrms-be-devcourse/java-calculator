@@ -70,6 +70,7 @@ public class Calculator {
             }
         }
 
+        // 마지막 command의 숫자까지 처리.
         if(PM == Ops.PLUS)
             result += st.peek();
         else

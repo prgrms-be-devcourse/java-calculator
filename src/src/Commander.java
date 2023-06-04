@@ -83,6 +83,7 @@ public class Commander {
             return true;
         return false;
     }
+
     private static void printMenu() {
         System.out.println("1. 조회");
         System.out.println("2. 계산");
