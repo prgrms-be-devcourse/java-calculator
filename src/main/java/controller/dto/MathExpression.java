@@ -11,7 +11,7 @@ public class MathExpression {
     private final ArrayList<String> op = new ArrayList<>();;
     private final ArrayList<Integer> nums = new ArrayList<>();
 
-    private MathExpression(final String exp) throws CalculatorException {
+    public MathExpression(final String exp) throws CalculatorException {
         String[] splitExp = exp.split(" ");
         extractFromStringExp(splitExp);
     }

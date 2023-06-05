@@ -4,6 +4,6 @@ import model.CalculationLog;
 
 public interface CalculationLogRepository {
 
-    void checkLog();
+    void viewLog();
     void save(final CalculationLog cl);
 }

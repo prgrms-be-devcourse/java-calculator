@@ -13,7 +13,7 @@ public class CalculationLogRepositoryImpl implements CalculationLogRepository {
     private static long index = 0L;
 
     @Override
-    public void checkLog() {
+    public void viewLog() {
         printLogs(repository);
     }
 

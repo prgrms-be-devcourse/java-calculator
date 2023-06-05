@@ -26,7 +26,7 @@ public class CalculatorApplication {
         while (isAppTurnOn()) {
             printSelectMenu();
             switch (selectMenuInput()) {
-                case CHECK -> clrp.checkLog();
+                case CHECK -> clrp.viewLog();
                 case CALCULATE -> {
                     String userExpressionInput = mathExpressionInput();
                     MathExpression me = MathExpression.from(userExpressionInput);
