@@ -1,15 +1,20 @@
 package calulator.input;
 
+import calulator.domain.Menu;
+
 import java.util.Scanner;
 
 public class InputView {
 
+    private static final String SELECT_MESSAGE = "선택 : ";
+    private static final String BLANK_REGEX = "//s";
+    private static final String NONE_SPACE_REGEX = "";
     private final Scanner scanner = new Scanner(System.in);
 
-    public int inputMenu() {
-        System.out.println("1. 조회\n2. 계산\n");
-        System.out.printf("선택 : ");
-        return Integer.parseInt(inputLineWithoutBlank());
+    public Menu inputMenu() {
+        System.out.println(Menu.menuInfo());
+        System.out.printf(SELECT_MESSAGE);
+        return Menu.findMenu(inputLineWithoutBlank());
     }
 
     public String inputExpression() {
@@ -17,7 +22,7 @@ public class InputView {
     }
 
     private String inputLineWithoutBlank() {
-        return scanner.nextLine().replaceAll("//s","");
+        return scanner.nextLine().replaceAll(BLANK_REGEX, NONE_SPACE_REGEX);
     }
 
 }
