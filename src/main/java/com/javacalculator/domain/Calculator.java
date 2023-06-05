@@ -17,7 +17,11 @@ public class Calculator {
             calculateSub(operands, request.getOperators(), priority++);
         }
 
-        saveHistory(request.getExpression(), operands.get(0));
+        saveHistory(request.getExpression(), getHistory(operands));
+        return getHistory(operands);
+    }
+
+    private int getHistory(List<Integer> operands) {
         return operands.get(0);
     }
 
@@ -30,12 +34,20 @@ public class Calculator {
             }
 
             int result = operator.operate(operands.get(i), operands.get(i + 1));
-            operators.remove(i);
-            operands.remove(i);
-            operands.remove(i);
-            operands.add(i, result);
+            removeSub(operands, operators, i);
+            addCalculationResult(operands, i, result);
             i -= 1;
         }
+    }
+
+    private void removeSub(List<Integer> operands, List<String> operators, int i) {
+        operators.remove(i);
+        operands.remove(i);
+        operands.remove(i);
+    }
+
+    private void addCalculationResult(List<Integer> operands, int i, int result) {
+        operands.add(i, result);
     }
 
     private void saveHistory(String expression, int result) {
