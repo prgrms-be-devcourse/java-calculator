@@ -18,20 +18,25 @@ public class InputView {
         return sc;
     }
 
-    public static Menu selectMenuInput() throws InputMismatchException, CalculatorException {
-        return switch (getInstance().nextInt()) {
-            case 1 -> Menu.CHECK;
-            case 2 -> Menu.CALCULATE;
-            case 3 -> Menu.END;
-            default -> throw new CalculatorException(ErrorMessage.INVALID_SELECT_NUMBER);
-        };
+    public static Menu selectMenuInput() throws CalculatorException {
+        try {
+            return switch (getInstance().nextInt()) {
+                case 1 -> Menu.CHECK;
+                case 2 -> Menu.CALCULATE;
+                case 3 -> Menu.END;
+                default -> throw new CalculatorException(ErrorMessage.INVALID_MENU_NUMBER);
+            };
+        } catch (InputMismatchException e) {
+            throw new CalculatorException(ErrorMessage.INVALID_TYPE_INPUT);
+        }
     }
 
-    public static String formulaInput() {
+    public static String mathExpressionInput() {
+        getInstance().nextLine(); //개행문자 제거
         return getInstance().nextLine();
     }
 
-    public static void close() {
+    public static void inputClose() {
         if (getInstance() != null) {
             getInstance().close();
         }

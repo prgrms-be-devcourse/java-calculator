@@ -1,6 +1,6 @@
 package exception;
 
-public class CalculatorException extends RuntimeException{
+public class CalculatorException extends Exception{
     private final String message;
 
     public CalculatorException(String message) {
