@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculationServiceTest {
 
+    private CalculationRepository calculationRepository = new CalculationRepository();
+    private CalculationService calculationService = new CalculationService(calculationRepository);
+
     @Test
     void SUCCESS_getCalculationsAll_메소드로_모든_계산_기록_조회() {
 
@@ -21,11 +24,7 @@ public class CalculationServiceTest {
         Calculator calculator2 = new Calculator("4-1", "3");
         Calculator calculator3 = new Calculator("5*2", "10");
         List<Calculator> calculators = Arrays.asList(calculator1, calculator2, calculator3);
-
-        CalculationRepository calculationRepository = new CalculationRepository();
         calculators.forEach(calculationRepository::save);
-
-        CalculationService calculationService = new CalculationService(calculationRepository);
 
         //when
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();   //임시 버퍼 생성
@@ -41,5 +40,20 @@ public class CalculationServiceTest {
 
         //then
         assertEquals(outputStream.toString(), expectedOutput);
+    }
+
+    @Test
+    void SUCCESS_실제_연산을_진행() {
+
+        //then
+        String operation = "4*5/4+7*2";
+
+        //when
+        calculationService.calculate(operation);
+        Calculator calculator = calculationRepository.findAll().get(0);
+
+        //then
+        assertEquals(calculator.getOperation(), operation);
+        assertEquals(calculator.getAnswer(), "19");
     }
 }
