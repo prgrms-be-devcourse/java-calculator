@@ -20,5 +20,16 @@ public class Calculator {
 //            }
 //        }
 
+    private void createExpression(String inputValue) {
+        List<String> expressions = StringSplitter.splitByOperator(inputValue);
+        this.expression = new Expression(expressions);
+    }
+
+    private String getCalculateResult(String inputValue) {
+        createExpression(inputValue);
+        String calculateResult = expression.calculate();
+        expressionRepository.addExpression(inputValue, calculateResult);
+        return calculateResult;
+    }
 
 }
