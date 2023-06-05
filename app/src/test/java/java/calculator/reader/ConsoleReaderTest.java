@@ -3,7 +3,7 @@ package java.calculator.reader;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.calculator.console.ConsoleReader;
+import java.calculator.console.reader.ConsoleReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConsoleReaderTest {
 
     @Test
-    @DisplayName("사용자가 입력 했을 때 입력을 잘 받는지 확인하는 테스트")
+    @DisplayName("사용자가 콘솔창에 입력 했을 때 입력을 잘 받는지 확인하는 테스트")
     public void testReadLine() {
         // Given
         String input = "test input\n";

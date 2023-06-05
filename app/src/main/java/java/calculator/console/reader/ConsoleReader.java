@@ -1,4 +1,4 @@
-package java.calculator.console;
+package java.calculator.console.reader;
 
 import java.calculator.common.reader.Reader;
 import java.util.Scanner;
