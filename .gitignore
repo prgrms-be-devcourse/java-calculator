@@ -1,0 +1,13 @@
+# 생성되는 애들
+.gradle
+build
+out
+
+# 인텔리제이
+.idea
+
+# 초기 파일들
+gradle
+gradlew
+gradlew.bat
+settings.gradle
