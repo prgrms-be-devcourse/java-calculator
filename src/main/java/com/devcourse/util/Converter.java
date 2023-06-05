@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class Converter {
 
-    public static List<Token> infixToPostfixFormula(String origin) {
+    public List<Token> infixToPostfixFormula(String origin) {
         String formula = origin.replace(" ", "");
         List<Token> result = new ArrayList<>();
         Stack<Operator> stack = new Stack<>();

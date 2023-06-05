@@ -13,9 +13,11 @@ import java.util.Stack;
 public class Calculator {
 
     private final CalcHistoryRepository repository;
+    private final Converter converter;
 
-    public Calculator(CalcHistoryRepository repository) {
+    public Calculator(CalcHistoryRepository repository, Converter converter) {
         this.repository = repository;
+        this.converter = converter;
     }
 
     public void run() {
@@ -29,7 +31,7 @@ public class Calculator {
 
     public String calc() {
         String formula = Input.getFormula();
-        List<Token> tokens = Converter.infixToPostfixFormula(formula);
+        List<Token> tokens = converter.infixToPostfixFormula(formula);
         String result = calculate(tokens).toString();
         repository.saveHistory(new History(formula, result));
         return result;
