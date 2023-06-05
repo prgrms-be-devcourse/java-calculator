@@ -11,30 +11,31 @@ import java.util.Stack;
 public class Converter {
 
     public static List<Token> infixToPostfixFormula(String origin) {
-        origin = origin.replace(" ", "");
+        String formula = origin.replace(" ", "");
         List<Token> result = new ArrayList<>();
         Stack<Operator> stack = new Stack<>();
 
-        for (int i = 0; i < origin.length(); i++) {
-            char currentChar = origin.charAt(i);
-
+        for (char currentChar : formula.toCharArray()) {
             if (Character.isDigit(currentChar)) {
                 result.add(new Number(Character.getNumericValue(currentChar)));
                 continue;
             }
-
-            Operator newOperator = Operator.find(currentChar);
-            if (stack.size() > 0 && newOperator.isLowerPriority(stack.peek())) {
-                result.add(stack.pop());
-            }
-            stack.push(newOperator);
-
-            if (newOperator.isFinishBracket()) {
-                clearBracketFormula(result, stack);
-            }
+            processOperator(result, stack, currentChar);
         }
 
         return clearOperationStack(result, stack);
+    }
+
+    private static void processOperator(List<Token> result, Stack<Operator> stack, char currentChar) {
+        Operator newOperator = Operator.find(currentChar);
+        if (stack.size() > 0 && newOperator.isLowerPriority(stack.peek())) {
+            result.add(stack.pop());
+        }
+        stack.push(newOperator);
+
+        if (newOperator.isFinishBracket()) {
+            clearBracketFormula(result, stack);
+        }
     }
 
     private static void clearBracketFormula(List<Token> result, Stack<Operator> stack) {

@@ -2,6 +2,7 @@ package com.devcourse.calc.model;
 
 import com.devcourse.calc.Calculator;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 public enum Menu {
@@ -23,14 +24,10 @@ public enum Menu {
     }
 
     public static String doAction(int selectedNumber, Calculator calculator) {
-        Menu selected = NONE;
-        Menu[] menus = values();
-        for (Menu menu : menus) {
-            if (menu.number == selectedNumber) {
-                selected = menu;
-                break;
-            }
-        }
+        Menu selected = Arrays.stream(values())
+                .filter(menu -> menu.number == selectedNumber)
+                .findFirst()
+                .orElse(NONE);
         return selected.action.apply(calculator);
     }
 
