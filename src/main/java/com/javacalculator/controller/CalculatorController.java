@@ -24,6 +24,11 @@ public class CalculatorController {
                 CalculatorRequest request = InputView.inputExpression();
                 int result = calculator.calculate(request);
                 OutputView.outputCalculatedResult(result);
+                continue;
+            }
+
+            if (menu == Menu.END) {
+                break;
             }
         }
     }
