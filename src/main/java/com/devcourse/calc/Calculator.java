@@ -2,6 +2,7 @@ package com.devcourse.calc;
 
 import com.devcourse.calc.model.*;
 import com.devcourse.calc.model.Number;
+import com.devcourse.calc.repo.CalcHistoryRepository;
 import com.devcourse.util.Converter;
 import com.devcourse.view.Input;
 import com.devcourse.view.Output;
@@ -11,19 +12,26 @@ import java.util.Stack;
 
 public class Calculator {
 
+    private final CalcHistoryRepository repository;
+
+    public Calculator(CalcHistoryRepository repository) {
+        this.repository = repository;
+    }
+
     public void run() {
         int menu = selectMenu();
         Output.viewResult(Menu.doAction(menu, this));
     }
 
     public String showHistory() {
-        return "계산 결과 이력 값입니다";
+        return repository.getAllHistories();
     }
 
     public String calc() {
         String formula = Input.getFormula();
         List<Token> tokens = Converter.infixToPostfixFormula(formula);
         String result = calculate(tokens).toString();
+        repository.saveHistory(new History(formula, result));
         return result;
     }
 
