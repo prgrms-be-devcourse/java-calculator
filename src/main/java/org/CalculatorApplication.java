@@ -2,6 +2,7 @@ package org;
 
 import org.application.InputView;
 import org.application.OutputView;
+import org.domain.repository.CalculationRepository;
 import org.error.ResponseErrorFormat;
 import org.service.CalculationService;
 
@@ -9,7 +10,8 @@ public class CalculatorApplication {
 
     public static void main(String[] args) {
 
-        final CalculationService calculationService = new CalculationService();
+        final CalculationRepository calculationRepository = new CalculationRepository();
+        final CalculationService calculationService = new CalculationService(calculationRepository);
 
         String menuChoice = "";
 

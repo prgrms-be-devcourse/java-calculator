@@ -10,6 +10,9 @@ public class CalculationRepository {
 
     private IdGenerator idGenerator = IdGenerator.getInstance();
 
+    public CalculationRepository() {
+    }
+
     public void save(Calculator calculator) {
 
         repository.put(idGenerator.generateId(), calculator);
