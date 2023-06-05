@@ -1,5 +1,7 @@
 package com.devcourse.view;
 
+import com.devcourse.valid.FormulaValidator;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,7 +20,11 @@ public class Input {
 
     public static String getFormula() {
         try {
-            return reader.readLine();
+            String formula = reader.readLine();
+            if (FormulaValidator.valid(formula)) {
+                return formula;
+            }
+            throw new RuntimeException();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
