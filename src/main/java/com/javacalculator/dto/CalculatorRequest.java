@@ -4,9 +4,9 @@ import java.util.List;
 
 public class CalculatorRequest {
 
-    private String expression;
-    private List<Integer> operands;
-    private List<String> operators;
+    private final String expression;
+    private final List<Integer> operands;
+    private final List<String> operators;
 
     public CalculatorRequest(String expression, List<Integer> operands, List<String> operators) {
         this.expression = expression;
