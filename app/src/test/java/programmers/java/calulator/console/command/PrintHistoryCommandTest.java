@@ -15,7 +15,7 @@ public class PrintHistoryCommandTest {
 
     @Test
     @DisplayName("사용자의 계산 기록 출력 명령이 작동하는지 확인하는 테스트")
-    public void whenExecuteIsCalled_thenPrintAllHistory() {
+    public void 계산기_기록_출력_테스트() {
         // given
         Repository mockRepository = Mockito.mock(Repository.class);
         Writer mockWriter = Mockito.mock(Writer.class);

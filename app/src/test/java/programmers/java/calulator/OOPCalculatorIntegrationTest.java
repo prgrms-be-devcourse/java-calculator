@@ -5,6 +5,7 @@ package programmers.java.calulator;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import programmers.java.calulator.common.Calculator;
 import programmers.java.calulator.console.reader.ConsoleReader;
@@ -35,7 +36,8 @@ public class OOPCalculatorIntegrationTest {
     }
 
     @Test
-    public void integrationTest() {
+    @DisplayName("객체지향 계산기 통합 테스트")
+    public void 통합테스트() {
         String[] inputs = { "2", "1 + 3", "2", "1 + 2 * 3", "2", "3 - 2 * 2", "1", "exit" };
         InputStream in = new ByteArrayInputStream(String.join("\n", inputs).getBytes());
         System.setIn(in);
