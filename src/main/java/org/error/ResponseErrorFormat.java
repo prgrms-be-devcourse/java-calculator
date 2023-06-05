@@ -16,6 +16,7 @@ public enum ResponseErrorFormat {
     }
 
     public String getMessage() {
+
         return message;
     }
 }

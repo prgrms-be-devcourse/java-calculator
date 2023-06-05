@@ -1,4 +1,4 @@
-package org.application;
+package org.console;
 
 import java.util.Scanner;
 

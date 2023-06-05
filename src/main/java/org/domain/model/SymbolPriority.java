@@ -28,10 +28,6 @@ public enum SymbolPriority {
         this.operation = operation;
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
     public int getPriority() {
 
         return priority;

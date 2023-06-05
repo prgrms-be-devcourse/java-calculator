@@ -1,7 +1,7 @@
 package org;
 
-import org.application.InputView;
-import org.application.OutputView;
+import org.console.InputView;
+import org.console.OutputView;
 import org.domain.repository.CalculationRepository;
 import org.error.ResponseErrorFormat;
 import org.service.CalculationService;
@@ -11,30 +11,31 @@ public class CalculatorApplication {
     static final CalculationRepository calculationRepository = new CalculationRepository();
     static final CalculationService calculationService = new CalculationService(calculationRepository);
 
+    private static final String FIND_MENU = "1";
+    private static final String CALCULATOR_MENU = "2";
+    private static final String EXIT_MENU = "3";
+
     public static void main(String[] args) {
 
         String menuChoice = "";
 
-        while (!menuChoice.equals("3")) {
+        while (!menuChoice.equals(EXIT_MENU)) {
+
             menuChoice = InputView.inputMenuSelection();
-            choice(menuChoice);
-        }
-    }
 
-    private static void choice(String choice) {
-
-        switch (choice) {
-            case "1":
-                getCalculationAll();
-                break;
-            case "2":
-                calculate();
-                break;
-            case "3":
-                exit();
-                break;
-            default:
-                other();
+            switch (menuChoice) {
+                case FIND_MENU:
+                    getCalculationAll();
+                    break;
+                case CALCULATOR_MENU:
+                    calculate();
+                    break;
+                case EXIT_MENU:
+                    exit();
+                    break;
+                default:
+                    other();
+            }
         }
     }
 
