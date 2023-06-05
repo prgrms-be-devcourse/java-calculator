@@ -10,11 +10,13 @@ public enum Menu {
     CALC(2, "계산", Calculator::calc),
     ;
 
-    private final Integer number;
+    private static final String TO_STRING_TEMPLATE = "%d. %s\n";
+
+    private final int number;
     private final String description;
     private final Function<Calculator, String> action;
 
-    Menu(Integer number, String description, Function<Calculator, String> action) {
+    Menu(int number, String description, Function<Calculator, String> action) {
         this.number = number;
         this.description = description;
         this.action = action;
@@ -34,11 +36,6 @@ public enum Menu {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append(number)
-                .append(". ")
-                .append(description)
-                .append("\n");
-        return result.toString();
+        return String.format(TO_STRING_TEMPLATE, this.number, this.description);
     }
 }
