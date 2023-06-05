@@ -1,6 +1,6 @@
-package domain.repository;
+package org.domain.repository;
 
-import domain.model.Calculator;
+import org.domain.model.Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

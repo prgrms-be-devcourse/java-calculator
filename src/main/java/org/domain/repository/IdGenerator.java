@@ -1,4 +1,4 @@
-package domain;
+package org.domain.repository;
 
 public class IdGenerator {
 

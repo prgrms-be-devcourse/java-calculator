@@ -1,6 +1,6 @@
-package console;
+package org.console;
 
-import domain.model.Calculator;
+import org.domain.model.Calculator;
 
 public class OutputView {
 

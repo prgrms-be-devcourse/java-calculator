@@ -1,5 +1,6 @@
-package domain;
+package org.domain.repository;
 
+import org.domain.repository.IdGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,7 +1,6 @@
-package domain.repository;
+package org.domain.repository;
 
-import domain.IdGenerator;
-import domain.model.Calculator;
+import org.domain.model.Calculator;
 
 import java.util.*;
 
