@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ExpressionRepository {
 
-    private final LinkedHashMap<String, String> repository = new LinkedHashMap<>();
+    private static final LinkedHashMap<String, String> repository = new LinkedHashMap<>();
 
     public void addExpression(String expression, String result) {
         repository.put(expression, result);
