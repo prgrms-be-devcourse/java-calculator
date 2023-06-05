@@ -2,49 +2,53 @@ package controller;
 
 
 import exception.CalculatorException;
-import model.Calculator;
-import repository.CalculateLogRepository;
-import view.InputView;
-import view.OutputView;
+import controller.dto.MathExpression;
+import model.CalculationLog;
+import model.calculator.Calculator;
+import repository.CalculationLogRepository;
 
-import java.util.InputMismatchException;
+import static view.InputView.*;
+import static view.OutputView.*;
 
 
 public class CalculatorApplication {
     private final Calculator calculator;
-    private final CalculateLogRepository repository;
+    private final CalculationLogRepository clrp;
     private boolean runFlag;
 
-    public CalculatorApplication(Calculator calculator, CalculateLogRepository repository) {
+    public CalculatorApplication(final Calculator calculator, final CalculationLogRepository clrp) {
         this.calculator = calculator;
-        this.repository = repository;
+        this.clrp = clrp;
         this.runFlag = true;
     }
 
-    public void run() throws InputMismatchException, CalculatorException {
-        while (isAppOn()) {
-            OutputView.printSelectMenu();
-            switch (InputView.selectMenuInput()) {
-                case CHECK -> repository.lookupLog(); //기록조회작업 => repository 객체에게 책임 위임
+    public void run() throws CalculatorException {
+        while (isAppTurnOn()) {
+            printSelectMenu();
+            switch (selectMenuInput()) {
+                case CHECK -> clrp.checkLog();
                 case CALCULATE -> {
-                    String expression = InputView.formulaInput();
-                    //todo: Expression.from(expression) 를 통해 클래스를 생성하고 유효한 formula 가 아니라면 isValid() 메서드를 통해 예외처리
-                    calculator.calculate(); //계산작업 => calculator 객체에게 책임 위임
+                    String userExpressionInput = mathExpressionInput();
+                    MathExpression me = MathExpression.from(userExpressionInput);
+                    int result = calculator.calculate(me);
+                    printResult(result);
+                    CalculationLog cl = CalculationLog.of(userExpressionInput, result);
+                    clrp.save(cl);
                 }
                 case END ->  {
-                    InputView.closeScanner();
-                    appOff();
+                    inputClose();
+                    appTurnOff();
                 }
             }
         }
     }
 
-    private boolean isAppOn() {
+    private boolean isAppTurnOn() {
         return runFlag;
     }
 
-    private void appOff() {
-        //todo: app off message insert
+    private void appTurnOff() {
+        printTurnOff();
         this.runFlag = false;
     }
 }
