@@ -9,7 +9,7 @@ class TokenizerTest {
 
     @Test
     @DisplayName("문자열을 입력 받았을 때 띄워쓰기 별로 분리가 잘 되는지 확인하는 테스트")
-    public void whenExpressionIsGiven_thenTokensAreCorrect() {
+    public void 문자열_분리_테스트() {
         //given
         String expression = "10 + 20";
 

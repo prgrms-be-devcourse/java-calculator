@@ -12,7 +12,7 @@ class ConsoleReaderTest {
 
     @Test
     @DisplayName("사용자가 콘솔창에 입력 했을 때 입력을 잘 받는지 확인하는 테스트")
-    public void testReadLine() {
+    public void 입력_테스트() {
         // Given
         String input = "test input\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());

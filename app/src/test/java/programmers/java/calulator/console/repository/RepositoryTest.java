@@ -32,7 +32,7 @@ public class RepositoryTest {
 
     @Test
     @DisplayName("계산을 기록하는 repository가 싱글톤으로 관리되는지 확인하는 테스트")
-    public void single_tone_repository_test() {
+    public void 싱글톤_리포지토리_테스트() {
         // Given
         // Initialization done in setUp
 

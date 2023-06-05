@@ -27,7 +27,7 @@ public class ConsoleWriterTest {
 
     @Test
     @DisplayName("사용자에게 콘솔창에서 출력 화면이 잘 나오는지 출력 모듈 테스트")
-    public void testWrite() {
+    public void 출력_테스트() {
         // Given
         ConsoleWriter consoleWriter = new ConsoleWriter();
         String message = "test output";

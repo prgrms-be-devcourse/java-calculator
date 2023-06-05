@@ -21,8 +21,8 @@ public class NumberTest {
     }
 
     @Test
-    @DisplayName("문자를 입력 받았을 때 true 반환하는지 확인하는 테스트")
-    public void whenTokenIsNotNumber_thenIsValidReturnsFalse() {
+    @DisplayName("문자를 입력 받았을 때 false 반환하는지 확인하는 테스트")
+    public void 문자_입력_확인_테스트() {
         //given
         String c = "a";
 
@@ -35,7 +35,7 @@ public class NumberTest {
 
     @Test
     @DisplayName("정수 문자가 변환이 잘 되는지 확인하는 테스트")
-    public void whenTokenIsNumber_thenToIntReturnsCorrectValue() {
+    public void 문자_변환_테스트() {
         //given
         String n = "10";
 

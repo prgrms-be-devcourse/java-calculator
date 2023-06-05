@@ -14,7 +14,7 @@ public class ExecuteCalculationCommandTest {
 
     @Test
     @DisplayName("사용자의 계산기 실행 명령이 작동하는지 확인하는 테스트")
-    public void whenExecuteIsCalled_thenCalculateExpressionAndWriteResult() {
+    public void 계산기_실행_테스트() {
         // given
         Calculator mockCalculator = Mockito.mock(Calculator.class);
         Reader mockReader = Mockito.mock(Reader.class);
