@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Commander {
 
+    // memorizer, calculator : Singleton.
     private static Memorizer memorizer = Memorizer.getInstance();
 
     private static Calculator calculator = Calculator.getInstance();
@@ -62,11 +63,12 @@ public class Commander {
     }
 
     public static boolean check(String[] command) {
-        for(String s : command) {
-            if(isDigit(s.charAt(0))) {
-                for(int i = 1; i < s.length(); i++) {
-                    if(!isDigit(s.charAt(i)))
-                        return false;
+        String s;
+        for(int i = 0; i < command.length; i++) {
+            s = command[i];
+            if(i % 2 == 0) {
+                if(!isDigit(s)) {
+                    return false;
                 }
             }
             else {
@@ -78,10 +80,14 @@ public class Commander {
         return true;
     }
 
-    public static boolean isDigit(char c) {
-        if((int)c - '0' >= 0 && (int)c - '0' <= 9)
-            return true;
-        return false;
+    // ASCII값으로 판정.
+    public static boolean isDigit(String s) {
+        for(int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if((int)c - '0' < 0 || (int)c - '0' > 9)
+                return false;
+        }
+        return true;
     }
 
     private static void printMenu() {
