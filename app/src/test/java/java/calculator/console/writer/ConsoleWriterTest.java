@@ -1,4 +1,4 @@
-package java.calculator.writer;
+package java.calculator.console.writer;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

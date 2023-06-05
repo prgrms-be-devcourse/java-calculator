@@ -1,4 +1,4 @@
-package java.calculator.repository;
+package java.calculator.console.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
