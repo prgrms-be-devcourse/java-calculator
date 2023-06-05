@@ -10,6 +10,10 @@ public class Number implements Token{
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return String.valueOf(number).concat("\n");
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
