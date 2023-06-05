@@ -6,7 +6,7 @@ public class Calculator {
 
     // private 메소드로 계산 메소드에 넣을 예정
     public static String toPostfix(String[] infixExpression) {
-        Stack<String> stack = new Stack<>();
+        Stack<String> operatorStack = new Stack<>();
         StringBuilder postfixExpression = new StringBuilder();
 
         for (String value : infixExpression) {
@@ -17,15 +17,16 @@ public class Calculator {
             //연산자라면 -> 스택에 담긴 연산자와 우선순위를 비교해 순서대로 넣음
             else {
                 CalculateType calculateType = CalculateType.findBySymbol(value);
-                while (!postfixExpression.isEmpty() && !stack.isEmpty() &&
-                        calculateType.getPriority() <= CalculateType.findBySymbol(stack.peek()).getPriority()) {
-                    postfixExpression.append(stack.pop());
+                while (!postfixExpression.isEmpty() && !operatorStack.isEmpty() &&
+                        calculateType.getPriority() <= CalculateType.findBySymbol(operatorStack.peek()).getPriority()) {
+                    postfixExpression.append(operatorStack.pop());
                 }
-                stack.push(value);
+                operatorStack.push(value);
             }
         }
-        while (!postfixExpression.isEmpty() && !stack.isEmpty()) {
-            postfixExpression.append(stack.pop());
+        // 연산자가 스택에남아있다면 추가
+        while (!operatorStack.isEmpty()) {
+            postfixExpression.append(operatorStack.pop());
         }
         return postfixExpression.toString();
     }

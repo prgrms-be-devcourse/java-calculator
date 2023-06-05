@@ -1,7 +1,6 @@
 import View.InputView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +11,7 @@ public class Main {
             System.out.println("1.계산");
             System.out.println("2.조회");
             int select = InputView.selectWorks();
-            //예외처리
+            // 종료하고 싶은 경우
             if(select == -1){
                 break;
             }

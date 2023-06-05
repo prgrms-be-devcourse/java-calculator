@@ -3,7 +3,6 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum CalculateType {
-    // 데이터틀 간의 연관관계 표현, 상태와 행위를 한곳에서 처리
     ADD("+",1, (left, right) -> left + right),
     SUBTRACT("-",1, (left, right) -> left - right),
     MULTIPLY("*",2, (left, right) -> left * right),
