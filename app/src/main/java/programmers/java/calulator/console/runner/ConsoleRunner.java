@@ -7,7 +7,7 @@ import programmers.java.calulator.common.reader.Reader;
 import programmers.java.calulator.common.writer.Writer;
 import programmers.java.calulator.console.command.ExecuteCalculationCommand;
 import programmers.java.calulator.console.command.PrintHistoryCommand;
-import programmers.java.calulator.console.repository.Repository;
+import programmers.java.calulator.console.repository.MapRepository;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,7 +23,7 @@ public class ConsoleRunner implements ApplicationRunner {
         this.writer = writer;
         this.commands = commands;
 
-        commands.put("1", new PrintHistoryCommand(writer, Repository.getInstance()));
+        commands.put("1", new PrintHistoryCommand(writer, MapRepository.getInstance()));
         commands.put("2", new ExecuteCalculationCommand(calculator, reader, writer));
     }
 

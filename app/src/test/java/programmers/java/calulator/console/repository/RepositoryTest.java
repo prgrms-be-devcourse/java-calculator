@@ -4,15 +4,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RepositoryTest {
-    private Repository repository;
+    private MapRepository repository;
 
     @BeforeEach
     public void setUp() {
-        repository = Repository.getInstance();
+        repository = MapRepository.getInstance();
     }
 
     @Test
@@ -37,8 +39,8 @@ public class RepositoryTest {
         // Initialization done in setUp
 
         // When
-        Repository firstInstance = Repository.getInstance();
-        Repository secondInstance = Repository.getInstance();
+        MapRepository firstInstance = MapRepository.getInstance();
+        MapRepository secondInstance = MapRepository.getInstance();
 
         // Then
         assertEquals(firstInstance, secondInstance);
