@@ -13,9 +13,7 @@ public class CalculationRepository {
 
     public void save(Calculator calculator) {
 
-        Long key = idGenerator.generateId();
-
-        repository.put(key, calculator);
+        repository.put(idGenerator.generateId(), calculator);
     }
 
     public List<Calculator> findAll() {

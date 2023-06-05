@@ -2,9 +2,9 @@ package domain.model;
 
 public class Calculator {
 
-    String operation;
+    private String operation;
 
-    String answer;
+    private String answer;
 
     public Calculator(String operation,
                       String answer) {
