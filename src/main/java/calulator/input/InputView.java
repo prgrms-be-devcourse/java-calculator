@@ -12,6 +12,10 @@ public class InputView {
         return Integer.parseInt(inputLineWithoutBlank());
     }
 
+    public String inputExpression() {
+        return inputLineWithoutBlank();
+    }
+
     private String inputLineWithoutBlank() {
         return scanner.nextLine().replaceAll("//s","");
     }
