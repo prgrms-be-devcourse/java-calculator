@@ -9,6 +9,13 @@ public class Calculator {
         while(power) {
             Console.printMenu();
             MenuType menu = makeMenuType(Console.inputMenuNumber());
+
+            switch(menu){
+                case EXIT:
+                    power = false;
+                    Console.printExit();
+                    break;
+            }
         }
     }
 

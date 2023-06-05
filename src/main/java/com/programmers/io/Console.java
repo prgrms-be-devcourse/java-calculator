@@ -29,4 +29,8 @@ public class Console {
     public static void printResult() {
 
     }
+
+    public static void printExit() {
+        System.out.println("프로그램이 종료되었습니다.");
+    }
 }
