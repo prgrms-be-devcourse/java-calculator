@@ -3,10 +3,10 @@ package programmers.java.calulator.console.repository;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Repository {
+public class MapRepository {
     private final Map<String, Integer> repository;
 
-    private Repository() {
+    private MapRepository() {
         this.repository = new HashMap<>();
     }
 
@@ -19,10 +19,10 @@ public class Repository {
     }
 
     private static class LazyHolder {
-        private static final Repository INSTANCE = new Repository();
+        private static final MapRepository INSTANCE = new MapRepository();
     }
 
-    public static Repository getInstance() {
+    public static MapRepository getInstance() {
         return LazyHolder.INSTANCE;
     }
 }

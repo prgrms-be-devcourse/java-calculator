@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import programmers.java.calulator.common.writer.Writer;
-import programmers.java.calulator.console.repository.Repository;
+import programmers.java.calulator.console.repository.MapRepository;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class PrintHistoryCommandTest {
     @DisplayName("사용자의 계산 기록 출력 명령이 작동하는지 확인하는 테스트")
     public void 계산기_기록_출력_테스트() {
         // given
-        Repository mockRepository = Mockito.mock(Repository.class);
+        MapRepository mockRepository = Mockito.mock(MapRepository.class);
         Writer mockWriter = Mockito.mock(Writer.class);
 
         Map<String, Integer> mockHistory = new HashMap<>();
