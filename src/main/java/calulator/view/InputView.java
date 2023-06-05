@@ -1,4 +1,4 @@
-package calulator.input;
+package calulator.view;
 
 import calulator.domain.Menu;
 
