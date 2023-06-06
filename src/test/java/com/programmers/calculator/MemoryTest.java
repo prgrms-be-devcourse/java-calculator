@@ -33,7 +33,7 @@ class MemoryTest {
         memory.save(new CalcResult(expression2, compute.compute(expression2)));
 
         // then
-        assertThat(memory.inMemory.size()).isEqualTo(2);
+        assertThat(memory.getSize()).isEqualTo(2);
     }
 
     @ParameterizedTest
