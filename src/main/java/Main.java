@@ -1,11 +1,26 @@
+import calculator.controller.CalculatorController;
 import calculator.ui.InputView;
+import calculator.ui.OutputView;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final Scanner scanner = new Scanner(System.in);
+        CalculatorController controller = new CalculatorController(
+                  inputViewInstance()
+                , outputViewInstance());
 
-        InputView inputView = new InputView(scanner);
+        controller.start();
+    }
+
+    private static InputView inputViewInstance() {
+        return new InputView(scannerInstance());
+    }
+    private static Scanner scannerInstance() {
+        return new Scanner(System.in);
+    }
+
+    private static OutputView outputViewInstance() {
+        return new OutputView();
     }
 }

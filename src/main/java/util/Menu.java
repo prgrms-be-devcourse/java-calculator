@@ -4,13 +4,15 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public enum Menu {
-    SEARCH("1"),
-    CALC("2"),
-    EMPTY("");
+    SEARCH("1", "1. 조회"),
+    CALC("2", "2. 계산"),
+    EMPTY("", "");
 
     private final String number;
+    private final String printMsg;
 
-    Menu(String number) {
+    Menu(String number, String printMsg) {
+        this.printMsg = printMsg;
         this.number = number;
     }
 
@@ -23,5 +25,9 @@ public enum Menu {
 
     public String getNumber() {
         return this.number;
+    }
+
+    public String getPrintMsg() {
+        return this.printMsg;
     }
 }
