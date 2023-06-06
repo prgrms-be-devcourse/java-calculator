@@ -35,7 +35,14 @@ public enum Operator {
     }
 
     public int operate(int e1, int e2) {
+        validateZeroDivision(e2);
         return expression.apply(e1, e2);
+    }
+
+    private void validateZeroDivision(int e2) {
+        if (this == DIVISION && e2 == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+        }
     }
 
     public boolean isSame(int priority) {

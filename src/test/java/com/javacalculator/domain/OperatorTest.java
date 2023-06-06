@@ -32,4 +32,15 @@ class OperatorTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    void 숮자0으로_나누는_경우_예외가_발생한다() {
+        // given
+        Operator operator = Operator.from("/");
+
+        // when & then
+        assertThatThrownBy(() -> operator.operate(10, 0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("0으로 나눌 수 없습니다.");
+    }
 }
