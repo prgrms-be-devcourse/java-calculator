@@ -9,6 +9,9 @@ public class StringSplitter {
 
     private static final String SPLIT_REGEX = "\\d+|[-+*/]";
 
+    private StringSplitter() {
+    }
+
     public static List<String> splitByOperator(String expression) {
         Pattern pattern = Pattern.compile(SPLIT_REGEX);
         Matcher matcher = pattern.matcher(expression);
