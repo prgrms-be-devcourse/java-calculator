@@ -20,12 +20,12 @@ public class CalculatorController {
             OutputView.outputMenu();
             menu = Menu.from(InputView.inputMenuNumber());
 
-            if (menu == Menu.FIRST) {
+            if (menu == Menu.HISTORY) {
                 OutputView.outputHistories(calculator.getHistories());
                 continue;
             }
 
-            if (menu == Menu.SECOND) {
+            if (menu == Menu.CALCULATION) {
                 CalculatorRequest request = InputView.inputExpression();
                 int result = calculator.calculate(request);
                 OutputView.outputCalculatedResult(result);

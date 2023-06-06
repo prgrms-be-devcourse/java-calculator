@@ -3,8 +3,8 @@ package com.javacalculator.domain;
 import java.util.Arrays;
 
 public enum Menu {
-    FIRST("조회", 1),
-    SECOND("계산", 2),
+    HISTORY("조회", 1),
+    CALCULATION("계산", 2),
     END("종료", 9999);
 
     private final String name;
