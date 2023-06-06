@@ -45,7 +45,7 @@ public class CheckInputException {
 
     private static void checkNumber(String data) {
         try {
-            Long.parseLong(data);
+            Double.parseDouble(data);
         } catch (NumberFormatException exception) {
             throw new NotEquationFormatException(exception.getMessage());
         }
