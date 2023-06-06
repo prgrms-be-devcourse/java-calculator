@@ -11,9 +11,10 @@ public class CalculatorController {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
 
-        while (true) {
+        Menu menu = null;
+        while (menu != Menu.END) {
             OutputView.outputMenu();
-            Menu menu = Menu.from(InputView.inputMenuNumber());
+            menu = Menu.from(InputView.inputMenuNumber());
 
             if (menu == Menu.FIRST) {
                 OutputView.outputHistories(calculator.getHistories());
@@ -24,11 +25,6 @@ public class CalculatorController {
                 CalculatorRequest request = InputView.inputExpression();
                 int result = calculator.calculate(request);
                 OutputView.outputCalculatedResult(result);
-                continue;
-            }
-
-            if (menu == Menu.END) {
-                break;
             }
         }
     }
