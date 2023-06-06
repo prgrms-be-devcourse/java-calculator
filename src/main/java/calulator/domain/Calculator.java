@@ -7,6 +7,7 @@ import calulator.view.OutputView;
 import java.util.List;
 
 import static calulator.domain.Expression.createExpression;
+import static calulator.domain.Menu.CALCULATE;
 import static calulator.domain.Menu.SELECT;
 
 public class Calculator {
@@ -21,22 +22,22 @@ public class Calculator {
     }
 
     public void run() {
-        while (true) {
-            Menu menu = inputView.inputMenu();
+        Menu menu;
+        do {
+            menu = inputView.inputMenu();
             process(menu);
-        }
+        } while (menu != null);
     }
 
     private void process(Menu menu) {
         if (menu == SELECT) {
             List<String> strings = expressionRepository.resultsToList();
             OutputView.printCalculateResults(strings);
-            return;
+        } else if (menu == CALCULATE) {
+            String inputValue = inputView.inputExpression();
+            String calculateResult = getCalculateResult(inputValue);
+            OutputView.printCalculateResult(calculateResult);
         }
-
-        String inputValue = inputView.inputExpression();
-        String calculateResult = getCalculateResult(inputValue);
-        OutputView.printCalculateResult(calculateResult);
     }
 
     private String getCalculateResult(String inputValue) {

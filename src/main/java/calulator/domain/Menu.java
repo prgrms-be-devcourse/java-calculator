@@ -26,7 +26,11 @@ public enum Menu {
         return Arrays.stream(values())
                 .filter(menu -> menu.value.equals(value))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("선택할 수 없는 메뉴입니다."));
+                .orElse(null);
+    }
+
+    public boolean isNull() {
+        return this.name.isEmpty();
     }
 
 }
