@@ -23,7 +23,7 @@ class MenuTest {
     void findMenuTest() {
         String input = "1";
 
-        assertThat(Menu.findMenu(input)).isEqualTo(CALCULATED_LOG);
+        assertThat(Menu.valueOf(input)).isEqualTo(CALCULATED_LOG);
     }
 
     @DisplayName("선택지가 없는 메뉴를 선택시 예외를 발생한다.")
@@ -31,7 +31,7 @@ class MenuTest {
     void findMenuFailTest() {
         String input = "3";
 
-        assertThatThrownBy(() -> Menu.findMenu(input))
+        assertThatThrownBy(() -> Menu.of(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("선택할 수 없는 메뉴입니다.");
     }

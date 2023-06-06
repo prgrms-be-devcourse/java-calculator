@@ -17,7 +17,7 @@ public class InputView {
     public Menu inputMenu() {
         System.out.println(Menu.menuInfo());
         System.out.print(SELECT_MESSAGE);
-        return Menu.findMenu(inputLineWithoutBlank());
+        return Menu.of(inputLineWithoutBlank());
     }
 
     public String inputExpression() {

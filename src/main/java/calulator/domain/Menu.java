@@ -22,7 +22,7 @@ public enum Menu {
         return menuInfo.toString();
     }
 
-    public static Menu findMenu(String value) {
+    public static Menu of(String value) {
         return Arrays.stream(values())
                 .filter(menu -> menu.value.equals(value))
                 .findFirst()
