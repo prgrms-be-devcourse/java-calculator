@@ -76,20 +76,23 @@ public class InfixToPostfixConverter implements ExpressionConverter {
     private boolean isParenthesesOrder(String expression) {
         Deque<Character> stack = new ArrayDeque<>();
 
-        for(char ch : expression.toCharArray()) {
-            if(ch == '('){
-                if(!stack.isEmpty() && stack.peek() == ')') {
-                    return false;
+        if (expression.contains("(")) {
+            for (char ch : expression.toCharArray()) {
+                if (ch == '(') {
+                    if (!stack.isEmpty() && stack.peek() == ')') {
+                        return false;
+                    }
+                    stack.push(ch);
+                } else if (ch == ')'){
+                    if (stack.isEmpty()) {
+                        return false;
+                    }
+                    stack.pop();
                 }
-                stack.push(ch);
-            } else {
-                if(stack.isEmpty()) {
-                    return false;
-                }
-                stack.pop();
             }
+            return stack.isEmpty();
         }
-        return stack.isEmpty();
+        return true;
     }
 
 
