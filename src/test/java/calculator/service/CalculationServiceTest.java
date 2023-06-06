@@ -1,7 +1,7 @@
-package org.service;
+package calculator.service;
 
-import org.domain.model.Calculator;
-import org.domain.repository.CalculationRepository;
+import calculator.domain.repository.CalculationRepository;
+import calculator.domain.model.Calculator;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

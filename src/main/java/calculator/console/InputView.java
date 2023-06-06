@@ -1,4 +1,4 @@
-package org.console;
+package calculator.console;
 
 import java.util.Scanner;
 

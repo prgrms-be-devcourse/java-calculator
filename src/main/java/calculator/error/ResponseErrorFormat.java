@@ -1,4 +1,4 @@
-package org.error;
+package calculator.error;
 
 public enum ResponseErrorFormat {
 

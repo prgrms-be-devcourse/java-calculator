@@ -1,9 +1,9 @@
-package org.service;
+package calculator.service;
 
-import org.domain.model.Calculator;
-import org.domain.model.SymbolPriority;
-import org.domain.repository.CalculationRepository;
-import org.error.ResponseErrorFormat;
+import calculator.domain.repository.CalculationRepository;
+import calculator.domain.model.Calculator;
+import calculator.domain.model.SymbolPriority;
+import calculator.error.ResponseErrorFormat;
 
 import java.util.*;
 

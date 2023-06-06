@@ -1,4 +1,4 @@
-package org.domain.model;
+package calculator.domain.model;
 
 public class Calculator {
 

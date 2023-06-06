@@ -1,10 +1,10 @@
-package org;
+package calculator;
 
-import org.console.InputView;
-import org.console.OutputView;
-import org.domain.repository.CalculationRepository;
-import org.error.ResponseErrorFormat;
-import org.service.CalculationService;
+import calculator.console.InputView;
+import calculator.console.OutputView;
+import calculator.domain.repository.CalculationRepository;
+import calculator.error.ResponseErrorFormat;
+import calculator.service.CalculationService;
 
 public class CalculatorApplication {
 

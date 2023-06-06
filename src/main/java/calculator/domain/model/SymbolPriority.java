@@ -1,6 +1,6 @@
-package org.domain.model;
+package calculator.domain.model;
 
-import org.error.ResponseErrorFormat;
+import calculator.error.ResponseErrorFormat;
 
 import java.util.Arrays;
 import java.util.function.BinaryOperator;

@@ -1,4 +1,4 @@
-package org.domain.repository;
+package calculator.domain.repository;
 
 import org.junit.jupiter.api.Test;
 

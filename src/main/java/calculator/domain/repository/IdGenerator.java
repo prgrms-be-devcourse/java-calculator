@@ -1,4 +1,4 @@
-package org.domain.repository;
+package calculator.domain.repository;
 
 public class IdGenerator {
 

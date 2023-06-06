@@ -1,4 +1,4 @@
-package org.console;
+package calculator.console;
 
 public class OutputView {
 
