@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum Menu {
 
-    SELECT("조회", "1"), CALCULATE("계산", "2");
+    CALCULATED_LOG("조회", "1"), CALCULATE("계산", "2");
 
     private final String name;
     private final String value;

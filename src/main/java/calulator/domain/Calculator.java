@@ -7,8 +7,7 @@ import calulator.view.OutputView;
 import java.util.List;
 
 import static calulator.domain.Expression.createExpression;
-import static calulator.domain.Menu.CALCULATE;
-import static calulator.domain.Menu.SELECT;
+import static calulator.domain.Menu.*;
 
 public class Calculator {
 
@@ -30,12 +29,12 @@ public class Calculator {
     }
 
     private void process(Menu menu) {
-        if (menu == SELECT) {
+        if (menu == CALCULATED_LOG) {
             List<String> strings = expressionRepository.resultsToList();
             OutputView.printCalculateResults(strings);
         } else if (menu == CALCULATE) {
-            String inputValue = inputView.inputExpression();
-            String calculateResult = getCalculateResult(inputValue);
+            String expression = inputView.inputExpression();
+            String calculateResult = getCalculateResult(expression);
             OutputView.printCalculateResult(calculateResult);
         }
     }
