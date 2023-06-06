@@ -1,5 +1,6 @@
 package org.programmers.java;
 
+import org.programmers.java.calculate.Calculate;
 import org.programmers.java.console.Input;
 import org.programmers.java.console.Output;
 import org.programmers.java.message.ErrorMsg;
@@ -8,10 +9,12 @@ public class Calculator {
     private boolean exitStatus = true;
     private Input input;
     private Output output;
+    private Calculate calculate;
 
-    Calculator(Input input, Output output){
+    Calculator(Input input, Output output, Calculate calculate){
         this.input = input;
         this.output = output;
+        this.calculate = calculate;
     }
 
     void run() {
@@ -25,7 +28,8 @@ public class Calculator {
                 case "2":
                     String formula = input.calculationInput();
                     if(formula.equals("")) break;
-                    System.out.println("계산기 동작");
+                    String result = calculate.requestCalculate(formula);
+                    output.calculationValue(result);
                     break;
                 case "3":
                     output.exitMsg();
