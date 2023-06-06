@@ -15,21 +15,21 @@ public class CalculatorController {
     }
 
     public void runCalculator() {
-        Menu menu = null;
-        while (menu != Menu.END) {
+        Menu menu;
+        do {
             OutputView.outputMenu();
             menu = Menu.from(InputView.inputMenuNumber());
 
-            if (menu == Menu.HISTORY) {
+            if (menu.isHistory()) {
                 OutputView.outputHistories(calculator.getHistories());
                 continue;
             }
 
-            if (menu == Menu.CALCULATION) {
+            if (menu.isCalculation()) {
                 CalculatorRequest request = InputView.inputExpression();
                 int result = calculator.calculate(request);
                 OutputView.outputCalculatedResult(result);
             }
-        }
+        } while (menu.isEnd());
     }
 }

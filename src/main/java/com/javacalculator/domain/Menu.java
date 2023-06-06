@@ -22,6 +22,18 @@ public enum Menu {
                 .orElseThrow(() -> new IllegalArgumentException("메뉴에 존재하지 않는 번호입니다. : " + number));
     }
 
+    public boolean isHistory() {
+        return this == HISTORY;
+    }
+
+    public boolean isCalculation() {
+        return this == CALCULATION;
+    }
+
+    public boolean isEnd() {
+        return this == END;
+    }
+
     public String getName() {
         return name;
     }
