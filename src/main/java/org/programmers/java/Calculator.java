@@ -41,7 +41,7 @@ public class Calculator {
                     exitStatus = false;
                     break;
                 default:
-                    System.out.println(ErrorMsg.SELECT_VALIDATION_ERROR_MSG.getErrorMsg());
+                    output.errorMsg(ErrorMsg.SELECT_VALIDATION_ERROR_MSG.getErrorMsg());
             }
         }
     }
