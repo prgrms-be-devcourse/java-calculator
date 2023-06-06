@@ -30,6 +30,6 @@ public class CalculatorController {
                 int result = calculator.calculate(request);
                 OutputView.outputCalculatedResult(result);
             }
-        } while (menu.isEnd());
+        } while (!menu.isEnd());
     }
 }
