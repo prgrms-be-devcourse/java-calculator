@@ -11,7 +11,6 @@ public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
-
     }
 
     public static int inputMenuNumber() {

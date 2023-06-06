@@ -7,7 +7,6 @@ import java.util.Map;
 public class OutputView {
 
     private OutputView() {
-
     }
 
     public static void outputMenu() {
