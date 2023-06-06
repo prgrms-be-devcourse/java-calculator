@@ -1,5 +1,6 @@
 package com.programmers.io;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -25,8 +26,8 @@ public class Console {
         System.out.println(errorMsg);
     }
 
-    public static void printHistory() {
-
+    public static void printHistory(List<String> history) {
+        history.forEach(System.out::println);
     }
 
     public static void printResult(String result) {

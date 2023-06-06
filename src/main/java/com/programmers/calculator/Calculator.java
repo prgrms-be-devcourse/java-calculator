@@ -7,11 +7,13 @@ import com.programmers.io.Console;
 
 public class Calculator {
 
-    Compute compute;
-    boolean power = true;
+    private Compute compute;
+    private Memory memory;
+    private boolean power = true;
 
     public Calculator(ExpressionConverter expressionConverter) {
         compute = new Compute(expressionConverter);
+        memory = new Memory();
     }
 
     public void run() {
@@ -23,11 +25,16 @@ public class Calculator {
                 continue;
 
             switch(menu){
+                case HISTORY:
+                    Console.printHistory(memory.findAll());
+                    break;
+
                 case CALCULATE:
                     String expression = Console.inputExpression();
                     String result = calculate(expression);
                     if(result == null)
                         break;
+                    memory.save(new CalcResult(expression, result));
                     Console.printResult(result);
                     break;
 
