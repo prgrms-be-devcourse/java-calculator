@@ -1,5 +1,7 @@
 package calulator.domain;
 
+import calulator.util.StringSplitter;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -9,8 +11,13 @@ public class Expression {
     private static final int RESULT_INDEX = 0;
     private final List<String> expressions;
 
-    public Expression(List<String> expressions) {
+    private Expression(List<String> expressions) {
         this.expressions = expressions;
+    }
+
+    public static Expression createExpression(String expression) {
+        List<String> expressions = StringSplitter.splitByOperator(expression);
+        return new Expression(expressions);
     }
 
     public String calculateExpression() {

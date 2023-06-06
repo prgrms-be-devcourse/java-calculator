@@ -1,12 +1,12 @@
 package calulator.domain;
 
 import calulator.repository.ExpressionRepository;
-import calulator.util.StringSplitter;
 import calulator.view.InputView;
 import calulator.view.OutputView;
 
 import java.util.List;
 
+import static calulator.domain.Expression.createExpression;
 import static calulator.domain.Menu.SELECT;
 
 public class Calculator {
@@ -39,13 +39,8 @@ public class Calculator {
         OutputView.printCalculateResult(calculateResult);
     }
 
-    private void createExpression(String inputValue) {
-        List<String> expressions = StringSplitter.splitByOperator(inputValue);
-        this.expression = new Expression(expressions);
-    }
-
     private String getCalculateResult(String inputValue) {
-        createExpression(inputValue);
+        this.expression = createExpression(inputValue);
         String calculateResult = expression.calculateExpression();
         expressionRepository.addExpression(inputValue, calculateResult);
         return calculateResult;
