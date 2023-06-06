@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import calculator.exception.NotSolveEquationException;
-import calculator.exception.ValidationEquationException;
+import calculator.exception.ValidationEquation;
 
 public class Calculator {
     private String equation;
@@ -14,7 +14,7 @@ public class Calculator {
     }
 
     private void validate(String equation) {
-        if (ValidationEquationException.isDivByZero(equation)) {
+        if (ValidationEquation.isDivByZero(equation)) {
             throw new NotSolveEquationException();
         }
     }

@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.ui.InputView;
-import calculator.ui.OutputView;
+import ui.InputView;
+import ui.OutputView;
 import util.Menu;
 
 public class CalculatorController {

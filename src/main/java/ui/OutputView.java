@@ -1,4 +1,4 @@
-package calculator.ui;
+package ui;
 
 import util.Menu;
 

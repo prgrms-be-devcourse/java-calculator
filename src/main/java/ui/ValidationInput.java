@@ -1,12 +1,11 @@
-package calculator.ui;
+package ui;
 
 import exception.NotEquationFormatException;
-import exception.NotMenuFormatExcpetion;
 import exception.NotMenuFormatExcpetion;
 import util.Menu;
 import util.OperatorMap;
 
-public class CheckInputException {
+public class ValidationInput {
     public static void checkMenuNumber(Menu menu) {
         if (menu == Menu.EMPTY) {
             throw new NotMenuFormatExcpetion();

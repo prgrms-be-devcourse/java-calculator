@@ -1,4 +1,4 @@
-package calculator.ui;
+package ui;
 
 import util.Menu;
 
@@ -17,18 +17,18 @@ public class InputView {
 
     public Menu getMenuNumber() {
         String userInput = readLine();
-        CheckInputException.isEmpty(userInput);
+        ValidationInput.isEmpty(userInput);
 
         Menu menu = Menu.getMenu(userInput);
-        CheckInputException.checkMenuNumber(menu);
+        ValidationInput.checkMenuNumber(menu);
         return menu;
     }
 
     public void getEquation() {
         String userInput = readLine();
-        CheckInputException.isEmpty(userInput);
+        ValidationInput.isEmpty(userInput);
 
-        CheckInputException.checkEquation(userInput);
+        ValidationInput.checkEquation(userInput);
 
     }
 }

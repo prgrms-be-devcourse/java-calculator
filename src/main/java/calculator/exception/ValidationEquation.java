@@ -1,6 +1,6 @@
 package calculator.exception;
 
-public class ValidationEquationException {
+public class ValidationEquation {
     private static final String ZERO = "0";
     private static final String DIV_OPERATOR = "/";
 

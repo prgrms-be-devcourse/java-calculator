@@ -1,6 +1,6 @@
 import calculator.controller.CalculatorController;
-import calculator.ui.InputView;
-import calculator.ui.OutputView;
+import ui.InputView;
+import ui.OutputView;
 
 import java.util.Scanner;
 
