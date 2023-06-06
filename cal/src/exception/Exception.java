@@ -1,2 +1,4 @@
-package exception;public class Exception {
+package exception;
+
+public class Exception {
 }

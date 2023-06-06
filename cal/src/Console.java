@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class Console {
+public class Console {
+
+
+    public void getHistory() {
+    }
+
+    public void input(String inputString) {
+    }
 }

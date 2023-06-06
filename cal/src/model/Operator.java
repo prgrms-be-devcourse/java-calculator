@@ -1,2 +1,4 @@
-package model;public class Operator {
+package model;
+
+public class Operator {
 }

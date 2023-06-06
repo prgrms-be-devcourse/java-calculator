@@ -1,2 +1,4 @@
-package model;public class Calculator {
+package model;
+
+public class Calculator {
 }

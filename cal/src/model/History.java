@@ -1,2 +1,4 @@
-package model;public class History {
+package model;
+
+public class History {
 }
