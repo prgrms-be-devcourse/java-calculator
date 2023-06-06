@@ -29,8 +29,4 @@ public enum Menu {
                 .orElse(null);
     }
 
-    public boolean isNull() {
-        return this.name.isEmpty();
-    }
-
 }

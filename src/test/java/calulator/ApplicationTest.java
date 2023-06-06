@@ -1,5 +1,0 @@
-package calulator;
-
-class ApplicationTest {
-
-}
