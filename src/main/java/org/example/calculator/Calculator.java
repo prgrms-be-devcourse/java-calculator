@@ -1,4 +1,4 @@
-package org.example;
+package org.example.calculator;
 
 public class Calculator {
   public static double plus(double number1, double number2) {
