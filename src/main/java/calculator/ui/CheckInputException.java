@@ -1,8 +1,10 @@
 package calculator.ui;
 
+import exception.NotEquationFormatException;
 import exception.NotMenuFormatExcpetion;
 import exception.NotMenuFormatExcpetion;
 import util.Menu;
+import util.OperatorMap;
 
 public class CheckInputException {
     public static void checkMenuNumber(Menu menu) {
@@ -16,4 +18,46 @@ public class CheckInputException {
             throw new NotMenuFormatExcpetion();
         }
     }
+
+    public static void checkEquation(String userInput) {
+        String[] inputDatas = userInput.split(" ");
+
+        if (!isOddNumber(inputDatas.length)) {
+            throw new NotEquationFormatException();
+        }
+
+        for (int inputIndex = 0; inputIndex < inputDatas.length; inputIndex++) {
+            eachInput(inputDatas[inputIndex], inputIndex);
+        }
+    }
+
+    private static void eachInput(String data, int index) {
+        if (isOddNumber(index)) {
+            checkOperation(data);
+            return;
+        }
+        checkNumber(data);
+    }
+
+    private static boolean isOddNumber(int size) {
+        return size % 2 != 0;
+    }
+
+    private static void checkNumber(String data) {
+        try {
+            Long.parseLong(data);
+        } catch (NumberFormatException exception) {
+            throw new NotEquationFormatException(exception.getMessage());
+        }
+    }
+
+    private static void checkOperation(String data) {
+        if (!OperatorMap.contains(data)) {
+            throw new NotEquationFormatException();
+        }
+    }
 }
+
+/*
+* 1 + (2 * 3 * 4) + 5 / 7
+* */

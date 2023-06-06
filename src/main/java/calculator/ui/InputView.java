@@ -12,7 +12,7 @@ public class InputView {
     }
 
     private String readLine() {
-        return this.scanner.nextLine();
+        return this.scanner.nextLine().trim();
     }
 
     public Menu getMenuNumber() {
@@ -24,4 +24,11 @@ public class InputView {
         return menu;
     }
 
+    public void getEquation() {
+        String userInput = readLine();
+        CheckInputException.isEmpty(userInput);
+
+        CheckInputException.checkEquation(userInput);
+
+    }
 }

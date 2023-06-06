@@ -1,14 +1,12 @@
 package calculator.ui;
 
-import exception.NotEquationForamtException;
+import exception.NotEquationFormatException;
 import exception.NotMenuFormatExcpetion;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import util.Menu;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
@@ -50,13 +48,13 @@ public class InputViewTest {
         @ValueSource(strings = {
                 "+++++"
                 , "+"
-                , "(", "()"
-                , "1+" , "1+1+", "1++1"
-                , "1()1"
+                , "1+" , "1 + 1 +", "1++1"
+                , "1 1"
+                ,"+ +"
         })
         void 계산식의_형식이_아니면_에러반환(String userInput) {
             assertThatThrownBy(()->CheckInputException.checkEquation(userInput))
-                    .isInstanceOf(NotEquationForamtException.class);
+                    .isInstanceOf(NotEquationFormatException.class);
         }
     }
 }
