@@ -7,9 +7,9 @@ import org.programmers.java.message.ErrorMsg;
 
 public class Calculator {
     private boolean exitStatus = true;
-    private Input input;
-    private Output output;
-    private Calculate calculate;
+    private final Input input;
+    private final Output output;
+    private final Calculate calculate;
 
     Calculator(Input input, Output output, Calculate calculate){
         this.input = input;

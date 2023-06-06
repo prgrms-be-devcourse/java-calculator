@@ -43,7 +43,7 @@ public class Validation {
 
 
     // 연산식 검증: 연산자와 피연산자의 전체 개수 검증 및 위치 검증
-    public Boolean checkFormulaValidation(List<String> formulaList){
+    public boolean checkFormulaValidation(List<String> formulaList){
         if(formulaList.size() % 2 == 0) return false;
 
         for(int i=0; i < formulaList.size(); i++){

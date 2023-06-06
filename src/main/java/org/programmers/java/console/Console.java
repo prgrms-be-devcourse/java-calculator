@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
-    private Validation validation;
+    private final Validation validation;
     private final Scanner scanner = new Scanner(System.in);
 
     public Console(Validation validation) {
