@@ -1,5 +1,3 @@
-package View;
-
 import java.util.Stack;
 
 public class Calculator {

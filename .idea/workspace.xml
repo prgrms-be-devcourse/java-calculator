@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6c27d52-7ae4-48df-89e8-a13f79fd149c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Commander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Memorizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Memorizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Commander.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Memorizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Memorizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/InputView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/InputView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/CalculatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/CalculatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,8 +57,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -220,7 +217,7 @@
       <workItem from="1686012938235" duration="159000" />
       <workItem from="1686013139813" duration="2720000" />
       <workItem from="1686015872378" duration="60000" />
-      <workItem from="1686015939732" duration="1871000" />
+      <workItem from="1686015939732" duration="6409000" />
     </task>
     <servers />
   </component>
