@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class History {
 
-  private Map<Long, String> map = new LinkedHashMap<>();
+  private Map<Long, Formula> map = new LinkedHashMap<>();
   private long number = 0L;
 
-  public void save(String formula) {
+  public void save(Formula formula) {
     map.put(++number, formula);
   }
 
-  public Map<Long, String> findAll() {
+  public Map<Long, Formula> findAll() {
     return map;
   }
 }
