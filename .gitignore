@@ -45,7 +45,9 @@
 # *.ipr
 
 .idea
-
+gradle
+gradlew
+gradlew.bat
 
 # CMake
 cmake-build-*/
