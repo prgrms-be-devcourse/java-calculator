@@ -18,7 +18,8 @@ public class CalculatorController {
         Menu menu;
         do {
             OutputView.outputMenu();
-            menu = Menu.from(InputView.inputMenuNumber());
+            int inputMenuNumber = InputView.inputMenuNumber();
+            menu = Menu.from(inputMenuNumber);
 
             if (menu.isHistory()) {
                 OutputView.outputHistories(calculator.getHistories());
