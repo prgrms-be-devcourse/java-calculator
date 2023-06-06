@@ -1,11 +1,11 @@
-package model.calculator;
+package model.service;
 
 import model.vo.MathExpression;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class CalculatorImpl implements Calculator{
+public class CalculateServiceImpl implements CalculateService {
     @Override
     public int calculate(final MathExpression me) {
         ArrayList<String> op = me.getOp();

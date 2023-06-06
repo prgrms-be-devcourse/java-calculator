@@ -1,7 +1,7 @@
-package model.calculator;
+package model.service;
 
 import model.vo.MathExpression;
 
-public interface Calculator {
+public interface CalculateService {
     int calculate(final MathExpression me);
 }

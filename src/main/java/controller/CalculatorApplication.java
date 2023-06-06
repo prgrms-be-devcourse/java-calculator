@@ -4,7 +4,7 @@ package controller;
 import exception.CalculatorException;
 import model.vo.MathExpression;
 import model.CalculationLog;
-import model.calculator.Calculator;
+import model.service.CalculateService;
 import repository.CalculationLogRepository;
 
 import static view.InputView.*;
@@ -12,12 +12,12 @@ import static view.OutputView.*;
 
 
 public class CalculatorApplication {
-    private final Calculator calculator;
+    private final CalculateService calculateService;
     private final CalculationLogRepository clrp;
     private boolean runFlag;
 
-    public CalculatorApplication(final Calculator calculator, final CalculationLogRepository clrp) {
-        this.calculator = calculator;
+    public CalculatorApplication(final CalculateService calculateService, final CalculationLogRepository clrp) {
+        this.calculateService = calculateService;
         this.clrp = clrp;
         this.runFlag = true;
     }
@@ -30,7 +30,7 @@ public class CalculatorApplication {
                 case CALCULATE -> {
                     String userExpressionInput = mathExpressionInput();
                     MathExpression me = MathExpression.from(userExpressionInput);
-                    int result = calculator.calculate(me);
+                    int result = calculateService.calculate(me);
                     printResult(result);
                     CalculationLog cl = CalculationLog.of(userExpressionInput, result);
                     clrp.save(cl);
