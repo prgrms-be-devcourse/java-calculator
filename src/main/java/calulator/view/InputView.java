@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class InputView {
 
     private static final String SELECT_MESSAGE = "선택 : ";
-    private static final String BLANK_REGEX = "//s";
+    private static final String BLANK_REGEX = "\\s";
     private static final String NONE_SPACE_REGEX = "";
     private static final String EXPRESSION_REGEX = "^-?\\d+([+\\-*/]-?\\d+)*$";
     private static final String INVALID_EXPRESSION_MESSAGE = "올바른 수식이 아닙니다.";
