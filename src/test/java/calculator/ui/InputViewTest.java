@@ -1,5 +1,6 @@
 package calculator.ui;
 
+import exception.NotEquationForamtException;
 import exception.NotMenuFormatExcpetion;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
@@ -47,14 +48,6 @@ public class InputViewTest {
     class equation_테스트 {
         @ParameterizedTest
         @ValueSource(strings = {
-                "+"
-        })
-        void 계산식의_입력에_숫자와_사칙연산_괄호가_아니면_에러반환(String userInput) {
-
-        }
-
-        @ParameterizedTest
-        @ValueSource(strings = {
                 "+++++"
                 , "+"
                 , "(", "()"
@@ -62,7 +55,8 @@ public class InputViewTest {
                 , "1()1"
         })
         void 계산식의_형식이_아니면_에러반환(String userInput) {
-
+            assertThatThrownBy(()->CheckInputException.checkEquation(userInput))
+                    .isInstanceOf(NotEquationForamtException.class);
         }
     }
 }
