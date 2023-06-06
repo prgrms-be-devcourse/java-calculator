@@ -1,15 +1,18 @@
 package com.programmers.io;
 
-
 import java.util.Scanner;
 
 public class Console {
 
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static String inputMenuNumber() {
         System.out.print("\n선택 : ");
-        return sc.next();
+        return SCANNER.nextLine();
+    }
+
+    public static String inputExpression() {
+        return SCANNER.nextLine();
     }
 
     public static void printMenu() {
@@ -26,8 +29,8 @@ public class Console {
 
     }
 
-    public static void printResult() {
-
+    public static void printResult(String result) {
+        System.out.println(result);
     }
 
     public static void printExit() {
