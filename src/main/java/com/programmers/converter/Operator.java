@@ -1,22 +1,25 @@
 package com.programmers.converter;
 
+import com.programmers.exception.DividedByZeroException;
 import com.programmers.exception.WrongOperationException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    ADD("+", 1, (n1, n2) -> n1 + n2),
-    SUBTRACT( "-", 1, (n1, n2) -> n1 - n2),
-    MULTIPLY( "*",2, (n1, n2) -> n1 * n2),
-    DIVIDE( "/", 2, (n1, n2) -> n1 / n2),
-    OPEN_PARENTHESES("(", 0, (n1, n2) -> 0L);
+    ADD("+", 1, BigDecimal::add),
+    SUBTRACT( "-", 1, BigDecimal::subtract),
+    MULTIPLY( "*",2, BigDecimal::multiply),
+    DIVIDE( "/", 2, (n1, n2) -> n1.divide(n2, 30, RoundingMode.HALF_EVEN)),
+    OPEN_PARENTHESES("(", 0, (n1, n2) -> BigDecimal.valueOf(0));
 
     private final String symbol;
     private final int priority;
-    private final BiFunction<Long, Long, Long> function;
+    private final BiFunction<BigDecimal, BigDecimal, BigDecimal> function;
 
-    Operator(String symbol, int priority, BiFunction<Long, Long, Long> function) {
+    Operator(String symbol, int priority, BiFunction<BigDecimal, BigDecimal, BigDecimal> function) {
         this.symbol = symbol;
         this.priority = priority;
         this.function = function;
@@ -50,7 +53,10 @@ public enum Operator {
         return this.priority;
     }
 
-    public long operation(long n1, long n2) {
+    public BigDecimal operation(BigDecimal n1, BigDecimal n2) {
+        if(this == DIVIDE && n2.doubleValue() == 0) {
+            throw new DividedByZeroException("0으로 나눌 수 없습니다.");
+        }
         return function.apply(n1, n2);
     }
 
