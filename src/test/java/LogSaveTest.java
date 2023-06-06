@@ -1,4 +1,4 @@
-import controller.dto.MathExpression;
+import model.vo.MathExpression;
 import exception.CalculatorException;
 import model.CalculationLog;
 import model.calculator.Calculator;

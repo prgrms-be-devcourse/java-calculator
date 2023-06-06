@@ -1,6 +1,6 @@
 package model.calculator;
 
-import controller.dto.MathExpression;
+import model.vo.MathExpression;
 
 import java.util.ArrayList;
 import java.util.Stack;

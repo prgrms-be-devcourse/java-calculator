@@ -1,4 +1,4 @@
-package controller.dto;
+package model.vo;
 
 import exception.CalculatorException;
 import exception.ErrorMessage;

@@ -2,7 +2,7 @@ package controller;
 
 
 import exception.CalculatorException;
-import controller.dto.MathExpression;
+import model.vo.MathExpression;
 import model.CalculationLog;
 import model.calculator.Calculator;
 import repository.CalculationLogRepository;

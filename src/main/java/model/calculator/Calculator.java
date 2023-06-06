@@ -1,6 +1,6 @@
 package model.calculator;
 
-import controller.dto.MathExpression;
+import model.vo.MathExpression;
 
 public interface Calculator {
     int calculate(final MathExpression me);
