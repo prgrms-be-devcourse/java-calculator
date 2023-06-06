@@ -1,7 +1,8 @@
+import View.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-//import Calculator;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
 
@@ -10,8 +11,6 @@ class CalculatorTest {
     @DisplayName("calculate함수는 띄어쓰기로 파싱된 commandArr를 계산하는 함수.")
     @Test
     void calculateTest() {
-        // case 테스트마다 commandArr, result 갱신해주는거 불편하다.
-        // 매크로로 못 선언하나 ?
         // 1. * + / -
         command = "5 * 2 + 64 / 32 - 7";
         assertEquals(5, input(command));

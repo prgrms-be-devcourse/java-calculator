@@ -1,3 +1,5 @@
+package View;
+
 import java.util.Stack;
 
 public class Calculator {
@@ -5,10 +7,10 @@ public class Calculator {
     // for operation enum.
     private enum Ops { PLUS, MINUS, MULT, DIV }
 
-    // for Plus / Minus Operation.
+    // for Plus / Minus Operation history.
     private static Ops PM;
 
-    // for Multiply / Divide Operation.
+    // for Multiply / Divide Operation history.
     private static Ops MD;
 
     private static Calculator calculator = new Calculator();

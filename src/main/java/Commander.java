@@ -1,4 +1,5 @@
-import java.io.IOException;
+import View.Calculator;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -10,9 +11,11 @@ public class Commander {
     private static Calculator calculator = Calculator.getInstance();
 
 
+    // TODO : 메서드명 수정
     public static void getMenu() {
         Scanner scanner = new Scanner(System.in);
         try {
+            // TODO : 메뉴가 늘어나면 if 계속추가해야된다.
             while(true) {
                 printMenu();
                 int menu = scanner.nextInt();
