@@ -10,13 +10,13 @@ public enum Operator {
     SUBTRACT( "-", 1, (n1, n2) -> n1 - n2),
     MULTIPLY( "*",2, (n1, n2) -> n1 * n2),
     DIVIDE( "/", 2, (n1, n2) -> n1 / n2),
-    OPEN_PARENTHESES("(", 0, (n1, n2) -> 0);
+    OPEN_PARENTHESES("(", 0, (n1, n2) -> 0L);
 
     private final String symbol;
     private final int priority;
-    private final BiFunction<Integer, Integer, Integer> function;
+    private final BiFunction<Long, Long, Long> function;
 
-    Operator(String symbol, int priority, BiFunction<Integer, Integer, Integer> function) {
+    Operator(String symbol, int priority, BiFunction<Long, Long, Long> function) {
         this.symbol = symbol;
         this.priority = priority;
         this.function = function;
@@ -50,7 +50,7 @@ public enum Operator {
         return this.priority;
     }
 
-    public int operation(int n1, int n2) {
+    public long operation(long n1, long n2) {
         return function.apply(n1, n2);
     }
 
