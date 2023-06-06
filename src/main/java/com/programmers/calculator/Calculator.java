@@ -7,8 +7,8 @@ import com.programmers.io.Console;
 
 public class Calculator {
 
-    private Compute compute;
-    private Memory memory;
+    private final Compute compute;
+    private final Memory memory;
     private boolean power = true;
 
     public Calculator(ExpressionConverter expressionConverter) {

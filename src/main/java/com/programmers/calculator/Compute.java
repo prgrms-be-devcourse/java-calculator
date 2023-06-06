@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Compute {
 
-    ExpressionConverter expressionConverter;
+    private final ExpressionConverter expressionConverter;
 
     public Compute(ExpressionConverter expressionConverter) {
         this.expressionConverter = expressionConverter;

@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class CalcResult {
 
-    String expression;
-    String result;
+    private final String expression;
+    private final String result;
 
     public CalcResult(String expression, String result) {
         this.expression = expression;
