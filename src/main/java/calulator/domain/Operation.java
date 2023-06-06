@@ -10,6 +10,7 @@ public enum Operation {
     MULTIPLICATION("*", (leftOperand, rightOperand) -> leftOperand * rightOperand),
     DIVISION("/", (leftOperand, rightOperand) -> leftOperand / rightOperand);
 
+    private static final String INVALID_OPERATOR_MESSAGE = "사용할 수 없는 연산자입니다.";
     private final String value;
     private final BiFunction<Integer, Integer, Integer> calculateFunction;
 
@@ -34,7 +35,7 @@ public enum Operation {
     private static Operation findOperator(String operation) {
         return Arrays.stream(values())
                 .filter(o -> o.value.equals(operation))
-                .findFirst().orElseThrow(() -> new IllegalArgumentException("사용할 수 없는 연산자입니다."));
+                .findFirst().orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATOR_MESSAGE));
     }
 
 }
