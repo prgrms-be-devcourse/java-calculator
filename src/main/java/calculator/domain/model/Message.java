@@ -1,8 +1,11 @@
-package calculator.console;
+package calculator.domain.model;
 
-public class OutputView {
+public class Message {
 
-    public static void outputByMenu() {
+    private Message() {
+    }
+
+    public static void menuMessage() {
 
         StringBuilder menu = new StringBuilder();
 
@@ -14,7 +17,7 @@ public class OutputView {
         System.out.print(menu);
     }
 
-    public static void exitCalculator() {
+    public static void exitMessage(){
 
         System.out.print("\n계산기를 종료합니다.");
     }
