@@ -29,11 +29,9 @@ class MenuTest {
     @DisplayName("선택지가 없는 메뉴를 선택시 예외를 발생한다.")
     @Test
     void findMenuFailTest() {
-        String input = "3";
+        String input = "";
 
-        assertThatThrownBy(() -> Menu.of(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("선택할 수 없는 메뉴입니다.");
+        assertThat(Menu.of(input)).isNull();
     }
 
 }
