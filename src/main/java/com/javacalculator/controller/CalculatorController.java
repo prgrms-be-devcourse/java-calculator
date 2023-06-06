@@ -8,9 +8,13 @@ import com.javacalculator.view.OutputView;
 
 public class CalculatorController {
 
-    public static void main(String[] args) {
-        Calculator calculator = new Calculator();
+    private final Calculator calculator;
 
+    public CalculatorController(Calculator calculator) {
+        this.calculator = calculator;
+    }
+
+    public void runCalculator() {
         Menu menu = null;
         while (menu != Menu.END) {
             OutputView.outputMenu();
