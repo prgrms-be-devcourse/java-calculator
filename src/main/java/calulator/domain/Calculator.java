@@ -11,14 +11,9 @@ import static calulator.domain.Menu.*;
 
 public class Calculator {
 
-    private final InputView inputView;
-    private final ExpressionRepository expressionRepository;
+    private final InputView inputView = new InputView();
+    private final ExpressionRepository expressionRepository = new ExpressionRepository();
     private Expression expression;
-
-    public Calculator(InputView inputView, ExpressionRepository expressionRepository) {
-        this.inputView = inputView;
-        this.expressionRepository = expressionRepository;
-    }
 
     public void run() {
         Menu menu;
