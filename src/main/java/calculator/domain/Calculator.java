@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
+    private static final String EQUALS = " = ";
+
     private String equation;
     private double result;
 
@@ -89,6 +91,6 @@ public class Calculator {
 
     @Override
     public String toString() {
-        return this.equation + " = " + this.result;
+        return this.equation + EQUALS + this.result;
     }
 }

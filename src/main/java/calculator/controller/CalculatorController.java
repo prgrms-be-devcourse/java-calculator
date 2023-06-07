@@ -65,12 +65,12 @@ public class CalculatorController {
     }
 
     private <T> T userInput(Supplier<T> input) {
-        for (int i = 0; i < ERROR_LIMIT; i++) {
+        for (int tryIndex = 0; tryIndex < ERROR_LIMIT; tryIndex++) {
             try {
                 return input.get();
             } catch (RuntimeException exception) {
                 outputView.printErrorMsg(exception.getMessage());
-                outputView.printLimitMsg(ERROR_LIMIT - i - 1);
+                outputView.printLimitMsg(ERROR_LIMIT - tryIndex - 1);
             }
         }
         throw new LimitErrorException();
