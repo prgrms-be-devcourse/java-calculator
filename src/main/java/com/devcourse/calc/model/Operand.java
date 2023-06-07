@@ -1,10 +1,10 @@
 package com.devcourse.calc.model;
 
-public class Number implements Token{
+public class Operand implements Token {
 
     private final int number;
 
-    public Number(int number) {
+    public Operand(int number) {
         this.number = number;
     }
 

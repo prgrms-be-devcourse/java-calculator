@@ -48,7 +48,7 @@ public enum Operator implements Token {
         return this.equals(OPEN);
     }
 
-    public int doAction(int number1, int number2) {
+    public int execute(int number1, int number2) {
         return this.action.apply(number1, number2);
     }
 

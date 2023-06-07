@@ -23,7 +23,7 @@ public enum Menu {
         this.action = action;
     }
 
-    public static String doAction(int selectedNumber, Calculator calculator) {
+    public static String execute(int selectedNumber, Calculator calculator) {
         Menu selected = Arrays.stream(values())
                 .filter(menu -> menu.number == selectedNumber)
                 .findFirst()

@@ -1,6 +1,6 @@
 package com.devcourse.util;
 
-import com.devcourse.calc.model.Number;
+import com.devcourse.calc.model.Operand;
 import com.devcourse.calc.model.Operator;
 import com.devcourse.calc.model.Token;
 
@@ -13,42 +13,42 @@ public class Converter {
     public List<Token> infixToPostfixFormula(String origin) {
         String formula = origin.replace(" ", "");
         List<Token> result = new ArrayList<>();
-        Stack<Operator> stack = new Stack<>();
+        Stack<Operator> operatorStack = new Stack<>();
 
         for (char currentChar : formula.toCharArray()) {
             if (Character.isDigit(currentChar)) {
-                result.add(new Number(Character.getNumericValue(currentChar)));
+                result.add(new Operand(Character.getNumericValue(currentChar)));
                 continue;
             }
-            processOperator(result, stack, currentChar);
+            processOperator(result, operatorStack, currentChar);
         }
 
-        return clearOperationStack(result, stack);
+        return clearOperationStack(result, operatorStack);
     }
 
-    private static void processOperator(List<Token> result, Stack<Operator> stack, char currentChar) {
-        Operator newOperator = Operator.find(currentChar);
-        if (stack.size() > 0 && newOperator.isLowerPriority(stack.peek())) {
-            result.add(stack.pop());
+    private static void processOperator(List<Token> result, Stack<Operator> operatorStack, char operatorChar) {
+        Operator operator = Operator.find(operatorChar);
+        if (operatorStack.size() > 0 && operator.isLowerPriority(operatorStack.peek())) {
+            result.add(operatorStack.pop());
         }
-        stack.push(newOperator);
+        operatorStack.push(operator);
 
-        if (newOperator.isFinishBracket()) {
-            clearBracketFormula(result, stack);
+        if (operator.isFinishBracket()) {
+            clearBracketFormula(result, operatorStack);
         }
     }
 
-    private static void clearBracketFormula(List<Token> result, Stack<Operator> stack) {
-        stack.pop();
-        while (!stack.peek().isOpenBracket()) {
-            result.add(stack.pop());
+    private static void clearBracketFormula(List<Token> result, Stack<Operator> operatorStack) {
+        operatorStack.pop();
+        while (!operatorStack.peek().isOpenBracket()) {
+            result.add(operatorStack.pop());
         }
-        stack.pop();
+        operatorStack.pop();
     }
 
-    private static List<Token> clearOperationStack(List<Token> result, Stack<Operator> stack) {
-        while (!stack.isEmpty()) {
-            result.add(stack.pop());
+    private static List<Token> clearOperationStack(List<Token> result, Stack<Operator> operatorStack) {
+        while (!operatorStack.isEmpty()) {
+            result.add(operatorStack.pop());
         }
         return result;
     }
