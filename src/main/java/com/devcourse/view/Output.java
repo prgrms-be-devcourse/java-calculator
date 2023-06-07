@@ -2,16 +2,14 @@ package com.devcourse.view;
 
 import com.devcourse.calc.model.Menu;
 
-import java.util.Arrays;
-
 public class Output {
 
     private Output() {
     }
 
     public static void init() {
-        Menu[] menus = Menu.values();
-        Arrays.stream(menus).forEach(System.out::println);
+        Menu.menus.values()
+                .forEach(System.out::println);
         System.out.print("\n선택 : ");
     }
 

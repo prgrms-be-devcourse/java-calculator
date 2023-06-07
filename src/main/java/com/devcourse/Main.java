@@ -10,9 +10,14 @@ public class Main {
     public static void main(String[] args) {
         Calculator calculator = new Calculator(new CalcHistoryRepository(), new Converter());
         while (true) {
-            int menu = selectMenu();
-            Output.viewResult(calculator.run(menu));
+            try {
+                int menu = selectMenu();
+                Output.viewResult(calculator.run(menu));
+            } catch (RuntimeException e) {
+                Output.viewResult(e.getMessage());
+            }
         }
+
     }
 
     private static int selectMenu() {

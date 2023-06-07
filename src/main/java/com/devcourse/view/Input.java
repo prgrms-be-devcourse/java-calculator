@@ -16,8 +16,10 @@ public class Input {
     public static int selectMenu() {
         try {
             return Integer.parseInt(reader.readLine());
-        } catch (IOException | NumberFormatException e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException();
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("메뉴 선택시 숫자를 입력해 주세요");
         }
     }
 
@@ -27,7 +29,7 @@ public class Input {
             if (FormulaValidator.valid(formula)) {
                 return formula;
             }
-            throw new RuntimeException();
+            throw new RuntimeException("잘못된 식 양식입니다 (ex : 1 + 2 / 3)");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
