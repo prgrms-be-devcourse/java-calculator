@@ -1,4 +1,4 @@
-package com.devcourse.calc.func;
+package com.devcourse.calc.converter;
 
 import com.devcourse.calc.model.Operand;
 import com.devcourse.calc.model.Operator;

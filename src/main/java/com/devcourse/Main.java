@@ -1,9 +1,8 @@
 package com.devcourse;
 
 import com.devcourse.calc.Calculator;
-import com.devcourse.calc.func.ConverterNoBracket;
+import com.devcourse.calc.converter.ConverterNoBracket;
 import com.devcourse.calc.repo.CalcHistoryRepository;
-import com.devcourse.calc.func.ConverterWithBracket;
 import com.devcourse.view.Input;
 import com.devcourse.view.Output;
 

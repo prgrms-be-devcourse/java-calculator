@@ -1,6 +1,6 @@
 package com.devcourse.calc;
 
-import com.devcourse.calc.func.Converter;
+import com.devcourse.calc.converter.Converter;
 import com.devcourse.calc.model.*;
 import com.devcourse.calc.model.Operand;
 import com.devcourse.calc.repo.CalcHistoryRepository;
