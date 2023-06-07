@@ -18,19 +18,25 @@ public class Calculator {
         this.converter = converter;
     }
 
-    public String run(int menu) {
-        return Menu.execute(menu, this);
+    public String run(int menuNumber) {
+        Menu selectedMenu = Menu.find(menuNumber);
+        Object result = selectedMenu.execute(this);
+        return processResult(result);
     }
 
     public String showHistory() {
-        return repository.getAllHistories();
+        List<History> histories = repository.getAllHistories();
+        StringBuilder result = new StringBuilder();
+        for (History history : histories) {
+            result.append(history);
+        }
+        return result.toString();
     }
 
-    public Operand calculate(String formula) {
+    public History calculate(String formula) {
         List<Token> tokens = converter.infixToPostfixFormula(formula);
         Operand result = calculate(tokens);
-        repository.saveHistory(new History(formula, result.getNumber()));
-        return result;
+        return new History(formula, result.getNumber());
     }
 
     private Operand calculate(List<Token> mathSymbols) {
@@ -47,5 +53,13 @@ public class Calculator {
             calculationResult.push(operator.execute(secondNumber, firstNumber));
         }
         return new Operand(calculationResult.pop());
+    }
+
+    private String processResult(Object result) {
+        if (result instanceof History history) {
+            repository.saveHistory(history);
+            return String.format("%d\n", history.getResult());
+        }
+        return result.toString();
     }
 }

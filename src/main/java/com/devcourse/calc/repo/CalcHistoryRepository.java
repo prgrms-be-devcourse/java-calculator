@@ -2,7 +2,9 @@ package com.devcourse.calc.repo;
 
 import com.devcourse.calc.model.History;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CalcHistoryRepository {
@@ -14,11 +16,7 @@ public class CalcHistoryRepository {
         histories.put(index++, history);
     }
 
-    public String getAllHistories() {
-        StringBuilder result = new StringBuilder();
-        for (History history : histories.values()) {
-            result.append(history.toString());
-        }
-        return result.toString();
+    public List<History> getAllHistories() {
+        return new ArrayList<>(histories.values());
     }
 }
