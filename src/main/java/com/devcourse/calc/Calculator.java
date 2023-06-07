@@ -1,9 +1,9 @@
 package com.devcourse.calc;
 
+import com.devcourse.calc.func.Converter;
 import com.devcourse.calc.model.*;
 import com.devcourse.calc.model.Operand;
 import com.devcourse.calc.repo.CalcHistoryRepository;
-import com.devcourse.calc.func.Converter;
 
 import java.util.List;
 import java.util.Stack;
@@ -34,7 +34,7 @@ public class Calculator {
     }
 
     public History calculate(String formula) {
-        List<Token> tokens = converter.infixToPostfixFormula(formula);
+        List<Token> tokens = converter.convertFormula(formula);
         Operand result = calculate(tokens);
         return new History(formula, result.getNumber());
     }

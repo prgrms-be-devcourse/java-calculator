@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Converter {
+public abstract class Converter {
 
-    public List<Token> infixToPostfixFormula(String origin) {
+    public List<Token> convertFormula(String origin) {
         String formula = origin.replace(" ", "");
         List<Token> result = new ArrayList<>();
         Stack<Operator> operatorStack = new Stack<>();
@@ -22,29 +22,10 @@ public class Converter {
             }
             processOperator(result, operatorStack, currentChar);
         }
-
         return clearOperationStack(result, operatorStack);
     }
 
-    private void processOperator(List<Token> result, Stack<Operator> operatorStack, char operatorChar) {
-        Operator operator = Operator.find(operatorChar);
-        if (operatorStack.size() > 0 && operator.isLowerPriority(operatorStack.peek())) {
-            result.add(operatorStack.pop());
-        }
-        operatorStack.push(operator);
-
-        if (operator.isFinishBracket()) {
-            clearBracketFormula(result, operatorStack);
-        }
-    }
-
-    private void clearBracketFormula(List<Token> result, Stack<Operator> operatorStack) {
-        operatorStack.pop();
-        while (!operatorStack.peek().isOpenBracket()) {
-            result.add(operatorStack.pop());
-        }
-        operatorStack.pop();
-    }
+    protected abstract void processOperator(List<Token> result, Stack<Operator> operatorStack, char operatorChar);
 
     private List<Token> clearOperationStack(List<Token> result, Stack<Operator> operatorStack) {
         while (!operatorStack.isEmpty()) {
