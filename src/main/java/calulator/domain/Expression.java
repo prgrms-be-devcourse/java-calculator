@@ -28,9 +28,9 @@ public class Expression {
         return expressions.get(RESULT_INDEX);
     }
 
-    private void operate(Predicate<String> isPriority) {
+    private void operate(Predicate<String> operationFilter) {
         for (int index = 0; index < expressions.size(); index++) {
-            if (isPriority.test(expressions.get(index))) {
+            if (operationFilter.test(expressions.get(index))) {
                 int result = operateResult(index);
 
                 replaceExpression(index, result);
