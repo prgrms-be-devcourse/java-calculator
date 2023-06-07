@@ -1,5 +1,7 @@
 package com.programmers.domain;
 
+import com.programmers.util.Arithmetic;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -10,11 +12,11 @@ public class PostfixConverter {
         boolean numberTurn = true;
         Stack<String> operators = new Stack<>();
         for (String token : tokenized) {
-            if(isNumber(token) && numberTurn) {
+            if(Arithmetic.isNumber(token) && numberTurn) {
                 result.add(token);
 
                 numberTurn = false;
-            } else if(isOperator(token) && !numberTurn) {
+            } else if(Arithmetic.isOperator(token) && !numberTurn) {
                 while (!operators.isEmpty()) {
                     if(getPriority(token) > getPriority(operators.peek())) {
                         break;
@@ -35,14 +37,6 @@ public class PostfixConverter {
         }
 
         return result.toArray(String[]::new);
-    }
-
-    private boolean isNumber(String token) {
-        return token.matches("[0-9]+");
-    }
-
-    private boolean isOperator(String token) {
-        return token.matches("[+\\-*/]?");
     }
 
     private int getPriority(String operator) {

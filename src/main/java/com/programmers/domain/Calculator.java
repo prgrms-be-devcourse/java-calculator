@@ -1,12 +1,14 @@
 package com.programmers.domain;
 
+import com.programmers.util.Arithmetic;
+
 import java.util.Stack;
 
 public class Calculator {
     public int calculate(String[] inputs) {
         Stack<Integer> numbers = new Stack<>();
         for (String input : inputs) {
-            if(isNumber(input)) {
+            if(Arithmetic.isNumber(input)) {
                 numbers.push(Integer.parseInt(input));
             } else {
                 int result = binaryOperation(numbers.pop(), numbers.pop(), input);
@@ -15,10 +17,6 @@ public class Calculator {
         }
 
         return numbers.pop();
-    }
-
-    private boolean isNumber(String input) {
-        return input.matches("[0-9]+");
     }
 
     private int binaryOperation(int a, int b, String operation) {
