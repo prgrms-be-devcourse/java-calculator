@@ -53,4 +53,19 @@ public class PostfixConverterTest {
         assertThatThrownBy(() -> converter.convert(tokenizedC))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
+
+    @Test
+    void convertDataButInvalidOperator_Then_Exception() {
+        //given
+        String[] tokenizedA = {"1", "++", "1", "**", "1"};
+        String[] tokenizedB = {"1", "+-", "1", "*/", "1"};
+
+        //when
+
+        //then
+        assertThatThrownBy(() -> converter.convert(tokenizedA))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> converter.convert(tokenizedB))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
 }
