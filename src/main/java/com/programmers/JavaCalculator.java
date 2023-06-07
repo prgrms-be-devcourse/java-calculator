@@ -8,13 +8,12 @@ public class JavaCalculator {
     private final Input input;
     private final Output output;
     private final Result result;
-    private final BasicCalculator bc;
+    private final BasicCalculator bc = new BasicCalculator();
 
-    public JavaCalculator(Input input, Output output, Result result, BasicCalculator bc) {
+    public JavaCalculator(Input input, Output output, Result result) {
         this.input = input;
         this.output = output;
         this.result = result;
-        this.bc = bc;
     }
 
     public void run() {

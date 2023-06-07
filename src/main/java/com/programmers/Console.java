@@ -9,18 +9,18 @@ public class Console implements Input, Output {
     private final Scanner sc = new Scanner(System.in);
     @Override
     public void showMenu() {
-        System.out.println("1. 조회\n2. 계산\n3. 종료");
+        System.out.println("1. 조회\n2. 계산\n3. 종료\n");
     }
 
     @Override
     public int selectMenu() {
-        System.out.println("선택 : ");
-        return sc.nextInt();
+        System.out.print("선택 : ");
+        return Integer.parseInt(sc.nextLine());
     }
 
     @Override
     public String getExpression() {
-        System.out.print("계산하고자하는 식을 입력해주세요 : ");
+        System.out.println("계산하고자하는 식을 입력해주세요!");
         return sc.nextLine();
     }
 }
