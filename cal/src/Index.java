@@ -33,11 +33,12 @@ public class Index implements Runnable{
             switch (select) {
                 case 1:
                     console.getHistory(history);
+                    break;
                 case 2:
                     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                     try {
                         String inputString = br.readLine();
-                        console.input(inputString,calculator,operator);
+                        console.input(inputString,calculator,operator,history);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
