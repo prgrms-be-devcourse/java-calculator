@@ -78,4 +78,9 @@ public class Calculator {
     public double getResult() {
         return result;
     }
+
+    @Override
+    public String toString() {
+        return this.equation + " = " + this.result;
+    }
 }

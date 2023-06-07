@@ -55,23 +55,23 @@ public class CalculatorController {
 
     private void executeMenu(Menu menu) {
         if (menu == Menu.SEARCH) {
-            search();
+            executeSearch();
             return;
         }
 
-        calcEquation();
+        executeCalc();
     }
 
-    private void calcEquation() {
-        String userInput = getEquation();
-        this.calculatorService.addCalculation(userInput);
+    private void executeCalc() {
+        Double result = getEquation();
+        outputView.printResult(result);
     }
 
-    private String getEquation() {
+    private double getEquation() {
         for (int i = 0; i < ERROR_LIMIT; i++) {
             try {
                 outputView.printEmptyMsg();
-                return inputView.getEquation();
+                return this.calculatorService.calculate(inputView.getEquation());
             } catch (RuntimeException exception) {
                 outputView.printErrorMsg(exception.getMessage());
                 outputView.printLimitMsg(ERROR_LIMIT - i - 1);
@@ -80,7 +80,7 @@ public class CalculatorController {
         throw new LimitErrorException();
     }
 
-    private void search() {
+    private void executeSearch() {
         this.calculatorService.getCalculateList();
     }
 }

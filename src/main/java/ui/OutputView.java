@@ -43,6 +43,11 @@ public class OutputView {
     public void printEmptyMsg() {
         println("");
     }
+
+    public void printResult(double result) {
+        println(String.valueOf(result));
+        printEmptyMsg();
+    }
 }
 
 

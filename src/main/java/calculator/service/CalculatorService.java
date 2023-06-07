@@ -7,8 +7,9 @@ import java.util.List;
 public class CalculatorService {
     public CalculatorService() {}
 
-    public String addCalculation(String userInput) {
-        return null;
+    public double calculate(String userInput) {
+        Calculator calculator = new Calculator(userInput);
+        return calculator.getResult();
     }
 
     public List<String> getCalculateList() {
