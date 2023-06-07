@@ -20,7 +20,7 @@ public class Console implements Input, Output {
 
     @Override
     public String getExpression() {
-        System.out.println("계산하고자하는 식을 입력해주세요!");
+        System.out.println("계산하고자 하는 식을 입력해주세요!");
         return sc.nextLine();
     }
 }
