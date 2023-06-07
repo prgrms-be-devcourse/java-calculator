@@ -1,15 +1,9 @@
 package com.devcourse.java.domain.menu;
 
-import com.devcourse.java.common.Factory;
-import com.devcourse.java.domain.console.Console;
-import com.devcourse.java.domain.console.Input;
-import com.devcourse.java.domain.console.Output;
-import com.devcourse.java.domain.menu.implementation.Exit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;

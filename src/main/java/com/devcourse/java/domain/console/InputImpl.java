@@ -1,11 +1,8 @@
-package com.devcourse.java.domain.console.implementation;
-
-import com.devcourse.java.common.Errors;
-import com.devcourse.java.domain.console.Input;
+package com.devcourse.java.domain.console;
 
 import java.util.Scanner;
 
-import static com.devcourse.java.common.Errors.*;
+import static com.devcourse.java.common.Errors.NOT_A_NUMBER;
 
 public class InputImpl implements Input {
     private final Scanner scanner;

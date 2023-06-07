@@ -1,8 +1,8 @@
 package com.devcourse.java.domain.console;
 
-import static com.devcourse.java.domain.console.ConsoleMessages.EXITING;
-import static com.devcourse.java.domain.console.ConsoleMessages.EXIT_CONFIRM;
-import static com.devcourse.java.domain.console.ConsoleMessages.MENU_SELECTION;
+import static com.devcourse.java.domain.console.Messages.EXITING;
+import static com.devcourse.java.domain.console.Messages.EXIT_CONFIRM;
+import static com.devcourse.java.domain.console.Messages.MENU_SELECTION;
 
 public class Console {
     private final Input input;
