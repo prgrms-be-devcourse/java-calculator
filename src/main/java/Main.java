@@ -1,4 +1,6 @@
 import calculator.controller.CalculatorController;
+import calculator.domain.Calculator;
+import calculator.service.CalculatorService;
 import ui.InputView;
 import ui.OutputView;
 
@@ -8,7 +10,8 @@ public class Main {
     public static void main(String[] args) {
         CalculatorController controller = new CalculatorController(
                   inputViewInstance()
-                , outputViewInstance());
+                , outputViewInstance()
+                , calculatorServiceInstance());
 
         controller.start();
     }
@@ -23,4 +26,6 @@ public class Main {
     private static OutputView outputViewInstance() {
         return new OutputView();
     }
+
+    private static CalculatorService calculatorServiceInstance() {return new CalculatorService();}
 }

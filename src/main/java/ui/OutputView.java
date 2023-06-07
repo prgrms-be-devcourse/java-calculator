@@ -17,15 +17,15 @@ public class OutputView {
         System.out.print(msg);
     }
 
+    private void printSelectMsg() {
+        print(SELECT_MSG);
+    }
+
     public void printMenu() {
         for (Menu menu : Menu.values()) {
             println(menu.getPrintMsg());
         }
         printSelectMsg();
-    }
-
-    private void printSelectMsg() {
-        print(SELECT_MSG);
     }
 
     public void printErrorMsg(String errorMsg) {
@@ -38,6 +38,10 @@ public class OutputView {
             return;
         }
         println(limit + LIMIT_MSG);
+    }
+
+    public void printEmptyMsg() {
+        println("");
     }
 }
 

@@ -24,11 +24,11 @@ public class InputView {
         return menu;
     }
 
-    public void getEquation() {
+    public String getEquation() {
         String userInput = readLine();
         ValidationInput.isEmpty(userInput);
 
         ValidationInput.checkEquation(userInput);
-
+        return userInput;
     }
 }
