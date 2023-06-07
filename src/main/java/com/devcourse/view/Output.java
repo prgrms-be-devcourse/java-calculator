@@ -13,7 +13,7 @@ public class Output {
     }
 
     public static void viewResult(String result) {
-        System.out.println(result);
+        System.out.println(result.concat("\n"));
     }
 
     public static void blankLine() {

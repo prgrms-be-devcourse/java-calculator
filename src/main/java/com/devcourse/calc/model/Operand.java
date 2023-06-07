@@ -10,7 +10,7 @@ public class Operand implements Token {
 
     @Override
     public String toString() {
-        return String.valueOf(number).concat("\n");
+        return String.valueOf(number);
     }
 
     public int getNumber() {

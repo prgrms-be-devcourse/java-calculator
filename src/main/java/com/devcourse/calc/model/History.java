@@ -1,12 +1,12 @@
 package com.devcourse.calc.model;
 
 public class History {
-    private static final String TO_STRING_TEMPLATE = "%s = %s";
+    private static final String TO_STRING_TEMPLATE = "%s = %d";
 
     private final String formula;
-    private final String result;
+    private final int result;
 
-    public History(String formula, String result) {
+    public History(String formula, int result) {
         this.formula = formula;
         this.result = result;
     }
