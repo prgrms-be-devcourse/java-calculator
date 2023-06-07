@@ -6,6 +6,9 @@ import java.util.Arrays;
 
 public class Output {
 
+    private Output() {
+    }
+
     public static void init() {
         Menu[] menus = Menu.values();
         Arrays.stream(menus).forEach(System.out::println);

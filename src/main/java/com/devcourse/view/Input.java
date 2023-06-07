@@ -10,6 +10,9 @@ public class Input {
 
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+    private Input() {
+    }
+
     public static int selectMenu() {
         try {
             return Integer.parseInt(reader.readLine());
