@@ -14,3 +14,14 @@
 - `operation` 메소드 혹은 변수명 `formula`로 변경
 - 의미없는 개행(줄박꿈) 삭제
 
+#### refactor : 예외 처리 수정
+
+- 윗단에서 호출하는 컨트롤러에서 `try-catch`로 예외처리를 진행하였습니다.
+  - 즉, 아랫단에선 `throw new ~`로 예외를 발생시키기만 하였습니다. 
+  - 이유: 아랫단에서 일일이 예외를 처리하면 반복적인 코드 작성으로 인해 미작성 혹은 잘못된 예외 처리가 발생하여 자원 낭비라고 생각했습니다.
+- 다음과 같은 예외 클래스를 만들었습니다.
+  - DivisionByZeroException : 0으로 나누면 발생
+  - WrongInputFormulaException : 잘못된 연산식이면 발생
+  - WrongInputMenuException
+  - WrongInputSymbolException : 잘못된 연산자면 발생
+

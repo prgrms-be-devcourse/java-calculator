@@ -1,6 +1,7 @@
 package calculator.domain.model;
 
-import calculator.error.ResponseErrorFormat;
+import calculator.error.exception.WrongInputSymbolException;
+import calculator.error.model.ResponseErrorFormat;
 
 import java.util.Arrays;
 import java.util.function.BinaryOperator;
@@ -39,6 +40,6 @@ public enum SymbolPriority {
         return Arrays.stream(values())
                 .filter(operator -> operator.symbol.equals(symbol))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ResponseErrorFormat.ERROR_BAD_SYMBOL.getMessage()));
+                .orElseThrow(() -> new WrongInputSymbolException(ResponseErrorFormat.FAIL_WRONG_INPUT_SYMBOL));
     }
 }

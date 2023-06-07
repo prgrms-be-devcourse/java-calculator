@@ -1,6 +1,7 @@
 package calculator.domain.model;
 
-import calculator.error.ResponseErrorFormat;
+import calculator.error.exception.WrongInputMenuException;
+import calculator.error.model.ResponseErrorFormat;
 
 import java.util.Arrays;
 
@@ -9,6 +10,7 @@ public enum Menu {
     FIND_ONE("조회", "1"),
     CALCULATION_TWO("계산", "2"),
     EXIT_THREE("종료", "3"),
+    OTHER("없는 메뉴", ""),
     ;
 
     private String name;
@@ -24,7 +26,7 @@ public enum Menu {
         return Arrays.stream(values())
                 .filter(menu -> menu.number.equals(number))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ResponseErrorFormat.ERROR_NOT_FOUND_MENU.getMessage()));
+                .orElse(OTHER);
     }
 
     public boolean isFindOne() {
@@ -40,5 +42,10 @@ public enum Menu {
     public boolean isExitTree() {
 
         return this.equals(EXIT_THREE);
+    }
+
+    public boolean isOther(){
+
+        return this.equals(OTHER);
     }
 }

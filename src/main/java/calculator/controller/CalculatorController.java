@@ -1,7 +1,11 @@
 package calculator.controller;
 
 import calculator.domain.model.Menu;
-import calculator.error.ResponseErrorFormat;
+import calculator.error.exception.DivisionByZeroException;
+import calculator.error.exception.WrongInputFormulaException;
+import calculator.error.exception.WrongInputMenuException;
+import calculator.error.exception.WrongInputSymbolException;
+import calculator.error.model.ResponseErrorFormat;
 import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -15,7 +19,7 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    public void runCalculator() throws IllegalArgumentException, ArithmeticException {
+    public void runCalculator() {
         Menu menu;
 
         do {
@@ -34,11 +38,13 @@ public class CalculatorController {
                 calculatorService.getHistoryAll();
             } else if (menu.isCalculationTwo()) {
                 calculatorService.calculate(InputView.input());
+            } else if(menu.isOther()){
+                throw new WrongInputMenuException(ResponseErrorFormat.FAIL_WRONG_INPUT_MENU);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (WrongInputFormulaException | WrongInputSymbolException | WrongInputMenuException | DivisionByZeroException e) {
             System.out.println(e.getMessage());
         } catch (ArithmeticException e) {
-            System.out.println(ResponseErrorFormat.ERROR_DIVISION_BY_ZERO.getMessage());
+            System.out.println(ResponseErrorFormat.FAIL_DIVISION_BY_ZERO.getMessage());
         }
     }
 }

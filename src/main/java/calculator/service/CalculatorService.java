@@ -3,7 +3,8 @@ package calculator.service;
 import calculator.domain.repository.CalculatorRepository;
 import calculator.domain.model.HistoryModel;
 import calculator.domain.model.SymbolPriority;
-import calculator.error.ResponseErrorFormat;
+import calculator.error.exception.WrongInputFormulaException;
+import calculator.error.model.ResponseErrorFormat;
 
 import java.util.*;
 
@@ -65,7 +66,7 @@ public class CalculatorService {
      */
     private void isCorrectFormula(String formula) {
         if (!formula.matches("^[0-9]+([-+*/][0-9]+)*$")) {
-            throw new IllegalArgumentException(ResponseErrorFormat.ERROR_BAD_OPERATION.getMessage());
+            throw new WrongInputFormulaException(ResponseErrorFormat.FAIL_WRONG_INPUT_FORMULA);
         }
     }
 
