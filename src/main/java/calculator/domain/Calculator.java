@@ -12,6 +12,11 @@ public class Calculator {
     private String equation;
     private double result;
 
+    public Calculator(String equation, double result) {
+        this.equation =equation;
+        this.result = result;
+    }
+
     public Calculator(String equation) {
         validate(equation);
 
@@ -74,6 +79,9 @@ public class Calculator {
         return index % 2 != 0;
     }
 
+    public Calculator getCalculator() {
+        return new Calculator(this.equation, this.result);
+    }
 
     public double getResult() {
         return result;

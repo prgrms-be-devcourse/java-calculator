@@ -1,5 +1,6 @@
 import calculator.controller.CalculatorController;
 import calculator.domain.Calculator;
+import calculator.repository.CalculatorRepository;
 import calculator.service.CalculatorService;
 import ui.InputView;
 import ui.OutputView;
@@ -22,10 +23,9 @@ public class Main {
     private static Scanner scannerInstance() {
         return new Scanner(System.in);
     }
-
     private static OutputView outputViewInstance() {
         return new OutputView();
     }
-
-    private static CalculatorService calculatorServiceInstance() {return new CalculatorService();}
+    private static CalculatorService calculatorServiceInstance() {return new CalculatorService(calculatorRepositoryInstance());}
+    private static CalculatorRepository calculatorRepositoryInstance() {return new CalculatorRepository();}
 }

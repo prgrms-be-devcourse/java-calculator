@@ -2,6 +2,7 @@ package ui;
 
 import util.Menu;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class OutputView {
@@ -46,6 +47,12 @@ public class OutputView {
 
     public void printResult(double result) {
         println(String.valueOf(result));
+        printEmptyMsg();
+    }
+
+    public void printCalculators(List<String> calculators) {
+        printEmptyMsg();
+        calculators.stream().forEach(System.out::println);
         printEmptyMsg();
     }
 }

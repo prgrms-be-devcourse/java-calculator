@@ -10,10 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorRepositoryTest {
     private static CalculatorRepository calculatorRepository;
+    @BeforeAll
     static void initRepository() {
         calculatorRepository = new CalculatorRepository();
     }
-    
+
     @Test
     void 계산식저장소에서_계산식리스트를_반환() {
         assertThat(calculatorRepository.findAll()).isInstanceOf(ArrayList.class);
