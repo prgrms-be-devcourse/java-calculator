@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public enum Menu {
-    NONE(0, "default do not use zero number", calculator -> {
+    NONE(0, "0번 메뉴는 할당하지 마세요", calculator -> {
         throw new RuntimeException("없는 메뉴");
     }),
     HISTORY(1, "조회", Calculator::showHistory),
