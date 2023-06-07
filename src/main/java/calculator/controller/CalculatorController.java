@@ -6,6 +6,9 @@ import ui.InputView;
 import ui.OutputView;
 import util.Menu;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public class CalculatorController {
     private static final int ERROR_LIMIT = 5;
 
@@ -31,26 +34,17 @@ public class CalculatorController {
     }
 
     private boolean eachExecute() {
-        Menu select = userSelect();
+        Menu select = userInput(()->{
+            outputView.printMenu();
+            return inputView.getMenuNumber();
+        });
+
         if (select == Menu.END) {
             return false;
         }
 
         executeMenu(select);
         return true;
-    }
-
-    private Menu userSelect() {
-        for(int i = 0; i < ERROR_LIMIT; i++) {
-            try {
-                outputView.printMenu();
-                return inputView.getMenuNumber();
-            } catch (RuntimeException exception) {
-                outputView.printErrorMsg(exception.getMessage());
-                outputView.printLimitMsg(ERROR_LIMIT - i - 1);
-            }
-        }
-        throw new LimitErrorException();
     }
 
     private void executeMenu(Menu menu) {
@@ -63,15 +57,17 @@ public class CalculatorController {
     }
 
     private void executeCalc() {
-        Double result = getEquation();
+        Double result = userInput(()->{
+            outputView.printEmptyMsg();
+            return this.calculatorService.calculate(inputView.getEquation());
+        });
         outputView.printResult(result);
     }
 
-    private double getEquation() {
+    private <T> T userInput(Supplier<T> input) {
         for (int i = 0; i < ERROR_LIMIT; i++) {
             try {
-                outputView.printEmptyMsg();
-                return this.calculatorService.calculate(inputView.getEquation());
+                return input.get();
             } catch (RuntimeException exception) {
                 outputView.printErrorMsg(exception.getMessage());
                 outputView.printLimitMsg(ERROR_LIMIT - i - 1);

@@ -3,12 +3,13 @@ package ui;
 import util.Menu;
 
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 public class OutputView {
     private static final String SELECT_MSG = "선택 : ";
     private static final String LIMIT_MSG = "회 남았습니다.";
     private static final String END_MSG = "시도 횟수 초과로 종료합니다.";
+    private static final String NO_DATA = "기록된 계산이 없습니다.";
 
     private void println(String msg) {
         System.out.println(msg);
@@ -39,6 +40,7 @@ public class OutputView {
             return;
         }
         println(limit + LIMIT_MSG);
+        printEmptyMsg();
     }
 
     public void printEmptyMsg() {
@@ -52,7 +54,13 @@ public class OutputView {
 
     public void printCalculators(List<String> calculators) {
         printEmptyMsg();
-        calculators.stream().forEach(System.out::println);
+
+        if (calculators.isEmpty()) {
+            println(NO_DATA);
+
+        } else {
+            calculators.stream().forEach(System.out::println);
+        }
         printEmptyMsg();
     }
 }
