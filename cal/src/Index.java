@@ -1,6 +1,7 @@
 import model.Calculator;
 import model.History;
 import model.Operator;
+import option.Option;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,8 +26,10 @@ public class Index implements Runnable{
     public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("1. 조회");
-            System.out.println("2. 계산");
+            for(Option opt : Option.values()){
+                System.out.println(opt.getIdx()+". "+opt.getOpt());
+            }
+
 
             int select = sc.nextInt();
 
