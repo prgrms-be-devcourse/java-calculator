@@ -2,7 +2,7 @@ package com.programmers;
 
 import java.util.Stack;
 
-public class Main {
+public class Example {
     public static int calculate(String str) {
         Stack<Integer> st = new Stack<>();
         for (int i = 0; i < str.length(); i++) {
