@@ -13,19 +13,16 @@ public enum SymbolPriority {
     DIV("/", 1, (a, b) -> a / b),
     ;
 
-    private String symbol;
-
-    private int priority;
-
-    private BinaryOperator<Integer> operation;
+    private final String symbol;
+    private final int priority;
+    private final BinaryOperator<Integer> formula;
 
     SymbolPriority(String symbol,
                    int priority,
-                   BinaryOperator<Integer> operation) {
-
+                   BinaryOperator<Integer> formula) {
         this.symbol = symbol;
         this.priority = priority;
-        this.operation = operation;
+        this.formula = formula;
     }
 
     public int getPriority() {
@@ -33,12 +30,12 @@ public enum SymbolPriority {
         return priority;
     }
 
-    public BinaryOperator<Integer> getOperation() {
-        return operation;
+    public BinaryOperator<Integer> getFormula() {
+        
+        return formula;
     }
 
     public static SymbolPriority from(String symbol) {
-
         return Arrays.stream(values())
                 .filter(operator -> operator.symbol.equals(symbol))
                 .findFirst()

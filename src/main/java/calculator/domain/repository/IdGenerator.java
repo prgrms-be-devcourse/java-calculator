@@ -3,7 +3,6 @@ package calculator.domain.repository;
 public class IdGenerator {
 
     private static IdGenerator instance;
-
     private long idCounter;
 
     private IdGenerator() {
@@ -17,6 +16,7 @@ public class IdGenerator {
     }
 
     public synchronized long generateId() {
+
         return idCounter++;
     }
 }

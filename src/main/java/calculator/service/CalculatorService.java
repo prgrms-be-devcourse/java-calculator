@@ -1,78 +1,70 @@
 package calculator.service;
 
-import calculator.domain.repository.CalculationRepository;
-import calculator.domain.model.Calculator;
+import calculator.domain.repository.CalculatorRepository;
+import calculator.domain.model.HistoryModel;
 import calculator.domain.model.SymbolPriority;
 import calculator.error.ResponseErrorFormat;
 
 import java.util.*;
 
-public class CalculationService {
+public class CalculatorService {
 
-    private final CalculationRepository calculationRepository;
+    private final CalculatorRepository calculatorRepository;
+    private final Stack<SymbolPriority> symbolStack = new Stack<>();
+    private final Stack<Integer> numberStack = new Stack<>();
 
-    private Stack<SymbolPriority> symbolStack = new Stack<>();
+    public CalculatorService(CalculatorRepository calculatorRepository) {
 
-    private Stack<Integer> numberStack = new Stack<>();
-
-    public CalculationService(CalculationRepository calculationRepository) {
-        this.calculationRepository = calculationRepository;
+        this.calculatorRepository = calculatorRepository;
     }
 
     /**
      * 모든 계산 기록 조회하는 메소드
      * 형식 : "연산식 = 연산결과"
      */
-    public void getCalculationsAll() {
-
-        calculationRepository
+    public void getHistoryAll() {
+        calculatorRepository
                 .findAll()
                 .forEach(
-                        calculator -> System.out.println(calculator.getOperation() + "=" + calculator.getAnswer())
+                        history -> System.out.println(history.getFormula() + "=" + history.getAnswer())
                 );
     }
 
     /**
      * 계산기 실행 메소드
      *
-     * @param operation : 계산을 진행할 연산식
+     * @param formula : 계산을 진행할 연산식
      */
-    public void calculate(String operation) {
+    public void calculate(String formula) {
+        isCorrectFormula(removeSpaces(formula));
 
-        operation = removeSpaces(operation);
+        final StringTokenizer formulaTokens = new StringTokenizer(formula, "+-/*", true);
+        processOperatorsAndNumbers(formulaTokens);
 
-        isCorrectOperation(operation);
+        final HistoryModel history = new HistoryModel(formula, numberStack.pop() + "");
+        System.out.println(history.getFormula() + "=" + history.getAnswer() + "\n");
 
-        final StringTokenizer stringTokenizer = new StringTokenizer(operation, "+-/*", true);
-
-        processOperatorsAndNumbers(stringTokenizer);
-
-        final Calculator calculator = new Calculator(operation, numberStack.pop() + "");
-
-        System.out.println(calculator.getOperation() + "=" + calculator.getAnswer() + "\n");
-
-        calculationRepository.save(calculator);
+        calculatorRepository.save(history);
     }
 
     /**
      * 연산식의 공백을 제거하는 메소드
      *
-     * @param operation : 공백을 제거할 연산식
+     * @param formula : 공백을 제거할 연산식
      * @return 공백이 제거된 연산식
      */
-    private String removeSpaces(String operation) {
+    private String removeSpaces(String formula) {
 
-        return operation.trim().replaceAll(" ", "");
+        return formula.trim().replaceAll(" ", "");
     }
 
     /**
      * 연산식이 사칙연산과 숫자로만 이루어져 있는 지 판단하는 유효성 검증 메소드
      *
-     * @param operation : 검증할 연산식
+     * @param formula : 검증할 연산식
      */
-    private void isCorrectOperation(String operation) {
-
-        if (!operation.matches("^[0-9]+([-+*/][0-9]+)*$")) {
+    private void isCorrectFormula(String formula) {
+        if (!formula.matches("^[0-9]+([-+*/][0-9]+)*$")) {
             throw new IllegalArgumentException(ResponseErrorFormat.ERROR_BAD_OPERATION.getMessage());
         }
     }
@@ -91,16 +83,15 @@ public class CalculationService {
 
                 while (!symbolStack.isEmpty() &&
                         symbolStack.peek().getPriority() >= nextSymbol.getPriority()) {
-
                     int secondNumber = numberStack.pop();
                     int firstNumber = numberStack.pop();
-
                     int result = symbolStack.pop()
-                            .getOperation()
+                            .getFormula()
                             .apply(firstNumber, secondNumber);
 
                     numberStack.push(result);
                 }
+
                 symbolStack.push(nextSymbol);
             } else {
                 numberStack.push(Integer.parseInt(token));
@@ -110,9 +101,8 @@ public class CalculationService {
         while (!symbolStack.isEmpty()) {
             int secondNumber = numberStack.pop();
             int firstNumber = numberStack.pop();
-
             int result = symbolStack.pop()
-                    .getOperation()
+                    .getFormula()
                     .apply(firstNumber, secondNumber);
 
             numberStack.push(result);

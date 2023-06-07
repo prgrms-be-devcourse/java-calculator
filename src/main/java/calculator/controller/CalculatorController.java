@@ -1,49 +1,44 @@
 package calculator.controller;
 
 import calculator.domain.model.Menu;
-import calculator.domain.model.Message;
 import calculator.error.ResponseErrorFormat;
-import calculator.service.CalculationService;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
 
-    private final CalculationService calculationService;
+    private final CalculatorService calculatorService;
 
-    public CalculatorController(CalculationService calculationService) {
+    public CalculatorController(CalculatorService calculatorService) {
 
-        this.calculationService = calculationService;
+        this.calculatorService = calculatorService;
     }
 
     public void runCalculator() throws IllegalArgumentException, ArithmeticException {
-
         Menu menu;
 
         do {
             OutputView.outputByMenu();
-
             menu = Menu.from(InputView.input());
-
             catchException(menu);
-
         } while (!menu.isExitTree());
 
-        Message.exitMessage();
+        OutputView.exitCalculator();
     }
 
     public void catchException(Menu menu) {
 
         try {
             if (menu.isFindOne()) {
-                calculationService.getCalculationsAll();
+                calculatorService.getHistoryAll();
             } else if (menu.isCalculationTwo()) {
-                calculationService.calculate(InputView.input());
+                calculatorService.calculate(InputView.input());
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         } catch (ArithmeticException e) {
-            System.out.println(ResponseErrorFormat.ERROR_DIVISION_BY_ZERO);
+            System.out.println(ResponseErrorFormat.ERROR_DIVISION_BY_ZERO.getMessage());
         }
     }
 }

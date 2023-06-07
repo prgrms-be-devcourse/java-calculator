@@ -6,7 +6,6 @@ public class Message {
     }
 
     public static void menuMessage() {
-
         StringBuilder menu = new StringBuilder();
 
         menu.append("1. 조회").append("\n");
@@ -17,7 +16,7 @@ public class Message {
         System.out.print(menu);
     }
 
-    public static void exitMessage(){
+    public static void exitMessage() {
 
         System.out.print("\n계산기를 종료합니다.");
     }
