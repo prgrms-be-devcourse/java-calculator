@@ -1,10 +1,13 @@
 package calculator.controller;
 
+import exception.LimitErrorException;
 import ui.InputView;
 import ui.OutputView;
 import util.Menu;
 
 public class CalculatorController {
+    private static final int ERROR_LIMIT = 5;
+
     private InputView inputView;
     private OutputView outputView;
 
@@ -24,23 +27,25 @@ public class CalculatorController {
     }
 
     private Menu userSelect() {
-        while(true) {
+        for(int i = 0; i < ERROR_LIMIT; i++) {
             try {
                 outputView.printMenu();
                 return inputView.getMenuNumber();
             } catch (RuntimeException exception) {
                 outputView.printErrorMsg(exception.getMessage());
+                outputView.printLimitMsg(ERROR_LIMIT - i - 1);
             }
         }
+        throw new LimitErrorException();
     }
 
     private void executeMenu(Menu menu) {
-        if (menu == Menu.CALC) {
-            calcEquation();
+        if (menu == Menu.SEARCH) {
+            search();
             return;
         }
 
-        search();
+        calcEquation();
     }
 
     private void calcEquation() {
