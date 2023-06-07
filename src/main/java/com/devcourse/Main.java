@@ -2,7 +2,7 @@ package com.devcourse;
 
 import com.devcourse.calc.Calculator;
 import com.devcourse.calc.repo.CalcHistoryRepository;
-import com.devcourse.util.Converter;
+import com.devcourse.calc.func.Converter;
 import com.devcourse.view.Input;
 import com.devcourse.view.Output;
 

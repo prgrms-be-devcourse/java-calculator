@@ -3,7 +3,7 @@ package com.devcourse.calc;
 import com.devcourse.calc.model.*;
 import com.devcourse.calc.model.Operand;
 import com.devcourse.calc.repo.CalcHistoryRepository;
-import com.devcourse.util.Converter;
+import com.devcourse.calc.func.Converter;
 
 import java.util.List;
 import java.util.Stack;

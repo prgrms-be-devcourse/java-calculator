@@ -1,4 +1,4 @@
-package com.devcourse.util;
+package com.devcourse.calc.func;
 
 import com.devcourse.calc.model.Operand;
 import com.devcourse.calc.model.Operator;
@@ -26,7 +26,7 @@ public class Converter {
         return clearOperationStack(result, operatorStack);
     }
 
-    private static void processOperator(List<Token> result, Stack<Operator> operatorStack, char operatorChar) {
+    private void processOperator(List<Token> result, Stack<Operator> operatorStack, char operatorChar) {
         Operator operator = Operator.find(operatorChar);
         if (operatorStack.size() > 0 && operator.isLowerPriority(operatorStack.peek())) {
             result.add(operatorStack.pop());
@@ -38,7 +38,7 @@ public class Converter {
         }
     }
 
-    private static void clearBracketFormula(List<Token> result, Stack<Operator> operatorStack) {
+    private void clearBracketFormula(List<Token> result, Stack<Operator> operatorStack) {
         operatorStack.pop();
         while (!operatorStack.peek().isOpenBracket()) {
             result.add(operatorStack.pop());
@@ -46,7 +46,7 @@ public class Converter {
         operatorStack.pop();
     }
 
-    private static List<Token> clearOperationStack(List<Token> result, Stack<Operator> operatorStack) {
+    private List<Token> clearOperationStack(List<Token> result, Stack<Operator> operatorStack) {
         while (!operatorStack.isEmpty()) {
             result.add(operatorStack.pop());
         }
