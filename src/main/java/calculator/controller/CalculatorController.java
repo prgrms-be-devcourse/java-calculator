@@ -14,7 +14,12 @@ public class CalculatorController {
 
     public void start() {
         while(true) {
+            Menu select = userSelect();
+            if (select == Menu.END) {
+                break;
+            }
 
+            executeMenu(select);
         }
     }
 
@@ -34,6 +39,7 @@ public class CalculatorController {
             calcEquation();
             return;
         }
+
         search();
     }
 
