@@ -1,5 +1,7 @@
 package com.devcourse.calc.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiFunction;
 
 public enum Operator implements Token {
@@ -13,12 +15,19 @@ public enum Operator implements Token {
             throw new RuntimeException();
         }
         return number1 / number2;
-    }),
-    ;
+    });
+
+    private static final Map<String, Operator> operators = new HashMap<>();
 
     private final String sign;
     private final int priority;
     private final BiFunction<Integer, Integer, Integer> action;
+
+    static {
+        for (Operator operator : values()) {
+            operators.put(operator.sign, operator);
+        }
+    }
 
     Operator(String sign, int priority, BiFunction<Integer, Integer, Integer> action) {
         this.sign = sign;
@@ -26,14 +35,12 @@ public enum Operator implements Token {
         this.action = action;
     }
 
-    public static Operator find(char currentChar) {
-        Operator[] operators = values();
-        for (Operator operator : operators) {
-            if (operator.sign.equals(String.valueOf(currentChar))) {
-                return operator;
-            }
+    public static Operator find(char sign) {
+        try {
+            return operators.get(Character.toString(sign));
+        } catch (NullPointerException e) {
+            throw new RuntimeException();
         }
-        throw new RuntimeException();
     }
 
     public boolean isLowerPriority(Operator other) {
