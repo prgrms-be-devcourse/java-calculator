@@ -1,5 +1,6 @@
 package com.devcourse.java.domain.menu.implementation;
 
+import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.menu.Menu;
 
 public class Query implements Menu {
@@ -15,7 +16,7 @@ public class Query implements Menu {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(Console console) {
         return true;
     }
 }
