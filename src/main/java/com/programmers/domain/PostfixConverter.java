@@ -1,4 +1,4 @@
-package com.programmers.postfixconverter;
+package com.programmers.domain;
 
 import java.util.ArrayList;
 import java.util.Stack;

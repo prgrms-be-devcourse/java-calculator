@@ -1,4 +1,4 @@
-package com.programmers.calculator;
+package com.programmers.domain;
 
 import java.util.Stack;
 

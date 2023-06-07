@@ -1,4 +1,4 @@
-package com.programmers.tokenizer;
+package com.programmers.domain;
 
 import java.util.ArrayList;
 
