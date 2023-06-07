@@ -19,10 +19,9 @@ public class BasicCalculator {
     private int toPostfix(String str) {
         String[] strArr = str.split(" ");
         ArrayList<String> output = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
         Stack<String> st = new Stack<>();
 
-        for (int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < strArr.length; i++) {
             String now = strArr[i];
             switch (now) {
                 case "(" -> st.push(now);
