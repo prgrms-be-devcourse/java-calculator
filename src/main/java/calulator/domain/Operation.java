@@ -27,7 +27,7 @@ public enum Operation {
         return value.equals(ADDITION.value) || value.equals(SUBTRACTION.value);
     }
 
-    public static int operator(String operation, int leftOperand, int rightOperand) {
+    public static int calculateByOperation(String operation, int leftOperand, int rightOperand) {
         return findOperator(operation)
                 .calculateFunction.apply(leftOperand, rightOperand);
     }
@@ -35,7 +35,8 @@ public enum Operation {
     private static Operation findOperator(String operation) {
         return Arrays.stream(values())
                 .filter(o -> o.value.equals(operation))
-                .findFirst().orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATOR_MESSAGE));
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_OPERATOR_MESSAGE));
     }
 
 }

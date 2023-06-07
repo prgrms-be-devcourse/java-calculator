@@ -12,7 +12,7 @@ class ExpressionTest {
     @Test
     void calculateExpressionTest(){
         Expression expression = createExpression("1+2*3/3");
-        String result = expression.calculateExpression();
+        String result = expression.calculate();
 
         assertThat(result).isEqualTo("3");
     }

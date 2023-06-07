@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Expression {
-
+    private static final int LEFT_OPERAND_POSITION = -1;
+    private static final int RIGHT_OPERAND_POSITION = 1;
     private static final int INDEX_INIT_VALUE = 2;
     private static final int RESULT_INDEX = 0;
     private final List<String> expressions;
@@ -20,7 +21,7 @@ public class Expression {
         return new Expression(expressions);
     }
 
-    public String calculateExpression() {
+    public String calculate() {
         operate(Operation::isPriority);
         operate(Operation::isNonePriority);
 
@@ -38,17 +39,19 @@ public class Expression {
         }
     }
 
-    private int operateResult(int index) {
-        return Operation.operator(expressions.get(index),
-                Integer.valueOf(expressions.get(index - 1)),
-                Integer.valueOf(expressions.get(index + 1)));
+    private int operateResult(int operatorIndex) {
+        return Operation.calculateByOperation(
+                expressions.get(operatorIndex),
+                Integer.valueOf(expressions.get(operatorIndex + LEFT_OPERAND_POSITION)),
+                Integer.valueOf(expressions.get(operatorIndex + RIGHT_OPERAND_POSITION)));
     }
 
-    private void replaceExpression(int index, int result) {
-        for (int i = index + 1; i >= index - 1; i--) {
+    private void replaceExpression(int operatorIndex, int result) {
+        for (int i = operatorIndex + RIGHT_OPERAND_POSITION; i >= operatorIndex + LEFT_OPERAND_POSITION; i--) {
             expressions.remove(i);
         }
-        expressions.add(index - 1, String.valueOf(result));
+        expressions.add(operatorIndex + LEFT_OPERAND_POSITION, String.valueOf(result));
     }
 
 }
+

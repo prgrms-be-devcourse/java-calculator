@@ -11,33 +11,40 @@ import static calulator.domain.Menu.*;
 
 public class Calculator {
 
-    private final InputView inputView = new InputView();
-    private final ExpressionRepository expressionRepository = new ExpressionRepository();
-    private Expression expression;
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    private final ExpressionRepository expressionRepository;
+
+    public Calculator(InputView inputView, OutputView outputView, ExpressionRepository expressionRepository) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.expressionRepository = expressionRepository;
+    }
 
     public void run() {
         Menu menu;
         do {
             menu = inputView.inputMenu();
-            process(menu);
+            executeMenuOption(menu);
         } while (menu != null);
     }
 
-    private void process(Menu menu) {
+    private void executeMenuOption(Menu menu) {
         if (menu == CALCULATED_LOG) {
             List<String> strings = expressionRepository.resultsToList();
-            OutputView.printCalculateResults(strings);
+            outputView.printCalculateResults(strings);
         } else if (menu == CALCULATE) {
             String expression = inputView.inputExpression();
-            String calculateResult = getCalculateResult(expression);
-            OutputView.printCalculateResult(calculateResult);
+            String calculateResult = calculateResult(expression);
+            outputView.printCalculateResult(calculateResult);
         }
     }
 
-    private String getCalculateResult(String inputValue) {
-        this.expression = createExpression(inputValue);
-        String calculateResult = expression.calculateExpression();
-        expressionRepository.addExpression(inputValue, calculateResult);
+    private String calculateResult(String inputValue) {
+        final Expression expression = createExpression(inputValue);
+        String calculateResult = expression.calculate();
+        expressionRepository.addExpressionAndResult(inputValue, calculateResult);
         return calculateResult;
     }
 

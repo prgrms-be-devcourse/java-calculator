@@ -23,7 +23,7 @@ class MenuTest {
     void findMenuTest() {
         String input = "1";
 
-        assertThat(Menu.valueOf(input)).isEqualTo(CALCULATED_LOG);
+        assertThat(Menu.of(input)).isEqualTo(CALCULATED_LOG);
     }
 
     @DisplayName("선택지가 없는 메뉴를 선택시 예외를 발생한다.")
