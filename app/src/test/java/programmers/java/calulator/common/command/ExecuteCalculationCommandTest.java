@@ -1,11 +1,14 @@
-package programmers.java.calulator.console.command;
+package programmers.java.calulator.common.command;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import programmers.java.calulator.common.Calculator;
+import programmers.java.calulator.common.calculator.Calculator;
+import programmers.java.calulator.common.command.impl.ExecuteCalculationCommand;
 import programmers.java.calulator.common.reader.Reader;
+import programmers.java.calulator.common.repository.History;
+import programmers.java.calulator.common.repository.Repository;
 import programmers.java.calulator.common.writer.Writer;
 
 import static org.mockito.Mockito.*;
@@ -19,11 +22,12 @@ public class ExecuteCalculationCommandTest {
         Calculator mockCalculator = Mockito.mock(Calculator.class);
         Reader mockReader = Mockito.mock(Reader.class);
         Writer mockWriter = Mockito.mock(Writer.class);
+        Repository mockRepository = Mockito.mock(Repository.class);
 
         when(mockReader.readLine()).thenReturn("2 + 2");
         when(mockCalculator.calculate("2 + 2")).thenReturn(4);
 
-        ExecuteCalculationCommand command = new ExecuteCalculationCommand(mockCalculator, mockReader, mockWriter);
+        ExecuteCalculationCommand command = new ExecuteCalculationCommand(mockCalculator, mockReader, mockWriter, mockRepository);
 
         // when
         command.execute();
@@ -31,5 +35,6 @@ public class ExecuteCalculationCommandTest {
         // then
         verify(mockCalculator, times(1)).calculate("2 + 2");
         verify(mockWriter, times(1)).write("4");
+        verify(mockRepository, times(1)).save(any(History.class));
     }
 }

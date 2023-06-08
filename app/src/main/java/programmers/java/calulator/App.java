@@ -3,16 +3,16 @@
  */
 package programmers.java.calulator;
 
+import programmers.java.calulator.common.calculator.StackCalculator;
+import programmers.java.calulator.console.menu.MenuHandler;
 import programmers.java.calulator.console.reader.ConsoleReader;
+import programmers.java.calulator.console.repository.MapRepository;
 import programmers.java.calulator.console.runner.ConsoleRunner;
 import programmers.java.calulator.console.writer.ConsoleWriter;
-import programmers.java.calulator.common.Calculator;
-
-import java.util.HashMap;
 
 public class App {
 
     public static void main(String[] args) {
-        new ConsoleRunner(new Calculator(), new ConsoleReader(), new ConsoleWriter(), new HashMap<>()).run();
+        new ConsoleRunner(new MenuHandler(new ConsoleWriter(), new StackCalculator(), new ConsoleReader(), MapRepository.getInstance())).run();
     }
 }

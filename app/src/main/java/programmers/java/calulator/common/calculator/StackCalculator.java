@@ -1,30 +1,30 @@
-package programmers.java.calulator.common.engine;
+package programmers.java.calulator.common.calculator;
 
 import programmers.java.calulator.common.operator.Operator;
-import programmers.java.calulator.common.utils.Tokenizer;
 import programmers.java.calulator.common.utils.Number;
+
 import java.util.Stack;
 
-public class CalculatorEngine {
+public class StackCalculator implements Calculator {
     private final Stack<Integer> numberStack = new Stack<>();
     private final Stack<Operator> operatorStack = new Stack<>();
+    private String[] tokens;
 
-    public CalculatorEngine(String rawExpression) {
-        Tokenizer tokenizer = new Tokenizer(rawExpression);
-        parse(tokenizer.getTokens());
+    @Override
+    public int calculate(String expression) {
+        this.tokens = expression.split(" ");
+        parse(tokens);
+        finalizeCalculation();
+        return numberStack.pop();
     }
 
     private void parse(String[] tokens) {
         for (String token : tokens) {
-            Number number = new Number(token);
-            if (number.isValid()) {
-                numberStack.push(number.toInt());
-                continue;
-            }
-            handleOperator(Operator.of(token));
+            Number.of(token).ifPresentOrElse(
+                    number -> numberStack.push(number.toInt()),
+                    () -> handleOperator(Operator.of(token))
+            );
         }
-
-        finalizeCalculation();
     }
 
     private void handleOperator(Operator operator) {
@@ -47,9 +47,5 @@ public class CalculatorEngine {
         Operator operator = operatorStack.pop();
 
         numberStack.push(operator.calculate(number1, number2));
-    }
-
-    public int evaluate() {
-        return numberStack.pop();
     }
 }

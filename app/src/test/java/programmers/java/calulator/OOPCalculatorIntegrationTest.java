@@ -7,13 +7,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import programmers.java.calulator.common.Calculator;
+import programmers.java.calulator.common.calculator.StackCalculator;
+import programmers.java.calulator.console.menu.MenuHandler;
 import programmers.java.calulator.console.reader.ConsoleReader;
+import programmers.java.calulator.console.repository.MapRepository;
 import programmers.java.calulator.console.runner.ConsoleRunner;
 import programmers.java.calulator.console.writer.ConsoleWriter;
 
 import java.io.*;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,7 +45,7 @@ public class OOPCalculatorIntegrationTest {
 
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new ConsoleRunner(new Calculator(), new ConsoleReader(), new ConsoleWriter(), new HashMap<>()).run();
+            new ConsoleRunner(new MenuHandler(new ConsoleWriter(), new StackCalculator(), new ConsoleReader(), MapRepository.getInstance())).run();
         });
         String output = testOut.toString();
 

@@ -1,24 +1,28 @@
-package programmers.java.calulator.console.command;
+package programmers.java.calulator.common.command.impl;
 
 import programmers.java.calulator.common.command.Command;
+import programmers.java.calulator.common.repository.Repository;
 import programmers.java.calulator.common.writer.Writer;
 import programmers.java.calulator.console.repository.MapRepository;
+
+import java.util.List;
 import java.util.Map;
 
 public class PrintHistoryCommand implements Command {
-    private final MapRepository repository;
+    private final Repository repository;
     private final Writer writer;
 
-    public PrintHistoryCommand(Writer writer, MapRepository repository) {
+    public PrintHistoryCommand(Writer writer, Repository repository) {
         this.repository = repository;
         this.writer = writer;
     }
 
     @Override
     public void execute() {
-        for (Map.Entry<String, Integer> entry : repository.getRepository().entrySet()) {
-            writer.write(entry.getKey() + " = " + entry.getValue());
-        }
+        repository.findAll()
+                .stream()
+                .forEach(history -> writer.write(history.toString()));
     }
+
 }
 
