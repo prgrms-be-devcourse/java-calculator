@@ -8,12 +8,12 @@ import lombok.Setter;
 public class InputAndAnswer {
     private Long id;
     private String input;
-    private Integer answer;
+    private Double answer;
 
     public InputAndAnswer() {
     }
 
-    public InputAndAnswer(String input, Integer answer) {
+    public InputAndAnswer(String input, Double answer) {
         this.input = input;
         this.answer = answer;
     }

@@ -1,5 +1,8 @@
 package com.bona.javacalculator.io;
 
+import com.bona.javacalculator.model.InputAndAnswer;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output{
@@ -19,12 +22,19 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void outFormula() {
-        System.out.println();
+    public void outAnswer(Double answer) {
+        System.out.println(answer);
     }
 
     @Override
-    public void outAnswer() {
+    public void printAll(List<InputAndAnswer> inputAndAnswerList) {
+        for (Object history : inputAndAnswerList) {
+            System.out.println(history);
+        }
+    }
 
+    @Override
+    public void printMessage(String message) {
+        System.out.println(message);
     }
 }

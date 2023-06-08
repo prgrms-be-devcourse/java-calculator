@@ -18,7 +18,7 @@ class CalMemoryRepositoryTest {
     @Test
     void save() {
         //given
-        InputAndAnswer inputAndAnswer = new InputAndAnswer("1+2",3);
+        InputAndAnswer inputAndAnswer = new InputAndAnswer("1+2",3.0);
 
         //when
         InputAndAnswer savedInputAndAnswer = memoryRepository.save(inputAndAnswer);
