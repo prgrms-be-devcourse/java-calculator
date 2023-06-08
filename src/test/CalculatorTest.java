@@ -1,3 +1,5 @@
+import main.java.domain.Command;
+import main.java.service.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CalculatorTest {
 
     String command;
-
+    Calculator calculator = new Calculator();
     @DisplayName("calculate함수는 띄어쓰기로 파싱된 commandArr를 계산하는 함수.")
     @Test
     void calculateTest() {
@@ -28,8 +30,9 @@ class CalculatorTest {
     }
 
     int input(String command) {
-        Calculator calculator = Calculator.getInstance();
         String[] commandArr = command.split(" ");
-        return calculator.calculate(commandArr);
+        Command command1 = new Command(commandArr);
+        command1.parseComamand();
+        return calculator.calculate(command1);
     }
 }

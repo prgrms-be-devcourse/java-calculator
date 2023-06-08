@@ -1,4 +1,4 @@
-package Model;
+package main.java.repository;
 
 import java.util.LinkedList;
 import java.util.Queue;
