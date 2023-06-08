@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.calculator.Operator;
 import org.example.history.Formula;
 import org.example.history.History;
 import org.example.io.Input;

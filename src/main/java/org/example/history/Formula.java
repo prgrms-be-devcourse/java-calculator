@@ -1,6 +1,5 @@
 package org.example.history;
 
-
 public class Formula {
 
   private String formula;
