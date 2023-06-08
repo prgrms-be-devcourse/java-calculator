@@ -10,6 +10,10 @@ public class CalculateResult {
         this.result = result;
     }
 
+    public Number getResult() {
+        return this.result;
+    }
+
     @Override
     public String toString() {
         return expression + EQUAL + result;

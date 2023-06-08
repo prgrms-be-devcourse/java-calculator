@@ -5,6 +5,7 @@ import com.devcourse.java.common.Storage;
 import com.devcourse.java.domain.calculateResult.CalculateResult;
 import com.devcourse.java.domain.calculateResult.MemoryStorage;
 import com.devcourse.java.domain.Runner.CalculatorRunner;
+import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.console.Input;
 import com.devcourse.java.domain.console.Reader;
@@ -25,7 +26,8 @@ public class App {
         Console console = new Console(reader, writer);
         Validator validator = new Validator();
         Query query = new Query(resultStorage, validator);
-        Calculate calculate = new Calculate(resultStorage);
+        Calculator calculator = new Calculator();
+        Calculate calculate = new Calculate(calculator, resultStorage, validator);
         Factory<Menu, Menus> menuFactory = new MenuFactory(query, calculate);
 
         CalculatorRunner calculatorRunner = new CalculatorRunner(menuFactory, console);

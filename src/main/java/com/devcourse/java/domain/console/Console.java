@@ -14,7 +14,7 @@ public class Console {
         this.output = output;
     }
 
-    public String readExpression() {
+    public String read() {
         return input.read();
     }
 
@@ -30,6 +30,10 @@ public class Console {
 
     public void print(String message) {
         output.print(message);
+    }
+
+    public void print(Number number) {
+        output.print(number);
     }
 
     public void printList(List<String> results) {

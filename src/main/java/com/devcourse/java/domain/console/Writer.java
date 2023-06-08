@@ -6,4 +6,9 @@ public class Writer implements Output {
     public void print(String message) {
         System.out.print(message);
     }
+
+    @Override
+    public void print(Number number) {
+        System.out.println(number);
+    }
 }
