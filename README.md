@@ -1,57 +1,58 @@
-# java_calculator
-KDT-Programmers 백엔드 데브코스에서 진행하는 OOP를 활용한 자바 계산기 구현 미션 저장소입니다.
+#### refactor : CalculationApplication 책임 분할 및 명확한 책임 부여
 
-### Branch 명명 규칙 + 팀의 PR규칙
-- prgrms-be-devcourse/spring-board 레포로 PR 시 branch는 git_user_id  
-- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
+- `CalculationApplication`의 책임을 명확하게 부여. -> 실행의 책임만을 부여.
+- `CalculatorController Class`를 만들어서 명확한 MVC 패턴 사용.
+  - 예외 흐름은 `WAS -> Filter -> Servlet -> Interceptor -> Controller(Exception!) -> 반복`
+  - 기본적으로 예외 흐름은 위 흐름으로 알고 있기 때문에, 해당 컨트롤러에서 예외 처리.
+- `Menu Enum Class`를 만들어서 유지보수성 및 재사용성 향상
+- `OutputView`에서 쓰이는 `Message`들을 사용하는 `Message  lass`를 만들어서 관리
 
-### 과제를 통해 기대하는 역량
- 
-- 깃허브를 통한 코드리뷰를 경험
-- 기본적인 테스트 코드 작성 및 활용하는 능력
-- 스스로 OOP를 생각하고 코드로 옮길 수 있는 능력
+#### refactor : 줄바꿈 및 클래스명, 변수명 명확한 명칭 부여
 
-### 요구사항
-- 콘솔로 구현입니다. 
-- 객체지향적인 코드로 계산기 구현하기
-    - [ ]  더하기
-    - [ ]  빼기
-    - [ ]  곱하기
-    - [ ]  나누기
-    - [ ]  우선순위(사칙연산)
-- [ ]  테스트 코드 구현하기
-- [ ]  계산 이력을 맵으로 데이터 저장기능 만들기
-    - 애플리케이션이 동작하는 동안 데이터베이스 외에 데이터를 저장할 수 있는 방법을 고안해보세요.
-- (선택) 정규식 사용
+- `Calculator` 모델 클래스명  -> `HistoryModel` 클래스명으로 변경
+- 클래스명에 들어간 `Calculation` 모두 `Calculator`로 변경
+- `operation` 메소드 혹은 변수명 `formula`로 변경
+- 의미없는 개행(줄박꿈) 삭제
 
-### 실행결과(콘솔)
-```
-1. 조회
-2. 계산
+#### refactor : 예외 처리 수정
 
-선택 : 2
+- 윗단에서 호출하는 컨트롤러에서 `try-catch`로 예외처리를 진행하였습니다.
+  - 즉, 아랫단에선 `throw new ~`로 예외를 발생시키기만 하였습니다.
+  - 이유: 아랫단에서 일일이 예외를 처리하면 반복적인 코드 작성으로 인해 미작성 혹은 잘못된 예외 처리가 발생하여 자원 낭비라고 생각했습니다.
+- 다음과 같은 예외 클래스를 만들었습니다.
+  - DivisionByZeroException : 0으로 나누면 발생
+  - WrongInputFormulaException : 잘못된 연산식이면 발생
+  - WrongInputMenuException
+  - WrongInputSymbolException : 잘못된 연산자면 발생
 
-1 + 2
-3
+#### refactor : 싱글톤 구현 방식 변경
 
-1. 조회
-2. 계산
+- Thread-safe로부터 안전하지 못한 싱글톤 구현 방식 변경
+- Static Inner Class 를 활용해 Thead-safe 하면서 LAZY 하게 구현
 
-선택 : 2
+#### refactor : Stack -> Deque 변경 및 Business 로직에서 View 역할 분리
 
-1 + 2 * 3
-7
+- `Business` 로직에서 `calculate()` 메소드가 `View` 역할하고 있었어서 분리하였음.
+- 성능을 위해 `Stack`보단 `Deque`를 사용해야하는 이유를 알게 되면서 변경.
 
-1. 조회
-2. 계산
+#### refactor : 메소드 접근 제어 private -> public 변경 및 메소드 기능 분리
 
-선택 : 1
+- 추후 테스트 코드를 위해 메소드를 `private` 에서 `public` 으로 변경했습니다.
+- 메소드를 분리하다보니 실제 로직이 실행되는 `CalculatorManager Class`를 만들게 되었습니다.
+- `removeSpaces` : 연산식의 공백을 제거합니다.
+- `isCorrectFormula` : 연산식이 사칙연산과 숫자로만 이루어져 있는 지 판단하는 유효성 검증합니다.
+- `calculate` : 실제 연산이 진행되는 메소드들을 호출합니다.
+- `isSymbolAndNumber` : 해당 토큰 값이 연산자인지 숫자인지 판단 후 그에 맞는 로직을 수행합니다.
+- `isCalculation(...)`
+  - 파라미터가 있다면 : 현재 연산식에서 가장 우선 순위가 높은 연산자가 있다면 계산을 진행합니다.
+  - 파라미터가 없다면 : 우선순위가 가장 낮았던, 마지막 연산을 진행 후 최종 결과값을 반환합니다.
 
-1 + 2 = 3
-1 + 2 * 3 = 7
+#### test : 테스트 코드 추가
 
-선택 : 2
-
-3 - 2 * 2
--1
-```
+- 연산 테스트와 조회 테스트 분리
+- 테스트
+  - 덧셈, 뺄셈, 나눗셈, 곱셈과 모두 섞인 사칙연산에 대한 테스트 구현
+  - 조회에 대한 테스트 구현
+  - 공백 제거에 대한 이슈 발견 -> fix 후 테스트 성공
+  - 0으로 나눴을 때에 대한 예외 처리가 없음을 발견 -> fix 후 테스트 성공 (isDivisionByZero 메서드 추가)
+  - 잘못된 연산식에 대한 예외 테스트 구현
