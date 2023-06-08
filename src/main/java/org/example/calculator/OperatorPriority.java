@@ -1,5 +1,7 @@
 package org.example.calculator;
 
+import java.util.Arrays;
+
 public enum OperatorPriority {
   PLUS("+", 1),
   MINUS("-", 1),
@@ -19,12 +21,8 @@ public enum OperatorPriority {
   }
 
   public static boolean isOperator(String letter) {
-    for (OperatorPriority op : OperatorPriority.values()) {
-      if (op.getOperator().equals(letter)) {
-        return true;
-      }
-    }
-    return false;
+    return Arrays.stream(Operator.values())
+            .anyMatch(o -> o.getOperator().equals(letter));
   }
 
   public int getPriority(String operator) {
