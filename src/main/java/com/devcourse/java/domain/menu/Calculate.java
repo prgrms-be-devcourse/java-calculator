@@ -26,7 +26,7 @@ public class Calculate implements Menu {
 
     private void calculateExpression(Console console, String expression) {
         if (validator.isValidExpression(expression, console)) {
-            CalculateResult calculateResult = calculator.run(expression);
+            CalculateResult calculateResult = calculator.run(expression, validator);
             console.print(calculateResult.getResult());
             storage.save(calculateResult);
         }

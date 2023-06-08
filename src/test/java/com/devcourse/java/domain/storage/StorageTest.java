@@ -15,7 +15,7 @@ class StorageTest {
     void saveTest() {
         // given
         final String expression = "test";
-        final int result = 25;
+        final double result = 25;
         CalculateResult calculateResult = new CalculateResult(expression, result);
 
         // when
@@ -34,7 +34,7 @@ class StorageTest {
         final String expression = "test";
         final int size = 10;
 
-        for (int i = 0; i < size; i++) {
+        for (double i = 0; i < size; i++) {
             CalculateResult calculateResult = new CalculateResult(expression + i, i);
             storage.save(calculateResult);
         }

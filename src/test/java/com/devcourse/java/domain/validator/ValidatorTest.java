@@ -65,4 +65,34 @@ class ValidatorTest {
             assertThat(validExpression).isFalse();
         }
     }
+
+    @Nested
+    @DisplayName("숫자 검증 테스트")
+    class validateNumberTest {
+        @ParameterizedTest
+        @DisplayName("[성공] 이상 없이 숫자임")
+        @ValueSource(strings = {"1", "12", "123", "1243", "123456"})
+        void validationSuccessTest(String number) {
+            // given
+
+            // when
+            boolean isNumber = validator.isNumber(number);
+
+            // then
+            assertThat(isNumber).isTrue();
+        }
+
+        @ParameterizedTest
+        @DisplayName("[실패] 숫자가 아님")
+        @ValueSource(strings = {"!", "a2", "1c3", "희조"})
+        void validationFailTest(String number) {
+            // given
+
+            // when
+            boolean isNumber = validator.isNumber(number);
+
+            // then
+            assertThat(isNumber).isFalse();
+        }
+    }
 }

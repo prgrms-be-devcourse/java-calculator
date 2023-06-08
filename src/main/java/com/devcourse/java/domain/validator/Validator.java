@@ -30,6 +30,15 @@ public class Validator {
         return false;
     }
 
+    public boolean isNumber(String currentCharacter) {
+        try {
+            Integer.parseInt(currentCharacter);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
     private boolean validateExpression(String expression) {
         Matcher matcher = VALID_EXPRESSION.matcher(expression);
         return isNotBlank(expression) && matcher.matches();

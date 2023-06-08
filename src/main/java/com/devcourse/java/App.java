@@ -1,6 +1,8 @@
 package com.devcourse.java;
 
 import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.operator.Operator;
+import com.devcourse.java.domain.operator.OperatorFactory;
 import com.devcourse.java.domain.storage.Storage;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.storage.MemoryStorage;
@@ -29,7 +31,8 @@ public class App {
         Validator validator = new Validator();
         Query query = new Query(resultStorage, validator);
         ExpressionParser prefixParser = new PrefixParser();
-        Calculator calculator = new Calculator(prefixParser);
+        Factory<Operator, String> operatorFactory = new OperatorFactory();
+        Calculator calculator = new Calculator(prefixParser, operatorFactory);
         Calculate calculate = new Calculate(calculator, resultStorage, validator);
         Factory<Menu, Menus> menuFactory = new MenuFactory(query, calculate);
 

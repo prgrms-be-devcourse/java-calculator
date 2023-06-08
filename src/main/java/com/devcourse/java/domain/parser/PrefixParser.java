@@ -1,6 +1,7 @@
 package com.devcourse.java.domain.parser;
 
 import com.devcourse.java.domain.operator.Operators;
+import com.devcourse.java.domain.validator.Validator;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -9,60 +10,57 @@ import java.util.List;
 
 public class PrefixParser implements ExpressionParser {
     private static final String BLANK = " ";
+    private static Deque<String> stack;
+
     public PrefixParser() { }
 
     @Override
-    public List<String> parse(String expression) {
-        return toPrefix(expression);
+    public List<String> parse(String expression, Validator validator) {
+        return toPrefix(expression, validator);
     }
 
-    private List<String> toPrefix(String expression) {
-        Deque<String> stack = new ArrayDeque<>();
+    private List<String> toPrefix(String expression, Validator validator) {
+        initStack();
         List<String> result = new ArrayList<>();
 
         for (String currentCharacter : expression.split(BLANK)) {
-            addOperandAndOrderOperator(stack, result, currentCharacter);
+            addOperandAndOrderOperator(result, currentCharacter, validator);
         }
 
-        clearLefts(stack, result);
+        clearLefts(result);
         return result;
     }
 
-    private void addOperandAndOrderOperator(Deque<String> stack, List<String> result, String currentCharacter) {
-        if (isNumber(currentCharacter)) {
+    private void addOperandAndOrderOperator(List<String> result, String currentCharacter, Validator validator) {
+        if (validator.isNumber(currentCharacter)) {
             result.add(currentCharacter);
             return;
         }
-        addHighPrioritiesToResult(stack, result, currentCharacter);
+        addHighPrioritiesToResult(result, currentCharacter);
         stack.push(currentCharacter);
     }
 
-    private void addHighPrioritiesToResult(Deque<String> stack, List<String> result, String currentCharacter) {
-        while (isHigherPriority(stack, currentCharacter)) {
+    private void addHighPrioritiesToResult(List<String> result, String currentCharacter) {
+        while (isHigherPriority(currentCharacter)) {
             result.add(stack.pop());
         }
     }
 
-    private boolean isHigherPriority(Deque<String> stack, String currentCharacter) {
-        return isNotEmpty(stack) && Operators.getPriority(currentCharacter) <= Operators.getPriority(stack.peek());
+    private boolean isHigherPriority(String currentCharacter) {
+        return isStackNotEmpty() && Operators.getPriority(currentCharacter) <= Operators.getPriority(stack.peek());
     }
 
-    private void clearLefts(Deque<String> stack, List<String> result) {
-        while (isNotEmpty(stack)) {
+    private void clearLefts(List<String> result) {
+        while (isStackNotEmpty()) {
             result.add(stack.pop());
         }
     }
 
-    private boolean isNotEmpty(Deque<String> stack) {
+    private boolean isStackNotEmpty() {
         return !stack.isEmpty();
     }
 
-    private boolean isNumber(String currentCharacter) {
-        try {
-            Integer.parseInt(currentCharacter);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+    private void initStack() {
+        stack = new ArrayDeque<>();
     }
 }

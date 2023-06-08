@@ -7,7 +7,7 @@ public class OperatorFactory implements Factory<Operator, String> {
 
     @Override
     public Operator create(String symbol) {
-        switch (symbol) {
+        switch (symbol) { // todo: 컴파일 시점에 결정되는 값만 사용가능. 다른 방법 고민하기
             case "+":
                 return Plus.getInstance();
             case "-":

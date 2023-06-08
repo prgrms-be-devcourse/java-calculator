@@ -3,14 +3,14 @@ package com.devcourse.java.domain.storage;
 public class CalculateResult {
     private static final String EQUAL = " = ";
     private final String expression;
-    private final Number result;
+    private final Double result;
 
-    public CalculateResult(String expression, Number result) {
+    public CalculateResult(String expression, Double result) {
         this.expression = expression;
         this.result = result;
     }
 
-    public Number getResult() {
+    public double getResult() {
         return this.result;
     }
 

@@ -1,6 +1,8 @@
 package com.devcourse.java.domain.menu;
 
 import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.operator.Operator;
+import com.devcourse.java.domain.operator.OperatorFactory;
 import com.devcourse.java.domain.storage.MemoryStorage;
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.parser.ExpressionParser;
@@ -93,7 +95,8 @@ class MenuTest {
         Validator validator = new Validator();
         MemoryStorage memoryStorage = new MemoryStorage();
         ExpressionParser prefixParser = new PrefixParser();
-        Calculator calculator = new Calculator(prefixParser);
+        Factory<Operator, String> factory = new OperatorFactory();
+        Calculator calculator = new Calculator(prefixParser, factory);
         query = new Query(memoryStorage, validator);
         calculate = new Calculate(calculator, memoryStorage, validator);
     }
