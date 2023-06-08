@@ -1,35 +1,48 @@
 package main.java.view;
 
 import main.java.domain.Menu;
+import main.java.exception.OutOfMenuException;
+import main.java.exception.WrongCommandException;
 
 import java.util.Scanner;
 
 import static main.java.domain.Menu.getMenu;
 import static main.java.service.Operator.isValidOperator;
+import static main.java.view.ConsoleOutput.printError;
 
 
 public class ConsoleInput implements Input{
 
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String ERROR_MESSAGE = "Unavailable Input !! Please re-type!!";
     private static final String DELIMINATOR = " ";
     public static final int SHOWMENU = 1;
     public static final int CALCULATEMENU = 2;
     public static final int EXITMENU = 0;
 
     @Override
-    public Menu getMenuInput() {
-        return getMenu(scanner.nextInt());
+    public Menu getMenuInput() throws OutOfMenuException {
+        String line = scanner.nextLine();
+        String[] lineArr = line.split(DELIMINATOR);
+        String menuCandidate = lineArr[0];
+        if (lineArr.length >= 2 || !checkIsNumber(menuCandidate)
+                || Character.getNumericValue(menuCandidate.charAt(0)) >= Menu.menuCount
+                || Character.getNumericValue(menuCandidate.charAt(0)) < 0) {
+            throw new OutOfMenuException(printError("MENU"));
+        }
+        return getMenu(Integer.parseInt(menuCandidate));
     }
 
     @Override
-    public String[] getLineAndParse() {
-        return scanner.nextLine().split(DELIMINATOR);
+    public String[] getLineAndParse() throws WrongCommandException {
+        String[] commandArr = scanner.nextLine().split(DELIMINATOR);
+        if(!isValidCommand(commandArr))
+            throw new WrongCommandException(printError("COMMAND"));
+        return commandArr;
     }
     public static void scannerClose() {
         scanner.close();
     }
-    public void flushBuffer() {
+    public static void flushBuffer() {
         scanner.nextLine();
     }
 
@@ -59,6 +72,5 @@ public class ConsoleInput implements Input{
 
         return true;
     }
-
 
 }

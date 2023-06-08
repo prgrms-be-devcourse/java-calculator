@@ -1,22 +1,24 @@
 package main.java.repository;
 
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static main.java.view.ConsoleOutput.EMPTY_MESSAGE;
+import static main.java.util.PrintOutMessage.EMPTY_MESSAGE;
 
 public class MapRepository implements Repository {
 
+    int historyCount;
     Map<Integer, String> mapRepository;
     public MapRepository() {
         this.mapRepository = new LinkedHashMap<>();
+        this.historyCount = 0;
     }
 
     @Override
     public void saveHistory(String history) {
-        this.mapRepository.put(1, history);
+        this.mapRepository.put(historyCount, history);
+        historyCount++;
     };
 
     @Override
@@ -27,5 +29,5 @@ public class MapRepository implements Repository {
         while(iter.hasNext()) {
             System.out.println(iter.next());
         }
-    };
+    }
 }

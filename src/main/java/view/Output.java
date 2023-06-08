@@ -6,4 +6,5 @@ public interface Output {
     void exitProgram();
     void showHistory(Repository repository);
     void printMenu();
+    void printResult(int result);
 }

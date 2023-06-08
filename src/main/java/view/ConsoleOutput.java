@@ -3,13 +3,14 @@ package main.java.view;
 import main.java.domain.Menu;
 import main.java.repository.Repository;
 
-import static main.java.view.ConsoleInput.ERROR_MESSAGE;
+import static main.java.util.PrintOutMessage.EXIT_MESSAGE;
 import static main.java.view.ConsoleInput.scannerClose;
 
 public class ConsoleOutput implements Output{
 
-    private static final String EXIT_MESSAGE = "EXIT CALCULATOR PROGRAM";
-    public static final String EMPTY_MESSAGE = "This repository is EMPTY!!";
+    public static String printError(String error) {
+        return "WRONG " + error + " ! PLEASE RE-TYPE!!";
+    }
 
     // 자원정리의 주체가 output이 돼도 되나?
     @Override
@@ -19,19 +20,21 @@ public class ConsoleOutput implements Output{
     }
 
     @Override
-    public void showHistory(Repository repository) {
-        repository.showHistory();
+    public void printResult(int result) {
+        System.out.println(result);
     }
 
-    public void printError() {
-        System.out.println(ERROR_MESSAGE);
+    // 다형성 이용.
+    @Override
+    public void showHistory(Repository repository) {
+        repository.showHistory();
     }
     @Override
     public void printMenu() {
         Menu[] menus = Menu.values();
-        for(int i = 0; i < menus.length - 1; i++)
+        for(int i = 1; i < menus.length; i++)
             System.out.println(menus[i]);
-        System.out.println(menus[menus.length - 1].getMenuName());
+        System.out.println(menus[0].getMenuName());
     }
 
 }

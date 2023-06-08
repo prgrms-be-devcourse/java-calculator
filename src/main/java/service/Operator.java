@@ -13,7 +13,6 @@ public enum Operator {
 
     public final String optName;
     private final BiFunction<Integer, Integer, Integer> biFunction;
-    private Operator status;
 
     Operator(String optName, BiFunction<Integer, Integer, Integer> biFunction) {
         this.optName = optName;

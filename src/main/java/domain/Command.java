@@ -2,14 +2,11 @@ package main.java.domain;
 
 import main.java.service.Operator;
 
-import java.util.Arrays;
-
 public class Command {
 
     public String[] commandArr;
     public int[] numberArr;
     public Operator[] optArr;
-    public String calculateResult;
     public int optCount;
 
     public Command(String[] commandArr) {
@@ -22,6 +19,7 @@ public class Command {
     public String makeHistory(int result) {
         return String.join(" ", this.commandArr) + " = " + result;
     }
+
     public void parseComamand() {
         for(int i = 0; i < commandArr.length; i++) {
             if(i % 2 == 0) {
@@ -32,33 +30,4 @@ public class Command {
         }
     }
 
-    public boolean isValidCommand() {
-        if((isValidNumber() && isValidOperator()) == true)
-            return true;
-        return false;
-    }
-
-    private boolean isStringDigit(String Number) {
-        for (int i = 0; i < Number.length(); i++) {
-            if (!Character.isDigit(Number.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isValidNumber() {
-        for(int i = 0; i < this.commandArr.length; i += 2)
-            if(!isStringDigit(this.commandArr[i]))
-                return false;
-        return true;
-    }
-
-    private boolean isValidOperator() {
-        for(int i = 1; i < this.commandArr.length; i += 2) {
-            if(!Operator.isValidOperator(this.commandArr[i]))
-                return false;
-        }
-        return true;
-    }
 }

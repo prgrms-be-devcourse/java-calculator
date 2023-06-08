@@ -18,6 +18,7 @@ sourceSets {
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.4.2'
 }
 
 tasks.named('test') {
