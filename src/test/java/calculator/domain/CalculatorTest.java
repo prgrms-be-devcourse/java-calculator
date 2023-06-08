@@ -12,16 +12,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CalculatorTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {
-            "1 / 0"
-            ,"1 * 5 / 0"
-    })
-    void 계산식_0으로_나누면_에러반환(String equation) {
-        assertThatThrownBy(()->new Calculator(equation))
-                .isInstanceOf(NotSolveEquationException.class);
-    }
-
-    @ParameterizedTest
     @CsvSource({
             "1 + 2 * 3, 7"
             ,"1 + 2, 3"
@@ -31,7 +21,7 @@ public class CalculatorTest {
             ,"1 / 2 + 1 / 2 + 8 / 4 * 2, 5"
             ,"3 / 4 - 1 / 4, 0.5"
     })
-    void 계산식_계산(String equation, double result) {
-        assertThat(result).isEqualTo(new Calculator(equation).getResult());
+    void 계산식_결과출력(String equation, double result) {
+        assertThat(equation+" = " +result).isEqualTo(new Calculator(equation, result).toString());
     }
 }

@@ -22,7 +22,7 @@ public class CalculatorRepositoryTest {
 
     @Test
     void 계산식저장소에_Calculator_저장() {
-        Calculator calculator = new Calculator("1 + 2 + 3");
+        Calculator calculator = new Calculator("1 + 2 + 3", 6);
         assertThat(calculatorRepository.add(calculator)).isEqualTo(true);
     }
 }
