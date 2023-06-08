@@ -14,13 +14,14 @@ public class Calculator {
     public int calculate(Command command) {
         PM = Operator.PLUS;
         MD = Operator.MULTIPLY;
+
         int result = 0;
+
         int[] numberArr = command.numberArr;
         Operator[] optArr = command.optArr;
 
         Stack<Integer> st = new Stack<>();
 
-        // 처음의 수를 더해주기 위함.
         for(int i = 0; i < command.optCount; i++) {
             // nums
             stackPush(numberArr[i], st);

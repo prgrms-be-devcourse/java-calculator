@@ -1,6 +1,7 @@
 package main.java.view;
 
 import main.java.domain.Menu;
+import main.java.repository.Repository;
 
 import static main.java.view.ConsoleInput.ERROR_MESSAGE;
 import static main.java.view.ConsoleInput.scannerClose;
@@ -8,6 +9,7 @@ import static main.java.view.ConsoleInput.scannerClose;
 public class ConsoleOutput implements Output{
 
     private static final String EXIT_MESSAGE = "EXIT CALCULATOR PROGRAM";
+    public static final String EMPTY_MESSAGE = "This repository is EMPTY!!";
 
     // 자원정리의 주체가 output이 돼도 되나?
     @Override
@@ -17,8 +19,8 @@ public class ConsoleOutput implements Output{
     }
 
     @Override
-    public void showHistory() {
-
+    public void showHistory(Repository repository) {
+        repository.showHistory();
     }
 
     public void printError() {

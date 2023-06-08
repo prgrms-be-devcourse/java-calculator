@@ -4,5 +4,6 @@ import main.java.domain.Menu;
 
 public interface Input {
     Menu getMenuInput();
-    String[] getLine();
+
+    String[] getLineAndParse();
 }

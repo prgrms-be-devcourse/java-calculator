@@ -2,6 +2,8 @@ package main.java.domain;
 
 import main.java.service.Operator;
 
+import java.util.Arrays;
+
 public class Command {
 
     public String[] commandArr;
@@ -17,6 +19,9 @@ public class Command {
         this.optArr = new Operator[optCount];
     }
 
+    public String makeHistory(int result) {
+        return String.join(" ", this.commandArr) + " = " + result;
+    }
     public void parseComamand() {
         for(int i = 0; i < commandArr.length; i++) {
             if(i % 2 == 0) {

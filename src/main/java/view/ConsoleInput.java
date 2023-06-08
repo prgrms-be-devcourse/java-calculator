@@ -23,7 +23,7 @@ public class ConsoleInput implements Input{
     }
 
     @Override
-    public String[] getLine() {
+    public String[] getLineAndParse() {
         return scanner.nextLine().split(DELIMINATOR);
     }
     public static void scannerClose() {

@@ -1,6 +1,6 @@
 package main.java.repository;
 
 public interface Repository {
-    void saveHistory();
+    void saveHistory(String history);
     void showHistory();
 }

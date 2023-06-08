@@ -31,18 +31,16 @@ public class Controller {
 
         while(true) {
             consoleOutput.printMenu();
-
             // menu 객체로 만듦.
             menu = consoleInput.getMenuInput();
             consoleInput.flushBuffer();
+            
             switch (menu.getMenuNum()) {
                 case SHOWMENU:
-                    // showHistory input으로 Repository
-                    // query 결과 넣어주면 될 듯.
-                    consoleOutput.showHistory();
+                    consoleOutput.showHistory(mapRepository);
                     break;
                 case CALCULATEMENU:
-                    command = new Command(consoleInput.getLine());
+                    command = new Command(consoleInput.getLineAndParse());
                     if(!command.isValidCommand()) {
                         consoleOutput.printError();
                         break;
@@ -50,10 +48,11 @@ public class Controller {
                     command.parseComamand();
                     result = calculator.calculate(command);
                     System.out.println(result);
+                    mapRepository.saveHistory(command.makeHistory(result));
                     break;
                 case EXITMENU:
                     consoleOutput.exitProgram();
-                    break;
+                    return;
                 default:
                     consoleOutput.printError();
             }
