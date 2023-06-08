@@ -26,4 +26,20 @@ public enum OperatorPriority {
     }
     return false;
   }
+
+  public int getPriority(String operator) {
+    if (PLUS.getOperator().equals(operator)) {
+      return PLUS.priority;
+    }
+    if (MINUS.getOperator().equals(operator)) {
+      return MINUS.priority;
+    }
+    if (MULTI.getOperator().equals(operator)) {
+      return MULTI.priority;
+    }
+    if (DIV.getOperator().equals(operator)) {
+      return DIV.priority;
+    }
+    return -1;
+  }
 }
