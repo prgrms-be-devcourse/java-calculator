@@ -29,3 +29,8 @@
 
 - Thread-safe로부터 안전하지 못한 싱글톤 구현 방식 변경
 - Static Inner Class 를 활용해 Thead-safe 하면서 LAZY 하게 구현
+
+#### refactor : Stack -> Deque 변경 및 Business 로직에서 View 역할 분리
+
+- `Business` 로직에서 `calculate()` 메소드가 `View` 역할하고 있었어서 분리하였음.
+- 성능을 위해 `Stack`보단 `Deque`를 사용해야하는 이유를 알게 되면서 변경. 

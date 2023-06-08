@@ -35,10 +35,12 @@ public class CalculatorController {
 
         try {
             if (menu.isFindOne()) {
-                calculatorService.getHistoryAll();
+                calculatorService
+                        .getHistoryAll()
+                        .forEach(OutputView::outputByCalculationResult);
             } else if (menu.isCalculationTwo()) {
-                calculatorService.calculate(InputView.input());
-            } else if(menu.isOther()){
+                OutputView.outputByCalculationResult(calculatorService.calculate(InputView.input()));
+            } else if (menu.isOther()) {
                 throw new WrongInputMenuException(ResponseErrorFormat.FAIL_WRONG_INPUT_MENU);
             }
         } catch (WrongInputFormulaException | WrongInputSymbolException | WrongInputMenuException | DivisionByZeroException e) {

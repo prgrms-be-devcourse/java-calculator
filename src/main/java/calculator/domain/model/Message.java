@@ -20,4 +20,9 @@ public class Message {
 
         System.out.print("\n계산기를 종료합니다.");
     }
+
+    public static void calculationResultMessage(HistoryModel historyModel) {
+
+        System.out.println(historyModel.getFormula() + " = " + historyModel.getAnswer());
+    }
 }

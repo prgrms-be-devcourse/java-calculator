@@ -11,8 +11,8 @@ import java.util.*;
 public class CalculatorService {
 
     private final CalculatorRepository calculatorRepository;
-    private final Stack<SymbolPriority> symbolStack = new Stack<>();
-    private final Stack<Integer> numberStack = new Stack<>();
+    private final Deque<SymbolPriority> symbolDeque = new ArrayDeque<>();
+    private final Deque<Integer> numberDeque = new ArrayDeque<>();
 
     public CalculatorService(CalculatorRepository calculatorRepository) {
 
@@ -23,12 +23,9 @@ public class CalculatorService {
      * 모든 계산 기록 조회하는 메소드
      * 형식 : "연산식 = 연산결과"
      */
-    public void getHistoryAll() {
-        calculatorRepository
-                .findAll()
-                .forEach(
-                        history -> System.out.println(history.getFormula() + "=" + history.getAnswer())
-                );
+    public List<HistoryModel> getHistoryAll() {
+
+        return calculatorRepository.findAll();
     }
 
     /**
@@ -36,16 +33,16 @@ public class CalculatorService {
      *
      * @param formula : 계산을 진행할 연산식
      */
-    public void calculate(String formula) {
+    public HistoryModel calculate(String formula) {
         isCorrectFormula(removeSpaces(formula));
 
         final StringTokenizer formulaTokens = new StringTokenizer(formula, "+-/*", true);
         processOperatorsAndNumbers(formulaTokens);
 
-        final HistoryModel history = new HistoryModel(formula, numberStack.pop() + "");
-        System.out.println(history.getFormula() + "=" + history.getAnswer() + "\n");
-
+        final HistoryModel history = new HistoryModel(formula, numberDeque.pop() + "");
         calculatorRepository.save(history);
+
+        return history;
     }
 
     /**
@@ -82,31 +79,31 @@ public class CalculatorService {
             if (token.matches("[-+*/]")) {
                 SymbolPriority nextSymbol = SymbolPriority.from(token);
 
-                while (!symbolStack.isEmpty() &&
-                        symbolStack.peek().getPriority() >= nextSymbol.getPriority()) {
-                    int secondNumber = numberStack.pop();
-                    int firstNumber = numberStack.pop();
-                    int result = symbolStack.pop()
+                while (!symbolDeque.isEmpty() &&
+                        symbolDeque.peek().getPriority() >= nextSymbol.getPriority()) {
+                    int secondNumber = numberDeque.pop();
+                    int firstNumber = numberDeque.pop();
+                    int result = symbolDeque.pop()
                             .getFormula()
                             .apply(firstNumber, secondNumber);
 
-                    numberStack.push(result);
+                    numberDeque.push(result);
                 }
 
-                symbolStack.push(nextSymbol);
+                symbolDeque.push(nextSymbol);
             } else {
-                numberStack.push(Integer.parseInt(token));
+                numberDeque.push(Integer.parseInt(token));
             }
         }
 
-        while (!symbolStack.isEmpty()) {
-            int secondNumber = numberStack.pop();
-            int firstNumber = numberStack.pop();
-            int result = symbolStack.pop()
+        while (!symbolDeque.isEmpty()) {
+            int secondNumber = numberDeque.pop();
+            int firstNumber = numberDeque.pop();
+            int result = symbolDeque.pop()
                     .getFormula()
                     .apply(firstNumber, secondNumber);
 
-            numberStack.push(result);
+            numberDeque.push(result);
         }
     }
 }

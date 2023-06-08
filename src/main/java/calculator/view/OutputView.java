@@ -1,5 +1,6 @@
 package calculator.view;
 
+import calculator.domain.model.HistoryModel;
 import calculator.domain.model.Message;
 
 public class OutputView {
@@ -15,5 +16,10 @@ public class OutputView {
     public static void exitCalculator() {
 
         Message.exitMessage();
+    }
+
+    public static void outputByCalculationResult(HistoryModel historyModel){
+
+        Message.calculationResultMessage(historyModel);
     }
 }
