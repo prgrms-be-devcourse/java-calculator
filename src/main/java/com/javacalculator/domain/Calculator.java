@@ -27,17 +27,17 @@ public class Calculator {
     }
 
     private void calculateSub(List<Integer> operands, List<String> operators, int priority) {
-        for (int i = 0; i < operators.size(); i++) {
-            Operator operator = Operator.from(operators.get(i));
+        for (int index = 0; index < operators.size(); index++) {
+            Operator operator = Operator.from(operators.get(index));
 
             if (!operator.isSame(priority)) {
                 continue;
             }
 
-            int result = operator.operate(operands.get(i), operands.get(i + 1));
-            removeSub(operands, operators, i);
-            addCalculationResult(operands, i, result);
-            i -= 1;
+            int result = operator.operate(operands.get(index), operands.get(index + 1));
+            removeSub(operands, operators, index);
+            addCalculationResult(operands, index, result);
+            index -= 1;
         }
     }
 
