@@ -3,6 +3,8 @@ package com.devcourse.java.domain.menu;
 import com.devcourse.java.common.Factory;
 import com.devcourse.java.domain.calculateResult.MemoryStorage;
 import com.devcourse.java.domain.calculator.Calculator;
+import com.devcourse.java.domain.parser.ExpressionParser;
+import com.devcourse.java.domain.parser.PrefixParser;
 import com.devcourse.java.domain.validator.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -90,7 +92,8 @@ class MenuTest {
     private void initMenu() {
         Validator validator = new Validator();
         MemoryStorage memoryStorage = new MemoryStorage();
-        Calculator calculator = new Calculator();
+        ExpressionParser prefixParser = new PrefixParser();
+        Calculator calculator = new Calculator(prefixParser);
         query = new Query(memoryStorage, validator);
         calculate = new Calculate(calculator, memoryStorage, validator);
     }

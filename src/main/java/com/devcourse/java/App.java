@@ -4,7 +4,9 @@ import com.devcourse.java.common.Factory;
 import com.devcourse.java.common.Storage;
 import com.devcourse.java.domain.calculateResult.CalculateResult;
 import com.devcourse.java.domain.calculateResult.MemoryStorage;
-import com.devcourse.java.domain.Runner.CalculatorRunner;
+import com.devcourse.java.domain.parser.ExpressionParser;
+import com.devcourse.java.domain.parser.PrefixParser;
+import com.devcourse.java.domain.runner.CalculatorRunner;
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.console.Input;
@@ -26,7 +28,8 @@ public class App {
         Console console = new Console(reader, writer);
         Validator validator = new Validator();
         Query query = new Query(resultStorage, validator);
-        Calculator calculator = new Calculator();
+        ExpressionParser prefixParser = new PrefixParser();
+        Calculator calculator = new Calculator(prefixParser);
         Calculate calculate = new Calculate(calculator, resultStorage, validator);
         Factory<Menu, Menus> menuFactory = new MenuFactory(query, calculate);
 

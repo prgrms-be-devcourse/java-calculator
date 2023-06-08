@@ -1,4 +1,4 @@
-package com.devcourse.java.domain.Runner;
+package com.devcourse.java.domain.runner;
 
 import com.devcourse.java.common.Factory;
 import com.devcourse.java.domain.console.Console;
