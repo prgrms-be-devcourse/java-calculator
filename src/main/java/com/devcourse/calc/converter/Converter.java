@@ -15,13 +15,17 @@ public abstract class Converter {
         List<Token> result = new ArrayList<>();
         Stack<Operator> operatorStack = new Stack<>();
 
+        StringBuilder operandNumber = new StringBuilder();
         for (char currentChar : formula.toCharArray()) {
             if (Character.isDigit(currentChar)) {
-                result.add(new Operand(Character.getNumericValue(currentChar)));
+                operandNumber.append(currentChar);
                 continue;
             }
+            result.add(new Operand(Integer.parseInt(operandNumber.toString())));
+            operandNumber = new StringBuilder();
             processOperator(result, operatorStack, currentChar);
         }
+        result.add(new Operand(Integer.parseInt(operandNumber.toString())));
         return clearOperationStack(result, operatorStack);
     }
 
