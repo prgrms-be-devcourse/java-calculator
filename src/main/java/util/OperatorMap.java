@@ -5,16 +5,18 @@ import calculator.exception.NotSolveEquationException;
 import java.util.function.BiFunction;
 
 public enum OperatorMap {
-    MINUS("-", (num1, num2)->num1-num2),
-    PLUS("+", (num1, num2)->num1+num2),
-    MUL("*",(num1, num2)-> num1*num2),
-    DIV("/",(num1, num2)-> num1/num2);
+    MINUS("-", 2, (num1, num2)->num1-num2),
+    PLUS("+", 2, (num1, num2)->num1+num2),
+    MUL("*",1, (num1, num2)-> num1*num2),
+    DIV("/",1, (num1, num2)-> num1/num2);
 
     private final String operator;
+    private final int priority;
     private final BiFunction<Double, Double, Double> bifunction;
 
-    OperatorMap(String operator, BiFunction<Double, Double, Double> bifunction) {
+    OperatorMap(String operator, int priority, BiFunction<Double, Double, Double> bifunction) {
         this.operator = operator;
+        this.priority = priority;
         this.bifunction = bifunction;
     }
 
@@ -47,4 +49,12 @@ public enum OperatorMap {
         return this.operator;
     }
 
+    public static int priority(String operator) {
+        for (OperatorMap oper : OperatorMap.values()) {
+            if (operator.equals(oper.operator)) {
+                return oper.priority;
+            }
+        }
+        return 0;
+    }
 }

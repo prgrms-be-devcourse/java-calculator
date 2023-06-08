@@ -4,6 +4,7 @@ import calculator.exception.NotSolveEquationException;
 import calculator.exception.ValidationEquation;
 import util.OperatorMap;
 
+import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
@@ -37,6 +38,7 @@ public class Calculator {
         }
         return calculate(eachEquation);
     }
+
 
     private double calculate(String[] eachEquation) {
         Stack<Double> numbers = new Stack<>();
