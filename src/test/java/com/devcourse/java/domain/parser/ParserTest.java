@@ -14,15 +14,15 @@ class ParserTest {
     @DisplayName("후위 표기식 동작 테스트")
     void prefixParserTest() {
         // given
-        final String expression = "1+2*3-4/5";
-        final List<Character> expect = List.of('1', '2', '3', '*', '+', '4', '5', '/', '-');
+        final String expression = "1 + 2 * 3 - 4 / 5";
+        final List<String> expect = List.of("1", "2", "3", "*", "+", "4", "5", "/", "-");
 
         // when
-        List<Character> prefixExpression = prefixParser.parse(expression);
+        List<String> prefixExpression = prefixParser.parse(expression);
 
         // then
-        for (int i = 0; i < expression.length(); i++) {
-            assertThat(prefixExpression.get(i)).isSameAs(expect.get(i));
+        for (int i = 0; i < expect.size(); i++) {
+            assertThat(prefixExpression.get(i)).isEqualTo(expect.get(i));
         }
     }
 }

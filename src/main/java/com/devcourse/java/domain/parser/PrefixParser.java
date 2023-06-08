@@ -8,19 +8,19 @@ import java.util.Deque;
 import java.util.List;
 
 public class PrefixParser implements ExpressionParser {
+    private static final String BLANK = " ";
     public PrefixParser() { }
 
     @Override
-    public List<Character> parse(String expression) {
+    public List<String> parse(String expression) {
         return toPrefix(expression);
     }
 
-    private List<Character> toPrefix(String expression) {
-        Deque<Character> stack = new ArrayDeque<>();
-        List<Character> result = new ArrayList<>();
+    private List<String> toPrefix(String expression) {
+        Deque<String> stack = new ArrayDeque<>();
+        List<String> result = new ArrayList<>();
 
-        for (int i = 0; i < expression.length(); i++) {
-            char currentCharacter = expression.charAt(i);
+        for (String currentCharacter : expression.split(BLANK)) {
             addOperandAndOrderOperator(stack, result, currentCharacter);
         }
 
@@ -28,32 +28,41 @@ public class PrefixParser implements ExpressionParser {
         return result;
     }
 
-    private void addOperandAndOrderOperator(Deque<Character> stack, List<Character> result, char currentCharacter) {
-        if (Character.isDigit(currentCharacter)) {
+    private void addOperandAndOrderOperator(Deque<String> stack, List<String> result, String currentCharacter) {
+        if (isNumber(currentCharacter)) {
             result.add(currentCharacter);
-        } else if (Operators.isOperator(currentCharacter)) {
-            addHighPrioritiesToResult(stack, result, currentCharacter);
-            stack.push(currentCharacter);
+            return;
         }
+        addHighPrioritiesToResult(stack, result, currentCharacter);
+        stack.push(currentCharacter);
     }
 
-    private void addHighPrioritiesToResult(Deque<Character> stack, List<Character> result, char currentCharacter) {
+    private void addHighPrioritiesToResult(Deque<String> stack, List<String> result, String currentCharacter) {
         while (isHigherPriority(stack, currentCharacter)) {
             result.add(stack.pop());
         }
     }
 
-    private boolean isHigherPriority(Deque<Character> stack, char currentCharacter) {
+    private boolean isHigherPriority(Deque<String> stack, String currentCharacter) {
         return isNotEmpty(stack) && Operators.getPriority(currentCharacter) <= Operators.getPriority(stack.peek());
     }
 
-    private void clearLefts(Deque<Character> stack, List<Character> result) {
+    private void clearLefts(Deque<String> stack, List<String> result) {
         while (isNotEmpty(stack)) {
             result.add(stack.pop());
         }
     }
 
-    private boolean isNotEmpty(Deque<Character> stack) {
+    private boolean isNotEmpty(Deque<String> stack) {
         return !stack.isEmpty();
+    }
+
+    private boolean isNumber(String currentCharacter) {
+        try {
+            Integer.parseInt(currentCharacter);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 }
