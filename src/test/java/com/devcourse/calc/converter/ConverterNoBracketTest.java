@@ -15,7 +15,7 @@ class ConverterNoBracketTest {
 
     @Test
     @DisplayName("중위 표현식을 문자 단위로 나누어 후위 표현식으로 변경한다")
-    void convertFormula(String formula) {
+    void convertFormula() {
         List<Token> result = converter.convertFormula("1 + 2 - 3");
 
         assertThat(result.size()).isEqualTo(5);
