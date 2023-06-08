@@ -25,7 +25,7 @@ public enum OperatorPriority {
             .anyMatch(o -> o.getOperator().equals(letter));
   }
 
-  public int getPriority(String operator) {
+  public static int getPriority(String operator) {
     if (PLUS.getOperator().equals(operator)) {
       return PLUS.priority;
     }
