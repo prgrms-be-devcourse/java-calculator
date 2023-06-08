@@ -9,8 +9,23 @@ import view.io.IO;
 
 public class ApplicationConfig {
 
-    private final CalculatorController controller = new CalculatorController(new DevCalculator(new MemoryResultRepository()));
-    private final CalculatorView view = new CalculatorView(new ConsoleIO(), controller);
+    private ResultRepository repository;
+    private Calculator calculator;
+    private CalculatorController controller;
+    private IO io;
+    private CalculatorView view;
+
+    public ApplicationConfig() {
+        init();
+    }
+
+    private void init() {
+        repository = new MemoryResultRepository();
+        calculator = new DevCalculator(repository);
+        controller = new CalculatorController(calculator);
+        io = new ConsoleIO();
+        view = new CalculatorView(io, controller);
+    }
 
     public CalculatorView getView() {
         return view;
