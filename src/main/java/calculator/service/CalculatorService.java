@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.domain.Calculator;
+import calculator.domain.PostFixCalculator;
 import calculator.exception.NotSaveException;
 import calculator.repository.CalculatorRepository;
 
@@ -14,7 +15,7 @@ public class CalculatorService {
     }
 
     public double calculate(String userInput) {
-        Calculator calculator = new Calculator(userInput);
+        Calculator calculator = PostFixCalculator.parseCalculator(userInput);
 
         if (this.calculatorRepository.add(calculator)) {
             return calculator.getResult();

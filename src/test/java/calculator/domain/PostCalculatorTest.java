@@ -32,6 +32,6 @@ public class PostCalculatorTest {
     })
     void 계산식_계산(String equation, double result) {
         assertThat(result)
-                .isEqualTo(PostFixCalculator.parseCalculator(equation));
+                .isEqualTo(PostFixCalculator.parseCalculator(equation).getResult());
     }
 }
