@@ -33,4 +33,16 @@
 #### refactor : Stack -> Deque 변경 및 Business 로직에서 View 역할 분리
 
 - `Business` 로직에서 `calculate()` 메소드가 `View` 역할하고 있었어서 분리하였음.
-- 성능을 위해 `Stack`보단 `Deque`를 사용해야하는 이유를 알게 되면서 변경. 
+- 성능을 위해 `Stack`보단 `Deque`를 사용해야하는 이유를 알게 되면서 변경.
+
+#### refactor : 메소드 접근 제어 private -> public 변경 및 메소드 기능 분리 
+
+- 추후 테스트 코드를 위해 메소드를 `private` 에서 `public` 으로 변경했습니다.
+- 메소드를 분리하다보니 실제 로직이 실행되는 `CalculatorManager Class`를 만들게 되었습니다.
+- `removeSpaces` : 연산식의 공백을 제거합니다.
+- `isCorrectFormula` : 연산식이 사칙연산과 숫자로만 이루어져 있는 지 판단하는 유효성 검증합니다. 
+- `calculate` : 실제 연산이 진행되는 메소드들을 호출합니다.
+- `isSymbolAndNumber` : 해당 토큰 값이 연산자인지 숫자인지 판단 후 그에 맞는 로직을 수행합니다.
+- `isCalculation(...)`
+  - 파라미터가 있다면 : 현재 연산식에서 가장 우선 순위가 높은 연산자가 있다면 계산을 진행합니다.
+  - 파라미터가 없다면 : 우선순위가 가장 낮았던, 마지막 연산을 진행 후 최종 결과값을 반환합니다. 

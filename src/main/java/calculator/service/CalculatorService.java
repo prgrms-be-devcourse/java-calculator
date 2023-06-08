@@ -1,22 +1,20 @@
 package calculator.service;
 
-import calculator.domain.repository.CalculatorRepository;
 import calculator.domain.model.HistoryModel;
-import calculator.domain.model.SymbolPriority;
-import calculator.error.exception.WrongInputFormulaException;
-import calculator.error.model.ResponseErrorFormat;
+import calculator.domain.repository.CalculatorRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class CalculatorService {
 
     private final CalculatorRepository calculatorRepository;
-    private final Deque<SymbolPriority> symbolDeque = new ArrayDeque<>();
-    private final Deque<Integer> numberDeque = new ArrayDeque<>();
+    private final CalculatorManager calculatorManager;
 
-    public CalculatorService(CalculatorRepository calculatorRepository) {
-
+    public CalculatorService(CalculatorRepository calculatorRepository,
+                             CalculatorManager calculatorManager) {
         this.calculatorRepository = calculatorRepository;
+        this.calculatorManager = calculatorManager;
     }
 
     /**
@@ -34,76 +32,12 @@ public class CalculatorService {
      * @param formula : 계산을 진행할 연산식
      */
     public HistoryModel calculate(String formula) {
-        isCorrectFormula(removeSpaces(formula));
+        calculatorManager.isCorrectFormula(calculatorManager.removeSpaces(formula));
 
         final StringTokenizer formulaTokens = new StringTokenizer(formula, "+-/*", true);
-        processOperatorsAndNumbers(formulaTokens);
-
-        final HistoryModel history = new HistoryModel(formula, numberDeque.pop() + "");
+        final HistoryModel history = new HistoryModel(formula, calculatorManager.calculate(formulaTokens));
         calculatorRepository.save(history);
 
         return history;
-    }
-
-    /**
-     * 연산식의 공백을 제거하는 메소드
-     *
-     * @param formula : 공백을 제거할 연산식
-     * @return 공백이 제거된 연산식
-     */
-    private String removeSpaces(String formula) {
-
-        return formula.trim().replaceAll(" ", "");
-    }
-
-    /**
-     * 연산식이 사칙연산과 숫자로만 이루어져 있는 지 판단하는 유효성 검증 메소드
-     *
-     * @param formula : 검증할 연산식
-     */
-    private void isCorrectFormula(String formula) {
-        if (!formula.matches("^[0-9]+([-+*/][0-9]+)*$")) {
-            throw new WrongInputFormulaException(ResponseErrorFormat.FAIL_WRONG_INPUT_FORMULA);
-        }
-    }
-
-    /**
-     * 실제 연산이 진행되는 메소트
-     *
-     * @param stringTokenizer : 연산을 진행할 토큰
-     */
-    private void processOperatorsAndNumbers(StringTokenizer stringTokenizer) {
-        while (stringTokenizer.hasMoreTokens()) {
-            String token = stringTokenizer.nextToken();
-
-            if (token.matches("[-+*/]")) {
-                SymbolPriority nextSymbol = SymbolPriority.from(token);
-
-                while (!symbolDeque.isEmpty() &&
-                        symbolDeque.peek().getPriority() >= nextSymbol.getPriority()) {
-                    int secondNumber = numberDeque.pop();
-                    int firstNumber = numberDeque.pop();
-                    int result = symbolDeque.pop()
-                            .getFormula()
-                            .apply(firstNumber, secondNumber);
-
-                    numberDeque.push(result);
-                }
-
-                symbolDeque.push(nextSymbol);
-            } else {
-                numberDeque.push(Integer.parseInt(token));
-            }
-        }
-
-        while (!symbolDeque.isEmpty()) {
-            int secondNumber = numberDeque.pop();
-            int firstNumber = numberDeque.pop();
-            int result = symbolDeque.pop()
-                    .getFormula()
-                    .apply(firstNumber, secondNumber);
-
-            numberDeque.push(result);
-        }
     }
 }
