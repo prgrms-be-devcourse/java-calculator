@@ -14,6 +14,7 @@ public class ExecuteCalculationCommand implements Command {
     private final Reader reader;
     private final Writer writer;
     private final Repository repository;
+
     public ExecuteCalculationCommand(Calculator calculator, Reader reader, Writer writer, Repository repository) {
         this.calculator = calculator;
         this.reader = reader;

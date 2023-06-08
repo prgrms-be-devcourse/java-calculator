@@ -8,6 +8,7 @@ import java.util.*;
 public class MapRepository implements Repository {
     private final Map<Long, History> repository;
     private Long idCounter;
+
     private MapRepository() {
         this.repository = new HashMap<>();
         this.idCounter = 0L;

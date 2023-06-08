@@ -18,6 +18,7 @@ public class MenuHandler {
     private final Reader reader;
     private final Calculator calculator;
     private final Repository repository;
+
     public MenuHandler(Writer writer, Calculator calculator, Reader reader, Repository repository) {
         this.writer = writer;
         this.commands = new HashMap<>();
