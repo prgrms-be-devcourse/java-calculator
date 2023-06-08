@@ -34,11 +34,7 @@ public enum Operator implements Token {
     }
 
     public static Operator find(char sign) {
-        try {
-            return operators.get(Character.toString(sign));
-        } catch (NullPointerException e) {
-            throw new RuntimeException("사용 불가능한 수식 기호입니다 ( '+', '-', '*', '/' ) 중 사용해 주세요");
-        }
+        return operators.get(Character.toString(sign));
     }
 
     public boolean isLowerPriority(Operator other) {
