@@ -1,3 +1,4 @@
+
 import model.Calculator;
 import model.History;
 import model.Operator;
@@ -23,7 +24,7 @@ public class Index implements Runnable{
     }
 
     @Override
-    public void run() {
+    public void run(){
         Scanner sc = new Scanner(System.in);
         while (true) {
             for(Option opt : Option.values()){
@@ -38,6 +39,7 @@ public class Index implements Runnable{
                     console.getHistory(history);
                     break;
                 case 2:
+                    System.out.print("계산식을 입력해주세요 : ");
                     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                     try {
                         String inputString = br.readLine();

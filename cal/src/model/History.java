@@ -15,6 +15,10 @@ public class History {
         }
     }
 
+    public Integer getHistoryLen() {
+        return log.size();
+    }
+
     public void addHistory(String result){
         log.add(result);
     }
