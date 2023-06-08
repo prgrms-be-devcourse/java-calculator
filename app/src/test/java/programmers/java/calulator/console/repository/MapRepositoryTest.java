@@ -1,35 +1,28 @@
 package programmers.java.calulator.console.repository;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
+import programmers.java.calulator.common.repository.History;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RepositoryTest {
-    private MapRepository repository;
-
-    @BeforeEach
-    public void setUp() {
-        repository = MapRepository.getInstance();
-    }
+public class MapRepositoryTest {
+    private final MapRepository repository = MapRepository.getInstance();
 
     @Test
     @DisplayName("연산 기록이 잘되는지 확인하는 테스트")
     public void add_기능이_잘되는지_확인하기() {
         // Given
-        String expression = "2+2";
+        String expression = "2 + 2";
         int result = 4;
+        History history = new MapHistory(expression, result);
 
         // When
-        repository.add(expression, result);
+        repository.save(history);
 
         // Then
-        assertTrue(repository.getRepository().containsKey(expression));
-        assertEquals(repository.getRepository().get(expression), result);
+        assertTrue(repository.findAll().contains(history));
     }
 
     @Test
@@ -46,4 +39,3 @@ public class RepositoryTest {
         assertEquals(firstInstance, secondInstance);
     }
 }
-

@@ -1,22 +1,30 @@
 package programmers.java.calulator.console.repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import programmers.java.calulator.common.repository.History;
+import programmers.java.calulator.common.repository.Repository;
 
-public class MapRepository {
-    private final Map<String, Integer> repository;
+import java.util.*;
 
+public class MapRepository implements Repository {
+    private final Map<Long, History> repository;
+    private Long idCounter;
     private MapRepository() {
         this.repository = new HashMap<>();
+        this.idCounter = 0L;
     }
 
-    public void add(String expression, int result) {
-        repository.put(expression, result);
+    @Override
+    public void save(History history) {
+        repository.put(++idCounter, history);
     }
 
-    public Map<String, Integer> getRepository() {
-        return repository;
+    @Override
+    public List<History> findAll() {
+        return repository.values()
+                .stream()
+                .toList();
     }
+
 
     private static class LazyHolder {
         private static final MapRepository INSTANCE = new MapRepository();

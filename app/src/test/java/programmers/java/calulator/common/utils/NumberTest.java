@@ -3,34 +3,36 @@ package programmers.java.calulator.common.utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class NumberTest {
 
     @Test
-    @DisplayName("숫자를 입력 받았을 때 true 반환하는지 확인하는 테스트")
+    @DisplayName("숫자를 입력 받았을 때 유효한 값을 반환하는지 확인하는 테스트")
     public void 숫자_입력_확인_테스트() {
         //given
         String n = "10";
 
         //when
-        Number number = new Number(n);
+        Optional<Number> number = Number.of(n);
 
         //then
-        assertTrue(number.isValid());
+        assertTrue(number.isPresent());
     }
 
     @Test
-    @DisplayName("문자를 입력 받았을 때 false 반환하는지 확인하는 테스트")
+    @DisplayName("문자를 입력 받았을 때 유효하지 않은 값을 반환하는지 확인하는 테스트")
     public void 문자_입력_확인_테스트() {
         //given
         String c = "a";
 
         //when
-        Number number = new Number(c);
+        Optional<Number> number = Number.of(c);
 
         //then
-        assertFalse(number.isValid());
+        assertFalse(number.isPresent());
     }
 
     @Test
@@ -40,9 +42,9 @@ public class NumberTest {
         String n = "10";
 
         //when
-        Number number = new Number(n);
+        Optional<Number> number = Number.of(n);
 
         //then
-        assertEquals(10, number.toInt());
+        assertEquals(10, number.get().toInt());
     }
 }
