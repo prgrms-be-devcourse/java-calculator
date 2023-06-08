@@ -19,6 +19,7 @@ public class IoManager {
         while (true){
             output.printAction("1.조회");
             output.printAction("2.계산");
+            output.printAction("3.종료");
 
             String action = input.selectAction();
             String curInput;
@@ -28,7 +29,7 @@ public class IoManager {
                 output.printCaculatedResult(resultNnm);
                 String resultStr = curInput + " = " + String.valueOf(resultNnm);
 
-            } else if (action.equals("1")){
+            }else if (action.equals("1")){
 
             }else if (action.equals("3")){
                 break;
