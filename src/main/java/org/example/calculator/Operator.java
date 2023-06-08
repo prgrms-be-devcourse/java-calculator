@@ -5,9 +5,9 @@ import java.util.function.BiFunction;
 
 public enum Operator {
   PLUS("+", (num1, num2) -> num1 + num2),
-  MINUS("+", (num1, num2) -> num1 - num2),
-  MULTI("+", (num1, num2) -> num1 * num2),
-  DIV("+", (num1, num2) -> num1 / num2);
+  MINUS("-", (num1, num2) -> num1 - num2),
+  MULTI("*", (num1, num2) -> num1 * num2),
+  DIV("/", (num1, num2) -> num1 / num2);
 
   private final String operator;
   private final BiFunction<Double, Double, Double> formula;
@@ -25,7 +25,7 @@ public enum Operator {
     return formula.apply(num1, num2);
   }
 
-  public static Operator checkOperator(String operator) {
+  public Operator checkOperator(String operator) {
     return Arrays.stream(values())
             .filter(op -> op.getOperator().equals(operator))
             .findFirst()

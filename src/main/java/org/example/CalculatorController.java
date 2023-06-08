@@ -9,10 +9,11 @@ import org.example.calculator.Calculator;
 import java.io.IOException;
 
 public class CalculatorController {
-  static Calculator calculator;
-  static History history;
 
-  public static void run() throws IOException {
+  Calculator calculator = new Calculator();
+  History history = new History();
+
+  public void run() throws IOException {
     while (true) {
       Output.showMenu();
 
