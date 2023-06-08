@@ -7,7 +7,7 @@ public class ConsoleOutput implements Output{
     }
 
     @Override
-    public void printCaculatedResult(long result) {
+    public void printCaculatedResult(int result) {
         System.out.println(result);
     }
 }
