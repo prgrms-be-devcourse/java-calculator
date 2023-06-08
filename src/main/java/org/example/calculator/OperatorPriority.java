@@ -1,5 +1,11 @@
 package org.example.calculator;
 
-public enum OperatorPriority {
+public class OperatorPriority {
 
+  public static boolean isOperator(String letter) {
+    if (("+").equals(letter) || ("-").equals(letter) || ("*").equals(letter) || ("/").equals(letter)) {
+      return true;
+    }
+    return false;
+  }
 }
