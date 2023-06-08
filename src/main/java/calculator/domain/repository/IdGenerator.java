@@ -2,22 +2,24 @@ package calculator.domain.repository;
 
 public class IdGenerator {
 
-    private static IdGenerator instance;
     private long idCounter;
 
     private IdGenerator() {
+    }
 
-        idCounter = 0;
+    private static class IdGeneratorHolder {
+
+        private static final IdGenerator INSTANCE = new IdGenerator();
     }
 
     public static IdGenerator getInstance() {
 
-        return instance == null ? instance = new IdGenerator() : instance;
+        return IdGeneratorHolder.INSTANCE;
     }
 
     public synchronized long generateId() {
 
-        return idCounter++;
+        return ++idCounter;
     }
 }
 

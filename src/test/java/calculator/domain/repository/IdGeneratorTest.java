@@ -15,9 +15,15 @@ public class IdGeneratorTest {
         //when
         final long id1 = id.generateId();
         final long id2 = id.generateId();
+        final long id3 = id.generateId();
+        final long id4 = id.generateId();
+        final long id5 = id.generateId();
 
         //then
-        assertEquals(id1, 0);
-        assertEquals(id2, 1);
+        assertEquals(id1, 1);
+        assertEquals(id2, 2);
+        assertEquals(id3, 3);
+        assertEquals(id4, 4);
+        assertEquals(id5, 5);
     }
 }

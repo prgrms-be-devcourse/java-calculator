@@ -25,3 +25,7 @@
   - WrongInputMenuException
   - WrongInputSymbolException : 잘못된 연산자면 발생
 
+#### refactor : 싱글톤 구현 방식 변경
+
+- Thread-safe로부터 안전하지 못한 싱글톤 구현 방식 변경
+- Static Inner Class 를 활용해 Thead-safe 하면서 LAZY 하게 구현
