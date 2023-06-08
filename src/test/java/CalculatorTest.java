@@ -29,4 +29,17 @@ class CalculatorTest {
         // then
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"3 - 5 - 7:-9"}, delimiter = ':')
+    @DisplayName("뺄셈 테스트")
+    void testSubtraction(String expression, String expectedResult) {
+        //given
+        int expected = Integer.parseInt(expectedResult);
+        // when
+        int actual = calculator.calculate(expression);
+        // then
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }

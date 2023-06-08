@@ -52,6 +52,7 @@ public class Calculator {
         while (!operators.isEmpty()) {
             Operator operator = operators.pop();
             checkPlusAndAdd(operator);
+            checkMinusAndSub(operator);
         }
 
         checkValidCalculation();
@@ -61,6 +62,12 @@ public class Calculator {
     private void checkPlusAndAdd(Operator operator) {
         if (operator.equals(Operator.PLUS)) {
             addNumbers();
+        }
+    }
+
+    private void checkMinusAndSub(Operator operator) {
+        if (operator.equals(Operator.MINUS)) {
+            subNumbers();
         }
     }
 
@@ -81,7 +88,13 @@ public class Calculator {
     private void addNumbers() {
         int rightOperand = operands.pop();
         int leftOperand = operands.pop();
-        operands.push(rightOperand + leftOperand);
+        operands.push(leftOperand + rightOperand);
+    }
+
+    private void subNumbers() {
+        int rightOperand = operands.pop();
+        int leftOperand = operands.pop();
+        operands.push(leftOperand - rightOperand);
     }
 
     private boolean isNumber(String argument) {
