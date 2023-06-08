@@ -1,4 +1,4 @@
-package com.devcourse.java.domain.calculateResult;
+package com.devcourse.java.domain.storage;
 
 public class CalculateResult {
     private static final String EQUAL = " = ";

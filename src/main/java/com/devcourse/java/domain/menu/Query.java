@@ -1,7 +1,7 @@
 package com.devcourse.java.domain.menu;
 
-import com.devcourse.java.common.Storage;
-import com.devcourse.java.domain.calculateResult.CalculateResult;
+import com.devcourse.java.domain.storage.Storage;
+import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.validator.Validator;
 

@@ -1,4 +1,4 @@
-package com.devcourse.java.common;
+package com.devcourse.java.domain.storage;
 
 import java.util.List;
 

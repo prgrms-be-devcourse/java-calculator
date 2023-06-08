@@ -1,6 +1,4 @@
-package com.devcourse.java.domain.calculateResult;
-
-import com.devcourse.java.common.Storage;
+package com.devcourse.java.domain.storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;

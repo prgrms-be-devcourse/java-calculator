@@ -1,7 +1,5 @@
 package com.devcourse.java.domain.storage;
 
-import com.devcourse.java.domain.calculateResult.CalculateResult;
-import com.devcourse.java.domain.calculateResult.MemoryStorage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

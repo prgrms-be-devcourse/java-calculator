@@ -1,7 +1,7 @@
 package com.devcourse.java.domain.menu;
 
 import com.devcourse.java.common.Factory;
-import com.devcourse.java.domain.calculateResult.MemoryStorage;
+import com.devcourse.java.domain.storage.MemoryStorage;
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.parser.ExpressionParser;
 import com.devcourse.java.domain.parser.PrefixParser;

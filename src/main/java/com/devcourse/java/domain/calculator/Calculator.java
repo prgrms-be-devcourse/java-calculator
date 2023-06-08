@@ -1,8 +1,10 @@
 package com.devcourse.java.domain.calculator;
 
-import com.devcourse.java.domain.calculateResult.CalculateResult;
 import com.devcourse.java.domain.parser.ExpressionParser;
+import com.devcourse.java.domain.storage.CalculateResult;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 public class Calculator {
@@ -13,7 +15,11 @@ public class Calculator {
     }
 
     public CalculateResult run(String expression) {
-        List<Character> prefixExpression = expressionParser.parse(expression);
+        List<String> prefixExpression = expressionParser.parse(expression);
+
+        Deque<Integer> stack = new ArrayDeque<>();
+
+
         return new CalculateResult(expression, 1);
     }
 }
