@@ -12,17 +12,22 @@ import calculator.entity.Menu;
 public class MainController {
 
     private static final String MENU_INPUT_MESSAGE = "메뉴를 입력해주세요(숫자만 입력) : ";
+    private static final String QUIT_MESSAGE = "프로그램을 종료합니다.";
 
     public void run() {
         Menu selectedMenu = null;
 
-        try {
-            showMenu();
-            int menuNumber = selectMenuNumber();
-            selectedMenu = getSelectedMenu(menuNumber);
-        } catch (Exception e) {
-            printWithLineBreak(e.getMessage());
-        }
+        do {
+            try {
+                showMenu();
+                int menuNumber = selectMenuNumber();
+                selectedMenu = getSelectedMenu(menuNumber);
+            } catch (Exception e) {
+                printWithLineBreak(e.getMessage());
+            }
+        } while (selectedMenu != Menu.QUIT);
+
+        printWithLineBreak(QUIT_MESSAGE);
     }
 
     private void showMenu() {

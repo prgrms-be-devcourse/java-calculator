@@ -5,7 +5,8 @@ import static calculator.validation.MenuInputValidator.validateIsExistedMenu;
 public enum Menu {
 
     READ_HISTORY(1, "조회"),
-    CALCULATE(2, "계산");
+    CALCULATE(2, "계산"),
+    QUIT(3, "종료");
 
     private final int number;
     private final String name;
