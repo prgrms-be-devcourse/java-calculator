@@ -38,9 +38,10 @@ public enum CalculateType {
         return symbol;
     }
 
-    public static Optional<CalculateType> findBySymbol(String symbol) {
+    public static CalculateType findBySymbol(String symbol) {
         return Arrays.stream(CalculateType.values())
                 .filter(calculateType -> calculateType.getSymbol().equals(symbol))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(()-> new IllegalArgumentException("연산자를 잘못 입력하셨습니다."));
     }
 }

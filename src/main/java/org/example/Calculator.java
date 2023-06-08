@@ -1,9 +1,7 @@
 package org.example;
 
-import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Pattern;
-
 
 public class Calculator {
 
@@ -20,14 +18,11 @@ public class Calculator {
             }
             double left = operandStack.pop();
             double right = operandStack.pop();
-            CalculateType.findBySymbol(value).ifPresentOrElse(calculateType -> {
-                double midResult =  calculateType.calculate(left,right);
-                operandStack.push(midResult);
-            },() -> new NullPointerException());
-
+            CalculateType calculateType = CalculateType.findBySymbol(value);
+            double midResult = calculateType.calculate(left, right);
+            operandStack.push(midResult);
         }
         double result = operandStack.pop();
-
         return result;
     }
 
@@ -41,21 +36,12 @@ public class Calculator {
                 postfixExpression.append(value + " ");
                 continue;
             }
-            //연산자라면 -> 스택에 담긴 연산자와 우선순위를 비교해 순서대로 넣음
-            Optional<CalculateType> calculateType = CalculateType.findBySymbol(value);
-            calculateType.ifPresentOrElse(
-                    calType -> {
-                        while(calType
-                        !postfixExpression.isEmpty() && !operatorStack.isEmpty() &&
-                                calType.getPriority() < CalculateType.findBySymbol(operatorStack.peek()).getPriority()
-                    }
 
-            while () {
+            CalculateType calculateType = CalculateType.findBySymbol(value);
+            while (!operatorStack.isEmpty() &&
+                    calculateType.getPriority() < CalculateType.findBySymbol(operatorStack.peek()).getPriority()) {
                 postfixExpression.append(operatorStack.pop() + " ");
             }
-            );
-
-
             operatorStack.push(value);
         }
         while (!operatorStack.isEmpty()) {

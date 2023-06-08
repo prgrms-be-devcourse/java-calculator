@@ -10,6 +10,5 @@ public class Main {
         Console console = new Console(new InputView(), new OutputView(), new Calculator());
         console.run();
 
-
     }
 }
