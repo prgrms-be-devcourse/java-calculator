@@ -10,4 +10,11 @@ public class ConsoleOutput implements Output{
     public void printCaculatedResult(int result) {
         System.out.println(result);
     }
+
+    @Override
+    public void printFindAll(String[] strings) {
+        for (String str : strings){
+            System.out.println(str);
+        }
+    }
 }

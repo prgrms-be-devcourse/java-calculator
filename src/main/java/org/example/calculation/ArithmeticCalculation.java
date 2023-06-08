@@ -1,6 +1,7 @@
 package org.example.calculation;
 
-import org.example.io.IoManager;
+import org.example.exception.BadEquationException;
+import org.example.exception.CheckEquation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,14 @@ public class ArithmeticCalculation implements Calculation{
         return calculate(convertInput(input));
     }
 
+    // 전위 표기식을 후위 표기식으로 변환.
     public String[] convertInput(String input) {
         input = input.replace("+", " + ");
         input = input.replace("-", " - ");
         input = input.replace("/", " / ");
         input = input.replace("*", " * ");
         input = input.replace("  ", " ");
+
         String[] str = input.split(" ");
 
         List<String> sb = new ArrayList<>();
@@ -48,7 +51,6 @@ public class ArithmeticCalculation implements Calculation{
         for (int i = 0; i < sb.size(); i++){
             result[i] = sb.get(i);
         }
-
         return result;
     }
 
@@ -82,6 +84,9 @@ public class ArithmeticCalculation implements Calculation{
                         stack.push(targetNum2 * targetNum1);
                         break;
                     case "/":
+                        if (targetNum1 == 0){
+                            throw new BadEquationException("0 으로 나눌 수 없습니다");
+                        }
                         stack.push(targetNum2 / targetNum1);
                         break;
                 }
