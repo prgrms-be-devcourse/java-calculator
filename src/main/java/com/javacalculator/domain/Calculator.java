@@ -2,6 +2,7 @@ package com.javacalculator.domain;
 
 import com.javacalculator.dto.CalculatorRequest;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,6 @@ public class Calculator {
     }
 
     public Map<String, Integer> getHistories() {
-        return histories;
+        return Collections.unmodifiableMap(histories);
     }
 }
