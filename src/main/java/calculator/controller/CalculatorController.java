@@ -43,9 +43,9 @@ public class CalculatorController {
             } else if (menu.isOther()) {
                 throw new WrongInputMenuException(ResponseErrorFormat.FAIL_WRONG_INPUT_MENU);
             }
-        } catch (WrongInputFormulaException | WrongInputSymbolException | WrongInputMenuException | DivisionByZeroException e) {
+        } catch (WrongInputFormulaException | WrongInputSymbolException | WrongInputMenuException e) {
             System.out.println(e.getMessage());
-        } catch (ArithmeticException e) {
+        } catch (ArithmeticException | DivisionByZeroException e) {
             System.out.println(ResponseErrorFormat.FAIL_DIVISION_BY_ZERO.getMessage());
         }
     }

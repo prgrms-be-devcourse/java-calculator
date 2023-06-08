@@ -1,6 +1,7 @@
 package calculator.service;
 
 import calculator.domain.model.SymbolPriority;
+import calculator.error.exception.DivisionByZeroException;
 import calculator.error.exception.WrongInputFormulaException;
 import calculator.error.model.ResponseErrorFormat;
 
@@ -68,7 +69,7 @@ public class CalculatorManager {
      */
     private void isCalculation(SymbolPriority nextSymbol) {
         while (!symbolDeque.isEmpty() && symbolDeque.peek().getPriority() >= nextSymbol.getPriority()) {
-            int secondNumber = numberDeque.pop();
+            int secondNumber = isDivisionByZero(symbolDeque.peek().getSymbol(), numberDeque.pop());
             int firstNumber = numberDeque.pop();
             int result = symbolDeque.pop()
                     .getFormula()
@@ -85,7 +86,7 @@ public class CalculatorManager {
      */
     public int isCalculation() {
         while (!symbolDeque.isEmpty()) {
-            int secondNumber = numberDeque.pop();
+            int secondNumber = isDivisionByZero(symbolDeque.peek().getSymbol(), numberDeque.pop());
             int firstNumber = numberDeque.pop();
             int result = symbolDeque.pop()
                     .getFormula()
@@ -95,5 +96,21 @@ public class CalculatorManager {
         }
 
         return numberDeque.pop();
+    }
+
+    /**
+     * 0인지 검증하는 메소드
+     *
+     * @param symbol       : 연산자
+     * @param secondNumber : 검증할 2번째 메소드
+     * @return secondNumber
+     */
+    public int isDivisionByZero(String symbol,
+                                int secondNumber) {
+        if (symbol.equals("/") && secondNumber == 0) {
+            throw new DivisionByZeroException(ResponseErrorFormat.FAIL_DIVISION_BY_ZERO);
+        }
+
+        return secondNumber;
     }
 }

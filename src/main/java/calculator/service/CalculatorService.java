@@ -32,10 +32,11 @@ public class CalculatorService {
      * @param formula : 계산을 진행할 연산식
      */
     public HistoryModel calculate(String formula) {
-        calculatorManager.isCorrectFormula(calculatorManager.removeSpaces(formula));
+        final String removeSpacesFormula = calculatorManager.removeSpaces(formula);
+        calculatorManager.isCorrectFormula(removeSpacesFormula);
 
-        final StringTokenizer formulaTokens = new StringTokenizer(formula, "+-/*", true);
-        final HistoryModel history = new HistoryModel(formula, calculatorManager.calculate(formulaTokens));
+        final StringTokenizer formulaTokens = new StringTokenizer(removeSpacesFormula, "+-/*", true);
+        final HistoryModel history = new HistoryModel(removeSpacesFormula, calculatorManager.calculate(formulaTokens));
         calculatorRepository.save(history);
 
         return history;

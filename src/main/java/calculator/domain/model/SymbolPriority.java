@@ -31,6 +31,10 @@ public enum SymbolPriority {
         return priority;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
     public BinaryOperator<Integer> getFormula() {
         
         return formula;
