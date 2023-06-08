@@ -12,17 +12,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/CalculatorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/calculator/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/calculator/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/calculator/Operator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/calculator/Operator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/calculator/OperatorPriority.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/calculator/OperatorPriority.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/history/History.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/history/History.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/io/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/io/Input.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/io/Output.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/io/Output.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/calculator/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/calculator/Operator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/history/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/history/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/io/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/io/Output.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

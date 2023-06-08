@@ -12,7 +12,10 @@ public class History {
     map.put(++number, formula);
   }
 
-  public Map<Long, Formula> view() {
-    return map;
+  public void view() {
+    for (Long key : map.keySet()) {
+      Formula formula = map.get(key);
+      System.out.println(key + " : " + formula);
+    }
   }
 }
