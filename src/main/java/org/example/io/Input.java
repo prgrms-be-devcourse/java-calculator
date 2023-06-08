@@ -6,13 +6,13 @@ import java.io.InputStreamReader;
 
 public class Input {
 
-  private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+  private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-  public Integer inputMenu() throws IOException {
+  public static Integer inputMenu() throws IOException {
     return Integer.parseInt(br.readLine());
   }
 
-  public String inputFormula() throws IOException {
+  public static String inputFormula() throws IOException {
     return br.readLine();
   }
 }
