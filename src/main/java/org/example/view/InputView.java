@@ -1,17 +1,18 @@
-package org.example.View;
+package org.example.view;
 
 import java.util.Scanner;
 
 public class InputView {
 
-    public static int selectWorks() {
-        Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
+
+    public int selectWorks() {
         int workNum = sc.nextInt();
+        sc.nextLine();
         return workNum;
     }
 
-    public static String inputExpression() {
-        Scanner sc = new Scanner(System.in);
+    public String inputExpression() {
         String expression = sc.nextLine();
         return expression;
     }
