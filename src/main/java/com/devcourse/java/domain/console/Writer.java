@@ -1,6 +1,6 @@
 package com.devcourse.java.domain.console;
 
-public class OutputImpl implements Output {
+public class Writer implements Output {
 
     @Override
     public void print(String message) {

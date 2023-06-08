@@ -1,8 +1,9 @@
 package com.devcourse.java.domain.console;
 
-import static com.devcourse.java.domain.console.Messages.EXITING;
-import static com.devcourse.java.domain.console.Messages.EXIT_CONFIRM;
-import static com.devcourse.java.domain.console.Messages.MENU_SELECTION;
+import java.util.List;
+
+import static com.devcourse.java.common.Messages.EXIT_CONFIRM;
+import static com.devcourse.java.common.Messages.MENU_SELECTION;
 
 public class Console {
     private final Input input;
@@ -13,17 +14,27 @@ public class Console {
         this.output = output;
     }
 
+    public String readExpression() {
+        return input.read();
+    }
+
     public int selectMenu() {
-        output.print(MENU_SELECTION.toString());
+        output.print(MENU_SELECTION.toMessage());
         return input.readAsInt();
     }
 
     public String askIfExiting() {
-        output.print(EXIT_CONFIRM.toString());
+        output.print(EXIT_CONFIRM.toMessage());
         return input.read();
     }
 
-    public void exiting() {
-        output.print(EXITING.toString());
+    public void print(String message) {
+        output.print(message);
+    }
+
+    public void printList(List<String> results) {
+        for (String result : results) {
+            output.print(result);
+        }
     }
 }

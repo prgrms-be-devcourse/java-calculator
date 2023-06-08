@@ -14,7 +14,7 @@ public enum Menus {
         this.type = type;
     }
 
-    public static Menus of(int type) {
+    public static Menus from(int type) {
         return Arrays.stream(Menus.values())
                 .filter(menus -> menus.type == type)
                 .findFirst()

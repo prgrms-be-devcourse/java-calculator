@@ -21,7 +21,7 @@ public class CalculatorRunner {
 
         while (power) {
             int selectedMenu = console.selectMenu();
-            Menus menus = Menus.of(selectedMenu);
+            Menus menus = Menus.from(selectedMenu);
 
             if (menus.isNotOnMenu() && confirmExit()) {
                 continue;

@@ -1,27 +1,19 @@
 package com.devcourse.java.domain.menu;
 
 import com.devcourse.java.common.Storage;
-import com.devcourse.java.domain.Result.Result;
+import com.devcourse.java.domain.calculateResult.CalculateResult;
 import com.devcourse.java.domain.console.Console;
 
 public class Calculate implements Menu {
-    private static Calculate INSTANCE;
+    private final Storage<CalculateResult> storage;
 
-    private final Storage<Result> storage;
-
-    private Calculate(Storage storage) {
+    public Calculate(Storage storage) {
         this.storage = storage;
-    }
-
-    public static Calculate getInstance(Storage storage) {
-        if (INSTANCE == null) {
-            INSTANCE = new Calculate(storage);
-        }
-        return INSTANCE;
     }
 
     @Override
     public boolean execute(Console console) {
+        String expression = console.readExpression(); // 유효성 검사
         return true;
     }
 }

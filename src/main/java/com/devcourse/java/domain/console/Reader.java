@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 import static com.devcourse.java.common.Errors.NOT_A_NUMBER;
 
-public class InputImpl implements Input {
+public class Reader implements Input {
     private final Scanner scanner;
 
-    public InputImpl() {
+    public Reader() {
         this.scanner = new Scanner(System.in);
     }
 
