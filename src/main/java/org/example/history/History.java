@@ -12,7 +12,7 @@ public class History {
     map.put(++number, formula);
   }
 
-  public Map<Long, Formula> findAll() {
+  public Map<Long, Formula> view() {
     return map;
   }
 }

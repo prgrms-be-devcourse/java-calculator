@@ -18,7 +18,7 @@ public class CalculatorController {
 
       switch (Input.inputMenu()) {
         case 1:
-          history.findAll();
+          history.view();
           break;
         case 2:
           String formula = Input.inputFormula();
@@ -27,7 +27,7 @@ public class CalculatorController {
           Output.printResult(result);
           break;
         case 3:
-          return ;
+          return;
       }
     }
   }

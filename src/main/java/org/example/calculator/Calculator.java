@@ -31,7 +31,7 @@ public class Calculator {
 
     for (String letter : formula) {
       if (OperatorPriority.isOperator(letter)) {
-        while (!stack.isEmpty() && OperatorPriority.getPriority(stack.peek()) >= OperatorPriority.getPriority(letter)) {
+        while (!stack.isEmpty() && OperatorPriority.checkPriority(stack.peek()) >= OperatorPriority.checkPriority(letter)) {
           list.add(stack.pop());
         }
         stack.push(letter);
