@@ -11,4 +11,9 @@ public class InputReader {
         int commandNumber = scanner.nextInt();
         return CommandType.getCommandType(commandNumber);
     }
+
+    public String readExpression() {
+        scanner.nextLine();
+        return scanner.nextLine();
+    }
 }
