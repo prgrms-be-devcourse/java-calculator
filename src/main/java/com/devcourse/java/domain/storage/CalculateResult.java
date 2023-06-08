@@ -2,6 +2,7 @@ package com.devcourse.java.domain.storage;
 
 public class CalculateResult {
     private static final String EQUAL = " = ";
+    private static final String NEW_LINE = "\n";
     private final String expression;
     private final Double result;
 
@@ -16,6 +17,6 @@ public class CalculateResult {
 
     @Override
     public String toString() {
-        return expression + EQUAL + result;
+        return expression + EQUAL + result + NEW_LINE;
     }
 }

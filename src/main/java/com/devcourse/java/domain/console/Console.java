@@ -14,17 +14,17 @@ public class Console {
         this.output = output;
     }
 
-    public String read() {
+    public String menuSelect() {
+        output.print(MENU_SELECTION.toMessage());
         return input.read();
     }
 
-    public int selectMenu() {
-        output.print(MENU_SELECTION.toMessage());
-        return input.readAsInt();
+    public String confirmExiting() {
+        output.print(EXIT_CONFIRM.toMessage());
+        return input.read();
     }
 
-    public String askIfExiting() {
-        output.print(EXIT_CONFIRM.toMessage());
+    public String read() {
         return input.read();
     }
 
@@ -40,5 +40,6 @@ public class Console {
         for (String result : results) {
             output.print(result);
         }
+        System.out.println();
     }
 }

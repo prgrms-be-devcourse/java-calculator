@@ -20,8 +20,8 @@ public class PrefixParser implements ExpressionParser {
     }
 
     private List<String> toPrefix(String expression, Validator validator) {
-        initStack();
         List<String> result = new ArrayList<>();
+        initializeStack();
 
         for (String currentCharacter : expression.split(BLANK)) {
             addOperandAndOrderOperator(result, currentCharacter, validator);
@@ -60,7 +60,7 @@ public class PrefixParser implements ExpressionParser {
         return !stack.isEmpty();
     }
 
-    private void initStack() {
+    private void initializeStack() {
         stack = new ArrayDeque<>();
     }
 }

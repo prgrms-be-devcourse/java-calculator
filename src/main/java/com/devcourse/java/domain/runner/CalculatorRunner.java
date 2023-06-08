@@ -20,7 +20,7 @@ public class CalculatorRunner {
         boolean power = true;
 
         while (power) {
-            int selectedMenu = console.selectMenu();
+            String selectedMenu = console.menuSelect();
             Menus menus = Menus.from(selectedMenu);
 
             if (menus.isNotOnMenu() && confirmExit()) {
@@ -33,7 +33,7 @@ public class CalculatorRunner {
     }
 
     private boolean confirmExit() {
-        String closing = console.askIfExiting();
+        String closing = console.confirmExiting();
         return !StringUtils.equalsIgnoreCase(closing, EXIT);
     }
 }

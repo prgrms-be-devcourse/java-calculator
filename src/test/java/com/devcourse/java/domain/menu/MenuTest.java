@@ -27,8 +27,8 @@ class MenuTest {
     class MenusTest {
         @ParameterizedTest
         @DisplayName("조회, 계산 생성 테스트")
-        @ValueSource(ints = {1, 2})
-        void menuCreateTest(int type) {
+        @ValueSource(strings = {"1", "2"})
+        void menuCreateTest(String type) {
             // given
 
             // when
@@ -42,7 +42,7 @@ class MenuTest {
         @DisplayName("없는 메뉴 생성 테스트")
         void noneMenuCreateTest() {
             // given
-            int notOnMenu = 3;
+            final String notOnMenu = "3";
 
             // when
             Menus menus = Menus.from(notOnMenu);
