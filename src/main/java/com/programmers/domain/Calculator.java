@@ -5,13 +5,13 @@ import com.programmers.util.Arithmetic;
 import java.util.Stack;
 
 public class Calculator {
-    public int calculate(String[] inputs) {
+    public int calculatePostfixExpression(String[] expression) {
         Stack<Integer> numbers = new Stack<>();
-        for (String input : inputs) {
-            if(Arithmetic.isNumber(input)) {
-                numbers.push(Integer.parseInt(input));
+        for (String expr : expression) {
+            if(Arithmetic.isNumber(expr)) {
+                numbers.push(Integer.parseInt(expr));
             } else {
-                int result = binaryOperation(numbers.pop(), numbers.pop(), input);
+                int result = binaryOperation(numbers.pop(), numbers.pop(), expr);
                 numbers.push(result);
             }
         }

@@ -16,9 +16,9 @@ public class CalculatorTest {
         String[] inputsC = {"1", "2", "+", "3", "+", "4", "+"};
         
         //when
-        int resultA = cal.calculate(inputsA);
-        int resultB = cal.calculate(inputsB);
-        int resultC = cal.calculate(inputsC);
+        int resultA = cal.calculatePostfixExpression(inputsA);
+        int resultB = cal.calculatePostfixExpression(inputsB);
+        int resultC = cal.calculatePostfixExpression(inputsC);
 
         //then
         assertThat(resultA).isEqualTo(6);
@@ -33,8 +33,8 @@ public class CalculatorTest {
         String[] inputsB = {"123", "23", "-", "523", "-"};
 
         //when
-        int resultA = cal.calculate(inputsA);
-        int resultB = cal.calculate(inputsB);
+        int resultA = cal.calculatePostfixExpression(inputsA);
+        int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
         assertThat(resultA).isEqualTo(-4);
@@ -48,8 +48,8 @@ public class CalculatorTest {
         String[] inputsB = {"123", "2345", "-", "2452", "+"};
 
         //when
-        int resultA = cal.calculate(inputsA);
-        int resultB = cal.calculate(inputsB);
+        int resultA = cal.calculatePostfixExpression(inputsA);
+        int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
         assertThat(resultA).isEqualTo(1 + 5 - 123);
@@ -64,8 +64,8 @@ public class CalculatorTest {
         String[] inputsB = {"123", "123", "*", "948", "*"};
 
         //when
-        int resultA = cal.calculate(inputsA);
-        int resultB = cal.calculate(inputsB);
+        int resultA = cal.calculatePostfixExpression(inputsA);
+        int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
         assertThat(resultA).isEqualTo(2 * 5);
@@ -79,8 +79,8 @@ public class CalculatorTest {
         String[] inputsB = {"123", "324", "*", "32", "42", "*", "-"};
 
         //when
-        int resultA = cal.calculate(inputsA);
-        int resultB = cal.calculate(inputsB);
+        int resultA = cal.calculatePostfixExpression(inputsA);
+        int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
         assertThat(resultA).isEqualTo(123 + 324 * 3 - 2332);
@@ -94,8 +94,8 @@ public class CalculatorTest {
         String[] inputsB = {"34", "42", "/", "35", "/"};
 
         //when
-        int resultA = cal.calculate(inputsA);
-        int resultB = cal.calculate(inputsB);
+        int resultA = cal.calculatePostfixExpression(inputsA);
+        int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
         assertThat(resultA).isEqualTo(123 / 23);
@@ -110,7 +110,7 @@ public class CalculatorTest {
         //when
 
         //then
-        assertThatThrownBy(() -> cal.calculate(inputsA))
+        assertThatThrownBy(() -> cal.calculatePostfixExpression(inputsA))
                 .isInstanceOf(ArithmeticException.class);
     }
 
@@ -121,8 +121,8 @@ public class CalculatorTest {
         String[] inputsB = {"23", "3", "23", "*", "2", "/", "12", "17", "*", "-", "+"};
 
         //when
-        int resultA = cal.calculate(inputsA);
-        int resultB = cal.calculate(inputsB);
+        int resultA = cal.calculatePostfixExpression(inputsA);
+        int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
         assertThat(resultA).isEqualTo(23*7 + 32/8);
