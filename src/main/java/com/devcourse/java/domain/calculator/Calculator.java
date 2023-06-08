@@ -28,26 +28,24 @@ public class Calculator {
     private Double calculatePrefix(List<String> prefixExpression, Validator validator) {
         Deque<Double> stack = new ArrayDeque<>();
         for (String current : prefixExpression) {
-            if (validator.isNumber(current)) {
-                pushOperand(stack, current);
-                continue;
-            }
-            calculateOperands(stack, current);
+            double result = parseOrCalculate(stack, current, validator);
+            stack.push(result);
         }
         return stack.pop();
     }
 
-    private void pushOperand(Deque<Double> stack, String current) {
-        double parsed = Double.parseDouble(current);
-        stack.push(parsed);
+    private double parseOrCalculate(Deque<Double> stack, String current, Validator validator) {
+        if (validator.isNumber(current)) {
+            return Double.parseDouble(current);
+        }
+        return calculateOperands(stack, current);
     }
 
-    private void calculateOperands(Deque<Double> stack, String current) {
+    private double calculateOperands(Deque<Double> stack, String current) {
         double operandY = stack.pop();
         double operandX = stack.pop();
         
         Operator operator = factory.create(current);
-        double result = operator.operate(operandX, operandY);
-        stack.push(result);
+        return operator.operate(operandX, operandY);
     }
 }
