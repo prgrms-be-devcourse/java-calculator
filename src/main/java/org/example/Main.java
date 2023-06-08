@@ -10,11 +10,6 @@ import org.example.repository.MemoryRepository;
 
 public class Main {
     public static void main(String[] args) {
-        IoManager ioManager = new IoManager(new ArithmeticCalculation(), new ConsoleInput(), new ConsoleOutput(), new MemoryRepository());
-        try {
-            ioManager.run();
-        } catch (Exception e) {
-            throw new BadEquationException("입력값이 올바르지 않습니다.");
-        }
+        new IoManager(new ArithmeticCalculation(), new ConsoleInput(), new ConsoleOutput(), new MemoryRepository()).run();
     }
 }

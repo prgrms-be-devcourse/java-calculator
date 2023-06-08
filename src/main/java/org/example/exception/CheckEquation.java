@@ -14,11 +14,11 @@ public class CheckEquation {
         Optional<String> preStr = Optional.empty();
         for (String str : strArr){
             if (preStr.isEmpty()){
-                preStr.of(str);
+                preStr = Optional.ofNullable(str);
             }else if (isOperator(preStr.get()) && isOperator(str)){
                 return false;
             }else {
-                preStr.of(str);
+                preStr = Optional.ofNullable(str);
             }
         }
         return true;

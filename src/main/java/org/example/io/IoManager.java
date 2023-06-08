@@ -20,34 +20,39 @@ public class IoManager {
         this.repository = repository;
     }
 
-    public void run() throws Exception{
+    public void run(){
         while (true){
-            output.printAction("1.조회");
-            output.printAction("2.계산");
-            output.printAction("3.종료");
-            System.out.println();
-
-            String action = input.selectAction();
-            String curInput;
-            if(action.equals("2")) {
-                curInput = input.input();
-                validate(curInput);
-                int resultNnm = calculation.run(curInput);
-                output.printCaculatedResult(resultNnm);
-                System.out.println();
-                String resultStr = curInput + " = " + String.valueOf(resultNnm);
-                repository.save(resultStr);
-
-            }else if (action.equals("1")){
-                String[] findStrArr = repository.findAll();
-                output.printFindAll(findStrArr);
+            try {
+                output.printAction("1.조회");
+                output.printAction("2.계산");
+                output.printAction("3.종료");
                 System.out.println();
 
-            }else if (action.equals("3")){
-                break;
+                String action = input.selectAction();
+                String curInput;
+                if(action.equals("2")) {
+                    curInput = input.input();
+                    validate(curInput);
+                    int resultNnm = calculation.run(curInput);
+                    output.printCaculatedResult(resultNnm);
+                    System.out.println();
+                    String resultStr = curInput + " = " + String.valueOf(resultNnm);
+                    repository.save(resultStr);
 
-            }else {
-                output.printAction("다시 입력해 주세요.");
+                }else if (action.equals("1")){
+                    String[] findStrArr = repository.findAll();
+                    output.printFindAll(findStrArr);
+                    System.out.println();
+
+                }else if (action.equals("3")){
+                    break;
+
+                }else {
+                    output.printAction("다시 입력해 주세요.");
+                    System.out.println();
+                }
+            }catch (Exception e){
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.^^");
                 System.out.println();
             }
         }
