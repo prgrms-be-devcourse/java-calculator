@@ -4,7 +4,6 @@ import com.programmers.domain.PostfixConverter;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PostfixConverterTest {
     private PostfixConverter converter = new PostfixConverter();
@@ -35,38 +34,5 @@ public class PostfixConverterTest {
         assertThat(resultA).containsExactly("1", "1", "*", "1", "1", "/", "+");
         assertThat(resultB).containsExactly("1", "1", "1", "*", "1", "/", "-");
 
-    }
-
-    @Test
-    void convertDataButInvalidOrder_Then_Exception() {
-        //given
-        String[] tokenizedA = {"1", "1", "1"};
-        String[] tokenizedB = {"+", "1", "*", "1", "-"};
-        String[] tokenizedC = {"1", "*", "1", "-", "-"};
-
-        //when
-
-        //then
-        assertThatThrownBy(() -> converter.convert(tokenizedA))
-                .isInstanceOf(UnsupportedOperationException.class);
-        assertThatThrownBy(() -> converter.convert(tokenizedB))
-                .isInstanceOf(UnsupportedOperationException.class);
-        assertThatThrownBy(() -> converter.convert(tokenizedC))
-                .isInstanceOf(UnsupportedOperationException.class);
-    }
-
-    @Test
-    void convertDataButInvalidOperator_Then_Exception() {
-        //given
-        String[] tokenizedA = {"1", "++", "1", "**", "1"};
-        String[] tokenizedB = {"1", "+-", "1", "*/", "1"};
-
-        //when
-
-        //then
-        assertThatThrownBy(() -> converter.convert(tokenizedA))
-                .isInstanceOf(UnsupportedOperationException.class);
-        assertThatThrownBy(() -> converter.convert(tokenizedB))
-                .isInstanceOf(UnsupportedOperationException.class);
     }
 }

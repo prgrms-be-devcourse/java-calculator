@@ -9,14 +9,11 @@ public class PostfixConverter {
     public String[] convert(String[] tokenized) {
         ArrayList<String> result = new ArrayList<>();
 
-        boolean numberTurn = true;
         Stack<String> operators = new Stack<>();
         for (String token : tokenized) {
-            if(Arithmetic.isNumber(token) && numberTurn) {
+            if(Arithmetic.isNumber(token)) {
                 result.add(token);
-
-                numberTurn = false;
-            } else if(Arithmetic.isOperator(token) && !numberTurn) {
+            } else {
                 while (!operators.isEmpty()) {
                     if(getPriority(token) > getPriority(operators.peek())) {
                         break;
@@ -25,10 +22,6 @@ public class PostfixConverter {
                     result.add(operators.pop());
                 }
                 operators.push(token);
-
-                numberTurn = true;
-            } else {
-                throw new UnsupportedOperationException("올바른 숫자/연산자를 입력해주세요.");
             }
         }
 

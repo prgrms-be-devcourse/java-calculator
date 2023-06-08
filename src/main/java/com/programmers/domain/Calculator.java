@@ -1,18 +1,23 @@
 package com.programmers.domain;
 
 import com.programmers.util.Arithmetic;
+import com.programmers.validator.ExpressionValidator;
 
 import java.util.Stack;
 
 public class Calculator {
 
+    private final ExpressionValidator validator;
     private final PostfixConverter postfixConverter;
 
     public Calculator() {
+        validator = new ExpressionValidator();
         postfixConverter = new PostfixConverter();
     }
 
     public int calculateInfixExpression(String[] expression) {
+        validator.validate(expression);
+
         String[] postfixExpression = postfixConverter.convert(expression);
 
         return calculatePostfixExpression(postfixExpression);
