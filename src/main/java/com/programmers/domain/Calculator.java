@@ -5,6 +5,19 @@ import com.programmers.util.Arithmetic;
 import java.util.Stack;
 
 public class Calculator {
+
+    private final PostfixConverter postfixConverter;
+
+    public Calculator() {
+        postfixConverter = new PostfixConverter();
+    }
+
+    public int calculateInfixExpression(String[] expression) {
+        String[] postfixExpression = postfixConverter.convert(expression);
+
+        return calculatePostfixExpression(postfixExpression);
+    }
+
     public int calculatePostfixExpression(String[] expression) {
         Stack<Integer> numbers = new Stack<>();
         for (String expr : expression) {
