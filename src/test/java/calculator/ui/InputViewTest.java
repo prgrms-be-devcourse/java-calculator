@@ -52,8 +52,12 @@ public class InputViewTest {
                 , "1+" , "1 + 1 +", "1++1"
                 , "1 1"
                 ,"+ +"
-                ,"( 1 + 2 )"
-                ,"1 + 2 * ( 3 + 4 ) - 5"
+                ,"( 1 + 2 ("
+                ,"1 + 2 * ) ( 3 + 4 ) - 5"
+                ,"( 1 + 2 ) ( 3 + 4 )"
+                ,"( ( ) ) 1 + 1 + 2"
+                ,"1 + 1 ( ) + 2"
+                ,"1 + 1 ( + ) 2"
         })
         void 계산식의_형식이_아니면_에러반환(String userInput) {
             assertThatThrownBy(()-> ValidationInput.checkEquation(userInput))
