@@ -1,32 +1,34 @@
 package calculator.domain.model;
 
-import calculator.error.exception.WrongInputMenuException;
+import calculator.error.exception.WrongInputSymbolException;
 import calculator.error.model.ResponseErrorFormat;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum Menu {
 
-    FIND_ONE("조회", "1"),
-    CALCULATION_TWO("계산", "2"),
-    EXIT_THREE("종료", "3"),
-    OTHER("없는 메뉴", ""),
+    FIND_ONE("1", "조회"),
+    CALCULATION_TWO("2", "계산"),
+    EXIT_THREE("3", "종료"),
+    OTHER("", "없는 메뉴"),
     ;
 
-    private String name;
     private String number;
+    private String name;
 
-    Menu(String name,
-         String number) {
-        this.name = name;
+    Menu(String number,
+         String name) {
         this.number = number;
+        this.name = name;
     }
 
-    public static Menu from(String number) {
-        return Arrays.stream(values())
-                .filter(menu -> menu.number.equals(number))
-                .findFirst()
-                .orElse(OTHER);
+    public String getNumber() {
+        return number;
     }
 
     public boolean isFindOne() {
@@ -47,5 +49,14 @@ public enum Menu {
     public boolean isOther(){
 
         return this.equals(OTHER);
+    }
+
+    private static final Map<String, Menu> menus =
+            Collections.unmodifiableMap(Arrays.stream(values())
+                    .collect(Collectors.toMap(Menu::getNumber, Function.identity())));
+
+    public static Menu from(String menuNumber) {
+        return Optional.ofNullable(menus.get(menuNumber))
+                .orElse(OTHER);
     }
 }

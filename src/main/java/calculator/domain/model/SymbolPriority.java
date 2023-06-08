@@ -4,7 +4,12 @@ import calculator.error.exception.WrongInputSymbolException;
 import calculator.error.model.ResponseErrorFormat;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum SymbolPriority {
 
@@ -36,14 +41,16 @@ public enum SymbolPriority {
     }
 
     public BinaryOperator<Integer> getFormula() {
-        
+
         return formula;
     }
 
+    private static final Map<String, SymbolPriority> symbolPriorities =
+            Collections.unmodifiableMap(Arrays.stream(values())
+                    .collect(Collectors.toMap(SymbolPriority::getSymbol, Function.identity())));
+
     public static SymbolPriority from(String symbol) {
-        return Arrays.stream(values())
-                .filter(operator -> operator.symbol.equals(symbol))
-                .findFirst()
+        return Optional.ofNullable(symbolPriorities.get(symbol))
                 .orElseThrow(() -> new WrongInputSymbolException(ResponseErrorFormat.FAIL_WRONG_INPUT_SYMBOL));
     }
 }
