@@ -41,9 +41,19 @@ class InfixToPostfixConverterTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"a * 5 + 2 : False", "7 ^ 2 + 5 : False", "4 + 3 * 2 / 5:True", "(3 + 4) * 2    + 5     * ( 2 + 3) : True", "7 ^     2 + 5 : False"}, delimiter = ':')
-    @DisplayName("수식 입력 잘못 된 값 검증")
-    void 수식_개별토큰변환예외검증(String input, String output) {
+    @CsvSource(value = {"4 + 3 * 2 / 5:True", "(3 + 4) * 2    + 5     * ( 2 + 3) : True"}, delimiter = ':')
+    @DisplayName("수식 입력 옳은 값 검증")
+    void 수식_적절한입력토큰검증(String input, String output) {
+        assertThat(Arrays.stream(input.split(ConstantRegex.EXPRESSION_VALIDATION_REGEX))
+                .findAny()
+                .isEmpty())
+                .isEqualTo(Boolean.valueOf(output));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"a * 5 + 2 : False", "7 ^ 2 + 5 : False", "7 ^     2 + 5 : False"}, delimiter = ':')
+    @DisplayName("수식 입력 잘못된 값 검증")
+    void 수식_잘못된입력토큰검증(String input, String output) {
         assertThat(Arrays.stream(input.split(ConstantRegex.EXPRESSION_VALIDATION_REGEX))
                 .findAny()
                 .isEmpty())
