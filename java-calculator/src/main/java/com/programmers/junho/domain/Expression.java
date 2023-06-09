@@ -3,8 +3,12 @@ package com.programmers.junho.domain;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
+import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
+import static com.programmers.junho.domain.ArithmeticOperators.isNumber;
+
 public class Expression {
     public static final String REGEX = "^\\d+\\s?([-+*/]\\s?\\d+\\s?)+$";
+    public static final String DELIMITER = "";
     private final String expression;
 
     public Expression(String expression) {
@@ -19,35 +23,39 @@ public class Expression {
     }
 
     public String getPostfixExpression() {
-        String expression = removeSpace();
-
         StringBuilder postfixExpression = new StringBuilder();
-
         Stack<ArithmeticOperators> stack = new Stack<>();
 
-        String[] tokens = expression.split("");
+        String[] tokens =  removeSpaceFromExpression().split(DELIMITER);
         for (String token : tokens) {
-            // 펴연산자 바로 출력
-            if (!ArithmeticOperators.isOperator(token)) {
-                postfixExpression.append(token);
-                continue;
-            }
-            // 연산자면
-            ArithmeticOperators operator = ArithmeticOperators.convertTokenToOperator(token);
-            while (!stack.isEmpty() && stack.peek().getPriority() >= operator.getPriority()) {
-                postfixExpression.append(stack.pop().getOperator());
-            }
-            if (stack.isEmpty() || stack.peek().getPriority() < operator.getPriority()) {
-                stack.push(operator);
-            }
+            converseToPostfix(postfixExpression, stack, token);
         }
-        while (!stack.isEmpty()) {
-            postfixExpression.append(stack.pop().getOperator());
-        }
+        appendAllExistingElement(postfixExpression, stack);
         return postfixExpression.toString();
     }
 
-    private String removeSpace() {
+    private void converseToPostfix(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack, String token) {
+        if (isNumber(token)) {
+            postfixExpression.append(token);
+            return;
+        }
+        var operator = convertTokenToOperator(token);
+        while (isStackNotEmptyAndOperatorPriorityLower(stack, operator)) {
+            postfixExpression.append(stack.pop().getOperator());
+        }
+        stack.push(operator);
+    }
+
+    private void appendAllExistingElement(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack) {
+        while (!stack.isEmpty()) {
+            postfixExpression.append(stack.pop().getOperator());
+        }
+    }
+    private boolean isStackNotEmptyAndOperatorPriorityLower(Stack<ArithmeticOperators> stack, ArithmeticOperators operator) {
+        return !stack.isEmpty() && stack.peek().getPriority() >= operator.getPriority();
+    }
+
+    private String removeSpaceFromExpression() {
         return this.expression.replace(" ", "");
     }
 }
