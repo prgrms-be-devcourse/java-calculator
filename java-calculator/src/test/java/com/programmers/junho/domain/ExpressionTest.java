@@ -3,10 +3,10 @@ package com.programmers.junho.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class ExpressionTest {
     @DisplayName("올바른 형식의 식이면 예외가 발생하지 않는다.")
@@ -37,5 +37,16 @@ class ExpressionTest {
     void name6(String expression) {
         assertThatThrownBy(() -> new Expression(expression))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("중위 표현식을 후위 표현식으로 변환한다.")
+    @ParameterizedTest(name = "중위 : {0}, 후위 : {1}")
+    @CsvSource(value = {"3 + 4 * 2:342*+", "1 + 2 * 3 + 4 / 2 + 2:123*+42/+2+", "4 + 5 * 6 / 2 - 3:456*2/+3-"}, delimiter = ':')
+    void name7(String infixExpression, String postfixExpression) {
+        Expression expression = new Expression(infixExpression);
+
+        String actual = expression.getPostfixExpression();
+
+        assertThat(actual).isEqualTo(postfixExpression);
     }
 }
