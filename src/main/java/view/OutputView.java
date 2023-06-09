@@ -3,18 +3,29 @@ package view;
 
 import model.CalculationLog;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class OutputView {
     public enum Menu {
-        CHECK("1. 조회"),
-        CALCULATE("2. 계산"),
-        END("3. 종료");
+        LOAD(1, "1. 조회"),
+        CALCULATE(2, "2. 계산"),
+        END(3, "3. 종료");
 
+        private final int menuNumber;
         private final String description;
 
-        Menu(String description) {
+        Menu(int menuNumber, String description) {
+            this.menuNumber = menuNumber;
             this.description = description;
+        }
+
+        public boolean isExistMenu(int userInput) {
+            return this.menuNumber == userInput;
+        }
+
+        public int getMenuNumber() {
+            return menuNumber;
         }
 
         public String getDescription() {
@@ -26,9 +37,7 @@ public class OutputView {
     private static final String END = "프로그램을 종료합니다.";
 
     public static void printSelectMenu() {
-        System.out.println(Menu.CHECK.getDescription());
-        System.out.println(Menu.CALCULATE.getDescription());
-        System.out.println(Menu.END.getDescription());
+        Arrays.stream(Menu.values()).forEach(m -> System.out.println(m.getDescription()));
         System.out.println();
         System.out.print(INPUT);
     }
