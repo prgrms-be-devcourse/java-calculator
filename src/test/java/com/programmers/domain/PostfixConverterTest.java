@@ -1,6 +1,5 @@
-package com.programmers.postfixconverter;
+package com.programmers.domain;
 
-import com.programmers.domain.PostfixConverter;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,5 @@
-package com.programmers.calculator;
+package com.programmers.domain;
 
-import com.programmers.domain.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

@@ -1,7 +1,6 @@
 package com.programmers.domain;
 
 import com.programmers.util.Arithmetic;
-import com.programmers.validator.ExpressionValidator;
 
 import java.util.Stack;
 

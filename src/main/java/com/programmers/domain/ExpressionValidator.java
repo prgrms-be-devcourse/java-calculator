@@ -1,4 +1,4 @@
-package com.programmers.validator;
+package com.programmers.domain;
 
 import com.programmers.util.Arithmetic;
 

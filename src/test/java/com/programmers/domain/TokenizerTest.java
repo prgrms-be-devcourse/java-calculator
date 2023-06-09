@@ -1,6 +1,5 @@
-package com.programmers.tokenizer;
+package com.programmers.domain;
 
-import com.programmers.domain.Tokenizer;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
