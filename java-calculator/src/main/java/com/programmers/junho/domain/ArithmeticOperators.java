@@ -44,9 +44,9 @@ public enum ArithmeticOperators implements Operator{
                 .orElseThrow();
     }
 
-    public static boolean isOperator(String token) {
+    public static boolean isNumber(String token) {
         return Arrays.stream(values())
-                .anyMatch(operator -> operator.getOperator().equals(token));
+                .noneMatch(operator -> operator.getOperator().equals(token));
     }
 
     public String getOperator() {
