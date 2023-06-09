@@ -84,9 +84,6 @@ public class ArithmeticCalculation implements Calculation{
                         stack.push(targetNum2 * targetNum1);
                         break;
                     case "/":
-                        if (targetNum1 == 0){
-                            throw new BadEquationException("0 으로 나눌 수 없습니다");
-                        }
                         stack.push(targetNum2 / targetNum1);
                         break;
                 }

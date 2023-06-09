@@ -51,8 +51,11 @@ public class IoManager {
                     output.printAction("다시 입력해 주세요.");
                     System.out.println();
                 }
-            }catch (Exception e){
+            }catch (IOException IOe){
                 System.out.println("잘못된 입력입니다. 다시 입력해주세요.^^");
+                System.out.println();
+            }catch (BadEquationException BEe){
+                System.out.println("잘못된 수식이 입력 되었습니다.");
                 System.out.println();
             }
         }
@@ -60,7 +63,7 @@ public class IoManager {
 
     private void validate(String str){
         if (!CheckEquation.validateEquation(str)){
-            throw new BadEquationException("잘못된 연산식이 입력 되었습니다.");
+            throw new BadEquationException("잘못된 수식이 입력 되었습니다.");
         }
     }
 }
