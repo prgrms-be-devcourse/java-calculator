@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.programmers.junho.domain.ArithmeticOperators.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class OperationTest {
+class ArithmticOperatorsTest {
 
     @Test
     void add() {
