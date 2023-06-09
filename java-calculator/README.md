@@ -45,12 +45,15 @@
 
 - [x] 컨트롤러 및 application 생성
   - 컨트롤러 역할 : view와 domain을 이어 준다 / repository에서 값을 가져온다.
-  - 게임을 실행하는 `run()`메서드를 가진다.
-  - Application 클래스 역할
+    - 컨트롤러에서 담당 : repository를 결정한다
+      - view는 주입 받는다(사용자가 결정)
+    - 게임을 실행하는 `run()`메서드를 가진다.
+  - Application 클래스 역할 : 사용자
     - 컨트롤러를 실행한다.
     - view 객체를 생성해 컨트롤러에 주입시킨다.
 
 - [ ] 조회 기능 구현
+  - [ ] 조회시 계산한 값이 없으면 `계산 값이 존재하지 않습니다` 메세지 출력 -> OutputView에서 담당
   - [x] 계산 후 이력을 List로 저장 -> Repository에서 생성
     - [x] repository 패키지 안 List 가진 일급 컬렉션으로 구현
     - [x] 인터페이스로 repository 추상화

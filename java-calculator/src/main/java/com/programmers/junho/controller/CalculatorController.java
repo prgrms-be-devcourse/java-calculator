@@ -5,8 +5,6 @@ import com.programmers.junho.repository.CalculatorRepository;
 import com.programmers.junho.repository.ListCalculatorRepository;
 import com.programmers.junho.view.InputView;
 import com.programmers.junho.view.OutputView;
-import com.programmers.junho.view.PrintStreamOutputView;
-import com.programmers.junho.view.ScannerInputView;
 
 import java.util.List;
 
@@ -18,9 +16,9 @@ public class CalculatorController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public CalculatorController() {
-        this.inputView = new ScannerInputView();
-        this.outputView = new PrintStreamOutputView();
+    public CalculatorController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
         this.calculatorRepository = new ListCalculatorRepository();
     }
 
