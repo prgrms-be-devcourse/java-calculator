@@ -12,7 +12,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum SymbolPriority {
-
     ADD("+", 0, (a, b) -> a + b),
     SUB("-", 0, (a, b) -> a - b),
     MUL("*", 1, (a, b) -> a * b),
@@ -32,7 +31,6 @@ public enum SymbolPriority {
     }
 
     public int getPriority() {
-
         return priority;
     }
 
@@ -41,7 +39,6 @@ public enum SymbolPriority {
     }
 
     public BinaryOperator<Integer> getFormula() {
-
         return formula;
     }
 

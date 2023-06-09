@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class CalculatorService {
-
     private final CalculatorRepository calculatorRepository;
     private final CalculatorManager calculatorManager;
 
@@ -22,7 +21,6 @@ public class CalculatorService {
      * 형식 : "연산식 = 연산결과"
      */
     public List<HistoryModel> getHistoryAll() {
-
         return calculatorRepository.findAll();
     }
 

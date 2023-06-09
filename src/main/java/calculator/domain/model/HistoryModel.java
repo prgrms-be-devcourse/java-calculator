@@ -1,7 +1,6 @@
 package calculator.domain.model;
 
 public class HistoryModel {
-
     private final String formula;
     private final String answer;
 
@@ -12,12 +11,10 @@ public class HistoryModel {
     }
 
     public String getFormula() {
-
         return formula;
     }
 
     public String getAnswer() {
-
         return answer;
     }
 }

@@ -11,11 +11,9 @@ import calculator.view.InputView;
 import calculator.view.OutputView;
 
 public class CalculatorController {
-
     private final CalculatorService calculatorService;
 
     public CalculatorController(CalculatorService calculatorService) {
-
         this.calculatorService = calculatorService;
     }
 
@@ -32,13 +30,16 @@ public class CalculatorController {
     }
 
     public void catchException(Menu menu) {
-
         try {
             if (menu.isFindOne()) {
                 OutputView.outputByCalculationResult(calculatorService.getHistoryAll());
-            } else if (menu.isCalculationTwo()) {
+                return;
+            }
+            if (menu.isCalculationTwo()) {
                 OutputView.outputByCalculationResult(calculatorService.calculate(InputView.input()));
-            } else if (menu.isOther()) {
+                return;
+            }
+            if (menu.isOther()) {
                 throw new WrongInputMenuException(ResponseErrorFormat.FAIL_WRONG_INPUT_MENU);
             }
         } catch (WrongInputFormulaException | WrongInputSymbolException | WrongInputMenuException e) {

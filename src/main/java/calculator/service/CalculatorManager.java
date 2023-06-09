@@ -10,7 +10,6 @@ import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class CalculatorManager {
-
     private final Deque<SymbolPriority> symbolDeque = new ArrayDeque<>();
     private final Deque<Integer> numberDeque = new ArrayDeque<>();
 
@@ -21,8 +20,8 @@ public class CalculatorManager {
      * @return 공백이 제거된 연산식
      */
     public String removeSpaces(String formula) {
-
-        return formula.trim().replaceAll(" ", "");
+        return formula.trim()
+                .replaceAll(" ", "");
     }
 
     /**
@@ -45,8 +44,7 @@ public class CalculatorManager {
         while (formulaTokens.hasMoreTokens()) {
             isSymbolAndNumber(formulaTokens.nextToken());
         }
-
-        return isCalculation() + "";
+        return String.valueOf(isCalculation());
     }
 
     /**
@@ -57,7 +55,9 @@ public class CalculatorManager {
     public void isSymbolAndNumber(String token) {
         if (token.matches("[-+*/]")) {
             isCalculation(SymbolPriority.from(token));
-        } else {
+            return;
+        }
+        if (token.matches("[0-9]")) {
             numberDeque.push(Integer.parseInt(token));
         }
     }
@@ -68,16 +68,14 @@ public class CalculatorManager {
      * @param nextSymbol : 검사할 다음 연산자
      */
     private void isCalculation(SymbolPriority nextSymbol) {
-        while (!symbolDeque.isEmpty() && symbolDeque.peek().getPriority() >= nextSymbol.getPriority()) {
+        while (checkSymbolPriority(nextSymbol)) {
             int secondNumber = isDivisionByZero(symbolDeque.peek().getSymbol(), numberDeque.pop());
             int firstNumber = numberDeque.pop();
             int result = symbolDeque.pop()
                     .getFormula()
                     .apply(firstNumber, secondNumber);
-
             numberDeque.push(result);
         }
-
         symbolDeque.push(nextSymbol);
     }
 
@@ -91,11 +89,13 @@ public class CalculatorManager {
             int result = symbolDeque.pop()
                     .getFormula()
                     .apply(firstNumber, secondNumber);
-
             numberDeque.push(result);
         }
-
         return numberDeque.pop();
+    }
+
+    private boolean checkSymbolPriority(SymbolPriority nextSymbol) {
+        return !symbolDeque.isEmpty() && symbolDeque.peek().getPriority() >= nextSymbol.getPriority();
     }
 
     /**
@@ -110,7 +110,6 @@ public class CalculatorManager {
         if (symbol.equals("/") && secondNumber == 0) {
             throw new DivisionByZeroException(ResponseErrorFormat.FAIL_DIVISION_BY_ZERO);
         }
-
         return secondNumber;
     }
 }
