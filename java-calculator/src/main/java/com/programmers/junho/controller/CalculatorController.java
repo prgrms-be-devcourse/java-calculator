@@ -1,6 +1,7 @@
 package com.programmers.junho.controller;
 
 import com.programmers.junho.controller.constant.Selection;
+import com.programmers.junho.domain.Calculator;
 import com.programmers.junho.repository.CalculatorRepository;
 import com.programmers.junho.repository.ListCalculatorRepository;
 import com.programmers.junho.view.InputView;
@@ -23,17 +24,41 @@ public class CalculatorController {
     }
 
     public void run() {
-        outputView.printChoiceMessage();
-        Selection code = findByCode(inputView.getSelectedCode());
-        switch (code){
+        switch (getCode()){
             case CHECK_DATA:
-                List<String> calculatedData = calculatorRepository.findAll();
-                outputView.printExpressions(calculatedData);
+                printAllPreviousData();
                 break;
             case CALCULATE:
-                // 계산 기능 구현
+                printCalculatedResultAndSave();
+                break;
             default:
                 throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
         }
+    }
+
+    private Selection getCode() {
+        outputView.printChoiceMessage();
+        return findByCode(inputView.getSelectedCode());
+    }
+
+    private void printAllPreviousData() {
+        List<String> calculatedData = calculatorRepository.findAll();
+        outputView.printExpressions(calculatedData);
+    }
+
+    private void printCalculatedResultAndSave() {
+        String expression = inputView.getExpression();
+        int result = calculate(expression);
+        outputView.printCalculatedResult(result);
+        calculatorRepository.save(generateTotalResult(expression, result));
+    }
+
+    private int calculate(String expression) {
+        Calculator calculator = new Calculator(expression);
+        return calculator.calculate();
+    }
+
+    private String generateTotalResult(String expression, int result) {
+        return expression + " = " + result;
     }
 }
