@@ -2,15 +2,17 @@ package com.wonu606;
 
 import com.wonu606.app.App;
 import com.wonu606.calculator.CalculatorApp;
+import com.wonu606.io.ConsolePrinter;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
+import com.wonu606.io.ConsoleInput;
 import java.io.IOException;
 
 public class Main {
 
     public static void main(String[] args) {
-        Input input;
-        Print printer;
+        Input input = new ConsoleInput();
+        Print printer = new ConsolePrinter();
 
         CalculatorApp app = new CalculatorApp();
         try {

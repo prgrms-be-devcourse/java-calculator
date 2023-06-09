@@ -16,7 +16,7 @@ class ConsolePrinterTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        Print printer;
+        Print printer = new ConsolePrinter();
         int number = -1;
         printer.print(number);
 
@@ -29,7 +29,7 @@ class ConsolePrinterTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        Print printer;
+        Print printer = new ConsolePrinter();
         String str = "Hello World";
         printer.print(str);
 

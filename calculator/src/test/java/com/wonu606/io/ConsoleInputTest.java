@@ -17,7 +17,7 @@ class ConsoleInputTest {
         InputStream in = new ByteArrayInputStream(menuSelection.getBytes());
         System.setIn(in);
 
-        Input input;
+        Input input = new ConsoleInput();
         assertThat(menuSelection).isEqualTo(input.getInput());
         input.tearDown();
     }
@@ -29,7 +29,7 @@ class ConsoleInputTest {
         InputStream in = new ByteArrayInputStream(expression.getBytes());
         System.setIn(in);
 
-        Input input;
+        Input input = new ConsoleInput();
         assertThat(expression).isEqualTo(input.getInput());
         input.tearDown();
     }
@@ -41,7 +41,7 @@ class ConsoleInputTest {
         InputStream in = new ByteArrayInputStream(newLine.getBytes());
         System.setIn(in);
 
-        Input input;
+        Input input = new ConsoleInput();
         assertThat("").isEqualTo(input.getInput());
         input.tearDown();
     }
