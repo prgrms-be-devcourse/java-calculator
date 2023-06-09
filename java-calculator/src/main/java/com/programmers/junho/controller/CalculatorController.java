@@ -24,15 +24,17 @@ public class CalculatorController {
     }
 
     public void run() {
-        switch (getCode()){
-            case CHECK_DATA:
-                printAllPreviousData();
-                break;
-            case CALCULATE:
-                printCalculatedResultAndSave();
-                break;
-            default:
-                throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+        while (true) {
+            switch (getCode()){
+                case CHECK_DATA:
+                    printAllPreviousData();
+                    break;
+                case CALCULATE:
+                    printCalculatedResultAndSave();
+                    break;
+                default:
+                    throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+            }
         }
     }
 
@@ -58,7 +60,7 @@ public class CalculatorController {
         return calculator.calculate();
     }
 
-    private String generateTotalResult(String expression, double result) {
+    private String generateTotalResult(String expression, int result) {
         return expression + " = " + result;
     }
 }
