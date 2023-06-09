@@ -4,19 +4,16 @@ import com.programmers.BasicCalculator;
 import com.programmers.engine.io.Input;
 import com.programmers.engine.io.Output;
 import com.programmers.engine.model.Result;
+import lombok.AllArgsConstructor;
 
-public class JavaCalculator {
+@AllArgsConstructor
+public class JavaCalculator implements Runnable{
     private final Input input;
     private final Output output;
     private final Result result;
-    private final BasicCalculator bc = new BasicCalculator();
+    private final BasicCalculator bc;
 
-    public JavaCalculator(Input input, Output output, Result result) {
-        this.input = input;
-        this.output = output;
-        this.result = result;
-    }
-
+    @Override
     public void run() {
         boolean isExcutable = true;
         while (isExcutable) {
@@ -25,7 +22,7 @@ public class JavaCalculator {
                 case 1 -> result.readAllResults();
                 case 2 -> result.save(bc.doCalculate(input.getExpression()));
                 case 3 -> isExcutable = false;
-                default -> System.out.println("다시 선택해주세요!");
+                default -> output.inputError();
             }
         }
     }

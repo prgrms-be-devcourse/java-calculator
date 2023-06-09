@@ -6,7 +6,9 @@ import com.programmers.engine.model.Result;
 public class App {
     public static void main(String[] args) {
         Console console = new Console();
-        Result calculateResult = new Result();
-        new JavaCalculator(console, console, calculateResult).run();
+        Result result = new Result();
+        BasicCalculator bc = new BasicCalculator();
+
+        new JavaCalculator(console, console, result, bc).run();
     }
 }

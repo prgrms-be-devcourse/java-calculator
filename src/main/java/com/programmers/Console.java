@@ -13,6 +13,11 @@ public class Console implements Input, Output {
     }
 
     @Override
+    public void inputError() {
+        System.out.println("잘못된 입력입니다. 다시 선택해주세요!");
+    }
+
+    @Override
     public int selectMenu() {
         System.out.print("선택 : ");
         return Integer.parseInt(sc.nextLine());
