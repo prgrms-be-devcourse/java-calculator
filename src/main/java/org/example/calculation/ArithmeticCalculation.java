@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class ArithmeticCalculation implements Calculation{
     @Override
-    public int run(String input){
+    public double run(String input){
         return calculate(convertInput(input));
     }
 
@@ -63,15 +63,15 @@ public class ArithmeticCalculation implements Calculation{
         return -1;
     }
 
-    public int calculate(String[] input){
-        Stack<Integer> stack = new Stack<>();
+    public double calculate(String[] input){
+        Stack<Double> stack = new Stack<>();
 
         for (String cur : input){
             if (!cur.equals("+") && !cur.equals("-") && !cur.equals("*") && !cur.equals("/")){
-                stack.push(Integer.parseInt(cur));
+                stack.push(Double.parseDouble(cur));
             }else {
-                int targetNum1 = stack.pop();
-                int targetNum2 = stack.pop();
+                Double targetNum1 = stack.pop();
+                Double targetNum2 = stack.pop();
 
                 switch (cur){
                     case "+":

@@ -33,7 +33,7 @@ public class IoManager {
                 if(action.equals("2")) {
                     curInput = input.input();
                     validate(curInput);
-                    int resultNnm = calculation.run(curInput);
+                    double resultNnm = calculation.run(curInput);
                     output.printCaculatedResult(resultNnm);
                     System.out.println();
                     String resultStr = curInput + " = " + String.valueOf(resultNnm);

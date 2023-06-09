@@ -8,7 +8,7 @@ public class ArithmeticCalculationTest {
     @Test
     public void 사칙연산() throws Exception{
         ArithmeticCalculation arithmeticCalculation = new ArithmeticCalculation();
-        int result = arithmeticCalculation.run("5 + 3 * 2");
+        double result = arithmeticCalculation.run("5 + 3 * 2");
         Assertions.assertThat(result).isEqualTo(11);
     }
 
