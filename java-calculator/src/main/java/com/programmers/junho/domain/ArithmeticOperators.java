@@ -5,25 +5,25 @@ import java.util.Arrays;
 public enum ArithmeticOperators implements Operator{
     ADDITION("+", 0){
         @Override
-        public double apply(double a, double b) {
+        public int apply(int a, int b) {
             return a + b;
         }
     },
     SUBTRACTION("-",0){
         @Override
-        public double apply(double a, double b) {
+        public int apply(int a, int b) {
             return a - b;
         }
     },
     MULTIPLICATION("*",1){
         @Override
-        public double apply(double a, double b) {
+        public int apply(int a, int b) {
             return a * b;
         }
     },
     DIVISION("/",1) {
         @Override
-        public double apply(double a, double b) {
+        public int apply(int a, int b) {
             return a / b;
         }
     };

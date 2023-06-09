@@ -48,12 +48,12 @@ public class CalculatorController {
 
     private void printCalculatedResultAndSave() {
         String expression = inputView.getExpression();
-        double result = calculate(expression);
+        int result = calculate(expression);
         outputView.printCalculatedResult(result);
         calculatorRepository.save(generateTotalResult(expression, result));
     }
 
-    private double calculate(String expression) {
+    private int calculate(String expression) {
         Calculator calculator = new Calculator(expression);
         return calculator.calculate();
     }
