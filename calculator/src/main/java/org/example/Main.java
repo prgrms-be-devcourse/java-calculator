@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
             choice = getChoice();
             System.out.println();
             if (choice == 1) {
-
+                new UserInterfaceImpl().showRecord();
             } else {
                 String expression = typeExpression();
                 new Calculate(expression).calculate();
