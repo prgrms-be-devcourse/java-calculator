@@ -1,7 +1,6 @@
 package com.programmers.service;
 
-import com.programmers.domain.Calculator;
-import com.programmers.domain.Tokenizer;
+import com.programmers.io.Console;
 import com.programmers.repository.CalculationMemoryRepository;
 import com.programmers.repository.CalculationRepository;
 import org.junit.jupiter.api.Test;
@@ -12,20 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculationServiceTest {
-    private CalculationService calculatorService;
-
-    private CalculationRepository calculationRepository;
-
-    private Tokenizer tokenizer;
-    private Calculator calculator;
+    private final CalculationService calculatorService;
+    private final CalculationRepository calculationRepository;
 
     public CalculationServiceTest() {
-        tokenizer = new Tokenizer();
-        calculator = new Calculator();
         calculationRepository = new CalculationMemoryRepository();
+        Console console = new Console();
 
-
-        calculatorService = new CalculationService(calculationRepository);
+        calculatorService = new CalculationService(calculationRepository, console, console);
     }
 
     @Test
