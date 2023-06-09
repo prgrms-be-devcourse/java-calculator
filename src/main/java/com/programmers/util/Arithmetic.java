@@ -9,6 +9,6 @@ public interface Arithmetic {
     }
 
     static boolean isOperator(String input) {
-        return input.matches("[+\\-*/]?");
+        return input.matches("[+\\-*/]");
     }
 }

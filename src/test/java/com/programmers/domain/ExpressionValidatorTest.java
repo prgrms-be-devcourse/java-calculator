@@ -30,7 +30,8 @@ public class ExpressionValidatorTest {
     void validateInvalidOperator_Then_Exception() {
         //given
         String[] inputA = {"1", "++", "1"};
-        String[] inputB = {"1", " ", "2", "", "3"};
+        String[] inputB = {"1", " ", "2"};
+        String[] inputC = {"1", "", "2"};
 
         //when
 
@@ -38,6 +39,8 @@ public class ExpressionValidatorTest {
         assertThatThrownBy(() -> validator.validate(inputA))
                 .isInstanceOf(UnsupportedOperationException.class);
         assertThatThrownBy(() -> validator.validate(inputB))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> validator.validate(inputC))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
