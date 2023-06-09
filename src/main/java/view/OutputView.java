@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class OutputView {
     public enum Menu {
-        LOAD(1, "1. 조회"),
-        CALCULATE(2, "2. 계산"),
-        END(3, "3. 종료");
+        LOAD(1, "조회"),
+        CALCULATE(2, "계산"),
+        END(3, "종료");
 
         private final int menuNumber;
         private final String description;
@@ -37,7 +37,7 @@ public class OutputView {
     private static final String END = "프로그램을 종료합니다.";
 
     public static void printSelectMenu() {
-        Arrays.stream(Menu.values()).forEach(m -> System.out.println(m.getDescription()));
+        Arrays.stream(Menu.values()).forEach(m -> System.out.println(m.getMenuNumber() + ". " + m.getDescription()));
         System.out.println();
         System.out.print(INPUT);
     }
