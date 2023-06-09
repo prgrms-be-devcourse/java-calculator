@@ -36,11 +36,8 @@ public class InfixToPostfixConverter implements ExpressionConverter {
                 else {
                     if (Operation.getOperator(opStack.peek()).isSameOrGrater(Operation.getOperator(s))) {
                         postfix.add(opStack.pop());
-                        opStack.push(s);
                     }
-                    else {
-                        opStack.push(s);
-                    }
+                    opStack.push(s);
                 }
             } else if (s.matches(OPERAND_REGEX)) {
                 num.append(s);
@@ -50,7 +47,6 @@ public class InfixToPostfixConverter implements ExpressionConverter {
             postfix.add(num.toString());
         }
         while(!opStack.isEmpty()){
-            System.out.println(opStack.peek());
             postfix.add(opStack.pop());
         }
         return postfix;

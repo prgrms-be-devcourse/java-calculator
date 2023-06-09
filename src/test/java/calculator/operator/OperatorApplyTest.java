@@ -13,12 +13,10 @@ public class OperatorApplyTest {
         int a = 10;
         int b = -5;
 
-
-    operation.getOperatorMap().entrySet()
+        operation.getOperatorMap().entrySet()
             .forEach(e -> {
                 System.out.print(a + e.getKey() + b + " = ");
                 System.out.println(operation.calculate(a, e.getKey(), b));
             });
     }
-
 }

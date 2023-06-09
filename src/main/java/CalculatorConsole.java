@@ -21,7 +21,7 @@ public class CalculatorConsole implements Input, Output {
 
     @Override
     public void inputError(String errorResponse) {
-        System.out.println(errorResponse);
+        throw new IllegalArgumentException(errorResponse);
     }
 
     @Override

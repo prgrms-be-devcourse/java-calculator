@@ -15,13 +15,13 @@ import static calculator.global.ErrorResponse.*;
 import static calculator.global.InputConstants.*;
 
 public class Calculator implements Runnable {
-    private final ExpressionConverter infixConverter;
+    private final ExpressionConverter expressionConverter;
     private final Input input;
     private final Output output;
     private final CalculationRepository calculationRepository;
 
-    public Calculator(ExpressionConverter infixConverter, Input input, Output output, CalculationRepository calculationRepository) {
-        this.infixConverter = infixConverter;
+    public Calculator(ExpressionConverter expressionConverter, Input input, Output output, CalculationRepository calculationRepository) {
+        this.expressionConverter = expressionConverter;
         this.input = input;
         this.output = output;
         this.calculationRepository = calculationRepository;
@@ -42,15 +42,15 @@ public class Calculator implements Runnable {
                 case REQUEST_CALCULATION:
                     String expression = input.getExpression();
                     if (validateExpression(expression)) {
-                        ArrayList<String> postfixList = infixConverter.convert(expression);
-                        Integer result = calculate(postfixList);
+                        ArrayList<String> postfixList = expressionConverter.convert(expression);
+                        Integer result = calculateFromPostfix(postfixList);
                         calculationRepository.save(expression + " = " + result);
                     }
             }
         }
     }
 
-    private Integer calculate(ArrayList<String> postfixExpression){
+    public Integer calculateFromPostfix(ArrayList<String> postfixExpression){
         Stack<String> calcStack = new Stack<>();
         Operation operation = new Operation();
 
@@ -71,17 +71,21 @@ public class Calculator implements Runnable {
         return Integer.valueOf(calcStack.pop());
     }
 
-    private boolean validateChoiceInput(String input){
+    public static boolean validateChoiceInput(String input){
         char firstChar = input.charAt(FIRST_INDEX);
         return input.length() == MENU_INPUT_LENGTH
                 && firstChar == REQUEST_VIEW_CALCULATION_RESULT
                 || firstChar == REQUEST_CALCULATION;
     }
-    private boolean validateExpression(String expression){
+    public static boolean validateExpression(String expression){
         AtomicInteger index = new AtomicInteger(0);
         long countOfValidOps = Arrays.stream(expression.split(" "))
-                .filter(e -> index.getAndIncrement() % 2 == 0 ? e.matches(OPERAND_REGEX) : e.matches(OPERATOR_REGEX))
+                .filter(e -> isEvenNumber(index) ? e.matches(OPERAND_REGEX) : e.matches(OPERATOR_REGEX))
                 .count();
         return countOfValidOps >= MINIMUM_OPS && Arrays.stream(expression.split(" ")).count() == countOfValidOps;
+    }
+
+    private static boolean isEvenNumber(AtomicInteger index) {
+        return index.getAndIncrement() % 2 == 0;
     }
 }
