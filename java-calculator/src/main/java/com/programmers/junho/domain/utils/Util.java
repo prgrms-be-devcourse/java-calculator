@@ -3,7 +3,7 @@ package com.programmers.junho.domain.utils;
 public class Util {
 
     private Util() {
-        throw new AssertionError("Uil 클래스 생성 불가합니다.");
+        throw new AssertionError("Util 클래스 생성 불가합니다.");
     }
 
     public static int convertStringToInt(String str) {
