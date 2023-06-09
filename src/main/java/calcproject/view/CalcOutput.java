@@ -6,7 +6,9 @@ import calcproject.models.CalcRecordModel;
 
 public interface CalcOutput {
 	public void showCalcResult(CalcRecordModel calcRecordModel);
+
 	public void showRecord(List<CalcRecordModel> calcRecordModelList);
+
 	public void showExitMessage();
 
 }

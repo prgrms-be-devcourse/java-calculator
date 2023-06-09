@@ -34,7 +34,7 @@ public class CalcManager implements Runnable {
 	}
 
 	private void executeCmd(Command cmd) {
-		switch (cmd){
+		switch (cmd) {
 			case INQUIRY:
 				List<CalcRecordModel> calcRecordModels = calcRecordRepository.loadCalcRecords();
 				calcOutput.showRecord(calcRecordModels);

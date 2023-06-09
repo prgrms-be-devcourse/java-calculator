@@ -10,7 +10,8 @@ public enum Command {
 	Command(int cmdIdx) {
 		this.cmdIdx = cmdIdx;
 	}
-	public int getCmdIdx(){
+
+	public int getCmdIdx() {
 		return this.cmdIdx;
 	}
 }

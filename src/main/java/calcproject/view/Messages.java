@@ -7,12 +7,12 @@ public enum Messages {
 
 	private final String message;
 
-	Messages(String message){
+	Messages(String message) {
 		this.message = message;
 	}
 
 	@Override
-	public String toString(){
+	public String toString() {
 		return this.message;
 	}
 }
