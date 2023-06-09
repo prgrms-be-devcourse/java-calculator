@@ -9,6 +9,10 @@ public class Console implements Input, Output{
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    //정수인지
+    public boolean isLong(double num) {
+        return num == (long) num;
+    }
 
     @Override
     public String input(String input) {
@@ -23,7 +27,13 @@ public class Console implements Input, Output{
 
     @Override
     public void outAnswer(Double answer) {
-        System.out.println(answer);
+        boolean isLong = isLong(answer);
+        if(isLong){
+            Long changeAnswer = answer.longValue();
+            System.out.println(changeAnswer);
+        }else {
+            System.out.println(answer);
+        }
     }
 
     @Override

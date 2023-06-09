@@ -5,6 +5,7 @@ import com.bona.javacalculator.io.Console;
 import com.bona.javacalculator.model.InputAndAnswer;
 import com.bona.javacalculator.repository.CalMemoryRepository;
 import com.bona.javacalculator.service.CalService;
+import com.bona.javacalculator.service.ValidateService;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class Calculator implements Runnable{
 
     private static final CalService calService = new CalService();
+    private static final ValidateService validateService = new ValidateService();
     private static final CalMemoryRepository calMemoryRepo = new CalMemoryRepository();
     private final Console console = new Console();
     @Override
@@ -60,7 +62,17 @@ public class Calculator implements Runnable{
 
     }
 
+    private Optional<String> checkValidate(String input) {
+        Optional<String> testInput = validateService.validate(input);
+        if (testInput.isEmpty()) {
+            console.inputError();
+            return Optional.empty();
+        }
+        return testInput;
+    }
+
     private int parse(String input) {
         return Integer.parseInt(input);
     }
+
 }
