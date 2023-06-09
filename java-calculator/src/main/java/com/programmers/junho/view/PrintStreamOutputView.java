@@ -13,7 +13,14 @@ public class PrintStreamOutputView implements OutputView {
 
     @Override
     public void printExpressions(List<String> expressions) {
+        validateIfIsEmpty(expressions);
         expressions.forEach(System.out::println);
+    }
+
+    private void validateIfIsEmpty(List<String> expressions) {
+        if (expressions.isEmpty()) {
+            System.out.println("계산 값이 존재하지 않습니다.");
+        }
     }
 
     @Override

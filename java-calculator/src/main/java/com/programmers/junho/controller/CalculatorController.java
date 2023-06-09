@@ -8,6 +8,8 @@ import com.programmers.junho.view.OutputView;
 import com.programmers.junho.view.PrintStreamOutputView;
 import com.programmers.junho.view.ScannerInputView;
 
+import java.util.List;
+
 import static com.programmers.junho.controller.constant.Selection.findByCode;
 
 public class CalculatorController {
@@ -27,10 +29,11 @@ public class CalculatorController {
         Selection code = findByCode(inputView.getSelectedCode());
         switch (code){
             case CHECK_DATA:
-                // do something 1
+                List<String> calculatedData = calculatorRepository.findAll();
+                outputView.printExpressions(calculatedData);
                 break;
             case CALCULATE:
-                // do something 2
+                // 계산 기능 구현
             default:
                 throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
         }
