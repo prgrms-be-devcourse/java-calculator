@@ -1,6 +1,5 @@
 package com.programmers.junho.domain;
 
-import java.util.Arrays;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -32,7 +31,6 @@ public class Expression {
         Stack<ArithmeticOperators> stack = new Stack<>();
 
         String[] tokens = this.expression.split(DELIMITER);
-        System.out.println(Arrays.toString(tokens));
         for (String token : tokens) {
             converseToPostfix(postfixExpression, stack, token);
         }

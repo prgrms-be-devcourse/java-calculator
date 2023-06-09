@@ -14,6 +14,7 @@ public class ScannerInputView implements InputView{
     @Override
     public String getExpression() {
         System.out.print("식 : ");
+        scanner.nextLine();
         return scanner.nextLine();
     }
 }
