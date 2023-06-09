@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import calcproject.models.CalcRecordModel;
 import calcproject.view.CalcInput;
-import calcproject.view.Command;
 import calcproject.view.CalcOutput;
+import calcproject.view.Command;
 import calcproject.view.Messages;
 
 public class CalcConsoleView implements CalcInput, CalcOutput {
@@ -25,7 +25,7 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 		return command;
 	}
 
-	private Command getCalcMenuByChoice(int choiceNum){
+	private Command getCalcMenuByChoice(int choiceNum) {
 		var result = Arrays.stream(Command.values())
 			.filter(s -> s.getCmdIdx() == choiceNum)
 			.findFirst();

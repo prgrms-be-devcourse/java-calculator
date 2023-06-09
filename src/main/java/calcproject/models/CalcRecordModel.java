@@ -1,7 +1,5 @@
 package calcproject.models;
 
-import java.util.Objects;
-
 public class CalcRecordModel {
 
 	private int id;
@@ -26,16 +24,18 @@ public class CalcRecordModel {
 		return this.calcResult;
 	}
 
-	public int getId(){
+	public int getId() {
 		return this.id;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof CalcRecordModel)) return false;
+		if (this == o)
+			return true;
+		if (!(o instanceof CalcRecordModel))
+			return false;
 
-		CalcRecordModel calcRecordModel = (CalcRecordModel) o;
+		CalcRecordModel calcRecordModel = (CalcRecordModel)o;
 		return this.calcResult == calcRecordModel.getCalcResult() &&
 			this.expression.equals(calcRecordModel.getExpression());
 	}
