@@ -6,12 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
+import static calculator.global.ErrorResponse.INVALID_OPERAND;
 import static calculator.global.ErrorResponse.OPERATOR_INPUT_ERROR;
 import static calculator.global.Priority.HIGH;
 import static calculator.global.Priority.LOW;
 
 public class Operation {
-    private static Map<String, Operator> operatorMap = new HashMap<>();
+    private static final Map<String, Operator> operatorMap = new HashMap<>();
 
     public Operation() {
         setOperatorMap();
@@ -27,7 +28,7 @@ public class Operation {
         return operatorMap;
     }
 
-    public double calculate(double a, String operator, double b){
+    public Integer calculate(Integer a, String operator, Integer b){
         return Optional.ofNullable(operatorMap.get(operator))
                 .orElseThrow(() ->  new IllegalArgumentException(OPERATOR_INPUT_ERROR))
                 .mapCalculate(operator,a,b);
@@ -46,10 +47,10 @@ public class Operation {
 
 
         private final String operator;
-        private final BiFunction<Double, Double, Double> expression;
+        private final BiFunction<Integer, Integer, Integer> expression;
         private final Integer priority;
 
-        Operator(String operator, BiFunction<Double, Double, Double> expression, Integer priority) {
+        Operator(String operator, BiFunction<Integer, Integer, Integer> expression, Integer priority) {
             this.operator = operator;
             this.expression = expression;
             this.priority = priority;
@@ -60,7 +61,10 @@ public class Operation {
             return priority >= operator.priority;
         }
 
-        public double mapCalculate(String operator, double num1, double num2) {
+        public Integer mapCalculate(String operator, Integer num1, Integer num2) {
+            if(Operation.getOperator(operator) == DIVIDE && num2 <= 0){
+                throw new ArithmeticException(INVALID_OPERAND);
+            }
             return getOperator(operator).expression.apply(num1, num2);
         }
     }

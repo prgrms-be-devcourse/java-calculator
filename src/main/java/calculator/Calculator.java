@@ -3,10 +3,12 @@ package calculator;
 import calculator.io.ExpressionConverter;
 import calculator.io.Input;
 import calculator.io.Output;
+import calculator.model.Operation;
 import calculator.repository.CalculationRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static calculator.global.ErrorResponse.*;
@@ -41,15 +43,32 @@ public class Calculator implements Runnable {
                     String expression = input.getExpression();
                     if (validateExpression(expression)) {
                         ArrayList<String> postfixList = infixConverter.convert(expression);
-                        int result = calculate(postfixList);
+                        Integer result = calculate(postfixList);
                         calculationRepository.save(expression + " = " + result);
                     }
             }
         }
     }
 
-    private int calculate(ArrayList<String> postfixExpression){
-        return 0;
+    private Integer calculate(ArrayList<String> postfixExpression){
+        Stack<String> calcStack = new Stack<>();
+        Operation operation = new Operation();
+
+        int op1, op2;
+
+        for(String s : postfixExpression){
+            if(s.matches(OPERATOR_REGEX)){
+                op2 = Integer.parseInt(calcStack.pop());
+                op1 = Integer.parseInt(calcStack.pop());
+
+                Integer result = operation.calculate(op1, s, op2);
+                calcStack.push(String.valueOf(result));
+            }
+            else{
+                calcStack.push(s);
+            }
+        }
+        return Integer.valueOf(calcStack.pop());
     }
 
     private boolean validateChoiceInput(String input){
