@@ -3,12 +3,13 @@ package calculator.repository;
 import java.util.LinkedHashMap;
 
 public class CalculationRepository {
-    LinkedHashMap<Integer, String> results = new LinkedHashMap<>();
+    private final static LinkedHashMap<Integer, String> results = new LinkedHashMap<>();
 
     public void save(String calculation) {
+        results.put(results.size() + 1, calculation);
     }
 
     public LinkedHashMap<Integer, String> findAll() {
-        return null;
+        return results;
     }
 }

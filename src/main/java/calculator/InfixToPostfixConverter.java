@@ -20,6 +20,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
     @Override
     public ArrayList<String> convert(String infixExpression) {
         StringBuilder num = new StringBuilder();
+        Operation operation = new Operation();
 
         // 중위 표기식을 리스트로 변환
         infix = new ArrayList<>(Arrays.asList(infixExpression.split(" ")));

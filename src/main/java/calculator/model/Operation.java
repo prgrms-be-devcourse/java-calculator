@@ -6,29 +6,30 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
+import static calculator.global.ErrorResponse.OPERATOR_INPUT_ERROR;
 import static calculator.global.Priority.HIGH;
 import static calculator.global.Priority.LOW;
 
 public class Operation {
-    private static final Map<String, Operator> operatorMap = new HashMap<>();
+    private static Map<String, Operator> operatorMap = new HashMap<>();
 
     public Operation() {
         setOperatorMap();
     }
 
-    private static void setOperatorMap(){
+    private void setOperatorMap(){
         Arrays.stream(Operator.values())
                 .forEach(op -> operatorMap.put(op.operator, op));
     }
 
 
-    public static Map<String, Operator> getOperatorMap() {
+    public Map<String, Operator> getOperatorMap() {
         return operatorMap;
     }
 
-    public static double calculate(double a, String operator, double b){
+    public double calculate(double a, String operator, double b){
         return Optional.ofNullable(operatorMap.get(operator))
-                .orElseThrow(() ->  new IllegalArgumentException("연산자 입력에 오류가 발생했습니다."))
+                .orElseThrow(() ->  new IllegalArgumentException(OPERATOR_INPUT_ERROR))
                 .mapCalculate(operator,a,b);
 
     }
