@@ -8,8 +8,8 @@ import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOpe
 import static com.programmers.junho.domain.ArithmeticOperators.isNumber;
 
 public class Expression {
-    public static final String REGEX = "^\\d+\\s([-+*/]\\s\\d+\\s)+$";
-    public static final String DELIMITER = " ";
+    private static final String REGEX = "^\\d+\\s([-+*/]\\s\\d+\\s)+$";
+    private static final String DELIMITER = " ";
     private final String expression;
 
     public Expression(String expression) {

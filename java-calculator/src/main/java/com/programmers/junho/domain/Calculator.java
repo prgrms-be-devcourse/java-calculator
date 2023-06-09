@@ -2,8 +2,11 @@ package com.programmers.junho.domain;
 
 import java.util.Stack;
 
+import static com.programmers.junho.domain.ArithmeticOperators.*;
+
 public class Calculator {
 
+    private static final String DELIMITER = " ";
     private final Expression expression;
 
     public Calculator(String expression) {
@@ -12,24 +15,22 @@ public class Calculator {
 
     public int calculate() {
         String postfixExpression = expression.getPostfixExpression();
-        String[] tokens = postfixExpression.split("");
+        String[] tokens = postfixExpression.split(DELIMITER);
         Stack<Integer> stack = new Stack<>();
 
         for (String token : tokens) {
-            extracted(stack, token);
+            postfixEvaluate(stack, token);
         }
-        // 스택 결과값
         return stack.pop();
     }
 
-    private void extracted(Stack<Integer> stack, String token) {
-        if (ArithmeticOperators.isNumber(token)) {
+    private void postfixEvaluate(Stack<Integer> stack, String token) {
+        if (isNumber(token)) {
             stack.push(Integer.parseInt(token));
             return;
         }
-        ArithmeticOperators operator = ArithmeticOperators.convertTokenToOperator(token);
-        Integer second = stack.pop();
-        Integer first = stack.pop();
-        stack.push(operator.apply(first, second));
+        Integer secondValue = stack.pop();
+        Integer firstValue = stack.pop();
+        stack.push(convertTokenToOperator(token).apply(firstValue, secondValue));
     }
 }
