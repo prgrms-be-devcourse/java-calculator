@@ -3,8 +3,10 @@ package com.programmers.junho.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CalculatorTest {
 
@@ -17,5 +19,13 @@ class CalculatorTest {
         int actual = calculator.calculate();
 
         assertThat(actual).isEqualTo(calculatedResult);
+    }
+
+    @DisplayName("정수 형 값을 벗어났을 경우 예외 발생")
+    @ParameterizedTest(name = "식: {0}")
+    @ValueSource(strings = {"999999 * 999999 * 99999 * 9999999","1 - 999999999 - 999999999 - 999999999 - 999999999"})
+    void test2(String expression) {
+        assertThatThrownBy(() -> new Calculator(expression).calculate())
+                .isInstanceOf(ArithmeticException.class);
     }
 }
