@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ListCalculatorRepository implements CalculatorRepository {
+public class MemoryCalculatorRepository implements CalculatorRepository {
 
     private final List<String> calculatedData;
 
-    public ListCalculatorRepository() {
+    public MemoryCalculatorRepository() {
         this.calculatedData = new ArrayList<>();
     }
 

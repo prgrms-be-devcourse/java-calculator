@@ -3,7 +3,7 @@ package com.programmers.junho.controller;
 import com.programmers.junho.controller.constant.Selection;
 import com.programmers.junho.domain.Calculator;
 import com.programmers.junho.repository.CalculatorRepository;
-import com.programmers.junho.repository.ListCalculatorRepository;
+import com.programmers.junho.repository.MemoryCalculatorRepository;
 import com.programmers.junho.view.InputView;
 import com.programmers.junho.view.OutputView;
 
@@ -20,7 +20,7 @@ public class CalculatorController {
     public CalculatorController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.calculatorRepository = new ListCalculatorRepository();
+        this.calculatorRepository = new MemoryCalculatorRepository();
     }
 
     public void run() {
