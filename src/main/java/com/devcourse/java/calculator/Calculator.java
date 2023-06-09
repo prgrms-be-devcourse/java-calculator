@@ -6,8 +6,6 @@ import com.devcourse.java.calculator.io.Output;
 import com.devcourse.java.calculator.repository.CalculatorRepository;
 import lombok.AllArgsConstructor;
 
-import java.util.InputMismatchException;
-
 @AllArgsConstructor
 public class Calculator implements Runnable{
 
