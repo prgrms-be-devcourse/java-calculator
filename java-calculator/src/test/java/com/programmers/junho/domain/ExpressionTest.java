@@ -16,11 +16,12 @@ class ExpressionTest {
         assertThatNoException().isThrownBy(() -> new Expression(expression));
     }
 
-    @DisplayName("공백이 존재하지 않아도 예외가 발생하지 않는다.")
+    @DisplayName("공백이 존재하지 않으면 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1+2", "1-3", "12+23* 45"})
     void name3(String expression) {
-        assertThatNoException().isThrownBy(() -> new Expression(expression));
+        assertThatThrownBy(() -> new Expression(expression))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("식과 연산 사이에 공백 개수가 하나 이상이면 예외가 발생한다.")
@@ -41,7 +42,7 @@ class ExpressionTest {
 
     @DisplayName("중위 표현식을 후위 표현식으로 변환한다.")
     @ParameterizedTest(name = "중위 : {0}, 후위 : {1}")
-    @CsvSource(value = {"3 + 4 * 2:342*+", "1 + 2 * 3 + 4 / 2 + 2:123*+42/+2+", "4 + 5 * 6 / 2 - 3:456*2/+3-"}, delimiter = ':')
+    @CsvSource(value = {"3 + 4 * 2:3 4 2 * +", "1 + 2 * 3 + 4 / 2 + 2:1 2 3 * + 4 2 / + 2 +", "4 + 5 * 6 / 2 - 3:4 5 6 * 2 / + 3 -", "44 / 2:44 2 /"}, delimiter = ':')
     void name7(String infixExpression, String postfixExpression) {
         Expression expression = new Expression(infixExpression);
 
