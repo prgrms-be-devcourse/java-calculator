@@ -16,21 +16,21 @@ public class InfixToPostfixConverter implements ExpressionConverter {
         List<String> expressionTokenList = makeExpressionToken(expression);
         List<String> postFixTokenList = new ArrayList<>();
 
-        for(int i = 0; i < expressionTokenList.size(); i++) {
+        for (int i = 0; i < expressionTokenList.size(); i++) {
             String token = expressionTokenList.get(i);
 
-            if(token.equals("(")) {
+            if (token.equals("(")) {
                 stack.push(Operator.OPEN_PARENTHESES);
-            } else if(Operator.isOperator(token)){
+            } else if (Operator.isOperator(token)) {
                 Operator operator = Operator.getOperation(token);
 
-                while(!stack.isEmpty() && stack.peek().compareTo(operator.getPriority()) >= 0) {
+                while (!stack.isEmpty() && stack.peek().compareTo(operator.getPriority()) >= 0) {
                     postFixTokenList.add(stack.pop().getSymbol());
                 }
                 stack.push(operator);
             } else if (token.equals(")")) {
                 Operator pop = stack.pop();
-                while(!stack.isEmpty() && !pop.isOpenParentheses()) {
+                while (!stack.isEmpty() && !pop.isOpenParentheses()) {
                     postFixTokenList.add(pop.getSymbol());
                     pop = stack.pop();
                 }
@@ -39,7 +39,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
             }
         }
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             postFixTokenList.add(stack.pop().getSymbol());
         }
 
@@ -54,7 +54,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
         Matcher matcher = pattern.matcher(expression);
         List<String> filterExpression = new ArrayList<>();
 
-        while(matcher.find()) {
+        while (matcher.find()) {
             filterExpression.add(matcher.group());
         }
 
@@ -68,7 +68,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
                     throw new WrongInputExpressionException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
                 });
 
-        if(!isParenthesesOrder(expression)) {
+        if (!isParenthesesOrder(expression)) {
             throw new WrongInputExpressionException("괄호의 순서가 잘못되었습니다.");
         }
     }
@@ -83,7 +83,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
                         return false;
                     }
                     stack.push(ch);
-                } else if (ch == ')'){
+                } else if (ch == ')') {
                     if (stack.isEmpty()) {
                         return false;
                     }

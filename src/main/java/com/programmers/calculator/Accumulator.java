@@ -8,11 +8,11 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
-public class Compute {
+public class Accumulator {
 
     private final ExpressionConverter expressionConverter;
 
-    public Compute(ExpressionConverter expressionConverter) {
+    public Accumulator(ExpressionConverter expressionConverter) {
         this.expressionConverter = expressionConverter;
     }
 
@@ -41,7 +41,7 @@ public class Compute {
     private String convertResultValue(String calc) {
         int commaIndex = calc.indexOf('.');
 
-        if(isDecimalPlaceOverTen(calc, commaIndex))
+        if (isDecimalPlaceOverTen(calc, commaIndex))
             return calc.substring(0, commaIndex + 11);
         return calc;
     }

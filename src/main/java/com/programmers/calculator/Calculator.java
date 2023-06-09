@@ -7,24 +7,24 @@ import com.programmers.io.Console;
 
 public class Calculator {
 
-    private final Compute compute;
+    private final Accumulator accumulator;
     private final Memory memory;
     private boolean power = true;
 
     public Calculator(ExpressionConverter expressionConverter) {
-        compute = new Compute(expressionConverter);
+        accumulator = new Accumulator(expressionConverter);
         memory = new Memory();
     }
 
     public void run() {
-        while(power) {
+        while (power) {
             Console.printMenu();
             MenuType menu = makeMenuType(Console.inputMenuNumber());
 
-            if(menu == null)
+            if (menu == null)
                 continue;
 
-            switch(menu){
+            switch (menu) {
                 case HISTORY:
                     Console.printHistory(memory.findAll());
                     break;
@@ -32,7 +32,7 @@ public class Calculator {
                 case CALCULATE:
                     String expression = Console.inputExpression();
                     String result = calculate(expression);
-                    if(result == null)
+                    if (result == null)
                         break;
                     memory.save(new CalcResult(expression, result));
                     Console.printResult(result);
@@ -59,7 +59,7 @@ public class Calculator {
     private String calculate(String expression) {
         String result = null;
         try {
-            result = compute.compute(expression);
+            result = accumulator.compute(expression);
         } catch (WrongInputExpressionException | ArithmeticException e) {
             Console.printError(e.getMessage());
         }

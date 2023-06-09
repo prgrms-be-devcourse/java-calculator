@@ -34,11 +34,12 @@ class InfixToPostfixConverterTest {
         Matcher matcher = pattern.matcher(input);
         List<String> filterExpression = new ArrayList<>();
 
-        while(matcher.find()) {
+        while (matcher.find()) {
             filterExpression.add(matcher.group());
         }
         assertThat(filterExpression.size()).isEqualTo(Integer.parseInt(output));
     }
+
     @ParameterizedTest
     @CsvSource(value = {"a * 5 + 2 : False", "7 ^ 2 + 5 : False", "4 + 3 * 2 / 5:True", "(3 + 4) * 2    + 5     * ( 2 + 3) : True", "7 ^     2 + 5 : False"}, delimiter = ':')
     @DisplayName("수식 입력 잘못 된 값 검증")
@@ -65,7 +66,4 @@ class InfixToPostfixConverterTest {
                 .isInstanceOf(WrongInputExpressionException.class)
                 .hasMessageContaining("괄호의 순서가 잘못되었습니다.");
     }
-
-
-
 }
