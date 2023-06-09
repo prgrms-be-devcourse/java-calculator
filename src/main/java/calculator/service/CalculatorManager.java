@@ -42,9 +42,14 @@ public class CalculatorManager {
      */
     public String calculate(StringTokenizer formulaTokens) {
         while (formulaTokens.hasMoreTokens()) {
-            isSymbolAndNumber(formulaTokens.nextToken());
+            handleSymbolOrNumberValidation(formulaTokens.nextToken());
         }
-        return String.valueOf(isCalculation());
+
+        while (!symbolDeque.isEmpty()){
+            performCalculation();
+        }
+
+        return String.valueOf(numberDeque.pop());
     }
 
     /**
@@ -52,50 +57,29 @@ public class CalculatorManager {
      *
      * @param token : 검사할 토큰
      */
-    public void isSymbolAndNumber(String token) {
-        if (token.matches("[-+*/]")) {
-            isCalculation(SymbolPriority.from(token));
+    private void handleSymbolOrNumberValidation(String token) {
+        if (token.matches("^[0-9]+$")) {
+            numberDeque.push(Integer.parseInt(token));
             return;
         }
-        if (token.matches("[0-9]")) {
-            numberDeque.push(Integer.parseInt(token));
+        if (token.matches("[-+*/]")) {
+            SymbolPriority nextSymbol = SymbolPriority.from(token);
+            while (!symbolDeque.isEmpty() && symbolDeque.peek().getPriority() >= nextSymbol.getPriority()){
+                performCalculation();
+            }
+            symbolDeque.push(nextSymbol);
         }
     }
 
-    /**
-     * 현재 연산식에서 가장 우선 순위가 높은 연산자가 있다면 계산을 진행하는 메소드
-     *
-     * @param nextSymbol : 검사할 다음 연산자
-     */
-    private void isCalculation(SymbolPriority nextSymbol) {
-        while (checkSymbolPriority(nextSymbol)) {
-            int secondNumber = isDivisionByZero(symbolDeque.peek().getSymbol(), numberDeque.pop());
-            int firstNumber = numberDeque.pop();
-            int result = symbolDeque.pop()
-                    .getFormula()
-                    .apply(firstNumber, secondNumber);
-            numberDeque.push(result);
-        }
-        symbolDeque.push(nextSymbol);
-    }
+    private void performCalculation(){
+        isDivisionByZero(symbolDeque.peek().getSymbol(), numberDeque.peek());
+        int secondNumber = numberDeque.pop();
+        int firstNumber = numberDeque.pop();
+        int result = symbolDeque.pop()
+                .getFormula()
+                .apply(firstNumber, secondNumber);
 
-    /**
-     * 우선순위가 가장 낮았던, 즉, 마지막에 남은 연산 진행
-     */
-    public int isCalculation() {
-        while (!symbolDeque.isEmpty()) {
-            int secondNumber = isDivisionByZero(symbolDeque.peek().getSymbol(), numberDeque.pop());
-            int firstNumber = numberDeque.pop();
-            int result = symbolDeque.pop()
-                    .getFormula()
-                    .apply(firstNumber, secondNumber);
-            numberDeque.push(result);
-        }
-        return numberDeque.pop();
-    }
-
-    private boolean checkSymbolPriority(SymbolPriority nextSymbol) {
-        return !symbolDeque.isEmpty() && symbolDeque.peek().getPriority() >= nextSymbol.getPriority();
+        numberDeque.push(result);
     }
 
     /**
@@ -105,11 +89,10 @@ public class CalculatorManager {
      * @param secondNumber : 검증할 2번째 메소드
      * @return secondNumber
      */
-    public int isDivisionByZero(String symbol,
-                                int secondNumber) {
+    private void isDivisionByZero(String symbol,
+                                  int secondNumber) {
         if (symbol.equals("/") && secondNumber == 0) {
             throw new DivisionByZeroException(ResponseErrorFormat.FAIL_DIVISION_BY_ZERO);
         }
-        return secondNumber;
     }
 }

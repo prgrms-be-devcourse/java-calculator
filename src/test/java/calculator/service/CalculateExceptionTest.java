@@ -32,15 +32,6 @@ public class CalculateExceptionTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = "/, 0")
-    @DisplayName("CalculatorManager.isDivisionByZero(String, int) - 0으로 나눴을 때, - DivisionByZeroException")
-    void 제로_나눗셈_검증(String inputSymbol, int inputNumber) {
-        assertThatThrownBy(() -> calculatorManager.isDivisionByZero(inputSymbol, inputNumber))
-                .isInstanceOf(DivisionByZeroException.class)
-                .hasMessageContaining(ResponseErrorFormat.FAIL_DIVISION_BY_ZERO.getMessage());
-    }
-
-    @ParameterizedTest
     @CsvSource(value = {"5/0", "1+2/0", "5*1/0"})
     @DisplayName("CalculatorService.calculate(String) - 0으로 나눴을 때, - DivisionByZeroException")
     void 제로_나눗셈(String input) {
