@@ -87,5 +87,7 @@
 - [x] 예외 처리
   - [x] 조회(1), 계산(2) 이외의 값을 입력 했을 경우 `IllegalArgumentException` 발생 -> controller에서 처리
   - [x] 형식 (숫자 + 공백 +  기호 + 공백 + 숫자 + 공백  + 기호 + ...)이 잘못된 경우 `IllegalArgumentException` 발생
-    - 공백은 하나 or 하나 이하여야 한다 -> split 하기 전 replace or replaceAll로 공백 제거하고 split하기
-  - [x] int 자료형 overflow / underflow 발생 시 `ArithmeticException` 발생
+    - 공백은 무조건 하나로 처리 -> split시 space 하나로 처리해야 자를 수 있음. split 특성상 delimiter 포함 하지를 못한다.
+    - 정규식으로 처리
+  - [x] int 자료형 overflow / underflow 발생 시 `IllegalArgumentException` 발생
+    - Math 클래스의 `~Exact()` 메서드 사용
