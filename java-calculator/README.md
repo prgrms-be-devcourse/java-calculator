@@ -33,22 +33,29 @@
 -1
 ```
 
-- [ ] 입력
+- [x] 입력
   - [x] Scanner를 통한 콘솔 입력 
     - [x] 선택 값 입력 받기
     - [x] 계산 기능 선택 시 -> 식 입력 받기
-  - [ ] BufferedReader로 입력 받는 것 교체 / 확장 가능 하게 추상화 시키기 (OCP)
-- [ ] 출력
+  - [x] BufferedReader로 입력 받는 것 교체 / 확장 가능 하게 추상화 시키기 (OCP)
+- [x] 출력
   - [x] 조회 기능 선택 시 -> 조회 시 넘겨 받은 결과값 출력하기
   - [x] 계산 기능 선택 시 -> 계산 후 계산한 결과 출력하기
-  - [ ] OutputView 추상화 시키기
+  - [x] OutputView 추상화 시키기
 
+- [x] 컨트롤러 및 application 생성
+  - 컨트롤러 역할 : view와 domain을 이어 준다 / repository에서 값을 가져온다.
+  - 게임을 실행하는 `run()`메서드를 가진다.
+  - Application 클래스 역할
+    - 컨트롤러를 실행한다.
+    - view 객체를 생성해 컨트롤러에 주입시킨다.
 
 - [ ] 조회 기능 구현
   - [x] 계산 후 이력을 List로 저장 -> Repository에서 생성
     - [x] repository 패키지 안 List 가진 일급 컬렉션으로 구현
     - [x] 인터페이스로 repository 추상화
-  - [ ] 조회 기능 선택 시 계산 이력을 List에서 가져 오기 (repository에서 controller로 직접적으로 가져오기)
+  - [x] 조회 기능 선택 시 계산 이력을 List에서 가져 오기 (repository에서 controller로 직접적으로 가져오기)
+
 
 - [ ] 계산 기능 구현
   - [ ] 덧셈
@@ -61,6 +68,6 @@
     - [ ] 식에서 
 
 - [ ] 예외 처리
-  - [ ] 조회(1), 계산(2) 이외의 값을 입력 했을 경우 `IllegalArgumentException` 발생
+  - [x] 조회(1), 계산(2) 이외의 값을 입력 했을 경우 `IllegalArgumentException` 발생 -> controller에서 처리
   - [ ] 형식 (숫자 + 공백 +  기호 + 공백 + 숫자 + 공백  + 기호 + ...)이 잘못된 경우 `IllegalArgumentException` 발생
   - [ ] int 자료형 overflow / underflow 발생 시 `ArithmeticException` 발생
