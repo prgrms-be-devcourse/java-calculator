@@ -1,6 +1,4 @@
 package org.example.io;
-
-import org.assertj.core.api.Assertions;
 import org.example.calculation.ArithmeticCalculation;
 import org.example.calculation.Calculation;
 import org.example.repository.MemoryRepository;
