@@ -1,7 +1,7 @@
 package com.programmers;
 
-import com.programmers.model.Input;
-import com.programmers.model.Output;
+import com.programmers.engine.io.Input;
+import com.programmers.engine.io.Output;
 
 import java.util.Scanner;
 

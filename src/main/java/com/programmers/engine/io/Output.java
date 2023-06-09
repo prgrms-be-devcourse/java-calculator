@@ -1,4 +1,4 @@
-package com.programmers.model;
+package com.programmers.engine.io;
 
 public interface Output {
     void showMenu();

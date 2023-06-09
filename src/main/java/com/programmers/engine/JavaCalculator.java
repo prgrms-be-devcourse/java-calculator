@@ -1,8 +1,9 @@
-package com.programmers;
+package com.programmers.engine;
 
-import com.programmers.model.Input;
-import com.programmers.model.Output;
-import com.programmers.model.Result;
+import com.programmers.BasicCalculator;
+import com.programmers.engine.io.Input;
+import com.programmers.engine.io.Output;
+import com.programmers.engine.model.Result;
 
 public class JavaCalculator {
     private final Input input;

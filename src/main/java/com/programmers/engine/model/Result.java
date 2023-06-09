@@ -1,19 +1,15 @@
-package com.programmers;
-
-import com.programmers.model.Result;
+package com.programmers.engine.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CalculateResult implements Result {
+public class Result {
     private final Map<Integer, String> results = new HashMap<>();
 
-    @Override
     public void save(String result) {
         results.put(results.size() + 1, result);
     }
 
-    @Override
     public void readAllResults() {
         if (results.size() == 0) {
             System.out.println("계산 이력이 없습니다.");
