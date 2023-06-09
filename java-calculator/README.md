@@ -34,13 +34,20 @@
 ```
 
 - [ ] 입력
-  - [ ] Scanner를 통한 콘솔 입력 
+  - [x] Scanner를 통한 콘솔 입력 
+    - [x] 선택 값 입력 받기
+    - [x] 계산 기능 선택 시 -> 식 입력 받기
   - [ ] BufferedReader로 입력 받는 것 교체 / 확장 가능 하게 추상화 시키기 (OCP)
-  
+- [ ] 출력
+  - [x] 조회 기능 선택 시 -> 조회 시 넘겨 받은 결과값 출력하기
+  - [x] 계산 기능 선택 시 -> 계산 후 계산한 결과 출력하기
+  - [ ] OutputView 추상화 시키기
+
+
 - [ ] 조회 기능 구현
-  - [ ] 계산 후 이력을 List로 저장 -> Repository에서 생성
-    - [ ] repository 패키지 안 Listfmf 가진 일급 컬렉션으로 구현
-    - [ ] 인터페이스로 repository 추상화
+  - [x] 계산 후 이력을 List로 저장 -> Repository에서 생성
+    - [x] repository 패키지 안 List 가진 일급 컬렉션으로 구현
+    - [x] 인터페이스로 repository 추상화
   - [ ] 조회 기능 선택 시 계산 이력을 List에서 가져 오기 (repository에서 controller로 직접적으로 가져오기)
 
 - [ ] 계산 기능 구현
