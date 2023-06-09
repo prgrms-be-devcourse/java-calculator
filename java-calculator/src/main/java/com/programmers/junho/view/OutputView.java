@@ -7,5 +7,5 @@ public interface OutputView {
     void printChoiceMessage();
     void printExpressions(List<String> expressions);
 
-    void printCalculatedResult(int result);
+    void printCalculatedResult(double result);
 }

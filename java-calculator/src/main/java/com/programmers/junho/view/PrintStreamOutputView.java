@@ -24,7 +24,7 @@ public class PrintStreamOutputView implements OutputView {
     }
 
     @Override
-    public void printCalculatedResult(int result) {
+    public void printCalculatedResult(double result) {
         System.out.println(result);
     }
 }
