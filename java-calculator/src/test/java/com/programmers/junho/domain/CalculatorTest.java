@@ -1,6 +1,7 @@
 package com.programmers.junho.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,5 +28,13 @@ class CalculatorTest {
     void test2(String expression) {
         assertThatThrownBy(() -> new Calculator(expression).calculate())
                 .isInstanceOf(ArithmeticException.class);
+    }
+
+    @DisplayName("입력값이 정수 범위를 초과하면 예외를 발생한다.")
+    @Test
+    void test123() {
+        Calculator calculator = new Calculator("999999999999999 + 1");
+        assertThatThrownBy(calculator::calculate)
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
