@@ -47,7 +47,7 @@ public class Calculator {
             case "/":
                 return b / a;
             default:
-                throw new UnsupportedOperationException("올바른 연산자를 입력해주세요.");
+                throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
         }
     }
 }

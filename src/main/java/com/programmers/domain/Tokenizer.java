@@ -22,10 +22,6 @@ public class Tokenizer {
                 result.add(String.valueOf(c));
             }
         }
-
-        if(sb.isEmpty()) {
-            throw new UnsupportedOperationException("올바른 계산식을 입력하세요.");
-        }
         result.add(sb.toString());
 
         return result.toArray(String[]::new);
