@@ -2,13 +2,10 @@ package com.programmers.junho.view;
 
 import java.util.List;
 
-public class OutputView {
+public interface OutputView {
 
-    public static void printExpressions(List<String> expressions) {
-        expressions.forEach(System.out::println);
-    }
+    void printChoiceMessage();
+    void printExpressions(List<String> expressions);
 
-    public static void printCalculatedResult(int result) {
-        System.out.println(result);
-    }
+    void printCalculatedResult(int result);
 }
