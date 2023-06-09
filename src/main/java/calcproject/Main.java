@@ -1,37 +1,21 @@
 package calcproject;
 
-import calcproject.repository.MemoryCalcModelRepository;
+import calcproject.engine.CalcExpressionTokenizer;
+import calcproject.engine.Calculator;
+import calcproject.repository.CalcRecordRepository;
+import calcproject.repository.MemoryCalcRecordRepository;
 import calcproject.service.CalcManager;
-import java.util.Scanner;
+import calcproject.view.console.CalcConsoleView;
 
 public class Main {
-    public static void main(String[] args) {
-        CalcManager calcManager = new CalcManager(new MemoryCalcModelRepository());
+	public static void main(String[] args) {
+		CalcRecordRepository calcRecordRepository = new MemoryCalcRecordRepository();
+		CalcConsoleView calcConsoleView = new CalcConsoleView();
+		CalcExpressionTokenizer calcExpressionTokenizer = new CalcExpressionTokenizer();
+		Calculator calculator = new Calculator(calcExpressionTokenizer);
 
-        while(true) {
-            System.out.println("1. 조회");
-            System.out.println("2. 계산 \n");
+		Runnable calcManager = new CalcManager(calcRecordRepository, calcConsoleView, calcConsoleView, calculator);
 
-            System.out.println("선택 :");
-
-            Scanner sc = new Scanner(System.in);
-            Integer choice_num = sc.nextInt();
-            sc.nextLine();
-
-            switch (choice_num) {
-                case 1:
-                    calcManager.printHistory();
-                    break;
-                case 2:
-                    String expression = sc.nextLine();
-                    double r = calcManager.calculateExpressionAndSave(expression);
-                    System.out.println(r);
-                    System.out.println();
-                    break;
-                default:
-                    System.out.println("잘 못된 입력입니다.");
-                    break;
-            }
-        }
-    }
+		calcManager.run();
+	}
 }
