@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Console implements Input, Output {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final InputValidator validator = new InputValidator();
 
     @Override
     public void printCommandMenu() {
@@ -21,13 +22,9 @@ public class Console implements Input, Output {
 
     @Override
     public int getCommand() {
+        String command = scanner.nextLine();
+        validator.checkCommandInput(command);
 
-        try {
-            int command = scanner.nextInt();
-        } catch (RuntimeException e) {
-
-        }
-
-        return 0;
+        return Integer.parseInt(command);
     }
 }

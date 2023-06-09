@@ -24,7 +24,7 @@ public class Calculator implements Runnable{
 
             try {
                 command = input.getCommand();
-            } catch (InputMismatchException e) {
+            } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
@@ -33,7 +33,7 @@ public class Calculator implements Runnable{
                 return;
             }
             runCommand(command);
-            return;
+            return; // 지우기
         }
     }
 
