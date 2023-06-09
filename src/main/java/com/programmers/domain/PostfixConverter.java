@@ -3,33 +3,38 @@ package com.programmers.domain;
 import com.programmers.util.Arithmetic;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
+import java.util.function.Supplier;
 
 public class PostfixConverter {
-    public String[] convert(String[] tokenized) {
-        ArrayList<String> result = new ArrayList<>();
+    private List<String> postfixExpression;
+    private Stack<String> operators;
 
-        Stack<String> operators = new Stack<>();
+    public String[] convert(String[] tokenized) {
+        postfixExpression = new ArrayList<>();
+        operators = new Stack<>();
+
         for (String token : tokenized) {
             if(Arithmetic.isNumber(token)) {
-                result.add(token);
+                postfixExpression.add(token);
             } else {
-                while (!operators.isEmpty()) {
-                    if(getPriority(token) > getPriority(operators.peek())) {
-                        break;
-                    }
-
-                    result.add(operators.pop());
-                }
+                popAndAddOperatorsToExpression(() -> getPriority(token) > getPriority(operators.peek()));
                 operators.push(token);
             }
         }
+        popAndAddOperatorsToExpression(() -> false);
 
+        return postfixExpression.toArray(String[]::new);
+    }
+
+    private void popAndAddOperatorsToExpression(Supplier<Boolean> breakCondition) {
         while(!operators.isEmpty()) {
-            result.add(operators.pop());
+            if(breakCondition.get()) {
+                break;
+            }
+            postfixExpression.add(operators.pop());
         }
-
-        return result.toArray(String[]::new);
     }
 
     private int getPriority(String operator) {
