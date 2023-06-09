@@ -52,35 +52,40 @@ public class CalculationService implements Runnable {
         while (true) {
             String selected = input.selectService();
 
-            boolean exitService = false;
-            switch (selected) {
-                case "1":
-                    List<String> findCalculations = findCalculations();
-                    output.printResult(findCalculations);
-
-                    break;
-                case "2":
-                    String calculation = input.inputCalculation();
-                    try {
-                        int result = calculate(calculation);
-                        output.printResult(result);
-                    } catch (RuntimeException ex) {
-                        output.printError(ex);
-                    }
-
-                    break;
-                case "3":
-                    output.exit();
-                    exitService = true;
-
-                    break;
-                default:
-                    output.inputError();
-            }
+            boolean exitService = selectService(selected);
 
             if(exitService) {
                 break;
             }
         }
+    }
+
+    private boolean selectService(String selected) {
+        boolean exitService = false;
+        switch (selected) {
+            case "1":
+                List<String> findCalculations = findCalculations();
+                output.printResult(findCalculations);
+
+                break;
+            case "2":
+                String calculation = input.inputCalculation();
+                try {
+                    int result = calculate(calculation);
+                    output.printResult(result);
+                } catch (RuntimeException ex) {
+                    output.printError(ex);
+                }
+
+                break;
+            case "3":
+                output.exit();
+                exitService = true;
+
+                break;
+            default:
+                output.inputError();
+        }
+        return exitService;
     }
 }
