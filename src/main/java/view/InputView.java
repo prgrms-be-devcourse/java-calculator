@@ -5,7 +5,9 @@ import exception.CalculatorException;
 import exception.ErrorMessage;
 import view.OutputView.Menu;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -20,12 +22,14 @@ public class InputView {
 
     public static Menu selectMenuInput() throws CalculatorException {
         try {
-            return switch (getInstance().nextInt()) {
-                case 1 -> Menu.CHECK;
-                case 2 -> Menu.CALCULATE;
-                case 3 -> Menu.END;
-                default -> throw new CalculatorException(ErrorMessage.INVALID_MENU_NUMBER);
-            };
+            int userInput = getInstance().nextInt();
+            Optional<Menu> selectedMenuNumber = Arrays.stream(Menu.values())
+                    .filter(m -> m.isExistMenu(userInput))
+                    .findFirst();
+            if (selectedMenuNumber.isEmpty()) {
+                throw new CalculatorException(ErrorMessage.INVALID_MENU_NUMBER);
+            }
+            return selectedMenuNumber.get();
         } catch (InputMismatchException e) {
             throw new CalculatorException(ErrorMessage.INVALID_TYPE_INPUT);
         }

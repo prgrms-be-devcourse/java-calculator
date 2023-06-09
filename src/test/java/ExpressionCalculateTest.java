@@ -1,7 +1,5 @@
-import model.vo.MathExpression;
+import model.MathExpression;
 import exception.CalculatorException;
-import model.service.CalculateService;
-import model.service.CalculateServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -11,8 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ExpressionCalculateTest {
-    private final CalculateService calculateService = new CalculateServiceImpl();
-
     @DisplayName(value = "정상적인 연산식 입력 테스트")
     @ParameterizedTest
     @CsvSource(
@@ -27,7 +23,8 @@ public class ExpressionCalculateTest {
             }
     )
     public void 성공_테스트(String expression, int expected) throws CalculatorException {
-        int actual = calculateService.calculate(MathExpression.from(expression));
+        MathExpression me = MathExpression.from(expression);
+        int actual = me.calculate();
         assertEquals(expected, actual);
     }
 
@@ -35,9 +32,9 @@ public class ExpressionCalculateTest {
     @DisplayName(value = "비정상적 연산식 입력 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"5 + 3 / 2 +", "10-20", "a - b"})
-    public void 실패_테스트(String expression) throws CalculatorException {
+    public void 실패_테스트(String expression) {
         assertThrows(CalculatorException.class, () -> {
-            calculateService.calculate(MathExpression.from(expression));
+            MathExpression.from(expression);
         });
     }
 }

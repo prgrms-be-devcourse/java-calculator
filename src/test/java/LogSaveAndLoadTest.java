@@ -1,8 +1,7 @@
-import model.vo.MathExpression;
 import exception.CalculatorException;
 import model.CalculationLog;
-import model.service.CalculateService;
-import model.service.CalculateServiceImpl;
+import model.MathExpression;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import repository.CalculationLogRepository;
@@ -10,10 +9,8 @@ import repository.CalculationLogRepositoryImpl;
 
 import java.util.List;
 
-
-public class LogSaveTest {
+public class LogSaveAndLoadTest {
     private final CalculationLogRepository clrp = new CalculationLogRepositoryImpl();
-    private final CalculateService calculateService = new CalculateServiceImpl();
 
     @DisplayName(value = "연산결과 저장 후 출력")
     @Test
@@ -28,9 +25,10 @@ public class LogSaveTest {
                     "-10 * -5 + 10"
                 );
         for (String expression : expressions) {
-            int result = calculateService.calculate(MathExpression.from(expression));
+            MathExpression me = MathExpression.from(expression);
+            int result = me.calculate();
             clrp.save(CalculationLog.of(expression, result));
         }
-        clrp.viewLog();
+        clrp.loadAllLogs();
     }
 }
