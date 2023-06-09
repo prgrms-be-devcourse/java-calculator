@@ -11,8 +11,12 @@ public class CalculateResult {
         this.result = result;
     }
 
-    public double getResult() {
-        return this.result;
+    public String getExpression() {
+        return expression;
+    }
+
+    public Double getResult() {
+        return result;
     }
 
     @Override

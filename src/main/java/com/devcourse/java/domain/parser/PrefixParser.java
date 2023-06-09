@@ -47,7 +47,7 @@ public class PrefixParser implements ExpressionParser {
     }
 
     private boolean isHigherPriority(String currentCharacter) {
-        return isStackNotEmpty() && Operators.getPriority(currentCharacter) <= Operators.getPriority(stack.peek());
+        return isStackNotEmpty() && Operators.evaluatePriority(currentCharacter) <= Operators.evaluatePriority(stack.peek());
     }
 
     private void clearLefts(List<String> result) {

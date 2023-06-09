@@ -25,7 +25,11 @@ public enum Operators {
         this.priority = priority;
     }
 
-    public static int getPriority(String symbol) {
+    public int getPriority() {
+        return priority;
+    }
+
+    public static int evaluatePriority(String symbol) {
         return Arrays.stream(Operators.values())
                 .filter(operator -> StringUtils.equals(operator.symbol, symbol))
                 .findFirst()

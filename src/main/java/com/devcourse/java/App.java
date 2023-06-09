@@ -1,6 +1,7 @@
 package com.devcourse.java;
 
 import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.operator.Operator;
 import com.devcourse.java.domain.operator.OperatorFactory;
 import com.devcourse.java.domain.storage.Storage;
@@ -9,7 +10,7 @@ import com.devcourse.java.domain.storage.MemoryStorage;
 import com.devcourse.java.domain.parser.ExpressionParser;
 import com.devcourse.java.domain.parser.PrefixParser;
 import com.devcourse.java.domain.runner.CalculatorRunner;
-import com.devcourse.java.domain.calculator.Calculator;
+import com.devcourse.java.domain.calculator.PrefixCalculator;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.console.Input;
 import com.devcourse.java.domain.console.Reader;
@@ -32,8 +33,8 @@ public class App {
         Query query = new Query(resultStorage, validator);
         ExpressionParser prefixParser = new PrefixParser();
         Factory<Operator, String> operatorFactory = new OperatorFactory();
-        Calculator calculator = new Calculator(prefixParser, operatorFactory);
-        Calculate calculate = new Calculate(calculator, resultStorage, validator);
+        Calculator prefixCalculator = new PrefixCalculator(prefixParser, operatorFactory);
+        Calculate calculate = new Calculate(prefixCalculator, resultStorage, validator);
         Factory<Menu, Menus> menuFactory = new MenuFactory(query, calculate);
 
         CalculatorRunner calculatorRunner = new CalculatorRunner(menuFactory, console);
