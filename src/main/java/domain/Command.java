@@ -14,6 +14,8 @@ public class Command {
         this.optCount = commandArr.length / 2;
         this.numberArr = new int[optCount + 1];
         this.optArr = new Operator[optCount];
+
+        parseComamand();
     }
 
     public String makeHistory(int result) {

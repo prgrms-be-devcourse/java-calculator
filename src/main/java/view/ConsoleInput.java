@@ -1,8 +1,7 @@
 package main.java.view;
 
 import main.java.domain.Menu;
-import main.java.exception.OutOfMenuException;
-import main.java.exception.WrongCommandException;
+import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
@@ -19,33 +18,29 @@ public class ConsoleInput implements Input{
     public static final int CALCULATEMENU = 2;
     public static final int EXITMENU = 0;
 
-    @Override
-    public Menu getMenuInput() throws OutOfMenuException {
+    @Test
+    public Menu getMenuInput() throws IllegalArgumentException {
         String line = scanner.nextLine();
         String[] lineArr = line.split(DELIMINATOR);
         String menuCandidate = lineArr[0];
-        if (lineArr.length >= 2 || !checkIsNumber(menuCandidate)
+        if (lineArr.length >= 2 || !isValidNumber(menuCandidate)
                 || Character.getNumericValue(menuCandidate.charAt(0)) >= Menu.menuCount
                 || Character.getNumericValue(menuCandidate.charAt(0)) < 0) {
-            throw new OutOfMenuException(printError("MENU"));
+            throw new IllegalArgumentException(printError("MENU"));
         }
         return getMenu(Integer.parseInt(menuCandidate));
     }
 
-    @Override
-    public String[] getLineAndParse() throws WrongCommandException {
+    @Test
+    public String[] getLineAndParse() throws IllegalArgumentException {
         String[] commandArr = scanner.nextLine().split(DELIMINATOR);
         if(!isValidCommand(commandArr))
-            throw new WrongCommandException(printError("COMMAND"));
+            throw new IllegalArgumentException(printError("COMMAND"));
         return commandArr;
     }
     public static void scannerClose() {
         scanner.close();
     }
-    public static void flushBuffer() {
-        scanner.nextLine();
-    }
-
 
     // 각각 숫자 , 연산자에 대해 맞는 command인지 검사.
     public boolean isValidCommand(String[] commandArr) {
@@ -53,7 +48,7 @@ public class ConsoleInput implements Input{
         for(int i = 0; i < commandArr.length; i++) {
             commandEntity = commandArr[i];
             if(i % 2 == 0) {
-                if(!checkIsNumber(commandEntity))
+                if(!isValidNumber(commandEntity))
                     return false;
             }
             else {
@@ -64,7 +59,7 @@ public class ConsoleInput implements Input{
         return true;
     }
 
-    private static boolean checkIsNumber(String commandEntity) {
+    private static boolean isValidNumber(String commandEntity) {
         for(int i = 0; i < commandEntity.length(); i++) {
             if(!Character.isDigit(commandEntity.charAt(i)))
                 return false;

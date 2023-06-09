@@ -2,13 +2,8 @@ package main.java.controller;
 
 import main.java.domain.Command;
 import main.java.domain.Menu;
-import main.java.exception.OutOfMenuException;
-import main.java.exception.WrongCommandException;
-import main.java.repository.MapRepository;
 import main.java.repository.Repository;
 import main.java.service.Calculator;
-import main.java.view.ConsoleInput;
-import main.java.view.ConsoleOutput;
 import main.java.view.Input;
 import main.java.view.Output;
 
@@ -47,7 +42,7 @@ public class Controller {
 
                     case CALCULATEMENU:
                         command = new Command(input.getLineAndParse());
-                        command.parseComamand();
+//                        command.parseComamand();
                         result = calculator.calculate(command);
                         output.printResult(result);
                         repository.saveHistory(command.makeHistory(result));
@@ -57,9 +52,9 @@ public class Controller {
                         output.exitProgram();
                         return;
                 }
-            } catch (WrongCommandException e) {
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-            } catch (OutOfMenuException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
