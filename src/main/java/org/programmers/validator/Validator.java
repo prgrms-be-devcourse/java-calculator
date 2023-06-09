@@ -15,6 +15,7 @@ public class Validator {
         this.console = console;
     }
 
+
     // 연산식 검증 로직
     public boolean validateCalculation(String inputMsg) {
         List<String> formulaList = validateFormulaSplit(inputMsg);

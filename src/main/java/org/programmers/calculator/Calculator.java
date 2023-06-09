@@ -1,6 +1,7 @@
 package org.programmers.calculator;
 
 import org.programmers.Io.Console;
+import org.programmers.validator.Validator;
 
 import java.lang.invoke.WrongMethodTypeException;
 
@@ -8,10 +9,15 @@ public class Calculator {
 
 
     private final Console console;
+    private final Validator validator;
 
     public Calculator(Console console) {
         this.console = console;
+        this.validator = new Validator(console);
     }
+
+
+
 
     boolean isRunning = true;
 
@@ -23,7 +29,7 @@ public class Calculator {
             if (option == null)
                 continue;
 
-            switch (option){
+            switch (option) {
                 case QUERY:
                     System.out.println("console.printQuery();");
                     break;
