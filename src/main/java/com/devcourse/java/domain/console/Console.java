@@ -37,6 +37,7 @@ public class Console {
     }
 
     public void printList(List<String> results) {
+        System.out.println();
         for (String result : results) {
             output.print(result);
         }

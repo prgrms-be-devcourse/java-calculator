@@ -19,6 +19,7 @@ public class Calculate implements Menu {
 
     @Override
     public boolean execute(Console console) {
+        System.out.println();
         String expression = console.read();
         calculateExpression(console, expression);
         return true;

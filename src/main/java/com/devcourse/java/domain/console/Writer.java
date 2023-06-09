@@ -9,6 +9,6 @@ public class Writer implements Output {
 
     @Override
     public void print(Number number) {
-        System.out.println(number);
+        System.out.println(number + "\n");
     }
 }

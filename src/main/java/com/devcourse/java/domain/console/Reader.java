@@ -11,8 +11,6 @@ public class Reader implements Input {
 
     @Override
     public String read() {
-        String input = scanner.nextLine();
-        System.out.println();
-        return input;
+        return scanner.nextLine();
     }
 }
