@@ -15,13 +15,13 @@ public class JavaCalculator implements Runnable{
 
     @Override
     public void run() {
-        boolean isExcutable = true;
-        while (isExcutable) {
+        boolean isExecutable = true;
+        while (isExecutable) {
             output.showMenu();
             switch (input.selectMenu()) {
                 case 1 -> result.readAllResults();
                 case 2 -> result.save(bc.doCalculate(input.getExpression()));
-                case 3 -> isExcutable = false;
+                case 3 -> isExecutable = false;
                 default -> output.inputError();
             }
         }
