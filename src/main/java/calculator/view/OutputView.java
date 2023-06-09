@@ -3,6 +3,8 @@ package calculator.view;
 import calculator.domain.model.HistoryModel;
 import calculator.domain.model.Message;
 
+import java.util.List;
+
 public class OutputView {
 
     private OutputView() {
@@ -21,5 +23,10 @@ public class OutputView {
     public static void outputByCalculationResult(HistoryModel historyModel){
 
         Message.calculationResultMessage(historyModel);
+    }
+
+    public static void outputByCalculationResult(List<HistoryModel> historyModels){
+
+        Message.calculationResultMessage(historyModels);
     }
 }

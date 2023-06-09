@@ -1,5 +1,9 @@
 package calculator.domain.model;
 
+import calculator.view.OutputView;
+
+import java.util.List;
+
 public class Message {
 
     private Message() {
@@ -24,5 +28,10 @@ public class Message {
     public static void calculationResultMessage(HistoryModel historyModel) {
 
         System.out.println(historyModel.getFormula() + " = " + historyModel.getAnswer());
+    }
+
+    public static void calculationResultMessage(List<HistoryModel> historyModels) {
+
+        historyModels.forEach(Message::calculationResultMessage);
     }
 }

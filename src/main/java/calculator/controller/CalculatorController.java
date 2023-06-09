@@ -35,9 +35,7 @@ public class CalculatorController {
 
         try {
             if (menu.isFindOne()) {
-                calculatorService
-                        .getHistoryAll()
-                        .forEach(OutputView::outputByCalculationResult);
+                OutputView.outputByCalculationResult(calculatorService.getHistoryAll());
             } else if (menu.isCalculationTwo()) {
                 OutputView.outputByCalculationResult(calculatorService.calculate(InputView.input()));
             } else if (menu.isOther()) {
