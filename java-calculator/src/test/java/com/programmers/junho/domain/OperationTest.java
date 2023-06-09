@@ -1,4 +1,4 @@
-package com.programmers.junho;
+package com.programmers.junho.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ class OperationTest {
     private Operation operation;
     @BeforeEach
     void setUp() {
-        this.operation = new Operation();
+        this.operation = new Operation(1);
     }
 
     @Test
