@@ -26,11 +26,8 @@ public class Calculator {
             Integer second = stack.pop();
             Integer first = stack.pop();
             stack.push(operator.apply(first, second));
-//            stack.pop()
-
-
         }
-
-        return 1;
+        // 스택 결과값
+        return stack.pop();
     }
 }
