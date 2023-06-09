@@ -5,6 +5,7 @@ import java.util.Stack;
 public class Calculate implements CalOrder{
     private String expression;
     Stack<String> expressionStack = new Stack<>();
+    ExpressionRepository repository = new ExpressionRepository();
     int result = 0;
 
     public Calculate(String expression) {
@@ -44,6 +45,7 @@ public class Calculate implements CalOrder{
             }
         }
         System.out.println(result);
+        repository.save(expression,result);
     }
 
     public void multiply(int idx){
