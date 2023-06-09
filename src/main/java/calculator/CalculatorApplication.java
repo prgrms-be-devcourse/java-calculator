@@ -8,7 +8,11 @@ import calculator.service.CalculatorService;
 public class CalculatorApplication {
 
     public static void main(String[] args) {
-        CalculatorController calculatorController = new CalculatorController(new CalculatorService(new CalculatorRepository(), new CalculatorManager()));
+        CalculatorRepository calculatorRepository = new CalculatorRepository();
+        CalculatorManager calculatorManager = new CalculatorManager();
+        CalculatorService calculatorService = new CalculatorService(calculatorRepository, calculatorManager);
+
+        CalculatorController calculatorController = new CalculatorController(calculatorService);
         calculatorController.runCalculator();
     }
 }

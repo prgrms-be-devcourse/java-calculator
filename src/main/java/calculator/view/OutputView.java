@@ -10,18 +10,18 @@ public class OutputView {
     }
 
     public static void outputByMenu() {
-        Message.menuMessage();
+        System.out.println(Message.MENU.getMessage());
     }
 
     public static void exitCalculator() {
-        Message.exitMessage();
+        System.out.println(Message.EXIT.getMessage());
     }
 
     public static void outputByCalculationResult(HistoryModel historyModel){
-        Message.calculationResultMessage(historyModel);
+        System.out.println(Message.calculationResult(historyModel));
     }
 
     public static void outputByCalculationResult(List<HistoryModel> historyModels){
-        Message.calculationResultMessage(historyModels);
+        historyModels.forEach(OutputView::outputByCalculationResult);
     }
 }

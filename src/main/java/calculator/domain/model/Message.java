@@ -1,31 +1,23 @@
 package calculator.domain.model;
 
-import java.util.List;
+public enum Message {
 
-public class Message {
-    private Message() {
+    MENU("1. 조회\n2. 계산\n3. 종료\n\n입력: "),
+    EXIT("\n계산기를 종료합니다."),
+    CALCULATION_RESULT("%s = %s"),
+    ;
+
+    private final String message;
+
+    Message(String message) {
+        this.message = message;
     }
 
-    public static void menuMessage() {
-        StringBuilder menu = new StringBuilder();
-
-        menu.append("1. 조회").append("\n");
-        menu.append("2. 계산").append("\n");
-        menu.append("3. 종료").append("\n");
-        menu.append("\n").append("입력 : ");
-
-        System.out.print(menu);
+    public String getMessage() {
+        return message;
     }
 
-    public static void exitMessage() {
-        System.out.print("\n계산기를 종료합니다.");
-    }
-
-    public static void calculationResultMessage(HistoryModel historyModel) {
-        System.out.println(historyModel.getFormula() + " = " + historyModel.getAnswer());
-    }
-
-    public static void calculationResultMessage(List<HistoryModel> historyModels) {
-        historyModels.forEach(Message::calculationResultMessage);
+    public static String calculationResult(HistoryModel historyModel) {
+        return String.format(CALCULATION_RESULT.message, historyModel.getFormula(), historyModel.getFormula());
     }
 }

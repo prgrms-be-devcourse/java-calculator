@@ -8,9 +8,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum Menu {
-    FIND_ONE("1", "조회"),
-    CALCULATION_TWO("2", "계산"),
-    EXIT_THREE("3", "종료"),
+    FIND("1", "조회"),
+    CALCULATION("2", "계산"),
+    EXIT("3", "종료"),
     OTHER("", "없는 메뉴"),
     ;
 
@@ -31,16 +31,16 @@ public enum Menu {
         return number;
     }
 
-    public boolean isFindOne() {
-        return this.equals(FIND_ONE);
+    public boolean isFind() {
+        return this.equals(FIND);
     }
 
-    public boolean isCalculationTwo() {
-        return this.equals(CALCULATION_TWO);
+    public boolean isCalculation() {
+        return this.equals(CALCULATION);
     }
 
-    public boolean isExitTree() {
-        return this.equals(EXIT_THREE);
+    public boolean isExit() {
+        return this.equals(EXIT);
     }
 
     public boolean isOther(){
