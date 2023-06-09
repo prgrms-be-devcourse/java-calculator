@@ -28,8 +28,10 @@ public class Console implements Input, Output{
 
     @Override
     public void printAll(List<InputAndAnswer> inputAndAnswerList) {
-        for (Object history : inputAndAnswerList) {
-            System.out.println(history);
+        for (InputAndAnswer history : inputAndAnswerList) {
+            String input = history.getInput();
+            Double answer = history.getAnswer();
+            System.out.println(input + "="+ answer);
         }
     }
 

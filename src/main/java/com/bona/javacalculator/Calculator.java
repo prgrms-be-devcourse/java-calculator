@@ -1,8 +1,7 @@
 package com.bona.javacalculator;
 
 import com.bona.javacalculator.io.Console;
-import com.bona.javacalculator.io.Input;
-import com.bona.javacalculator.io.Output;
+
 import com.bona.javacalculator.model.InputAndAnswer;
 import com.bona.javacalculator.repository.CalMemoryRepository;
 import com.bona.javacalculator.service.CalService;
@@ -44,7 +43,8 @@ public class Calculator implements Runnable{
             return;
         }
         String postfix = calService.convPostfix(input);
-        double result = calService.calculateStr(postfix);
+        System.out.println("postfix = " + postfix);
+        Double result = calService.calculateStr(postfix);
         calMemoryRepo.save(new InputAndAnswer(input, result));
 
         console.outAnswer(result);
