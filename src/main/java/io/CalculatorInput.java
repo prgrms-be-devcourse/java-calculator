@@ -1,6 +1,6 @@
 package io;
 
-public interface Input {
+public interface CalculatorInput {
     int inputButton();
 
     String inputCalculationFormula();

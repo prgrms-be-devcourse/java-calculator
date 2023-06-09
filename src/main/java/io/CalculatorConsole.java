@@ -5,7 +5,7 @@ import exception.ExceptionMessage;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Console implements Output, Input {
+public class CalculatorConsole implements CalculatorOutput, CalculatorInput {
     private static final String BUTTON_INIT_MESSAGE = "1. 조회\n2. 계산";
     private static final String BUTTON_CHOICE_MESSAGE = "선택 : ";
     private static final String RECORD_MESSAGE = "%s = %d";
