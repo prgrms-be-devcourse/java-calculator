@@ -25,6 +25,16 @@ class CalculatorTest {
         this.calculator = new Calculator(this.console);
     }
 
+    @DisplayName("사칙연산 공백 전처리 테스트")
+    @Test
+    void preprocessExpressionTest() {
+        String rowExpression = "   1     +     2   3  /    3    *   8  - 2   ";
+        String preprocessedExpression = "1 + 23 / 3 * 8 - 2";
+        assertEquals(preprocessedExpression,calculator.preprocess(rowExpression));
+    }
+
+
+
     @DisplayName("사칙연산 입력 검증 통과 테스트")
     @ParameterizedTest
     @MethodSource("passValidateExpressionTestData")
