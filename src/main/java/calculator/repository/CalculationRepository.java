@@ -1,6 +1,8 @@
 package calculator.repository;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class CalculationRepository {
     private final static LinkedHashMap<Integer, String> results = new LinkedHashMap<>();
@@ -9,7 +11,7 @@ public class CalculationRepository {
         results.put(results.size() + 1, calculation);
     }
 
-    public LinkedHashMap<Integer, String> findAll() {
-        return results;
+    public List<String> findAll() {
+        return new ArrayList<>(results.values());
     }
 }

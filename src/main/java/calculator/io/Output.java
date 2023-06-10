@@ -1,10 +1,10 @@
 package calculator.io;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 
 public interface Output {
     void putMenu();
-    void showCalculationResult(LinkedHashMap<Integer, String> calculationResult);
+    void showCalculationResult(List<String> calcResults);
     void inputError(String errorResponse);
     void showResult(Integer calculationResult);
 }

@@ -3,7 +3,7 @@ import calculator.io.Input;
 import calculator.io.Output;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class CalculatorConsole implements Input, Output {
@@ -15,9 +15,9 @@ public class CalculatorConsole implements Input, Output {
     }
 
     @Override
-    public void showCalculationResult(LinkedHashMap<Integer, String> calculationResult) {
+    public void showCalculationResult(List<String> calcResults) {
         System.out.println();
-        calculationResult.values().forEach(System.out::println);
+        calcResults.forEach(System.out::println);
         System.out.println();
     }
 
