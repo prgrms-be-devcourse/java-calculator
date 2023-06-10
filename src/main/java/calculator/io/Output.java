@@ -6,4 +6,5 @@ public interface Output {
     void putMenu();
     void showCalculationResult(LinkedHashMap<Integer, String> calculationResult);
     void inputError(String errorResponse);
+    void showResult(Integer calculationResult);
 }

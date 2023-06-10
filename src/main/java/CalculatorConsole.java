@@ -16,12 +16,19 @@ public class CalculatorConsole implements Input, Output {
 
     @Override
     public void showCalculationResult(LinkedHashMap<Integer, String> calculationResult) {
+        System.out.println();
         calculationResult.values().forEach(System.out::println);
+        System.out.println();
     }
 
     @Override
     public void inputError(String errorResponse) {
-        throw new IllegalArgumentException(errorResponse);
+        System.out.println(errorResponse);
+    }
+
+    @Override
+    public void showResult(Integer calculationResult) {
+        System.out.println(calculationResult + "\n");
     }
 
     @Override
@@ -32,6 +39,7 @@ public class CalculatorConsole implements Input, Output {
 
     @Override
     public String getExpression() {
+        System.out.println();
         return scanner.nextLine();
     }
 }
