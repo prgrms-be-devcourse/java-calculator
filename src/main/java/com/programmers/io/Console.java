@@ -11,6 +11,7 @@ public class Console implements Input, Output{
 
     private final Scanner scanner = new Scanner(System.in);
 
+    @Override
     public String input() {
         return scanner.nextLine();
     }
