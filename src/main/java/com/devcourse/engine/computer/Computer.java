@@ -1,8 +1,10 @@
 package com.devcourse.engine.computer;
 
 import com.devcourse.engine.exception.InvalidInputException;
+import com.devcourse.engine.model.Operator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -35,14 +37,23 @@ public class Computer {
         return expression;
     }
 
-    public Stack<String> convert(List<String> expression) {
-        Stack<String> expressionStack = new Stack<>();
+    public List<String> convert(List<String> expression) {
+        List<String> postfixExpression = new ArrayList<>();
+        Stack<Operator> temp = new Stack<>();
         for (String exp: expression) {
-            if (expressionStack.isEmpty()) {
-                expressionStack.push(exp);
+            if (Operator.isOperator(exp)) {
+                while (!temp.isEmpty() && temp.peek().getOperatorPriority() > Operator.getOperator(exp).getOperatorPriority()) {
+                    postfixExpression.add(temp.pop().getOperatorString());
+                }
+                temp.add(Operator.getOperator(exp));
+            } else {
+                postfixExpression.add(exp);
             }
         }
-        return expressionStack;
+        while (!temp.isEmpty()) {
+            postfixExpression.add(temp.pop().getOperatorString());
+        }
+        return postfixExpression;
     }
 
     public double compute(List<String> expression) {
