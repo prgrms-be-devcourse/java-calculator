@@ -3,6 +3,7 @@ package com.devcourse.java.calculator;
 import com.devcourse.java.calculator.constant.ExceptionConstant;
 
 import java.util.InputMismatchException;
+import java.util.LinkedHashMap;
 
 public class InputValidator {
 
@@ -23,5 +24,11 @@ public class InputValidator {
     private boolean isInBoundary(String input) {
         int command = Integer.parseInt(input);
         return (command >= 1 && command <= 3);
+    }
+
+    public void checkCalculateHistoryLength(LinkedHashMap<Integer, String> calculateHistory) {
+        if (calculateHistory.isEmpty()) {
+            throw new IllegalArgumentException(ExceptionConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
+        }
     }
 }

@@ -1,5 +1,13 @@
 package com.devcourse.java.calculator.repository;
 
-public interface CalculatorRepository {
+import lombok.Getter;
+
+import java.util.LinkedHashMap;
+
+@Getter
+public class CalculatorRepository {
+
+    private Integer historyNumber = 0;
+    private LinkedHashMap<Integer, String> history = new LinkedHashMap<>();
 
 }

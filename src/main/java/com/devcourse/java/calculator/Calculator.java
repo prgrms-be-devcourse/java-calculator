@@ -11,7 +11,7 @@ public class Calculator implements Runnable{
 
     private final Input input;
     private final Output output;
-    private final CalculatorRepository calculatorRepository;
+    private CalculatorRepository calculatorRepository;
     private int command;
 
     @Override
@@ -23,7 +23,7 @@ public class Calculator implements Runnable{
             try {
                 command = input.getCommand();
             } catch (RuntimeException e) {
-                System.out.println(e.getMessage());
+                output.printExceptionMessage(e.getMessage());
                 continue;
             }
 
@@ -31,14 +31,17 @@ public class Calculator implements Runnable{
                 return;
             }
             runCommand(command);
-            return; // 지우기
+
         }
     }
 
     public void runCommand(int command) {
         if (command == MenuConstant.SELECTED_HISTORY_COMMAND) {
-
-            // 조회
+            try {
+                output.printCalculateHistory(calculatorRepository.getHistory());
+            } catch (RuntimeException e) {
+                output.printExceptionMessage(e.getMessage());
+            }
         }
 
         else if (command == MenuConstant.SELECTED_CALCULATE_COMMAND) {
