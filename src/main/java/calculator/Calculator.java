@@ -30,22 +30,25 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-        while(true) {
+        while (true) {
             output.putMenu();
             String inputString = input.getChoice(CHOICE_PROMPT);
             if (!validateChoiceInput(inputString)) output.inputError(MENU_INPUT_ERROR);
 
             switch (inputString.charAt(FIRST_INDEX)) {
-                case REQUEST_VIEW_CALCULATION_RESULT:
-                    output.showCalculationResult(calculationRepository.findAll());
-
-                case REQUEST_CALCULATION:
+                case REQUEST_VIEW_CALCULATION_RESULT -> output.showCalculationResult(calculationRepository.findAll());
+                case REQUEST_CALCULATION -> {
                     String expression = input.getExpression();
-                    if (validateExpression(expression)) {
+                    if (!validateExpression(expression)) output.inputError(INVALID_INPUT_EXPRESSION);
+                    else {
                         ArrayList<String> postfixList = expressionConverter.convert(expression);
                         Integer result = calculateFromPostfix(postfixList);
+                        output.showResult(result);
                         calculationRepository.save(expression + " = " + result);
                     }
+                }
+                default -> {
+                }
             }
         }
     }
