@@ -5,7 +5,6 @@ import org.example.Console;
 import org.example.engine.enums.ArithmeticOperator;
 import org.example.engine.model.CalculationResult;
 import org.example.engine.repository.CalculationRepository;
-import org.example.engine.repository.InmemoryCalculationRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,112 +14,123 @@ import java.util.Stack;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Calculator implements Runnable{
-    private Console console;
-    private CalculationRepository calculationRepository;
-    public Calculator(Console console, CalculationRepository calculationRepository){
-        this.console = console;
-        this.calculationRepository = calculationRepository;
-    }
-    @Override
-    public void run() {
-        try{
-            while(true){
-                int mode = console.inputSelectMode();
-                switch(mode){
-                    case 1 : loadHistory(); break;
-                    case 2 : compute(); break;
-                }
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-    public void compute()throws IOException {
-        String inputExpression = console.inputExpression();
-        String preprocessedExpression = preprocess(inputExpression);
-        if(!validateExpression(preprocessedExpression)) {
-            System.out.println("예외를 발생시키겠어요");
-        }
-        List<String> parseExpression =  parseExpression(preprocessedExpression);
-        List<String> postfixExpression =  infixToPostfix(parseExpression);
-        Double result = calculate(postfixExpression);
-        System.out.println(result);
-        saveHistory(new CalculationResult(inputExpression, result));
-    }
+public class Calculator implements Runnable {
+	private Console console;
+	private CalculationRepository calculationRepository;
 
-    public void loadHistory(){
-        List<CalculationResult> historyList = calculationRepository.findAll();
-        for(CalculationResult calculationResult: historyList){
-            calculationResult.printInfo();
-        }
-    }
+	public Calculator(Console console, CalculationRepository calculationRepository) {
+		this.console = console;
+		this.calculationRepository = calculationRepository;
+	}
 
-    public String preprocess(String rowExpression){
-        String preprocessedExpression = rowExpression.trim();
-        preprocessedExpression = preprocessedExpression.replaceAll("\\s+", "");
-        preprocessedExpression = preprocessedExpression.replaceAll("([+\\-*/])", " $1 ");;
-        return preprocessedExpression;
-    }
+	@Override
+	public void run() {
+		try {
+			while (true) {
+				int mode = console.inputSelectMode();
+				switch (mode) {
+					case 1:
+						loadHistory();
+						break;
+					case 2:
+						compute();
+						break;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
-    public boolean validateExpression(String expression){
-        String regex = "^\\d+(\\s*[+\\-*/]\\s*\\d+)*$";
-        return Pattern.matches(regex, expression);
-    }
+	public void compute() throws IOException {
+		String inputExpression = console.inputExpression();
+		String preprocessedExpression = preprocess(inputExpression);
+		if (!validateExpression(preprocessedExpression)) {
+			System.out.println("예외를 발생시키겠어요");
+		}
+		List<String> parseExpression = parseExpression(preprocessedExpression);
+		List<String> postfixExpression = infixToPostfix(parseExpression);
+		Double result = calculate(postfixExpression);
+		System.out.println(result);
+		saveHistory(new CalculationResult(inputExpression, result));
+	}
 
-    public List <String> parseExpression(String expression){
-        return  Arrays.stream(expression.split(" ")).collect(Collectors.toList());
-    }
+	public void loadHistory() {
+		List<CalculationResult> historyList = calculationRepository.findAll();
+		for (CalculationResult calculationResult : historyList) {
+			calculationResult.printInfo();
+		}
+	}
 
-    public List<String> infixToPostfix (List<String> infixExpression){
-        List<String> postfixExpression = new ArrayList<>();
-        Stack<String> st = new Stack<>();
-        for(String ele : infixExpression){
-            if(StringUtils.isNumeric(ele)){
-                postfixExpression.add(ele);  continue;
-            }
+	public String preprocess(String rowExpression) {
+		String preprocessedExpression = rowExpression.trim();
+		preprocessedExpression = preprocessedExpression.replaceAll("\\s+", "");
+		preprocessedExpression = preprocessedExpression.replaceAll("([+\\-*/])", " $1 ");
+		;
+		return preprocessedExpression;
+	}
 
-            if(st.isEmpty()){
-                st.add(ele); continue;
-            }
+	public boolean validateExpression(String expression) {
+		String regex = "^\\d+(\\s*[+\\-*/]\\s*\\d+)*$";
+		return Pattern.matches(regex, expression);
+	}
 
-            ArithmeticOperator prevOperator = ArithmeticOperator.getArithmeticOperator(st.peek());
-            ArithmeticOperator tempOperator = ArithmeticOperator.getArithmeticOperator(ele);
-            if(ArithmeticOperator.comparePriority(prevOperator, tempOperator)<0){
-                st.add(ele);
-            }else{
-                while(!st.isEmpty())
-                    postfixExpression.add(st.pop());
-                st.add(ele);
-            }
-        }
+	public List<String> parseExpression(String expression) {
+		return Arrays.stream(expression.split(" ")).collect(Collectors.toList());
+	}
 
-        while(!st.isEmpty())
-            postfixExpression.add(st.pop());
+	public List<String> infixToPostfix(List<String> infixExpression) {
+		List<String> postfixExpression = new ArrayList<>();
+		Stack<String> st = new Stack<>();
+		for (String ele : infixExpression) {
+			if (StringUtils.isNumeric(ele)) {
+				postfixExpression.add(ele);
+				continue;
+			}
 
-        return postfixExpression;
-    }
+			if (st.isEmpty()) {
+				st.add(ele);
+				continue;
+			}
 
-    public double calculate(List<String> postfixExpression){
+			ArithmeticOperator prevOperator = ArithmeticOperator.getArithmeticOperator(st.peek());
+			ArithmeticOperator tempOperator = ArithmeticOperator.getArithmeticOperator(ele);
+			if (ArithmeticOperator.comparePriority(prevOperator, tempOperator) < 0) {
+				st.add(ele);
+			} else {
+				while (!st.isEmpty())
+					postfixExpression.add(st.pop());
+				st.add(ele);
+			}
+		}
 
-        Stack<String> st = new Stack<>();
+		while (!st.isEmpty())
+			postfixExpression.add(st.pop());
 
-        for(String ele : postfixExpression){
-            if(StringUtils.isNumeric(ele)){
-                st.add(ele);  continue;
-            }
+		return postfixExpression;
+	}
 
-            Double right = Double.parseDouble(st.pop());
-            Double left = Double.parseDouble(st.pop());
-            String arithmeticOperator = ele;
-            st.add(String.valueOf(ArithmeticOperator.calculate(arithmeticOperator, left, right)));
-        }
+	public double calculate(List<String> postfixExpression) {
 
-        return Double.parseDouble(st.pop());
-    }
+		Stack<String> st = new Stack<>();
 
-    public int saveHistory(CalculationResult calculationResult){
-        return calculationRepository.save(calculationResult);
-    }
+		for (String ele : postfixExpression) {
+			if (StringUtils.isNumeric(ele)) {
+				st.add(ele);
+				continue;
+			}
+
+			Double right = Double.parseDouble(st.pop());
+			Double left = Double.parseDouble(st.pop());
+			String arithmeticOperator = ele;
+			st.add(String.valueOf(ArithmeticOperator.calculate(arithmeticOperator, left, right)));
+		}
+
+		return Double.parseDouble(st.pop());
+	}
+
+	public int saveHistory(CalculationResult calculationResult) {
+		return calculationRepository.save(calculationResult);
+	}
 
 }

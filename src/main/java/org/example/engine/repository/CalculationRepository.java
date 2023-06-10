@@ -5,13 +5,12 @@ import org.example.engine.model.CalculationResult;
 import java.util.List;
 
 public interface CalculationRepository {
-    public int save( CalculationResult calculationResult);
+	public int save(CalculationResult calculationResult);
 
-    public List<CalculationResult> findAll();
+	public List<CalculationResult> findAll();
 
-    public void clear();
+	public void clear();
 
-    public int size();
-
+	public int size();
 
 }
