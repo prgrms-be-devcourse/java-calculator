@@ -9,6 +9,7 @@ import com.devcourse.engine.historian.Historian;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
@@ -32,7 +33,8 @@ public class Calculator implements Runnable {
                     output.endGame();
                     break;
                 } else if (menu.equals(Menu.HISTORY.getMenuOrdinal())) {
-                    output.showHistory(historian.getHistory());
+                    IntStream.rangeClosed(1, historian.getLastIndex())
+                            .forEach(i -> output.showHistory(historian.getHistory(i)));
                 } else if (menu.equals(Menu.COMPUTE.getMenuOrdinal())) {
                     String userInput = input.inputExpression();
                     List<String> infixExpression = computer.validate(userInput);
