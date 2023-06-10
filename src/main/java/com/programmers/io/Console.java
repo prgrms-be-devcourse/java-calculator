@@ -14,12 +14,23 @@ public class Console implements Input, Output{
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String input() {
-        return scanner.nextLine();
+    public String getRequest() {
+        String _request = scanner.nextLine();
+        String request = _request.replaceAll(" ", "");
+        InputValidator.checkRequest(request);
+        return request;
     }
 
     @Override
-    public String initMessage() {
+    public String getEquation() {
+        String _equation = scanner.nextLine();
+        String equation = _equation.replaceAll(" ", "");
+        InputValidator.checkEquation(equation);
+        return equation;
+    }
+
+    @Override
+    public String getMenu() {
         StringBuilder sb = new StringBuilder();
         sb.append(HISTORY_MESSAGE);
         sb.append(CALC_MESSAGE);
@@ -28,9 +39,8 @@ public class Console implements Input, Output{
         System.out.println(sb);
         System.out.print(SELECT_MESSAGE);
 
-        String request = input();
-        InputValidator.isEmpty(request);
-        InputValidator.checkEquation(request);
+        String request = getRequest();
+
 
         return request;
     }
@@ -39,6 +49,7 @@ public class Console implements Input, Output{
     public void println(String msg) {
         System.out.println(msg);
     }
+
 
     public void println(double msg) {
         System.out.println(msg);

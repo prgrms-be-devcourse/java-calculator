@@ -1,5 +1,10 @@
 package com.programmers.io;
 
 public interface Input {
-    String input();
+    String getRequest();
+
+    String getEquation();
+
+    String getMenu();
+
 }
