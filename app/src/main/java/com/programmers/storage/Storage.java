@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Storage {
 	
-	static Map<String, Integer> map = new ConcurrentHashMap<>();
+	private final static Map<String, Integer> map = new ConcurrentHashMap<>();
 	
 	public void save(Expression expression, Integer result) {
 		map.put(expression.toString(), result);
