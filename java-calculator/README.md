@@ -89,5 +89,6 @@
   - [x] 형식 (숫자 + 공백 +  기호 + 공백 + 숫자 + 공백  + 기호 + ...)이 잘못된 경우 `IllegalArgumentException` 발생
     - 공백은 무조건 하나로 처리 -> split시 space 하나로 처리해야 자를 수 있음. split 특성상 delimiter 포함 하지를 못한다.
     - 정규식으로 처리
-  - [x] int 자료형 overflow / underflow 발생 시 `IllegalArgumentException` 발생
+  - [x] 식에 int 형 범위 벗어 나 있는 경우 `IllegalArgumentException` 발생
+  - [x] 계산 과정에 있어 int 자료형 overflow / underflow 발생 시 `IllegalArgumentException` 발생
     - Math 클래스의 `~Exact()` 메서드 사용
