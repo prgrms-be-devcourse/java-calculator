@@ -25,6 +25,7 @@ public class Calculator implements Runnable {
             String menu = input.inputMenu();
 
             try {
+
                 if (menu.length() != 1)
                     throw new InvalidInputException("올바른 메뉴를 선택해주세요.");
 
@@ -53,6 +54,7 @@ public class Calculator implements Runnable {
 
                     historian.saveHistory(infixExpression, result);
                     output.showResult(result);
+
                 } else {
                     throw new InvalidInputException("올바른 메뉴를 선택해주세요.");
                 }

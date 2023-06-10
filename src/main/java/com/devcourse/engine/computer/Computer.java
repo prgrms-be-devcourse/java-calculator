@@ -18,12 +18,16 @@ public class Computer {
     public List<String> validate(String userInput) {
         List<String> expression = new ArrayList<>();
         Matcher matcher = pattern.matcher(userInput);
+
         int count = 0;
         int branketCount = 0;
+
         while (matcher.find()) {
             String token = matcher.group();
+
             if (token.isBlank())
                 continue;
+
             if (Character.isDigit(token.charAt(0))) {
                 if (++count > 1)
                     throw new InvalidInputException(invalidExpressionString);
@@ -36,26 +40,36 @@ public class Computer {
                 if (-- count < 0)
                     throw new InvalidInputException(invalidExpressionString);
             }
+
             expression.add(token);
         }
+
         if (count < 1)
             throw new InvalidInputException(invalidExpressionString);
+
         return expression;
     }
 
     public List<String> convert(List<String> expression) {
         List<String> postfixExpression = new ArrayList<>();
         Stack<Operator> temp = new Stack<>();
+
         for (String exp: expression) {
             if (Operator.isOperator(exp)) {
+
                 Operator operator = Operator.getOperator(exp);
+
                 if (operator.getOperatorString().equals("(")) {
+
                     temp.push(operator);
                     continue;
+
                 } else if (operator.getOperatorString().equals(")")) {
+
                     while (!temp.isEmpty() && !temp.peek().getOperatorString().equals("(")) {
                         postfixExpression.add(temp.pop().getOperatorString());
                     }
+
                     if (!temp.isEmpty()) temp.pop();
                     continue;
                 }
@@ -63,19 +77,24 @@ public class Computer {
                 while (!temp.isEmpty() && temp.peek().getOperatorPriority() >= operator.getOperatorPriority()) {
                     postfixExpression.add(temp.pop().getOperatorString());
                 }
+
                 temp.add(operator);
+
             } else {
                 postfixExpression.add(exp);
             }
         }
+
         while (!temp.isEmpty()) {
             postfixExpression.add(temp.pop().getOperatorString());
         }
+
         return postfixExpression;
     }
 
     public double compute(List<String> expression) {
         Stack<Double> stack = new Stack<>();
+
         for (String exp : expression) {
             if (Operator.isOperator(exp)) {
                 stack.push(Operator.getOperator(exp).calculate(stack.pop(), stack.pop()));
@@ -83,6 +102,7 @@ public class Computer {
                 stack.push(Double.parseDouble(exp));
             }
         }
+
         return stack.pop();
     }
 }
