@@ -25,22 +25,31 @@ public class Calculator implements Runnable {
             String menu = input.inputMenu();
 
             try {
-                if (menu.length() != 1) {
+                if (menu.length() != 1)
                     throw new InvalidInputException("올바른 메뉴를 선택해주세요.");
-                }
 
                 if (menu.equals(Menu.EXIT.getMenuOrdinal())) {
+
                     output.endGame();
                     break;
+
                 } else if (menu.equals(Menu.HISTORY.getMenuOrdinal())) {
+
+                    if (historian.getLastIndex() < 1) {
+                        output.showHistory("표시할 이력이 없습니다.\n");
+                        continue;
+                    }
+
                     IntStream.rangeClosed(1, historian.getLastIndex())
                             .forEach(i -> output.showHistory(historian.getHistory(i)));
+
                 } else if (menu.equals(Menu.COMPUTE.getMenuOrdinal())) {
+
                     String userInput = input.inputExpression();
                     List<String> infixExpression = computer.validate(userInput);
-                    System.out.println(infixExpression);
                     List<String> postfixExpression = computer.convert(infixExpression);
                     double result = computer.compute(postfixExpression);
+
                     historian.saveHistory(infixExpression, result);
                     output.showResult(result);
                 } else {

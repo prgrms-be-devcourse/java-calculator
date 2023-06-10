@@ -13,8 +13,6 @@ public class Historian {
     }
 
     public String getHistory(int index) {
-        if (index < 1)
-            return "표시할 이력이 없습니다.";
         return "#" + index + ". " + history.get(index);
     }
 
