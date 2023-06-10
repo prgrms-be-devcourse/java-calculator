@@ -1,6 +1,5 @@
 package com.programmers.expression;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,5 +37,25 @@ class ExpressionTest {
 		assertThat(strExpression)
 				.isEqualTo("3 * 4 / 2");
 	}
-
+	
+	@Test
+	@DisplayName("잘못된 입력은 예외를 던진다.")
+	void throwWhenInvalidInput() {
+		// given
+		String[] invalidInput = {
+				"1     + 1",
+				"1 + ",
+				" + 1",
+				" "
+		};
+		
+		for (String s : invalidInput) {
+			assertThatThrownBy(() -> {
+				// when
+				Expression expression = new Expression(s);
+			// then
+			}).isExactlyInstanceOf(IllegalArgumentException.class);
+		}
+	}
+	
 }
