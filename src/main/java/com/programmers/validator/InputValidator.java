@@ -46,7 +46,7 @@ public class InputValidator {
             String cur = equationArr[i];
             String next = equationArr[i+1];
 
-            if (operators.contains(cur) && operators.contains(next)) {
+            if (operator.contains(cur) && operator.contains(next)) {
                 return true;
             }
         }
