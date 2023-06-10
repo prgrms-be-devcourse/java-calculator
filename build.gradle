@@ -10,6 +10,10 @@ repositories {
 }
 
 dependencies {
+
+    implementation 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok:1.18.22'
+
     testImplementation(platform('org.junit:junit-bom:5.9.3'))
     testImplementation('org.junit.jupiter:junit-jupiter')
 }
