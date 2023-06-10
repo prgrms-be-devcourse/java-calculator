@@ -11,11 +11,9 @@ public class InputValidator {
 
 
     public static void checkEquation(String equation) {
-        if (containsBracket(equation)) {
-            throw new EquationFormatException();
-        }
+        containsBracket(equation);
 
-        if (!endByOperator(equation)) {
+        if (endByOperator(equation)) {
             throw new EquationFormatException();
         }
 
@@ -71,11 +69,10 @@ public class InputValidator {
         return false;
     }
 
-    public static boolean containsBracket(String equation) {
+    public static void containsBracket(String equation) {
         if (equation.contains("(") || equation.contains(")")) {
-            if (!checkBracket(equation)) return false;
+            if (!checkBracket(equation)) throw new EquationFormatException();
         }
-        return true;
     }
 
     public static boolean checkBracket(String equation) {
