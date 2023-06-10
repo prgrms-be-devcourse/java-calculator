@@ -1,5 +1,7 @@
 package com.programmers.io;
 
+import com.programmers.validator.InputValidator;
+
 import java.util.Scanner;
 
 public class Console implements Input, Output{
@@ -26,8 +28,11 @@ public class Console implements Input, Output{
         System.out.println(sb);
         System.out.print(SELECT_MESSAGE);
 
-        String input = input();
-        return input;
+        String request = input();
+        InputValidator.isEmpty(request);
+        InputValidator.checkEquation(request);
+
+        return request;
     }
 
     @Override
