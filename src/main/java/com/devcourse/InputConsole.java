@@ -10,7 +10,7 @@ public class InputConsole implements Input {
 
     @Override
     public String inputMenu() {
-        System.out.println("0: 종료\n1: 조회\n2: 계산\n\n실행: ");
+        System.out.println("\n0: 종료\n1: 조회\n2: 계산\n\n실행: ");
         return scanner.nextLine();
     }
 

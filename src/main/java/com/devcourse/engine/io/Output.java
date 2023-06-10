@@ -4,4 +4,6 @@ public interface Output {
     void endGame();
 
     void printError(String errorMessage);
+
+    void showResult(double result);
 }

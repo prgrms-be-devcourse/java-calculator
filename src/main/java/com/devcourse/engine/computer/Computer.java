@@ -57,6 +57,14 @@ public class Computer {
     }
 
     public double compute(List<String> expression) {
-        return 0.0;
+        Stack<Double> stack = new Stack<>();
+        for (String exp : expression) {
+            if (Operator.isOperator(exp)) {
+                stack.push(Operator.getOperator(exp).calculate(stack.pop(), stack.pop()));
+            } else {
+                stack.push(Double.parseDouble(exp));
+            }
+        }
+        return stack.pop();
     }
 }

@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Getter
 public enum Operator {
-    PLUS("+", 1, (a, b) -> a + b),
-    MINUS("-", 1, (a, b) -> a - b),
-    MULTIPLY("*", 2, (a, b) -> a * b),
-    DIVIDE("/", 2, (a, b) -> {
+    PLUS("+", 1, (b, a) -> a + b),
+    MINUS("-", 1, (b, a) -> a - b),
+    MULTIPLY("*", 2, (b, a) -> a * b),
+    DIVIDE("/", 2, (b, a) -> {
         if (b == 0)
             throw new InvalidInputException("0으로 나눌 수 없습니다.");
         return a / b;
@@ -22,7 +22,7 @@ public enum Operator {
 
     private String operatorString;
     private int operatorPriority;
-    private BiFunction<Integer, Integer, Integer> operatorFunction;
+    private BiFunction<Double, Double, Double> operatorFunction;
 
     public static boolean isOperator(String token) {
         return Arrays.stream(Operator.values())
@@ -33,5 +33,9 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter(o -> o.getOperatorString().equals(exp))
                 .toList().get(0);
+    }
+
+    public Double calculate(Double num1, Double num2) {
+        return operatorFunction.apply(num1, num2);
     }
 }

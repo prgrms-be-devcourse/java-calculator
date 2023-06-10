@@ -37,6 +37,7 @@ public class Calculator implements Runnable {
                     List<String> postfixExpression = computer.convert(infixExpression);
                     double result = computer.compute(postfixExpression);
                     historian.saveHistory(infixExpression, result);
+                    output.showResult(result);
                 } catch (InvalidInputException e) {
                     output.printError(e.getMessage());
                 }
