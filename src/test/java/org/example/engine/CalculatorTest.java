@@ -8,8 +8,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,8 +35,6 @@ class CalculatorTest {
         String preprocessedExpression = "1 + 23 / 3 * 8 - 2";
         assertEquals(preprocessedExpression,calculator.preprocess(rowExpression));
     }
-
-
 
     @DisplayName("사칙연산 입력 검증 통과 테스트")
     @ParameterizedTest
@@ -99,9 +100,6 @@ class CalculatorTest {
         });
 
     }
-
-
-
 
     private static List<String> passValidateExpressionTestData() {
         return Arrays.asList(

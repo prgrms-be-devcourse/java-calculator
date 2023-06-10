@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.example.Console;
 import org.example.engine.enums.ArithmeticOperator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,25 +22,27 @@ public class Calculator implements Runnable{
 
     @Override
     public void run() {
-
-        while(true){
-            int mode = console.inputSelectMode();
-
-            switch(mode){
-                case 1 : compute(); break;
-                case 2 : loadHistory(); break;
+        try{
+            while(true){
+                int mode = console.inputSelectMode();
+                switch(mode){
+                    case 1 : loadHistory(); break;
+                    case 2 : compute(); break;
+                }
             }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 
-    public void compute(){
+    public void compute()throws IOException {
         String inputExpression = console.inputExpression();
         String preprocessedExpression = preprocess(inputExpression);
         if(!validateExpression(preprocessedExpression)) System.out.println("예외를 발생시키겠어요");
         List<String> parseExpression =  parseExpression(preprocessedExpression);
         List<String> postfixExpression =  infixToPostfix(parseExpression);
-
-
+        Double result = calculate(postfixExpression);
+        System.out.println(result);
 
     }
 
@@ -50,8 +53,8 @@ public class Calculator implements Runnable{
 
     public String preprocess(String rowExpression){
         String preprocessedExpression = rowExpression.trim();
-        preprocessedExpression = preprocessedExpression.replaceAll("\\s+", " ");
-        preprocessedExpression = preprocessedExpression.replaceAll("(?<=\\d)\\s+(?=\\d)", "");
+        preprocessedExpression = preprocessedExpression.replaceAll("\\s+", "");
+        preprocessedExpression = preprocessedExpression.replaceAll("([+\\-*/])", " $1 ");;
         return preprocessedExpression;
     }
 
@@ -82,7 +85,8 @@ public class Calculator implements Runnable{
             if(ArithmeticOperator.comparePriority(prevOperator, tempOperator)<0){
                 st.add(ele);
             }else{
-                postfixExpression.add(st.pop());
+                while(!st.isEmpty())
+                    postfixExpression.add(st.pop());
                 st.add(ele);
             }
         }
