@@ -1,8 +1,7 @@
 package org.example.engine;
 
-
 import org.example.Console;
-
+import java.util.regex.Pattern;
 
 
 public class Calculator implements Runnable{
@@ -27,7 +26,9 @@ public class Calculator implements Runnable{
     }
 
     public void compute(){
-        System.out.println("compute에요");
+        String expression = console.inputExpression();
+        String trimExpression = expression.trim();
+        if(!validateExpression(trimExpression)) System.out.println("예외를 발생시키겠어요");
 
 
     }
@@ -35,6 +36,18 @@ public class Calculator implements Runnable{
     public void loadHistory(){
         System.out.println("laodHistory에요");
     }
+
+    public boolean validateExpression(String expression){
+        String regex = "^\\d+(\\s*[+\\-*/]\\s*\\d+)*$";
+        return Pattern.matches(regex, expression);
+
+
+
+    }
+
+
+
+
 
 
 
