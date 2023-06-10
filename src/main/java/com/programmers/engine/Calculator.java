@@ -21,7 +21,7 @@ public class Calculator {
 
 
     // 사용자 요청에 응답하기
-    public void response(String request) {
+    private void response(String request) {
 
         if ("1".equals(request)) {
             //저장된 값 조회

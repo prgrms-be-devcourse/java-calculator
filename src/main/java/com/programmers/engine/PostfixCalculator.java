@@ -8,7 +8,7 @@ public class PostfixCalculator {
     private final Stack<Character> opStack = new Stack<>();
     private final StringBuilder postFix = new StringBuilder();
 
-    public double calculate(String equation) {
+    private double calculate(String equation) {
         Stack<Double> stack = new Stack<>();
         char cur = ' ';
         double value1, value2;
@@ -81,7 +81,7 @@ public class PostfixCalculator {
         return calculate(postFix.toString());
     }
 
-    public void stackPop(char oper) {
+    private void stackPop(char oper) {
         while (!opStack.isEmpty()) {
             oper = opStack.pop();
             if (oper == '(') return;
@@ -89,7 +89,7 @@ public class PostfixCalculator {
         }
     }
 
-    public <T> boolean popOperator(Predicate<T> predicate, T data) {
+    private  <T> boolean popOperator(Predicate<T> predicate, T data) {
         while (!opStack.isEmpty()) {
             if (predicate.test(data)) return false;
 
@@ -103,7 +103,7 @@ public class PostfixCalculator {
         return true;
     }
 
-    public int getPriority(char op) {
+    private int getPriority(char op) {
         switch (op) {
             case '+':
             case '-':
@@ -133,6 +133,5 @@ public class PostfixCalculator {
         }
 
     }
-
 
 }
