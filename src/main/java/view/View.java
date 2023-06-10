@@ -1,5 +1,6 @@
 package view;
 
+import exception.NoSuchCommandException;
 import model.Command;
 
 import java.util.Scanner;
@@ -12,12 +13,16 @@ public class View {
     }
 
     public Command commandReader() {
-        int input = scanner.nextInt();
-        Command.
+        try {
+            int input = scanner.nextInt();
+            return Command.getCommand(input);
+        } catch (RuntimeException e) {
+            throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
+        }
     }
 
     public String expressionReader() {
-
+        return "";
     }
 
     public void printInfoMessage() {

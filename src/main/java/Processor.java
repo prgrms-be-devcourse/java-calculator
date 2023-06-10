@@ -1,4 +1,5 @@
 import model.Calculator;
+import model.Command;
 import view.View;
 
 public class Processor {
@@ -11,6 +12,17 @@ public class Processor {
     }
 
     public void start() {
+        while (true) {
+            try {
+                view.printInfoMessage();
+                Command command = view.commandReader();
+                view.printNewLine();
+
+            } catch (RuntimeException e) {
+                System.out.println("\n" + e.getMessage() + "\n");
+            }
+        }
+
 
     }
 }
