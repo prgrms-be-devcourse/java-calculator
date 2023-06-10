@@ -38,6 +38,7 @@ public class Calculator implements Runnable {
                 } else if (menu.equals(Menu.COMPUTE.getMenuOrdinal())) {
                     String userInput = input.inputExpression();
                     List<String> infixExpression = computer.validate(userInput);
+                    System.out.println(infixExpression);
                     List<String> postfixExpression = computer.convert(infixExpression);
                     double result = computer.compute(postfixExpression);
                     historian.saveHistory(infixExpression, result);

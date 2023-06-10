@@ -11,28 +11,35 @@ import java.util.regex.Pattern;
 
 public class Computer {
 
-    private static final String REGEXP = "(?:^\\.[0-9]+)|(?:^[0-9]?\\.[\\s+\\-*/]$)|([0-9]+\\.[0-9]+)|([+\\-*/])|([0-9]+)|(s*)";
+    private static final String REGEXP = "(?:^\\.[0-9]+)|(?:^[0-9]?\\.[\\s+\\-*/]$)|([0-9]+\\.[0-9]+)|([+\\-*/)(])|([0-9]+)|(s*)";
     private static final Pattern pattern = Pattern.compile(REGEXP);
+    public static final String invalidExpressionString = "올바르지 않은 식입니다.";
 
     public List<String> validate(String userInput) {
         List<String> expression = new ArrayList<>();
         Matcher matcher = pattern.matcher(userInput);
         int count = 0;
+        int branketCount = 0;
         while (matcher.find()) {
             String token = matcher.group();
             if (token.isBlank())
                 continue;
             if (Character.isDigit(token.charAt(0))) {
-                if (++ count > 1)
-                    throw new InvalidInputException("올바르지 않은 식입니다.");
+                if (++count > 1)
+                    throw new InvalidInputException(invalidExpressionString);
+            } else if (token.charAt(0) == '(') {
+                branketCount ++;
+            } else if (token.charAt(0) == ')') {
+                if (-- branketCount < 0)
+                    throw new InvalidInputException(invalidExpressionString);
             } else {
                 if (-- count < 0)
-                    throw new InvalidInputException("올바르지 않은 식입니다.");
+                    throw new InvalidInputException(invalidExpressionString);
             }
             expression.add(token);
         }
         if (count < 1)
-            throw new InvalidInputException("올바르지 않은 식입니다.");
+            throw new InvalidInputException(invalidExpressionString);
         return expression;
     }
 
@@ -41,10 +48,22 @@ public class Computer {
         Stack<Operator> temp = new Stack<>();
         for (String exp: expression) {
             if (Operator.isOperator(exp)) {
-                while (!temp.isEmpty() && temp.peek().getOperatorPriority() > Operator.getOperator(exp).getOperatorPriority()) {
+                Operator operator = Operator.getOperator(exp);
+                if (operator.getOperatorString().equals("(")) {
+                    temp.push(operator);
+                    continue;
+                } else if (operator.getOperatorString().equals(")")) {
+                    while (!temp.isEmpty() && !temp.peek().getOperatorString().equals("(")) {
+                        postfixExpression.add(temp.pop().getOperatorString());
+                    }
+                    if (!temp.isEmpty()) temp.pop();
+                    continue;
+                }
+
+                while (!temp.isEmpty() && temp.peek().getOperatorPriority() >= operator.getOperatorPriority()) {
                     postfixExpression.add(temp.pop().getOperatorString());
                 }
-                temp.add(Operator.getOperator(exp));
+                temp.add(operator);
             } else {
                 postfixExpression.add(exp);
             }

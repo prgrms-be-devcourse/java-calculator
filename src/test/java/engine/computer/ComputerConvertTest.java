@@ -22,4 +22,18 @@ public class ComputerConvertTest {
         Assertions.assertEquals(result.size(), computer.convert(result).size());
     }
 
+    @Test
+    void convertTest3() {
+        Computer computer = new Computer();
+        List<String> result = computer.validate("1+2*(10-8)/4");
+        Assertions.assertEquals(result.size()-2, computer.convert(result).size());
+    }
+
+    @Test
+    void convertTest4() {
+        Computer computer = new Computer();
+        List<String> result = computer.validate("(1+2*(10-8))/4");
+        Assertions.assertEquals("12108-*+4/", String.join("", computer.convert(result)));
+    }
+
 }

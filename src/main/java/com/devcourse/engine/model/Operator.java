@@ -10,18 +10,20 @@ import java.util.function.BiFunction;
 @AllArgsConstructor
 @Getter
 public enum Operator {
-    PLUS("+", 1, (b, a) -> a + b),
+    PLUS("+", 1, Double::sum),
     MINUS("-", 1, (b, a) -> a - b),
     MULTIPLY("*", 2, (b, a) -> a * b),
     DIVIDE("/", 2, (b, a) -> {
         if (b == 0)
             throw new InvalidInputException("0으로 나눌 수 없습니다.");
         return a / b;
-    });
+    }),
+    OPEN_BRANKET("(", 0, (b, a) -> 0.0),
+    CLOSE_BRANKET(")", 0, (b, a) -> 0.0);
 
-    private String operatorString;
-    private int operatorPriority;
-    private BiFunction<Double, Double, Double> operatorFunction;
+    private final String operatorString;
+    private final int operatorPriority;
+    private final BiFunction<Double, Double, Double> operatorFunction;
 
     public static boolean isOperator(String token) {
         return Arrays.stream(Operator.values())

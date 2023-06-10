@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 public class ComputerValidateTest {
 
@@ -29,6 +28,30 @@ public class ComputerValidateTest {
         Computer computer = new Computer();
         List<String> expressionResult = computer.validate(" 1");
         Assertions.assertEquals(1, expressionResult.size());
+    }
+
+    @Test
+    void validateTest4() {
+        Computer computer = new Computer();
+        Assertions.assertEquals(3, computer.validate("2. * 3").size());
+    }
+
+    @Test
+    void validateTest5() {
+        Computer computer = new Computer();
+        Assertions.assertEquals(3, computer.validate("2.*3").size());
+    }
+
+    @Test
+    void validateTest6() {
+        Computer computer = new Computer();
+        Assertions.assertEquals(11, computer.validate("1+2*(10-8)/4").size());
+    }
+
+    @Test
+    void validateExceptionTest6() {
+        Computer computer = new Computer();
+        Assertions.assertEquals(3, computer.validate("1.2*2").size());
     }
 
     @Test
@@ -61,11 +84,6 @@ public class ComputerValidateTest {
         Assertions.assertThrows(InvalidInputException.class, () -> computer.validate(""));
     }
 
-    @Test
-    void validateExceptionTest6() {
-        Computer computer = new Computer();
-        Assertions.assertEquals(3, computer.validate("1.2*2").size());
-    }
 
     @Test
     void validateExceptionTest7() {
@@ -76,13 +94,19 @@ public class ComputerValidateTest {
     @Test
     void validateExceptionTest8() {
         Computer computer = new Computer();
-        Assertions.assertEquals(3, computer.validate("2. * 3").size());
+        Assertions.assertThrows(InvalidInputException.class, () -> computer.validate("1+)7*9-(8+9"));
     }
 
     @Test
     void validateExceptionTest9() {
         Computer computer = new Computer();
-        Assertions.assertEquals(3, computer.validate("2.*3").size());
+        Assertions.assertThrows(InvalidInputException.class, () -> computer.validate("())"));
+    }
+
+    @Test
+    void validateExceptionTest10() {
+        Computer computer = new Computer();
+        Assertions.assertThrows(InvalidInputException.class, () -> computer.validate("(())"));
     }
 
 }
