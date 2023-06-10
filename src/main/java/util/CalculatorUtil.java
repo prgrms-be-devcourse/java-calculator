@@ -15,6 +15,10 @@ public class CalculatorUtil {
         }
     }
 
+    public static boolean isDigit(char ch) {
+        return Character.isDigit(ch);
+    }
+
     public static void checkExpressionByRegex(String expression) {
         if (!Pattern.matches(pattern, expression)) {
             throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");

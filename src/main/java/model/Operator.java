@@ -1,33 +1,29 @@
 package model;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Deque;
 
-public enum Operator {
-    PLUS("+", 0),
-    MINUS("-", 0),
-    MULTIPLY("*", 1),
-    DIVIDE("/", 1);
+public class Operator {
+    private final Deque<OperatorType> stack;
 
-    private final String operator;
-    private final int precedence;
-    private final Deque<Operator> stack;
-
-    Operator(String operator, int precedence) {
-        this.operator = operator;
-        this.precedence = precedence;
+    public Operator() {
         this.stack = new ArrayDeque<>();
     }
 
-    public static Operator getOperator(String operator) {
-        return Arrays.stream(values())
-                .filter(elem -> elem.operator.equals(operator))
-                .findFirst()
-                .orElseThrow();
+    public void push(char operator) {
+        OperatorType operatorType = OperatorType.getOperator(String.valueOf(operator));
+        stack.push(operatorType);
     }
 
-    public int getPrecedence() {
-        return precedence;
+    public boolean isEmpty() {
+        return stack.isEmpty();
+    }
+
+    public OperatorType peekOperator() {
+        return stack.peek();
+    }
+
+    public OperatorType pop() {
+        return stack.pop();
     }
 }

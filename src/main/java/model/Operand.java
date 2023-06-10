@@ -10,7 +10,11 @@ public class Operand {
         this.stack = new ArrayDeque<>();
     }
 
-    public void pushOperand(String number) {
-        stack.push(Integer.parseInt(number));
+    public void push(int number) {
+        stack.push(number);
+    }
+
+    public int pop() {
+        return stack.pop();
     }
 }
