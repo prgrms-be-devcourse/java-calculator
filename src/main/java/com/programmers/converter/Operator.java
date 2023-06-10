@@ -1,8 +1,5 @@
 package com.programmers.converter;
 
-import com.programmers.exception.DividedByZeroException;
-import com.programmers.exception.WrongOperationException;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
@@ -18,7 +15,7 @@ public enum Operator {
     MULTIPLY("*", 1, BigDecimal::multiply),
     DIVIDE("/", 1, (n1, n2) -> {
         if (n2.doubleValue() == 0) {
-            throw new DividedByZeroException("0으로 나눌 수 없습니다.");
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
         return n1.divide(n2, 30, RoundingMode.HALF_EVEN);
     }),
@@ -47,11 +44,11 @@ public enum Operator {
         if (OPERATOR_MAP.containsKey(symbol))
             return OPERATOR_MAP.get(symbol);
 
-        throw new WrongOperationException("잘모된 연산자가 들어왔습니다." + symbol);
+        throw new IllegalArgumentException("잘못된 연산자가 들어왔습니다." + symbol);
     }
 
-    public int compareTo(int priority) {
-        return this.priority - priority;
+    public boolean isComparePriority(Operator operator) {
+        return this.priority - operator.getPriority() <= 0;
     }
 
     public boolean isOpenParentheses() {

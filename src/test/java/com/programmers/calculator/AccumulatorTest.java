@@ -1,7 +1,6 @@
 package com.programmers.calculator;
 
 import com.programmers.converter.InfixToPostfixConverter;
-import com.programmers.exception.DividedByZeroException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +51,7 @@ class AccumulatorTest {
     @DisplayName("0으로 나누는 경우에 대한 예외 처리")
     void divide0Exception() {
         assertThatThrownBy(() -> accumulator.compute("5 / 0"))
-                .isInstanceOf(DividedByZeroException.class)
+                .isInstanceOf(ArithmeticException.class)
                 .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
 

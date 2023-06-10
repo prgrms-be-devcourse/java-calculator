@@ -1,6 +1,5 @@
 package com.programmers.calculator;
 
-import com.programmers.exception.WrongInputMenuException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,6 +23,6 @@ class MenuTypeTest {
     @ValueSource(strings = {"a", "z", "4", "0", "!", ")"})
     void wrongInputMenuNumber(String inputMenuNumber) {
         assertThatThrownBy(() -> MenuType.findMenuType(inputMenuNumber))
-                .isInstanceOf(WrongInputMenuException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
