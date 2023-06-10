@@ -31,6 +31,7 @@ public class Calculator implements Runnable{
         String inputExpression = console.inputExpression();
         String preprocessedExpression = preprocess(inputExpression);
         if(!validateExpression(preprocessedExpression)) System.out.println("예외를 발생시키겠어요");
+        String [] parseExpression =  parseExpression(preprocessedExpression);
 
 
     }
@@ -54,7 +55,9 @@ public class Calculator implements Runnable{
 
     }
 
-
+    public String [] parseExpression(String expression){
+        return  expression.split(" ");
+    }
 
 
     public String infixToPostfix(String infixExpression){
