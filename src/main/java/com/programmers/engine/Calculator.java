@@ -30,7 +30,7 @@ public class Calculator {
 
 
     // 사용자 요청에 응답하기
-    private void response(String request) {
+    private void response(String request) throws RuntimeException {
 
         //저장된 값 조회
         if (HISTORY.equals(request)) {
@@ -39,12 +39,7 @@ public class Calculator {
             // 연산
         } else if (CALC.equals(request)) {
             String equation = " ";
-            try {
                 equation = input.getEquation();
-            } catch (EquationFormatException efe) {
-                output.printErrorMsg(efe.getMessage());
-                return;
-            }
             double answer = postfixCalculator.infixToPostfix(equation);
             output.println(answer);
             calculatorHistory.save(equation, answer);
@@ -61,10 +56,10 @@ public class Calculator {
             String request = "";
             try {
                 request = input.getMenu();
-            } catch (MenuFormatException mfe) {
-                output.printErrorMsg(mfe.getMessage());
+                response(request);
+            } catch (RuntimeException e) {
+                output.printErrorMsg(e.getMessage());
             }
-            response(request);
         }
     }
 
