@@ -30,9 +30,9 @@ public class Validator {
         return false;
     }
 
-    public boolean isNumber(String currentCharacter) {
+    public boolean isNumber(String character) {
         try {
-            Integer.parseInt(currentCharacter);
+            Integer.parseInt(character);
             return true;
         } catch (IllegalArgumentException e) {
             return false;
@@ -45,6 +45,6 @@ public class Validator {
     }
 
     private boolean isNotBlank(String expression) {
-        return StringUtils.isNotBlank(expression); // @NotBlank와 동일하게 동작
+        return StringUtils.isNotBlank(expression);
     }
 }

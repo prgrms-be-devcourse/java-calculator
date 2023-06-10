@@ -36,9 +36,9 @@ public class PrefixCalculator implements Calculator {
 
     private double parseOrCalculate(Deque<Double> stack, String current, Validator validator) {
         if (validator.isNumber(current)) {
-            return Double.parseDouble(current);
+            return calculateOperands(stack, current);
         }
-        return calculateOperands(stack, current);
+        return Double.parseDouble(current);
     }
 
     private double calculateOperands(Deque<Double> stack, String current) {

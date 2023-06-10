@@ -10,7 +10,6 @@ import java.util.List;
 
 public class PrefixParser implements ExpressionParser {
     private static final String BLANK = " ";
-    private static Deque<String> stack;
 
     public PrefixParser() { }
 
@@ -20,47 +19,46 @@ public class PrefixParser implements ExpressionParser {
     }
 
     private List<String> toPrefix(String expression, Validator validator) {
+        Deque<String> stack = new ArrayDeque<>();
         List<String> result = new ArrayList<>();
-        initializeStack();
 
-        for (String currentCharacter : expression.split(BLANK)) {
-            addOperandAndOrderOperator(result, currentCharacter, validator);
+        for (String character : expression.split(BLANK)) {
+            if (isOperator(result, character, validator)) {
+                addToResult(stack, result, character);
+            }
         }
 
-        clearLefts(result);
+        clearLeftsToResult(stack, result);
         return result;
     }
 
-    private void addOperandAndOrderOperator(List<String> result, String currentCharacter, Validator validator) {
-        if (validator.isNumber(currentCharacter)) {
-            result.add(currentCharacter);
-            return;
+    private boolean isOperator(List<String> result, String character, Validator validator) {
+        if (validator.isNumber(character)) {
+            result.add(character);
+            return false;
         }
-        addHighPrioritiesToResult(result, currentCharacter);
-        stack.push(currentCharacter);
+        return true;
     }
 
-    private void addHighPrioritiesToResult(List<String> result, String currentCharacter) {
-        while (isHigherPriority(currentCharacter)) {
+    private void addToResult(Deque<String> stack, List<String> result, String character) {
+        while (isNotEmpty(stack) && isPeekHigherPriority(stack, character)) {
+            result.add(stack.pop());
+        }
+        stack.push(character);
+    }
+
+    private boolean isPeekHigherPriority(Deque<String> stack, String character) {
+        // todo: 빈번한 Optional 호출 개선
+        return Operators.evaluatePriority(character) <= Operators.evaluatePriority(stack.peek());
+    }
+
+    private void clearLeftsToResult(Deque<String> stack, List<String> result) {
+        while (isNotEmpty(stack)) {
             result.add(stack.pop());
         }
     }
 
-    private boolean isHigherPriority(String currentCharacter) {
-        return isStackNotEmpty() && Operators.evaluatePriority(currentCharacter) <= Operators.evaluatePriority(stack.peek());
-    }
-
-    private void clearLefts(List<String> result) {
-        while (isStackNotEmpty()) {
-            result.add(stack.pop());
-        }
-    }
-
-    private boolean isStackNotEmpty() {
+    private boolean isNotEmpty(Deque<String> stack) {
         return !stack.isEmpty();
-    }
-
-    private void initializeStack() {
-        stack = new ArrayDeque<>();
     }
 }
