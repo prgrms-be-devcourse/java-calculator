@@ -1,6 +1,4 @@
-package org.programmers.java.calculate;
-
-import java.util.function.BiFunction;
+package org.programmers.java.calculation;
 
 public class Operator {
 
@@ -14,7 +12,9 @@ public class Operator {
         return a * b;
     }
     static public int divide(int a, int b){
-        if(b == 0) throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        if(b == 0) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        }
         return a / b;
     }
 }

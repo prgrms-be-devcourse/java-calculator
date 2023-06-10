@@ -3,16 +3,14 @@ package org.programmers.java;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.programmers.java.calculate.Calculate;
+import org.programmers.java.calculation.Calculation;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class CalculateTest {
+public class CalculationTest {
 
-     Calculate calculate = new Calculate();
+     Calculation calculation = new Calculation();
 
      @Test
      @DisplayName("중위 표기식 -> 후위 표기식 변경")
@@ -22,7 +20,7 @@ public class CalculateTest {
           List<String> postfixExpect = Arrays.asList("3","5","10","*","+");
 
           // when
-          List<String> postfix = calculate.infixToPostfix(formulaList);
+          List<String> postfix = calculation.infixToPostfix(formulaList);
 
           // then
           Assertions.assertEquals(postfixExpect, postfix);
@@ -35,7 +33,7 @@ public class CalculateTest {
           List<String> postfix = Arrays.asList("3","5","10","*","+");
 
           // when
-          String calculateValue = calculate.postfixCalculate(postfix);
+          String calculateValue = calculation.postfixCalculate(postfix);
 
           // then
           Assertions.assertEquals("53", calculateValue);

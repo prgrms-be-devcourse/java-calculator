@@ -1,8 +1,8 @@
-package org.programmers.java.calculate;
+package org.programmers.java.calculation;
 
 import java.util.*;
 
-public class Calculate {
+public class Calculation {
 
     private final String numberMatch = "[0-9]+";
     private final String operatorMatch = "[*+/-]";
@@ -32,16 +32,21 @@ public class Calculate {
                 postfixOperator.add(item);
             }
             if(item.matches(operatorMatch)){
-                if(operatorDeque.size() == 0) operatorDeque.add(item);
-                else {
+                if(operatorDeque.size() == 0) {
+                    operatorDeque.add(item);
+                    continue;
+                }
+                if(operatorDeque.size() != 0){
                     while(operatorDeque.size() > 0){
                         if(operatorPriority.get(operatorDeque.peekLast()) <= operatorPriority.get(item)) {
                             operatorDeque.add(item);
                             break;
                         }
-                        else postfixOperator.add(operatorDeque.removeLast());
+                        postfixOperator.add(operatorDeque.removeLast());
                     }
-                    if(operatorDeque.size() == 0) operatorDeque.add(item);
+                    if(operatorDeque.size() == 0) {
+                        operatorDeque.add(item);
+                    }
                 }
             }
         }
@@ -59,7 +64,9 @@ public class Calculate {
     public String postfixCalculate(List<String> postfixOperator){
         Deque<String> numberDeque = new ArrayDeque<>();
         for(String item : postfixOperator){
-            if(item.matches(numberMatch)) numberDeque.add(item);
+            if(item.matches(numberMatch)) {
+                numberDeque.add(item);
+            }
             if(item.matches(operatorMatch)){
                 int num2 = Integer.parseInt(numberDeque.removeLast());
                 int num1 = Integer.parseInt(numberDeque.removeLast());

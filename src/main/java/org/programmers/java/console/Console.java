@@ -1,7 +1,6 @@
 package org.programmers.java.console;
 
-import org.programmers.java.message.InfoMsg;
-import org.programmers.java.validation.Validation;
+import org.programmers.java.message.Info;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -20,24 +19,23 @@ public class Console implements Input, Output {
         return ConsoleSingleton.consoleInstance;
     }
 
-
     @Override
-    public String numInput() {
+    public String selectNumInput() {
         String numInput = scanner.nextLine();
         return numInput;
     }
 
     @Override
-    public String calculationInput() {
-        String calculationInput = scanner.nextLine();
-        return calculationInput;
+    public String formulaInput() {
+        String formulaInput = scanner.nextLine();
+        return formulaInput;
     }
 
     @Override
     public void menuMsg() {
-        System.out.println(InfoMsg.SELECT_MESSGAE.getInfoMsg());
-        System.out.println(InfoMsg.CALCULATION_MESSAGE.getInfoMsg());
-        System.out.println(InfoMsg.EXIT_MESSAGE.getInfoMsg());
+        System.out.println(Info.SELECT.getMsg());
+        System.out.println(Info.CALCULATION.getMsg());
+        System.out.println(Info.EXIT.getMsg());
     }
 
     @Override
@@ -47,7 +45,7 @@ public class Console implements Input, Output {
 
     @Override
     public void selectMsg(String selectNum) {
-        System.out.println(InfoMsg.SELECT_NUM_MESSAGE.getInfoMsg() + selectNum);
+        System.out.println(Info.SELECT_NUM.getMsg() + selectNum);
     }
 
     @Override
@@ -61,15 +59,15 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void getCalculationValues(Map<Long, String> values) {
-        for (Long key : values.keySet()) {
-            String value = values.get(key);
+    public void getCalculationValues(Map<Long, String> calculationValues) {
+        for (Long key : calculationValues.keySet()) {
+            String value = calculationValues.get(key);
             System.out.println(value);
         }
     }
 
     @Override
     public void exitMsg() {
-        System.out.println(InfoMsg.EXIT_INFO_MESSAGE.getInfoMsg());
+        System.out.println(Info.EXIT_INFO.getMsg());
     }
 }

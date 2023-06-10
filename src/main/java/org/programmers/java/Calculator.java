@@ -1,34 +1,34 @@
 package org.programmers.java;
 
-import org.programmers.java.calculate.Calculate;
+import org.programmers.java.calculation.Calculation;
 import org.programmers.java.console.Input;
 import org.programmers.java.console.Output;
-import org.programmers.java.message.ErrorMsg;
+import org.programmers.java.message.Error;
 import org.programmers.java.repository.FormulaRepository;
-import org.programmers.java.validation.Validation;
+import org.programmers.java.validator.Validator;
 
 public class Calculator {
     private boolean exitStatus = true;
     private final Input input;
     private final Output output;
-    private final Calculate calculate;
+    private final Calculation calculation;
     private final FormulaRepository formulaRepository;
-    private final Validation validation;
+    private final Validator validator;
 
-    Calculator(Input input, Output output, Calculate calculate, FormulaRepository formulaRepository, Validation validation){
+    Calculator(Input input, Output output, Calculation calculation, FormulaRepository formulaRepository, Validator validator){
         this.input = input;
         this.output = output;
-        this.calculate = calculate;
+        this.calculation = calculation;
         this.formulaRepository = formulaRepository;
-        this.validation = validation;
+        this.validator = validator;
     }
 
     void run() {
         while (exitStatus) {
             output.menuMsg();
-            String inputNum = input.numInput();
-            output.selectMsg(inputNum);
-            switch (inputNum) {
+            String selectNum = input.selectNumInput();
+            output.selectMsg(selectNum);
+            switch (selectNum) {
                 case "1":
                     output.getCalculationValues(formulaRepository.getFormulaList());
                     break;
@@ -40,16 +40,16 @@ public class Calculator {
                     exitStatus = false;
                     break;
                 default:
-                    output.errorMsg(ErrorMsg.SELECT_VALIDATION_ERROR_MSG.getErrorMsg());
+                    output.errorMsg(Error.SELECT_VALIDATION.getMsg());
             }
         }
     }
 
     private void formulaCalculate() {
-        String formula = input.calculationInput();
+        String formula = input.formulaInput();
 
-        if(validation.calculateValidation(formula)){
-            String result = calculate.requestCalculate(formula);
+        if(validator.formulaValidate(formula)){
+            String result = calculation.requestCalculate(formula);
             output.calculationValue(result);
             formulaRepository.save(formula, result);
         }

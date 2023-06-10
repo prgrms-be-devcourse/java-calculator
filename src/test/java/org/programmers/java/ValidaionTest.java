@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.programmers.java.console.Console;
-import org.programmers.java.console.Output;
-import org.programmers.java.validation.Validation;
+import org.programmers.java.validator.Validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class ValidaionTest {
 
-    Validation validation = new Validation(Console.getInstance());
+    Validator validator = new Validator(Console.getInstance());
 
     @Test
     @DisplayName("연산식 검증: 연산식 분해 검증")
@@ -23,7 +22,7 @@ public class ValidaionTest {
         List<String> formulaTest = Arrays.asList("10", "+", "4", "/", "20", "*", "3", "-", "2");
 
         // when
-        List<String> formulaList = validation.formulaSplitValidation(inputMsg);
+        List<String> formulaList = validator.formulaSplitValidate(inputMsg);
 
         // then
         Assertions.assertEquals(formulaList, formulaTest);
@@ -36,7 +35,7 @@ public class ValidaionTest {
         List<String> formulaList = Arrays.asList("10", "+", "4", "/", "20", "*", "3", "-", "2");
 
         // when
-        Boolean checkedFormulaValidation = validation.checkFormulaValidation(formulaList);
+        Boolean checkedFormulaValidation = validator.formulaCountValidate(formulaList);
 
         // then
         Assertions.assertEquals(checkedFormulaValidation, true);

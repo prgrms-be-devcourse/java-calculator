@@ -3,7 +3,7 @@ package org.programmers.java;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.programmers.java.calculate.Operator;
+import org.programmers.java.calculation.Operator;
 
 public class OperatorTest {
 
