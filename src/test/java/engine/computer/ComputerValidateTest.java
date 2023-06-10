@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class ComputerValidateTest {
 
@@ -58,6 +59,30 @@ public class ComputerValidateTest {
     void validateExceptionTest5() {
         Computer computer = new Computer();
         Assertions.assertThrows(InvalidInputException.class, () -> computer.validate(""));
+    }
+
+    @Test
+    void validateExceptionTest6() {
+        Computer computer = new Computer();
+        Assertions.assertEquals(3, computer.validate("1.2*2").size());
+    }
+
+    @Test
+    void validateExceptionTest7() {
+        Computer computer = new Computer();
+        Assertions.assertThrows(InvalidInputException.class, () -> computer.validate(".14 + 2"));
+    }
+
+    @Test
+    void validateExceptionTest8() {
+        Computer computer = new Computer();
+        Assertions.assertEquals(3, computer.validate("2. * 3").size());
+    }
+
+    @Test
+    void validateExceptionTest9() {
+        Computer computer = new Computer();
+        Assertions.assertEquals(3, computer.validate("2.*3").size());
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class Computer {
 
-    private static final String REGEXP = "([0-9]+)|([+\\-*/])|(\s*)";
+    private static final String REGEXP = "(?:^\\.[0-9]+)|(?:^[0-9]?\\.[\\s+\\-*/]$)|([0-9]+\\.[0-9]+)|([+\\-*/])|([0-9]+)|(s*)";
     private static final Pattern pattern = Pattern.compile(REGEXP);
 
     public List<String> validate(String userInput) {
