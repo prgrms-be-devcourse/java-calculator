@@ -24,6 +24,13 @@ public class ComputerValidateTest {
     }
 
     @Test
+    void validateTest3() {
+        Computer computer = new Computer();
+        List<String> expressionResult = computer.validate(" 1");
+        Assertions.assertEquals(1, expressionResult.size());
+    }
+
+    @Test
     void validateExceptionTest1() {
         Computer computer = new Computer();
         Assertions.assertThrows(InvalidInputException.class, () -> computer.validate("+ 1"));
