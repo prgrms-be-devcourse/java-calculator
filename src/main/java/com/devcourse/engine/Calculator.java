@@ -36,12 +36,13 @@ public class Calculator implements Runnable {
                 } else if (menu.equals(Menu.HISTORY.getMenuOrdinal())) {
 
                     if (historian.getLastIndex() < 1) {
-                        output.showHistory("표시할 이력이 없습니다.\n");
+                        output.printError("표시할 이력이 없습니다.");
                         continue;
                     }
 
                     IntStream.rangeClosed(1, historian.getLastIndex())
                             .forEach(i -> output.showHistory(historian.getHistory(i)));
+                    output.showHistory("");
 
                 } else if (menu.equals(Menu.COMPUTE.getMenuOrdinal())) {
 
@@ -55,6 +56,7 @@ public class Calculator implements Runnable {
                 } else {
                     throw new InvalidInputException("올바른 메뉴를 선택해주세요.");
                 }
+
             } catch (InvalidInputException e) {
                 output.printError(e.getMessage());
             }
