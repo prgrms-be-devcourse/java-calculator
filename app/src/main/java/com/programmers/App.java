@@ -3,12 +3,13 @@
  */
 package com.programmers;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import com.programmers.controller.CalculatorController;
 
+public class App {
+	
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+	    CalculatorController calculatorController = new CalculatorController();
+		calculatorController.run();
     }
+	
 }
