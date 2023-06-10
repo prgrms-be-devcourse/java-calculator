@@ -9,8 +9,8 @@ import java.util.function.BiFunction;
 
 public enum ArithmeticOperator {
     ADDITION("+", 1, (left, right) -> left + right),
-    SUBTRACTION("-", 1,  (left, right) -> left + right),
-    MULTIPLICATION("*", 2,  (left, right) -> left + right),
+    SUBTRACTION("-", 1,  (left, right) -> left - right),
+    MULTIPLICATION("*", 2,  (left, right) -> left * right),
     DIVISION("/", 2,  (Dividend, Divisor) -> {
         if (Divisor != 0) {
             return Dividend / Divisor;
