@@ -23,11 +23,11 @@ public class Calculator {
     // 사용자 요청에 응답하기
     public void response(String request) {
 
-        if (request.equals("1")) {
+        if ("1".equals(request)) {
             //저장된 값 조회
             console.printHistory(calculatorHistory.findAll());
 
-        } else if (request.equals("2")) {
+        } else if ("2".equals(request)) {
             // 연산
             String formula = console.input();
 
@@ -40,7 +40,7 @@ public class Calculator {
                 console.printErrorMessage("올바른 식을 입력해주세요.");
             }
 
-        }else if (request.equals("3")) {
+        }else if ("3".equals(request)) {
             // 종료
             isRunning = false;
         } else {
