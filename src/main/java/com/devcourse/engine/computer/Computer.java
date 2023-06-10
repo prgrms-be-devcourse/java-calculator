@@ -1,10 +1,8 @@
 package com.devcourse.engine.computer;
 
 import com.devcourse.engine.exception.InvalidInputException;
-import com.devcourse.engine.model.Token;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -38,7 +36,13 @@ public class Computer {
     }
 
     public Stack<String> convert(List<String> expression) {
-        return new Stack<>();
+        Stack<String> expressionStack = new Stack<>();
+        for (String exp: expression) {
+            if (expressionStack.isEmpty()) {
+                expressionStack.push(exp);
+            }
+        }
+        return expressionStack;
     }
 
     public double compute(List<String> expression) {

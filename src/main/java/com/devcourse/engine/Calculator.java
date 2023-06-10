@@ -33,10 +33,10 @@ public class Calculator implements Runnable {
                 String userInput = input.inputExpression();
 
                 try {
-                    List<String> expression1 = computer.validate(userInput);
-                    Stack<String> expression2 = computer.convert(expression1);
-                    double result = computer.compute(expression2);
-                    historian.saveHistory(expression1, result);
+                    List<String> expressionList = computer.validate(userInput);
+                    Stack<String> expressionStack = computer.convert(expressionList);
+                    double result = computer.compute(expressionStack);
+                    historian.saveHistory(expressionList, result);
                 } catch (InvalidInputException e) {
                     output.printError(e.getMessage());
                 }
