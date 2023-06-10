@@ -88,6 +88,20 @@ class CalculatorTest {
 
     }
 
+    @DisplayName("0으로 나눌시 예외 반환")
+    @Test
+    void calulateTest2(){
+
+        List<String> postfixExpression = Arrays.asList("1","0","/");
+
+        assertThrows(ArithmeticException.class, () -> {
+            double result = calculator.calculate(postfixExpression);
+        });
+
+    }
+
+
+
 
     private static List<String> passValidateExpressionTestData() {
         return Arrays.asList(
