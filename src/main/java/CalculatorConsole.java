@@ -23,7 +23,7 @@ public class CalculatorConsole implements Input, Output {
 
     @Override
     public void inputError(String errorResponse) {
-        System.out.println(errorResponse);
+        System.out.println(errorResponse + "\n");
     }
 
     @Override

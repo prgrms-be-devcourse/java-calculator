@@ -33,7 +33,10 @@ public class Calculator implements Runnable {
         while (true) {
             output.putMenu();
             String inputString = input.getChoice(CHOICE_PROMPT);
-            if (!validateChoiceInput(inputString)) output.inputError(MENU_INPUT_ERROR);
+            if (!validateChoiceInput(inputString)){
+                output.inputError(MENU_INPUT_ERROR);
+                continue;
+            }
 
             switch (inputString.charAt(FIRST_INDEX)) {
                 case REQUEST_VIEW_CALCULATION_RESULT -> output.showCalculationResult(calculationRepository.findAll());
@@ -75,10 +78,9 @@ public class Calculator implements Runnable {
     }
 
     public static boolean validateChoiceInput(String input){
+        if (input.length() != MENU_INPUT_LENGTH) return false;
         char firstChar = input.charAt(FIRST_INDEX);
-        return input.length() == MENU_INPUT_LENGTH
-                && firstChar == REQUEST_VIEW_CALCULATION_RESULT
-                || firstChar == REQUEST_CALCULATION;
+        return firstChar == REQUEST_VIEW_CALCULATION_RESULT || firstChar == REQUEST_CALCULATION;
     }
     public static boolean validateExpression(String expression){
         AtomicInteger index = new AtomicInteger(0);
