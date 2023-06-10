@@ -76,11 +76,17 @@ class CalculatorTest {
 
     }
 
+    @DisplayName("연산자 우선순위를 반영하여 중위식 표현의 연산입력값을 후위식으로 표현")
+    @ParameterizedTest
+    @MethodSource("caluateTestData")
+    void calulateTest(List<String> postfixExpression, Double output){
 
+        System.out.println(calculator.calculate(postfixExpression));
+        Double expected = output;
+        Double actual = calculator.calculate(postfixExpression);
+        assertEquals(expected, actual);
 
-
-
-
+    }
 
 
     private static List<String> passValidateExpressionTestData() {
@@ -109,7 +115,16 @@ class CalculatorTest {
                     Arguments.of(Arrays.asList("1","+","2","-","3"), Arrays.asList("1","2","+","3","-")),
                     Arguments.of(Arrays.asList("1","/","2","*","3"), Arrays.asList("1","2","/","3","*"))
             );
+    }
 
+    private static Stream<Arguments> caluateTestData() {
+
+        return Stream.of(
+                Arguments.of(Arrays.asList("1","2","3","*","+"), 6.0),
+                Arguments.of(Arrays.asList("1","2","3","/","-"), 1.6666666666666665),
+                Arguments.of(Arrays.asList("1","2","+","3","-"), 6.0),
+                Arguments.of(Arrays.asList("1","2","/","3","*"), 3.5)
+        );
     }
 
 

@@ -30,7 +30,6 @@ public class Calculator implements Runnable{
                 case 2 : loadHistory(); break;
             }
         }
-
     }
 
     public void compute(){
@@ -38,6 +37,8 @@ public class Calculator implements Runnable{
         String preprocessedExpression = preprocess(inputExpression);
         if(!validateExpression(preprocessedExpression)) System.out.println("예외를 발생시키겠어요");
         List<String> parseExpression =  parseExpression(preprocessedExpression);
+        List<String> postfixExpression =  infixToPostfix(parseExpression);
+
 
 
     }
@@ -52,7 +53,6 @@ public class Calculator implements Runnable{
         preprocessedExpression = preprocessedExpression.replaceAll("\\s+", " ");
         preprocessedExpression = preprocessedExpression.replaceAll("(?<=\\d)\\s+(?=\\d)", "");
         return preprocessedExpression;
-
     }
 
     public boolean validateExpression(String expression){
@@ -93,8 +93,23 @@ public class Calculator implements Runnable{
         return postfixExpression;
     }
 
+    public double calculate(List<String> postfixExpression){
 
+        Stack<String> st = new Stack<>();
 
+        for(String ele : postfixExpression){
+            if(StringUtils.isNumeric(ele)){
+                st.add(ele);  continue;
+            }
+
+            Double right = Double.parseDouble(st.pop());
+            Double left = Double.parseDouble(st.pop());
+            String arithmeticOperator = ele;
+            st.add(String.valueOf(ArithmeticOperator.calculate(arithmeticOperator, left, right)));
+        }
+
+        return Double.parseDouble(st.pop());
+    }
 
 
 
