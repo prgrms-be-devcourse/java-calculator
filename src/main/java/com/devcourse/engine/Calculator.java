@@ -1,13 +1,14 @@
 package com.devcourse.engine;
 
-import com.devcourse.computer.Computer;
+import com.devcourse.engine.computer.Computer;
 import com.devcourse.engine.io.Input;
 import com.devcourse.engine.io.Output;
 import com.devcourse.engine.model.Menu;
-import com.devcourse.exception.InvalidInputException;
-import com.devcourse.historian.Historian;
+import com.devcourse.engine.exception.InvalidInputException;
+import com.devcourse.engine.historian.Historian;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
 import java.util.Stack;
 
 @AllArgsConstructor
@@ -32,15 +33,14 @@ public class Calculator implements Runnable {
                 String userInput = input.inputExpression();
 
                 try {
-                    computer.validate(userInput);
-                    Stack<String> expression = computer.convert(userInput);
-                    double result = computer.compute(userInput);
-                    historian.saveHistory(expression, result);
+                    List<String> expression1 = computer.validate(userInput);
+                    Stack<String> expression2 = computer.convert(expression1);
+                    double result = computer.compute(expression2);
+                    historian.saveHistory(expression1, result);
                 } catch (InvalidInputException e) {
                     output.printError(e.getMessage());
                 }
             }
-
         }
     }
 }

@@ -14,4 +14,10 @@ public class InputConsole implements Input {
         return scanner.nextLine();
     }
 
+    @Override
+    public String inputExpression() {
+        System.out.println("계산식을 입력하세요.");
+        return scanner.nextLine();
+    }
+
 }

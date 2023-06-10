@@ -1,4 +1,4 @@
-package com.devcourse.exception;
+package com.devcourse.engine.exception;
 
 public class InvalidInputException extends RuntimeException {
     public InvalidInputException() {
