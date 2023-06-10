@@ -4,8 +4,6 @@ import com.programmers.engine.Calculator;
 import com.programmers.engine.PostfixCalculator;
 import com.programmers.io.Console;
 import com.programmers.repository.CalculatorHistory;
-import com.programmers.validator.InputValidator;
-import com.programmers.validator.Validator;
 
 public class Application {
     public static void main(String[] args) {
@@ -26,7 +24,6 @@ public class Application {
     private static PostfixCalculator postfixCalculatorInstance() {
         return new PostfixCalculator();
     }
-
 
     private static CalculatorHistory calculatorHistoryInstance() {
         return new CalculatorHistory();
