@@ -9,6 +9,8 @@ public class PostfixCalculator {
     private final StringBuilder postFix = new StringBuilder();
 
     private double calculate(String equation) {
+        postFix.setLength(0);
+
         Stack<Double> stack = new Stack<>();
         char cur = ' ';
         double value1, value2;
@@ -61,7 +63,7 @@ public class PostfixCalculator {
                 if (cur == ')') {
                     boolean flag = true;
                     while (flag) {
-                        if (!popOperator((Character c) -> c == '(', opStack.pop())) {
+                        if (!popOperator((Character c) -> c == '(', opStack.peek())) {
                             flag = false;
                         }
                     }
@@ -94,7 +96,7 @@ public class PostfixCalculator {
             if (predicate.test(data)) return false;
 
             if (data instanceof Character) {
-                postFix.append(data);
+                postFix.append(opStack.pop());
                 return true;
             }
 
