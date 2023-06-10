@@ -7,12 +7,19 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
-    private final Validation validation;
+
     private final Scanner scanner = new Scanner(System.in);
 
-    public Console(Validation validation) {
-        this.validation = validation;
+    private Console() {}
+
+    private static class ConsoleSingleton {
+        private static final Console consoleInstance = new Console();
     }
+
+    public static Console getInstance(){
+        return ConsoleSingleton.consoleInstance;
+    }
+
 
     @Override
     public String numInput() {
@@ -23,8 +30,7 @@ public class Console implements Input, Output {
     @Override
     public String calculationInput() {
         String calculationInput = scanner.nextLine();
-        Boolean validationCheck = validation.calculateValidation(calculationInput);
-        return validationCheck == true ? calculationInput : "";
+        return calculationInput;
     }
 
     @Override

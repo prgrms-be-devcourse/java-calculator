@@ -8,10 +8,11 @@ import org.programmers.java.validation.Validation;
 
 public class App {
     public static void main(String[] args){
-        Console console = new Console(new Validation());
+        Console console = Console.getInstance();
         Calculate calculate = new Calculate();
         FormulaRepository formulaRepository = new FormulaMemoryRepository();
-        Calculator calculator = new Calculator(console, console, calculate, formulaRepository);
+        Validation validation = new Validation(console);
+        Calculator calculator = new Calculator(console, console, calculate, formulaRepository, validation);
         calculator.run();
     }
 }

@@ -1,14 +1,20 @@
 package org.programmers.java.validation;
 
+import org.programmers.java.console.Output;
 import org.programmers.java.message.ErrorMsg;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Validation {
+    private final Output output;
     private final String numberMatch = "[0-9]+";
     private final String operatorMatch = "[*+/-]";
 
+
+    public Validation(Output output) {
+        this.output = output;
+    }
 
     // 연산식 검증 로직
     public boolean calculateValidation(String inputMsg) {
@@ -18,7 +24,7 @@ public class Validation {
 
         if(formulaList.size() != 0) afterCheck = checkFormulaValidation(formulaList);
 
-        if(!afterCheck) System.out.println(ErrorMsg.CALCULATE_VALIDATION_ERROR_MSG.getErrorMsg());
+        if(!afterCheck) output.errorMsg(ErrorMsg.CALCULATE_VALIDATION_ERROR_MSG.getErrorMsg());
 
         return afterCheck;
     }
@@ -33,7 +39,7 @@ public class Validation {
             if(str.matches(numberMatch)) formulaBeforeValidation.add(str);
             else if(str.matches(operatorMatch)) formulaBeforeValidation.add(str);
             else {
-                System.out.println(ErrorMsg.CALCULATE_VALIDATION_ERROR_MSG.getErrorMsg());
+                output.errorMsg(ErrorMsg.CALCULATE_VALIDATION_ERROR_MSG.getErrorMsg());
                 formulaBeforeValidation.clear();
                 break;
             }

@@ -3,6 +3,8 @@ package org.programmers.java;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.programmers.java.console.Console;
+import org.programmers.java.console.Output;
 import org.programmers.java.validation.Validation;
 
 import java.util.Arrays;
@@ -11,7 +13,7 @@ import java.util.List;
 
 public class ValidaionTest {
 
-    Validation validation = new Validation();
+    Validation validation = new Validation(Console.getInstance());
 
     @Test
     @DisplayName("연산식 검증: 연산식 분해 검증")
