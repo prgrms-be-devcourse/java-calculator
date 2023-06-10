@@ -6,4 +6,6 @@ public interface Output {
     void printError(String errorMessage);
 
     void showResult(double result);
+
+    void showHistory(String history);
 }

@@ -9,7 +9,6 @@ import com.devcourse.engine.historian.Historian;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Stack;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
@@ -28,7 +27,7 @@ public class Calculator implements Runnable {
                 output.endGame();
                 break;
             } else if (menu.equals(Menu.HISTORY.getMenuOrdinal())) {
-                historian.showHistory();
+                output.showHistory(historian.getHistory());
             } else {
                 String userInput = input.inputExpression();
 

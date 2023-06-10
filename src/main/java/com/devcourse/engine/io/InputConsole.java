@@ -1,6 +1,4 @@
-package com.devcourse;
-
-import com.devcourse.engine.io.Input;
+package com.devcourse.engine.io;
 
 import java.util.Scanner;
 
@@ -10,13 +8,14 @@ public class InputConsole implements Input {
 
     @Override
     public String inputMenu() {
-        System.out.println("\n0: 종료\n1: 조회\n2: 계산\n\n실행: ");
+        System.out.println("----------------------------------");
+        System.out.println("0: 종료\n1: 조회\n2: 계산\n\n선택: ");
         return scanner.nextLine();
     }
 
     @Override
     public String inputExpression() {
-        System.out.println("계산식을 입력하세요.");
+        System.out.println("\n계산식을 입력하세요.");
         return scanner.nextLine();
     }
 

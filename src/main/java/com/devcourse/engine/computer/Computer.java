@@ -4,7 +4,6 @@ import com.devcourse.engine.exception.InvalidInputException;
 import com.devcourse.engine.model.Operator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;

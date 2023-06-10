@@ -1,6 +1,4 @@
-package com.devcourse;
-
-import com.devcourse.engine.io.Output;
+package com.devcourse.engine.io;
 
 public class OutputConsole implements Output {
     @Override
@@ -16,5 +14,10 @@ public class OutputConsole implements Output {
     @Override
     public void showResult(double result) {
         System.out.println(result);
+    }
+
+    @Override
+    public void showHistory(String history) {
+        System.out.println(history);
     }
 }
