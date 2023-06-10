@@ -11,6 +11,6 @@ public class CalculationResult {
         this.result = result;
     }
     public void printInfo(){
-        System.out.printf("%s = ", this.expression, this.result);
+        System.out.printf("%s = %f%n", this.expression, this.result);
     }
 }

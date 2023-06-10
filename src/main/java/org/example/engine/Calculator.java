@@ -3,6 +3,9 @@ package org.example.engine;
 import org.apache.commons.lang3.StringUtils;
 import org.example.Console;
 import org.example.engine.enums.ArithmeticOperator;
+import org.example.engine.model.CalculationResult;
+import org.example.engine.repository.CalculationRepository;
+import org.example.engine.repository.InmemoryCalculationRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,14 +15,13 @@ import java.util.Stack;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-
 public class Calculator implements Runnable{
     private Console console;
-
-    public Calculator(Console console){
+    private CalculationRepository calculationRepository;
+    public Calculator(Console console, CalculationRepository calculationRepository){
         this.console = console;
+        this.calculationRepository = calculationRepository;
     }
-
     @Override
     public void run() {
         try{
@@ -34,22 +36,25 @@ public class Calculator implements Runnable{
             System.out.println(e.getMessage());
         }
     }
-
     public void compute()throws IOException {
         String inputExpression = console.inputExpression();
         String preprocessedExpression = preprocess(inputExpression);
-        if(!validateExpression(preprocessedExpression)) System.out.println("예외를 발생시키겠어요");
+        if(!validateExpression(preprocessedExpression)) {
+            System.out.println("예외를 발생시키겠어요");
+        }
         List<String> parseExpression =  parseExpression(preprocessedExpression);
         List<String> postfixExpression =  infixToPostfix(parseExpression);
         Double result = calculate(postfixExpression);
         System.out.println(result);
-
+        saveHistory(new CalculationResult(inputExpression, result));
     }
 
     public void loadHistory(){
-        System.out.println("laodHistory에요");
+        List<CalculationResult> historyList = calculationRepository.findAll();
+        for(CalculationResult calculationResult: historyList){
+            calculationResult.printInfo();
+        }
     }
-
 
     public String preprocess(String rowExpression){
         String preprocessedExpression = rowExpression.trim();
@@ -61,7 +66,6 @@ public class Calculator implements Runnable{
     public boolean validateExpression(String expression){
         String regex = "^\\d+(\\s*[+\\-*/]\\s*\\d+)*$";
         return Pattern.matches(regex, expression);
-
     }
 
     public List <String> parseExpression(String expression){
@@ -115,12 +119,8 @@ public class Calculator implements Runnable{
         return Double.parseDouble(st.pop());
     }
 
-
-
-
-
-
-
-
+    public int saveHistory(CalculationResult calculationResult){
+        return calculationRepository.save(calculationResult);
+    }
 
 }

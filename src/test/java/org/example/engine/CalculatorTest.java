@@ -1,6 +1,8 @@
 package org.example.engine;
 
 import org.example.Console;
+import org.example.engine.repository.CalculationRepository;
+import org.example.engine.repository.InmemoryCalculationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,12 +22,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
     Console console;
+    CalculationRepository calculationRepository;
     Calculator calculator;
 
     @BeforeEach
     void setUp() {
         this.console = new Console();
-        this.calculator = new Calculator(this.console);
+        this.calculationRepository = new InmemoryCalculationRepository();
+        this.calculator = new Calculator(this.console, this.calculationRepository);
     }
 
     @DisplayName("사칙연산 공백 전처리 테스트")
@@ -43,8 +47,6 @@ class CalculatorTest {
         boolean expected = true;
         boolean actual = calculator.validateExpression(expression);
         assertEquals(expected, actual);
-
-
     }
 
     @DisplayName("사칙연산 입력 검증 실페 테스트")
@@ -54,7 +56,6 @@ class CalculatorTest {
         boolean expected = false;
         boolean actual = calculator.validateExpression(expression);
         assertEquals(expected, actual);
-
     }
 
     @DisplayName("문자열 형태의 연산 입력값을 공백을 기준으로 분리한 리스트 변환")
@@ -74,19 +75,16 @@ class CalculatorTest {
         List<String> expected = output;
         List<String> actual = calculator.infixToPostfix(input);
         assertEquals(expected, actual);
-
     }
 
     @DisplayName("연산자 우선순위를 반영하여 중위식 표현의 연산입력값을 후위식으로 표현")
     @ParameterizedTest
     @MethodSource("caluateTestData")
     void calulateTest(List<String> postfixExpression, Double output){
-
         System.out.println(calculator.calculate(postfixExpression));
         Double expected = output;
         Double actual = calculator.calculate(postfixExpression);
         assertEquals(expected, actual);
-
     }
 
     @DisplayName("0으로 나눌시 예외 반환")
