@@ -15,7 +15,7 @@ public class InputConsole implements Input {
 
     @Override
     public String inputExpression() {
-        System.out.println("\n계산식을 입력하세요.");
+        System.out.println("계산식을 입력하세요.");
         return scanner.nextLine();
     }
 

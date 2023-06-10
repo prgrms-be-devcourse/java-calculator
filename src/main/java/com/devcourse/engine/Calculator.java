@@ -23,23 +23,28 @@ public class Calculator implements Runnable {
         while (true) {
             String menu = input.inputMenu();
 
-            if (menu.equals(Menu.EXIT.getMenuOrdinal())) {
-                output.endGame();
-                break;
-            } else if (menu.equals(Menu.HISTORY.getMenuOrdinal())) {
-                output.showHistory(historian.getHistory());
-            } else {
-                String userInput = input.inputExpression();
+            try {
+                if (menu.length() != 1) {
+                    throw new InvalidInputException("올바른 메뉴를 선택해주세요.");
+                }
 
-                try {
+                if (menu.equals(Menu.EXIT.getMenuOrdinal())) {
+                    output.endGame();
+                    break;
+                } else if (menu.equals(Menu.HISTORY.getMenuOrdinal())) {
+                    output.showHistory(historian.getHistory());
+                } else if (menu.equals(Menu.COMPUTE.getMenuOrdinal())) {
+                    String userInput = input.inputExpression();
                     List<String> infixExpression = computer.validate(userInput);
                     List<String> postfixExpression = computer.convert(infixExpression);
                     double result = computer.compute(postfixExpression);
                     historian.saveHistory(infixExpression, result);
                     output.showResult(result);
-                } catch (InvalidInputException e) {
-                    output.printError(e.getMessage());
+                } else {
+                    throw new InvalidInputException("올바른 메뉴를 선택해주세요.");
                 }
+            } catch (InvalidInputException e) {
+                output.printError(e.getMessage());
             }
         }
     }

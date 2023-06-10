@@ -18,6 +18,10 @@ public class OutputConsole implements Output {
 
     @Override
     public void showHistory(String history) {
-        System.out.println(history);
+        if (history.length() == 0) {
+            System.out.println("표시할 이력이 없습니다.");
+        } else {
+            System.out.println(history);
+        }
     }
 }
