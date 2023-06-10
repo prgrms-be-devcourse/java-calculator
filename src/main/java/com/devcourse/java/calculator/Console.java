@@ -14,6 +14,7 @@ public class Console implements Input, Output {
 
     @Override
     public void printCommandMenu() {
+        System.out.println();
         System.out.println(MenuConstant.PRINT_COMMAND_FIRST_HISTORY);
         System.out.println(MenuConstant.PRINT_COMMAND_SECOND_CALCULATE);
         System.out.println(MenuConstant.PRINT_COMMAND_THIRD_EXIT);
@@ -34,10 +35,23 @@ public class Console implements Input, Output {
     }
 
     @Override
+    public void printRequestEquationInput() {
+        System.out.print(MenuConstant.REQUEST_EQUATION);
+    }
+
+    @Override
     public int getCommand() {
         String command = scanner.nextLine();
         validator.checkCommandInput(command);
 
         return Integer.parseInt(command);
+    }
+
+    @Override
+    public String getEquation() {
+        String equation = scanner.nextLine();
+        validator.checkEquationInput(equation);
+
+        return equation;
     }
 }

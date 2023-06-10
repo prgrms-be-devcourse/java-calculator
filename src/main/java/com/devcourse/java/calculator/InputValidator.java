@@ -31,4 +31,8 @@ public class InputValidator {
             throw new IllegalArgumentException(ExceptionConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
         }
     }
+
+    public void checkEquationInput(String equation) {
+
+    }
 }

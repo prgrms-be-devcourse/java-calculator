@@ -7,4 +7,5 @@ public interface Output {
     void printCommandMenu();
     void printCalculateHistory(LinkedHashMap<Integer, String> calculateHistory);
     void printExceptionMessage(String message);
+    void printRequestEquationInput();
 }

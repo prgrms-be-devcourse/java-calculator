@@ -30,8 +30,8 @@ public class Calculator implements Runnable{
             if (command == MenuConstant.SELECTED_EXIT_COMMAND) {
                 return;
             }
-            runCommand(command);
 
+            runCommand(command);
         }
     }
 
@@ -45,8 +45,12 @@ public class Calculator implements Runnable{
         }
 
         else if (command == MenuConstant.SELECTED_CALCULATE_COMMAND) {
-
-            // 계산
+            try {
+                output.printRequestEquationInput();
+                String equation = input.getEquation();
+            } catch (RuntimeException e) {
+                output.printExceptionMessage(e.getMessage());
+            }
         }
     }
 }
