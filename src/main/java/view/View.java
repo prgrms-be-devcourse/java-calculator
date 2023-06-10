@@ -2,6 +2,7 @@ package view;
 
 import exception.NoSuchCommandException;
 import model.Command;
+import util.CalculatorUtil;
 
 import java.util.Scanner;
 
@@ -13,16 +14,19 @@ public class View {
     }
 
     public Command commandReader() {
+        String input = scanner.nextLine();
         try {
-            int input = scanner.nextInt();
-            return Command.getCommand(input);
+            int command = CalculatorUtil.parseNumber(input);
+            return Command.getCommand(command);
         } catch (RuntimeException e) {
             throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
         }
     }
 
-    public String expressionReader() {
-        return "";
+    public String expressionReader() throws RuntimeException {
+        String expression = scanner.nextLine();
+        CalculatorUtil.checkExpressionByRegex(expression);
+        return expression;
     }
 
     public void printInfoMessage() {

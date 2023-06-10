@@ -18,11 +18,17 @@ public class Processor {
                 Command command = view.commandReader();
                 view.printNewLine();
 
+                if (command.equals(Command.HISTORY_COMMAND)) {
+
+                }
+                if (command.equals(Command.CALCULATE_COMMAND)) {
+                    String expression = view.expressionReader();
+                    int result = calculator.calculate(expression);
+                    view.printAnswer(result);
+                }
             } catch (RuntimeException e) {
                 System.out.println("\n" + e.getMessage() + "\n");
             }
         }
-
-
     }
 }
