@@ -1,42 +1,19 @@
 package com.programmers.converter;
 
-import com.programmers.exception.WrongInputExpressionException;
 import com.programmers.util.ConstantRegex;
 
 import java.util.*;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class InfixToPostfixConverter implements ExpressionConverter {
     @Override
     public List<String> convert(String expression) {
-        // Stack 클래스를 사용 할 수 있으나, Stack 은 동기화 처리로 인한 성능 저하 문제가 있으므로, 자바의 권장사항대로 Deque 를 선택하였습니다.
         Deque<Operator> stack = new ArrayDeque<>();
-
-        List<String> expressionTokenList = makeExpressionToken(expression);
         List<String> postFixTokenList = new ArrayList<>();
+        List<String> expressionTokenList = makeExpressionToken(expression);
 
-        for (int i = 0; i < expressionTokenList.size(); i++) {
-            String token = expressionTokenList.get(i);
-
-            if (token.equals("(")) {
-                stack.push(Operator.OPEN_PARENTHESES);
-            } else if (Operator.isOperator(token)) {
-                Operator operator = Operator.getOperation(token);
-
-                while (!stack.isEmpty() && stack.peek().compareTo(operator.getPriority()) >= 0) {
-                    postFixTokenList.add(stack.pop().getSymbol());
-                }
-                stack.push(operator);
-            } else if (token.equals(")")) {
-                Operator pop = stack.pop();
-                while (!stack.isEmpty() && !pop.isOpenParentheses()) {
-                    postFixTokenList.add(pop.getSymbol());
-                    pop = stack.pop();
-                }
-            } else {
-                postFixTokenList.add(token);
-            }
+        for (String token : expressionTokenList) {
+            makePostFixTokenList(token, postFixTokenList, stack);
         }
 
         while (!stack.isEmpty()) {
@@ -46,12 +23,57 @@ public class InfixToPostfixConverter implements ExpressionConverter {
         return postFixTokenList;
     }
 
+    private void makePostFixTokenList(String token, List<String> postFixTokenList, Deque<Operator> stack) {
+
+        if (token.equals("(")) {
+            stack.push(Operator.OPEN_PARENTHESES);
+            return;
+        }
+
+        if (Operator.isOperator(token)) {
+            pushTokenPostfixListInStack(stack, postFixTokenList, token);
+            return;
+        }
+
+        if (token.equals(")")) {
+            pushTokenListUntilOpenBracket(stack, postFixTokenList);
+            return;
+        }
+
+        postFixTokenList.add(token);
+    }
+
+    private void pushTokenListUntilOpenBracket(Deque<Operator> stack, List<String> postFixTokenList) {
+        Operator pop = stack.pop();
+        while (!stack.isEmpty() && !pop.isOpenParentheses()) {
+            postFixTokenList.add(pop.getSymbol());
+            pop = stack.pop();
+        }
+    }
+
+    private void pushTokenPostfixListInStack(Deque<Operator> stack, List<String> postFixTokenList, String token) {
+        Operator operator = Operator.getOperation(token);
+
+        while (isLowerPriorityInStack(stack, operator)) {
+            postFixTokenList.add(stack.pop().getSymbol());
+        }
+
+        stack.push(operator);
+    }
+
+    private boolean isLowerPriorityInStack(Deque<Operator> stack, Operator inputOperator) {
+        if (stack.isEmpty())
+            return false;
+
+        Operator operatorInStack = stack.peek();
+        return operatorInStack.isComparePriority(inputOperator);
+    }
+
     private List<String> makeExpressionToken(String expression) {
 
         validateInputExpression(expression);
 
-        Pattern pattern = Pattern.compile(ConstantRegex.EXPRESSION_FILTER_REGEX);
-        Matcher matcher = pattern.matcher(expression);
+        Matcher matcher = ConstantRegex.EXPRESSION_FILTER_REGEX_COMPILE.matcher(expression);
         List<String> filterExpression = new ArrayList<>();
 
         while (matcher.find()) {
@@ -62,37 +84,42 @@ public class InfixToPostfixConverter implements ExpressionConverter {
     }
 
     private void validateInputExpression(String expression) {
+
         Arrays.stream(expression.split(ConstantRegex.EXPRESSION_VALIDATION_REGEX))
                 .findAny()
                 .ifPresent(p -> {
-                    throw new WrongInputExpressionException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
+                    throw new IllegalArgumentException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
                 });
 
-        if (!isParenthesesOrder(expression)) {
-            throw new WrongInputExpressionException("괄호의 순서가 잘못되었습니다.");
+        if (!isParenthesesOrderCorrect(expression)) {
+            throw new IllegalArgumentException("괄호의 순서가 잘못되었습니다.");
         }
     }
 
-    private boolean isParenthesesOrder(String expression) {
+    private boolean isParenthesesOrderCorrect(String expression) {
         Deque<Character> stack = new ArrayDeque<>();
 
-        if (expression.contains("(")) {
-            for (char ch : expression.toCharArray()) {
-                if (ch == '(') {
-                    if (!stack.isEmpty() && stack.peek() == ')') {
-                        return false;
-                    }
-                    stack.push(ch);
-                } else if (ch == ')') {
-                    if (stack.isEmpty()) {
-                        return false;
-                    }
-                    stack.pop();
-                }
-            }
-            return stack.isEmpty();
+        for (char ch : expression.toCharArray()) {
+            fillParenthesesStack(stack, ch);
         }
-        return true;
+        return stack.isEmpty();
+    }
+
+    private void fillParenthesesStack(Deque<Character> stack, char ch) {
+
+        if (ch == '(') {
+            stack.push(ch);
+            return;
+        }
+
+        if (ch == ')' && !stack.isEmpty() && stack.peek() == '(') {
+            stack.pop();
+            return;
+        }
+
+        if (ch == ')') {
+            stack.push(ch);
+        }
     }
 
 
