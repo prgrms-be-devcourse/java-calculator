@@ -93,7 +93,10 @@ public class PostfixCalculator {
 
     private  <T> boolean popOperator(Predicate<T> predicate, T data) {
         while (!opStack.isEmpty()) {
-            if (predicate.test(data)) return false;
+            if (predicate.test(data)) {
+                opStack.pop();
+                return false;
+            }
 
             if (data instanceof Character) {
                 postFix.append(opStack.pop());
