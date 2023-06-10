@@ -47,8 +47,6 @@ public class Calculator {
 				Integer result = calc.getFunc().apply(op2, op1);
 				
 				stack.push(result);
-				
-				System.out.println(stack.size());
 			}
 		}
 		
