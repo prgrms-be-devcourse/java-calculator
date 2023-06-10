@@ -56,6 +56,32 @@ class CalculatorTest {
 
     }
 
+    @DisplayName("문자열 형태의 연산 입력값을 공백을 기준으로 분리한 리스트 변환")
+    @Test
+    void parseExpressionTest(){
+        String expression = "1 + 2 / 3 * 4 - 5";
+        List<String> expected = Arrays.asList("1","+","2","/","3","*","4","-","5");
+        List<String> actual = calculator.parseExpression(expression);
+        assertEquals(expected, actual);
+
+    }
+
+    @DisplayName("연산자 우선순위를 반영하여 중위식 표현의 연산입력값을 후위식으로 표현")
+    @ParameterizedTest
+    @MethodSource("infixToPostfixTestData")
+    void infixToPostfixTest(List<String> input, List<String> output){
+        List<String> expected = output;
+        List<String> actual = calculator.infixToPostfix(input);
+        assertEquals(expected, actual);
+
+    }
+
+
+
+
+
+
+
 
     private static List<String> passValidateExpressionTestData() {
         return Arrays.asList(
@@ -74,6 +100,18 @@ class CalculatorTest {
                 "     "
         );
     }
+
+    private static Stream<Arguments> infixToPostfixTestData() {
+
+            return Stream.of(
+                    Arguments.of(Arrays.asList("1","+","2","*","3"), Arrays.asList("1","2","3","*","+")),
+                    Arguments.of(Arrays.asList("1","-","2","/","3"), Arrays.asList("1","2","3","/","-")),
+                    Arguments.of(Arrays.asList("1","+","2","-","3"), Arrays.asList("1","2","+","3","-")),
+                    Arguments.of(Arrays.asList("1","/","2","*","3"), Arrays.asList("1","2","/","3","*"))
+            );
+
+    }
+
 
 
 

@@ -1,9 +1,15 @@
 package org.example.engine;
 
+import org.apache.commons.lang3.StringUtils;
 import org.example.Console;
+import org.example.engine.enums.ArithmeticOperator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 public class Calculator implements Runnable{
@@ -31,7 +37,7 @@ public class Calculator implements Runnable{
         String inputExpression = console.inputExpression();
         String preprocessedExpression = preprocess(inputExpression);
         if(!validateExpression(preprocessedExpression)) System.out.println("예외를 발생시키겠어요");
-        String [] parseExpression =  parseExpression(preprocessedExpression);
+        List<String> parseExpression =  parseExpression(preprocessedExpression);
 
 
     }
@@ -55,17 +61,36 @@ public class Calculator implements Runnable{
 
     }
 
-    public String [] parseExpression(String expression){
-        return  expression.split(" ");
+    public List <String> parseExpression(String expression){
+        return  Arrays.stream(expression.split(" ")).collect(Collectors.toList());
     }
 
-
-    public String infixToPostfix(String infixExpression){
-        StringBuilder postfixExpression =new StringBuilder();
+    public List<String> infixToPostfix (List<String> infixExpression){
+        List<String> postfixExpression = new ArrayList<>();
         Stack<String> st = new Stack<>();
+        for(String ele : infixExpression){
+            if(StringUtils.isNumeric(ele)){
+                postfixExpression.add(ele);  continue;
+            }
 
+            if(st.isEmpty()){
+                st.add(ele); continue;
+            }
 
-        return postfixExpression.toString();
+            ArithmeticOperator prevOperator = ArithmeticOperator.getArithmeticOperator(st.peek());
+            ArithmeticOperator tempOperator = ArithmeticOperator.getArithmeticOperator(ele);
+            if(ArithmeticOperator.comparePriority(prevOperator, tempOperator)<0){
+                st.add(ele);
+            }else{
+                postfixExpression.add(st.pop());
+                st.add(ele);
+            }
+        }
+
+        while(!st.isEmpty())
+            postfixExpression.add(st.pop());
+
+        return postfixExpression;
     }
 
 
