@@ -1,58 +1,71 @@
 package com.programmers.engine;
 
+import com.programmers.exception.EquationFormatException;
+import com.programmers.exception.MenuFormatException;
 import com.programmers.io.Console;
+import com.programmers.io.Input;
+import com.programmers.io.Output;
 import com.programmers.repository.CalculatorHistory;
-import com.programmers.validator.Validator;
+import com.programmers.validator.InputValidator;
+
 
 public class Calculator {
 
-    private Console console; //final 설정 시 생성자보다 먼저 초기화가 일어나기 때문
+    private Input input; //final 설정 시 생성자보다 먼저 초기화가 일어나기 때문
+    private Output output; //final 설정 시 생성자보다 먼저 초기화가 일어나기 때문
     private PostfixCalculator postfixCalculator;
-    private Validator validator;
     private CalculatorHistory calculatorHistory;
-    private boolean isRunning = true;
 
-    public Calculator() {
-        this.console = new Console();
-        this.postfixCalculator = new PostfixCalculator();
-        this.validator = new Validator();
-        this.calculatorHistory = new CalculatorHistory();
+    public Calculator(Input input, Output output, PostfixCalculator postfixCalculator, CalculatorHistory calculatorHistory) {
+        this.input = input;
+        this.output = output;
+        this.postfixCalculator = postfixCalculator;
+        this.calculatorHistory = calculatorHistory;
     }
+
+    private boolean isRunning = true;
+    private static String HISTORY = "1";
+    private static String CALC = "2";
+    private static String END = "3";
 
 
     // 사용자 요청에 응답하기
     private void response(String request) {
 
-        if ("1".equals(request)) {
-            //저장된 값 조회
-            console.println(calculatorHistory.findAll());
+        //저장된 값 조회
+        if (HISTORY.equals(request)) {
+            output.println(calculatorHistory.findAll());
 
-        } else if ("2".equals(request)) {
             // 연산
-            String formula = console.input();
-
-            if (validator.checkFormula(formula)) {
-                double answer = postfixCalculator.infixToPostfix(formula);
-                console.println(answer);
-                calculatorHistory.save(formula, answer);
-            } else {
-                // 연산자가 1//2 와 같은 경우는 처리를 못하고 있음
-                console.printErrorMsg("올바른 식을 입력해주세요.");
+        } else if (CALC.equals(request)) {
+            String equation = " ";
+            try {
+                equation = input.getEquation();
+            } catch (EquationFormatException efe) {
+                output.printErrorMsg(efe.getMessage());
+                return;
             }
+            double answer = postfixCalculator.infixToPostfix(equation);
+            output.println(answer);
+            calculatorHistory.save(equation, answer);
 
-        }else if ("3".equals(request)) {
+        } else if (END.equals(request)) {
             // 종료
             isRunning = false;
-        } else {
-            console.printErrorMsg("선택지에 해당하는 값을 입력해주세요.");
         }
+
     }
 
     public void run() {
         while (isRunning) {
-            String request = console.initMessage();
+            String request = "";
+            try {
+                request = input.getMenu();
+            } catch (MenuFormatException mfe) {
+                output.printErrorMsg(mfe.getMessage());
+            }
             response(request);
         }
-
     }
+
 }
