@@ -1,9 +1,9 @@
 package com.programmers.calculator;
 
 import com.programmers.converter.ExpressionConverter;
-import com.programmers.exception.WrongInputExpressionException;
-import com.programmers.exception.WrongInputMenuException;
 import com.programmers.io.Console;
+
+import java.util.Optional;
 
 public class Calculator {
 
@@ -19,10 +19,9 @@ public class Calculator {
     public void run() {
         while (power) {
             Console.printMenu();
-            MenuType menu = makeMenuType(Console.inputMenuNumber());
 
-            if (menu == null)
-                continue;
+            MenuType menu = makeMenu(Console.inputMenuNumber())
+                    .orElse(MenuType.NULL);
 
             switch (menu) {
                 case HISTORY:
@@ -32,8 +31,9 @@ public class Calculator {
                 case CALCULATE:
                     String expression = Console.inputExpression();
                     String result = calculate(expression);
-                    if (result == null)
+                    if (result == null) {
                         break;
+                    }
                     memory.save(new CalcResult(expression, result));
                     Console.printResult(result);
                     break;
@@ -42,15 +42,19 @@ public class Calculator {
                     power = false;
                     Console.printExit();
                     break;
+
+                default:
+                    Console.printError("1, 2, 3 만 입력이 가능합니다.");
+                    break;
             }
         }
     }
 
-    private MenuType makeMenuType(String inputMenuNumber) {
-        MenuType menu = null;
+    private Optional<MenuType> makeMenu(String expression) {
+        Optional<MenuType> menu = Optional.empty();
         try {
-            menu = MenuType.findMenuType(inputMenuNumber);
-        } catch (WrongInputMenuException e) {
+            menu = Optional.ofNullable(MenuType.findMenuType(expression));
+        } catch (IllegalArgumentException e) {
             Console.printError(e.getMessage());
         }
         return menu;
@@ -60,7 +64,7 @@ public class Calculator {
         String result = null;
         try {
             result = accumulator.compute(expression);
-        } catch (WrongInputExpressionException | ArithmeticException e) {
+        } catch (IllegalArgumentException | ArithmeticException e) {
             Console.printError(e.getMessage());
         }
         return result;
