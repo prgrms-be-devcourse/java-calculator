@@ -2,8 +2,13 @@ plugins {
     id 'java'
 }
 
-group = 'org.devcourse'
+group = 'com.devcourse'
 version = '1.0.0'
+
+compileJava.options.encoding = "UTF-8"
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 
 repositories {
     mavenCentral()
