@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class CalculatorScannerInput implements CalculatorInput{
     private static final Pattern BUTTON_PATTERN = Pattern.compile("^[1-2]$");
-    private static final Pattern CALCULATION_FORMULA_PATTERN = Pattern.compile("^[0-9]+(\\s[+\\-*/]\\s[0-9]+)+$");
-    private static final Scanner sc = new Scanner(System.in);
+    private static final Pattern EXPRESSION_PATTERN = Pattern.compile("^[0-9]+(\\s[+\\-*/]\\s[0-9]+)+$");
+    private static Scanner sc = new Scanner(System.in);
 
     @Override
     public int inputButton() {
@@ -24,15 +24,15 @@ public class CalculatorScannerInput implements CalculatorInput{
     }
 
     @Override
-    public String inputCalculationFormula() {
+    public String inputExpression() {
         String input = sc.nextLine();
-        validateCalculateFormula(input);
+        validateExpression(input);
         return input;
     }
 
-    private void validateCalculateFormula(String input) {
-        if (!CALCULATION_FORMULA_PATTERN.matcher(input).matches()) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_NOT_FORMULA.getMessage());
+    private void validateExpression(String input) {
+        if (!EXPRESSION_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_NOT_EXPRESSION.getMessage());
         }
     }
 }
