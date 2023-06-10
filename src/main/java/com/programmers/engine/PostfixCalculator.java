@@ -1,12 +1,14 @@
 package com.programmers.engine;
 
+import com.programmers.exception.DivideByZeroException;
+
 import java.util.Stack;
 import java.util.function.Predicate;
 
 public class PostfixCalculator {
 
     private final Stack<Character> opStack = new Stack<>();
-    private final StringBuilder postFix = new StringBuilder();
+    private final StringBuilder postFix = new StringBuilder(); // 스태틱제외하자
 
     private double calculate(String equation) {
         postFix.setLength(0);
@@ -35,6 +37,7 @@ public class PostfixCalculator {
                         stack.push(value1 * value2);
                         break;
                     case '/':
+                        if (value2 == 0) throw new DivideByZeroException();
                         stack.push(value1 / value2);
                         break;
                 }
