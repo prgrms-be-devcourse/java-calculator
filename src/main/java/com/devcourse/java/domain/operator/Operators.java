@@ -5,10 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 
 public enum Operators {
-    PLUS("+", Priority.LOW),
-    MINUS("-", Priority.LOW),
-    MULTIPLY("*", Priority.HIGH),
-    DIVIDE("/", Priority.HIGH),
+    PLUS("+", Priority.LOW, Plus.getInstance()),
+    MINUS("-", Priority.LOW, Minus.getInstance()),
+    MULTIPLY("*", Priority.HIGH, Multiply.getInstance()),
+    DIVIDE("/", Priority.HIGH, Divide.getInstance()),
     ;
 
     private static class Priority {
@@ -19,14 +19,25 @@ public enum Operators {
 
     private final String symbol;
     private final int priority;
+    private final Operator operator;
 
-    Operators(String symbol, int priority) {
+    Operators(String symbol, int priority, Operator operator) {
         this.symbol = symbol;
         this.priority = priority;
+        this.operator = operator;
     }
 
+    // for test
     public int getPriority() {
         return priority;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public Operator getOperator() {
+        return operator;
     }
 
     public static int evaluatePriority(String symbol) {

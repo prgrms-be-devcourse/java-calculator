@@ -2,20 +2,24 @@ package com.devcourse.java.domain.operator;
 
 import com.devcourse.java.common.Factory;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class OperatorFactory implements Factory<Operator, String> {
-    public OperatorFactory() { }
+    private static final Map<String, Operator> operators = new HashMap<>();
+
+    public OperatorFactory() {
+        initMap();
+    }
 
     @Override
     public Operator create(String symbol) {
-        switch (symbol) { // todo: 컴파일 시점에 결정되는 값만 사용가능. 다른 방법 고민하기
-            case "+":
-                return Plus.getInstance();
-            case "-":
-                return Minus.getInstance();
-            case "*":
-                return Multiply.getInstance();
-            default:
-                return Divide.getInstance();
-        }
+        return operators.get(symbol);
+    }
+
+    private void initMap() {
+        Arrays.stream(Operators.values())
+                .forEach(operator -> operators.put(operator.getSymbol(), operator.getOperator()));
     }
 }
