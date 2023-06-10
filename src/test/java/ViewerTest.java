@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.View;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -8,7 +9,7 @@ import java.io.PrintStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ViewerTest {
-    Viewer viewer = new Viewer();
+    View viewer = new View();
 
     @Test
     @DisplayName("안내 메시지를 출력")
