@@ -13,22 +13,28 @@ public class CalculatorController {
   Calculator calculator = new Calculator();
   History history = new History();
 
+  final int HISTORY = 1;
+  final int CALCULATE = 2;
+  final int EXIT = 3;
+
   public void run() throws IOException {
     while (true) {
       Output.showMenu();
 
       switch (Input.inputMenu()) {
-        case 1:
+        case HISTORY:
           history.view();
           break;
-        case 2:
+        case CALCULATE:
           String formula = Input.inputFormula();
           double result = calculator.calculate(formula);
           history.save(new Formula(formula, result));
           Output.printResult(result);
           break;
-        case 3:
+        case EXIT:
           return;
+        default:
+          System.out.println("보기에 나와있는 메뉴를 선택하세요.");
       }
     }
   }
