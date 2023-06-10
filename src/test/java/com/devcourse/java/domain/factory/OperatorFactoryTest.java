@@ -1,6 +1,10 @@
-package com.devcourse.java.domain.operator;
+package com.devcourse.java.domain.factory;
 
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.operator.Divide;
+import com.devcourse.java.domain.operator.Minus;
+import com.devcourse.java.domain.operator.Multiply;
+import com.devcourse.java.domain.operator.Operator;
+import com.devcourse.java.domain.operator.Plus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

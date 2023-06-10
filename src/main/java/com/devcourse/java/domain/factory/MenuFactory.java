@@ -1,6 +1,10 @@
-package com.devcourse.java.domain.menu;
+package com.devcourse.java.domain.factory;
 
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.menu.Calculate;
+import com.devcourse.java.domain.menu.Exit;
+import com.devcourse.java.domain.menu.Menu;
+import com.devcourse.java.domain.menu.Menus;
+import com.devcourse.java.domain.menu.Query;
 
 public class MenuFactory implements Factory<Menu, Menus> {
     private final Query query;

@@ -1,6 +1,7 @@
-package com.devcourse.java.domain.operator;
+package com.devcourse.java.domain.factory;
 
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.operator.Operator;
+import com.devcourse.java.domain.operator.Operators;
 
 import java.util.Arrays;
 import java.util.HashMap;

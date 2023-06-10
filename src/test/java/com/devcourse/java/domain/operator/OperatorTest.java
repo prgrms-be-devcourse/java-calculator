@@ -1,7 +1,7 @@
 package com.devcourse.java.domain.operator;
 
-import com.devcourse.java.common.Errors;
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.factory.Factory;
+import com.devcourse.java.domain.factory.OperatorFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

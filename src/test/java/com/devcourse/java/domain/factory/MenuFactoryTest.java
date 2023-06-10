@@ -1,9 +1,12 @@
-package com.devcourse.java.domain.menu;
+package com.devcourse.java.domain.factory;
 
-import com.devcourse.java.common.Factory;
 import com.devcourse.java.domain.calculator.PrefixCalculator;
+import com.devcourse.java.domain.menu.Calculate;
+import com.devcourse.java.domain.menu.Exit;
+import com.devcourse.java.domain.menu.Menu;
+import com.devcourse.java.domain.menu.Menus;
+import com.devcourse.java.domain.menu.Query;
 import com.devcourse.java.domain.operator.Operator;
-import com.devcourse.java.domain.operator.OperatorFactory;
 import com.devcourse.java.domain.parser.ExpressionParser;
 import com.devcourse.java.domain.parser.PrefixParser;
 import com.devcourse.java.domain.storage.MemoryStorage;

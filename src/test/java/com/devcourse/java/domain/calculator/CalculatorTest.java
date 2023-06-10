@@ -1,8 +1,8 @@
 package com.devcourse.java.domain.calculator;
 
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.factory.Factory;
 import com.devcourse.java.domain.operator.Operator;
-import com.devcourse.java.domain.operator.OperatorFactory;
+import com.devcourse.java.domain.factory.OperatorFactory;
 import com.devcourse.java.domain.parser.PrefixParser;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.validator.Validator;

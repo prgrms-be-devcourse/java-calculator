@@ -1,6 +1,6 @@
 package com.devcourse.java.domain.runner;
 
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.factory.Factory;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.menu.Menu;
 import com.devcourse.java.domain.menu.Menus;

@@ -1,6 +1,6 @@
 package com.devcourse.java.domain.calculator;
 
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.factory.Factory;
 import com.devcourse.java.domain.operator.Operator;
 import com.devcourse.java.domain.parser.ExpressionParser;
 import com.devcourse.java.domain.storage.CalculateResult;

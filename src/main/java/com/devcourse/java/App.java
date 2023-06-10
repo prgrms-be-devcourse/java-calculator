@@ -1,9 +1,9 @@
 package com.devcourse.java;
 
-import com.devcourse.java.common.Factory;
+import com.devcourse.java.domain.factory.Factory;
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.operator.Operator;
-import com.devcourse.java.domain.operator.OperatorFactory;
+import com.devcourse.java.domain.factory.OperatorFactory;
 import com.devcourse.java.domain.storage.Storage;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.storage.MemoryStorage;
@@ -18,7 +18,7 @@ import com.devcourse.java.domain.console.Output;
 import com.devcourse.java.domain.console.Writer;
 import com.devcourse.java.domain.menu.Calculate;
 import com.devcourse.java.domain.menu.Menu;
-import com.devcourse.java.domain.menu.MenuFactory;
+import com.devcourse.java.domain.factory.MenuFactory;
 import com.devcourse.java.domain.menu.Menus;
 import com.devcourse.java.domain.menu.Query;
 import com.devcourse.java.domain.validator.Validator;
