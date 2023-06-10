@@ -2,20 +2,25 @@ package com.programmers.io;
 
 import java.util.Scanner;
 
-public class Console {
+public class Console implements Input, Output{
 
     private final String SELECT_MESSAGE = "선택 : ";
+    private final String HISTORY_MESSAGE = "1. 조회\n";
+    private final String CALC_MESSAGE = "2. 계산\n";
+    private final String END_MESSAGE = "3. 종료\n";
+
     private final Scanner scanner = new Scanner(System.in);
 
     public String input() {
         return scanner.nextLine();
     }
 
+    @Override
     public String initMessage() {
         StringBuilder sb = new StringBuilder();
-        sb.append("1. 조회\n");
-        sb.append("2. 계산\n");
-        sb.append("3. 종료\n");
+        sb.append(HISTORY_MESSAGE);
+        sb.append(CALC_MESSAGE);
+        sb.append(END_MESSAGE);
 
         System.out.println(sb);
         System.out.print(SELECT_MESSAGE);
@@ -24,16 +29,17 @@ public class Console {
         return input;
     }
 
-    public void printErrorMessage(String errorMsg) {
-        System.out.println(errorMsg);
+    @Override
+    public void println(String msg) {
+        System.out.println(msg);
     }
 
-    public void printHistory(String history) {
-        System.out.println(history);
+    public void println(double msg) {
+        System.out.println(msg);
     }
 
-    public void printResult(double result) {
-        System.out.println(result);
+    @Override
+    public void printErrorMsg(String errMsg) {
+        System.out.println(errMsg);
     }
-
 }
