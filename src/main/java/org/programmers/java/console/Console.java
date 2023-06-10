@@ -1,5 +1,6 @@
 package org.programmers.java.console;
 
+import org.programmers.java.message.FunctionSelect;
 import org.programmers.java.message.Info;
 
 import java.util.Map;
@@ -33,9 +34,9 @@ public class Console implements Input, Output {
 
     @Override
     public void menuMsg() {
-        System.out.println(Info.SELECT.getMsg());
-        System.out.println(Info.CALCULATION.getMsg());
-        System.out.println(Info.EXIT.getMsg());
+        System.out.println(FunctionSelect.CHECK.getMsg());
+        System.out.println(FunctionSelect.CALCULATION.getMsg());
+        System.out.println(FunctionSelect.EXIT.getMsg());
     }
 
     @Override

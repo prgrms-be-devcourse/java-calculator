@@ -4,11 +4,14 @@ import org.programmers.java.calculation.Calculation;
 import org.programmers.java.console.Input;
 import org.programmers.java.console.Output;
 import org.programmers.java.message.Error;
+import org.programmers.java.message.FunctionSelect;
 import org.programmers.java.repository.FormulaRepository;
 import org.programmers.java.validator.Validator;
 
+import java.util.Optional;
+
 public class Calculator {
-    private boolean exitStatus = true;
+    private boolean programStatus = true;
     private final Input input;
     private final Output output;
     private final Calculation calculation;
@@ -24,25 +27,38 @@ public class Calculator {
     }
 
     void run() {
-        while (exitStatus) {
+        while (programStatus) {
             output.menuMsg();
             String selectNum = input.selectNumInput();
             output.selectMsg(selectNum);
-            switch (selectNum) {
-                case "1":
+            Optional<FunctionSelect> selectMenu = getFunctionSelectNumber(selectNum);
+
+            switch (selectMenu.get()) {
+                case CHECK:
                     output.getCalculationValues(formulaRepository.getFormulaList());
                     break;
-                case "2":
+                case CALCULATION:
                     formulaCalculate();
                     break;
-                case "3":
+                case EXIT:
                     output.exitMsg();
-                    exitStatus = false;
+                    programStatus = false;
                     break;
-                default:
+                case WRONGINPUT:
                     output.errorMsg(Error.SELECT_VALIDATION.getMsg());
+                    break;
             }
         }
+    }
+
+    private Optional<FunctionSelect> getFunctionSelectNumber(String selectNum) {
+        Optional<FunctionSelect> selectMenu = FunctionSelect.findSelect(selectNum);
+
+        if(selectMenu.isEmpty()){
+            selectMenu.orElse(FunctionSelect.WRONGINPUT);
+        }
+
+        return selectMenu;
     }
 
     private void formulaCalculate() {
