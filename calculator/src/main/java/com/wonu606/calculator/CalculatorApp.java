@@ -3,7 +3,7 @@ package com.wonu606.calculator;
 import com.wonu606.app.App;
 import com.wonu606.calculator.storage.Persistence;
 import com.wonu606.calculator.storage.ResultStore;
-import com.wonu606.calculator.strategy.Strategy;
+import com.wonu606.calculator.strategy.CalculatorStrategy;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
 import com.wonu606.calculator.util.CalculatorMessage;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class CalculatorApp implements App {
 
-    private final List<Strategy> strategies = new ArrayList<>();
+    private final List<CalculatorStrategy> strategies = new ArrayList<>();
     private final Persistence store = new ResultStore();
     Input input;
     Print printer;
@@ -30,11 +30,11 @@ public class CalculatorApp implements App {
     public void execute(Input input, Print printer) throws IOException {
         this.input = input;
         this.printer = printer;
-
+        
         while (true) {
             int selection = Integer.parseInt(input.getInput());
 
-            Optional<Strategy> selectedStrategy =
+            Optional<CalculatorStrategy> selectedStrategy =
                     Optional.ofNullable(strategies.get(selection - 1));
             selectedStrategy.ifPresentOrElse(
                     strategy -> strategy.execute(input, printer, store),
