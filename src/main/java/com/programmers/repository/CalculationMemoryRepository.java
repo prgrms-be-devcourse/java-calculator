@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CalculationMemoryRepository implements CalculationRepository {
-    Map<Integer, String> calculations = new HashMap<>();
+   private final Map<Integer, String> calculations = new HashMap<>();
 
     @Override
     public void save(String calculation) {
