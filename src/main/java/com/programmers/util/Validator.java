@@ -2,6 +2,9 @@ package com.programmers.util;
 
 import com.programmers.view.Input;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Validator {
 
     //정수인지 판별
@@ -21,4 +24,16 @@ public class Validator {
     }
 
     //식이 숫자와 사칙연산으로 이루어졌는지 확인
+    public static boolean checkValidArithmeticExpression(String expression) {
+        String pattern = "^[0-9]+([+\\-*/][0-9]+)*$";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(expression);
+        return matcher.matches();
+    }
+
+    //공백 제거
+    public static String removeWhiteSpace(String input) {
+        return input.replaceAll("\\s+", "");
+    }
+
 }
