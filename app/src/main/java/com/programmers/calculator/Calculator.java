@@ -20,6 +20,59 @@ public class Calculator {
 
     // 중위 표현식 오류 메시지
     private static final String WRONG_INFIX_EXPRESSION_MESSAGE = "중위 표현식이 유효하지 않습니다.";
+
+    /**
+     * 중위 표현식을 후위 표현식으로 변환하는 메소드
+     *
+     * @param inputExpression 사용자에게 입력받은 중위 표현식
+     * @return postfixExpression 변환된 후위 표기식
+     * @throws IllegalArgumentException
+     */
+    public String convert(String inputExpression) throws IllegalArgumentException {
+        StringBuilder sb = new StringBuilder();
+        Deque<String> infixStack = new ArrayDeque<>();
+
+        String validExpression = validateInfixExpression(inputExpression);
+        String[] expressionTokens = validExpression.split(EXPRESSION_REGEX);
+
+        for (String token : expressionTokens) {
+            switch (token) {
+                case ADD_OPERATOR:
+                case SUBTRACTION_OPERATOR:
+                case MULTIPLY_OPERATOR:
+                case DIVIDE_OPERATOR: {
+                    while (!infixStack.isEmpty() && priority(infixStack.peek()) >= priority(token)) {
+                        sb.append(infixStack.pop() + " ");
+                    }
+                    infixStack.push(token);
+                    break;
+                }
+                case OPEN_BRACKET: {
+                    infixStack.push(token);
+                    break;
+                }
+                case CLOSE_BRACKET: {
+                    while (!infixStack.isEmpty() && !infixStack.peek().equals(OPEN_BRACKET)) {
+                        sb.append(infixStack.pop() + " ");
+                    }
+                    infixStack.pop();
+                    break;
+                }
+                default: {
+                    sb.append(token + " ");
+                }
+            }
+        }
+
+        while (!infixStack.isEmpty()) {
+            sb.append(infixStack.pop() + " ");
+        }
+
+        sb.delete(sb.length() - 1, sb.length());
+        String postfixExpression = sb.toString();
+
+        return postfixExpression;
+    }
     /**
      * 중위 표현식이 유효한지 검증하는 메소드
      *
