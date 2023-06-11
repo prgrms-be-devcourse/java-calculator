@@ -20,7 +20,7 @@ public enum MenuType {
 
     public static MenuType findMenuType(String inputNumber) {
 
-        if (!MENU_TYPE_MAP.containsKey(inputNumber)) {
+        if (!MENU_TYPE_MAP.containsKey(inputNumber) || inputNumber.equals("999")) {
             throw new IllegalArgumentException("잘못된 입력 메뉴가 들어왔습니다. 1, 2, 3 만 가능합니다.");
         }
 
