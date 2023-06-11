@@ -22,7 +22,7 @@ public class Calculator {
         return instance;
     }
 
-    public Integer run(String expression) {
+    public Integer execute(String expression) {
         Integer result = processor.calculate(expressionConvertor.convertToPostfix(expression));
 
         memory.save(expression, result);
