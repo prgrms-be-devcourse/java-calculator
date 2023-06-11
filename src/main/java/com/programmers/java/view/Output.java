@@ -1,6 +1,16 @@
 package com.programmers.java.view;
 
+import java.util.ArrayList;
+
 public class Output {
 
-    //결과를 보여준다.
+    public void viewCalculateResult(double result) {
+        System.out.println(result);
+    }
+
+    public void viewSearchResult(ArrayList<String> calcList) {
+        for (String calc : calcList) {
+            System.out.println(calc);
+        }
+    }
 }
