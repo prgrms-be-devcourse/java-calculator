@@ -11,9 +11,9 @@ public class ResultSaveService implements CalculatorFunction {
 
     @Override
     public void doService(Calculator calculator) {
-        System.out.println("ResultSaveService.doService");
 
         if (results.size() == 0) {
+
             System.out.println("[ 조회된 계산이력 없음 ]\n");
         } else {
             StringBuilder savedResults = new StringBuilder();

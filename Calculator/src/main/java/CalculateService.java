@@ -86,7 +86,7 @@ public class CalculateService implements CalculatorFunction {
                 expForCal.pollFirst();
                 v = Double.parseDouble(queue.pollLast()) / Double.parseDouble(expForCal.poll());
 
-                if (v.isInfinite()) {
+                if (v.isInfinite() || v.isNaN()) {
                     System.out.print("0 으로 나눌 수 없습니다. ");
                     throw new ArithmeticException();
                 }

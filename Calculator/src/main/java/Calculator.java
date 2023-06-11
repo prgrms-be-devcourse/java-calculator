@@ -9,6 +9,7 @@ public class Calculator {
     private CalculateService calculateService;
     private static Map<Integer, CalculatorFunction> menus = new HashMap<>();
     private StringBuilder menusBuilder = new StringBuilder();
+    private CalculatorFunction calculatorFunction;
 
     public Calculator(ResultSaveService resultSaveService, CalculateService calculateService) {
         this.resultSaveService = resultSaveService;
@@ -39,14 +40,16 @@ public class Calculator {
 
         while (true) {
             System.out.print(menusBuilder);
-
             Scanner scanner = new Scanner(System.in);
-            int optionNumber = scanner.nextInt();
 
-            CalculatorFunction calculatorFunction = menus.get(optionNumber);
-            calculatorFunction.doService(this);
+            try {
+                 calculatorFunction = menus.get(scanner.nextInt());
+                 calculatorFunction.doService(this);
+            } catch (Exception e) {
+                System.out.println("입력이 올바르지 않습니다.\n");
+            }
+
         }
-
     }
 
     public ResultSaveService getResultSaveService() {
