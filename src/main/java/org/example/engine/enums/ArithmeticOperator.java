@@ -3,6 +3,8 @@ package org.example.engine.enums;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
+import org.example.exception.CaculatorApplicationException;
+
 public enum ArithmeticOperator {
 	ADDITION("+", 1, (left, right) -> left + right),
 	SUBTRACTION("-", 1, (left, right) -> left - right),
@@ -11,7 +13,7 @@ public enum ArithmeticOperator {
 		if (Divisor != 0) {
 			return Dividend / Divisor;
 		} else {
-			throw new ArithmeticException("Division by zero");
+			throw new CaculatorApplicationException("Cannot divide by zero");
 		}
 
 	});
@@ -37,7 +39,7 @@ public enum ArithmeticOperator {
 	public static ArithmeticOperator getArithmeticOperator(String arithmeticOperator) {
 		return Arrays.stream(values())
 			.filter(o -> o.arithmeticOperator.equals(arithmeticOperator))
-			.findFirst().orElseThrow(() -> new IllegalArgumentException("올바른 연산자가 아닙니다."));
+			.findFirst().orElseThrow(() -> new CaculatorApplicationException("Invalid operator."));
 	}
 
 	public static int comparePriority(ArithmeticOperator operator1, ArithmeticOperator operator2) {

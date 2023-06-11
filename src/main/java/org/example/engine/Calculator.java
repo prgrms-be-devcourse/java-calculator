@@ -3,6 +3,7 @@ package org.example.engine;
 import org.apache.commons.lang3.StringUtils;
 import org.example.Console;
 import org.example.engine.enums.ArithmeticOperator;
+import org.example.exception.CaculatorApplicationException;
 import org.example.engine.model.CalculationResult;
 import org.example.engine.repository.CalculationRepository;
 
@@ -25,9 +26,12 @@ public class Calculator implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			while (true) {
+
+		while (true) {
+
+			try {
 				int mode = console.inputSelectMode();
+				console.outputSelectResult(mode);
 				switch (mode) {
 					case 1:
 						loadHistory();
@@ -36,17 +40,23 @@ public class Calculator implements Runnable {
 						compute();
 						break;
 				}
+			} catch (CaculatorApplicationException e1) {
+				System.out.println(e1.getMessage());
+				continue;
+			} catch (IOException e2) {
+				System.out.println(e2.getMessage());
+				continue;
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+
 		}
+
 	}
 
-	public void compute() throws IOException {
+	public void compute() throws IOException, CaculatorApplicationException {
 		String inputExpression = console.inputExpression();
 		String preprocessedExpression = preprocess(inputExpression);
 		if (!validateExpression(preprocessedExpression)) {
-			System.out.println("예외를 발생시키겠어요");
+			throw new CaculatorApplicationException("Invalid expression");
 		}
 		List<String> parseExpression = parseExpression(preprocessedExpression);
 		List<String> postfixExpression = infixToPostfix(parseExpression);
@@ -66,7 +76,7 @@ public class Calculator implements Runnable {
 		String preprocessedExpression = rowExpression.trim();
 		preprocessedExpression = preprocessedExpression.replaceAll("\\s+", "");
 		preprocessedExpression = preprocessedExpression.replaceAll("([+\\-*/])", " $1 ");
-		;
+
 		return preprocessedExpression;
 	}
 
@@ -110,7 +120,7 @@ public class Calculator implements Runnable {
 		return postfixExpression;
 	}
 
-	public double calculate(List<String> postfixExpression) {
+	public double calculate(List<String> postfixExpression) throws CaculatorApplicationException {
 
 		Stack<String> st = new Stack<>();
 
