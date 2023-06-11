@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Input {
-
   private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
   public static Integer inputMenu() throws IOException {

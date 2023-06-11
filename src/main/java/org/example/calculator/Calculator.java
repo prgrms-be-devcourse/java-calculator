@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
-
   public double calculate(String inputFormula) {
-
     String[] formula = inputFormula.split(" ");
     List<String> separatedFormula = separate(formula);
     Stack<Double> numbers = new Stack<>();
@@ -25,7 +23,6 @@ public class Calculator {
   }
 
   public List<String> separate(String[] formula) {
-
     List<String> parsedFormula = new ArrayList<>();
     Stack<String> operators = new Stack<>();
 
@@ -39,6 +36,7 @@ public class Calculator {
         parsedFormula.add(value);
       }
     }
+
     while (!operators.isEmpty()) {
       parsedFormula.add(operators.pop());
     }

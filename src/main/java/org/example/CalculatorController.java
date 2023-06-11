@@ -9,7 +9,6 @@ import org.example.calculator.Calculator;
 import java.io.IOException;
 
 public class CalculatorController {
-
   Calculator calculator = new Calculator();
   History history = new History();
 
