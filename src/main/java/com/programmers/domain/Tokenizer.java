@@ -13,7 +13,7 @@ public class Tokenizer {
 
         StringBuilder sb = new StringBuilder();
         for (char c : chars) {
-            if(c >= '0' && c <= '9') {
+            if (c >= '0' && c <= '9') {
                 sb.append(c);
             } else {
                 result.add(sb.toString());

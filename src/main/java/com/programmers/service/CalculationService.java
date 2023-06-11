@@ -54,7 +54,7 @@ public class CalculationService implements Runnable {
 
             boolean exitService = selectService(selected);
 
-            if(exitService) {
+            if (exitService) {
                 break;
             }
         }

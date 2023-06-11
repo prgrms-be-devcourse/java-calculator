@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CalculationMemoryRepository implements CalculationRepository{
+public class CalculationMemoryRepository implements CalculationRepository {
     Map<Integer, String> calculations = new HashMap<>();
 
     @Override

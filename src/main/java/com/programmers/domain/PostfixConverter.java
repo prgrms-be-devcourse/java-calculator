@@ -16,7 +16,7 @@ public class PostfixConverter {
         operators = new Stack<>();
 
         for (String token : tokenized) {
-            if(Arithmetic.isNumber(token)) {
+            if (Arithmetic.isNumber(token)) {
                 postfixExpression.add(token);
             } else {
                 popAndAddOperatorsToExpression(() -> getPriority(token) > getPriority(operators.peek()));
@@ -29,8 +29,8 @@ public class PostfixConverter {
     }
 
     private void popAndAddOperatorsToExpression(Supplier<Boolean> breakCondition) {
-        while(!operators.isEmpty()) {
-            if(breakCondition.get()) {
+        while (!operators.isEmpty()) {
+            if (breakCondition.get()) {
                 break;
             }
             postfixExpression.add(operators.pop());

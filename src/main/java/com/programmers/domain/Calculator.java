@@ -25,7 +25,7 @@ public class Calculator {
     public int calculatePostfixExpression(String[] expression) {
         Stack<Integer> numbers = new Stack<>();
         for (String expr : expression) {
-            if(Arithmetic.isNumber(expr)) {
+            if (Arithmetic.isNumber(expr)) {
                 numbers.push(Integer.parseInt(expr));
             } else {
                 int result = binaryOperation(numbers.pop(), numbers.pop(), expr);
