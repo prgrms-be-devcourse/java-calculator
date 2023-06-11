@@ -4,6 +4,7 @@ import com.devcourse.java.calculator.constant.MenuConstant;
 import com.devcourse.java.calculator.io.Input;
 import com.devcourse.java.calculator.io.Output;
 import com.devcourse.java.calculator.repository.CalculatorRepository;
+import com.devcourse.java.calculator.util.CalculateUtil;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -12,6 +13,7 @@ public class Calculator implements Runnable{
     private final Input input;
     private final Output output;
     private CalculatorRepository calculatorRepository;
+    private CalculateUtil calculateUtil;
     private int command;
 
     @Override
@@ -48,6 +50,7 @@ public class Calculator implements Runnable{
             try {
                 output.printRequestEquationInput();
                 String equation = input.getEquation();
+                calculatorRepository.storeHistory(calculateUtil.calculateAndReturnEquationWithAnswer(equation));
             } catch (RuntimeException e) {
                 output.printExceptionMessage(e.getMessage());
             }

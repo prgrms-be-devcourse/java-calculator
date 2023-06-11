@@ -31,7 +31,6 @@ public class Console implements Input, Output {
     @Override
     public void printExceptionMessage(String message) {
         System.out.println(message);
-        System.out.println();
     }
 
     @Override
