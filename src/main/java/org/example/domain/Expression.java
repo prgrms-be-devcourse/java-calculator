@@ -1,9 +1,10 @@
 package org.example.domain;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Expression {
-    public String convertToPostfix(String infix) {
+    public String[] convertToPostfix(String infix) {
         boolean isBracket = false;
 
         if (infix.charAt(0) == '(') {
@@ -13,19 +14,19 @@ public class Expression {
         infix = trimSpaces(infix);
         String[] str = splitBySpaces(infix);
 
-        StringBuilder sb = new StringBuilder();
+        ArrayList<String> sb = new ArrayList<>();
         Stack<String> stack = new Stack<>();
 
         for (int i = 0; i < str.length; i++) {
             String now = str[i];
 
-            switch (now) {
+            switch (now){
                 case "+":
                 case "-":
                 case "*":
                 case "/":
                     while (!stack.isEmpty() && priority(stack.peek()) >= priority(now)) {
-                        sb.append(stack.pop());
+                        sb.add(stack.pop());
                     }
                     stack.push(now);
                     break;
@@ -33,25 +34,30 @@ public class Expression {
                     stack.push(now);
                     break;
                 case ")":
-                    while (!stack.isEmpty() && !stack.peek().equals("(")) {
-                        sb.append(stack.pop());
+                    while(!stack.isEmpty() && !stack.peek().equals("(")){
+                        sb.add(stack.pop());
                     }
                     stack.pop();
                     break;
                 default:
-                    sb.append(now);
+                    sb.add(now);
             }
         }
 
         while (!stack.isEmpty()) {
-            sb.append(stack.pop());
+            sb.add(stack.pop());
         }
 
-        if (isBracket) {
-            sb.deleteCharAt(0);
+        if(isBracket) {
+            sb.remove(0);}
+
+        String[] result = new String[sb.size()];
+
+        for(int i = 0; i < sb.size(); i++) {
+            result[i]=sb.get(i);
         }
 
-        return sb.toString();
+        return result;
     }
 
     private String trimSpaces(String infix) {
