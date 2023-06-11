@@ -2,7 +2,10 @@ package com.programmers.converter;
 
 import com.programmers.util.ConstantRegex;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 import java.util.regex.Matcher;
 
 public class InfixToPostfixConverter implements ExpressionConverter {
@@ -85,11 +88,9 @@ public class InfixToPostfixConverter implements ExpressionConverter {
 
     private void validateInputExpression(String expression) {
 
-        Arrays.stream(expression.split(ConstantRegex.EXPRESSION_VALIDATION_REGEX))
-                .findAny()
-                .ifPresent(p -> {
-                    throw new IllegalArgumentException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
-                });
+        if (ConstantRegex.EXPRESSION_VALIDATION_REGEX_COMPILE.matcher(expression).matches()) {
+            throw new IllegalArgumentException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
+        }
 
         if (!isParenthesesOrderCorrect(expression)) {
             throw new IllegalArgumentException("괄호의 순서가 잘못되었습니다.");
