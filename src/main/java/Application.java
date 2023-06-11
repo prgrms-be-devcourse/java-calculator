@@ -1,7 +1,11 @@
+import calculator.engine.Repository.Memorizer;
+
+import java.util.ArrayList;
+
 public class Application {
     public static void main(String[] args) {
         Console console = new Console();
-        console.start();
+        Memorizer memorizer = new Memorizer();
     }
 }
 

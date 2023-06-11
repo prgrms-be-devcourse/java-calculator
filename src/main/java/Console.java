@@ -1,32 +1,17 @@
-import java.util.Scanner;
+import calculator.engine.io.Input;
+import calculator.engine.io.Output;
 
-//콘솔 입력과 출력에 대한 클래스
-public class Console {
-
-    public void start() {
-        Scanner scanner = new Scanner(System.in);
-        Calculator calculator = new Calculator();
-        Memorizer memorizer = new Memorizer();
-
-        while (true) {
-            getMenu();
-            System.out.println("선택: ");
-            int selectMenu = scanner.nextInt();
-
-            //입력받은 값이 1이라면
-            if (selectMenu == 1) {
-                //기억한 계산 결과를 출력함
-                //memorizer.value();
-            } else {
-                //입력된 피연산자와 연산자를 이용하여 계산함
-                //calculator.calculator();
-            }
-        }
+public class Console implements Input, Output {
+    @Override
+    public String input(String s) {
+        return null;
     }
-
-    //계산기 메뉴 선택 사항
-    public static void getMenu(){
-        System.out.println("1.조회");
-        System.out.println("2.계산");
-    };
+    @Override
+    public String inputError() {
+        return "입력 오류가 발생하였습니다.";
+    }
+    @Override
+    public String outputError() {
+        return "프로그램 오류가 발생하였습니다.";
+    }
 }
