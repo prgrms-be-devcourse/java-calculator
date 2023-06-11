@@ -9,6 +9,8 @@ public class IOConsole {
     private static final String HISTORY_OPTION_MESSAGE = "1. 조회";
     private static final String CALCULATE_OPTION_MESSAGE = "2. 계산";
     private static final String USER_CHOICE_MESSAGE = "선택 : ";
+    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
     /**
      * 계산기의 선택 메뉴를 출력하는 함수
      */
@@ -30,5 +32,15 @@ public class IOConsole {
         System.out.println();
 
         return expression;
+    }
+
+    /**
+     * 사용자의 입력을 받아 반환하는 함수
+     *
+     * @return 사용자가 입력한 문자열
+     * @throws IOException
+     */
+    public String getInput() throws IOException {
+        return br.readLine();
     }
 }
