@@ -22,6 +22,9 @@ public class CalculatorView {
     public void printOptionMessage() {
         outputView.printOptionMessage();
     }
+    public void printCalcResult(Integer result) {
+        outputView.printCalcResult(result);
+    }
 
     //Controller에서 주입
     public void printMemory(Calculator calculator) {
