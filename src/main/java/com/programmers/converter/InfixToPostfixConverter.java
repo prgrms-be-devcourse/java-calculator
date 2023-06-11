@@ -88,13 +88,16 @@ public class InfixToPostfixConverter implements ExpressionConverter {
 
     private void validateInputExpression(String expression) {
 
-        if (ConstantRegex.EXPRESSION_VALIDATION_REGEX_COMPILE.matcher(expression).matches()) {
-            throw new IllegalArgumentException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
-        }
-
         if (!isParenthesesOrderCorrect(expression)) {
             throw new IllegalArgumentException("괄호의 순서가 잘못되었습니다.");
         }
+
+        expression = expression.replaceAll(ConstantRegex.WHITESPACE_REGEX, "");
+        if (!ConstantRegex.EXPRESSION_VALIDATION_REGEX_COMPILE.matcher(expression).matches()) {
+            throw new IllegalArgumentException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
+        }
+
+
     }
 
     private boolean isParenthesesOrderCorrect(String expression) {

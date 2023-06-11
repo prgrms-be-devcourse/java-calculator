@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -41,20 +40,21 @@ class InfixToPostfixConverterTest {
     @CsvSource(value = {"4 + 3 * 2 / 5:True", "(3 + 4) * 2    + 5     * ( 2 + 3) : True"}, delimiter = ':')
     @DisplayName("수식 입력 옳은 값 검증")
     void 수식_적절한입력토큰검증(String input, String output) {
-        assertThat(Arrays.stream(input.split(ConstantRegex.EXPRESSION_VALIDATION_REGEX))
-                .findAny()
-                .isEmpty())
-                .isEqualTo(Boolean.valueOf(output));
+        input = input.replaceAll(ConstantRegex.WHITESPACE_REGEX, "");
+        assertThat(ConstantRegex.EXPRESSION_VALIDATION_REGEX_COMPILE
+                .matcher(input)
+                .matches()).isEqualTo(Boolean.valueOf(output));
+
     }
 
     @ParameterizedTest
     @CsvSource(value = {"a * 5 + 2 : False", "7 ^ 2 + 5 : False", "7 ^     2 + 5 : False"}, delimiter = ':')
     @DisplayName("수식 입력 잘못된 값 검증")
     void 수식_잘못된입력토큰검증(String input, String output) {
-        assertThat(Arrays.stream(input.split(ConstantRegex.EXPRESSION_VALIDATION_REGEX))
-                .findAny()
-                .isEmpty())
-                .isEqualTo(Boolean.valueOf(output));
+        input = input.replaceAll(ConstantRegex.WHITESPACE_REGEX, "");
+        assertThat(ConstantRegex.EXPRESSION_VALIDATION_REGEX_COMPILE
+                .matcher(input)
+                .matches()).isEqualTo(Boolean.valueOf(output));
     }
 
     @ParameterizedTest
