@@ -3,7 +3,7 @@ package com.programmers.junho.domain;
 import java.util.Stack;
 
 import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
-import static com.programmers.junho.domain.ArithmeticOperators.isNumber;
+import static com.programmers.junho.domain.ArithmeticOperators.isNotOperator;
 import static com.programmers.junho.domain.utils.Util.convertStringToInt;
 
 public class Calculator {
@@ -27,7 +27,7 @@ public class Calculator {
     }
 
     private void evaluatePostfixNotation(Stack<Integer> stack, String token) {
-        if (isNumber(token)) {
+        if (isNotOperator(token)) {
             stack.push(convertStringToInt(token));
             return;
         }

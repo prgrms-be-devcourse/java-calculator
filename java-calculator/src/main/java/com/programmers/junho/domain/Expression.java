@@ -4,7 +4,7 @@ import java.util.Stack;
 import java.util.regex.Pattern;
 
 import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
-import static com.programmers.junho.domain.ArithmeticOperators.isNumber;
+import static com.programmers.junho.domain.ArithmeticOperators.isNotOperator;
 
 public class Expression {
     private static final String REGEX = "^\\d+\\s([-+*/]\\s\\d+\\s)+$";
@@ -40,7 +40,7 @@ public class Expression {
     }
 
     private void convertToPostfix(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack, String token) {
-        if (isNumber(token)) {
+        if (isNotOperator(token)) {
             postfixExpression.append(token).append(BLANK);
             return;
         }
