@@ -9,7 +9,7 @@ public class Memory {
         map.put(infixExpression, result);
     }
 
-    public HashMap<String, Integer> getMap() {
+    HashMap<String, Integer> getMap() {
         return map;
     }
 }

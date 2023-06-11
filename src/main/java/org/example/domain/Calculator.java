@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import java.util.HashMap;
+
 public class Calculator {
     private static Calculator instance;
 
@@ -25,5 +27,9 @@ public class Calculator {
 
         memory.save(expression, result);
         return result;
+    }
+
+    public HashMap<String, Integer> getMap() {
+        return memory.getMap();
     }
 }

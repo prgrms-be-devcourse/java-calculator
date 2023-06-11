@@ -1,5 +1,7 @@
 package org.example.view;
 
+import org.example.domain.Calculator;
+
 public class CalculatorView {
     final private InputView inputView;
     final private OutputView outputView;
@@ -17,4 +19,12 @@ public class CalculatorView {
         return inputView.readCommand();
     }
 
+    public void printOptionMessage() {
+        outputView.printOptionMessage();
+    }
+
+    //Controller에서 주입
+    public void printMemory(Calculator calculator) {
+        outputView.printMemory(calculator);
+    }
 }
