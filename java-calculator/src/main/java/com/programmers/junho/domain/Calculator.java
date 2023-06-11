@@ -1,5 +1,6 @@
 package com.programmers.junho.domain;
 
+import java.util.Objects;
 import java.util.Stack;
 
 import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
@@ -34,5 +35,18 @@ public class Calculator {
         Integer secondValue = stack.pop();
         Integer firstValue = stack.pop();
         stack.push(convertTokenToOperator(token).apply(firstValue, secondValue));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Calculator that = (Calculator) o;
+        return Objects.equals(expression, that.expression);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expression);
     }
 }

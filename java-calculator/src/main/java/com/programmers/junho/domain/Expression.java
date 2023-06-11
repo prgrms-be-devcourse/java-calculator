@@ -1,5 +1,6 @@
 package com.programmers.junho.domain;
 
+import java.util.Objects;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -58,6 +59,19 @@ public class Expression {
     }
     private boolean isStackNotEmptyAndOperatorPriorityLower(Stack<ArithmeticOperators> stack, ArithmeticOperators operator) {
         return !stack.isEmpty() && stack.peek().getPriority() >= operator.getPriority();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expression that = (Expression) o;
+        return Objects.equals(expression, that.expression);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expression);
     }
 }
 
