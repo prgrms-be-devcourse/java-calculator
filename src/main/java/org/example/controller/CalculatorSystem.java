@@ -4,8 +4,8 @@ import org.example.domain.Calculator;
 import org.example.view.CalculatorView;
 
 public class CalculatorSystem {
-    Calculator calculator;
-    CalculatorView calculatorView;
+    private Calculator calculator;
+    private CalculatorView calculatorView;
 
     public CalculatorSystem() {
         this.calculator = Calculator.getInstance();

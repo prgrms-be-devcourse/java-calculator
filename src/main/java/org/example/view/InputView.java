@@ -8,7 +8,7 @@ public class InputView {
     private static final String MESSAGE_CHOICE = "선택 : ";
 
     private final InputValidater inputValidater = new InputValidater();
-    Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     String readExpression() {
         String expression = sc.nextLine();
