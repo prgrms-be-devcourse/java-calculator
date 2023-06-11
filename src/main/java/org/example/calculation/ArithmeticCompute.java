@@ -3,21 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class ArithmeticCalculation implements Calculation{
+public class ArithmeticCompute implements Compute {
     @Override
-    public double run(String input){
+    public double operate(String input){
         return calculate(convertInput(input));
     }
 
     // 전위 표기식을 후위 표기식으로 변환.
     public String[] convertInput(String input) {
-        input = input.replace("+", " + ");
-        input = input.replace("-", " - ");
-        input = input.replace("/", " / ");
-        input = input.replace("*", " * ");
-        input = input.replace("  ", " ");
-
-        String[] str = input.split(" ");
+        String[] str = inputFormating(input);
 
         List<String> sb = new ArrayList<>();
         Stack<String> stack = new Stack<>();
@@ -48,6 +42,17 @@ public class ArithmeticCalculation implements Calculation{
             result[i] = sb.get(i);
         }
         return result;
+    }
+
+    private static String[] inputFormating(String input) {
+        input = input.replace("+", " + ");
+        input = input.replace("-", " - ");
+        input = input.replace("/", " / ");
+        input = input.replace("*", " * ");
+        input = input.replace("  ", " ");
+
+        String[] str = input.split(" ");
+        return str;
     }
 
     private int priority(String operator) {

@@ -3,12 +3,12 @@ package org.example.calculation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ArithmeticCalculationTest {
+public class ArithmeticComputeTest {
 
     @Test
     public void 사칙연산() throws Exception{
-        ArithmeticCalculation arithmeticCalculation = new ArithmeticCalculation();
-        double result = arithmeticCalculation.run("5 + 3 * 2");
+        ArithmeticCompute arithmeticCalculation = new ArithmeticCompute();
+        double result = arithmeticCalculation.operate("5 + 3 * 2");
         Assertions.assertThat(result).isEqualTo(11);
     }
 
