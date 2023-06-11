@@ -1,6 +1,7 @@
 import io.Input;
 import io.Output;
 import model.Result;
+import repository.Repository;
 import utils.InputValidation;
 
 import java.util.ArrayList;
@@ -9,11 +10,13 @@ public class Calculator implements Runnable {
 
     private Input input;
     private Output output;
+    private Repository repository;
     private boolean go = true;
 
-    public Calculator(Input input, Output output) {
+    public Calculator(Input input, Output output, Repository repository) {
         this.input = input;
         this.output = output;
+        this.repository = repository;
     }
 
     @Override
@@ -32,14 +35,18 @@ public class Calculator implements Runnable {
                     go = false;
                     break;
                 case "1":
-                    output.results(new ArrayList<>());
+                    output.results(repository.findAll());
                     break;
                 case "2":
                     String problem = input.read();
-                    if (InputValidation.isValidatedMathProblem(problem))
-                        output.answer(calculate(problem));
-                    else
+                    if (InputValidation.isValidatedMathProblem(problem)) {
+                        Result result = calculate(problem);
+                        repository.save(result);
+                        output.answer(result);
+                    }
+                    else {
                         output.inputError("잘못된 형식입니다.");
+                    }
             }
         }
     }
