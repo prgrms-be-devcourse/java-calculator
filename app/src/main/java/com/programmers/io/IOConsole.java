@@ -9,6 +9,9 @@ public class IOConsole {
     private static final String HISTORY_OPTION_MESSAGE = "1. 조회";
     private static final String CALCULATE_OPTION_MESSAGE = "2. 계산";
     private static final String USER_CHOICE_MESSAGE = "선택 : ";
+    // 오류 발생 메시지
+    private static final String WRONG_OPTION_MESSAGE = "계산기에서 지원하지 않는 옵션입니다.";
+    private static final String SHUTDOWN_MESSAGE = "계산기를 종료합니다.";
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     /**
@@ -42,5 +45,16 @@ public class IOConsole {
      */
     public String getInput() throws IOException {
         return br.readLine();
+    }
+
+    /**
+     * 잘못된 선택 입력이 들어왔을 때 처리하는 메소드
+     *
+     * @throws IOException
+     */
+    public void handleWrongInput() throws IOException {
+        System.out.println(WRONG_OPTION_MESSAGE);
+        System.out.println(SHUTDOWN_MESSAGE);
+        br.close();
     }
 }
