@@ -16,10 +16,10 @@ public class Input {
         try {
             switch (input) {
                 case "1":
-                    button = Button.CALCULATE;
+                    button = Button.SEARCH;
                     break;
                 case "2":
-                    button = Button.SEARCH;
+                    button = Button.CALCULATE;
                     break;
                 default:
                     throw new IllegalArgumentException("올바른 입력이 아닙니다.");
