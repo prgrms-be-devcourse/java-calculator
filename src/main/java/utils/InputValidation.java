@@ -8,12 +8,10 @@ public class InputValidation {
     private InputValidation() {}
 
     public static boolean isValidatedMathProblem(String input) {
-        if (input.matches(MATH_PROBLEM_PATTERN)) return true;
-        return false;
+        return input.matches(MATH_PROBLEM_PATTERN);
     }
 
     public static boolean isValidatedOption(String input) {
-        if (input.matches(OPTION_PATTERN)) return true;
-        return false;
+        return input.matches(OPTION_PATTERN);
     }
 }
