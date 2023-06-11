@@ -21,7 +21,7 @@ public class Calculator {
             Console.printMenu();
 
             MenuType menu = makeMenu(Console.inputMenuNumber())
-                    .orElse(MenuType.NULL);
+                    .orElseGet(() -> MenuType.NULL);
 
             switch (menu) {
                 case HISTORY:
