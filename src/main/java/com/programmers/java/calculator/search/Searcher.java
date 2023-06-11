@@ -1,8 +1,13 @@
 package com.programmers.java.calculator.search;
 
+import com.programmers.java.repository.ResultRepository;
+
+import java.util.ArrayList;
+
 public class Searcher {
+    private static ResultRepository resultRepository = new ResultRepository();
 
-    //저장소와 소통하며 계산 결과들을 조회한다
-
-
+    public ArrayList<String> findAll() {
+        return resultRepository.getCalculationResults();
+    }
 }
