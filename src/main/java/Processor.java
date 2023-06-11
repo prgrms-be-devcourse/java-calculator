@@ -17,7 +17,7 @@ public class Processor {
     public void start() {
         while (true) {
             try {
-                view.printInfoMessage();
+                view.printInfoMessages();
                 Command command = view.commandReader();
                 view.printNewLine();
 
@@ -30,7 +30,7 @@ public class Processor {
                     String expression = view.expressionReader();
                     String result = calculator.calculate(expression);
                     historyStorage.save(expression, result);
-                    view.printAnswer(result);
+                    view.printCalculationResult(result);
                 }
             } catch (RuntimeException e) {
                 System.out.println("\n" + e.getMessage() + "\n");

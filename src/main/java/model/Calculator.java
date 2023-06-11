@@ -1,6 +1,6 @@
 package model;
 
-import util.CalculatorUtil;
+import util.Validator;
 
 public class Calculator {
     private final Operand operand;
@@ -17,10 +17,10 @@ public class Calculator {
                 continue;
             }
 
-            if (CalculatorUtil.isDigit(component)) {
-                operand.push(Character.getNumericValue(component));
-                continue;
-            }
+//            if (Validator.checkIsDigit(String.valueOf(component))) {
+//                operand.push(Character.getNumericValue(component));
+//                continue;
+//            }
 
             if (!operator.isEmpty()) {
                 OperatorType currentOperator = OperatorType.getOperator(String.valueOf(component));

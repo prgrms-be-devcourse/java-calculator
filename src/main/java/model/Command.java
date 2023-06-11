@@ -15,7 +15,8 @@ public enum Command {
         return number;
     }
 
-    public static Command getCommand (int command) {
+    public static Command getCommand(String input) {
+        int command = Integer.parseInt(input);
         return Arrays.stream(values())
                 .filter(cmd -> cmd.getNumber() == command)
                 .findFirst()

@@ -1,10 +1,12 @@
 package view;
 
+import exception.IllegalExpressionException;
 import exception.NoSuchCommandException;
 import model.Command;
-import util.CalculatorUtil;
+import util.Validator;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class View {
     private final Scanner scanner;
@@ -13,49 +15,49 @@ public class View {
         this.scanner = new Scanner(System.in);
     }
 
-    public Command commandReader() {
-        String input = scanner.nextLine();
-        try {
-            int command = CalculatorUtil.parseNumber(input);
-            return Command.getCommand(command);
-        } catch (RuntimeException e) {
-            throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
-        }
+    public void printInfoMessages() {
+        System.out.print(ViewMessage.getFormattedMessage());
     }
 
-    public String expressionReader() throws RuntimeException {
-        String expression = scanner.nextLine();
-        CalculatorUtil.checkExpressionByRegex(expression);
-        return expression;
-    }
-
-    public void printInfoMessage() {
-        String infoMessage = formatMessages();
-        System.out.print(infoMessage);
-    }
-
-    public void printAnswer(String result) {
+    public void printCalculationResult(String result) {
         System.out.print(result + "\n\n");
     }
 
-    private String formatMessages() {
-        StringBuilder formattedMessage = new StringBuilder();
-
-        for (ViewMessage msg : ViewMessage.values()) {
-            if (!msg.equals(ViewMessage.SELECT)) {
-                formattedMessage.append(msg.getMessage()).append('\n');
-            }
-        }
-        formattedMessage.append('\n').append(ViewMessage.SELECT.getMessage());
-
-        return formattedMessage.toString();
+    public void printHistory(String history) {
+        System.out.println(history);
     }
 
     public void printNewLine() {
         System.out.println();
     }
 
-    public void printHistory(String history) {
-        System.out.println(history);
+    public Command commandReader() {
+        try {
+            String input = scanner.nextLine();
+            Validator.checkIsDigit(input);
+            return Command.getCommand(input);
+        } catch (RuntimeException e) {
+            throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
+        }
+    }
+
+    public String expressionReader() {
+        try {
+            String expression = removeWhiteSpace(scanner.nextLine());
+            checkIsValidExpression(expression);
+            return expression;
+        } catch (IllegalExpressionException e) {
+            throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
+        }
+    }
+
+    private String removeWhiteSpace(String input) {
+        return input.replaceAll(" ", "");
+    }
+
+    private void checkIsValidExpression(String expression) {
+        if (!Pattern.matches("^\\d+([+\\-*/]\\d+)*$", expression)) {
+            throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
+        }
     }
 }
