@@ -1,3 +1,5 @@
+import io.Input;
+import io.Output;
 import model.Calculator;
 import model.History;
 import model.Operator;
@@ -9,13 +11,7 @@ import java.util.List;
 //Index 생성자에 필요한 객체들을 넣어줍니다.
 public class Main {
     public static void main(String[] args) {
-
-        Console console = new Console();
-        Calculator calculator = new Calculator();
-        Operator operator = new Operator();
-        History history = new History();
-
-        new Index(console,history,calculator,operator).run();
+        new Index(new Console(),new History(),new Calculator()).run();
     }
 
 

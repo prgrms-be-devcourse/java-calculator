@@ -10,17 +10,17 @@ public class History {
         return log.isEmpty();
     }
     // 외부에서 계산 내역을 조회할려고 하면 실행합니다
-    public void getHistory() {
-        for (String s : log) {
-            System.out.println(s);
-        }
+    public List<String> getHistory() {
+        return log;
     }
+
     // 저장된 계산 내역 개수를 반환합니다
     public Integer getHistoryLen() {
         return log.size();
     }
     // 계산 내역을 추가합니다
-    public void addHistory(String result){
-        log.add(result);
+    public void addHistory(String inputString,int result){
+        StringBuilder sb = new StringBuilder();
+        log.add(sb.append(inputString).append(" = ").append(result).toString());
     }
 }

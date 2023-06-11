@@ -1,50 +1,54 @@
 
+import io.Input;
+import io.Output;
 import model.Calculator;
 import model.History;
-import model.Operator;
 import option.Option;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.function.DoubleUnaryOperator;
 
 //사용자가 옵션을 선택할 수 있습니다.
 //선택한 옵션에 맞게 switch 문으로 해당 옵션에 맞는 메소드를 호출합니다.
 public class Index implements Runnable{
-    private Console console;
+    private Input input;
+    private Output output;
     private History history;
     private Calculator calculator;
-    private Operator operator;
 
-    public Index(Console console, History history, Calculator calculator, Operator operator) {
-        this.console = console;
+    public Index(Console console, History history, Calculator calculator) {
+        this.input = console;
+        this.output = console;
         this.history = history;
         this.calculator = calculator;
-        this.operator = operator;
     }
 
     @Override
     public void run(){
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         while (true) {
-            for(Option opt : Option.values()){
-                System.out.println(opt.getIdx()+". "+opt.getOpt());
-            }
 
+            output.ShowOptions();
 
-            int select = sc.nextInt();
+            Option select = input.selectOption("선택");
+
             //스위치 문을 통하여 옵션에 맞는 코드를 실행합니다
             switch (select) {
-                case 1:
-                    console.getHistory(history);
+                case HISTORY:
+                    if (!(output.showResultHistory(history.getHistory()))) output.historyEmptyError();
                     break;
-                case 2:
+                case CALCULATE:
                     System.out.print("계산식을 입력해주세요 : ");
-                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
                     try {
                         String inputString = br.readLine();
-                        console.input(inputString,calculator,operator,history);
+                        int result = calculator.cal(inputString);
+                        System.out.println(result);
+                        history.addHistory(inputString,result);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
