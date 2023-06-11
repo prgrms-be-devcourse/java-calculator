@@ -15,7 +15,7 @@ public class CalculateService implements CalculatorFunction {
     }
 
     @Override
-    public void doService() {
+    public void doService(Calculator calculator) {
 
         String expression;
         LinkedList<String> expForCal;
@@ -34,6 +34,9 @@ public class CalculateService implements CalculatorFunction {
         }
 
         System.out.println(result);
+
+        calculator.getResultSaveService().save(new Result(expression, result));
+
     }
 
     private static String calculate(LinkedList<String> expForCal) throws Exception {
@@ -84,8 +87,8 @@ public class CalculateService implements CalculatorFunction {
                 v = Double.parseDouble(queue.pollLast()) / Double.parseDouble(expForCal.poll());
 
                 if (v.isInfinite()) {
-                    System.out.print("0으로 나눌 수 없습니다. ");
-                    throw new Exception();
+                    System.out.print("0 으로 나눌 수 없습니다. ");
+                    throw new ArithmeticException();
                 }
 
                 queue.add(String.valueOf(v));

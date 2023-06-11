@@ -44,9 +44,12 @@ public class Calculator {
             int optionNumber = scanner.nextInt();
 
             CalculatorFunction calculatorFunction = menus.get(optionNumber);
-            calculatorFunction.doService();
-
+            calculatorFunction.doService(this);
         }
 
+    }
+
+    public ResultSaveService getResultSaveService() {
+        return resultSaveService;
     }
 }
