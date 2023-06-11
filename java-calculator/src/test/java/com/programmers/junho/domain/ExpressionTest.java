@@ -16,7 +16,7 @@ class ExpressionTest {
         assertThatNoException().isThrownBy(() -> new Expression(expression));
     }
 
-    @DisplayName("공백이 존재하지 않으면 예외가 발생한다.")
+    @DisplayName("값과 연산자 사이에 공백이 존재하지 않으면 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1+2", "1-3", "12+23* 45"})
     void when_SpaceDoesNotExists_Expects_ThrowException(String expression) {
@@ -24,7 +24,7 @@ class ExpressionTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("식과 연산 사이에 공백 개수가 하나 이상이면 예외가 발생한다.")
+    @DisplayName("값과 연산자 사이에 공백 개수가 하나 이상이면 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1  + 2, 1 -   2", "3 * 4 /   6"})
     void when_MoreThanOneSpaceExists_Expects_ThrowException(String expression) {
