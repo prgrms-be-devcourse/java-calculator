@@ -15,7 +15,7 @@ public class View {
         this.scanner = new Scanner(System.in);
     }
 
-    public void printInfoMessages() {
+    public void printInfoMessage() {
         System.out.print(ViewMessage.getFormattedMessage());
     }
 
@@ -25,6 +25,10 @@ public class View {
 
     public void printHistory(String history) {
         System.out.println(history);
+    }
+
+    public void printErrorMessage(String message) {
+        System.out.println("\n" + message + "\n");
     }
 
     public void printNewLine() {
