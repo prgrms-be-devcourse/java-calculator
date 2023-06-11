@@ -26,6 +26,7 @@ public class Input {
             }
         } catch (Exception e) {
             System.out.println("계산기를 종료합니다.");
+            System.exit(0);
         }
         return button;
     }
