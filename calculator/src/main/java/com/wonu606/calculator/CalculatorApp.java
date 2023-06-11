@@ -9,15 +9,15 @@ import com.wonu606.io.Print;
 import com.wonu606.calculator.util.CalculatorMessage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class CalculatorApp implements App {
 
-    private final List<CalculatorStrategy> strategies = new ArrayList<>();
+    private final Map<String, CalculatorStrategy> strategies = new HashMap();
     private final Persistence store = new ResultStore();
-    Input input;
-    Print printer;
 
     public CalculatorApp() {
         initStrategies();
@@ -27,20 +27,34 @@ public class CalculatorApp implements App {
         // TODO 조회와 계산 기능을 생성하여 추가해야 함
     }
 
-    public void execute(Input input, Print printer) throws IOException {
-        this.input = input;
-        this.printer = printer;
-        
-        while (true) {
-            int selection = Integer.parseInt(input.getInput());
+    public void execute(Input input, Print printer) {
 
-            Optional<CalculatorStrategy> selectedStrategy =
-                    Optional.ofNullable(strategies.get(selection - 1));
-            selectedStrategy.ifPresentOrElse(
-                    strategy -> strategy.execute(input, printer, store),
-                    () -> {
-                        throw new IllegalArgumentException(CalculatorMessage.INVALID_INPUT.message);
-                    });
+        while (true) {
+            String selection = inputMenuSelection(input);
+            CalculatorStrategy selectedStrategy = getStrategyOrThrow(selection);
+            performStrategy(input, printer, selectedStrategy);
+        }
+    }
+
+    private void performStrategy(Input input, Print printer, CalculatorStrategy selectedStrategy) {
+        selectedStrategy.execute(input, printer, store);
+    }
+
+    private CalculatorStrategy getStrategyOrThrow(String selection) {
+        CalculatorStrategy selectedStrategy = strategies.get(selection);
+        if (selectedStrategy == null) {
+            throw new IllegalArgumentException(CalculatorMessage.INVALID_INPUT.message);
+        }
+        return selectedStrategy;
+    }
+
+    private String inputMenuSelection(Input input) {
+        while (true) {
+            try {
+                return input.getInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
