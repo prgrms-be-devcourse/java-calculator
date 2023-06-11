@@ -3,7 +3,7 @@ package org.example.domain;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Expression {
+public class ExpressionConvertor {
     public String[] convertToPostfix(String infix) {
         boolean isBracket = false;
 
