@@ -67,6 +67,7 @@ public class ExpressionConvertor {
                 .replace("-", " - ")
                 .replace("/", " / ")
                 .replace("*", " * ")
+                .replace("  ", " ")
                 .replace("  ", " ");
 
         return infix;
