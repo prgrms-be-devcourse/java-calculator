@@ -21,4 +21,24 @@ public class HistoryMemory {
         String formatExpression = String.format("%s = %.2f", inputExpression, result);
         historyMemoryMap.put(++orderNumber, formatExpression);
     }
+
+    /**
+     * 계산 이력을 가져오는 메소드
+     *
+     * @return 계산 이력
+     */
+    public String getHistory() {
+        StringBuilder sb = new StringBuilder();
+        List<Integer> keyList = new ArrayList<>(historyMemoryMap.keySet());
+
+        Collections.sort(keyList);
+
+        for (int key : keyList) {
+            sb.append(historyMemoryMap.get(key) + "\n");
+        }
+
+        String history = sb.toString();
+
+        return history;
+    }
 }
