@@ -16,7 +16,7 @@ public class CalculatorController {
   final int CALCULATE = 2;
   final int EXIT = 3;
 
-  public void run() throws IOException {
+  public void run() {
     while (true) {
       Output.showMenu();
 
