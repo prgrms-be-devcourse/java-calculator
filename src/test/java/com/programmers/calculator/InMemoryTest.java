@@ -10,15 +10,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class MemoryTest {
+class InMemoryTest {
 
     Accumulator accumulator;
-    Memory memory;
+    InMemory inMemory;
 
     @BeforeEach
     void setUp() {
         accumulator = new Accumulator(new InfixToPostfixConverter());
-        memory = new Memory();
+        inMemory = new InMemory();
     }
 
     @Test
@@ -28,19 +28,19 @@ class MemoryTest {
         String expression1 = "3 * 8 / 4";
         String expression2 = "( 3 / ( 8 - 4 + 9 ) ) * ( 20 - 8 ) * 17";
         // when
-        memory.save(new CalcResult(expression1, accumulator.calculate(expression1).get()));
-        memory.save(new CalcResult(expression2, accumulator.calculate(expression2).get()));
+        inMemory.save(new CalcResult(expression1, accumulator.calculate(expression1).get()));
+        inMemory.save(new CalcResult(expression2, accumulator.calculate(expression2).get()));
 
         // then
-        assertThat(memory.getSize()).isEqualTo(2);
+        assertThat(inMemory.getSize()).isEqualTo(2);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"3 * 8 / 4 : 6", "( 3 / ( 8 - 4 + 9 ) ) * ( 20 - 8 ) * 17 : 47.0769230769"}, delimiter = ':')
     @DisplayName("연산 기록 출력 테스트")
     void 연산_기록_출력(String input, String output) {
-        memory.save(new CalcResult(input, accumulator.calculate(input).get()));
+        inMemory.save(new CalcResult(input, accumulator.calculate(input).get()));
 
-        assertThat(memory.findAll().get(0)).isEqualTo(input + " = " + output);
+        assertThat(inMemory.findAll()).isEqualTo(input + " = " + output);
     }
 }

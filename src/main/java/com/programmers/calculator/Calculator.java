@@ -8,12 +8,12 @@ import java.util.Optional;
 public class Calculator {
 
     private final Accumulator accumulator;
-    private final Memory memory;
+    private final InMemory inMemory;
     private boolean power = true;
 
     public Calculator(ExpressionConverter expressionConverter) {
         accumulator = new Accumulator(expressionConverter);
-        memory = new Memory();
+        inMemory = new InMemory();
     }
 
     public void run() {
@@ -25,14 +25,14 @@ public class Calculator {
 
             switch (menu) {
                 case HISTORY:
-                    Console.printHistory(memory.findAll());
+                    Console.printHistory(inMemory.findAll());
                     break;
 
                 case CALCULATE:
                     String expression = Console.inputExpression();
                     accumulator.calculate(expression)
                             .ifPresent((result) -> {
-                                memory.save(new CalcResult(expression, result));
+                                inMemory.save(new CalcResult(expression, result));
                                 Console.printResult(result);
                             });
                     break;
