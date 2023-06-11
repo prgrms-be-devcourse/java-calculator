@@ -16,9 +16,10 @@ public enum SelectTypeView {
         this.option = option;
     }
 
-    public static SelectTypeView findByNum(int num){
+    public static SelectTypeView findByNum(String num){
+        Integer workNum = Integer.valueOf(num);
         for(SelectTypeView stv : SelectTypeView.values()){
-            if(stv.num == num){
+            if(stv.num == workNum){
                 return stv;
             }
         }

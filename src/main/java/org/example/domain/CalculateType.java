@@ -1,7 +1,6 @@
-package org.example;
+package org.example.domain;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum CalculateType {

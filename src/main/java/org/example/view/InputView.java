@@ -2,18 +2,27 @@ package org.example.view;
 
 import java.util.Scanner;
 
-public class InputView {
-    //1과 2만 입력되도록 하는 정규식 필요
-    private Scanner sc = new Scanner(System.in);
+import static org.example.domain.Validation.REGEX_EXPRESSION;
+import static org.example.domain.Validation.REGEX_SELECT;
 
-    public int selectWorks() {
-        int workNum = sc.nextInt();
+public class InputView {
+
+    private final Scanner sc = new Scanner(System.in);
+
+    public String selectWorks() {
+        String workNum = sc.nextLine();
+        if(REGEX_SELECT.matcher(workNum).matches()){
+            return workNum;
+        }
         sc.nextLine();
-        return workNum;
+        return "넌틀렸어";
     }
 
     public String inputExpression() {
         String expression = sc.nextLine();
-        return expression;
+        if(REGEX_EXPRESSION.matcher(expression).matches()){
+            return expression;
+        }
+        return "수식이 잘못됐습니다.";
     }
 }

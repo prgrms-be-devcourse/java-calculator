@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.domain.Calculator;
+import org.example.domain.Console;
 import org.example.view.InputView;
 import org.example.view.OutputView;
 

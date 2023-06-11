@@ -1,11 +1,10 @@
-package org.example;
+package org.example.domain;
 
 import java.util.Stack;
-import java.util.regex.Pattern;
+
+import static org.example.domain.Validation.REGEX_NUM;
 
 public class Calculator {
-
-    private final Pattern RegexNum = Pattern.compile("[0-9]+");
 
     public double calculate(String infixExpression) {
         String postfixExpression = toPostfix(infixExpression.split(" "));
@@ -51,7 +50,7 @@ public class Calculator {
     }
 
     private boolean isNumber(String value) {
-        if (RegexNum.matcher(value).matches()) {
+        if (REGEX_NUM.matcher(value).matches()) {
             return true;
         }
         return false;

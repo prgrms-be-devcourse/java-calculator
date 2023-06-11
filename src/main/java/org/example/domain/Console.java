@@ -1,5 +1,6 @@
-package org.example;
+package org.example.domain;
 
+import org.example.domain.Calculator;
 import org.example.repository.Records;
 import org.example.view.InputView;
 import org.example.view.OutputView;
@@ -9,9 +10,9 @@ import static org.example.view.SelectTypeView.GET_LOG;
 
 public class Console {
 
-    private InputView inputView;
-    private OutputView outputView;
-    private Calculator calculator;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final Calculator calculator;
 
     public Console(InputView inputView, OutputView outputView, Calculator calculator) {
         this.inputView = inputView;
@@ -22,7 +23,7 @@ public class Console {
     public void run() {
         while (true) {
             outputView.start();
-            Integer option = inputView.selectWorks();
+            String option = inputView.selectWorks();
             if (option == null) {
                 break;
             }
