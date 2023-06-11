@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CalculatorTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2023-06-11T04:12:28" hostname="eun.local" time="0.109">
+<testsuite name="CalculatorTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2023-06-11T04:34:42" hostname="eun.local" time="0.098">
   <properties/>
-  <testcase name="더하기" classname="CalculatorTest" time="0.109">
+  <testcase name="더하기" classname="CalculatorTest" time="0.098">
     <failure message="org.opentest4j.AssertionFailedError: &#10;expected: 9.0&#10; but was: 8.0" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: 
 expected: 9.0
  but was: 8.0
@@ -9,7 +9,7 @@ expected: 9.0
 	at java.base@17.0.6/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
 	at java.base@17.0.6/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 	at java.base@17.0.6/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-	at app//CalculatorTest.plus(CalculatorTest.java:14)
+	at app//CalculatorTest.plus(CalculatorTest.java:13)
 	at java.base@17.0.6/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base@17.0.6/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base@17.0.6/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
