@@ -2,7 +2,7 @@ package org.example.engine;
 
 import org.example.Console;
 import org.example.engine.repository.CalculationRepository;
-import org.example.engine.repository.InmemoryCalculationRepository;
+import org.example.engine.repository.OrderedInmemoryCalculationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ class CalculatorTest {
 	@BeforeEach
 	void setUp() {
 		this.console = new Console();
-		this.calculationRepository = new InmemoryCalculationRepository();
+		this.calculationRepository = new OrderedInmemoryCalculationRepository();
 		this.calculator = new Calculator(this.console, this.calculationRepository);
 	}
 

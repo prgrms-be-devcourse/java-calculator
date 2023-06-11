@@ -4,11 +4,11 @@ import org.example.engine.model.CalculationResult;
 
 import java.util.*;
 
-public class InmemoryCalculationRepository implements CalculationRepository {
+public class OrderedInmemoryCalculationRepository implements CalculationRepository {
 	private static Long id;
 	private static Map<Long, CalculationResult> memoryDB;
 
-	public InmemoryCalculationRepository() {
+	public OrderedInmemoryCalculationRepository() {
 		id = 0L;
 		this.memoryDB = new LinkedHashMap<>();
 	}

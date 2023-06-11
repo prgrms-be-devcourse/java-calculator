@@ -4,17 +4,14 @@ import org.example.engine.model.CalculationResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.net.CacheRequest;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class InmemoryCalculationRepositoryTest {
+class OrderedInmemoryCalculationRepositoryTest {
 	CalculationRepository calculationRepository;
 
 	@BeforeEach
 	void setup() {
-		this.calculationRepository = new InmemoryCalculationRepository();
+		this.calculationRepository = new OrderedInmemoryCalculationRepository();
 	}
 
 	@Test
