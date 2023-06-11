@@ -2,8 +2,6 @@ package co.programmers.application;
 
 import co.programmers.domain.Operator;
 import co.programmers.domain.UserMenu;
-import co.programmers.view.CalculatorInputView;
-import co.programmers.view.CalculatorOutputView;
 import co.programmers.view.InputView;
 import co.programmers.view.OutputView;
 import java.util.Stack;
@@ -16,13 +14,6 @@ public class Calculator {
     public Calculator(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-    }
-
-    public static void main(String[] args) {
-        InputView inputView = new CalculatorInputView();
-        OutputView outputView = new CalculatorOutputView();
-        Calculator calculator = new Calculator(inputView, outputView);
-        calculator.run();
     }
 
     public void run() {
@@ -48,12 +39,12 @@ public class Calculator {
         Stack<Integer> Operands = new Stack<>();
         Stack<Character> Operators = new Stack<>();
         for (int i = 0; i < expression.length; i++) {
-            if (expression[i] == ' ') {
+            if (Character.isWhitespace(expression[i])) {
                 continue;
             }
-            if (isInteger(expression[i])) {
+            if (Character.isDigit(expression[i])) {
                 StringBuffer operand = new StringBuffer();
-                while (i < expression.length && isInteger(expression[i])) {
+                while (i < expression.length && Character.isDigit(expression[i])) {
                     operand.append(expression[i++]);
                 }
                 i--;
@@ -61,12 +52,7 @@ public class Calculator {
             } else if (expression[i] == '(') {
                 Operators.push(expression[i]);
             } else if (expression[i] == ')') {
-                while (Operators.peek() != '(') {
-                    Operands.push(Operator.calculate(
-                            String.valueOf(Operators.pop()), Operands.pop(), Operands.pop()
-                    ));
-                }
-                Operators.pop();
+                evaluateOperators(Operands, Operators);
             } else {
                 while (!Operators.empty() && comparePriority(expression[i], Operators.peek())) {
                     Operands.push(Operator.calculate(
@@ -76,20 +62,28 @@ public class Calculator {
                 Operators.push(expression[i]);
             }
         }
-        while (!Operators.empty()) {
-            Operands.push(Operator.calculate(
-                    String.valueOf(Operators.pop()), Operands.pop(), Operands.pop()
-            ));
-        }
+        evaluateOperators(Operands, Operators);
         return Operands.pop();
     }
 
-    private boolean comparePriority(char operator1, char operator2) {
-        return Operator.getSymbol(String.valueOf(operator1)).getPriority() >
-                Operator.getSymbol(String.valueOf(operator2)).getPriority();
+    private void evaluateOperators(Stack<Integer> operands, Stack<Character> operators) {
+        while (!operators.empty() && (operators.peek() != '(')) {
+            Character operator = operators.pop();
+            Integer operand1 = operands.pop();
+            Integer operand2 = operands.pop();
+            int result = Operator.calculate(
+                    String.valueOf(operator), operand1, operand2
+            );
+            operands.push(result);
+        }
+
+        if (!operators.empty()) {
+            operators.pop();
+        }
     }
 
-    private boolean isInteger(char c) {
-        return ('0' <= c && c <= '9');
+    private boolean comparePriority(char operator1, char operator2) {
+        return Operator.getSymbol(String.valueOf(operator1)).getPriority() >=
+                Operator.getSymbol(String.valueOf(operator2)).getPriority();
     }
 }
