@@ -9,9 +9,15 @@ public class IOConsole {
     private static final String HISTORY_OPTION_MESSAGE = "1. 조회";
     private static final String CALCULATE_OPTION_MESSAGE = "2. 계산";
     private static final String USER_CHOICE_MESSAGE = "선택 : ";
+
     // 오류 발생 메시지
+    private static final String WRONG_INPUT_MESSAGE = "계산기에서 지원하지 않는 입력입니다.";
     private static final String WRONG_OPTION_MESSAGE = "계산기에서 지원하지 않는 옵션입니다.";
     private static final String SHUTDOWN_MESSAGE = "계산기를 종료합니다.";
+
+    // 사용자의 입력을 검증하는 regex. 사칙연산자와 숫자, 공백 문자열을 허용한다.
+    private static final String INPUT_REGEX = "^[\\d\\+\\-\\*/\\(\\)\\s]+$";
+
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     /**
@@ -76,5 +82,20 @@ public class IOConsole {
      */
     public void print(String s) {
         System.out.println(s);
+    }
+
+    /**
+     * 사용자의 input을 검증하는 메소드.
+     *
+     * @param inputExpression 사용자가 입력한 중위 표현식
+     * @return true or false
+     */
+    public boolean validateInputExpression(String inputExpression) {
+        if (!inputExpression.matches(INPUT_REGEX)) {
+            System.out.println(WRONG_INPUT_MESSAGE + "\n");
+            return false;
+        }
+
+        return true;
     }
 }
