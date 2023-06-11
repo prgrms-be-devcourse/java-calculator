@@ -20,7 +20,7 @@ public class InputValidator {
     }
 
     private boolean isInteger(String input) {
-        return input.matches("^[-]?\\d*$");
+        return input.matches("^?\\d*$");
     }
 
     private boolean isInBoundary(String input) {
@@ -45,7 +45,7 @@ public class InputValidator {
             throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
 
-        if (!isInteger(tokens.get(0))) {
+        if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
             throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
 
@@ -62,7 +62,7 @@ public class InputValidator {
             }
         }
 
-        if (digit - operation > 1 || operation >= digit || digit + operation == 1) {
+        if (digit - operation > 1 || digit + operation == 1) {
             throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }
