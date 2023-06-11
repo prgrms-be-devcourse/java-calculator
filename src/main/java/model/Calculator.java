@@ -1,51 +1,37 @@
 package model;
 
-import util.Validator;
-
 public class Calculator {
     private final Operand operand;
-    private final Operator operator;
 
     public Calculator() {
         this.operand = new Operand();
-        this.operator = new Operator();
     }
 
-    public String calculate(String expression) {
-        for (char component : expression.toCharArray()) {
-            if (component == ' ') {
+    public String calculate(String expression) throws RuntimeException {
+        for (String expComponent : expression.split("")) {
+            if (Character.isDigit(expComponent.charAt(0))) {
+                operand.push(Integer.parseInt(expComponent));
                 continue;
             }
 
-//            if (Validator.checkIsDigit(String.valueOf(component))) {
-//                operand.push(Character.getNumericValue(component));
-//                continue;
-//            }
-
-            if (!operator.isEmpty()) {
-                OperatorType currentOperator = OperatorType.getOperator(String.valueOf(component));
-                OperatorType peekOperator = operator.peekOperator();
-
+            Operator currentOperator = Operator.getOperator(expComponent);
+            if (!Operator.isEmpty()) {
+                Operator peekOperator = Operator.peek();
                 if (peekOperator.getPrecedence() >= currentOperator.getPrecedence()) {
-                    int num2 = operand.pop();
-                    int num1 = operand.pop();
-                    int result = peekOperator.applyCalculate(num1, num2);
+                    int rightNumber = operand.pop();
+                    int leftNumber = operand.pop();
+                    int result = peekOperator.applyCalculate(leftNumber, rightNumber);
                     operand.push(result);
-                    operator.pop();
+                    Operator.pop();
                 }
             }
-            operator.push(component);
+            Operator.push(currentOperator);
         }
 
-        while (!operator.isEmpty()) {
-            OperatorType currentOperator = operator.pop();
-            int num2 = operand.pop();
-            int num1 = operand.pop();
-            int result = currentOperator.applyCalculate(num1, num2);
-            operand.push(result);
-        }
-
-        return String.valueOf(operand.pop());
+        Operator currentOperator = Operator.pop();
+        int rightNumber = operand.pop();
+        int leftNumber = operand.pop();
+        return String.valueOf(currentOperator.applyCalculate(leftNumber, rightNumber));
     }
 }
 
