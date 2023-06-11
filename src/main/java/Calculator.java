@@ -4,7 +4,6 @@ import model.Result;
 import utils.InputValidation;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Calculator implements Runnable {
 
@@ -33,17 +32,14 @@ public class Calculator implements Runnable {
                     go = false;
                     break;
                 case "1":
-                    List<Result> results = new ArrayList<>();
-                    output.results(results);
+                    output.results(new ArrayList<>());
                     break;
                 case "2":
                     String problem = input.read();
-                    if (!InputValidation.isValidatedMathProblem(problem)) {
+                    if (InputValidation.isValidatedMathProblem(problem))
+                        output.answer(calculate(problem));
+                    else
                         output.inputError("잘못된 형식입니다.");
-                        continue;
-                    }
-                    Result result = calculate(problem);
-                    output.answer(result);
             }
         }
     }
