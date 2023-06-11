@@ -21,12 +21,12 @@ public class Calculator {
         Stack<Integer> stack = new Stack<>();
 
         for (String token : tokens) {
-            postfixEvaluate(stack, token);
+            evaluatePostfixNotation(stack, token);
         }
         return stack.pop();
     }
 
-    private void postfixEvaluate(Stack<Integer> stack, String token) {
+    private void evaluatePostfixNotation(Stack<Integer> stack, String token) {
         if (isNumber(token)) {
             stack.push(convertStringToInt(token));
             return;

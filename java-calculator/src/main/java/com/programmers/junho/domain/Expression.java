@@ -9,6 +9,7 @@ import static com.programmers.junho.domain.ArithmeticOperators.isNumber;
 public class Expression {
     private static final String REGEX = "^\\d+\\s([-+*/]\\s\\d+\\s)+$";
     private static final String DELIMITER = " ";
+    public static final String BLANK = " ";
     private final String expression;
 
     public Expression(String expression) {
@@ -32,27 +33,27 @@ public class Expression {
 
         String[] tokens = this.expression.split(DELIMITER);
         for (String token : tokens) {
-            converseToPostfix(postfixExpression, stack, token);
+            convertToPostfix(postfixExpression, stack, token);
         }
         appendAllExistingElement(postfixExpression, stack);
         return postfixExpression.toString().trim();
     }
 
-    private void converseToPostfix(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack, String token) {
+    private void convertToPostfix(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack, String token) {
         if (isNumber(token)) {
-            postfixExpression.append(token).append(" ");
+            postfixExpression.append(token).append(BLANK);
             return;
         }
         var operator = convertTokenToOperator(token);
         while (isStackNotEmptyAndOperatorPriorityLower(stack, operator)) {
-            postfixExpression.append(stack.pop().getOperator()).append(" ");
+            postfixExpression.append(stack.pop().getOperator()).append(BLANK);
         }
         stack.push(operator);
     }
 
     private void appendAllExistingElement(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack) {
         while (!stack.isEmpty()) {
-            postfixExpression.append(stack.pop().getOperator()).append(" ");
+            postfixExpression.append(stack.pop().getOperator()).append(BLANK);
         }
     }
     private boolean isStackNotEmptyAndOperatorPriorityLower(Stack<ArithmeticOperators> stack, ArithmeticOperators operator) {
