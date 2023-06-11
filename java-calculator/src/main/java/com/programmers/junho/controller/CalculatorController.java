@@ -13,6 +13,7 @@ import static com.programmers.junho.controller.constant.Selection.findByCode;
 
 public class CalculatorController {
 
+    public static final String EQUAL = " = ";
     private final CalculatorRepository calculatorRepository;
     private final InputView inputView;
     private final OutputView outputView;
@@ -61,6 +62,6 @@ public class CalculatorController {
     }
 
     private String generateTotalResult(String expression, int result) {
-        return expression + " = " + result;
+        return expression + EQUAL + result;
     }
 }
