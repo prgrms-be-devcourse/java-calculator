@@ -10,6 +10,7 @@ import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ConsoleTest {
@@ -83,6 +84,54 @@ public class ConsoleTest {
         assertThat(outputStream.toString()).isEqualTo(expectedOutput);
 
         System.setOut(System.out);
+    }
+
+    @Test
+    @DisplayName("연산자 정규표현식 확인")
+    void isOperatorTest() {
+        //given
+        String test1 = "+";
+        String test2 = "++";
+        String test3 = "+*";
+
+        //when
+        boolean result1 = inputValidator.isOperator(test1);
+        boolean result2 = inputValidator.isOperator(test2);
+        boolean result3 = inputValidator.isOperator(test3);
+
+        //then
+        assertThat(result1).isEqualTo(true);
+        assertThat(result2).isEqualTo(false);
+        assertThat(result3).isEqualTo(false);
+
+    }
+
+    @Test
+    @DisplayName("올바르지 못한 식 입력에 대한 InputMismatchException 확인")
+    void getEquation_Invalid_Test() {
+        //given
+        String input = "3 + 4 *";
+        String input2 = "";
+
+        //when, then
+        assertThatThrownBy(() -> inputValidator.checkEquationInput(input))
+                .isInstanceOf(InputMismatchException.class)
+                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+
+        assertThatThrownBy(() -> inputValidator.checkEquationInput(input2))
+                .isInstanceOf(InputMismatchException.class)
+                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+    }
+
+    @Test
+    @DisplayName("식 입력에 대한 확인")
+    void getEquation_Valid_Test() {
+        //given
+        String input = "3 + 4 * 5";
+
+        //when, then
+        assertThatCode(() -> inputValidator.checkEquationInput(input))
+                .doesNotThrowAnyException();
     }
 
 }

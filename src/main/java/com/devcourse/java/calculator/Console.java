@@ -4,8 +4,6 @@ import com.devcourse.java.calculator.constant.MenuConstant;
 import com.devcourse.java.calculator.io.Input;
 import com.devcourse.java.calculator.io.Output;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
@@ -52,9 +50,7 @@ public class Console implements Input, Output {
     @Override
     public String getEquation() {
         String equation = scanner.nextLine();
-
-        ArrayList<String> token = new ArrayList<>(Arrays.asList(equation.split(" ")));
-        validator.checkEquationInput(token);
+        validator.checkEquationInput(equation);
 
         return equation;
     }
