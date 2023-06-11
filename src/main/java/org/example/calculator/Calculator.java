@@ -9,40 +9,40 @@ public class Calculator {
   public double calculate(String inputFormula) {
 
     String[] formula = inputFormula.split(" ");
-    List<String> list = seperate(formula);
-    Stack<Double> stack = new Stack<>();
+    List<String> separatedFormula = separate(formula);
+    Stack<Double> numbers = new Stack<>();
 
-    for (String letter : list) {
-      if (!stack.isEmpty() && OperatorPriority.isOperator(letter)) {
-        double number1 = stack.pop();
-        double number2 = stack.pop();
-        stack.push(calculation(number1, number2, letter));
+    for (String letter : separatedFormula) {
+      if (!numbers.isEmpty() && OperatorPriority.isOperator(letter)) {
+        double number1 = numbers.pop();
+        double number2 = numbers.pop();
+        numbers.push(calculation(number1, number2, letter));
         continue;
       }
-      stack.push(Double.parseDouble(letter));
+      numbers.push(Double.parseDouble(letter));
     }
-    return stack.pop();
+    return numbers.pop();
   }
 
-  public List<String> seperate(String[] formula) {
+  public List<String> separate(String[] formula) {
 
-    List<String> list = new ArrayList<>();
-    Stack<String> stack = new Stack<>();
+    List<String> parsedFormula = new ArrayList<>();
+    Stack<String> operators = new Stack<>();
 
-    for (String letter : formula) {
-      if (OperatorPriority.isOperator(letter)) {
-        while (!stack.isEmpty() && OperatorPriority.checkPriority(stack.peek()) >= OperatorPriority.checkPriority(letter)) {
-          list.add(stack.pop());
+    for (String value : formula) {
+      if (OperatorPriority.isOperator(value)) {
+        while (!operators.isEmpty() && OperatorPriority.checkPriority(operators.peek()) >= OperatorPriority.checkPriority(value)) {
+          parsedFormula.add(operators.pop());
         }
-        stack.push(letter);
+        operators.push(value);
       } else {
-        list.add(letter);
+        parsedFormula.add(value);
       }
     }
-    while (!stack.isEmpty()) {
-      list.add(stack.pop());
+    while (!operators.isEmpty()) {
+      parsedFormula.add(operators.pop());
     }
-    return list;
+    return parsedFormula;
   }
 
   public double calculation(double number1, double number2, String operator) {

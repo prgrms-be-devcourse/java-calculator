@@ -8,16 +8,16 @@ public enum Operator {
   MULTI("*", (num1, num2) -> num1 * num2),
   DIV("/", (num1, num2) -> num1 / num2);
 
-  private final String operator;
+  private final String type;
   private final BiFunction<Double, Double, Double> formula;
 
-  Operator(String operator, BiFunction<Double, Double, Double> formula) {
-    this.operator = operator;
+  Operator(String type, BiFunction<Double, Double, Double> formula) {
+    this.type = type;
     this.formula = formula;
   }
 
-  public String getOperator() {
-    return operator;
+  public String getType() {
+    return type;
   }
 
   public double calculate(double num1, double num2) {

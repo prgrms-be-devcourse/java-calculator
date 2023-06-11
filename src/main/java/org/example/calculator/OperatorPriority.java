@@ -20,9 +20,9 @@ public enum OperatorPriority {
     return operator;
   }
 
-  public static boolean isOperator(String letter) {
+  public static boolean isOperator(String value) {
     return Arrays.stream(Operator.values())
-            .anyMatch(o -> o.getOperator().equals(letter));
+            .anyMatch(o -> o.getType().equals(value));
   }
 
   public static int checkPriority(String operator) {
