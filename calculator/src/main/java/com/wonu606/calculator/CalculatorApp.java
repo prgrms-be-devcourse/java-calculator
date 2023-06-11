@@ -2,9 +2,11 @@ package com.wonu606.calculator;
 
 import com.wonu606.app.App;
 import com.wonu606.calculator.storage.Persistence;
+import com.wonu606.calculator.storage.ResultStore;
 import com.wonu606.calculator.strategy.Strategy;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
+import com.wonu606.calculator.util.CalculatorMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.Optional;
 public class CalculatorApp implements App {
 
     private final List<Strategy> strategies = new ArrayList<>();
-    private final Persistence store;
+    private final Persistence store = new ResultStore();
     Input input;
     Print printer;
 
@@ -37,7 +39,7 @@ public class CalculatorApp implements App {
             selectedStrategy.ifPresentOrElse(
                     strategy -> strategy.execute(input, printer, store),
                     () -> {
-                        throw new IllegalArgumentException("잘못된 입력입니다.");
+                        throw new IllegalArgumentException(CalculatorMessage.INVALID_INPUT.message);
                     });
         }
     }
