@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Optional;
 
 public class Input {
-    public String click() throws IOException {
+    public Button enterMenu() throws IOException {
 
         Button button = null;
 
@@ -27,6 +27,12 @@ public class Input {
         } catch (Exception e) {
             System.out.println("계산기를 종료합니다.");
         }
-        return button.getValue();
+        return button;
+    }
+
+    public String enterExpression() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String expression = br.readLine();
+        return expression;
     }
 }
