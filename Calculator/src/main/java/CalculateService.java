@@ -39,11 +39,11 @@ public class CalculateService implements CalculatorFunction {
 
     }
 
-    private static String calculate(LinkedList<String> expForCal) throws Exception {
+    public String calculate(LinkedList<String> expForCal) throws Exception {
         return plusOrMinus(divideOrMultiple(expForCal));
     }
 
-    private static String plusOrMinus(LinkedList<String> expression) {
+    public String plusOrMinus(LinkedList<String> expression) {
 
         Double sum = Double.valueOf(0);
 
@@ -70,7 +70,7 @@ public class CalculateService implements CalculatorFunction {
         return String.valueOf(sum);
     }
 
-    private static LinkedList<String> divideOrMultiple(LinkedList<String> expForCal) throws Exception {
+    public LinkedList<String> divideOrMultiple(LinkedList<String> expForCal) throws Exception {
 
         Double v;
 
@@ -104,7 +104,7 @@ public class CalculateService implements CalculatorFunction {
         return expForCal;
     }
 
-    private static String readExpression() {
+    public String readExpression() {
         Scanner scanner = new Scanner(System.in);
 
         String input = scanner.nextLine();
@@ -112,7 +112,7 @@ public class CalculateService implements CalculatorFunction {
         return inputRefined;
     }
 
-    public static LinkedList<String> fullTextParsing(String inputRefined) throws Exception {
+    public LinkedList<String> fullTextParsing(String inputRefined) throws Exception {
 
         LinkedList<String> equationElements = new LinkedList<>();
 
@@ -139,7 +139,7 @@ public class CalculateService implements CalculatorFunction {
         return equationElements;
     }
 
-    public static boolean isValidFormula(String inputRefined) {
+    public boolean isValidFormula(String inputRefined) {
 
         boolean startWithNum = true;
         boolean onlyAllowed = true;
