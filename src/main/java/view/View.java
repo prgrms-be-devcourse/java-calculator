@@ -3,7 +3,6 @@ package view;
 import exception.IllegalExpressionException;
 import exception.NoSuchCommandException;
 import model.Command;
-import util.Validator;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -38,7 +37,6 @@ public class View {
     public Command commandReader() {
         try {
             String input = scanner.nextLine();
-            Validator.checkIsDigit(input);
             return Command.getCommand(input);
         } catch (RuntimeException e) {
             throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
@@ -60,7 +58,7 @@ public class View {
     }
 
     private void checkIsValidExpression(String expression) {
-        if (!Pattern.matches("^\\d+([+\\-*/]\\d+)*$", expression)) {
+        if (expression.length() == 1 || !Pattern.matches("^\\d+([+\\-*/]\\d+)*$", expression)) {
             throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
         }
     }
