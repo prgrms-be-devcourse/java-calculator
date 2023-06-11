@@ -73,6 +73,76 @@ public class Calculator {
 
         return postfixExpression;
     }
+
+    /**
+     * 후위 표기식의 계산 결과를 반환하는 메소드
+     *
+     * @param postfixExpression
+     * @return 연산의 결과
+     * @throws ArithmeticException
+     */
+    public double calculate(String postfixExpression) throws ArithmeticException {
+        Deque<String> postfixStack = new ArrayDeque<>();
+
+        for (String postfixToken : postfixExpression.split(" ")) {
+            if (isOperator(postfixToken)) {
+                double y = Double.parseDouble(postfixStack.pop());
+                double x = Double.parseDouble(postfixStack.pop());
+
+                switch (postfixToken) {
+                    case ADD_OPERATOR: {
+                        postfixStack.push(String.format("%.2f", x + y));
+                        break;
+                    }
+                    case SUBTRACTION_OPERATOR: {
+                        postfixStack.push(String.format("%.2f", x - y));
+                        break;
+                    }
+                    case MULTIPLY_OPERATOR: {
+                        postfixStack.push(String.format("%.2f", x * y));
+                        break;
+                    }
+                    case DIVIDE_OPERATOR: {
+                        postfixStack.push(String.format("%.2f", x / y));
+                    }
+                }
+            } else {
+                postfixStack.push(postfixToken);
+            }
+        }
+
+        return Double.parseDouble(postfixStack.pop());
+    }
+
+    /**
+     * 사칙연산자인지 확인하는 메소드
+     *
+     * @param token
+     * @return true or false
+     */
+    private boolean isOperator(String token) {
+        return token.equals(ADD_OPERATOR) || token.equals(SUBTRACTION_OPERATOR) || token.equals(MULTIPLY_OPERATOR) || token.equals(DIVIDE_OPERATOR);
+    }
+
+    /**
+     * 연산자의 우선순위를 판별하는 메소드
+     *
+     * @param operator 연산자
+     * @return 우선순위
+     */
+    private int priority(String operator) {
+        if (operator.equals(OPEN_BRACKET) || operator.equals(CLOSE_BRACKET)) {
+            return 0;
+        }
+        if (operator.equals(ADD_OPERATOR) || operator.equals(SUBTRACTION_OPERATOR)) {
+            return 1;
+        }
+        if (operator.equals(MULTIPLY_OPERATOR) || operator.equals(DIVIDE_OPERATOR)) {
+            return 2;
+        }
+        return -1;
+    }
+
     /**
      * 중위 표현식이 유효한지 검증하는 메소드
      *
