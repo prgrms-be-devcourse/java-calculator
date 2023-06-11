@@ -34,7 +34,7 @@ public class View {
         System.out.print(infoMessage);
     }
 
-    public void printAnswer(int result) {
+    public void printAnswer(String result) {
         System.out.print(result + "\n\n");
     }
 
@@ -53,5 +53,9 @@ public class View {
 
     public void printNewLine() {
         System.out.println();
+    }
+
+    public void printHistory(String history) {
+        System.out.println(history);
     }
 }

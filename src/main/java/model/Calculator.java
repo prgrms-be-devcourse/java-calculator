@@ -11,7 +11,7 @@ public class Calculator {
         this.operator = new Operator();
     }
 
-    public int calculate(String expression) {
+    public String calculate(String expression) {
         for (char component : expression.toCharArray()) {
             if (component == ' ') {
                 continue;
@@ -45,7 +45,7 @@ public class Calculator {
             operand.push(result);
         }
 
-        return operand.pop();
+        return String.valueOf(operand.pop());
     }
 }
 
