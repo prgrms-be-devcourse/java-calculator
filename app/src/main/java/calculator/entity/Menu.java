@@ -1,6 +1,6 @@
 package calculator.entity;
 
-import static calculator.validation.MenuInputValidator.validateIsExistedMenu;
+import calculator.validation.exception.MenuInputException;
 
 public enum Menu {
 
@@ -8,6 +8,7 @@ public enum Menu {
     CALCULATE(2, "계산"),
     QUIT(3, "종료");
 
+    private static final String NOT_EXIST_MENU_MESSAGE = "존재하지 않는 메뉴입니다.";
     private final int number;
     private final String name;
 
@@ -27,7 +28,14 @@ public enum Menu {
         }
 
         validateIsExistedMenu(selectedMenu);
+
         return selectedMenu;
+    }
+
+    private static void validateIsExistedMenu(Menu selectedMenu) {
+        if (selectedMenu == null) {
+            throw new MenuInputException(NOT_EXIST_MENU_MESSAGE);
+        }
     }
 
     public int getNumber() {

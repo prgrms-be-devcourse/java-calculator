@@ -1,8 +1,23 @@
 package calculator.view;
 
-public class OutputView {
+import calculator.entity.Menu;
+
+public final class OutputView {
+
+    private static final String MENU_INPUT_MESSAGE = "메뉴를 입력해주세요(숫자만 입력) : ";
+    private static final String QUIT_MESSAGE = "프로그램을 종료합니다.";
 
     private OutputView() {
+    }
+
+    public static void showMenu() {
+        printMultiple(Menu.values());
+        printWithLineBreak();
+        printWithoutLineBreak(MENU_INPUT_MESSAGE);
+    }
+
+    public static void showQuitMessage() {
+        printWithLineBreak(QUIT_MESSAGE);
     }
 
     public static void printWithLineBreak() {
