@@ -57,4 +57,15 @@ public class IOConsole {
         System.out.println(SHUTDOWN_MESSAGE);
         br.close();
     }
+
+    /**
+     * 계산의 결과를 출력하는 함수
+     *
+     * @param answer 계산의 결과
+     */
+    public void printAnswer(double answer) {
+        System.out.printf("%.2f", answer);
+        System.out.println();
+        System.out.println();
+    }
 }
