@@ -38,7 +38,7 @@ public enum CalculateType {
     }
 
     public static CalculateType findBySymbol(String symbol) {
-        return Arrays.stream(CalculateType.values())
+        return Arrays.stream(values())
                 .filter(calculateType -> calculateType.getSymbol().equals(symbol))
                 .findFirst()
                 .orElseThrow(()-> new IllegalArgumentException("연산자를 잘못 입력하셨습니다."));

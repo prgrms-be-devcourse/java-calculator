@@ -1,10 +1,11 @@
 package org.example.domain;
 
 import java.util.Stack;
-
-import static org.example.domain.Validation.REGEX_NUM;
+import java.util.regex.Pattern;
 
 public class Calculator {
+
+    private final Pattern REGEX_NUM = Pattern.compile("[0-9]+");
 
     public double calculate(String infixExpression) {
         String postfixExpression = toPostfix(infixExpression.split(" "));

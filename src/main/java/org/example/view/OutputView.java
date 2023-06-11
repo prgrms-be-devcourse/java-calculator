@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OutputView {
 
-    public void start(){
+    public void printSelection(){
         System.out.println("1.조회");
         System.out.println("2.계산");
         System.out.println();
@@ -16,10 +16,7 @@ public class OutputView {
     }
 
     public void printRecords(List<String> arithmeticRecords) {
-        for (String record: arithmeticRecords) {
-            System.out.println(record);
-        }
+        arithmeticRecords.stream().forEach(System.out::println);
     }
-
 
 }
