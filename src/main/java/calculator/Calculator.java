@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.global.Menu;
 import calculator.io.ExpressionConverter;
 import calculator.io.Input;
 import calculator.io.Output;
@@ -30,7 +31,8 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        boolean isProgramRunnable = true;
+        while (isProgramRunnable) {
             output.putMenu();
             String inputString = input.getChoice(CHOICE_PROMPT);
             if (!validateChoiceInput(inputString)){
@@ -39,6 +41,7 @@ public class Calculator implements Runnable {
             }
 
             switch (inputString.charAt(FIRST_INDEX)) {
+                case REQUEST_EXIT -> isProgramRunnable = false;
                 case REQUEST_VIEW_CALCULATION_RESULT -> output.showCalculationResult(calculationRepository.findAll());
                 case REQUEST_CALCULATION -> {
                     String expression = input.getExpression();
@@ -49,8 +52,6 @@ public class Calculator implements Runnable {
                         output.showResult(result);
                         calculationRepository.save(expression + " = " + result);
                     }
-                }
-                default -> {
                 }
             }
         }
@@ -79,8 +80,9 @@ public class Calculator implements Runnable {
 
     public static boolean validateChoiceInput(String input){
         if (input.length() != MENU_INPUT_LENGTH) return false;
-        char firstChar = input.charAt(FIRST_INDEX);
-        return firstChar == REQUEST_VIEW_CALCULATION_RESULT || firstChar == REQUEST_CALCULATION;
+        Character firstChar = input.charAt(FIRST_INDEX);
+        return Arrays.stream(Menu.values()).filter(m -> m.getCommand()
+                .equals(firstChar)).count() == 1;
     }
     public static boolean validateExpression(String expression){
         AtomicInteger index = new AtomicInteger(0);

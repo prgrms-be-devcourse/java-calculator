@@ -1,16 +1,21 @@
 package calculator.global;
 
 public enum Menu {
-    GET(1, "조회"),
-    CALCULATE(2, "계산");
+    EXIT('0', "종료"),
+    CALCULATION_HISTORY('1', "조회"),
+    CALCULATE('2', "계산");
 
-    private final Integer command;
+    private final Character command;
     private final String explanation;
 
 
-    Menu(Integer command, String explanation) {
+    Menu(Character command, String explanation) {
         this.command = command;
         this.explanation = explanation;
+    }
+
+    public Character getCommand(){
+        return command;
     }
 
     @Override
