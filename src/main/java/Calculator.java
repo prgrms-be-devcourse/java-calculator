@@ -3,7 +3,10 @@ import io.Output;
 import model.Result;
 import utils.InputValidation;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 
 public class Calculator implements Runnable {
 
@@ -45,7 +48,27 @@ public class Calculator implements Runnable {
     }
 
     private Result calculate(String problem) {
-        int answer = 0;
+        int answer = basicCalculate(new ArrayDeque<>(List.of(problem.split(" "))));
         return new Result(problem, answer);
+    }
+
+    private int basicCalculate(Deque<String> deque) {
+        int result = Integer.parseInt(deque.removeFirst());
+        int n;
+        String operator;
+
+        while (!deque.isEmpty()) {
+            operator = deque.removeFirst();
+            n = Integer.parseInt(deque.removeFirst());
+            switch (operator) {
+                case "+":
+                    result += n;
+                    break;
+                case "-":
+                    result -= n;
+            }
+        }
+
+        return result;
     }
 }
