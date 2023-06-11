@@ -68,4 +68,13 @@ public class IOConsole {
         System.out.println();
         System.out.println();
     }
+
+    /**
+     * 문자열을 출력하는 함수
+     *
+     * @param s 문자열
+     */
+    public void print(String s) {
+        System.out.println(s);
+    }
 }
