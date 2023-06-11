@@ -4,6 +4,7 @@ import model.Result;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Console implements Input, Output {
 
@@ -27,10 +28,10 @@ public class Console implements Input, Output {
 
     @Override
     public void results(List<Result> results) {
-        System.out.println();
-        results.stream()
-                .forEach((result) -> System.out.println(result.getProblem() + " = " + result.getAnswer()));
-        System.out.println();
+        String output = results.stream()
+                .map(result -> result.getProblem() + " = " + result.getAnswer())
+                        .collect(Collectors.joining("\n"));
+        System.out.println("\n" + output + "\n");
     }
 
     @Override
