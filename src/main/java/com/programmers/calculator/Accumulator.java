@@ -2,11 +2,14 @@ package com.programmers.calculator;
 
 import com.programmers.converter.ExpressionConverter;
 import com.programmers.converter.Operator;
+import com.programmers.converter.ResultConverter;
+import com.programmers.io.Console;
 
 import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
+import java.util.Optional;
 
 public class Accumulator {
 
@@ -16,38 +19,34 @@ public class Accumulator {
         this.expressionConverter = expressionConverter;
     }
 
-    public String compute(String expression) {
-        List<String> convert = expressionConverter.convert(expression);
-        BigDecimal calc = calculate(convert).stripTrailingZeros();
-        return convertResultValue(calc.toString());
-
+    public Optional<String> calculate(String expression) {
+        Optional<String> result = Optional.empty();
+        try {
+            List<String> convert = expressionConverter.convert(expression);
+            BigDecimal calc = getComputationResult(convert).stripTrailingZeros();
+            result = Optional.of(ResultConverter.convertResult(calc.toString()));
+        } catch (IllegalArgumentException | ArithmeticException e) {
+            Console.printError(e.getMessage());
+        }
+        return result;
     }
 
-    private BigDecimal calculate(List<String> convert) {
+    private BigDecimal getComputationResult(List<String> convert) {
         Deque<BigDecimal> stack = new ArrayDeque<>();
-        for (String op : convert) {
+
+        convert.forEach(op -> {
             if (Operator.isOperator(op)) {
                 Operator operator = Operator.getOperation(op);
                 BigDecimal n2 = stack.pop();
                 BigDecimal n1 = stack.pop();
                 stack.push(operator.operation(n1, n2));
-                continue;
             }
-            stack.push(BigDecimal.valueOf(Double.parseDouble(op)));
-        }
+
+            if (!Operator.isOperator(op)) {
+                stack.push(BigDecimal.valueOf(Double.parseDouble(op)));
+            }
+        });
         return stack.pop();
     }
 
-    private String convertResultValue(String calc) {
-        int commaIndex = calc.indexOf('.');
-
-        if (isDecimalPlaceOverTen(calc, commaIndex))
-            return calc.substring(0, commaIndex + 11);
-        return calc;
-    }
-
-    private boolean isDecimalPlaceOverTen(String calc, int commaIndex) {
-        int decimalPlace = calc.substring(commaIndex + 1).length();
-        return decimalPlace >= 10;
-    }
 }

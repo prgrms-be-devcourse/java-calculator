@@ -30,12 +30,11 @@ public class Calculator {
 
                 case CALCULATE:
                     String expression = Console.inputExpression();
-                    String result = calculate(expression);
-                    if (result == null) {
-                        break;
-                    }
-                    memory.save(new CalcResult(expression, result));
-                    Console.printResult(result);
+                    accumulator.calculate(expression)
+                            .ifPresent((result) -> {
+                                memory.save(new CalcResult(expression, result));
+                                Console.printResult(result);
+                            });
                     break;
 
                 case EXIT:
@@ -44,7 +43,6 @@ public class Calculator {
                     break;
 
                 default:
-                    Console.printError("1, 2, 3 만 입력이 가능합니다.");
                     break;
             }
         }
@@ -53,20 +51,11 @@ public class Calculator {
     private Optional<MenuType> makeMenu(String expression) {
         Optional<MenuType> menu = Optional.empty();
         try {
-            menu = Optional.ofNullable(MenuType.findMenuType(expression));
+            menu = Optional
+                    .ofNullable(MenuType.findMenuType(expression));
         } catch (IllegalArgumentException e) {
             Console.printError(e.getMessage());
         }
         return menu;
-    }
-
-    private String calculate(String expression) {
-        String result = null;
-        try {
-            result = accumulator.compute(expression);
-        } catch (IllegalArgumentException | ArithmeticException e) {
-            Console.printError(e.getMessage());
-        }
-        return result;
     }
 }
