@@ -8,9 +8,25 @@ import java.util.Optional;
 public class Input {
     public String click() throws IOException {
 
-        // if 1,2가 아니면 예외 처리
+        Button button = null;
 
-        // Calculator
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String input = br.readLine();
+
+        try {
+            switch (input) {
+                case "1":
+                    button = Button.CALCULATE;
+                    break;
+                case "2":
+                    button = Button.SEARCH;
+                    break;
+                default:
+                    throw new IllegalArgumentException("올바른 입력이 아닙니다.");
+            }
+        } catch (Exception e) {
+            System.out.println("계산기를 종료합니다.");
+        }
+        return button.getValue();
     }
-
 }
