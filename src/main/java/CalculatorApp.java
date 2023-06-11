@@ -1,15 +1,19 @@
 import calculator.Calculator;
-import calculator.InfixToPostfixConverter;
+import calculator.CalculatorConsole;
+import calculator.model.PostfixCalculator;
+import calculator.util.converter.InfixToPostfixConverter;
 import calculator.repository.CalculationRepository;
 
 public class CalculatorApp {
     public static void main(String[] args) {
         CalculatorConsole console = new CalculatorConsole();
-        InfixToPostfixConverter infixToPostfixConvertor = new InfixToPostfixConverter();
-        CalculationRepository repository = new CalculationRepository();
 
-        new Calculator(infixToPostfixConvertor, console, console, repository).run();
-
-
+        new Calculator(
+                new PostfixCalculator(),
+                new InfixToPostfixConverter(),
+                console,
+                console,
+                new CalculationRepository()
+        ).run();
     }
 }

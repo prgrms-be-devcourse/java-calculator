@@ -1,6 +1,6 @@
 package calculator.infixtopostfix;
 
-import calculator.InfixToPostfixConverter;
+import calculator.util.converter.InfixToPostfixConverter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,12 @@
-package calculator;
+package calculator.util.converter;
 
-import calculator.io.ExpressionConverter;
 import calculator.model.Operation;
+import calculator.util.ExpressionConverter;
 import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 import static calculator.global.InputConstants.OPERAND_REGEX;
@@ -13,7 +14,7 @@ import static calculator.global.InputConstants.OPERATOR_REGEX;
 
 @ToString
 public class InfixToPostfixConverter implements ExpressionConverter {
-    private ArrayList<String> infix;
+    private List<String> infix;
     private static final ArrayList<String> postfix = new ArrayList<>();
     private static final Stack<String> opStack = new Stack<>();
 
