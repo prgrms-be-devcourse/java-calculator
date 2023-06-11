@@ -41,12 +41,11 @@ public class Calculator {
             System.out.print(menusBuilder);
 
             Scanner scanner = new Scanner(System.in);
-
             int optionNumber = scanner.nextInt();
 
             CalculatorFunction calculatorFunction = menus.get(optionNumber);
-
             calculatorFunction.doService();
+
         }
 
     }
