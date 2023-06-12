@@ -50,7 +50,7 @@ public class Operation {
     }
 
     private static Integer getPerformFourArithmeticOperations(String operator, Integer operand1, Integer operand2) {
-        return Operator.getOperator(operator).calculate(operand1, operand2);
+        return Operator.getOperator(operator).calculate(operand2, operand1);
     }
 
     private static boolean isComparePriorities(String operator, String element) {
