@@ -1,6 +1,6 @@
 package com.programmers.junho.domain;
 
 @FunctionalInterface
-public interface Operator {
+public interface Operable {
     int apply(int a, int b);
 }

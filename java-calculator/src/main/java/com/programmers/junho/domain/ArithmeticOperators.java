@@ -2,7 +2,7 @@ package com.programmers.junho.domain;
 
 import java.util.Arrays;
 
-public enum ArithmeticOperators implements Operator {
+public enum ArithmeticOperators implements Operable {
     ADDITION("+", 0) {
         @Override
         public int apply(int a, int b) {
