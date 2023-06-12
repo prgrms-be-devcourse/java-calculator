@@ -7,7 +7,7 @@ import java.util.Stack;
 public class CalService {
 
 
-    private static final char WHITE_SPACE = ' ';
+//    private static final char WHITE_SPACE = ' ';
 
     //숫자,연산자 구분
     public Double calculateStr(String input) {

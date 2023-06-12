@@ -2,6 +2,7 @@ package com.bona.javacalculator.repository;
 
 import com.bona.javacalculator.model.InputAndAnswer;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +16,7 @@ class CalMemoryRepositoryTest {
         memoryRepository.clearStore();
     }
 
-   // @DisplayName("저장을 테스트한다.")
+    @DisplayName("저장 테스트")
     @Test
     void save() {
         //given

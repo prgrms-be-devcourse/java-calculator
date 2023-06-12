@@ -5,7 +5,6 @@ import com.bona.javacalculator.io.Console;
 import com.bona.javacalculator.model.InputAndAnswer;
 import com.bona.javacalculator.repository.CalMemoryRepository;
 import com.bona.javacalculator.service.CalService;
-import com.bona.javacalculator.service.Check;
 import com.bona.javacalculator.service.ValidateService;
 
 import java.util.List;
@@ -36,9 +35,6 @@ public class Calculator implements Runnable{
                     break;
                 case CALCULATE:
                     calculate();
-                    break;
-                case EXIT:
-                    isRun = false;
                     break;
                 default:
                     break;

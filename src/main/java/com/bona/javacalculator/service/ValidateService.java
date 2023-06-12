@@ -12,11 +12,11 @@ public class ValidateService {
             return Optional.empty();
         }
 
-        boolean isDivision = false;
 
+        boolean isDivision = false;
         for (int i = 0; i < inputString.length; i++) {
             if (i % 2 == 1) { // 홀수 자리일 경우 연산자여야 함.
-                if(!Check.isOperator(inputString[i])){
+                if(!CheckService.isOperator(inputString[i])){
                     return Optional.empty();
                 }
                 // / 일 경우 0 나누는경울 처리
@@ -27,10 +27,9 @@ public class ValidateService {
             } else if (!isValidNumber(inputString[i], isDivision)) {
                 return Optional.empty();
             }
-            isDivision = false;
         }
         //마지막 자리가 숫자인지
-        if(!Check.isNumber((inputString[inputString.length-1]))){
+        if(!CheckService.isNumber(inputString[inputString.length-1])){
             return Optional.empty();
         }
         return Optional.of(input);
@@ -38,7 +37,7 @@ public class ValidateService {
 
     private boolean isValidNumber(String s, boolean isDivision) {
         //숫자 인지
-        if(!Check.isNumber(s)){
+        if(!CheckService.isNumber(s)){
             return false;
         }
         // 0이고 앞서 나온 연산자가 / 라면 false

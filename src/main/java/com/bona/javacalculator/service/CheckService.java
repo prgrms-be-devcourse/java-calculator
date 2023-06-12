@@ -1,6 +1,6 @@
 package com.bona.javacalculator.service;
 
-public class Check {
+public class CheckService {
     static boolean isOperator(String s) {
         if (s.length() > 1) {
             return false;
@@ -16,7 +16,7 @@ public class Check {
             if (s.length() == 1 && s.charAt(0) == '-') {
                 return false;
             }
-            if(i > 0 && !Character.isDigit(s.charAt(i))){
+            if(!Character.isDigit(s.charAt(i))){
                 return false;
             }
         }
