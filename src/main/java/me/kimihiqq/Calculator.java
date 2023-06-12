@@ -24,6 +24,7 @@ public class Calculator implements Runnable {
             switch (selectPage) {
                 case "1" -> list();
                 case "2" -> calculate();
+                default -> printer.println("Invalid page!");
             }
         }
     }
