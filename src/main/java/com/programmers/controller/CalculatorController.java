@@ -1,10 +1,17 @@
 package com.programmers.controller;
 
 import com.programmers.domain.Menu;
+import com.programmers.service.CalculatorService;
 import com.programmers.view.Input;
 import com.programmers.view.Output;
 
 public class CalculatorController {
+
+    private final CalculatorService calculatorService;
+
+    public CalculatorController(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
 
     public void run(){
         Menu menu;
@@ -19,7 +26,8 @@ public class CalculatorController {
                 //todo : map에서 출력
             }
             if(menu.isCalculate()){
-                System.out.println(Input.inputExpression());
+                String expression = Input.inputExpression();
+                calculatorService.calculate(expression);
             }
 
         }while(!menu.isFinish());

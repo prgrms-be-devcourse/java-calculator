@@ -36,4 +36,15 @@ public class Validator {
         return input.replaceAll("\\s+", "");
     }
 
+
+    //연산자(+,-,*,/)인지 확인하는 함수
+    public static boolean isOperator(char ch) {
+        return ch == '+' || ch == '-' || ch == '*' || ch == '/';
+    }
+
+    //연산자 우선순위를 비교하는 함수
+    public static boolean hasHigherPrecedence(char operator1, char operator2) {
+        return (operator1 == '*' || operator1 == '/') && (operator2 == '+' || operator2 == '-');
+    }
+
 }
