@@ -42,6 +42,7 @@ public class CalculatorController {
     }
 
     private Selection getCode() {
+        outputView.printChoiceMessage();
         return findByCode(inputView.getSelectedCode());
     }
 
