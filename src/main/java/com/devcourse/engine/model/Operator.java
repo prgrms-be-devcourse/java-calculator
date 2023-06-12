@@ -1,14 +1,10 @@
 package com.devcourse.engine.model;
 
 import com.devcourse.engine.exception.InvalidInputException;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
-@AllArgsConstructor
-@Getter
 public enum Operator {
     PLUS("+", 1, Double::sum),
     MINUS("-", 1, (b, a) -> a - b),
@@ -25,6 +21,12 @@ public enum Operator {
     private final int operatorPriority;
     private final BiFunction<Double, Double, Double> operatorFunction;
 
+    Operator(String str, int priority, BiFunction<Double, Double, Double> biFunction) {
+        this.operatorString = str;
+        this.operatorPriority = priority;
+        this.operatorFunction = biFunction;
+    }
+
     public static boolean isOperator(String token) {
         return Arrays.stream(Operator.values())
                 .anyMatch((o) -> o.getOperatorString().equals(token));
@@ -38,5 +40,13 @@ public enum Operator {
 
     public Double calculate(Double num1, Double num2) {
         return operatorFunction.apply(num1, num2);
+    }
+
+    public int getOperatorPriority() {
+        return operatorPriority;
+    }
+
+    public String getOperatorString() {
+        return operatorString;
     }
 }

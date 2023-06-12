@@ -6,18 +6,27 @@ import com.devcourse.engine.io.Output;
 import com.devcourse.engine.model.Menu;
 import com.devcourse.engine.exception.InvalidInputException;
 import com.devcourse.engine.historian.Historian;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-@AllArgsConstructor
 public class Calculator implements Runnable {
 
     private Computer computer;
     private Historian historian;
     private Input input;
     private Output output;
+
+    public Calculator(
+            Computer computer,
+            Historian historian,
+            Input input,
+            Output output) {
+        this.computer = computer;
+        this.historian = historian;
+        this.input = input;
+        this.output = output;
+    }
 
     @Override
     public void run() {
