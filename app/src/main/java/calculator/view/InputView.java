@@ -1,5 +1,8 @@
 package calculator.view;
 
+import static calculator.utils.StringUtils.isMatchingExpressionRegex;
+import static calculator.utils.StringUtils.isNumeric;
+
 import calculator.validation.exception.ExpressionInputException;
 import calculator.validation.exception.MenuInputException;
 import java.util.Scanner;
@@ -7,8 +10,6 @@ import java.util.Scanner;
 public final class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String NUMERIC_REGEX = "\\d+";
-    private static final String EXPRESSION_REGEX = "^\\d+(\\s[+\\-*/]\\s\\d+)*";
     private static final String NOT_NUMERIC_MENU_INPUT_MESSAGE = "메뉴는 숫자만 입력 가능합니다.";
     private static final String INVALID_EXPRESSION_MESSAGE = "올바르지 않은 계산식이 입력되었습니다.";
 
@@ -38,13 +39,13 @@ public final class InputView {
     }
 
     private static void validateMenuInput(String menu) {
-        if (!menu.matches(NUMERIC_REGEX)) {
+        if (!isNumeric(menu)) {
             throw new MenuInputException(NOT_NUMERIC_MENU_INPUT_MESSAGE);
         }
     }
 
-    private static void validateExpression(String infixExpression) {
-        if (!infixExpression.matches(EXPRESSION_REGEX)) {
+    private static void validateExpression(String expression) {
+        if (!isMatchingExpressionRegex(expression)) {
             throw new ExpressionInputException(INVALID_EXPRESSION_MESSAGE);
         }
     }

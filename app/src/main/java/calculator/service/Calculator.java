@@ -1,6 +1,8 @@
 package calculator.service;
 
 import static calculator.entity.Operator.getOperatorWithSameSymbol;
+import static calculator.utils.StringUtils.isNumeric;
+import static calculator.utils.StringUtils.splitToElements;
 import static calculator.view.InputView.inputExpression;
 import static calculator.view.OutputView.showCalculationResult;
 import static calculator.view.OutputView.showExpressionInputMessage;
@@ -12,10 +14,7 @@ public class Calculator {
 
     public void calculate() {
         showExpressionInputMessage();
-
-        String expression = inputExpression();
-        int calculationResult = solve(expression);
-
+        int calculationResult = solve(inputExpression());
         showCalculationResult(calculationResult);
     }
 
@@ -53,13 +52,5 @@ public class Calculator {
 
         int evaluationResult = operator.evaluate(operand1, operand2);
         operands.push(evaluationResult);
-    }
-
-    private String[] splitToElements(String expression) {
-        return expression.split(" ");
-    }
-
-    private boolean isNumeric(String element) {
-        return element.matches("\\d+");
     }
 }
