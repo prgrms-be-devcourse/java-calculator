@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import org.calculator.engine.CalculateEngine;
 import org.calculator.engine.domain.Condition;
 import org.calculator.engine.error.ErrorCode;
-import org.calculator.engine.io.Console;
+import org.calculator.engine.io.Printer;
 import org.calculator.repository.CalculateRepository;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
     private static boolean STOPPER = true;
     private CalculateEngine calculateEngine;
-    private Console console;
+    private Printer printer;
     private CalculateRepository calculateRepository;
 
     @Override
@@ -30,9 +30,9 @@ public class Calculator implements Runnable {
     }
 
     private String validateInput() {
-        String stringCondition = console.printCondition().orElse("wrong");
+        String stringCondition = printer.printCondition().orElse("wrong");
         if (stringCondition == "wrong") {
-            console.printError(ErrorCode.BAD_CONDITION);
+            printer.printError(ErrorCode.BAD_CONDITION);
         }
         return stringCondition;
     }
@@ -40,7 +40,7 @@ public class Calculator implements Runnable {
     private Condition validateCondition(String stringCondition) {
         Condition condition = Condition.decideCondition(stringCondition).orElse(null);
         if (condition == null) {
-            console.printError(ErrorCode.BAD_CONDITION);
+            printer.printError(ErrorCode.BAD_CONDITION);
         }
         return condition;
     }
@@ -59,7 +59,7 @@ public class Calculator implements Runnable {
 
     private void calculate(Condition condition) {
         if (condition == Condition.CALCULATE) {
-            String equation = console.insertEquation();
+            String equation = printer.insertEquation();
             double result = calculateEngine.calculate(equation);
             System.out.println();
             System.out.println("result = " + result);

@@ -5,7 +5,7 @@ import org.calculator.engine.error.ErrorCode;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class Console implements Input, Output {
+public class Console implements Printer {
     Scanner scanner = new Scanner(System.in);
 
     @Override
