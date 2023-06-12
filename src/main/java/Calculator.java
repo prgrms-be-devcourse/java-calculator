@@ -1,36 +1,36 @@
 import io.Input;
 import io.Output;
-import model.Result;
 import utils.InputValidation;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 
-public class Calculator implements Runnable {
+public class Calculator {
 
     private Input input;
     private Output output;
     private boolean go = true;
+    private List<Integer> operands = new ArrayList<>();
+    private List<String> operators = new ArrayList<>();
 
     public Calculator(Input input, Output output) {
         this.input = input;
         this.output = output;
     }
 
-    @Override
     public void run() {
 
-        while (go) {
-            String option = input.readWithPrompt("0. 종료\n1. 조회\n2. 계산\n\n선택 : ");
+        String userInput;
 
-            if (!InputValidation.isValidatedOption(option)) {
+        while (go) {
+            userInput = input.readWithPrompt("0. 종료\n1. 조회\n2. 계산\n\n선택 : ");
+
+            if (!InputValidation.isValidatedOption(userInput)) {
                 output.inputError("0, 1, 2 중에 하나를 선택하세요.");
                 continue;
             }
 
-            switch (option) {
+            switch (userInput) {
                 case "0":
                     go = false;
                     break;
@@ -38,37 +38,63 @@ public class Calculator implements Runnable {
                     output.results(new ArrayList<>());
                     break;
                 case "2":
-                    String problem = input.read();
-                    if (InputValidation.isValidatedMathProblem(problem))
-                        output.answer(calculate(problem));
-                    else
+                    operands.clear();
+                    operators.clear();
+                    userInput = input.read();
+
+                    if (InputValidation.isValidatedMathProblem(userInput)) {
+                        try {
+                            parseRawProblem(userInput);
+                            output.answer(calculate());
+                        } catch (Exception e) {
+                            output.inputError(e.getMessage());
+                        }
+                    } else {
                         output.inputError("잘못된 형식입니다.");
+                    }
             }
         }
     }
 
-    private Result calculate(String problem) {
-        int answer = basicCalculate(new ArrayDeque<>(List.of(problem.split(" "))));
-        return new Result(problem, answer);
+    private void parseRawProblem(String problem) {
+        String[] tokens = problem.split(" ");
+        for (int i = 0; i < tokens.length; i++) {
+            if (isNumeric(tokens[i])) {
+                operands.add(Integer.parseInt(tokens[i]));
+            } else {
+                operators.add(tokens[i]);
+            }
+        }
     }
 
-    private int basicCalculate(Deque<String> deque) {
-        int result = Integer.parseInt(deque.removeFirst());
-        int n;
-        String operator;
+    private int calculate() {
+        int answer = operands.get(0);
 
-        while (!deque.isEmpty()) {
-            operator = deque.removeFirst();
-            n = Integer.parseInt(deque.removeFirst());
+        for (int i = 1; i < operands.size(); i++) {
+            answer = basicCalculate(answer, operands.get(i), operators.get(i - 1));
+        }
+
+        return answer;
+    }
+
+    private int basicCalculate(int operand1, int operand2, String operator) {
             switch (operator) {
                 case "+":
-                    result += n;
-                    break;
+                    return operand1 + operand2;
                 case "-":
-                    result -= n;
-            }
+                    return operand1 - operand2;
+                case "*":
+                    return operand1 * operand2;
+                case "/":
+                    if (operand2 != 0) {
+                        return operand1 / operand2;
+                    }
+                default:
+                    throw new ArithmeticException("올바르지 않은 수식입니다.");
         }
+    }
 
-        return result;
+    private boolean isNumeric(String s) {
+        return s.chars().allMatch(Character::isDigit);
     }
 }

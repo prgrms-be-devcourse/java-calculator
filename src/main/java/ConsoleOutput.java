@@ -19,7 +19,7 @@ public class ConsoleOutput implements Output {
     }
 
     @Override
-    public void answer(Result result) {
-        System.out.println("\n" + result.getAnswer() + "\n");
+    public void answer(int answer) {
+        System.out.println("\n" + answer + "\n");
     }
 }
