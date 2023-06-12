@@ -1,7 +1,7 @@
 package io;
 
 public interface CalculatorOutput {
-    void printButtonMessage();
+    void printMenuMessage();
 
     void printExpression(int expression);
 
