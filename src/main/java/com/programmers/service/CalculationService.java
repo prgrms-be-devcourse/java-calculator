@@ -33,8 +33,8 @@ public class CalculationService implements Runnable {
 
     private void saveCalculation(List<String> tokenized, int result) {
         StringBuilder calculationBuilder = new StringBuilder();
-        for (String str : tokenized) {
-            calculationBuilder.append(str);
+        for (String token : tokenized) {
+            calculationBuilder.append(token);
             calculationBuilder.append(" ");
         }
         calculationBuilder.append("= ");
