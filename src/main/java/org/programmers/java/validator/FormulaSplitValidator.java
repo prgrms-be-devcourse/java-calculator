@@ -18,27 +18,36 @@ public class FormulaSplitValidator {
 
     // 연산식 검증: 연산식 분해 후 하나씩 검증
     public List<String> validate(String formulaInput){
+        formularAfterSplitValidate.clear();
         String[] splitFormula = formulaInput.split(" ");
 
         for(String operatorOrOperand : splitFormula){
-            splitValidateAddInList(operatorOrOperand);
+            if(!splitValidateAddInList(operatorOrOperand)){
+                break;
+            }
         }
 
         return formularAfterSplitValidate;
     }
 
-    private void splitValidateAddInList(String operatorOrOperand){
+    private boolean splitValidateAddInList(String operatorOrOperand){
         if(Operator.isNumber(operatorOrOperand)) {
             formularAfterSplitValidate.add(operatorOrOperand);
+            return true;
         }
 
         if(Operator.isSymbol(operatorOrOperand).isPresent()) {
             formularAfterSplitValidate.add(operatorOrOperand);
+            return true;
         }
 
         if(!Operator.isNumber(operatorOrOperand) && !Operator.isSymbol(operatorOrOperand).isPresent()){
+            System.out.println(operatorOrOperand);
             output.errorMsg(Error.CALCULATE_VALIDATION.getMsg());
             formularAfterSplitValidate.clear();
+            return false;
         }
+
+        return true;
     }
 }
