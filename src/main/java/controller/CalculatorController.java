@@ -3,7 +3,7 @@ package controller;
 import io.CalculatorInput;
 import io.CalculatorOutput;
 
-public class CalculatorController implements Runnable{
+public class CalculatorController implements Runnable {
     private final CalculatorInput input;
     private final CalculatorOutput output;
 
