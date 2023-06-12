@@ -38,17 +38,12 @@ public class Calculator {
     }
 
     private int binaryOperation(int a, int b, String operation) {
-        switch (operation) {
-            case "+":
-                return b + a;
-            case "-":
-                return b - a;
-            case "*":
-                return b * a;
-            case "/":
-                return b / a;
-            default:
-                throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
-        }
+        return switch (operation) {
+            case "+" -> b + a;
+            case "-" -> b - a;
+            case "*" -> b * a;
+            case "/" -> b / a;
+            default -> throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
+        };
     }
 }

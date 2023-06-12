@@ -63,12 +63,11 @@ public class CalculationService implements Runnable {
     private boolean selectService(String selected) {
         boolean exitService = false;
         switch (selected) {
-            case "1":
+            case "1" -> {
                 List<String> findCalculations = findCalculations();
                 output.printResult(findCalculations);
-
-                break;
-            case "2":
+            }
+            case "2" -> {
                 String calculation = input.inputCalculation();
                 try {
                     int result = calculate(calculation);
@@ -76,15 +75,12 @@ public class CalculationService implements Runnable {
                 } catch (RuntimeException ex) {
                     output.printError(ex);
                 }
-
-                break;
-            case "3":
+            }
+            case "3" -> {
                 output.exit();
                 exitService = true;
-
-                break;
-            default:
-                output.inputError();
+            }
+            default -> output.inputError();
         }
         return exitService;
     }
