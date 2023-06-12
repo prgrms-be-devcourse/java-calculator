@@ -40,7 +40,7 @@ public class ConsoleTest {
     void getCommand_Input_Not_In_Boundary() {
         //given
         String command1 = "99";
-        String command2 = "-30";
+        String command2 = "30";
 
         //when, then
         assertThatThrownBy(() -> inputValidator.checkCommandInput(command1))

@@ -1,5 +1,7 @@
 package com.devcourse.java.calculator.util;
 
+import com.devcourse.java.calculator.constant.ExceptionConstant;
+
 import java.util.Stack;
 
 public class CalculateUtil {
@@ -83,6 +85,9 @@ public class CalculateUtil {
                         result = operand1 * operand2;
                         break;
                     case '/':
+                        if (operand2 == 0) {
+                            throw new ArithmeticException(ExceptionConstant.DIVIDE_BY_ZERO_EXCEPTION);
+                        }
                         result = operand1 / operand2;
                         break;
                 }
