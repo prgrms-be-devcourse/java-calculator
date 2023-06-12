@@ -45,26 +45,10 @@ public class PostfixConverter {
     }
 
     private static void putOperand(String operand, List<String> postfix) throws IllegalArgumentException {
-        if (!isNumber(operand)) {
-            throw new IllegalArgumentException("number는 숫자가 아닙니다.");
+        if (!StringUtil.isNumber(operand)) {
+            throw new IllegalArgumentException("피연산자가 숫자가 아닙니다.");
         }
-
         postfix.add(operand);
-    }
-
-    private static boolean isNumber(String operand) {
-        boolean isNumber;
-        try {
-            convertStringToLong(operand);
-            isNumber = true;
-        } catch (NumberFormatException e) {
-            isNumber = false;
-        }
-        return isNumber;
-    }
-
-    private static void convertStringToLong(String operand) {
-        Long.parseLong(operand);
     }
 
 
