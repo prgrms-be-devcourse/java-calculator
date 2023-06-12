@@ -33,15 +33,6 @@ public class OutputView {
         println(errorMsg);
     }
 
-    public void printLimitMsg(int limit) {
-        if (limit == 0) {
-            println(END_MSG);
-            return;
-        }
-        println(limit + LIMIT_MSG);
-        printEmptyMsg();
-    }
-
     public void printEmptyMsg() {
         println("");
     }

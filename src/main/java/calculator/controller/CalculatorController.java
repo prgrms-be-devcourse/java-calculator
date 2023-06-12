@@ -1,17 +1,13 @@
 package calculator.controller;
 
 import calculator.service.CalculatorService;
-import exception.LimitErrorException;
 import ui.InputView;
 import ui.OutputView;
 import util.Menu;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class CalculatorController {
-    private static final int ERROR_LIMIT = 5;
-
     private InputView inputView;
     private OutputView outputView;
     private CalculatorService calculatorService;
@@ -25,11 +21,7 @@ public class CalculatorController {
     public void start() {
         boolean continueCalculator = true;
         while(continueCalculator) {
-            try {
-                continueCalculator = eachExecute();
-            } catch (LimitErrorException exception) {
-                return;
-            }
+            continueCalculator = eachExecute();
         }
     }
 
@@ -65,15 +57,13 @@ public class CalculatorController {
     }
 
     private <T> T userInput(Supplier<T> input) {
-        for (int tryIndex = 0; tryIndex < ERROR_LIMIT; tryIndex++) {
+        while (true) {
             try {
                 return input.get();
             } catch (RuntimeException exception) {
                 outputView.printErrorMsg(exception.getMessage());
-                outputView.printLimitMsg(ERROR_LIMIT - tryIndex - 1);
             }
         }
-        throw new LimitErrorException();
     }
 
     private void executeSearch() {
