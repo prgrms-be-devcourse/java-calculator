@@ -10,7 +10,7 @@ public enum Operator {
     ADD("+", 1, (a, b) -> a + b),
     SUBTRACTION("-", 1, (a, b) -> a - b),
     MULTIPLY("*", 2, (a, b) -> a * b),
-    DIVIDE("/", 2, (a, b) -> a/ b);
+    DIVIDE("/", 2, (a, b) -> b / a);
 
     private final String symbol;
     private final int priority;
