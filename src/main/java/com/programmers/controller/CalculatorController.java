@@ -1,30 +1,27 @@
 package com.programmers.controller;
 
-import com.programmers.engine.PostfixCalculator;
+import com.programmers.exception.MenuFormatException;
 import com.programmers.io.Console;
-import com.programmers.repository.CalculatorHistory;
+import com.programmers.service.CalculatorService;
+import com.programmers.util.Menu;
 
 public class CalculatorController {
 
     private Console console;
-    private PostfixCalculator postfixCalculator;
-    private CalculatorHistory calculatorHistory;
+    private CalculatorService calculatorService;
 
-    public CalculatorController(Console console, PostfixCalculator postfixCalculator, CalculatorHistory calculatorHistory) {
+    public CalculatorController(Console console, CalculatorService calculatorService) {
         this.console = console;
-        this.postfixCalculator = postfixCalculator;
-        this.calculatorHistory = calculatorHistory;
+        this.calculatorService = calculatorService;
     }
 
     private boolean isRunning = true;
-    private static String HISTORY = "1";
-    private static String CALC = "2";
-    private static String END = "3";
 
     public void run() {
         while (isRunning) {
             try {
-                String request = console.getMenu();
+                console.getMenu();
+                String request = console.getRequest();
                 response(request);
             } catch (RuntimeException e) {
                 console.printErrorMsg(e.getMessage());
@@ -36,32 +33,32 @@ public class CalculatorController {
     private void response(String request) throws RuntimeException {
 
         //저장된 값 조회
-        if (HISTORY.equals(request)) {
+        if (Menu.HISTORY.getNumber().equals(request)) {
             showHistory();
 
             // 연산
-        } else if (CALC.equals(request)) {
-            calculate();
+        } else if (Menu.CALCULATE.getNumber().equals(request)) {
+            doCalculate();
 
-        } else if (END.equals(request)) {
+        } else if (Menu.END.getNumber().equals(request)) {
             // 종료
             stop();
 
         } else {
-            throw new RuntimeException();
+            throw new MenuFormatException();
         }
 
     }
 
     private void showHistory() {
-        console.println(calculatorHistory.findAll());
+        console.println(calculatorService.showHistory());
     }
 
-    private void calculate() {
+    private void doCalculate() {
         String equation = console.getEquation();
-        double answer = postfixCalculator.infixToPostfix(equation);
+        double answer = calculatorService.calculate(equation);
         console.println(answer);
-        calculatorHistory.save(equation, answer);
+        calculatorService.save(equation, answer);
     }
 
     private void stop() {
