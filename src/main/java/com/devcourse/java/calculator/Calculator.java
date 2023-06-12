@@ -39,23 +39,33 @@ public class Calculator implements Runnable{
 
     public void runCommand(int command) {
         if (command == MenuConstant.SELECTED_PRINT_HISTORY_COMMAND) {
-            try {
-                output.printCalculateHistory(calculatorRepository.getHistory());
-
-            } catch (RuntimeException e) {
-                output.printExceptionMessage(e.getMessage());
-            }
+            printHistoryCommand();
         }
 
         else if (command == MenuConstant.SELECTED_CALCULATE_COMMAND) {
-            try {
-                output.printRequestEquationInput();
-                String equation = input.getEquation();
-                calculatorRepository.storeHistory(calculateUtil.calculateAndReturnEquationWithAnswer(equation));
+            calculateCommand();
+        }
+    }
 
-            } catch (RuntimeException e) {
-                output.printExceptionMessage(e.getMessage());
-            }
+    void printHistoryCommand() {
+        try {
+            output.printCalculateHistory(calculatorRepository.getHistory());
+
+        } catch (RuntimeException e) {
+            output.printExceptionMessage(e.getMessage());
+        }
+    }
+
+    void calculateCommand() {
+        try {
+            output.printRequestEquationInput();
+            String equation = input.getEquation();
+            String equationWithAnswer = calculateUtil.calculateAndReturnEquationWithAnswer(equation);
+            output.printAnswerFromEquation(equationWithAnswer);
+            calculatorRepository.storeHistory(equationWithAnswer);
+
+        } catch (RuntimeException e) {
+            output.printExceptionMessage(e.getMessage());
         }
     }
 }

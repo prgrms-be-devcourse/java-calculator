@@ -39,6 +39,12 @@ public class Console implements Input, Output {
     }
 
     @Override
+    public void printAnswerFromEquation(String answer) {
+        String[] splitAnswer = answer.split(" ");
+        System.out.println(splitAnswer[splitAnswer.length - 1]);
+    }
+
+    @Override
     public int getCommand() {
         String command = scanner.nextLine();
         validator.checkCommandInput(command);

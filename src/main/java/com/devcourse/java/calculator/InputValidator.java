@@ -43,7 +43,22 @@ public class InputValidator {
 
         throwIfEquationIsEmpty(equation);
         throwIfEquationStartOrEndWithNoInteger(tokens);
+        throwIfEquationIsWrong(tokens);
+    }
 
+    public void throwIfEquationIsEmpty(String equation) {
+        if (equation.length() == 0) {
+            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+        }
+    }
+
+    public void throwIfEquationStartOrEndWithNoInteger(ArrayList<String> tokens) {
+        if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
+            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+        }
+    }
+
+    public void throwIfEquationIsWrong(ArrayList<String> tokens) {
         int digit = 0;
         int operation = 0;
         boolean continuedOperation = true;
@@ -67,21 +82,7 @@ public class InputValidator {
             }
 
         }
-
-        if (digit + operation == 1) {
-            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
-        }
+        
     }
 
-    public void throwIfEquationIsEmpty(String equation) {
-        if (equation.length() == 0) {
-            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
-        }
-    }
-
-    public void throwIfEquationStartOrEndWithNoInteger(ArrayList<String> tokens) {
-        if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
-            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
-        }
-    }
 }

@@ -9,7 +9,6 @@ public class CalculateUtil {
     public String calculateAndReturnEquationWithAnswer(String equation) {
         String postfix = changeToPostfix(equation);
         String calculateAnswer = calculatePostfix(postfix);
-        System.out.println(calculateAnswer);
         return equation + " = " + calculateAnswer;
     }
 
