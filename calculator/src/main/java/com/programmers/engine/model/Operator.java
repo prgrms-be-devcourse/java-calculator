@@ -18,6 +18,10 @@ public enum Operator {
         this.biFunction = biFunction;
     }
 
+    public String getOperator() {
+        return operator;
+    }
+
     public static Operator getOperator(String input) {
         return Arrays.stream(Operator.values())
                 .filter(o -> Objects.equals(o.operator, input))

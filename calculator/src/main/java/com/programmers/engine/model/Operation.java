@@ -53,9 +53,12 @@ public class Operation {
         return Operator.getOperator(operator).calculate(operand1, operand2);
     }
 
-    //나중에 구현
     private static boolean isComparePriorities(String operator, String element) {
-        return true;
+        if ((operator.equals(Operator.MULTIPLY.getOperator())) || operator.equals(Operator.DIVIDE.getOperator())
+                && (element.equals(Operator.PLUS.getOperator()) || element.equals(Operator.MINUS.getOperator()))) {
+            return true;
+        }
+        return false;
     }
 
     //나중에 구현
