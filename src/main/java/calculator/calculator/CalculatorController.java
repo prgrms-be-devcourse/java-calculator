@@ -1,16 +1,22 @@
-package calculator.calculator;
+package calculator.controller;
 
+import calculator.domain.Expression;
 import calculator.domain.enums.Command;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
+
+import java.util.Map;
 
 public class CalculatorController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final CalculatorService calculatorService;
 
-    public CalculatorController(InputView inputView, OutputView outputView) {
+    public CalculatorController(InputView inputView, OutputView outputView, CalculatorService calculatorService) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.calculatorService = calculatorService;
     }
 
     public void run() {
@@ -27,10 +33,13 @@ public class CalculatorController {
 
     private void processCommand(Command command) {
         if (command.isHistory()) {
-
+            Map<Expression, Integer> history = calculatorService.getHistory();
+            outputView.printHistory(history);
         }
         else if (command.isCalculation()) {
             String input = inputView.input();
+            int result = calculatorService.process(new Expression(input));
+            outputView.printResult(result);
         }
     }
 
