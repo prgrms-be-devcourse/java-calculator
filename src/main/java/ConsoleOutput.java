@@ -13,13 +13,13 @@ public class ConsoleOutput implements Output {
     @Override
     public void results(List<Result> results) {
         String output = results.stream()
-                .map(result -> result.getProblem() + " = " + result.getAnswer())
+                .map(Result::toString)
                 .collect(Collectors.joining("\n"));
         System.out.println("\n" + output + "\n");
     }
 
     @Override
-    public void answer(Result result) {
-        System.out.println("\n" + result.getAnswer() + "\n");
+    public void answer(int answer) {
+        System.out.println("\n" + answer + "\n");
     }
 }

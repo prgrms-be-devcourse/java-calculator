@@ -4,8 +4,6 @@ import model.Result;
 import repository.Repository;
 import utils.InputValidation;
 
-import java.util.ArrayList;
-
 public class Calculator implements Runnable {
 
     private Input input;
@@ -40,9 +38,9 @@ public class Calculator implements Runnable {
                 case "2":
                     String problem = input.read();
                     if (InputValidation.isValidatedMathProblem(problem)) {
-                        Result result = calculate(problem);
-                        repository.save(result);
-                        output.answer(result);
+                        int answer = calculate(problem);
+                        repository.save(new Result(problem, answer));
+                        output.answer(answer);
                     }
                     else {
                         output.inputError("잘못된 형식입니다.");
@@ -51,8 +49,8 @@ public class Calculator implements Runnable {
         }
     }
 
-    private Result calculate(String problem) {
+    private int calculate(String problem) {
         int answer = 0;
-        return new Result(problem, answer);
+        return answer;
     }
 }

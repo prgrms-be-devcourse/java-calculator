@@ -9,11 +9,8 @@ public class Result {
         this.answer = answer;
     }
 
-    public String getProblem() {
-        return problem;
+    public String toString() {
+        return problem + " = " + answer;
     }
 
-    public int getAnswer() {
-        return answer;
-    }
 }
