@@ -11,7 +11,7 @@ public class Calculator {
     private static ResultRepository resultRepository = new ResultRepository();
     private static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
 
-    public double getResult(String expression) {
+    public double calculate(String expression) {
         List<String> tokenList = expressionTokenizer.expressionSplit(expression);
 
         Stack<Double> tempStack = new Stack<>();
