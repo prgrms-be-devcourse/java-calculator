@@ -14,39 +14,50 @@ public class PostfixConverter implements Converter {
         Stack<Operator> temp = new Stack<>();
 
         for (String exp: expression) {
-            if (Operator.isOperator(exp)) {
-
-                Operator operator = Operator.getOperator(exp);
-
-                if (operator.getOperatorString().equals("(")) {
-
-                    temp.push(operator);
-                    continue;
-
-                } else if (operator.getOperatorString().equals(")")) {
-
-                    while (!temp.isEmpty() && !temp.peek().getOperatorString().equals("(")) {
-                        postfixExpression.add(temp.pop().getOperatorString());
-                    }
-
-                    if (!temp.isEmpty()) temp.pop();
-                    continue;
-                }
-
-                while (!temp.isEmpty() && temp.peek().getOperatorPriority() >= operator.getOperatorPriority()) {
-                    postfixExpression.add(temp.pop().getOperatorString());
-                }
-
-                temp.add(operator);
-
-            } else {
-                postfixExpression.add(exp);
-            }
+            convertByOperator(exp, postfixExpression, temp)
         }
-
         takeRemainExpression(postfixExpression, temp);
 
         return postfixExpression;
+    }
+
+    private boolean convertByOperator(String exp, List<String> postfixExpression, Stack<Operator> temp) {
+        if (Operator.isOperator(exp)) {
+            Operator operator = Operator.getOperator(exp);
+
+            if (convertByBranket(operator, postfixExpression, temp))
+                return true;
+            convertWithOperandPriority(operator, postfixExpression, temp);
+
+            temp.add(operator);
+        } else {
+            postfixExpression.add(exp);
+        }
+        return false;
+    }
+
+    private void convertWithOperandPriority(Operator operator, List<String> postfixExpression, Stack<Operator> temp) {
+        while (!temp.isEmpty() && temp.peek().getOperatorPriority() >= operator.getOperatorPriority()) {
+            postfixExpression.add(temp.pop().getOperatorString());
+        }
+    }
+
+    private boolean convertByBranket(Operator operator, List<String> postfixExpression, Stack<Operator> temp) {
+        if (operator.getOperatorString().equals("(")) {
+            temp.push(operator);
+            return true;
+        } else if (operator.getOperatorString().equals(")")) {
+            convertWithBranketPriority(operator, postfixExpression, temp);
+            return true;
+        }
+        return false;
+    }
+
+    private void convertWithBranketPriority(Operator operator, List<String> postfixExpression, Stack<Operator> temp) {
+        while (!temp.isEmpty() && !temp.peek().getOperatorString().equals("(")) {
+            postfixExpression.add(temp.pop().getOperatorString());
+        }
+        if (!temp.isEmpty()) temp.pop();
     }
 
     private void takeRemainExpression(List<String> expression, Stack<Operator> stack) {
