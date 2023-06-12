@@ -2,6 +2,7 @@ package com.programmers.junho.domain;
 
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -49,5 +50,16 @@ class ExpressionTest {
         String actual = expression.getPostfixExpression();
 
         assertThat(actual).isEqualTo(postfixExpression);
+    }
+
+    @DisplayName("동일한 식을 가진 Expression 객체의 동등성을 보장한다.")
+    @Test
+    public void when_givenEqualExpression_Expects_Equal() {
+        String expression = "3 + 4 * 2";
+
+        Expression expression1 = new Expression(expression);
+        Expression expression2 = new Expression(expression);
+
+        assertThat(expression1).isEqualTo(expression2);
     }
 }
