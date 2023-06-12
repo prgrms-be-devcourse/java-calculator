@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculatorTests {
+public class CalculatorTest {
 
     @Test
     @DisplayName("덧셈 테스트")
