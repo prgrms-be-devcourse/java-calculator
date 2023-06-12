@@ -12,6 +12,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -166,5 +167,9 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
+
+*.idea
+gradlew
+gradlew.bat
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle
