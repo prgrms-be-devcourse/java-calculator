@@ -1,21 +1,27 @@
 package com.programmers.java.calculator.service;
 
 import com.programmers.java.calculator.converter.Converter;
+import com.programmers.java.calculator.entity.History;
+import com.programmers.java.calculator.repository.CalculatorRepository;
 
 public class CalculatorServiceImpl implements CalculatorService {
 
     private final Converter converter;
+    private final CalculatorRepository calculatorRepository;
 
-    public CalculatorServiceImpl(Converter converter) {
+    public CalculatorServiceImpl(Converter converter, CalculatorRepository calculatorRepository) {
         this.converter = converter;
+        this.calculatorRepository = calculatorRepository;
     }
 
     @Override
     public String calculate(String expression) {
-        StringBuilder builder = new StringBuilder(expression);
-        builder.append(" = ");
         String result = (String) converter.convert(expression);
-        builder.append(result);
+        calculatorRepository.save(makeHistory(expression, result));
         return result;
+    }
+
+    private static History makeHistory(String expression, String result) {
+        return new History(expression + "=" + result);
     }
 }
