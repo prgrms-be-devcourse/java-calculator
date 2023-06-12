@@ -7,10 +7,7 @@ import com.wonu606.calculator.strategy.CalculatorStrategy;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
 import com.wonu606.calculator.util.CalculatorMessage;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -49,12 +46,6 @@ public class CalculatorApp implements App {
     }
 
     private String inputMenuSelection(Input input) {
-        while (true) {
-            try {
-                return input.getInput();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        return input.getInput();
     }
 }

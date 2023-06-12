@@ -8,7 +8,7 @@ public class ConsoleInput implements Input {
     Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String getInput() throws IOException {
+    public String getInput() {
         return scanner.nextLine();
     }
 

@@ -12,7 +12,7 @@ class ConsoleInputTest {
 
     @Test
     @DisplayName("메뉴 입력")
-    void testMenuSelectionInput() throws IOException {
+    void testMenuSelectionInput() {
         String menuSelection = "1";
         InputStream in = new ByteArrayInputStream(menuSelection.getBytes());
         System.setIn(in);
@@ -24,7 +24,7 @@ class ConsoleInputTest {
 
     @Test
     @DisplayName("표현식 입력")
-    void testExpressionInput() throws IOException {
+    void testExpressionInput() {
         String expression = "2 + 3";
         InputStream in = new ByteArrayInputStream(expression.getBytes());
         System.setIn(in);
@@ -36,7 +36,7 @@ class ConsoleInputTest {
 
     @Test
     @DisplayName("개행 입력")
-    void testNewLineInput() throws IOException {
+    void testNewLineInput() {
         String newLine = "\n";
         InputStream in = new ByteArrayInputStream(newLine.getBytes());
         System.setIn(in);

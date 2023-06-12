@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface App {
 
-    void execute(Input input, Print printer) throws IOException;
+    void execute(Input input, Print printer);
 }

@@ -25,7 +25,7 @@ public class Main {
         }
     }
 
-    private static void runApp(App app, Input input, Print printer) throws IOException {
+    private static void runApp(App app, Input input, Print printer) {
         app.execute(input, printer);
     }
 }
