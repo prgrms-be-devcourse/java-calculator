@@ -4,17 +4,18 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-@Getter
+
 public class ResultRepository {
 
-    private static ArrayList<String> calculationResults = new ArrayList<>();
+    private static List<String> calculationResults = new ArrayList<>();
 
     public void save(String expression, String result) {
         calculationResults.add(expression + "=" + result);
     }
 
-    public ArrayList<String> getCalculationResults() {
+    public List<String> getCalculationResults() {
         return calculationResults;
     }
 }
