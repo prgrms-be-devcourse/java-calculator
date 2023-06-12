@@ -13,23 +13,23 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-    public void run(){
+    public void run() {
         Menu menu;
-        do{
+        do {
             Output.printMenu();
 
             int menuNum = Input.inputMenu();
 
             menu = Menu.getMenu(menuNum);
 
-            if(menu.isHistory()){
+            if (menu.isHistory()) {
                 //todo : map에서 출력
             }
-            if(menu.isCalculate()){
+            if (menu.isCalculate()) {
                 String expression = Input.inputExpression();
-                calculatorService.calculate(expression);
+                int result = calculatorService.calculate(expression);
             }
 
-        }while(!menu.isFinish());
+        } while (!menu.isFinish());
     }
 }
