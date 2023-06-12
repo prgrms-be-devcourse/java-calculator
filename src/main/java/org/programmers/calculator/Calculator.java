@@ -1,9 +1,11 @@
 package org.programmers.calculator;
 
 import org.programmers.Io.Console;
+import org.programmers.repository.CalRepository;
 import org.programmers.validator.Validator;
 
 import java.lang.invoke.WrongMethodTypeException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Calculator {
@@ -14,13 +16,16 @@ public class Calculator {
 
     private final ExpressionEvaluator expressionEvaluator;
 
+    private final CalRepository calRepository;
+
     private final Scanner sc = new Scanner(System.in);
 
 
-    public Calculator(Console console, ExpressionEvaluator expressionEvaluator) {
+    public Calculator(Console console, ExpressionEvaluator expressionEvaluator, CalRepository calRepository) {
         this.console = console;
         this.validator = new Validator(console);
         this.expressionEvaluator = expressionEvaluator;
+        this.calRepository = calRepository;
     }
 
 
@@ -31,12 +36,16 @@ public class Calculator {
             console.printOption();
             String inputNum = console.inputNum();
             Option option = ChangeOption(inputNum);
-            if (option == null)
+            if (option == null){
+                System.out.println("올바른 번호를 입력해주세요. 1 : 조회 , 2 : 계산 , 0 : 종료");
                 continue;
+            }
+
 
             switch (option) {
                 case QUERY:
-                    System.out.println("console.printQuery();");
+                    Map<Long, String> queryList = calRepository.getQueryList();
+                    console.printQuery(queryList);
                     break;
                 case CALC:
                     // String formula = console.inputFormula();
@@ -49,6 +58,7 @@ public class Calculator {
                     }
                     String result = expressionEvaluator.requestCalculate(formula);
                     console.printCal(result);
+                    calRepository.save(formula, result);
                     break;
                 case EXIT:
                     isRunning = false;

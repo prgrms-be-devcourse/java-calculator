@@ -1,6 +1,7 @@
 package org.programmers.Io;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Console {
@@ -31,9 +32,10 @@ public class Console {
 
     }
 
-    public void printQuery(List<String> query) {
-        for (String s : query) {
-            System.out.println(s);
+    public void printQuery(Map<Long, String> query) {
+        for (Long key : query.keySet()) {
+            String result = query.get(key);
+            System.out.println(result);
         }
 
     }

@@ -15,12 +15,12 @@ public enum Option {
     }
 
 
-    public static Option findByNumber(String num){
-        for(Option option : Option.values()){
-            if(option.number == Integer.parseInt(num)){
+    public static Option findByNumber(String num) {
+        for (Option option : Option.values()) {
+            if (option.number == Integer.parseInt(num)) {
                 return option;
             }
         }
-        throw new InputMismatchException("올바른 번호를 입력해주세요. 1 : 조회 , 2 : 계산 , 0 : 종료");
+        return null;
     }
 }
