@@ -32,6 +32,7 @@ public class SimpleValidator implements Validator {
             if (token.isBlank())
                 continue;
             branchIsBranketCondition(token, expression);
+            expression.add(token);
         }
         checkCountValidation(operandCount, cnt -> cnt < 1);
         return expression;
@@ -44,7 +45,6 @@ public class SimpleValidator implements Validator {
             branchBranket(prefix);
         } else {
             branchIsDigitCondition(prefix);
-            expression.add(token);
         }
     }
 
@@ -64,7 +64,7 @@ public class SimpleValidator implements Validator {
 
 
     private void checkCountValidation(int count, Predicate<Integer> predicate) {
-        if (!predicate.test(count))
+        if (predicate.test(count))
             throw new InvalidInputException(INVALID_EXPRESSION);
     }
 

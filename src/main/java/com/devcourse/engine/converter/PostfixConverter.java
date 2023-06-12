@@ -14,7 +14,7 @@ public class PostfixConverter implements Converter {
         Stack<Operator> temp = new Stack<>();
 
         for (String exp: expression) {
-            convertByOperator(exp, postfixExpression, temp)
+            convertByOperator(exp, postfixExpression, temp);
         }
         takeRemainExpression(postfixExpression, temp);
 
