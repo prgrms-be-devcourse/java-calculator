@@ -17,7 +17,6 @@ public class ExpressionValidator {
             }
         }
 
-        //계산식의 마지막이 숫자로 끝나지 않았다면
         if (isNumberTurn) {
             throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
         }

@@ -14,7 +14,7 @@ public class ExpressionValidatorTest {
         //given
         List<String> inputA = List.of("1", "1", "1");
         List<String> inputB = List.of("+", "1", "/");
-        List<String> inputC = List.of("1", "+");
+        List<String> inputC = List.of("1", "+", "+", "1");
 
         //when
 
@@ -43,6 +43,21 @@ public class ExpressionValidatorTest {
         assertThatThrownBy(() -> validator.validate(inputB))
                 .isInstanceOf(UnsupportedOperationException.class);
         assertThatThrownBy(() -> validator.validate(inputC))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @Test
+    void validateExpressionEndWithOperator_Then_Exception() {
+        //given
+        List<String> inputA = List.of("1", "+");
+        List<String> inputB = List.of("1", "*", "1", "-");
+
+        //when
+
+        //then
+        assertThatThrownBy(() -> validator.validate(inputA))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> validator.validate(inputB))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
