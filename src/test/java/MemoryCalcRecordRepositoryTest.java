@@ -1,6 +1,7 @@
 package calcproject.repository;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,8 +27,8 @@ class MemoryCalcRecordRepositoryTest {
 		calcRecordRepository.saveCalcRecord(calcRecord2);
 
 		// when
-		var resultCalcRecords = calcRecordRepository.loadCalcRecords();
-		var expectedCalcRecords = Arrays.asList(calcRecord1, calcRecord2);
+		List<CalcRecordModel> resultCalcRecords = calcRecordRepository.loadCalcRecords();
+		List<CalcRecordModel> expectedCalcRecords = Arrays.asList(calcRecord1, calcRecord2);
 
 		// then
 		Assertions.assertThat(resultCalcRecords)
