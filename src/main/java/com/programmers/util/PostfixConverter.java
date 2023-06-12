@@ -44,9 +44,9 @@ public class PostfixConverter {
         stack.push(operator);
     }
 
-    private static void putOperand(String operand, List<String> postfix) throws IllegalArgumentException {
+    private static void putOperand(String operand, List<String> postfix) throws NumberFormatException {
         if (!StringUtil.isNumber(operand)) {
-            throw new IllegalArgumentException("피연산자가 숫자가 아닙니다.");
+            throw new NumberFormatException("피연산자가 숫자가 아닙니다.");
         }
         postfix.add(operand);
     }
