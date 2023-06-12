@@ -2,6 +2,7 @@ package ui;
 
 import util.Menu;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -24,9 +25,7 @@ public class OutputView {
     }
 
     public void printMenu() {
-        for (Menu menu : Menu.values()) {
-            println(menu.getPrintMsg());
-        }
+        Arrays.stream(Menu.values()).forEach(menu -> println(menu.getPrintMsg()));
         printSelectMsg();
     }
 

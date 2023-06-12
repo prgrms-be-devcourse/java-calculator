@@ -18,7 +18,6 @@ public class InputView {
     public Menu getMenuNumber() {
         String userInput = readLine();
         ValidationInput.isEmpty(userInput);
-
         return Menu.getMenu(userInput);
     }
 
