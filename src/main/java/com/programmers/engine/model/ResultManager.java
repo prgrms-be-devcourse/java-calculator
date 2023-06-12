@@ -3,7 +3,7 @@ package com.programmers.engine.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Result {
+public class ResultManager {
     private final Map<Integer, String> results = new HashMap<>();
 
     public void save(String expression, int answer) {
