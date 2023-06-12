@@ -1,6 +1,6 @@
 package com.programmers.engine;
 
-import com.programmers.BasicCalculator;
+import com.programmers.engine.module.BasicCalculator;
 import com.programmers.engine.io.Input;
 import com.programmers.engine.io.Output;
 import com.programmers.engine.model.Menu;
