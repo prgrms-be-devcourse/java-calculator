@@ -7,13 +7,12 @@ import java.util.regex.Pattern;
 
 public class ExpressionTokenizer {
 
-    private static final String REGEXP = "\\d+|[-+*/]";
+    private static final String OPERATOR_REGEXP = "\\d+|[-+*/]";
 
-    // 연산자와 피연사자를 정규식을 이용해서 분리하는 역할을 담당한다.
     public List<String> expressionSplit(String expression) {
 
         List<String> result = new ArrayList<>();
-        Pattern pattern = Pattern.compile(REGEXP);
+        Pattern pattern = Pattern.compile(OPERATOR_REGEXP);
         Matcher matcher = pattern.matcher(expression);
 
         while (matcher.find()) {
