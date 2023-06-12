@@ -24,7 +24,7 @@ public class ConsoleDevice implements IODevice {
 
     @Override
     public void outputSingleResult(String res) {
-        System.out.println(res);
+        System.out.println(res + "\n");
     }
 
     @Override
@@ -33,6 +33,7 @@ public class ConsoleDevice implements IODevice {
         for (String res : outputList) {
             System.out.println(res);
         }
+        System.out.println();
     }
 
 }
