@@ -1,0 +1,25 @@
+package com.bona.javacalculator.service;
+
+public class Check {
+    static boolean isOperator(String s) {
+        if (s.length() > 1) {
+            return false;
+        }
+        if(s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/")){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isNumber(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (s.length() == 1 && s.charAt(0) == '-') {
+                return false;
+            }
+            if(i > 0 && !Character.isDigit(s.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+}

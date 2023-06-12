@@ -41,7 +41,15 @@ public class Console implements Input, Output{
         for (InputAndAnswer history : inputAndAnswerList) {
             String input = history.getInput();
             Double answer = history.getAnswer();
-            System.out.println(input + "="+ answer);
+
+            System.out.print(input + "=");
+            boolean isLong = isLong(answer);
+            if(isLong){
+                Long changeAnswer = answer.longValue();
+                System.out.println(changeAnswer);
+            }else {
+                System.out.println(answer);
+            }
         }
     }
 

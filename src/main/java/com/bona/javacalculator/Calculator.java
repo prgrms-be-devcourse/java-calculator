@@ -5,6 +5,7 @@ import com.bona.javacalculator.io.Console;
 import com.bona.javacalculator.model.InputAndAnswer;
 import com.bona.javacalculator.repository.CalMemoryRepository;
 import com.bona.javacalculator.service.CalService;
+import com.bona.javacalculator.service.Check;
 import com.bona.javacalculator.service.ValidateService;
 
 import java.util.List;
@@ -23,16 +24,23 @@ public class Calculator implements Runnable{
         while(isRun){
             String input = console.input("1. 조회 2. 계산");
             int number = parse(input);
+            Option option = Option.valueOf(number);
 
-            switch (number) {
-                case 1:
+            if (option == null) {
+                continue;
+            }
+
+            switch (option) {
+                case INQUIRY:
                     inquiry();
                     break;
-                case 2:
+                case CALCULATE:
                     calculate();
                     break;
-                default:
+                case EXIT:
                     isRun = false;
+                    break;
+                default:
                     break;
             }
 
@@ -42,11 +50,11 @@ public class Calculator implements Runnable{
     private void calculate() {
         String input = console.input("식을 입력해주세요 : ");
         Optional<String> validateInput = checkValidate(input);
-        if (input.isEmpty()) {
+        if (validateInput.isEmpty()) {
             return;
         }
         String postfix = calService.convPostfix(validateInput.get());
-        System.out.println("postfix = " + postfix);
+//        System.out.println("postfix = " + postfix);
         Double result = calService.calculateStr(postfix);
         calMemoryRepo.save(new InputAndAnswer(input, result));
 
@@ -73,11 +81,6 @@ public class Calculator implements Runnable{
     }
 
     private int parse(String input) {
-//        if (input.isBlank()) {
-//            return BYE;
-//        }
-//        if()
-
         return Integer.parseInt(input);
     }
 
