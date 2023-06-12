@@ -3,6 +3,7 @@ package programmers.java.calulator.common.repository;
 public abstract class History {
     private String expression;
     private Integer result;
+    public static final String HISTORY_FORMAT_DELIMITER = " = ";
 
     protected History(String expression, Integer result) {
         this.expression = expression;
@@ -10,6 +11,6 @@ public abstract class History {
     }
     @Override
     public String toString() {
-        return expression + FormatConstants.HISTORY_FORMAT_DELIMITER + result;
+        return expression + HISTORY_FORMAT_DELIMITER + result;
     }
 }

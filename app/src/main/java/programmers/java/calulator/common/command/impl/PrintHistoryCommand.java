@@ -1,6 +1,7 @@
 package programmers.java.calulator.common.command.impl;
 
 import programmers.java.calulator.common.command.Command;
+import programmers.java.calulator.common.command.factory.CommandType;
 import programmers.java.calulator.common.repository.Repository;
 import programmers.java.calulator.common.writer.Writer;
 import programmers.java.calulator.console.repository.MapRepository;
@@ -24,5 +25,9 @@ public class PrintHistoryCommand implements Command {
                 .forEach(history -> writer.write(history.toString()));
     }
 
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.PRINT_HISTORY;
+    }
 }
 

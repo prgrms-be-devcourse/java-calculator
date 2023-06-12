@@ -4,25 +4,36 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import programmers.java.calulator.common.repository.History;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapRepositoryTest {
     private final MapRepository repository = MapRepository.getInstance();
 
     @Test
-    @DisplayName("연산 기록이 잘되는지 확인하는 테스트")
-    public void add_기능이_잘되는지_확인하기() {
+    @DisplayName("100개의 스레드에서 동시에 저장을 시도했을 때 저장이 안정적으로 되는지 확인하는 테스트")
+    public void save_동시성_테스트() throws InterruptedException {
         // Given
+        int numThreads = 100;
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
         String expression = "2 + 2";
         int result = 4;
-        History history = new MapHistory(expression, result);
 
         // When
-        repository.save(history);
+        IntStream.rangeClosed(1, numThreads)
+                .forEach(i -> executor.execute(() -> {
+                    History history = new MapHistory(expression + " * " + i, result * i);
+                    repository.save(history);
+                }));
+        executor.shutdown();
+        executor.awaitTermination(1, TimeUnit.MINUTES);
 
         // Then
-        assertTrue(repository.findAll().contains(history));
+        assertEquals(numThreads, repository.findAll().size());
     }
 
     @Test

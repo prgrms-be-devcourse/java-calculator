@@ -1,12 +1,12 @@
 package programmers.java.calulator.common.command.impl;
 
 import programmers.java.calulator.common.command.Command;
+import programmers.java.calulator.common.command.factory.CommandType;
 import programmers.java.calulator.common.reader.Reader;
 import programmers.java.calulator.common.repository.History;
 import programmers.java.calulator.common.repository.Repository;
 import programmers.java.calulator.common.writer.Writer;
 import programmers.java.calulator.console.repository.MapHistory;
-import programmers.java.calulator.console.repository.MapRepository;
 import programmers.java.calulator.common.calculator.Calculator;
 
 public class ExecuteCalculationCommand implements Command {
@@ -29,5 +29,10 @@ public class ExecuteCalculationCommand implements Command {
         History history = new MapHistory(expression, result);
         repository.save(history);
         writer.write(result.toString());
+    }
+
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.EXECUTE_CALCULATION;
     }
 }
