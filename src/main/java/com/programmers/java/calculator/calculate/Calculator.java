@@ -1,52 +1,64 @@
 package com.programmers.java.calculator.calculate;
 
 import com.programmers.java.repository.ResultRepository;
-import com.programmers.java.util.ExpressionTokenizer;
 
 import java.util.List;
-import java.util.Stack;
 
 public class Calculator {
 
     private static ResultRepository resultRepository = new ResultRepository();
-    private static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
 
-    public double calculate(String expression) {
-        List<String> tokenList = expressionTokenizer.expressionSplit(expression);
+    public double calculate(List<String> tokenList) {
+        double tempResult = 0.0;
+        String operator = "";
 
-        Stack<Double> tempStack = new Stack<>();
-        int index = 0;
+        for (String token : tokenList) {
+            if (isDigit(token) && operator.equals("")) {
+                tempResult = Double.parseDouble(token);
+                continue;
+            }
 
-        while (index < tokenList.size()) {
-            String token = tokenList.get(index++);
-            switch (token) {
-                case "+": {
-                    int nextOperand = Integer.parseInt(tokenList.get(index++));
-                    tempStack.add(tempStack.pop() + nextOperand);
-                    break;
-                }
-                case "-": {
-                    int nextOperand = Integer.parseInt(tokenList.get(index++));
-                    tempStack.add(tempStack.pop() - nextOperand);
-                    break;
-                }
-                case "/": {
-                    int nextOperand = Integer.parseInt(tokenList.get(index++));
-                    tempStack.add(tempStack.pop() / nextOperand);
-                    break;
-                }
-                case "*": {
-                    int nextOperand = Integer.parseInt(tokenList.get(index++));
-                    tempStack.add(tempStack.pop() * nextOperand);
-                    break;
-                }
-                default:
-                    tempStack.add(Double.parseDouble(token));
+            if (isDigit(token) && !operator.equals("")) {
+                tempResult = subCalculate(token, tempResult, operator);
+                continue;
+            }
+            operator = token;
+        }
+        return tempResult;
+    }
+
+    public boolean isDigit(String strValue) {
+        try {
+            Long.parseLong(strValue);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public double subCalculate(String token, double tempResult, String operator) {
+        switch (operator) {
+            case "+": {
+                double nextOperand = Double.parseDouble(token);
+                tempResult = tempResult + nextOperand;
+                break;
+            }
+            case "-": {
+                double nextOperand = Double.parseDouble(token);
+                tempResult = tempResult - nextOperand;
+                break;
+            }
+            case "/": {
+                double nextOperand = Double.parseDouble(token);
+                tempResult = tempResult / nextOperand;
+                break;
+            }
+            case "*": {
+                double nextOperand = Double.parseDouble(token);
+                tempResult = tempResult * nextOperand;
+                break;
             }
         }
-
-        double result = tempStack.pop();
-        resultRepository.save(expression, Double.toString(result));
-        return result;
+        return tempResult;
     }
 }
