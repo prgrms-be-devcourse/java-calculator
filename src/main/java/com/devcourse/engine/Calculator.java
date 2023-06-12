@@ -1,6 +1,6 @@
 package com.devcourse.engine;
 
-import com.devcourse.engine.computer.Computer;
+import com.devcourse.engine.computer.SimpleComputer;
 import com.devcourse.engine.io.Input;
 import com.devcourse.engine.io.Output;
 import com.devcourse.engine.exception.InvalidInputException;
@@ -15,17 +15,17 @@ import static com.devcourse.engine.exception.InvalidInputException.NO_HISTORY;
 
 public class Calculator implements Runnable {
 
-    private final Computer computer;
+    private final SimpleComputer simpleComputer;
     private final Historian historian;
     private final Input input;
     private final Output output;
 
     public Calculator(
-            Computer computer,
+            SimpleComputer simpleComputer,
             Historian historian,
             Input input,
             Output output) {
-        this.computer = computer;
+        this.simpleComputer = simpleComputer;
         this.historian = historian;
         this.input = input;
         this.output = output;
@@ -60,9 +60,9 @@ public class Calculator implements Runnable {
 
     private void calculate() {
         String userInput = input.inputExpression();
-        List<String> infixExpression = computer.validate(userInput);
-        List<String> postfixExpression = computer.convert(infixExpression);
-        double result = computer.compute(postfixExpression);
+        List<String> infixExpression = simpleComputer.validate(userInput);
+        List<String> postfixExpression = simpleComputer.convert(infixExpression);
+        double result = simpleComputer.compute(postfixExpression);
 
         historian.saveHistory(infixExpression, result);
         output.showResult(result);
