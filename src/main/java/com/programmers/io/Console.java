@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Console implements Input, Output{
 
     private final String SELECT_MESSAGE = "선택 : ";
-
     private final Scanner scanner = new Scanner(System.in);
 
     @Override

@@ -23,12 +23,12 @@ public enum Menu {
         this.printMessage = printMessage;
     }
 
-    public static Menu getMenu(String request) {
-        return Arrays.stream(Menu.values())
-                .filter(menu -> menu.getNumber().equals(request))
-                .findAny()
-                .orElseThrow();
-    }
+//    public static Menu getMenu(String request) {
+//        return Arrays.stream(Menu.values())
+//                .filter(menu -> menu.getNumber().equals(request))
+//                .findAny()
+//                .orElseThrow();
+//    }
 
 
 }

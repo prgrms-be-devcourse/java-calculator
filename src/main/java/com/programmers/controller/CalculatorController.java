@@ -57,8 +57,8 @@ public class CalculatorController {
     private void doCalculate() {
         String equation = console.getEquation();
         double answer = calculatorService.calculate(equation);
-        console.println(answer);
         calculatorService.save(equation, answer);
+        console.println(answer);
     }
 
     private void stop() {

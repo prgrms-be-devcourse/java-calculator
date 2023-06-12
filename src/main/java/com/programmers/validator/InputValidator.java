@@ -11,20 +11,10 @@ public class InputValidator {
 
 
     public static void checkEquation(String equation) {
+        checkOperator(equation);
         containsBracket(equation);
-
-        if (endByOperator(equation)) {
-            throw new EquationFormatException();
-        }
-
-        if (continuousOp(equation)) {
-            throw new EquationFormatException();
-        }
-
-        if (checkOperator(equation)) {
-            throw new EquationFormatException();
-        }
-
+        endByOperator(equation);
+        continuousOperator(equation);
     }
 
     public static void checkRequest(String request) {
@@ -33,40 +23,39 @@ public class InputValidator {
         }
     }
 
-    private static boolean endByOperator(String equation) {
+    private static void endByOperator(String equation) {
         String[] equationArr = equation.split("");
         for (int i = equationArr.length - 1; i >= 0; i--) {
             if (equationArr[i].equals(")")) continue;
-            if (!OPERATOR.contains(equationArr[i])) {
-                return false;
-            }else
-                return true;
+            if (OPERATOR.contains(equationArr[i])){
+                throw new EquationFormatException();
+            }
+            return;
         }
-        return true;
     }
 
-    private static boolean continuousOp(String equation) {
+    private static void continuousOperator(String equation) {
         String[] equationArr = equation.split("");
         for (int i = 0; i < equationArr.length - 1; i++) {
             String cur = equationArr[i];
             String next = equationArr[i + 1];
 
             if (OPERATOR.contains(cur) && OPERATOR.contains(next)) {
-                return true;
+                throw new EquationFormatException();
             }
         }
-        return false;
+        return;
     }
 
-    private static boolean checkOperator(String _equation) {
+    private static void checkOperator(String _equation) {
         String equation = _equation.replaceAll(NUMBER, "");
         String[] equationArr = equation.split("");
         for (int i = 0; i < equationArr.length; i++) {
             if (!OP_WITH_BRACKET.contains(equationArr[i])) {
-                return true;
+                throw new EquationFormatException();
             }
         }
-        return false;
+        return;
     }
 
     public static void containsBracket(String equation) {
