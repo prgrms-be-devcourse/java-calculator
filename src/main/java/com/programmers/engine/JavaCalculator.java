@@ -19,8 +19,13 @@ public class JavaCalculator implements Runnable{
         while (isExecutable) {
             output.showMenu();
             switch (input.selectMenu()) {
-                case 1 -> result.readAllResults();
-                case 2 -> result.save(bc.doCalculate(input.getExpression()));
+                case 1 -> output.readAllResults(result.readAllResults());
+                case 2 -> {
+                    String expression = input.getExpression();
+                    int answer = bc.doCalculate(expression);
+                    output.printAnswer(answer);
+                    result.save(expression, answer);
+                }
                 case 3 -> isExecutable = false;
                 default -> output.inputError();
             }

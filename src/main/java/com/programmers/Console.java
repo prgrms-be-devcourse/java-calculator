@@ -3,6 +3,7 @@ package com.programmers;
 import com.programmers.engine.io.Input;
 import com.programmers.engine.io.Output;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -27,5 +28,21 @@ public class Console implements Input, Output {
     public String getExpression() {
         System.out.println("계산하고자 하는 식을 입력해주세요!");
         return sc.nextLine();
+    }
+
+    @Override
+    public void readAllResults(Map<Integer, String> map) {
+        if (map.isEmpty()) {
+            System.out.println("계산 이력이 없습니다.");
+            return;
+        }
+        System.out.println();
+        map.forEach((key, value) -> System.out.println(value));
+        System.out.println();
+    }
+
+    @Override
+    public void printAnswer(int answer) {
+        System.out.println(answer);
     }
 }

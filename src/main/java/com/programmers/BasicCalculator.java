@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class BasicCalculator {
-    public String doCalculate(String expression) {
-        int answer = toPostfix(expression);
-        System.out.println(answer);
-        return expression + " = " + String.valueOf(answer);
+    public int doCalculate(String expression) {
+        return toPostfix(expression);
     }
 
     private int getPriority(String operator) {
