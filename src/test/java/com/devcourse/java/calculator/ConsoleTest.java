@@ -112,6 +112,8 @@ public class ConsoleTest {
         //given
         String input = "3 + 4 *";
         String input2 = "";
+        String input3 = "3 + + 1";
+        String input4 = "1 2 3";
 
         //when, then
         assertThatThrownBy(() -> inputValidator.checkEquationInput(input))
@@ -119,6 +121,14 @@ public class ConsoleTest {
                 .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
 
         assertThatThrownBy(() -> inputValidator.checkEquationInput(input2))
+                .isInstanceOf(InputMismatchException.class)
+                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+
+        assertThatThrownBy(() -> inputValidator.checkEquationInput(input3))
+                .isInstanceOf(InputMismatchException.class)
+                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+
+        assertThatThrownBy(() -> inputValidator.checkEquationInput(input4))
                 .isInstanceOf(InputMismatchException.class)
                 .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
     }

@@ -46,20 +46,29 @@ public class InputValidator {
 
         int digit = 0;
         int operation = 0;
+        boolean continuedOperation = true;
 
         for (String eachToken: tokens) {
 
             if (isInteger(eachToken)) {
+                if (!continuedOperation) {
+                    throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                }
                 digit += 1;
+                continuedOperation = false;
             } else if (isOperator(eachToken)) {
+                if (continuedOperation) {
+                    throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                }
                 operation += 1;
+                continuedOperation = true;
             } else {
                 throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
             }
 
         }
-            // 연속 연산 계산 예외 넣어야함
-        if (digit - operation > 1 || digit + operation == 1) {
+
+        if (digit + operation == 1) {
             throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }

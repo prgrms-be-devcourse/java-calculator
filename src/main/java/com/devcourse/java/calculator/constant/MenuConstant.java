@@ -9,7 +9,7 @@ public class MenuConstant {
     public static final String PRINT_COMMAND_THIRD_EXIT = "3. 종료";
 
     public static final int START_CALCULATOR_NO_COMMAND = 0;
-    public static final int SELECTED_HISTORY_COMMAND = 1;
+    public static final int SELECTED_PRINT_HISTORY_COMMAND = 1;
     public static final int SELECTED_CALCULATE_COMMAND = 2;
     public static final int SELECTED_EXIT_COMMAND = 3;
 

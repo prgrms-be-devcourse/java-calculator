@@ -38,7 +38,7 @@ public class Calculator implements Runnable{
     }
 
     public void runCommand(int command) {
-        if (command == MenuConstant.SELECTED_HISTORY_COMMAND) {
+        if (command == MenuConstant.SELECTED_PRINT_HISTORY_COMMAND) {
             try {
                 output.printCalculateHistory(calculatorRepository.getHistory());
 
