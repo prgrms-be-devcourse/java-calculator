@@ -18,7 +18,8 @@ public class Input {
         int menuNum;
 
         try{
-            menuNum = Validator.checkInteger(scanner.nextLine());
+            String menuString = Validator.removeWhiteSpace(scanner.nextLine());
+            menuNum = Validator.checkInteger(menuString);
         }catch(NumberFormatException e){
             System.out.print(NOTINTEGERMESSAGE);
             return inputMenu(); //반복
