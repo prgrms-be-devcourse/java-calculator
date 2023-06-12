@@ -35,7 +35,7 @@ class ExpressionTest {
     @DisplayName("잘못된 형식이나 순서의 식이면 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1 & 2", "/ 1 + ", "1 / + 2"})
-    void when_wrongFormat_Expects_ThrowException(String expression) {
+    void when_WrongFormat_Expects_ThrowException(String expression) {
         assertThatThrownBy(() -> new Expression(expression))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -43,7 +43,7 @@ class ExpressionTest {
     @DisplayName("중위 표현식을 후위 표현식으로 변환한다.")
     @ParameterizedTest(name = "중위 : {0}, 후위 : {1}")
     @CsvSource(value = {"3 + 4 * 2:3 4 2 * +", "1 + 2 * 3 + 4 / 2 + 2:1 2 3 * + 4 2 / + 2 +", "4 + 5 * 6 / 2 - 3:4 5 6 * 2 / + 3 -", "44 / 2:44 2 /"}, delimiter = ':')
-    void convert_InfixNotation_to_PostfixNotation(String infixExpression, String postfixExpression) {
+    void when_InfixNotationIsGiven_Expects_ReturnPostfixNotation(String infixExpression, String postfixExpression) {
         Expression expression = new Expression(infixExpression);
 
         String actual = expression.getPostfixExpression();
