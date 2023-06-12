@@ -1,6 +1,6 @@
 package calculator.entity;
 
-import calculator.validation.exception.MenuInputException;
+import calculator.exception.MenuInputException;
 import java.util.Arrays;
 
 public enum Menu {

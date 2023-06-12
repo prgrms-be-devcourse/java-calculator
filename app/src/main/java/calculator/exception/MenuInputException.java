@@ -1,4 +1,4 @@
-package calculator.validation.exception;
+package calculator.exception;
 
 public class MenuInputException extends RuntimeException {
 

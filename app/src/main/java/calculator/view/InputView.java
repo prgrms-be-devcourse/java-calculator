@@ -3,8 +3,8 @@ package calculator.view;
 import static calculator.utils.StringUtils.isMatchingExpressionRegex;
 import static calculator.utils.StringUtils.isNumeric;
 
-import calculator.validation.exception.ExpressionInputException;
-import calculator.validation.exception.MenuInputException;
+import calculator.exception.ExpressionInputException;
+import calculator.exception.MenuInputException;
 import java.util.Scanner;
 
 public final class InputView {
