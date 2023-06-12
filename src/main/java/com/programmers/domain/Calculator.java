@@ -1,5 +1,6 @@
 package com.programmers.domain;
 
+import com.programmers.enumtype.Operator;
 import com.programmers.util.Arithmetic;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class Calculator {
             if (Arithmetic.isNumber(expr)) {
                 numbers.push(Integer.parseInt(expr));
             } else {
-                int result = binaryOperation(numbers.pop(), numbers.pop(), expr);
+                int result = binaryOperation(numbers.pop(), numbers.pop(), Operator.getValue(expr));
                 numbers.push(result);
             }
         }
@@ -37,13 +38,12 @@ public class Calculator {
         return numbers.pop();
     }
 
-    private int binaryOperation(int a, int b, String operation) {
-        return switch (operation) {
-            case "+" -> b + a;
-            case "-" -> b - a;
-            case "*" -> b * a;
-            case "/" -> b / a;
-            default -> throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
+    private int binaryOperation(int a, int b, Operator operator) {
+        return switch (operator) {
+            case PLUS -> b + a;
+            case MINUS -> b - a;
+            case MULTIPLY -> b * a;
+            case DIVIDE -> b / a;
         };
     }
 }

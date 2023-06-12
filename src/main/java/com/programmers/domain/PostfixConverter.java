@@ -1,5 +1,6 @@
 package com.programmers.domain;
 
+import com.programmers.enumtype.Operator;
 import com.programmers.util.Arithmetic;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.function.Supplier;
 
 public class PostfixConverter {
     private List<String> postfixExpression;
-    private Stack<String> operators;
+    private Stack<Operator> operators;
 
     public List<String> convert(List<String> tokenized) {
         postfixExpression = new ArrayList<>();
@@ -19,8 +20,9 @@ public class PostfixConverter {
             if (Arithmetic.isNumber(token)) {
                 postfixExpression.add(token);
             } else {
-                popAndAddOperatorsToExpression(() -> getPriority(token) > getPriority(operators.peek()));
-                operators.push(token);
+                Operator operator = Operator.getValue(token);
+                popAndAddOperatorsToExpression(() -> getPriority(operator) > getPriority(operators.peek()));
+                operators.push(operator);
             }
         }
         popAndAddOperatorsToExpression(() -> false);
@@ -33,15 +35,15 @@ public class PostfixConverter {
             if (breakCondition.get()) {
                 break;
             }
-            postfixExpression.add(operators.pop());
+            Operator operator = operators.pop();
+            postfixExpression.add(operator.toString());
         }
     }
 
-    private int getPriority(String operator) {
+    private int getPriority(Operator operator) {
         return switch (operator) {
-            case "+", "-" -> 1;
-            case "*", "/" -> 2;
-            default -> 0;
+            case PLUS, MINUS -> 1;
+            case MULTIPLY, DIVIDE -> 2;
         };
     }
 
