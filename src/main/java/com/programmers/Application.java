@@ -8,25 +8,12 @@ import com.programmers.repository.CalculatorHistory;
 public class Application {
     public static void main(String[] args) {
         Calculator calculator = new Calculator(
-                consoleInstance(),
-                consoleInstance(),
-                postfixCalculatorInstance(),
-                calculatorHistoryInstance()
+                new Console(),
+                new PostfixCalculator(),
+                new CalculatorHistory()
         );
         calculator.run();
 
-    }
-
-    private static Console consoleInstance() {
-        return new Console();
-    }
-
-    private static PostfixCalculator postfixCalculatorInstance() {
-        return new PostfixCalculator();
-    }
-
-    private static CalculatorHistory calculatorHistoryInstance() {
-        return new CalculatorHistory();
     }
 
 }

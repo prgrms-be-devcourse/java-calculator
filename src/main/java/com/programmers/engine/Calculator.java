@@ -1,24 +1,17 @@
 package com.programmers.engine;
 
-import com.programmers.exception.EquationFormatException;
-import com.programmers.exception.MenuFormatException;
 import com.programmers.io.Console;
-import com.programmers.io.Input;
-import com.programmers.io.Output;
 import com.programmers.repository.CalculatorHistory;
-import com.programmers.validator.InputValidator;
 
 
 public class Calculator {
 
-    private Input input; //final 설정 시 생성자보다 먼저 초기화가 일어나기 때문
-    private Output output; //final 설정 시 생성자보다 먼저 초기화가 일어나기 때문
+    private Console console;
     private PostfixCalculator postfixCalculator;
     private CalculatorHistory calculatorHistory;
 
-    public Calculator(Input input, Output output, PostfixCalculator postfixCalculator, CalculatorHistory calculatorHistory) {
-        this.input = input;
-        this.output = output;
+    public Calculator(Console console, PostfixCalculator postfixCalculator, CalculatorHistory calculatorHistory) {
+        this.console = console;
         this.postfixCalculator = postfixCalculator;
         this.calculatorHistory = calculatorHistory;
     }
@@ -34,14 +27,14 @@ public class Calculator {
 
         //저장된 값 조회
         if (HISTORY.equals(request)) {
-            output.println(calculatorHistory.findAll());
+            console.println(calculatorHistory.findAll());
 
             // 연산
         } else if (CALC.equals(request)) {
             String equation = " ";
-                equation = input.getEquation();
+                equation = console.getEquation();
             double answer = postfixCalculator.infixToPostfix(equation);
-            output.println(answer);
+            console.println(answer);
             calculatorHistory.save(equation, answer);
 
         } else if (END.equals(request)) {
@@ -55,10 +48,10 @@ public class Calculator {
         while (isRunning) {
             String request = "";
             try {
-                request = input.getMenu();
+                request = console.getMenu();
                 response(request);
             } catch (RuntimeException e) {
-                output.printErrorMsg(e.getMessage());
+                console.printErrorMsg(e.getMessage());
             }
         }
     }

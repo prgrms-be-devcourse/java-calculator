@@ -41,7 +41,6 @@ public class Console implements Input, Output{
 
         String request = getRequest();
 
-
         return request;
     }
 
