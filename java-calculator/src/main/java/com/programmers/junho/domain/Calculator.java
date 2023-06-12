@@ -5,7 +5,7 @@ import java.util.Stack;
 import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
 import static com.programmers.junho.domain.ArithmeticOperators.isNotOperator;
 import static com.programmers.junho.domain.constant.CalculatorConstant.DELIMITER;
-import static com.programmers.junho.domain.utils.Util.convertStringToInt;
+import static com.programmers.junho.domain.utils.StringUtil.convertStringToInt;
 
 public class Calculator {
 

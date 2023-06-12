@@ -1,8 +1,8 @@
 package com.programmers.junho.domain.utils;
 
-public class Util {
+public class StringUtil {
 
-    private Util() {
+    private StringUtil() {
         throw new AssertionError("Util 클래스 생성 불가합니다.");
     }
 
