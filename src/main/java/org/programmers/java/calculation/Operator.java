@@ -21,9 +21,11 @@ public enum Operator {
         this.priority = priority;
         this.expression = expression;
     }
-
+    private int getPriority() {
+        return priority;
+    }
     public static boolean comparePriorities(String firstSymbol, String secondSymbol){
-        return Integer.parseInt(firstSymbol) > Integer.parseInt(secondSymbol);
+        return Operator.isSymbol(firstSymbol).get().getPriority() > Operator.isSymbol(secondSymbol).get().getPriority();
 
     }
 
