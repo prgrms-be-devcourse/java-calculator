@@ -24,7 +24,7 @@ public class Operation {
 
     private static void calculateRemainingValues(Stack<String> operatorsStack, Stack<Integer> operandsStack) {
         while (!operatorsStack.empty()) {
-            Integer calculationResult = getPerformFourArithmeticOperations(operatorsStack, operandsStack);
+            Integer calculationResult = getPerformFourArithmeticOperations(operatorsStack.pop(), operandsStack.pop(), operandsStack.pop());
             operandsStack.push(calculationResult);
         }
     }
@@ -38,7 +38,7 @@ public class Operation {
 
     private static void pushCalculationResult(Stack<String> operatorsStack, Stack<Integer> operandsStack, String element) {
         while (!operatorsStack.empty() && isComparePriorities(operatorsStack.peek(), element)) {
-            Integer calculationResult = getPerformFourArithmeticOperations(operatorsStack, operandsStack);
+            Integer calculationResult = getPerformFourArithmeticOperations(operatorsStack.pop(), operandsStack.pop(), operandsStack.pop());
             operandsStack.push(calculationResult);
         }
     }
@@ -49,9 +49,8 @@ public class Operation {
         }
     }
 
-    //나중에 구현
-    private static Integer getPerformFourArithmeticOperations(Stack<String> operatorsStack, Stack<Integer> operandsStack) {
-        return null;
+    private static Integer getPerformFourArithmeticOperations(String operator, Integer operand1, Integer operand2) {
+        return Operator.getOperator(operator).calculate(operand1, operand2);
     }
 
     //나중에 구현
