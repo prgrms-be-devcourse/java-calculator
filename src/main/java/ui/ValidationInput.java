@@ -11,12 +11,6 @@ import java.util.Map;
 import java.util.Stack;
 
 public class ValidationInput {
-    public static void checkMenuNumber(Menu menu) {
-        if (menu == Menu.EMPTY) {
-            throw new NotMenuFormatExcpetion();
-        }
-    }
-
     public static void isEmpty(String userInput) {
         if (userInput == null || userInput.isBlank()) {
             throw new NotMenuFormatExcpetion();
@@ -49,6 +43,7 @@ public class ValidationInput {
     private static boolean isBracket(String input) {
         return Brackets.isOpenBrackets(input) || Brackets.isCloseBrackets(input);
     }
+
     private static void addBracket(Stack<String> correctBracket, String input) {
         if (correctBracket.isEmpty()) {
             correctBracket.add(input);
@@ -62,6 +57,7 @@ public class ValidationInput {
 
         correctBracket.add(input);
     }
+
     private static void checkFormat(String[] inputDatas) {
         for (int index = 0; index < inputDatas.length; index++) {
             String inputData = inputDatas[index];

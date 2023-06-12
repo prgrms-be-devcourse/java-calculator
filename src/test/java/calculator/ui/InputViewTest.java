@@ -36,9 +36,7 @@ public class InputViewTest {
                 , "abc"
         })
         void 메뉴번호가_1_2가_아니면_에러반환(String userInput) {
-            Menu menu = Menu.getMenu(userInput);
-
-            assertThatThrownBy(()-> ValidationInput.checkMenuNumber(menu))
+            assertThatThrownBy(()-> Menu.getMenu(userInput))
                     .isInstanceOf(NotMenuFormatExcpetion.class);
         }
     }

@@ -19,9 +19,7 @@ public class InputView {
         String userInput = readLine();
         ValidationInput.isEmpty(userInput);
 
-        Menu menu = Menu.getMenu(userInput);
-        ValidationInput.checkMenuNumber(menu);
-        return menu;
+        return Menu.getMenu(userInput);
     }
 
     public String getEquation() {

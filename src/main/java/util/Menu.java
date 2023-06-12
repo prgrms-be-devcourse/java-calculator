@@ -1,5 +1,7 @@
 package util;
 
+import exception.NotMenuFormatExcpetion;
+
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
@@ -21,7 +23,7 @@ public enum Menu {
         return Arrays.stream(Menu.values())
                 .filter(menu -> value.equals(menu.getNumber()))
                 .findAny()
-                .orElse(EMPTY);
+                .orElseThrow(NotMenuFormatExcpetion::new);
     }
 
     public String getNumber() {
