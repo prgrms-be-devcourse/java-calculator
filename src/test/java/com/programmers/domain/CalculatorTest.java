@@ -2,6 +2,8 @@ package com.programmers.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
@@ -10,10 +12,10 @@ public class CalculatorTest {
     @Test
     void calculateOnlyPlus() {
         //given
-        String[] inputsA = {"1", "5", "+"};
-        String[] inputsB = {"123", "234", "2134", "+", "+"};
-        String[] inputsC = {"1", "2", "+", "3", "+", "4", "+"};
-        
+        List<String> inputsA = List.of("1", "5", "+");
+        List<String> inputsB = List.of("123", "234", "2134", "+", "+");
+        List<String> inputsC = List.of("1", "2", "+", "3", "+", "4", "+");
+
         //when
         int resultA = cal.calculatePostfixExpression(inputsA);
         int resultB = cal.calculatePostfixExpression(inputsB);
@@ -28,8 +30,8 @@ public class CalculatorTest {
     @Test
     void calculateOnlyMinus() {
         //given
-        String[] inputsA = {"1", "5", "-"};
-        String[] inputsB = {"123", "23", "-", "523", "-"};
+        List<String> inputsA = List.of("1", "5", "-");
+        List<String> inputsB = List.of("123", "23", "-", "523", "-");
 
         //when
         int resultA = cal.calculatePostfixExpression(inputsA);
@@ -43,8 +45,8 @@ public class CalculatorTest {
     @Test
     void calculateMixedWithPlusAndMinus() {
         //given
-        String[] inputsA = {"1", "5", "+", "123", "-"};
-        String[] inputsB = {"123", "2345", "-", "2452", "+"};
+        List<String> inputsA = List.of("1", "5", "+", "123", "-");
+        List<String> inputsB = List.of("123", "2345", "-", "2452", "+");
 
         //when
         int resultA = cal.calculatePostfixExpression(inputsA);
@@ -59,8 +61,8 @@ public class CalculatorTest {
     @Test
     void calculateOnlyMultiply() {
         //given
-        String[] inputsA = {"2", "5", "*"};
-        String[] inputsB = {"123", "123", "*", "948", "*"};
+        List<String> inputsA = List.of("2", "5", "*");
+        List<String> inputsB = List.of("123", "123", "*", "948", "*");
 
         //when
         int resultA = cal.calculatePostfixExpression(inputsA);
@@ -74,8 +76,8 @@ public class CalculatorTest {
     @Test
     void calculateMultiplyMixedWithPlusAndMinus() {
         //given
-        String[] inputsA = {"123", "324", "3", "*", "+", "2332", "-"};
-        String[] inputsB = {"123", "324", "*", "32", "42", "*", "-"};
+        List<String> inputsA = List.of("123", "324", "3", "*", "+", "2332", "-");
+        List<String> inputsB = List.of("123", "324", "*", "32", "42", "*", "-");
 
         //when
         int resultA = cal.calculatePostfixExpression(inputsA);
@@ -89,8 +91,8 @@ public class CalculatorTest {
     @Test
     void calculateOnlyDivide() {
         //given
-        String[] inputsA = {"123", "23", "/"};
-        String[] inputsB = {"34", "42", "/", "35", "/"};
+        List<String> inputsA = List.of("123", "23", "/");
+        List<String> inputsB = List.of("34", "42", "/", "35", "/");
 
         //when
         int resultA = cal.calculatePostfixExpression(inputsA);
@@ -104,7 +106,7 @@ public class CalculatorTest {
     @Test
     void calculateDivideByZero_Then_Exception() {
         //given
-        String[] inputsA = {"123", "0", "/"};
+        List<String> inputsA = List.of("123", "0", "/");
 
         //when
 
@@ -116,15 +118,15 @@ public class CalculatorTest {
     @Test
     void calculateMixedAllOperation() {
         //given
-        String[] inputsA = {"23", "7", "*", "32", "8", "/", "+"};
-        String[] inputsB = {"23", "3", "23", "*", "2", "/", "12", "17", "*", "-", "+"};
+        List<String> inputsA = List.of("23", "7", "*", "32", "8", "/", "+");
+        List<String> inputsB = List.of("23", "3", "23", "*", "2", "/", "12", "17", "*", "-", "+");
 
         //when
         int resultA = cal.calculatePostfixExpression(inputsA);
         int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
-        assertThat(resultA).isEqualTo(23*7 + 32/8);
+        assertThat(resultA).isEqualTo(23 * 7 + 32 / 8);
         assertThat(resultB).isEqualTo(23 + 3 * 23 / 2 - 12 * 17);
     }
 

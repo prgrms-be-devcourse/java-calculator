@@ -23,7 +23,7 @@ public class CalculationService implements Runnable {
     }
 
     public int calculate(String input) {
-        String[] tokenized = tokenizer.tokenize(input);
+        List<String> tokenized = tokenizer.tokenize(input);
         int result = calculator.calculateInfixExpression(tokenized);
 
         saveCalculation(tokenized, result);
@@ -31,7 +31,7 @@ public class CalculationService implements Runnable {
         return result;
     }
 
-    private void saveCalculation(String[] tokenized, int result) {
+    private void saveCalculation(List<String> tokenized, int result) {
         StringBuilder calculationBuilder = new StringBuilder();
         for (String str : tokenized) {
             calculationBuilder.append(str);

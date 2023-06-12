@@ -2,6 +2,7 @@ package com.programmers.domain;
 
 import com.programmers.util.Arithmetic;
 
+import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
@@ -14,15 +15,15 @@ public class Calculator {
         postfixConverter = new PostfixConverter();
     }
 
-    public int calculateInfixExpression(String[] expression) {
+    public int calculateInfixExpression(List<String> expression) {
         validator.validate(expression);
 
-        String[] postfixExpression = postfixConverter.convert(expression);
+        List<String> postfixExpression = postfixConverter.convert(expression);
 
         return calculatePostfixExpression(postfixExpression);
     }
 
-    public int calculatePostfixExpression(String[] expression) {
+    public int calculatePostfixExpression(List<String> expression) {
         Stack<Integer> numbers = new Stack<>();
         for (String expr : expression) {
             if (Arithmetic.isNumber(expr)) {

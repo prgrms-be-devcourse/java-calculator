@@ -2,6 +2,8 @@ package com.programmers.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostfixConverterTest {
@@ -10,10 +12,10 @@ public class PostfixConverterTest {
     @Test
     void parsingDataMixedWithPlusAndMinus() {
         //given
-        String[] tokenizedA = {"1", "+", "3", "-", "4"};
+        List<String> tokenizedA = List.of("1", "+", "3", "-", "4");
 
         //when
-        String[] resultA = converter.convert(tokenizedA);
+        List<String> resultA = converter.convert(tokenizedA);
 
         //then
         assertThat(resultA).containsExactly("1", "3", "+", "4", "-");
@@ -22,12 +24,12 @@ public class PostfixConverterTest {
     @Test
     void parsingDataMixedAllOperator() {
         //given
-        String[] tokenizedA = {"1", "*", "1", "+", "1", "/", "1"};
-        String[] tokenizedB = {"1", "-", "1", "*", "1", "/", "1"};
+        List<String> tokenizedA = List.of("1", "*", "1", "+", "1", "/", "1");
+        List<String> tokenizedB = List.of("1", "-", "1", "*", "1", "/", "1");
 
         //when
-        String[] resultA = converter.convert(tokenizedA);
-        String[] resultB = converter.convert(tokenizedB);
+        List<String> resultA = converter.convert(tokenizedA);
+        List<String> resultB = converter.convert(tokenizedB);
 
         //then
         assertThat(resultA).containsExactly("1", "1", "*", "1", "1", "/", "+");

@@ -2,8 +2,10 @@ package com.programmers.domain;
 
 import com.programmers.util.Arithmetic;
 
+import java.util.List;
+
 public class ExpressionValidator {
-    public void validate(String[] expression) {
+    public void validate(List<String> expression) {
         boolean isNumberTurn = true;
         for (String expr : expression) {
             if (Arithmetic.isNumber(expr) && isNumberTurn) {

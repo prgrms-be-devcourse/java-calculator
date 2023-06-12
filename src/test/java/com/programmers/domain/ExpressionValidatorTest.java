@@ -2,6 +2,8 @@ package com.programmers.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ExpressionValidatorTest {
@@ -10,9 +12,9 @@ public class ExpressionValidatorTest {
     @Test
     void validateInvalidOrder_Then_Exception() {
         //given
-        String[] inputA = {"1", "1", "1"};
-        String[] inputB = {"+", "1", "/"};
-        String[] inputC = {"1", "+"};
+        List<String> inputA = List.of("1", "1", "1");
+        List<String> inputB = List.of("+", "1", "/");
+        List<String> inputC = List.of("1", "+");
 
         //when
 
@@ -29,9 +31,9 @@ public class ExpressionValidatorTest {
     @Test
     void validateInvalidOperator_Then_Exception() {
         //given
-        String[] inputA = {"1", "++", "1"};
-        String[] inputB = {"1", " ", "2"};
-        String[] inputC = {"1", "", "2"};
+        List<String> inputA = List.of("1", "++", "1");
+        List<String> inputB = List.of("1", " ", "2");
+        List<String> inputC = List.of("1", "", "2");
 
         //when
 
@@ -47,8 +49,8 @@ public class ExpressionValidatorTest {
     @Test
     void validateValidExpression() {
         //given
-        String[] inputA = {"1", "+", "1"};
-        String[] inputB = {"1", "/", "1", "*", "1"};
+        List<String> inputA = List.of("1", "+", "1");
+        List<String> inputB = List.of("1", "/", "1", "*", "1");
 
         //when
         validator.validate(inputA);

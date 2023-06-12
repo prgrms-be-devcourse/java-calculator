@@ -11,7 +11,7 @@ public class PostfixConverter {
     private List<String> postfixExpression;
     private Stack<String> operators;
 
-    public String[] convert(String[] tokenized) {
+    public List<String> convert(List<String> tokenized) {
         postfixExpression = new ArrayList<>();
         operators = new Stack<>();
 
@@ -25,7 +25,7 @@ public class PostfixConverter {
         }
         popAndAddOperatorsToExpression(() -> false);
 
-        return postfixExpression.toArray(String[]::new);
+        return postfixExpression;
     }
 
     private void popAndAddOperatorsToExpression(Supplier<Boolean> breakCondition) {

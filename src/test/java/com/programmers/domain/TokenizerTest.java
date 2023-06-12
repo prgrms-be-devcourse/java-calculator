@@ -2,6 +2,8 @@ package com.programmers.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TokenizerTest {
@@ -14,8 +16,8 @@ public class TokenizerTest {
         String inputB = "1+2+3";
 
         //when
-        String[] tokenizedA = tokenizer.tokenize(inputA);
-        String[] tokenizedB = tokenizer.tokenize(inputB);
+        List<String> tokenizedA = tokenizer.tokenize(inputA);
+        List<String> tokenizedB = tokenizer.tokenize(inputB);
 
         //then
         assertThat(tokenizedA).containsExactly("1", "+", "2", "+", "3");
