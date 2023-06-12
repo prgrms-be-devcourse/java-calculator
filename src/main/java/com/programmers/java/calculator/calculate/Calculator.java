@@ -8,12 +8,9 @@ import java.util.Stack;
 
 public class Calculator {
 
-
     private static ResultRepository resultRepository = new ResultRepository();
     private static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
 
-
-    //계산의 역할을 한다.
     public double getResult(String expression) {
 
 
