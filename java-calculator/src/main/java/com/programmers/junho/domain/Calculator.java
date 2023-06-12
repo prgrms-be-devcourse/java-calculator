@@ -12,6 +12,10 @@ public class Calculator {
     public int calculate(String value) {
         Expression expression = new Expression(value);
         String postfixExpression = expression.getPostfixExpression();
+        return calculateWithPostfixExpression(postfixExpression);
+    }
+
+    private Integer calculateWithPostfixExpression(String postfixExpression) {
         String[] tokens = postfixExpression.split(DELIMITER.getValue());
         Stack<Integer> stack = new Stack<>();
 
