@@ -10,6 +10,9 @@ import com.devcourse.engine.historian.Historian;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static com.devcourse.engine.exception.InvalidInputException.INVALID_MENU;
+import static com.devcourse.engine.exception.InvalidInputException.NO_HISTORY;
+
 public class Calculator implements Runnable {
 
     private Computer computer;
@@ -68,9 +71,13 @@ public class Calculator implements Runnable {
                     throw new InvalidInputException("올바른 메뉴를 선택해주세요.");
                 }
 
-            } catch (InvalidInputException e) {
-                output.printError(e.getMessage());
-            }
-        }
+    private void checkHasHistory() {
+        if (historian.getLastIndex() < 1)
+            throw new InvalidInputException(NO_HISTORY);
+    }
+
+    private void validMenuCheck(String menu) throws InvalidInputException {
+        if (menu.length() > 1 || !Arrays.asList("0", "1", "2").contains(menu))
+            throw new InvalidInputException(INVALID_MENU);
     }
 }

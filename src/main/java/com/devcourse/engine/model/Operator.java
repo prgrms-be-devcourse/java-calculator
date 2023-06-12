@@ -5,13 +5,15 @@ import com.devcourse.engine.exception.InvalidInputException;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
+import static com.devcourse.engine.exception.InvalidInputException.ZERO_DIVIDE;
+
 public enum Operator {
     PLUS("+", 1, Double::sum),
     MINUS("-", 1, (b, a) -> a - b),
     MULTIPLY("*", 2, (b, a) -> a * b),
     DIVIDE("/", 2, (b, a) -> {
         if (b == 0)
-            throw new InvalidInputException("0으로 나눌 수 없습니다.");
+            throw new InvalidInputException(ZERO_DIVIDE);
         return a / b;
     }),
     OPEN_BRANKET("(", 0, (b, a) -> 0.0),
