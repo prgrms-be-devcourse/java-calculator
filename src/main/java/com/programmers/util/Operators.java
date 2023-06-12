@@ -1,7 +1,5 @@
 package com.programmers.util;
 
-import com.programmers.error.exception.InvalidOperatorInputException;
-
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
@@ -24,7 +22,7 @@ public enum Operators {
         return Arrays.stream(values())
                 .filter(operator -> operator.symbol.equals(inputOperator))
                 .findFirst()
-                .orElseThrow(() -> new InvalidOperatorInputException("잘못된 수식입니다. +, -, *, / 연산만 가능합니다."));
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 수식입니다. +, -, *, / 연산만 가능합니다."));
     }
 
 
