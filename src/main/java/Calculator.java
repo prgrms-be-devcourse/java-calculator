@@ -20,17 +20,18 @@ public class Calculator {
 
     public void run() {
 
-        String userInput;
+        String optionInput;
+        String problemInput;
 
         while (go) {
-            userInput = input.readWithPrompt("0. 종료\n1. 조회\n2. 계산\n\n선택 : ");
+            optionInput = input.readWithPrompt("0. 종료\n1. 조회\n2. 계산\n\n선택 : ");
 
-            if (!InputValidation.isValidatedOption(userInput)) {
+            if (!InputValidation.isValidatedOption(optionInput)) {
                 output.inputError("0, 1, 2 중에 하나를 선택하세요.");
                 continue;
             }
 
-            switch (userInput) {
+            switch (optionInput) {
                 case "0":
                     go = false;
                     break;
@@ -40,11 +41,11 @@ public class Calculator {
                 case "2":
                     operands.clear();
                     operators.clear();
-                    userInput = input.read();
+                    problemInput = input.read();
 
-                    if (InputValidation.isValidatedMathProblem(userInput)) {
+                    if (InputValidation.isValidatedMathProblem(problemInput)) {
                         try {
-                            parseRawProblem(userInput);
+                            parseRawProblem(problemInput);
                             output.answer(calculate());
                         } catch (Exception e) {
                             output.inputError(e.getMessage());
