@@ -1,10 +1,15 @@
 package com.devcourse.engine;
 
+import com.devcourse.engine.computer.Computer;
 import com.devcourse.engine.computer.SimpleComputer;
+import com.devcourse.engine.converter.Converter;
+import com.devcourse.engine.converter.PostfixConverter;
 import com.devcourse.engine.io.Input;
 import com.devcourse.engine.io.Output;
 import com.devcourse.engine.exception.InvalidInputException;
 import com.devcourse.engine.historian.Historian;
+import com.devcourse.engine.validator.SimpleValidator;
+import com.devcourse.engine.validator.Validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,20 +20,27 @@ import static com.devcourse.engine.exception.InvalidInputException.NO_HISTORY;
 
 public class Calculator implements Runnable {
 
-    private final SimpleComputer simpleComputer;
-    private final Historian historian;
     private final Input input;
     private final Output output;
+    private final Historian historian;
+    private final Validator validator;
+    private final Converter converter;
+    private final Computer computer;
 
     public Calculator(
-            SimpleComputer simpleComputer,
-            Historian historian,
             Input input,
-            Output output) {
-        this.simpleComputer = simpleComputer;
-        this.historian = historian;
+            Output output,
+            Historian historian,
+            Validator validator,
+            Converter converter,
+            Computer computer
+            ) {
         this.input = input;
         this.output = output;
+        this.historian = historian;
+        this.validator = validator;
+        this.converter = converter;
+        this.computer = computer;
     }
 
     @Override
@@ -60,10 +72,14 @@ public class Calculator implements Runnable {
 
     private void calculate() {
         String userInput = input.inputExpression();
-        List<String> infixExpression = simpleComputer.validate(userInput);
-        List<String> postfixExpression = simpleComputer.convert(infixExpression);
-        double result = simpleComputer.compute(postfixExpression);
+        List<String> infixExpression = validator.validate(userInput);
+        double result = computer.compute(
+                converter.convert(infixExpression)
+        );
+        saveAndPrint(infixExpression, result);
+    }
 
+    private void saveAndPrint(List<String> infixExpression, double result) {
         historian.saveHistory(infixExpression, result);
         output.showResult(result);
     }
