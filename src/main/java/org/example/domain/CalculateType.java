@@ -7,13 +7,7 @@ public enum CalculateType {
     ADD("+", 1, (left, right) -> left + right),
     SUBTRACT("-", 1, (left, right) -> left - right),
     MULTIPLY("*", 2, (left, right) -> left * right),
-    DIVIDE("/", 2, (left, right) ->
-    {
-        if (right == 0) {
-            throw new ArithmeticException("0으로 나누어선 안됩니다.");
-        }
-        return left / right;
-    });
+    DIVIDE("/", 2, (left, right) -> left / right);
 
     private String symbol;
     private int priority;

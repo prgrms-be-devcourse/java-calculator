@@ -1,43 +1,47 @@
 package org.example.domain;
 
 import org.example.repository.Records;
-import org.example.view.InputView;
-import org.example.view.OutputView;
 import org.example.view.SelectTypeView;
+import org.example.view.View;
 
 public class Console {
 
-    private final InputView inputView;
-    private final OutputView outputView;
-    private final Calculator calculator;
+    private View view;
+    private Calculator calculator;
+    private static boolean loop = false;
 
-    public Console(InputView inputView, OutputView outputView, Calculator calculator) {
-        this.inputView = inputView;
-        this.outputView = outputView;
+    public Console(View view, Calculator calculator) {
+        this.view = view;
         this.calculator = calculator;
     }
 
     public void run() {
-        while (true) {
-            outputView.printSelection();
-            String option = inputView.selectWork();
+
+        while (!loop) {
+            view.printSelection();
+            String option = view.selectWork();
             SelectTypeView selectType = SelectTypeView.findByNum(option);
             selectOption(selectType);
         }
+
     }
 
-    public void selectOption(SelectTypeView selectType) {
+    private void selectOption(SelectTypeView selectType) {
 
         switch (selectType) {
 
-            case GET_RECORD -> outputView.printRecords(Records.exportRecord());
+            case GET_RECORD -> view.printRecords(Records.exportRecord());
 
             case CALCULATE -> {
-                String infixExpression = inputView.inputExpression();
+                String infixExpression = view.inputExpression();
                 double result = calculator.calculate(infixExpression);
-                outputView.printResult(result);
+                view.printResult(result);
                 Records.saveRecord(infixExpression, result);
             }
+
+            case END -> loop = true;
         }
     }
+
+
 }

@@ -18,15 +18,23 @@ public class Calculator {
             }
             double left = operandStack.pop();
             double right = operandStack.pop();
+
+            if (value.equals("/") && right == 0){
+                throw new ArithmeticException("0으로 나눌 수 없습니다.");
+            }
+
             CalculateType calculateType = CalculateType.findBySymbol(value);
             double midResult = calculateType.calculate(left, right);
             operandStack.push(midResult);
         }
+
         double result = operandStack.pop();
+
         return result;
     }
 
     private String toPostfix(String[] infixExpression) {
+
         Stack<String> operatorStack = new Stack<>();
         StringBuilder postfixExpression = new StringBuilder();
 
@@ -38,15 +46,20 @@ public class Calculator {
             }
 
             CalculateType calculateType = CalculateType.findBySymbol(value);
-            while (!operatorStack.isEmpty() &&
-                    calculateType.getPriority() < CalculateType.findBySymbol(operatorStack.peek()).getPriority()) {
+            int expressionPriority = CalculateType.findBySymbol(operatorStack.peek()).getPriority();
+            int typePriority = calculateType.getPriority();
+
+            while (!operatorStack.isEmpty() && typePriority < expressionPriority) {
                 postfixExpression.append(operatorStack.pop() + " ");
             }
+
             operatorStack.push(value);
         }
+
         while (!operatorStack.isEmpty()) {
             postfixExpression.append(operatorStack.pop() + " ");
         }
+
         return postfixExpression.toString();
     }
 
