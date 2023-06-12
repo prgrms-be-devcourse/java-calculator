@@ -1,7 +1,10 @@
 package io;
 
-public interface CalculatorInput {
-    int inputButton();
+import model.ExpressionVO;
+import model.MenuVO;
 
-    String inputExpression();
+public interface CalculatorInput {
+    MenuVO menuInput();
+
+    ExpressionVO expressionInput();
 }
