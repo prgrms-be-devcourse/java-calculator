@@ -17,6 +17,11 @@ public class Console {
         return sc.next();
     }
 
+
+    public String inputFormula() {
+        return sc.nextLine();
+    }
+
     public void printError(String errorMsg) {
         System.out.println("errorMsg = " + errorMsg);
     }

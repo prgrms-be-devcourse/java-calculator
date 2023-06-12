@@ -4,6 +4,7 @@ import org.programmers.Io.Console;
 import org.programmers.validator.Validator;
 
 import java.lang.invoke.WrongMethodTypeException;
+import java.util.Scanner;
 
 public class Calculator {
 
@@ -11,12 +12,16 @@ public class Calculator {
     private final Console console;
     private final Validator validator;
 
-    public Calculator(Console console) {
+    private final ExpressionEvaluator expressionEvaluator;
+
+    private final Scanner sc = new Scanner(System.in);
+
+
+    public Calculator(Console console, ExpressionEvaluator expressionEvaluator) {
         this.console = console;
         this.validator = new Validator(console);
+        this.expressionEvaluator = expressionEvaluator;
     }
-
-
 
 
     boolean isRunning = true;
@@ -24,7 +29,7 @@ public class Calculator {
     public void run() {
         while (isRunning) {
             console.printOption();
-            String inputNum = (console.inputNum());
+            String inputNum = console.inputNum();
             Option option = ChangeOption(inputNum);
             if (option == null)
                 continue;
@@ -34,7 +39,11 @@ public class Calculator {
                     System.out.println("console.printQuery();");
                     break;
                 case CALC:
-                    System.out.println("console.printCalc();");
+                    // String formula = console.inputFormula();
+                    // System.out.println("formula = " + formula); console.inputFormula()로 입력이 안됨 추후 리팩토링
+                    String formula = sc.nextLine();
+                    String result = expressionEvaluator.requestCalculate(formula);
+                    console.printCal(result);
                     break;
                 case EXIT:
                     isRunning = false;
