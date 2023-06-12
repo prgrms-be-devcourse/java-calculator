@@ -1,7 +1,7 @@
 package com.programmers.junho.domain.constant;
 
 public enum CalculatorConstant {
-    REDEX("^\\d+\\s([-+*/]\\s\\d+\\s)+$"),
+    REGEX("^\\d+\\s([-+*/]\\s\\d+\\s)+$"),
     DELIMITER(" "),
     BLANK(" ");
 

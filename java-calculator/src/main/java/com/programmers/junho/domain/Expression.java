@@ -17,7 +17,7 @@ public class Expression {
     }
 
     private void validateExpression(String expression) {
-        if (!Pattern.matches(REDEX.getValue(), appendBlankForRegex(expression))) {
+        if (!Pattern.matches(REGEX.getValue(), appendBlankForRegex(expression))) {
             throw new IllegalArgumentException("잘못된 형식의 식을 입력하셨습니다.");
         }
     }
