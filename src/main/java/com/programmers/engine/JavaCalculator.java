@@ -22,17 +22,19 @@ public class JavaCalculator implements Runnable{
 
             switch (menu) {
                 case LOOK_UP -> output.readAllResults(resultManager.readAllResults());
-                case CALCULATE -> {
-                    String expression = input.getExpression();
-                    int answer = bc.doCalculate(expression);
-                    output.printAnswer(answer);
-                    resultManager.save(expression, answer);
-                }
+                case CALCULATE -> calculate();
                 case EXIT -> {
                     return;
                 }
                 default -> output.inputError();
             }
         }
+    }
+
+    private void calculate() {
+        String expression = input.getExpression();
+        int answer = bc.doCalculate(expression);
+        output.printAnswer(answer);
+        resultManager.save(expression, answer);
     }
 }
