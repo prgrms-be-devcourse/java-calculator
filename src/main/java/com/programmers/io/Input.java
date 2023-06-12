@@ -5,6 +5,6 @@ public interface Input {
 
     String getEquation();
 
-    String getMenu();
+    void getMenu();
 
 }

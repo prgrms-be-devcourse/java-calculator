@@ -6,6 +6,8 @@ public interface Output {
 
     void println(double msg);
 
+    void print(String msg);
+
     void printErrorMsg(String errMsg);
 
 }
