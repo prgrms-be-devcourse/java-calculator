@@ -22,15 +22,14 @@ public class CalculatorService {
         int result = CalculatorHelper.calculateExpression(postfixExpression);
 
         //저장
-        calculatorRepository.save(new CalculatorDto(expression,result));
+        calculatorRepository.save(new CalculatorDto(expression, result));
         return result;
     }
 
     //history 조회
-    public List<CalculatorDto> getHistories(){
+    public List<CalculatorDto> getHistories() {
         return calculatorRepository.findAll();
     }
-
 
 
 }

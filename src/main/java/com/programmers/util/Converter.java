@@ -12,21 +12,21 @@ public class Converter {
             char c = infix.charAt(i);
 
             //연산자인경우
-            if (Validator.isOperator(c)){
-                while(!operatorStack.isEmpty() && Validator.hasHigherPrecedence(operatorStack.peek(),c)){
+            if (Validator.isOperator(c)) {
+                while (!operatorStack.isEmpty() && Validator.hasHigherPrecedence(operatorStack.peek(), c)) {
                     postfix.append(operatorStack.pop());
                 }
                 operatorStack.push(c);
             }
             //숫자인 경우
-            else{
+            else {
                 //숫자를 만나면 바로 postfix에 추가
                 postfix.append(c);
             }
         }
 
         //남은 연산자들 후위 표기법에 추가
-        while(!operatorStack.isEmpty()){
+        while (!operatorStack.isEmpty()) {
             postfix.append(operatorStack.pop());
         }
 
