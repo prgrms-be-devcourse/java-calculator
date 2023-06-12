@@ -7,7 +7,7 @@ import java.util.List;
 public interface Output {
     void printRecord(List<CalculationResult> record);
 
-    void printError(String errorMsg);
+    void printMessage(String errorMsg);
 
     void printResult(long result);
 
