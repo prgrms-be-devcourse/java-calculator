@@ -41,18 +41,14 @@ public class InputValidator {
     public void checkEquationInput(String equation) {
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(equation.split(" ")));
 
-        if (equation.length() == 0) {
-            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
-        }
-
-        if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
-            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
-        }
+        throwIfEquationIsEmpty(equation);
+        throwIfEquationStartOrEndWithNoInteger(tokens);
 
         int digit = 0;
         int operation = 0;
 
         for (String eachToken: tokens) {
+
             if (isInteger(eachToken)) {
                 digit += 1;
             } else if (isOperator(eachToken)) {
@@ -60,9 +56,22 @@ public class InputValidator {
             } else {
                 throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
             }
-        }
 
+        }
+            // 연속 연산 계산 예외 넣어야함
         if (digit - operation > 1 || digit + operation == 1) {
+            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+        }
+    }
+
+    public void throwIfEquationIsEmpty(String equation) {
+        if (equation.length() == 0) {
+            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+        }
+    }
+
+    public void throwIfEquationStartOrEndWithNoInteger(ArrayList<String> tokens) {
+        if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
             throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }

@@ -41,6 +41,7 @@ public class Calculator implements Runnable{
         if (command == MenuConstant.SELECTED_HISTORY_COMMAND) {
             try {
                 output.printCalculateHistory(calculatorRepository.getHistory());
+
             } catch (RuntimeException e) {
                 output.printExceptionMessage(e.getMessage());
             }
@@ -51,6 +52,7 @@ public class Calculator implements Runnable{
                 output.printRequestEquationInput();
                 String equation = input.getEquation();
                 calculatorRepository.storeHistory(calculateUtil.calculateAndReturnEquationWithAnswer(equation));
+
             } catch (RuntimeException e) {
                 output.printExceptionMessage(e.getMessage());
             }
