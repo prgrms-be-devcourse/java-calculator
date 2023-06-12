@@ -11,7 +11,8 @@ public class CalculatorManager {
     private final CalculationRepository repository;
     private final Input input;
     private final Output output;
-    private static final String VIEW = "1", CALCULATION = "2";
+    private static final String VIEW = "1", CALCULATION = "2", EXIT = "3";
+
 
     public CalculatorManager(CalculationRepository repository, Input input, Output output) {
         this.repository = repository;
@@ -28,6 +29,8 @@ public class CalculatorManager {
                 case CALCULATION:
                     calculatorProcessStart();
                     break;
+                case EXIT:
+                    exitProgram();
                 default:
                     wrongMenuSelection();
             }
@@ -50,11 +53,11 @@ public class CalculatorManager {
             repository.save(new CalculationResult(formula, result));
             output.printResult(result);
         } catch (NumberFormatException e) {
-            output.printError(ErrorMsg.OPERAND_IS_NOT_A_NUMBER);
+            output.printMessage(ErrorMsg.OPERAND_IS_NOT_A_NUMBER);
         } catch (IllegalArgumentException e) {
-            output.printError(ErrorMsg.INVALID_OPERATOR_INPUT);
+            output.printMessage(ErrorMsg.INVALID_OPERATOR_INPUT);
         } catch (ArithmeticException e) {
-            output.printError(ErrorMsg.ENTER_ZERO_FOR_DIVISION);
+            output.printMessage(ErrorMsg.ENTER_ZERO_FOR_DIVISION);
         }
     }
 
@@ -72,12 +75,12 @@ public class CalculatorManager {
     }
 
     private void wrongMenuSelection() {
-        output.printError(ErrorMsg.INVALID_MENU_SELECTION);
+        output.printMessage(ErrorMsg.INVALID_MENU_SELECTION);
     }
 
     private void recordCommandExecution(List<CalculationResult> calculationRecord) {
         if (isEmptyRecord(calculationRecord)) {
-            output.printError(ErrorMsg.NO_CALCULATION_RECORDS);
+            output.printMessage(ErrorMsg.NO_CALCULATION_RECORDS);
             return;
         }
         output.printRecord(calculationRecord);
@@ -85,5 +88,10 @@ public class CalculatorManager {
 
     private boolean isEmptyRecord(List<CalculationResult> record) {
         return record != null && record.size() == 0;
+    }
+
+    private void exitProgram() {
+        output.printMessage("프로그램을 종료합니다.");
+        System.exit(0);
     }
 }
