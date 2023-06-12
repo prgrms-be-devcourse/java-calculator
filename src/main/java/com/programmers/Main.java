@@ -1,7 +1,15 @@
 package com.programmers;
 
+import com.programmers.model.CalculatorManager;
+import com.programmers.repository.CalculationRepository;
+import com.programmers.repository.InMemoryCalculationRepository;
+import com.programmers.view.Console;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        CalculationRepository repository = new InMemoryCalculationRepository();
+        Console console = new Console();
+        CalculatorManager calculatorManager = new CalculatorManager(repository, console, console);
+        calculatorManager.run();
     }
 }
