@@ -29,6 +29,8 @@ public class PostCalculatorTest {
             ,"1 + 2 * 3 + 5 / 5 + 1 + 4, 13"
             ,"1 / 2 + 1 / 2 + 8 / 4 * 2, 5"
             ,"3 / 4 - 1 / 4, 0.5"
+            ,"((1+2)+3)"
+
     })
     void 계산식_계산(String equation, double result) {
         assertThat(result)

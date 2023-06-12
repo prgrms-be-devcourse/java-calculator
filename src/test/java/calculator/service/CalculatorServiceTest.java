@@ -48,7 +48,7 @@ public class CalculatorServiceTest {
         calculatorService.calculate(userInput);
 
         assertThat(calculatorService.getCalculateList().stream()
-                .filter(calc -> make.equals(calc))
-                .findAny().isPresent()).isTrue();
+                .anyMatch(calc -> make.equals(calc)))
+                .isTrue();
     }
 }

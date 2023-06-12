@@ -100,7 +100,7 @@ public class PostFixCalculator {
         if (OperatorMap.contains(data)) {
             double back = result.pop();
             double front = result.pop();
-            result.add(OperatorMap.apply(data, front, back));
+            result.add(OperatorMap.calculate(data, front, back));
             return;
         }
 

@@ -3,6 +3,7 @@ package util;
 import calculator.exception.NotSolveEquationException;
 
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 public enum OperatorMap {
     MINUS("-", 2, (num1, num2)->num1-num2),
@@ -29,14 +30,7 @@ public enum OperatorMap {
         return false;
     }
 
-    public static boolean firstOrder(String operator) {
-        if (operator.equals(MUL.operator) || operator.equals(DIV.operator)) {
-            return true;
-        }
-        return false;
-    }
-
-    public static double apply(String operator, double num1, double num2) {
+    public static double calculate(String operator, double num1, double num2) {
         for (OperatorMap oper : OperatorMap.values()) {
             if (operator.equals(oper.operator)) {
                 return oper.bifunction.apply(num1, num2);
@@ -57,4 +51,6 @@ public enum OperatorMap {
         }
         return 0;
     }
+
+
 }

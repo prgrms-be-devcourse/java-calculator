@@ -1,5 +1,4 @@
 import calculator.controller.CalculatorController;
-import calculator.domain.Calculator;
 import calculator.repository.CalculatorRepository;
 import calculator.service.CalculatorService;
 import ui.InputView;
@@ -7,25 +6,18 @@ import ui.OutputView;
 
 import java.util.Scanner;
 
-public class Main {
+public class CalculatorApplication {
     public static void main(String[] args) {
         CalculatorController controller = new CalculatorController(
-                  inputViewInstance()
-                , outputViewInstance()
-                , calculatorServiceInstance());
+                new InputView(scannerInstance())
+                , new OutputView()
+                , new CalculatorService(calculatorRepositoryInstance()));
 
         controller.start();
     }
 
-    private static InputView inputViewInstance() {
-        return new InputView(scannerInstance());
-    }
     private static Scanner scannerInstance() {
         return new Scanner(System.in);
     }
-    private static OutputView outputViewInstance() {
-        return new OutputView();
-    }
-    private static CalculatorService calculatorServiceInstance() {return new CalculatorService(calculatorRepositoryInstance());}
     private static CalculatorRepository calculatorRepositoryInstance() {return new CalculatorRepository();}
 }
