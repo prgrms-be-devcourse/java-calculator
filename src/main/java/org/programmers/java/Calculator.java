@@ -31,9 +31,8 @@ public class Calculator {
             output.menuMsg();
             String selectNum = input.selectNumInput();
             output.selectMsg(selectNum);
-            Optional<FunctionSelect> selectMenu = getFunctionSelectNumber(selectNum);
-
-            switch (selectMenu.get()) {
+            FunctionSelect selectMenu = getFunctionSelectNumber(selectNum);
+            switch (selectMenu) {
                 case CHECK:
                     output.getCalculationValues(formulaRepository.getFormulaList());
                     break;
@@ -51,14 +50,8 @@ public class Calculator {
         }
     }
 
-    private Optional<FunctionSelect> getFunctionSelectNumber(String selectNum) {
-        Optional<FunctionSelect> selectMenu = FunctionSelect.findSelect(selectNum);
-
-        if(selectMenu.isEmpty()){
-            selectMenu.orElse(FunctionSelect.WRONGINPUT);
-        }
-
-        return selectMenu;
+    private FunctionSelect getFunctionSelectNumber(String selectNum) {
+        return FunctionSelect.findSelect(selectNum).orElse(FunctionSelect.WRONGINPUT);
     }
 
     private void formulaCalculate() {

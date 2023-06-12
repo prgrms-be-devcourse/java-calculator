@@ -4,13 +4,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.programmers.java.calculation.Calculation;
+import org.programmers.java.calculation.InfixToPostfixConverter;
+import org.programmers.java.calculation.PostfixCalculation;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class CalculationTest {
 
-     Calculation calculation = new Calculation();
+     InfixToPostfixConverter infixToPostfixConverter = new InfixToPostfixConverter();
+     PostfixCalculation postfixCalculation = new PostfixCalculation();
 
      @Test
      @DisplayName("중위 표기식 -> 후위 표기식 변경")
@@ -20,7 +23,7 @@ public class CalculationTest {
           List<String> postfixExpect = Arrays.asList("3","5","10","*","+");
 
           // when
-          List<String> postfix = calculation.infixToPostfix(formulaList);
+          List<String> postfix = infixToPostfixConverter.convert(formulaList);
 
           // then
           Assertions.assertEquals(postfixExpect, postfix);
@@ -33,7 +36,7 @@ public class CalculationTest {
           List<String> postfix = Arrays.asList("3","5","10","*","+");
 
           // when
-          String calculateValue = calculation.postfixCalculate(postfix);
+          String calculateValue = postfixCalculation.calculate(postfix);
 
           // then
           Assertions.assertEquals("53", calculateValue);

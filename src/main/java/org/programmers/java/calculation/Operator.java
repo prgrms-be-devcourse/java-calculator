@@ -1,20 +1,44 @@
 package org.programmers.java.calculation;
 
-public class Operator {
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.regex.Pattern;
 
-    static public int plus(int a, int b){
-        return a + b;
+public enum Operator {
+    PLUS("+", 2, (a, b) -> a + b),
+    MINUS("-", 2, (a, b) -> a - b),
+    MULTIPLY("*", 1, (a, b) -> a * b),
+    DIVIDE("/", 1, (a, b) -> a / b);
+
+    private final String symbol;
+    private final int priority;
+    private final BiFunction<Integer, Integer, Integer> expression;
+
+
+    Operator(String symbol, int priority, BiFunction<Integer, Integer, Integer> expression){
+        this.symbol = symbol;
+        this.priority = priority;
+        this.expression = expression;
     }
-    static public int minus(int a, int b){
-        return a - b;
+
+    public static boolean comparePriorities(String firstSymbol, String secondSymbol){
+        return Integer.parseInt(firstSymbol) > Integer.parseInt(secondSymbol);
+
     }
-    static public int multiply(int a, int b){
-        return a * b;
+
+    public static int arithmeticExpression(String symbol, int firstOperand, int secondOperand){
+        return isSymbol(symbol).get().expression.apply(firstOperand, secondOperand);
     }
-    static public int divide(int a, int b){
-        if(b == 0) {
-            throw new ArithmeticException("0으로 나눌 수 없습니다.");
-        }
-        return a / b;
+
+
+    public static Optional<Operator> isSymbol(String inputSymbol){
+        return Arrays.stream(values())
+                .filter(operator -> operator.symbol.equals(inputSymbol))
+                .findAny();
+    }
+
+    public static boolean isNumber(String inputNumber){
+        return Pattern.matches("[0-9]+",inputNumber);
     }
 }
