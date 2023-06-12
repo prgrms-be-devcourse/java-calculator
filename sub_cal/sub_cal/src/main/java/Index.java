@@ -9,8 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-//사용자가 옵션을 선택할 수 있습니다.
-//선택한 옵션에 맞게 switch 문으로 해당 옵션에 맞는 메소드를 호출합니다.
+
 public class Index implements Runnable{
     private Input input;
     private Output output;

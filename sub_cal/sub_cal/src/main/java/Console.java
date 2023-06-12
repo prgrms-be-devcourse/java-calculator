@@ -13,9 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-
-//Index에서 사용자가 입력을 하면 해당 옵션에 맞는 메소드를 제공해줍니다.
-//만약 예외가 발생하면 오류 메세지를 출력
 public class Console implements Input,  Output {
     Scanner sc = new Scanner(System.in);
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,7 +20,7 @@ public class Console implements Input,  Output {
     @Override
     public Option selectOption() {
         Optional<Option> userOption = Option.getMenu(sc.nextLine());
-        if(userOption.isEmpty()) System.out.println() ;
+        if(userOption.isEmpty()) System.out.println("존재하지 않는 메뉴입니다.");
         return userOption.get();
     }
 

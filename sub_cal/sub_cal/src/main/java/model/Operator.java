@@ -2,11 +2,12 @@ package model;
 
 import java.util.Stack;
 import java.util.StringTokenizer;
-// 실질적인 계산을 담당합니다.
 public class Operator {
-    static Stack<Integer> numberStack = new Stack<>();
-    static Stack<String> operStack = new Stack<>();
+    private Stack<Integer> numberStack = new Stack<>();
+    private Stack<String> operStack = new Stack<>();
+
     public Integer operate(String inputString) {
+
 
         StringTokenizer st = new StringTokenizer(inputString);
 
@@ -17,7 +18,7 @@ public class Operator {
         return numberStack.pop();
     }
     // 숫자와 연산자를 구분하고 각자 스택에 넣어줍니다
-    private static void classify(StringTokenizer st){
+    private void classify(StringTokenizer st){
 
         while(st.hasMoreTokens()){
             String word = st.nextToken();
@@ -41,7 +42,7 @@ public class Operator {
 
     }
 
-    private static void cal(){
+    private void cal(){
         while(true){
             if(numberStack.size() == 1) break;
 
@@ -57,7 +58,7 @@ public class Operator {
         }
     }
 
-    private static void calPriority(String word,int num2) {
+    private void calPriority(String word,int num2) {
         int num1 = numberStack.pop();
 
         if(word.equals("*")) numberStack.push(num1*num2);
