@@ -42,7 +42,6 @@ public class FormulaSplitValidator {
         }
 
         if(!Operator.isNumber(operatorOrOperand) && !Operator.isSymbol(operatorOrOperand).isPresent()){
-            System.out.println(operatorOrOperand);
             output.errorMsg(Error.CALCULATE_VALIDATION.getMsg());
             formularAfterSplitValidate.clear();
             return false;

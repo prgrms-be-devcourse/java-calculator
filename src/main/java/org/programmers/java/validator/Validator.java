@@ -28,7 +28,6 @@ public class Validator {
         }
 
         if(!isNormalFormula) {
-            System.out.println("에러");
             output.errorMsg(Error.CALCULATE_VALIDATION.getMsg());
         }
 
