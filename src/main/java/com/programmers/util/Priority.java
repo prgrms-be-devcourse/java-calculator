@@ -1,7 +1,5 @@
 package com.programmers.util;
 
-import com.programmers.error.exception.InvalidOperatorInputException;
-
 import java.util.Arrays;
 
 public enum Priority {
