@@ -17,7 +17,6 @@ public class Calculator {
     private final Scanner sc = new Scanner(System.in);
 
 
-
     public Calculator(Console console, ExpressionEvaluator expressionEvaluator) {
         this.console = console;
         this.validator = new Validator(console);
@@ -32,7 +31,6 @@ public class Calculator {
             console.printOption();
             String inputNum = console.inputNum();
             Option option = ChangeOption(inputNum);
-            System.out.println("option = " + option);
             if (option == null)
                 continue;
 
@@ -41,9 +39,14 @@ public class Calculator {
                     System.out.println("console.printQuery();");
                     break;
                 case CALC:
-                   // String formula = console.inputFormula();
-                   // System.out.println("formula = " + formula); console.inputFormula()로 입력이 안됨 추후 리팩토링
+                    // String formula = console.inputFormula();
+                    // System.out.println("formula = " + formula); console.inputFormula()로 입력이 안됨 추후 리팩토링
+
                     String formula = sc.nextLine();
+                    // 입력된 연산식의 유효성 검증
+                    if (!validator.validateCalculation(formula)) {
+                        break;
+                    }
                     String result = expressionEvaluator.requestCalculate(formula);
                     console.printCal(result);
                     break;
