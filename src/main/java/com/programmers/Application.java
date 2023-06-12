@@ -1,18 +1,18 @@
 package com.programmers;
 
-import com.programmers.engine.Calculator;
+import com.programmers.controller.CalculatorController;
 import com.programmers.engine.PostfixCalculator;
 import com.programmers.io.Console;
 import com.programmers.repository.CalculatorHistory;
 
 public class Application {
     public static void main(String[] args) {
-        Calculator calculator = new Calculator(
+        CalculatorController calculatorController = new CalculatorController(
                 new Console(),
                 new PostfixCalculator(),
                 new CalculatorHistory()
         );
-        calculator.run();
+        calculatorController.run();
 
     }
 
