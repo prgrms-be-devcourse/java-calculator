@@ -55,12 +55,25 @@ public class Calculator {
     }
 
     private void formulaCalculate() {
-        String formula = input.formulaInput();
+        String inputFormula = input.formulaInput();
 
-        if(validator.formulaValidate(formula)){
-            String result = calculation.requestCalculate(formula);
+        if(validator.formulaValidate(inputFormula)){
+            String result = calculation.requestCalculate(inputFormula);
             output.calculationValue(result);
-            formulaRepository.save(formula, result);
+            String getFormula = formulaRepository.save(inputFormula, result);
+            compareFormula(getFormula, inputFormula, result);
+        }
+    }
+
+    private void compareFormula(String getFormula, String inputFormula, String result){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder
+                .append(inputFormula)
+                .append(" = ")
+                .append(result);
+        String formula = stringBuilder.toString();
+        if(!getFormula.equals(formula)){
+            output.errorMsg(Error.DOES_NOT_MATCH_DATA.getMsg());
         }
     }
 }
