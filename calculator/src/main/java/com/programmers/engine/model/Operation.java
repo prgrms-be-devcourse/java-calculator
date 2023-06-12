@@ -61,8 +61,7 @@ public class Operation {
         return false;
     }
 
-    //나중에 구현
     private static boolean isOperand(String element) {
-        return true;
+        return element.matches("[0-9]+");
     }
 }
