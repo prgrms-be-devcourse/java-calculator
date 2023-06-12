@@ -18,6 +18,10 @@ public enum Menu {
         this.name = name;
     }
 
+    public static boolean isCalculate(Menu selectedMenu) {
+        return selectedMenu == Menu.CALCULATE;
+    }
+
     public static boolean isQuit(Menu selectedMenu) {
         return selectedMenu == Menu.QUIT;
     }
