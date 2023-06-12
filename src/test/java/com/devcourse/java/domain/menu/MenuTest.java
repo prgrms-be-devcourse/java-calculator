@@ -8,7 +8,6 @@ import com.devcourse.java.domain.console.Reader;
 import com.devcourse.java.domain.console.Writer;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.storage.MemoryStorage;
-import com.devcourse.java.domain.validator.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,6 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class MenuTest {
     private final Console console = new Console(new Reader(), new Writer());
-    private final Validator validator = new Validator();
     private final MemoryStorage memoryStorage = new MemoryStorage();
 
     @Test
@@ -43,7 +41,7 @@ class MenuTest {
     @Nested
     @DisplayName("조회 메뉴 테스트")
     class queryMenuTest {
-        private final Query query = new Query(memoryStorage, validator);
+        private final Query query = new Query(memoryStorage);
 
         @ParameterizedTest
         @MethodSource("queryData")
@@ -80,7 +78,7 @@ class MenuTest {
         void calculateSuccessTest(String expression, double expected) {
            // given
             final Console console = new Console(new CustomInput(expression), output);
-            final Calculate calculate = new Calculate(new CustomCalculator(expected), memoryStorage, validator);
+            final Calculate calculate = new Calculate(new CustomCalculator(expected), memoryStorage);
 
             // when
             boolean power = calculate.execute(console);
@@ -99,7 +97,7 @@ class MenuTest {
             }
 
             @Override
-            public CalculateResult run(String expression, Validator validator) {
+            public CalculateResult run(String expression) {
                 return new CalculateResult(expression, this.result);
             }
         }

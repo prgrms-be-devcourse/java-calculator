@@ -10,7 +10,6 @@ import com.devcourse.java.domain.operator.Operator;
 import com.devcourse.java.domain.parser.ExpressionParser;
 import com.devcourse.java.domain.parser.PrefixParser;
 import com.devcourse.java.domain.storage.MemoryStorage;
-import com.devcourse.java.domain.validator.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -63,12 +62,11 @@ class MenuFactoryTest {
     }
 
     private void initializeQueryAndCalculateMenu() {
-        Validator validator = new Validator();
         MemoryStorage memoryStorage = new MemoryStorage();
         ExpressionParser prefixParser = new PrefixParser();
         Factory<Operator, String> factory = new OperatorFactory();
         PrefixCalculator prefixCalculator = new PrefixCalculator(prefixParser, factory);
-        query = new Query(memoryStorage, validator);
-        calculate = new Calculate(prefixCalculator, memoryStorage, validator);
+        query = new Query(memoryStorage);
+        calculate = new Calculate(prefixCalculator, memoryStorage);
     }
 }

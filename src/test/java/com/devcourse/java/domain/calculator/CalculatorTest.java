@@ -1,11 +1,10 @@
 package com.devcourse.java.domain.calculator;
 
 import com.devcourse.java.domain.factory.Factory;
-import com.devcourse.java.domain.operator.Operator;
 import com.devcourse.java.domain.factory.OperatorFactory;
+import com.devcourse.java.domain.operator.Operator;
 import com.devcourse.java.domain.parser.PrefixParser;
 import com.devcourse.java.domain.storage.CalculateResult;
-import com.devcourse.java.domain.validator.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +19,6 @@ class CalculatorTest {
     private final PrefixParser parser = new PrefixParser();
     private final Factory<Operator, String> factory = new OperatorFactory();
     private final PrefixCalculator prefixCalculator = new PrefixCalculator(parser, factory);
-    private final Validator validator = new Validator();
 
     @ParameterizedTest
     @DisplayName("계산을 시키면 입력에 따른 예상값이 정상적으로 계산되야 한다.")
@@ -29,7 +27,7 @@ class CalculatorTest {
         // given
 
         // when
-        CalculateResult result = prefixCalculator.run(expression, validator);
+        CalculateResult result = prefixCalculator.run(expression);
 
         // then
         assertThat(result.getExpression()).isEqualTo(expression);

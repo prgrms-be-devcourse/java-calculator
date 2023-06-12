@@ -1,6 +1,5 @@
 package com.devcourse.java.domain.parser;
 
-import com.devcourse.java.domain.validator.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +8,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ParserTest {
-    private final Validator validator = new Validator();
     private final PrefixParser prefixParser = new PrefixParser();
 
     @Test
@@ -20,7 +18,7 @@ class ParserTest {
         final List<String> expect = List.of("1", "2", "3", "*", "+", "4", "5", "/", "-");
 
         // when
-        List<String> prefixExpression = prefixParser.parse(expression, validator);
+        List<String> prefixExpression = prefixParser.parse(expression);
 
         // then
         for (int i = 0; i < expect.size(); i++) {

@@ -1,7 +1,7 @@
 package com.devcourse.java.domain.parser;
 
 import com.devcourse.java.domain.operator.Operators;
-import com.devcourse.java.domain.validator.Validator;
+import com.devcourse.java.common.Validator;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ public class PrefixParser implements ExpressionParser {
     public PrefixParser() { }
 
     @Override
-    public List<String> parse(String expression, Validator validator) {
-        return toPrefix(expression, validator);
+    public List<String> parse(String expression) {
+        return toPrefix(expression);
     }
 
-    private List<String> toPrefix(String expression, Validator validator) {
+    private List<String> toPrefix(String expression) {
         Deque<String> stack = new ArrayDeque<>();
         List<String> result = new ArrayList<>();
 
         for (String character : expression.split(BLANK)) {
-            if (isOperator(result, character, validator)) {
+            if (isOperator(result, character)) {
                 addToResult(stack, result, character);
             }
         }
@@ -32,8 +32,8 @@ public class PrefixParser implements ExpressionParser {
         return result;
     }
 
-    private boolean isOperator(List<String> result, String character, Validator validator) {
-        if (validator.isNumber(character)) {
+    private boolean isOperator(List<String> result, String character) {
+        if (Validator.isNumber(character)) {
             result.add(character);
             return false;
         }
@@ -41,7 +41,7 @@ public class PrefixParser implements ExpressionParser {
     }
 
     private void addToResult(Deque<String> stack, List<String> result, String character) {
-        while (isNotEmpty(stack) && isPeekHigherPriority(stack, character)) {
+        while (Validator.isNotEmpty(stack) && isPeekHigherPriority(stack, character)) {
             result.add(stack.pop());
         }
         stack.push(character);
@@ -53,12 +53,8 @@ public class PrefixParser implements ExpressionParser {
     }
 
     private void clearLeftsToResult(Deque<String> stack, List<String> result) {
-        while (isNotEmpty(stack)) {
+        while (Validator.isNotEmpty(stack)) {
             result.add(stack.pop());
         }
-    }
-
-    private boolean isNotEmpty(Deque<String> stack) {
-        return !stack.isEmpty();
     }
 }

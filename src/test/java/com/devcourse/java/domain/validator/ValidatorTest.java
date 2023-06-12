@@ -1,5 +1,6 @@
 package com.devcourse.java.domain.validator;
 
+import com.devcourse.java.common.Validator;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.console.Reader;
 import com.devcourse.java.domain.console.Writer;
@@ -15,7 +16,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ValidatorTest {
-    private Validator validator = new Validator();
     private Console console = new Console(new Reader(), new Writer());
 
     @Test
@@ -25,7 +25,7 @@ class ValidatorTest {
         List<String> strings = new ArrayList<>();
 
         // when
-        boolean notEmpty = validator.isNotEmpty(strings, console);
+        boolean notEmpty = Validator.isNotEmpty(strings);
 
         // then
         assertThat(notEmpty).isFalse();
@@ -41,7 +41,7 @@ class ValidatorTest {
             // given
 
             // when
-            boolean validExpression = validator.isValidExpression(expression, console);
+            boolean validExpression = Validator.isValidExpression(expression);
 
             // then
             assertThat(validExpression).isTrue();
@@ -59,7 +59,7 @@ class ValidatorTest {
             // given
 
             // when
-            boolean validExpression = validator.isValidExpression(expression, console);
+            boolean validExpression = Validator.isValidExpression(expression);
 
             // then
             assertThat(validExpression).isFalse();
@@ -76,7 +76,7 @@ class ValidatorTest {
             // given
 
             // when
-            boolean isNumber = validator.isNumber(number);
+            boolean isNumber = Validator.isNumber(number);
 
             // then
             assertThat(isNumber).isTrue();
@@ -89,7 +89,7 @@ class ValidatorTest {
             // given
 
             // when
-            boolean isNumber = validator.isNumber(number);
+            boolean isNumber = Validator.isNumber(number);
 
             // then
             assertThat(isNumber).isFalse();

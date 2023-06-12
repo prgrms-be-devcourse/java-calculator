@@ -3,18 +3,18 @@ package com.devcourse.java.domain.menu;
 import com.devcourse.java.domain.storage.Storage;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.console.Console;
-import com.devcourse.java.domain.validator.Validator;
+import com.devcourse.java.common.Validator;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.devcourse.java.common.Messages.EMPTY_STORAGE;
+
 public class Query implements Menu {
     private final Storage<CalculateResult> storage;
-    private final Validator validator;
 
-    public Query(Storage<CalculateResult> storage, Validator validator) {
+    public Query(Storage<CalculateResult> storage) {
         this.storage = storage;
-        this.validator = validator;
     }
 
     @Override
@@ -25,9 +25,11 @@ public class Query implements Menu {
     }
 
     private void queryResults(Console console, List<CalculateResult> calculateResults) {
-        if (validator.isNotEmpty(calculateResults, console)) {
+        if (Validator.isNotEmpty(calculateResults)) {
             List<String> resultStrings = toString(calculateResults);
             console.printList(resultStrings);
+        } else { // todo: change
+            console.print(EMPTY_STORAGE.toMessage());
         }
     }
 

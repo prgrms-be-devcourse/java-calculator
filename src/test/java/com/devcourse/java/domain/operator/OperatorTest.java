@@ -125,7 +125,7 @@ class OperatorTest {
             double x = 1;
             double y = 0;
 
-            assertThatThrownBy(() -> operator.operate(1, y))
+            assertThatThrownBy(() -> operator.operate(x, y))
                     .withFailMessage(DIVIDE_BY_ZERO.toMessage());
         }
 
