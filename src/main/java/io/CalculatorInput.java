@@ -1,10 +1,10 @@
 package io;
 
-import model.ExpressionVO;
-import model.MenuVO;
+import model.vo.Expression;
+import model.vo.Menu;
 
 public interface CalculatorInput {
-    MenuVO menuInput();
+    Menu menuInput();
 
-    ExpressionVO expressionInput();
+    Expression expressionInput();
 }

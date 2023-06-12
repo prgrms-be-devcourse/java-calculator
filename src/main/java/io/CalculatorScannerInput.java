@@ -1,7 +1,7 @@
 package io;
 
-import model.ExpressionVO;
-import model.MenuVO;
+import model.vo.Expression;
+import model.vo.Menu;
 
 import java.util.Scanner;
 
@@ -9,12 +9,12 @@ public class CalculatorScannerInput implements CalculatorInput {
     private static final Scanner sc = new Scanner(System.in);
 
     @Override
-    public MenuVO menuInput() {
-        return new MenuVO(sc.nextLine());
+    public Menu menuInput() {
+        return new Menu(sc.nextLine());
     }
 
     @Override
-    public ExpressionVO expressionInput() {
-        return new ExpressionVO(sc.nextLine());
+    public Expression expressionInput() {
+        return new Expression(sc.nextLine());
     }
 }
