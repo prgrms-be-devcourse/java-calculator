@@ -171,5 +171,8 @@ gradle-app.setting
 *.idea
 gradlew
 gradlew.bat
+/build/
+
+.DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle
