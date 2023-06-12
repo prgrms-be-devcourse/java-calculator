@@ -35,11 +35,15 @@ public enum ArithmeticOperators implements Operator {
     }
 
     public static ArithmeticOperators convertTokenToOperator(String token) {
-        return Arrays.stream(values()).filter(operator -> operator.getOperator().equals(token)).findAny().orElseThrow();
+        return Arrays.stream(values())
+                .filter(operator -> operator.getOperator().equals(token))
+                .findAny()
+                .orElseThrow();
     }
 
     public static boolean isNotOperator(String token) {
-        return Arrays.stream(values()).noneMatch(operator -> operator.getOperator().equals(token));
+        return Arrays.stream(values())
+                .noneMatch(operator -> operator.getOperator().equals(token));
     }
 
     public String getOperator() {
