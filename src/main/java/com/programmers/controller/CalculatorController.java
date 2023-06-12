@@ -23,11 +23,12 @@ public class CalculatorController {
             menu = Menu.getMenu(menuNum);
 
             if (menu.isHistory()) {
-                //todo : map에서 출력
+                Output.printHistories(calculatorService.getHistories());
             }
             if (menu.isCalculate()) {
                 String expression = Input.inputExpression();
                 int result = calculatorService.calculate(expression);
+                Output.printResult(result);
             }
 
         } while (!menu.isFinish());

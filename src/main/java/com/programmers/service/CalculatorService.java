@@ -5,6 +5,8 @@ import com.programmers.repository.CalculatorRepository;
 import com.programmers.util.CalculatorHelper;
 import com.programmers.util.Converter;
 
+import java.util.List;
+
 
 public class CalculatorService {
     private final CalculatorRepository calculatorRepository;
@@ -20,8 +22,15 @@ public class CalculatorService {
         int result = CalculatorHelper.calculateExpression(postfixExpression);
 
         //저장
-        return calculatorRepository.save(new CalculatorDto(expression,result));
+        calculatorRepository.save(new CalculatorDto(expression,result));
+        return result;
     }
+
+    //history 조회
+    public List<CalculatorDto> getHistories(){
+        return calculatorRepository.findAll();
+    }
+
 
 
 }

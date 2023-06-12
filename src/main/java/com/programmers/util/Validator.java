@@ -1,7 +1,5 @@
 package com.programmers.util;
 
-import com.programmers.view.Input;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
