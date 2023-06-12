@@ -18,19 +18,19 @@ public enum Menu {
         this.name = name;
     }
 
-    public static boolean isCalculate(Menu selectedMenu) {
-        return selectedMenu == Menu.CALCULATE;
-    }
-
-    public static boolean isQuit(Menu selectedMenu) {
-        return selectedMenu == Menu.QUIT;
-    }
-
     public static Menu getSelectedMenu(int selectedMenuNumber) {
         return Arrays.stream(Menu.values())
             .filter(menu -> selectedMenuNumber == menu.getNumber())
             .findFirst()
             .orElseThrow(() -> new MenuInputException(NOT_EXIST_MENU_MESSAGE));
+    }
+
+    public boolean isCalculate() {
+        return this == Menu.CALCULATE;
+    }
+
+    public boolean isQuit() {
+        return this == Menu.QUIT;
     }
 
     public int getNumber() {

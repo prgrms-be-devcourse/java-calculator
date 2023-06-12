@@ -1,8 +1,6 @@
 package calculator.controller;
 
 import static calculator.entity.Menu.getSelectedMenu;
-import static calculator.entity.Menu.isCalculate;
-import static calculator.entity.Menu.isQuit;
 import static calculator.view.InputView.inputMenuNumber;
 import static calculator.view.OutputView.showMenu;
 
@@ -24,7 +22,7 @@ public class MainController {
             int menuNumber = inputMenuNumber();
             Menu selectedMenu = getSelectedMenu(menuNumber);
 
-            if (isQuit(selectedMenu)) {
+            if (selectedMenu.isQuit()) {
                 break;
             }
 
@@ -33,7 +31,7 @@ public class MainController {
     }
 
     private void execute(Menu selectedMenu) {
-        if (isCalculate(selectedMenu)) {
+        if (selectedMenu.isCalculate()) {
             calculator.calculate();
         }
     }
