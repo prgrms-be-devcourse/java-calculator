@@ -10,7 +10,7 @@ import static com.programmers.junho.domain.ArithmeticOperators.isNotOperator;
 public class Expression {
     private static final String REGEX = "^\\d+\\s([-+*/]\\s\\d+\\s)+$";
     private static final String DELIMITER = " ";
-    public static final String BLANK = " ";
+    private static final String BLANK = " ";
     private final String expression;
 
     public Expression(String expression) {
@@ -25,7 +25,7 @@ public class Expression {
     }
 
     private String appendBlankForRegex(String expression) {
-        return expression + " ";
+        return expression + BLANK;
     }
 
     public String getPostfixExpression() {
@@ -74,4 +74,3 @@ public class Expression {
         return Objects.hash(expression);
     }
 }
-

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PrintStreamOutputView implements OutputView {
 
-    public static final String CHOICE_MESSAGE = "1. 조회\n" + "2. 계산";
+    private static final String CHOICE_MESSAGE = "1. 조회\n" + "2. 계산";
 
     @Override
     public void printChoiceMessage() {
