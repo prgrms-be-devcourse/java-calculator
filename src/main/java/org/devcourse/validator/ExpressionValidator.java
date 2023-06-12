@@ -1,6 +1,7 @@
 package org.devcourse.validator;
 
 import org.devcourse.exception.InputExpressionException;
+import org.devcourse.util.RegexPattern;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -41,7 +42,7 @@ public class ExpressionValidator<T> implements Validator<T> {
 
         String expression = exp.replaceAll(" ", "");
 
-        Pattern pattern = Pattern.compile("^[\\.+\\-*/\\(\\)\\d]*$"); // 연산자, 피연산자(\\d)
+        Pattern pattern = RegexPattern.OPERATOR_PATTERN;
         Matcher matcher = pattern.matcher(expression);
 
         if (exp.equals("")) {
@@ -59,8 +60,8 @@ public class ExpressionValidator<T> implements Validator<T> {
     private void checkOperatorOrder(String exp) throws InputExpressionException {
 
 
-        Pattern operandPattern = Pattern.compile("[0-9\\(\\)\\.]");
-        Pattern notOperandPattern = Pattern.compile("[0-9]\\(|\\)[0-9]");
+        Pattern operandPattern = RegexPattern.OPERAND_PATTERN;
+        Pattern notOperandPattern = RegexPattern.NOT_OPERAND_PATTERN;
 
         char firstChar = exp.charAt(0);
         char lastChar = exp.charAt(exp.length()-1);
