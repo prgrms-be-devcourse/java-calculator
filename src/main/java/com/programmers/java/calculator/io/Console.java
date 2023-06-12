@@ -15,7 +15,18 @@ public class Console implements Input, Output {
     }
 
     @Override
+    public String input() {
+        return scanner.nextLine();
+    }
+
+    @Override
     public void inputError(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void print(String message) {
+        System.out.println(message);
+        System.out.println();
     }
 }
