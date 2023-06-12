@@ -4,6 +4,8 @@ import com.programmers.java.calculator.converter.Converter;
 import com.programmers.java.calculator.entity.History;
 import com.programmers.java.calculator.repository.CalculatorRepository;
 
+import java.util.List;
+
 public class CalculatorServiceImpl implements CalculatorService {
 
     private final Converter converter;
@@ -21,7 +23,12 @@ public class CalculatorServiceImpl implements CalculatorService {
         return result;
     }
 
+    @Override
+    public List<History> getHistoryList() {
+        return calculatorRepository.findAll();
+    }
+
     private static History makeHistory(String expression, String result) {
-        return new History(expression + "=" + result);
+        return new History(expression + " = " + result);
     }
 }

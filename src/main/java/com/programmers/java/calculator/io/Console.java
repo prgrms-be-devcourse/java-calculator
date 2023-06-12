@@ -1,5 +1,8 @@
 package com.programmers.java.calculator.io;
 
+import com.programmers.java.calculator.entity.History;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -27,6 +30,12 @@ public class Console implements Input, Output {
     @Override
     public void print(String message) {
         System.out.println(message);
+        System.out.println();
+    }
+
+    @Override
+    public void printHistoryList(List<History> historyList) {
+        historyList.stream().forEach(history -> System.out.println(history.getExpression()));
         System.out.println();
     }
 }

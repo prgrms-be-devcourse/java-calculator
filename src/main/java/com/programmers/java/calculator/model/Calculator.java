@@ -27,7 +27,9 @@ public class Calculator {
                 MenuType selecedtmenuType = MenuType.of(inputMenuType);
 
                 switch (selecedtmenuType) {
-                    case HISTORY -> System.out.println("조회 중");
+                    case HISTORY -> {
+                        output.printHistoryList(calculatorService.getHistoryList());
+                    }
                     case CALCULATE -> {
                         String expression = input.input();
                         validator.validate(expression);

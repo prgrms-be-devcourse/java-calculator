@@ -13,6 +13,10 @@ public class History {
         return id;
     }
 
+    public String getExpression() {
+        return expression;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
