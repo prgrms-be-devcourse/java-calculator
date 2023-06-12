@@ -3,18 +3,22 @@ package calculator.controller;
 import static calculator.entity.Menu.getSelectedMenu;
 import static calculator.entity.Menu.isQuit;
 import static calculator.view.InputView.inputMenuNumber;
+import static calculator.view.OutputView.showMenu;
 
 import calculator.entity.Menu;
-import java.util.Optional;
 
 public class MainController {
 
     public void run() {
-        Optional<Menu> selectedMenu = Optional.empty();
+        while (true) {
+            showMenu();
 
-        while (!isQuit(selectedMenu)) {
             int menuNumber = inputMenuNumber();
-            selectedMenu = getSelectedMenu(menuNumber);
+            Menu selectedMenu = getSelectedMenu(menuNumber);
+
+            if (isQuit(selectedMenu)) {
+                break;
+            }
         }
     }
 }

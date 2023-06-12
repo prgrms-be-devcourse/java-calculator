@@ -2,7 +2,6 @@ package calculator.entity;
 
 import calculator.validation.exception.MenuInputException;
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Menu {
 
@@ -19,24 +18,15 @@ public enum Menu {
         this.name = name;
     }
 
-    public static boolean isQuit(Optional<Menu> selectedMenu) {
-        return selectedMenu.equals(Optional.of(Menu.QUIT));
+    public static boolean isQuit(Menu selectedMenu) {
+        return selectedMenu == Menu.QUIT;
     }
 
-    public static Optional<Menu> getSelectedMenu(int selectedMenuNumber) {
-        Optional<Menu> selectedMenu = Arrays.stream(Menu.values())
+    public static Menu getSelectedMenu(int selectedMenuNumber) {
+        return Arrays.stream(Menu.values())
             .filter(menu -> selectedMenuNumber == menu.getNumber())
-            .findFirst();
-
-        validateIsExistedMenu(selectedMenu);
-
-        return selectedMenu;
-    }
-
-    private static void validateIsExistedMenu(Optional<Menu> selectedMenu) {
-        if (selectedMenu.isEmpty()) {
-            throw new MenuInputException(NOT_EXIST_MENU_MESSAGE);
-        }
+            .findFirst()
+            .orElseThrow(() -> new MenuInputException(NOT_EXIST_MENU_MESSAGE));
     }
 
     public int getNumber() {

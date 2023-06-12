@@ -1,7 +1,5 @@
 package calculator.view;
 
-import static calculator.view.OutputView.showMenu;
-
 import calculator.validation.exception.MenuInputException;
 import java.util.Scanner;
 
@@ -15,9 +13,8 @@ public final class InputView {
     }
 
     public static int inputMenuNumber() {
-        showMenu();
         String menuInput = readLine().trim();
-        validateIsNumericMenuInput(menuInput);
+        validateMenuInput(menuInput);
 
         return Integer.parseInt(menuInput);
     }
@@ -26,8 +23,8 @@ public final class InputView {
         return SCANNER.nextLine();
     }
 
-    private static void validateIsNumericMenuInput(String menuInput) {
-        if (!menuInput.matches(NUMERIC_REGEX)) {
+    private static void validateMenuInput(String menu) {
+        if (!menu.matches(NUMERIC_REGEX)) {
             throw new MenuInputException(NOT_NUMERIC_MENU_INPUT_MESSAGE);
         }
     }
