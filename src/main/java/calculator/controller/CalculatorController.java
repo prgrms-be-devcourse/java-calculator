@@ -21,22 +21,13 @@ public class CalculatorController {
     public void start() {
         boolean continueCalculator = true;
         while(continueCalculator) {
-            continueCalculator = eachExecute();
+            Menu select = userInput(()->{
+                outputView.printMenu();
+                return inputView.getMenuNumber();
+            });
+
+            executeMenu(select);
         }
-    }
-
-    private boolean eachExecute() {
-        Menu select = userInput(()->{
-            outputView.printMenu();
-            return inputView.getMenuNumber();
-        });
-
-        if (select == Menu.END) {
-            return false;
-        }
-
-        executeMenu(select);
-        return true;
     }
 
     private void executeMenu(Menu menu) {
