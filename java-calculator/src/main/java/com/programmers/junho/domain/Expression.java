@@ -6,11 +6,9 @@ import java.util.regex.Pattern;
 
 import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
 import static com.programmers.junho.domain.ArithmeticOperators.isNotOperator;
+import static com.programmers.junho.domain.constant.CalculatorConstant.*;
 
 public class Expression {
-    private static final String REGEX = "^\\d+\\s([-+*/]\\s\\d+\\s)+$";
-    private static final String DELIMITER = " ";
-    private static final String BLANK = " ";
     private final String expression;
 
     public Expression(String expression) {
@@ -19,20 +17,20 @@ public class Expression {
     }
 
     private void validateExpression(String expression) {
-        if (!Pattern.matches(REGEX, appendBlankForRegex(expression))) {
+        if (!Pattern.matches(REDEX.getValue(), appendBlankForRegex(expression))) {
             throw new IllegalArgumentException("잘못된 형식의 식을 입력하셨습니다.");
         }
     }
 
     private String appendBlankForRegex(String expression) {
-        return expression + BLANK;
+        return expression + BLANK.getValue();
     }
 
     public String getPostfixExpression() {
         StringBuilder postfixExpression = new StringBuilder();
         Stack<ArithmeticOperators> stack = new Stack<>();
 
-        String[] tokens = this.expression.split(DELIMITER);
+        String[] tokens = this.expression.split(DELIMITER.getValue());
         for (String token : tokens) {
             convertToPostfix(postfixExpression, stack, token);
         }
@@ -42,19 +40,19 @@ public class Expression {
 
     private void convertToPostfix(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack, String token) {
         if (isNotOperator(token)) {
-            postfixExpression.append(token).append(BLANK);
+            postfixExpression.append(token).append(BLANK.getValue());
             return;
         }
         var operator = convertTokenToOperator(token);
         while (isStackNotEmptyAndOperatorPriorityLower(stack, operator)) {
-            postfixExpression.append(stack.pop().getOperator()).append(BLANK);
+            postfixExpression.append(stack.pop().getOperator()).append(BLANK.getValue());
         }
         stack.push(operator);
     }
 
     private void appendAllExistingElement(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack) {
         while (!stack.isEmpty()) {
-            postfixExpression.append(stack.pop().getOperator()).append(BLANK);
+            postfixExpression.append(stack.pop().getOperator()).append(BLANK.getValue());
         }
     }
     private boolean isStackNotEmptyAndOperatorPriorityLower(Stack<ArithmeticOperators> stack, ArithmeticOperators operator) {

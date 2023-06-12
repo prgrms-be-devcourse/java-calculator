@@ -22,16 +22,18 @@ public class CalculatorController {
         this.inputView = inputView;
         this.outputView = outputView;
         this.calculatorRepository = new MemoryCalculatorRepository();
+        System.out.println();
     }
 
     public void run() {
+        Calculator calculator = new Calculator();
         while (true) {
             switch (getCode()){
                 case CHECK_DATA:
                     printAllPreviousData();
                     break;
                 case CALCULATE:
-                    printCalculatedResultAndSave();
+                    printCalculatedResultAndSave(calculator);
                     break;
                 default:
                     throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
@@ -40,7 +42,6 @@ public class CalculatorController {
     }
 
     private Selection getCode() {
-        outputView.printChoiceMessage();
         return findByCode(inputView.getSelectedCode());
     }
 
@@ -49,16 +50,11 @@ public class CalculatorController {
         outputView.printExpressions(calculatedData);
     }
 
-    private void printCalculatedResultAndSave() {
+    private void printCalculatedResultAndSave(Calculator calculator) {
         String expression = inputView.getExpression();
-        int result = calculate(expression);
+        int result = calculator.calculate(expression);
         outputView.printCalculatedResult(result);
         calculatorRepository.save(generateTotalResult(expression, result));
-    }
-
-    private int calculate(String expression) {
-        Calculator calculator = new Calculator(expression);
-        return calculator.calculate();
     }
 
     private String generateTotalResult(String expression, int result) {
