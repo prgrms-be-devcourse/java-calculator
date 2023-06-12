@@ -18,8 +18,10 @@ public class CalculatorHelper {
             else {
                 int operand2 = stack.pop();
                 int operand1 = stack.pop();
+
                 int result = performOperation(token, operand1, operand2);
                 stack.push(result);
+
             }
         }
         return stack.pop();

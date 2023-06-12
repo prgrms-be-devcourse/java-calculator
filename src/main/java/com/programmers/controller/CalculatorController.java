@@ -26,11 +26,25 @@ public class CalculatorController {
                 Output.printHistories(calculatorService.getHistories());
             }
             if (menu.isCalculate()) {
-                String expression = Input.inputExpression();
-                int result = calculatorService.calculate(expression);
-                Output.printResult(result);
+                processExpression();
             }
 
         } while (!menu.isFinish());
     }
+
+    private void processExpression() {
+        String expression = Input.inputExpression();
+
+        try {
+            int result = calculatorService.calculate(expression);
+            Output.printResult(result);
+        } catch (ArithmeticException e) {
+            System.out.println("0으로 나눌 수 없습니다. 다시 입력하세요");
+            this.processExpression();
+        } catch (IllegalArgumentException e) {
+            System.out.println("식이 잘못 되었습니다. 다시 입력하세요");
+            this.processExpression();
+        }
+    }
+
 }

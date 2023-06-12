@@ -34,7 +34,6 @@ public class Validator {
         return input.replaceAll("\\s+", "");
     }
 
-
     //연산자(+,-,*,/)인지 확인하는 함수
     public static boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';
