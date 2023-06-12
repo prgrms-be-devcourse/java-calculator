@@ -16,8 +16,7 @@ public class JavaCalculator implements Runnable{
 
     @Override
     public void run() {
-        boolean isExecutable = true;
-        while (isExecutable) {
+        while (true) {
             output.showMenu();
             Menu menu = Menu.matchMenu(input.selectMenu());
 
@@ -29,7 +28,9 @@ public class JavaCalculator implements Runnable{
                     output.printAnswer(answer);
                     resultManager.save(expression, answer);
                 }
-                case EXIT -> isExecutable = false;
+                case EXIT -> {
+                    return;
+                }
                 default -> output.inputError();
             }
         }
