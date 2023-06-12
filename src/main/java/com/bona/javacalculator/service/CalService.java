@@ -1,12 +1,13 @@
 package com.bona.javacalculator.service;
 
 import org.springframework.stereotype.Service;
-
-
 import java.util.Stack;
 
-@Service
+
 public class CalService {
+
+
+    private static final char WHITE_SPACE = ' ';
 
     //숫자,연산자 구분
     public Double calculateStr(String input) {
@@ -17,9 +18,9 @@ public class CalService {
         double num2 = 0;
         for (int i = 0; i < input.length(); i++) {
             c = input.charAt(i);
-            if(Character.isDigit(c)){
+            if (Character.isDigit(c)) {
                 numbers.push(c);
-            }else{
+            } else {
                 num2 = Double.parseDouble(numbers.pop().toString());
                 num1 = Double.parseDouble(numbers.pop().toString());
                 //연산자면 계산 후 스택에 저장
@@ -47,12 +48,12 @@ public class CalService {
             } else if (operationStack.isEmpty()) {//연산자 스택이 비어있을 경우 값 push
                 operationStack.push(c);
             } else {// 연산자가 스택에 있는 경우
-                if (compareOperation((char)operationStack.peek(), c) > 0) { //현재 연산자가 우선순위 더 높을 때
+                if (compareOperation((char) operationStack.peek(), c) > 0) { //현재 연산자가 우선순위 더 높을 때
                     operationStack.push(c); // 연산자 저장
                 } else {
                     while (!operationStack.isEmpty()) {
                         //현재 연산자가 우선순위 더 낮거나 같은 경우
-                        if (compareOperation((char)operationStack.peek(), c) <= 0) {
+                        if (compareOperation((char) operationStack.peek(), c) <= 0) {
                             sb.append(operationStack.pop()); // 스택에 있는 우선순위 높은 연산자 pop
                         } else {
                             break;
@@ -69,7 +70,6 @@ public class CalService {
         }
         return sb.toString();
     }
-
 
 
     //연산자 우선순위 반환
@@ -97,7 +97,7 @@ public class CalService {
             return 1;
         } else if (operationPriorityNow == operationPriority) {
             return 0;
-        } else{
+        } else {
             return -1;
         }
 

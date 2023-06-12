@@ -15,6 +15,7 @@ class CalMemoryRepositoryTest {
         memoryRepository.clearStore();
     }
 
+   // @DisplayName("저장을 테스트한다.")
     @Test
     void save() {
         //given

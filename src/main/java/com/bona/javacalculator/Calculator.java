@@ -41,10 +41,11 @@ public class Calculator implements Runnable{
 
     private void calculate() {
         String input = console.input("식을 입력해주세요 : ");
+        Optional<String> validateInput = checkValidate(input);
         if (input.isEmpty()) {
             return;
         }
-        String postfix = calService.convPostfix(input);
+        String postfix = calService.convPostfix(validateInput.get());
         System.out.println("postfix = " + postfix);
         Double result = calService.calculateStr(postfix);
         calMemoryRepo.save(new InputAndAnswer(input, result));
@@ -72,6 +73,11 @@ public class Calculator implements Runnable{
     }
 
     private int parse(String input) {
+//        if (input.isBlank()) {
+//            return BYE;
+//        }
+//        if()
+
         return Integer.parseInt(input);
     }
 
