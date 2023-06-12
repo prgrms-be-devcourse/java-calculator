@@ -1,5 +1,7 @@
 package calcproject.view;
 
+import java.util.Arrays;
+
 public enum Command {
 
 	EXIT(-1),
@@ -13,5 +15,12 @@ public enum Command {
 
 	public int getCmdIdx() {
 		return this.cmdIdx;
+	}
+
+	public static Command valueOfCmd(int choiceNum) {
+		return Arrays.stream(values())
+			.filter(value -> value.equals(choiceNum))
+			.findAny()
+			.orElse(CALCULATE.EXIT);
 	}
 }

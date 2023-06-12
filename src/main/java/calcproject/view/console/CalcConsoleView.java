@@ -21,16 +21,8 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 		int choiceNum = sc.nextInt();
 		sc.nextLine();
 
-		Command command = getCalcMenuByChoice(choiceNum);
+		Command command = Command.valueOfCmd(choiceNum);
 		return command;
-	}
-
-	private Command getCalcMenuByChoice(int choiceNum) {
-		var result = Arrays.stream(Command.values())
-			.filter(s -> s.getCmdIdx() == choiceNum)
-			.findFirst();
-
-		return result.orElse(Command.EXIT);
 	}
 
 	@Override
