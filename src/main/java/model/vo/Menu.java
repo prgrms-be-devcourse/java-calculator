@@ -4,13 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Menu {
-    private static final String BUTTON_PATTERN = "^[1-2]$";
-    public static final String INVALID_INPUT_BUTTON = "1 또는 2만 입력 가능합니다.";
+    private static final String MENU_PATTERN = "^[1-2]$";
+    public static final String INVALID_MENU = "1 또는 2만 입력 가능합니다.";
 
     private final int menu;
 
     public Menu(String menu) {
-        validNumber(menu, BUTTON_PATTERN);
+        validNumber(menu, MENU_PATTERN);
         this.menu = Integer.parseInt(menu);
     }
 
@@ -23,7 +23,7 @@ public class Menu {
         Matcher matcher = pattern.matcher(menu);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(INVALID_INPUT_BUTTON);
+            throw new IllegalArgumentException(INVALID_MENU);
         }
     }
 }
