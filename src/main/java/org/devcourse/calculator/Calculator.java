@@ -5,6 +5,7 @@ import org.devcourse.io.IODevice;
 import org.devcourse.repository.Repository;
 import org.devcourse.util.DigitChecker;
 import org.devcourse.validator.ExpressionValidator;
+import org.devcourse.validator.MenuValidator;
 import org.devcourse.validator.Validator;
 
 import java.util.List;
@@ -30,27 +31,12 @@ public class Calculator {
             ioDevice.outputMenus();
             String menuType = ioDevice.inputMenu();
 
-            // 메뉴 검증로직 구현
-            Validator<String> inputMenuValidator = (String s) -> {
-
-                try {
-
-                    int menuNum = Integer.parseInt(s);
-                    return MenuType.hasMenu(menuNum);
-
-                } catch (NumberFormatException e) {
-                    System.out.println("메뉴 번호를 숫자로 정확히 입력해주세요. [1, 2, 3]");
-                } catch (MenuTypeException e) {
-                    System.out.println(e.getMessage());
-                }
-
-                return false;
-            };
-
 
             // 메뉴 입력 검증
+            Validator<String> inputMenuValidator = new MenuValidator<>();
             boolean isValidMenu = inputMenuValidator.validate(menuType);
             if(!isValidMenu) continue;
+
 
             // 메뉴 입력에 따른 연산 수행
             MenuType menu = MenuType.findByMenuNum(Integer.parseInt(menuType));
