@@ -7,13 +7,13 @@ import com.programmers.view.Output;
 
 import java.util.List;
 
-public class CalculatorRunner {
+public class CalculatorManager {
     private final CalculationRepository repository;
     private final Input input;
     private final Output output;
     private static final String VIEW = "1", CALCULATION = "2";
 
-    public CalculatorRunner(CalculationRepository repository, Input input, Output output) {
+    public CalculatorManager(CalculationRepository repository, Input input, Output output) {
         this.repository = repository;
         this.input = input;
         this.output = output;
@@ -87,4 +87,3 @@ public class CalculatorRunner {
         return record != null && record.size() == 0;
     }
 }
-
