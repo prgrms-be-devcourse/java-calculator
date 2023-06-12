@@ -16,7 +16,10 @@ public enum Option {
         this.index = index;
     }
 
-
+    @Override
+    public String toString() {
+        return option + '.' + index ;
+    }
 
     public static Optional<Option> getMenu(String option) {
         return Arrays.stream(values())

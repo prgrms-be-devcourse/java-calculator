@@ -19,10 +19,10 @@ class ConsoleTest {
 
         int result;
 
-        result = cal.cal("1 + 3",operator, history);
+        result = cal.cal("1 + 3");
         assertEquals(4,result);
 
-        result = cal.cal("1 * 3 + 6",operator, history);
+        result = cal.cal("1 * 3 + 6");
         assertEquals(9,result);
 
         int length =  history.getHistoryLen();

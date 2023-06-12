@@ -8,8 +8,6 @@ import option.Option;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.function.DoubleUnaryOperator;
 
 //사용자가 옵션을 선택할 수 있습니다.
 //선택한 옵션에 맞게 switch 문으로 해당 옵션에 맞는 메소드를 호출합니다.
@@ -34,7 +32,7 @@ public class Index implements Runnable{
 
             output.ShowOptions();
 
-            Option select = input.selectOption("선택");
+            Option select = input.selectOption();
 
             //스위치 문을 통하여 옵션에 맞는 코드를 실행합니다
             switch (select) {
@@ -44,14 +42,22 @@ public class Index implements Runnable{
                 case CALCULATE:
                     System.out.print("계산식을 입력해주세요 : ");
 
+                    String inputString = null;
+
                     try {
-                        String inputString = br.readLine();
+                        inputString = input.inputString();
+
                         int result = calculator.cal(inputString);
-                        System.out.println(result);
+
+                        output.printResult(result);
+
                         history.addHistory(inputString,result);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+
+                    } catch (Exception e) {
+                        output.inputEmptyError("수식을 입력해주세요!");
+                        break;
                     }
+
             }
         }
     }

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Output {
 
-    void inputFormatError(String inputString);
+    void inputEmptyError(String inputString);
     void historyEmptyError();
     boolean showResultHistory(List<String> history);
     void ShowOptions();
