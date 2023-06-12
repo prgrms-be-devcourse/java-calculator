@@ -1,5 +1,8 @@
 public class Application {
     public static void main(String[] args) {
-        new Processor().start();
+        Processor processor = new Processor();
+        while (true) {
+            processor.start();
+        }
     }
 }

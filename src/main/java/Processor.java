@@ -15,26 +15,37 @@ public class Processor {
     }
 
     public void start() {
-        while (true) {
-            try {
-                view.printInfoMessage();
-                Command command = view.commandReader();
-                view.printNewLine();
-
-                if (command.equals(Command.HISTORY_COMMAND)) {
-                    String history = historyStorage.loadAll();
-                    view.printHistory(history);
-                    view.printNewLine();
-                }
-                if (command.equals(Command.CALCULATE_COMMAND)) {
-                    String expression = view.expressionReader();
-                    String result = calculator.calculate(expression);
-                    historyStorage.save(expression, result);
-                    view.printCalculationResult(result);
-                }
-            } catch (RuntimeException e) {
-                view.printErrorMessage(e.getMessage());
-            }
+        try {
+            doService();
+        } catch (RuntimeException e) {
+            view.printErrorMessage(e.getMessage());
         }
+    }
+
+    private void doService() throws RuntimeException {
+        view.printInfoMessage();
+        switch (getCommand()) {
+            case HISTORY_COMMAND -> viewLogs();
+            case CALCULATE_COMMAND -> doCalculation();
+        }
+    }
+
+    private Command getCommand() throws RuntimeException {
+        Command command = view.commandReader();
+        view.printNewLine();
+        return command;
+    }
+
+    private void viewLogs() {
+        String history = historyStorage.loadAll();
+        view.printHistory(history);
+        view.printNewLine();
+    }
+
+    private void doCalculation() throws RuntimeException {
+        String expression = view.expressionReader();
+        String result = calculator.calculate(expression);
+        historyStorage.save(expression, result);
+        view.printCalculationResult(result);
     }
 }
