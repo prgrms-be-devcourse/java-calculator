@@ -12,8 +12,6 @@ public class Calculator {
     private static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
 
     public double getResult(String expression) {
-
-
         List<String> tokenList = expressionTokenizer.expressionSplit(expression);
 
         Stack<Double> tempStack = new Stack<>();
