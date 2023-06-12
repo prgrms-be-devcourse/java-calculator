@@ -23,7 +23,7 @@ public class CalculatorTest {
 
         //then
         assertThat(resultA).isEqualTo(6);
-        assertThat(resultB).isEqualTo(123 + 234 + 2134);
+        assertThat(resultB).isEqualTo(2491);
         assertThat(resultC).isEqualTo(10);
     }
 
@@ -39,7 +39,7 @@ public class CalculatorTest {
 
         //then
         assertThat(resultA).isEqualTo(-4);
-        assertThat(resultB).isEqualTo(123 - 23 - 523);
+        assertThat(resultB).isEqualTo(-423);
     }
 
     @Test
@@ -53,8 +53,8 @@ public class CalculatorTest {
         int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
-        assertThat(resultA).isEqualTo(1 + 5 - 123);
-        assertThat(resultB).isEqualTo(123 - 2345 + 2452);
+        assertThat(resultA).isEqualTo(-117);
+        assertThat(resultB).isEqualTo(230);
 
     }
 
@@ -69,8 +69,8 @@ public class CalculatorTest {
         int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
-        assertThat(resultA).isEqualTo(2 * 5);
-        assertThat(resultB).isEqualTo(123 * 123 * 948);
+        assertThat(resultA).isEqualTo(10);
+        assertThat(resultB).isEqualTo(14342292);
     }
 
     @Test
@@ -84,8 +84,8 @@ public class CalculatorTest {
         int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
-        assertThat(resultA).isEqualTo(123 + 324 * 3 - 2332);
-        assertThat(resultB).isEqualTo(123 * 324 - 32 * 42);
+        assertThat(resultA).isEqualTo(-1237);
+        assertThat(resultB).isEqualTo(38508);
     }
 
     @Test
@@ -99,8 +99,8 @@ public class CalculatorTest {
         int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
-        assertThat(resultA).isEqualTo(123 / 23);
-        assertThat(resultB).isEqualTo(34 / 42 / 35);
+        assertThat(resultA).isEqualTo(5);
+        assertThat(resultB).isEqualTo(0);
     }
 
     @Test
@@ -126,8 +126,8 @@ public class CalculatorTest {
         int resultB = cal.calculatePostfixExpression(inputsB);
 
         //then
-        assertThat(resultA).isEqualTo(23 * 7 + 32 / 8);
-        assertThat(resultB).isEqualTo(23 + 3 * 23 / 2 - 12 * 17);
+        assertThat(resultA).isEqualTo(165);
+        assertThat(resultB).isEqualTo(-147);
     }
 
 }

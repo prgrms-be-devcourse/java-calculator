@@ -37,9 +37,9 @@ public class CalculationServiceTest {
 
         //then
         assertThat(resultA).isEqualTo(6);
-        assertThat(resultB).isEqualTo(5 * 2 + 3 + 4 - 5 * 6);
-        assertThat(resultC).isEqualTo(5 * 2 * 3 - 4 / 2 * 4);
-        assertThat(resultD).isEqualTo(3 * 33);
+        assertThat(resultB).isEqualTo(-13);
+        assertThat(resultC).isEqualTo(22);
+        assertThat(resultD).isEqualTo(99);
     }
 
     @Test
