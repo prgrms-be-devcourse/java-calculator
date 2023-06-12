@@ -5,9 +5,10 @@ import java.util.Map;
 
 public class ResultManager {
     private final Map<Integer, String> results = new HashMap<>();
+    private int key = 0;
 
     public void save(String expression, int answer) {
-        results.put(results.size() + 1, expression + " = " + String.valueOf(answer));
+        results.put(++key, expression + " = " + String.valueOf(answer));
     }
 
     public Map<Integer, String> readAllResults() {
