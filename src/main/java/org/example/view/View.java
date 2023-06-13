@@ -1,5 +1,6 @@
 package org.example.view;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -11,15 +12,15 @@ public class View implements Input,Output{
     private final Pattern REGEX_EXPRESSION = Pattern.compile("\\d+(\\s[+\\-*/]\\s\\d+)*");
 
     @Override
-    public String selectWork() {
-        String selection = sc.nextLine();
+    public int selectWork() {
+        int selection = sc.nextInt();
 
         if (validateSelection(selection)) {
             return selection;
         }
         sc.nextLine();
-
-        return "넌틀렸어";
+        
+        return -1;
     }
 
     @Override
@@ -52,13 +53,11 @@ public class View implements Input,Output{
         arithmeticRecords.stream().forEach(System.out::println);
     }
 
-    private boolean validateSelection(String selection) {
+    private boolean validateSelection(int selection) {
+        int[] regex_select = {1, 2, 3};
+        boolean regex_result = Arrays.stream(regex_select).anyMatch(num -> num == selection);
 
-        if (REGEX_SELECT.matcher(selection).matches()) {
-            return true;
-        }
-
-        return false;
+        return regex_result;
     }
 
     public boolean validateExpression(String expression) {
