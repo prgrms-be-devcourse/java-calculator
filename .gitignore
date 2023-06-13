@@ -170,6 +170,10 @@ $RECYCLE.BIN/
 .gradle
 **/build/
 !src/**/build/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -192,5 +196,23 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java,gradle,windows
