@@ -4,6 +4,8 @@ import com.programmers.domain.ExpressionValidator;
 import com.programmers.domain.SelectionValidator;
 import com.programmers.io.Console;
 
+import java.util.List;
+
 public class CalculatorService {
 
     private final Console console;
@@ -26,7 +28,7 @@ public class CalculatorService {
         }
     }
 
-    public String getValidatedExpression() {
+    public List<String> getValidatedExpression() {
         String expression = console.getExpressionSpaceRemoved();
 
         try {

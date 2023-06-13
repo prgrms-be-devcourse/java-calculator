@@ -12,14 +12,12 @@ public class Calculator {
 
     private final Console console = new Console();
     private final CalculatorService calculatorService = new CalculatorService(console);
-    private final ExpressionProcessor expressionProcessor = new ExpressionProcessor();
 
     public void run() {
         int menuSelection = calculatorService.getValidatedMenuSelection();
 
         if (menuSelection == CALCULATE) {
-            String validatedExpression = calculatorService.getValidatedExpression();
-            List<String> tokens = expressionProcessor.parse(validatedExpression);
+            List<String> tokens = calculatorService.getValidatedExpression();
 
             tokens.forEach(System.out::println);
         }
