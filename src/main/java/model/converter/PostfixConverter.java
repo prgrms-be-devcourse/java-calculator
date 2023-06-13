@@ -8,43 +8,44 @@ import java.util.List;
 import java.util.Stack;
 
 public class PostfixConverter implements Converter {
+    private static final String WHITESPACE = " ";
 
     @Override
     public List<String> covert(Expression expression) {
         List<String> postfixList = new ArrayList<>();
-        Stack<Operator> stack = new Stack<>();
-        String[] str = expression.getExpression().split(" ");
+        Stack<Operator> operatorStack = new Stack<>();
+        String[] noWhitespaceExpression = expression.getExpression().split(WHITESPACE);
 
-        for (String s : str) {
-            if (isOperator(s)) {
-                Operator operator = Operator.findOperator(s);
+        for (String textSegment : noWhitespaceExpression) {
+            if (isOperator(textSegment)) {
+                Operator operator = Operator.findOperator(textSegment);
 
-                while (!stack.isEmpty() && isHigherPriorityAfterOperator(stack.peek(), operator)) {
-                    postfixList.add(stack.pop().getSignature());
+                while (!operatorStack.isEmpty() && isHigherPriorityAfterOperator(operatorStack.peek(), operator)) {
+                    postfixList.add(operatorStack.pop().getSignature());
                 }
-                stack.push(operator);
+                operatorStack.push(operator);
                 continue;
             }
-            postfixList.add(s);
+            postfixList.add(textSegment);
         }
-        appendRemainingOperators(postfixList, stack);
+        appendRemainingOperators(postfixList, operatorStack);
         return postfixList;
     }
 
-    private boolean isOperator(String s) {
-        return s.equals(Operator.PLUS.getSignature())
-                || s.equals(Operator.MINUS.getSignature())
-                || s.equals(Operator.MULTIPLY.getSignature())
-                || s.equals(Operator.DIVIDE.getSignature());
+    private boolean isOperator(String textSegment) {
+        return textSegment.equals(Operator.PLUS.getSignature())
+                || textSegment.equals(Operator.MINUS.getSignature())
+                || textSegment.equals(Operator.MULTIPLY.getSignature())
+                || textSegment.equals(Operator.DIVIDE.getSignature());
     }
 
     private boolean isHigherPriorityAfterOperator(Operator prev, Operator now) {
         return prev.getPriority() >= now.getPriority();
     }
 
-    private void appendRemainingOperators(List<String> postfixList, Stack<Operator> stack) {
-        while (!stack.isEmpty()) {
-            postfixList.add(stack.pop().getSignature());
+    private void appendRemainingOperators(List<String> postfixList, Stack<Operator> operatorStack) {
+        while (!operatorStack.isEmpty()) {
+            postfixList.add(operatorStack.pop().getSignature());
         }
     }
 }

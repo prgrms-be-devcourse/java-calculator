@@ -30,6 +30,4 @@ public enum Operator {
                 .findAny()
                 .get();
     }
-
-
 }

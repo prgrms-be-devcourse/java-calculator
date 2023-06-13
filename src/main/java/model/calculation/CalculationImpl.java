@@ -12,16 +12,15 @@ public class CalculationImpl implements Calculation{
     public int calculate(List<String> postfixExpression) {
         Stack<Integer> stack = new Stack<>();
 
-        for (String s : postfixExpression) {
-            if (isNumber(s)) {
-                stack.push(Integer.parseInt(s));
+        for (String textSegment : postfixExpression) {
+            if (isNumber(textSegment)) {
+                stack.push(Integer.parseInt(textSegment));
                 continue;
             }
 
             int number1 = stack.pop();
             int number2 = stack.pop();
-            Operator operator = Operator.findOperator(s);
-
+            Operator operator = Operator.findOperator(textSegment);
             switch (operator) {
                 case PLUS -> stack.push(plus(number1, number2));
                 case MINUS -> stack.push(minus(number1, number2));

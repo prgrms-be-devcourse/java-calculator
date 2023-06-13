@@ -12,10 +12,6 @@ public enum MenuType {
         this.menu = menu;
     }
 
-    public int getMenu() {
-        return menu;
-    }
-
     public static MenuType findMenuType(int inputMenu) {
         return Arrays.stream(values())
                 .filter(menuType -> menuType.menu == inputMenu)
