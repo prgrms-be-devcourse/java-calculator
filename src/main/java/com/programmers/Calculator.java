@@ -26,12 +26,15 @@ public class Calculator {
             if (StringUtil.isNumber(token)) {
                 stack.push(StringUtil.convertStringToLong(token));
             } else {
-                Long num2 = stack.pop();
-                Long num1 = stack.pop();
-                stack.push(Operators.calculate(token, num1, num2));
+                calculateTop(stack, token);
             }
         }
         return stack.pop();
     }
 
+    private void calculateTop(Stack<Long> stack, String token) {
+        Long num2 = stack.pop();
+        Long num1 = stack.pop();
+        stack.push(Operators.calculate(token, num1, num2));
+    }
 }
