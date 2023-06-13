@@ -47,9 +47,9 @@ public class Calculator {
             }
 
             CalculateType calculateType = CalculateType.findBySymbol(value);
-            int expressionPriority = CalculateType.findBySymbol(operatorStack.peek()).getPriority();
-            int typePriority = calculateType.getPriority();
-            while (!operatorStack.isEmpty() && typePriority < expressionPriority) {
+            int op1Priority = CalculateType.findBySymbol(operatorStack.peek()).getPriority();
+            int op2Priority = calculateType.getPriority();
+            while (!operatorStack.isEmpty() && op1Priority < op2Priority) {
                 postfixExpression.append(operatorStack.pop() + " ");
             }
 
