@@ -85,4 +85,20 @@ class CalculatorServiceTest {
         //then
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    void 계산한_결과를_저장하고_출력한다() {
+        //given
+        List<String> input = Arrays.asList(
+                "5", "+", "2", "+", "34", "*", "23", "/", "2", "-", "3"
+        );
+        int inputResult = 395;
+
+        //when
+        calculatorService.saveExpressionResult(input, inputResult);
+        calculatorService.getResult();
+
+        //then
+        assertThat(outputStream.toString()).contains("5 + 2 + 34 * 23 / 2 - 3 = 395");
+    }
 }
