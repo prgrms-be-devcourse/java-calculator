@@ -17,9 +17,9 @@ public enum SelectTypeView {
         this.option = option;
     }
 
-    public static Optional<SelectTypeView> findByNum(int workNum){
-        return Arrays.stream(SelectTypeView.values())
-                .filter(stv -> stv.num == workNum)
+    public static Optional<SelectTypeView> findByNum(int selectTypeNum){
+        return Arrays.stream(values())
+                .filter(stv -> stv.num == selectTypeNum)
                 .findFirst();
     }
 
