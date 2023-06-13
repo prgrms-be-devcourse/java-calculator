@@ -7,10 +7,10 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.Stack;
 
-@ToString
 public class InfixToPostfixConverter implements ExpressionConverter {
     private final ArrayList<String> postfix;
     private final Stack<String> opStack;
+    private final Operation operation;
 
     private static final String EXPRESSION_DELIMITER = " ";
     public static final String OPERATOR_REGEX = "[-*/+]";
@@ -20,6 +20,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
     public InfixToPostfixConverter(){
         postfix = new ArrayList<>();
         opStack = new Stack<>();
+        operation = Operation.getInstance();
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CalculatorValidator {
     public static final String OPERATOR_REGEX = "[-*/+]";
-    public static final String OPERAND_REGEX = "^\\d+$";
+    public static final String OPERAND_REGEX = "^(0|[-]?[1-9]\\d*)$";
 
     public static final int MINIMUM_OPS = 3;
 

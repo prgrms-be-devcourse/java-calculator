@@ -22,7 +22,7 @@ public enum Menu {
         return command;
     }
 
-    public static boolean isValidMenu(String input){
+    public static boolean isValidMenuInput(String input){
         if (input.length() != MENU_INPUT_LENGTH) return false;
         Character firstChar = input.charAt(FIRST_INDEX);
         return Arrays.stream(Menu.values()).filter(m -> m.getCommand()

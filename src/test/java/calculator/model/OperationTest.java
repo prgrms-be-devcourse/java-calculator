@@ -24,6 +24,18 @@ class OperationTest {
     }
 
     @ParameterizedTest
+    @DisplayName("잘못된 표현 수식에 대한 연산을 검증 하는 테스트")
+    @CsvSource({"2,/,0", "3,/,0"})
+    void calculateInvalidExpression(Integer a, String operator, Integer b) {
+        try {
+            Integer calculated = operation.calculate(a, operator, b);
+        } catch (RuntimeException e){
+            Assertions.assertEquals("올바른 피연산자가 아닙니다.", e.getMessage());
+        }
+    }
+
+
+    @ParameterizedTest
     @DisplayName("Operator 사칙 연산을 검증 하는 테스트 - 잘못된 결과 값에 대한 테스트")
     @CsvSource({"1,+,5,5", "2,-,1,4", "3,*,-5,15", "12,/,4,1"})
     void validateWrongCalculation(Integer a, String operator, Integer b, Integer result) {

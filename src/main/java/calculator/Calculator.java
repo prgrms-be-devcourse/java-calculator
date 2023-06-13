@@ -42,7 +42,7 @@ public class Calculator implements Runnable {
         while (isProgramRunnable) {
             output.putMenu();
             String inputMenu = input.getChoice(CHOICE_PROMPT);
-            if (!Menu.isValidMenu(inputMenu)) {
+            if (!Menu.isValidMenuInput(inputMenu)) {
                 output.inputError(MENU_INPUT_ERROR);
                 continue;
             }
