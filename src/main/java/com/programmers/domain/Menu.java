@@ -24,22 +24,23 @@ public enum Menu {
     }
 
     public boolean isHistory() {
-        if (this.num == 1) return true;
-        return false;
+        return this.equals(HISTORY);
     }
 
     public boolean isFinish() {
-        if (this.num == 3) return true;
-        return false;
+        return this.equals(FINISH);
     }
 
     public boolean isCalculate() {
-        if (this.num == 2) return true;
-        return false;
+        return this.equals(CALCULATE);
     }
 
     public static Menu getMenu(int num) {
-        return Arrays.stream(Menu.values()).filter(m -> m.num == num).findAny().get();
+        return Arrays
+                .stream(Menu.values())
+                .filter(m -> m.num == num)
+                .findAny()
+                .get();
     }
 
 }
