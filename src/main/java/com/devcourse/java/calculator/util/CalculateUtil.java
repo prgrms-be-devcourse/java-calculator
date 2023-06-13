@@ -38,13 +38,6 @@ public class CalculateUtil {
                     stringBuilder.append(' ');
                 }
                 stack.push(each);
-            } else if (each == '(') {
-                stack.push(each);
-            } else if (each == ')') {
-                while (!stack.isEmpty() && stack.peek() != '(') {
-                    stringBuilder.append(stack.pop());
-                }
-                stack.pop();
             } else {
                 stringBuilder.append(each);
             }
