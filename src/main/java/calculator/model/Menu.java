@@ -1,4 +1,6 @@
-package calculator.global;
+package calculator.model;
+
+import java.util.Arrays;
 
 public enum Menu {
     EXIT('0', "종료"),
@@ -8,6 +10,8 @@ public enum Menu {
     private final Character command;
     private final String explanation;
 
+    private static final Integer MENU_INPUT_LENGTH = 1;
+    private static final Integer FIRST_INDEX = 0;
 
     Menu(Character command, String explanation) {
         this.command = command;
@@ -16,6 +20,13 @@ public enum Menu {
 
     public Character getCommand(){
         return command;
+    }
+
+    public static boolean isValidMenu(String input){
+        if (input.length() != MENU_INPUT_LENGTH) return false;
+        Character firstChar = input.charAt(FIRST_INDEX);
+        return Arrays.stream(Menu.values()).filter(m -> m.getCommand()
+                .equals(firstChar)).count() == 1;
     }
 
     @Override

@@ -3,9 +3,9 @@ package calculator.model;
 import java.util.List;
 import java.util.Stack;
 
-import static calculator.global.InputConstants.OPERATOR_REGEX;
-
 public class PostfixCalculator implements BasicCalculator{
+
+    public static final String OPERATOR_REGEX = "[-*/+]";
     @Override
     public Integer calculate(List<String> expression) {
         Stack<String> calcStack = new Stack<>();

@@ -1,19 +1,15 @@
 package calculator.util.validator;
 
-import calculator.global.Menu;
-
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static calculator.global.InputConstants.*;
 
 public class CalculatorValidator {
-    public static boolean isValidChoice(String input){
-        if (input.length() != MENU_INPUT_LENGTH) return false;
-        Character firstChar = input.charAt(FIRST_INDEX);
-        return Arrays.stream(Menu.values()).filter(m -> m.getCommand()
-                .equals(firstChar)).count() == 1;
-    }
+    public static final String OPERATOR_REGEX = "[-*/+]";
+    public static final String OPERAND_REGEX = "^\\d+$";
+
+    public static final int MINIMUM_OPS = 3;
+
     public static boolean isValidExpression(String expression){
         AtomicInteger index = new AtomicInteger(0);
         long countOfValidOps = Arrays.stream(expression.split(" "))

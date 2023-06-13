@@ -6,26 +6,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
-import static calculator.global.ErrorResponse.INVALID_OPERAND;
-import static calculator.global.ErrorResponse.OPERATOR_INPUT_ERROR;
-import static calculator.global.Priority.HIGH;
-import static calculator.global.Priority.LOW;
 
 public class Operation {
     private static final Map<String, Operator> operatorMap = new HashMap<>();
 
-    public Operation() {
-        setOperatorMap();
-    }
+    public static final Integer LOW = 0;
+    public static final Integer HIGH = 1;
 
-    private void setOperatorMap(){
+    public static final String OPERATOR_INPUT_ERROR = "연산자 입력에 오류가 발생했습니다.";
+    public static final String INVALID_OPERAND = "올바른 피연산자가 아닙니다.";
+
+    public Operation() {
         Arrays.stream(Operator.values())
                 .forEach(op -> operatorMap.put(op.operator, op));
-    }
-
-
-    public Map<String, Operator> getOperatorMap() {
-        return operatorMap;
     }
 
     public Integer calculate(Integer a, String operator, Integer b){
@@ -57,12 +50,12 @@ public class Operation {
         }
 
 
-        public boolean isSameOrGrater(Operator operator) {
+        public boolean isPrioritySameOrGreater(Operator operator) {
             return priority >= operator.priority;
         }
 
         public Integer mapCalculate(String operator, Integer num1, Integer num2) {
-            if(Operation.getOperator(operator) == DIVIDE && num2 <= 0){
+            if(Operation.getOperator(operator) == DIVIDE && num2 == 0){
                 throw new ArithmeticException(INVALID_OPERAND);
             }
             return getOperator(operator).expression.apply(num1, num2);

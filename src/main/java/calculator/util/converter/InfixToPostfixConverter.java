@@ -5,18 +5,17 @@ import calculator.util.ExpressionConverter;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
-
-import static calculator.global.InputConstants.OPERAND_REGEX;
-import static calculator.global.InputConstants.OPERATOR_REGEX;
 
 @ToString
 public class InfixToPostfixConverter implements ExpressionConverter {
-    private List<String> infix;
     private static final ArrayList<String> postfix = new ArrayList<>();
     private static final Stack<String> opStack = new Stack<>();
+
+    private static final String EXPRESSION_DELIMITER = " ";
+    public static final String OPERATOR_REGEX = "[-*/+]";
+    public static final String OPERAND_REGEX = "^\\d+$";
+
 
     @Override
     public ArrayList<String> convert(String infixExpression) {
@@ -24,18 +23,18 @@ public class InfixToPostfixConverter implements ExpressionConverter {
         Operation operation = new Operation();
 
         // 중위 표기식을 리스트로 변환
-        infix = new ArrayList<>(Arrays.asList(infixExpression.split(" ")));
+        String[] infix = infixExpression.split(EXPRESSION_DELIMITER);
 
         // 후위 표기식으로 전환
         for(String s : infix){
             if(s.matches(OPERATOR_REGEX)){
-                if(!num.toString().equals("")){
+                if(!num.isEmpty()){
                     postfix.add(num.toString());
                     num = new StringBuilder();
                 }
                 if (opStack.isEmpty()) opStack.push(s);
                 else {
-                    if (Operation.getOperator(opStack.peek()).isSameOrGrater(Operation.getOperator(s))) {
+                    if (Operation.getOperator(opStack.peek()).isPrioritySameOrGreater(Operation.getOperator(s))) {
                         postfix.add(opStack.pop());
                     }
                     opStack.push(s);
@@ -44,7 +43,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
                 num.append(s);
             }
         }
-        if(!num.toString().equals("")){
+        if(!num.isEmpty()) {
             postfix.add(num.toString());
         }
         while(!opStack.isEmpty()){
