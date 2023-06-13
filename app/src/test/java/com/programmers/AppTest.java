@@ -34,4 +34,16 @@ class AppTest {
         assertThat(multiplyResult).isEqualTo(12);
         assertThat(divideResult).isEqualTo(2);
     }
+
+    @Test
+    void 연산_우선순위_테스트() {
+        // given
+        Expression complexExpression = new Expression("1 + 4 * 3");
+
+        // when
+        int result = complexExpression.getResult();
+
+        // then
+        assertThat(result).isEqualTo(13);
+    }
 }
