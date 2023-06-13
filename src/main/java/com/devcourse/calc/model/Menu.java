@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static java.util.stream.Collectors.toMap;
+
 public enum Menu {
     NONE(0, "0번 메뉴는 할당하지 마세요", calculator -> {
         throw new RuntimeException("사용할 수 없는 메뉴 입니다");
@@ -16,17 +18,11 @@ public enum Menu {
     CALC(2, "계산", calculator -> calculator.calculate(Input.getFormula()));
 
     private static final String TO_STRING_TEMPLATE = "%d. %s";
-    public static final Map<Integer, Menu> menus = new HashMap<>();
+    public static final Map<Integer, Menu> menus = Arrays.stream(values()).collect(toMap(menu -> menu.number, menu -> menu));
 
     private final int number;
     private final String description;
     private final Function<Calculator, Object> action;
-
-    static {
-        Arrays.stream(values())
-                .filter(menu -> menu.number != 0)
-                .forEach(menu -> menus.put(menu.number, menu));
-    }
 
     Menu(int number, String description, Function<Calculator, Object> action) {
         this.number = number;
@@ -35,8 +31,7 @@ public enum Menu {
     }
 
     public static Menu find(int selectedNumber) {
-        Menu selectedMenu = menus.get(selectedNumber);
-        return selectedMenu == null ? NONE : selectedMenu;
+        return menus.get(selectedNumber);
     }
 
     public Object execute(Calculator calculator) {
