@@ -51,13 +51,13 @@ public class CalculatorManager {
         try {
             long result = sendToCalculator(formula);
             repository.save(new CalculationResult(formula, result));
-            console.printResult(result);
+            console.print(result);
         } catch (NumberFormatException e) {
-            console.printMessage(ErrorMsg.OPERAND_IS_NOT_A_NUMBER);
+            console.print(ErrorMsg.OPERAND_IS_NOT_A_NUMBER);
         } catch (IllegalArgumentException e) {
-            console.printMessage(ErrorMsg.INVALID_OPERATOR_INPUT);
+            console.print(ErrorMsg.INVALID_OPERATOR_INPUT);
         } catch (ArithmeticException e) {
-            console.printMessage(ErrorMsg.ENTER_ZERO_FOR_DIVISION);
+            console.print(ErrorMsg.ENTER_ZERO_FOR_DIVISION);
         }
     }
 
@@ -75,15 +75,15 @@ public class CalculatorManager {
     }
 
     private void wrongMenuSelection() {
-        console.printMessage(ErrorMsg.INVALID_MENU_SELECTION);
+        console.print(ErrorMsg.INVALID_MENU_SELECTION);
     }
 
     private void recordCommandExecution(List<CalculationResult> calculationRecord) {
         if (isEmptyRecord(calculationRecord)) {
-            console.printMessage(ErrorMsg.NO_CALCULATION_RECORDS);
+            console.print(ErrorMsg.NO_CALCULATION_RECORDS);
             return;
         }
-        console.printRecord(calculationRecord);
+        console.printList(calculationRecord);
     }
 
     private boolean isEmptyRecord(List<CalculationResult> record) {
@@ -91,7 +91,7 @@ public class CalculatorManager {
     }
 
     private void exitProgram() {
-        console.printMessage("프로그램을 종료합니다.");
+        console.print("프로그램을 종료합니다.");
         System.exit(0);
     }
 }

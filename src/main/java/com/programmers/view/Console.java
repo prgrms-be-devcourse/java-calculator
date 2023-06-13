@@ -3,41 +3,46 @@ package com.programmers.view;
 import com.programmers.model.CalculationResult;
 
 import java.util.List;
-import java.util.Scanner;
 
-public class Console implements Input, Output {
-    private final Scanner scanner = new Scanner(System.in);
+public class Console {
+    private final Input input;
+    private final Output output;
 
-    @Override
+    private static final String VIEW_MESSAGE = "1. 조회";
+    private static final String CALCULATION_MESSAGE = "2. 계산";
+    private static final String EXITING_MESSAGE = "3. 종료";
+    private static final String CHOICE = "선택 : ";
+
+    public Console(Input input, Output output) {
+        this.input = input;
+        this.output = output;
+    }
+
     public String inputMenu() {
-        System.out.println("1. 조회");
-        System.out.println("2. 계산");
-        System.out.println("3. 종료");
-        System.out.print("선택 : ");
-        return scanner.nextLine().trim();
+        System.out.println(VIEW_MESSAGE);
+        System.out.println(CALCULATION_MESSAGE);
+        System.out.println(EXITING_MESSAGE);
+        System.out.print(CHOICE);
+        return input.read();
     }
 
-    @Override
     public String inputFormula() {
-        return scanner.nextLine().trim();
+        return input.read();
     }
 
-
-    @Override
-    public void printRecord(List<CalculationResult> record) {
-        record.forEach(System.out::println);
+    public void printList(List<CalculationResult> record) {
         System.out.println();
+        record.forEach(System.out::println);
     }
 
-    @Override
-    public void printMessage(String message) {
+    public void print(String message) {
         System.out.println(message);
         System.out.println();
     }
 
-    @Override
-    public void printResult(long result) {
+    public void print(long result) {
         System.out.println(result);
         System.out.println();
     }
 }
+

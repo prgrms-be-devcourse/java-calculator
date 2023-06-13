@@ -5,10 +5,11 @@ import com.programmers.model.CalculationResult;
 import java.util.List;
 
 public interface Output {
-    void printRecord(List<CalculationResult> record);
 
-    void printMessage(String errorMsg);
+    void print(String message);
 
-    void printResult(long result);
+    void print(long result);
+
+    void print(List<CalculationResult> record);
 
 }
