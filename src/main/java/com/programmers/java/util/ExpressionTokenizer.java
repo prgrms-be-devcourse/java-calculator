@@ -7,17 +7,18 @@ import java.util.regex.Pattern;
 
 public class ExpressionTokenizer {
 
-    private static final String OPERATOR_REGEXP = "\\d+|[-+*/]";
+    private static final String EXPRESSION_REGEXP = "\\d+|[-+*/]";
 
     public List<String> expressionSplit(String expression) {
-
         List<String> result = new ArrayList<>();
-        Pattern pattern = Pattern.compile(OPERATOR_REGEXP);
+        Pattern pattern = Pattern.compile(EXPRESSION_REGEXP);
         Matcher matcher = pattern.matcher(expression);
 
+        //stream이용해서
         while (matcher.find()) {
             result.add(matcher.group());
         }
+
         return result;
     }
 }
