@@ -53,9 +53,6 @@ public class CalculatorService {
         System.out.println(result + "\n");
 
         saveExpressionResult(expression, result);
-
-        List<String> all = calculatorRepository.findAll();
-        all.forEach(System.out::println);
     }
 
     public int calculatePostfix(List<String> postfix) {
@@ -88,5 +85,12 @@ public class CalculatorService {
     public void saveExpressionResult(List<String> expression, int result) {
         String s = expressionProcessor.rearrangeExpression(expression, result);
         calculatorRepository.save(s);
+    }
+
+    public void getResult() {
+        System.out.println();
+        List<String> all = calculatorRepository.findAll();
+        all.forEach(System.out::println);
+        System.out.println();
     }
 }

@@ -2,13 +2,10 @@ package com.programmers.domain;
 
 import com.programmers.io.Console;
 import com.programmers.service.CalculatorService;
-import com.programmers.util.ExpressionProcessor;
-
-import java.util.List;
 
 public class Calculator {
 
-    private static int CALCULATE = 2;
+    private static int GET_RESULT = 1;
 
     private final Console console = new Console();
     private final CalculatorService calculatorService = new CalculatorService(console);
@@ -16,8 +13,20 @@ public class Calculator {
     public void run() {
         int menuSelection = calculatorService.getValidatedMenuSelection();
 
-        if (menuSelection == CALCULATE) {
+        while (true) {
+            if (menuSelection == 3) {
+                break;
+            }
+
+            if (menuSelection == GET_RESULT) {
+                calculatorService.getResult();
+                menuSelection = calculatorService.getValidatedMenuSelection();
+                continue;
+            }
+
+            System.out.println();
             calculatorService.calculate();
+            menuSelection = calculatorService.getValidatedMenuSelection();
         }
     }
 }
