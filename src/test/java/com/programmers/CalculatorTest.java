@@ -20,7 +20,7 @@ class CalculatorTest {
         // given
         String postfixExpression = "324*+93/-";
         // when
-        int result = calculator.calculate(postfixExpression);
+        double result = calculator.calculate(postfixExpression);
         // then
         assertThat(result).isEqualTo(8);
     }

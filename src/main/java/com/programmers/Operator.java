@@ -7,16 +7,16 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    ADD("+", 1, Integer::sum),
+    ADD("+", 1, Double::sum),
     SUBTRACT("-", 1, (n1, n2) -> n1 - n2),
     MULTIPLY("*", 2, (n1, n2) -> n1 * n2),
     DIVIDE("/", 2, (n1, n2) -> n1 / n2);
 
     private final String symbol;
     private final int priority;
-    private final BiFunction<Integer, Integer, Integer> operation;
+    private final BiFunction<Double, Double, Double> operation;
 
-    Operator(String symbol, int priority, BiFunction<Integer, Integer, Integer> operation) {
+    Operator(String symbol, int priority, BiFunction<Double, Double, Double> operation) {
         this.symbol = symbol;
         this.priority = priority;
         this.operation = operation;
@@ -41,7 +41,7 @@ public enum Operator {
         return this.priority >= operator.priority;
     }
 
-    public int calculate(int operand1, int operand2) {
+    public double calculate(double operand1, double operand2) {
         return this.operation.apply(operand1, operand2);
     }
 }

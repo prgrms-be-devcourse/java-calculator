@@ -38,7 +38,7 @@ public class CalculatorController implements Runnable {
     private void calculate() {
         Expression expression = input.readExpression();
 
-        int result = calculator.calculate(expression.toPostfix());
+        double result = calculator.calculate(expression.toPostfix());
         output.displayResult(result);
     }
 }

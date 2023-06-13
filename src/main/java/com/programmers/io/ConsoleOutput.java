@@ -13,7 +13,7 @@ public class ConsoleOutput implements Output {
     }
 
     @Override
-    public void displayResult(int result) {
+    public void displayResult(double result) {
         System.out.println(result);
         printEmptyLine();
     }
