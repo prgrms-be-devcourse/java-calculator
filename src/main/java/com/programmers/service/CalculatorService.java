@@ -1,6 +1,7 @@
 package com.programmers.service;
 
 import com.programmers.domain.ExpressionValidator;
+import com.programmers.domain.PostFixConverter;
 import com.programmers.domain.SelectionValidator;
 import com.programmers.io.Console;
 
@@ -11,6 +12,7 @@ public class CalculatorService {
     private final Console console;
     private final SelectionValidator selectionValidator = new SelectionValidator();
     private final ExpressionValidator expressionValidator = new ExpressionValidator();
+    private final PostFixConverter postfixConverter = new PostFixConverter();
 
     public CalculatorService(Console console) {
         this.console = console;
@@ -36,6 +38,15 @@ public class CalculatorService {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getValidatedExpression();
+        }
+    }
+
+    public void calculate() {
+        List<String> expression = getValidatedExpression();
+        List<String> postfix = postfixConverter.convertInfixToPostfix(expression);
+
+        for (String s : postfix) {
+            System.out.print(s + " ");
         }
     }
 }

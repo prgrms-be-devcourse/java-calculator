@@ -17,9 +17,7 @@ public class Calculator {
         int menuSelection = calculatorService.getValidatedMenuSelection();
 
         if (menuSelection == CALCULATE) {
-            List<String> tokens = calculatorService.getValidatedExpression();
-
-            tokens.forEach(System.out::println);
+            calculatorService.calculate();
         }
     }
 }
