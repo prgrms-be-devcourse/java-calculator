@@ -1,6 +1,7 @@
 package com.devcourse.calc;
 
 import com.devcourse.calc.converter.ConverterNoBracket;
+import com.devcourse.calc.model.CalculateRecord;
 import com.devcourse.calc.model.History;
 import com.devcourse.calc.repo.CalcHistoryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,10 +27,9 @@ class CalculatorTest {
     @DisplayName("계산식 입력 시 결과 값을 반환한다 - History 타입")
     void calculateFormula() {
         String formula = "11 + 2";
-        History result = calculator.calculate(formula);
+        int result = calculator.calculate(formula);
 
-        assertThat(result.getResult()).isEqualTo(13);
-        assertThat(result.toString()).isEqualTo("11 + 2 = 13\n");
+        assertThat(result).isEqualTo(13);
     }
 
     @Test
@@ -39,9 +39,7 @@ class CalculatorTest {
         repository.saveHistory(new History("11 + 3", 14));
         repository.saveHistory(new History("1 + 3", 4));
 
-        String result = calculator.showHistory();
-        assertThat(result).contains("11 + 2 = 13");
-        assertThat(result).contains("11 + 3 = 14");
-        assertThat(result).contains("1 + 3 = 4");
+        CalculateRecord result = calculator.showHistory();
+        assertThat(result.toString()).isEqualTo("11 + 2 = 13\n11 + 3 = 14\n1 + 3 = 4");
     }
 }
