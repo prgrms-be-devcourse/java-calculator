@@ -21,23 +21,23 @@ public class CalculateEngine {
         for (int i = 0; i < equation.size(); i++) {
             String s = equation.get(i);
 
-            if (s.equals("+")) {
+            if ("+".equals(s)) {
                 mode = "add";
-            } else if (s.equals("-")) {
+            } else if ("-".equals(s)) {
                 mode = "sub";
-            } else if (s.equals("*")) {
+            } else if ("*".equals(s)) {
                 mode = "mul";
-            } else if (s.equals("/")) {
+            } else if ("/".equals(s)) {
                 mode = "div";
             } else {
-                if ((mode.equals("mul") || mode.equals("div")) && !s.equals("+") && !s.equals("-") && !s.equals("*") && !s.equals("/")) {
+                if (("mul".equals(mode) || "div".equals(mode)) && !"+".equals(s) && !"-".equals(s) && !"*".equals(s) && !"/".equals(s)) {
                     Double one = Double.parseDouble(equation.get(i - 2));
                     Double two = Double.parseDouble(equation.get(i));
                     Double result = 0.0;
 
-                    if (mode.equals("mul")) {
+                    if ("mul".equals(mode)) {
                         result = one * two;
-                    } else if (mode.equals("div")) {
+                    } else if ("div".equals(mode)) {
                         result = one / two;
                     }
 
@@ -47,21 +47,22 @@ public class CalculateEngine {
                         equation.remove(i - 2);
                     }
 
-                    i -= 2;	// 결과값이 생긴 인덱스로 이동
+                    i -= 2;    // 결과값이 생긴 인덱스로 이동
                 }
             }
         }	// 곱셈 나눗셈을 먼저 계산한다
 
+        mode = "";
         for (String s : equation) {
-            if (s.equals("+")) {
+            if ("+".equals(s)) {
                 mode = "add";
-            } else if (s.equals("-")) {
+            } else if ("-".equals(s)) {
                 mode = "sub";
             }  else {
                 current = Double.parseDouble(s);
-                if (mode.equals("add")) {
+                if ("add".equals(mode)) {
                     prev += current;
-                } else if (mode.equals("sub")) {
+                } else if ("sub".equals(mode)) {
                     prev -= current;
                 } else {
                     prev = current;
