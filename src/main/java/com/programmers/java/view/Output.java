@@ -3,10 +3,10 @@ package com.programmers.java.view;
 import java.util.List;
 
 public class Output {
-
     public void viewStartConsole() {
-        System.out.println("1.조회");
-        System.out.println("2.계산");
+        for (Menu menu : Menu.values()) {
+            System.out.println(menu.toString());
+        }
     }
 
     public void viewEndConsole() {
