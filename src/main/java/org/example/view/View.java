@@ -29,8 +29,8 @@ public class View implements Input,Output{
         if (validateExpression(expression)) {
             return expression;
         }
-
-        return "수식이 잘못됐습니다";
+        //의도하신 부분이 맞는 건지 혼동되는 부분
+        throw new IllegalArgumentException("수식을 정화갛게 입력하지 않으셨습니다.");
     }
 
     @Override
