@@ -16,7 +16,6 @@ public class Console {
     }
 
     public void run() {
-
         while (!loop) {
             view.printSelection();
             String option = view.selectWork();
@@ -27,11 +26,8 @@ public class Console {
     }
 
     private void selectOption(SelectTypeView selectType) {
-
         switch (selectType) {
-
             case GET_RECORD -> view.printRecords(Records.exportRecord());
-
             case CALCULATE -> {
                 String infixExpression = view.inputExpression();
                 double result = calculator.calculate(infixExpression);
