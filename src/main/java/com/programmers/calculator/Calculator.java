@@ -4,6 +4,7 @@ import com.programmers.calculator.domain.CalculationResult;
 import com.programmers.calculator.domain.Operator;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
@@ -17,10 +18,9 @@ public class Calculator {
     public double calculate(String postfixExpression) {
         Deque<Double> operandStack = new ArrayDeque<>();
 
-        postfixExpression.chars()
-                .mapToObj(token -> (char) token)
+        Arrays.stream(postfixExpression.split(" "))
                 .forEach(token -> {
-                    if (Character.isDigit(token)) {
+                    if (Character.isDigit(token.charAt(0))) {
                         handleDigit(operandStack, token);
                     } else {
                         handleOperator(operandStack, token);
@@ -38,12 +38,11 @@ public class Calculator {
         return calculatorMemory.findAll();
     }
 
-    private void handleDigit(Deque<Double> operandStack, char digit) {
-        double operand = Character.getNumericValue(digit);
-        operandStack.push(operand);
+    private void handleDigit(Deque<Double> operandStack, String digit) {
+        operandStack.push(Double.parseDouble(digit));
     }
 
-    private void handleOperator(Deque<Double> operandStack, char symbol) {
+    private void handleOperator(Deque<Double> operandStack, String symbol) {
         double operand2 = operandStack.pop();
         double operand1 = operandStack.pop();
 

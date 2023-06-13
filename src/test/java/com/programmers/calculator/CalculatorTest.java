@@ -20,10 +20,10 @@ class CalculatorTest {
     @DisplayName("후위 표기식 계산을 성공한다.")
     void 후위_표기식_계산() {
         // given
-        String postfixExpression = "324*+93/-";
+        String postfixExpression = "30 2 4 * + 9 3 / -";
         // when
         double result = calculator.calculate(postfixExpression);
         // then
-        assertThat(result).isEqualTo(8);
+        assertThat(result).isEqualTo(35);
     }
 }

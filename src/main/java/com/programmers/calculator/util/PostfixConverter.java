@@ -3,6 +3,7 @@ package com.programmers.calculator.util;
 import com.programmers.calculator.domain.Operator;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 
 public class PostfixConverter {
@@ -10,33 +11,31 @@ public class PostfixConverter {
         StringBuilder postfixExpression = new StringBuilder();
         Deque<Operator> operatorStack = new ArrayDeque<>();
 
-        expression.chars()
-                .mapToObj(token -> (char) token)
-                .filter(token -> !Character.isWhitespace(token))
+        Arrays.stream(expression.split(" "))
                 .forEach(token -> {
-                    if (Character.isDigit(token)) {
-                        handleDigit(postfixExpression, token);
+                    if (Character.isDigit(token.charAt(0))) {
+                        appendToken(postfixExpression, token);
                     } else {
                         handleOperator(postfixExpression, operatorStack, token);
                     }
                 });
 
         while (!operatorStack.isEmpty()) {
-            postfixExpression.append(operatorStack.pop().getSymbol());
+            appendToken(postfixExpression, operatorStack.pop().getSymbol());
         }
-        return postfixExpression.toString();
+        return postfixExpression.toString().trim();
     }
 
-    private static void handleDigit(StringBuilder postfixExpression, char digit) {
-        postfixExpression.append(digit);
-    }
-
-    private static void handleOperator(StringBuilder postfixExpression, Deque<Operator> operatorStack, char symbol) {
+    private static void handleOperator(StringBuilder postfixExpression, Deque<Operator> operatorStack, String symbol) {
         Operator currentOperator = Operator.findBySymbol(symbol);
 
         while (!operatorStack.isEmpty() && operatorStack.peek().isHigherPriorityThan(currentOperator)) {
-            postfixExpression.append(operatorStack.pop().getSymbol());
+            appendToken(postfixExpression, operatorStack.pop().getSymbol());
         }
         operatorStack.push(currentOperator);
+    }
+
+    private static void appendToken(StringBuilder postfixExpression, String token) {
+        postfixExpression.append(token).append(" ");
     }
 }

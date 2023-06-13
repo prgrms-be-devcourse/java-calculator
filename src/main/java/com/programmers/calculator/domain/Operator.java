@@ -30,15 +30,15 @@ public enum Operator {
         return " " + symbol + " ";
     }
 
-    public static Operator findBySymbol(char symbol) {
+    public static Operator findBySymbol(String symbol) {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new InvalidOperatorException(ErrorMessage.INVALID_OPERATOR));
     }
 
-    public boolean equals(char symbol) {
-        return this.symbol.equals(String.valueOf(symbol));
+    public boolean equals(String symbol) {
+        return this.symbol.equals(symbol);
     }
 
     public boolean isHigherPriorityThan(Operator operator) {
