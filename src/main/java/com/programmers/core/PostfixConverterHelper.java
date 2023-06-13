@@ -15,7 +15,7 @@ public class PostfixConverterHelper {
             return;
         }
 
-        while (!operatorStack.isEmpty() && Priority.getPriority(operatorStack.peek()) >= Priority.getPriority(operator)) {
+        while (!operatorStack.isEmpty() && Priority.isNewOperatorPriorityLower(operator, operatorStack)) {
             postfix.add(operatorStack.pop());
         }
 

@@ -25,5 +25,9 @@ public enum Priority {
     public static boolean isNewOperatorPriorityHigher(String operator, Stack<String> operatorStack) {
         return Priority.getPriority(operatorStack.peek()) < Priority.getPriority(operator);
     }
+
+    public static boolean isNewOperatorPriorityLower(String operator, Stack<String> operatorStack) {
+        return Priority.getPriority(operatorStack.peek()) >= Priority.getPriority(operator);
+    }
 }
 
