@@ -34,12 +34,10 @@ public class Calculator {
     }
 
     private String toPostfix(String[] infixExpression) {
-
         Stack<String> operatorStack = new Stack<>();
         StringBuilder postfixExpression = new StringBuilder();
 
         for (String value : infixExpression) {
-
             if (isNumber(value)) {
                 postfixExpression.append(value + " ");
                 continue;
@@ -48,7 +46,6 @@ public class Calculator {
             CalculateType calculateType = CalculateType.findBySymbol(value);
             int expressionPriority = CalculateType.findBySymbol(operatorStack.peek()).getPriority();
             int typePriority = calculateType.getPriority();
-
             while (!operatorStack.isEmpty() && typePriority < expressionPriority) {
                 postfixExpression.append(operatorStack.pop() + " ");
             }
@@ -65,8 +62,10 @@ public class Calculator {
 
     private boolean isNumber(String value) {
         if (REGEX_NUM.matcher(value).matches()) {
+
             return true;
         }
+
         return false;
     }
 }

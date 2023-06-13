@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 public class View implements Input,Output{
 
     private final Scanner sc = new Scanner(System.in);
-    private final Pattern REGEX_SELECT = Pattern.compile("[123]");
     private final Pattern REGEX_EXPRESSION = Pattern.compile("\\d+(\\s[+\\-*/]\\s\\d+)*");
 
     @Override
@@ -19,7 +18,7 @@ public class View implements Input,Output{
             return selection;
         }
         sc.nextLine();
-        
+
         return -1;
     }
 

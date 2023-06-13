@@ -1,6 +1,7 @@
 package org.example.view;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum SelectTypeView {
 
@@ -16,11 +17,10 @@ public enum SelectTypeView {
         this.option = option;
     }
 
-    public static SelectTypeView findByNum(int num){
+    public static Optional<SelectTypeView> findByNum(int workNum){
         return Arrays.stream(SelectTypeView.values())
-                .filter(stv -> stv.num == (num))
-                .findFirst()
-                .orElse(null);
+                .filter(stv -> stv.num == workNum)
+                .findFirst();
     }
 
 }

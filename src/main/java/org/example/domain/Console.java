@@ -4,6 +4,8 @@ import org.example.repository.Records;
 import org.example.view.SelectTypeView;
 import org.example.view.View;
 
+import java.util.Optional;
+
 public class Console {
 
     private View view;
@@ -18,11 +20,10 @@ public class Console {
     public void run() {
         while (!loop) {
             view.printSelection();
-            String option = view.selectWork();
-            SelectTypeView selectType = SelectTypeView.findByNum(option);
-            selectOption(selectType);
+            int option = view.selectWork();
+            Optional<SelectTypeView> selectType = SelectTypeView.findByNum(option);
+            selectOption(selectType.orElse(null));
         }
-
     }
 
     private void selectOption(SelectTypeView selectType) {
