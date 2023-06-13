@@ -1,9 +1,9 @@
-package com.programmers.java.repository;
+package com.programmers.java.record;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultRepository {
+public class CalculationRecord {
 
     private static List<String> calculationResults = new ArrayList<>();
 

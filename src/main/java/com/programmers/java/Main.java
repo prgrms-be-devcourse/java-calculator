@@ -1,7 +1,7 @@
 package com.programmers.java;
 
 import com.programmers.java.calculator.calculate.Calculator;
-import com.programmers.java.repository.ResultRepository;
+import com.programmers.java.record.CalculationRecord;
 import com.programmers.java.util.ExpressionTokenizer;
 import com.programmers.java.view.Menu;
 import com.programmers.java.view.Input;
@@ -13,7 +13,7 @@ public class Main {
     static Output output = new Output();
     static Input input = new Input();
     static Calculator calculator = new Calculator();
-    static ResultRepository resultRepository = new ResultRepository();
+    static CalculationRecord resultRepository = new CalculationRecord();
     static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
 
     public static void main(String[] args) throws IOException {
