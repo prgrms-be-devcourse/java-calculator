@@ -2,6 +2,7 @@ package com.devcourse.calc.model;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Stack;
 import java.util.function.BiFunction;
 
 import static java.util.stream.Collectors.toMap;
@@ -46,8 +47,11 @@ public enum Operator implements Token {
         return this.equals(OPEN);
     }
 
-    public int execute(int number1, int number2) {
-        return this.action.apply(number1, number2);
+    @Override
+    public void deal(Stack<Integer> calculationResult) {
+        Integer firstNumber = calculationResult.pop();
+        Integer secondNumber = calculationResult.pop();
+        calculationResult.push(action.apply(secondNumber, firstNumber));
     }
 
     @Override

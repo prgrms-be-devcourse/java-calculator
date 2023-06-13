@@ -1,6 +1,7 @@
 package com.devcourse.calc.model;
 
 import java.util.Objects;
+import java.util.Stack;
 
 public class Operand implements Token {
 
@@ -10,8 +11,9 @@ public class Operand implements Token {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public void deal(Stack<Integer> calculationResult) {
+        calculationResult.push(this.number);
     }
 
     @Override

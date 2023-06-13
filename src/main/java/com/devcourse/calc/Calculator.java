@@ -28,33 +28,23 @@ public class Calculator {
         return repository.getAllHistories();
     }
 
-    public History calculate(String formula) {
+    public int calculate(String formula) {
         List<Token> tokens = converter.convertFormula(formula);
-        Operand result = calculate(tokens);
-        return new History(formula, result.getNumber());
+        int result = calculate(tokens);
+        saveCalculateHistory(formula, result);
+
+        return result;
     }
 
-    private Operand calculate(List<Token> mathSymbols) {
+    private int calculate(List<Token> mathSymbols) {
         Stack<Integer> calculationResult = new Stack<>();
-        for (Token symbol : mathSymbols) {
-            if (symbol instanceof Operand number) {
-                calculationResult.push(number.getNumber());
-                continue;
-            }
+        mathSymbols.forEach(symbol -> symbol.deal(calculationResult));
 
-            Integer firstNumber = calculationResult.pop();
-            Integer secondNumber = calculationResult.pop();
-            Operator operator = (Operator) symbol;
-            calculationResult.push(operator.execute(secondNumber, firstNumber));
-        }
-        return new Operand(calculationResult.pop());
+        return calculationResult.pop();
     }
 
-    private String processResult(Object result) {
-        if (result instanceof History history) {
-            repository.saveHistory(history);
-            return String.format("%d\n", history.getResult());
-        }
-        return result.toString();
+    private void saveCalculateHistory(String formula, int calculate) {
+        History history = new History(formula, calculate);
+        repository.saveHistory(history);
     }
 }
