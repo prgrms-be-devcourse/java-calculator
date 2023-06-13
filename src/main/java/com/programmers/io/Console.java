@@ -1,5 +1,8 @@
 package com.programmers.io;
 
+
+import com.programmers.util.ExpressionProcessor;
+
 import java.util.Scanner;
 
 public class Console implements Output, Input {
@@ -8,6 +11,7 @@ public class Console implements Output, Input {
     private static final String MENU_SELECTION_MESSAGE = "선택 : ";
 
     private final Scanner scanner = new Scanner(System.in);
+    private final ExpressionProcessor expressionProcessor = new ExpressionProcessor();
 
     @Override
     public void printMenu() {
@@ -23,5 +27,10 @@ public class Console implements Output, Input {
     public String getSelection() {
         printMenu();
         return readInput();
+    }
+
+    public String getExpressionSpaceRemoved() {
+        String expression = readInput();
+        return expressionProcessor.removeSpace(expression);
     }
 }
