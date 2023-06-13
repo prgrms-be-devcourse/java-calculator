@@ -48,7 +48,7 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 		System.out.println();
 	}
 
-	private String calcRecordToFormattedStr(CalcResultRecordModel calcRecord){
+	private String calcRecordToFormattedStr(CalcResultRecordModel calcRecord) {
 		String expression = calcRecord.getExpression();
 		double calcResult = calcRecord.getCalcResult();
 		String formattedStr = expression + " = " + calcResult;

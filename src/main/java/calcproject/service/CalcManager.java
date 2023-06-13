@@ -9,14 +9,15 @@ import calcproject.view.CalcInput;
 import calcproject.view.CalcOutput;
 import calcproject.view.Command;
 
-public class CalcManager{
+public class CalcManager {
 
 	private final CalcResultRecordRepository calcResultRecordRepository;
 	private final CalcInput calcInput;
 	private final CalcOutput calcOutput;
 	private final Calculator calculator;
 
-	public CalcManager(CalcResultRecordRepository calcResultRecordRepository, CalcInput calcInput, CalcOutput calcOutput,
+	public CalcManager(CalcResultRecordRepository calcResultRecordRepository, CalcInput calcInput,
+		CalcOutput calcOutput,
 		Calculator calculator) {
 		this.calcResultRecordRepository = calcResultRecordRepository;
 		this.calcInput = calcInput;
