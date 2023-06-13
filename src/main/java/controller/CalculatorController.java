@@ -1,12 +1,17 @@
 package controller;
 
+import constant.MenuType;
 import io.CalculatorInput;
 import io.CalculatorOutput;
 import model.calculation.Calculation;
 import model.converter.Converter;
+import model.vo.Expression;
 import model.vo.Menu;
 
+import java.util.List;
+
 public class CalculatorController implements Runnable {
+    private static final String INVALID_MENU = "올바르지 않은 값입니다.";
     private final CalculatorInput input;
     private final CalculatorOutput output;
     private final Converter converter;
@@ -28,17 +33,21 @@ public class CalculatorController implements Runnable {
     }
 
     private void selectMenu(Menu menu) {
-        switch (menu.getMenu()) {
-            case 1 -> runRecordLogic();
-            case 2 -> runCalculationLogic();
+        MenuType menuType = MenuType.findMenuType(menu.getMenu());
+        switch (menuType) {
+            case CHECK_DATA -> runRecordLogic();
+            case CALCULATION -> runCalculationLogic();
+            default -> throw new IllegalArgumentException(INVALID_MENU);
         }
     }
 
     private void runRecordLogic() {
-
     }
 
     private void runCalculationLogic() {
-
+        Expression expression = input.expressionInput();
+        List<String> postfixExpression = converter.covert(expression);
+        int result = calculation.calculate(postfixExpression);
+        output.printExpression(result);
     }
 }
