@@ -21,11 +21,14 @@ public class Calculator implements Runnable {
             output.printStart();
             String selectionResult = input.choose();
             if (selectionResult.equals(CALCULATION)) {
-                output.printResult(Operation.calculate(input.input()));
+                String calculationCommand = input.input();
+                Integer calculationResult = Operation.calculate(calculationCommand);
+                storage.save(calculationCommand, calculationResult);
+                output.printResult(calculationResult);
                 continue;
             }
             if (selectionResult.equals(HISTORY)) {
-                output.printHistory(storage.findHistory());
+                output.printHistory(storage.findAll());
                 continue;
             }
             break;
