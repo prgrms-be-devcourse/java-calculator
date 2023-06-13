@@ -1,11 +1,12 @@
 package model.converter;
 
 import model.vo.Expression;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 class PostfixConverterTest {
 
@@ -21,6 +22,6 @@ class PostfixConverterTest {
         List<String> covert = converter.covert(expression);
 
         //then
-        Assertions.assertThat(covert).hasSameHashCodeAs(result);
+        assertThat(covert).hasSameHashCodeAs(result);
     }
 }
