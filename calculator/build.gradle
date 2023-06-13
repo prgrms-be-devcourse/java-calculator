@@ -15,6 +15,10 @@ dependencies {
 
     testImplementation 'org.assertj:assertj-core:3.24.2'
 
+    //lombok
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
+
+
 }
 
 test {
