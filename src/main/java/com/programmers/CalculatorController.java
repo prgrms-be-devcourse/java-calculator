@@ -34,5 +34,6 @@ public class CalculatorController implements Runnable {
     }
 
     private void calculate() {
+        Expression expression = input.readExpression();
     }
 }

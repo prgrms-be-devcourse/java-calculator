@@ -1,5 +1,6 @@
 package com.programmers.io;
 
+import com.programmers.Expression;
 import com.programmers.Menu;
 
 import java.util.Scanner;
@@ -13,5 +14,10 @@ public class ConsoleInput implements Input {
         String menuNumber = scanner.nextLine();
 
         return Menu.findByNumber(menuNumber);
+    }
+
+    @Override
+    public Expression readExpression() {
+        return new Expression(scanner.nextLine());
     }
 }
