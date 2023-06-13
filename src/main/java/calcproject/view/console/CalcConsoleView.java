@@ -40,10 +40,17 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 
 	@Override
 	public void showRecord(List<CalcRecordModel> calcRecordModelList) {
-		calcRecordModelList.stream().
-			forEach(s -> System.out.println(s));
+		calcRecordModelList.
+			forEach(calcRecord -> calcRecordToFormattedStr(calcRecord));
 
 		System.out.println();
+	}
+
+	private String calcRecordToFormattedStr(CalcRecordModel calcRecord){
+		String expression = calcRecord.getExpression();
+		double calcResult = calcRecord.getCalcResult();
+		String formattedStr = expression + " = " + calcResult;
+		return formattedStr;
 	}
 
 	@Override

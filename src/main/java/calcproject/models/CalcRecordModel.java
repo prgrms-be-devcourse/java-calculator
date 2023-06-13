@@ -11,11 +11,6 @@ public class CalcRecordModel {
 		this.calcResult = calcResult;
 	}
 
-	@Override
-	public String toString() {
-		return this.expression + " = " + this.calcResult;
-	}
-
 	public String getExpression() {
 		return this.expression;
 	}
@@ -26,17 +21,5 @@ public class CalcRecordModel {
 
 	public int getId() {
 		return this.id;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof CalcRecordModel))
-			return false;
-
-		CalcRecordModel calcRecordModel = (CalcRecordModel)o;
-		return this.calcResult == calcRecordModel.getCalcResult() &&
-			this.expression.equals(calcRecordModel.getExpression());
 	}
 }
