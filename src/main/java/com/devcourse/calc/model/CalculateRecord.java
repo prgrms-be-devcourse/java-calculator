@@ -14,9 +14,8 @@ public class CalculateRecord {
 
     @Override
     public String toString() {
-        String result = histories.stream()
+        return histories.stream()
                 .map(String::valueOf)
-                .collect(joining());
-        return result.substring(0, result.length() - 1);
+                .collect(joining("\n"));
     }
 }
