@@ -18,10 +18,7 @@ public class Calculator {
             }
             double left = operandStack.pop();
             double right = operandStack.pop();
-
-            if (value.equals("/") && right == 0){
-                throw new ArithmeticException("0으로 나눌 수 없습니다.");
-            }
+            dividedZero(value, right);
 
             CalculateType calculateType = CalculateType.findBySymbol(value);
             double midResult = calculateType.calculate(left, right);
@@ -31,6 +28,12 @@ public class Calculator {
         double result = operandStack.pop();
 
         return result;
+    }
+
+    private void dividedZero(String value, double right) {
+        if (value.equals("/") && right == 0){
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        }
     }
 
     private String toPostfix(String[] infixExpression) {

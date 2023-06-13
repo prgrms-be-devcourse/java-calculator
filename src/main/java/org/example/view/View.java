@@ -30,7 +30,7 @@ public class View implements Input,Output{
             return expression;
         }
 
-        return "수식이 잘못됐습니다.";
+        return "수식이 잘못됐습니다";
     }
 
     @Override
