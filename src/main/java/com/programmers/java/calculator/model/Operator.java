@@ -1,4 +1,4 @@
-package com.programmers.java.calculator;
+package com.programmers.java.calculator.model;
 
 import java.math.BigDecimal;
 import java.util.function.BiFunction;

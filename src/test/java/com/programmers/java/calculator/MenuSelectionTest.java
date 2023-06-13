@@ -1,5 +1,6 @@
 package com.programmers.java.calculator;
 
+import com.programmers.java.calculator.model.MenuType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

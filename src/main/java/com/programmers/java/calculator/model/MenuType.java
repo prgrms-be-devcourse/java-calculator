@@ -1,4 +1,4 @@
-package com.programmers.java.calculator;
+package com.programmers.java.calculator.model;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

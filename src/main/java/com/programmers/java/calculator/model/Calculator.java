@@ -1,6 +1,5 @@
 package com.programmers.java.calculator.model;
 
-import com.programmers.java.calculator.MenuType;
 import com.programmers.java.calculator.io.Input;
 import com.programmers.java.calculator.io.Output;
 import com.programmers.java.calculator.service.CalculatorService;

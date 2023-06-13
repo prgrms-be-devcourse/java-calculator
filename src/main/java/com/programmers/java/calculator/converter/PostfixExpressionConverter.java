@@ -1,6 +1,6 @@
 package com.programmers.java.calculator.converter;
 
-import com.programmers.java.calculator.Operator;
+import com.programmers.java.calculator.model.Operator;
 
 import java.math.BigDecimal;
 import java.util.Stack;
