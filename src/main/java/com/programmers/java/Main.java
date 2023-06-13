@@ -3,7 +3,7 @@ package com.programmers.java;
 import com.programmers.java.calculator.calculate.Calculator;
 import com.programmers.java.repository.ResultRepository;
 import com.programmers.java.util.ExpressionTokenizer;
-import com.programmers.java.view.Button;
+import com.programmers.java.view.Menu;
 import com.programmers.java.view.Input;
 import com.programmers.java.view.Output;
 
@@ -20,28 +20,32 @@ public class Main {
         while (true) {
             output.viewStartConsole();
 
-            Button button = input.enterMenu();
-
-            if (button == null) {
-                output.viewEndConsole();
-                System.exit(0);
-            }
-            String menu = button.name();
-            runCalculator(menu);
+            input.enterMenu().ifPresentOrElse(
+                    Main::runCalculator,
+                    () -> System.exit(0));
         }
     }
 
-    public static void runCalculator(String menu) throws IOException {
+    public static void runCalculator(Menu menu) {
         switch (menu) {
-            case "CALCULATE":
-                String expression = input.enterExpression();
-                Double result = calculator.calculate(expressionTokenizer.expressionSplit(expression));
-                output.viewCalculateResult(result);
-                resultRepository.save(expression, Double.toString(result));
+            case CALCULATE:
+                calculator();
                 break;
-            case "SEARCH":
+            case SEARCH:
                 output.viewSearchResult(resultRepository.getCalculationResults());
                 break;
         }
+    }
+
+    private static void calculator() {
+        String expression = null;
+        try {
+            expression = input.enterExpression();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Double result = calculator.calculate(expressionTokenizer.expressionSplit(expression));
+        output.viewCalculateResult(result);
+        resultRepository.save(expression, Double.toString(result));
     }
 }
