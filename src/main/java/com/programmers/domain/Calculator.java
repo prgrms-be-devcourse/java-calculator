@@ -30,7 +30,7 @@ public class Calculator {
             if (Arithmetic.isNumber(expr)) {
                 numbers.push(Integer.parseInt(expr));
             } else {
-                int result = binaryOperation(numbers.pop(), numbers.pop(), Operator.getValue(expr));
+                int result = binaryOperate(numbers.pop(), numbers.pop(), expr);
                 numbers.push(result);
             }
         }
@@ -38,12 +38,7 @@ public class Calculator {
         return numbers.pop();
     }
 
-    private int binaryOperation(int a, int b, Operator operator) {
-        return switch (operator) {
-            case PLUS -> b + a;
-            case MINUS -> b - a;
-            case MULTIPLY -> b * a;
-            case DIVIDE -> b / a;
-        };
+    private int binaryOperate(int a, int b, String operator) {
+        return Operator.binaryOperate(b, a, operator);
     }
 }
