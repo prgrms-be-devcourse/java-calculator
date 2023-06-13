@@ -12,8 +12,8 @@ public class Calculator implements Runnable{
 
     private final Input input;
     private final Output output;
-    private CalculatorRepository calculatorRepository;
-    private CalculateUtil calculateUtil;
+    private final CalculatorRepository calculatorRepository;
+    private final CalculateUtil calculateUtil;
     private int command;
 
     @Override
@@ -47,7 +47,7 @@ public class Calculator implements Runnable{
         }
     }
 
-    void printHistoryCommand() {
+    public void printHistoryCommand() {
         try {
             output.printCalculateHistory(calculatorRepository.getHistory());
 
@@ -56,7 +56,7 @@ public class Calculator implements Runnable{
         }
     }
 
-    void calculateCommand() {
+    public void calculateCommand() {
         try {
             output.printRequestEquationInput();
             String equation = input.getEquation();
