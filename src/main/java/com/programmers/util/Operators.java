@@ -22,7 +22,7 @@ public enum Operators {
         return Arrays.stream(values())
                 .filter(operator -> operator.symbol.equals(inputOperator))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 수식입니다. +, -, *, / 연산만 가능합니다."));
+                .orElseThrow(IllegalArgumentException::new);
     }
 
 
