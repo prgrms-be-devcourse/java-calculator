@@ -1,6 +1,6 @@
-package com.programmers;
+package com.programmers.calculator;
 
-import com.programmers.domain.CalculationResult;
+import com.programmers.calculator.domain.CalculationResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;

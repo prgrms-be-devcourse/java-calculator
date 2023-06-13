@@ -1,9 +1,9 @@
-package com.programmers.util;
+package com.programmers.calculator.util;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.programmers.util.PostfixConverter.convert;
+import static com.programmers.calculator.util.PostfixConverter.convert;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PostfixConverterTest {

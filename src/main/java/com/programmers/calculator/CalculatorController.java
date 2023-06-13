@@ -1,10 +1,10 @@
-package com.programmers;
+package com.programmers.calculator;
 
-import com.programmers.domain.CalculationResult;
-import com.programmers.domain.Expression;
-import com.programmers.domain.Menu;
-import com.programmers.io.Input;
-import com.programmers.io.Output;
+import com.programmers.calculator.domain.CalculationResult;
+import com.programmers.calculator.domain.Expression;
+import com.programmers.calculator.domain.Menu;
+import com.programmers.calculator.io.Input;
+import com.programmers.calculator.io.Output;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

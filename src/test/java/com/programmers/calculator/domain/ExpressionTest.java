@@ -1,6 +1,6 @@
-package com.programmers.domain;
+package com.programmers.calculator.domain;
 
-import com.programmers.exception.InvalidExpressionException;
+import com.programmers.calculator.exception.InvalidExpressionException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

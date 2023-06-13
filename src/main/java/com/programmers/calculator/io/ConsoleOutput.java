@@ -1,6 +1,6 @@
-package com.programmers.io;
+package com.programmers.calculator.io;
 
-import com.programmers.domain.Menu;
+import com.programmers.calculator.domain.Menu;
 
 import java.util.Arrays;
 

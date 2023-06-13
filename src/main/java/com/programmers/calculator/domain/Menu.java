@@ -1,7 +1,7 @@
-package com.programmers.domain;
+package com.programmers.calculator.domain;
 
-import com.programmers.constant.ErrorMessage;
-import com.programmers.exception.InvalidMenuException;
+import com.programmers.calculator.constant.ErrorMessage;
+import com.programmers.calculator.exception.InvalidMenuException;
 
 import java.util.Arrays;
 

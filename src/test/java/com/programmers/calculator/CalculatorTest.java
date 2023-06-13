@@ -1,4 +1,4 @@
-package com.programmers;
+package com.programmers.calculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

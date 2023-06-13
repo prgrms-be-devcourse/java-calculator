@@ -1,8 +1,8 @@
-package com.programmers.domain;
+package com.programmers.calculator.domain;
 
-import com.programmers.constant.ErrorMessage;
-import com.programmers.exception.InvalidExpressionException;
-import com.programmers.util.PostfixConverter;
+import com.programmers.calculator.constant.ErrorMessage;
+import com.programmers.calculator.exception.InvalidExpressionException;
+import com.programmers.calculator.util.PostfixConverter;
 
 public class Expression {
     private static final String EXPRESSION_VALIDATION_REGEX = "([0-9]+)\\s*([+\\-*/]\\s*[0-9]+\\s*)*";

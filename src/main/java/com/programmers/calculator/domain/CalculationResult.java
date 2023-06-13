@@ -1,4 +1,4 @@
-package com.programmers.domain;
+package com.programmers.calculator.domain;
 
 public class CalculationResult {
     private String expression;

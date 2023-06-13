@@ -1,7 +1,7 @@
-package com.programmers;
+package com.programmers.calculator;
 
-import com.programmers.domain.CalculationResult;
-import com.programmers.domain.Operator;
+import com.programmers.calculator.domain.CalculationResult;
+import com.programmers.calculator.domain.Operator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
