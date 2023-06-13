@@ -13,10 +13,10 @@ public class PostfixConverter {
         Stack<String> stack = new Stack<>();
         checkEmptyFormula(splitFormula);
 
-        for (int i = 0; i < splitFormula.length; i++) {
-            String eachFormula = splitFormula[i];
+        for (int position = 0; position < splitFormula.length; position++) {
+            String eachFormula = splitFormula[position];
 
-            if (isOperatorCheck(i)) {
+            if (isOperatorPositionCheck(position)) {
                 putOperator(eachFormula, postfix, stack);
             } else {
                 putOperand(eachFormula, postfix);
@@ -52,8 +52,8 @@ public class PostfixConverter {
     }
 
 
-    private static boolean isOperatorCheck(int i) {
-        return (i + 1) % 2 == 0;
+    private static boolean isOperatorPositionCheck(int position) {
+        return (position + 1) % 2 == 0;
     }
 
     private static void checkEmptyFormula(String[] splitFormula) throws IllegalArgumentException {
