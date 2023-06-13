@@ -1,12 +1,12 @@
 package calculator;
 
-import calculator.global.Menu;
+import calculator.model.Menu;
 import calculator.io.Input;
 import calculator.io.Output;
 import calculator.model.CalculationResult;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CalculatorConsole implements Input, Output {
@@ -19,9 +19,9 @@ public class CalculatorConsole implements Input, Output {
     }
 
     @Override
-    public void showCalculationResult(List<CalculationResult> calcResults) {
+    public void showCalculationResult(Map<Integer, CalculationResult> result) {
         System.out.println();
-        calcResults.forEach(System.out::println);
+        result.forEach((key, value) -> System.out.println(value));
         System.out.println();
     }
 

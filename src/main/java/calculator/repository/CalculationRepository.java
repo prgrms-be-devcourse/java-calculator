@@ -2,18 +2,17 @@ package calculator.repository;
 
 import calculator.model.CalculationResult;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CalculationRepository {
-    private final static LinkedHashMap<Integer, CalculationResult> results = new LinkedHashMap<>();
+    private final static Map<Integer, CalculationResult> results = new ConcurrentHashMap<>();
 
     public void save(CalculationResult result) {
         results.put(results.size() + 1, result);
     }
 
-    public List<CalculationResult> findAll() {
-        return new ArrayList<>(results.values());
+    public Map<Integer, CalculationResult> findAll() {
+        return results;
     }
 }

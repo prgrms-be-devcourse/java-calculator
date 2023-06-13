@@ -2,15 +2,16 @@ package calculator.model;
 
 public class CalculationResult {
     private final String expression;
-    private final String answer;
+    private final Integer answer;
+    private static final String CALCULATION_EQUALS_SIGN = " = ";
 
-    public CalculationResult(String expression, String answer){
+    public CalculationResult(String expression, Integer answer){
         this.expression = expression;
         this.answer = answer;
     }
 
     @Override
     public String toString() {
-        return expression + " = " + answer;
+        return expression + CALCULATION_EQUALS_SIGN + answer;
     }
 }
