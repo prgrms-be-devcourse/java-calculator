@@ -17,13 +17,13 @@ class ExpressionValidatorTest {
                     "-1+10*5",
                     "(2+10)/2*(-1)*5",
                     "0/15",
-                    "((10-5)/5*10*(-5)+500)"}
+                    "((10-5)/5*10*(-5)+500)",
+                    "- (3 - (- (4 + 5) ) )"}
 
     )
     void correctInputExpression(String expression) {
 
-        System.out.println("expression = " + expression);
-        Assertions.assertThat(validator.validate(expression)).isEqualTo(true);
+        Assertions.assertThat(validator.validate(expression.replaceAll(" ", ""))).isEqualTo(true);
 
     }
 
@@ -42,7 +42,7 @@ class ExpressionValidatorTest {
     )
     void wrongInputExpression(String expression) {
 
-        Assertions.assertThat(validator.validate(expression)).isEqualTo(false);
+        Assertions.assertThat(validator.validate(expression.replaceAll(" ", ""))).isEqualTo(false);
 
     }
 
