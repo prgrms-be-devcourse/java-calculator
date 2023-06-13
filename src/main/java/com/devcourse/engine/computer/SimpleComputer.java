@@ -16,13 +16,14 @@ public class SimpleComputer implements Computer {
     }
 
     private void branchIsOperator(String exp, Stack<Double> stack) {
-        if (Operator.isOperator(exp))
+        if (Operator.isOperator(exp)) {
             stack.push(
                     Operator.getOperator(exp).calculate(
                             stack.pop(), stack.pop()
                     )
             );
-        else
-            stack.push(Double.parseDouble(exp));
+            return;
+        }
+        stack.push(Double.parseDouble(exp));
     }
 }

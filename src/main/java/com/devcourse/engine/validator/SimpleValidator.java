@@ -31,35 +31,37 @@ public class SimpleValidator implements Validator {
             String token = matcher.group();
             if (token.isBlank())
                 continue;
-            branchIsBranketCondition(token, expression);
+            branchIsBranketCondition(token);
             expression.add(token);
         }
         checkCountValidation(operandCount, cnt -> cnt < 1);
         return expression;
     }
 
-    private void branchIsBranketCondition(String token, List<String> expression) {
+    private void branchIsBranketCondition(String token) {
         char prefix = token.charAt(0);
 
         if (prefix == '(' || prefix == ')') {
             branchBranket(prefix);
-        } else {
-            branchIsDigitCondition(prefix);
+            return;
         }
+        branchIsDigitCondition(prefix);
     }
 
     private void branchBranket(char prefix) {
-        if (prefix == '(')
+        if (prefix == '(') {
             branketCount ++;
-        else
-            checkCountValidation(-- branketCount, cnt -> cnt < 0);
+            return;
+        }
+        checkCountValidation(-- branketCount, cnt -> cnt < 0);
     }
 
     private void branchIsDigitCondition(char prefix) {
-        if (Character.isDigit(prefix))
+        if (Character.isDigit(prefix)) {
             checkCountValidation(++ operandCount, cnt -> cnt > 1);
-        else
-            checkCountValidation(-- operandCount, cnt -> cnt < 0);
+            return;
+        }
+        checkCountValidation(-- operandCount, cnt -> cnt < 0);
     }
 
 

@@ -31,13 +31,14 @@ public enum Operator {
 
     public static boolean isOperator(String token) {
         return Arrays.stream(Operator.values())
-                .anyMatch((o) -> o.getOperatorString().equals(token));
+                .anyMatch(o -> o.getOperatorString().equals(token));
     }
 
     public static Operator getOperator(String exp) {
         return Arrays.stream(Operator.values())
                 .filter(o -> o.getOperatorString().equals(exp))
-                .toList().get(0);
+                .toList()
+                .get(0);
     }
 
     public Double calculate(Double num1, Double num2) {

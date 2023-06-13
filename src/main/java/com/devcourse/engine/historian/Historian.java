@@ -6,7 +6,7 @@ import java.util.List;
 public class Historian {
 
     private HashMap<Integer, String> history = new HashMap<>();
-    private static int lastIndex = 0;
+    private int lastIndex = 0;
 
     public void saveHistory(List<String> expression, double result) {
         history.put(++ lastIndex, String.join(" ", expression) + " = " + result);

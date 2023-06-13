@@ -21,19 +21,18 @@ public class PostfixConverter implements Converter {
         return postfixExpression;
     }
 
-    private boolean convertByOperator(String exp, List<String> postfixExpression, Stack<Operator> temp) {
+    private void convertByOperator(String exp, List<String> postfixExpression, Stack<Operator> temp) {
         if (Operator.isOperator(exp)) {
             Operator operator = Operator.getOperator(exp);
 
             if (convertByBranket(operator, postfixExpression, temp))
-                return true;
+                return;
             convertWithOperandPriority(operator, postfixExpression, temp);
 
             temp.add(operator);
-        } else {
-            postfixExpression.add(exp);
+            return;
         }
-        return false;
+        postfixExpression.add(exp);
     }
 
     private void convertWithOperandPriority(Operator operator, List<String> postfixExpression, Stack<Operator> temp) {
