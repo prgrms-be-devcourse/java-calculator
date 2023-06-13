@@ -60,11 +60,6 @@ public class View implements Input,Output{
     }
 
     public boolean validateExpression(String expression) {
-
-        if (REGEX_EXPRESSION.matcher(expression).matches()) {
-            return true;
-        }
-
-        return false;
+        return REGEX_EXPRESSION.matcher(expression).matches();
     }
 }
