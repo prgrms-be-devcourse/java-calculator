@@ -7,7 +7,7 @@ import com.programmers.engine.model.Storage;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class Calculator implements Runnable{
+public class Calculator implements Runnable {
     public static final String CALCULATION = "2";
     public static final String HISTORY = "1";
 
@@ -17,18 +17,18 @@ public class Calculator implements Runnable{
 
     @Override
     public void run() {
-            while(true) {
-                output.printStart();
-                String selectionResult = input.choose();
-                if (selectionResult.equals(CALCULATION)) {
-                    output.printResult(Operation.calculate(input.input()));
-                    continue;
-                }
-                if (selectionResult.equals(HISTORY)) {
-                    output.printHistory(storage.findHistory());
-                    continue;
-                }
-                break;
+        while (true) {
+            output.printStart();
+            String selectionResult = input.choose();
+            if (selectionResult.equals(CALCULATION)) {
+                output.printResult(Operation.calculate(input.input()));
+                continue;
             }
+            if (selectionResult.equals(HISTORY)) {
+                output.printHistory(storage.findHistory());
+                continue;
+            }
+            break;
+        }
     }
 }
