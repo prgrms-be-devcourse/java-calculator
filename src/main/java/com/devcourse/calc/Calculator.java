@@ -24,13 +24,8 @@ public class Calculator {
         return processResult(result);
     }
 
-    public String showHistory() {
-        List<History> histories = repository.getAllHistories();
-        StringBuilder result = new StringBuilder();
-        for (History history : histories) {
-            result.append(history);
-        }
-        return result.toString();
+    public CalculateRecord showHistory() {
+        return repository.getAllHistories();
     }
 
     public History calculate(String formula) {
