@@ -1,4 +1,4 @@
-package com.programmers;
+package com.programmers.domain;
 
 import com.programmers.constant.ErrorMessage;
 import com.programmers.exception.InvalidMenuException;

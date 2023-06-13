@@ -1,4 +1,4 @@
-package com.programmers;
+package com.programmers.domain;
 
 import com.programmers.constant.ErrorMessage;
 import com.programmers.exception.InvalidExpressionException;
@@ -12,6 +12,10 @@ public class Expression {
     public Expression(String expression) {
         this.expression = expression;
         validateFormat();
+    }
+
+    public String getExpression() {
+        return expression;
     }
 
     public String toPostfix() {
