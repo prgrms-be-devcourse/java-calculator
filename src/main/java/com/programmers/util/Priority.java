@@ -17,7 +17,7 @@ public enum Priority {
         return Arrays.stream(Priority.values())
                 .filter(symbol -> Arrays.asList(symbol.operators).contains(operator))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 수식입니다. +, -, *, / 연산만 가능합니다."))
+                .orElseThrow(IllegalArgumentException::new)
                 .priority;
     }
 }

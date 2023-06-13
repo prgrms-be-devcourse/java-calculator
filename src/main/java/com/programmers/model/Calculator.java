@@ -15,7 +15,7 @@ public class Calculator {
         this.formula = formula;
     }
 
-    public long calculate(String formula) throws IllegalArgumentException, ArithmeticException {
+    public long calculate(String formula) {
         List<String> postfix = PostfixConverter.convert(formula);
         return calculatePostfixFormula(postfix);
     }

@@ -30,7 +30,7 @@ public class PostfixConverter {
 
     private static void putOperator(String operator, List<String> postfix, Stack<String> stack) {
         if (!Operators.isOperator(operator))
-            throw new IllegalArgumentException("잘못된 수식입니다. +, -, *, / 연산만 가능합니다.");
+            throw new IllegalArgumentException();
 
         if (stack.isEmpty() || Priority.getPriority(stack.peek()) < Priority.getPriority(operator)) {
             stack.push(operator);
@@ -44,9 +44,9 @@ public class PostfixConverter {
         stack.push(operator);
     }
 
-    private static void putOperand(String operand, List<String> postfix) throws NumberFormatException {
+    private static void putOperand(String operand, List<String> postfix) {
         if (!StringUtil.isNumber(operand)) {
-            throw new NumberFormatException("피연산자가 숫자가 아닙니다.");
+            throw new NumberFormatException();
         }
         postfix.add(operand);
     }
@@ -57,7 +57,7 @@ public class PostfixConverter {
     }
 
     private static void checkEmptyFormula(String[] splitFormula) throws IllegalArgumentException {
-        if (isEmptyFormula(splitFormula)) throw new IllegalArgumentException("비어있는 수식입니다.");
+        if (isEmptyFormula(splitFormula)) throw new IllegalArgumentException();
     }
 
     private static boolean isEmptyFormula(String[] splitFormula) {
