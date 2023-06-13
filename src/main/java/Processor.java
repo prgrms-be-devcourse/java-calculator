@@ -1,7 +1,7 @@
 import model.Calculator;
-import model.Command;
 import model.HistoryStorage;
 import view.View;
+import view.ViewMessage;
 
 public class Processor {
     private final View view;
@@ -30,8 +30,8 @@ public class Processor {
         }
     }
 
-    private Command getCommand() throws RuntimeException {
-        Command command = view.commandReader();
+    private ViewMessage getCommand() throws RuntimeException {
+        ViewMessage command = view.commandReader();
         view.printNewLine();
         return command;
     }

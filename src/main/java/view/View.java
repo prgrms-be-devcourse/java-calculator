@@ -2,7 +2,6 @@ package view;
 
 import exception.IllegalExpressionException;
 import exception.NoSuchCommandException;
-import model.Command;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -34,10 +33,10 @@ public class View {
         System.out.println();
     }
 
-    public Command commandReader() {
+    public ViewMessage commandReader() {
         try {
             String input = scanner.nextLine();
-            return Command.getCommand(input);
+            return ViewMessage.getViewMessage(input);
         } catch (RuntimeException e) {
             throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
         }
