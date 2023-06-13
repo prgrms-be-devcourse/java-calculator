@@ -9,7 +9,7 @@ import calcproject.view.CalcInput;
 import calcproject.view.CalcOutput;
 import calcproject.view.Command;
 
-public class CalcManager implements Runnable {
+public class CalcManager{
 
 	private final CalcResultRecordRepository calcResultRecordRepository;
 	private final CalcInput calcInput;
@@ -24,7 +24,7 @@ public class CalcManager implements Runnable {
 		this.calculator = calculator;
 	}
 
-	public void run() {
+	public void startCalcManager() {
 		Command cmd = null;
 
 		do {

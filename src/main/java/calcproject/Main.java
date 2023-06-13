@@ -23,8 +23,8 @@ public class Main {
 		CalcExpressionTokenizer calcExpressionTokenizer = new CalcExpressionTokenizer();
 		Calculator calculator = new Calculator(calcExpressionTokenizer);
 
-		Runnable calcManager = new CalcManager(calcResultRecordRepository, calcConsoleView, calcConsoleView, calculator);
+		CalcManager calcManager = new CalcManager(calcResultRecordRepository, calcConsoleView, calcConsoleView, calculator);
 
-		calcManager.run();
+		calcManager.startCalcManager();
 	}
 }
