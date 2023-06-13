@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class CalculatorRepository {
     private final Map<Integer, CalculatorDto> calculatorRepository = new LinkedHashMap<>();
-    private final IdGenerator idGenerator = new IdGenerator();
+    private static final IdGenerator idGenerator = new IdGenerator();
 
     public CalculatorRepository() {
     }
