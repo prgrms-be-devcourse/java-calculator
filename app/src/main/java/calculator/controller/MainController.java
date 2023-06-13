@@ -6,12 +6,15 @@ import static calculator.view.OutputView.showMenu;
 
 import calculator.entity.Menu;
 import calculator.service.Calculator;
+import calculator.service.HistoryReader;
 
 public class MainController {
 
+    private final HistoryReader historyReader;
     private final Calculator calculator;
 
-    public MainController(Calculator calculator) {
+    public MainController(HistoryReader historyReader, Calculator calculator) {
+        this.historyReader = historyReader;
         this.calculator = calculator;
     }
 
@@ -31,6 +34,11 @@ public class MainController {
     }
 
     private void execute(Menu selectedMenu) {
+        if (selectedMenu.isReadHistory()) {
+            historyReader.execute();
+            return;
+        }
+
         if (selectedMenu.isCalculate()) {
             calculator.execute();
         }

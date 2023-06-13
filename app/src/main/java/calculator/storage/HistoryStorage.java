@@ -9,6 +9,9 @@ public class HistoryStorage {
 
     public void save(String history) {
         storage.add(history);
-        System.out.println(storage);
+    }
+
+    public String[] readAllHistory() {
+        return storage.toArray(String[]::new);
     }
 }

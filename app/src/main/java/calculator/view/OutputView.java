@@ -8,6 +8,7 @@ public final class OutputView {
     private static final String EXPRESSION_INPUT_MESSAGE = "계산식을 입력하세요(자연수, 사칙연산, 공백 기준) : ";
     private static final String QUIT_MESSAGE = "프로그램을 종료합니다.";
     private static final String CALCULATION_RESULT_MESSAGE = "계산 결과 : ";
+    private static final String EMPTY_HISTORY_MESSAGE = "계산 내역이 존재하지 않습니다.";
 
     private OutputView() {
     }
@@ -24,11 +25,22 @@ public final class OutputView {
     }
 
     public static void showQuitMessage() {
+        printWithLineBreak();
         printWithLineBreak(QUIT_MESSAGE);
     }
 
     public static void showCalculationResult(int calculationResult) {
         printWithLineBreak(CALCULATION_RESULT_MESSAGE + calculationResult);
+        printWithLineBreak();
+    }
+
+    public static void showEmptyHistoryMessage() {
+        printWithLineBreak(EMPTY_HISTORY_MESSAGE);
+        printWithLineBreak();
+    }
+
+    public static void showAllHistory(String[] allHistory) {
+        printMultiple(allHistory);
         printWithLineBreak();
     }
 

@@ -25,6 +25,10 @@ public enum Menu {
             .orElseThrow(() -> new MenuInputException(NOT_EXIST_MENU_MESSAGE));
     }
 
+    public boolean isReadHistory() {
+        return this == Menu.READ_HISTORY;
+    }
+
     public boolean isCalculate() {
         return this == Menu.CALCULATE;
     }
