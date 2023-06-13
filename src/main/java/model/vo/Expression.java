@@ -9,7 +9,7 @@ public class Expression {
     private final String expression;
 
     public Expression(String expression) {
-        validExpression(expression, INVALID_EXPRESSION);
+        validExpression(expression, EXPRESSION_PATTERN);
         this.expression = expression;
     }
 
@@ -22,7 +22,7 @@ public class Expression {
         Matcher matcher = pattern.matcher(expression);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(EXPRESSION_PATTERN);
+            throw new IllegalArgumentException(INVALID_EXPRESSION);
         }
     }
 }

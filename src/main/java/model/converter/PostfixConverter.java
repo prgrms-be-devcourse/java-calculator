@@ -27,6 +27,7 @@ public class PostfixConverter implements Converter {
             }
             postfixList.add(s);
         }
+        appendRemainingOperators(postfixList, stack);
         return postfixList;
     }
 
@@ -39,5 +40,11 @@ public class PostfixConverter implements Converter {
 
     private boolean isHigherPriorityAfterOperator(Operator prev, Operator now) {
         return prev.getPriority() >= now.getPriority();
+    }
+
+    private void appendRemainingOperators(List<String> postfixList, Stack<Operator> stack) {
+        while (!stack.isEmpty()) {
+            postfixList.add(stack.pop().getSignature());
+        }
     }
 }

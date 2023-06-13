@@ -26,7 +26,7 @@ public enum Operator {
 
     public static Operator findOperator(String signature) {
         return Arrays.stream(values())
-                .filter(operator -> operator.equals(signature))
+                .filter(operator -> operator.signature.equals(signature))
                 .findAny()
                 .get();
     }
