@@ -18,20 +18,34 @@ public class Calculator implements Runnable {
     @Override
     public void run() {
         while (true) {
-            output.printStart();
-            String selectionResult = input.choose();
-            if (selectionResult.equals(CALCULATION)) {
-                String calculationCommand = input.input();
-                Integer calculationResult = Operation.calculate(calculationCommand);
-                storage.save(calculationCommand, calculationResult);
-                output.printResult(calculationResult);
-                continue;
+            try {
+                output.printStart();
+                String selectionResult = input.choose();
+                if (canCalculate(selectionResult)) continue;
+                if (canFind(selectionResult)) continue;
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
-            if (selectionResult.equals(HISTORY)) {
-                output.printHistory(storage.findAll());
-                continue;
-            }
-            break;
         }
+    }
+
+    private boolean canFind(String selectionResult) {
+        if (selectionResult.equals(HISTORY)) {
+            output.printHistory(storage.findAll());
+            return true;
+        }
+        return false;
+    }
+
+    private boolean canCalculate(String selectionResult) {
+        if (selectionResult.equals(CALCULATION)) {
+            String calculationCommand = input.input();
+            Integer calculationResult = Operation.calculate(calculationCommand);
+            storage.save(calculationCommand, calculationResult);
+            output.printResult(calculationResult);
+            return true;
+        }
+        return false;
     }
 }
