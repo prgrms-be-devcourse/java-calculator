@@ -46,12 +46,12 @@ public class PostfixConverter {
         if (str == null) {
             return false;
         }
+
         try {
             Integer.parseInt(str);
         } catch (NumberFormatException e) {
             return false;
         }
-
         return true;
     }
 }

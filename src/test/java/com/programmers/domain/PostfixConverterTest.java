@@ -52,6 +52,4 @@ class PostfixConverterTest {
         //then
         assertThat(result).isEqualTo(expected);
     }
-
-
 }

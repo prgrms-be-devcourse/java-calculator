@@ -4,10 +4,10 @@ import com.programmers.domain.*;
 import com.programmers.io.Console;
 import com.programmers.util.ExpressionProcessor;
 
+import static com.programmers.domain.Operator.findOperator;
+
 import java.util.List;
 import java.util.Stack;
-
-import static com.programmers.domain.Operator.findOperator;
 
 public class CalculatorService {
 

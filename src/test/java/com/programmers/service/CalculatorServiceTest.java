@@ -1,5 +1,7 @@
 package com.programmers.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.programmers.io.Console;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Stack;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorServiceTest {
 
