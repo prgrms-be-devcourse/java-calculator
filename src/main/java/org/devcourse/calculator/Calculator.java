@@ -92,7 +92,6 @@ public class Calculator {
     }
 
 
-
     private String calculate(List<String> postfix) throws ArithmeticException {
 
         Stack<Double> stack = new Stack<>();

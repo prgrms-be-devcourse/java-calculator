@@ -1,6 +1,7 @@
 package org.devcourse.calculator;
 
 import org.devcourse.util.DigitChecker;
+import org.devcourse.util.RegexPattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +17,21 @@ public class ExpressionConverter {
 
         List<String> expressionList = new ArrayList<>();
 
-        Pattern pattern = Pattern.compile("^[+\\-*/\\(\\)]*$"); // 연산자
+        Pattern pattern = RegexPattern.OPERATOR_PATTERN; // 연산자
 
         int li=0, ri=1;
         if(exp.charAt(0) == '(') {
             expressionList.add("(");
+            li++;
+        } else if (exp.charAt(0) == '-' && !Character.isDigit(exp.charAt(1))) {
+            expressionList.add("-1");
+            expressionList.add("*");
             li++;
         }
 
         while (ri < exp.length()) {
 
             Matcher matcher = pattern.matcher(String.valueOf(exp.charAt(ri)));
-
 
             if (matcher.find()) {
 
@@ -44,8 +48,15 @@ public class ExpressionConverter {
                 }
 
                 // 연산자(operation) 저장
-                if( ri>= 1 && !(exp.charAt(ri) == '-' && exp.charAt(ri - 1) == '(')) {
-                    expressionList.add(String.valueOf(exp.charAt(ri)));
+                if( ri>= 1 && !(exp.charAt(ri) == '-' && exp.charAt(ri - 1) == '(' && exp.charAt(ri+1) != '(')) {
+
+                    if(exp.charAt(ri) == '-' && exp.charAt(ri - 1) == '(') {
+                        expressionList.add("-1");
+                        expressionList.add("*");
+                    } else {
+                        expressionList.add(String.valueOf(exp.charAt(ri)));
+
+                    }
                 }
 
 
@@ -57,7 +68,6 @@ public class ExpressionConverter {
 
         }
 
-        // 마지막 피연산자(operand)
         if(li < exp.length())
             expressionList.add(exp.substring(li, ri));
 

@@ -42,7 +42,7 @@ public class ExpressionValidator<T> implements Validator<T> {
 
         String expression = exp.replaceAll(" ", "");
 
-        Pattern pattern = RegexPattern.OPERATOR_PATTERN;
+        Pattern pattern = RegexPattern.EXPRESSION_PATTERN;
         Matcher matcher = pattern.matcher(expression);
 
         if (exp.equals("")) {
