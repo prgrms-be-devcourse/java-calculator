@@ -2,7 +2,6 @@ package com.devcourse.calc;
 
 import com.devcourse.calc.converter.Converter;
 import com.devcourse.calc.model.*;
-import com.devcourse.calc.model.Operand;
 import com.devcourse.calc.repo.CalcHistoryRepository;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public class Calculator {
 
     public String run(int menuNumber) {
         Menu selectedMenu = Menu.find(menuNumber);
-        Object result = selectedMenu.execute(this);
-        return processResult(result);
+
+        return selectedMenu.execute(this);
     }
 
     public CalculateRecord showHistory() {
