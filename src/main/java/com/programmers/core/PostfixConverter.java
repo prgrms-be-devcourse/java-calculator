@@ -27,40 +27,4 @@ public class PostfixConverter {
         }
         return postfix;
     }
-
-//    private static void putOperator(String operator, List<String> postfix, Stack<String> stack) {
-//        if (!Operators.isOperator(operator))
-//            throw new IllegalArgumentException();
-//
-//        if (stack.isEmpty() || Priority.getPriority(stack.peek()) < Priority.getPriority(operator)) {
-//            stack.push(operator);
-//            return;
-//        }
-//
-//        while (!stack.isEmpty() && Priority.getPriority(stack.peek()) >= Priority.getPriority(operator)) {
-//            postfix.add(stack.pop());
-//        }
-//
-//        stack.push(operator);
-//    }
-//
-//    private static void putOperand(String operand, List<String> postfix) {
-//        if (!StringUtil.isNumber(operand)) {
-//            throw new NumberFormatException();
-//        }
-//        postfix.add(operand);
-//    }
-//
-//
-//    private static boolean isOperatorPositionCheck(int position) {
-//        return (position + 1) % 2 == 0;
-//    }
-//
-//    private static void checkEmptyFormula(String[] splitFormula) throws IllegalArgumentException {
-//        if (isEmptyFormula(splitFormula)) throw new IllegalArgumentException();
-//    }
-//
-//    private static boolean isEmptyFormula(String[] splitFormula) {
-//        return splitFormula != null && splitFormula.length == 0;
-//    }
 }
