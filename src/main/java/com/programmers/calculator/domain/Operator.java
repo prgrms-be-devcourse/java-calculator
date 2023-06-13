@@ -26,6 +26,10 @@ public enum Operator {
         return symbol;
     }
 
+    public String getFormattedSymbol() {
+        return " " + symbol + " ";
+    }
+
     public static Operator findBySymbol(char symbol) {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.equals(symbol))
