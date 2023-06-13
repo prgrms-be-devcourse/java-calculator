@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public enum Priority {
-    HIGH(2, new String[]{"/", "*"}), LOW(1, new String[]{"+", "-"});
+    HIGH(10, new String[]{"/", "*"}), LOW(1, new String[]{"+", "-"});
 
     private final int priority;
     private final String[] operators;
