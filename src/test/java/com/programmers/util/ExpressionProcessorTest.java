@@ -2,6 +2,7 @@ package com.programmers.util;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +11,34 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ExpressionProcessorTest {
 
     ExpressionProcessor expressionProcessor = new ExpressionProcessor();
+
+    @Test
+    void 계산식을_요소별로_나눈다() {
+        //given
+        String input = "1+1+4+7*2-3/2";
+        List<String> expected = Arrays.asList("1", "+", "1", "+", "4", "+", "7", "*", "2", "-", "3", "/", "2");
+
+        //when
+        List<String> result = expressionProcessor.parse(input);
+
+        //then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void 토큰_문자열에_요소를_추가한다() {
+        //given
+        StringBuilder builder = new StringBuilder("11");
+        List<String> tokens = new ArrayList<>();
+
+        List<String> expected = Arrays.asList("11");
+
+        //when
+        expressionProcessor.addBuilderToTokens(builder, tokens);
+
+        //then
+        assertThat(tokens).isEqualTo(expected);
+    }
 
     @Test
     void 공백을_제거한다() {
