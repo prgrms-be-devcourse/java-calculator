@@ -1,5 +1,6 @@
 package calculator.entity;
 
+import calculator.exception.ExpressionInputException;
 import java.util.Arrays;
 
 public enum Operator {
@@ -38,6 +39,8 @@ public enum Operator {
         }
     };
 
+    private static final String NOT_MATCHING_ANY_SYMBOL_MESSAGE = "일치하는 연산자가 없습니다.";
+
     private final String symbol;
 
     Operator(String symbol) {
@@ -48,7 +51,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
             .filter(operator -> elementSymbol.equals(operator.getSymbol()))
             .findFirst()
-            .get();
+            .orElseThrow(() -> new ExpressionInputException(NOT_MATCHING_ANY_SYMBOL_MESSAGE));
     }
 
     public String getSymbol() {
