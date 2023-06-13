@@ -1,6 +1,6 @@
 package com.programmers.io;
 
-import com.programmers.Menu;
+import com.programmers.domain.Menu;
 
 import java.util.Arrays;
 
@@ -13,7 +13,7 @@ public class ConsoleOutput implements Output {
     }
 
     @Override
-    public void displayResult(double result) {
+    public <T> void displayResult(T result) {
         System.out.println(result);
         printEmptyLine();
     }

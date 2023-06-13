@@ -9,7 +9,8 @@ public class CalculatorApplication {
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Output output = new ConsoleOutput();
-        Calculator calculator = new Calculator();
+        CalculatorMemory calculatorMemory = new CalculatorMemory();
+        Calculator calculator = new Calculator(calculatorMemory);
 
         CalculatorController calculatorController = new CalculatorController(input, output, calculator);
         calculatorController.run();

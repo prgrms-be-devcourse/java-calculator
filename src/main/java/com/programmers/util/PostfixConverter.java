@@ -1,6 +1,6 @@
 package com.programmers.util;
 
-import com.programmers.Operator;
+import com.programmers.domain.Operator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

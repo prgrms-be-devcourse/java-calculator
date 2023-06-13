@@ -1,7 +1,7 @@
 package com.programmers.io;
 
-import com.programmers.Expression;
-import com.programmers.Menu;
+import com.programmers.domain.Expression;
+import com.programmers.domain.Menu;
 
 public interface Input {
     Menu selectMenu();

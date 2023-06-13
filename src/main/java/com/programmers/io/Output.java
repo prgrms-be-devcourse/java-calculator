@@ -3,5 +3,5 @@ package com.programmers.io;
 public interface Output {
     void displayMenu();
 
-    void displayResult(double result);
+    <T> void displayResult(T result);
 }
