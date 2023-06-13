@@ -8,14 +8,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorTest {
     Calculator calculator;
+    CalculatorMemory calculatorMemory;
 
     @BeforeEach
     void beforeEach() {
-        calculator = new Calculator();
+        calculatorMemory = new CalculatorMemory();
+        calculator = new Calculator(calculatorMemory);
     }
 
     @Test
-    @DisplayName("후위 표기식 계산")
+    @DisplayName("후위 표기식 계산을 성공한다.")
     void 후위_표기식_계산() {
         // given
         String postfixExpression = "324*+93/-";
