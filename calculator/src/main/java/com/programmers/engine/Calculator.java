@@ -8,9 +8,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
-    public static final String CALCULATION = "2";
-    public static final String HISTORY = "1";
-
     private final Input input;
     private final Output output;
     private final Storage storage;
@@ -31,7 +28,7 @@ public class Calculator implements Runnable {
     }
 
     private boolean canFind(String selectionResult) {
-        if (selectionResult.equals(HISTORY)) {
+        if (selectionResult.equals(Selection.HISTORY.getNumber())) {
             output.printHistory(storage.findAll());
             return true;
         }
@@ -39,7 +36,7 @@ public class Calculator implements Runnable {
     }
 
     private boolean canCalculate(String selectionResult) {
-        if (selectionResult.equals(CALCULATION)) {
+        if (selectionResult.equals(Selection.CALCULATION.getNumber())) {
             String calculationCommand = input.input();
             Integer calculationResult = Operation.calculate(calculationCommand);
             storage.save(calculationCommand, calculationResult);
