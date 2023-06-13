@@ -5,6 +5,7 @@ import io.CalculatorInput;
 import io.CalculatorOutput;
 import model.calculation.Calculation;
 import model.converter.Converter;
+import model.vo.CalculationResult;
 import model.vo.Expression;
 import model.vo.Menu;
 
@@ -47,7 +48,7 @@ public class CalculatorController implements Runnable {
     private void runCalculationLogic() {
         Expression expression = input.expressionInput();
         List<String> postfixExpression = converter.covert(expression);
-        int result = calculation.calculate(postfixExpression);
-        output.printExpression(result);
+        CalculationResult calculationResult = calculation.calculate(postfixExpression);
+        output.printExpression(calculationResult);
     }
 }

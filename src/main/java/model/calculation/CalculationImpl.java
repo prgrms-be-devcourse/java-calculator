@@ -1,6 +1,7 @@
 package model.calculation;
 
 import constant.Operator;
+import model.vo.CalculationResult;
 
 import java.util.List;
 import java.util.Stack;
@@ -9,14 +10,14 @@ public class CalculationImpl implements Calculation{
     private static final String IS_NUMBER_PATTERN = "^[0-9]$";
 
     @Override
-    public int calculate(List<String> postfixExpression) {
+    public CalculationResult calculate(List<String> postfixExpression) {
         Stack<Integer> stack = new Stack<>();
 
         for (String textSegment : postfixExpression) {
             calculatePostfixExpression(stack, textSegment);
         }
 
-        return stack.pop();
+        return new CalculationResult(stack.pop());
     }
 
     private void calculatePostfixExpression(Stack<Integer> stack, String textSegment) {

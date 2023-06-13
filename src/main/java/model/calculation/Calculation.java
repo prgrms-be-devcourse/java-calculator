@@ -1,5 +1,7 @@
 package model.calculation;
 
+import model.vo.CalculationResult;
+
 import java.util.List;
 
 public interface Calculation {
@@ -19,5 +21,5 @@ public interface Calculation {
         return number1 / number2;
     }
 
-    int calculate(List<String> postfixExpression);
+    CalculationResult calculate(List<String> postfixExpression);
 }
