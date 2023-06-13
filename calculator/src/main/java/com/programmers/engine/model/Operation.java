@@ -30,7 +30,7 @@ public class Operation {
     }
 
     private static void pushOperator(Stack<String> operatorsStack, Stack<Integer> operandsStack, String element) {
-        if (!isOperand(element)) {
+        if (Confirmation.isOperator(element)) {
             pushCalculationResult(operatorsStack, operandsStack, element);
             operatorsStack.push(element);
         }
@@ -44,7 +44,7 @@ public class Operation {
     }
 
     private static void pushOperand(Stack<Integer> operandsStack, String element) {
-        if (isOperand(element)) {
+        if (Confirmation.isOperand(element)) {
             operandsStack.push(Integer.valueOf(element));
         }
     }
@@ -59,9 +59,5 @@ public class Operation {
             return true;
         }
         return false;
-    }
-
-    private static boolean isOperand(String element) {
-        return element.matches("[0-9]+");
     }
 }
