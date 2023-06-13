@@ -73,7 +73,7 @@
       <recent name="model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="JUnit.ConsoleTest">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="sub_cal.sub_cal.main~1" />
@@ -163,7 +163,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686371262681</updated>
-      <workItem from="1686371263772" duration="34568000" />
+      <workItem from="1686371263772" duration="40652000" />
     </task>
     <servers />
   </component>

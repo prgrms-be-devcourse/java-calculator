@@ -8,7 +8,6 @@ public class Operator {
 
     public Integer operate(String inputString) {
 
-
         StringTokenizer st = new StringTokenizer(inputString);
 
         classify(st);
@@ -23,17 +22,25 @@ public class Operator {
         while(st.hasMoreTokens()){
             String word = st.nextToken();
 
-            if (word.equals("+") || word.equals("-")) operStack.add(word);
-                // 곱하기나 나누기 연산자가 나오면 먼저 계산합니다
-            else if(word.equals("*") || word.equals("/")) calPriority(word,Integer.parseInt(st.nextToken()));
+            if(!(OperatorList.getOperator(word).isEmpty())){
+                word = OperatorList.getOperator(word).get().name();
+            }
 
-            else {
-                if(operStack.isEmpty() || operStack.pop().equals("+")){
-                    numberStack.push(Integer.parseInt(word));
-                }
-                else{
+            switch (word){
+                case "MULTIPLY" : case "DIVIDE":
+                    calPriority(word,Integer.parseInt(st.nextToken()));
+                    break;
+                case "PLUS" : case "MINUS":
+                    operStack.add(word);
+                    break;
+                default:
+                    if(operStack.isEmpty() || operStack.pop().equals("PLUS")){
+                        numberStack.push(Integer.parseInt(word));
+                        break;
+                    }
+
                     numberStack.push(-1*Integer.parseInt(word));
-                }
+                    break;
             }
         }
 
@@ -49,9 +56,6 @@ public class Operator {
 
             numberStack.push(num1 + num2);
 
-//            if(operStack.pop().equals("+")) numberStack.push(num1 + num2);
-//            else numberStack.push(num1 - num2);
-
 
         }
     }
@@ -59,7 +63,7 @@ public class Operator {
     private void calPriority(String word,int num2) {
         int num1 = numberStack.pop();
 
-        if(word.equals("*")) numberStack.push(num1*num2);
+        if(word.equals("MULTIPLY")) numberStack.push(num1*num2);
 
         else numberStack.push(num1/num2);
 

@@ -21,11 +21,10 @@ public class Console implements Input,  Output {
         return userOption.get();
     }
 
-
-
     @Override
     public String inputString() throws IOException {
         String input = br.readLine();
+        System.out.println(input);
         return input;
     }
 
