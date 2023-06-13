@@ -64,11 +64,7 @@ public class Calculator {
     }
 
     private boolean isNumber(String value) {
-        if (REGEX_NUM.matcher(value).matches()) {
-
-            return true;
-        }
-
-        return false;
+        return REGEX_NUM.matcher(value).matches();
     }
+
 }
