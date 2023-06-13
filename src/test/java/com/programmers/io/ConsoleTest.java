@@ -1,5 +1,7 @@
 package com.programmers.io;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,13 +14,11 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 class ConsoleTest {
 
     private static final String MENU_MESSAGE = "1. 조회\n2. 계산\n3. 종료\n";
     private static final String MENU_SELECTION_MESSAGE = "선택 : ";
+    private static final String TERMINATION_MESSAGE = "계산기 프로그램을 종료합니다.";
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private final InputStream inputStream = System.in;
@@ -64,5 +64,18 @@ class ConsoleTest {
             assertThat(outputStream.toString()).contains(input);
         } catch (NoSuchElementException ignore) {
         }
+    }
+
+    @Test
+    void 종료_메시지를_출력한다() {
+        //given
+        //when
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        console.printTermination();
+
+        //then
+        assertThat(outputStream.toString()).contains(TERMINATION_MESSAGE);
     }
 }
