@@ -10,7 +10,7 @@ public class ConsoleInput implements Input {
 
     @Override
     public Menu selectMenu() {
-        System.out.print("선택: ");
+        System.out.print("\n선택: ");
         String menuNumber = scanner.nextLine();
 
         return Menu.findByNumber(menuNumber);
