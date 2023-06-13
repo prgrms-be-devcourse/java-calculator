@@ -1,5 +1,7 @@
 package calcproject;
 
+import java.util.Scanner;
+
 import calcproject.engine.CalcExpressionTokenizer;
 import calcproject.engine.Calculator;
 import calcproject.repository.CalcRecordRepository;
@@ -10,7 +12,8 @@ import calcproject.view.console.CalcConsoleView;
 public class Main {
 	public static void main(String[] args) {
 		CalcRecordRepository calcRecordRepository = new MemoryCalcRecordRepository();
-		CalcConsoleView calcConsoleView = new CalcConsoleView();
+		Scanner scanner = new Scanner(System.in);
+		CalcConsoleView calcConsoleView = new CalcConsoleView(scanner);
 		CalcExpressionTokenizer calcExpressionTokenizer = new CalcExpressionTokenizer();
 		Calculator calculator = new Calculator(calcExpressionTokenizer);
 

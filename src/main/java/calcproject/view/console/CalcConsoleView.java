@@ -11,15 +11,19 @@ import calcproject.view.Command;
 import calcproject.view.Messages;
 
 public class CalcConsoleView implements CalcInput, CalcOutput {
+	private Scanner scanner;
+
+	public CalcConsoleView(Scanner scanner) {
+		this.scanner = scanner;
+	}
 
 	@Override
 	public Command getCmd() {
 		System.out.println(Messages.INPUT_GUIDE_MESSAGE);
 		System.out.print(Messages.INPUT_CHOICE_MESSAGE);
 
-		Scanner sc = new Scanner(System.in);
-		int choiceNum = sc.nextInt();
-		sc.nextLine();
+		int choiceNum = this.scanner.nextInt();
+		this.scanner.nextLine();
 
 		Command command = Command.valueOfCmd(choiceNum);
 		return command;
@@ -27,8 +31,7 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 
 	@Override
 	public String getExpression() {
-		Scanner sc = new Scanner(System.in);
-		String expression = sc.nextLine();
+		String expression = this.scanner.nextLine();
 
 		return expression;
 	}
