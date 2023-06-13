@@ -11,7 +11,7 @@ public class View implements Input,Output{
     private final Pattern REGEX_EXPRESSION = Pattern.compile("\\d+(\\s[+\\-*/]\\s\\d+)*");
 
     @Override
-    public int selectWork() {
+    public int select() {
         int selection = sc.nextInt();
 
         if (validateSelection(selection)) {

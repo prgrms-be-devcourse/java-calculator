@@ -1,6 +1,6 @@
 package org.example.view;
 
 public interface Input {
-    int selectWork();
+    int select();
     String inputExpression();
 }

@@ -20,7 +20,7 @@ public class Console {
     public void run() {
         while (!calculatorProcess) {
             view.printSelection();
-            int option = view.selectWork();
+            int option = view.select();
             Optional<SelectTypeView> selectType = SelectTypeView.findByNum(option);
             selectOption(selectType.orElse(null));
         }
