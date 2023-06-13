@@ -16,9 +16,17 @@ public class Operation {
     public static final String OPERATOR_INPUT_ERROR = "연산자 입력에 오류가 발생했습니다.";
     public static final String INVALID_OPERAND = "올바른 피연산자가 아닙니다.";
 
-    public Operation() {
+    private Operation(){
         Arrays.stream(Operator.values())
                 .forEach(op -> operatorMap.put(op.operator, op));
+    }
+
+    public static Operation getInstance(){
+        return LazyHolder.INSTANCE;
+    }
+
+    private static class LazyHolder{
+        private static final Operation INSTANCE = new Operation();
     }
 
     public Integer calculate(Integer a, String operator, Integer b){
