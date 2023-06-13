@@ -1,5 +1,6 @@
 package com.programmers.service;
 
+import com.programmers.domain.ExpressionValidator;
 import com.programmers.domain.SelectionValidator;
 import com.programmers.io.Console;
 
@@ -7,6 +8,7 @@ public class CalculatorService {
 
     private final Console console;
     private final SelectionValidator selectionValidator = new SelectionValidator();
+    private final ExpressionValidator expressionValidator = new ExpressionValidator();
 
     public CalculatorService(Console console) {
         this.console = console;
@@ -21,6 +23,17 @@ public class CalculatorService {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getValidatedMenuSelection();
+        }
+    }
+
+    public String getValidatedExpression() {
+        String expression = console.getExpressionSpaceRemoved();
+
+        try {
+            return expressionValidator.validate(expression);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getValidatedExpression();
         }
     }
 }

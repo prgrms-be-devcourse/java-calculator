@@ -14,8 +14,9 @@ public class Calculator {
         int menuSelection = calculatorService.getValidatedMenuSelection();
 
         if (menuSelection == CALCULATE) {
-            String expression = console.getExpressionSpaceRemoved();
-            System.out.println(expression);
+            String validatedExpression = calculatorService.getValidatedExpression();
+
+            System.out.println(validatedExpression);
         }
     }
 }
