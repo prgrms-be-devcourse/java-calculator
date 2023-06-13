@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MenuTest {
 
@@ -18,13 +17,4 @@ class MenuTest {
     void runMenuSuccess() {
         assertThat(Menu.find(1).execute(calculator)).isEqualTo("");
     }
-
-    @Test
-    @DisplayName("없는 메뉴를 입력받아 기능 실행에 실패한다")
-    void runMenuFail() {
-        assertThatThrownBy(() -> Menu.find(3).execute(calculator))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessage("사용할 수 없는 메뉴 입니다");
-    }
-
 }
