@@ -2,11 +2,9 @@ package com.programmers.io;
 
 public interface Output {
 
-    void println(String msg);
+    <T> void println(T msg);
 
-    void println(double msg);
-
-    void print(String msg);
+    <T> void print(T msg);
 
     void printErrorMsg(String errMsg);
 

@@ -35,17 +35,12 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public void println(String msg) {
-        System.out.println(msg);
-    }
-
-
-    public void println(double msg) {
+    public <T> void println(T msg) {
         System.out.println(msg);
     }
 
     @Override
-    public void print(String msg) {
+    public <T> void print(T msg) {
         System.out.print(msg);
     }
 
