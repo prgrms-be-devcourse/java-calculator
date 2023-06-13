@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-// 계산 내역을 저장하고 출력합니다.
+
 public class History {
     // 계산 내역을 저장하는 리스트
     private List<String> log = new ArrayList<>();

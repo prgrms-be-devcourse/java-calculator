@@ -30,12 +30,10 @@ public class Operator {
             else {
                 if(operStack.isEmpty() || operStack.pop().equals("+")){
                     numberStack.push(Integer.parseInt(word));
-
                 }
                 else{
                     numberStack.push(-1*Integer.parseInt(word));
                 }
-
             }
         }
 

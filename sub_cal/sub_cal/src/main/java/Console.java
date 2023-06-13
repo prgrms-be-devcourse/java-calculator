@@ -1,26 +1,23 @@
 
 import io.Input;
 import io.Output;
-import model.Calculator;
-import model.History;
-import model.Operator;
 import option.Option;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
+
 public class Console implements Input,  Output {
     Scanner sc = new Scanner(System.in);
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //사용자가 1번(조회)를 선택하였을 시 실행
     @Override
-    public Option selectOption() {
+    public Option selectOption() throws NoSuchElementException {
         Optional<Option> userOption = Option.getMenu(sc.nextLine());
-        if(userOption.isEmpty()) System.out.println("존재하지 않는 메뉴입니다.");
+        if(userOption.isEmpty()) {
+            System.out.println("존재하지 않는 메뉴입니다.");
+        }
+
         return userOption.get();
     }
 
