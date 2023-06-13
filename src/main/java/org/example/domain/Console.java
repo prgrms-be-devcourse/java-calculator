@@ -10,7 +10,7 @@ public class Console {
 
     private View view;
     private Calculator calculator;
-    private static boolean loop = false;
+    private boolean calculatorProcess = false;
 
     public Console(View view, Calculator calculator) {
         this.view = view;
@@ -18,7 +18,7 @@ public class Console {
     }
 
     public void run() {
-        while (!loop) {
+        while (!calculatorProcess) {
             view.printSelection();
             int option = view.selectWork();
             Optional<SelectTypeView> selectType = SelectTypeView.findByNum(option);
@@ -37,7 +37,7 @@ public class Console {
                 Records.saveRecord(infixExpression, result);
             }
 
-            case END -> loop = true;
+            case END -> calculatorProcess = true;
         }
     }
 
