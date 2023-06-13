@@ -22,13 +22,13 @@ public class Calculator {
 
     private long calculatePostfixFormula(List<String> formula) {
         Stack<Long> stack = new Stack<>();
-        for (String numOrOperator : formula) {
-            if (StringUtil.isNumber(numOrOperator)) {
-                stack.push(StringUtil.convertStringToLong(numOrOperator));
+        for (String token : formula) {
+            if (StringUtil.isNumber(token)) {
+                stack.push(StringUtil.convertStringToLong(token));
             } else {
                 Long num2 = stack.pop();
                 Long num1 = stack.pop();
-                stack.push(Operators.calculate(numOrOperator, num1, num2));
+                stack.push(Operators.calculate(token, num1, num2));
             }
         }
         return stack.pop();
