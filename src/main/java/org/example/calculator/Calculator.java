@@ -27,12 +27,7 @@ public class Calculator {
     Stack<String> operators = new Stack<>();
 
     for (String value : formula) {
-      if (OperatorPriority.isOperator(value)) {
-        comparePriority(operators, parsedFormula, value);
-        operators.push(value);
-      } else {
-        parsedFormula.add(value);
-      }
+      separateFormula(parsedFormula, operators, value);
     }
 
     while (!operators.isEmpty()) {
@@ -41,11 +36,21 @@ public class Calculator {
     return parsedFormula;
   }
 
+  public void separateFormula(List<String> parsedFormula, Stack<String> operators, String value) {
+    if (OperatorPriority.isOperator(value)) {
+      comparePriority(operators, parsedFormula, value);
+      operators.push(value);
+    } else {
+      parsedFormula.add(value);
+    }
+  }
+
   public void comparePriority(Stack<String> operators, List<String> parsedFormula, String value) {
     while (!operators.isEmpty() && OperatorPriority.checkPriority(operators.peek()) >= OperatorPriority.checkPriority(value)) {
       parsedFormula.add(operators.pop());
     }
   }
+
 
   public double calculation(double number1, double number2, String operator) {
     if (("+").equals(operator)) {
