@@ -1,20 +1,21 @@
 package org.calculator.engine.domain;
 
+import lombok.RequiredArgsConstructor;
+
+import java.util.Arrays;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public enum Condition {
-    LOOKUP, CALCULATE, BREAK;
+    LOOKUP("1"),
+    CALCULATE("2"),
+    BREAK("3");
 
-    public static Optional<Condition> decideCondition(String condition) {
-        if (condition.equals("1")) {
-            return Optional.of(LOOKUP);
-        }
-        if (condition.equals("2")) {
-            return Optional.of(CALCULATE);
-        }
-        if (condition.equals("3")) {
-            return Optional.of(BREAK);
-        }
-        return Optional.empty();
+    private final String input;
+
+    public static Optional<Condition> convert(String condition) {
+        return Arrays.stream(Condition.values())
+                .filter(conditionEnum -> conditionEnum.input.equals(condition))
+                .findAny();
     }
 }

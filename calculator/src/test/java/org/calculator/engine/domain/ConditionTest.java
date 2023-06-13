@@ -14,7 +14,7 @@ class ConditionTest {
     @ValueSource(strings = {"1", "2", "3", "4", "%"})
     @DisplayName("Condition이 정상적으로 반환 되는지 조회")
     void decideCondition(String condition) {
-        Optional<Condition> optionalCondition = Condition.decideCondition(condition);
+        Optional<Condition> optionalCondition = Condition.convert(condition);
         switch (condition) {
             case "1" -> assertThat(optionalCondition.get()).isEqualTo(Condition.LOOKUP);
             case "2" -> assertThat(optionalCondition.get()).isEqualTo(Condition.CALCULATE);

@@ -1,31 +1,46 @@
 package org.calculator.engine.io;
 
-import org.calculator.engine.error.ErrorCode;
+import lombok.RequiredArgsConstructor;
+import org.calculator.engine.domain.Condition;
+import org.calculator.repository.CalculateRepository;
 
-import java.util.Optional;
 import java.util.Scanner;
 
+@RequiredArgsConstructor
 public class ConsoleImpl implements Console {
     private Scanner scanner = new Scanner(System.in);
+    private final CalculateRepository calculateRepository;
 
     @Override
-    public void printAnswer(int answer) {
-        System.out.println(answer);
+    public void printAnswer(double answer) {
+        System.out.println();
+        System.out.println("result = " + answer);
+        System.out.println();
+    }
+
+
+    @Override
+    public void printHistory() {
+        System.out.println();
+        System.out.println("<< History Of Calculation >>");
+        calculateRepository.getHistory()
+                .forEach(h -> System.out.println("Equation : " + h.getEquation() + " | result : " + h.getResult()));
+        System.out.println();
     }
 
     @Override
-    public void printError(ErrorCode errorCode) {
-        ErrorCode.printError(errorCode);
-    }
-
-    @Override
-    public Optional<String> getCondition() {
+    public Condition getCondition() {
         System.out.println("1. 조회");
         System.out.println("2. 계산");
         System.out.println("3. 종료");
         System.out.println();
         System.out.print("선택 : ");
-        return Optional.of(scanner.nextLine());
+        return validateInput();
+    }
+
+    private Condition validateInput() {
+        String condition = scanner.nextLine();
+        return Condition.convert(condition).orElseThrow(() -> new IllegalArgumentException("잘못된 값을 입력하셨습니다."));
     }
 
     @Override

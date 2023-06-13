@@ -8,9 +8,9 @@ import org.calculator.repository.CalculateRepositoryImpl;
 
 public class App {
     public static void main(String[] args) {
-        Console console = new ConsoleImpl();
         CalculateEngine calculateEngine = new CalculateEngine();
         CalculateRepository calculateRepository = new CalculateRepositoryImpl();
-        new Calculator(calculateEngine, console, calculateRepository).run();
+        Console console = new ConsoleImpl(calculateRepository);
+        new Calculator(calculateEngine, console).run();
     }
 }

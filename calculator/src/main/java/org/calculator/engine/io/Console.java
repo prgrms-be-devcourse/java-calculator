@@ -1,15 +1,13 @@
 package org.calculator.engine.io;
 
-import org.calculator.engine.error.ErrorCode;
-
-import java.util.Optional;
+import org.calculator.engine.domain.Condition;
 
 public interface Console {
-    Optional<String> getCondition();
+    Condition getCondition();
 
     String insertEquation();
 
-    void printAnswer(int answer);
+    void printAnswer(double answer);
 
-    void printError(ErrorCode errorCode);
+    void printHistory();
 }

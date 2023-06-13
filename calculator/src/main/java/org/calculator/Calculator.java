@@ -3,16 +3,13 @@ package org.calculator;
 import lombok.AllArgsConstructor;
 import org.calculator.engine.CalculateEngine;
 import org.calculator.engine.domain.Condition;
-import org.calculator.engine.error.ErrorCode;
 import org.calculator.engine.io.Console;
-import org.calculator.repository.CalculateRepository;
 
 @AllArgsConstructor
 public class Calculator implements Runnable {
     private static boolean STOPPER = true;
     private CalculateEngine calculateEngine;
     private Console console;
-    private CalculateRepository calculateRepository;
 
     @Override
     public void run() {
@@ -21,55 +18,42 @@ public class Calculator implements Runnable {
 
     private void runCalculator() {
         while (STOPPER) {
-            String stringCondition = validateInput();
-            Condition condition = validateCondition(stringCondition);
-            inquireHistory(condition);
+            Condition condition = null;
+            condition = getUserInput(condition);
+            printHistory(condition);
             calculate(condition);
-            stop(condition);
+            if (condition == Condition.BREAK) break;
         }
     }
 
-    private String validateInput() {
-        String stringCondition = console.getCondition().orElse("wrong");
-        if ("wrong".equals(stringCondition)) {
-            console.printError(ErrorCode.BAD_CONDITION);
-        }
-        return stringCondition;
-    }
-
-    private Condition validateCondition(String stringCondition) {
-        Condition condition = Condition.decideCondition(stringCondition).orElse(null);
-        if (condition == null) {
-            console.printError(ErrorCode.BAD_CONDITION);
+    private Condition getUserInput(Condition condition) {
+        try {
+            condition = console.getCondition();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.toString());
         }
         return condition;
     }
 
-
-
-    private void inquireHistory(Condition condition) {
+    private void printHistory(Condition condition) {
         if (condition == Condition.LOOKUP) {
-            System.out.println();
-            System.out.println("<< History Of Calculation >>");
-            calculateRepository.getHistory()
-                    .forEach(h -> System.out.println("Equation : " + h.getEquation() + " | result : " + h.getResult()));
-            System.out.println();
+            console.printHistory();
         }
     }
 
     private void calculate(Condition condition) {
         if (condition == Condition.CALCULATE) {
             String equation = console.insertEquation();
-            double result = calculateEngine.calculate(equation);
-            System.out.println();
-            System.out.println("result = " + result);
-            System.out.println();
+            double result = 0;
+            try {
+                result = calculateEngine.calculate(equation);
+                console.printAnswer(result);
+            } catch (Exception e) {
+                System.out.println("계산에 문제가 생겼습니다. 문제 원인 : " + e.toString());
+                System.out.println();
+            }
+
         }
     }
 
-    private void stop(Condition condition) {
-        if (condition == Condition.BREAK) {
-            STOPPER = false;
-        }
-    }
 }
