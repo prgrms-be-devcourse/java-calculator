@@ -1,6 +1,7 @@
 package com.devcourse.view;
 
 import com.devcourse.valid.FormulaValidator;
+import com.devcourse.valid.MenuValidator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,22 +15,24 @@ public class Input {
     }
 
     public static int selectMenu() {
-        try {
-            return Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            throw new RuntimeException();
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("메뉴 선택시 숫자를 입력해 주세요");
+        String menuNumber = getUserInput();
+        if (MenuValidator.valid(menuNumber)) {
+            return Integer.parseInt(menuNumber);
         }
+        throw new RuntimeException("1, 2 두개의 메뉴 중 하나를 입력해 주세요");
     }
 
     public static String getFormula() {
+        String formula = getUserInput();
+        if (FormulaValidator.valid(formula)) {
+            return formula;
+        }
+        throw new RuntimeException("잘못된 식 양식입니다 (ex : 1 + 2 / 3)");
+    }
+
+    private static String getUserInput() {
         try {
-            String formula = reader.readLine();
-            if (FormulaValidator.valid(formula)) {
-                return formula;
-            }
-            throw new RuntimeException("잘못된 식 양식입니다 (ex : 1 + 2 / 3)");
+            return reader.readLine();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
