@@ -25,7 +25,7 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 		int choiceNum = this.scanner.nextInt();
 		this.scanner.nextLine();
 
-		Command command = Command.valueOfCmd(choiceNum);
+		Command command = Command.valueOf(choiceNum);
 		return command;
 	}
 

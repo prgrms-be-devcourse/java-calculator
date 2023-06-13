@@ -17,7 +17,7 @@ public enum Command {
 		return this.cmdIdx;
 	}
 
-	public static Command valueOfCmd(int choiceNum) {
+	public static Command valueOf(int choiceNum) {
 		return Arrays.stream(values())
 			.filter(value -> value.equals(choiceNum))
 			.findAny()
