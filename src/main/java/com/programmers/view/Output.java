@@ -24,6 +24,10 @@ public class Output {
         System.out.println(result + "\n");
     }
 
+    public static void printMessage(String message){
+        System.out.println(message);
+    }
+
     //조회 출력
     public static void printHistories(List<CalculatorDto> dtoList) {
         StringBuilder sb = new StringBuilder();

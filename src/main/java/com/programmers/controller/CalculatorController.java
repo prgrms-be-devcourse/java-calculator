@@ -39,10 +39,10 @@ public class CalculatorController {
             int result = calculatorService.calculate(expression);
             Output.printResult(result);
         } catch (ArithmeticException e) {
-            System.out.println("0으로 나눌 수 없습니다. 다시 입력하세요");
+            Output.printMessage("0으로 나눌 수 없습니다. 다시 입력하세요");
             this.processExpression();
         } catch (IllegalArgumentException e) {
-            System.out.println("식이 잘못 되었습니다. 다시 입력하세요");
+            Output.printMessage("식이 잘못 되었습니다. 다시 입력하세요");
             this.processExpression();
         }
     }
