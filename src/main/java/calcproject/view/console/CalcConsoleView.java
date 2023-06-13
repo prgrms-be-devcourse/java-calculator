@@ -1,10 +1,9 @@
 package calcproject.view.console;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import calcproject.models.CalcRecordModel;
+import calcproject.models.CalcResultRecordModel;
 import calcproject.view.CalcInput;
 import calcproject.view.CalcOutput;
 import calcproject.view.Command;
@@ -37,19 +36,19 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 	}
 
 	@Override
-	public void showCalcResult(CalcRecordModel calcRecordModel) {
-		System.out.println(calcRecordModel.getCalcResult() + "\n");
+	public void showCalcResult(CalcResultRecordModel calcResultRecordModel) {
+		System.out.println(calcResultRecordModel.getCalcResult() + "\n");
 	}
 
 	@Override
-	public void showRecord(List<CalcRecordModel> calcRecordModelList) {
-		calcRecordModelList.
+	public void showRecord(List<CalcResultRecordModel> calcResultRecordModelList) {
+		calcResultRecordModelList.
 			forEach(calcRecord -> calcRecordToFormattedStr(calcRecord));
 
 		System.out.println();
 	}
 
-	private String calcRecordToFormattedStr(CalcRecordModel calcRecord){
+	private String calcRecordToFormattedStr(CalcResultRecordModel calcRecord){
 		String expression = calcRecord.getExpression();
 		double calcResult = calcRecord.getCalcResult();
 		String formattedStr = expression + " = " + calcResult;

@@ -6,26 +6,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import calcproject.models.CalcRecordModel;
+import calcproject.models.CalcResultRecordModel;
 
-public class MemoryCalcRecordRepository implements CalcRecordRepository {
+public class MemoryCalcResultRecordRepository implements CalcResultRecordRepository {
 
-	private Map<Integer, CalcRecordModel> calcMap;
+	private Map<Integer, CalcResultRecordModel> calcMap;
 	private int lastIdx;
 
-	public MemoryCalcRecordRepository() {
+	public MemoryCalcResultRecordRepository() {
 		this.calcMap = new HashMap<>();
 		this.lastIdx = 0;
 	}
 
 	@Override
-	public void saveCalcRecord(CalcRecordModel calcRecord) {
-		this.calcMap.put(this.lastIdx, calcRecord);
+	public void saveCalcResultRecord(CalcResultRecordModel calcResultRecord) {
+		this.calcMap.put(this.lastIdx, calcResultRecord);
 		this.lastIdx += 1;
 	}
 
 	@Override
-	public List<CalcRecordModel> loadCalcRecords() {
+	public List<CalcResultRecordModel> loadCalcResultRecords() {
 		return this.calcMap.values()
 			.stream()
 			.sorted(Comparator.comparing(calcModel -> calcModel.getId()))
