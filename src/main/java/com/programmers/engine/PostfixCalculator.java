@@ -2,41 +2,41 @@ package com.programmers.engine;
 
 import com.programmers.exception.DivideByZeroException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import java.util.function.Predicate;
 
 public class PostfixCalculator {
-
+    private final String operators = "+-/*()";
     private final Stack<Character> opStack = new Stack<>();
-    private final StringBuilder postFix = new StringBuilder(); // 스태틱제외하자
 
-    private double calculate(String equation) {
-        postFix.setLength(0);
+    private double calculate(List<String> postfix) {
 
         Stack<Double> stack = new Stack<>();
-        char cur = ' ';
+        String cur = "";
         double value1, value2;
 
-        for (int i = 0; i < equation.length(); i++) {
-            cur = equation.charAt(i);
-            if (Character.isDigit(cur)) {
-                stack.push(Double.valueOf(cur) - 48);
+        for (int i = 0; i < postfix.size(); i++) {
+            cur = postfix.get(i);
+            if (!operators.contains(cur)) {
+                stack.push(Double.valueOf(cur));
             } else {
                 value2 = Double.valueOf(stack.pop());
                 value1 = Double.valueOf(stack.pop());
 
                 switch (cur) {
                     // 스택에서 거꾸로 뽑기 때문에 value2를 먼저
-                    case '+':
+                    case "+":
                         stack.push(value1 + value2);
                         break;
-                    case '-':
+                    case "-":
                         stack.push(value1 - value2);
                         break;
-                    case '*':
+                    case "*":
                         stack.push(value1 * value2);
                         break;
-                    case '/':
+                    case "/":
                         if (value2 == 0) throw new DivideByZeroException();
                         stack.push(value1 / value2);
                         break;
@@ -46,18 +46,29 @@ public class PostfixCalculator {
         return stack.pop();
     }
 
-    // 메서드를 분리해야 하는지?
     public double infixToPostfix(String infix) {
-        char cur = ' ';
+
+        List<String> postfix = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < infix.length(); i++) {
+            char cur = ' ';
             cur = infix.charAt(i);
 
             if (Character.isDigit(cur)) {
-                postFix.append(cur);
+                sb.append(cur);
+                if (i == infix.length() - 1) postfix.add(sb.toString());
             } else if (opStack.isEmpty()) {
+                if (sb.length() > 0) {
+                    postfix.add(sb.toString());
+                    sb.setLength(0);
+                }
                 opStack.push(cur);
             } else {
+                if (sb.length() > 0) {
+                    postfix.add(sb.toString());
+                    sb.setLength(0);
+                }
                 if (cur == '(') {
                     opStack.push(cur);
                     continue;
@@ -66,35 +77,35 @@ public class PostfixCalculator {
                 if (cur == ')') {
                     boolean flag = true;
                     while (flag) {
-                        if (!popOperator((Character c) -> c == '(', opStack.peek())) {
+                        if (!popOperator(postfix, (Character c) -> c == '(', opStack.peek())) {
                             flag = false;
                         }
                     }
-                continue;
+                    continue;
                 }
 
                 if (compareOpPriority(opStack.peek(), cur) > 0) {
                     opStack.push(cur);
                 } else {
-                    popOperator((Integer data) -> data > 0, compareOpPriority(opStack.peek(), cur));
+                    popOperator(postfix, (Integer data) -> data > 0, compareOpPriority(opStack.peek(), cur));
                     opStack.push(cur);
                 }
             }
         }
-        if (!opStack.isEmpty()) stackPop(' ');
+        if (!opStack.isEmpty()) stackPop(postfix,' ');
 
-        return calculate(postFix.toString());
+        return calculate(postfix);
     }
 
-    private void stackPop(char oper) {
+    private void stackPop(List<String> list, char oper) {
         while (!opStack.isEmpty()) {
             oper = opStack.pop();
             if (oper == '(') return;
-            postFix.append(oper);
+            list.add(String.valueOf(oper));
         }
     }
 
-    private  <T> boolean popOperator(Predicate<T> predicate, T data) {
+    private <T> boolean popOperator(List<String> list, Predicate<T> predicate, T data) {
         while (!opStack.isEmpty()) {
             if (predicate.test(data)) {
                 opStack.pop();
@@ -102,11 +113,11 @@ public class PostfixCalculator {
             }
 
             if (data instanceof Character) {
-                postFix.append(opStack.pop());
+                list.add(String.valueOf(opStack.pop()));
                 return true;
             }
 
-            postFix.append(opStack.pop());
+            list.add(String.valueOf(opStack.pop()));
         }
         return true;
     }

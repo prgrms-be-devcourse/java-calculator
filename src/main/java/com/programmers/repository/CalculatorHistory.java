@@ -13,7 +13,8 @@ public class CalculatorHistory {
     }
 
     public String findAll() {
-
+        
+        // 콘솔로 역할을 주자
         if (storage.isEmpty()) {
             return "조회할 기록이 없습니다.";
         }

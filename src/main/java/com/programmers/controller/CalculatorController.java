@@ -7,15 +7,15 @@ import com.programmers.util.Menu;
 
 public class CalculatorController {
 
-    private Console console;
+    private final Console console;
     private CalculatorService calculatorService;
+    private boolean isRunning = true;
 
     public CalculatorController(Console console, CalculatorService calculatorService) {
         this.console = console;
         this.calculatorService = calculatorService;
     }
 
-    private boolean isRunning = true;
 
     public void run() {
         while (isRunning) {
