@@ -26,13 +26,13 @@ public class CalculatorController {
                 Output.printHistories(calculatorService.getHistories());
             }
             if (menu.isCalculate()) {
-                processExpression();
+                processCalculation();
             }
 
         } while (!menu.isFinish());
     }
 
-    private void processExpression() {
+    private void processCalculation() {
         String expression = Input.inputExpression();
 
         try {
@@ -40,10 +40,10 @@ public class CalculatorController {
             Output.printResult(result);
         } catch (ArithmeticException e) {
             Output.printMessage("0으로 나눌 수 없습니다. 다시 입력하세요");
-            this.processExpression();
+            this.processCalculation();
         } catch (IllegalArgumentException e) {
             Output.printMessage("식이 잘못 되었습니다. 다시 입력하세요");
-            this.processExpression();
+            this.processCalculation();
         }
     }
 

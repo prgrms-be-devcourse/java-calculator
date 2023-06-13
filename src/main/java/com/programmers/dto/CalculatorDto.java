@@ -1,8 +1,8 @@
 package com.programmers.dto;
 
 public class CalculatorDto {
-    private String expression; //식
-    private int answer; //값
+    private final String expression; //식
+    private final int answer; //값
 
     public CalculatorDto(String expression, int answer) {
         this.expression = expression;
