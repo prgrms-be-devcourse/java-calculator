@@ -1,7 +1,9 @@
 package calcproject.repository;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +16,11 @@ class MemoryCalcResultRecordRepositoryTest {
 	private CalcResultRecordRepository calcResultRecordRepository;
 
 	@BeforeEach
-	void onlyonce() {
-		this.calcResultRecordRepository = new MemoryCalcResultRecordRepository();
+	void beforeEach() {
+		Map<Integer, CalcResultRecordModel> calcMap = new HashMap<>();
+		int startIdx = 0;
+		this.calcResultRecordRepository =
+			new MemoryCalcResultRecordRepository(calcMap, startIdx);
 	}
 
 	@Test
