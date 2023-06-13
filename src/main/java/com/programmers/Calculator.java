@@ -1,7 +1,7 @@
-package com.programmers.model;
+package com.programmers;
 
-import com.programmers.util.Operators;
-import com.programmers.util.PostfixConverter;
+import com.programmers.core.Operators;
+import com.programmers.core.PostfixConverter;
 import com.programmers.util.StringUtil;
 
 import java.util.List;

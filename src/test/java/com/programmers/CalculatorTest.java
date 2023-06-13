@@ -1,6 +1,5 @@
 package com.programmers;
 
-import com.programmers.model.Calculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

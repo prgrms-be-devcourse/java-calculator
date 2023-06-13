@@ -1,4 +1,4 @@
-package com.programmers.util;
+package com.programmers.core;
 
 import java.util.Arrays;
 

@@ -1,4 +1,6 @@
-package com.programmers.util;
+package com.programmers.core;
+
+import com.programmers.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;

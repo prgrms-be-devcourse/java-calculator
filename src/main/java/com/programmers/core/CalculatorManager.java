@@ -1,6 +1,8 @@
-package com.programmers.model;
+package com.programmers.core;
 
+import com.programmers.Calculator;
 import com.programmers.error.ErrorMsg;
+import com.programmers.model.CalculationResult;
 import com.programmers.repository.CalculationRepository;
 import com.programmers.view.Console;
 

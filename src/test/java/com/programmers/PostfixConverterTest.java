@@ -1,6 +1,6 @@
 package com.programmers;
 
-import com.programmers.util.PostfixConverter;
+import com.programmers.core.PostfixConverter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
