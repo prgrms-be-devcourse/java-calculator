@@ -8,10 +8,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class CalculatorController implements Runnable {
     private final Input input;
     private final Output output;
+    private final Calculator calculator;
 
-    public CalculatorController(Input input, Output output) {
+    public CalculatorController(Input input, Output output, Calculator calculator) {
         this.input = input;
         this.output = output;
+        this.calculator = calculator;
     }
 
     @Override
@@ -35,5 +37,8 @@ public class CalculatorController implements Runnable {
 
     private void calculate() {
         Expression expression = input.readExpression();
+
+        int result = calculator.calculate(expression.toPostfix());
+        output.displayResult(result);
     }
 }

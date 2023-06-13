@@ -12,6 +12,12 @@ public class ConsoleOutput implements Output {
         printEmptyLine();
     }
 
+    @Override
+    public void displayResult(int result) {
+        System.out.println(result);
+        printEmptyLine();
+    }
+
     private void printEmptyLine() {
         System.out.println();
     }

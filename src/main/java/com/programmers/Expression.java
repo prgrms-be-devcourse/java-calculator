@@ -2,6 +2,7 @@ package com.programmers;
 
 import com.programmers.constant.ErrorMessage;
 import com.programmers.exception.InvalidExpressionException;
+import com.programmers.util.PostfixConverter;
 
 public class Expression {
     private static final String EXPRESSION_VALIDATION_REGEX = "([0-9]+)\\s*([+\\-*/]\\s*[0-9]+\\s*)*";
@@ -11,6 +12,10 @@ public class Expression {
     public Expression(String expression) {
         this.expression = expression;
         validateFormat();
+    }
+
+    public String toPostfix() {
+        return PostfixConverter.convert(expression);
     }
 
     private void validateFormat() {
