@@ -17,19 +17,12 @@ public class ConverterWithBracket extends Converter {
         operatorStack.push(operator);
 
         if (operator.isFinishBracket()) {
-            clearBracketFormula(result, operatorStack);
+            operatorStack.pop();
+            while (!operatorStack.peek().isOpenBracket()) {
+                result.add(operatorStack.pop());
+            }
+            operatorStack.pop();
         }
     }
 
-    /**
-     * 닫힘 괄호 만날 시
-     * 괄호 안에 수식 우선 처리
-     */
-    private void clearBracketFormula(List<Token> result, Stack<Operator> operatorStack) {
-        operatorStack.pop();
-        while (!operatorStack.peek().isOpenBracket()) {
-            result.add(operatorStack.pop());
-        }
-        operatorStack.pop();
-    }
 }
