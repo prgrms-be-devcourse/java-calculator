@@ -49,7 +49,7 @@ public class MakePostfixService {
             case '-':
                 return 1;
             default:
-                return -1;
+                throw new IllegalStateException("유효하지 않은 연산자 입니다" + op);
         }
     }
 

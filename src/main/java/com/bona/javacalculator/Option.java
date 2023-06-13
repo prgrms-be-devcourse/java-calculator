@@ -1,7 +1,7 @@
 package com.bona.javacalculator;
 
 public enum Option {
-    EXIT(-1),
+    EXIT(3),
     INVALID_INPUT(0),
     INQUIRY(1),
     CALCULATE(2);
@@ -15,7 +15,7 @@ public enum Option {
     public static Option valueOf(int matchNum) {
         Option option = null;
         switch (matchNum) {
-            case -1:
+            case 3:
                 option = Option.EXIT;
                 return option;
             case 1:
