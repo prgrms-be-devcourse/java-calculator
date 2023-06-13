@@ -42,8 +42,8 @@ public class Calculator {
         return calculationResult.pop();
     }
 
-    private void saveCalculateHistory(String formula, int calculate) {
-        History history = new History(formula, calculate);
+    private void saveCalculateHistory(String formula, int result) {
+        History history = new History(formula, result);
         repository.saveHistory(history);
     }
 }
