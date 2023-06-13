@@ -13,7 +13,7 @@ public class Calculator implements Runnable {
 
     private final Input scanner;
     private final Output printer;
-    private final History history = new History();
+    private final History history;
 
     public void run() {
 
@@ -81,7 +81,6 @@ public class Calculator implements Runnable {
                 .append(terms.get(0))
                 .toString();
         history.add(result);
-
     }
 
     public void list() {
