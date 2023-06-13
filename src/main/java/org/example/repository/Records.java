@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Records {
 
-    private static List<String> arithmeticRecords = new ArrayList<>();
+    private List<String> arithmeticRecords = new ArrayList<>();
 
-    public static void saveRecord(String infixExpression, double result){
+    public void saveRecord(String infixExpression, double result){
         arithmeticRecords.add(infixExpression.toString() + " = " + result);
     }
 
-    public static List<String> exportRecord(){
+    public List<String> exportRecord(){
         return arithmeticRecords;
     }
 

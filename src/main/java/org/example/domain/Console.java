@@ -10,11 +10,13 @@ public class Console {
 
     private View view;
     private Calculator calculator;
+    private Records records;
     private boolean calculatorProcess = false;
 
-    public Console(View view, Calculator calculator) {
+    public Console(View view, Calculator calculator,Records records) {
         this.view = view;
         this.calculator = calculator;
+        this.records = records;
     }
 
     public void run() {
@@ -28,13 +30,13 @@ public class Console {
 
     private void selectOption(SelectTypeView selectType) {
         switch (selectType) {
-            case GET_RECORD -> view.printRecords(Records.exportRecord());
+            case GET_RECORD -> view.printRecords(records.exportRecord());
 
             case CALCULATE -> {
                 String infixExpression = view.inputExpression();
                 double result = calculator.calculate(infixExpression);
                 view.printResult(result);
-                Records.saveRecord(infixExpression, result);
+                records.saveRecord(infixExpression, result);
             }
 
             case END -> calculatorProcess = true;
