@@ -53,10 +53,9 @@ public class View implements Input,Output{
     }
 
     private boolean validateSelection(int selection) {
-        int[] regex_select = {1, 2, 3};
-        boolean regex_result = Arrays.stream(regex_select).anyMatch(num -> num == selection);
+        int[] regex_select = {1, 2, 3}; // 형변환 시 이루어진 영향으로 추가, 1,2,3의 의미를 파악하기 어려워 개선 필요
+        return Arrays.stream(regex_select).anyMatch(num -> num == selection);
 
-        return regex_result;
     }
 
     public boolean validateExpression(String expression) {
