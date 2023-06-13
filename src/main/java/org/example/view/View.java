@@ -52,9 +52,7 @@ public class View implements Input,Output{
     }
 
     private boolean validateSelection(int selection) {
-        int[] regex_select = {1, 2, 3}; // 형변환 시 이루어진 영향으로 추가, 1,2,3의 의미를 파악하기 어려워 개선 필요
-        return Arrays.stream(regex_select).anyMatch(num -> num == selection);
-
+        return Arrays.stream(SelectTypeView.values()).anyMatch(num -> num.getNum() == selection);
     }
 
     public boolean validateExpression(String expression) {
