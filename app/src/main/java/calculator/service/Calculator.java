@@ -12,13 +12,16 @@ import java.util.Stack;
 
 public class Calculator {
 
-    public void calculate() {
+    public void execute() {
         showExpressionInputMessage();
-        int calculationResult = solve(inputExpression());
+
+        String expression = inputExpression();
+        int calculationResult = calculate(expression);
+
         showCalculationResult(calculationResult);
     }
 
-    private int solve(String expression) {
+    private int calculate(String expression) {
         String[] elements = splitToElements(expression);
         Stack<Integer> operands = new Stack<>();
         Stack<Operator> operators = new Stack<>();
@@ -46,6 +49,11 @@ public class Calculator {
             return;
         }
 
+        pushEvaluationResult(operands, operators, element);
+    }
+
+    private void pushEvaluationResult(Stack<Integer> operands, Stack<Operator> operators,
+        String element) {
         Operator operator = operators.pop();
         int operand1 = operands.pop();
         int operand2 = Integer.parseInt(element);

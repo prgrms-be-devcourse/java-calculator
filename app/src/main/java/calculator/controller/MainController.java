@@ -32,7 +32,7 @@ public class MainController {
 
     private void execute(Menu selectedMenu) {
         if (selectedMenu.isCalculate()) {
-            calculator.calculate();
+            calculator.execute();
         }
     }
 }
