@@ -4,16 +4,12 @@ import com.devcourse.calc.Calculator;
 import com.devcourse.view.Input;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
 
 public enum Menu {
-    NONE(0, "0번 메뉴는 할당하지 마세요", calculator -> {
-        throw new RuntimeException("사용할 수 없는 메뉴 입니다");
-    }),
     HISTORY(1, "조회", Calculator::showHistory),
     CALC(2, "계산", calculator -> calculator.calculate(Input.getFormula()));
 
@@ -34,8 +30,8 @@ public enum Menu {
         return menus.get(selectedNumber);
     }
 
-    public Object execute(Calculator calculator) {
-        return action.apply(calculator);
+    public String execute(Calculator calculator) {
+        return action.apply(calculator).toString();
     }
 
     @Override
