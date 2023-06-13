@@ -1,6 +1,7 @@
 package com.programmers.core;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public enum Priority {
     HIGH(2, new String[]{"/", "*"}), LOW(1, new String[]{"+", "-"});
@@ -19,6 +20,10 @@ public enum Priority {
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new)
                 .priority;
+    }
+
+    public static boolean isNewOperatorPriorityHigher(String operator, Stack<String> operatorStack) {
+        return Priority.getPriority(operatorStack.peek()) < Priority.getPriority(operator);
     }
 }
 

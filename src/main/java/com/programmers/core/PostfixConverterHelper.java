@@ -6,19 +6,20 @@ import java.util.List;
 import java.util.Stack;
 
 public class PostfixConverterHelper {
-    public static void putOperator(String operator, List<String> postfix, Stack<String> stack) {
-        if (!Operators.isOperator(operator)) throw new IllegalArgumentException();
 
-        if (stack.isEmpty() || Priority.getPriority(stack.peek()) < Priority.getPriority(operator)) {
-            stack.push(operator);
+    public static void putOperator(String operator, List<String> postfix, Stack<String> operatorStack) {
+        if (!Operators.isOperator(operator));
+
+        if (operatorStack.isEmpty() || Priority.isNewOperatorPriorityHigher(operator, operatorStack)) {
+            operatorStack.push(operator);
             return;
         }
 
-        while (!stack.isEmpty() && Priority.getPriority(stack.peek()) >= Priority.getPriority(operator)) {
-            postfix.add(stack.pop());
+        while (!operatorStack.isEmpty() && Priority.getPriority(operatorStack.peek()) >= Priority.getPriority(operator)) {
+            postfix.add(operatorStack.pop());
         }
 
-        stack.push(operator);
+        operatorStack.push(operator);
     }
 
     public static void putOperand(String operand, List<String> postfix) {
