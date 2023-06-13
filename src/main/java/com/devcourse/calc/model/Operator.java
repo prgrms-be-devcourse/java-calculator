@@ -55,8 +55,8 @@ public enum Operator implements Token {
         return sign;
     }
 
-    private static void checkDivideZero(Integer number2) {
-        if (number2 == 0) {
+    private static void checkDivideZero(int denominator) {
+        if (denominator == 0) {
             throw new RuntimeException("0으로 나눌 수 없습니다");
         }
     }

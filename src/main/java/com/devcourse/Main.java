@@ -20,9 +20,10 @@ public class Main {
     }
 
     private static int selectMenu() {
-        Output.init();
+        Output.showMenus();
         int menu = Input.selectMenu();
         Output.blankLine();
+
         return menu;
     }
 }

@@ -4,9 +4,9 @@ import java.util.regex.Pattern;
 
 public class FormulaValidator {
 
+    private static final String EXPRESSION_NO_BRACKET = "\\d+(\\s[+\\-*/]\\s\\d+)+";
+
     public static boolean valid(String formula) {
-        String expressionValidationWithBracket = "\\(?\\d+(\\s[+\\-*/]\\s\\(?\\d+\\)?)+";
-        String expressionValidationNoBracket = "\\d+(\\s[+\\-*/]\\s\\d+)+";
-        return Pattern.matches(expressionValidationNoBracket, formula);
+        return Pattern.matches(EXPRESSION_NO_BRACKET, formula);
     }
 }

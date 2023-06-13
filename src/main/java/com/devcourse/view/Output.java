@@ -7,14 +7,14 @@ public class Output {
     private Output() {
     }
 
-    public static void init() {
+    public static void showMenus() {
         Menu.menus.values()
                 .forEach(System.out::println);
         System.out.print("\n선택 : ");
     }
 
     public static void viewResult(String result) {
-        System.out.println(result);
+        System.out.println(result.concat("\n"));
     }
 
     public static void blankLine() {
