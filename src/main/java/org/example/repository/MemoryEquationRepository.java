@@ -1,8 +1,9 @@
 package org.example.repository;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
-public class MemoryRepository implements Repository{
+public class MemoryEquationRepository implements EquationRepository {
     private List<String> saveList = new ArrayList<>();
 
     @Override

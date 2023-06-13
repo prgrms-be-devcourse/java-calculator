@@ -5,5 +5,5 @@ import java.io.IOException;
 public interface Input {
     String selectAction() throws IOException;
 
-    String input() throws IOException;
+    String getUserEquation() throws IOException;
 }

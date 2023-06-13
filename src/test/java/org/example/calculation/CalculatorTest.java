@@ -1,12 +1,9 @@
 package org.example.calculation;
-import org.example.calculation.ArithmeticCompute;
-import org.example.calculation.Compute;
-import org.example.calculation.Calculator;
 import org.example.io.ConsoleOutput;
 import org.example.io.Input;
 import org.example.io.Output;
-import org.example.repository.MemoryRepository;
-import org.example.repository.Repository;
+import org.example.repository.MemoryEquationRepository;
+import org.example.repository.EquationRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +18,7 @@ public class CalculatorTest {
     private Compute compute;
     private Input input;
     private Output output;
-    private Repository repository;
+    private EquationRepository equationRepository;
     private Calculator calculator;
 
     //터미널 출력값 검증용
@@ -33,9 +30,9 @@ public class CalculatorTest {
         compute = new ArithmeticCompute();
         input = mock(Input.class);
         output = new ConsoleOutput();
-        repository = new MemoryRepository();
+        equationRepository = new MemoryEquationRepository();
 
-        calculator = new Calculator(compute, input, output, repository);
+        calculator = new Calculator(compute, input, output, equationRepository);
 
         // 기존 표준 출력 스트림 보관
         originalOut = System.out;
@@ -57,7 +54,7 @@ public class CalculatorTest {
     @Test
     public void 계산기_통합테스트_연산값_테스트() throws IOException {
         when(input.selectAction()).thenReturn("2").thenReturn("3");
-        when(input.input()).thenReturn("3 - 9 / 3 + 2 * 7");
+        when(input.getUserEquation()).thenReturn("3 - 9 / 3 + 2 * 7");
 
         calculator.run();
 
@@ -72,7 +69,7 @@ public class CalculatorTest {
     @Test
     public void 메모리에_저장된_식_조회_테스트() throws IOException{
         when(input.selectAction()).thenReturn("2").thenReturn("1").thenReturn("3");
-        when(input.input()).thenReturn("2 - 12 / 2 + 5 * 15");
+        when(input.getUserEquation()).thenReturn("2 - 12 / 2 + 5 * 15");
 
         calculator.run();
 
@@ -85,7 +82,7 @@ public class CalculatorTest {
     @Test
     public void divide_zero_예외처리_테스트() throws IOException{
         when(input.selectAction()).thenReturn("2").thenReturn("3");
-        when(input.input()).thenReturn("3 + 9 / 0");
+        when(input.getUserEquation()).thenReturn("3 + 9 / 0");
 
         calculator.run();
 
@@ -98,7 +95,7 @@ public class CalculatorTest {
     @Test
     public void 연산자가_연속된_경우_예외처리() throws IOException{
         when(input.selectAction()).thenReturn("2").thenReturn("3");
-        when(input.input()).thenReturn("3 + + 9");
+        when(input.getUserEquation()).thenReturn("3 + + 9");
 
         calculator.run();
 

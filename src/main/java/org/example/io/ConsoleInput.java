@@ -13,7 +13,7 @@ public class ConsoleInput implements Input{
     }
 
     @Override
-    public String input() throws IOException {
+    public String getUserEquation() throws IOException {
         return br.readLine();
     }
 }

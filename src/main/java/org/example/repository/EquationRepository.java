@@ -1,6 +1,6 @@
 package org.example.repository;
 
-public interface Repository {
+public interface EquationRepository {
     void save(String str);
     String[] findAll();
 }

@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemoryRepositoryTest {
-    private MemoryRepository memoryRepository;
+public class MemoryEquationRepositoryTest {
+    private MemoryEquationRepository memoryRepository;
 
     @BeforeEach
     public void setupList(){
-        memoryRepository = new MemoryRepository();
+        memoryRepository = new MemoryEquationRepository();
     }
 
     @Test
