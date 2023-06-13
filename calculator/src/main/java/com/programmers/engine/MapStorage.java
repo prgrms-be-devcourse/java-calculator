@@ -26,6 +26,12 @@ public class MapStorage implements Storage {
 
     @Override
     public void save(String calculationCommand, Integer calculationResult) {
-        mapStorage.put(id++, calculationCommand + " = " + calculationResult);
+        StringBuilder calculationResultBuilder = new StringBuilder();
+        String result = calculationResultBuilder
+                .append(calculationCommand)
+                .append(" = ")
+                .append(calculationResult)
+                .toString();
+        mapStorage.put(id++, result);
     }
 }
