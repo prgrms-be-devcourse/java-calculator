@@ -7,29 +7,29 @@ import java.util.Stack;
 public class PostfixConverter {
 
     public List<String> convertInfixToPostfix(List<String> tokens) {
-        List<String> postFix = new ArrayList<>();
+        List<String> postfix = new ArrayList<>();
         Stack<String> stack = new Stack<>();
 
         for (int i = 0; i < tokens.size(); i++) {
             String token = tokens.get(i);
 
             if (isNumeric(token)) {
-                postFix.add(token);
+                postfix.add(token);
                 continue;
             }
 
             while (!stack.isEmpty() && isProceed(stack.peek(), token)) {
-                postFix.add(stack.pop());
+                postfix.add(stack.pop());
             }
 
             stack.push(token);
         }
 
         while (!stack.isEmpty()) {
-            postFix.add(String.valueOf(stack.pop()));
+            postfix.add(String.valueOf(stack.pop()));
         }
 
-        return postFix;
+        return postfix;
     }
 
     public boolean isProceed(String op1, String op2) {
