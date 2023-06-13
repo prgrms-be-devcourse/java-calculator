@@ -4,8 +4,12 @@ import com.programmers.io.Console;
 import com.programmers.repository.CalculationMemoryRepository;
 import com.programmers.repository.CalculationRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -21,25 +25,23 @@ public class CalculationServiceTest {
         calculatorService = new CalculationService(calculationRepository, console, console);
     }
 
-    @Test
-    void inputData() {
-        //given
-        String inputA = "1   +   2 +  3";
-        String inputB = "5 * 2 + 3  +  4 - 5 * 6";
-        String inputC = "5 * 2 * 3 - 4 / 2 * 4";
-        String inputD = "3 * 3 3";
+    private static Stream<Arguments> inputData() {
+        return Stream.of(
+                Arguments.of("1   +   2 +  3", 6),
+                Arguments.of("5 * 2 + 3  +  4 - 5 * 6", -13),
+                Arguments.of("5 * 2 * 3 - 4 / 2 * 4", 22),
+                Arguments.of("3 * 3 3", 99)
+        );
+    }
 
+    @ParameterizedTest
+    @MethodSource
+    void inputData(String input, int result) {
         //when
-        int resultA = calculatorService.calculate(inputA);
-        int resultB = calculatorService.calculate(inputB);
-        int resultC = calculatorService.calculate(inputC);
-        int resultD = calculatorService.calculate(inputD);
+        int calculated = calculatorService.calculate(input);
 
         //then
-        assertThat(resultA).isEqualTo(6);
-        assertThat(resultB).isEqualTo(-13);
-        assertThat(resultC).isEqualTo(22);
-        assertThat(resultD).isEqualTo(99);
+        assertThat(calculated).isEqualTo(result);
     }
 
     @Test
@@ -81,8 +83,6 @@ public class CalculationServiceTest {
         List<String> resultA = calculatorService.findCalculations();
 
         //then
-        assertThat(resultA).containsExactly(calculationA, calculationB);
-
+        assertThat(resultA).containsExactly("1 + 2 + 3 = 6", "1 * 2 - 3 = -1");
     }
-
 }

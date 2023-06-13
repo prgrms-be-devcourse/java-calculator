@@ -1,106 +1,85 @@
 package com.programmers.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
+    private final String parameterClass = "com.programmers.parameterized.CalculatorParams";
     private final Calculator cal = new Calculator();
 
-    @Test
-    void calculateOnlyPlus() {
-        //given
-        List<String> inputsA = List.of("1", "5", "+");
-        List<String> inputsB = List.of("123", "234", "2134", "+", "+");
-        List<String> inputsC = List.of("1", "2", "+", "3", "+", "4", "+");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateOnlyPlus")
+    void calculateOnlyPlus(List<String> postfixExpression, int result) {
         //when
-        int resultA = cal.calculatePostfixExpression(inputsA);
-        int resultB = cal.calculatePostfixExpression(inputsB);
-        int resultC = cal.calculatePostfixExpression(inputsC);
+        int calculated = cal.calculatePostfixExpression(postfixExpression);
 
         //then
-        assertThat(resultA).isEqualTo(6);
-        assertThat(resultB).isEqualTo(2491);
-        assertThat(resultC).isEqualTo(10);
+        assertThat(calculated).isEqualTo(result);
     }
 
-    @Test
-    void calculateOnlyMinus() {
-        //given
-        List<String> inputsA = List.of("1", "5", "-");
-        List<String> inputsB = List.of("123", "23", "-", "523", "-");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateOnlyMinus")
+    void calculateOnlyMinus(List<String> postfixExpression, int result) {
         //when
-        int resultA = cal.calculatePostfixExpression(inputsA);
-        int resultB = cal.calculatePostfixExpression(inputsB);
+        int calculated = cal.calculatePostfixExpression(postfixExpression);
 
         //then
-        assertThat(resultA).isEqualTo(-4);
-        assertThat(resultB).isEqualTo(-423);
+        assertThat(calculated).isEqualTo(result);
     }
 
-    @Test
-    void calculateMixedWithPlusAndMinus() {
-        //given
-        List<String> inputsA = List.of("1", "5", "+", "123", "-");
-        List<String> inputsB = List.of("123", "2345", "-", "2452", "+");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateMixedWithPlusAndMinus")
+    void calculateMixedWithPlusAndMinus(List<String> postfixExpression, int result) {
         //when
-        int resultA = cal.calculatePostfixExpression(inputsA);
-        int resultB = cal.calculatePostfixExpression(inputsB);
+        int calculated = cal.calculatePostfixExpression(postfixExpression);
 
         //then
-        assertThat(resultA).isEqualTo(-117);
-        assertThat(resultB).isEqualTo(230);
-
+        assertThat(calculated).isEqualTo(result);
     }
 
-    @Test
-    void calculateOnlyMultiply() {
-        //given
-        List<String> inputsA = List.of("2", "5", "*");
-        List<String> inputsB = List.of("123", "123", "*", "948", "*");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateOnlyMultiply")
+    void calculateOnlyMultiply(List<String> postfixExpression, int result) {
         //when
-        int resultA = cal.calculatePostfixExpression(inputsA);
-        int resultB = cal.calculatePostfixExpression(inputsB);
+        int calculated = cal.calculatePostfixExpression(postfixExpression);
 
         //then
-        assertThat(resultA).isEqualTo(10);
-        assertThat(resultB).isEqualTo(14342292);
+        assertThat(calculated).isEqualTo(result);
     }
 
-    @Test
-    void calculateMultiplyMixedWithPlusAndMinus() {
-        //given
-        List<String> inputsA = List.of("123", "324", "3", "*", "+", "2332", "-");
-        List<String> inputsB = List.of("123", "324", "*", "32", "42", "*", "-");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateMultiplyMixedWithPlusAndMinus")
+    void calculateMultiplyMixedWithPlusAndMinus(List<String> postfixExpression, int result) {
         //when
-        int resultA = cal.calculatePostfixExpression(inputsA);
-        int resultB = cal.calculatePostfixExpression(inputsB);
+        int calculated = cal.calculatePostfixExpression(postfixExpression);
 
         //then
-        assertThat(resultA).isEqualTo(-1237);
-        assertThat(resultB).isEqualTo(38508);
+        assertThat(calculated).isEqualTo(result);
     }
 
-    @Test
-    void calculateOnlyDivide() {
-        //given
-        List<String> inputsA = List.of("123", "23", "/");
-        List<String> inputsB = List.of("34", "42", "/", "35", "/");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateOnlyDivide")
+    void calculateOnlyDivide(List<String> postfixExpression, int result) {
         //when
-        int resultA = cal.calculatePostfixExpression(inputsA);
-        int resultB = cal.calculatePostfixExpression(inputsB);
+        int calculated = cal.calculatePostfixExpression(postfixExpression);
 
         //then
-        assertThat(resultA).isEqualTo(5);
-        assertThat(resultB).isEqualTo(0);
+        assertThat(calculated).isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateMixedAllOperation")
+    void calculateMixedAllOperation(List<String> postfixExpression, int result) {
+        //when
+        int calculated = cal.calculatePostfixExpression(postfixExpression);
+
+        //then
+        assertThat(calculated).isEqualTo(result);
     }
 
     @Test
@@ -114,20 +93,4 @@ public class CalculatorTest {
         assertThatThrownBy(() -> cal.calculatePostfixExpression(inputsA))
                 .isInstanceOf(ArithmeticException.class);
     }
-
-    @Test
-    void calculateMixedAllOperation() {
-        //given
-        List<String> inputsA = List.of("23", "7", "*", "32", "8", "/", "+");
-        List<String> inputsB = List.of("23", "3", "23", "*", "2", "/", "12", "17", "*", "-", "+");
-
-        //when
-        int resultA = cal.calculatePostfixExpression(inputsA);
-        int resultB = cal.calculatePostfixExpression(inputsB);
-
-        //then
-        assertThat(resultA).isEqualTo(165);
-        assertThat(resultB).isEqualTo(-147);
-    }
-
 }

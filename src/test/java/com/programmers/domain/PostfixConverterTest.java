@@ -1,39 +1,33 @@
 package com.programmers.domain;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostfixConverterTest {
+    private final String parameterClass = "com.programmers.parameterized.PostfixConverterParams";
     private PostfixConverter converter = new PostfixConverter();
 
-    @Test
-    void parsingDataMixedWithPlusAndMinus() {
-        //given
-        List<String> tokenizedA = List.of("1", "+", "3", "-", "4");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#parsingDataMixedWithPlusAndMinus")
+    void parsingDataMixedWithPlusAndMinus(List<String> infixExpression, List<String> result) {
         //when
-        List<String> resultA = converter.convert(tokenizedA);
+        List<String> postfixExpression = converter.convert(infixExpression);
 
         //then
-        assertThat(resultA).containsExactly("1", "3", "+", "4", "-");
+        assertThat(postfixExpression).containsExactlyElementsOf(result);
     }
 
-    @Test
-    void parsingDataMixedAllOperator() {
-        //given
-        List<String> tokenizedA = List.of("1", "*", "1", "+", "1", "/", "1");
-        List<String> tokenizedB = List.of("1", "-", "1", "*", "1", "/", "1");
-
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#parsingDataMixedAllOperator")
+    void parsingDataMixedAllOperator(List<String> infixExpression, List<String> result) {
         //when
-        List<String> resultA = converter.convert(tokenizedA);
-        List<String> resultB = converter.convert(tokenizedB);
+        List<String> postfixExpression = converter.convert(infixExpression);
 
         //then
-        assertThat(resultA).containsExactly("1", "1", "*", "1", "1", "/", "+");
-        assertThat(resultB).containsExactly("1", "1", "1", "*", "1", "/", "-");
-
+        assertThat(postfixExpression).containsExactlyElementsOf(result);
     }
 }
