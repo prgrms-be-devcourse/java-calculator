@@ -2,7 +2,7 @@ package com.programmers.service;
 
 import com.programmers.domain.ExpressionValidator;
 import com.programmers.domain.Operator;
-import com.programmers.domain.PostFixConverter;
+import com.programmers.domain.PostfixConverter;
 import com.programmers.domain.SelectionValidator;
 import com.programmers.io.Console;
 
@@ -16,7 +16,7 @@ public class CalculatorService {
     private final Console console;
     private final SelectionValidator selectionValidator = new SelectionValidator();
     private final ExpressionValidator expressionValidator = new ExpressionValidator();
-    private final PostFixConverter postfixConverter = new PostFixConverter();
+    private final PostfixConverter postfixConverter = new PostfixConverter();
 
     public CalculatorService(Console console) {
         this.console = console;

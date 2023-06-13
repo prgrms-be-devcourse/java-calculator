@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostFixConverter {
+public class PostfixConverter {
 
     public List<String> convertInfixToPostfix(List<String> tokens) {
         List<String> postFix = new ArrayList<>();
