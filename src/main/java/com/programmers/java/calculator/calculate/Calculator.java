@@ -1,25 +1,24 @@
 package com.programmers.java.calculator.calculate;
 
-import com.programmers.java.repository.ResultRepository;
+import com.programmers.java.record.CalculationRecord;
 
 import java.util.List;
 
 public class Calculator {
 
-    private static ResultRepository resultRepository = new ResultRepository();
+    private static CalculationRecord resultRepository = new CalculationRecord();
 
     public double calculate(List<String> tokenList) {
         double tempResult = 0.0;
         String operator = "";
 
         for (String token : tokenList) {
-            if (isDigit(token) && operator.equals("")) {
+            if (isOperand(token) && operator.equals("")) {
                 tempResult = Double.parseDouble(token);
                 continue;
             }
-
-            if (isDigit(token) && !operator.equals("")) {
-                tempResult = calculate(token, tempResult, operator);
+            if (isOperand(token) && !operator.equals("")) {
+                tempResult = calculate(Double.parseDouble(token), tempResult, operator);
                 continue;
             }
             operator = token;
@@ -27,39 +26,17 @@ public class Calculator {
         return tempResult;
     }
 
-    public boolean isDigit(String strValue) {
+    public boolean isOperand(String token) {
         try {
-            Long.parseLong(strValue);
+            Double.parseDouble(token);
             return true;
         } catch (NumberFormatException ex) {
             return false;
         }
     }
 
-    public double calculate(String token, double prevOperand, String operator) {
-        double result = 0.0;
-        switch (operator) {
-            case "+": {
-                double nextOperand = Double.parseDouble(token);
-                result = prevOperand + nextOperand;
-                break;
-            }
-            case "-": {
-                double nextOperand = Double.parseDouble(token);
-                result = prevOperand - nextOperand;
-                break;
-            }
-            case "/": {
-                double nextOperand = Double.parseDouble(token);
-                result = prevOperand / nextOperand;
-                break;
-            }
-            case "*": {
-                double nextOperand = Double.parseDouble(token);
-                result = prevOperand * nextOperand;
-                break;
-            }
-        }
-        return result;
+    public double calculate(double prevOperand, double nextOperand, String token) {
+        Operator operator = Operator.findByOperator(token);
+        return operator.calculate(prevOperand, nextOperand);
     }
 }
