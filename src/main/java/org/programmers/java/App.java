@@ -10,13 +10,9 @@ import org.programmers.java.validator.Validator;
 
 public class App {
     public static void main(String[] args){
-        Console console = Console.getInstance();
-        InfixToPostfixConverter infixToPostfixConverter = new InfixToPostfixConverter();
-        PostfixCalculation postfixCalculation = new PostfixCalculation();
-        Calculation calculation = new Calculation(infixToPostfixConverter, postfixCalculation);
+        Calculation calculation = new Calculation();
         FormulaRepository formulaRepository = new FormulaMemoryRepository();
-        Validator validator = new Validator(console);
-        Calculator calculator = new Calculator(console, console, calculation, formulaRepository, validator);
+        Calculator calculator = new Calculator(calculation, formulaRepository);
         calculator.run();
     }
 }

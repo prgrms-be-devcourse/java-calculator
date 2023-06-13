@@ -1,5 +1,6 @@
 package org.programmers.java.validator;
 
+import org.programmers.java.console.Console;
 import org.programmers.java.console.Output;
 import org.programmers.java.message.Error;
 
@@ -11,10 +12,10 @@ public class Validator {
     private final FormulaCountValidator formulaCountValidator;
     private final FormulaSplitValidator formulaSplitValidator;
 
-    public Validator(Output output) {
-        this.output = output;
+    public Validator() {
+        this.output = Console.getInstance();
         this.formulaCountValidator = new FormulaCountValidator();
-        this.formulaSplitValidator = new FormulaSplitValidator(output);
+        this.formulaSplitValidator = new FormulaSplitValidator();
     }
 
     // 연산식 검증 로직

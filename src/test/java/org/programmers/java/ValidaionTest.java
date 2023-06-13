@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ValidaionTest {
 
-    FormulaSplitValidator formulaSplitValidator = new FormulaSplitValidator(Console.getInstance());
+    FormulaSplitValidator formulaSplitValidator = new FormulaSplitValidator();
     FormulaCountValidator formulaCountValidator = new FormulaCountValidator();
 
     @Test

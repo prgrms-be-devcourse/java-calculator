@@ -7,9 +7,9 @@ public class Calculation {
     private final InfixToPostfixConverter infixToPostfixConverter;
     private final PostfixCalculation postfixCalculation;
 
-    public Calculation(InfixToPostfixConverter infixToPostfixConverter, PostfixCalculation postfixCalculation) {
-        this.infixToPostfixConverter = infixToPostfixConverter;
-        this.postfixCalculation = postfixCalculation;
+    public Calculation() {
+        this.infixToPostfixConverter = new InfixToPostfixConverter();
+        this.postfixCalculation = new PostfixCalculation();
     }
 
     public String requestCalculate(String inputFormula){

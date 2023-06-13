@@ -24,6 +24,7 @@ public enum Operator {
     private int getPriority() {
         return priority;
     }
+
     public static boolean comparePriorities(String firstSymbol, String secondSymbol){
         return Operator.isSymbol(firstSymbol).get().getPriority() < Operator.isSymbol(secondSymbol).get().getPriority();
 

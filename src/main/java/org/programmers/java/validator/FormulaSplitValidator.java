@@ -1,6 +1,7 @@
 package org.programmers.java.validator;
 
 import org.programmers.java.calculation.Operator;
+import org.programmers.java.console.Console;
 import org.programmers.java.console.Output;
 import org.programmers.java.message.Error;
 
@@ -12,8 +13,8 @@ public class FormulaSplitValidator {
     private final Output output;
     private List<String> formularAfterSplitValidate = new ArrayList<>();
 
-    public FormulaSplitValidator(Output output) {
-        this.output = output;
+    public FormulaSplitValidator() {
+        this.output = Console.getInstance();
     }
 
     // 연산식 검증: 연산식 분해 후 하나씩 검증

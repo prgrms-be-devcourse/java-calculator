@@ -1,6 +1,7 @@
 package org.programmers.java;
 
 import org.programmers.java.calculation.Calculation;
+import org.programmers.java.console.Console;
 import org.programmers.java.console.Input;
 import org.programmers.java.console.Output;
 import org.programmers.java.message.Error;
@@ -18,12 +19,12 @@ public class Calculator {
     private final FormulaRepository formulaRepository;
     private final Validator validator;
 
-    Calculator(Input input, Output output, Calculation calculation, FormulaRepository formulaRepository, Validator validator){
-        this.input = input;
-        this.output = output;
+    Calculator(Calculation calculation, FormulaRepository formulaRepository){
+        this.input = Console.getInstance();
+        this.output = Console.getInstance();
         this.calculation = calculation;
         this.formulaRepository = formulaRepository;
-        this.validator = validator;
+        this.validator = new Validator();
     }
 
     void run() {
