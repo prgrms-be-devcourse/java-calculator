@@ -5,11 +5,13 @@ import static calculator.view.OutputView.showQuitMessage;
 
 import calculator.controller.MainController;
 import calculator.service.Calculator;
+import calculator.storage.HistoryStorage;
 
 public class App {
 
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
+        HistoryStorage historyStorage = new HistoryStorage();
+        Calculator calculator = new Calculator(historyStorage);
         MainController mainController = new MainController(calculator);
 
         try {

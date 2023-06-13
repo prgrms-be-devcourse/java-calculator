@@ -2,21 +2,32 @@ package calculator.service;
 
 import static calculator.entity.Operator.getOperatorWithSameSymbol;
 import static calculator.utils.StringUtils.isNumeric;
+import static calculator.utils.StringUtils.makeHistory;
 import static calculator.utils.StringUtils.splitToElements;
 import static calculator.view.InputView.inputExpression;
 import static calculator.view.OutputView.showCalculationResult;
 import static calculator.view.OutputView.showExpressionInputMessage;
 
 import calculator.entity.Operator;
+import calculator.storage.HistoryStorage;
 import java.util.Stack;
 
 public class Calculator {
+
+    private final HistoryStorage historyStorage;
+
+    public Calculator(HistoryStorage historyStorage) {
+        this.historyStorage = historyStorage;
+    }
 
     public void execute() {
         showExpressionInputMessage();
 
         String expression = inputExpression();
         int calculationResult = calculate(expression);
+
+        String history = makeHistory(expression, calculationResult);
+        historyStorage.save(history);
 
         showCalculationResult(calculationResult);
     }
