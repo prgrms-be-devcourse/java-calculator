@@ -1,5 +1,6 @@
 package org.example.view;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -35,9 +36,8 @@ public class View implements Input,Output{
 
     @Override
     public void printSelection(){
-        System.out.println("1.조회");
-        System.out.println("2.계산");
-        System.out.println("3.종류");
+        Arrays.stream(SelectTypeView.values())
+                        .forEach(view -> System.out.println(view.getNum() + " " + view.getOption()));
         System.out.println();
         System.out.print("선택 : ");
     }

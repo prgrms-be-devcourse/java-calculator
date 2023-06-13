@@ -23,4 +23,11 @@ public enum SelectTypeView {
                 .findFirst();
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public String getOption() {
+        return option;
+    }
 }
