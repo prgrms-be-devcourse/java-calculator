@@ -19,7 +19,7 @@ public class Calculator {
             }
 
             if (isDigit(token) && !operator.equals("")) {
-                tempResult = subCalculate(token, tempResult, operator);
+                tempResult = calculate(token, tempResult, operator);
                 continue;
             }
             operator = token;
@@ -36,29 +36,30 @@ public class Calculator {
         }
     }
 
-    public double subCalculate(String token, double tempResult, String operator) {
+    public double calculate(String token, double prevOperand, String operator) {
+        double result = 0.0;
         switch (operator) {
             case "+": {
                 double nextOperand = Double.parseDouble(token);
-                tempResult = tempResult + nextOperand;
+                result = prevOperand + nextOperand;
                 break;
             }
             case "-": {
                 double nextOperand = Double.parseDouble(token);
-                tempResult = tempResult - nextOperand;
+                result = prevOperand - nextOperand;
                 break;
             }
             case "/": {
                 double nextOperand = Double.parseDouble(token);
-                tempResult = tempResult / nextOperand;
+                result = prevOperand / nextOperand;
                 break;
             }
             case "*": {
                 double nextOperand = Double.parseDouble(token);
-                tempResult = tempResult * nextOperand;
+                result = prevOperand * nextOperand;
                 break;
             }
         }
-        return tempResult;
+        return result;
     }
 }
