@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         CalculationRepository repository = new InMemoryCalculationRepository();
         Console console = new Console();
-        CalculatorManager calculatorManager = new CalculatorManager(repository, console, console);
+        CalculatorManager calculatorManager = new CalculatorManager(repository, console);
         calculatorManager.run();
     }
 }
