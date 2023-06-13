@@ -17,7 +17,11 @@ public class MapStorage implements Storage {
 
     @Override
     public List<String> findAll() {
-        return null;
+        return mapStorage.keySet()
+                .stream()
+                .sorted()
+                .map(id -> mapStorage.get(id))
+                .toList();
     }
 
     @Override
