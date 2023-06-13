@@ -1,10 +1,8 @@
 package com.programmers.service;
 
-import com.programmers.domain.ExpressionValidator;
-import com.programmers.domain.Operator;
-import com.programmers.domain.PostfixConverter;
-import com.programmers.domain.SelectionValidator;
+import com.programmers.domain.*;
 import com.programmers.io.Console;
+import com.programmers.util.ExpressionProcessor;
 
 import java.util.List;
 import java.util.Stack;
@@ -17,6 +15,8 @@ public class CalculatorService {
     private final SelectionValidator selectionValidator = new SelectionValidator();
     private final ExpressionValidator expressionValidator = new ExpressionValidator();
     private final PostfixConverter postfixConverter = new PostfixConverter();
+    private final ExpressionProcessor expressionProcessor = new ExpressionProcessor();
+    private final CalculatorRepository calculatorRepository = new CalculatorRepository();
 
     public CalculatorService(Console console) {
         this.console = console;
@@ -51,6 +51,11 @@ public class CalculatorService {
 
         int result = calculatePostfix(postfix);
         System.out.println(result + "\n");
+
+        saveExpressionResult(expression, result);
+
+        List<String> all = calculatorRepository.findAll();
+        all.forEach(System.out::println);
     }
 
     public int calculatePostfix(List<String> postfix) {
@@ -78,5 +83,10 @@ public class CalculatorService {
 
         Operator operator = findOperator(token);
         return operator.calculate(num1, num2);
+    }
+
+    public void saveExpressionResult(List<String> expression, int result) {
+        String s = expressionProcessor.rearrangeExpression(expression, result);
+        calculatorRepository.save(s);
     }
 }

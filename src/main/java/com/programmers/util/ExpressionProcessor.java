@@ -35,4 +35,10 @@ public class ExpressionProcessor {
             builder.setLength(0);
         }
     }
+
+    public String rearrangeExpression(List<String> expression, int result) {
+        String collect = String.join(" ", expression);
+
+        return collect + " = " + result;
+    }
 }
