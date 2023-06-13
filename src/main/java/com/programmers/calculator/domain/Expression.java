@@ -4,6 +4,10 @@ import com.programmers.calculator.constant.ErrorMessage;
 import com.programmers.calculator.exception.InvalidExpressionException;
 import com.programmers.calculator.util.PostfixConverter;
 
+import java.util.Arrays;
+
+import static java.util.stream.Collectors.joining;
+
 public class Expression {
     private static final String WHITESPACE_REGEX = "\\s+";
     private static final String EXPRESSION_VALIDATION_REGEX = "([0-9]+)\\s*([+\\-*/]\\s*[0-9]+\\s*)*";
@@ -25,12 +29,16 @@ public class Expression {
     }
 
     private String formatExpression(String expression) {
-        String formattedExpression = expression.replaceAll(WHITESPACE_REGEX, "");
+        return Arrays.stream(expression.split(WHITESPACE_REGEX))
+                .map(this::replaceFormattedOperator)
+                .collect(joining());
+    }
 
+    private String replaceFormattedOperator(String token) {
         for (Operator operator : Operator.values()) {
-            formattedExpression = formattedExpression.replace(operator.getSymbol(), operator.getFormattedSymbol());
+            token = token.replace(operator.getSymbol(), operator.getFormattedSymbol());
         }
-        return formattedExpression;
+        return token;
     }
 
     private void validateWrongFormat() {
