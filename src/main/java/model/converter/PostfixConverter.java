@@ -17,26 +17,33 @@ public class PostfixConverter implements Converter {
         String[] noWhitespaceExpression = expression.getExpression().split(WHITESPACE);
 
         for (String textSegment : noWhitespaceExpression) {
-            if (isOperator(textSegment)) {
-                Operator operator = Operator.findOperator(textSegment);
-
-                while (!operatorStack.isEmpty() && isHigherPriorityAfterOperator(operatorStack.peek(), operator)) {
-                    postfixList.add(operatorStack.pop().getSignature());
-                }
-                operatorStack.push(operator);
-                continue;
-            }
-            postfixList.add(textSegment);
+            separateNumberAndOperator(postfixList, operatorStack, textSegment);
         }
         appendRemainingOperators(postfixList, operatorStack);
         return postfixList;
     }
 
+    private void separateNumberAndOperator(List<String> postfixList, Stack<Operator> operatorStack, String textSegment) {
+        if (isOperator(textSegment)) {
+            Operator operator = Operator.findOperator(textSegment);
+
+            addOperatorToPostfixList(postfixList, operatorStack, operator);
+            operatorStack.push(operator);
+            return;
+        }
+        postfixList.add(textSegment);
+    }
     private boolean isOperator(String textSegment) {
         return textSegment.equals(Operator.PLUS.getSignature())
                 || textSegment.equals(Operator.MINUS.getSignature())
                 || textSegment.equals(Operator.MULTIPLY.getSignature())
                 || textSegment.equals(Operator.DIVIDE.getSignature());
+    }
+
+    private void addOperatorToPostfixList(List<String> postfixList, Stack<Operator> operatorStack, Operator operator) {
+        while (!operatorStack.isEmpty() && isHigherPriorityAfterOperator(operatorStack.peek(), operator)) {
+            postfixList.add(operatorStack.pop().getSignature());
+        }
     }
 
     private boolean isHigherPriorityAfterOperator(Operator prev, Operator now) {

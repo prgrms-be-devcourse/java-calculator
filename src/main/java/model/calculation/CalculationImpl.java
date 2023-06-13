@@ -13,23 +13,27 @@ public class CalculationImpl implements Calculation{
         Stack<Integer> stack = new Stack<>();
 
         for (String textSegment : postfixExpression) {
-            if (isNumber(textSegment)) {
-                stack.push(Integer.parseInt(textSegment));
-                continue;
-            }
-
-            int number1 = stack.pop();
-            int number2 = stack.pop();
-            Operator operator = Operator.findOperator(textSegment);
-            switch (operator) {
-                case PLUS -> stack.push(plus(number1, number2));
-                case MINUS -> stack.push(minus(number1, number2));
-                case MULTIPLY -> stack.push(multiply(number1, number2));
-                case DIVIDE -> stack.push(divide(number1, number2));
-            }
+            calculatePostfixExpression(stack, textSegment);
         }
 
         return stack.pop();
+    }
+
+    private void calculatePostfixExpression(Stack<Integer> stack, String textSegment) {
+        if (isNumber(textSegment)) {
+            stack.push(Integer.parseInt(textSegment));
+            return;
+        }
+
+        int number1 = stack.pop();
+        int number2 = stack.pop();
+        Operator operator = Operator.findOperator(textSegment);
+        switch (operator) {
+            case PLUS -> stack.push(plus(number1, number2));
+            case MINUS -> stack.push(minus(number1, number2));
+            case MULTIPLY -> stack.push(multiply(number1, number2));
+            case DIVIDE -> stack.push(divide(number1, number2));
+        }
     }
 
     private boolean isNumber(String s) {
