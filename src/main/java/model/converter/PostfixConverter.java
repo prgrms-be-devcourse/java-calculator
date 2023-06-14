@@ -7,43 +7,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static constant.Operator.*;
+
 public class PostfixConverter implements Converter {
     private static final String WHITESPACE = " ";
+    private static final Stack<Operator> operatorStack = new Stack<>();
 
     @Override
-    public List<String> covert(Expression expression) {
+    public List<String> convert(Expression expression) {
         List<String> postfixList = new ArrayList<>();
-        Stack<Operator> operatorStack = new Stack<>();
-        String[] noWhitespaceExpression = expression.getExpression().split(WHITESPACE);
+        String[] nonSpaceExpression = convertToNonSpaceExpression(expression);
 
-        for (String textSegment : noWhitespaceExpression) {
-            separateNumberAndOperator(postfixList, operatorStack, textSegment);
+        for (String textSegment : nonSpaceExpression) {
+            if (isOperator(textSegment)) {
+                Operator operator = Operator.findOperator(textSegment);
+                processLowPriorityOperators(postfixList, operator);
+                operatorStack.push(operator);
+                continue;
+            }
+            postfixList.add(textSegment);
         }
         appendRemainingOperators(postfixList, operatorStack);
         return postfixList;
     }
 
-    private void separateNumberAndOperator(List<String> postfixList, Stack<Operator> operatorStack, String textSegment) {
-        if (isOperator(textSegment)) {
-            Operator operator = Operator.findOperator(textSegment);
-
-            addOperatorToPostfixList(postfixList, operatorStack, operator);
-            operatorStack.push(operator);
-            return;
-        }
-        postfixList.add(textSegment);
-    }
-    private boolean isOperator(String textSegment) {
-        return textSegment.equals(Operator.PLUS.getSignature())
-                || textSegment.equals(Operator.MINUS.getSignature())
-                || textSegment.equals(Operator.MULTIPLY.getSignature())
-                || textSegment.equals(Operator.DIVIDE.getSignature());
-    }
-
-    private void addOperatorToPostfixList(List<String> postfixList, Stack<Operator> operatorStack, Operator operator) {
+    private void processLowPriorityOperators(List<String> postfixList, Operator operator) {
         while (!operatorStack.isEmpty() && isHigherPriorityAfterOperator(operatorStack.peek(), operator)) {
             postfixList.add(operatorStack.pop().getSignature());
         }
+    }
+
+    private String[] convertToNonSpaceExpression(Expression expression) {
+        return expression.getExpression().split(WHITESPACE);
     }
 
     private boolean isHigherPriorityAfterOperator(Operator prev, Operator now) {

@@ -1,19 +1,28 @@
 package constant;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
+
+import static controller.CalculatorController.INVALID_MENU;
+import static model.calculation.CalculationImpl.ZERO_DIVIDE;
 
 public enum Operator {
-    PLUS("+", 1),
-    MINUS("-", 1),
-    MULTIPLY("*", 2),
-    DIVIDE("/", 2);
+    PLUS("+", 1, Integer::sum),
+    MINUS("-", 1, (operand1, operand2) -> operand2 - operand1),
+    MULTIPLY("*", 2, (operand1, operand2) -> operand2 * operand1),
+    DIVIDE("/", 2, (operand1, operand2) -> {
+        if (operand1 == 0) throw new ArithmeticException(ZERO_DIVIDE);
+        return operand2 / operand1;
+    });
 
     private final String signature;
     private final int priority;
+    private final BiFunction<Integer, Integer, Integer> operation;
 
-    Operator(String signature, int priority) {
+    Operator(String signature, int priority, BiFunction<Integer, Integer, Integer> operation) {
         this.signature = signature;
         this.priority = priority;
+        this.operation = operation;
     }
 
     public String getSignature() {
@@ -24,10 +33,20 @@ public enum Operator {
         return priority;
     }
 
+    public static boolean isOperator(String textSegment) {
+        return Arrays.stream(values())
+                .anyMatch(operator -> operator.getSignature().equals(textSegment));
+    }
+
+    public static Integer calculate(String operator, Integer operand1, Integer operand2) {
+        return findOperator(operator)
+                .operation.apply(operand1, operand2);
+    }
+
     public static Operator findOperator(String signature) {
         return Arrays.stream(values())
                 .filter(operator -> operator.signature.equals(signature))
                 .findAny()
-                .get();
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_MENU));
     }
 }

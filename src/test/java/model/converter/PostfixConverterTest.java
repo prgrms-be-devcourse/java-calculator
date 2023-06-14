@@ -19,7 +19,7 @@ class PostfixConverterTest {
         final List<String> result = List.of("3", "2", "4", "*", "+", "9", "3", "/", "-");
 
         //when
-        List<String> covert = converter.covert(expression);
+        List<String> covert = converter.convert(expression);
 
         //then
         assertThat(covert).hasSameHashCodeAs(result);

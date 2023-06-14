@@ -5,5 +5,5 @@ import model.vo.Expression;
 import java.util.List;
 
 public interface Converter {
-    List<String> covert(Expression expression);
+    List<String> convert(Expression expression);
 }

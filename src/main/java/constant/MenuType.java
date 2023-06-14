@@ -2,8 +2,10 @@ package constant;
 
 import java.util.Arrays;
 
+import static controller.CalculatorController.INVALID_MENU;
+
 public enum MenuType {
-    CHECK_DATA(1),
+    INQUIRY(1),
     CALCULATION(2);
 
     private final int menu;
@@ -16,6 +18,6 @@ public enum MenuType {
         return Arrays.stream(values())
                 .filter(menuType -> menuType.menu == inputMenu)
                 .findAny()
-                .get();
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_MENU));
     }
 }

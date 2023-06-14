@@ -11,8 +11,8 @@ import model.vo.Menu;
 
 import java.util.List;
 
-public class CalculatorController implements Runnable {
-    private static final String INVALID_MENU = "올바르지 않은 값입니다.";
+public class CalculatorController {
+    public static final String INVALID_MENU = "올바르지 않은 값입니다.";
     private final CalculatorInput input;
     private final CalculatorOutput output;
     private final Converter converter;
@@ -25,30 +25,32 @@ public class CalculatorController implements Runnable {
         this.calculation = calculation;
     }
 
-    @Override
-    public void run() {
+    public void runProgram() {
         while (true) {
             output.printMenuMessage();
-            selectMenu(input.menuInput());
+            selectCalculatorFunction(input.menuInput());
         }
     }
 
-    private void selectMenu(Menu menu) {
+    private void selectCalculatorFunction(Menu menu) {
         MenuType menuType = MenuType.findMenuType(menu.getMenu());
         switch (menuType) {
-            case CHECK_DATA -> runRecordLogic();
-            case CALCULATION -> runCalculationLogic();
-            default -> throw new IllegalArgumentException(INVALID_MENU);
+            case INQUIRY -> printExpressions();
+            case CALCULATION -> {
+                Expression expression = input.expressionInput();
+                CalculationResult calculationResult = getCalculationResult(expression);
+                output.printExpression(calculationResult);
+            }
+            default -> output.printSelectOtherMenu();
         }
     }
 
-    private void runRecordLogic() {
+    private void printExpressions() {
     }
 
-    private void runCalculationLogic() {
-        Expression expression = input.expressionInput();
-        List<String> postfixExpression = converter.covert(expression);
+    private CalculationResult getCalculationResult(Expression expression) {
+        List<String> postfixExpression = converter.convert(expression);
         CalculationResult calculationResult = calculation.calculate(postfixExpression);
-        output.printExpression(calculationResult);
+        return calculationResult;
     }
 }

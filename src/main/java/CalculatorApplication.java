@@ -15,6 +15,6 @@ public class CalculatorApplication {
         Converter converter = new PostfixConverter();
         Calculation calculation = new CalculationImpl();
 
-        new CalculatorController(input, output, converter, calculation).run();
+        new CalculatorController(input, output, converter, calculation).runProgram();
     }
 }
