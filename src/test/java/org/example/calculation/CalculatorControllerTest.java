@@ -1,4 +1,5 @@
 package org.example.calculation;
+import org.example.controller.CalculatorController;
 import org.example.io.ConsoleOutput;
 import org.example.io.Input;
 import org.example.io.Output;
@@ -14,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CalculatorTest {
+public class CalculatorControllerTest {
     private Compute compute;
     private Input input;
     private Output output;
     private EquationRepository equationRepository;
-    private Calculator calculator;
+    private CalculatorController calculatorController;
 
     //터미널 출력값 검증용
     public PrintStream originalOut;
@@ -32,7 +33,7 @@ public class CalculatorTest {
         output = new ConsoleOutput();
         equationRepository = new MemoryEquationRepository();
 
-        calculator = new Calculator(compute, input, output, equationRepository);
+        calculatorController = new CalculatorController(compute, input, output, equationRepository);
 
         // 기존 표준 출력 스트림 보관
         originalOut = System.out;
@@ -56,7 +57,7 @@ public class CalculatorTest {
         when(input.selectAction()).thenReturn("2").thenReturn("3");
         when(input.getUserEquation()).thenReturn("3 - 9 / 3 + 2 * 7");
 
-        calculator.run();
+        calculatorController.run();
 
         // 캡처된 터미널 출력 값을 얻어옴
         String terminalOutput = outputStream.toString();
@@ -71,7 +72,7 @@ public class CalculatorTest {
         when(input.selectAction()).thenReturn("2").thenReturn("1").thenReturn("3");
         when(input.getUserEquation()).thenReturn("2 - 12 / 2 + 5 * 15");
 
-        calculator.run();
+        calculatorController.run();
 
         String terminalOutput = outputStream.toString();
 
@@ -84,7 +85,7 @@ public class CalculatorTest {
         when(input.selectAction()).thenReturn("2").thenReturn("3");
         when(input.getUserEquation()).thenReturn("3 + 9 / 0");
 
-        calculator.run();
+        calculatorController.run();
 
         String terminalOutput = outputStream.toString();
 
@@ -97,7 +98,7 @@ public class CalculatorTest {
         when(input.selectAction()).thenReturn("2").thenReturn("3");
         when(input.getUserEquation()).thenReturn("3 + + 9");
 
-        calculator.run();
+        calculatorController.run();
 
         String terminalOutput = outputStream.toString();
 

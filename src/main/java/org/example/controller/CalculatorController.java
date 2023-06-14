@@ -1,20 +1,21 @@
-package org.example.calculation;
+package org.example.controller;
 
+import org.example.calculation.Compute;
 import org.example.exception.BadEquationException;
-import org.example.exception.CheckEquation;
+import org.example.util.CheckEquation;
 import org.example.io.Input;
 import org.example.io.Output;
 import org.example.repository.EquationRepository;
 
 import java.io.IOException;
 
-public class Calculator implements Runnable{
+public class CalculatorController implements Runnable{
     private Compute compute;
     private Input input;
     private Output output;
     private EquationRepository equationRepository;
 
-    public Calculator(Compute compute, Input input, Output output, EquationRepository equationRepository) {
+    public CalculatorController(Compute compute, Input input, Output output, EquationRepository equationRepository) {
         this.compute = compute;
         this.input = input;
         this.output = output;
