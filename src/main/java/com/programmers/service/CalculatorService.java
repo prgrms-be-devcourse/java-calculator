@@ -1,6 +1,6 @@
 package com.programmers.service;
 
-import com.programmers.dto.CalculatorDto;
+import com.programmers.dto.ExpressionResult;
 import com.programmers.repository.CalculatorRepository;
 import com.programmers.util.CalculatorProcessor;
 import com.programmers.util.Converter;
@@ -22,12 +22,12 @@ public class CalculatorService {
         int result = CalculatorProcessor.calculateExpression(postfixExpression);
 
         //저장
-        calculatorRepository.save(new CalculatorDto(expression, result));
+        calculatorRepository.save(new ExpressionResult(expression, result));
         return result;
     }
 
     //history 조회
-    public List<CalculatorDto> getHistories() {
+    public List<ExpressionResult> getHistories() {
         return calculatorRepository.findAll();
     }
 

@@ -1,10 +1,10 @@
 package com.programmers.dto;
 
-public class CalculatorDto {
+public class ExpressionResult {
     private final String expression; //식
     private final int answer; //값
 
-    public CalculatorDto(String expression, int answer) {
+    public ExpressionResult(String expression, int answer) {
         this.expression = expression;
         this.answer = answer;
     }

@@ -1,7 +1,7 @@
 package com.programmers.view;
 
 import com.programmers.domain.Menu;
-import com.programmers.dto.CalculatorDto;
+import com.programmers.dto.ExpressionResult;
 
 import java.util.List;
 
@@ -29,9 +29,9 @@ public class Output {
     }
 
     //조회 출력
-    public static void printHistories(List<CalculatorDto> dtoList) {
+    public static void printHistories(List<ExpressionResult> dtoList) {
         StringBuilder sb = new StringBuilder();
-        for (CalculatorDto dto : dtoList) {
+        for (ExpressionResult dto : dtoList) {
             sb.append(dto.getExpression());
             sb.append(" = ");
             sb.append(dto.getAnswer());
