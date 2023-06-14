@@ -1,7 +1,9 @@
 package com.programmers.java.calculator.model;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,10 +23,12 @@ public enum MenuType {
     }
 
     private static final Map<String, MenuType> MENU_TYPE_MAP =
-            Stream.of(values())
-                    .collect(Collectors.toMap(MenuType::getNumber,
-                            menuType -> menuType,
-                            (x, y) -> y, LinkedHashMap::new));
+            Collections.unmodifiableMap(Stream.of(values()).collect(
+                    Collectors.toMap(MenuType::getNumber,
+                            Function.identity(),
+                            (x, y) -> y,
+                            LinkedHashMap::new)
+            ));
 
     public String getNumber() {
         return number;

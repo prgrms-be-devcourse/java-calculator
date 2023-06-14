@@ -1,7 +1,12 @@
 package com.programmers.java.calculator.model;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Operator {
 
@@ -19,6 +24,10 @@ public enum Operator {
         this.priority = priority;
         this.function = function;
     }
+
+    private static final Map<String, Operator> OPERATOR_MAP =
+            Collections.unmodifiableMap(Stream.of(values()).collect(
+                    Collectors.toMap(Operator::getSymbol, Function.identity())));
 
     public String getSymbol() {
         return symbol;
@@ -39,10 +48,8 @@ public enum Operator {
     }
 
     public static Operator of(String symbol) {
-        for (Operator operator : Operator.values()) {
-            if (operator.getSymbol().equals(symbol)) {
-                return operator;
-            }
+        if (OPERATOR_MAP.containsKey(symbol)) {
+            return OPERATOR_MAP.get(symbol);
         }
 
         throw new IllegalArgumentException("잘못 입력되었습니다");
