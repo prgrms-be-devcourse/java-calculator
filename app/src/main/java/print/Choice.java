@@ -1,4 +1,4 @@
-package Print;
+package print;
 
 public class Choice {
     public static void printChoice() {
