@@ -6,7 +6,7 @@ import com.programmers.util.Arithmetic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import java.util.function.Supplier;
+import java.util.function.BooleanSupplier;
 
 public class PostfixConverter {
     private List<String> postfixExpression;
@@ -21,22 +21,37 @@ public class PostfixConverter {
                 postfixExpression.add(token);
             } else {
                 Operator operator = Operator.getValue(token);
-                popAndAddOperatorsToExpression(() -> operator.comparePriorityTo(operators.peek()));
+
+                List<Operator> poppedOperators =
+                        popOperators(() -> operator.comparePriorityTo(operators.peek()));
+                addOperatorsToExpression(poppedOperators);
+
                 operators.push(operator);
             }
         }
-        popAndAddOperatorsToExpression(() -> false);
+        List<Operator> remainedOperators = popOperators(() -> false);
+        addOperatorsToExpression(remainedOperators);
 
         return postfixExpression;
     }
 
-    private void popAndAddOperatorsToExpression(Supplier<Boolean> breakCondition) {
+    private List<Operator> popOperators(BooleanSupplier breakCondition) {
+        List<Operator> poppedOperators = new ArrayList<>();
         while (!operators.isEmpty()) {
-            if (breakCondition.get()) {
+            if (breakCondition.getAsBoolean()) {
                 break;
             }
-            Operator operator = operators.pop();
-            postfixExpression.add(operator.toString());
+            poppedOperators.add(operators.pop());
         }
+
+        return poppedOperators;
+    }
+
+    private void addOperatorsToExpression(List<Operator> operators) {
+        postfixExpression.addAll(
+                operators.stream()
+                        .map(Operator::toString)
+                        .toList()
+        );
     }
 }
