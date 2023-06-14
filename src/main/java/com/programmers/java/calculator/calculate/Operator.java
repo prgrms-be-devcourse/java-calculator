@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
+    NONE("",(preOperand, nextOperand) -> null),
     PLUS("+", (preOperand, nextOperand) -> preOperand + nextOperand),
     MINUS("-", (preOperand, nextOperand) -> preOperand - nextOperand),
     MULTIPLE("*", (preOperand, nextOperand) -> preOperand * nextOperand),
@@ -22,7 +23,6 @@ public enum Operator {
     }
 
     public static Operator findByOperator(String operator) {
-
         return Arrays.stream(Operator.values())
                 .filter(opt -> opt.operator.equals(operator))
                 .findFirst()
