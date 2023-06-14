@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CalculationMemoryRepository implements CalculationRepository {
+public class CalculatorMemoryRepository implements CalculatorRepository {
     private final Map<Integer, Calculator> calculations = new HashMap<>();
 
     @Override

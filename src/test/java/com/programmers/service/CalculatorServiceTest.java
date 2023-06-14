@@ -2,8 +2,8 @@ package com.programmers.service;
 
 import com.programmers.domain.Calculator;
 import com.programmers.io.Console;
-import com.programmers.repository.CalculationMemoryRepository;
-import com.programmers.repository.CalculationRepository;
+import com.programmers.repository.CalculatorMemoryRepository;
+import com.programmers.repository.CalculatorRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,15 +16,15 @@ import static com.programmers.util.CalculatorTestUtil.createCalculation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CalculationServiceTest {
-    private final CalculationService calculatorService;
-    private final CalculationRepository calculationRepository;
+public class CalculatorServiceTest {
+    private final CalculatorService calculatorService;
+    private final CalculatorRepository calculatorRepository;
 
-    public CalculationServiceTest() {
-        calculationRepository = new CalculationMemoryRepository();
+    public CalculatorServiceTest() {
+        calculatorRepository = new CalculatorMemoryRepository();
         Console console = new Console();
 
-        calculatorService = new CalculationService(calculationRepository, console, console);
+        calculatorService = new CalculatorService(calculatorRepository, console, console);
     }
 
     private static Stream<Arguments> inputData() {
@@ -67,7 +67,7 @@ public class CalculationServiceTest {
         calculatorService.calculate(inputA);
 
         //then
-        List<Calculator> result = calculationRepository.findAll();
+        List<Calculator> result = calculatorRepository.findAll();
 
         Calculator expected = createCalculation("1 + 2 + 3");
         assertThat(result).containsExactly(expected);
@@ -79,8 +79,8 @@ public class CalculationServiceTest {
         Calculator calculationA = createCalculation("1 + 2 + 3");
         Calculator calculationB = createCalculation("1 * 2 - 3");
 
-        calculationRepository.save(calculationA);
-        calculationRepository.save(calculationB);
+        calculatorRepository.save(calculationA);
+        calculatorRepository.save(calculationB);
 
         //when
         List<Calculator> resultA = calculatorService.findCalculations();

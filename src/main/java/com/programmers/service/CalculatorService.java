@@ -5,19 +5,19 @@ import com.programmers.domain.Tokenizer;
 import com.programmers.enumtype.ServiceSelection;
 import com.programmers.io.Input;
 import com.programmers.io.Output;
-import com.programmers.repository.CalculationRepository;
+import com.programmers.repository.CalculatorRepository;
 
 import java.util.List;
 
-public class CalculationService implements Runnable {
+public class CalculatorService implements Runnable {
     private final Tokenizer tokenizer = new Tokenizer();
 
-    private final CalculationRepository calculationRepository;
+    private final CalculatorRepository calculatorRepository;
     private final Input input;
     private final Output output;
 
-    public CalculationService(CalculationRepository calculationRepository, Input input, Output output) {
-        this.calculationRepository = calculationRepository;
+    public CalculatorService(CalculatorRepository calculatorRepository, Input input, Output output) {
+        this.calculatorRepository = calculatorRepository;
         this.input = input;
         this.output = output;
     }
@@ -28,13 +28,13 @@ public class CalculationService implements Runnable {
         Calculator calculator = new Calculator(tokenized);
         int result = calculator.calculate();
 
-        calculationRepository.save(calculator);
+        calculatorRepository.save(calculator);
 
         return result;
     }
 
     public List<Calculator> findCalculations() {
-        return calculationRepository.findAll();
+        return calculatorRepository.findAll();
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.programmers.domain.Calculator;
 
 import java.util.List;
 
-public interface CalculationRepository {
+public interface CalculatorRepository {
 
     void save(Calculator calculation);
 
