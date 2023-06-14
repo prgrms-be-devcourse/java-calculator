@@ -1,16 +1,11 @@
 package org.programmers.java;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.programmers.java.console.Console;
 import org.programmers.java.validator.FormulaCountValidator;
 import org.programmers.java.validator.FormulaSplitValidator;
-import org.programmers.java.validator.Validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,9 +13,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class ValidaionTest {
-
     FormulaSplitValidator formulaSplitValidator = new FormulaSplitValidator();
     FormulaCountValidator formulaCountValidator = new FormulaCountValidator();
 
@@ -42,7 +35,6 @@ public class ValidaionTest {
                 Arguments.of("7 * 2 - 3 / 3 + 2", Arrays.asList("7","*","2","-","3","/","3","+","2"))
         );
     }
-
 
     @ParameterizedTest
     @DisplayName("연산식 검증: 연산자와 피연산자의 전체 개수 검증 및 위치 검증")

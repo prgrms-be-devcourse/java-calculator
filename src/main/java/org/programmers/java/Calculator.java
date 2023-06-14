@@ -9,8 +9,6 @@ import org.programmers.java.message.FunctionSelect;
 import org.programmers.java.repository.FormulaRepository;
 import org.programmers.java.validator.Validator;
 
-import java.util.Optional;
-
 public class Calculator {
     private boolean programStatus = true;
     private final Input input;

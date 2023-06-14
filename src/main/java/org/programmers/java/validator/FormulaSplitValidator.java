@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FormulaSplitValidator {
-
     private final Output output;
     private List<String> formularAfterSplitValidate = new ArrayList<>();
 

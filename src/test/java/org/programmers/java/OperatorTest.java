@@ -8,7 +8,6 @@ import org.programmers.java.calculation.Operator;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OperatorTest {
-
     @Test
     @DisplayName("사칙연산 테스트")
     void operatorCalculate(){

@@ -1,10 +1,7 @@
 package org.programmers.java.repository;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class FormulaMemoryRepository implements FormulaRepository {
     Map<Long, String> formulaMap = new LinkedHashMap<>();

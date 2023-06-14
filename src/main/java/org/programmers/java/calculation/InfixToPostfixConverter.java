@@ -14,6 +14,7 @@ public class InfixToPostfixConverter {
             operandAddInPostfix(operatorOrOperand);
             checkOperatorToAddPostfix(operatorOrOperand);
         }
+
         while(operatorDeque.size() > 0){
             postfixOperator.add(operatorDeque.removeLast());
         }

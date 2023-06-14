@@ -15,7 +15,6 @@ public enum Operator {
     private final int priority;
     private final BiFunction<Integer, Integer, Integer> expression;
 
-
     Operator(String symbol, int priority, BiFunction<Integer, Integer, Integer> expression){
         this.symbol = symbol;
         this.priority = priority;
@@ -33,7 +32,6 @@ public enum Operator {
     public static int arithmeticExpression(String symbol, int firstOperand, int secondOperand){
         return isSymbol(symbol).get().expression.apply(firstOperand, secondOperand);
     }
-
 
     public static Optional<Operator> isSymbol(String inputSymbol){
         return Arrays.stream(values())

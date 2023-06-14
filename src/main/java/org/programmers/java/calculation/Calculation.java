@@ -3,7 +3,6 @@ package org.programmers.java.calculation;
 import java.util.*;
 
 public class Calculation {
-
     private final InfixToPostfixConverter infixToPostfixConverter;
     private final PostfixCalculation postfixCalculation;
 

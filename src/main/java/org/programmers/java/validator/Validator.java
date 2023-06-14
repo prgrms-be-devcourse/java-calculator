@@ -4,7 +4,6 @@ import org.programmers.java.console.Console;
 import org.programmers.java.console.Output;
 import org.programmers.java.message.Error;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Validator {
