@@ -3,13 +3,13 @@ package com.programmers.java.view;
 import java.util.List;
 
 public class Output {
-    public void viewStartConsole() {
+    public void viewMenu() {
         for (Menu menu : Menu.values()) {
             System.out.println(menu.toString());
         }
     }
 
-    public void viewEndConsole() {
+    public void viewEndMessage() {
         System.out.println("계산기를 종료합니다.");
     }
 

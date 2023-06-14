@@ -18,12 +18,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         while (true) {
-            output.viewStartConsole();
+            output.viewMenu();
 
             input.enterMenu().ifPresentOrElse(
                     Main::runCalculator,
                     () -> {
-                        output.viewEndConsole();
+                        output.viewEndMessage();
                         System.exit(0);
                     }
             );
