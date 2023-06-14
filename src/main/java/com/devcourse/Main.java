@@ -10,12 +10,8 @@ public class Main {
     public static void main(String[] args) {
         Calculator calculator = new Calculator(new CalcHistoryRepository(), new ConverterNoBracket());
         while (true) {
-            try {
-                int menu = selectMenu();
-                Output.viewResult(calculator.run(menu));
-            } catch (RuntimeException e) {
-                Output.viewResult(e.getMessage());
-            }
+            int menu = selectMenu();
+            Output.viewResult(calculator.run(menu));
         }
     }
 
