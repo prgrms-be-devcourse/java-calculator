@@ -1,9 +1,7 @@
 package org.example;
 
-import java.io.IOException;
-
 public class App {
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) {
     CalculatorController calculatorController = new CalculatorController();
     calculatorController.run();
   }

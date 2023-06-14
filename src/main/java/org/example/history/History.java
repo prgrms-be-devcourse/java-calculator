@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class History {
-  private static final Map<Long, Formula> memory = new LinkedHashMap<>();
+  private Map<Long, Formula> memory = new LinkedHashMap<>();
   private long number = 0L;
 
   public void save(Formula formula) {
