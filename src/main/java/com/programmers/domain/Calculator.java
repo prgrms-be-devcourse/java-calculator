@@ -13,14 +13,14 @@ public class Calculator {
     private int result;
 
     public Calculator(List<String> infixExpression) {
-        validate(infixExpression);
-
         this.infixExpression = infixExpression;
+        validateExpression();
+
         this.postfixExpression = PostfixConverter.convert(infixExpression);
         this.result = 0;
     }
 
-    private void validate(List<String> infixExpression) {
+    private void validateExpression() {
         boolean numberTurn = true;
         for (String expr : infixExpression) {
             if (Arithmetic.isNumber(expr) && numberTurn) {
