@@ -12,7 +12,6 @@ import static com.programmers.error.ConsoleMessage.INPUT_RETRY_MESSAGE;
  */
 
 public class Input {
-    private static final String NOTVALIDARITHMETICEXPRESSION = "계산식이 옳지 않습니다. 식을 다시 입력해주세요\n";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -36,23 +35,21 @@ public class Input {
     }
 
     public static String inputExpression() {
-        String expression = scanner.nextLine();
+        String expression="";
+        boolean inputSuccessful = false;
 
-        //공백 제거
-        expression = removeWhiteSpace(expression);
+        while(!inputSuccessful){
+            try{
+                expression = scanner.nextLine();
+                expression = removeWhiteSpace(expression);
+                Validator.checkValidArithmeticExpression(expression);
+                inputSuccessful = true;
+            }
+            catch (CalculatorException e){
+                Output.printMessage(INPUT_RETRY_MESSAGE);
+            }
+        }
 
-//        //사칙연산(+,-,*,/)과 숫자만으로 구성되어 있는지 확인
-//        if (!Validator.checkValidArithmeticExpression(expression)) {
-//            System.out.print(NOTVALIDARITHMETICEXPRESSION);
-//
-//            inputExpression(); //반복
-//        }
-//        try{
-//
-//        }
-//        catch(CalculatorException e){
-//            Output.printMessage(INPUT_RETRY_MESSAGE);
-//        }
         return expression;
     }
 
