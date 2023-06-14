@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+import static global.ErrorMessage.HISTORY_EMPTY_MESSAGE;
+import static global.ErrorMessage.INVALID_MENU_INDEX;
+
 public class Console implements Input,  Output {
     Scanner sc = new Scanner(System.in);
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +18,7 @@ public class Console implements Input,  Output {
     public Option selectOption() throws NoSuchElementException {
         Optional<Option> userOption = Option.getMenu(sc.nextLine());
         if(userOption.isEmpty()) {
-            System.out.println("존재하지 않는 메뉴입니다.");
+            System.out.println(INVALID_MENU_INDEX);
         }
 
         return userOption.get();
@@ -35,7 +38,7 @@ public class Console implements Input,  Output {
 
     @Override
     public void historyEmptyError() {
-        System.out.println("조회된 데이터가 없습니다.");
+        System.out.println(HISTORY_EMPTY_MESSAGE);
     }
 
     @Override
@@ -57,10 +60,5 @@ public class Console implements Input,  Output {
     @Override
     public void printResult(Integer result) {
         System.out.println(result);
-    }
-
-    @Override
-    public void quitMessage() {
-
     }
 }

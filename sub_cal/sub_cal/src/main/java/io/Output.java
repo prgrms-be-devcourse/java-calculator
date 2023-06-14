@@ -9,5 +9,5 @@ public interface Output {
     boolean showResultHistory(List<String> history);
     void ShowOptions();
     void printResult(Integer result);
-    void quitMessage();
+
 }

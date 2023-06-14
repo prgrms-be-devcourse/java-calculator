@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.NoSuchElementException;
 
+import static global.ErrorMessage.EMPTY_INPUT_STRING;
+
 
 public class Index implements Runnable{
     private final Input input;
@@ -25,7 +27,6 @@ public class Index implements Runnable{
 
     @Override
     public void run(){
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
 
@@ -57,7 +58,7 @@ public class Index implements Runnable{
                         history.addHistory(inputString,result);
 
                     } catch (Exception e) {
-                        output.inputEmptyError("수식을 입력해주세요!");
+                        output.inputEmptyError(EMPTY_INPUT_STRING);
                         break;
                     }
 
