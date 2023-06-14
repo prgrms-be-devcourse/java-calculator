@@ -1,6 +1,6 @@
 package com.programmers.java.calculator.io;
 
-import com.programmers.java.calculator.entity.History;
+import com.programmers.java.calculator.entity.CalculationHistory;
 
 import java.util.List;
 import java.util.Scanner;
@@ -34,8 +34,8 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printHistoryList(List<History> historyList) {
-        historyList.stream().forEach(history -> System.out.println(history.getExpression()));
+    public void printHistoryList(List<CalculationHistory> historyList) {
+        historyList.stream().forEach(history -> System.out.println(history.getExpression() + " = " + history.getResult()));
         System.out.println();
     }
 }

@@ -1,12 +1,12 @@
 package com.programmers.java.calculator.repository;
 
-import com.programmers.java.calculator.entity.History;
+import com.programmers.java.calculator.entity.CalculationHistory;
 
 import java.util.List;
 
 public interface CalculatorRepository {
 
-    void save(History history);
+    void save(String expression, String result);
 
-    List<History> findAll();
+    List<CalculationHistory> findAll();
 }

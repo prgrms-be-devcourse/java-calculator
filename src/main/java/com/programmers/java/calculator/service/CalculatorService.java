@@ -1,6 +1,6 @@
 package com.programmers.java.calculator.service;
 
-import com.programmers.java.calculator.entity.History;
+import com.programmers.java.calculator.entity.CalculationHistory;
 
 import java.util.List;
 
@@ -8,5 +8,5 @@ public interface CalculatorService {
 
     String calculate(String expression);
 
-    List<History> getHistoryList();
+    List<CalculationHistory> getHistoryList();
 }
