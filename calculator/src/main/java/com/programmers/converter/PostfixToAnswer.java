@@ -15,7 +15,7 @@ public class PostfixToAnswer {
         continue;
       }
 
-      if (Character.isDigit(ch)) {
+      if (isDigit(ch)) {
         operandStack.push((double) (ch - '0'));
       } else {
         Operator operator = Operator.fromSymbol(ch);
@@ -28,6 +28,10 @@ public class PostfixToAnswer {
     }
 
     return operandStack.pop();
+  }
+
+  private static boolean isDigit(char ch) {
+    return Character.isDigit(ch);
   }
 }
 

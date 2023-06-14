@@ -27,11 +27,10 @@ public class InfixToPostfix {
         continue;
       }
 
-      if (Character.isDigit(ch)) {
+      if (isDigit(ch)) {
         postfixStringBuilder.append(ch);
       } else {
-        while (!operatorStack.isEmpty() && getPriority(ch) <= getPriority(
-            operatorStack.peek())) {
+        while (isPriority(operatorStack, ch)) {
           postfixStringBuilder.append(operatorStack.pop());
         }
         operatorStack.push(ch);
@@ -43,5 +42,14 @@ public class InfixToPostfix {
     }
 
     return postfixStringBuilder.toString();
+  }
+
+  private static boolean isDigit(char ch) {
+    return Character.isDigit(ch);
+  }
+
+  private static boolean isPriority(Stack<Character> operatorStack, char ch) {
+    return !operatorStack.isEmpty() && getPriority(ch) <= getPriority(
+        operatorStack.peek());
   }
 }
