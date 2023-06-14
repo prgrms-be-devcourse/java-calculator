@@ -10,8 +10,9 @@ public class ConsoleOutput implements Output{
     }
 
     @Override
-    public void printCaculatedResult(double result) {
+    public void printCalculatedResult(double result) {
         System.out.println(result);
+        System.out.println();
     }
 
     @Override
@@ -19,5 +20,18 @@ public class ConsoleOutput implements Output{
         for (String str : strings){
             System.out.println(str);
         }
+        System.out.println();
+    }
+
+    @Override
+    public void printIoError() {
+        System.out.println("잘못된 입력입니다. 다시 입력해주세요.^^");
+        System.out.println();
+    }
+
+    @Override
+    public void printEquationError() {
+        System.out.println("잘못된 수식이 입력 되었습니다.");
+        System.out.println();
     }
 }

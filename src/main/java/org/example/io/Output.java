@@ -3,6 +3,8 @@ package org.example.io;
 public interface Output {
 
     void printAction();
-    void printCaculatedResult(double result);
+    void printCalculatedResult(double result);
     void printFindAll(String[] strings);
+    void printIoError();
+    void printEquationError();
 }

@@ -16,15 +16,11 @@ public class CheckEquation {
 
         Optional<String> preStr = Optional.empty();
         for (String str : strArr){
-            if (preStr.isEmpty()){
-                preStr = Optional.ofNullable(str);
-            }else if (Operator.isOperator(preStr.get()) && Operator.isOperator(str)){
-                return false;
-            } else if (preStr.get().equals("/") && str.equals("0")) {
-                return false;
-            } else {
-                preStr = Optional.ofNullable(str);
-            }
+            if (!str.matches("\\d+") && !Operator.isOperator(str)) return false;
+            else if (preStr.isEmpty()) preStr = Optional.ofNullable(str);
+            else if (Operator.isOperator(preStr.get()) && Operator.isOperator(str)) return false;
+            else if (preStr.get().equals("/") && str.equals("0")) return false;
+            else preStr = Optional.ofNullable(str);
         }
         return true;
     }

@@ -6,8 +6,13 @@ import org.example.util.CheckEquation;
 import org.example.io.Input;
 import org.example.io.Output;
 import org.example.repository.EquationRepository;
+import org.example.util.Menu;
 
 import java.io.IOException;
+
+import static org.example.util.Menu.CALCULATE;
+import static org.example.util.Menu.EXIT;
+import static org.example.util.Menu.QUERY;
 
 public class CalculatorController implements Runnable{
     private Compute compute;
@@ -27,36 +32,26 @@ public class CalculatorController implements Runnable{
         while (true){
             try {
                 output.printAction();
-                String action = input.selectAction();
-                String curInput;
+                Menu curMenu = Menu.getMenu(input.selectAction());
 
-                if(action.equals("1")) {
+                if(curMenu == QUERY) {
                     String[] findStrArr = equationRepository.findAll();
                     output.printFindAll(findStrArr);
-                    System.out.println();
 
-                }else if (action.equals("2")){
-                    curInput = input.getUserEquation();
+                }else if (curMenu == CALCULATE){
+                    String curInput = input.getUserEquation();
                     validate(curInput);
-                    double resultNnm = compute.operate(curInput);
-                    output.printCaculatedResult(resultNnm);
-                    System.out.println();
-                    String resultStr = curInput + " = " + String.valueOf(resultNnm);
-                    equationRepository.save(resultStr);
+                    double resultNum = compute.operate(curInput);
+                    output.printCalculatedResult(resultNum);
+                    equationRepository.save(curInput, resultNum);
 
-                }else if (action.equals("3")){
-                    break;
+                }else if (curMenu == EXIT) break;
+                else output.printIoError();
 
-                }else {
-                    System.out.println("다시 입력해 주세요.");
-                    System.out.println();
-                }
             }catch (IOException IOe){
-                System.out.println("잘못된 입력입니다. 다시 입력해주세요.^^");
-                System.out.println();
+                output.printIoError();
             }catch (BadEquationException BEe){
-                System.out.println("잘못된 수식이 입력 되었습니다.");
-                System.out.println();
+                output.printEquationError();
             }
         }
     }

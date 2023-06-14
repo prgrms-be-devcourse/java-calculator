@@ -1,9 +1,8 @@
 package org.example.calculation;
+import org.example.util.InputStringFormating;
 import org.example.util.Operator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class ArithmeticCompute implements Compute {
     @Override
@@ -12,20 +11,18 @@ public class ArithmeticCompute implements Compute {
     }
 
     public String[] prefixToPostfix(String input) {
-        String[] str = InputStringFormating.formating(input);
+        String[] strArr = InputStringFormating.formating(input);
 
         List<String> stringBuffer = new ArrayList<>();
-        Stack<String> operatorStack = new Stack<>();
+        Deque<String> operatorStack = new ArrayDeque<>();
 
-        for(int i = 0; i < str.length; i++){
-            String cur = str[i];
-
-            if (Operator.isOperator(cur)){
-                while (!operatorStack.isEmpty() && isLowerThenStack(cur, operatorStack.peek())){
-                        stringBuffer.add(operatorStack.pop());
-                    }
-                    operatorStack.push(cur);
-            }else stringBuffer.add(cur);
+        for (String curStr : strArr) {
+            if (Operator.isOperator(curStr)) {
+                while (!operatorStack.isEmpty() && isLowerThenStack(curStr, operatorStack.peek())) {
+                    stringBuffer.add(operatorStack.pop());
+                }
+                operatorStack.push(curStr);
+            } else stringBuffer.add(curStr);
         }
 
         while (!operatorStack.isEmpty()){
@@ -43,20 +40,20 @@ public class ArithmeticCompute implements Compute {
     }
 
     public double calculate(String[] input){
-        Stack<Double> stack = new Stack<>();
+        Deque<Double> numStack = new ArrayDeque<>();
 
         for (String cur : input){
             if (!Operator.isOperator(cur)){
-                stack.push(Double.parseDouble(cur));
+                numStack.push(Double.parseDouble(cur));
             }else {
-                Double targetNum1 = stack.pop();
-                Double targetNum2 = stack.pop();
+                Double targetNum1 = numStack.pop();
+                Double targetNum2 = numStack.pop();
                 Operator curOperator = Operator.getOperator(cur);
 
-                stack.push(curOperator.calculateByOperator(targetNum2, targetNum1));
+                numStack.push(curOperator.calculateByOperator(targetNum2, targetNum1));
             }
         }
-        return stack.pop();
+        return numStack.pop();
     }
 
 }

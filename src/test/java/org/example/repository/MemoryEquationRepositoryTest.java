@@ -15,17 +15,17 @@ public class MemoryEquationRepositoryTest {
 
     @Test
     public void 계산값_1개_저장_후_조회(){
-        memoryRepository.save("5 + 3 * 2 = 11");
+        memoryRepository.save("5 + 3 * 2", 11.0);
         String[] result = memoryRepository.findAll();
-        assertThat(result[0]).isEqualTo("5 + 3 * 2 = 11");
+        assertThat(result[0]).isEqualTo("5 + 3 * 2 = 11.0");
     }
 
     @Test
     public void 계산값_2개_저장_후_조회(){
-        memoryRepository.save("5 + 3 * 2 = 11");
-        memoryRepository.save("3 + 5 * 7 = 38");
+        memoryRepository.save("5 + 3 * 2", 11.0);
+        memoryRepository.save("3 + 5 * 7", 38.0);
         String[] result = memoryRepository.findAll();
-        assertThat(result[0]).isEqualTo("5 + 3 * 2 = 11");
-        assertThat(result[1]).isEqualTo("3 + 5 * 7 = 38");
+        assertThat(result[0]).isEqualTo("5 + 3 * 2 = 11.0");
+        assertThat(result[1]).isEqualTo("3 + 5 * 7 = 38.0");
     }
 }

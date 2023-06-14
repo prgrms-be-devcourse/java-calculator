@@ -1,4 +1,4 @@
-package org.example.calculation;
+package org.example.util;
 
 public class InputStringFormating{
     public static String[] formating(String input) {

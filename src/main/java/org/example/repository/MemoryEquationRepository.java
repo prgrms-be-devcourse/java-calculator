@@ -7,8 +7,12 @@ public class MemoryEquationRepository implements EquationRepository {
     private List<String> saveList = new ArrayList<>();
 
     @Override
-    public void save(String str) {
-        saveList.add(str);
+    public void save(String equation ,double answer) {
+        saveList.add(combineEquationAnswer(equation, answer));
+    }
+
+    private String combineEquationAnswer(String equation, double answer) {
+        return equation + " = " + String.valueOf(answer);
     }
 
     @Override
