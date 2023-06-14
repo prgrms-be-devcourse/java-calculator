@@ -1,8 +1,10 @@
 package com.programmers.service;
 
+import com.programmers.domain.model.Calculation;
 import com.programmers.io.Console;
 import com.programmers.repository.CalculationMemoryRepository;
 import com.programmers.repository.CalculationRepository;
+import com.programmers.util.CalculatiorTestUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,6 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.programmers.util.CalculatiorTestUtil.createCalculation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -65,24 +68,25 @@ public class CalculationServiceTest {
         calculatorService.calculate(inputA);
 
         //then
-        List<String> resultA = calculationRepository.findAll();
+        List<Calculation> result = calculationRepository.findAll();
 
-        assertThat(resultA).containsExactly("1 + 2 + 3 = 6");
+        Calculation expected = createCalculation("1 + 2 + 3", 6);
+        assertThat(result).containsExactly(expected);
     }
 
     @Test
     void findCalculations() {
         //given
-        String calculationA = "1 + 2 + 3 = 6";
-        String calculationB = "1 * 2 - 3 = -1";
+        Calculation calculationA = createCalculation("1 + 2 + 3", 6);
+        Calculation calculationB = createCalculation("1 * 2 - 3", -1);
 
         calculationRepository.save(calculationA);
         calculationRepository.save(calculationB);
 
         //when
-        List<String> resultA = calculatorService.findCalculations();
+        List<Calculation> resultA = calculatorService.findCalculations();
 
         //then
-        assertThat(resultA).containsExactly("1 + 2 + 3 = 6", "1 * 2 - 3 = -1");
+        assertThat(resultA).containsExactly(calculationA, calculationB);
     }
 }
