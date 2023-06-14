@@ -1,29 +1,26 @@
 package com.programmers.java.calculator.calculate;
 
-import com.programmers.java.record.CalculationRecord;
-
 import java.util.List;
 
 public class Calculator {
-
-    private static CalculationRecord resultRepository = new CalculationRecord();
-
     public double calculate(List<String> tokenList) {
-        double tempResult = 0.0;
-        String operator = "";
+        double prevOperand = 0.0;
+        double nextOperand = 0.0;
+        Operator operator = Operator.NONE;
 
         for (String token : tokenList) {
-            if (isOperand(token) && operator.equals("")) {
-                tempResult = Double.parseDouble(token);
+            if (isOperand(token) && operator==Operator.NONE) {
+                prevOperand = Double.parseDouble(token);
                 continue;
             }
-            if (isOperand(token) && !operator.equals("")) {
-                tempResult = calculate(Double.parseDouble(token), tempResult, operator);
+            if (isOperand(token) && operator!=Operator.NONE) {
+                nextOperand = Double.parseDouble(token);
+                prevOperand = operator.calculate(prevOperand, nextOperand);
                 continue;
             }
-            operator = token;
+            operator = Operator.findByOperator(token);
         }
-        return tempResult;
+        return prevOperand;
     }
 
     public boolean isOperand(String token) {
@@ -33,10 +30,5 @@ public class Calculator {
         } catch (NumberFormatException ex) {
             return false;
         }
-    }
-
-    public double calculate(double prevOperand, double nextOperand, String token) {
-        Operator operator = Operator.findByOperator(token);
-        return operator.calculate(prevOperand, nextOperand);
     }
 }
