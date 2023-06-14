@@ -24,7 +24,7 @@ public class Calculator implements Runnable {
           calculationFormula.showResult();
           continue;
         case 2:
-          String formula = menu.getCalculationFormula();
+          String formula = menu.getInfix();
           calculationFormula.calculate(formula);
           continue;
         case 3:

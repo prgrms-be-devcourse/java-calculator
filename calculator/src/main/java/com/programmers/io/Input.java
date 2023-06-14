@@ -4,5 +4,7 @@ public interface Input {
 
   int selectOption();
 
-  String getCalculationFormula();
+  String getInfix();
+
+  String getReplacedInfix(String infix);
 }

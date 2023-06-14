@@ -17,10 +17,13 @@ public class Menu implements Input, Output {
   }
 
   @Override
-  public String getCalculationFormula() {
-    String infix = scanner.nextLine();
-    infix = infix.replaceAll("\\s+", "");
-    return infix;
+  public String getInfix() {
+    return scanner.nextLine();
+  }
+
+  @Override
+  public String getReplacedInfix(String infix) {
+    return infix.replaceAll("\\s+", "");
   }
 
   @Override
