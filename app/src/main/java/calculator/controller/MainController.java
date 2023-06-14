@@ -43,7 +43,7 @@ public class MainController {
         }
 
         if (selectedMenu.isCalculate()) {
-            calculator.execute();
+            calculator.calculate();
         }
     }
 }

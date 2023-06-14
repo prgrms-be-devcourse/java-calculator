@@ -22,19 +22,19 @@ public class Calculator {
         this.historyStorage = historyStorage;
     }
 
-    public void execute() {
+    public void calculate() {
         showExpressionInputMessage();
 
         String infixExpression = inputExpression();
-        int calculationResult = calculate(infixExpression);
+        int result = evaluate(infixExpression);
 
-        String history = makeHistory(infixExpression, calculationResult);
+        String history = makeHistory(infixExpression, result);
         historyStorage.save(history);
 
-        showCalculationResult(calculationResult);
+        showCalculationResult(result);
     }
 
-    private int calculate(String infixExpression) {
+    private int evaluate(String infixExpression) {
         String[] elements = splitToElements(infixExpression);
         Stack<Integer> operands = new Stack<>();
         Stack<Operator> operators = new Stack<>();
