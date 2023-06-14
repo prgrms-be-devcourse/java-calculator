@@ -27,15 +27,18 @@ public class Calculator {
     public int calculatePostfixExpression(List<String> expression) {
         Stack<Integer> numbers = new Stack<>();
         for (String expr : expression) {
-            if (Arithmetic.isNumber(expr)) {
-                numbers.push(Integer.parseInt(expr));
-            } else {
-                int result = binaryOperate(numbers.pop(), numbers.pop(), expr);
-                numbers.push(result);
-            }
+            numbers.push(processOperation(numbers, expr));
         }
 
         return numbers.pop();
+    }
+
+    private int processOperation(Stack<Integer> numbers, String token) {
+        if (Arithmetic.isNumber(token)) {
+            return Integer.parseInt(token);
+        }
+        //token 이 연산자일 경우 스택 상위 2개의 값을 연산한 결과를 반환
+        return binaryOperate(numbers.pop(), numbers.pop(), token);
     }
 
     private int binaryOperate(int a, int b, String operator) {
