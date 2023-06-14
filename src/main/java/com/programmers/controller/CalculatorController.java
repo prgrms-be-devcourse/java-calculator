@@ -31,23 +31,23 @@ public class CalculatorController {
 
     // 사용자 요청에 응답하기
     private void response(String request) throws RuntimeException {
+        Menu menu = Menu.getMenu(request);
 
         //저장된 값 조회
-        if (Menu.HISTORY.getNumber().equals(request)) {
+        if (menu == Menu.HISTORY) {
             showHistory();
 
             // 연산
-        } else if (Menu.CALCULATE.getNumber().equals(request)) {
+        } else if (menu == Menu.CALCULATE) {
             doCalculate();
 
-        } else if (Menu.END.getNumber().equals(request)) {
             // 종료
+        } else if (menu == Menu.END) {
             stop();
 
         } else {
             throw new MenuFormatException();
         }
-
     }
 
     private void showHistory() {
