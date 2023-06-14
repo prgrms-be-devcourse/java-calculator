@@ -11,6 +11,10 @@ public class History {
     memory.put(++number, formula);
   }
 
+  public Map<Long, Formula> getMemory() {
+    return memory;
+  }
+
   public void view() {
     for (Long key : memory.keySet()) {
       Formula formula = memory.get(key);

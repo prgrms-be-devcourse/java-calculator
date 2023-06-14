@@ -9,6 +9,10 @@
 .gradle/
 build/
 
+.gradle
+.idea
+build
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
