@@ -51,21 +51,31 @@ public class CalculationService implements Runnable {
     @Override
     public void run() {
         while (true) {
-            String selected = input.selectService();
+            String serviceNumber = input.selectService();
 
-            boolean exitService = selectService(selected);
+            ServiceSelection selected = ServiceSelection.selectService(serviceNumber);
 
+            boolean exitService = progressService(selected);
             if (exitService) {
                 break;
             }
         }
     }
 
-    private boolean selectService(String selected) {
+    private boolean progressService(ServiceSelection selected) {
         boolean exitService = false;
+        try {
+            exitService = selectService(selected);
+        } catch (RuntimeException ex) {
+            output.printError(ex);
+        }
 
-        ServiceSelection service = ServiceSelection.selectService(selected);
-        switch (service) {
+        return exitService;
+    }
+
+    private boolean selectService(ServiceSelection selectedService) {
+        boolean exitService = false;
+        switch (selectedService) {
             case NOT_SELECTED -> {
                 output.inputError();
             }
@@ -75,18 +85,15 @@ public class CalculationService implements Runnable {
             }
             case CALCULATION -> {
                 String calculation = input.inputCalculation();
-                try {
-                    int result = calculate(calculation);
-                    output.printResult(result);
-                } catch (RuntimeException ex) {
-                    output.printError(ex);
-                }
+                int result = calculate(calculation);
+                output.printResult(result);
             }
             case EXIT_SERVICE -> {
                 output.exit();
                 exitService = true;
             }
         }
+
         return exitService;
     }
 }
