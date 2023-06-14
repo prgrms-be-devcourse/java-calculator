@@ -41,7 +41,7 @@ class CalculationRepositoryTest {
     }
 
     @Test
-    @DisplayName("CalculationRepository에서 CalculationResult 값들을 잘 가져오는지 확인하는 테스트")
+    @DisplayName("Calculation Repository에서 CalculationResult 값들을 잘 가져오는지 확인하는 테스트")
     void findAll() {
         String expression1 = "3 + 5 * 2";
         Integer answer1 = 13;

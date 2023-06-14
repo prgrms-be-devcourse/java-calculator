@@ -2,7 +2,6 @@ package calculator.util.converter;
 
 import calculator.model.Operation;
 import calculator.util.ExpressionConverter;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -13,8 +12,8 @@ public class InfixToPostfixConverter implements ExpressionConverter {
     private final Operation operation;
 
     private static final String EXPRESSION_DELIMITER = " ";
-    public static final String OPERATOR_REGEX = "[-*/+]";
-    public static final String OPERAND_REGEX = "^\\d+$";
+    private static final String OPERATOR_REGEX = "[-*/+]";
+    private static final String OPERAND_REGEX = "^\\d+$";
 
 
     public InfixToPostfixConverter(){
