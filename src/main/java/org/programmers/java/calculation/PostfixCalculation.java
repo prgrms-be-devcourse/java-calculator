@@ -27,6 +27,7 @@ public class PostfixCalculation {
             int num2 = Integer.parseInt(numberDeque.removeLast());
             int num1 = Integer.parseInt(numberDeque.removeLast());
 
+            Operator.checkDivideZero(operatorOrOperand, num2);
             numberDeque.add(String.valueOf(Operator.arithmeticExpression(operatorOrOperand, num1, num2)));
         }
     }

@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.programmers.java.calculation.Calculation;
 import org.programmers.java.calculation.InfixToPostfixConverter;
+import org.programmers.java.calculation.Operator;
 import org.programmers.java.calculation.PostfixCalculation;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CalculationTest {
 
@@ -57,5 +59,15 @@ public class CalculationTest {
                   Arguments.of(Arrays.asList("3", "5", "10", "-", "+"), "-2"),
                   Arguments.of(Arrays.asList("3", "10", "5", "/", "+"), "5")
           );
+     }
+
+     @Test
+     @DisplayName("0으로 나눌 때 예외가 발생")
+     void checkZeroDivide() {
+          // given
+          String operator = "/";
+
+          // when, then
+          assertThrows(IllegalArgumentException.class, () -> Operator.checkDivideZero(operator,0));
      }
 }

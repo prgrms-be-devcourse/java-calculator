@@ -44,4 +44,10 @@ public enum Operator {
     public static boolean isNumber(String inputNumber){
         return Pattern.matches("[0-9]+",inputNumber);
     }
+
+    public static void checkDivideZero(String symbol, int secondOperand){
+        if(symbol.equals("/") && secondOperand == 0){
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다");
+        }
+    }
 }
