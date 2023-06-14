@@ -16,7 +16,7 @@ public class Console implements Input, Output{
     @Override
     public String inputNum() {
         System.out.print("선택: ");
-        return sc.next();
+        return sc.nextLine();
     }
 
     @Override

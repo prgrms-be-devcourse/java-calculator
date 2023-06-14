@@ -66,10 +66,7 @@ public class Calculator {
                 console.printQuery(queryList);
                 break;
             case CALC:
-                // String formula = console.inputFormula();
-                // System.out.println("formula = " + formula); console.inputFormula()로 입력이 안됨 추후 리팩토링
-
-                String formula = sc.nextLine();
+                String formula = console.inputFormula();
                 // 입력된 연산식의 유효성 검증
                 if (!validator.validateCalculation(formula)) {
                     break;
