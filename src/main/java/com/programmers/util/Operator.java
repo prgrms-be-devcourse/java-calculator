@@ -40,11 +40,15 @@ public enum Operator {
         return operator;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
     public static int getPriority(char targetOperator) {
         String target = String.valueOf(targetOperator);
         for (Operator operator : Operator.values()) {
-            if (operator.equals(target)) {
-                return operator.priority;
+            if (operator.getOperator().equals(target)) {
+                return operator.getPriority();
             }
         }
         return 0;

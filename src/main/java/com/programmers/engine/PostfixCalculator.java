@@ -21,8 +21,6 @@ public class PostfixCalculator {
                 deque.push(Double.valueOf(cur));
             } else {
                 value2 = Double.valueOf(deque.pop());
-                if (value2 == 0)
-                    throw new DivideByZeroException();
                 value1 = Double.valueOf(deque.pop());
 
                 deque.push(Operator.operate(cur, value1, value2));
@@ -102,17 +100,17 @@ public class PostfixCalculator {
             }
             list.add(String.valueOf(opStack.pop()));
         }
-        return true;
+        return false;
     }
 
 
-    private int compareOperatorPriority(char target, char cur) {
-        int targetOperator = Operator.getPriority(target);
-        int currentOperator = Operator.getPriority(cur);
+    private int compareOperatorPriority(char stackOp, char curOp) {
+        int stackOpPriority = Operator.getPriority(stackOp);
+        int curOpPriority = Operator.getPriority(curOp);
 
-        if (targetOperator < currentOperator) {
+        if (stackOpPriority < curOpPriority) {
             return 1;
-        } else if (targetOperator == currentOperator) {
+        } else if (stackOpPriority == curOpPriority) {
             return 0;
         } else {
             return -1;
