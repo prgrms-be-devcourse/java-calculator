@@ -1,31 +1,31 @@
 package org.example;
 
-import org.example.Input.Type;
-import org.example.Input.UserType;
+import org.example.Input.Input;
+import org.example.Input.UserInput;
 import org.example.Output.Show;
 import org.example.Output.ShowText;
+import org.example.Repository.ExpressionRepository;
+import org.example.Repository.Repository;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     private static int choice;
     public static void main(String[] args) {
-        UserInterface userInterface = new UserInterfaceImpl();
         Repository repository = new ExpressionRepository();
-        Type type = new UserType();
+        Input input = new UserInput();
         CalOrder calculator = new Calculate();
         Show show = new ShowText();
 
         while (true) {
             show.showMenu();
-            choice = type.typeChoice();
+            choice = input.inputChoice();
             System.out.println();
             if (choice == 1) {
                 List<String> records = repository.getRecords();
-                userInterface.showRecords(records);
+                show.showRecords(records);
             } else {
-                String expression = type.typeExpression();
+                String expression = input.inputExpression();
                 calculator.getExpression(expression);
                 calculator.calculate();
             }
