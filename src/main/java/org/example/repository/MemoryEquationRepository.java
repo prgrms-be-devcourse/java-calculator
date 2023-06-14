@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class MemoryEquationRepository implements EquationRepository {
-    private List<String> saveList = new ArrayList<>();
+    private final List<String> savedEquations = new ArrayList<>();
 
     @Override
     public void save(String equation ,double answer) {
-        saveList.add(combineEquationAnswer(equation, answer));
+        savedEquations.add(combineEquationAnswer(equation, answer));
     }
 
     private String combineEquationAnswer(String equation, double answer) {
@@ -17,7 +17,6 @@ public class MemoryEquationRepository implements EquationRepository {
 
     @Override
     public String[] findAll() {
-        String[] resultArr = saveList.toArray(new String[saveList.size()]);
-        return resultArr;
+        return savedEquations.toArray(new String[savedEquations.size()]);
     }
 }

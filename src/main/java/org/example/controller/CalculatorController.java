@@ -15,10 +15,10 @@ import static org.example.util.Menu.EXIT;
 import static org.example.util.Menu.QUERY;
 
 public class CalculatorController implements Runnable{
-    private Compute compute;
-    private Input input;
-    private Output output;
-    private EquationRepository equationRepository;
+    private final Compute compute;
+    private final Input input;
+    private final Output output;
+    private final EquationRepository equationRepository;
 
     public CalculatorController(Compute compute, Input input, Output output, EquationRepository equationRepository) {
         this.compute = compute;
