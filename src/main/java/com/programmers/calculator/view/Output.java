@@ -6,8 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface Output {
-    void outputOption();
-    void outputExit();
-    void outputHistory(List<CalculationHistory> calculationHistories);
-    void outputCalculation(BigDecimal result);
+    void write(String message);
+    void write(List<CalculationHistory> calculationHistories);
+    void write(BigDecimal result);
 }

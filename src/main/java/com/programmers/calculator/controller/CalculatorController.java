@@ -3,29 +3,27 @@ package com.programmers.calculator.controller;
 import com.programmers.calculator.domain.Calculator;
 import com.programmers.calculator.repository.CalculationHistory;
 import com.programmers.calculator.repository.HistoryRepository;
-import com.programmers.calculator.view.Input;
-import com.programmers.calculator.view.Output;
+import com.programmers.calculator.view.Console;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class CalculatorController {
-    private final Input inputConsole;
-    private final Output outputConsole;
-    private final Calculator calculator;
-    private final HistoryRepository historyRepository;
 
-    public CalculatorController(Input inputConsole, Output outputConsole, Calculator calculator, HistoryRepository historyRepository) {
-        this.inputConsole = inputConsole;
-        this.outputConsole = outputConsole;
+    private final Console console;
+    private final Calculator calculator;
+    private final HistoryRepository repository;
+
+    public CalculatorController(Console console, Calculator calculator, HistoryRepository repository) {
+        this.console = console;
         this.calculator = calculator;
-        this.historyRepository = historyRepository;
+        this.repository = repository;
     }
 
     public void run() {
         while (true) {
-            outputConsole.outputOption();
-            OptionType inputValue = OptionType.of(inputConsole.inputOption());
+            console.outputOption();
+            OptionType inputValue = OptionType.of(console.inputOption());
 
             switch (inputValue) {
                 case EXIT:
@@ -38,31 +36,31 @@ public class CalculatorController {
                     saveCalculationResult(processCalculation());
                     break;
                 default:
-                    outputConsole.outputOption();
+                    console.outputOption();
             }
         }
     }
 
     private void exitCalculator() {
-        outputConsole.outputExit();
+        console.outputExit();
         System.exit(0);
     }
 
     private void loadCalculationHistory() {
-        List<CalculationHistory> calculationHistoryList = historyRepository.findAll();
-        outputConsole.outputHistory(calculationHistoryList);
+        List<CalculationHistory> calculationHistoryList = repository.findAll();
+        console.outputHistory(calculationHistoryList);
     }
 
     private CalculationHistory processCalculation() {
-        String inputExpression = inputConsole.inputExpression();
+        String inputExpression = console.inputExpression();
         BigDecimal result = calculator.calculate(inputExpression);
-        outputConsole.outputCalculation(result);
+        console.outputCalculation(result);
 
         return new CalculationHistory(inputExpression, result);
     }
 
     private void saveCalculationResult(CalculationHistory calculationHistory) {
-        historyRepository.save(calculationHistory);
+        repository.save(calculationHistory);
     }
 
 }
