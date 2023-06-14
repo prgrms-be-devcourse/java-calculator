@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -25,4 +26,15 @@ class CalculationResultTest {
         );
     }
 
+    @ParameterizedTest
+    @DisplayName("오버라이딩한 Calculation Result의 ToString 테스트")
+    @CsvSource({
+            "3 + 5, 8, 3 + 5 = 8",
+            "-2 * 1, -2, -2 * 1 = -2"
+    })
+    void testToString(String expression, Integer answer, String expectedResult) {
+        CalculationResult result = new CalculationResult(expression, answer);
+
+        Assertions.assertEquals(expectedResult, result.toString());
+    }
 }
