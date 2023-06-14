@@ -177,4 +177,20 @@ public class CalculatorTest {
         assertThatThrownBy(cal::calculate)
                 .isInstanceOf(ArithmeticException.class);
     }
+
+    //toString()
+    @Test
+    void toString_Then_InfixExpressionAndResult() {
+        //given
+        List<String> infixExpression = List.of("123", "+", "234");
+        Calculator calculator = new Calculator(infixExpression);
+        calculator.calculate();
+
+        //when
+        String calculation = calculator.toString();
+
+        //then
+        assertThat(calculation).isEqualTo("123 + 234 = 357");
+
+    }
 }

@@ -1,11 +1,12 @@
 package com.programmers.repository;
 
-import com.programmers.domain.model.Calculation;
+import com.programmers.domain.Calculator;
 
 import java.util.List;
 
 public interface CalculationRepository {
 
-    void save(Calculation calculation);
-    List<Calculation> findAll();
+    void save(Calculator calculation);
+
+    List<Calculator> findAll();
 }

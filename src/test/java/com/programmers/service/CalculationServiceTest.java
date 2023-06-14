@@ -1,10 +1,9 @@
 package com.programmers.service;
 
-import com.programmers.domain.model.Calculation;
+import com.programmers.domain.Calculator;
 import com.programmers.io.Console;
 import com.programmers.repository.CalculationMemoryRepository;
 import com.programmers.repository.CalculationRepository;
-import com.programmers.util.CalculatiorTestUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.programmers.util.CalculatiorTestUtil.createCalculation;
+import static com.programmers.util.CalculatorTestUtil.createCalculation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -68,23 +67,23 @@ public class CalculationServiceTest {
         calculatorService.calculate(inputA);
 
         //then
-        List<Calculation> result = calculationRepository.findAll();
+        List<Calculator> result = calculationRepository.findAll();
 
-        Calculation expected = createCalculation("1 + 2 + 3", 6);
+        Calculator expected = createCalculation("1 + 2 + 3");
         assertThat(result).containsExactly(expected);
     }
 
     @Test
     void findCalculations() {
         //given
-        Calculation calculationA = createCalculation("1 + 2 + 3", 6);
-        Calculation calculationB = createCalculation("1 * 2 - 3", -1);
+        Calculator calculationA = createCalculation("1 + 2 + 3");
+        Calculator calculationB = createCalculation("1 * 2 - 3");
 
         calculationRepository.save(calculationA);
         calculationRepository.save(calculationB);
 
         //when
-        List<Calculation> resultA = calculatorService.findCalculations();
+        List<Calculator> resultA = calculatorService.findCalculations();
 
         //then
         assertThat(resultA).containsExactly(calculationA, calculationB);
