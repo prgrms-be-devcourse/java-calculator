@@ -1,18 +1,24 @@
 package org.example;
 
+import org.example.Input.Type;
+import org.example.Input.UserType;
+import org.example.Output.Show;
+import org.example.Output.ShowText;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static int choice;
     public static void main(String[] args) {
-
         UserInterface userInterface = new UserInterfaceImpl();
         Type type = new UserType();
         CalOrder calculator = new Calculate();
+        Show show = new ShowText();
 
         while (true) {
-            choice = getChoice();
+            show.showMenu();
+            choice = type.typeChoice();
             System.out.println();
             if (choice == 1) {
                 userInterface.showRecord();
@@ -24,7 +30,4 @@ public class Main {
             System.out.println();
         }
     }
-
-        System.out.println("1. 조회\n2. 계산\n");
-        System.out.print("선택 : ");
 }
