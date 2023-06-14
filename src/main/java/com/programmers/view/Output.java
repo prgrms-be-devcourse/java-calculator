@@ -2,6 +2,7 @@ package com.programmers.view;
 
 import com.programmers.domain.Menu;
 import com.programmers.dto.ExpressionResult;
+import com.programmers.error.ConsoleMessage;
 
 import java.util.List;
 
@@ -9,7 +10,6 @@ import java.util.List;
  * 출력
  */
 public class Output {
-    private static final String FINISHMESSAGE = "계산기를 종료합니다.";
 
     public static void printMenu() {
         for (Menu menu : Menu.values()) {
@@ -24,8 +24,12 @@ public class Output {
         System.out.println(result + "\n");
     }
 
-    public static void printMessage(String message){
+    public static void printMessage(ConsoleMessage message){
         System.out.println(message);
+    }
+
+    public static void printNewLine(){
+        System.out.println();
     }
 
     //조회 출력

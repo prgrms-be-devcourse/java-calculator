@@ -6,6 +6,8 @@ import com.programmers.service.CalculatorService;
 import com.programmers.view.Input;
 import com.programmers.view.Output;
 
+import static com.programmers.error.ConsoleMessage.INPUT_RETRY_MESSAGE;
+
 public class CalculatorController {
 
     private final CalculatorService calculatorService;
@@ -43,7 +45,7 @@ public class CalculatorController {
                 Output.printResult(result);
                 calculationSuccessful = true;
             } catch (CalculatorException e) {
-                System.out.println("다시 입력하세요.");
+                Output.printMessage(INPUT_RETRY_MESSAGE);
             }
         }
     }
