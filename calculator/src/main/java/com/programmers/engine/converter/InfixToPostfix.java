@@ -40,7 +40,6 @@ public class InfixToPostfix {
     while (!operatorStack.isEmpty()) {
       postfixStringBuilder.append(operatorStack.pop());
     }
-
     return postfixStringBuilder.toString();
   }
 

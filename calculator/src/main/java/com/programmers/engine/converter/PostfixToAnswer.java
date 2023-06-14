@@ -26,7 +26,6 @@ public class PostfixToAnswer {
         operandStack.push(result);
       }
     }
-
     return operandStack.pop();
   }
 

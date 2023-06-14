@@ -20,6 +20,4 @@ public class CalculationFormula {
     System.out.println(answer + "\n");
     history.save(infix, answer);
   }
-
-
 }
