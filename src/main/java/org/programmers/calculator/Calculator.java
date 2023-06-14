@@ -20,12 +20,23 @@ public class Calculator {
 
     private final Scanner sc = new Scanner(System.in);
 
+    private boolean isRunning;
+
 
     public Calculator(Console console, ExpressionEvaluator expressionEvaluator, CalRepository calRepository) {
         this.console = console;
         this.validator = new Validator(console);
         this.expressionEvaluator = expressionEvaluator;
         this.calRepository = calRepository;
+    }
+
+    public boolean getRunning() {
+        return isRunning;
+    }
+
+
+    public void setRunning(boolean running) {
+        isRunning = running;
     }
 
 
@@ -41,31 +52,9 @@ public class Calculator {
                 continue;
             }
 
-
-            switch (option) {
-                case QUERY:
-                    Map<Long, String> queryList = calRepository.getQueryList();
-                    console.printQuery(queryList);
-                    break;
-                case CALC:
-                    // String formula = console.inputFormula();
-                    // System.out.println("formula = " + formula); console.inputFormula()로 입력이 안됨 추후 리팩토링
-
-                    String formula = sc.nextLine();
-                    // 입력된 연산식의 유효성 검증
-                    if (!validator.validateCalculation(formula)) {
-                        break;
-                    }
-                    String result = expressionEvaluator.requestCalculate(formula);
-                    console.printCal(result);
-                    calRepository.save(formula, result);
-                    break;
-                case EXIT:
-                    isRunning = false;
-                    System.out.println("계산기 종료");
-                    break;
-            }
-
+            // 분기
+            extracted(option);
+            // 1. method flow control -> flag, early return
         }
     }
 
