@@ -25,7 +25,7 @@ public class Processor {
     private void doService() throws RuntimeException {
         view.printInfoMessage();
         switch (getCommand()) {
-            case HISTORY_COMMAND -> viewLogs();
+            case HISTORY_COMMAND -> viewHistory();
             case CALCULATE_COMMAND -> doCalculation();
         }
     }
@@ -37,7 +37,7 @@ public class Processor {
         return command;
     }
 
-    private void viewLogs() {
+    private void viewHistory() {
         String history = historyStorage.loadAll();
         view.printHistory(history);
         view.printNewLine();
