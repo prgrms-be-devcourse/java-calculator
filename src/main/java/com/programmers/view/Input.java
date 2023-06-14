@@ -19,7 +19,7 @@ public class Input {
         int menuNum;
 
         try {
-            String menuString = Validator.removeWhiteSpace(scanner.nextLine());
+            String menuString = removeWhiteSpace(scanner.nextLine());
             menuNum = Validator.checkInteger(menuString);
         } catch (NumberFormatException e) {
             System.out.print(NOTINTEGERMESSAGE);
@@ -40,7 +40,7 @@ public class Input {
         String expression = scanner.nextLine();
 
         //공백 제거
-        expression = Validator.removeWhiteSpace(expression);
+        expression = removeWhiteSpace(expression);
 
         //사칙연산(+,-,*,/)과 숫자만으로 구성되어 있는지 확인
         if (!Validator.checkValidArithmeticExpression(expression)) {
@@ -49,5 +49,11 @@ public class Input {
         }
 
         return expression;
+    }
+
+
+    //공백 제거
+    public static String removeWhiteSpace(String input) {
+        return input.replaceAll("\\s+", "");
     }
 }
