@@ -28,6 +28,7 @@ public enum ViewMessage {
                 .filter(elem -> !elem.equals(ViewMessage.SELECT_COMMAND))
                 .map(ViewMessage::getMessage)
                 .collect(Collectors.joining("\n"));
+
         return sb.append(infoMessage)
                 .append("\n\n")
                 .append(SELECT_COMMAND.getMessage())
@@ -36,6 +37,7 @@ public enum ViewMessage {
 
     public static ViewMessage getViewMessage(String input) {
         int command = Integer.parseInt(input);
+
         return Arrays.stream(values())
                 .filter(cmd -> cmd.getCommandNumber() == command)
                 .findFirst()

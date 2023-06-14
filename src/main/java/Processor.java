@@ -33,6 +33,7 @@ public class Processor {
     private ViewMessage getCommand() throws RuntimeException {
         ViewMessage command = view.commandReader();
         view.printNewLine();
+
         return command;
     }
 

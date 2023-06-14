@@ -22,6 +22,7 @@ public class Calculator {
             }
             calculateIfOperatorNotEmpty(expressionComponent);
         }
+
         return makeFinalCalculation();
     }
 
@@ -51,6 +52,7 @@ public class Calculator {
         Operator currentOperator = operatorStack.pop();
         int rightNumber = operandStack.pop();
         int leftNumber = operandStack.pop();
+
         return String.valueOf(currentOperator.applyCalculate(leftNumber, rightNumber));
     }
 }

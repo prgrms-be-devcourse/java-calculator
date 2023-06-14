@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class View {
+    private static final int ONE_LENGTH = 1;
+    private static final String NORMAL_EXPRESSION = "^\\d+([+\\-*/]\\d+)*$";
     private final Scanner scanner;
 
     public View() {
@@ -36,6 +38,7 @@ public class View {
     public ViewMessage commandReader() {
         try {
             String input = scanner.nextLine();
+
             return ViewMessage.getViewMessage(input);
         } catch (RuntimeException e) {
             throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
@@ -46,6 +49,7 @@ public class View {
         try {
             String expression = removeWhiteSpace(scanner.nextLine());
             checkIsValidExpression(expression);
+
             return expression;
         } catch (IllegalExpressionException e) {
             throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
@@ -57,7 +61,7 @@ public class View {
     }
 
     private void checkIsValidExpression(String expression) {
-        if (expression.length() == 1 || !Pattern.matches("^\\d+([+\\-*/]\\d+)*$", expression)) {
+        if (expression.length() == ONE_LENGTH || !Pattern.matches(NORMAL_EXPRESSION, expression)) {
             throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
         }
     }
