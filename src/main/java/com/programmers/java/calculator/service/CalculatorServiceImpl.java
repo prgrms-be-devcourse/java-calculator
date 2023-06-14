@@ -8,17 +8,17 @@ import java.util.List;
 
 public class CalculatorServiceImpl implements CalculatorService {
 
-    private final Converter converter;
+    private final Converter<String, String> converter;
     private final CalculatorRepository calculatorRepository;
 
-    public CalculatorServiceImpl(Converter converter, CalculatorRepository calculatorRepository) {
+    public CalculatorServiceImpl(Converter<String, String> converter, CalculatorRepository calculatorRepository) {
         this.converter = converter;
         this.calculatorRepository = calculatorRepository;
     }
 
     @Override
     public String calculate(String expression) {
-        String result = (String) converter.convert(expression);
+        String result = converter.convert(expression);
         calculatorRepository.save(expression, result);
         return result;
     }

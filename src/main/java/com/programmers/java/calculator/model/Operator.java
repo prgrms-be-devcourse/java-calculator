@@ -3,7 +3,7 @@ package com.programmers.java.calculator.model;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Map;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,9 +17,9 @@ public enum Operator {
 
     private final String symbol;
     private final int priority;
-    private final BiFunction<BigDecimal, BigDecimal, BigDecimal> function;
+    private final BinaryOperator<BigDecimal> function;
 
-    Operator(String symbol, int priority, BiFunction<BigDecimal, BigDecimal, BigDecimal> function) {
+    Operator(String symbol, int priority, BinaryOperator<BigDecimal> function) {
         this.symbol = symbol;
         this.priority = priority;
         this.function = function;
