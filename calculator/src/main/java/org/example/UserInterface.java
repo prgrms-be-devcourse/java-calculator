@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 public interface UserInterface {
-    void showRecords();
+    void showRecords(List<String> records);
 }
