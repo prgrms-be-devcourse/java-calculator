@@ -2,14 +2,15 @@ package com.programmers.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class History {
 
   private final Map<Integer, String> history = new HashMap<>();
-  private int index = 0;
+  AtomicInteger index = new AtomicInteger();
 
   public void save(String formula, double answer) {
-    history.put(++index, formula + " = " + answer);
+    history.put(index.addAndGet(1), formula + " = " + answer);
   }
 
   public void showHistory() {
