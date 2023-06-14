@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class PostfixCalculator implements BasicCalculator{
 
-    public static final String OPERATOR_REGEX = "[-*/+]";
+    private static final String OPERATOR_REGEX = "[-*/+]";
 
     @Override
     public Integer calculate(List<String> expression) {

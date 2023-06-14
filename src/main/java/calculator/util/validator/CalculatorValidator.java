@@ -5,13 +5,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class CalculatorValidator {
-    public static final String OPERATOR_REGEX = "[-*/+]";
-    public static final String OPERAND_REGEX = "^(0|[-]?[1-9]\\d*)$";
+    private static final String OPERATOR_REGEX = "[-*/+]";
+    private static final String OPERAND_REGEX = "^(0|[-]?[1-9]\\d*)$";
 
-    public static final int MINIMUM_OPS = 3;
+    private static final int MINIMUM_OPS = 3;
+    private static final int FIRST_INDEX = 0;
+
 
     public static boolean isValidExpression(String expression){
-        AtomicInteger index = new AtomicInteger(0);
+        AtomicInteger index = new AtomicInteger(FIRST_INDEX);
         long countOfValidOps = Arrays.stream(expression.split(" "))
                 .filter(e -> isEvenNumber(index) ? e.matches(OPERAND_REGEX) : e.matches(OPERATOR_REGEX))
                 .count();

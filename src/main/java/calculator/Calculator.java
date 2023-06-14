@@ -19,13 +19,13 @@ public class Calculator implements Runnable {
     private final Output output;
     private final CalculationRepository calculationRepository;
 
-    public static final String MENU_INPUT_ERROR = "메뉴가 올바르게 입력되지 않았습니다.";
-    public static final String INVALID_INPUT_EXPRESSION = "올바른 수식 표현이 아닙니다.";
-    public static final char REQUEST_EXIT = '0';
-    public static final char REQUEST_VIEW_CALCULATION_RESULT = '1';
-    public static final char REQUEST_CALCULATION = '2';
-    public static final String CHOICE_PROMPT = "\n선택 : ";
-    public static final int FIRST_INDEX = 0;
+    private static final String MENU_INPUT_ERROR = "메뉴가 올바르게 입력되지 않았습니다.";
+    private static final String INVALID_INPUT_EXPRESSION = "올바른 수식 표현이 아닙니다.";
+    private static final char REQUEST_EXIT = '0';
+    private static final char REQUEST_VIEW_CALCULATION_RESULT = '1';
+    private static final char REQUEST_CALCULATION = '2';
+    private static final String CHOICE_PROMPT = "\n선택 : ";
+    private static final int FIRST_INDEX = 0;
 
     public Calculator(BasicCalculator calculator, ExpressionConverter expressionConverter, Input input, Output output, CalculationRepository calculationRepository) {
         this.calculator = calculator;

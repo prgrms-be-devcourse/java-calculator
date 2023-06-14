@@ -10,11 +10,11 @@ import java.util.function.BiFunction;
 public class Operation {
     private static final Map<String, Operator> operatorMap = new HashMap<>();
 
-    public static final Integer LOW = 0;
-    public static final Integer HIGH = 1;
+    private static final Integer LOW = 0;
+    private static final Integer HIGH = 1;
 
-    public static final String OPERATOR_INPUT_ERROR = "연산자 입력에 오류가 발생했습니다.";
-    public static final String INVALID_OPERAND = "올바른 피연산자가 아닙니다.";
+    private static final String OPERATOR_INPUT_ERROR = "연산자 입력에 오류가 발생했습니다.";
+    private static final String INVALID_OPERAND = "올바른 피연산자가 아닙니다.";
 
     private Operation(){
         Arrays.stream(Operator.values())
