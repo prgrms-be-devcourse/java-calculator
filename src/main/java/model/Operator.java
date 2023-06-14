@@ -3,7 +3,7 @@ package model;
 import exception.NoSuchOperatorException;
 
 
-import java.util.*;
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -33,7 +33,7 @@ public enum Operator {
         return precedence;
     }
 
-    public int applyCalculate(int num1, int num2) {
-        return expression.apply(num1, num2);
+    public int applyCalculate(int leftOperand, int rightOperand) {
+        return expression.apply(leftOperand, rightOperand);
     }
 }

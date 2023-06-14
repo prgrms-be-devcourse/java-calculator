@@ -2,11 +2,15 @@ package view;
 
 import exception.IllegalExpressionException;
 import exception.NoSuchCommandException;
+import util.ParsingUtils;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class View {
+    private static final String HISTORY_MESSAGE = "1. 조회";
+    private static final String CALCULATE_MESSAGE = "2. 계산";
+    private static final String SELECT_MESSAGE = "선택 : ";
     private static final int ONE_LENGTH = 1;
     private static final String NORMAL_EXPRESSION = "^\\d+([+\\-*/]\\d+)*$";
     private final Scanner scanner;
@@ -16,7 +20,13 @@ public class View {
     }
 
     public void printInfoMessage() {
-        System.out.print(ViewMessage.getFormattedMessage());
+        System.out.print(getFormattedMessage());
+    }
+
+    private String getFormattedMessage() {
+        return HISTORY_MESSAGE + '\n' +
+                CALCULATE_MESSAGE + "\n\n" +
+                SELECT_MESSAGE;
     }
 
     public void printCalculationResult(String result) {
@@ -35,11 +45,11 @@ public class View {
         System.out.println();
     }
 
-    public ViewMessage commandReader() {
+    public Command commandReader() {
         try {
             String input = scanner.nextLine();
 
-            return ViewMessage.getViewMessage(input);
+            return Command.resolveCommand(ParsingUtils.parseStringToInteger(input));
         } catch (RuntimeException e) {
             throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
         }
