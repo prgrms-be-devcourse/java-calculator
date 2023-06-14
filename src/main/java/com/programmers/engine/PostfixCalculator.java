@@ -1,6 +1,7 @@
 package com.programmers.engine;
 
 import com.programmers.exception.DivideByZeroException;
+import com.programmers.exception.EquationFormatException;
 import com.programmers.util.Operator;
 
 import java.util.*;
@@ -19,12 +20,13 @@ public class PostfixCalculator {
             cur = postfix.get(i);
             if (!Operator.contains(cur)) {
                 deque.push(Double.valueOf(cur));
-            } else {
-                value2 = Double.valueOf(deque.pop());
-                value1 = Double.valueOf(deque.pop());
-
-                deque.push(Operator.operate(cur, value1, value2));
+                continue;
             }
+            value2 = Double.valueOf(deque.pop());
+            if (value2 == 0) throw new EquationFormatException();
+            value1 = Double.valueOf(deque.pop());
+            deque.push(Operator.operate(cur, value1, value2));
+
         }
         return deque.pop();
     }
@@ -41,17 +43,15 @@ public class PostfixCalculator {
             if (Character.isDigit(cur)) {
                 sb.append(cur);
                 if (i == infix.length() - 1) postfix.add(sb.toString());
-            } else if (opStack.isEmpty()) {
-                if (sb.length() > 0) {
-                    postfix.add(sb.toString());
-                    sb.setLength(0);
-                }
+                continue;
+            }
+            if (opStack.isEmpty()) {
+                addAndReset(postfix, sb);
                 opStack.push(cur);
-            } else {
-                if (sb.length() > 0) {
-                    postfix.add(sb.toString());
-                    sb.setLength(0);
-                }
+                continue;
+            }
+            else {
+                addAndReset(postfix, sb);
                 if (cur == '(') {
                     opStack.push(cur);
                     continue;
@@ -75,9 +75,16 @@ public class PostfixCalculator {
                 }
             }
         }
-        if (!opStack.isEmpty()) stackPop(postfix,' ');
+        if (!opStack.isEmpty()) stackPop(postfix, ' ');
 
         return calculate(postfix);
+    }
+
+    private void addAndReset(List<String> postfix, StringBuilder sb) {
+        if (sb.length() > 0) {
+            postfix.add(sb.toString());
+            sb.setLength(0);
+        }
     }
 
     private void stackPop(List<String> list, char oper) {

@@ -42,11 +42,8 @@ public class CalculatorController {
             doCalculate();
 
             // 종료
-        } else if (menu == Menu.END) {
-            stop();
-
         } else {
-            throw new MenuFormatException();
+            stop();
         }
     }
 

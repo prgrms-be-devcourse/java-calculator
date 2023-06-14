@@ -1,5 +1,7 @@
 package com.programmers.util;
 
+import com.programmers.exception.MenuFormatException;
+
 import java.util.Arrays;
 
 public enum Menu {
@@ -27,7 +29,7 @@ public enum Menu {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.getNumber().equals(request))
                 .findAny()
-                .orElseThrow();
+                .orElseThrow(()-> new MenuFormatException());
     }
 
 

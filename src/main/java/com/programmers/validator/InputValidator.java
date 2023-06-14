@@ -2,10 +2,10 @@ package com.programmers.validator;
 
 import com.programmers.exception.EquationFormatException;
 import com.programmers.exception.MenuFormatException;
+import com.programmers.util.Operator;
 
 public class InputValidator {
     private static final String BRACKET = "[^\\(\\)]+";
-    private static final String OP_WITH_BRACKET = "+-*/()";
     private static final String OPERATOR = "+-*/";
     private static final String NUMBER = "[0-9]+";
 
@@ -51,7 +51,7 @@ public class InputValidator {
         String equation = _equation.replaceAll(NUMBER, "");
         String[] equationArr = equation.split("");
         for (int i = 0; i < equationArr.length; i++) {
-            if (!OP_WITH_BRACKET.contains(equationArr[i])) {
+            if (!Operator.contains(equationArr[i])) {
                 throw new EquationFormatException();
             }
         }
