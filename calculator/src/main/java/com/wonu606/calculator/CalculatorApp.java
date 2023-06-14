@@ -4,12 +4,11 @@ import com.wonu606.app.App;
 import com.wonu606.calculator.storage.Persistence;
 import com.wonu606.calculator.storage.ResultStore;
 import com.wonu606.calculator.strategy.CalculatorStrategy;
+import com.wonu606.calculator.util.CalculatorMessage;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
-import com.wonu606.calculator.util.CalculatorMessage;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class CalculatorApp implements App {
 

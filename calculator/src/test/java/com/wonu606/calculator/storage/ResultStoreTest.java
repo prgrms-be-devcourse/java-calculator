@@ -1,11 +1,9 @@
-package com.wonu606.storage;
+package com.wonu606.calculator.storage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.wonu606.calculator.model.CalculationResult;
-import com.wonu606.calculator.storage.Persistence;
-import com.wonu606.calculator.storage.ResultStore;
 import com.wonu606.calculator.util.CalculatorMessage;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ResultStoreTest {
+
     @Test
     @DisplayName("저장")
     void testSave() {

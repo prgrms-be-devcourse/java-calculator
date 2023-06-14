@@ -1,9 +1,7 @@
-package com.wonu606.validator;
+package com.wonu606.calculator.validator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.wonu606.calculator.validator.InfixValidator;
-import com.wonu606.calculator.validator.Validator;
 import org.junit.jupiter.api.Test;
 
 public class InfixValidatorTest {

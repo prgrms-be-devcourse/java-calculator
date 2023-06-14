@@ -1,9 +1,7 @@
-package com.wonu606.calculator;
+package com.wonu606.calculator.calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.wonu606.calculator.calculator.Calculator;
-import com.wonu606.calculator.calculator.PostfixCalculator;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

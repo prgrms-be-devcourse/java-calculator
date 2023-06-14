@@ -3,7 +3,7 @@ package com.wonu606.calculator.model;
 import com.wonu606.calculator.util.CalculatorMessage;
 
 public enum Operator {
-    ADD("+", 2){
+    ADD("+", 2) {
         @Override
         public double apply(double a, double b) {
             return a + b;
@@ -39,8 +39,6 @@ public enum Operator {
         this.precedence = precedence;
     }
 
-    public abstract double apply(double a, double b);
-
     public static Operator get(String symbol) {
         for (Operator operator : values()) {
             if (operator.symbol.equals(symbol)) {
@@ -49,4 +47,6 @@ public enum Operator {
         }
         return null;
     }
+
+    public abstract double apply(double a, double b);
 }

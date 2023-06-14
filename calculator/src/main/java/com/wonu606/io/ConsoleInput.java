@@ -1,6 +1,5 @@
 package com.wonu606.io;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleInput implements Input {

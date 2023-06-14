@@ -2,11 +2,10 @@ package com.wonu606;
 
 import com.wonu606.app.App;
 import com.wonu606.calculator.CalculatorApp;
+import com.wonu606.io.ConsoleInput;
 import com.wonu606.io.ConsolePrinter;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
-import com.wonu606.io.ConsoleInput;
-import java.io.IOException;
 
 public class Main {
 
