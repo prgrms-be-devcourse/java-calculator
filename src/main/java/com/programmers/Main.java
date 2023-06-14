@@ -6,8 +6,9 @@ import com.programmers.service.CalculatorService;
 
 public class Main {
     public static void main(String[] args) {
-
-        CalculatorController controller = new CalculatorController(new CalculatorService(new CalculatorRepository()));
+        CalculatorRepository calculatorRepository = new CalculatorRepository();
+        CalculatorService calculatorService = new CalculatorService(calculatorRepository);
+        CalculatorController controller = new CalculatorController(calculatorService);
         controller.run();
     }
 }
