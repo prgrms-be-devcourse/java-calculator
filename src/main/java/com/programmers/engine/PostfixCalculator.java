@@ -2,48 +2,46 @@ package com.programmers.engine;
 
 import com.programmers.exception.DivideByZeroException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class PostfixCalculator {
     private final String operators = "+-/*()";
-    private final Stack<Character> opStack = new Stack<>();
+    private final Deque<Character> opStack = new ArrayDeque<>();
 
     private double calculate(List<String> postfix) {
 
-        Stack<Double> stack = new Stack<>();
+        Deque<Double> deque = new ArrayDeque<>();
         String cur = "";
         double value1, value2;
 
         for (int i = 0; i < postfix.size(); i++) {
             cur = postfix.get(i);
             if (!operators.contains(cur)) {
-                stack.push(Double.valueOf(cur));
+                deque.push(Double.valueOf(cur));
             } else {
-                value2 = Double.valueOf(stack.pop());
-                value1 = Double.valueOf(stack.pop());
+                value2 = Double.valueOf(deque.pop());
+                value1 = Double.valueOf(deque.pop());
 
                 switch (cur) {
                     // 스택에서 거꾸로 뽑기 때문에 value2를 먼저
                     case "+":
-                        stack.push(value1 + value2);
+                        deque.push(value1 + value2);
                         break;
                     case "-":
-                        stack.push(value1 - value2);
+                        deque.push(value1 - value2);
                         break;
                     case "*":
-                        stack.push(value1 * value2);
+                        deque.push(value1 * value2);
                         break;
                     case "/":
                         if (value2 == 0) throw new DivideByZeroException();
-                        stack.push(value1 / value2);
+                        deque.push(value1 / value2);
                         break;
                 }
             }
         }
-        return stack.pop();
+        return deque.pop();
     }
 
     public double infixToPostfix(String infix) {
@@ -111,12 +109,10 @@ public class PostfixCalculator {
                 opStack.pop();
                 return false;
             }
-
             if (data instanceof Character) {
                 list.add(String.valueOf(opStack.pop()));
                 return true;
             }
-
             list.add(String.valueOf(opStack.pop()));
         }
         return true;

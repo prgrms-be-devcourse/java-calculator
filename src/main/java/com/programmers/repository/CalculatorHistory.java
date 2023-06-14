@@ -22,7 +22,6 @@ public class CalculatorHistory {
         storage.keySet().forEach(key -> {
             double answer = storage.get(key);
             sb.append(key).append(" = ").append(answer).append("\n");
-
         });
         return sb.toString();
     }
