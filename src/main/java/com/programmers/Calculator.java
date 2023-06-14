@@ -2,21 +2,20 @@ package com.programmers;
 
 import com.programmers.core.Converter;
 import com.programmers.core.Operators;
-import com.programmers.core.PostfixConverter;
+import com.programmers.model.AbstractCalculator;
 import com.programmers.util.StringUtil;
 
 import java.util.List;
 import java.util.Stack;
 
-public class Calculator {
+public class Calculator implements AbstractCalculator {
     private final Converter converter;
-    private final String formula;
 
-    public Calculator(String formula) {
-        this.formula = formula;
-        this.converter = new PostfixConverter();
+    public Calculator(Converter converter) {
+        this.converter = converter;
     }
 
+    @Override
     public long calculate(String formula) {
         List<String> postfix = converter.convert(formula);
         return calculatePostfixFormula(postfix);
