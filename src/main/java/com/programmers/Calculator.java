@@ -1,5 +1,6 @@
 package com.programmers;
 
+import com.programmers.core.Converter;
 import com.programmers.core.Operators;
 import com.programmers.core.PostfixConverter;
 import com.programmers.util.StringUtil;
@@ -8,15 +9,16 @@ import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
-
+    private final Converter converter;
     private final String formula;
 
     public Calculator(String formula) {
         this.formula = formula;
+        this.converter = new PostfixConverter();
     }
 
     public long calculate(String formula) {
-        List<String> postfix = PostfixConverter.convert(formula);
+        List<String> postfix = converter.convert(formula);
         return calculatePostfixFormula(postfix);
     }
 

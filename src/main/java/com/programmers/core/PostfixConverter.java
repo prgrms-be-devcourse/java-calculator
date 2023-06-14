@@ -1,30 +1,56 @@
 package com.programmers.core;
 
+import com.programmers.util.StringUtil;
+import com.programmers.util.Validator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostfixConverter {
+public class PostfixConverter implements Converter {
     private static final String SEPARATOR = " ";
 
-    public static List<String> convert(String formula) {
+    @Override
+    public List<String> convert(String formula) {
         List<String> postfix = new ArrayList<>();
         String[] splitFormula = formula.split(SEPARATOR);
         Stack<String> stack = new Stack<>();
-        PostfixConverterHelper.checkEmptyFormula(splitFormula);
+        Validator.checkEmpty(splitFormula);
 
         for (int position = 0; position < splitFormula.length; position++) {
             String eachFormula = splitFormula[position];
 
-            if (PostfixConverterHelper.isOperatorPositionCheck(position)) {
-                PostfixConverterHelper.putOperator(eachFormula, postfix, stack);
+            if (Validator.isOperatorCheck(position)) {
+                putOperator(eachFormula, postfix, stack);
             } else {
-                PostfixConverterHelper.putOperand(eachFormula, postfix);
+                putOperand(eachFormula, postfix);
             }
         }
         while (!stack.isEmpty()) {
             postfix.add(stack.pop());
         }
         return postfix;
+    }
+
+    private void putOperator(String operator, List<String> postfix, Stack<String> operatorStack) {
+        if (!Operators.isOperator(operator)) ;
+
+        if (operatorStack.isEmpty() || Priority.isNewOperatorPriorityHigher(operator, operatorStack)) {
+            operatorStack.push(operator);
+            return;
+        }
+
+        while (!operatorStack.isEmpty() && Priority.isNewOperatorPriorityLower(operator, operatorStack)) {
+            postfix.add(operatorStack.pop());
+        }
+
+        operatorStack.push(operator);
+    }
+
+    private void putOperand(String operand, List<String> postfix) {
+        if (!StringUtil.isNumber(operand)) {
+            throw new NumberFormatException();
+        }
+        postfix.add(operand);
     }
 }
