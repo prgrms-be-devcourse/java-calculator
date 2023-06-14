@@ -4,8 +4,7 @@ import com.programmers.error.CalculatorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.programmers.error.ErrorMessage.NOT_INTEGER_EXCEPTION;
-import static com.programmers.error.ErrorMessage.NOT_MENU_OPTION;
+import static com.programmers.error.ErrorMessage.*;
 
 public class Validator {
 
@@ -33,11 +32,11 @@ public class Validator {
     }
 
     //식이 숫자와 사칙연산으로 이루어졌는지 확인
-    public static boolean checkValidArithmeticExpression(String expression) {
+    public static void checkValidArithmeticExpression(String expression) {
         String pattern = "^[0-9]+([+\\-*/][0-9]+)*$";
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher = regex.matcher(expression);
-        return matcher.matches();
+        if(!matcher.matches()) throw new CalculatorException(NOT_VALID_ARITHMETIC_EXPRESSION);
     }
 
     //연산자(+,-,*,/)인지 확인하는 함수
