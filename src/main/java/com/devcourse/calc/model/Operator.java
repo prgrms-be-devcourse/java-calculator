@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.function.BiFunction;
 
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum Operator implements Token {
@@ -18,7 +19,8 @@ public enum Operator implements Token {
         return number1 / number2;
     });
 
-    private static final Map<String, Operator> operators = Arrays.stream(values()).collect(toMap(operator -> operator.sign, operator -> operator));
+    private static final Map<String, Operator> operators = Arrays.stream(values())
+            .collect(toMap(operator -> operator.sign, identity()));
 
     private final String sign;
 

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum Menu {
@@ -14,7 +15,8 @@ public enum Menu {
     CALC(2, "계산", calculator -> calculator.calculate(Input.getFormula()));
 
     private static final String TO_STRING_TEMPLATE = "%d. %s";
-    public static final Map<Integer, Menu> menus = Arrays.stream(values()).collect(toMap(menu -> menu.number, menu -> menu));
+    public static final Map<Integer, Menu> menus = Arrays.stream(values())
+            .collect(toMap(menu -> menu.number, identity()));
 
     private final int number;
     private final String description;
