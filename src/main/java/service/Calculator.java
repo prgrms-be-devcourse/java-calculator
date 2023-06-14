@@ -6,8 +6,8 @@ import java.util.Stack;
 
 public class Calculator {
 
-    Operator PM;
-    Operator MD;
+    private Operator PM;
+    private Operator MD;
 
     public Calculator() {}
 
@@ -17,38 +17,38 @@ public class Calculator {
 
         int result = 0;
 
-        int[] numberArr = command.numberArr;
-        Operator[] optArr = command.optArr;
+        int[] numberArr = command.getNumberArr();
+        Operator[] optArr = command.getOptArr();
 
-        Stack<Integer> st = new Stack<>();
+        Stack<Integer> stack = new Stack<>();
 
-        for(int i = 0; i < command.optCount; i++) {
+        for(int i = 0; i < command.getOptCount(); i++) {
             // nums
-            stackPush(numberArr[i], st);
+            stackPush(numberArr[i], stack);
 
             // opts
             if(optArr[i].decideToCalculate()) {
-                result = PM.calculateOpt(result, st.peek());
+                result = PM.calculateOpt(result, stack.peek());
                 PM = optArr[i];
-                st.pop();
+                stack.pop();
                 continue;
             }
             MD = optArr[i];
         }
 
-        stackPush(numberArr[command.optCount], st);
+        stackPush(numberArr[command.getOptCount()], stack);
         // 마지막 command의 숫자까지 처리.
-        result = PM.calculateOpt(result, st.peek());
+        result = PM.calculateOpt(result, stack.peek());
         return result;
     }
 
-    private void stackPush(int number, Stack<Integer> st) {
-        if(st.isEmpty()) {
-            st.push(number);
+    private void stackPush(int number, Stack<Integer> stack) {
+        if(stack.isEmpty()) {
+            stack.push(number);
             return;
         }
-        int top = st.peek();
-        st.pop();
-        st.push(MD.calculateOpt(top, number));
+        int top = stack.peek();
+        stack.pop();
+        stack.push(MD.calculateOpt(top, number));
     }
 }

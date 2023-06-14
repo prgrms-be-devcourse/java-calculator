@@ -1,12 +1,14 @@
 package main.java.view;
 
+import main.java.domain.History;
 import main.java.domain.Menu;
-import main.java.repository.Repository;
 
-import static main.java.util.PrintOutMessage.EXIT_MESSAGE;
-import static main.java.view.ConsoleInput.scannerClose;
+import java.util.List;
 
 public class ConsoleOutput implements Output{
+
+    private static final String EXIT_MESSAGE = "EXIT calculate ..";
+    public static final String EMPTY_MESSAGE = "Repository is EMPTY!!";
 
     public static String printError(String error) {
         return "WRONG " + error + " ! PLEASE RE-TYPE!!";
@@ -15,7 +17,6 @@ public class ConsoleOutput implements Output{
     // 자원정리의 주체가 output이 돼도 되나?
     @Override
     public void exitProgram() {
-        scannerClose();
         System.out.println(EXIT_MESSAGE);
     }
 
@@ -24,16 +25,22 @@ public class ConsoleOutput implements Output{
         System.out.println(result);
     }
 
-    // 다형성 이용.
     @Override
-    public void showHistory(Repository repository) {
-        repository.showHistory();
+    public void showHistory(List<History> historyList) {
+        if(historyList.isEmpty()) {
+            System.out.println(EMPTY_MESSAGE);
+            return;
+        }
+        for(History historyEntity : historyList) {
+            System.out.println(historyEntity.getHistory());
+        }
     }
+
     @Override
-    public void printMenu() {
-        Menu[] menus = Menu.values();
-        for(int i = 1; i < menus.length; i++)
+    public void printMenu(Menu[] menus) {
+        for(int i = 1; i < menus.length; i++) {
             System.out.println(menus[i]);
+        }
         System.out.println(menus[0].getMenuName());
     }
 

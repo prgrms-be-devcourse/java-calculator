@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public enum Operator {
     PLUS("+", (a, b) -> (a + b)),
@@ -19,6 +20,10 @@ public enum Operator {
         this.biFunction = biFunction;
     }
 
+    public String getOptName() {
+        return optName;
+    }
+
     public boolean decideToCalculate() {
         if(this == PLUS || this == MINUS)
             return true;
@@ -31,10 +36,9 @@ public enum Operator {
 
     // for checking valid operator input.
     private static List<String> toStringArray(Operator[] operators) {
-        String[] optNames = new String[operators.length];
-        for(int i = 0; i < operators.length; i++)
-            optNames[i] = operators[i].optName;
-        return Arrays.asList(optNames);
+        return Arrays.stream(operators)
+                .map(Operator::getOptName)
+                .collect(Collectors.toList());
     }
 
     public static boolean isValidOperator(String comp) {

@@ -11,7 +11,7 @@ public enum Menu {
 
     private final int menuNum;
     private final String menuName;
-    public static int menuCount = 3;
+    public static final int menuCount = Menu.values().length - 1;
 
     Menu(int menuNum, String menuName) {
         this.menuNum = menuNum;

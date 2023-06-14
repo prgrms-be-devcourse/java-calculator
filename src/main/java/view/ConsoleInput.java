@@ -18,26 +18,25 @@ public class ConsoleInput implements Input{
     public static final int CALCULATEMENU = 2;
     public static final int EXITMENU = 0;
 
-    @Test
-    public Menu getMenuInput() throws IllegalArgumentException {
+    public Menu getMenuInput() {
         String line = scanner.nextLine();
         String[] lineArr = line.split(DELIMINATOR);
         String menuCandidate = lineArr[0];
         if (lineArr.length >= 2 || !isValidNumber(menuCandidate)
-                || Character.getNumericValue(menuCandidate.charAt(0)) >= Menu.menuCount
-                || Character.getNumericValue(menuCandidate.charAt(0)) < 0) {
+                || Integer.parseInt(menuCandidate) >= Menu.menuCount
+                || Integer.parseInt(menuCandidate) < 0) {
             throw new IllegalArgumentException(printError("MENU"));
         }
         return getMenu(Integer.parseInt(menuCandidate));
     }
 
-    @Test
-    public String[] getLineAndParse() throws IllegalArgumentException {
+    public String[] getLineAndParse() {
         String[] commandArr = scanner.nextLine().split(DELIMINATOR);
         if(!isValidCommand(commandArr))
             throw new IllegalArgumentException(printError("COMMAND"));
         return commandArr;
     }
+
     public static void scannerClose() {
         scanner.close();
     }

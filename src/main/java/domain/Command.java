@@ -4,10 +4,10 @@ import main.java.service.Operator;
 
 public class Command {
 
-    public String[] commandArr;
-    public int[] numberArr;
-    public Operator[] optArr;
-    public int optCount;
+    private String[] commandArr;
+    private int[] numberArr;
+    private Operator[] optArr;
+    private int optCount;
 
     public Command(String[] commandArr) {
         this.commandArr = commandArr;
@@ -18,8 +18,20 @@ public class Command {
         parseComamand();
     }
 
-    public String makeHistory(int result) {
-        return String.join(" ", this.commandArr) + " = " + result;
+    public String[] getCommandArr() {
+        return commandArr;
+    }
+
+    public int[] getNumberArr() {
+        return numberArr;
+    }
+
+    public Operator[] getOptArr() {
+        return optArr;
+    }
+
+    public int getOptCount() {
+        return optCount;
     }
 
     public void parseComamand() {

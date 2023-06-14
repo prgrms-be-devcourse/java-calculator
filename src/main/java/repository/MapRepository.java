@@ -1,33 +1,26 @@
 package main.java.repository;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import main.java.domain.History;
 
-import static main.java.util.PrintOutMessage.EMPTY_MESSAGE;
+import java.util.*;
 
-public class MapRepository implements Repository {
+public class MapRepository implements HistoryRepository {
 
-    int historyCount;
-    Map<Integer, String> mapRepository;
+    private int historyCount;
+    private Map<Integer, History> mapRepository;
     public MapRepository() {
         this.mapRepository = new LinkedHashMap<>();
         this.historyCount = 0;
     }
 
     @Override
-    public void saveHistory(String history) {
+    public void saveHistory(History history) {
         this.mapRepository.put(historyCount, history);
         historyCount++;
     };
 
     @Override
-    public void showHistory() {
-        Iterator iter = mapRepository.values().iterator();
-        if(!iter.hasNext())
-            System.out.println(EMPTY_MESSAGE);
-        while(iter.hasNext()) {
-            System.out.println(iter.next());
-        }
+    public List<History> getAllHistoryToList() {
+        return new ArrayList<>(mapRepository.values());
     }
 }

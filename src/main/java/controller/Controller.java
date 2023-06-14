@@ -1,8 +1,9 @@
 package main.java.controller;
 
 import main.java.domain.Command;
+import main.java.domain.History;
 import main.java.domain.Menu;
-import main.java.repository.Repository;
+import main.java.repository.HistoryRepository;
 import main.java.service.Calculator;
 import main.java.view.Input;
 import main.java.view.Output;
@@ -12,12 +13,12 @@ import static main.java.view.ConsoleInput.*;
 
 public class Controller {
 
-    private Input input;
-    private Output output;
-    private Calculator calculator;
-    private Repository repository;
+    private final Input input;
+    private final Output output;
+    private final Calculator calculator;
+    private final HistoryRepository repository;
 
-    public Controller(Input input, Output output, Calculator calculator, Repository repository) {
+    public Controller(Input input, Output output, Calculator calculator, HistoryRepository repository) {
         this.input = input;
         this.output = output;
         this.calculator = calculator;
@@ -25,31 +26,31 @@ public class Controller {
     }
 
     public void run() {
-        Menu menu;
-        Command command;
-        int result;
 
         while(true) {
             try {
-                output.printMenu();
+                output.printMenu(Menu.values());
                 // menu 객체로 만듦.
-                menu = input.getMenuInput();
+                Menu menu = input.getMenuInput();
 
                 switch (menu.getMenuNum()) {
                     case SHOWMENU:
-                        output.showHistory(repository);
+                        output.showHistory(repository.getAllHistoryToList());
                         break;
 
                     case CALCULATEMENU:
-                        command = new Command(input.getLineAndParse());
-//                        command.parseComamand();
-                        result = calculator.calculate(command);
+                        Command command = new Command(input.getLineAndParse());
+                        int result = calculator.calculate(command);
+
+                        // output에서 DTO
                         output.printResult(result);
-                        repository.saveHistory(command.makeHistory(result));
+                        History history = new History(command.getCommandArr(), result);
+                        repository.saveHistory(history);
                         break;
 
                     case EXITMENU:
                         output.exitProgram();
+                        scannerClose();
                         return;
                 }
             } catch (IllegalArgumentException e) {
@@ -57,8 +58,8 @@ public class Controller {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
+
     }
 
 }
