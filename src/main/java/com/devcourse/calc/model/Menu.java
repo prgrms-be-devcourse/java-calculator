@@ -20,9 +20,9 @@ public enum Menu {
 
     private final int number;
     private final String description;
-    private final Function<Calculator, Object> action;
+    private final Function<Calculator, Result> action;
 
-    Menu(int number, String description, Function<Calculator, Object> action) {
+    Menu(int number, String description, Function<Calculator, Result> action) {
         this.number = number;
         this.description = description;
         this.action = action;

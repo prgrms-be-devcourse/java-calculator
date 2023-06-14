@@ -4,11 +4,12 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
-public class CalculateRecord {
+public class CalculateRecord extends Result{
 
     private final List<History> histories;
 
     public CalculateRecord(List<History> histories) {
+        super();
         this.histories = histories;
     }
 

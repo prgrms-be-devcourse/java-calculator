@@ -27,12 +27,12 @@ public class Calculator {
         return repository.getAllHistories();
     }
 
-    public int calculate(String formula) {
+    public Result calculate(String formula) {
         List<Token> tokens = converter.convertFormula(formula);
         int result = calculate(tokens);
         saveCalculateHistory(formula, result);
 
-        return result;
+        return new Result(result);
     }
 
     private int calculate(List<Token> mathSymbols) {
