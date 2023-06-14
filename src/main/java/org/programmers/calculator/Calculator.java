@@ -25,7 +25,7 @@ public class Calculator {
 
     public Calculator(Console console, ExpressionEvaluator expressionEvaluator, CalRepository calRepository) {
         this.console = console;
-        this.validator = new Validator(console);
+        this.validator = validator;
         this.expressionEvaluator = expressionEvaluator;
         this.calRepository = calRepository;
     }
