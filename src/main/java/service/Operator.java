@@ -24,7 +24,7 @@ public enum Operator {
         return optName;
     }
 
-    public boolean decideToCalculate() {
+    public boolean isPlusOrMinus() {
         if(this == PLUS || this == MINUS)
             return true;
         return false;

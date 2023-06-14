@@ -24,10 +24,10 @@ public class Calculator {
 
         for(int i = 0; i < command.getOptCount(); i++) {
             // nums
-            stackPush(numberArr[i], stack);
+            calculateAndPush(numberArr[i], stack);
 
             // opts
-            if(optArr[i].decideToCalculate()) {
+            if(optArr[i].isPlusOrMinus()) {
                 result = PM.calculateOpt(result, stack.peek());
                 PM = optArr[i];
                 stack.pop();
@@ -36,13 +36,13 @@ public class Calculator {
             MD = optArr[i];
         }
 
-        stackPush(numberArr[command.getOptCount()], stack);
+        calculateAndPush(numberArr[command.getOptCount()], stack);
         // 마지막 command의 숫자까지 처리.
         result = PM.calculateOpt(result, stack.peek());
         return result;
     }
 
-    private void stackPush(int number, Stack<Integer> stack) {
+    private void calculateAndPush(int number, Stack<Integer> stack) {
         if(stack.isEmpty()) {
             stack.push(number);
             return;
