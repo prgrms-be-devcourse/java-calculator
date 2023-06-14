@@ -6,15 +6,13 @@ import org.example.io.Input;
 import org.example.io.Output;
 import org.example.calculator.Calculator;
 
-import java.io.IOException;
-
 public class CalculatorController {
   Calculator calculator = new Calculator();
   History history = new History();
 
-  final int HISTORY = 1;
-  final int CALCULATE = 2;
-  final int EXIT = 3;
+  public static final int HISTORY = 1;
+  public static final int CALCULATE = 2;
+  public static final int EXIT = 3;
 
   public void run() {
     while (true) {
