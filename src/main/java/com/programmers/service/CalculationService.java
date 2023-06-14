@@ -2,6 +2,7 @@ package com.programmers.service;
 
 import com.programmers.domain.Calculator;
 import com.programmers.domain.Tokenizer;
+import com.programmers.enumtype.ServiceSelection;
 import com.programmers.io.Input;
 import com.programmers.io.Output;
 import com.programmers.repository.CalculationRepository;
@@ -62,12 +63,17 @@ public class CalculationService implements Runnable {
 
     private boolean selectService(String selected) {
         boolean exitService = false;
-        switch (selected) {
-            case "1" -> {
+
+        ServiceSelection service = ServiceSelection.selectService(selected);
+        switch (service) {
+            case NOT_SELECTED -> {
+                output.inputError();
+            }
+            case LOOKUP_RECORDS -> {
                 List<String> findCalculations = findCalculations();
                 output.printResult(findCalculations);
             }
-            case "2" -> {
+            case CALCULATION -> {
                 String calculation = input.inputCalculation();
                 try {
                     int result = calculate(calculation);
@@ -76,11 +82,10 @@ public class CalculationService implements Runnable {
                     output.printError(ex);
                 }
             }
-            case "3" -> {
+            case EXIT_SERVICE -> {
                 output.exit();
                 exitService = true;
             }
-            default -> output.inputError();
         }
         return exitService;
     }
