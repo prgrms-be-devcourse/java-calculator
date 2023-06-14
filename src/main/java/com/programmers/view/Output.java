@@ -25,7 +25,7 @@ public class Output {
     }
 
     public static void printMessage(ConsoleMessage message){
-        System.out.println(message);
+        System.out.println(message.getMessage());
     }
 
     public static void printNewLine(){
