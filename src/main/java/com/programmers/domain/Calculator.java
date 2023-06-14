@@ -4,33 +4,47 @@ import com.programmers.enumtype.Operator;
 import com.programmers.util.Arithmetic;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 
 public class Calculator {
+    private final List<String> infixExpression;
+    private final List<String> postfixExpression;
+    private int result;
 
-    private final ExpressionValidator validator;
-    private final PostfixConverter postfixConverter;
+    public Calculator(List<String> infixExpression) {
+        this.infixExpression = infixExpression;
+        validateExpression();
 
-    public Calculator() {
-        validator = new ExpressionValidator();
-        postfixConverter = new PostfixConverter();
+        this.postfixExpression = PostfixConverter.convert(infixExpression);
+        this.result = 0;
     }
 
-    public int calculateInfixExpression(List<String> expression) {
-        validator.validate(expression);
-
-        List<String> postfixExpression = postfixConverter.convert(expression);
-
-        return calculatePostfixExpression(postfixExpression);
-    }
-
-    public int calculatePostfixExpression(List<String> expression) {
-        Stack<Integer> numbers = new Stack<>();
-        for (String expr : expression) {
-            numbers.push(processOperation(numbers, expr));
+    private void validateExpression() {
+        boolean numberTurn = true;
+        for (String expr : infixExpression) {
+            if (Arithmetic.isNumber(expr) && numberTurn) {
+                numberTurn = false;
+            } else if (Arithmetic.isOperator(expr) && !numberTurn) {
+                numberTurn = true;
+            } else {
+                throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
+            }
         }
 
-        return numbers.pop();
+        if (numberTurn) {
+            throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
+        }
+    }
+
+    public int calculate() {
+        Stack<Integer> numbers = new Stack<>();
+        for (String expr : postfixExpression) {
+            numbers.push(processOperation(numbers, expr));
+        }
+        result = numbers.pop();
+
+        return result;
     }
 
     private int processOperation(Stack<Integer> numbers, String token) {
@@ -43,5 +57,38 @@ public class Calculator {
 
     private int binaryOperate(int a, int b, String operator) {
         return Operator.binaryOperate(b, a, operator);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (String token : infixExpression) {
+            sb.append(token);
+            sb.append(" ");
+        }
+        sb.append("= ");
+        sb.append(result);
+
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Calculator that = (Calculator) o;
+        return result
+                == that.result
+                && Objects.equals(infixExpression, that.infixExpression)
+                && Objects.equals(postfixExpression, that.postfixExpression);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(infixExpression, postfixExpression, result);
     }
 }

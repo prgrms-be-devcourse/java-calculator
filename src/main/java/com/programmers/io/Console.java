@@ -1,6 +1,6 @@
 package com.programmers.io;
 
-import com.programmers.domain.model.Calculation;
+import com.programmers.domain.Calculator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +36,7 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printResult(List<Calculation> findCalculations) {
+    public void printResult(List<Calculator> findCalculations) {
         findCalculations.forEach(System.out::println);
         System.out.println();
     }

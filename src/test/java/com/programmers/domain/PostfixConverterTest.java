@@ -5,17 +5,17 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 
+import static com.programmers.domain.PostfixConverter.convert;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostfixConverterTest {
     private final String parameterClass = "com.programmers.parameterized.PostfixConverterParams";
-    private PostfixConverter converter = new PostfixConverter();
 
     @ParameterizedTest
     @MethodSource(parameterClass + "#parsingDataMixedWithPlusAndMinus")
     void parsingDataMixedWithPlusAndMinus(List<String> infixExpression, List<String> result) {
         //when
-        List<String> postfixExpression = converter.convert(infixExpression);
+        List<String> postfixExpression = convert(infixExpression);
 
         //then
         assertThat(postfixExpression).containsExactlyElementsOf(result);
@@ -25,7 +25,7 @@ public class PostfixConverterTest {
     @MethodSource(parameterClass + "#parsingDataMixedAllOperator")
     void parsingDataMixedAllOperator(List<String> infixExpression, List<String> result) {
         //when
-        List<String> postfixExpression = converter.convert(infixExpression);
+        List<String> postfixExpression = convert(infixExpression);
 
         //then
         assertThat(postfixExpression).containsExactlyElementsOf(result);

@@ -2,45 +2,39 @@ package com.programmers.service;
 
 import com.programmers.domain.Calculator;
 import com.programmers.domain.Tokenizer;
-import com.programmers.domain.model.Calculation;
 import com.programmers.enumtype.ServiceSelection;
 import com.programmers.io.Input;
 import com.programmers.io.Output;
-import com.programmers.repository.CalculationRepository;
+import com.programmers.repository.CalculatorRepository;
 
 import java.util.List;
 
-public class CalculationService implements Runnable {
+public class CalculatorService implements Runnable {
     private final Tokenizer tokenizer = new Tokenizer();
-    private final Calculator calculator = new Calculator();
 
-    private final CalculationRepository calculationRepository;
+    private final CalculatorRepository calculatorRepository;
     private final Input input;
     private final Output output;
 
-    public CalculationService(CalculationRepository calculationRepository, Input input, Output output) {
-        this.calculationRepository = calculationRepository;
+    public CalculatorService(CalculatorRepository calculatorRepository, Input input, Output output) {
+        this.calculatorRepository = calculatorRepository;
         this.input = input;
         this.output = output;
     }
 
     public int calculate(String input) {
         List<String> tokenized = tokenizer.tokenize(input);
-        int result = calculator.calculateInfixExpression(tokenized);
 
-        saveCalculation(tokenized, result);
+        Calculator calculator = new Calculator(tokenized);
+        int result = calculator.calculate();
+
+        calculatorRepository.save(calculator);
 
         return result;
     }
 
-    private void saveCalculation(List<String> tokenized, int result) {
-        Calculation calculation = new Calculation(tokenized, result);
-
-        calculationRepository.save(calculation);
-    }
-
-    public List<Calculation> findCalculations() {
-        return calculationRepository.findAll();
+    public List<Calculator> findCalculations() {
+        return calculatorRepository.findAll();
     }
 
     @Override
@@ -75,7 +69,7 @@ public class CalculationService implements Runnable {
                 output.inputError();
             }
             case LOOKUP_RECORDS -> {
-                List<Calculation> findCalculations = findCalculations();
+                List<Calculator> findCalculations = findCalculations();
                 output.printResult(findCalculations);
             }
             case CALCULATION -> {

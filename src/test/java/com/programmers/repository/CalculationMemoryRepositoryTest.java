@@ -1,27 +1,26 @@
 package com.programmers.repository;
 
-import com.programmers.domain.model.Calculation;
-import com.programmers.util.CalculatiorTestUtil;
+import com.programmers.domain.Calculator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.programmers.util.CalculatiorTestUtil.createCalculation;
+import static com.programmers.util.CalculatorTestUtil.createCalculation;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculationMemoryRepositoryTest {
-    CalculationRepository calculationRepository = new CalculationMemoryRepository();
+    CalculatorRepository calculatorRepository = new CalculatorMemoryRepository();
 
     @Test
     void save() {
         //given
-        Calculation calculation = createCalculation("1 + 2 + 3", 6);
+        Calculator calculation = createCalculation("1 + 2 + 3");
 
         //when
-        calculationRepository.save(calculation);
+        calculatorRepository.save(calculation);
 
         //then
-        List<Calculation> result = calculationRepository.findAll();
+        List<Calculator> result = calculatorRepository.findAll();
 
         assertThat(result).containsExactly(calculation);
     }
@@ -29,15 +28,15 @@ class CalculationMemoryRepositoryTest {
     @Test
     void findAll() {
         //given
-        Calculation calculationA = createCalculation("1 + 2 + 3", 6);
-        Calculation calculationB = createCalculation("1 + 3 + 5", 9);
+        Calculator calculationA = createCalculation("1 + 2 + 3");
+        Calculator calculationB = createCalculation("1 + 3 + 5");
 
         //when
-        calculationRepository.save(calculationA);
-        calculationRepository.save(calculationB);
+        calculatorRepository.save(calculationA);
+        calculatorRepository.save(calculationB);
 
         //then
-        List<Calculation> result = calculationRepository.findAll();
+        List<Calculator> result = calculatorRepository.findAll();
 
         assertThat(result).containsExactly(calculationA, calculationB);
     }

@@ -1,15 +1,15 @@
 package com.programmers;
 
 import com.programmers.io.Console;
-import com.programmers.repository.CalculationMemoryRepository;
-import com.programmers.repository.CalculationRepository;
-import com.programmers.service.CalculationService;
+import com.programmers.repository.CalculatorMemoryRepository;
+import com.programmers.repository.CalculatorRepository;
+import com.programmers.service.CalculatorService;
 
 public class CalculatorApplication {
     public static void main(String[] args) {
-        CalculationRepository calculationRepository = new CalculationMemoryRepository();
+        CalculatorRepository calculatorRepository = new CalculatorMemoryRepository();
         Console console = new Console();
 
-        new CalculationService(calculationRepository, console, console).run();
+        new CalculatorService(calculatorRepository, console, console).run();
     }
 }
