@@ -1,4 +1,4 @@
-package calculator.model;
+package calculator.model.calculator;
 
 public class CalculationResult {
     private final String expression;

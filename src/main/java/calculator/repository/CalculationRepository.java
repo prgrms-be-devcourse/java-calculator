@@ -1,6 +1,6 @@
 package calculator.repository;
 
-import calculator.model.CalculationResult;
+import calculator.model.calculator.CalculationResult;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

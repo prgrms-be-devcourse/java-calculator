@@ -1,13 +1,13 @@
 package calculator;
 
-import calculator.model.Menu;
-import calculator.model.CalculationResult;
-import calculator.util.ExpressionConverter;
+import calculator.model.menu.Menu;
+import calculator.model.calculator.CalculationResult;
+import calculator.model.ExpressionConverter;
 import calculator.io.Input;
 import calculator.io.Output;
 import calculator.model.BasicCalculator;
 import calculator.repository.CalculationRepository;
-import calculator.util.validator.CalculatorValidator;
+import calculator.model.validator.CalculatorValidator;
 
 import java.util.List;
 

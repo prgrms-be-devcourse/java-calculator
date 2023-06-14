@@ -1,9 +1,9 @@
 package calculator;
 
-import calculator.model.Menu;
+import calculator.model.menu.Menu;
 import calculator.io.Input;
 import calculator.io.Output;
-import calculator.model.CalculationResult;
+import calculator.model.calculator.CalculationResult;
 
 import java.util.Arrays;
 import java.util.Map;

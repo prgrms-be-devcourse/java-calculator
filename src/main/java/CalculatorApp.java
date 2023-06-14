@@ -1,7 +1,7 @@
 import calculator.Calculator;
 import calculator.CalculatorConsole;
-import calculator.model.PostfixCalculator;
-import calculator.util.converter.InfixToPostfixConverter;
+import calculator.model.calculator.PostfixCalculator;
+import calculator.model.converter.InfixToPostfixConverter;
 import calculator.repository.CalculationRepository;
 
 public class CalculatorApp {

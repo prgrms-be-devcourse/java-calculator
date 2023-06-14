@@ -1,7 +1,7 @@
-package calculator.util.converter;
+package calculator.model.converter;
 
-import calculator.model.Operation;
-import calculator.util.ExpressionConverter;
+import calculator.model.ExpressionConverter;
+import calculator.model.calculator.Operation;
 
 import java.util.ArrayList;
 import java.util.Stack;

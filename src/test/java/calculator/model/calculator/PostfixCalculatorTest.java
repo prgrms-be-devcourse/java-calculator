@@ -1,5 +1,6 @@
-package calculator.model;
+package calculator.model.calculator;
 
+import calculator.model.calculator.PostfixCalculator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

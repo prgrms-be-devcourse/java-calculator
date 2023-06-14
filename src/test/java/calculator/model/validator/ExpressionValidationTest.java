@@ -1,7 +1,6 @@
-package calculator.calculator;
+package calculator.model.validator;
 
-import calculator.Calculator;
-import calculator.util.validator.CalculatorValidator;
+import calculator.model.validator.CalculatorValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

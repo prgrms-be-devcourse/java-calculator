@@ -1,7 +1,8 @@
-package calculator.util.converter;
+package calculator.model.calculator;
 
-import calculator.model.Operation;
-import calculator.util.ExpressionConverter;
+import calculator.model.calculator.Operation;
+import calculator.model.converter.InfixToPostfixConverter;
+import calculator.model.ExpressionConverter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

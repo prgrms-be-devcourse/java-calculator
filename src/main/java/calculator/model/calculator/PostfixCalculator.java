@@ -1,9 +1,11 @@
-package calculator.model;
+package calculator.model.calculator;
+
+import calculator.model.BasicCalculator;
 
 import java.util.List;
 import java.util.Stack;
 
-public class PostfixCalculator implements BasicCalculator{
+public class PostfixCalculator implements BasicCalculator {
 
     private static final String OPERATOR_REGEX = "[-*/+]";
 

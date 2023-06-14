@@ -1,5 +1,6 @@
-package calculator.model;
+package calculator.model.calculator;
 
+import calculator.model.calculator.CalculationResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

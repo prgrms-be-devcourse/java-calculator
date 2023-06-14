@@ -1,6 +1,6 @@
 package calculator.repository;
 
-import calculator.model.CalculationResult;
+import calculator.model.calculator.CalculationResult;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Index;
 import org.junit.jupiter.api.AfterEach;

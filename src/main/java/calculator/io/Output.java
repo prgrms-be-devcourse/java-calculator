@@ -1,6 +1,6 @@
 package calculator.io;
 
-import calculator.model.CalculationResult;
+import calculator.model.calculator.CalculationResult;
 
 import java.util.Map;
 

@@ -1,6 +1,6 @@
-package calculator.model;
+package calculator.model.calculator;
 
-import org.assertj.core.api.Assert;
+import calculator.model.calculator.Operation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
