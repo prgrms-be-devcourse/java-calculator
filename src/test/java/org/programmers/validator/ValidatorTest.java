@@ -1,8 +1,8 @@
 package org.programmers.validator;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.programmers.Io.Console;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,8 +10,9 @@ import java.util.List;
 
 public class ValidatorTest {
 
-    Validator validator = new Validator(new Console());
+    Validator validator = new Validator();
 
+    @DisplayName("")
     @Test
     void validateFormulaSplit() {
         // given
