@@ -3,23 +3,40 @@ package org.programmers.repository;
 import java.util.HashMap;
 import java.util.Map;
 
+public class CalRepositoryImpl implements CalRepository {
 
-public class CalRepositoryImpl implements CalRepository{
-
-    Map<Long, String> queryMap = new HashMap<>();
+    Map<Long, CalculateResult> queryMap = new HashMap<>();
     private Long num = 0L;
 
     @Override
     public void save(String formula, String result) {
-        StringBuilder stringBuilder = new StringBuilder(formula);
-        stringBuilder.append(" = ");
-        stringBuilder.append(result);
-        queryMap.put(num++, stringBuilder.toString());
-
+        CalculateResult calculateResult = new CalculateResult(formula, result);
+        queryMap.put(num++, calculateResult);
     }
 
     @Override
     public Map<Long, String> getQueryList() {
-        return queryMap;
+        Map<Long, String> resultMap = new HashMap<>();
+        for (Map.Entry<Long, CalculateResult> entry : queryMap.entrySet()) {
+            Long key = entry.getKey();
+            CalculateResult value = entry.getValue();
+            resultMap.put(key, value.toString());
+        }
+        return resultMap;
+    }
+
+    private static class CalculateResult {
+        private final String formula;
+        private final String result;
+
+        public CalculateResult(String formula, String result) {
+            this.formula = formula;
+            this.result = result;
+        }
+
+        @Override
+        public String toString() {
+            return formula + " = " + result;
+        }
     }
 }

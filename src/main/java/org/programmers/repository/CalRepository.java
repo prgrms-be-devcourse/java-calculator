@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface CalRepository {
     void save(String formula, String result);
-    Map<Long, String> getQueryList();
 
+    Map<Long, String> getQueryList();
 
 }
