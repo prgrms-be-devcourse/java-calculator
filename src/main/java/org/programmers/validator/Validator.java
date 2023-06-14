@@ -1,6 +1,5 @@
 package org.programmers.validator;
 
-import org.programmers.Io.Console;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +7,6 @@ import java.util.List;
 public class Validator {
     private static final String NUMBER_PATTERN = "[0-9]+";
     private static final String OPERATOR_PATTERN = "[*+/-]";
-
-    private final Console console;
-
-    public Validator(Console console) {
-        this.console = console;
-    }
 
 
     // 연산식 검증 로직
@@ -28,7 +21,7 @@ public class Validator {
         boolean afterCheck = validateFormula(formulaList);
 
         if (!afterCheck) {
-            console.printError("잘못된 입력값입니다.");
+            System.out.println("잘못된 입력값입니다");
         }
 
         return afterCheck;
