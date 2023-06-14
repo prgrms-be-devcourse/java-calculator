@@ -6,6 +6,7 @@ import org.programmers.validator.Validator;
 
 import java.lang.invoke.WrongMethodTypeException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Calculator {
@@ -46,7 +47,7 @@ public class Calculator {
         while (isRunning) {
             console.printOption();
             String inputNum = console.inputNum();
-            Option option = ChangeOption(inputNum);
+            Option option = changeOption(inputNum);
             if (option == null){
                 System.out.println("올바른 번호를 입력해주세요. 1 : 조회 , 2 : 계산 , 0 : 종료");
                 continue;
@@ -59,11 +60,12 @@ public class Calculator {
     }
 
     //문자열을 이넘타입으로 변환하는 메서드
-    private Option ChangeOption(String inputNum) {
+    private Option changeOption(String inputNum) {
         Option option = null;
 
         try {
-            option = Option.findByNumber(inputNum);
+            Optional<Option> optionalOption = Option.findByNumber(inputNum);
+            option = optionalOption.orElse(null);
         } catch (WrongMethodTypeException e) {
             console.printError(e.getMessage());
         }
