@@ -11,7 +11,9 @@ public class Menu implements Input, Output {
   @Override
   public int selectOption() {
     System.out.print("선택 : ");
-    return Integer.parseInt(scanner.nextLine());
+    int select = Integer.parseInt(scanner.nextLine());
+    System.out.println();
+    return select;
   }
 
   @Override
