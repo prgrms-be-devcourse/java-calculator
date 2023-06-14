@@ -13,4 +13,9 @@ public class ShowText implements Show{
     public void showRecords(List<String> records) {
         records.forEach(System.out::println);
     }
+
+    @Override
+    public void showResult(int result) {
+        System.out.println(result);
+    }
 }
