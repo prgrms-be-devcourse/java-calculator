@@ -7,18 +7,32 @@ import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
-    private final ExpressionValidator validator;
-
     public Calculator() {
-        validator = new ExpressionValidator();
     }
 
     public int calculateInfixExpression(List<String> expression) {
-        validator.validate(expression);
+        validate(expression);
 
         List<String> postfixExpression = PostfixConverter.convert(expression);
 
         return calculatePostfixExpression(postfixExpression);
+    }
+
+    private void validate(List<String> infixExpression) {
+        boolean numberTurn = true;
+        for (String expr : infixExpression) {
+            if (Arithmetic.isNumber(expr) && numberTurn) {
+                numberTurn = false;
+            } else if (Arithmetic.isOperator(expr) && !numberTurn) {
+                numberTurn = true;
+            } else {
+                throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
+            }
+        }
+
+        if (numberTurn) {
+            throw new UnsupportedOperationException(Arithmetic.WRONG_EXPRESSION);
+        }
     }
 
     public int calculatePostfixExpression(List<String> expression) {
