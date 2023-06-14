@@ -1,7 +1,6 @@
 package org.programmers.calculator;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
+import java.util.Optional;
 
 public enum Option {
     QUERY(1),
@@ -15,12 +14,12 @@ public enum Option {
     }
 
 
-    public static Option findByNumber(String num) {
+    public static Optional<Option> findByNumber(String num) {
         for (Option option : Option.values()) {
             if (option.number == Integer.parseInt(num)) {
-                return option;
+                return Optional.of(option);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }
