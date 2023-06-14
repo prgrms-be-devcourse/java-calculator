@@ -19,15 +19,15 @@ public class MainController {
     }
 
     public void run() {
-        while (true) {
+        boolean isRunning = true;
+
+        while (isRunning) {
             showMenu();
 
             int menuNumber = inputMenuNumber();
             Menu selectedMenu = getSelectedMenu(menuNumber);
 
-            if (selectedMenu.isQuit()) {
-                break;
-            }
+            isRunning = !selectedMenu.isQuit();
 
             execute(selectedMenu);
         }
