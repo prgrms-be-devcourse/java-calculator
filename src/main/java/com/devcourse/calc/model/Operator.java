@@ -2,7 +2,6 @@ package com.devcourse.calc.model;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Stack;
 import java.util.function.BiFunction;
 
 import static java.util.function.Function.identity;
@@ -50,10 +49,13 @@ public enum Operator implements Token {
     }
 
     @Override
-    public void deal(Stack<Integer> calculationResult) {
-        Integer firstNumber = calculationResult.pop();
-        Integer secondNumber = calculationResult.pop();
-        calculationResult.push(action.apply(secondNumber, firstNumber));
+    public boolean isDigit() {
+        return false;
+    }
+
+    @Override
+    public int getProcessedNumber(int... numbers) {
+        return action.apply(numbers[1], numbers[0]);
     }
 
     @Override

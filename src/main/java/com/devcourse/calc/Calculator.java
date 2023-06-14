@@ -37,7 +37,16 @@ public class Calculator {
 
     private int calculate(List<Token> mathSymbols) {
         Stack<Integer> calculationResult = new Stack<>();
-        mathSymbols.forEach(symbol -> symbol.deal(calculationResult));
+        for (Token mathSymbol : mathSymbols) {
+            if (mathSymbol.isDigit()) {
+                calculationResult.push(mathSymbol.getProcessedNumber());
+                continue;
+            }
+
+            Integer firstNumber = calculationResult.pop();
+            Integer secondNumber = calculationResult.pop();
+            calculationResult.push(mathSymbol.getProcessedNumber(secondNumber, firstNumber));
+        }
 
         return calculationResult.pop();
     }
