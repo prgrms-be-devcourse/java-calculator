@@ -1,6 +1,14 @@
 package calculator.engine.Repository;
 
-//TODO: 계산 결과를 기억하는 Mermorizer 클래스
-public class Memorizer {
+import java.util.LinkedHashMap;
 
+public class Memorizer {
+    private Integer startNumber = 0;
+    private final LinkedHashMap<Integer, String> memoroizer = new LinkedHashMap<>();
+    public void storeHistory(String initCalculator) {
+        this.memoroizer.put(startNumber++, initCalculator);
+    }
+    public LinkedHashMap<Integer,String> getMemoroizer(){
+        return memoroizer;
+    }
 }
