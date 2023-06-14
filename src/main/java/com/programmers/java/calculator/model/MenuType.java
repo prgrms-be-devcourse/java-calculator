@@ -46,7 +46,7 @@ public enum MenuType {
         StringBuilder builder = new StringBuilder();
 
         for (MenuType menuType : MENU_TYPE_MAP.values()) {
-            builder.append(menuType.getNumber() + ". " + menuType.getName() + '\n');
+            builder.append(menuType.getNumber()).append(". ").append(menuType.getName()).append('\n');
         }
         builder.append("\n선택 : ");
 
@@ -54,8 +54,9 @@ public enum MenuType {
     }
 
     public static MenuType of(String number) {
-        if (MENU_TYPE_MAP.containsKey(number))
+        if (MENU_TYPE_MAP.containsKey(number)) {
             return MENU_TYPE_MAP.get(number);
+        }
 
         throw new IllegalArgumentException("메뉴를 찾을 수 없습니다.");
     }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface Output {
 
-    void inputError(String message);
+    void printError(String message);
 
     void print(String message);
 

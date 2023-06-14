@@ -13,7 +13,9 @@ public class CalculatorApplication {
 
     public static void main(String[] args) {
         Console console = new Console();
-        CalculatorService calculatorService = new CalculatorServiceImpl(new PostfixExpressionConverter(), new MemoryCalculatorRepository());
+        CalculatorService calculatorService = new CalculatorServiceImpl(
+                new PostfixExpressionConverter(),
+                new MemoryCalculatorRepository());
         Validator validator = new ExpressionValidator();
 
         new Calculator(console, console, calculatorService, validator).run();

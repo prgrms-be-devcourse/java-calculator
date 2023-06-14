@@ -23,7 +23,7 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void inputError(String message) {
+    public void printError(String message) {
         System.out.println(message);
     }
 
@@ -35,7 +35,9 @@ public class Console implements Input, Output {
 
     @Override
     public void printHistoryList(List<CalculationHistory> historyList) {
-        historyList.stream().forEach(history -> System.out.println(history.getExpression() + " = " + history.getResult()));
+        for (CalculationHistory history : historyList) {
+            System.out.println(history.getExpression() + " = " + history.getResult());
+        }
         System.out.println();
     }
 }

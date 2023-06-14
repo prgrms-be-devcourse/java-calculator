@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class PostfixExpressionConverter implements Converter<String, String> {
 
-    private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private static boolean isNumeric(String strNum) {
         return pattern.matcher(strNum).matches();
@@ -19,9 +19,7 @@ public class PostfixExpressionConverter implements Converter<String, String> {
         Stack<Operator> waiting = new Stack<>();
         Stack<String> postfix = new Stack<>();
 
-        for (int i = 0; i < exp.length; i++) {
-            String str = exp[i];
-
+        for (String str : exp) {
             if (isNumeric(str)) {
                 postfix.push(str);
                 continue;
@@ -29,7 +27,7 @@ public class PostfixExpressionConverter implements Converter<String, String> {
 
             Operator operator = Operator.of(str);
 
-            while (!waiting.isEmpty() && operator.comparePriority(waiting.peek()) == -1) {
+            while (isSameOrHighPriority(waiting, operator)) {
                 postfix.push(waiting.pop().getSymbol());
             }
 
@@ -40,6 +38,10 @@ public class PostfixExpressionConverter implements Converter<String, String> {
             postfix.add(waiting.pop().getSymbol());
 
         return calculatePostfix(postfix);
+    }
+
+    private static boolean isSameOrHighPriority(Stack<Operator> waiting, Operator operator) {
+        return !waiting.isEmpty() && operator.comparePriority(waiting.peek()) == -1;
     }
 
     private String calculatePostfix(Stack<String> postfix) {
@@ -57,6 +59,7 @@ public class PostfixExpressionConverter implements Converter<String, String> {
             stack.push(String.valueOf(operator.calculate(b, a)));
         }
 
-        return String.valueOf(new BigDecimal(stack.pop()));
+        BigDecimal result = new BigDecimal(stack.pop());
+        return result.toString();
     }
 }

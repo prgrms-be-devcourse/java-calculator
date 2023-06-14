@@ -23,12 +23,10 @@ public class Calculator {
         while (true) {
             try {
                 String inputMenuType = input.input(MenuType.getMenu());
-                MenuType selecedtmenuType = MenuType.of(inputMenuType);
+                MenuType selecedtMenuType = MenuType.of(inputMenuType);
 
-                switch (selecedtmenuType) {
-                    case HISTORY -> {
-                        output.printHistoryList(calculatorService.getHistoryList());
-                    }
+                switch (selecedtMenuType) {
+                    case HISTORY -> output.printHistoryList(calculatorService.getHistoryList());
                     case CALCULATE -> {
                         String expression = input.input();
                         validator.validate(expression);
@@ -40,7 +38,7 @@ public class Calculator {
                     }
                 }
             } catch (IllegalArgumentException e) {
-                output.inputError(e.getMessage());
+                output.printError(e.getMessage());
             }
         }
     }
