@@ -19,7 +19,7 @@ public class Input {
         int menuNum = 0;
         boolean inputSuccessful = false;
 
-        while(!inputSuccessful){
+        while (!inputSuccessful) {
             try {
                 String menuString = removeWhiteSpace(scanner.nextLine());
                 menuNum = Validator.validateMenu(menuString);
@@ -35,17 +35,16 @@ public class Input {
     }
 
     public static String inputExpression() {
-        String expression="";
+        String expression = "";
         boolean inputSuccessful = false;
 
-        while(!inputSuccessful){
-            try{
+        while (!inputSuccessful) {
+            try {
                 expression = scanner.nextLine();
-                expression = removeWhiteSpace(expression);
-                Validator.checkValidArithmeticExpression(expression);
+                String removeWhiteSpaceExpression = removeWhiteSpace(expression);
+                Validator.checkValidArithmeticExpression(removeWhiteSpaceExpression);
                 inputSuccessful = true;
-            }
-            catch (CalculatorException e){
+            } catch (CalculatorException e) {
                 Output.printMessage(INPUT_RETRY_MESSAGE);
             }
         }

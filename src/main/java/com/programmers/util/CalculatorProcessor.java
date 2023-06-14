@@ -1,53 +1,50 @@
 package com.programmers.util;
 
-import com.programmers.error.CalculatorException;
+import com.programmers.domain.Operator;
 
-import java.util.Stack;
-
-import static com.programmers.error.ErrorMessage.DIVIDE_ZERO_EXCEPTION;
-import static com.programmers.error.ErrorMessage.NOT_VALID_ARITHMETIC_EXPRESSION;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class CalculatorProcessor {
+    private static final Deque<Integer> operands = new ArrayDeque<>();
+    private static final Deque<Operator> operators = new ArrayDeque<>();
+
     public static int calculateExpression(String postfix) throws ArithmeticException {
-        Stack<Integer> stack = new Stack<>();
 
         String[] tokens = postfix.split("");
 
         for (String token : tokens) {
-            //숫자인 경우 스택에 추가
-            if (Character.isDigit(token.charAt(0))) {
-                int operand = Validator.checkInteger(token);
-                stack.push(operand);
-            }
-            //연산자인 경우 stack에서 필요한 피연산자들을 꺼내 연산을 수행하고 결과를 스택에 추가
-            else {
-                int operand2 = stack.pop();
-                int operand1 = stack.pop();
-
-                int result = performOperation(token, operand1, operand2);
-                stack.push(result);
-
-            }
-        }
-        return stack.pop();
-    }
-
-    public static int performOperation(String operator, int operand1, int operand2) {
-        switch (operator) {
-            case "+":
-                return operand1 + operand2;
-            case "-":
-                return operand1 - operand2;
-            case "*":
-                return operand1 * operand2;
-            case "/":
-                if (operand2 == 0) {
-                    throw new CalculatorException(DIVIDE_ZERO_EXCEPTION);
+            //연산자
+            if (Validator.isOperator(token)) {
+                Operator operator = Operator.getOperator(token);
+                while (!operators.isEmpty() && !Operator.isHigherPriority(operator)) {
+                    int result = calculate();
+                    operands.push(result);
                 }
-                return operand1 / operand2;
-            default:
-                throw new CalculatorException(NOT_VALID_ARITHMETIC_EXPRESSION);
+                operators.push(operator);
+            }
+            //숫자
+            if (Validator.isInteger(token)) {
+                operands.push(Integer.parseInt(token));
+            }
         }
+
+        while (!operators.isEmpty()) {
+            int result = calculate();
+            operands.push(result);
+        }
+        return operands.pop();
+
     }
+
+    private static int calculate() {
+        int second = operands.pop();
+        int first = operands.pop();
+        Operator operator = operators.pop();
+        int result = operator.applyOperation(first, second);
+
+        return result;
+    }
+
 
 }
