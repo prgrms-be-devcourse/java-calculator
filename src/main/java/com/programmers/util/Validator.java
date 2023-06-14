@@ -1,7 +1,10 @@
 package com.programmers.util;
 
+import com.programmers.error.CalculatorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.programmers.error.ErrorMessage.NOT_INTEGER_EXCEPTION;
 
 public class Validator {
 
@@ -10,13 +13,13 @@ public class Validator {
         int num;
         try {
             return num = Integer.parseInt(data);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("정수가 아닙니다.");
+        } catch (CalculatorException e) {
+            throw new CalculatorException(NOT_INTEGER_EXCEPTION);
         }
     }
 
     //1,2,3중 하나의 값을 가지는지 판별
-    public static boolean check123(int menuNum) {
+    public static boolean checkValidMenu(int menuNum) {
         if (menuNum >= 0 && menuNum <= 3) return true;
         else return false;
     }

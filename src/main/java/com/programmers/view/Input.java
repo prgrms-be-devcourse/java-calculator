@@ -28,7 +28,7 @@ public class Input {
 
         System.out.println(); //공백
 
-        if (!Validator.check123(menuNum)) {
+        if (!Validator.checkValidMenu(menuNum)) {
             System.out.print(NOTMENUMESSAGE);
             inputMenu(); //반복
         }
