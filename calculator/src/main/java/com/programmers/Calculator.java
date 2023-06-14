@@ -3,6 +3,7 @@ package com.programmers;
 import com.programmers.io.Input;
 import com.programmers.io.Output;
 import com.programmers.model.CalculationFormula;
+import com.programmers.model.Menu;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -11,11 +12,11 @@ public class Calculator implements Runnable {
   private final Input input;
   private final Output output;
   private final CalculationFormula calculationFormula;
+  private final Menu menu;
 
   @Override
   public void run() {
     while (true) {
-      // 메뉴 보여주기
       output.showMenu();
 
       switch (input.selectOption()) {
@@ -23,6 +24,7 @@ public class Calculator implements Runnable {
           calculationFormula.showResult();
           continue;
         case 2:
+          menu.getCalculationFormula();
           calculationFormula.calculate();
           continue;
         case 3:

@@ -15,6 +15,13 @@ public class Menu implements Input, Output {
   }
 
   @Override
+  public String getCalculationFormula() {
+    String infix = scanner.nextLine();
+    infix = infix.replaceAll("\\s+", "");
+    return infix;
+  }
+
+  @Override
   public void showMenu() {
     System.out.println("1. 조회\n2. 계산 \n3. 종료\n");
   }
