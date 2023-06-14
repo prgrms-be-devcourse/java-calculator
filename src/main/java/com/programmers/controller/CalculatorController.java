@@ -51,7 +51,7 @@ public class CalculatorController {
     }
 
     private void showHistory() {
-        console.println(calculatorService.showHistory());
+        console.printResult(calculatorService.showHistory());
     }
 
     private void doCalculate() {

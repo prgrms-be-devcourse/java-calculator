@@ -3,6 +3,8 @@ package com.programmers.service;
 import com.programmers.engine.PostfixCalculator;
 import com.programmers.repository.CalculatorHistory;
 
+import java.util.Map;
+
 public class CalculatorService {
     private CalculatorHistory calculatorHistory;
     private PostfixCalculator postfixCalculator;
@@ -20,7 +22,7 @@ public class CalculatorService {
         calculatorHistory.save(equation, answer);
     }
 
-    public String showHistory() {
+    public Map<String, Double> showHistory() {
         return calculatorHistory.findAll();
     }
 }
