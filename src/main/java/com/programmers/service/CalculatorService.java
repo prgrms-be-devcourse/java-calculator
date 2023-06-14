@@ -10,8 +10,6 @@ import com.programmers.repository.CalculatorRepository;
 import java.util.List;
 
 public class CalculatorService implements Runnable {
-    private final Tokenizer tokenizer = new Tokenizer();
-
     private final CalculatorRepository calculatorRepository;
     private final Input input;
     private final Output output;
@@ -23,7 +21,7 @@ public class CalculatorService implements Runnable {
     }
 
     public int calculate(String input) {
-        List<String> tokenized = tokenizer.tokenize(input);
+        List<String> tokenized = Tokenizer.tokenizeAsExpression(input);
 
         Calculator calculator = new Calculator(tokenized);
         int result = calculator.calculate();

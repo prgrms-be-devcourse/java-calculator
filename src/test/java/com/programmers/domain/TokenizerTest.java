@@ -29,7 +29,7 @@ public class TokenizerTest {
     @MethodSource
     void inputData(String input, List<String> result) {
         //when
-        List<String> tokenized = tokenizer.tokenize(input);
+        List<String> tokenized = tokenizer.tokenizeAsExpression(input);
 
         //then
         assertThat(tokenized).containsExactlyElementsOf(result);

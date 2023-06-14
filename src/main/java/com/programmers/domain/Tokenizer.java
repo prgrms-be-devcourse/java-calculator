@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tokenizer {
-    public List<String> tokenize(String input) {
+    public static List<String> tokenizeAsExpression(String input) {
         List<String> tokens = new ArrayList<>();
 
         char[] chars = input
