@@ -2,7 +2,7 @@ package com.programmers.util;
 
 import java.util.Stack;
 
-public class CalculatorHelper {
+public class CalculatorProcessor {
     public static int calculateExpression(String postfix) throws ArithmeticException {
         Stack<Integer> stack = new Stack<>();
 
