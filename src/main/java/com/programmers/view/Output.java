@@ -1,7 +1,7 @@
 package com.programmers.view;
 
 import com.programmers.domain.Menu;
-import com.programmers.dto.ExpressionResult;
+import com.programmers.model.ExpressionResult;
 import com.programmers.error.ConsoleMessage;
 
 import java.util.List;

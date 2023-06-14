@@ -1,4 +1,4 @@
-package com.programmers.dto;
+package com.programmers.model;
 
 public class ExpressionResult {
     private final String expression; //식

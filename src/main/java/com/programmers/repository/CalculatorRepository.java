@@ -1,6 +1,6 @@
 package com.programmers.repository;
 
-import com.programmers.dto.ExpressionResult;
+import com.programmers.model.ExpressionResult;
 import com.programmers.util.IdGenerator;
 
 import java.util.ArrayList;

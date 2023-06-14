@@ -1,7 +1,7 @@
 package com.programmers.service;
 
 import com.programmers.domain.Expression;
-import com.programmers.dto.ExpressionResult;
+import com.programmers.model.ExpressionResult;
 import com.programmers.repository.CalculatorRepository;
 import com.programmers.util.CalculatorProcessor;
 
