@@ -12,7 +12,7 @@ public class ExpressionRepository implements Repository {
     }
 
     @Override
-    public List<String> getRecord() {
+    public List<String> getRecords() {
         return store;
     }
 }

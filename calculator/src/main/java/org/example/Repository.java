@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Repository {
     void save(String expression, int result);
-    List<String> getRecord();
+    List<String> getRecords();
 }

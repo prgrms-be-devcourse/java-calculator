@@ -4,10 +4,10 @@ import java.util.List;
 
 public class UserInterfaceImpl implements UserInterface{
 
-    ExpressionRepository repository = new ExpressionRepository();
+    Repository repository = new ExpressionRepository();
     @Override
-    public void showRecord() {
-        List<String> record = repository.getRecord();
+    public void showRecords() {
+        List<String> record = repository.getRecords();
         record.forEach(System.out::println);
     }
 }

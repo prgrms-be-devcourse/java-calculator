@@ -21,7 +21,7 @@ public class Main {
             choice = type.typeChoice();
             System.out.println();
             if (choice == 1) {
-                userInterface.showRecord();
+                userInterface.showRecords();
             } else {
                 String expression = type.typeExpression();
                 calculator.getExpression(expression);
