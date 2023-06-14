@@ -1,6 +1,11 @@
 package com.programmers.util;
 
+import com.programmers.error.CalculatorException;
+
 import java.util.Stack;
+
+import static com.programmers.error.ErrorMessage.DIVIDE_ZERO_EXCEPTION;
+import static com.programmers.error.ErrorMessage.NOT_VALID_ARITHMETIC_EXPRESSION;
 
 public class CalculatorProcessor {
     public static int calculateExpression(String postfix) throws ArithmeticException {
@@ -37,11 +42,11 @@ public class CalculatorProcessor {
                 return operand1 * operand2;
             case "/":
                 if (operand2 == 0) {
-                    throw new ArithmeticException("0으로 나눌 수 없습니다.");
+                    throw new CalculatorException(DIVIDE_ZERO_EXCEPTION);
                 }
                 return operand1 / operand2;
             default:
-                throw new IllegalArgumentException("연산자를 확인해주세요.");
+                throw new CalculatorException(NOT_VALID_ARITHMETIC_EXPRESSION);
         }
     }
 

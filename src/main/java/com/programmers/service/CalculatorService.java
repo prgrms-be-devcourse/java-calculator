@@ -1,9 +1,9 @@
 package com.programmers.service;
 
+import com.programmers.domain.Expression;
 import com.programmers.dto.ExpressionResult;
 import com.programmers.repository.CalculatorRepository;
 import com.programmers.util.CalculatorProcessor;
-import com.programmers.util.Converter;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class CalculatorService {
     //계산 수행 후 저장
     public int calculate(String expression) {
         //계산
-        String postfixExpression = Converter.convertToPostFix(expression);
+        String postfixExpression = Expression.convertToPostFix(expression);
         int result = CalculatorProcessor.calculateExpression(postfixExpression);
 
         //저장
