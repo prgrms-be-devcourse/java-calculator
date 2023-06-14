@@ -1,31 +1,25 @@
 package co.programmers.domain;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import co.programmers.exception.ExceptionMessage;
+import java.util.Arrays;
 
 public enum UserMenu {
-    INQUIRY("1"),
-    CALCULATE("2"),
-    TERMINATE("3");
+    INQUIRY(1), CALCULATE(2), TERMINATE(3), ERROR(4);
 
-    private static final Map<String, UserMenu> values =
-            Collections.unmodifiableMap(Stream.of(values())
-                    .collect(Collectors.toMap(UserMenu::getValue, Function.identity())));
-    private final String value;
+    private final Integer menu;
 
-    UserMenu(String value) {
-        this.value = value;
+    private UserMenu(Integer value) {
+        this.menu = value;
     }
 
-    public static UserMenu get(String input) {
-        return Optional.ofNullable(values.get(input)).orElse(TERMINATE);
+    public static UserMenu get(Integer input) {
+        return Arrays.stream(values())
+                .filter(menuNum -> menuNum.menu.equals(input))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_INPUT));
     }
 
-    public String getValue() {
-        return value;
+    public Integer getMenu() {
+        return menu;
     }
 }
