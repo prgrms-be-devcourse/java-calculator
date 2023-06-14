@@ -1,6 +1,7 @@
 package com.programmers.controller;
 
 import com.programmers.domain.Menu;
+import com.programmers.error.CalculatorException;
 import com.programmers.service.CalculatorService;
 import com.programmers.view.Input;
 import com.programmers.view.Output;
@@ -33,17 +34,17 @@ public class CalculatorController {
     }
 
     private void processCalculation() {
-        String expression = Input.inputExpression();
+        boolean calculationSuccessful = false;
 
-        try {
-            int result = calculatorService.calculate(expression);
-            Output.printResult(result);
-        } catch (ArithmeticException e) {
-            Output.printMessage("0으로 나눌 수 없습니다. 다시 입력하세요");
-            this.processCalculation();
-        } catch (IllegalArgumentException e) {
-            Output.printMessage("식이 잘못 되었습니다. 다시 입력하세요");
-            this.processCalculation();
+        while (!calculationSuccessful) {
+            String expression = Input.inputExpression();
+            try {
+                int result = calculatorService.calculate(expression);
+                Output.printResult(result);
+                calculationSuccessful = true;
+            } catch (CalculatorException e) {
+                System.out.println("다시 입력하세요.");
+            }
         }
     }
 
