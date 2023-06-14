@@ -24,8 +24,8 @@ public class Calculator implements Runnable {
           calculationFormula.showResult();
           continue;
         case 2:
-          menu.getCalculationFormula();
-          calculationFormula.calculate();
+          String formula = menu.getCalculationFormula();
+          calculationFormula.calculate(formula);
           continue;
         case 3:
           output.exit();
