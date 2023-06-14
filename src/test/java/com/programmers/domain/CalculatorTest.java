@@ -10,13 +10,78 @@ import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
     private final String parameterClass = "com.programmers.parameterized.CalculatorParams";
-    private final Calculator cal = new Calculator();
+
+    //validate()
+    @Test
+    void validateInvalidOperator_Then_Exception() {
+        //given
+        List<String> expression = List.of("1", "++", "1");
+
+        //when
+
+        //then
+        assertThatThrownBy(() -> new Calculator(expression))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @Test
+    void validateOperatorButBlank_Then_Exception() {
+        //given
+        List<String> expression = List.of("1", " ", "2");
+
+        //when
+
+        //then
+        assertThatThrownBy(() -> new Calculator(expression))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @Test
+    void validateOperatorButEmpty_Then_Exception() {
+        //given
+        List<String> expression = List.of("1", "", "2");
+
+        //when
+
+        //then
+        assertThatThrownBy(() -> new Calculator(expression))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateOnlyPlus")
-    void calculateOnlyPlus(List<String> postfixExpression, int result) {
+    @MethodSource(parameterClass + "#validateInvalidOrder_Then_Exception")
+    void validateInvalidOrder_Then_Exception(List<String> infixExpression) {
+        //then
+        assertThatThrownBy(() -> new Calculator(infixExpression))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#validateExpressionEndWithOperator_Then_Exception")
+    void validateExpressionEndWithOperator_Then_Exception(List<String> infixExpression) {
+        //then
+        assertThatThrownBy(() -> new Calculator(infixExpression))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#validateValidExpression")
+    void validateValidExpression(List<String> expression) {
         //when
-        int calculated = cal.calculatePostfixExpression(postfixExpression);
+        new Calculator(expression);
+
+        //then
+    }
+
+    //calculate()
+    @ParameterizedTest
+    @MethodSource(parameterClass + "#calculateOnlyPlus")
+    void calculateOnlyPlus(List<String> infixExpression, int result) {
+        //given
+        Calculator cal = new Calculator(infixExpression);
+
+        //when
+        int calculated = cal.calculate();
 
         //then
         assertThat(calculated).isEqualTo(result);
@@ -24,9 +89,12 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource(parameterClass + "#calculateOnlyMinus")
-    void calculateOnlyMinus(List<String> postfixExpression, int result) {
+    void calculateOnlyMinus(List<String> infixExpression, int result) {
+        //given
+        Calculator cal = new Calculator(infixExpression);
+
         //when
-        int calculated = cal.calculatePostfixExpression(postfixExpression);
+        int calculated = cal.calculate();
 
         //then
         assertThat(calculated).isEqualTo(result);
@@ -34,9 +102,12 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource(parameterClass + "#calculateMixedWithPlusAndMinus")
-    void calculateMixedWithPlusAndMinus(List<String> postfixExpression, int result) {
+    void calculateMixedWithPlusAndMinus(List<String> infixExpression, int result) {
+        //given
+        Calculator cal = new Calculator(infixExpression);
+
         //when
-        int calculated = cal.calculatePostfixExpression(postfixExpression);
+        int calculated = cal.calculate();
 
         //then
         assertThat(calculated).isEqualTo(result);
@@ -44,9 +115,12 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource(parameterClass + "#calculateOnlyMultiply")
-    void calculateOnlyMultiply(List<String> postfixExpression, int result) {
+    void calculateOnlyMultiply(List<String> infixExpression, int result) {
+        //given
+        Calculator cal = new Calculator(infixExpression);
+
         //when
-        int calculated = cal.calculatePostfixExpression(postfixExpression);
+        int calculated = cal.calculate();
 
         //then
         assertThat(calculated).isEqualTo(result);
@@ -54,9 +128,12 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource(parameterClass + "#calculateMultiplyMixedWithPlusAndMinus")
-    void calculateMultiplyMixedWithPlusAndMinus(List<String> postfixExpression, int result) {
+    void calculateMultiplyMixedWithPlusAndMinus(List<String> infixExpression, int result) {
+        //given
+        Calculator cal = new Calculator(infixExpression);
+
         //when
-        int calculated = cal.calculatePostfixExpression(postfixExpression);
+        int calculated = cal.calculate();
 
         //then
         assertThat(calculated).isEqualTo(result);
@@ -64,9 +141,12 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource(parameterClass + "#calculateOnlyDivide")
-    void calculateOnlyDivide(List<String> postfixExpression, int result) {
+    void calculateOnlyDivide(List<String> infixExpression, int result) {
+        //given
+        Calculator cal = new Calculator(infixExpression);
+
         //when
-        int calculated = cal.calculatePostfixExpression(postfixExpression);
+        int calculated = cal.calculate();
 
         //then
         assertThat(calculated).isEqualTo(result);
@@ -74,9 +154,12 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource(parameterClass + "#calculateMixedAllOperation")
-    void calculateMixedAllOperation(List<String> postfixExpression, int result) {
+    void calculateMixedAllOperation(List<String> infixExpression, int result) {
+        //given
+        Calculator cal = new Calculator(infixExpression);
+
         //when
-        int calculated = cal.calculatePostfixExpression(postfixExpression);
+        int calculated = cal.calculate();
 
         //then
         assertThat(calculated).isEqualTo(result);
@@ -85,12 +168,13 @@ public class CalculatorTest {
     @Test
     void calculateDivideByZero_Then_Exception() {
         //given
-        List<String> inputsA = List.of("123", "0", "/");
+        List<String> infixExpression = List.of("123", "/", "0");
+        Calculator cal = new Calculator(infixExpression);
 
         //when
 
         //then
-        assertThatThrownBy(() -> cal.calculatePostfixExpression(inputsA))
+        assertThatThrownBy(cal::calculate)
                 .isInstanceOf(ArithmeticException.class);
     }
 }

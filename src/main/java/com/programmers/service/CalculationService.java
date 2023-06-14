@@ -12,7 +12,6 @@ import java.util.List;
 
 public class CalculationService implements Runnable {
     private final Tokenizer tokenizer = new Tokenizer();
-    private final Calculator calculator = new Calculator();
 
     private final CalculationRepository calculationRepository;
     private final Input input;
@@ -26,7 +25,9 @@ public class CalculationService implements Runnable {
 
     public int calculate(String input) {
         List<String> tokenized = tokenizer.tokenize(input);
-        int result = calculator.calculateInfixExpression(tokenized);
+
+        Calculator calculator = new Calculator(tokenized);
+        int result = calculator.calculate();
 
         saveCalculation(tokenized, result);
 

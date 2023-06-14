@@ -7,15 +7,11 @@ import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
-    public Calculator() {
-    }
+    private final List<String> expression;
 
-    public int calculateInfixExpression(List<String> expression) {
-        validate(expression);
-
-        List<String> postfixExpression = PostfixConverter.convert(expression);
-
-        return calculatePostfixExpression(postfixExpression);
+    public Calculator(List<String> infixExpression) {
+        validate(infixExpression);
+        expression = PostfixConverter.convert(infixExpression);
     }
 
     private void validate(List<String> infixExpression) {
@@ -35,7 +31,7 @@ public class Calculator {
         }
     }
 
-    public int calculatePostfixExpression(List<String> expression) {
+    public int calculate() {
         Stack<Integer> numbers = new Stack<>();
         for (String expr : expression) {
             numbers.push(processOperation(numbers, expr));
