@@ -19,9 +19,9 @@ public class Console {
     }
 
     public String inputMenu() {
-        System.out.println(VIEW_MESSAGE);
-        System.out.println(CALCULATION_MESSAGE);
-        System.out.println(EXITING_MESSAGE);
+        output.print(VIEW_MESSAGE);
+        output.print(CALCULATION_MESSAGE);
+        output.print(EXITING_MESSAGE);
         System.out.print(CHOICE);
         return input.read();
     }
@@ -31,18 +31,15 @@ public class Console {
     }
 
     public void printList(List<CalculationResult> record) {
-        System.out.println();
-        record.forEach(System.out::println);
+        output.print(record);
     }
 
     public void print(String message) {
-        System.out.println(message);
-        System.out.println();
+        output.print(message);
     }
 
     public void print(long result) {
-        System.out.println(result);
-        System.out.println();
+        output.print(result);
     }
 }
 
