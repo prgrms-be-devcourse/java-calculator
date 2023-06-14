@@ -21,7 +21,9 @@ public class CalculatorManager {
     }
 
     public void run() {
-        while (true) {
+        boolean power = true;
+
+        while (power) {
             switch (inputMenu()) {
                 case VIEW:
                     findAllCalculationHistory();
@@ -31,6 +33,7 @@ public class CalculatorManager {
                     break;
                 case EXIT:
                     exitProgram();
+                    power = false;
                 default:
                     wrongMenuSelection();
             }
