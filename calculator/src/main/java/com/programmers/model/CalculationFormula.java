@@ -10,19 +10,14 @@ public class CalculationFormula {
   private static final Menu menu = new Menu();
 
   public void showResult() {
-    // 저장한 계산결과 출력
     history.showHistory();
   }
 
   public void calculate(String infix) {
     String replacedInfix = menu.getReplacedInfix(infix);
-    // 중위 표기식 -> 후위 표기식
     String postfix = InfixToPostfix.InfixToPostfix(replacedInfix);
-    // 후위 표기식 계산
     double answer = PostfixToAnswer(postfix);
-    // 계산 결과 출력
     System.out.println(answer + "\n");
-    // 계산 결과 저장
     history.save(infix, answer);
   }
 
