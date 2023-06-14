@@ -1,7 +1,7 @@
 package com.programmers.core;
 
-import com.programmers.Calculator;
 import com.programmers.error.ErrorMsg;
+import com.programmers.model.AbstractCalculator;
 import com.programmers.model.CalculationResult;
 import com.programmers.repository.CalculationRepository;
 import com.programmers.view.Console;
@@ -11,12 +11,15 @@ import java.util.List;
 public class CalculatorManager {
     private final CalculationRepository repository;
     private final Console console;
+    private final AbstractCalculator calculator;
+
     private static final String VIEW = "1", CALCULATION = "2", EXIT = "3";
 
 
-    public CalculatorManager(CalculationRepository repository, Console console) {
+    public CalculatorManager(CalculationRepository repository, Console console, AbstractCalculator calculator) {
         this.repository = repository;
         this.console = console;
+        this.calculator = calculator;
 
     }
 
@@ -65,7 +68,7 @@ public class CalculatorManager {
     }
 
     private long sendToCalculator(String formula) {
-        Calculator calculator = new Calculator(formula);
+        calculator.calculate(formula);
         return calculator.calculate(formula);
     }
 
