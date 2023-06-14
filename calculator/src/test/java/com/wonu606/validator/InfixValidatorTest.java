@@ -14,7 +14,7 @@ public class InfixValidatorTest {
         Validator validator = new InfixValidator();
 
         // when
-        String expression = "+ 1 3";
+        String expression = "1 3 +";
 
         // then
         assertThat(validator.isValid(expression)).isFalse();
