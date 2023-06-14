@@ -1,7 +1,7 @@
-package com.programmers.model;
+package com.programmers.engine.model;
 
-import com.programmers.io.Input;
-import com.programmers.io.Output;
+import com.programmers.engine.io.Input;
+import com.programmers.engine.io.Output;
 import java.util.Scanner;
 
 public class Menu implements Input, Output {

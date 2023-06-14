@@ -1,8 +1,8 @@
-package com.programmers.model;
+package com.programmers.engine.model;
 
-import static com.programmers.converter.PostfixToAnswer.PostfixToAnswer;
+import static com.programmers.engine.converter.PostfixToAnswer.PostfixToAnswer;
 
-import com.programmers.converter.InfixToPostfix;
+import com.programmers.engine.converter.InfixToPostfix;
 
 public class CalculationFormula {
 

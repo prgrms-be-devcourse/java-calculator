@@ -1,4 +1,4 @@
-package com.programmers.io;
+package com.programmers.engine.io;
 
 public interface Output {
 

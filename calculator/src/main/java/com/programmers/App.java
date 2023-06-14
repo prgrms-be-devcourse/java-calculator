@@ -1,7 +1,7 @@
 package com.programmers;
 
-import com.programmers.model.CalculationFormula;
-import com.programmers.model.Menu;
+import com.programmers.engine.model.CalculationFormula;
+import com.programmers.engine.model.Menu;
 
 public class App {
 

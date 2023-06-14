@@ -1,9 +1,9 @@
 package com.programmers;
 
-import com.programmers.io.Input;
-import com.programmers.io.Output;
-import com.programmers.model.CalculationFormula;
-import com.programmers.model.Menu;
+import com.programmers.engine.io.Input;
+import com.programmers.engine.io.Output;
+import com.programmers.engine.model.CalculationFormula;
+import com.programmers.engine.model.Menu;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

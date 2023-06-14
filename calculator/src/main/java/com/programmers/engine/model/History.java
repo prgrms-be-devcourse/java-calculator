@@ -1,4 +1,4 @@
-package com.programmers.model;
+package com.programmers.engine.model;
 
 import java.util.HashMap;
 import java.util.Map;
