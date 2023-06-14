@@ -12,7 +12,8 @@ public class HistoryStorage {
     }
 
     public void save(String expression, String result) {
-        storage.put(id++, expression + " = " + result);
+        storage.put(id, expression + " = " + result);
+        id++;
     }
 
     public String loadAll() {
