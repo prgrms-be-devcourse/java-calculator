@@ -5,8 +5,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.programmers.error.ErrorMessage.NOT_INTEGER_EXCEPTION;
+import static com.programmers.error.ErrorMessage.NOT_MENU_OPTION;
 
 public class Validator {
+
+    public static int validateMenu(String data){
+        int menuNum = checkInteger(data);
+        checkValidMenu(menuNum);
+        return menuNum;
+    }
 
     //정수인지 판별
     public static int checkInteger(String data) {
@@ -19,9 +26,10 @@ public class Validator {
     }
 
     //1,2,3중 하나의 값을 가지는지 판별
-    public static boolean checkValidMenu(int menuNum) {
-        if (menuNum >= 0 && menuNum <= 3) return true;
-        else return false;
+    public static void checkValidMenu(int menuNum) {
+        if (!(menuNum >= 1 && menuNum <= 3)){
+            throw new CalculatorException(NOT_MENU_OPTION);
+        }
     }
 
     //식이 숫자와 사칙연산으로 이루어졌는지 확인
