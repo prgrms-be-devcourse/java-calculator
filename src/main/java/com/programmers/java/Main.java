@@ -22,7 +22,11 @@ public class Main {
 
             input.enterMenu().ifPresentOrElse(
                     Main::runCalculator,
-                    () -> System.exit(0));
+                    () -> {
+                        output.viewEndConsole();
+                        System.exit(0);
+                    }
+            );
         }
     }
 
