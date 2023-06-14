@@ -21,7 +21,7 @@ public class PostfixConverter {
                 postfixExpression.add(token);
             } else {
                 Operator operator = Operator.getValue(token);
-                popAndAddOperatorsToExpression(() -> getPriority(operator) > getPriority(operators.peek()));
+                popAndAddOperatorsToExpression(() -> operator.comparePriorityTo(operators.peek()));
                 operators.push(operator);
             }
         }
@@ -39,12 +39,4 @@ public class PostfixConverter {
             postfixExpression.add(operator.toString());
         }
     }
-
-    private int getPriority(Operator operator) {
-        return switch (operator) {
-            case PLUS, MINUS -> 1;
-            case MULTIPLY, DIVIDE -> 2;
-        };
-    }
-
 }
