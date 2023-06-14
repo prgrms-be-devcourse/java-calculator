@@ -5,11 +5,11 @@ import java.util.Stack;
 
 public class PostfixToAnswer {
 
-  public static double PostfixToAnswer(String postfixExpression) {
+  public static double PostfixToAnswer(String postfix) {
     Stack<Double> operandStack = new Stack<>();
 
-    for (int i = 0; i < postfixExpression.length(); i++) {
-      char ch = postfixExpression.charAt(i);
+    for (int i = 0; i < postfix.length(); i++) {
+      char ch = postfix.charAt(i);
 
       if (ch == ' ') {
         continue;
@@ -19,9 +19,10 @@ public class PostfixToAnswer {
         operandStack.push((double) (ch - '0'));
       } else {
         Operator operator = Operator.fromSymbol(ch);
-        double operand2 = operandStack.pop();
-        double operand1 = operandStack.pop();
-        double result = operator.performOperation(operand1, operand2);
+        double rightOperand = operandStack.pop();
+        double leftOperand = operandStack.pop();
+        double result = operator.calculate(leftOperand, rightOperand);
+
         operandStack.push(result);
       }
     }

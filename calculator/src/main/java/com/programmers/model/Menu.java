@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Menu implements Input, Output {
 
-  private final Scanner scanner = new Scanner(System.in);
+  private static final Scanner scanner = new Scanner(System.in);
 
   @Override
   public int selectOption() {
@@ -33,11 +33,11 @@ public class Menu implements Input, Output {
 
   @Override
   public void exit() {
-    System.out.println("종료할게");
+    System.out.println("계산기를 종료합니다.");
   }
 
   @Override
   public void incorrectOption() {
-    System.out.println("올바른 답이 아니야");
+    System.out.println("올바른 메뉴 옵션을 선택해주세요.");
   }
 }

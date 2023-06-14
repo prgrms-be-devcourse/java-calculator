@@ -3,29 +3,29 @@ package com.programmers.model;
 public enum Operator {
   ADD('+') {
     @Override
-    public double performOperation(double operand1, double operand2) {
-      return operand1 + operand2;
+    public double calculate(double leftOperand, double rightOperand) {
+      return leftOperand + rightOperand;
     }
   },
   SUBTRACT('-') {
     @Override
-    public double performOperation(double operand1, double operand2) {
-      return operand1 - operand2;
+    public double calculate(double leftOperand, double rightOperand) {
+      return leftOperand - rightOperand;
     }
   },
   MULTIPLY('*') {
     @Override
-    public double performOperation(double operand1, double operand2) {
-      return operand1 * operand2;
+    public double calculate(double leftOperand, double rightOperand) {
+      return leftOperand * rightOperand;
     }
   },
   DIVIDE('/') {
     @Override
-    public double performOperation(double operand1, double operand2) {
-      if (operand2 == 0) {
-        throw new ArithmeticException("Division by zero");
+    public double calculate(double leftOperand, double rightOperand) {
+      if (rightOperand == 0) {
+        throw new ArithmeticException("0으로 나눌 수 없습니다.");
       }
-      return Math.round(operand1 / operand2 * 100.0) / 100.0;
+      return Math.round(leftOperand / rightOperand * 100.0) / 100.0;
     }
   };
 
@@ -35,18 +35,14 @@ public enum Operator {
     this.symbol = symbol;
   }
 
-  public char getSymbol() {
-    return symbol;
-  }
-
   public static Operator fromSymbol(char symbol) {
     for (Operator operator : values()) {
       if (operator.symbol == symbol) {
         return operator;
       }
     }
-    throw new IllegalArgumentException("Invalid operator symbol: " + symbol);
+    throw new IllegalArgumentException("잘못된 연산자입니다." + symbol);
   }
 
-  public abstract double performOperation(double operand1, double operand2);
+  public abstract double calculate(double leftOperand, double rightOperand);
 }

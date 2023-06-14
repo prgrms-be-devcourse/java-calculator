@@ -17,5 +17,6 @@ public class History {
       String formula = history.get(key);
       System.out.println(formula);
     }
+    System.out.println();
   }
 }

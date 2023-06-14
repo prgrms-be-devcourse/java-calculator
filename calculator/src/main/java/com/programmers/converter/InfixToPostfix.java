@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class InfixToPostfix {
 
-  private static int getPrecedence(char operator) {
+  private static int getPriority(char operator) {
     switch (operator) {
       case '+':
       case '-':
@@ -16,32 +16,32 @@ public class InfixToPostfix {
     return -1;
   }
 
-  public static String convertToPostfix(String infixExpression) {
-    StringBuilder postfixExpression = new StringBuilder();
+  public static String InfixToPostfix(String infix) {
+    StringBuilder postfixStringBuilder = new StringBuilder();
     Stack<Character> operatorStack = new Stack<>();
 
-    for (int i = 0; i < infixExpression.length(); i++) {
-      char ch = infixExpression.charAt(i);
+    for (int i = 0; i < infix.length(); i++) {
+      char ch = infix.charAt(i);
 
       if (ch == ' ') {
         continue;
       }
 
       if (Character.isDigit(ch)) {
-        postfixExpression.append(ch);
+        postfixStringBuilder.append(ch);
       } else {
-        while (!operatorStack.isEmpty() && getPrecedence(ch) <= getPrecedence(
+        while (!operatorStack.isEmpty() && getPriority(ch) <= getPriority(
             operatorStack.peek())) {
-          postfixExpression.append(operatorStack.pop());
+          postfixStringBuilder.append(operatorStack.pop());
         }
         operatorStack.push(ch);
       }
     }
 
     while (!operatorStack.isEmpty()) {
-      postfixExpression.append(operatorStack.pop());
+      postfixStringBuilder.append(operatorStack.pop());
     }
 
-    return postfixExpression.toString();
+    return postfixStringBuilder.toString();
   }
 }
