@@ -7,19 +7,16 @@ import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
-
     private final ExpressionValidator validator;
-    private final PostfixConverter postfixConverter;
 
     public Calculator() {
         validator = new ExpressionValidator();
-        postfixConverter = new PostfixConverter();
     }
 
     public int calculateInfixExpression(List<String> expression) {
         validator.validate(expression);
 
-        List<String> postfixExpression = postfixConverter.convert(expression);
+        List<String> postfixExpression = PostfixConverter.convert(expression);
 
         return calculatePostfixExpression(postfixExpression);
     }

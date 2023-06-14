@@ -9,12 +9,9 @@ import java.util.Stack;
 import java.util.function.BooleanSupplier;
 
 public class PostfixConverter {
-    private List<String> postfixExpression;
-    private Stack<Operator> operators;
-
-    public List<String> convert(List<String> tokenized) {
-        postfixExpression = new ArrayList<>();
-        operators = new Stack<>();
+    public static List<String> convert(List<String> tokenized) {
+        List<String> postfixExpression = new ArrayList<>();
+        Stack<Operator> operators = new Stack<>();
 
         for (String token : tokenized) {
             if (Arithmetic.isNumber(token)) {
@@ -23,19 +20,19 @@ public class PostfixConverter {
                 Operator operator = Operator.getValue(token);
 
                 List<Operator> poppedOperators =
-                        popOperators(() -> operator.comparePriorityTo(operators.peek()));
-                addOperatorsToExpression(poppedOperators);
+                        popOperators(operators, () -> operator.comparePriorityTo(operators.peek()));
+                addOperatorsToExpression(poppedOperators, postfixExpression);
 
                 operators.push(operator);
             }
         }
-        List<Operator> remainedOperators = popOperators(() -> false);
-        addOperatorsToExpression(remainedOperators);
+        List<Operator> remainedOperators = popOperators(operators, () -> false);
+        addOperatorsToExpression(remainedOperators, postfixExpression);
 
         return postfixExpression;
     }
 
-    private List<Operator> popOperators(BooleanSupplier breakCondition) {
+    private static List<Operator> popOperators(Stack<Operator> operators, BooleanSupplier breakCondition) {
         List<Operator> poppedOperators = new ArrayList<>();
         while (!operators.isEmpty()) {
             if (breakCondition.getAsBoolean()) {
@@ -47,7 +44,7 @@ public class PostfixConverter {
         return poppedOperators;
     }
 
-    private void addOperatorsToExpression(List<Operator> operators) {
+    private static void addOperatorsToExpression(List<Operator> operators, List<String> postfixExpression) {
         postfixExpression.addAll(
                 operators.stream()
                         .map(Operator::toString)
