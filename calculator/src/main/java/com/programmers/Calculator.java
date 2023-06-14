@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Calculator implements Runnable {
 
+  public static final int HISTORY = 1;
+  public static final int CALCULATE = 2;
+  public static final int EXIT = 3;
   private final Input input;
   private final Output output;
   private final CalculationFormula calculationFormula;
@@ -20,14 +23,14 @@ public class Calculator implements Runnable {
       output.showMenu();
 
       switch (input.selectOption()) {
-        case 1:
+        case HISTORY:
           calculationFormula.showResult();
           continue;
-        case 2:
+        case CALCULATE:
           String formula = menu.getInfix();
           calculationFormula.calculate(formula);
           continue;
-        case 3:
+        case EXIT:
           output.exit();
           return;
         default:
