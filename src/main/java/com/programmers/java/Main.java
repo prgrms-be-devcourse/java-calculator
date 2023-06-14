@@ -13,7 +13,7 @@ public class Main {
     static Output output = new Output();
     static Input input = new Input();
     static Calculator calculator = new Calculator();
-    static CalculationRecord resultRepository = new CalculationRecord();
+    static CalculationRecord calculationRecord = new CalculationRecord();
     static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
 
     public static void main(String[] args) throws IOException {
@@ -36,7 +36,7 @@ public class Main {
                 calculator();
                 break;
             case SEARCH:
-                output.viewSearchResult(resultRepository.getCalculationResults());
+                output.viewSearchResult(calculationRecord.getCalculationResults());
                 break;
         }
     }
@@ -50,6 +50,6 @@ public class Main {
         }
         Double result = calculator.calculate(expressionTokenizer.expressionSplit(expression));
         output.viewCalculateResult(result);
-        resultRepository.save(expression, Double.toString(result));
+        calculationRecord.save(expression, Double.toString(result));
     }
 }

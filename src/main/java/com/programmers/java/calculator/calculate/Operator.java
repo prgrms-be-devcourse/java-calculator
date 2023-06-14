@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    NONE("",(preOperand, nextOperand) -> null),
+    NONE("", (preOperand, nextOperand) -> null),
     PLUS("+", (preOperand, nextOperand) -> preOperand + nextOperand),
     MINUS("-", (preOperand, nextOperand) -> preOperand - nextOperand),
     MULTIPLE("*", (preOperand, nextOperand) -> preOperand * nextOperand),

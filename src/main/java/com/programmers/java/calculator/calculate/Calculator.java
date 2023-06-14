@@ -9,11 +9,11 @@ public class Calculator {
         Operator operator = Operator.NONE;
 
         for (String token : tokenList) {
-            if (isOperand(token) && operator==Operator.NONE) {
+            if (isOperand(token) && operator == Operator.NONE) {
                 prevOperand = Double.parseDouble(token);
                 continue;
             }
-            if (isOperand(token) && operator!=Operator.NONE) {
+            if (isOperand(token) && operator != Operator.NONE) {
                 nextOperand = Double.parseDouble(token);
                 prevOperand = operator.calculate(prevOperand, nextOperand);
                 continue;
