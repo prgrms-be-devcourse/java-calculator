@@ -1,12 +1,12 @@
 package com.programmers.engine;
 
 import com.programmers.exception.DivideByZeroException;
+import com.programmers.util.Operator;
 
 import java.util.*;
 import java.util.function.Predicate;
 
 public class PostfixCalculator {
-    private final String operators = "+-/*()";
     private final Deque<Character> opStack = new ArrayDeque<>();
 
     private double calculate(List<String> postfix) {
@@ -17,28 +17,15 @@ public class PostfixCalculator {
 
         for (int i = 0; i < postfix.size(); i++) {
             cur = postfix.get(i);
-            if (!operators.contains(cur)) {
+            if (!Operator.contains(cur)) {
                 deque.push(Double.valueOf(cur));
             } else {
                 value2 = Double.valueOf(deque.pop());
+                if (value2 == 0)
+                    throw new DivideByZeroException();
                 value1 = Double.valueOf(deque.pop());
 
-                switch (cur) {
-                    // 스택에서 거꾸로 뽑기 때문에 value2를 먼저
-                    case "+":
-                        deque.push(value1 + value2);
-                        break;
-                    case "-":
-                        deque.push(value1 - value2);
-                        break;
-                    case "*":
-                        deque.push(value1 * value2);
-                        break;
-                    case "/":
-                        if (value2 == 0) throw new DivideByZeroException();
-                        deque.push(value1 / value2);
-                        break;
-                }
+                deque.push(Operator.operate(cur, value1, value2));
             }
         }
         return deque.pop();
@@ -82,10 +69,10 @@ public class PostfixCalculator {
                     continue;
                 }
 
-                if (compareOpPriority(opStack.peek(), cur) > 0) {
+                if (compareOperatorPriority(opStack.peek(), cur) > 0) {
                     opStack.push(cur);
                 } else {
-                    popOperator(postfix, (Integer data) -> data > 0, compareOpPriority(opStack.peek(), cur));
+                    popOperator(postfix, (Integer data) -> data > 0, compareOperatorPriority(opStack.peek(), cur));
                     opStack.push(cur);
                 }
             }
@@ -118,26 +105,10 @@ public class PostfixCalculator {
         return true;
     }
 
-    private int getPriority(char op) {
-        switch (op) {
-            case '+':
-            case '-':
-                return 1;
-            case '/':
-            case '*':
-                return 2;
-            case '(':
-            case ')':
-                return 0;
 
-            default:
-                return -1; // 여기까지 도달 안함
-        }
-    }
-
-    private int compareOpPriority(char stackOp, char curOp) {
-        int stackOpPriority = getPriority(stackOp);
-        int curOpPriority = getPriority(curOp);
+    private int compareOperatorPriority(char stackOp, char curOp) {
+        int stackOpPriority = Operator.getPriority(stackOp);
+        int curOpPriority = Operator.getPriority(curOp);
 
         if (stackOpPriority < curOpPriority) {
             return 1;

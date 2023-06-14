@@ -1,5 +1,6 @@
 package com.programmers.util;
 
+import javax.management.StringValueExp;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
@@ -26,12 +27,27 @@ public enum Operator {
                 .anyMatch(operator -> operator.getOperator().equals(cur));
     }
 
+    public static double operate(String cur, double num1, double num2) {
+        for (Operator operator : Operator.values()) {
+            if (cur.equals(operator.getOperator())) {
+                return operator.biFunction.apply(num1, num2);
+            }
+        }
+        return 0;
+    }
+
     public String getOperator() {
         return operator;
     }
 
-    public int getPriority() {
-        return priority;
+    public static int getPriority(char targetOperator) {
+        String target = String.valueOf(targetOperator);
+        for (Operator operator : Operator.values()) {
+            if (operator.equals(target)) {
+                return operator.priority;
+            }
+        }
+        return 0;
     }
 
 }
