@@ -20,7 +20,7 @@ public class Validator {
         int num;
         try {
             return num = Integer.parseInt(data);
-        } catch (CalculatorException e) {
+        } catch (CalculatorException | NumberFormatException e) {
             throw new CalculatorException(NOT_INTEGER_EXCEPTION);
         }
     }
