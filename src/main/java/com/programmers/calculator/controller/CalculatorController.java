@@ -2,20 +2,24 @@ package com.programmers.calculator.controller;
 
 import com.programmers.calculator.domain.Calculator;
 import com.programmers.calculator.repository.CalculationHistory;
+import com.programmers.calculator.repository.HistoryRepository;
 import com.programmers.calculator.view.Input;
 import com.programmers.calculator.view.Output;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CalculatorController {
     private final Input inputConsole;
     private final Output outputConsole;
     private final Calculator calculator;
+    private final HistoryRepository historyRepository;
 
-    public CalculatorController(Input inputConsole, Output outputConsole, Calculator calculator) {
+    public CalculatorController(Input inputConsole, Output outputConsole, Calculator calculator, HistoryRepository historyRepository) {
         this.inputConsole = inputConsole;
         this.outputConsole = outputConsole;
         this.calculator = calculator;
+        this.historyRepository = historyRepository;
     }
 
     public void run() {
@@ -31,7 +35,7 @@ public class CalculatorController {
                     loadCalculationHistory();
                     break;
                 case CALCULATION:
-                    processCalculation();
+                    saveCalculationResult(processCalculation());
                     break;
                 default:
                     outputConsole.outputOption();
@@ -45,6 +49,8 @@ public class CalculatorController {
     }
 
     private void loadCalculationHistory() {
+        List<CalculationHistory> calculationHistoryList = historyRepository.findAll();
+        outputConsole.outputHistory(calculationHistoryList);
     }
 
     private CalculationHistory processCalculation() {
@@ -55,8 +61,8 @@ public class CalculatorController {
         return new CalculationHistory(inputExpression, result);
     }
 
-    private void saveCalculationResult() {
+    private void saveCalculationResult(CalculationHistory calculationHistory) {
+        historyRepository.save(calculationHistory);
     }
-
 
 }
