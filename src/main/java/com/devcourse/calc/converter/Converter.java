@@ -21,11 +21,14 @@ public abstract class Converter {
                 operandNumber.append(currentChar);
                 continue;
             }
-            result.add(new Operand(Integer.parseInt(operandNumber.toString())));
+            Operand operand = convertToOperand(operandNumber);
+            result.add(operand);
             operandNumber = new StringBuilder();
             processOperator(result, operatorStack, currentChar);
         }
-        result.add(new Operand(Integer.parseInt(operandNumber.toString())));
+        Operand operand = convertToOperand(operandNumber);
+        result.add(operand);
+
         return clearOperationStack(result, operatorStack);
     }
 
@@ -36,5 +39,9 @@ public abstract class Converter {
             result.add(operatorStack.pop());
         }
         return result;
+    }
+
+    private static Operand convertToOperand(StringBuilder operandNumber) {
+        return new Operand(Integer.parseInt(operandNumber.toString()));
     }
 }
