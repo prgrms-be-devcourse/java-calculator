@@ -1,6 +1,10 @@
 package calculator.engine.io;
 
+import java.util.LinkedHashMap;
+
 public interface Output {
-    String inputError();
-    String outputError();
+    void printCalculator(int result);
+    void consoleMenu();
+    void MemoryCalculator(LinkedHashMap<Integer, String> memoryCalculator);
+    void outputError();
 }
