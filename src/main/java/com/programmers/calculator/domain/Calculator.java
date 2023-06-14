@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Calculator {
+
     private Expression expression;
 
     public Calculator(Expression expression) {
@@ -11,7 +12,8 @@ public class Calculator {
     }
 
     public BigDecimal calculate(String inputExpression) {
-        List<String> postfixTokens = expression.parseToTokens(inputExpression);
-        return null;
+        List<String> postfixTokens = expression.convertToPostfix(expression.parseToTokens(inputExpression));
+        BigDecimal result = expression.evaluatePostfix(postfixTokens);
+        return result;
     }
 }

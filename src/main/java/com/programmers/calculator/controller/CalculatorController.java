@@ -1,8 +1,11 @@
 package com.programmers.calculator.controller;
 
 import com.programmers.calculator.domain.Calculator;
+import com.programmers.calculator.repository.CalculationHistory;
 import com.programmers.calculator.view.Input;
 import com.programmers.calculator.view.Output;
+
+import java.math.BigDecimal;
 
 public class CalculatorController {
     private final Input inputConsole;
@@ -28,7 +31,7 @@ public class CalculatorController {
                     loadCalculationHistory();
                     break;
                 case CALCULATION:
-                    saveCalculationResult();
+                    processCalculation();
                     break;
                 default:
                     outputConsole.outputOption();
@@ -42,6 +45,14 @@ public class CalculatorController {
     }
 
     private void loadCalculationHistory() {
+    }
+
+    private CalculationHistory processCalculation() {
+        String inputExpression = inputConsole.inputExpression();
+        BigDecimal result = calculator.calculate(inputExpression);
+        outputConsole.outputCalculation(result);
+
+        return new CalculationHistory(inputExpression, result);
     }
 
     private void saveCalculationResult() {

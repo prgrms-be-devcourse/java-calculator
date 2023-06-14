@@ -1,5 +1,10 @@
 package com.programmers.calculator.view;
 
+import com.programmers.calculator.repository.CalculationHistory;
+
+import java.math.BigDecimal;
+import java.util.List;
+
 public class OutputConsole implements Output {
 
     @Override
@@ -15,12 +20,12 @@ public class OutputConsole implements Output {
     }
 
     @Override
-    public void outputHistory() {
-        System.out.println("계산 이력 조회");
+    public void outputHistory(List<CalculationHistory> calculationHistories) {
+        calculationHistories.forEach(System.out::println);
     }
 
     @Override
-    public void outputCalculation() {
-        System.out.println("계산 기능 수행");
+    public void outputCalculation(BigDecimal result) {
+        System.out.println(result);
     }
 }
