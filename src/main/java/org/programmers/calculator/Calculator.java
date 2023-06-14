@@ -15,7 +15,7 @@ public class Calculator {
     private final Console console;
     private final Validator validator;
 
-    private final ExpressionEvaluator expressionEvaluator;
+    private final Calculate calculate;
 
     private final CalRepository calRepository;
 
@@ -23,11 +23,10 @@ public class Calculator {
 
     private boolean isRunning;
 
-
-    public Calculator(Console console, ExpressionEvaluator expressionEvaluator, CalRepository calRepository) {
+    public Calculator(Console console, Calculate calculate, CalRepository calRepository, Validator validator) {
         this.console = console;
         this.validator = validator;
-        this.expressionEvaluator = expressionEvaluator;
+        this.calculate = calculate;
         this.calRepository = calRepository;
     }
 
@@ -40,11 +39,12 @@ public class Calculator {
         isRunning = running;
     }
 
-
-    boolean isRunning = true;
-
     public void run() {
-        while (isRunning) {
+
+        isRunning = true;
+
+
+        while (getRunning()) {
             console.printOption();
             String inputNum = console.inputNum();
             Option option = changeOption(inputNum);
@@ -56,6 +56,31 @@ public class Calculator {
             // 분기
             extracted(option);
             // 1. method flow control -> flag, early return
+        }
+    }
+
+    private void extracted(Option option) {
+        switch (option) {
+            case QUERY:
+                Map<Long, String> queryList = calRepository.getQueryList();
+                console.printQuery(queryList);
+                break;
+            case CALC:
+                // String formula = console.inputFormula();
+                // System.out.println("formula = " + formula); console.inputFormula()로 입력이 안됨 추후 리팩토링
+
+                String formula = sc.nextLine();
+                // 입력된 연산식의 유효성 검증
+                if (!validator.validateCalculation(formula)) {
+                    break;
+                }
+                String result = calculate.requestCalculate(formula);
+                console.printCal(result);
+                calRepository.save(formula, result);
+                break;
+            case EXIT:
+                console.printExit();
+                setRunning(false);
         }
     }
 

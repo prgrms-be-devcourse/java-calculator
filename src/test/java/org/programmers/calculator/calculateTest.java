@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class ExpressionEvaluatorTest {
+public class calculateTest {
 
 
-    ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
+    Calculate calculate = new Calculate();
 
 
 
@@ -20,7 +20,7 @@ public class ExpressionEvaluatorTest {
         List<String> postfix = Arrays.asList("5", "8", "3", "*", "+");
 
         // when
-        String calculateValue = expressionEvaluator.calculatePostfix(postfix);
+        String calculateValue = calculate.calculatePostfix(postfix);
 
         // then
         double expectedResult = 29.0;
@@ -36,7 +36,7 @@ public class ExpressionEvaluatorTest {
         List<String> postfixExpect = Arrays.asList("3","5","10","*","+");
 
         // when
-        List<String> postfix = expressionEvaluator.convertToPostfix(formulaList);
+        List<String> postfix = calculate.convertToPostfix(formulaList);
 
         // then
         Assertions.assertEquals(postfixExpect, postfix);
@@ -49,7 +49,7 @@ public class ExpressionEvaluatorTest {
         List<String> postfix = Arrays.asList("10", "4", "2", "-", "/");
 
         // when
-        String calculateValue = expressionEvaluator.calculatePostfix(postfix);
+        String calculateValue = calculate.calculatePostfix(postfix);
 
         // then
         double expectedResult = 5.0;

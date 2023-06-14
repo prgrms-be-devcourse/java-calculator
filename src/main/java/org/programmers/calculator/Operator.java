@@ -1,6 +1,9 @@
 package org.programmers.calculator;
 
-public class Operator {
+public final class Operator {
+
+    private Operator() { }
+
     public static int add(int num1, int num2) {
         return num1 + num2;
     }

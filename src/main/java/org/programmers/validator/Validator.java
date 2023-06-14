@@ -14,7 +14,7 @@ public class Validator {
         List<String> formulaList = validateFormulaSplit(inputMsg);
 
         if (formulaList.isEmpty()) {
-            console.printError("잘못된 입력값입니다.");
+            System.out.println("잘못된 입력값입니다.");
             return false;
         }
 
