@@ -4,6 +4,7 @@ import calculator.model.ExpressionConverter;
 import calculator.model.calculator.Operation;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class InfixToPostfixConverter implements ExpressionConverter {
@@ -23,7 +24,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
     }
 
     @Override
-    public ArrayList<String> convert(String infixExpression) {
+    public List<String> convert(String infixExpression) {
         StringBuilder num = new StringBuilder();
 
         // 중위 표기식을 리스트로 변환
