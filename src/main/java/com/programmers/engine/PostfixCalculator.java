@@ -106,13 +106,13 @@ public class PostfixCalculator {
     }
 
 
-    private int compareOperatorPriority(char stackOp, char curOp) {
-        int stackOpPriority = Operator.getPriority(stackOp);
-        int curOpPriority = Operator.getPriority(curOp);
+    private int compareOperatorPriority(char target, char cur) {
+        int targetOperator = Operator.getPriority(target);
+        int currentOperator = Operator.getPriority(cur);
 
-        if (stackOpPriority < curOpPriority) {
+        if (targetOperator < currentOperator) {
             return 1;
-        } else if (stackOpPriority == curOpPriority) {
+        } else if (targetOperator == currentOperator) {
             return 0;
         } else {
             return -1;
