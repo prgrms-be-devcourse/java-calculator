@@ -20,7 +20,9 @@
     - 애플리케이션이 동작하는 동안 데이터베이스 외에 데이터를 저장할 수 있는 방법을 고안해보세요.
 - (선택) 정규식 사용
 
-### 수정 필요한 사항
-✍️ View가 SelectTypeView를 의존하고 있다. 이 관계를 지울 필요가 있음
+### ✍️ 수정 필요한 사항
+ 
+- View가 SelectTypeView를 의존하고 있다. 이 관계를 지울 필요가 있음
+- Input,Output을 인터페이스로 만들고 View가 상속받도록 했는데, 이러한 형태의 구조가 계산기에 적합한 설계인지 생각해볼 필요가 있음
 
 <img width="1306" alt="스크린샷 2023-06-14 오후 4 51 26" src="https://github.com/HandmadeCloud/java-calculator-1/assets/77893164/be4020b9-9e6c-43d8-a43b-092783d27587">
