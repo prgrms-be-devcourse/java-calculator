@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static Print.Choice.printChoice;
+import static print.Choice.printChoice;
 import static validator.Validator.checkChoiceNum;
 
 public class Calculator {
