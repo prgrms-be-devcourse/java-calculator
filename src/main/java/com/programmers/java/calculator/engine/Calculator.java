@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class Calculator implements Runnable{
 
     private final Scanner scanner = new Scanner(System.in);
+
+    private Calculation calculation = new Calculation();
     private Input input;
     private Output output;
 
@@ -17,7 +19,7 @@ public class Calculator implements Runnable{
     public void run() {
         while(true){
             Console.printMenu();
-            int num = input.parseToInt(scanner.nextLine());
+            int num = scanner.nextInt();
 
             if(!validCheck(num)){
                 throw new NumberIndexException("잘못된 입력입니다.");
@@ -26,8 +28,13 @@ public class Calculator implements Runnable{
                 if(num == 1) {  // 조회
                     scanner.nextLine();
                 }
-                else { // 계산
-
+                else if(num == 2){ // 계산
+                    scanner.nextLine();
+                    String form = scanner.nextLine();
+                    calculation.start(form);
+                }
+                else if(num == 9){
+                    break;
                 }
             }
 
@@ -35,7 +42,7 @@ public class Calculator implements Runnable{
     }
 
     private boolean validCheck(int num) {
-        if(num!=1 || num!=2) return false;
+        if(num != 1 && num!=2 && num != 9) return false;
         else return true;
     }
 }
