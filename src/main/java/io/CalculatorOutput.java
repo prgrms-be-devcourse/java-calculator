@@ -1,9 +1,14 @@
 package io;
 
+import model.entity.Calculator;
+import model.vo.CalculationResult;
+
 public interface CalculatorOutput {
-    void printButtonMessage();
+    void printMenuMessage();
 
-    void printExpression(int expression);
+    void printSelectOtherMenu();
 
-    void printRecords(String record, int result);
+    void printExpression(CalculationResult expression);
+
+    void printRecords(Calculator calculator);
 }
