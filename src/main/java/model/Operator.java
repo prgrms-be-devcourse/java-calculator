@@ -34,6 +34,10 @@ public enum Operator {
     }
 
     public int applyCalculate(int leftOperand, int rightOperand) {
-        return expression.apply(leftOperand, rightOperand);
+        try {
+            return expression.apply(leftOperand, rightOperand);
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("[ERROR] 0으로 나눌 수 없습니다.");
+        }
     }
 }
