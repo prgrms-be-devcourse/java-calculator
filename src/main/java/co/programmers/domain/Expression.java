@@ -21,6 +21,9 @@ public class Expression {
 	}
 
 	private boolean validate() {
+		if (expression == null) {
+			throw new ArithmeticException(ExceptionMessage.INVALID_EXPRESSION);
+		}
 		Matcher matcher = EXPRESSION_FORMAT.matcher(expression);
 		return matcher.matches();
 	}
