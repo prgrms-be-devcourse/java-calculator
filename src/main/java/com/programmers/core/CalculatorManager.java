@@ -1,6 +1,6 @@
 package com.programmers.core;
 
-import com.programmers.error.ErrorMsg;
+import com.programmers.error.ErrorMessages;
 import com.programmers.model.AbstractCalculator;
 import com.programmers.model.CalculationResult;
 import com.programmers.repository.CalculationRepository;
@@ -20,7 +20,6 @@ public class CalculatorManager {
         this.repository = repository;
         this.console = console;
         this.calculator = calculator;
-
     }
 
     public void run() {
@@ -59,11 +58,11 @@ public class CalculatorManager {
             repository.save(new CalculationResult(formula, result));
             console.print(result);
         } catch (NumberFormatException e) {
-            console.print(ErrorMsg.OPERAND_IS_NOT_A_NUMBER);
+            console.print(ErrorMessages.getOperandIsNotANumberMsg());
         } catch (IllegalArgumentException e) {
-            console.print(ErrorMsg.INVALID_OPERATOR_INPUT);
+            console.print(ErrorMessages.getInvalidOperatorInputMsg());
         } catch (ArithmeticException e) {
-            console.print(ErrorMsg.ENTER_ZERO_FOR_DIVISION);
+            console.print(ErrorMessages.getEnterZeroForDivisionMsg());
         }
     }
 
@@ -81,12 +80,12 @@ public class CalculatorManager {
     }
 
     private void wrongMenuSelection() {
-        console.print(ErrorMsg.INVALID_MENU_SELECTION);
+        console.print(ErrorMessages.getInvalidMenuSelectionMsg());
     }
 
     private void recordCommandExecution(List<CalculationResult> calculationRecord) {
         if (isEmptyRecord(calculationRecord)) {
-            console.print(ErrorMsg.NO_CALCULATION_RECORDS);
+            console.print(ErrorMessages.getNoCalculationRecordsMsg());
             return;
         }
         console.printList(calculationRecord);
