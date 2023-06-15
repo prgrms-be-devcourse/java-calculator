@@ -12,7 +12,7 @@ public class Pretreatment {
     }
 
     public static boolean validateFormula(String formula) {
-        if (!formula.matches("^(-*\\d\\s[+\\-*/]\\s)+\\d$")) {
+        if (!formula.matches("^(-*\\d+\\s[+\\-*/]\\s)+\\d+$")) {
             System.out.println("Invalid formula!");
             return false;
         }
