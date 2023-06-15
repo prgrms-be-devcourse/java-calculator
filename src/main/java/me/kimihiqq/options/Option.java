@@ -2,7 +2,8 @@ package me.kimihiqq.options;
 
 public enum Option {
     LIST("1"),
-    CALCULATE("2");
+    CALCULATE("2"),
+    EXIT("3");
 
     private final String value;
 

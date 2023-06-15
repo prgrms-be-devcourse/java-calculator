@@ -16,23 +16,29 @@ public class Calculator {
     private final Output printer;
     private final History history;
 
-    public void run() {
+    public boolean run() {
+        printer.println("1. 조회\n2. 계산\n3. 종료\n");
+        String selectPage = scanner.nextLine("선택 : ");
+        Option option = Option.from(selectPage);
 
-        while (true) {
-            printer.println("1. 조회\n2. 계산\n");
-            String selectPage = scanner.nextLine("선택 : ");
-            Option option = Option.from(selectPage);
-
-            if (option == null) {
-                printer.println("Invalid page!");
-                continue;
-            }
-
-            switch (option) {
-                case LIST -> list();
-                case CALCULATE -> calculate();
-            }
+        if (option == null) {
+            printer.println("Invalid page!");
+            return true;
         }
+
+        switch (option) {
+            case LIST:
+                list();
+                return true;
+            case CALCULATE:
+                calculate();
+                return true;
+            case EXIT:
+                printer.println("종료합니다.");
+                return false;
+        }
+
+        return true;
     }
 
     public void calculate() {

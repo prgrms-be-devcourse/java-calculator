@@ -9,8 +9,9 @@ public class Application {
         History history = new History();
         Calculator calculator = new Calculator(consoleInput, consoleOutput, history);
 
-        while (true) {
-            calculator.run();
+        boolean running = true;
+        while (running) {
+            running = calculator.run();
         }
     }
 }
