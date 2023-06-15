@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostfixConverter implements Converter{
+public class PostfixConverter implements Converter {
 
-    private final ExpressionValidator expressionValidator;
+    private final ExpressionValidator validator;
 
-    public PostfixConverter() {
-        this.expressionValidator = new ExpressionValidator();
+    public PostfixConverter(ExpressionValidator validator) {
+        this.validator = validator;
     }
 
     @Override
@@ -23,21 +23,23 @@ public class PostfixConverter implements Converter{
         Stack<String> operatorStack = new Stack<>();
 
         for (String element : expression.split("")) {
-            if (expressionValidator.isOperator(element)) {
+            if (validator.isOperator(element)) {
                 addToPostfix(postfix, number.toString());
                 number.delete(0, number.length());
 
                 comparePriority(operatorStack, postfix, element);
-
                 operatorStack.push(element);
-            } else if (expressionValidator.isNumber(element)) {
+
+            } else if (validator.isNumber(element)) {
                 number.append(element);
+
             } else {
                 throw new IllegalArgumentException("잘못된 식을 입력하였습니다.");
             }
         }
         addToPostfix(postfix, number.toString());
         popOperator(operatorStack, postfix);
+
         return new ExpressionParam(postfix, expression);
     }
 

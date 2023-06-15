@@ -2,32 +2,34 @@ package org.programmers.calculator;
 
 import org.programmers.expression.ExpressionParam;
 import org.programmers.expression.ExpressionResult;
+import org.programmers.expression.ExpressionValidator;
 
 import java.util.Stack;
 
 public class PostfixCalculator extends Calculator {
 
-    public PostfixCalculator() {
-        super();
+    public PostfixCalculator(ExpressionValidator validator) {
+        super(validator);
     }
 
     @Override
     public ExpressionResult calculate(ExpressionParam param) {
-        Stack<String> stack = new Stack<>();
+        Stack<String> calculateStack = new Stack<>();
 
-        for (String element : param.getFormula()) {
-            if (expressionValidator.isOperator(element)) {
-                double firstOperand = Double.parseDouble(stack.pop());
-                double secondOperand = Double.parseDouble(stack.pop());
+        for (String element : param.getPostfix()) {
+            if (validator.isOperator(element)) {
+                double firstOperand = Double.parseDouble(calculateStack.pop());
+                double secondOperand = Double.parseDouble(calculateStack.pop());
 
                 double result = getCalculationResult(element, firstOperand, secondOperand);
 
-                stack.push(String.valueOf(result));
+                calculateStack.push(String.valueOf(result));
             } else {
-                stack.push(element);
+                calculateStack.push(element);
             }
         }
-        double answer = Double.parseDouble(stack.pop());
+        double answer = Double.parseDouble(calculateStack.pop());
+
         return new ExpressionResult(param.getOriginalExpression(), answer);
     }
 }
