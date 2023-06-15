@@ -1,6 +1,6 @@
 package org.programmers.repository;
 
-import org.programmers.domain.expression.ExpressionResult;
+import org.programmers.expression.ExpressionResult;
 
 import java.util.Map;
 

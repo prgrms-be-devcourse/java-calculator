@@ -1,8 +1,8 @@
-package org.programmers.domain.converter;
+package org.programmers.converter;
 
 import org.programmers.constant.Operator;
-import org.programmers.domain.expression.ExpressionParam;
-import org.programmers.domain.expression.ExpressionValidator;
+import org.programmers.expression.ExpressionParam;
+import org.programmers.expression.ExpressionValidator;
 
 import java.util.ArrayList;
 import java.util.List;

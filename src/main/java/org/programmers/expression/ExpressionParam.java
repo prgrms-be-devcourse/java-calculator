@@ -1,4 +1,4 @@
-package org.programmers.domain.expression;
+package org.programmers.expression;
 
 import java.util.List;
 
