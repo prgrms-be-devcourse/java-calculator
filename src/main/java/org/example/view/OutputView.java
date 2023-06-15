@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static final String MESSAGE_OPTION = "1. 조회\n2. 계산\n";
+    public static final String MESSAGE_OPTION = "1. 조회\n2. 계산\n3. 종료\n";
 
     public OutputView() {
     }

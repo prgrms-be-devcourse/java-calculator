@@ -26,6 +26,9 @@ public class CalculatorSystem {
                 String expression = calculatorView.readExpression();
                 calculatorView.printCalcResult(calculator.execute(expression));
             }
+            if (command == Command.END) {
+                break;
+            }
         }
     }
 }
