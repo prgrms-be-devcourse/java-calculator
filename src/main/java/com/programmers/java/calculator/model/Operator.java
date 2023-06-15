@@ -37,10 +37,8 @@ public enum Operator {
         return priority;
     }
 
-    public int comparePriority(Operator operator) {
-        if (this.getPriority() > operator.getPriority()) return -1;
-        if (this.getPriority() < operator.getPriority()) return 1;
-        return 0;
+    public int comparePriority(Operator newOperator) {
+        return Integer.compare(this.getPriority(), newOperator.getPriority());
     }
 
     public BigDecimal calculate(BigDecimal a, BigDecimal b) {
