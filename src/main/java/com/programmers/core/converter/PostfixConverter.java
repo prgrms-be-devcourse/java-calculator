@@ -34,6 +34,7 @@ public class PostfixConverter implements Converter {
         while (!stack.isEmpty()) {
             postfix.add(stack.pop());
         }
+
         return postfix;
     }
 
