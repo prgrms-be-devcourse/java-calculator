@@ -3,10 +3,10 @@ package com.devcourse.java;
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.calculator.PrefixCalculator;
 import com.devcourse.java.domain.console.Console;
-import com.devcourse.java.domain.console.Input;
-import com.devcourse.java.domain.console.Output;
-import com.devcourse.java.domain.console.Reader;
-import com.devcourse.java.domain.console.Writer;
+import com.devcourse.java.domain.console.io.Reader;
+import com.devcourse.java.domain.console.io.Writer;
+import com.devcourse.java.domain.console.io.ConsoleReader;
+import com.devcourse.java.domain.console.io.ConsoleWriter;
 import com.devcourse.java.domain.factory.Factory;
 import com.devcourse.java.domain.factory.MenuFactory;
 import com.devcourse.java.domain.factory.OperatorFactory;
@@ -32,8 +32,8 @@ public class App {
         Query query = new Query(resultStorage);
         Calculate calculate = new Calculate(prefixCalculator, resultStorage);
 
-        Input reader = new Reader();
-        Output writer = new Writer();
+        Reader reader = new ConsoleReader();
+        Writer writer = new ConsoleWriter();
         Console console = new Console(reader, writer);
         Factory<Menu, Menus> menuFactory = new MenuFactory(query, calculate);
 

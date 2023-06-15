@@ -1,16 +1,15 @@
 package com.devcourse.java.domain.menu;
 
-import com.devcourse.java.domain.storage.Storage;
-import com.devcourse.java.domain.storage.CalculateResult;
-import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.common.Validator;
+import com.devcourse.java.domain.console.Console;
+import com.devcourse.java.domain.storage.CalculateResult;
+import com.devcourse.java.domain.storage.Storage;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.devcourse.java.common.Messages.EMPTY_STORAGE;
-
 public class Query implements Menu {
+    private static final String EMPTY_STORAGE = "계산 이력이 없습니다.\n\n";
     private final Storage<CalculateResult> storage;
 
     public Query(Storage<CalculateResult> storage) {
@@ -27,9 +26,9 @@ public class Query implements Menu {
     private void queryResults(Console console, List<CalculateResult> calculateResults) {
         if (Validator.isNotEmpty(calculateResults)) {
             List<String> resultStrings = toString(calculateResults);
-            console.printList(resultStrings);
+            console.write(resultStrings);
         } else { // todo: change
-            console.print(EMPTY_STORAGE.toMessage());
+            console.write(EMPTY_STORAGE);
         }
     }
 

@@ -1,46 +1,48 @@
 package com.devcourse.java.domain.console;
 
-import java.util.List;
+import com.devcourse.java.domain.console.io.Reader;
+import com.devcourse.java.domain.console.io.Writer;
 
-import static com.devcourse.java.common.Messages.EXIT_CONFIRM;
-import static com.devcourse.java.common.Messages.MENU_SELECTION;
+import java.util.Collection;
 
 public class Console {
-    private final Input input;
-    private final Output output;
+    private static final String MENU_SELECTION = "1: 조회\n2: 계산\n\n선택 : ";
+    private static final String EXIT_CONFIRM = "메뉴에 없는 값을 입력했습니다.\n종료하시겠습니까? (Y) : ";
+    private final Reader reader;
+    private final Writer writer;
 
-    public Console(Input input, Output output) {
-        this.input = input;
-        this.output = output;
+    public Console(Reader reader, Writer writer) {
+        this.reader = reader;
+        this.writer = writer;
     }
 
-    public String menuSelect() {
-        output.print(MENU_SELECTION.toMessage());
-        return input.read();
+    public String selectMenu() {
+        writer.write(MENU_SELECTION);
+        return reader.read();
     }
 
     public String confirmExiting() {
-        output.print(EXIT_CONFIRM.toMessage());
-        return input.read();
+        writer.write(EXIT_CONFIRM);
+        return reader.read();
     }
 
     public String read() {
-        return input.read();
+        return reader.read();
     }
 
-    public void print(String message) {
-        output.print(message);
-    }
-
-    public void print(Number number) {
-        output.print(number);
-    }
-
-    public void printList(List<String> results) {
-        System.out.println();
-        for (String result : results) {
-            output.print(result);
+    public <T> void write(T message) {
+        if (isCollection(message)) {
+            writeCollection(message);
+        } else {
+            writer.write(message);
         }
-        System.out.println();
+    }
+
+    private <T> boolean isCollection(T message) {
+        return message instanceof Collection<?>;
+    }
+
+    private <T> void writeCollection(T message) {
+        ((Collection<?>) message).forEach(this::write);
     }
 }

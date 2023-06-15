@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CalculatorRunner {
     private static final String EXIT = "Y";
+    private static boolean power = true;
     private final Factory<Menu, Menus> factory;
     private final Console console;
 
@@ -17,10 +18,8 @@ public class CalculatorRunner {
     }
 
     public void run() {
-        boolean power = true;
-
         while (power) {
-            String selectedMenu = console.menuSelect();
+            String selectedMenu = console.selectMenu();
             Menus menus = Menus.from(selectedMenu);
 
             if (menus.isNotOnMenu() && confirmExit()) {

@@ -1,9 +1,6 @@
 package com.devcourse.java.domain.validator;
 
 import com.devcourse.java.common.Validator;
-import com.devcourse.java.domain.console.Console;
-import com.devcourse.java.domain.console.Reader;
-import com.devcourse.java.domain.console.Writer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,8 +13,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ValidatorTest {
-    private Console console = new Console(new Reader(), new Writer());
-
     @Test
     @DisplayName("빈 리스트 검사 테스트")
     void isEmptyTest() {

@@ -2,10 +2,10 @@ package com.devcourse.java.domain.menu;
 
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.console.Console;
-import com.devcourse.java.domain.console.Input;
-import com.devcourse.java.domain.console.Output;
-import com.devcourse.java.domain.console.Reader;
-import com.devcourse.java.domain.console.Writer;
+import com.devcourse.java.domain.console.io.Reader;
+import com.devcourse.java.domain.console.io.Writer;
+import com.devcourse.java.domain.console.io.ConsoleReader;
+import com.devcourse.java.domain.console.io.ConsoleWriter;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.storage.MemoryStorage;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class MenuTest {
-    private final Console console = new Console(new Reader(), new Writer());
+    private final Console console = new Console(new ConsoleReader(), new ConsoleWriter());
     private final MemoryStorage memoryStorage = new MemoryStorage();
 
     @Test
@@ -71,13 +71,13 @@ class MenuTest {
     @Nested
     @DisplayName("계산 메뉴 테스트")
     class calculateMenuTest {
-        private final Output output = new Writer();
+        private final Writer writer = new ConsoleWriter();
 
         @ParameterizedTest
         @MethodSource("calculateData")
         void calculateSuccessTest(String expression, double expected) {
            // given
-            final Console console = new Console(new CustomInput(expression), output);
+            final Console console = new Console(new CustomReader(expression), writer);
             final Calculate calculate = new Calculate(new CustomCalculator(expected), memoryStorage);
 
             // when
@@ -102,10 +102,10 @@ class MenuTest {
             }
         }
 
-        static class CustomInput implements Input {
+        static class CustomReader implements Reader {
             private final String input;
 
-            public CustomInput(String input) {
+            public CustomReader(String input) {
                 this.input = input;
             }
 

@@ -2,15 +2,14 @@ package com.devcourse.java.domain.menu;
 
 import com.devcourse.java.domain.console.Console;
 
-import static com.devcourse.java.common.Messages.EXITING;
-
 public class Exit implements Menu {
+    private static final String EXITING = "계산기를 종료합니다.";
 
     public Exit() { }
 
     @Override
     public boolean execute(Console console) {
-        console.print(EXITING.toMessage());
+        console.write(EXITING);
         return false;
     }
 }

@@ -1,11 +1,11 @@
-package com.devcourse.java.domain.console;
+package com.devcourse.java.domain.console.io;
 
 import java.util.Scanner;
 
-public class Reader implements Input {
+public class ConsoleReader implements Reader {
     private final Scanner scanner;
 
-    public Reader() {
+    public ConsoleReader() {
         this.scanner = new Scanner(System.in);
     }
 

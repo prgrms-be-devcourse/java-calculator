@@ -1,14 +1,13 @@
 package com.devcourse.java.domain.menu;
 
+import com.devcourse.java.common.Validator;
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.storage.Storage;
-import com.devcourse.java.common.Validator;
-
-import static com.devcourse.java.common.Messages.BAD_EXPRESSION;
 
 public class Calculate implements Menu {
+    private static final String BAD_EXPRESSION = "올바른 계산식이 아닙니다. 다시 입력바랍니다.\n\n";
     private final Calculator calculator;
     private final Storage<CalculateResult> storage;
 
@@ -28,10 +27,10 @@ public class Calculate implements Menu {
     private void calculateExpression(Console console, String expression) {
         if (Validator.isValidExpression(expression)) {
             CalculateResult calculateResult = calculator.run(expression);
-            console.print(calculateResult.getResult());
+            console.write(calculateResult.getResult());
             storage.save(calculateResult);
         } else { // todo: change
-            console.print(BAD_EXPRESSION.toMessage());
+            console.write(BAD_EXPRESSION);
         }
     }
 }
