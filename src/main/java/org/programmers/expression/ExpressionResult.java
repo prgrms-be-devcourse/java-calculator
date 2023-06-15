@@ -6,15 +6,15 @@ public class ExpressionResult {
 
     private final String expression;
 
-    private final double result;
+    private final double answer;
 
-    public ExpressionResult(String expression, double result) {
+    public ExpressionResult(String expression, double answer) {
         this.expression = expression;
-        this.result = result;
+        this.answer = answer;
     }
 
-    public double getResult() {
-        return result;
+    public double getAnswer() {
+        return answer;
     }
 
     @Override
@@ -27,6 +27,6 @@ public class ExpressionResult {
                 + ExpressionSymbol.BLANK_SYMBOL.getSymbol()
                 + ExpressionSymbol.EQUAL_SYMBOL.getSymbol()
                 + ExpressionSymbol.BLANK_SYMBOL.getSymbol()
-                + result;
+                + answer;
     }
 }

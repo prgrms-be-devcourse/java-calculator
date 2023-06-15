@@ -3,20 +3,21 @@ package org.programmers.expression;
 import java.util.List;
 
 public class ExpressionParam {
-    private final List<String> formula;
+
+    private final List<String> postfix;
 
     private final String originalExpression;
 
-    public List<String> getFormula() {
-        return formula;
+    public List<String> getPostfix() {
+        return postfix;
     }
 
     public String getOriginalExpression() {
         return originalExpression;
     }
 
-    public ExpressionParam(List<String> formula, String originalExpression) {
-        this.formula = formula;
+    public ExpressionParam(List<String> postfix, String originalExpression) {
+        this.postfix = postfix;
         this.originalExpression = originalExpression;
     }
 }

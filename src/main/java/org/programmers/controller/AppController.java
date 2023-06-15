@@ -47,7 +47,7 @@ public class AppController {
         String inputExpression = console.getInput().inputExpression();
         try {
             ExpressionResult expressionResult = calculatorManagement.runCalculator(inputExpression);
-            console.getOutput().printAnswer(expressionResult.getResult());
+            console.getOutput().printAnswer(expressionResult.getAnswer());
             repository.save(expressionResult);
         } catch (IllegalArgumentException e) {
             System.out.println("잘못된 식을 입력하였습니다.");

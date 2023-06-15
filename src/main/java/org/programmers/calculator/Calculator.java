@@ -7,10 +7,10 @@ import org.programmers.expression.ExpressionValidator;
 
 public abstract class Calculator {
 
-    protected final ExpressionValidator expressionValidator;
+    protected final ExpressionValidator validator;
 
-    public Calculator() {
-        this.expressionValidator = new ExpressionValidator();
+    public Calculator(ExpressionValidator validator) {
+        this.validator = validator;
     }
 
     public abstract ExpressionResult calculate(ExpressionParam param);
