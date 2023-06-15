@@ -1,6 +1,6 @@
 package com.programmers.view;
 
-import com.programmers.model.CalculationResult;
+import com.programmers.core.data.CalculationResult;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class Console {
         output.print(VIEW_MESSAGE);
         output.print(CALCULATION_MESSAGE);
         output.print(EXITING_MESSAGE);
-        System.out.print(CHOICE);
+        output.print(CHOICE);
         return input.read();
     }
 

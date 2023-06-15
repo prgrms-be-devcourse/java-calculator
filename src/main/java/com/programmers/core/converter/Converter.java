@@ -1,4 +1,4 @@
-package com.programmers.core;
+package com.programmers.core.converter;
 
 import java.util.List;
 

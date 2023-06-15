@@ -1,6 +1,6 @@
 package com.programmers.repository;
 
-import com.programmers.model.CalculationResult;
+import com.programmers.core.data.CalculationResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
