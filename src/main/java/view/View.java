@@ -2,7 +2,6 @@ package view;
 
 import exception.IllegalExpressionException;
 import exception.NoSuchCommandException;
-import util.CalculatorUtils;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -19,14 +18,8 @@ public class View {
         this.scanner = new Scanner(System.in);
     }
 
-    public void printInfoMessage() {
+    public void printMenuMessage() {
         System.out.print(getFormattedMessage());
-    }
-
-    private String getFormattedMessage() {
-        return HISTORY_MESSAGE + '\n' +
-                CALCULATE_MESSAGE + "\n\n" +
-                SELECT_MESSAGE;
     }
 
     public void printCalculationResult(String result) {
@@ -64,6 +57,12 @@ public class View {
         } catch (IllegalExpressionException e) {
             throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
         }
+    }
+
+    private String getFormattedMessage() {
+        return HISTORY_MESSAGE + '\n' +
+                CALCULATE_MESSAGE + "\n\n" +
+                SELECT_MESSAGE;
     }
 
     private String removeWhiteSpace(String input) {

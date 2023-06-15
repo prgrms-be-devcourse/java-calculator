@@ -23,7 +23,7 @@ public class Processor {
     }
 
     private void doService() throws RuntimeException {
-        view.printInfoMessage();
+        view.printMenuMessage();
         switch (getCommand()) {
             case HISTORY_COMMAND -> viewHistory();
             case CALCULATE_COMMAND -> doCalculation();
