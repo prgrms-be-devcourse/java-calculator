@@ -1,11 +1,11 @@
 package com.programmers.storage;
 
-import com.programmers.expression.Expression;
-import org.assertj.core.api.Assertions;
+import com.programmers.util.Formula;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,21 +13,25 @@ class StorageTest {
 
 	Storage storage = new Storage();
 	
+	@BeforeEach
+	void setup() throws InterruptedException {
+		storage.save(new Formula("1 * 2"), 2);
+		Thread.sleep(10);
+		storage.save(new Formula("2 / 2"), 1);
+		Thread.sleep(10);
+		storage.save(new Formula("1 * 2"), 2);
+	}
+	
 	@Test
-	@DisplayName("저장을 한다")
+	@DisplayName("저장을 하고 중복 저장 및 날짜 순으로 조회")
 	void save() {
-		// given
-		Expression expression = new Expression("1 * 2");
-		int result = 3;
-		
 		// when
-		storage.save(expression, result);
-		Map<String, Integer> list = storage.findAll();
+		List<String> record = storage.findAll();
 		
 		// then
-		assertThat(list)
+		assertThat(record)
 				.isNotEmpty()
-				.containsExactly(entry("1 * 2", 3));
+				.containsExactly("1 * 2 = 2", "2 / 2 = 1", "1 * 2 = 2");
 	}
 	
 }
