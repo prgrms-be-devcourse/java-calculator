@@ -7,6 +7,10 @@ public class Application {
         ConsoleInput consoleInput = new ConsoleInput();
         ConsoleOutput consoleOutput = new ConsoleOutput();
         History history = new History();
-        new Calculator(consoleInput, consoleOutput, history).run();
+        Calculator calculator = new Calculator(consoleInput, consoleOutput, history);
+
+        while (true) {
+            calculator.run();
+        }
     }
 }
