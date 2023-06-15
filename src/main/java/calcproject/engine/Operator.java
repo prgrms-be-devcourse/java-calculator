@@ -1,9 +1,6 @@
 package calcproject.engine;
 
 import java.util.Arrays;
-import java.util.Optional;
-
-import calcproject.view.Command;
 
 public enum Operator {
 	Plus("+", 0),
@@ -14,17 +11,10 @@ public enum Operator {
 
 	private String operator;
 	private int priority;
+
 	Operator(String operator, int priority) {
 		this.operator = operator;
 		this.priority = priority;
-	}
-
-	public String getOperator() {
-		return this.operator;
-	}
-
-	public int getPriority() {
-		return this.priority;
 	}
 
 	public static Operator opValueOf(String op) {
@@ -36,5 +26,13 @@ public enum Operator {
 			)
 			.findAny()
 			.orElse(Operator.UnSupportedOp);
+	}
+
+	public String getOperator() {
+		return this.operator;
+	}
+
+	public int getPriority() {
+		return this.priority;
 	}
 }

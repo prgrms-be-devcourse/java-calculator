@@ -12,8 +12,8 @@ public class Calculator {
 	}
 
 	private boolean isNumber(String token) {
-		for (int i=0; i<token.length(); i++){
-			if(!Character.isDigit(token.charAt(i)))
+		for (int i = 0; i < token.length(); i++) {
+			if (!Character.isDigit(token.charAt(i)))
 				return false;
 		}
 		return true;
@@ -28,15 +28,15 @@ public class Calculator {
 				continue;
 			}
 
-			while(!stack.empty()) {
+			while (!stack.empty()) {
 				Operator currentOperator = Operator.opValueOf(currentToken);
 				Operator stackPeekOPerator = Operator.opValueOf(stack.peek());
 
-				if ( stackPeekOPerator == Operator.UnSupportedOp) {
+				if (stackPeekOPerator == Operator.UnSupportedOp) {
 					return null;
 				}
 
-				if ( currentOperator.getPriority() > stackPeekOPerator.getPriority()) {
+				if (currentOperator.getPriority() > stackPeekOPerator.getPriority()) {
 					break;
 				}
 
@@ -55,7 +55,6 @@ public class Calculator {
 
 	public double calculateExpression(String expression) {
 		List<String> tokens = calcExpressionTokenizer.tokenizeExpression(expression);
-
 
 		return Double.NaN;
 	}

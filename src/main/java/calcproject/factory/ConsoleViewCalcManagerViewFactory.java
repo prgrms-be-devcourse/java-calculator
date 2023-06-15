@@ -1,7 +1,5 @@
 package calcproject.factory;
 
-import java.util.Scanner;
-
 import calcproject.view.CalcInput;
 import calcproject.view.CalcOutput;
 import calcproject.view.console.CalcConsoleView;
