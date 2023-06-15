@@ -1,4 +1,4 @@
-package com.programmers.calculator.constant;
+package com.programmers.calculator.util;
 
 import java.util.regex.Pattern;
 
