@@ -4,6 +4,7 @@ import calculator.constant.ErrorMessage;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 public enum CalculatorEngine {
 
@@ -11,16 +12,16 @@ public enum CalculatorEngine {
     SUB("-", (o1, o2) -> o1 - o2),
     MUL("*", (o1, o2) -> o1 * o2),
     DIV("/", (o1, o2) -> {
-        if (o2 != 0) {
-            return o1 / o2;
+        if (o2 == 0) {
+            throw new ArithmeticException(ErrorMessage.DIVISION_BY_ZERO);
         }
-        throw new ArithmeticException(ErrorMessage.DIVISION_BY_ZERO);
+        return o1 / o2;
     });
 
-    private String operator;
-    private OperationHandler handler;
+    private final String operator;
+    private final BiFunction<Integer, Integer, Integer> handler;
 
-    CalculatorEngine(String operator, OperationHandler handler) {
+    CalculatorEngine(String operator, BiFunction<Integer, Integer, Integer> handler) {
         this.operator = operator;
         this.handler = handler;
     }
@@ -29,6 +30,6 @@ public enum CalculatorEngine {
         return Arrays.stream(values())
                 .filter(engine -> engine.operator.equals(operator))
                 .findFirst()
-                .map(engine -> engine.handler.operate(o1, o2));
+                .map(engine -> engine.handler.apply(o1, o2));
     }
 }

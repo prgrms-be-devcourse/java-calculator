@@ -9,11 +9,8 @@ public class Result {
         this.answer = answer;
     }
 
-    public String getProblem() {
-        return problem;
-    }
-
-    public int getAnswer() {
-        return answer;
+    @Override
+    public String toString() {
+        return problem + " = " + answer;
     }
 }
