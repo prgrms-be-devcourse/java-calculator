@@ -13,6 +13,10 @@ public enum OptionType {
         this.inputOption = inputOption;
     }
 
+    public String getInputOption() {
+        return inputOption;
+    }
+
     public static OptionType of(String inputOption) {
         for (OptionType optionType : OPTION_TYPES) {
             if (optionType.inputOption.equals(inputOption)) {
@@ -22,5 +26,6 @@ public enum OptionType {
 
         throw new IllegalArgumentException("유효하지 않은 메뉴입니다.");
     }
+
 }
 
