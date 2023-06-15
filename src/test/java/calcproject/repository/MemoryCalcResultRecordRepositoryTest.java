@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +19,14 @@ import calcproject.models.CalcResultRecordModel;
 class MemoryCalcResultRecordRepositoryTest {
 
 	private CalcResultRecordRepository calcResultRecordRepository;
+
+	private static Stream<Arguments> testLoadCalcRecordsProvider() {
+		return Stream.of(
+			Arguments.of(Arrays.asList("1*2", "5+5-4", "1+4"), Arrays.asList(2.0, 6.0, 5.0)),
+			Arguments.of(Arrays.asList("4+5+3", "5-3", "6+4"), Arrays.asList(12.0, 2.0, 10.0)),
+			Arguments.of(Arrays.asList("4/2", "8+3", "7-4"), Arrays.asList(2.0, 11.0, 3.0))
+		);
+	}
 
 	@BeforeEach
 	void beforeEach() {
@@ -35,7 +42,7 @@ class MemoryCalcResultRecordRepositoryTest {
 	void testLoadCalcRecords(List<String> expressionList, List<Double> calcResultList) {
 		// given
 		List<CalcResultRecordModel> expectedCalcRecords = new ArrayList<>();
-		for (int i=0; i<expressionList.size(); i++) {
+		for (int i = 0; i < expressionList.size(); i++) {
 			String expression = expressionList.get(i);
 			Double calcRsult = calcResultList.get(i);
 
@@ -50,13 +57,5 @@ class MemoryCalcResultRecordRepositoryTest {
 		// then
 		Assertions.assertThat(resultCalcRecords)
 			.containsExactlyInAnyOrderElementsOf(expectedCalcRecords);
-	}
-
-	private static Stream<Arguments> testLoadCalcRecordsProvider() {
-		return Stream.of(
-			Arguments.of(Arrays.asList("1*2", "5+5-4", "1+4"), Arrays.asList(2.0, 6.0, 5.0)),
-			Arguments.of(Arrays.asList("4+5+3", "5-3", "6+4"), Arrays.asList(12.0, 2.0, 10.0)),
-			Arguments.of(Arrays.asList("4/2", "8+3", "7-4"), Arrays.asList(2.0, 11.0, 3.0))
-		);
 	}
 }

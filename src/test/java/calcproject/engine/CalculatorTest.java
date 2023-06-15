@@ -1,7 +1,5 @@
 package calcproject.engine;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -9,12 +7,9 @@ import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import calcproject.engine.tokenaction.TokenAction;
 
 class CalculatorTest {
 
@@ -27,6 +22,24 @@ class CalculatorTest {
 		calculator = new Calculator(tokenizer);
 	}
 
+	private static Stream<Arguments> tokensToPostfixNotationProvider() {
+		return Stream.of(
+			Arguments.of(Arrays.asList("1", "+", "2", "*", "3", "/", "4"),
+				Arrays.asList("1", "2", "3", "*", "4", "/", "+")),
+			Arguments.of(Arrays.asList("10", "*", "4", "/", "1"), Arrays.asList("/", "*", "10", "4", "1")),
+			Arguments.of(Arrays.asList("4", "*", "3", "/", "2", "-", "1"),
+				Arrays.asList("-", "/", "*", "4", "3", "2", "1"))
+		);
+	}
+
+	private static Stream<Arguments> calculateExpressionProvider() {
+		return Stream.of(
+			Arguments.of("1 + 2 * 3 / 4", "2.5"),
+			Arguments.of("10 * 4 / 1", "40"),
+			Arguments.of("4 * 3 / 2 - 1", "5")
+		);
+	}
+
 	@ParameterizedTest
 	@DisplayName("후위 표기법 변환 테스트")
 	@MethodSource("tokensToPostfixNotationProvider")
@@ -37,14 +50,6 @@ class CalculatorTest {
 		//then
 		Assertions.assertThat(resultTokens)
 			.containsExactlyInAnyOrderElementsOf(expectedTokens);
-	}
-
-	private static Stream<Arguments> tokensToPostfixNotationProvider() {
-		return Stream.of(
-			Arguments.of(Arrays.asList("1", "+", "2", "*", "3", "/", "4"), Arrays.asList("1", "2", "3", "*", "4", "/", "+")),
-			Arguments.of(Arrays.asList("10", "*", "4", "/", "1"), Arrays.asList("/", "*", "10", "4", "1")),
-			Arguments.of(Arrays.asList("4", "*", "3", "/", "2", "-", "1"), Arrays.asList("-", "/", "*", "4", "3", "2", "1"))
-		);
 	}
 
 	@ParameterizedTest
@@ -61,13 +66,5 @@ class CalculatorTest {
 		//then
 		Assertions.assertThat(calcResult)
 			.isEqualTo(expectedResult);
-	}
-
-	private static Stream<Arguments> calculateExpressionProvider() {
-		return Stream.of(
-			Arguments.of("1 + 2 * 3 / 4", "2.5"),
-			Arguments.of("10 * 4 / 1", "40"),
-			Arguments.of("4 * 3 / 2 - 1", "5")
-		);
 	}
 }

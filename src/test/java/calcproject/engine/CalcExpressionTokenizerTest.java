@@ -7,15 +7,21 @@ import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 class CalcExpressionTokenizerTest {
 
 	private CalcExpressionTokenizer calcExpressionTokenizer;
+
+	private static Stream<Arguments> expressionProvider() {
+		return Stream.of(
+			Arguments.of("1 + 2 * 3 / 4", Arrays.asList("1", "+", "2", "*", "3", "/", "4")),
+			Arguments.of("10 * 4 / 1", Arrays.asList("10", "*", "4", "/", "1")),
+			Arguments.of("4 * 3 / 2 - 1", Arrays.asList("4", "*", "3", "/", "2", "-", "1"))
+		);
+	}
 
 	@BeforeEach
 	void beforeEach() {
@@ -32,13 +38,5 @@ class CalcExpressionTokenizerTest {
 		//then
 		Assertions.assertThat(resultTokens)
 			.containsExactlyInAnyOrderElementsOf(expectedTokens);
-	}
-
-	private static Stream<Arguments> expressionProvider() {
-		return Stream.of(
-			Arguments.of("1 + 2 * 3 / 4", Arrays.asList("1", "+", "2", "*", "3", "/", "4")),
-			Arguments.of("10 * 4 / 1", Arrays.asList("10", "*", "4", "/", "1")),
-			Arguments.of("4 * 3 / 2 - 1", Arrays.asList("4", "*", "3", "/", "2", "-", "1"))
-		);
 	}
 }

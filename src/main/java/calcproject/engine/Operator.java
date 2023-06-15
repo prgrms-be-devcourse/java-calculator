@@ -1,14 +1,13 @@
 package calcproject.engine;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
 
 public enum Operator {
 	Plus("+", 0, (a, b) -> a + b),
 	Minus("-", 0, (a, b) -> a - b),
 	Multiply("*", 1, (a, b) -> a * b),
 	Divide("/", 1, (a, b) -> a / b),
-	UnSupportedOp("", -1, (a,b) -> Double.NaN);
+	UnSupportedOp("", -1, (a, b) -> Double.NaN);
 
 	private String operator;
 	private int priority;
