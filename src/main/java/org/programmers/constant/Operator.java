@@ -28,13 +28,17 @@ public enum Operator {
         this.expression = expression;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
     public static Optional<Operator> find(String symbol) {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.symbol.equals(symbol))
                 .findAny();
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public double getAnswer(double operand1, double operand2) {
+        return expression.apply(operand1, operand2);
     }
 }
