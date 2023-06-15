@@ -4,10 +4,10 @@ import operator.Operator;
 
 import java.util.Stack;
 
-import static validator.Validator.checkPositiveNum;
 import static validator.Validator.checkValidOperator;
 
 public class Calculation {
+    private static final String positiveRegularExp = "\\d+(\\.\\d+)?";
     private static int priority(char operator) {
         if (operator == '(' || operator == ')') {
             return 0;
@@ -26,7 +26,7 @@ public class Calculation {
         String[] split = expression.split(" ");
 
         for (String now : split) {
-            if (checkPositiveNum(now)) {
+            if (isDigit(now)) {
                 sb.append(now).append(" ");
                 continue;
             }
@@ -63,10 +63,9 @@ public class Calculation {
     public double calculatePostfix(String postfix) {
         String[] pfs = postfix.split(" ");
         Stack<String> stack = new Stack<>();
-        Operator operator = new Operator();
 
         for (String pf : pfs) {
-            if (checkPositiveNum(pf)) {
+            if (isDigit(pf)) {
                 stack.add(pf);
                 continue;
             }
@@ -95,5 +94,9 @@ public class Calculation {
         }
 
         return Double.parseDouble(stack.pop());
+    }
+
+    public static boolean isDigit(String str) {
+        return str.matches(positiveRegularExp);
     }
 }

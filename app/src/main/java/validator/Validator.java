@@ -4,7 +4,6 @@ public class Validator {
     private static final int END_CHOICE = 0;
     private static final int READ_CHOICE = 1;
     private static final int CALCULATE_CHOICE = 2;
-    private static final String positiveRegularExp = "\\d+(\\.\\d+)?";
     private static final char[] ops = {'(', ')', '+', '-', '*', '/'};
 
     public static int checkChoiceNum(int num) {
@@ -22,13 +21,5 @@ public class Validator {
         }
 
         throw new IllegalArgumentException("유효하지 않은 연산자입니다");
-    }
-
-    public static boolean checkPositiveNum(String str) {
-        if (str.matches(positiveRegularExp)) {
-            return true;
-        }
-
-        throw new IllegalArgumentException("음수는 입력이 불가합니다.");
     }
 }
