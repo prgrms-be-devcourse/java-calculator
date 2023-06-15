@@ -1,7 +1,6 @@
 package org.programmers.io;
 
-
-import org.programmers.expression.ExpressionResult;
+import org.programmers.domain.expression.ExpressionResult;
 
 import java.util.Map;
 

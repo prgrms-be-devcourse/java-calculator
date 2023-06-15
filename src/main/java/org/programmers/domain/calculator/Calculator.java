@@ -1,9 +1,9 @@
-package org.programmers.calculator;
+package org.programmers.domain.calculator;
 
 import org.programmers.constant.Operator;
-import org.programmers.expression.ExpressionParam;
-import org.programmers.expression.ExpressionResult;
-import org.programmers.expression.ExpressionValidator;
+import org.programmers.domain.expression.ExpressionParam;
+import org.programmers.domain.expression.ExpressionResult;
+import org.programmers.domain.expression.ExpressionValidator;
 
 public abstract class Calculator {
 

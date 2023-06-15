@@ -1,7 +1,7 @@
 package org.programmers.controller;
 
 import org.programmers.constant.Selection;
-import org.programmers.expression.ExpressionResult;
+import org.programmers.domain.expression.ExpressionResult;
 import org.programmers.io.Console;
 import org.programmers.repository.Repository;
 

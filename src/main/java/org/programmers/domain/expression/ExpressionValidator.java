@@ -1,4 +1,4 @@
-package org.programmers.expression;
+package org.programmers.domain.expression;
 
 import org.programmers.constant.Operator;
 
