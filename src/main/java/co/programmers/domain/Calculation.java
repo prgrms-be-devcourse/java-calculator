@@ -30,7 +30,7 @@ public class Calculation {
 	}
 
 	private void removeCompletedExpression(int operatorPosition, int count) {
-		for (int cnt = 0; cnt < count; cnt++) {
+		for (int cnt = 0; cnt <= count; cnt++) {
 			parsedExpression.remove(operatorPosition);
 		}
 	}
@@ -46,7 +46,7 @@ public class Calculation {
 		return new Double[] {operand1, operand2};
 	}
 
-	public List<String> extractOperators() {
+	private List<String> extractOperators() {
 		expression.eliminateWhiteSpace();
 		List<String> parsed = expression.split("\\d+");
 		parsed.removeIf(String::isEmpty);
