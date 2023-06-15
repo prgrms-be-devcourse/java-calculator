@@ -21,9 +21,16 @@ public enum ArithmeticOperators implements Operable {
     }, DIVISION("/", 1) {
         @Override
         public int apply(int a, int b) {
+            validateDivideNumIsZero(b);
             return a / b;
         }
     };
+
+    private static void validateDivideNumIsZero(int num) {
+        if (num == 0) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        }
+    }
 
     private final String operator;
     private final int priority;

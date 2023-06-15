@@ -45,7 +45,7 @@ public class InfixExpression implements Expression {
             postfixExpression.append(token).append(BLANK);
             return;
         }
-        var operator = convertTokenToOperator(token);
+        ArithmeticOperators operator = convertTokenToOperator(token);
         while (isStackNotEmptyAndOperatorPriorityLower(stack, operator)) {
             postfixExpression.append(stack.pop().getOperator()).append(BLANK);
         }
