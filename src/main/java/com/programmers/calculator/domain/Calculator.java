@@ -1,19 +1,22 @@
 package com.programmers.calculator.domain;
 
+import com.programmers.calculator.domain.component.Converter;
+import com.programmers.calculator.domain.component.Parser;
+
 import java.math.BigDecimal;
-import java.util.List;
 
 public class Calculator {
+    private final Parser parser;
+    private final Converter converter;
 
-    private Expression expression;
-
-    public Calculator(Expression expression) {
-        this.expression = expression;
+    public Calculator(Parser parser, Converter converter) {
+        this.parser = parser;
+        this.converter = converter;
     }
 
-    public BigDecimal calculate(String inputExpression) {
-        List<String> postfixTokens = expression.convertToPostfix(expression.parseToTokens(inputExpression));
-        BigDecimal result = expression.evaluatePostfix(postfixTokens);
-        return result;
+    public BigDecimal calculate(String expression) {
+        parser.parseToTokens(expression);
+        converter.convert(expression);
+        return BigDecimal.ZERO;
     }
 }

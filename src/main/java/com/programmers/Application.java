@@ -2,7 +2,10 @@ package com.programmers;
 
 import com.programmers.calculator.controller.CalculatorController;
 import com.programmers.calculator.domain.Calculator;
-import com.programmers.calculator.domain.Expression;
+import com.programmers.calculator.domain.component.Converter;
+import com.programmers.calculator.domain.component.Parser;
+import com.programmers.calculator.domain.component.PostfixConverter;
+import com.programmers.calculator.domain.component.RegexParser;
 import com.programmers.calculator.repository.HistoryMapRepository;
 import com.programmers.calculator.repository.HistoryRepository;
 import com.programmers.calculator.view.Console;
@@ -20,7 +23,9 @@ public class Application {
         Console console = new Console(input, output);
 
         // domain
-        Calculator calculator = new Calculator(new Expression());
+        Parser parser = new RegexParser();
+        Converter converter = new PostfixConverter();
+        Calculator calculator = new Calculator(parser, converter);
 
         // repository
         HistoryRepository repository = new HistoryMapRepository();

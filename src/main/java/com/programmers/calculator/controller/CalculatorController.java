@@ -1,5 +1,6 @@
 package com.programmers.calculator.controller;
 
+import com.programmers.calculator.constant.OptionType;
 import com.programmers.calculator.domain.Calculator;
 import com.programmers.calculator.repository.CalculationHistory;
 import com.programmers.calculator.repository.HistoryRepository;
@@ -21,6 +22,7 @@ public class CalculatorController {
     }
 
     public void run() {
+
         while (true) {
             console.outputOption();
             OptionType inputValue = OptionType.of(console.inputOption());
@@ -33,13 +35,14 @@ public class CalculatorController {
                     loadCalculationHistory();
                     break;
                 case CALCULATION:
-                    saveCalculationResult(processCalculation());
+                    processCalculation();
                     break;
                 default:
-                    console.outputOption();
+                    errorDetection();
             }
         }
     }
+
 
     private void exitCalculator() {
         console.outputExit();
@@ -51,16 +54,21 @@ public class CalculatorController {
         console.outputHistory(calculationHistoryList);
     }
 
-    private CalculationHistory processCalculation() {
+    private void processCalculation() {
         String inputExpression = console.inputExpression();
         BigDecimal result = calculator.calculate(inputExpression);
-        console.outputCalculation(result);
+        CalculationHistory calculationHistory = new CalculationHistory(inputExpression, result);
 
-        return new CalculationHistory(inputExpression, result);
+        console.outputCalculation(result);
+        saveCalculationResult(calculationHistory);
     }
 
     private void saveCalculationResult(CalculationHistory calculationHistory) {
         repository.save(calculationHistory);
+    }
+
+    private void errorDetection() {
+        System.exit(0);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.programmers.calculator.controller;
+package com.programmers.calculator.constant;
 
 public enum OptionType {
     EXIT("0"),
