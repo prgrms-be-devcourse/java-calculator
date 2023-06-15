@@ -7,11 +7,13 @@ public class Validator {
     }
 
     public static void checkEmpty(String[] splitFormula) {
-        if (isEmpty(splitFormula)) ;
+        if (isEmpty(splitFormula)) {
+            throw new IllegalArgumentException();
+        }
     }
 
-    private static boolean isEmpty(String[] splitFormula) {
-        return splitFormula != null && splitFormula.length == 0;
+    private static boolean isEmpty(String[] list) {
+        return list != null && list.length == 0;
     }
 
 }
