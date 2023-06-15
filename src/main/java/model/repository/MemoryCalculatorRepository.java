@@ -1,19 +1,25 @@
 package model.repository;
 
 import model.entity.Calculator;
-import model.vo.CalculationResult;
-import model.vo.Expression;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MemoryCalculatorRepository implements CalculatorRepository {
-    @Override
-    public void save(Expression expression, CalculationResult calculationResult) {
+    private static final Map<Long, Calculator> store = new LinkedHashMap<>();
+    private static long sequence = 0L;
 
+    @Override
+    public Calculator save(Calculator calculator) {
+        calculator.setId(++sequence);
+        store.put(calculator.getId(), calculator);
+        return calculator;
     }
 
     @Override
     public List<Calculator> findAll() {
-        return null;
+        return new ArrayList<>(store.values());
     }
 }
