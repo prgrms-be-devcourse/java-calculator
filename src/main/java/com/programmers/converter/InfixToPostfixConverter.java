@@ -1,6 +1,7 @@
 package com.programmers.converter;
 
 import com.programmers.util.ConstantRegex;
+import com.programmers.validation.Validator;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
 
     private void makePostFixTokenList(String token, List<String> postFixTokenList, Deque<Operator> stack) {
 
-        if (token.equals("(")) {
+        if ("(".equals(token)) {
             stack.push(Operator.OPEN_PARENTHESES);
             return;
         }
@@ -38,7 +39,7 @@ public class InfixToPostfixConverter implements ExpressionConverter {
             return;
         }
 
-        if (token.equals(")")) {
+        if (")".equals(token)) {
             pushTokenListUntilOpenBracket(stack, postFixTokenList);
             return;
         }
@@ -68,13 +69,13 @@ public class InfixToPostfixConverter implements ExpressionConverter {
         if (stack.isEmpty())
             return false;
 
-        Operator operatorInStack = stack.peek();
-        return operatorInStack.isComparePriority(inputOperator);
+        Operator topOperatorInStack = stack.peek();
+        return topOperatorInStack.isComparePriority(inputOperator);
     }
 
     private List<String> makeExpressionToken(String expression) {
 
-        validateInputExpression(expression);
+        Validator.getInstance().validateInputExpression(expression);
 
         Matcher matcher = ConstantRegex.EXPRESSION_FILTER_REGEX_COMPILE.matcher(expression);
         List<String> filterExpression = new ArrayList<>();
@@ -85,46 +86,4 @@ public class InfixToPostfixConverter implements ExpressionConverter {
 
         return filterExpression;
     }
-
-    private void validateInputExpression(String expression) {
-
-        if (!isParenthesesOrderCorrect(expression)) {
-            throw new IllegalArgumentException("괄호의 순서가 잘못되었습니다.");
-        }
-
-        expression = expression.replaceAll(ConstantRegex.WHITESPACE_REGEX, "");
-        if (!ConstantRegex.EXPRESSION_VALIDATION_REGEX_COMPILE.matcher(expression).matches()) {
-            throw new IllegalArgumentException("수식은 숫자와 +, -, *, /, ( , )만 입력이 가능합니다.");
-        }
-
-
-    }
-
-    private boolean isParenthesesOrderCorrect(String expression) {
-        Deque<Character> stack = new ArrayDeque<>();
-
-        for (char ch : expression.toCharArray()) {
-            fillParenthesesStack(stack, ch);
-        }
-        return stack.isEmpty();
-    }
-
-    private void fillParenthesesStack(Deque<Character> stack, char ch) {
-
-        if (ch == '(') {
-            stack.push(ch);
-            return;
-        }
-
-        if (ch == ')' && !stack.isEmpty() && stack.peek() == '(') {
-            stack.pop();
-            return;
-        }
-
-        if (ch == ')') {
-            stack.push(ch);
-        }
-    }
-
-
 }
