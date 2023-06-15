@@ -1,5 +1,7 @@
 package model;
 
+import util.CalculatorUtils;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -29,9 +31,15 @@ public class HistoryStorage {
     private String makeFormattedExpression(String expression, String result) {
         StringBuilder stringBuilder = new StringBuilder();
         for (char expressionComponent : expression.toCharArray()) {
-            stringBuilder.append(expressionComponent).append(' ');
+            if (CalculatorUtils.isDigitCharacter(expressionComponent)) {
+                stringBuilder.append(expressionComponent);
+                continue;
+            }
+            stringBuilder.append(' ')
+                    .append(expressionComponent)
+                    .append(' ');
         }
-        stringBuilder.append("= ").append(result);
+        stringBuilder.append(" = ").append(result);
 
         return stringBuilder.toString();
     }
