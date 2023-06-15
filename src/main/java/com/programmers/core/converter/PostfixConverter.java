@@ -16,10 +16,11 @@ public class PostfixConverter implements Converter {
     @Override
     public List<String> convert(CalculationRequest request) {
         String formula = request.getFormula();
-        List<String> postfix = new ArrayList<>();
         String[] splitFormula = formula.split(SEPARATOR);
-        Stack<String> stack = new Stack<>();
         Validator.checkEmpty(splitFormula);
+
+        List<String> postfix = new ArrayList<>();
+        Stack<String> stack = new Stack<>();
 
         for (int position = 0; position < splitFormula.length; position++) {
             String eachFormula = splitFormula[position];
