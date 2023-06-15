@@ -22,5 +22,6 @@ public class HistoryRepository{
         for (int i = 0; i < history.size(); i++) {
             System.out.println(history.get(i) + " = " + resultHistory.get(i));
         }
+        System.out.println();
     }
 }

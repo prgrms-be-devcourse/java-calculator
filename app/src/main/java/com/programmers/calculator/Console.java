@@ -25,4 +25,9 @@ public class Console implements Input, Output {
     public void printMenu(String menu) {
         System.out.println(menu);
     }
+
+    @Override
+    public void printResult(int result) {
+        System.out.println(result + "\n");
+    }
 }
