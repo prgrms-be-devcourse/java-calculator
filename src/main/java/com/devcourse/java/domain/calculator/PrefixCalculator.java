@@ -3,7 +3,7 @@ package com.devcourse.java.domain.calculator;
 import com.devcourse.java.common.Validator;
 import com.devcourse.java.domain.factory.Factory;
 import com.devcourse.java.domain.operator.Operator;
-import com.devcourse.java.domain.parser.ExpressionParser;
+import com.devcourse.java.domain.calculator.parser.PrefixParser;
 import com.devcourse.java.domain.storage.CalculateResult;
 
 import java.util.ArrayDeque;
@@ -11,16 +11,16 @@ import java.util.Deque;
 import java.util.List;
 
 public class PrefixCalculator implements Calculator {
-    private final ExpressionParser expressionParser;
+    private final PrefixParser parser;
     private final Factory<Operator, String> factory;
 
-    public PrefixCalculator(ExpressionParser expressionParser, Factory<Operator, String> factory) {
-        this.expressionParser = expressionParser;
+    public PrefixCalculator(PrefixParser parser, Factory<Operator, String> factory) {
+        this.parser = parser;
         this.factory = factory;
     }
 
     public CalculateResult run(String expression) {
-        List<String> prefixExpression = expressionParser.parse(expression);
+        List<String> prefixExpression = parser.parse(expression);
         Double result = calculatePrefix(prefixExpression);
         return new CalculateResult(expression, result);
     }

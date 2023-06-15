@@ -7,8 +7,7 @@ import com.devcourse.java.domain.menu.Menu;
 import com.devcourse.java.domain.menu.Menus;
 import com.devcourse.java.domain.menu.Query;
 import com.devcourse.java.domain.operator.Operator;
-import com.devcourse.java.domain.parser.ExpressionParser;
-import com.devcourse.java.domain.parser.PrefixParser;
+import com.devcourse.java.domain.calculator.parser.PrefixParser;
 import com.devcourse.java.domain.storage.MemoryStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -63,7 +62,7 @@ class MenuFactoryTest {
 
     private void initializeQueryAndCalculateMenu() {
         MemoryStorage memoryStorage = new MemoryStorage();
-        ExpressionParser prefixParser = new PrefixParser();
+        PrefixParser prefixParser = new PrefixParser();
         Factory<Operator, String> factory = new OperatorFactory();
         PrefixCalculator prefixCalculator = new PrefixCalculator(prefixParser, factory);
         query = new Query(memoryStorage);

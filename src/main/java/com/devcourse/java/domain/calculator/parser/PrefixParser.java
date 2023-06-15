@@ -1,4 +1,4 @@
-package com.devcourse.java.domain.parser;
+package com.devcourse.java.domain.calculator.parser;
 
 import com.devcourse.java.domain.operator.Operators;
 import com.devcourse.java.common.Validator;
@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-public class PrefixParser implements ExpressionParser {
+public class PrefixParser {
     private static final String BLANK = " ";
 
     public PrefixParser() { }
 
-    @Override
     public List<String> parse(String expression) {
         return toPrefix(expression);
     }
@@ -48,7 +47,6 @@ public class PrefixParser implements ExpressionParser {
     }
 
     private boolean isPeekHigherPriority(Deque<String> stack, String character) {
-        // todo: 빈번한 Optional 호출 개선
         return Operators.evaluatePriority(character) <= Operators.evaluatePriority(stack.peek());
     }
 
