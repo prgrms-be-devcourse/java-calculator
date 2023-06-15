@@ -5,6 +5,8 @@ import util.CalculatorUtils;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public class Calculator {
     private final Deque<Integer> operandStack;
@@ -36,17 +38,21 @@ public class Calculator {
     }
 
     private void calculateByPrecedence(Operator currentOperator) {
-        Operator peekOperator = operatorStack.peek();
-        if (peekOperator == null) {
+        Optional<Operator> peekOperator = Optional.ofNullable(operatorStack.peek());
+        peekOperator.ifPresentOrElse(calculateConsumer(currentOperator), () -> {
             throw new NoSuchOperatorException("[ERROR] 연산자 스택이 비어있습니다.");
-        }
+        });
+    }
 
-        if (peekOperator.getPrecedence() >= currentOperator.getPrecedence()) {
-            int rightNumber = operandStack.pop();
-            int leftNumber = operandStack.pop();
-            operandStack.push(peekOperator.applyCalculate(leftNumber, rightNumber));
-            operatorStack.pop();
-        }
+    private Consumer<Operator> calculateConsumer(Operator currentOperator) {
+        return (operator) -> {
+            if (operator.getPrecedence() >= currentOperator.getPrecedence()) {
+                int rightNumber = operandStack.pop();
+                int leftNumber = operandStack.pop();
+                operandStack.push(operator.applyCalculate(leftNumber, rightNumber));
+                operatorStack.pop();
+            }
+        };
     }
 
     private String makeFinalCalculation() {
