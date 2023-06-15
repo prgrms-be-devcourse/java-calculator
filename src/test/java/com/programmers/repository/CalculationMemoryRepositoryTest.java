@@ -9,7 +9,7 @@ import static com.programmers.util.CalculatorTestUtil.createCalculation;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculationMemoryRepositoryTest {
-    CalculatorRepository calculatorRepository = new CalculatorMemoryRepository();
+    CalculatorMemoryRepository calculatorRepository = new CalculatorMemoryRepository();
 
     @Test
     void save() {

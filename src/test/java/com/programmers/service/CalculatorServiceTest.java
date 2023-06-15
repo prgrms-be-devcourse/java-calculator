@@ -3,7 +3,6 @@ package com.programmers.service;
 import com.programmers.domain.Calculator;
 import com.programmers.io.Console;
 import com.programmers.repository.CalculatorMemoryRepository;
-import com.programmers.repository.CalculatorRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorServiceTest {
     private final CalculatorService calculatorService;
-    private final CalculatorRepository calculatorRepository;
+    private final CalculatorMemoryRepository calculatorRepository;
 
     public CalculatorServiceTest() {
         calculatorRepository = new CalculatorMemoryRepository();

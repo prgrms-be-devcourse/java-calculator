@@ -5,16 +5,16 @@ import com.programmers.domain.Tokenizer;
 import com.programmers.enumtype.ServiceSelection;
 import com.programmers.io.Input;
 import com.programmers.io.Output;
-import com.programmers.repository.CalculatorRepository;
+import com.programmers.repository.CalculatorMemoryRepository;
 
 import java.util.List;
 
 public class CalculatorService implements Runnable {
-    private final CalculatorRepository calculatorRepository;
+    private final CalculatorMemoryRepository calculatorRepository;
     private final Input input;
     private final Output output;
 
-    public CalculatorService(CalculatorRepository calculatorRepository, Input input, Output output) {
+    public CalculatorService(CalculatorMemoryRepository calculatorRepository, Input input, Output output) {
         this.calculatorRepository = calculatorRepository;
         this.input = input;
         this.output = output;
