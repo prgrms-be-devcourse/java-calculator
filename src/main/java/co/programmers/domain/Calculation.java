@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Calculator {
+public class Calculation {
 
+    private static final String DELIMITER = " ";
     private final Stack<String> operators = new Stack<>();
-    private final Stack<Integer> calculationBuffer = new Stack<>();
+    private final Stack<Double> calculationBuffer = new Stack<>();
     private final List<String> postfix = new ArrayList<>();
-    private String delimiter;
-    private String expression;
+    private Expression expression;
 
-    public Calculator(String delimiter, String expression) {
-        this.delimiter = delimiter;
+    public Calculation(Expression expression) {
         this.expression = expression;
     }
 
@@ -21,9 +20,9 @@ public class Calculator {
         return stringNumber.chars().allMatch(Character::isDigit);
     }
 
-    public Integer calculate() throws ArithmeticException {
+    public Double calculate() throws ArithmeticException {
         String postfixExpression = convertInfixToPostfix();
-        for (String component : postfixExpression.split(delimiter)) {
+        for (String component : postfixExpression.split(DELIMITER)) {
             evaluatePostfixComponent(component);
         }
         return calculationBuffer.pop();
@@ -31,12 +30,12 @@ public class Calculator {
 
     private void evaluatePostfixComponent(String component) throws ArithmeticException {
         if (isNumeric(component)) {
-            calculationBuffer.push(Integer.parseInt(component));
+            calculationBuffer.push(Double.parseDouble(component));
             return;
         }
-        int operand2 = calculationBuffer.pop();
-        int operand1 = calculationBuffer.pop();
-        int intermediateResult = Operator.calculate(component, operand1, operand2);
+        Double operand2 = calculationBuffer.pop();
+        Double operand1 = calculationBuffer.pop();
+        Double intermediateResult = Operator.calculate(component, operand1, operand2);
         calculationBuffer.push(intermediateResult);
     }
 
@@ -49,7 +48,7 @@ public class Calculator {
     }
 
     private void preProcess() {
-        for (String current : expression.split(delimiter)) {
+        for (String current : expression.split(DELIMITER)) {
             evaluateOperationObject(current);
         }
     }
