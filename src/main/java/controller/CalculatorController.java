@@ -52,7 +52,7 @@ public class CalculatorController {
 
     private void printExpressions() {
         List<Calculator> expressions = repository.findAll();
-        expressions.stream()
+        expressions
                 .forEach(output::printRecords);
     }
 
