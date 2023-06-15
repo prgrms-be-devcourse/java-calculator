@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import me.kimihiqq.io.Input;
 import me.kimihiqq.io.Output;
 import me.kimihiqq.model.History;
+import me.kimihiqq.options.Option;
 
 import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class Calculator implements Runnable {
+public class Calculator {
 
     private final Input scanner;
     private final Output printer;
@@ -20,11 +21,16 @@ public class Calculator implements Runnable {
         while (true) {
             printer.println("1. 조회\n2. 계산\n");
             String selectPage = scanner.nextLine("선택 : ");
+            Option option = Option.from(selectPage);
 
-            switch (selectPage) {
-                case "1" -> list();
-                case "2" -> calculate();
-                default -> printer.println("Invalid page!");
+            if (option == null) {
+                printer.println("Invalid page!");
+                continue;
+            }
+
+            switch (option) {
+                case LIST -> list();
+                case CALCULATE -> calculate();
             }
         }
     }
