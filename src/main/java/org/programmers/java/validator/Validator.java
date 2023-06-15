@@ -23,7 +23,7 @@ public class Validator {
 
         List<String> formularAfterSplitValidate = formulaSplitValidator.validate(formulaInput);
 
-        if(formularAfterSplitValidate.size() != 0) {
+        if(formularAfterSplitValidate.isEmpty()) {
             isNormalFormula = formulaCountValidator.validate(formularAfterSplitValidate);
         }
 
