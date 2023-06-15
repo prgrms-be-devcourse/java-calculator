@@ -36,6 +36,18 @@ class CalculatorTest {
 	}
 
 	@ParameterizedTest
+	@ValueSource(strings = {
+			"1 + 25 % 4 + A",
+			"AB2 * 3 - 22 + 3",
+			"22 + A - 4 + 15",
+			"[ 2 * 3 / ]"
+	})
+	@DisplayName("입력된 수식이 숫자와 사칙 연산 기호 이외의 문자를 포함하는 경우 예외를 던진다.")
+	void ExpressionWithInvalidCharactersTest(String input) {
+		assertThatThrownBy(() -> new Expression(input)).isInstanceOf(ArithmeticException.class);
+	}
+
+	@ParameterizedTest
 	@MethodSource("generateData")
 	@DisplayName("여러 연산자들이 주어졌을 때 연산 순서를 올바르게 결정할 수 있다")
 	void OperatordecideCalculationOrderTest(ArrayList<String> operators) {
@@ -50,6 +62,20 @@ class CalculatorTest {
 	void ExpressionNullAndEmptyTest(String expression) {
 		assertThatThrownBy(() -> new Expression(expression))
 				.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"1 + 25 * 4 / 0",
+			"3 / 0",
+			"22 - 3 + 4 / 0",
+	})
+	@DisplayName("0으로 나누는 경우 예외를 던진다")
+	void calculateDividedByZeroTest(String inputExpression) {
+		Expression expression = new Expression(inputExpression);
+		Calculation calculation = new Calculation(expression);
+		assertThatThrownBy(() -> calculation.calculate())
+				.isInstanceOf(ArithmeticException.class);
 	}
 
 	@ParameterizedTest
