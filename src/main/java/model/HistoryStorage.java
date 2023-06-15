@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class HistoryStorage {
+    private static final String STORAGE_EMPTY_MESSAGE = "연산 기록이 없습니다.";
     private final Map<Integer, String> storage;
     private int id = 0;
 
@@ -12,11 +13,29 @@ public class HistoryStorage {
     }
 
     public void save(String expression, String result) {
-        storage.put(id, expression + " = " + result);
+        String formattedExpression = makeFormattedExpression(expression, result);
+        storage.put(id, formattedExpression);
         id++;
     }
 
     public String loadAll() {
+        if (storage.isEmpty()) {
+            return STORAGE_EMPTY_MESSAGE;
+        }
+
         return String.join("\n", storage.values());
+    }
+
+    private String makeFormattedExpression(String expression, String result) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        char[] expressionComponents = expression.toCharArray();
+        int length = expressionComponents.length;
+        for (int i = 0; i < length; i++) {
+            stringBuilder.append(expressionComponents[i]).append(' ');
+        }
+        stringBuilder.append("= ").append(result);
+
+        return stringBuilder.toString();
     }
 }
