@@ -1,5 +1,10 @@
 package com.programmers.calculator.constant;
 
+import com.programmers.calculator.domain.vo.Expression;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum RegexEnum {
@@ -27,5 +32,15 @@ public enum RegexEnum {
         return token.matches(RegexEnum.NUMERIC.getRegex());
     }
 
+    public static List<String> parseToTokens(Expression expression) {
+        List<String> tokens = new ArrayList<>();
+        Matcher matcher = RegexEnum.FOUR_ARITHMETIC.getPattern().matcher(expression);
+
+        while (matcher.find()) {
+            tokens.add(matcher.group());
+        }
+
+        return tokens;
+    }
 }
 

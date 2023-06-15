@@ -3,8 +3,6 @@ package com.programmers;
 import com.programmers.calculator.controller.CalculatorController;
 import com.programmers.calculator.domain.component.Converter;
 import com.programmers.calculator.domain.component.Evaluator;
-import com.programmers.calculator.domain.component.FourArithmeticParser;
-import com.programmers.calculator.domain.component.Parser;
 import com.programmers.calculator.domain.component.PostfixConverter;
 import com.programmers.calculator.domain.component.PostfixEvaluator;
 import com.programmers.calculator.domain.core.Calculator;
@@ -26,10 +24,9 @@ public class Application {
         Console console = new Console(input, output);
 
         // domain
-        Parser parser = new FourArithmeticParser();
         Converter converter = new PostfixConverter();
         Evaluator evaluator = new PostfixEvaluator();
-        Calculator calculator = new FourArithmeticCalculator(parser, converter, evaluator);
+        Calculator calculator = new FourArithmeticCalculator(converter, evaluator);
 
         // repository
         HistoryRepository repository = new HistoryMapRepository();
