@@ -8,6 +8,7 @@ import com.programmers.calculator.repository.HistoryRepository;
 public class Calculator implements Runnable {
     private final int HISTORY = 1;
     private final int CALCULATE = 2;
+    private final int END = 0;
 
     private HistoryRepository historyRepository;
 
@@ -29,10 +30,15 @@ public class Calculator implements Runnable {
     @Override
     public void run() {
         while (true) {
-            output.printMenu("1. 조회\n2. 계산\n");
+            output.printMenu("0. 종료\n1. 조회\n2. 계산\n");
             int menu = Integer.parseInt(input.inputMenu("선택 : ")); // 예외처리는 어떻게?
 
             switch (menu) {
+                case END -> {
+                    System.out.println("계산기 종료");
+                    return;
+                }
+
                 case HISTORY -> {
                     System.out.println("조회 실행");
                     // do more
@@ -44,7 +50,7 @@ public class Calculator implements Runnable {
                     // do more
                     Expression expression = input.inputExpression();
                     int result = expression.getResult();
-                    System.out.println(result);
+                    output.printResult(result);
                     historyRepository.save(expression, result);
                 }
 
