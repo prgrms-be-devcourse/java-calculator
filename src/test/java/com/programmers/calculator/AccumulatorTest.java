@@ -52,7 +52,7 @@ class AccumulatorTest {
 
     @Test
     @DisplayName("0으로 나누는 경우에 대한 예외 처리")
-    void divide0Exception() {
+    void 나누기0_예외발생() {
         assertThatThrownBy(() -> Operator.DIVIDE.operation(BigDecimal.TEN, BigDecimal.ZERO))
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessageContaining("0으로 나눌 수 없습니다.");

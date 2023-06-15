@@ -12,7 +12,7 @@ class MenuTypeTest {
     @ParameterizedTest
     @DisplayName("적절한 메뉴 입력")
     @ValueSource(strings = {"1", "2", "3"})
-    void rightInputMenuNumber(String inputMenuNumber) {
+    void 적절한_메뉴_입력(String inputMenuNumber) {
         assertThatCode(
                 () -> MenuType.findMenuType(inputMenuNumber)
         ).doesNotThrowAnyException();
@@ -21,7 +21,7 @@ class MenuTypeTest {
     @ParameterizedTest
     @DisplayName("잘못된 메뉴 입력")
     @ValueSource(strings = {"a", "z", "4", "0", "!", ")"})
-    void wrongInputMenuNumber(String inputMenuNumber) {
+    void 잘못된_메뉴_입력(String inputMenuNumber) {
         assertThatThrownBy(() -> MenuType.findMenuType(inputMenuNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }

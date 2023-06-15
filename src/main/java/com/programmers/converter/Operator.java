@@ -56,7 +56,7 @@ public enum Operator {
     }
 
     public String getSymbol() {
-        return symbol;
+        return this.symbol;
     }
 
     public int getPriority() {
