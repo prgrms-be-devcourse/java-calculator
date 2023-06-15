@@ -1,14 +1,15 @@
 package com.programmers.calculator.repository;
 
-import java.math.BigDecimal;
+import com.programmers.calculator.domain.vo.CalculationResult;
+import com.programmers.calculator.domain.vo.Expression;
 
 public class CalculationHistory {
 
     private Long id = 0L;
-    private String expression;
-    private BigDecimal result;
+    private Expression expression;
+    private CalculationResult result;
 
-    public CalculationHistory(String expression, BigDecimal result) {
+    public CalculationHistory(Expression expression, CalculationResult result) {
         this.expression = expression;
         this.result = result;
     }

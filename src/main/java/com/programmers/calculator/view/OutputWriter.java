@@ -1,8 +1,8 @@
 package com.programmers.calculator.view;
 
+import com.programmers.calculator.domain.vo.CalculationResult;
 import com.programmers.calculator.repository.CalculationHistory;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class OutputWriter implements Output {
@@ -18,7 +18,7 @@ public class OutputWriter implements Output {
     }
 
     @Override
-    public void write(BigDecimal result) {
+    public void write(CalculationResult result) {
         System.out.println(result);
     }
 

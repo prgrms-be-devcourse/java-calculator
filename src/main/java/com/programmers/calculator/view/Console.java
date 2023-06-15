@@ -1,8 +1,8 @@
 package com.programmers.calculator.view;
 
+import com.programmers.calculator.domain.vo.CalculationResult;
 import com.programmers.calculator.repository.CalculationHistory;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Console {
@@ -38,7 +38,7 @@ public class Console {
         output.write(calculationHistories);
     }
 
-    public void outputCalculation(BigDecimal result) {
+    public void outputCalculation(CalculationResult result) {
         output.write(result);
     }
 }

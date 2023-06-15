@@ -1,21 +1,22 @@
-package com.programmers.calculator.domain;
+package com.programmers.calculator.domain.core;
 
-import java.math.BigDecimal;
+import com.programmers.calculator.domain.vo.CalculationResult;
+
 import java.util.function.BiFunction;
 
 public enum Operator {
-    ADDITION('+', 10, BigDecimal::add),
-    SUBTRACTION('-', 10, BigDecimal::subtract),
-    MULTIPLICATION('*', 100, BigDecimal::multiply),
-    DIVISION('/', 100, BigDecimal::divide);
+    ADDITION('+', 10, CalculationResult::add),
+    SUBTRACTION('-', 10, CalculationResult::subtract),
+    MULTIPLICATION('*', 100, CalculationResult::multiply),
+    DIVISION('/', 100, CalculationResult::divide);
 
     private static final Operator[] OPERATORS = Operator.values();
 
     private final char symbol;
     private final int priority;
-    private final BiFunction<BigDecimal, BigDecimal, BigDecimal> function;
+    private final BiFunction<CalculationResult, CalculationResult, CalculationResult> function;
 
-    Operator(char symbol, int priority, BiFunction<BigDecimal, BigDecimal, BigDecimal> function) {
+    Operator(char symbol, int priority, BiFunction<CalculationResult, CalculationResult, CalculationResult> function) {
         this.symbol = symbol;
         this.priority = priority;
         this.function = function;
@@ -29,7 +30,7 @@ public enum Operator {
         return priority;
     }
 
-    public BiFunction<BigDecimal, BigDecimal, BigDecimal> getFunction() {
+    public BiFunction<CalculationResult, CalculationResult, CalculationResult> getFunction() {
         return function;
     }
 
