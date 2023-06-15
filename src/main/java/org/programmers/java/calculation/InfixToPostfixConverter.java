@@ -29,7 +29,7 @@ public class InfixToPostfixConverter {
     }
 
     private void checkOperatorToAddPostfix(String operatorOrOperand) {
-        if (Operator.isSymbol(operatorOrOperand).isPresent()) {
+        if (Operator.findSymbol(operatorOrOperand).isPresent()) {
             checkOperatorStackAndCompare(operatorOrOperand);
         }
     }

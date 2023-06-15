@@ -23,7 +23,7 @@ public class PostfixCalculation {
     }
 
     private void calculationResultAddInStack(String operatorOrOperand) {
-        if(Operator.isSymbol(operatorOrOperand).isPresent()){
+        if(Operator.findSymbol(operatorOrOperand).isPresent()){
             int num2 = Integer.parseInt(numberDeque.removeLast());
             int num1 = Integer.parseInt(numberDeque.removeLast());
 

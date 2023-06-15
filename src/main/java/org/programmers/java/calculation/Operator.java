@@ -1,9 +1,16 @@
 package org.programmers.java.calculation;
 
+import org.programmers.java.message.Error;
+
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Operator {
     PLUS("+", 2, (a, b) -> a + b),
@@ -25,18 +32,24 @@ public enum Operator {
     }
 
     public static boolean comparePriorities(String firstSymbol, String secondSymbol){
-        return Operator.isSymbol(firstSymbol).get().getPriority() < Operator.isSymbol(secondSymbol).get().getPriority();
+        return Operator.findSymbol(firstSymbol).get().getPriority() < Operator.findSymbol(secondSymbol).get().getPriority();
 
     }
 
     public static int arithmeticExpression(String symbol, int firstOperand, int secondOperand){
-        return isSymbol(symbol).get().expression.apply(firstOperand, secondOperand);
+        return findSymbol(symbol).get().expression.apply(firstOperand, secondOperand);
     }
 
-    public static Optional<Operator> isSymbol(String inputSymbol){
-        return Arrays.stream(values())
-                .filter(operator -> operator.symbol.equals(inputSymbol))
-                .findAny();
+    public static Optional<Operator> findSymbol(String inputSymbol){
+        Map<String, Operator> mapCollection = Collections.unmodifiableMap(Stream.of(values()).
+                collect(Collectors.toMap(Operator::getSymbol, Function.identity())));
+
+        return Optional.ofNullable(mapCollection.get(inputSymbol));
+        // Arrays.stream(values()).filter(operator -> operator.symbol.equals(inputSymbol)).findAny();
+    }
+
+    private String getSymbol() {
+        return symbol;
     }
 
     public static boolean isNumber(String inputNumber){
