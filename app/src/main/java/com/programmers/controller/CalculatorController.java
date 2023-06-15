@@ -1,70 +1,64 @@
 package com.programmers.controller;
 
-import com.programmers.calculator.Calculator;
-import com.programmers.expression.Expression;
-import com.programmers.storage.Storage;
+import com.programmers.service.CalculatorService;
+import com.programmers.util.Formula;
 import com.programmers.ui.InputView;
 import com.programmers.ui.OutputView;
+import com.programmers.util.Menu;
 
-import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Map;
 
 public class CalculatorController {
 	
-	private InputView inputView = new InputView();
-	private OutputView outputView = new OutputView();
-	private Calculator calculator = new Calculator();
-	private Storage storage = new Storage();
+	private final InputView inputView;
+	private final OutputView outputView;
+	private final CalculatorService calculatorService;
+
+	public CalculatorController() {
+		this.inputView = new InputView();
+		this.outputView = new OutputView();
+		this.calculatorService = new CalculatorService();
+	}
 	
-	public void run()  {
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-			while (true) {
+	public void run() {
+		while (true) {
+			try {
 				outputView.init();
-				String select = inputView.select(br);
-				if (!isValidInput(select)) continue;
-				Integer num = Integer.parseInt(select);
-				if (num.equals(1)) view();
-				else if (num.equals(2)) calculate(br);
-				else {
-					outputView.inputInOneAndTwo();
-					continue;
+				String select = inputView.select();
+				Menu menu = Menu.of(select);
+				if (menu == Menu.VIEW) view();
+				else if (menu == Menu.CALCULATE) calculate();
+				else if (menu == Menu.EXIT) {
+					exit();
+					break;
 				}
+			} catch(Exception e){
+				outputView.printExceptionMessage(e.getMessage());
+				if (e instanceof IOException) break;
 			}
-		} catch (IOException e) {
-			outputView.eof();
 		}
-	}
-	
-	private boolean isValidInput(String select) throws IOException {
-		if (select.isEmpty()) throw new IOException();
-		if (!select.matches("[0-9]+")){
-			outputView.inputIsOnlyNumber();
-			return false;
-		} return true;
-	}
-	
-	private void calculate(BufferedReader br) throws IOException {
+		
 		try {
-			String str = inputView.expression(br);
-			Expression expression = new Expression(str);
-			List<String> postfix = calculator.changeInfixToPostfix(expression.getExpression());
-			Integer result = calculator.calcPostfix(postfix);
-			storage.save(expression, result);
-			outputView.viewResult(result);
-		} catch (IllegalArgumentException e) {
-			outputView.invalidInputException();
-		} catch (ArithmeticException e) {
-			outputView.divideByZeroException();
+			inputView.close();
+		} catch (Exception e) {
+			outputView.printExceptionMessage(e.getMessage());
 		}
+	}
+	
+	private void calculate() {
+		String formula = inputView.formula();
+		Integer result = calculatorService.calculate(formula);
+		outputView.viewResult(result);
 	}
 	
 	private void view() {
-		Map<String, Integer> list = storage.findAll();
-		outputView.viewList(list);
+		List<String> record = calculatorService.view();
+		outputView.viewRecord(record);
+	}
+	
+	private void exit() {
+		outputView.exit();
 	}
 	
 }
