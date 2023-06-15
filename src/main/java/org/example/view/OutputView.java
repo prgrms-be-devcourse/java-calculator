@@ -22,7 +22,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printMemory(Calculator calculator) {
+    public void printHistory(Calculator calculator) {
         HashMap<String, Integer> map = calculator.getMap();
 
         Iterator<Map.Entry<String, Integer>> entry = map.entrySet().iterator();

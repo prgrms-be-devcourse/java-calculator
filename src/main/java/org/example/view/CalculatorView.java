@@ -27,7 +27,7 @@ public class CalculatorView {
     }
 
     //Controller에서 주입
-    public void printMemory(Calculator calculator) {
-        outputView.printMemory(calculator);
+    public void printHistory(Calculator calculator) {
+        outputView.printHistory(calculator);
     }
 }
