@@ -3,8 +3,6 @@ package com.programmers.calculator;
 import com.programmers.converter.ExpressionConverter;
 import com.programmers.io.Console;
 
-import java.util.Optional;
-
 public class Calculator {
 
     private final Accumulator accumulator;
@@ -20,12 +18,12 @@ public class Calculator {
         while (power) {
             Console.printMenu();
 
-            MenuType menu = makeMenu(Console.inputMenuNumber())
-                    .orElseGet(() -> MenuType.NULL);
+            MenuType menu = MenuType.findMenuType(Console.inputMenuNumber());
 
             switch (menu) {
                 case HISTORY:
-                    Console.printHistory(inMemory.findAll());
+                    String history = inMemory.findAll();
+                    Console.printHistory(history);
                     break;
 
                 case CALCULATE:
@@ -43,19 +41,9 @@ public class Calculator {
                     break;
 
                 default:
+                    Console.printError("메뉴는 1, 2, 3 만 가능합니다.");
                     break;
             }
         }
-    }
-
-    private Optional<MenuType> makeMenu(String expression) {
-        Optional<MenuType> menu = Optional.empty();
-        try {
-            menu = Optional
-                    .ofNullable(MenuType.findMenuType(expression));
-        } catch (IllegalArgumentException e) {
-            Console.printError(e.getMessage());
-        }
-        return menu;
     }
 }
