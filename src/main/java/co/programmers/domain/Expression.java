@@ -40,4 +40,8 @@ public class Expression {
 	public void eliminateWhiteSpace() {
 		expression = expression.replaceAll("\\s", "");
 	}
+
+	public String getExpression() {
+		return expression;
+	}
 }
