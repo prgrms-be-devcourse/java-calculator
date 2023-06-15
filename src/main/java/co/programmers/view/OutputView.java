@@ -2,6 +2,5 @@ package co.programmers.view;
 
 public interface OutputView {
 
-    void print(String content);
-
+    void printCalculationRes(Integer content);
 }
