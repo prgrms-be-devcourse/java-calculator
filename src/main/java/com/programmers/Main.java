@@ -1,8 +1,8 @@
 package com.programmers;
 
 import com.programmers.core.CalculatorManager;
-import com.programmers.core.calculator.AbstractCalculator;
 import com.programmers.core.calculator.Calculator;
+import com.programmers.core.calculator.PostfixCalculator;
 import com.programmers.core.converter.Converter;
 import com.programmers.core.converter.PostfixConverter;
 import com.programmers.core.manager.CalculationRequestManager;
@@ -24,7 +24,7 @@ public class Main {
         Output writer = new Writer();
         Console console = new Console(reader, writer);
         Converter converter = new PostfixConverter();
-        AbstractCalculator calculator = new Calculator(converter);
+        Calculator calculator = new PostfixCalculator(converter);
 
         MenuManager menuManager = new MenuManager(console);
         CalculationRequestManager requestManager = new CalculationRequestManager(console);
