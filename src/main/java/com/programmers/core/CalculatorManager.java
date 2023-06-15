@@ -1,82 +1,63 @@
 package com.programmers.core;
 
-import com.programmers.error.ErrorMessages;
-import com.programmers.model.AbstractCalculator;
-import com.programmers.model.CalculationResult;
+import com.programmers.core.data.CalculationRequest;
+import com.programmers.core.data.CalculationResult;
+import com.programmers.core.manager.CalculationRequestManager;
+import com.programmers.core.manager.CalculatorProcessor;
+import com.programmers.core.manager.MenuManager;
+import com.programmers.core.manager.ResultPrinter;
 import com.programmers.repository.CalculationRepository;
-import com.programmers.view.Console;
 
 import java.util.List;
 
 public class CalculatorManager {
+
+    private final MenuManager menuManager;
+    private final CalculationRequestManager requestManager;
+    private final CalculatorProcessor calculatorProcessor;
+    private final ResultPrinter resultPrinter;
     private final CalculationRepository repository;
-    private final Console console;
-    private final AbstractCalculator calculator;
 
     private static final String VIEW = "1", CALCULATION = "2", EXIT = "3";
 
-
-    public CalculatorManager(CalculationRepository repository, Console console, AbstractCalculator calculator) {
+    public CalculatorManager(MenuManager menuManager, CalculationRequestManager requestManager, CalculatorProcessor calculatorProcessor, ResultPrinter resultPrinter, CalculationRepository repository) {
+        this.menuManager = menuManager;
+        this.requestManager = requestManager;
+        this.calculatorProcessor = calculatorProcessor;
+        this.resultPrinter = resultPrinter;
         this.repository = repository;
-        this.console = console;
-        this.calculator = calculator;
     }
 
     public void run() {
         Boolean power = true;
 
         while (power) {
-            switch (inputMenu()) {
+            switch (menuManager.inputMenu()) {
                 case VIEW:
-                    findAllCalculationHistory();
+                    findRecord();
                     break;
                 case CALCULATION:
-                    calculatorProcessStart();
+                    calculatorProcess();
                     break;
                 case EXIT:
-                    exitProgram();
-                    power = false;
+                    menuManager.printExitMessage();
                     break;
                 default:
-                    wrongMenuSelection();
+                    menuManager.printInvalidMenuSelection();
             }
         }
     }
 
-    private void findAllCalculationHistory() {
+    private void findRecord() {
         List<CalculationResult> calculationRecord = repository.findAll();
-        recordCommandExecution(calculationRecord);
+        menuManager.printCalculationRecords(calculationRecord);
     }
 
-    private void calculatorProcessStart() {
-        saveAndPrintResult(console.inputFormula());
-    }
-
-    private void saveAndPrintResult(String formula) {
-        try {
-            long result = sendToCalculator(formula);
-            repository.save(new CalculationResult(formula, result));
-            console.print(result);
-        } catch (NumberFormatException e) {
-            console.print(ErrorMessages.getOperandIsNotANumberMsg());
-        } catch (IllegalArgumentException e) {
-            console.print(ErrorMessages.getInvalidOperatorInputMsg());
-        } catch (ArithmeticException e) {
-            console.print(ErrorMessages.getEnterZeroForDivisionMsg());
+    private void calculatorProcess() {
+        CalculationRequest request = requestManager.createCalculationRequest();
+        CalculationResult result = calculatorProcessor.performCalculation(request);
+        if (result != null) {
+            resultPrinter.printResult(result.getResult());
         }
     }
-
-    private void wrongMenuSelection() {
-        console.print(ErrorMessages.getInvalidMenuSelectionMsg());
-    }
-
-    private void recordCommandExecution(List<CalculationResult> calculationRecord) {
-        if (calculationRecord.isEmpty()) {
-            console.print(ErrorMessages.getNoCalculationRecordsMsg());
-            return;
-        }
-        console.printList(calculationRecord);
-    }
-
-
 }

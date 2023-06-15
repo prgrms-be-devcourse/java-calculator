@@ -1,9 +1,14 @@
 package com.programmers;
 
 import com.programmers.core.CalculatorManager;
-import com.programmers.core.Converter;
-import com.programmers.core.PostfixConverter;
-import com.programmers.model.AbstractCalculator;
+import com.programmers.core.calculator.AbstractCalculator;
+import com.programmers.core.calculator.Calculator;
+import com.programmers.core.converter.Converter;
+import com.programmers.core.converter.PostfixConverter;
+import com.programmers.core.manager.CalculationRequestManager;
+import com.programmers.core.manager.CalculatorProcessor;
+import com.programmers.core.manager.MenuManager;
+import com.programmers.core.manager.ResultPrinter;
 import com.programmers.repository.CalculationRepository;
 import com.programmers.repository.InMemoryCalculationRepository;
 import com.programmers.view.Console;
@@ -21,7 +26,11 @@ public class Main {
         Converter converter = new PostfixConverter();
         AbstractCalculator calculator = new Calculator(converter);
 
-        CalculatorManager calculatorManager = new CalculatorManager(repository, console, calculator);
+        MenuManager menuManager = new MenuManager(console);
+        CalculationRequestManager requestManager = new CalculationRequestManager(console);
+        CalculatorProcessor calculatorProcessor = new CalculatorProcessor(calculator, repository, console);
+        ResultPrinter resultPrinter = new ResultPrinter(console);
+        CalculatorManager calculatorManager = new CalculatorManager(menuManager, requestManager, calculatorProcessor, resultPrinter, repository);
         calculatorManager.run();
     }
 }
