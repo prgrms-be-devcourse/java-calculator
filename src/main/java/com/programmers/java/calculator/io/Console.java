@@ -36,7 +36,7 @@ public class Console implements Input, Output {
     @Override
     public void printHistoryList(List<CalculationHistory> historyList) {
         for (CalculationHistory history : historyList) {
-            System.out.println(history.getExpression() + " = " + history.getResult());
+            System.out.println(history);
         }
         System.out.println();
     }

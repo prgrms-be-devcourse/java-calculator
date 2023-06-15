@@ -23,4 +23,9 @@ public final class CalculationHistory {
     public String getResult() {
         return result;
     }
+
+    @Override
+    public String toString() {
+        return getExpression() + " = " + getResult();
+    }
 }
