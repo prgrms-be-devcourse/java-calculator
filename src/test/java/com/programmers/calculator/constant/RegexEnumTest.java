@@ -1,0 +1,42 @@
+package com.programmers.calculator.constant;
+
+import com.programmers.calculator.domain.vo.Expression;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+class RegexEnumTest {
+
+    @DisplayName("정규식에 맞게 토큰이 잘 쪼개지는지 확인")
+    @Test
+    void expression_regex_parsing () {
+
+        // given
+        Expression expression1 = new Expression("1 + 2 * 4 / 6");
+        Expression expression2 = new Expression("1+2*4/6");
+
+        // when
+        List<String> result1 = RegexEnum.parseToTokens(expression1);
+        List<String> result2 = RegexEnum.parseToTokens(expression2);
+        List<String> expectedTokens = List.of("1", "+", "2", "*", "4", "/", "6");
+
+        // then
+        Assertions.assertThat(expectedTokens).isEqualTo(result1);
+        Assertions.assertThat(expectedTokens).isEqualTo(result2);
+    }
+
+    @DisplayName("숫자가 숫자 정규식에 체크 되는지 확인")
+    @Test
+    void numeric_regex() {
+        Assertions.assertThat(RegexEnum.isNumeric("1")).isTrue();
+    }
+
+    @DisplayName("숫자 아닌 것이 숫자 정규식에 체크가 안되는지 확인")
+    @Test
+    void not_numeric_regex() {
+        Assertions.assertThat(RegexEnum.isNumeric("a")).isFalse();
+    }
+
+}
