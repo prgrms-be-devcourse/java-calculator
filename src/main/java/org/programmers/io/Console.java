@@ -1,6 +1,7 @@
 package org.programmers.io;
 
 public class Console {
+
     private final Input input;
     private final Output output;
 
