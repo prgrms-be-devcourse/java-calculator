@@ -15,15 +15,16 @@ public class Expression {
 
 	public Expression(String expression) {
 		this.expression = expression;
+		if (expression == null) {
+			throw new IllegalArgumentException(ExceptionMessage.EMPTY_INPUT);
+		}
 		if (!validate()) {
 			throw new ArithmeticException(ExceptionMessage.INVALID_EXPRESSION);
 		}
 	}
 
 	private boolean validate() {
-		if (expression == null) {
-			throw new ArithmeticException(ExceptionMessage.INVALID_EXPRESSION);
-		}
+
 		Matcher matcher = EXPRESSION_FORMAT.matcher(expression);
 		return matcher.matches();
 	}
