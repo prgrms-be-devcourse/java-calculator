@@ -61,6 +61,7 @@ class InfixExpressionTest {
         InfixExpression infixExpression1 = new InfixExpression(expression);
         InfixExpression infixExpression2 = new InfixExpression(expression);
 
+        assertThat(infixExpression1).hasSameHashCodeAs(infixExpression2);
         assertThat(infixExpression1).isEqualTo(infixExpression2);
     }
 }
