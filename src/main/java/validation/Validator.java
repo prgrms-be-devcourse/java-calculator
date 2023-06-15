@@ -3,12 +3,12 @@ package validation;
 import java.util.Stack;
 
 public class Validator {
-    private static final String numberPattern = "^[0-9]";
-    private static final String operatorPattern = "^[-+*/]";
-    private static final String exprSequence = "^([0-9][-+*/])+[0-9]$";
+    private static final String NUMBER_PATTERN = "^[0-9]+";
+    private static final String OPERATOR_PATTERN = "^[-+*/]";
+    private static final String EXPRESSION_SEQUENCE = "^(([0-9]+[-+*/])+[0-9]+$)|([0-9]+)";
 
     public static boolean isNumber(String getString) {
-        return getString.matches(numberPattern);
+        return getString.matches(NUMBER_PATTERN);
     }
 
     public static boolean isNotNumber(String getString) {
@@ -16,7 +16,7 @@ public class Validator {
     }
 
     public static boolean isOperator(String getString) {
-        return getString.matches(operatorPattern);
+        return getString.matches(OPERATOR_PATTERN);
     }
 
     public static boolean isOpenBrackets(String getString) {
@@ -44,12 +44,12 @@ public class Validator {
         return bracketStack.isEmpty();
     }
 
-    public static boolean exprSequenceCheck(String getExpr) {
-        getExpr = getExpr.replace("(", "").replace(")", "");
-        return getExpr.matches(exprSequence);
+    public static boolean expressionSequenceCheck(String getExpression) {
+        getExpression = getExpression.replace("(", "").replace(")", "");
+        return getExpression.matches(EXPRESSION_SEQUENCE);
     }
 
-    public static boolean isRightExpr(String getExpr) {
-        return checkBrackets(getExpr) && exprSequenceCheck(getExpr);
+    public static boolean isRightExpression(String getExpression) {
+        return checkBrackets(getExpression) && expressionSequenceCheck(getExpression);
     }
 }
