@@ -35,8 +35,9 @@ public class View implements Input,Output{
 
     @Override
     public void printSelection(){
-        Arrays.stream(SelectTypeView.values())
-                        .forEach(view -> System.out.println(view.getNum() + " " + view.getOption()));
+        for(SelectTypeView stv : SelectTypeView.values()){
+            System.out.println(stv.getNum() + " " + stv.getOption());
+        }
         System.out.println();
         System.out.print("선택 : ");
     }
@@ -52,7 +53,12 @@ public class View implements Input,Output{
     }
 
     private boolean validateSelection(int selection) {
-        return Arrays.stream(SelectTypeView.values()).anyMatch(num -> num.getNum() == selection);
+        for(SelectTypeView stv : SelectTypeView.values()){
+            if(stv.getNum() == selection){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean validateExpression(String expression) {
