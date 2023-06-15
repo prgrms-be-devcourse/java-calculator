@@ -56,7 +56,6 @@ public class View implements Input,Output{
     }
 
     private boolean validateSelection(int selection) {
-        System.out.println(selection);
         for(SelectTypeView stv : SelectTypeView.values()){
             if(stv.getNum() == selection){
                 return true;
