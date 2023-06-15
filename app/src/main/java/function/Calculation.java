@@ -7,7 +7,13 @@ import java.util.Stack;
 import static validator.Validator.checkValidOperator;
 
 public class Calculation {
+    Operator operator;
     private static final String positiveRegularExp = "\\d+(\\.\\d+)?";
+
+    public Calculation() {
+        this.operator = new Operator();
+    }
+
     private static int priority(char operator) {
         if (operator == '(' || operator == ')') {
             return 0;

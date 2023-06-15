@@ -11,10 +11,16 @@ import static print.Choice.printChoice;
 import static validator.Validator.checkChoiceNum;
 
 public class Calculator {
+    Calculation calculation;
+    Storage storage;
+
+    public Calculator() {
+        this.calculation = new Calculation();
+        this.storage = new Storage();
+    }
+
     public void run() throws IOException {
         BufferedReader br;
-        Storage storage = new Storage();
-        Calculation calculation = new Calculation();
 
         while (true) {
             printChoice();
