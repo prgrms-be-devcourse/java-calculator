@@ -18,7 +18,7 @@ public class View implements Input,Output{
             return selection;
         }
 
-        return -1;
+        throw new IllegalArgumentException("원하는 요청을 찾을 수 없습니다.");
     }
 
     @Override
