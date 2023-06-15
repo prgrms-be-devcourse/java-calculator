@@ -1,31 +1,26 @@
 package calcproject;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-
+import calcproject.di.container.CalcManagerDependencyInjectionContainer;
+import calcproject.factory.CalcManagerViewFactory;
+import calcproject.factory.CalcResultRecordRepositoryFactory;
+import calcproject.factory.ConsoleViewCalcManagerViewFactory;
+import calcproject.factory.InMemoryCalcResultRecordRepositoryFacotry;
 import calcproject.engine.CalcExpressionTokenizer;
 import calcproject.engine.Calculator;
-import calcproject.models.CalcResultRecordModel;
-import calcproject.repository.CalcResultRecordRepository;
-import calcproject.repository.MemoryCalcResultRecordRepository;
 import calcproject.service.CalcManager;
-import calcproject.view.console.CalcConsoleView;
 
 public class Main {
 	public static void main(String[] args) {
-		Map<Integer, CalcResultRecordModel> calcMap = new HashMap<>();
-		int startIdx = 0;
-		CalcResultRecordRepository calcResultRecordRepository =
-			new MemoryCalcResultRecordRepository(calcMap, startIdx);
-		Scanner scanner = new Scanner(System.in);
-		CalcConsoleView calcConsoleView = new CalcConsoleView(scanner);
 		CalcExpressionTokenizer calcExpressionTokenizer = new CalcExpressionTokenizer();
 		Calculator calculator = new Calculator(calcExpressionTokenizer);
 
-		CalcManager calcManager = new CalcManager(calcResultRecordRepository, calcConsoleView, calcConsoleView,
-			calculator);
+		CalcManagerViewFactory calcManagerViewFactory = new ConsoleViewCalcManagerViewFactory();
+		CalcResultRecordRepositoryFactory calcResultRecordRepositoryFactory = new InMemoryCalcResultRecordRepositoryFacotry();
 
+		CalcManagerDependencyInjectionContainer calcManagerDependencyInjectionContainer =
+			new CalcManagerDependencyInjectionContainer(calcResultRecordRepositoryFactory, calcManagerViewFactory, calculator);
+
+		CalcManager calcManager = calcManagerDependencyInjectionContainer.createCalcManager();
 		calcManager.startCalcManager();
 	}
 }

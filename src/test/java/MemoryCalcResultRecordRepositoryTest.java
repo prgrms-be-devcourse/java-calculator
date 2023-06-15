@@ -30,10 +30,10 @@ class MemoryCalcResultRecordRepositoryTest {
 		CalcResultRecordModel calcRecord2 = new CalcResultRecordModel("3+3", 6);
 		calcResultRecordRepository.saveCalcResultRecord(calcRecord1);
 		calcResultRecordRepository.saveCalcResultRecord(calcRecord2);
+		List<CalcResultRecordModel> expectedCalcRecords = Arrays.asList(calcRecord1, calcRecord2);
 
 		// when
 		List<CalcResultRecordModel> resultCalcRecords = calcResultRecordRepository.loadCalcResultRecords();
-		List<CalcResultRecordModel> expectedCalcRecords = Arrays.asList(calcRecord1, calcRecord2);
 
 		// then
 		Assertions.assertThat(resultCalcRecords)

@@ -27,7 +27,7 @@ public class MemoryCalcResultRecordRepository implements CalcResultRecordReposit
 	public List<CalcResultRecordModel> loadCalcResultRecords() {
 		return this.calcMap.values()
 			.stream()
-			.sorted(Comparator.comparing(calcModel -> calcModel.getId()))
+			.sorted(Comparator.comparing(CalcResultRecordModel::getId))
 			.collect(Collectors.toList());
 	}
 }
