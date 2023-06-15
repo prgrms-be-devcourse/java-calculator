@@ -2,10 +2,8 @@ package co.programmers.domain;
 
 import java.util.Arrays;
 
-import co.programmers.exception.ExceptionMessage;
-
 public enum UserMenu {
-	INQUIRY(1), CALCULATE(2), TERMINATE(3), ERROR(4);
+	INQUIRY(1), CALCULATE(2), TERMINATE(3), ERROR(-9999);
 
 	private final Integer menu;
 
@@ -17,6 +15,6 @@ public enum UserMenu {
 		return Arrays.stream(values())
 				.filter(menuNum -> menuNum.menu.equals(input))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_INPUT));
+				.orElse(ERROR);
 	}
 }
