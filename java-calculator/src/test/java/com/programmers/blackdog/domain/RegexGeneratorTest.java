@@ -13,6 +13,7 @@ class RegexGeneratorTest {
 
     private static final String REGEX_PREFIX = "^\\d+\\s([";
     private static final String REGEX_SUFFIX = "]\\s\\d+\\s)+$";
+    public static final String OPERATOR_PREFIX = "\\";
 
     private RegexGenerator regexGenerator;
 
@@ -27,7 +28,7 @@ class RegexGeneratorTest {
     void when_ConfineSpecificOperator_Expects_GenerateRegexWithInputOperator(ArithmeticOperators firstOperator, ArithmeticOperators secondOperator) {
         String regex = regexGenerator.generateWithOperator(firstOperator, secondOperator);
 
-        assertThat(regex).isEqualTo(REGEX_PREFIX + firstOperator.getOperator()+ secondOperator.getOperator() + REGEX_SUFFIX);
+        assertThat(regex).isEqualTo(REGEX_PREFIX + OPERATOR_PREFIX + firstOperator.getOperator()+ OPERATOR_PREFIX + secondOperator.getOperator() + REGEX_SUFFIX);
     }
 
     @DisplayName("모든 연산자를 포함한 정규식을 반환한다.")
@@ -35,7 +36,7 @@ class RegexGeneratorTest {
     void when_GenerateWithAllOperator_Expects_GenerateRegexWithAllOperator() {
         String regex = regexGenerator.generateWithAllOperator();
 
-        String expected = "^\\d+\\s([+-*/]\\s\\d+\\s)+$";
+        String expected = "^\\d+\\s([\\+\\-\\*\\/]\\s\\d+\\s)+$";
 
         assertThat(regex).isEqualTo(expected);
     }
