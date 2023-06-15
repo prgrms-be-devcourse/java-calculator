@@ -1,6 +1,13 @@
 package com.programmers.java.calculator.engine.model;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class Result {
-    private char operate;
-    private
+    String oper;
+    int answer;
+    @Override
+    public String toString() {
+        return oper + " = " + answer;
+    }
 }

@@ -1,14 +1,15 @@
 package com.programmers.java.calculator.engine;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
+import com.programmers.java.calculator.engine.model.Result;
 import java.util.Stack;
-import java.util.StringTokenizer;
+import static com.programmers.java.calculator.engine.Lookup.records;
 
 // 계산
 public class Calculation {
     public void start(String form) {
-        System.out.println(calPostfix(infixTopostfic(form)));
+        int answer = calPostfix(infixTopostfic(form));
+        System.out.println(answer);
+        records.add(new Result(form, answer));
         System.out.println();
     }
 
@@ -71,7 +72,6 @@ public class Calculation {
     // 후위 표기식으로 계산 결과 return
     private int calPostfix(String postFix){
         Stack<Integer> stack = new Stack<>();
-        System.out.println("postFix:"+postFix);
 
         for(char c : postFix.toCharArray()){
             if(Character.isDigit(c)){
