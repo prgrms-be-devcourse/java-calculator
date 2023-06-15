@@ -2,11 +2,10 @@ package com.wonu606;
 
 import com.wonu606.app.App;
 import com.wonu606.calculator.CalculatorApp;
+import com.wonu606.io.ConsoleInput;
 import com.wonu606.io.ConsolePrinter;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
-import com.wonu606.io.ConsoleInput;
-import java.io.IOException;
 
 public class Main {
 
@@ -25,7 +24,7 @@ public class Main {
         }
     }
 
-    private static void runApp(App app, Input input, Print printer) throws IOException {
+    private static void runApp(App app, Input input, Print printer) {
         app.execute(input, printer);
     }
 }
