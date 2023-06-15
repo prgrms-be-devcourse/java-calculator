@@ -1,4 +1,4 @@
-package org.example.calculation;
+package org.example.compute;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

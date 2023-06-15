@@ -1,4 +1,4 @@
-package org.example.calculation;
+package org.example.compute;
 import org.example.util.InputStringFormating;
 import org.example.util.Operator;
 

@@ -1,7 +1,6 @@
 package org.example.controller;
-import org.example.calculation.ArithmeticCompute;
-import org.example.calculation.Compute;
-import org.example.controller.CalculatorController;
+import org.example.compute.ArithmeticCompute;
+import org.example.compute.Compute;
 import org.example.io.ConsoleOutput;
 import org.example.io.Input;
 import org.example.io.Output;

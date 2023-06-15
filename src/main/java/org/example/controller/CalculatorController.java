@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import org.example.calculation.Compute;
+import org.example.compute.Compute;
 import org.example.exception.BadEquationException;
 import org.example.util.CheckEquation;
 import org.example.io.Input;
