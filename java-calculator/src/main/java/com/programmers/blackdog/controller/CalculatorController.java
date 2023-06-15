@@ -1,11 +1,9 @@
 package com.programmers.junho.controller;
 
-import com.programmers.junho.controller.constant.Selection;
-import com.programmers.junho.domain.Calculator;
-import com.programmers.junho.repository.CalculatorRepository;
-import com.programmers.junho.repository.MemoryCalculatorRepository;
-import com.programmers.junho.view.InputView;
-import com.programmers.junho.view.OutputView;
+import com.programmers.blackdog.controller.constant.Selection;
+import com.programmers.blackdog.service.CalculatorService;
+import com.programmers.blackdog.service.Service;
+import com.programmers.blackdog.view.Console;
 
 import java.util.List;
 
@@ -13,42 +11,52 @@ import static com.programmers.blackdog.controller.constant.Selection.findByCode;
 
 public class CalculatorController {
 
-    public static final String EQUAL = " = ";
-    private final CalculatorRepository calculatorRepository;
-    private final InputView inputView;
-    private final OutputView outputView;
+    private final Service service;
+    private final Console console;
 
-    public CalculatorController(InputView inputView, OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-        this.calculatorRepository = new MemoryCalculatorRepository();
-        System.out.println();
+    public CalculatorController(Console console) {
+        this.console = console;
+        this.service = new CalculatorService();
     }
 
     public void run() {
-        Calculator calculator = new Calculator();
         while (true) {
-            switch (getCode()){
-                case CHECK_DATA:
-                    printAllPreviousData();
-                    break;
-                case CALCULATE:
-//                    printCalculatedResultAndSave();
-                    break;
-                default:
-                    throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
+            try {
+                switch (getCode()) {
+                    case CHECK_DATA:
+                        printAllPreviousData();
+                        break;
+                    case CALCULATE:
+                        printCalculatedResultAndSave();
+                        break;
+                    case EXIT:
+                        exitProgram();
+                        return;
+                }
+            } catch (Exception e) {
+                console.printErrorMessage(e.getMessage());
             }
         }
     }
 
     private Selection getCode() {
-        outputView.printChoiceMessage();
-        return findByCode(inputView.getSelectedCode());
+        int selectionCode = console.getSelectionCode();
+        return findByCode(selectionCode);
     }
 
+
     private void printAllPreviousData() {
-        List<String> calculatedData = calculatorRepository.findAll();
-        outputView.printExpressions(calculatedData);
+        List<String> calculatedData = service.findAll();
+        console.printExpressions(calculatedData);
+    }
+
+    private void printCalculatedResultAndSave() {
+        String expression = console.getExpression();
+        int result = service.calculate(expression);
+
+        service.save(expression, result);
+
+        console.printCalculatedResult(result);
     }
 
     private void printCalculatedResultAndSave(Calculator calculator) {

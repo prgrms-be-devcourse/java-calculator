@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Console {
 
-    private static final String CHOICE_MESSAGE = "1. 조회\n" + "2. 계산";
+    private static final String CHOICE_MESSAGE = "1. 조회\n" + "2. 계산\n" + "3. 종료\n";
 
     private final InputView inputView;
     private final OutputView outputView;

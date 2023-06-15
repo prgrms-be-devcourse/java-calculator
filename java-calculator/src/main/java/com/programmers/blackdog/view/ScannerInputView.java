@@ -7,7 +7,6 @@ public class ScannerInputView implements InputView{
 
     @Override
     public String read() {
-        scanner.nextLine();
         return scanner.nextLine();
     }
 }
