@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class FormulaMemoryRepository implements FormulaRepository {
-    Map<Long, String> formulaMap = new LinkedHashMap<>();
+    private final Map<Long, String> formulaMap = new LinkedHashMap<>();
     private Long num = 0L;
 
     @Override
@@ -18,6 +18,6 @@ public class FormulaMemoryRepository implements FormulaRepository {
 
     @Override
     public Map<Long, String> getFormulaList() {
-        return formulaMap;
+        return new LinkedHashMap<>(formulaMap);
     }
 }
