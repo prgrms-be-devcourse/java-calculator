@@ -1,66 +1,58 @@
 package co.programmers.domain;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
 public class Calculation {
 
-    private static final String DELIMITER = " ";
-    private final Stack<String> operators = new Stack<>();
-    private final Stack<Double> calculationBuffer = new Stack<>();
-    private final List<String> postfix = new ArrayList<>();
-    private Expression expression;
+	private ArrayList<String> parsedExpression;
+	private ArrayList<String> operators;
+	private Expression expression;
 
-    public Calculation(Expression expression) {
-        this.expression = expression;
-    }
+	public Calculation(Expression expression) {
+		this.expression = expression;
+		parsedExpression = new ArrayList<>();
+		operators = new ArrayList<>();
+	}
 
-    public static boolean isNumeric(String stringNumber) {
-        return stringNumber.chars().allMatch(Character::isDigit);
-    }
+	public Double calculate() throws ArithmeticException {
+		parsedExpression = expression.split();
+		operators = extractOperators();
+		Operator.decideCalculationOrder(operators);
+		for (String operator : operators) {
+			int operatorPosition = parsedExpression.indexOf(operator);
+			Double[] operands = extractOperands(operator);
+			Double calculationRes = Operator.calculate(operator, operands[0], operands[1]);
+			storeIntermediateResult(operatorPosition, calculationRes);
+			removeCompletedExpression(operatorPosition, operands.length);
+		}
+		return calcFinalResult();
+	}
 
-    public Double calculate() throws ArithmeticException {
-        String postfixExpression = convertInfixToPostfix();
-        for (String component : postfixExpression.split(DELIMITER)) {
-            evaluatePostfixComponent(component);
-        }
-        return calculationBuffer.pop();
-    }
+	private void removeCompletedExpression(int operatorPosition, int count) {
+		for (int cnt = 0; cnt < count; cnt++) {
+			parsedExpression.remove(operatorPosition);
+		}
+	}
 
-    private void evaluatePostfixComponent(String component) throws ArithmeticException {
-        if (isNumeric(component)) {
-            calculationBuffer.push(Double.parseDouble(component));
-            return;
-        }
-        Double operand2 = calculationBuffer.pop();
-        Double operand1 = calculationBuffer.pop();
-        Double intermediateResult = Operator.calculate(component, operand1, operand2);
-        calculationBuffer.push(intermediateResult);
-    }
+	private void storeIntermediateResult(int operatorPosition, Double calculationRes) {
+		parsedExpression.add(operatorPosition - 1, String.valueOf(calculationRes));
+	}
 
-    public String convertInfixToPostfix() {
-        preProcess();
-        while (!operators.empty()) {
-            postfix.add(operators.pop());
-        }
-        return String.join(" ", postfix);
-    }
+	private Double[] extractOperands(String operator) {
+		int operatorIdx = parsedExpression.indexOf(operator);
+		Double operand1 = Double.parseDouble(parsedExpression.get(operatorIdx - 1));
+		Double operand2 = Double.parseDouble(parsedExpression.get(operatorIdx + 1));
+		return new Double[] {operand1, operand2};
+	}
 
-    private void preProcess() {
-        for (String current : expression.split(DELIMITER)) {
-            evaluateOperationObject(current);
-        }
-    }
+	public ArrayList<String> extractOperators() {
+		expression.eliminateWhiteSpace();
+		ArrayList<String> parsed = expression.split("\\d+");
+		parsed.removeIf(String::isEmpty);
+		return parsed;
+	}
 
-    private void evaluateOperationObject(String current) {
-        if (!Operator.isOperator(current)) {
-            postfix.add(current);
-            return;
-        }
-        while (!operators.empty() && Operator.hasLowerPrecedence(current, operators.peek())) {
-            postfix.add(operators.pop());
-        }
-        operators.push(current);
-    }
+	private Double calcFinalResult() {
+		return Double.parseDouble(parsedExpression.get(0));
+	}
 }
