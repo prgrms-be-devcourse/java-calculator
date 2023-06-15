@@ -1,6 +1,7 @@
 package com.programmers.java;
 
 import com.programmers.java.calculator.calculate.Calculator;
+import com.programmers.java.calculator.calculate.PostfixConverter;
 import com.programmers.java.record.CalculationRecord;
 import com.programmers.java.util.ExpressionTokenizer;
 import com.programmers.java.view.Menu;
@@ -15,6 +16,7 @@ public class Main {
     static Calculator calculator = new Calculator();
     static CalculationRecord calculationRecord = new CalculationRecord();
     static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
+    static PostfixConverter postfixConverter = new PostfixConverter();
 
     public static void main(String[] args) throws IOException {
         while (true) {
@@ -50,7 +52,9 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        Double result = calculator.calculate(expressionTokenizer.expressionSplit(expression));
+        Double result = calculator.
+                calculate(postfixConverter.postfixConvert
+                        (expressionTokenizer.expressionSplit(expression)));
         output.viewCalculateResult(result);
         calculationRecord.save(expression, Double.toString(result));
     }
