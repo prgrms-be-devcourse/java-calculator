@@ -48,7 +48,9 @@ public class View implements Input,Output{
 
     @Override
     public void printRecords(List<String> arithmeticRecords) {
-        arithmeticRecords.stream().forEach(System.out::println);
+        for(String record : arithmeticRecords){
+            System.out.println(record);
+        }
     }
 
     private boolean validateSelection(int selection) {
