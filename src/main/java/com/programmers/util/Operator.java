@@ -1,5 +1,7 @@
 package com.programmers.util;
 
+import com.programmers.exception.DivideByZeroException;
+
 import javax.management.StringValueExp;
 import java.util.Arrays;
 import java.util.function.BiFunction;
@@ -8,7 +10,12 @@ public enum Operator {
     PLUS("+", 1, (num1, num2)-> num1 + num2),
     MINUS("-", 1, (num1, num2)-> num1 - num2),
     MULTIPLY("*", 2, (num1, num2)-> num1 * num2),
-    DIVIDE("/", 2, (num1, num2)-> num1 / num2),
+    DIVIDE("/", 2, (num1, num2)-> {
+        if (num2 == 0) {
+            throw new DivideByZeroException();
+        }
+        return num1 / num2;
+    }),
     OPEN_BRACKET("(", 0, null),
     CLOSE_BRACKET(")", 0, null);
 

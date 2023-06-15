@@ -23,7 +23,6 @@ public class PostfixCalculator {
                 continue;
             }
             value2 = Double.valueOf(deque.pop());
-            if (value2 == 0) throw new EquationFormatException();
             value1 = Double.valueOf(deque.pop());
             deque.push(Operator.operate(cur, value1, value2));
 
@@ -122,7 +121,6 @@ public class PostfixCalculator {
         } else {
             return -1;
         }
-
     }
 
 }
