@@ -15,14 +15,12 @@ public class Calculator {
     private final Output output;
     private final Calculation calculation;
     private final FormulaRepository formulaRepository;
-    private final Validator validator;
 
-    Calculator(Calculation calculation, FormulaRepository formulaRepository){
+    public Calculator(Calculation calculation, FormulaRepository formulaRepository){
         this.input = Console.getInstance();
         this.output = Console.getInstance();
         this.calculation = calculation;
         this.formulaRepository = formulaRepository;
-        this.validator = new Validator();
     }
 
     void run() {
@@ -55,13 +53,13 @@ public class Calculator {
 
     private void formulaCalculate() {
         String inputFormula = input.formulaInput();
+        Validator.formulaValidate(inputFormula);
 
-        if(validator.formulaValidate(inputFormula)){
-            String result = calculation.requestCalculate(inputFormula);
-            output.calculationValue(result);
-            String formulaAndResult = formattingFormula(inputFormula, result);
-            formulaRepository.save(formulaAndResult);
-        }
+        String result = calculation.requestCalculate(inputFormula);
+        output.calculationValue(result);
+
+        String formulaAndResult = formattingFormula(inputFormula, result);
+        formulaRepository.save(formulaAndResult);
     }
 
     private String formattingFormula(String inputFormula, String result){
@@ -72,6 +70,4 @@ public class Calculator {
                 .append(result)
                 .toString();
     }
-
-
 }

@@ -1,36 +1,54 @@
 package org.programmers.java.validator;
 
-import org.programmers.java.console.Console;
-import org.programmers.java.console.Output;
+import org.programmers.java.calculation.Operator;
 import org.programmers.java.message.Error;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Validator {
-    private final Output output;
-    private final FormulaCountValidator formulaCountValidator;
-    private final FormulaSplitValidator formulaSplitValidator;
+    private static final List<String> formularAfterSplitValidate = new ArrayList<>();
 
-    public Validator() {
-        this.output = Console.getInstance();
-        this.formulaCountValidator = new FormulaCountValidator();
-        this.formulaSplitValidator = new FormulaSplitValidator();
+    public static void formulaValidate(String formulaInput) {
+        formularAfterSplitValidate.clear();
+        formulaSplitValidate(formulaInput);
+        formulaCountValidate(formularAfterSplitValidate);
     }
 
-    // 연산식 검증 로직
-    public boolean formulaValidate(String formulaInput) {
-        boolean isNormalFormula = false;
+    private static void formulaSplitValidate(String formulaInput) {
+        String[] splitFormula = formulaInput.split(" ");
 
-        List<String> formularAfterSplitValidate = formulaSplitValidator.validate(formulaInput);
+        for (String operatorOrOperand : splitFormula) {
+            if (!isValid(operatorOrOperand)) {
+                throw new IllegalArgumentException(Error.CALCULATE_VALIDATION.getMsg());
+            }
+            formularAfterSplitValidate.add(operatorOrOperand);
+        }
+    }
 
-        if(formularAfterSplitValidate.isEmpty()) {
-            isNormalFormula = formulaCountValidator.validate(formularAfterSplitValidate);
+    private static boolean isValid(String operatorOrOperand) {
+        return Operator.isNumber(operatorOrOperand) ||
+                Operator.isSymbol(operatorOrOperand).isPresent();
+    }
+
+    private static void formulaCountValidate(List<String> formularAfterSplitValidate){
+        if(formularAfterSplitValidate.size() % 2 == 0) {
+            throw new IllegalArgumentException(Error.CALCULATE_VALIDATION.getMsg());
         }
 
-        if(!isNormalFormula) {
-            output.errorMsg(Error.CALCULATE_VALIDATION.getMsg());
+        for(int i=0; i < formularAfterSplitValidate.size(); i++){
+            String operatorOrOperand = formularAfterSplitValidate.get(i);
+            checkOperatorAndOperandLocation(i, operatorOrOperand);
+        }
+    }
+
+    private static void checkOperatorAndOperandLocation(int index, String operatorOrOperand) {
+        if(index % 2 != 0 && Operator.isNumber(operatorOrOperand)) {
+            throw new IllegalArgumentException(Error.CALCULATE_VALIDATION.getMsg());
         }
 
-        return isNormalFormula;
+        if(index % 2 != 1 && Operator.isSymbol(operatorOrOperand).isPresent()) {
+            throw new IllegalArgumentException(Error.CALCULATE_VALIDATION.getMsg());
+        }
     }
 }
