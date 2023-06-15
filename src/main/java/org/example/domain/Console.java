@@ -22,12 +22,7 @@ public class Console {
         while (calculatorProcess) {
             view.printSelection();
             Optional<SelectTypeView> selectType = view.select();
-            if(selectType.isPresent()){
-                selectOption(selectType.get());
-            }
-            else {
-                throw new IllegalArgumentException("잘못된 입력입니다.");
-            }
+            selectOption(selectType.orElse(null));
         }
     }
 
