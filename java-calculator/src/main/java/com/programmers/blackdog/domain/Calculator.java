@@ -1,14 +1,18 @@
 package com.programmers.junho.domain;
 
+import com.programmers.blackdog.domain.calculator.AbstractCalculator;
+
 import java.util.Stack;
 
-import static com.programmers.blackdog.domain.ArithmeticOperators.*;
+import static com.programmers.blackdog.domain.ArithmeticOperators.convertTokenToOperator;
+import static com.programmers.blackdog.domain.ArithmeticOperators.isNotOperator;
+import static com.programmers.blackdog.domain.constant.Regex.DELIMITER;
 import static com.programmers.blackdog.domain.utils.StringUtil.convertStringToInt;
 
-public class Calculator {
+public class Calculator implements AbstractCalculator {
 
-    public int calculate(String value) {
-        Expression expression = new Expression(value);
+    @Override
+    public int calculate(Expression expression) {
         String postfixExpression = expression.getPostfixExpression();
         return calculateWithPostfixExpression(postfixExpression);
     }
