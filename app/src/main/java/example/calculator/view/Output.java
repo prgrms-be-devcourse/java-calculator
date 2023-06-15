@@ -18,4 +18,8 @@ public class Output {
     public void printResult(double result) {
         System.out.println("결과: " + result);
     }
+
+    public void printMessage() {
+        System.out.print("수식을 입력하세요: ");
+    }
 }
