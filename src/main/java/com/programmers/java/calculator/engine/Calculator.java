@@ -7,7 +7,6 @@ import com.programmers.java.calculator.engine.io.Output;
 
 import java.util.Scanner;
 
-import static com.programmers.java.calculator.engine.Lookup.records;
 
 public class Calculator implements Runnable{
 
