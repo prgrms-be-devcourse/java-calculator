@@ -5,6 +5,8 @@ import example.calculator.view.Output;
 import example.calculator.view.Input;
 
 public class CalculatorController {
+    private static final int MENU_VIEW_HISTORY = 1;
+    private static final int MENU_HANDLE_CALCULATION = 2;
     private Input input;
     private Output output;
     private Calculator calculator;
@@ -16,19 +18,22 @@ public class CalculatorController {
     }
 
     public void start() {
-        while (true) {
-            output.printMenu();
-            int choice = input.getIntInput();
+        boolean isRunning = true;
 
-            switch (choice) {
-                case 1:
+        while (isRunning) {
+            output.printMenu();
+            int userChoice = input.getIntInput();
+
+            switch (userChoice) {
+                case MENU_VIEW_HISTORY:
                     output.printCalculationHistory(calculator.getCalculationHistory());
                     break;
-                case 2:
+                case MENU_HANDLE_CALCULATION:
                     handleCalculation();
                     break;
                 default:
-                    System.out.println("잘못된 선택입니다. 다시 선택해주세요.");
+                    isRunning = false;  // 루프 종료 조건
+                    break;
             }
         }
     }
@@ -36,7 +41,7 @@ public class CalculatorController {
     private void handleCalculation() {
         input.getStringInput();
 
-        System.out.print("수식을 입력하세요: ");
+        output.printMessage();
         String expression = input.getStringInput();
 
         String[] tokens = expression.split("\\s+");
