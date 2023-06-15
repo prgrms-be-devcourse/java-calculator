@@ -5,6 +5,7 @@ import java.util.Optional;
 
 public enum Menu {
     SEARCH("1"), CALCULATE("2");
+
     private final String value;
 
     Menu(String value) {

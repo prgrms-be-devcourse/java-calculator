@@ -43,11 +43,13 @@ public class Main {
 
     private static void calculator() {
         String expression = null;
+
         try {
             expression = input.enterExpression();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         Double result = calculator.calculate(expressionTokenizer.expressionSplit(expression));
         output.viewCalculateResult(result);
         calculationRecord.save(expression, Double.toString(result));
