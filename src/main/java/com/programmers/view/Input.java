@@ -15,13 +15,12 @@ public class Input {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputMenu() {
+    public static int processMenu(String menuString) {
         int menuNum = 0;
         boolean inputSuccessful = false;
-
         while (!inputSuccessful) {
             try {
-                String menuString = removeWhiteSpace(scanner.nextLine());
+                menuString = removeWhiteSpace(menuString);
                 menuNum = Validator.validateMenu(menuString);
                 inputSuccessful = true;
             } catch (CalculatorException e) {
@@ -29,19 +28,19 @@ public class Input {
             }
         }
 
-        Output.printNewLine();//공백
-
         return menuNum;
     }
 
-    public static String inputExpression() {
-        String expression = "";
+    public static String inputLine() {
+        return scanner.nextLine();
+    }
+
+    public static String processExpression(String beforeProcessExpression) {
         boolean inputSuccessful = false;
 
         while (!inputSuccessful) {
             try {
-                expression = scanner.nextLine();
-                String removeWhiteSpaceExpression = removeWhiteSpace(expression);
+                String removeWhiteSpaceExpression = removeWhiteSpace(beforeProcessExpression);
                 Validator.checkValidArithmeticExpression(removeWhiteSpaceExpression);
                 inputSuccessful = true;
             } catch (CalculatorException e) {
@@ -49,7 +48,7 @@ public class Input {
             }
         }
 
-        return expression;
+        return beforeProcessExpression;
     }
 
 

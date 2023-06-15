@@ -21,7 +21,10 @@ public class CalculatorController {
         do {
             Output.printMenu();
 
-            int menuNum = Input.inputMenu();
+            String menuString = Input.inputLine();
+            int menuNum = Input.processMenu(menuString);
+
+            Output.printNewLine();//공백
 
             menu = Menu.getMenu(menuNum);
 
@@ -39,7 +42,8 @@ public class CalculatorController {
         boolean calculationSuccessful = false;
 
         while (!calculationSuccessful) {
-            String expression = Input.inputExpression();
+            String beforeProcessExpression = Input.inputLine();
+            String expression = Input.processExpression(beforeProcessExpression);
             try {
                 int result = calculatorService.calculate(expression);
                 Output.printResult(result);
