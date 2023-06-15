@@ -41,7 +41,7 @@ public class RepositoryTest {
                 1L, "10 / 2 * 5 - 3 = 22"
         );
 
-        String formulaAndResult1 = formattingFormula(formula1, result2);
+        String formulaAndResult1 = formattingFormula(formula1, result1);
         String formulaAndResult2 = formattingFormula(formula2, result2);
 
         // when

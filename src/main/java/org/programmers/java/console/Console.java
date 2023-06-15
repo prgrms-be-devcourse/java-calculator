@@ -49,11 +49,6 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void formulaMsg(String inputMsg) {
-        System.out.println(inputMsg);
-    }
-
-    @Override
     public void calculationValue(String value) {
         System.out.println(value);
     }

@@ -33,7 +33,6 @@ public enum Operator {
 
     public static boolean comparePriorities(String firstSymbol, String secondSymbol){
         return Operator.findSymbol(firstSymbol).get().getPriority() < Operator.findSymbol(secondSymbol).get().getPriority();
-
     }
 
     public static int arithmeticExpression(String symbol, int firstOperand, int secondOperand){
