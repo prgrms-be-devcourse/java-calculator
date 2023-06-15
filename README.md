@@ -43,5 +43,6 @@
 
 ### ✍️ 수정 필요한 사항
 - Input,Output을 인터페이스로 만들고 View가 상속받도록 했는데, 이러한 형태의 구조가 계산기에 적합한 설계인지 생각해볼 필요가 있음
+  
+<img width="1412" alt="스크린샷 2023-06-15 오후 5 20 38" src="https://github.com/HandmadeCloud/java-calculator-1/assets/77893164/548eaf30-d666-4bed-80db-9a1ef1546ecf">
 
-![스크린샷 2023-06-15 오후 5.20.38.png](..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-06-15%20%EC%98%A4%ED%9B%84%205.20.38.png)
