@@ -1,11 +1,12 @@
 package co.programmers.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calculation {
 
-	private ArrayList<String> parsedExpression;
-	private ArrayList<String> operators;
+	private List<String> parsedExpression;
+	private List<String> operators;
 	private Expression expression;
 
 	public Calculation(Expression expression) {
@@ -45,9 +46,9 @@ public class Calculation {
 		return new Double[] {operand1, operand2};
 	}
 
-	public ArrayList<String> extractOperators() {
+	public List<String> extractOperators() {
 		expression.eliminateWhiteSpace();
-		ArrayList<String> parsed = expression.split("\\d+");
+		List<String> parsed = expression.split("\\d+");
 		parsed.removeIf(String::isEmpty);
 		return parsed;
 	}
