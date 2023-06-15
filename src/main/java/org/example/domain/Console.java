@@ -23,29 +23,25 @@ public class Console {
             view.printSelection();
             int option = view.select();
             Optional<SelectTypeView> selectType = SelectTypeView.findByNum(option);
-            selectOption(selectType);
+            if(selectType.isPresent()){
+                selectOption(selectType.get());
+            }
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
 
-    private void selectOption(Optional<SelectTypeView> selectType) {
-        selectType.ifPresentOrElse(
-            type -> {
-            switch (type) {
-                case GET_RECORD -> view.printRecords(records.exportRecord());
+    private void selectOption(SelectTypeView selectType) {
+        switch (selectType) {
+            case GET_RECORD -> view.printRecords(records.exportRecord());
 
-                case CALCULATE -> {
-                    String infixExpression = view.inputExpression();
-                    double result = calculator.calculate(infixExpression);
-                    view.printResult(result);
-                    records.saveRecord(infixExpression, result);
-                }
+            case CALCULATE -> {
+                String infixExpression = view.inputExpression();
+                double result = calculator.calculate(infixExpression);
+                view.printResult(result);
+                records.saveRecord(infixExpression, result);
+            }
 
-                case END -> calculatorProcess = true;
-                }
-            },
-            () -> {throw new IllegalArgumentException("잘못된 입력입니다.");}
-        );
+            case END -> calculatorProcess = true;
+        }
     }
-
-
 }
