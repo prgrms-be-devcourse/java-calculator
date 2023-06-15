@@ -5,6 +5,8 @@ import com.programmers.calculator.io.Output;
 import com.programmers.calculator.model.Expression;
 import com.programmers.calculator.repository.HistoryRepository;
 
+import java.util.Arrays;
+
 public class Calculator implements Runnable {
     private final int HISTORY = 1;
     private final int CALCULATE = 2;
@@ -30,7 +32,7 @@ public class Calculator implements Runnable {
     @Override
     public void run() {
         while (true) {
-            output.printMenu("0. 종료\n1. 조회\n2. 계산\n");
+            output.printMenu(Arrays.asList("0. 종료", "1. 조회", "2. 계산"));
             int menu = Integer.parseInt(input.inputMenu("선택 : ")); // 예외처리는 어떻게?
 
             switch (menu) {

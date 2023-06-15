@@ -4,6 +4,7 @@ import com.programmers.calculator.io.Input;
 import com.programmers.calculator.io.Output;
 import com.programmers.calculator.model.Expression;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
@@ -22,8 +23,9 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printMenu(String menu) {
-        System.out.println(menu);
+    public void printMenu(List<String> menu) {
+        menu.forEach(System.out::println);
+        System.out.println();
     }
 
     @Override
