@@ -1,25 +1,18 @@
 package com.bona.javacalculator.repository;
 
-import com.bona.javacalculator.model.InputAndAnswer;
+import com.bona.javacalculator.model.ExpressionResult;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
-public interface MemoryRepository{
+public interface MemoryRepository {
 
-    InputAndAnswer save(InputAndAnswer inputAndAnswer);
+    ExpressionResult save(ExpressionResult expressionResult);
 
-    InputAndAnswer findById(Long id);
+    ExpressionResult findById(Long id);
 
-    List<InputAndAnswer> findAll();
+    List<ExpressionResult> findAll();
 
-    void clearStore();
-
-
-
-    int size();
 
 }

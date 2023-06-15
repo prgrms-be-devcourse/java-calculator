@@ -1,14 +1,16 @@
-package com.bona.javacalculator.service;
+package com.bona.javacalculator.core;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.bona.javacalculator.core.converter.PostfixConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
-class MakePostfixServiceTest {
+class PostfixTest {
 
-    MakePostfixService makePostfixService = new MakePostfixService();
+    PostfixConverter makePostfix = new PostfixConverter();
 
     @Test
     @DisplayName("후위표기식 출력 테스트")
@@ -17,9 +19,9 @@ class MakePostfixServiceTest {
         String input = "1+2*3";
         String wantInput = "123*+";
         //when
-        String postfixInput = makePostfixService.convPostfix(input);
+        List<String> convert = makePostfix.convert(input);
         //then
-        assertThat(postfixInput).isEqualTo(wantInput);
+        assertThat(convert).isEqualTo(wantInput);
     }
 
 }

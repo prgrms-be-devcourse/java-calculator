@@ -1,18 +1,15 @@
 package com.bona.javacalculator.io;
 
-import com.bona.javacalculator.model.InputAndAnswer;
+import com.bona.javacalculator.model.ExpressionResult;
+import com.bona.javacalculator.util.Validator;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class Console implements Input, Output{
+public class Console implements Input, Output {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
-    //정수인지
-    public boolean isLong(double num) {
-        return num == (long) num;
-    }
 
     @Override
     public String input(String input) {
@@ -27,27 +24,27 @@ public class Console implements Input, Output{
 
     @Override
     public void outAnswer(Double answer) {
-        boolean isLong = isLong(answer);
-        if(isLong){
+        boolean isLong = Validator.isLong(answer);
+        if (isLong) {
             Long changeAnswer = answer.longValue();
             System.out.println(changeAnswer);
-        }else {
+        } else {
             System.out.println(answer);
         }
     }
 
     @Override
-    public void printAll(List<InputAndAnswer> inputAndAnswerList) {
-        for (InputAndAnswer history : inputAndAnswerList) {
+    public void printAll(List<ExpressionResult> expressionResultList) {
+        for (ExpressionResult history : expressionResultList) {
             String input = history.getInput();
             Double answer = history.getAnswer();
 
             System.out.print(input + "=");
-            boolean isLong = isLong(answer);
-            if(isLong){
+            boolean isLong = Validator.isLong(answer);
+            if (isLong) {
                 Long changeAnswer = answer.longValue();
                 System.out.println(changeAnswer);
-            }else {
+            } else {
                 System.out.println(answer);
             }
         }

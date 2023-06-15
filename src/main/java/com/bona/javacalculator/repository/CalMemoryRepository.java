@@ -1,6 +1,6 @@
 package com.bona.javacalculator.repository;
 
-import com.bona.javacalculator.model.InputAndAnswer;
+import com.bona.javacalculator.model.ExpressionResult;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,35 +9,30 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class CalMemoryRepository implements MemoryRepository{
+public class CalMemoryRepository implements MemoryRepository {
 
-    private static final Map<Long, InputAndAnswer> store = new HashMap<>();
+    private static final Map<Long, ExpressionResult> store = new HashMap<>();
+
     private static long sequence = 0L;
 
     @Override
-    public InputAndAnswer save(InputAndAnswer inputAndAnswer) {
-        inputAndAnswer.setId(++sequence);
-        store.put(inputAndAnswer.getId(),inputAndAnswer);
-        return inputAndAnswer;
+    public ExpressionResult save(ExpressionResult expressionResult) {
+
+        expressionResult.setId(++sequence);
+
+        store.put(expressionResult.getId(), expressionResult);
+
+        return expressionResult;
     }
 
     @Override
-    public InputAndAnswer findById(Long id) {
+    public ExpressionResult findById(Long id) {
         return store.get(id);
     }
 
     @Override
-    public List<InputAndAnswer> findAll() {
+    public List<ExpressionResult> findAll() {
         return new ArrayList<>(store.values());
     }
 
-    @Override
-    public void clearStore() {
-        store.clear();
-    }
-
-    @Override
-    public int size() {
-        return store.size();
-    }
 }
