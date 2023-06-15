@@ -11,7 +11,7 @@ import java.util.List;
 
 // 계산 및 저장 로직 담당
 public class CalculatorService implements Service {
-    private static final String EQUAL = "=";
+    private static final String EQUAL = " = ";
     private final CalculatorRepository calculatorRepository;
     private final AbstractCalculator calculator;
 
