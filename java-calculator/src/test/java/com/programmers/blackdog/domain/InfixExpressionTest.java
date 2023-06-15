@@ -9,19 +9,19 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-class ExpressionTest {
+class InfixExpressionTest {
     @DisplayName("올바른 형식의 식이면 예외가 발생하지 않는다.")
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2", "1 - 3", "1 * 2", "4 / 2", "12 + 23 * 45"})
     void when_CorrectFormat_Expects_DoesNotThrowException(String expression) {
-        assertThatNoException().isThrownBy(() -> new Expression(expression));
+        assertThatNoException().isThrownBy(() -> new InfixExpression(expression));
     }
 
     @DisplayName("값과 연산자 사이에 공백이 존재하지 않으면 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1+2", "1-3", "12+23* 45"})
     void when_SpaceDoesNotExists_Expects_ThrowException(String expression) {
-        assertThatThrownBy(() -> new Expression(expression))
+        assertThatThrownBy(() -> new InfixExpression(expression))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -29,7 +29,7 @@ class ExpressionTest {
     @ParameterizedTest
     @ValueSource(strings = {"1  + 2, 1 -   2", "3 * 4 /   6"})
     void when_MoreThanOneSpaceExists_Expects_ThrowException(String expression) {
-        assertThatThrownBy(() -> new Expression(expression))
+        assertThatThrownBy(() -> new InfixExpression(expression))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -37,7 +37,7 @@ class ExpressionTest {
     @ParameterizedTest
     @ValueSource(strings = {"1 & 2", "/ 1 + ", "1 / + 2"})
     void when_WrongFormat_Expects_ThrowException(String expression) {
-        assertThatThrownBy(() -> new Expression(expression))
+        assertThatThrownBy(() -> new InfixExpression(expression))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -45,7 +45,7 @@ class ExpressionTest {
     @ParameterizedTest(name = "중위 : {0}, 후위 : {1}")
     @CsvSource(value = {"3 + 4 * 2:3 4 2 * +", "1 + 2 * 3 + 4 / 2 + 2:1 2 3 * + 4 2 / + 2 +", "4 + 5 * 6 / 2 - 3:4 5 6 * 2 / + 3 -", "44 / 2:44 2 /"}, delimiter = ':')
     void when_InfixNotationIsGiven_Expects_ReturnPostfixNotation(String infixExpression, String postfixExpression) {
-        Expression expression = new Expression(infixExpression);
+        InfixExpression expression = new InfixExpression(infixExpression);
 
         String actual = expression.getPostfixExpression();
 
@@ -57,9 +57,9 @@ class ExpressionTest {
     public void when_givenEqualExpression_Expects_Equal() {
         String expression = "3 + 4 * 2";
 
-        Expression expression1 = new Expression(expression);
-        Expression expression2 = new Expression(expression);
+        InfixExpression infixExpression1 = new InfixExpression(expression);
+        InfixExpression infixExpression2 = new InfixExpression(expression);
 
-        assertThat(expression1).isEqualTo(expression2);
+        assertThat(infixExpression1).isEqualTo(infixExpression2);
     }
 }
