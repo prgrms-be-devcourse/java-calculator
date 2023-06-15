@@ -1,5 +1,7 @@
 package org.example.util;
 
+import org.example.exception.BadEquationException;
+
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
@@ -23,7 +25,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter((a) -> a.operater.equals(str))
                 .findFirst()
-                .get();
+                .orElseThrow(BadEquationException::new);
     }
 
     public static boolean isOperator(String str){

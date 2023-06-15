@@ -1,12 +1,18 @@
 package org.example.util;
 
+import org.example.exception.BadEquationException;
+
 import java.util.Optional;
 
 public class CheckEquation {
 
+    public static void validate(String input){
+        if (!validateEquation(input)) throw new BadEquationException();
+    }
+
 //    입력값의 첫번째와 마지막이 연산자인 경우, 연산자가 연속으로 나오는 경우,
 //    0으로 나누는 경우 예외처리
-    public static boolean validateEquation(String input){
+    private static boolean validateEquation(String input){
         String[] strArr = input.split(" ");
         if (Operator.isOperator(strArr[0])){
             return false;

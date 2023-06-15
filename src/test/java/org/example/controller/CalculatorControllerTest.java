@@ -1,4 +1,6 @@
-package org.example.calculation;
+package org.example.controller;
+import org.example.calculation.ArithmeticCompute;
+import org.example.calculation.Compute;
 import org.example.controller.CalculatorController;
 import org.example.io.ConsoleOutput;
 import org.example.io.Input;
@@ -97,6 +99,19 @@ public class CalculatorControllerTest {
     public void 연산자가_연속된_경우_예외처리() throws IOException{
         when(input.selectAction()).thenReturn("2").thenReturn("3");
         when(input.getUserEquation()).thenReturn("3 + + 9");
+
+        calculatorController.run();
+
+        String terminalOutput = outputStream.toString();
+
+        String expectedOutput = "잘못된 수식이 입력 되었습니다.";
+        assertThat(terminalOutput).contains(expectedOutput);
+    }
+
+    @Test
+    public void 연산자_자리에_이상한_문자가_들어오는_경우() throws IOException {
+        when(input.selectAction()).thenReturn("2").thenReturn("3");
+        when(input.getUserEquation()).thenReturn("3 * 5 @ 9");
 
         calculatorController.run();
 

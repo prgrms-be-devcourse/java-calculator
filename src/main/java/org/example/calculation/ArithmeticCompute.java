@@ -10,7 +10,7 @@ public class ArithmeticCompute implements Compute {
         return calculate(prefixToPostfix(input));
     }
 
-    public String[] prefixToPostfix(String input) {
+    private String[] prefixToPostfix(String input) {
         String[] strArr = InputStringFormating.formating(input);
 
         List<String> stringBuffer = new ArrayList<>();

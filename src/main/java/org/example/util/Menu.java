@@ -1,5 +1,6 @@
 package org.example.util;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public enum Menu {
@@ -13,10 +14,10 @@ public enum Menu {
         this.number = number;
     }
 
-    public static Menu getMenu(String str){
+    public static Menu getMenu(String str) throws IOException {
         return Arrays.stream(Menu.values())
                 .filter((a) -> a.number.equals(str))
                 .findFirst()
-                .get();
+                .orElseThrow(IOException::new);
     }
 }

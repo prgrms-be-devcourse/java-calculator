@@ -40,7 +40,7 @@ public class CalculatorController implements Runnable{
 
                 }else if (curMenu == CALCULATE){
                     String curInput = input.getUserEquation();
-                    validate(curInput);
+                    CheckEquation.validate(curInput);
                     double resultNum = compute.operate(curInput);
                     output.printCalculatedResult(resultNum);
                     equationRepository.save(curInput, resultNum);
@@ -56,9 +56,4 @@ public class CalculatorController implements Runnable{
         }
     }
 
-    private void validate(String str){
-        if (!CheckEquation.validateEquation(str)){
-            throw new BadEquationException("잘못된 수식이 입력 되었습니다.");
-        }
-    }
 }

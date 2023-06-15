@@ -12,4 +12,11 @@ public class ArithmeticComputeTest {
         Assertions.assertThat(result).isEqualTo(11);
     }
 
+    @Test
+    public void 잘못된_수식입력_테스트() throws Exception{
+        ArithmeticCompute arithmeticCalculation = new ArithmeticCompute();
+        double result = arithmeticCalculation.operate("5 + 3 * 2");
+        Assertions.assertThat(result).isEqualTo(11);
+    }
+
 }
