@@ -20,7 +20,7 @@ public class ConsoleOutput implements Output {
 
     @Override
     public void printError() {
-        System.out.println("Unknown number was entered");
+        System.out.println("올바르지 않은 메뉴 번호가 입력되었습니다.");
     }
 
 

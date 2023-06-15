@@ -50,7 +50,7 @@ public class AppController {
             console.getOutput().printAnswer(expressionResult.getResult());
             repository.save(expressionResult);
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 식입니다.");
+            System.out.println("잘못된 식을 입력하였습니다.");
         }
     }
 }

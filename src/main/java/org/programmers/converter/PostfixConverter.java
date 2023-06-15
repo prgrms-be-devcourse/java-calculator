@@ -33,7 +33,7 @@ public class PostfixConverter implements Converter{
             } else if (expressionValidator.isNumber(element)) {
                 number.append(element);
             } else {
-                throw new IllegalArgumentException("잘못된 식입니다.");
+                throw new IllegalArgumentException("잘못된 식을 입력하였습니다.");
             }
         }
         addToPostfix(postfix, number.toString());
