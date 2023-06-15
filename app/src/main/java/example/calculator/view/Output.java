@@ -11,8 +11,8 @@ public class Output {
     }
 
     public void printMenu() {
-        System.out.println(Menu.조회.getValue() + ". " + Menu.조회);
-        System.out.println(Menu.계산.getValue() + ". " + Menu.계산);
+        System.out.println(Menu.조회.getFormattedInfo());
+        System.out.println(Menu.계산.getFormattedInfo());
     }
 
     public void printResult(double result) {
