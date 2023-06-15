@@ -12,10 +12,9 @@ public class MemoryCalculatorRepository implements CalculatorRepository {
     private static long sequence = 0L;
 
     @Override
-    public Calculator save(Calculator calculator) {
+    public void save(Calculator calculator) {
         calculator.setId(++sequence);
         store.put(calculator.getId(), calculator);
-        return calculator;
     }
 
     @Override

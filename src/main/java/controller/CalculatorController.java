@@ -5,6 +5,7 @@ import io.CalculatorInput;
 import io.CalculatorOutput;
 import model.calculation.Calculation;
 import model.converter.Converter;
+import model.entity.Calculator;
 import model.repository.CalculatorRepository;
 import model.vo.CalculationResult;
 import model.vo.Expression;
@@ -42,6 +43,7 @@ public class CalculatorController {
             case CALCULATION -> {
                 Expression expression = input.expressionInput();
                 CalculationResult calculationResult = getCalculationResult(expression);
+                repository.save(new Calculator(expression.getExpression(), calculationResult.getCalculationResult()));
                 output.printExpression(calculationResult);
             }
             default -> output.printSelectOtherMenu();
@@ -49,6 +51,9 @@ public class CalculatorController {
     }
 
     private void printExpressions() {
+        List<Calculator> expressions = repository.findAll();
+        expressions.stream()
+                .forEach(output::printRecords);
     }
 
     private CalculationResult getCalculationResult(Expression expression) {
