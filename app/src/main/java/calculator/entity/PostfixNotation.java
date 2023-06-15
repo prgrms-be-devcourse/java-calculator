@@ -21,7 +21,18 @@ public class PostfixNotation implements Notation {
     @Override
     public Optional<Expression> makeExpression(Stack<Integer> operands, Stack<Operator> operators,
         String element) {
-        return Optional.empty();
+        if (isNumeric(element)) {
+            int operand = Integer.parseInt(element);
+            operands.push(operand);
+
+            return Optional.empty();
+        }
+
+        Operator operator = getOperatorWithSameSymbol(element);
+        int operand2 = operands.pop();
+        int operand1 = operands.pop();
+
+        return Optional.of(new Expression(operator, operand1, operand2));
     }
 
     private String[] convertToPostfix(String[] elements) {
