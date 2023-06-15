@@ -4,17 +4,19 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    NONE("", (preOperand, nextOperand) -> null),
-    PLUS("+", (preOperand, nextOperand) -> preOperand + nextOperand),
-    MINUS("-", (preOperand, nextOperand) -> preOperand - nextOperand),
-    MULTIPLE("*", (preOperand, nextOperand) -> preOperand * nextOperand),
-    DIVIDE("/", (preOperand, nextOperand) -> preOperand / nextOperand);
+    NONE("", 0,(preOperand, nextOperand) -> null),
+    PLUS("+", 1,(preOperand, nextOperand) -> preOperand + nextOperand),
+    MINUS("-", 1,(preOperand, nextOperand) -> preOperand - nextOperand),
+    MULTIPLE("*",2, (preOperand, nextOperand) -> preOperand * nextOperand),
+    DIVIDE("/",2, (preOperand, nextOperand) -> preOperand / nextOperand);
 
     private String operator;
+    private int priority;
     private BiFunction<Double, Double, Double> calculateLamda;
 
-    Operator(String operator, BiFunction<Double, Double, Double> calculateLamda) {
+    Operator(String operator, int priority,  BiFunction<Double, Double, Double> calculateLamda) {
         this.operator = operator;
+        this.priority = priority;
         this.calculateLamda = calculateLamda;
     }
 
@@ -30,6 +32,6 @@ public enum Operator {
     }
 
     public static int evaluatePriority(Operator prevOperator, Operator nextOperator) {
-        return prevOperator.compareTo(nextOperator);
+        return prevOperator.priority - nextOperator.priority;
     }
 }
