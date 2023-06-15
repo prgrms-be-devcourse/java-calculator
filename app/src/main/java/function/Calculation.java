@@ -102,7 +102,7 @@ public class Calculation {
         return Double.parseDouble(stack.pop());
     }
 
-    public static boolean isDigit(String str) {
+    private static boolean isDigit(String str) {
         return str.matches(positiveRegularExp);
     }
 }
