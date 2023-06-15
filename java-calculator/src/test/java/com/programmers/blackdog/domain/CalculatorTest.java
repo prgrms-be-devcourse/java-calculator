@@ -28,7 +28,7 @@ class CalculatorTest {
 
     @DisplayName("계산 식을 입력하면 올바른 계산 결과를 반환한다.")
     @ParameterizedTest(name = "식: {0}, 결과: {1}")
-    @CsvSource(value = {"1 + 2:3", "1 + 2 * 3:7", "3 - 2 * 2:-1", "44 / 2 * 8:176", "22 * 8:176", "12 + 44 / 2 * 8 - 10 + 18 / 2 / 3:181"}, delimiter = ':')
+    @CsvSource(value = {"1 + 2=3", "1 + 2 * 3=7", "3 - 2 * 2=-1", "44 / 2 * 8=176", "22 * 8=176", "12 + 44 / 2 * 8 - 10 + 18 / 2 / 3=181"}, delimiter = '=')
     void when_ExpressionIsGiven_CalculateCorrectResult(String expression, int calculatedResult) {
         int actual = calculator.calculate(getExpression(expression));
 

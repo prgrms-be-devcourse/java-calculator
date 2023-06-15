@@ -44,7 +44,7 @@ class InfixExpressionTest {
 
     @DisplayName("중위 표현식을 후위 표현식으로 변환한다.")
     @ParameterizedTest(name = "중위 : {0}, 후위 : {1}")
-    @CsvSource(value = {"3 + 4 * 2:3 4 2 * +", "1 + 2 * 3 + 4 / 2 + 2:1 2 3 * + 4 2 / + 2 +", "4 + 5 * 6 / 2 - 3:4 5 6 * 2 / + 3 -", "44 / 2:44 2 /"}, delimiter = ':')
+    @CsvSource(value = {"3 + 4 * 2=3 4 2 * +", "1 + 2 * 3 + 4 / 2 + 2=1 2 3 * + 4 2 / + 2 +", "4 + 5 * 6 / 2 - 3=4 5 6 * 2 / + 3 -", "44 / 2=44 2 /"}, delimiter = '=')
     void when_InfixNotationIsGiven_Expects_ReturnPostfixNotation(String infixExpression, String postfixExpression) {
         InfixExpression expression = new InfixExpression(infixExpression);
 

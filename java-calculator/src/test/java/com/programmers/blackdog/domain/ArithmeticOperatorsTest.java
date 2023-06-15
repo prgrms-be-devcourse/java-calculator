@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.programmers.blackdog.domain.ArithmeticOperators.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ArithmeticOperatorsTest {
 
@@ -34,5 +35,12 @@ class ArithmeticOperatorsTest {
     void when_DivideTwoNum_Expects_correctResult() {
         int result = DIVISION.apply(4, 2);
         assertThat(result).isEqualTo(2);
+    }
+
+    @DisplayName("0으로 나누면 예외를 발생한다.")
+    @Test
+    void when_DivideWithZero_Expects_ThrowsException() {
+        assertThatThrownBy(() -> DIVISION.apply(10, 0))
+                .isInstanceOf(ArithmeticException.class);
     }
 }
