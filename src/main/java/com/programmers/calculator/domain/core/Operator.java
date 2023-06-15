@@ -2,13 +2,19 @@ package com.programmers.calculator.domain.core;
 
 import com.programmers.calculator.domain.vo.CalculationResult;
 
+import java.math.BigDecimal;
 import java.util.function.BiFunction;
 
 public enum Operator {
     ADDITION('+', 10, CalculationResult::add),
     SUBTRACTION('-', 10, CalculationResult::subtract),
     MULTIPLICATION('*', 100, CalculationResult::multiply),
-    DIVISION('/', 100, CalculationResult::divide);
+    DIVISION('/', 100, (o1, o2) -> {
+        if (o2.getValue().equals(BigDecimal.ZERO)) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        }
+        return o1.divide(o2);
+    });
 
     private static final Operator[] OPERATORS = Operator.values();
 

@@ -26,9 +26,6 @@ public class CalculationResult {
     }
 
     public CalculationResult divide(CalculationResult otherValue) {
-        if (otherValue.getValue().equals(BigDecimal.ZERO)) {
-            throw new ArithmeticException("0으로 나눌 수 없습니다.");
-        }
         return new CalculationResult(value.divide(otherValue.getValue()));
     }
 
