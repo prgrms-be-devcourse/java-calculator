@@ -56,7 +56,7 @@ public class RepositoryTest {
         StringBuilder stringBuilder = new StringBuilder();
         return stringBuilder
                 .append(inputFormula)
-                .append("=")
+                .append(" = ")
                 .append(result)
                 .toString();
     }
