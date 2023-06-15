@@ -1,41 +1,27 @@
 package co.programmers.domain;
 
 import co.programmers.exception.ExceptionMessage;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Operator {
-    ADDITION("+", 2, (operand1, operand2) -> Integer.valueOf(
-            operand1 + operand2
-    )),
-    SUBTRACTION("-", 2, (operand1, operand2) -> Integer.valueOf(
-            operand2 - operand1
-    )),
-    MULTIPLICATION("*", 1, (operand1, operand2) -> Integer.valueOf(
-            operand1 * operand2
-    )),
+    ADDITION("+", 2, (operand1, operand2) -> operand1 + operand2),
+    SUBTRACTION("-", 2, (operand1, operand2) -> operand1 - operand2),
+    MULTIPLICATION("*", 1, (operand1, operand2) -> operand1 * operand2),
     DIVISION("/", 1, (operand1, operand2) -> {
         if (operand2 == 0) {
-            throw new IllegalArgumentException(ExceptionMessage.DIVIDED_BY_ZERO);
+            throw new ArithmeticException(ExceptionMessage.DIVIDED_BY_ZERO);
         }
-        return Integer.valueOf(operand1 / operand2);
+        return operand1 / operand2;
     }),
     OPENED_PARENTHESIS("(", 3, (operand1, operand2) -> 0),
     CLOSED_PARENTHESIS(")", 3, (operand1, operand2) -> 0);
 
-    private static final Map<String, Operator> operators =
-            Collections.unmodifiableMap(Stream.of(values())
-                    .collect(Collectors.toMap(Operator::getSymbol, Function.identity())));
     private final String symbol;
     private final int priority;
     private final BiFunction<Integer, Integer, Integer> operation;
 
-    Operator(String symbol, int priority, BiFunction<Integer, Integer, Integer> operation) {
+    private Operator(String symbol, int priority, BiFunction<Integer, Integer, Integer> operation) {
         this.symbol = symbol;
         this.priority = priority;
         this.operation = operation;
@@ -46,12 +32,23 @@ public enum Operator {
     }
 
     public static Operator getSymbol(String operator) {
-        return Optional.ofNullable(operators.get(operator))
-                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_SYMBOL));
+        return Arrays.stream(values())
+                .filter(o -> o.symbol.equals(operator))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_INPUT));
     }
 
-    private String getSymbol() {
-        return symbol;
+    public static boolean isOperator(String symbol) {
+        return !Arrays.stream(values())
+                .filter(o -> o.symbol.equals(symbol))
+                .findAny()
+                .isEmpty();
+    }
+
+    public static boolean hasLowerPrecedence(String current, String toCompare) {
+        Operator operator1 = getSymbol(current);
+        Operator operator2 = getSymbol(toCompare);
+        return (operator1.getPriority() >= operator2.getPriority());
     }
 
     public int getPriority() {
