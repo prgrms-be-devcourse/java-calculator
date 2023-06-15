@@ -28,11 +28,8 @@ public class HistoryStorage {
 
     private String makeFormattedExpression(String expression, String result) {
         StringBuilder stringBuilder = new StringBuilder();
-
-        char[] expressionComponents = expression.toCharArray();
-        int length = expressionComponents.length;
-        for (int i = 0; i < length; i++) {
-            stringBuilder.append(expressionComponents[i]).append(' ');
+        for (char expressionComponent : expression.toCharArray()) {
+            stringBuilder.append(expressionComponent).append(' ');
         }
         stringBuilder.append("= ").append(result);
 
