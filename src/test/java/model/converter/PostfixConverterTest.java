@@ -9,19 +9,47 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class PostfixConverterTest {
+    private final PostfixConverter converter = new PostfixConverter();
 
     @Test
     @DisplayName("후위식변환 테스트")
-    void covert() {
+    void covert1() {
         //given
-        final Converter converter = new PostfixConverter();
         final Expression expression = new Expression("3 + 2 * 4 - 9 / 3");
-        final List<String> result = List.of("3", "2", "4", "*", "+", "9", "3", "/", "-");
+        final List<String> expected = List.of("3", "2", "4", "*", "+", "9", "3", "/", "-");
 
         //when
-        List<String> covert = converter.convert(expression);
+        List<String> result = converter.convert(expression);
 
         //then
-        assertThat(covert).hasSameHashCodeAs(result);
+        assertThat(result).hasSameHashCodeAs(expected);
+    }
+
+    @Test
+    @DisplayName("후위식변환 테스트")
+    void covert2() {
+        //given
+        final Expression expression = new Expression("2 + 3 * 4 - 5");
+        final List<String> expected = List.of("2", "3", "4", "*", "+", "5", "-");
+
+        //when
+        List<String> result = converter.convert(expression);
+
+        //then
+        assertThat(result).hasSameHashCodeAs(expected);
+    }
+
+    @Test
+    @DisplayName("후위식변환 테스트")
+    void covert3() {
+        //given
+        final Expression expression = new Expression("2 - 3 + 4");
+        final List<String> expected = List.of("2", "3", "-", "4", "+");
+
+        //when
+        List<String> result = converter.convert(expression);
+
+        //then
+        assertThat(result).hasSameHashCodeAs(expected);
     }
 }
