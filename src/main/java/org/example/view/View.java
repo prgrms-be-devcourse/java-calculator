@@ -1,6 +1,7 @@
 package org.example.view;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -10,12 +11,13 @@ public class View implements Input,Output{
     private static final Pattern REGEX_EXPRESSION = Pattern.compile("\\d+(\\s[+\\-*/]\\s\\d+)*");
 
     @Override
-    public int select() {
+    public Optional<SelectTypeView> select() {
         int selection = sc.nextInt();
 
         if (validateSelection(selection)) {
+            Optional<SelectTypeView> selectType = SelectTypeView.findByNum(selection);
             sc.nextLine();
-            return selection;
+            return selectType;
         }
 
         throw new IllegalArgumentException("원하는 요청을 찾을 수 없습니다.");

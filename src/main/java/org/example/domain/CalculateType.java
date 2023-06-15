@@ -24,8 +24,8 @@ public enum CalculateType {
         return process.apply(left, right);
     }
 
-    private void dividedZero(double right, String value) {
-        if (value.equals("/") && right == 0) {
+    private void dividedZero(double right, String operator) {
+        if (operator.equals("/") && right == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
     }

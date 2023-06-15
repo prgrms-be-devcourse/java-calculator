@@ -1,6 +1,8 @@
 package org.example.view;
 
+import java.util.Optional;
+
 public interface Input {
-    int select();
+    Optional<SelectTypeView> select();
     String inputExpression();
 }

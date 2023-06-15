@@ -21,8 +21,7 @@ public class Console {
     public void run() {
         while (calculatorProcess) {
             view.printSelection();
-            int option = view.select();
-            Optional<SelectTypeView> selectType = SelectTypeView.findByNum(option);
+            Optional<SelectTypeView> selectType = view.select();
             if(selectType.isPresent()){
                 selectOption(selectType.get());
             }
