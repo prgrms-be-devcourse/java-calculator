@@ -21,16 +21,14 @@ public class Calculation {
         else if(operator == '*' || operator == '/'){
             return 2;
         }
-        else if(operator == '('){
-            return 3;
-        }
         else {
             return -1;
         }
     }
 
     // 중위 표기식 -> 후위 표기식 변환
-    public String infixTopostfic(String s){
+    public String
+    infixTopostfic(String s){
         // StringTokenizer tokenizer = new StringTokenizer(s, "+-*/()");
         StringBuilder postFix = new StringBuilder();
         Stack<Character> stack = new Stack<>();
