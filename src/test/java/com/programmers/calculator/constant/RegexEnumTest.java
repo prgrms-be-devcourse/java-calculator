@@ -23,8 +23,8 @@ class RegexEnumTest {
         List<String> expectedTokens = List.of("1", "+", "2", "*", "4", "/", "6");
 
         // then
-        Assertions.assertThat(expectedTokens).isEqualTo(result1);
-        Assertions.assertThat(expectedTokens).isEqualTo(result2);
+        Assertions.assertThat(result1).isEqualTo(expectedTokens);
+        Assertions.assertThat(result2).isEqualTo(expectedTokens);
     }
 
     @DisplayName("숫자가 숫자 정규식에 체크 되는지 확인")
