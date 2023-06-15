@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 import static com.programmers.error.ErrorMessage.*;
 
 public class Validator {
+    public static Pattern numberPattern = Pattern.compile("^[0-9]*$");
+    public static Pattern expressionPattern = Pattern.compile("^[0-9]+([+\\-*/][0-9]+)*$");
+
 
     public static int validateMenu(String data) {
         int menuNum = checkInteger(data);
@@ -34,9 +37,7 @@ public class Validator {
 
     //식이 숫자와 사칙연산으로 이루어졌는지 확인
     public static void checkValidArithmeticExpression(String expression) {
-        String pattern = "^[0-9]+([+\\-*/][0-9]+)*$";
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(expression);
+        Matcher matcher = expressionPattern.matcher(expression);
         if (!matcher.matches()) throw new CalculatorException(NOT_VALID_ARITHMETIC_EXPRESSION);
     }
 
@@ -47,7 +48,6 @@ public class Validator {
 
     //정수인지 판별 - boolean 반환
     public static boolean isInteger(String data) {
-        Pattern numberPattern = Pattern.compile("^[0-9]*$");
         if (numberPattern.matcher(data).matches()) {
             return true;
         }
