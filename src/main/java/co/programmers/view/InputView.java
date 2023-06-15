@@ -1,8 +1,10 @@
 package co.programmers.view;
 
+import co.programmers.domain.Expression;
+
 public interface InputView {
 
-    String inputUserMenu();
+    Integer inputUserMenu();
 
-    String inputExpression();
+    Expression inputExpression();
 }
