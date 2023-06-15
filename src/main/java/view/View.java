@@ -49,7 +49,7 @@ public class View {
         try {
             String input = scanner.nextLine();
 
-            return Command.resolveCommand(CalculatorUtils.parseStringToInteger(input));
+            return Command.resolveCommand(input);
         } catch (RuntimeException e) {
             throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
         }

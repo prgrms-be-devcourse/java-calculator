@@ -1,6 +1,7 @@
 package view;
 
 import exception.NoSuchCommandException;
+import util.CalculatorUtils;
 
 import java.util.Arrays;
 
@@ -18,7 +19,8 @@ public enum Command {
         return commandNumber;
     }
 
-    public static Command resolveCommand(int command) {
+    public static Command resolveCommand(String input) {
+        int command = CalculatorUtils.parseStringToInteger(input);
         return Arrays.stream(values())
                 .filter(cmd -> cmd.getCommandNumber() == command)
                 .findFirst()
