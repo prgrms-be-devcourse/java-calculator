@@ -3,7 +3,7 @@ package com.programmers.calculator;
 public interface Repository {
     String findAll();
 
-    void save(CalcResult calcResult);
+    Long save(CalcResult calcResult);
 
     int getSize();
 }
