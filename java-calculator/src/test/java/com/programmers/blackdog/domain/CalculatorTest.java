@@ -1,4 +1,4 @@
-package com.programmers.junho.domain;
+package com.programmers.blackdog.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +30,7 @@ class CalculatorTest {
 
     @DisplayName("계산 값이 정수 형 값을 벗어났을 경우 예외가 발생한다.")
     @ParameterizedTest(name = "식: {0}")
-    @ValueSource(strings = {"999999 * 999999 * 99999 * 9999999","1 - 999999999 - 999999999 - 999999999 - 999999999"})
+    @ValueSource(strings = {"999999 * 999999 * 99999 * 9999999", "1 - 999999999 - 999999999 - 999999999 - 999999999"})
     void when_CalculatedResultIsOutOfIntegerRange_Expects_ThrowException(String expression) {
         assertThatThrownBy(() -> calculator.calculate(expression))
                 .isInstanceOf(ArithmeticException.class);

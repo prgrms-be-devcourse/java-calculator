@@ -2,10 +2,8 @@ package com.programmers.junho.domain;
 
 import java.util.Stack;
 
-import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
-import static com.programmers.junho.domain.ArithmeticOperators.isNotOperator;
-import static com.programmers.junho.domain.constant.CalculatorConstant.DELIMITER;
-import static com.programmers.junho.domain.utils.StringUtil.convertStringToInt;
+import static com.programmers.blackdog.domain.ArithmeticOperators.*;
+import static com.programmers.blackdog.domain.utils.StringUtil.convertStringToInt;
 
 public class Calculator {
 
@@ -16,7 +14,7 @@ public class Calculator {
     }
 
     private Integer calculateWithPostfixExpression(String postfixExpression) {
-        String[] tokens = postfixExpression.split(DELIMITER.getValue());
+        String[] tokens = postfixExpression.split(DELIMITER);
         Stack<Integer> stack = new Stack<>();
 
         for (String token : tokens) {

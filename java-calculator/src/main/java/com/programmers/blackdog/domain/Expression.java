@@ -4,9 +4,9 @@ import java.util.Objects;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import static com.programmers.junho.domain.ArithmeticOperators.convertTokenToOperator;
-import static com.programmers.junho.domain.ArithmeticOperators.isNotOperator;
-import static com.programmers.junho.domain.constant.CalculatorConstant.*;
+import static com.programmers.blackdog.domain.ArithmeticOperators.*;
+import static com.programmers.blackdog.domain.ArithmeticOperators.convertTokenToOperator;
+import static com.programmers.blackdog.domain.ArithmeticOperators.isNotOperator;
 
 public class Expression {
     private final String expression;
@@ -23,14 +23,14 @@ public class Expression {
     }
 
     private String appendBlankForRegex(String expression) {
-        return expression + BLANK.getValue();
+        return expression + BLANK;
     }
 
     public String getPostfixExpression() {
         StringBuilder postfixExpression = new StringBuilder();
         Stack<ArithmeticOperators> stack = new Stack<>();
 
-        String[] tokens = this.expression.split(DELIMITER.getValue());
+        String[] tokens = this.expression.split(DELIMITER);
         for (String token : tokens) {
             convertToPostfix(postfixExpression, stack, token);
         }
@@ -40,19 +40,19 @@ public class Expression {
 
     private void convertToPostfix(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack, String token) {
         if (isNotOperator(token)) {
-            postfixExpression.append(token).append(BLANK.getValue());
+            postfixExpression.append(token).append(BLANK);
             return;
         }
         var operator = convertTokenToOperator(token);
         while (isStackNotEmptyAndOperatorPriorityLower(stack, operator)) {
-            postfixExpression.append(stack.pop().getOperator()).append(BLANK.getValue());
+            postfixExpression.append(stack.pop().getOperator()).append(BLANK);
         }
         stack.push(operator);
     }
 
     private void appendAllExistingElement(StringBuilder postfixExpression, Stack<ArithmeticOperators> stack) {
         while (!stack.isEmpty()) {
-            postfixExpression.append(stack.pop().getOperator()).append(BLANK.getValue());
+            postfixExpression.append(stack.pop().getOperator()).append(BLANK);
         }
     }
     private boolean isStackNotEmptyAndOperatorPriorityLower(Stack<ArithmeticOperators> stack, ArithmeticOperators operator) {

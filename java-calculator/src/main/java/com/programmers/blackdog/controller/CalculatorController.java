@@ -9,7 +9,7 @@ import com.programmers.junho.view.OutputView;
 
 import java.util.List;
 
-import static com.programmers.junho.controller.constant.Selection.findByCode;
+import static com.programmers.blackdog.controller.constant.Selection.findByCode;
 
 public class CalculatorController {
 
@@ -33,7 +33,7 @@ public class CalculatorController {
                     printAllPreviousData();
                     break;
                 case CALCULATE:
-                    printCalculatedResultAndSave(calculator);
+//                    printCalculatedResultAndSave();
                     break;
                 default:
                     throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");

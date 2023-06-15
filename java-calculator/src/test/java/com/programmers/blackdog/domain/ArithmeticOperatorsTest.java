@@ -1,9 +1,9 @@
-package com.programmers.junho.domain;
+package com.programmers.blackdog.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.programmers.junho.domain.ArithmeticOperators.*;
+import static com.programmers.blackdog.domain.ArithmeticOperators.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ArithmeticOperatorsTest {

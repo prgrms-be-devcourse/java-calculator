@@ -1,4 +1,4 @@
-package com.programmers.junho.domain;
+package com.programmers.blackdog.domain;
 
 
 import org.junit.jupiter.api.DisplayName;
