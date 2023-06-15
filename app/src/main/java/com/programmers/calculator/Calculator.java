@@ -45,7 +45,7 @@ public class Calculator implements Runnable {
                     Expression expression = input.inputExpression();
                     int result = expression.getResult();
                     System.out.println(result);
-//                    historyRepository.save(expression, result);
+                    historyRepository.save(expression, result);
                 }
 
                 default -> System.out.println("잘못된 입력입니다.");
