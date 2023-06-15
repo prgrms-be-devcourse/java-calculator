@@ -11,7 +11,9 @@ public enum Operator {
     MINUS("-", 1, (operand1, operand2) -> operand2 - operand1),
     MULTIPLY("*", 2, (operand1, operand2) -> operand2 * operand1),
     DIVIDE("/", 2, (operand1, operand2) -> {
-        if (operand1 == 0) throw new ArithmeticException(ZERO_DIVIDE);
+        if (operand1 == 0) {
+            throw new ArithmeticException(ZERO_DIVIDE);
+        }
         return operand2 / operand1;
     });
 
@@ -35,12 +37,12 @@ public enum Operator {
 
     public static boolean isOperator(String textSegment) {
         return Arrays.stream(values())
-                .anyMatch(operator -> operator.getSignature().equals(textSegment));
+                    .map(Operator::getSignature)
+                    .anyMatch(textSegment::equals);
     }
 
-    public static Integer calculate(String operator, Integer operand1, Integer operand2) {
-        return findOperator(operator)
-                .operation.apply(operand1, operand2);
+    public static Integer calculateArithmetic(Operator operator, Integer operand1, Integer operand2) {
+        return operator.operation.apply(operand1, operand2);
     }
 
     public static Operator findOperator(String signature) {

@@ -10,6 +10,7 @@ import java.util.Stack;
 import static constant.Operator.*;
 
 public class PostfixConverter implements Converter {
+    private static final String IS_NUMBER_PATTERN = "^[0-9]+$";
     private static final String WHITESPACE = " ";
     private static final Stack<Operator> operatorStack = new Stack<>();
 
@@ -23,9 +24,11 @@ public class PostfixConverter implements Converter {
                 Operator operator = Operator.findOperator(textSegment);
                 processLowPriorityOperators(postfixList, operator);
                 operatorStack.push(operator);
-                continue;
             }
-            postfixList.add(textSegment);
+
+            if (isOperand(textSegment)) {
+                postfixList.add(textSegment);
+            }
         }
         appendRemainingOperators(postfixList, operatorStack);
         return postfixList;
@@ -43,6 +46,10 @@ public class PostfixConverter implements Converter {
 
     private boolean isHigherPriorityAfterOperator(Operator prev, Operator now) {
         return prev.getPriority() >= now.getPriority();
+    }
+
+    private boolean isOperand(String textSegment) {
+        return textSegment.matches(IS_NUMBER_PATTERN);
     }
 
     private void appendRemainingOperators(List<String> postfixList, Stack<Operator> operatorStack) {

@@ -38,7 +38,7 @@ public class CalculatorController {
             case INQUIRY -> printExpressions();
             case CALCULATION -> {
                 Expression expression = input.expressionInput();
-                CalculationResult calculationResult = getCalculationResult(expression);
+                CalculationResult calculationResult = calculatePostfixExpression(expression);
                 output.printExpression(calculationResult);
             }
             default -> output.printSelectOtherMenu();
@@ -48,7 +48,7 @@ public class CalculatorController {
     private void printExpressions() {
     }
 
-    private CalculationResult getCalculationResult(Expression expression) {
+    private CalculationResult calculatePostfixExpression(Expression expression) {
         List<String> postfixExpression = converter.convert(expression);
         CalculationResult calculationResult = calculation.calculate(postfixExpression);
         return calculationResult;

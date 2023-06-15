@@ -6,8 +6,10 @@ import model.vo.CalculationResult;
 import java.util.List;
 import java.util.Stack;
 
+import static constant.Operator.*;
+
 public class CalculationImpl implements Calculation {
-    private static final String IS_NUMBER_PATTERN = "^[0-9]$";
+    private static final String IS_NUMBER_PATTERN = "^[0-9]+$";
     public static final String ZERO_DIVIDE = "0으로 나눌 수 없습니다.";
     private static final Stack<Integer> numberStack = new Stack<>();
 
@@ -16,11 +18,12 @@ public class CalculationImpl implements Calculation {
         for (String textSegment : postfixExpression) {
             if (isNumber(textSegment)) {
                 pushNumberToStack(Integer.parseInt(textSegment));
-                continue;
             }
 
-            Integer operationResult = calculatePostfixOperation(textSegment);
-            pushNumberToStack(operationResult);
+            if (isOperator(textSegment)) {
+                Integer operationResult = calculatePostfixOperation(textSegment);
+                pushNumberToStack(operationResult);
+            }
         }
 
         return new CalculationResult(numberStack.pop());
@@ -37,7 +40,8 @@ public class CalculationImpl implements Calculation {
     private Integer calculatePostfixOperation(String textSegment) {
         Integer number1 = numberStack.pop();
         Integer number2 = numberStack.pop();
-        Integer operationResult = Operator.calculate(textSegment, number1, number2);
+        Operator operator = findOperator(textSegment);
+        Integer operationResult = calculateArithmetic(operator, number1, number2);
         return operationResult;
     }
 }
