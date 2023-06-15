@@ -1,14 +1,11 @@
 package model.entity;
 
-import model.vo.CalculationResult;
-import model.vo.Expression;
-
 public class Calculator {
     private Long id;
-    private Expression expression;
-    private CalculationResult calculationResult;
+    private String expression;
+    private int calculationResult;
 
-    public Calculator(Expression expression, CalculationResult calculationResult) {
+    public Calculator(String expression, int calculationResult) {
         this.expression = expression;
         this.calculationResult = calculationResult;
     }
@@ -17,11 +14,11 @@ public class Calculator {
         return id;
     }
 
-    public Expression getExpression() {
+    public String getExpression() {
         return expression;
     }
 
-    public CalculationResult getCalculationResult() {
+    public int getCalculationResult() {
         return calculationResult;
     }
 
