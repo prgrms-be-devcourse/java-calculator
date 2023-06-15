@@ -2,7 +2,10 @@ package com.programmers.calculator;
 
 import com.programmers.util.Operator;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.ArrayDeque;
 import java.util.regex.Pattern;
 
 public class Calculator {

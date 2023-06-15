@@ -1,7 +1,6 @@
 package com.programmers.util;
 
 import com.programmers.exception.InvalidFormulaException;
-import com.programmers.util.Formula;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
