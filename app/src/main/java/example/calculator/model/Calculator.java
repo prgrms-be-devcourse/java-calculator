@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Calculator {
+    private static final Pattern OPERATOR_PATTERN = Pattern.compile("[+\\-*/]");
     private Map<String, CalculationOperation> calculationOperations;
     private List<String> calculationHistory;
 
@@ -46,7 +48,7 @@ public class Calculator {
         List<Double> operands = new ArrayList<>();
 
         for (String token : tokens) {
-            if (token.matches("[+\\-*/]")) {
+            if (OPERATOR_PATTERN.matcher(token).matches()) {
                 operators.add(token);
             } else {
                 operands.add(Double.parseDouble(token));
