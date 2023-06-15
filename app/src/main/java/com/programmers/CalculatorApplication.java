@@ -5,7 +5,7 @@ package com.programmers;
 
 import com.programmers.controller.CalculatorController;
 
-public class App {
+public class CalculatorApplication {
 	
     public static void main(String[] args) {
 	    CalculatorController calculatorController = new CalculatorController();
