@@ -21,8 +21,7 @@ public class CalculatorController {
         do {
             Output.printMenu();
 
-            String menuString = Input.inputLine();
-            int menuNum = Input.processMenu(menuString);
+            int menuNum = inputMenu();
 
             Output.printNewLine();//공백
 
@@ -37,6 +36,22 @@ public class CalculatorController {
 
         } while (!menu.isFinish());
     }
+    private int inputMenu(){
+        boolean inputMenuSuccessful = false;
+        int menuNum = 0;
+        while(!inputMenuSuccessful){
+            try{
+                String menuString = Input.inputLine();
+                menuNum = Input.processMenu(menuString);
+                inputMenuSuccessful = true;
+            }
+            catch(CalculatorException e){
+                Output.printMessage(INPUT_RETRY_MESSAGE);
+            }
+        }
+        return menuNum;
+    }
+
 
     private void processCalculation() {
         boolean calculationSuccessful = false;

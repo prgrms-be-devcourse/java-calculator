@@ -16,17 +16,9 @@ public class Input {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int processMenu(String menuString) {
-        int menuNum = 0;
-        boolean inputSuccessful = false;
-        while (!inputSuccessful) {
-            try {
-                menuString = removeWhiteSpace(menuString);
-                menuNum = Validator.validateMenu(menuString);
-                inputSuccessful = true;
-            } catch (CalculatorException e) {
-                Output.printMessage(INPUT_RETRY_MESSAGE);
-            }
-        }
+
+        menuString = removeWhiteSpace(menuString);
+        int menuNum = Validator.validateMenu(menuString);
 
         return menuNum;
     }
@@ -36,17 +28,9 @@ public class Input {
     }
 
     public static String processExpression(String beforeProcessExpression) {
-        boolean inputSuccessful = false;
 
-        while (!inputSuccessful) {
-            try {
-                String removeWhiteSpaceExpression = removeWhiteSpace(beforeProcessExpression);
-                Validator.checkValidArithmeticExpression(removeWhiteSpaceExpression);
-                inputSuccessful = true;
-            } catch (CalculatorException e) {
-                Output.printMessage(INPUT_RETRY_MESSAGE);
-            }
-        }
+        String removeWhiteSpaceExpression = removeWhiteSpace(beforeProcessExpression);
+        Validator.checkValidArithmeticExpression(removeWhiteSpaceExpression);
 
         return beforeProcessExpression;
     }
