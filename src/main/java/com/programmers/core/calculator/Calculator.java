@@ -19,10 +19,8 @@ public class Calculator implements AbstractCalculator {
     @Override
     public CalculationResult calculate(CalculationRequest request) {
         String formula = request.getFormula();
-        List<String> postfix = converter.convert(formula);
+        List<String> postfix = converter.convert(request);
         long result = calculatePostfixFormula(postfix);
-//        request.updateResult(result);
-//        return request;
         return new CalculationResult(formula, result);
     }
 

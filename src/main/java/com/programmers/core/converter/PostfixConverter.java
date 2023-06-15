@@ -1,5 +1,8 @@
-package com.programmers.core;
+package com.programmers.core.converter;
 
+import com.programmers.core.Operators;
+import com.programmers.core.Priority;
+import com.programmers.core.data.CalculationRequest;
 import com.programmers.util.StringUtil;
 import com.programmers.util.Validator;
 
@@ -11,7 +14,8 @@ public class PostfixConverter implements Converter {
     private static final String SEPARATOR = " ";
 
     @Override
-    public List<String> convert(String formula) {
+    public List<String> convert(CalculationRequest request) {
+        String formula = request.getFormula();
         List<String> postfix = new ArrayList<>();
         String[] splitFormula = formula.split(SEPARATOR);
         Stack<String> stack = new Stack<>();
