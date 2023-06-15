@@ -10,12 +10,13 @@ import java.util.List;
 
 class PostfixEvaluatorTest {
 
+    PostfixEvaluator postfixEvaluator = new PostfixEvaluator();
+
     @DisplayName("후위표기식의 계산이 잘 되는지 확인")
     @Test
     void right_convert_postfix () {
 
         // given
-        PostfixEvaluator postfixEvaluator = new PostfixEvaluator();
         List<String> postfix = List.of("1", "2", "4", "*", "6", "*", "+");
 
         // when
@@ -23,6 +24,20 @@ class PostfixEvaluatorTest {
 
         // then
         Assertions.assertThat(result.getValue()).isEqualTo(new BigDecimal(49));
+    }
+
+    @DisplayName("잘못된 후위표기식이 예외를 던지는지 확인")
+    @Test
+    void throw_wrong_evaluate_postfix () {
+
+        // given
+        List<String> postfix = List.of("1", "+", "+");
+
+        // then
+        Assertions.assertThatThrownBy(() -> postfixEvaluator.evaluate(postfix))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 수식입니다.");
+
     }
 
 }

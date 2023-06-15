@@ -8,12 +8,12 @@ import java.util.List;
 
 class PostfixConverterTest {
 
+    PostfixConverter postfixConverter = new PostfixConverter();
+
     @DisplayName("후위표기식으로 변환 잘 되는지 확인")
     @Test
     void right_convert_postfix () {
-
         // given
-        PostfixConverter postfixConverter = new PostfixConverter();
         List<String> tokens = List.of("1", "+", "2", "*", "4", "/", "6");
         List<String> expected = List.of("1", "2", "4", "*", "6", "/", "+");
 
