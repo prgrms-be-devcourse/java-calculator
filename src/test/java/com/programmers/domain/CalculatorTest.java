@@ -2,15 +2,14 @@ package com.programmers.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
-    private final String parameterClass = "com.programmers.parameterized.CalculatorParams";
-
     //validate()
     @Test
     void validateInvalidOperator_Then_Exception() {
@@ -49,35 +48,59 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#validateInvalidOrder_Then_Exception")
-    void validateInvalidOrder_Then_Exception(List<String> infixExpression) {
+    @CsvSource(value = {
+            "1 1 1",
+            "+ 1 /",
+            "1 + + 1"
+    })
+    void validateInvalidOrder_Then_Exception(String input) {
+        //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
+
         //then
         assertThatThrownBy(() -> new Calculator(infixExpression))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#validateExpressionEndWithOperator_Then_Exception")
-    void validateExpressionEndWithOperator_Then_Exception(List<String> infixExpression) {
+    @CsvSource(value = {
+            "1 +",
+            "1 * 1 -"
+    })
+    void validateExpressionEndWithOperator_Then_Exception(String input) {
+        //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
+
         //then
         assertThatThrownBy(() -> new Calculator(infixExpression))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#validateValidExpression")
-    void validateValidExpression(List<String> expression) {
+    @CsvSource(value = {
+            "1 + 1",
+            "1 / 1 * 1"
+    })
+    void validateValidExpression(String input) {
+        //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
+
         //when
-        new Calculator(expression);
+        new Calculator(infixExpression);
 
         //then
     }
 
     //calculate()
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateOnlyPlus")
-    void calculateOnlyPlus(List<String> infixExpression, int result) {
+    @CsvSource(value = {
+            "1 + 5:6",
+            "123 + 234 + 2134:2491",
+            "1 + 2 + 3 + 4:10"
+    }, delimiter = ':')
+    void calculateOnlyPlus(String input, int result) {
         //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
         Calculator cal = new Calculator(infixExpression);
 
         //when
@@ -88,9 +111,13 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateOnlyMinus")
-    void calculateOnlyMinus(List<String> infixExpression, int result) {
+    @CsvSource(value = {
+            "1 - 5:-4",
+            "123 - 23 - 523:-423"
+    }, delimiter = ':')
+    void calculateOnlyMinus(String input, int result) {
         //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
         Calculator cal = new Calculator(infixExpression);
 
         //when
@@ -101,9 +128,13 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateMixedWithPlusAndMinus")
-    void calculateMixedWithPlusAndMinus(List<String> infixExpression, int result) {
+    @CsvSource(value = {
+            "1 + 5 - 123:-117",
+            "123 - 2345 + 2452:230"
+    }, delimiter = ':')
+    void calculateMixedWithPlusAndMinus(String input, int result) {
         //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
         Calculator cal = new Calculator(infixExpression);
 
         //when
@@ -114,9 +145,13 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateOnlyMultiply")
-    void calculateOnlyMultiply(List<String> infixExpression, int result) {
+    @CsvSource(value = {
+            "2 * 5:10",
+            "20 * 5 * 5:500"
+    }, delimiter = ':')
+    void calculateOnlyMultiply(String input, int result) {
         //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
         Calculator cal = new Calculator(infixExpression);
 
         //when
@@ -127,9 +162,13 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateMultiplyMixedWithPlusAndMinus")
-    void calculateMultiplyMixedWithPlusAndMinus(List<String> infixExpression, int result) {
+    @CsvSource(value = {
+            "100 + 30 * 5 - 100:150",
+            "120 * 3 - 3 * 100:60"
+    }, delimiter = ':')
+    void calculateMultiplyMixedWithPlusAndMinus(String input, int result) {
         //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
         Calculator cal = new Calculator(infixExpression);
 
         //when
@@ -140,9 +179,13 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateOnlyDivide")
-    void calculateOnlyDivide(List<String> infixExpression, int result) {
+    @CsvSource(value = {
+            "120 / 20:6",
+            "80 / 2 / 10:4"
+    }, delimiter = ':')
+    void calculateOnlyDivide(String input, int result) {
         //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
         Calculator cal = new Calculator(infixExpression);
 
         //when
@@ -153,9 +196,13 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(parameterClass + "#calculateMixedAllOperation")
-    void calculateMixedAllOperation(List<String> infixExpression, int result) {
+    @CsvSource(value = {
+            "20 * 5 + 18 / 6:103",
+            "20 + 5 * 2 / 2 - 12:13"
+    }, delimiter = ':')
+    void calculateMixedAllOperation(String input, int result) {
         //given
+        List<String> infixExpression = Arrays.stream(input.split(" ")).toList();
         Calculator cal = new Calculator(infixExpression);
 
         //when

@@ -5,11 +5,9 @@ import com.programmers.io.Console;
 import com.programmers.repository.CalculatorMemoryRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static com.programmers.util.CalculatorTestUtil.createCalculation;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,17 +24,13 @@ public class CalculatorServiceTest {
         calculatorService = new CalculatorService(calculatorRepository, console, console);
     }
 
-    private static Stream<Arguments> inputData() {
-        return Stream.of(
-                Arguments.of("1   +   2 +  3", 6),
-                Arguments.of("5 * 2 + 3  +  4 - 5 * 6", -13),
-                Arguments.of("5 * 2 * 3 - 4 / 2 * 4", 22),
-                Arguments.of("3 * 3 3", 99)
-        );
-    }
-
     @ParameterizedTest
-    @MethodSource
+    @CsvSource(value = {
+            "1   +   2 +  3:6",
+            "5 * 2 + 3  +  4 - 5 * 6:-13",
+            "5 * 2 * 3 - 4 / 2 * 4:22",
+            "3 * 3 3:99"
+    }, delimiter = ':')
     void inputData(String input, int result) {
         //when
         int calculated = calculatorService.calculate(input);
