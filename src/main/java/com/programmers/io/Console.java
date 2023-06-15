@@ -1,5 +1,8 @@
 package com.programmers.io;
 
+import com.programmers.calculator.CalcResult;
+
+import java.util.Map;
 import java.util.Scanner;
 
 public class Console {
@@ -25,8 +28,10 @@ public class Console {
         System.out.println(errorMsg);
     }
 
-    public static void printHistory(String history) {
-        System.out.println(history);
+    public static void printHistory(Map<Long, CalcResult> historyMap) {
+        for (Map.Entry<Long, CalcResult> history : historyMap.entrySet()) {
+            System.out.println(history.getValue());
+        }
     }
 
     public static void printResult(String result) {

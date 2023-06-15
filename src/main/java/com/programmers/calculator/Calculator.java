@@ -3,6 +3,8 @@ package com.programmers.calculator;
 import com.programmers.converter.ExpressionConverter;
 import com.programmers.io.Console;
 
+import java.util.Map;
+
 public class Calculator {
 
     private final Accumulator accumulator;
@@ -22,8 +24,8 @@ public class Calculator {
 
             switch (menu) {
                 case HISTORY:
-                    String history = inMemory.findAll();
-                    Console.printHistory(history);
+                    Map<Long, CalcResult> historyMap = inMemory.findAll();
+                    Console.printHistory(historyMap);
                     break;
 
                 case CALCULATE:

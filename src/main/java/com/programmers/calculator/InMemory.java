@@ -1,5 +1,6 @@
 package com.programmers.calculator;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,12 +9,8 @@ public class InMemory implements Repository {
     private final Map<Long, CalcResult> resultMapList = new LinkedHashMap<>();
 
     @Override
-    public String findAll() {
-        StringBuilder builder = new StringBuilder();
-        resultMapList.values().forEach((value) -> {
-            builder.append(value.toString()).append("\n");
-        });
-        return builder.toString().trim();
+    public Map<Long, CalcResult> findAll() {
+        return Collections.unmodifiableMap(resultMapList);
     }
 
     @Override

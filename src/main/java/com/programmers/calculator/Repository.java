@@ -1,7 +1,9 @@
 package com.programmers.calculator;
 
+import java.util.Map;
+
 public interface Repository {
-    String findAll();
+    Map<Long, CalcResult> findAll();
 
     Long save(CalcResult calcResult);
 
