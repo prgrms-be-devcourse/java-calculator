@@ -3,6 +3,6 @@ package org.programmers.java.repository;
 import java.util.Map;
 
 public interface FormulaRepository {
-    String save(String formula, String caculateValue);
+    void save(String formulaAndResult);
     Map<Long, String> getFormulaList();
 }

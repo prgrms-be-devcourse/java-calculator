@@ -59,20 +59,19 @@ public class Calculator {
         if(validator.formulaValidate(inputFormula)){
             String result = calculation.requestCalculate(inputFormula);
             output.calculationValue(result);
-            String getFormula = formulaRepository.save(inputFormula, result);
-            compareFormula(getFormula, inputFormula, result);
+            String formulaAndResult = formattingFormula(inputFormula, result);
+            formulaRepository.save(formulaAndResult);
         }
     }
 
-    private void compareFormula(String getFormula, String inputFormula, String result){
+    private String formattingFormula(String inputFormula, String result){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
+        return stringBuilder
                 .append(inputFormula)
-                .append(" = ")
-                .append(result);
-        String formula = stringBuilder.toString();
-        if(!getFormula.equals(formula)){
-            output.errorMsg(Error.DOES_NOT_MATCH_DATA.getMsg());
-        }
+                .append("=")
+                .append(result)
+                .toString();
     }
+
+
 }

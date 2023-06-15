@@ -8,12 +8,8 @@ public class FormulaMemoryRepository implements FormulaRepository {
     private Long num = 0L;
 
     @Override
-    public String save(String formula, String caculateValue) {
-        StringBuilder stringBuilder = new StringBuilder(formula);
-        stringBuilder.append(" = ");
-        stringBuilder.append(caculateValue);
-        formulaMap.put(num++, stringBuilder.toString());
-        return formulaMap.get(num-1);
+    public void save(String formulaAndResult) {
+        formulaMap.put(num++, formulaAndResult);
     }
 
     @Override
