@@ -1,5 +1,7 @@
 package org.programmers.constant;
 
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum Operator {
@@ -28,5 +30,11 @@ public enum Operator {
 
     public int getPriority() {
         return priority;
+    }
+
+    public static Optional<Operator> find(String symbol) {
+        return Arrays.stream(Operator.values())
+                .filter(operator -> operator.symbol.equals(symbol))
+                .findAny();
     }
 }
