@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class PostfixConverter implements Converter{
+
     private final ExpressionValidator expressionValidator;
 
     public PostfixConverter() {
@@ -21,16 +22,16 @@ public class PostfixConverter implements Converter{
         List<String> postfix = new ArrayList<>();
         Stack<String> operatorStack = new Stack<>();
 
-        for (String str : expression.split("")) {
-            if (expressionValidator.isOperator(str)) {
+        for (String element : expression.split("")) {
+            if (expressionValidator.isOperator(element)) {
                 addToPostfix(postfix, number.toString());
                 number.delete(0, number.length());
 
-                comparePriority(operatorStack, postfix, str);
+                comparePriority(operatorStack, postfix, element);
 
-                operatorStack.push(str);
-            } else if (expressionValidator.isNumber(str)) {
-                number.append(str);
+                operatorStack.push(element);
+            } else if (expressionValidator.isNumber(element)) {
+                number.append(element);
             } else {
                 throw new IllegalArgumentException("잘못된 식입니다.");
             }
