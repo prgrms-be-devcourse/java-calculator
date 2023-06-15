@@ -10,7 +10,7 @@ public class Console {
     private View view;
     private Calculator calculator;
     private Records records;
-    private boolean calculatorProcess = false;
+    private boolean calculatorProcess = true;
 
     public Console(View view, Calculator calculator,Records records) {
         this.view = view;
@@ -19,14 +19,16 @@ public class Console {
     }
 
     public void run() {
-        while (!calculatorProcess) {
+        while (calculatorProcess) {
             view.printSelection();
             int option = view.select();
             Optional<SelectTypeView> selectType = SelectTypeView.findByNum(option);
             if(selectType.isPresent()){
                 selectOption(selectType.get());
             }
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+            else {
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            }
         }
     }
 
@@ -41,7 +43,7 @@ public class Console {
                 records.saveRecord(infixExpression, result);
             }
 
-            case END -> calculatorProcess = true;
+            case END -> calculatorProcess = false;
         }
     }
 }

@@ -19,8 +19,15 @@ public enum CalculateType {
         this.process = process;
     }
 
-    public double calculate(double left, double right) {
+    public double calculate(double left, double right, String operator) {
+        dividedZero(right, operator);
         return process.apply(left, right);
+    }
+
+    private void dividedZero(double right, String value) {
+        if (value.equals("/") && right == 0) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+        }
     }
 
     public int getPriority() {
@@ -35,6 +42,6 @@ public enum CalculateType {
         return Arrays.stream(values())
                 .filter(calculateType -> calculateType.getSymbol().equals(symbol))
                 .findFirst()
-                .orElseThrow(()-> new IllegalArgumentException("연산자를 잘못 입력하셨습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("연산자를 잘못 입력하셨습니다."));
     }
 }

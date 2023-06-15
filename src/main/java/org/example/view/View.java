@@ -1,6 +1,5 @@
 package org.example.view;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -15,9 +14,9 @@ public class View implements Input,Output{
         int selection = sc.nextInt();
 
         if (validateSelection(selection)) {
+            sc.nextLine();
             return selection;
         }
-        sc.nextLine();
 
         return -1;
     }
@@ -30,7 +29,7 @@ public class View implements Input,Output{
             return expression;
         }
         //의도하신 부분이 맞는 건지 혼동되는 부분
-        throw new IllegalArgumentException("수식을 정화갛게 입력하지 않으셨습니다.");
+        throw new IllegalArgumentException("수식을 정확하게 입력하지 않으셨습니다.");
     }
 
     @Override
@@ -53,6 +52,7 @@ public class View implements Input,Output{
     }
 
     private boolean validateSelection(int selection) {
+        System.out.println(selection);
         for(SelectTypeView stv : SelectTypeView.values()){
             if(stv.getNum() == selection){
                 return true;
