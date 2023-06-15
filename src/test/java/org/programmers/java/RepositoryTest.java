@@ -20,7 +20,8 @@ public class RepositoryTest {
     @CsvSource(value={"3 + 6 / 2 : 6", "10 / 2 * 5 - 3 : 22"}, delimiter = ':')
     void save(String formula, String result){
         // when
-        formulaRepository.save(formula, result);
+        String formulaAndResult = formattingFormula(formula, result);
+        formulaRepository.save(formulaAndResult);
 
         // then
         assertEquals(formula + " = " + result, formulaRepository.getFormulaList().get(0L));
@@ -40,11 +41,23 @@ public class RepositoryTest {
                 1L, "10 / 2 * 5 - 3 = 22"
         );
 
+        String formulaAndResult1 = formattingFormula(formula1, result2);
+        String formulaAndResult2 = formattingFormula(formula2, result2);
+
         // when
-        formulaRepository.save(formula1, result1);
-        formulaRepository.save(formula2, result2);
+        formulaRepository.save(formulaAndResult1);
+        formulaRepository.save(formulaAndResult2);
 
         // then
         Assertions.assertEquals(formulaListExpect, formulaRepository.getFormulaList());
+    }
+
+    private String formattingFormula(String inputFormula, String result){
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder
+                .append(inputFormula)
+                .append("=")
+                .append(result)
+                .toString();
     }
 }

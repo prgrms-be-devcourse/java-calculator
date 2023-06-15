@@ -15,7 +15,7 @@ public class Validator {
         formulaCountValidate(formularAfterSplitValidate);
     }
 
-    private static void formulaSplitValidate(String formulaInput) {
+    public static void formulaSplitValidate(String formulaInput) {
         String[] splitFormula = formulaInput.split(" ");
 
         for (String operatorOrOperand : splitFormula) {
@@ -28,10 +28,10 @@ public class Validator {
 
     private static boolean isValid(String operatorOrOperand) {
         return Operator.isNumber(operatorOrOperand) ||
-                Operator.isSymbol(operatorOrOperand).isPresent();
+                Operator.findSymbol(operatorOrOperand).isPresent();
     }
 
-    private static void formulaCountValidate(List<String> formularAfterSplitValidate){
+    public static void formulaCountValidate(List<String> formularAfterSplitValidate){
         if(formularAfterSplitValidate.size() % 2 == 0) {
             throw new IllegalArgumentException(Error.CALCULATE_VALIDATION.getMsg());
         }
@@ -47,7 +47,7 @@ public class Validator {
             throw new IllegalArgumentException(Error.CALCULATE_VALIDATION.getMsg());
         }
 
-        if(index % 2 != 1 && Operator.isSymbol(operatorOrOperand).isPresent()) {
+        if(index % 2 != 1 && Operator.findSymbol(operatorOrOperand).isPresent()) {
             throw new IllegalArgumentException(Error.CALCULATE_VALIDATION.getMsg());
         }
     }
