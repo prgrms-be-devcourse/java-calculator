@@ -4,6 +4,8 @@ import static calculator.view.OutputView.printWithLineBreak;
 import static calculator.view.OutputView.showQuitMessage;
 
 import calculator.controller.MainController;
+import calculator.entity.InfixNotation;
+import calculator.entity.Notation;
 import calculator.service.Calculator;
 import calculator.storage.HistoryStorage;
 
@@ -11,7 +13,8 @@ public class App {
 
     public static void main(String[] args) {
         HistoryStorage historyStorage = new HistoryStorage();
-        Calculator calculator = new Calculator(historyStorage);
+        Notation notation = new InfixNotation();
+        Calculator calculator = new Calculator(historyStorage, notation);
         MainController mainController = new MainController(historyStorage, calculator);
 
         try {
