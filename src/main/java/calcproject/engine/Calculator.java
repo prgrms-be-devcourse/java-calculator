@@ -77,6 +77,7 @@ public class Calculator {
 
 	public double calculateExpression(String expression) {
 		List<String> tokens = calcExpressionTokenizer.tokenizeExpression(expression);
+		List<String> postfixTokens = tokensToPostfixNotation(tokens);
 		double calcResult = calculatePostfixNotation(tokens);
 
 		return calcResult;

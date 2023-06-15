@@ -12,9 +12,9 @@ public class MemoryCalcResultRecordRepository implements CalcResultRecordReposit
 	private Map<Integer, CalcResultRecordModel> calcMap;
 	private int lastIdx;
 
-	public MemoryCalcResultRecordRepository(Map<Integer, CalcResultRecordModel> calcMap, int startIdx) {
+	public MemoryCalcResultRecordRepository(Map<Integer, CalcResultRecordModel> calcMap) {
 		this.calcMap = calcMap;
-		this.lastIdx = startIdx;
+		this.lastIdx = 0;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,14 +19,14 @@ import calcproject.models.CalcResultRecordModel;
 
 class MemoryCalcResultRecordRepositoryTest {
 
-	private static CalcResultRecordRepository calcResultRecordRepository;
+	private CalcResultRecordRepository calcResultRecordRepository;
 
-	@BeforeAll
-	static void beforeEach() {
+	@BeforeEach
+	void beforeEach() {
 		Map<Integer, CalcResultRecordModel> calcMap = new HashMap<>();
 		int startIdx = 0;
 		this.calcResultRecordRepository =
-			new MemoryCalcResultRecordRepository(calcMap, startIdx);
+			new MemoryCalcResultRecordRepository(calcMap);
 	}
 
 	@ParameterizedTest
@@ -39,12 +40,12 @@ class MemoryCalcResultRecordRepositoryTest {
 			Double calcRsult = calcResultList.get(i);
 
 			CalcResultRecordModel calcResultRecord = new CalcResultRecordModel(expression, calcRsult);
-			calcResultRecordRepository.saveCalcResultRecord(calcResultRecord);
+			this.calcResultRecordRepository.saveCalcResultRecord(calcResultRecord);
 			expectedCalcRecords.add(calcResultRecord);
 		}
 
 		// when
-		List<CalcResultRecordModel> resultCalcRecords = calcResultRecordRepository.loadCalcResultRecords();
+		List<CalcResultRecordModel> resultCalcRecords = this.calcResultRecordRepository.loadCalcResultRecords();
 
 		// then
 		Assertions.assertThat(resultCalcRecords)
@@ -54,7 +55,7 @@ class MemoryCalcResultRecordRepositoryTest {
 	private static Stream<Arguments> testLoadCalcRecordsProvider() {
 		return Stream.of(
 			Arguments.of(Arrays.asList("1*2", "5+5-4", "1+4"), Arrays.asList(2.0, 6.0, 5.0)),
-			Arguments.of(Arrays.asList("4+5+3", "5-3", "6+4"), Arrays.asList(11.0, 2.0, 10.0)),
+			Arguments.of(Arrays.asList("4+5+3", "5-3", "6+4"), Arrays.asList(12.0, 2.0, 10.0)),
 			Arguments.of(Arrays.asList("4/2", "8+3", "7-4"), Arrays.asList(2.0, 11.0, 3.0))
 		);
 	}

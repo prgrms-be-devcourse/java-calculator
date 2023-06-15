@@ -13,7 +13,7 @@ public class InMemoryCalcResultRecordRepositoryFacotry implements CalcResultReco
 		Map<Integer, CalcResultRecordModel> calcMap = new HashMap<>();
 		int startIdx = 0;
 		CalcResultRecordRepository calcResultRecordRepository =
-			new MemoryCalcResultRecordRepository(calcMap, startIdx);
+			new MemoryCalcResultRecordRepository(calcMap);
 
 		return calcResultRecordRepository;
 	}
