@@ -18,7 +18,7 @@ public class CheckEquationTest {
 
     @Test
     public void 수식의_첫번째_값이_연산자일_경우_예외처리_테스트(){
-        BadEquationException e = assertThrows(BadEquationException.class, () -> CheckEquation.validate("+ 5 * 7"));
+        BadEquationException e = assertThrows(BadEquationException.class, () -> CheckEquation.validate("+ 7 * 9"));
         assertThat(e.getMessage()).isEqualTo("잘못된 수식이 입력 되었습니다.");
     }
 
