@@ -4,7 +4,8 @@ import java.util.regex.Pattern;
 
 public enum RegexEnum {
 
-    FOUR_ARITHMETIC("\\d+|[-+*/]");
+    FOUR_ARITHMETIC("\\d+|[-+*/]"),
+    NUMERIC("\\d+");
 
     private final String regex;
     private final Pattern pattern;
@@ -20,6 +21,10 @@ public enum RegexEnum {
 
     public Pattern getPattern() {
         return pattern;
+    }
+
+    public static boolean isNumeric(String token) {
+        return token.matches(RegexEnum.NUMERIC.getRegex());
     }
 
 }
