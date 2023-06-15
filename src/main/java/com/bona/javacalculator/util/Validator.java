@@ -20,12 +20,12 @@ public class Validator {
         if (inputString.length < 3) {
             throw new RuntimeException("입력식이 포맷에 맞지 않습니다.");
         }
-        //마지막 자리가 숫자인지
+
         if (!isNumber(inputString[inputString.length - 1])) {
             throw new RuntimeException("입력식이 포맷에 맞지 않습니다.");
         }
         for (int i = 0; i < inputString.length; i++) {
-            if (i % 2 == 1) { // 홀수 자리일 경우 연산자여야 함.
+            if (i % 2 == 1) {
                 if (!Operator.isOperator(inputString[i])) {
                     throw new RuntimeException("입력식이 포맷에 맞지 않습니다.");
                 }
