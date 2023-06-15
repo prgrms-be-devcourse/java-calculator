@@ -30,7 +30,7 @@ public class Calculation {
     }
 
     // 중위 표기식 -> 후위 표기식 변환
-    private String infixTopostfic(String s){
+    public String infixTopostfic(String s){
         // StringTokenizer tokenizer = new StringTokenizer(s, "+-*/()");
         StringBuilder postFix = new StringBuilder();
         Stack<Character> stack = new Stack<>();
@@ -70,7 +70,7 @@ public class Calculation {
     }
 
     // 후위 표기식으로 계산 결과 return
-    private int calPostfix(String postFix){
+    public int calPostfix(String postFix){
         Stack<Integer> stack = new Stack<>();
 
         for(char c : postFix.toCharArray()){
@@ -89,13 +89,13 @@ public class Calculation {
                         stack.push(op1 + op2);
                         break;
                     case '-':
-                        stack.push(op1 - op2);
+                        stack.push(op2 - op1);
                         break;
                     case '*':
                         stack.push(op1 * op2);
                         break;
                     case '/':
-                        stack.push(op1 / op2);
+                        stack.push(op2 / op1);
                         break;
                 }
             }
