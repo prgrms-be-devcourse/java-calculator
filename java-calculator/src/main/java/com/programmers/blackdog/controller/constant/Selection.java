@@ -3,7 +3,7 @@ package com.programmers.junho.controller.constant;
 import java.util.Arrays;
 
 public enum Selection {
-    CHECK_DATA(1), CALCULATE(2);
+    CHECK_DATA(1), CALCULATE(2), EXIT(3);
 
     private final int code;
 
