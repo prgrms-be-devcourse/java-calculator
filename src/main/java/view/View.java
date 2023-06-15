@@ -2,6 +2,7 @@ package view;
 
 import exception.IllegalExpressionException;
 import exception.NoSuchCommandException;
+import util.CalculatorUtils;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -53,7 +54,7 @@ public class View {
             String expression = removeWhiteSpace(scanner.nextLine());
             checkIsValidExpression(expression);
 
-            return expression;
+            return makeFormattedExpression(expression);
         } catch (IllegalExpressionException e) {
             throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
         }
@@ -73,5 +74,20 @@ public class View {
         if (expression.length() == ONE_LENGTH || !Pattern.matches(NORMAL_EXPRESSION, expression)) {
             throw new IllegalExpressionException("[ERROR] 잘못된 연산식입니다.");
         }
+    }
+
+    private String makeFormattedExpression(String expression) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (char expressionComponent : expression.toCharArray()) {
+            if (CalculatorUtils.isDigitCharacter(expressionComponent)) {
+                stringBuilder.append(expressionComponent);
+                continue;
+            }
+            stringBuilder.append(' ')
+                    .append(expressionComponent)
+                    .append(' ');
+        }
+
+        return stringBuilder.toString();
     }
 }

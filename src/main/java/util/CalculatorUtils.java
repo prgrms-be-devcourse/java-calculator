@@ -19,6 +19,15 @@ public class CalculatorUtils {
         }
     }
 
+    public static boolean isStringNumber(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     public static boolean isDigitCharacter(char input) {
         return Character.isDigit(input);
     }

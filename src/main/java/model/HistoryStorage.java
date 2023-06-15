@@ -15,8 +15,7 @@ public class HistoryStorage {
     }
 
     public void save(String expression, String result) {
-        String formattedExpression = makeFormattedExpression(expression, result);
-        storage.put(id, formattedExpression);
+        storage.put(id, expression + " = " + result);
         id++;
     }
 
@@ -26,21 +25,5 @@ public class HistoryStorage {
         }
 
         return String.join("\n", storage.values());
-    }
-
-    private String makeFormattedExpression(String expression, String result) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (char expressionComponent : expression.toCharArray()) {
-            if (CalculatorUtils.isDigitCharacter(expressionComponent)) {
-                stringBuilder.append(expressionComponent);
-                continue;
-            }
-            stringBuilder.append(' ')
-                    .append(expressionComponent)
-                    .append(' ');
-        }
-        stringBuilder.append(" = ").append(result);
-
-        return stringBuilder.toString();
     }
 }

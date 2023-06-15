@@ -18,9 +18,9 @@ public class Calculator {
     }
 
     public String calculate(String expression) throws RuntimeException {
-        for (char expressionComponent : expression.toCharArray()) {
-            if (CalculatorUtils.isDigitCharacter(expressionComponent)) {
-                operandStack.push(CalculatorUtils.parseCharToInteger(expressionComponent));
+        for (String expressionComponent : expression.split(" ")) {
+            if (CalculatorUtils.isStringNumber(expressionComponent)) {
+                operandStack.push(CalculatorUtils.parseStringToInteger(expressionComponent));
                 continue;
             }
             calculateIfOperatorNotEmpty(expressionComponent);
@@ -29,8 +29,8 @@ public class Calculator {
         return makeFinalCalculation();
     }
 
-    private void calculateIfOperatorNotEmpty(char expressionComponent) throws NoSuchOperatorException {
-        Operator currentOperator = Operator.getOperator(expressionComponent);
+    private void calculateIfOperatorNotEmpty(String expressionComponent) throws NoSuchOperatorException {
+        Operator currentOperator = Operator.getOperator(expressionComponent.charAt(0));
         if (!operatorStack.isEmpty()) {
             calculateByPrecedence(currentOperator);
         }
