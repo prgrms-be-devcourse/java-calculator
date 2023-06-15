@@ -1,34 +1,29 @@
 package com.programmers.java.calculator.calculate;
 
-import java.util.List;
+import com.programmers.java.util.OperandChecker;
+
+import java.util.Stack;
 
 public class Calculator {
-    public double calculate(List<String> tokenList) {
-        double prevOperand = 0.0;
-        double nextOperand = 0.0;
-        Operator operator = Operator.NONE;
+    public double calculate(String postfixExpression) {
+        Stack<Double> operandStack = new Stack<>();
+        double result;
+        Operator operator;
 
-        for (String token : tokenList) {
-            if (isOperand(token) && operator == Operator.NONE) {
-                prevOperand = Double.parseDouble(token);
+        for (String value : postfixExpression.split(" ")) {
+            if (OperandChecker.isOperand(value)) {
+                operandStack.push(Double.parseDouble(value));
                 continue;
             }
-            if (isOperand(token) && operator != Operator.NONE) {
-                nextOperand = Double.parseDouble(token);
-                prevOperand = operator.calculate(prevOperand, nextOperand);
-                continue;
-            }
-            operator = Operator.findByOperator(token);
-        }
-        return prevOperand;
-    }
+            double nextOperand = operandStack.pop();
+            double prevOperand = operandStack.pop();
 
-    public boolean isOperand(String token) {
-        try {
-            Double.parseDouble(token);
-            return true;
-        } catch (NumberFormatException ex) {
-            return false;
+            operator = Operator.valueOf(value);
+            result = operator.calculate(prevOperand, nextOperand);
+            operandStack.push(result);
         }
+        result = operandStack.pop();
+
+        return result;
     }
 }
