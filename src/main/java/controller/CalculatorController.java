@@ -5,6 +5,7 @@ import io.CalculatorInput;
 import io.CalculatorOutput;
 import model.calculation.Calculation;
 import model.converter.Converter;
+import model.entity.Calculator;
 import model.repository.CalculatorRepository;
 import model.vo.CalculationResult;
 import model.vo.Expression;
@@ -42,6 +43,7 @@ public class CalculatorController {
             case CALCULATION -> {
                 Expression expression = input.expressionInput();
                 CalculationResult calculationResult = calculatePostfixExpression(expression);
+                repository.save(new Calculator(expression.getExpression(), calculationResult.getCalculationResult()));
                 output.printExpression(calculationResult);
             }
             default -> output.printSelectOtherMenu();
@@ -49,6 +51,8 @@ public class CalculatorController {
     }
 
     private void printExpressions() {
+        List<Calculator> expressions = repository.findAll();
+        expressions.forEach(output::printRecords);
     }
 
     private CalculationResult calculatePostfixExpression(Expression expression) {
