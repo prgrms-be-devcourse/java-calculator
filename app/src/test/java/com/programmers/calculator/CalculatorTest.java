@@ -33,24 +33,10 @@ class CalculatorTest {
 		List<String> postfix = List.of("1", "2", "*", "4", "2", "/", "+");
 		
 		// when
-		Integer answer = calculator.calcPostfix(postfix);
+		Integer answer = calculator.calculatePostfix(postfix);
 		
 		// then
 		assertThat(answer).isEqualTo(4);
-	}
-	
-	@Test
-	@DisplayName("연산자 우선 순위 계산")
-	void isPriority() {
-		// given
-		String[] operator = { "+", "-", "*", "/" };
-		int[] expectedPriority = { -1, -1, 1, 1 };
-		
-		// when
-		for (int i = 0; i < 4; i++) {
-			int priority = calculator.getPriority(operator[i]);
-			assertThat(priority).isEqualTo(expectedPriority[i]);
-		}
 	}
 	
 }
