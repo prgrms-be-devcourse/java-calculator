@@ -53,9 +53,32 @@ public class Calculator {
 		return postFixNotationTokens;
 	}
 
+	public double calculatePostfixNotation(List<String> postFixNotationTokens) {
+		Stack<Double> stack = new Stack<>();
+
+		for (int i = 0; i < postFixNotationTokens.size(); i++) {
+			String token = postFixNotationTokens.get(i);
+
+			if (isNumber(token)) {
+				double num = Double.valueOf(token);
+				stack.push(num);
+			} else {
+				Operator operator = Operator.opValueOf(token);
+
+				double operand2 = stack.pop();
+				double operand1 = stack.pop();
+				double result = operator.calculate(operand1, operand2);
+				stack.push(result);
+			}
+		}
+
+		return stack.pop();
+	}
+
 	public double calculateExpression(String expression) {
 		List<String> tokens = calcExpressionTokenizer.tokenizeExpression(expression);
+		double calcResult = calculatePostfixNotation(tokens);
 
-		return Double.NaN;
+		return calcResult;
 	}
 }

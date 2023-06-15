@@ -7,18 +7,22 @@ public class CalcExpressionTokenizer {
 	public List<String> tokenizeExpression(String expression) {
 		List<String> tokens = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
-		expression = expression.replace(" ", "");
 
 		for (int i = 0; i < expression.length(); i++) {
-			char c = expression.charAt(i);
+			char ch = expression.charAt(i);
 
-			if (Character.isDigit(c)) {
-				sb.append(c);
+			if (ch == ' ') {
+				continue;
+			}
+
+			if (Character.isDigit(ch)) {
+				sb.append(ch);
 			} else {
 				String numberString = sb.toString();
 				tokens.add(numberString);
 				sb.setLength(0);
-				tokens.add(Character.toString(c));
+
+				tokens.add(Character.toString(ch));
 			}
 		}
 
