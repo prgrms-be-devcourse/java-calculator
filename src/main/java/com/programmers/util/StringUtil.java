@@ -14,8 +14,4 @@ public final class StringUtil {
 
         return unCheckedToken.matches(NUMBER_REGEX);
     }
-
-    public static long convertStringToLong(String token) {
-        return Long.parseLong(token);
-    }
 }

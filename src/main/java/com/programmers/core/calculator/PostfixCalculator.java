@@ -28,11 +28,12 @@ public class PostfixCalculator implements Calculator {
         Stack<Long> stack = new Stack<>();
         for (String token : postfix) {
             if (StringUtil.isNumber(token)) {
-                stack.push(StringUtil.convertStringToLong(token));
+                stack.push(Long.parseLong(token));
             } else {
                 calculateTop(stack, token);
             }
         }
+
         return stack.pop();
     }
 
