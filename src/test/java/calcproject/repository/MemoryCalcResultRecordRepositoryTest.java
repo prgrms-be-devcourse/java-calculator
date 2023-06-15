@@ -1,36 +1,47 @@
 package calcproject.repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import calcproject.models.CalcResultRecordModel;
 
 class MemoryCalcResultRecordRepositoryTest {
 
-	private CalcResultRecordRepository calcResultRecordRepository;
+	private static CalcResultRecordRepository calcResultRecordRepository;
 
-	@BeforeEach
-	void beforeEach() {
+	@BeforeAll
+	static void beforeEach() {
 		Map<Integer, CalcResultRecordModel> calcMap = new HashMap<>();
 		int startIdx = 0;
 		this.calcResultRecordRepository =
 			new MemoryCalcResultRecordRepository(calcMap, startIdx);
 	}
 
-	@Test
-	void testLoadCalcRecords() {
+	@ParameterizedTest
+	@DisplayName("인 메모리 repository에 저장, 불러오기 테스트")
+	@MethodSource("testLoadCalcRecordsProvider")
+	void testLoadCalcRecords(List<String> expressionList, List<Double> calcResultList) {
 		// given
-		CalcResultRecordModel calcRecord1 = new CalcResultRecordModel("2+2", 4);
-		CalcResultRecordModel calcRecord2 = new CalcResultRecordModel("3+3", 6);
-		calcResultRecordRepository.saveCalcResultRecord(calcRecord1);
-		calcResultRecordRepository.saveCalcResultRecord(calcRecord2);
-		List<CalcResultRecordModel> expectedCalcRecords = Arrays.asList(calcRecord1, calcRecord2);
+		List<CalcResultRecordModel> expectedCalcRecords = new ArrayList<>();
+		for (int i=0; i<expressionList.size(); i++) {
+			String expression = expressionList.get(i);
+			Double calcRsult = calcResultList.get(i);
+
+			CalcResultRecordModel calcResultRecord = new CalcResultRecordModel(expression, calcRsult);
+			calcResultRecordRepository.saveCalcResultRecord(calcResultRecord);
+			expectedCalcRecords.add(calcResultRecord);
+		}
 
 		// when
 		List<CalcResultRecordModel> resultCalcRecords = calcResultRecordRepository.loadCalcResultRecords();
@@ -38,5 +49,13 @@ class MemoryCalcResultRecordRepositoryTest {
 		// then
 		Assertions.assertThat(resultCalcRecords)
 			.containsExactlyInAnyOrderElementsOf(expectedCalcRecords);
+	}
+
+	private static Stream<Arguments> testLoadCalcRecordsProvider() {
+		return Stream.of(
+			Arguments.of(Arrays.asList("1*2", "5+5-4", "1+4"), Arrays.asList(2.0, 6.0, 5.0)),
+			Arguments.of(Arrays.asList("4+5+3", "5-3", "6+4"), Arrays.asList(11.0, 2.0, 10.0)),
+			Arguments.of(Arrays.asList("4/2", "8+3", "7-4"), Arrays.asList(2.0, 11.0, 3.0))
+		);
 	}
 }
