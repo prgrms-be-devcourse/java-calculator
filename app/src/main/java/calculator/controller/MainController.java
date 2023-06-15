@@ -1,8 +1,11 @@
 package calculator.controller;
 
 import static calculator.entity.Menu.getSelectedMenu;
+import static calculator.view.InputView.inputExpression;
 import static calculator.view.InputView.inputMenuNumber;
 import static calculator.view.OutputView.showAllHistory;
+import static calculator.view.OutputView.showCalculationResult;
+import static calculator.view.OutputView.showExpressionInputMessage;
 import static calculator.view.OutputView.showMenu;
 
 import calculator.entity.Menu;
@@ -43,7 +46,11 @@ public class MainController {
         }
 
         if (selectedMenu.isCalculate()) {
-            calculator.calculate();
+            showExpressionInputMessage();
+            String expression = inputExpression();
+
+            int result = calculator.calculate(expression);
+            showCalculationResult(result);
         }
     }
 }

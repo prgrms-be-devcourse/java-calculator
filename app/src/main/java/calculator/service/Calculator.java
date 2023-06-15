@@ -4,9 +4,6 @@ import static calculator.entity.Operator.getOperatorWithSameSymbol;
 import static calculator.utils.StringUtils.isNumeric;
 import static calculator.utils.StringUtils.makeHistory;
 import static calculator.utils.StringUtils.splitToElements;
-import static calculator.view.InputView.inputExpression;
-import static calculator.view.OutputView.showCalculationResult;
-import static calculator.view.OutputView.showExpressionInputMessage;
 
 import calculator.entity.Expression;
 import calculator.entity.Operator;
@@ -22,20 +19,17 @@ public class Calculator {
         this.historyStorage = historyStorage;
     }
 
-    public void calculate() {
-        showExpressionInputMessage();
+    public int calculate(String expression) {
+        int result = evaluate(expression);
 
-        String infixExpression = inputExpression();
-        int result = evaluate(infixExpression);
-
-        String history = makeHistory(infixExpression, result);
+        String history = makeHistory(expression, result);
         historyStorage.save(history);
 
-        showCalculationResult(result);
+        return result;
     }
 
-    private int evaluate(String infixExpression) {
-        String[] elements = splitToElements(infixExpression);
+    private int evaluate(String expression) {
+        String[] elements = splitToElements(expression);
         Stack<Integer> operands = new Stack<>();
         Stack<Operator> operators = new Stack<>();
 
