@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class View implements Input,Output{
 
     private final Scanner sc = new Scanner(System.in);
-    private final Pattern REGEX_EXPRESSION = Pattern.compile("\\d+(\\s[+\\-*/]\\s\\d+)*");
+    private static final Pattern REGEX_EXPRESSION = Pattern.compile("\\d+(\\s[+\\-*/]\\s\\d+)*");
 
     @Override
     public int select() {

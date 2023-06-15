@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private final Pattern REGEX_NUM = Pattern.compile("[0-9]+");
+    private static final Pattern REGEX_NUM = Pattern.compile("[0-9]+");
 
     public double calculate(String infixExpression) {
         String postfixExpression = toPostfix(infixExpression.split(" "));
