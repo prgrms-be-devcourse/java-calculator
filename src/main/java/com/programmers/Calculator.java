@@ -21,9 +21,9 @@ public class Calculator implements AbstractCalculator {
         return calculatePostfixFormula(postfix);
     }
 
-    private long calculatePostfixFormula(List<String> formula) {
+    private long calculatePostfixFormula(List<String> postfix) {
         Stack<Long> stack = new Stack<>();
-        for (String token : formula) {
+        for (String token : postfix) {
             if (StringUtil.isNumber(token)) {
                 stack.push(StringUtil.convertStringToLong(token));
             } else {
