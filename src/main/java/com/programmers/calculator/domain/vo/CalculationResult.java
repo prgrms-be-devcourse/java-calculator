@@ -1,6 +1,7 @@
 package com.programmers.calculator.domain.vo;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CalculationResult {
     private BigDecimal value;
@@ -26,7 +27,7 @@ public class CalculationResult {
     }
 
     public CalculationResult divide(CalculationResult otherValue) {
-        return new CalculationResult(value.divide(otherValue.getValue()));
+        return new CalculationResult(value.divide(otherValue.getValue(), 5, RoundingMode.HALF_UP));
     }
 
     @Override
