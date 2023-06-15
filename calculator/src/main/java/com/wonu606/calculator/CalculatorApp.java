@@ -1,10 +1,14 @@
 package com.wonu606.calculator;
 
 import com.wonu606.app.App;
+import com.wonu606.calculator.calculator.PostfixCalculator;
+import com.wonu606.calculator.converter.InfixToPostfixConverter;
 import com.wonu606.calculator.storage.Persistence;
 import com.wonu606.calculator.storage.ResultStore;
+import com.wonu606.calculator.strategy.CalculationStrategy;
 import com.wonu606.calculator.strategy.CalculatorStrategy;
 import com.wonu606.calculator.util.CalculatorMessage;
+import com.wonu606.calculator.validator.InfixValidator;
 import com.wonu606.io.Input;
 import com.wonu606.io.Print;
 import java.util.HashMap;
@@ -20,7 +24,8 @@ public class CalculatorApp implements App {
     }
 
     private void initStrategies() {
-        // TODO 조회와 계산 기능을 생성하여 추가해야 함
+        strategies.put("1", new CalculationStrategy(
+                new InfixValidator(), new InfixToPostfixConverter(), new PostfixCalculator()));
     }
 
     public void execute(Input input, Print printer) {
