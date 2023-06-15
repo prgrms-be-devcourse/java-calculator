@@ -2,7 +2,7 @@ package com.programmers.core.data;
 
 public class CalculationResult {
     private String formula;
-    private long result;
+    private final long result;
 
     public CalculationResult(String formula, long result) {
         this.formula = formula;
