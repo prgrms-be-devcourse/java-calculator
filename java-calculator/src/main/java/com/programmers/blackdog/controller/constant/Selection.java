@@ -1,4 +1,4 @@
-package com.programmers.junho.controller.constant;
+package com.programmers.blackdog.controller.constant;
 
 import java.util.Arrays;
 

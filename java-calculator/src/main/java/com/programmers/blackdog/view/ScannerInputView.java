@@ -1,9 +1,9 @@
-package com.programmers.junho.view;
+package com.programmers.blackdog.view;
 
 import java.util.Scanner;
 
-public class ScannerInputView implements InputView{
-    private static final Scanner scanner = new Scanner(System.in);
+public class ScannerInputView implements InputView {
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     public String read() {

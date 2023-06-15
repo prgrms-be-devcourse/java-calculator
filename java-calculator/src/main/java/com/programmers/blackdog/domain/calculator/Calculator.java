@@ -1,4 +1,4 @@
-package com.programmers.junho.domain;
+package com.programmers.blackdog.domain.calculator;
 
 import com.programmers.blackdog.domain.expression.Expression;
 

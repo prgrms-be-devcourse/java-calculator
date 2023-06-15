@@ -1,4 +1,4 @@
-package com.programmers.junho.controller;
+package com.programmers.blackdog.controller;
 
 import com.programmers.blackdog.controller.constant.Selection;
 import com.programmers.blackdog.service.CalculatorService;
@@ -59,14 +59,7 @@ public class CalculatorController {
         console.printCalculatedResult(result);
     }
 
-    private void printCalculatedResultAndSave(Calculator calculator) {
-        String expression = inputView.getExpression();
-        int result = calculator.calculate(expression);
-        outputView.printCalculatedResult(result);
-        calculatorRepository.save(generateTotalResult(expression, result));
-    }
-
-    private String generateTotalResult(String expression, int result) {
-        return expression + EQUAL + result;
+    private void exitProgram() {
+        console.printEndMessage();
     }
 }

@@ -1,4 +1,4 @@
-package com.programmers.junho.repository;
+package com.programmers.blackdog.repository;
 
 import java.util.List;
 
