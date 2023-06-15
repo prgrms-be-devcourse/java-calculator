@@ -1,6 +1,7 @@
 package model;
 
 import exception.NoSuchOperatorException;
+import util.CalculatorUtils;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -15,9 +16,9 @@ public class Calculator {
     }
 
     public String calculate(String expression) throws RuntimeException {
-        for (String expressionComponent : expression.split("")) {
-            if (Character.isDigit(expressionComponent.charAt(0))) {
-                operandStack.push(Integer.parseInt(expressionComponent));
+        for (char expressionComponent : expression.toCharArray()) {
+            if (CalculatorUtils.isDigitCharacter(expressionComponent)) {
+                operandStack.push(CalculatorUtils.parseCharToInteger(expressionComponent));
                 continue;
             }
             calculateIfOperatorNotEmpty(expressionComponent);
@@ -26,7 +27,7 @@ public class Calculator {
         return makeFinalCalculation();
     }
 
-    private void calculateIfOperatorNotEmpty(String expressionComponent) throws NoSuchOperatorException {
+    private void calculateIfOperatorNotEmpty(char expressionComponent) throws NoSuchOperatorException {
         Operator currentOperator = Operator.getOperator(expressionComponent);
         if (!operatorStack.isEmpty()) {
             calculateByPrecedence(currentOperator);

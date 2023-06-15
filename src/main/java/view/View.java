@@ -2,7 +2,7 @@ package view;
 
 import exception.IllegalExpressionException;
 import exception.NoSuchCommandException;
-import util.ParsingUtils;
+import util.CalculatorUtils;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -49,7 +49,7 @@ public class View {
         try {
             String input = scanner.nextLine();
 
-            return Command.resolveCommand(ParsingUtils.parseStringToInteger(input));
+            return Command.resolveCommand(CalculatorUtils.parseStringToInteger(input));
         } catch (RuntimeException e) {
             throw new NoSuchCommandException("[ERROR] 잘못된 명령어를 입력하셨습니다.");
         }
