@@ -1,6 +1,7 @@
 package co.programmers.domain;
 
 import co.programmers.exception.ExceptionMessage;
+import co.programmers.repository.Repository;
 import co.programmers.view.CalculatorOutputView;
 import co.programmers.view.InputView;
 import co.programmers.view.OutputView;
@@ -9,10 +10,12 @@ public class CalculatorApp {
 
 	private final InputView inputView;
 	private final OutputView outputView;
+	private final Repository repository;
 
-	public CalculatorApp(InputView inputView, OutputView outputView) {
+	public CalculatorApp(InputView inputView, OutputView outputView, Repository repository) {
 		this.inputView = inputView;
 		this.outputView = outputView;
+		this.repository = repository;
 	}
 
 	public void run() {
@@ -41,7 +44,7 @@ public class CalculatorApp {
 	}
 
 	public void inquiry() {
-		//TODO
+		outputView.printCalculationHistory(repository.read());
 	}
 
 	public void calculate() {
@@ -51,6 +54,7 @@ public class CalculatorApp {
 			Calculation calculator = new Calculation(expression);
 			Double output = calculator.calculate();
 			outputView.printCalculationResult(output);
+			repository.save(expression.getExpression(), output);
 		} catch (ArithmeticException arithmeticException) {
 			System.out.println(arithmeticException.getMessage());
 		}
