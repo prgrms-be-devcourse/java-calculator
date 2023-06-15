@@ -1,12 +1,13 @@
 package com.programmers.calculator.controller;
 
 import com.programmers.calculator.constant.OptionType;
-import com.programmers.calculator.domain.Calculator;
+import com.programmers.calculator.domain.core.Calculator;
+import com.programmers.calculator.domain.vo.CalculationResult;
+import com.programmers.calculator.domain.vo.Expression;
 import com.programmers.calculator.repository.CalculationHistory;
 import com.programmers.calculator.repository.HistoryRepository;
 import com.programmers.calculator.view.Console;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class CalculatorController {
@@ -55,15 +56,15 @@ public class CalculatorController {
     }
 
     private void processCalculation() {
-        String inputExpression = console.inputExpression();
-        BigDecimal result = calculator.calculate(inputExpression);
-        CalculationHistory calculationHistory = new CalculationHistory(inputExpression, result);
+        Expression expression = new Expression(console.inputExpression());
+        CalculationResult calculationResult = calculator.calculate(expression);
+        console.outputCalculation(calculationResult);
 
-        console.outputCalculation(result);
-        saveCalculationResult(calculationHistory);
+        saveCalculationResult(expression, calculationResult);
     }
 
-    private void saveCalculationResult(CalculationHistory calculationHistory) {
+    private void saveCalculationResult(Expression expression, CalculationResult calculationResult) {
+        CalculationHistory calculationHistory = new CalculationHistory(expression, calculationResult);
         repository.save(calculationHistory);
     }
 
