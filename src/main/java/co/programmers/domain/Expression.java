@@ -26,4 +26,8 @@ public class Expression {
     public String getExpression() {
         return expression;
     }
+
+    public String[] split(String delimiter) {
+        return expression.split(delimiter);
+    }
 }
