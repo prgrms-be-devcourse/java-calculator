@@ -15,7 +15,7 @@ public class CalculatorView {
         return inputView.readExpression();
     }
 
-    public Integer readCommand() {
+    public String readCommand() {
         return inputView.readCommand();
     }
 

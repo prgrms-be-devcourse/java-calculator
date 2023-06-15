@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.domain.Calculator;
+import org.example.util.Command;
 import org.example.view.CalculatorView;
 
 public class CalculatorSystem {
@@ -15,12 +16,13 @@ public class CalculatorSystem {
     public void run() {
         while (true) {
             calculatorView.printOptionMessage();
-            Integer command = calculatorView.readCommand();
 
-            if (command == 1) {
+            Command command = Command.getCommand(calculatorView.readCommand());
+
+            if (command == Command.HISTORY) {
                 calculatorView.printMemory(calculator);
             }
-            if (command == 2) {
+            if (command == Command.CALCULATE) {
                 String expression = calculatorView.readExpression();
                 calculatorView.printCalcResult(calculator.execute(expression));
             }

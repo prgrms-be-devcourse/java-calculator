@@ -18,13 +18,13 @@ public class InputView {
         return expression;
     }
 
-    Integer readCommand() {
+    String readCommand() {
         System.out.print(MESSAGE_CHOICE);
         String command = sc.nextLine();
         System.out.println();
 
         inputValidater.validateCommand(command);
 
-        return Integer.parseInt(command);
+        return command;
     }
 }
