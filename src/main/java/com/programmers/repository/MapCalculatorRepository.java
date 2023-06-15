@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MapCalculatorRepository implements CalculatorRepository{
-    private final Map<Integer, ExpressionResult> calculatorRepository = new LinkedHashMap<>();
+    private final Map<Integer, ExpressionResult> map = new LinkedHashMap<>();
     private static final IdGenerator idGenerator = new IdGenerator();
 
     public MapCalculatorRepository(){
@@ -17,13 +17,13 @@ public class MapCalculatorRepository implements CalculatorRepository{
 
     public int save(ExpressionResult dto) {
         int key = idGenerator.generateId();
-        calculatorRepository.put(key, dto);
+        map.put(key, dto);
         return key;
     }
 
     public List<ExpressionResult> findAll() {
         List<ExpressionResult> list = new ArrayList<>();
-        list.addAll(calculatorRepository.values());
+        list.addAll(map.values());
         return list;
     }
 
