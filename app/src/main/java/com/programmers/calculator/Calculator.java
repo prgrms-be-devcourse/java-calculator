@@ -1,63 +1,64 @@
 package com.programmers.calculator;
 
+import com.programmers.util.Operator;
+
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Calculator {
 	
+	private final Pattern NUMBER = Pattern.compile("\\d+");
+	
 	public List<String> changeInfixToPostfix(List<String> infix) {
 		List<String> postfix = new ArrayList<>();
-		Stack<String> stack = new Stack<>();
+		Deque<String> deque = new ArrayDeque<>();
 		
-		for (String s : infix) {
-			if (s.matches("\\d+")) { // 숫자일 경우
-				postfix.add(s);
-			} else { // 숫자 아닐 경우
-				int priority = getPriority(s);
-				// 스택이 비었거나
-				while (!stack.isEmpty()) {
-					String topOperator = stack.peek();
-					int topPriority = getPriority(topOperator);
-					
-					// top의 우선 순위가 높거나 같을 경우
-					if (topPriority >= priority) postfix.add(stack.pop());
-					// top의 우선 순위가 낮을 경우
-					else break;
+		infix.stream()
+			.forEach(s -> {
+				if (NUMBER.matcher(s).matches()) { // 숫자일 경우
+					postfix.add(s);
+				} else { // 숫자 아닐 경우
+					Operator operator = Operator.of(s);
+					int priority = operator.getPriority();
+					// 덱이 비었거나
+					while (!deque.isEmpty()) {
+						Operator topOperator = Operator.of(deque.peekLast());
+						int topPriority = topOperator.getPriority();
+						
+						// top의 우선 순위가 높거나 같을 경우
+						if (topPriority >= priority) postfix.add(deque.pollLast());
+							// top의 우선 순위가 낮을 경우
+						else break;
+					}
+					deque.addLast(s); // 연산자 넣음
 				}
-				stack.push(s); // 연산자 넣음
-			}
-		}
+			});
 		
 		// 스택에 남아있는 연산자 모두 집어 넣음
-		while (!stack.isEmpty()) postfix.add(stack.pop());
+		while (!deque.isEmpty()) postfix.add(deque.pollLast());
 		
 		return postfix;
 	}
 	
-	public Integer calcPostfix(List<String> postfix) {
-		Stack<Integer> stack = new Stack<>();
+	public Integer calculatePostfix(List<String> postfix) {
+		Deque<Integer> deque = new ArrayDeque<>();
 		
-		for (String s : postfix) {
-			// 숫자일 경우 스택에 넣음
-			if (s.matches("\\d+")) stack.push(Integer.parseInt(s));
-			else { // 연산자 일 경우
-				Integer op1 = stack.pop();
-				Integer op2 = stack.pop();
-				
-				Operator calc = Operator.of(s);
-				Integer result = calc.getFunc().apply(op2, op1);
-				
-				stack.push(result);
-			}
-		}
+		postfix.stream()
+				.forEach(s -> {
+					// 숫자일 경우 덱에 넣음
+					if (NUMBER.matcher(s).matches()) deque.addLast(Integer.parseInt(s));
+					else { // 연산자 일 경우
+						Integer op1 = deque.pollLast();
+						Integer op2 = deque.pollLast();
+						
+						Operator calc = Operator.of(s);
+						Integer result = calc.calculateOperation(op2, op1);
+						
+						deque.addLast(result);
+					}
+				});
 		
-		return stack.pop();
-	}
-	
-	public Integer getPriority(String operator) {
-		// * 와 / 는 우선순위 높음
-		if (operator.equals("*") || operator.equals("/")) return 1;
-		// 그 외 낮음
-		return -1;
+		return deque.pollLast();
 	}
 	
 }
