@@ -1,6 +1,7 @@
 package com.programmers.blackdog.domain;
 
 
+import com.programmers.blackdog.domain.expression.InfixExpression;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

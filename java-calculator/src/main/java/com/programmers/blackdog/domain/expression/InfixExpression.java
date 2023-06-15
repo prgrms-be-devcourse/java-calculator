@@ -1,4 +1,6 @@
-package com.programmers.blackdog.domain;
+package com.programmers.blackdog.domain.expression;
+
+import com.programmers.blackdog.domain.ArithmeticOperators;
 
 import java.util.Objects;
 import java.util.Stack;

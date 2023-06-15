@@ -1,6 +1,6 @@
 package com.programmers.junho.domain;
 
-import com.programmers.blackdog.domain.calculator.AbstractCalculator;
+import com.programmers.blackdog.domain.expression.Expression;
 
 import java.util.Stack;
 

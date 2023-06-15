@@ -1,6 +1,6 @@
-package com.programmers.junho.domain.utils;
+package com.programmers.blackdog.domain.utils;
 
-public class StringUtil {
+public final class StringUtil {
 
     private StringUtil() {
         throw new AssertionError("Util 클래스 생성 불가합니다.");

@@ -1,8 +1,8 @@
 package com.programmers.blackdog.service;
 
-import com.programmers.blackdog.domain.Calculator;
-import com.programmers.blackdog.domain.Expression;
-import com.programmers.blackdog.domain.InfixExpression;
+import com.programmers.blackdog.domain.calculator.Calculator;
+import com.programmers.blackdog.domain.expression.Expression;
+import com.programmers.blackdog.domain.expression.InfixExpression;
 import com.programmers.blackdog.domain.calculator.AbstractCalculator;
 import com.programmers.blackdog.repository.CalculatorRepository;
 import com.programmers.blackdog.repository.MemoryCalculatorRepository;
