@@ -25,4 +25,8 @@ public enum Operator {
         this.priority = priority;
         this.expression = expression;
     }
+
+    public int getPriority() {
+        return priority;
+    }
 }
