@@ -1,4 +1,4 @@
-package com.programmers.model;
+package com.programmers.core.data;
 
 public class CalculationResult {
     private String formula;
@@ -12,5 +12,9 @@ public class CalculationResult {
     @Override
     public String toString() {
         return formula + " = " + result;
+    }
+
+    public long getResult() {
+        return result;
     }
 }

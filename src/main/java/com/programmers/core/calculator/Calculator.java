@@ -1,8 +1,9 @@
-package com.programmers;
+package com.programmers.core.calculator;
 
-import com.programmers.core.Converter;
 import com.programmers.core.Operators;
-import com.programmers.model.AbstractCalculator;
+import com.programmers.core.converter.Converter;
+import com.programmers.core.data.CalculationRequest;
+import com.programmers.core.data.CalculationResult;
 import com.programmers.util.StringUtil;
 
 import java.util.List;
@@ -16,9 +17,13 @@ public class Calculator implements AbstractCalculator {
     }
 
     @Override
-    public long calculate(String formula) {
+    public CalculationResult calculate(CalculationRequest request) {
+        String formula = request.getFormula();
         List<String> postfix = converter.convert(formula);
-        return calculatePostfixFormula(postfix);
+        long result = calculatePostfixFormula(postfix);
+//        request.updateResult(result);
+//        return request;
+        return new CalculationResult(formula, result);
     }
 
     private long calculatePostfixFormula(List<String> postfix) {
