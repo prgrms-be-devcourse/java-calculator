@@ -30,7 +30,4 @@ public class ExpressionResult {
         return answer;
     }
 
-    public void setAnswer(Double answer) {
-        this.answer = answer;
-    }
 }

@@ -1,14 +1,13 @@
 package com.bona.javacalculator.core.calculator;
 
-import com.bona.javacalculator.io.Console;
 import com.bona.javacalculator.core.*;
 import com.bona.javacalculator.util.Validator;
 
 import java.util.List;
 import java.util.Stack;
 
-// only calculate S R P
 public class Calculator implements AbstractCalculator{
+
 
     @Override
     public double calculate(List<String> formula) {

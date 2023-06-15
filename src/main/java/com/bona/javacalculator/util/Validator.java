@@ -45,34 +45,33 @@ public class Validator {
                 }
 
             } else if (!isValidNumber(inputString[i], isDivision)) {
-                throw new RuntimeException("0으로 나눌 수 없습니다.");
+                throw new ArithmeticException("0으로 나눌 수 없습니다.");
             }
         }
     }
 
     private void validateIsEmpty(String input) {
         if (input.isEmpty()) {
-            console.inputError();
             throw new RuntimeException("입력 값이 비어있습니다.");
         }
     }
 
 
-    private boolean isValidNumber(String split, boolean isDivision) {
+    private boolean isValidNumber(String input, boolean isDivision) {
 
-        if (!isNumber(split)) {
+        if (!isNumber(input)) {
             return false;
         }
 
-        if (split.equals("0") && isDivision) {
+        if (input.equals("0") && isDivision) {
             return false;
         }
         return true;
     }
 
-    public static boolean isNumber(String split) {
-        for (int i = 0; i < split.length(); i++) {
-            if (!Character.isDigit(split.charAt(i))) {
+    public static boolean isNumber(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
                 return false;
             }
         }

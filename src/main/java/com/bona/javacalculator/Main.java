@@ -9,7 +9,7 @@ import com.bona.javacalculator.repository.CalMemoryRepository;
 import com.bona.javacalculator.repository.MemoryRepository;
 import com.bona.javacalculator.util.Validator;
 
-public class JavaCalculatorApplication {
+public class Main {
 
     public static void main(String[] args) {
         MemoryRepository repository = new CalMemoryRepository();
@@ -22,6 +22,7 @@ public class JavaCalculatorApplication {
 
 
         calculatorManager.run();
+
     }
 
 }

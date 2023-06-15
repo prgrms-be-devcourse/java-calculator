@@ -10,13 +10,14 @@ import com.bona.javacalculator.util.Validator;
 import java.util.List;
 
 public class CalculatorManager {
+
     private final Converter converter;
     private final Validator validator;
     private final MemoryRepository repository;
     private final Console console;
     private final Calculator calculator;
 
-    public CalculatorManager( Calculator calculator,MemoryRepository repository,Console console, Converter converter, Validator validator) {
+    public CalculatorManager(Calculator calculator, MemoryRepository repository, Console console,Converter converter, Validator validator) {
         this.repository = repository;
         this.console = console;
         this.converter = converter;
@@ -28,24 +29,20 @@ public class CalculatorManager {
         boolean isRun = true;
 
         while (isRun) {
-            String input = console.input("1. 조회 2. 계산 3.종료");
+            try {
+                String input = console.input("1. 조회 2. 계산 3.종료");
 
-            Option option = Option.of(input);
+                Option option = Option.of(input);
 
-
-            switch (option) {
-                case INQUIRY:
-                    inquiry();
-                    break;
-                case CALCULATE:
-                    calculate();
-                    break;
-                case EXIT:
-                    isRun = false;
-                    break;
-                default:
-                    console.printMessage("잘못된 입력입니다");
-                    break;
+                switch (option) {
+                    case INQUIRY -> inquiry();
+                    case CALCULATE -> calculate();
+                    case EXIT -> isRun = false;
+                    default -> {
+                    }
+                }
+            } catch (RuntimeException e) {
+                console.printMessage(e.getMessage());
             }
         }
     }
@@ -63,6 +60,7 @@ public class CalculatorManager {
 
         console.outAnswer(result);
     }
+
 
     public void inquiry() {
         List<ExpressionResult> all = repository.findAll();

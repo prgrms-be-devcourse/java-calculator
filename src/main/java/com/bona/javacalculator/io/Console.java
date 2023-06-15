@@ -17,10 +17,6 @@ public class Console implements Input, Output {
         return scanner.nextLine();
     }
 
-    @Override
-    public void inputError() {
-        System.out.println("입력을 잘못하셨습니다.");
-    }
 
     @Override
     public void outAnswer(Double answer) {

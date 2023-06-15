@@ -12,7 +12,6 @@ public class PostfixConverter implements Converter {
     private final String WHITE_SPACE = "";
     private final Priority priorityFind = new Priority();
 
-    //후위 표기로 변환
     @Override
     public List<String> convert(String input) {
         List<String> postfix = new ArrayList<>();
@@ -36,11 +35,11 @@ public class PostfixConverter implements Converter {
     }
 
     public void pushOperator(String operator, List<String> postfix, Stack<String> operatorStack) {
-        if (operatorStack.isEmpty() || priorityFind.compareOperation(operatorStack.peek(), operator) > 0) {
+        if (operatorStack.isEmpty() || Priority.compareOperation(operatorStack.peek(), operator) > 0) {
             operatorStack.push(operator);
             return;
         }
-        while (!operatorStack.isEmpty() && priorityFind.compareOperation(operatorStack.peek(), operator) <= 0) {
+        while (!operatorStack.isEmpty() && Priority.compareOperation(operatorStack.peek(), operator) <= 0) {
             postfix.add(operatorStack.pop());
         }
         operatorStack.push(operator);
