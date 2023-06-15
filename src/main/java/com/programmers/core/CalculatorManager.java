@@ -23,7 +23,7 @@ public class CalculatorManager {
     }
 
     public void run() {
-        boolean power = true;
+        Boolean power = true;
 
         while (power) {
             switch (inputMenu()) {
@@ -36,6 +36,7 @@ public class CalculatorManager {
                 case EXIT:
                     exitProgram();
                     power = false;
+                    break;
                 default:
                     wrongMenuSelection();
             }
@@ -48,8 +49,7 @@ public class CalculatorManager {
     }
 
     private void calculatorProcessStart() {
-        String formula = getFormula();
-        saveAndPrintResult(formula);
+        saveAndPrintResult(console.inputFormula());
     }
 
     private void saveAndPrintResult(String formula) {
@@ -66,37 +66,17 @@ public class CalculatorManager {
         }
     }
 
-    private long sendToCalculator(String formula) {
-        calculator.calculate(formula);
-        return calculator.calculate(formula);
-    }
-
-    private String getFormula() {
-        return console.inputFormula();
-    }
-
-    private String inputMenu() {
-        return console.inputMenu();
-    }
-
     private void wrongMenuSelection() {
         console.print(ErrorMessages.getInvalidMenuSelectionMsg());
     }
 
     private void recordCommandExecution(List<CalculationResult> calculationRecord) {
-        if (isEmptyRecord(calculationRecord)) {
+        if (calculationRecord.isEmpty()) {
             console.print(ErrorMessages.getNoCalculationRecordsMsg());
             return;
         }
         console.printList(calculationRecord);
     }
 
-    private boolean isEmptyRecord(List<CalculationResult> record) {
-        return record != null && record.size() == 0;
-    }
 
-    private void exitProgram() {
-        console.print("프로그램을 종료합니다.");
-        System.exit(0);
-    }
 }
