@@ -28,4 +28,8 @@ public enum Operator {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("연산자가 아닙니다."));
     }
+
+    public static int evaluatePriority(Operator prevOperator, Operator nextOperator) {
+        return prevOperator.compareTo(nextOperator);
+    }
 }
