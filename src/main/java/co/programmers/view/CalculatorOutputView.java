@@ -1,5 +1,7 @@
 package co.programmers.view;
 
+import java.util.Map;
+
 public class CalculatorOutputView implements OutputView {
 	public static void printCalculationGuide() {
 		System.out.println("1 + 2 * 3와 같은 형식으로 계산하고자 하는 식을 입력하세요.");
@@ -22,5 +24,13 @@ public class CalculatorOutputView implements OutputView {
 	@Override
 	public void printMessage(String message) {
 		System.out.println(message);
+	}
+
+	@Override
+	public void printCalculationHistory(Map<String, Double> history) {
+		System.out.println(">> 계산 기록 조회");
+		for (Map.Entry<String, Double> oneExpression : history.entrySet()) {
+			System.out.println(oneExpression.getKey() + " = " + oneExpression.getValue());
+		}
 	}
 }
