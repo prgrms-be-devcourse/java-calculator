@@ -15,7 +15,7 @@ public class Expression {
 
 	public Expression(String expression) {
 		this.expression = expression;
-		if (expression == null) {
+		if (expression == null || expression.isEmpty()) {
 			throw new IllegalArgumentException(ExceptionMessage.EMPTY_INPUT);
 		}
 		if (!validate()) {
