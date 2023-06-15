@@ -15,7 +15,7 @@ public class CalculatorOutputView implements OutputView {
         System.out.print("> 선택 :  ");
     }
 
-    public void printCalculationRes(Integer content) {
-        System.out.println(">> 결과 : " + content);
+    public void printCalculationResult(Double result) {
+        System.out.println(">> 결과 : " + result);
     }
 }
