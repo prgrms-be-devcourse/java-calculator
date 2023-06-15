@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -41,6 +43,8 @@ class InMemoryTest {
     void 연산_기록_출력(String input, String output) {
         inMemory.save(new CalcResult(input, accumulator.calculate(input).get()));
 
-        assertThat(inMemory.findAll()).isEqualTo(input + " = " + output);
+        for (Map.Entry<Long, CalcResult> result : inMemory.findAll().entrySet()) {
+            assertThat(result.getValue().toString()).isEqualTo(input + " = " + output);
+        }
     }
 }

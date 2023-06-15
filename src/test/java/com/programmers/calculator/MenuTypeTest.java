@@ -1,11 +1,11 @@
 package com.programmers.calculator;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MenuTypeTest {
 
@@ -22,7 +22,6 @@ class MenuTypeTest {
     @DisplayName("잘못된 메뉴 입력")
     @ValueSource(strings = {"a", "z", "4", "0", "!", ")"})
     void 잘못된_메뉴_입력(String inputMenuNumber) {
-        assertThatThrownBy(() -> MenuType.findMenuType(inputMenuNumber))
-                .isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThat(MenuType.findMenuType(inputMenuNumber)).isEqualTo(MenuType.NULL);
     }
 }
