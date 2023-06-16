@@ -46,6 +46,16 @@ public class Calculator {
         if (!Pretreatment.validateFormula(formula)) return;
         List<String> terms = Pretreatment.parseFormula(formula);
 
+        terms = executeMultiplicationAndDivision(terms);
+
+        terms = executeAdditionAndSubtraction(terms);
+
+        printResult(terms.get(0));
+
+        saveHistory(formula, terms.get(0));
+    }
+
+    private List<String> executeMultiplicationAndDivision(List<String> terms) {
         int i = 0;
         while (i < terms.size()) {
             if (terms.get(i).equals("*") || terms.get(i).equals("/")) {
@@ -65,8 +75,11 @@ public class Calculator {
                 i++;
             }
         }
+        return terms;
+    }
 
-        i = 0;
+    private List<String> executeAdditionAndSubtraction(List<String> terms) {
+        int i = 0;
         while (i < terms.size()) {
             if (terms.get(i).equals("+") || terms.get(i).equals("-")) {
                 long leftHandSide = Long.parseLong(terms.get(i - 1));
@@ -85,14 +98,20 @@ public class Calculator {
                 i++;
             }
         }
+        return terms;
+    }
 
-        printer.println(terms.get(0));
+    private void printResult(String result) {
+        printer.println(result);
+    }
+
+    private void saveHistory(String formula, String result) {
         StringBuffer sb = new StringBuffer();
-        String result = sb.append(formula)
+        String historyItem = sb.append(formula)
                 .append(" = ")
-                .append(terms.get(0))
+                .append(result)
                 .toString();
-        history.add(result);
+        history.add(historyItem);
     }
 
     public void list() {
