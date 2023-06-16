@@ -29,10 +29,11 @@ public class PostfixConverter {
             }
             operatorStack.push(nextOperator);
         }
-
         Collections.reverse(operatorStack);
-        operatorStack.stream()
-                .forEach(v -> postfixExpression.append(v).append(" "));
+
+        for (Operator remainOperator : operatorStack) {
+            postfixExpression.append(remainOperator).append(" ");
+        }
 
         return postfixExpression.toString();
     }
