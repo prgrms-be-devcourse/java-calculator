@@ -1,45 +1,28 @@
 package engine.computer;
 
+import com.devcourse.engine.model.accepter.Accepter;
 import com.devcourse.engine.model.converter.Converter;
-import com.devcourse.engine.model.validator.Validator;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
 public class ConverterTest {
 
-    @Test
-    void convertTest1() {
-        Validator validator = new Validator();
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1+1,11+", "1 + 2 * 5 -8/4,125*+84/-", " 1,1",
+            "2. * 3,23*", "2.*3,23*", "1+2*(10-8)/4,12108-*4/+",
+            "1.2*2,1.22*", "(1+2*(10-8))/4,12108-*+4/"
+    })
+    void convertTest(String input, String expected) {
+        List<String> infixExperssions = new Accepter().accept(input);
         Converter converter = new Converter();
-        List<String> result = converter.convert(validator.validate("1+1"));
-        Assertions.assertEquals(result.size(), result.size());
-    }
 
-    @Test
-    void convertTest2() {
-        Validator validator = new Validator();
-        Converter converter = new Converter();
-        List<String> result = converter.convert(validator.validate("1 + 2* 5 - 8/4"));
-        Assertions.assertEquals(result.size(), result.size());
-    }
+        String result = String.join("", converter.convert(infixExperssions));
 
-    @Test
-    void convertTest3() {
-        Validator validator = new Validator();
-        Converter converter = new Converter();
-        List<String> result = converter.convert(validator.validate("1+2*(10-8)/4"));
-        System.out.println(result);
-        Assertions.assertEquals(9, result.size());
-    }
-
-    @Test
-    void convertTest4() {
-        Validator validator = new Validator();
-        Converter converter = new Converter();
-        List<String> result = converter.convert(validator.validate("(1+2*(10-8))/4"));
-        Assertions.assertEquals("12108-*+4/", String.join("", result));
+        Assertions.assertEquals(expected, result);
     }
 
 }

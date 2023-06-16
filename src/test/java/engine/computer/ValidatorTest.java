@@ -14,7 +14,7 @@ public class ValidatorTest {
             "2. * 3", "2.*3", "1+2*(10-8)/4",
             "1.2*2"
     })
-    void validateTest1(String input) {
+    void validateTest(String input) {
         Validator validator =  new Validator();
         boolean result = validator.validate(input);
         Assertions.assertTrue(result);
@@ -24,9 +24,9 @@ public class ValidatorTest {
     @ValueSource(strings = {
             "+ 1", "1 ++", "1 2 3",
             "", ".14 + 2", "1+)7*9-(8+9",
-            "())", "(())"
+            "())", "(())", "adsfk", "1 k 3", "", " "
     })
-    void ValidateTest2(String input) {
+    void ValidateExceptionTest(String input) {
         Validator validator =  new Validator();
         Assertions.assertThrows(InvalidInputException.class, () -> validator.validate(input));
     }

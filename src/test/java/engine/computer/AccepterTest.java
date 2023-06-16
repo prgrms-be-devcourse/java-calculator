@@ -1,11 +1,9 @@
 package engine.computer;
 
 import com.devcourse.engine.model.accepter.Accepter;
-import com.devcourse.engine.model.validator.Validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class AccepterTest {
 

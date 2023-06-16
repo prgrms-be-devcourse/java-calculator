@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class Converter {
 
-    public List<String> convert(List<String> expressions) throws InvalidInputException {
+    public List<String> convert(List<String> expressions) {
         List<String> postfixExpressions = new ArrayList<>();
         Stack<Operator> tempStack = new Stack<>();
 
