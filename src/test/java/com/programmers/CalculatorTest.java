@@ -1,96 +1,121 @@
 package com.programmers;
 
-import org.junit.jupiter.api.Assertions;
+import com.programmers.core.calculator.PostfixCalculator;
+import com.programmers.core.converter.Converter;
+import com.programmers.core.converter.PostfixConverter;
+import com.programmers.core.data.CalculationRequest;
+import com.programmers.core.data.CalculationResult;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CalculatorTest {
+    private PostfixCalculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        Converter converter = new PostfixConverter();
+        calculator = new PostfixCalculator(converter);
+    }
 
     @Test
-    @DisplayName("덧셈 테스트")
+    @DisplayName("더하기 테스트")
     void addTest() throws Exception {
         //given
-        Calculator calculator = new Calculator("1 + 1");
-        Calculator calculator2 = new Calculator("2 + 2");
+        CalculationRequest request = new CalculationRequest("1 + 2");
+        CalculationResult expected = new CalculationResult(request.getFormula(), 3);
+
         //when
-        long result = calculator.calculate("1 + 1");
-        long result2 = calculator2.calculate("2 + 2");
+        CalculationResult result = calculator.calculate(request);
 
         //then
-        assertThat(result).isEqualTo(2);
-        assertThat(result2).isEqualTo(4);
+        assertThat(result.getResult()).isEqualTo(expected.getResult());
     }
 
     @Test
-    @DisplayName("뺄셈 테스트")
-    void subtractTest() throws Exception {
+    @DisplayName("빼기 테스트")
+    void subtractionTest() throws Exception {
         //given
-        Calculator calculator = new Calculator("1 - 1");
+        CalculationRequest request = new CalculationRequest("1 - 2");
+        CalculationResult expected = new CalculationResult(request.getFormula(), -1);
+
         //when
-        long result = calculator.calculate("1 - 1");
+        CalculationResult result = calculator.calculate(request);
+
         //then
-        assertThat(result).isEqualTo(0);
+        assertThat(result.getResult()).isEqualTo(expected.getResult());
     }
+
 
     @Test
     @DisplayName("곱하기 테스트")
     void multiplyTest() throws Exception {
         //given
-        Calculator calculator = new Calculator("2 * 2 * 3");
+        CalculationRequest request = new CalculationRequest("2 * 2");
+        CalculationResult expected = new CalculationResult(request.getFormula(), 4);
+
         //when
-        long result = calculator.calculate("2 * 2 * 3");
+        CalculationResult result = calculator.calculate(request);
+
         //then
-        assertThat(result).isEqualTo(12);
+        assertThat(result.getResult()).isEqualTo(expected.getResult());
     }
+
 
     @Test
     @DisplayName("나누기 테스트")
     void divideTest() throws Exception {
         //given
-        Calculator calculator = new Calculator("6 / 2 / 3");
-        //when
-        long result = calculator.calculate("6 / 2 / 3");
-        //then
-        assertThat(result).isEqualTo(1);
-    }
+        CalculationRequest request = new CalculationRequest("2 / 2");
+        CalculationResult expected = new CalculationResult(request.getFormula(), 1);
 
+        //when
+        CalculationResult result = calculator.calculate(request);
+
+        //then
+        assertThat(result.getResult()).isEqualTo(expected.getResult());
+    }
 
     @Test
-    @DisplayName("우선 순위 테스트")
-    void priorityTest() throws Exception {
-        //given
-        Calculator calculator = new Calculator("2 + 2 * 3 / 3");
+    @DisplayName("계산 실패_잘못된 수식")
+    public void testInvalidFormula() {
+        CalculationRequest request = new CalculationRequest("3 4 + +");
 
-        //when
-        long result = calculator.calculate("2 + 2 * 3 / 3");
-
-        //then
-        assertThat(result).isEqualTo(4);
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate(request));
     }
 
+    @Test
+    @DisplayName("계산 실패_빈 수식")
+    void testEmptyFormula() throws Exception {
+        CalculationRequest request = new CalculationRequest("");
 
-    @ParameterizedTest
-    @ValueSource(strings = {"2 / 0 ", "1 + 3 * 10 / 0", "2 - 3 + 2 / 0 * 5"})
-    @DisplayName("0으로 나눌시 예외 발생 테스트")
-    void divideZeroTest(String formula) throws Exception {
-        Calculator calculator = new Calculator(formula);
-
-        Assertions.assertThrows(ArithmeticException.class, () -> calculator.calculate(formula));
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate(request));
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"", "1 + a", "2  2", "1 + +", "a B C d"})
-    @DisplayName("숫자,연산외 다른 문자 입력시 예외")
-    void wrongFormulaTest(String formula) throws Exception {
-        Calculator calculator = new Calculator(formula);
+    @Test
+    @DisplayName("계산 실패_null값")
+    void testNullFormula() throws Exception {
+        CalculationRequest request = new CalculationRequest(null);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.calculate(formula));
-
-
+        assertThrows(IllegalArgumentException.class, () -> calculator.calculate(request));
     }
 
+    @Test
+    @DisplayName("계산 실패_피연산자가 아닌 문자열 입력")
+    void testInvalidOperand() throws Exception {
+        CalculationRequest request = new CalculationRequest("3 + a");
+
+        assertThrows(NumberFormatException.class, () -> calculator.calculate(request));
+    }
+
+    @Test
+    @DisplayName("계산 실패_0으로 나누는 경우")
+    void testDivideByZero() throws Exception {
+        CalculationRequest request = new CalculationRequest("3 / 0");
+
+        assertThrows(ArithmeticException.class, () -> calculator.calculate(request));
+    }
 }
