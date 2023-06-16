@@ -17,13 +17,13 @@ public class Computer {
 
     private void branchIsOperator(String expression, Stack<Double> stack) {
         if (Operator.isOperator(expression)) {
-            stack.push(
-                    Operator.getOperator(expression).calculate(
-                            stack.pop(), stack.pop()
-                    )
-            );
+            stack.push(getCalculationResult(expression, stack));
             return;
         }
         stack.push(Double.parseDouble(expression));
+    }
+
+    private Double getCalculationResult(String expression, Stack<Double> stack) {
+        return Operator.getOperator(expression).calculate(stack.pop(), stack.pop());
     }
 }
