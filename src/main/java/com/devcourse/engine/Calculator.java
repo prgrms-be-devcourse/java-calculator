@@ -7,6 +7,7 @@ import com.devcourse.engine.model.converter.Converter;
 import com.devcourse.engine.model.exception.InvalidInputException;
 import com.devcourse.engine.model.histories.Histories;
 import com.devcourse.engine.model.validator.Validator;
+import com.devcourse.engine.model.unit.Menu;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,29 +43,39 @@ public class Calculator implements Runnable {
 
     @Override
     public void run() {
-        label:
         while (true) {
             String menu = input.inputMenu();
-
-            try {
-                validMenuCheck(menu);
-
-                switch (menu) {
-                    case "0":
-                        output.endGame();
-                        break label;
-                    case "1":
-                        checkHasHistory();
-                        printHistory();
-                        break;
-                    case "2":
-                        calculate();
-                        break;
-                }
-            } catch (InvalidInputException e) {
-                output.printError(e.getMessage());
+            if (actualOperate(menu)) {
+                break;
             }
         }
+    }
+
+    private boolean actualOperate(String menu) {
+        try {
+            return menuOperate(menu);
+        } catch (InvalidInputException e) {
+            output.printError(e.getMessage());
+        }
+        return false;
+    }
+
+    private boolean menuOperate(String menu) {
+        return switch (Menu.getMenuByOrdinalString(menu)) {
+            case EXIT -> {
+                output.endGame();
+                yield true;
+            }
+            case HISTORY -> {
+                checkHasHistory();
+                printHistory();
+                yield false;
+            }
+            case CALCULATE -> {
+                calculate();
+                yield false;
+            }
+        };
     }
 
     private void calculate() {
@@ -93,9 +104,4 @@ public class Calculator implements Runnable {
         }
     }
 
-    private void validMenuCheck(String menu) throws InvalidInputException {
-        if (menu.length() > 1 || !Arrays.asList("0", "1", "2").contains(menu)) {
-            throw new InvalidInputException(INVALID_MENU);
-        }
-    }
 }

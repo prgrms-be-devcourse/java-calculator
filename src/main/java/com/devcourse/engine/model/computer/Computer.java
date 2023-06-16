@@ -1,6 +1,6 @@
 package com.devcourse.engine.model.computer;
 
-import com.devcourse.engine.model.Operator;
+import com.devcourse.engine.model.unit.Operator;
 
 import java.util.List;
 import java.util.Stack;

@@ -1,6 +1,6 @@
 package com.devcourse.engine.model.converter;
 
-import com.devcourse.engine.model.Operator;
+import com.devcourse.engine.model.unit.Operator;
 
 import java.util.ArrayList;
 import java.util.List;

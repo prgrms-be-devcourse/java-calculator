@@ -1,4 +1,4 @@
-package com.devcourse.engine.model;
+package com.devcourse.engine.model.unit;
 
 import com.devcourse.engine.model.exception.InvalidInputException;
 
