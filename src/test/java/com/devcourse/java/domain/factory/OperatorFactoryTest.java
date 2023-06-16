@@ -1,6 +1,6 @@
 package com.devcourse.java.domain.factory;
 
-import com.devcourse.java.domain.operator.Divide;
+import com.devcourse.java.domain.operator.Division;
 import com.devcourse.java.domain.operator.Minus;
 import com.devcourse.java.domain.operator.Multiply;
 import com.devcourse.java.domain.operator.Operator;
@@ -37,7 +37,7 @@ class OperatorFactoryTest {
                 arguments("+", Plus.class),
                 arguments("-", Minus.class),
                 arguments("*", Multiply.class),
-                arguments("/", Divide.class)
+                arguments("/", Division.class)
         );
     }
 }

@@ -1,15 +1,14 @@
 package com.devcourse.java.domain.operator;
 
-import static com.devcourse.java.common.Errors.DIVIDE_BY_ZERO;
+public class Division implements Operator {
+    private static final String ZERO_DIVISION_ERROR = "0으로 나눌 수 없습니다.";
+    private static Division INSTANCE;
 
-public class Divide implements Operator {
-    private static Divide INSTANCE;
+    private Division() { }
 
-    private Divide() { }
-
-    public static Divide getInstance() {
+    public static Division getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new Divide();
+            INSTANCE = new Division();
         }
         return INSTANCE;
     }
@@ -22,7 +21,7 @@ public class Divide implements Operator {
 
     public void validateDivideByZero(double denominator) {
         if (denominator == 0) {
-            throw new ArithmeticException(DIVIDE_BY_ZERO.toMessage());
+            throw new ArithmeticException(ZERO_DIVISION_ERROR);
         }
     }
 }

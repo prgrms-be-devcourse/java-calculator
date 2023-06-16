@@ -31,7 +31,7 @@ class OperatorsTest {
                 arguments("+", PLUS.getPriority()),
                 arguments("-", MINUS.getPriority()),
                 arguments("*", MULTIPLY.getPriority()),
-                arguments("/", DIVIDE.getPriority())
+                arguments("/", DIVISION.getPriority())
         );
     }
 }

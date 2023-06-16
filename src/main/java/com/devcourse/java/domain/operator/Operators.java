@@ -8,7 +8,7 @@ public enum Operators {
     PLUS("+", Priority.LOW, Plus.getInstance()),
     MINUS("-", Priority.LOW, Minus.getInstance()),
     MULTIPLY("*", Priority.HIGH, Multiply.getInstance()),
-    DIVIDE("/", Priority.HIGH, Divide.getInstance()),
+    DIVISION("/", Priority.HIGH, Division.getInstance()),
     ;
 
     private static class Priority {

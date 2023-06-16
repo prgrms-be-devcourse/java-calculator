@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.devcourse.java.common.Errors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -126,7 +125,7 @@ class OperatorTest {
             double y = 0;
 
             assertThatThrownBy(() -> operator.operate(x, y))
-                    .withFailMessage(DIVIDE_BY_ZERO.toMessage());
+                    .withFailMessage("0으로 나눌 수 없습니다.");
         }
 
         static Stream<Arguments> divideData() {
