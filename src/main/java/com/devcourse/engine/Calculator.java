@@ -94,8 +94,8 @@ public class Calculator implements Runnable {
 
     private void printHistory() {
         IntStream.rangeClosed(1, histories.getLastIndex())
-                .forEach(i -> output.showHistory(histories.getHistory(i)));
-        output.showHistory("");
+                .forEach(i -> output.showHistory(i, histories.getHistory(i)));
+        output.printMessage("\n");
     }
 
     private void checkHasHistory() {
