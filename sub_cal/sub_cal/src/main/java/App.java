@@ -8,13 +8,13 @@ import option.Option;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class Index implements Runnable{
+public class App implements Runnable{
     private final Input input;
     private final Output output;
         private final History history;
     private final Calculator calculator;
 
-    public Index(Console console, History history, Calculator calculator) {
+    public App(Console console, History history, Calculator calculator) {
         this.input = console;
         this.output = console;
         this.history = history;
