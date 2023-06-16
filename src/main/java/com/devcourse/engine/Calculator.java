@@ -2,11 +2,11 @@ package com.devcourse.engine;
 
 import com.devcourse.engine.io.InputConsole;
 import com.devcourse.engine.io.OutputConsole;
-import com.devcourse.engine.model.computer.Computer;
-import com.devcourse.engine.model.converter.Converter;
+import com.devcourse.engine.model.computer.SimpleComputer;
+import com.devcourse.engine.model.converter.PostfixConverter;
 import com.devcourse.engine.model.exception.InvalidInputException;
 import com.devcourse.engine.model.histories.Histories;
-import com.devcourse.engine.model.validator.Validator;
+import com.devcourse.engine.model.validator.ExpressionValidator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,17 +20,17 @@ public class Calculator implements Runnable {
     private final InputConsole input;
     private final OutputConsole output;
     private final Histories histories;
-    private final Validator validator;
-    private final Converter converter;
-    private final Computer computer;
+    private final ExpressionValidator validator;
+    private final PostfixConverter converter;
+    private final SimpleComputer computer;
 
     public Calculator(
             InputConsole input,
             OutputConsole output,
             Histories histories,
-            Validator validator,
-            Converter converter,
-            Computer computer
+            ExpressionValidator validator,
+            PostfixConverter converter,
+            SimpleComputer computer
             ) {
         this.input = input;
         this.output = output;

@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SimpleValidator implements Validator {
+public class ExpressionValidator {
 
     private static final String REGEXP = "(?:^\\.[0-9]+)|(?:^[0-9]?\\.[\\s+\\-*/]$)|([0-9]+\\.[0-9]+)|([+\\-*/)(])|([0-9]+)|(s*)";
     private static final Pattern pattern = Pattern.compile(REGEXP);
@@ -17,7 +17,6 @@ public class SimpleValidator implements Validator {
     int operandCount;
     int branketCount;
 
-    @Override
     public List<String> validate(String userInput) throws InvalidInputException {
         List<String> expression = new ArrayList<>();
         Matcher matcher = pattern.matcher(userInput);

@@ -6,7 +6,7 @@ import com.devcourse.engine.model.converter.PostfixConverter;
 import com.devcourse.engine.model.histories.Histories;
 import com.devcourse.engine.io.InputConsole;
 import com.devcourse.engine.io.OutputConsole;
-import com.devcourse.engine.model.validator.SimpleValidator;
+import com.devcourse.engine.model.validator.ExpressionValidator;
 
 public class App {
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class App {
                 new InputConsole(),
                 new OutputConsole(),
                 new Histories(),
-                new SimpleValidator(),
+                new ExpressionValidator(),
                 new PostfixConverter(),
                 new SimpleComputer()
         ).run();

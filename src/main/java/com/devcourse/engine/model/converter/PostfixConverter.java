@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostfixConverter implements Converter {
+public class PostfixConverter {
 
-    @Override
     public List<String> convert(List<String> expression) {
         List<String> postfixExpression = new ArrayList<>();
         Stack<Operator> temp = new Stack<>();

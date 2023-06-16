@@ -1,10 +1,9 @@
 package engine.computer;
 
-import com.devcourse.engine.model.computer.Computer;
 import com.devcourse.engine.model.computer.SimpleComputer;
 import com.devcourse.engine.model.converter.PostfixConverter;
 import com.devcourse.engine.model.exception.InvalidInputException;
-import com.devcourse.engine.model.validator.SimpleValidator;
+import com.devcourse.engine.model.validator.ExpressionValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +18,7 @@ public class ComputerTest {
                 computer.compute(
                         new PostfixConverter()
                                 .convert(
-                                        new SimpleValidator().
+                                        new ExpressionValidator().
                                                 validate(expression)
                                 )
                 )
@@ -35,7 +34,7 @@ public class ComputerTest {
                 computer.compute(
                         new PostfixConverter()
                                 .convert(
-                                        new SimpleValidator().
+                                        new ExpressionValidator().
                                                 validate(expression)
                                 )
                 )
@@ -51,7 +50,7 @@ public class ComputerTest {
                 () -> computer.compute(
                         new PostfixConverter()
                                 .convert(
-                                        new SimpleValidator().
+                                        new ExpressionValidator().
                                                 validate(expression)
                                 )
                 )
@@ -67,7 +66,7 @@ public class ComputerTest {
                 () -> computer.compute(
                         new PostfixConverter()
                                 .convert(
-                                        new SimpleValidator().
+                                        new ExpressionValidator().
                                                 validate(expression)
                                 )
                 )
@@ -83,7 +82,7 @@ public class ComputerTest {
                 computer.compute(
                         new PostfixConverter()
                                 .convert(
-                                        new SimpleValidator().
+                                        new ExpressionValidator().
                                                 validate(expression)
                                 )
                 )
@@ -99,7 +98,7 @@ public class ComputerTest {
                 computer.compute(
                         new PostfixConverter()
                                 .convert(
-                                        new SimpleValidator().
+                                        new ExpressionValidator().
                                                 validate(expression)
                                 )
                 )
