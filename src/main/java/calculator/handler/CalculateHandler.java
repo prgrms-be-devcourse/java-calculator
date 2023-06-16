@@ -2,7 +2,6 @@ package calculator.handler;
 
 import calculator.constant.ErrorMessage;
 import calculator.constant.ModelKey;
-import calculator.constant.Operator;
 import calculator.constant.ParamKey;
 import calculator.engine.CalculatorEngine;
 
@@ -16,7 +15,8 @@ public class CalculateHandler implements CalculatorHandler {
 
     @Override
     public void process(Map<String, String> param, Map<String, Object> model) {
-        model.put(ModelKey.ANSWER, calculate(parseRawProblem(param.get(ParamKey.PROBLEM))));
+        int answer = calculate(parseRawProblem(param.get(ParamKey.PROBLEM)));
+        model.put(ModelKey.ANSWER, answer);
     }
 
     private String[] parseRawProblem(String problem) {
@@ -33,6 +33,7 @@ public class CalculateHandler implements CalculatorHandler {
                 .filter(i -> i % 2 != 0)
                 .reduce(initNum, (acc, next) -> CalculatorEngine.execute(acc, Integer.parseInt(problem[next+1]), problem[next])
                         .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_OPERATOR)));
+
     }
     private String[] priorityCalculate(String[] problem) {
         Deque<String> deque1 = new ArrayDeque<>(List.of(problem));
@@ -41,7 +42,7 @@ public class CalculateHandler implements CalculatorHandler {
         while (!deque1.isEmpty()) {
             String temp = deque1.removeFirst();
             
-            if (temp.equals(Operator.DIV) || temp.equals(Operator.MUL)) {
+            if (temp.equals("/") || temp.equals("*")) {
                 int o1 = Integer.parseInt(deque2.removeLast());
                 int o2 = Integer.parseInt(deque1.removeFirst());
 
