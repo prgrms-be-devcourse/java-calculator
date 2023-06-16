@@ -1,18 +1,20 @@
 package org.example.Calculate;
 
+import java.util.Arrays;
 import java.util.Stack;
 
-public class PreProcessImpl implements PreProcess{
-    private String expression;
+public class PreProcessImpl implements PreProcess {
     Stack<String> expressionStack = new Stack<>();
+
     @Override
     public Stack<String> expressionToStack(String expression) {
-        this.expression = expression;
-        String[] expressionArr = expression.split(" ");
-        expressionStack.clear();
-        for (String inputVal : expressionArr) {
-            expressionStack.add(inputVal);
-        }
+        makeEmptyStack();
+        Arrays.stream(expression.split(" "))
+                .forEach(expressionStack::add);
         return expressionStack;
+    }
+
+    private void makeEmptyStack() {
+        expressionStack.clear();
     }
 }
