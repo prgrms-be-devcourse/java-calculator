@@ -1,6 +1,6 @@
-package com.devcourse.engine.validator;
+package com.devcourse.engine.model.validator;
 
-import com.devcourse.engine.exception.InvalidInputException;
+import com.devcourse.engine.model.exception.InvalidInputException;
 
 import java.util.List;
 

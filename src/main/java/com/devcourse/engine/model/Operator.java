@@ -1,11 +1,11 @@
 package com.devcourse.engine.model;
 
-import com.devcourse.engine.exception.InvalidInputException;
+import com.devcourse.engine.model.exception.InvalidInputException;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
-import static com.devcourse.engine.exception.InvalidInputException.ZERO_DIVIDE;
+import static com.devcourse.engine.model.exception.InvalidInputException.ZERO_DIVIDE;
 
 public enum Operator {
     PLUS("+", 1, Double::sum),

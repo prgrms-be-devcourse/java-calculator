@@ -1,4 +1,4 @@
-package com.devcourse.engine.computer;
+package com.devcourse.engine.model.computer;
 
 import java.util.List;
 

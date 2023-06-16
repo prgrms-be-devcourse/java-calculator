@@ -2,11 +2,11 @@ package com.devcourse.engine;
 
 import com.devcourse.engine.computer.Computer;
 import com.devcourse.engine.computer.SimpleComputer;
-import com.devcourse.engine.converter.Converter;
-import com.devcourse.engine.converter.PostfixConverter;
-import com.devcourse.engine.io.Input;
+import com.devcourse.engine.model.computer.Computer;
+import com.devcourse.engine.model.converter.Converter;
+import com.devcourse.engine.model.exception.InvalidInputException;
 import com.devcourse.engine.model.histories.Histories;
-import com.devcourse.engine.exception.InvalidInputException;
+import com.devcourse.engine.model.validator.Validator;
 import com.devcourse.engine.historian.Historian;
 import com.devcourse.engine.validator.SimpleValidator;
 import com.devcourse.engine.validator.Validator;
@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static com.devcourse.engine.exception.InvalidInputException.INVALID_MENU;
-import static com.devcourse.engine.exception.InvalidInputException.NO_HISTORY;
+import static com.devcourse.engine.model.exception.InvalidInputException.INVALID_MENU;
+import static com.devcourse.engine.model.exception.InvalidInputException.NO_HISTORY;
 
 public class Calculator implements Runnable {
 

@@ -1,9 +1,9 @@
 package engine.computer;
 
-import com.devcourse.engine.converter.Converter;
-import com.devcourse.engine.converter.PostfixConverter;
-import com.devcourse.engine.validator.SimpleValidator;
-import com.devcourse.engine.validator.Validator;
+import com.devcourse.engine.model.converter.Converter;
+import com.devcourse.engine.model.converter.PostfixConverter;
+import com.devcourse.engine.model.validator.SimpleValidator;
+import com.devcourse.engine.model.validator.Validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

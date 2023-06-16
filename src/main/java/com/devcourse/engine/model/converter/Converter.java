@@ -1,4 +1,4 @@
-package com.devcourse.engine.converter;
+package com.devcourse.engine.model.converter;
 
 import java.util.List;
 

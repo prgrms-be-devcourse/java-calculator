@@ -1,14 +1,12 @@
-package com.devcourse.engine.validator;
+package com.devcourse.engine.model.validator;
 
-import com.devcourse.engine.exception.InvalidInputException;
+import com.devcourse.engine.model.exception.InvalidInputException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.devcourse.engine.exception.InvalidInputException.INVALID_EXPRESSION;
 
 public class SimpleValidator implements Validator {
 
@@ -67,7 +65,7 @@ public class SimpleValidator implements Validator {
 
     private void checkCountValidation(int count, Predicate<Integer> predicate) {
         if (predicate.test(count))
-            throw new InvalidInputException(INVALID_EXPRESSION);
+            throw new InvalidInputException(InvalidInputException.INVALID_EXPRESSION);
     }
 
 
