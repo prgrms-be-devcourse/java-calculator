@@ -4,20 +4,23 @@ import java.util.List;
 
 public class OutputConsole {
 
-    public void printMessage(String message) {
-        System.out.println(message);
+    public void printNewLine() {
+        System.out.println();
     }
 
     public void endGame() {
-        System.out.println("게임을 종료합니다.\n");
+        System.out.println("게임을 종료합니다.");
+        printNewLine();
     }
 
     public void printError(String errorMessage) {
-        System.out.println(errorMessage + "\n");
+        System.out.println(errorMessage);
+        printNewLine();
     }
 
     public void showResult(double result) {
-        System.out.println(result + "\n");
+        System.out.println(result);
+        printNewLine();
     }
 
     public void showHistory(int index, List<String> history) {

@@ -22,7 +22,6 @@ public class Calculator implements Runnable {
     private final InputConsole input;
     private final OutputConsole output;
     private final Histories histories;
-    private final Validator validator;
     private final Accepter accepter;
     private final Converter converter;
     private final Computer computer;
@@ -31,7 +30,6 @@ public class Calculator implements Runnable {
             InputConsole input,
             OutputConsole output,
             Histories histories,
-            Validator validator,
             Accepter accepter,
             Converter converter,
             Computer computer
@@ -39,7 +37,6 @@ public class Calculator implements Runnable {
         this.input = input;
         this.output = output;
         this.histories = histories;
-        this.validator = validator;
         this.accepter = accepter;
         this.converter = converter;
         this.computer = computer;
@@ -84,7 +81,7 @@ public class Calculator implements Runnable {
 
     private void calculate() {
         String userInput = input.inputExpression();
-        validator.validate(userInput);
+        new Validator().validate(userInput);
         List<String> infixExpressions = accepter.accept(userInput);
         double result = computer.compute(
                 converter.convert(infixExpressions)
@@ -100,7 +97,7 @@ public class Calculator implements Runnable {
     private void printHistory() {
         IntStream.rangeClosed(1, histories.getLastIndex())
                 .forEach(i -> output.showHistory(i, histories.getHistory(i)));
-        output.printMessage("\n");
+        output.printNewLine();
     }
 
     private void checkHasHistory() {
