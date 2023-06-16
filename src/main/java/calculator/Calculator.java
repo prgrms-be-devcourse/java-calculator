@@ -9,6 +9,8 @@ import calculator.handler.LookupHandler;
 import calculator.handlermanager.ICalculatorHandlerManager;
 import calculator.io.Input;
 import calculator.io.Output;
+import calculator.vo.OptionVO;
+import calculator.vo.ProblemVO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +21,6 @@ public class Calculator {
     private final Input input;
     private final Output output;
     private final ICalculatorHandlerManager handlerManager;
-    private final String OPTION_PATTERN = "^(1|2)$";
-    private final String MATH_PROBLEM_PATTERN = "^\\d+(\\s[+\\-*/]\\s\\d+)+$";
 
     public Calculator(Input input, Output output, ICalculatorHandlerManager handlerManager) {
         this.input = input;
@@ -39,10 +39,9 @@ public class Calculator {
 
         while (true) {
             output.print("1. 조회\n2. 계산\n\n선택 : ");
-            String optionInput = input.read();
 
             try {
-                checkValidatedOption(optionInput);
+                String optionInput = getOptionInput();
 
                 Map<String, String> param = new HashMap<>();
                 Map<String, Object> model = new HashMap<>();
@@ -69,9 +68,11 @@ public class Calculator {
     }
 
     private String getProblemInput() {
-        String problemInput = input.read();
-        checkValidatedMathProblem(problemInput);
-        return problemInput;
+        return new ProblemVO(input.read()).get();
+    }
+
+    private String getOptionInput() {
+        return new OptionVO(input.read()).get();
     }
 
     private void executeLookupHandler(Map<String, String> param, Map<String, Object> model) {
@@ -82,16 +83,4 @@ public class Calculator {
         handlerManager.execute(Option.CALCULATE, new HashMap<>(param), model);
     }
 
-
-    private void checkValidatedOption(String input) {
-        if (!input.matches(OPTION_PATTERN)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_OPTION);
-        }
-    }
-
-    private void checkValidatedMathProblem(String input) {
-        if (!input.matches(MATH_PROBLEM_PATTERN)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_MATH_PROBLEM);
-        }
-    }
 }
