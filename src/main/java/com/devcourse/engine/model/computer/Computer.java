@@ -1,5 +1,6 @@
 package com.devcourse.engine.model.computer;
 
+import com.devcourse.engine.model.exception.InvalidInputException;
 import com.devcourse.engine.model.unit.Operator;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Stack;
 
 public class Computer {
 
-    public double compute(List<String> expressions) {
+    public double compute(List<String> expressions) throws InvalidInputException {
         Stack<Double> stack = new Stack<>();
         for (String expression : expressions) {
             branchIsOperator(expression, stack);

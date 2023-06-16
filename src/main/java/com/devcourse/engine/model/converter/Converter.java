@@ -1,5 +1,6 @@
 package com.devcourse.engine.model.converter;
 
+import com.devcourse.engine.model.exception.InvalidInputException;
 import com.devcourse.engine.model.unit.Operator;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.Stack;
 
 public class Converter {
 
-    public List<String> convert(List<String> expressions) {
+    public List<String> convert(List<String> expressions) throws InvalidInputException {
         List<String> postfixExpressions = new ArrayList<>();
         Stack<Operator> tempStack = new Stack<>();
 

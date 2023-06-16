@@ -3,7 +3,9 @@ package com.devcourse.engine.model.unit;
 import com.devcourse.engine.model.exception.InvalidInputException;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 import static com.devcourse.engine.model.exception.InvalidInputException.ZERO_DIVIDE;
 
@@ -34,11 +36,11 @@ public enum Operator {
                 .anyMatch(o -> o.getOperatorString().equals(token));
     }
 
-    public static Operator getOperator(String exp) {
+    public static Operator getOperator(String expression) {
         return Arrays.stream(Operator.values())
-                .filter(o -> o.getOperatorString().equals(exp))
-                .toList()
-                .get(0);
+                .filter(o -> o.getOperatorString().equals(expression))
+                .findAny()
+                .orElseThrow(() -> new InvalidInputException(InvalidInputException.INVALID_EXPRESSION));
     }
 
     public Double calculate(Double num1, Double num2) {
