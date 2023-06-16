@@ -11,6 +11,7 @@ import java.util.Stack;
 
 public class Main {
     private static int choice;
+
     public static void main(String[] args) {
         CalConfig calConfig = new CalConfig();
         Calculate calculator = calConfig.calculate();
@@ -21,19 +22,28 @@ public class Main {
 
         while (true) {
             show.showMenu();
-            choice = input.inputChoice();
-            System.out.println();
-            if (choice == 1) {
-                List<String> records = repository.getRecords();
-                show.showRecords(records);
-            } else {
-                String expression = input.inputExpression();
-                Stack<String> expressionStack = preProcess.expressionToStack(expression);
-                int result = calculator.calculate(expressionStack);
-                repository.save(expression,result);
-                show.showResult(result);
+            choice = input.inputNumber();
+            Choice menuChoice = Choice.of(choice);
+            show.lineBreak();
+            switch (menuChoice) {
+                case HISTORY:
+                    List<String> records = repository.getRecords();
+                    show.showRecords(records);
+                    break;
+                case CALCULATION:
+                    String expression = input.inputExpression();
+                    Stack<String> expressionStack = preProcess.expressionToStack(expression);
+                    int result = calculator.calculate(expressionStack);
+                    repository.save(expression, result);
+                    show.showResult(result);
+                    break;
+                case WRONGNUMBER:
+                    show.showInvalidInput();
+                    break;
+                case END:
+                    return;
             }
-            System.out.println();
+            show.lineBreak();
         }
     }
 }
