@@ -4,15 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Brackets {
-    public static final Map<String, String> openBrackets;
-    public static final Map<String, String> closeBrackets;
-
-    static {
-        openBrackets = new HashMap<>();
-        closeBrackets = new HashMap<>();
-        openBrackets.put("(", ")");
-        closeBrackets.put(")", "(");
-    }
+    public static final Map<String, String> openBrackets = new HashMap<>(){{put("(", ")");}};
+    public static final Map<String, String> closeBrackets = new HashMap<>() {{put(")", "(");}};
 
     public static boolean isOpenBrackets(String input) {
         return openBrackets.containsKey(input);
