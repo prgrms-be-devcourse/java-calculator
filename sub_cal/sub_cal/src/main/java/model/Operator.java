@@ -12,9 +12,7 @@ public class Operator {
 
         classify(st);
 
-        cal();
-
-        return numberStack.pop();
+        return cal();
     }
     private void classify(StringTokenizer st){
 
@@ -46,7 +44,7 @@ public class Operator {
 
     }
 
-    private void cal(){
+    private Integer cal(){
         while(true){
             if(numberStack.size() == 1) break;
 
@@ -57,6 +55,8 @@ public class Operator {
 
 
         }
+
+        return numberStack.pop();
     }
 
     private void calPriority(String word,int num2) {
