@@ -46,8 +46,8 @@ public class Console implements Input,  Output {
     }
 
     @Override
-    public void ShowOptions() {
-        Arrays.stream(Option.values()).forEach(o -> System.out.println(o.toString()));
+    public void printMenuList() {
+        Arrays.stream(Option.values()).forEach(o -> System.out.println(o));
     }
 
 

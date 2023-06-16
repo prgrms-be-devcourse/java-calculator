@@ -4,9 +4,8 @@ import io.Output;
 import model.Calculator;
 import model.History;
 import option.Option;
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.NoSuchElementException;
 
 public class Index implements Runnable{
@@ -27,7 +26,7 @@ public class Index implements Runnable{
 
         while (true) {
 
-            output.ShowOptions();
+            output.printMenuList();
             Option select = null;
             try{
              select = input.selectOption();
