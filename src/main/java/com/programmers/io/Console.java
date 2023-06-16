@@ -16,7 +16,6 @@ public class Console implements Input, Output{
     public String getRequest() {
         String _request = scanner.nextLine();
         String request = _request.replaceAll(" ", "");
-        InputValidator.checkRequest(request);
         return request;
     }
 

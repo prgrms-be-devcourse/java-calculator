@@ -25,12 +25,11 @@ public enum Menu {
         this.printMessage = printMessage;
     }
 
-    public static Menu getMenu(String request) {
+    public static Menu getMenu(Request request) {
         return Arrays.stream(Menu.values())
-                .filter(menu -> menu.getNumber().equals(request))
+                .filter(menu -> menu.getNumber().equals(request.getRequest()))
                 .findAny()
                 .orElseThrow(()-> new MenuFormatException());
     }
-
 
 }

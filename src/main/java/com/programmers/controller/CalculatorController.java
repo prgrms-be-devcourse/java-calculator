@@ -4,11 +4,12 @@ import com.programmers.exception.MenuFormatException;
 import com.programmers.io.Console;
 import com.programmers.service.CalculatorService;
 import com.programmers.util.Menu;
+import com.programmers.util.Request;
 
 public class CalculatorController {
 
     private final Console console;
-    private CalculatorService calculatorService;
+    private final CalculatorService calculatorService;
     private boolean isRunning = true;
 
     public CalculatorController(Console console, CalculatorService calculatorService) {
@@ -16,12 +17,11 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
-
     public void run() {
         while (isRunning) {
             try {
                 console.getMenu();
-                String request = console.getRequest();
+                Request request = new Request(console.getRequest());
                 response(request);
             } catch (RuntimeException e) {
                 console.printErrorMsg(e.getMessage());
@@ -30,7 +30,9 @@ public class CalculatorController {
     }
 
     // 사용자 요청에 응답하기
-    private void response(String request) throws RuntimeException {
+    // 새로운 객체로 감싸기 (Request)
+    // 형변환에 대한 자유
+    private void response(Request request) throws RuntimeException {
         Menu menu = Menu.getMenu(request);
 
         //저장된 값 조회

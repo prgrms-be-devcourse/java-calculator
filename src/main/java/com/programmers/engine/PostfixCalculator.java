@@ -109,14 +109,15 @@ public class PostfixCalculator {
         return false;
     }
 
+    
+    // 팀 미팅 질문
+    private int compareOperatorPriority(char target, char cur) {
+        int targetOperator = Operator.getPriority(target);
+        int curOperator = Operator.getPriority(cur);
 
-    private int compareOperatorPriority(char stackOp, char curOp) {
-        int stackOpPriority = Operator.getPriority(stackOp);
-        int curOpPriority = Operator.getPriority(curOp);
-
-        if (stackOpPriority < curOpPriority) {
+        if (targetOperator < curOperator) {
             return 1;
-        } else if (stackOpPriority == curOpPriority) {
+        } else if (targetOperator == curOperator) {
             return 0;
         } else {
             return -1;

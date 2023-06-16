@@ -17,17 +17,11 @@ public class InputValidator {
         continuousOperator(equation);
     }
 
-    public static void checkRequest(String request) {
-        if (request == null || request.isBlank()) {
-            throw new MenuFormatException();
-        }
-    }
-
     private static void endByOperator(String equation) {
         String[] equationArr = equation.split("");
         for (int i = equationArr.length - 1; i >= 0; i--) {
             if (equationArr[i].equals(")")) continue;
-            if (OPERATOR.contains(equationArr[i])){
+            if (OPERATOR.contains(equationArr[i]) || Operator.contains(equationArr[0])){
                 throw new EquationFormatException();
             }
             return;
