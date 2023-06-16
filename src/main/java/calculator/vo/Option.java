@@ -2,11 +2,11 @@ package calculator.vo;
 
 import calculator.constant.ErrorMessage;
 
-public class OptionVO {
+public class Option {
     private final String option;
     private final String OPTION_PATTERN = "^(1|2)$";
 
-    public OptionVO(String option) {
+    public Option(String option) {
         validate(option);
         this.option = option;
     }

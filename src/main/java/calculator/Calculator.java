@@ -8,8 +8,8 @@ import calculator.handler.LookupHandler;
 import calculator.handlermanager.ICalculatorHandlerManager;
 import calculator.io.Input;
 import calculator.io.Output;
-import calculator.vo.OptionVO;
-import calculator.vo.ProblemVO;
+import calculator.vo.Option;
+import calculator.vo.Problem;
 
 import java.util.HashMap;
 import java.util.List;
@@ -67,11 +67,11 @@ public class Calculator {
     }
 
     private String getProblemInput() {
-        return new ProblemVO(input.read()).get();
+        return new Problem(input.read()).get();
     }
 
     private String getOptionInput() {
-        return new OptionVO(input.read()).get();
+        return new Option(input.read()).get();
     }
 
 }

@@ -2,12 +2,12 @@ package calculator.vo;
 
 import calculator.constant.ErrorMessage;
 
-public class ProblemVO {
+public class Problem {
     private final String problem;
     private final String MATH_PROBLEM_PATTERN = "^\\d+(\\s[+\\-*/]\\s\\d+)+$";
 
 
-    public ProblemVO(String problem) {
+    public Problem(String problem) {
         validate(problem);
         this.problem = problem;
     }
