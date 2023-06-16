@@ -9,7 +9,6 @@ import java.util.*;
 
 public class Console implements Input,  Output {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    //사용자가 1번(조회)를 선택하였을 시 실행
     @Override
     public Option selectOption() throws NoSuchElementException, IOException {
         Optional<Option> userOption = Option.getMenu(br.readLine());

@@ -16,7 +16,6 @@ public class Operator {
 
         return numberStack.pop();
     }
-    // 숫자와 연산자를 구분하고 각자 스택에 넣어줍니다
     private void classify(StringTokenizer st){
 
         while(st.hasMoreTokens()){

@@ -37,7 +37,6 @@ public class Index implements Runnable{
                 continue;
             }
 
-            //스위치 문을 통하여 옵션에 맞는 코드를 실행합니다
             switch (select) {
                 case HISTORY:
                     if (!(output.showResultHistory(history.getHistory()))) output.historyEmptyError();
