@@ -12,20 +12,19 @@ import calcproject.view.Messages;
 public class CalcConsoleView implements CalcInput, CalcOutput {
 	private Scanner scanner;
 
-	public CalcConsoleView(Scanner scanner) {
-		this.scanner = scanner;
+	public CalcConsoleView() {
+		this.scanner = new Scanner(System.in);
 	}
 
 	@Override
 	public Command getCmd() {
-		System.out.println(Messages.INPUT_GUIDE_MESSAGE);
-		System.out.print(Messages.INPUT_CHOICE_MESSAGE);
+		System.out.println(Messages.INPUT_GUIDE_MESSAGE.getMessage());
+		System.out.print(Messages.INPUT_CHOICE_MESSAGE.getMessage());
 
 		int choiceNum = this.scanner.nextInt();
 		this.scanner.nextLine();
 
-		Command command = Command.valueOf(choiceNum);
-		return command;
+		return Command.valueOf(choiceNum);
 	}
 
 	@Override
@@ -51,13 +50,12 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 	private String calcRecordToFormattedStr(CalcResultRecordModel calcRecord) {
 		String expression = calcRecord.getExpression();
 		double calcResult = calcRecord.getCalcResult();
-		String formattedStr = expression + " = " + calcResult;
-		return formattedStr;
+		return expression + " = " + calcResult;
 	}
 
 	@Override
 	public void showExitMessage() {
-		System.out.println(Messages.EXIT_MESSAGE);
+		System.out.println(Messages.EXIT_MESSAGE.getMessage());
 	}
 
 }
