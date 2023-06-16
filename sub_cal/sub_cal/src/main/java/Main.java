@@ -9,6 +9,4 @@ public class Main {
         new Index(new Console(),new History(),new Calculator()).run();
     }
 
-
-
 }

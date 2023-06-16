@@ -15,7 +15,7 @@ import static global.ErrorMessage.EMPTY_INPUT_STRING;
 public class Index implements Runnable{
     private final Input input;
     private final Output output;
-    private final History history;
+        private final History history;
     private final Calculator calculator;
 
     public Index(Console console, History history, Calculator calculator) {
@@ -34,7 +34,9 @@ public class Index implements Runnable{
             Option select = null;
             try{
              select = input.selectOption();
-            } catch (NoSuchElementException e){
+            } catch (NoSuchElementException e1){
+                continue;
+            } catch (IOException e2){
                 continue;
             }
 

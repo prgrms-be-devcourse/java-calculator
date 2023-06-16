@@ -11,12 +11,11 @@ import static global.ErrorMessage.HISTORY_EMPTY_MESSAGE;
 import static global.ErrorMessage.INVALID_MENU_INDEX;
 
 public class Console implements Input,  Output {
-    Scanner sc = new Scanner(System.in);
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //사용자가 1번(조회)를 선택하였을 시 실행
     @Override
-    public Option selectOption() throws NoSuchElementException {
-        Optional<Option> userOption = Option.getMenu(sc.nextLine());
+    public Option selectOption() throws NoSuchElementException, IOException {
+        Optional<Option> userOption = Option.getMenu(br.readLine());
         if(userOption.isEmpty()) {
             System.out.println(INVALID_MENU_INDEX);
         }
