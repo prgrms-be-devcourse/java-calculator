@@ -1,40 +1,68 @@
 package com.programmers;
 
-import com.programmers.core.Converter;
-import com.programmers.core.PostfixConverter;
-import org.junit.jupiter.api.Assertions;
+import com.programmers.core.converter.PostfixConverter;
+import com.programmers.core.data.CalculationRequest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PostfixConverterTest {
 
-    @Test
-    @DisplayName("후위 표기식 변환 성공 테스트")
-    void postfixFormulaConversionSuccessful() throws Exception {
-        Converter postfixConverter = new PostfixConverter();
-        //given
-        String formula1 = "1 + 2 * 3";
-        String formula2 = "3 + 5 / 1 + 2 / 2";
-        //when
-        List<String> postfixFormula1 = postfixConverter.convert(formula1);
-        List<String> postfixFormula2 = postfixConverter.convert(formula2);
-        //then
-        assertThat(postfixFormula1).containsExactly("1", "2", "3", "*", "+");
-        assertThat(postfixFormula2).containsExactly("3", "5", "1", "/", "+", "2", "2", "/", "+");
+    private PostfixConverter converter;
+
+    @BeforeEach
+    void setUp() {
+        converter = new PostfixConverter();
     }
 
     @Test
-    @DisplayName("후위 표기식 변환 실패 테스트")
-    void postfixFormulaConversionFailed() throws Exception {
-        Converter postfixConverter = new PostfixConverter();
+    @DisplayName("후위 표기식 변환 성공 테스트")
+    void validFormula() {
 
-        String formula = "1 + 2 * 3 + a ";
+        //given
+        CalculationRequest request1 = new CalculationRequest("1 + 1 * 2");
+        CalculationRequest request2 = new CalculationRequest("2 * 2 - 2 / 2");
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> postfixConverter.convert(formula));
+        //when
+        List<String> postfixFormula1 = converter.convert(request1);
+        List<String> postfixFormula2 = converter.convert(request2);
+
+        //then
+        assertThat(postfixFormula1).containsExactly("1", "1", "2", "*", "+");
+        assertThat(postfixFormula2).containsExactly("2", "2", "*", "2", "2", "/", "-");
+    }
+
+    @Test
+    @DisplayName("후위 표기식 변환 실패 테스트_빈 수식")
+    void emptyFormula() {
+        CalculationRequest request = new CalculationRequest("");
+        assertThrows(IllegalArgumentException.class, () -> converter.convert(request));
+    }
+
+    @Test
+    @DisplayName("후위 표기식 변환 실패 테스트_null")
+    void nullFormula() {
+        CalculationRequest request = new CalculationRequest(null);
+        assertThrows(IllegalArgumentException.class, () -> converter.convert(request));
+    }
+
+    @Test
+    @DisplayName("후위 표기식 변환 실패 테스트_잘못된 수식")
+    void invalidFormula() {
+        CalculationRequest request = new CalculationRequest("1 + a");
+        assertThrows(IllegalArgumentException.class, () -> converter.convert(request));
+    }
+
+    @Test
+    @DisplayName("후위 표기식 변환 실패 테스트_완성되지 않은 식")
+    void singleFormula() {
+        CalculationRequest request = new CalculationRequest("+");
+        assertThrows(IllegalArgumentException.class, () -> converter.convert(request));
     }
 }
 
