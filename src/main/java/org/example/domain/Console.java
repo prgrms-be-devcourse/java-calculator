@@ -21,8 +21,8 @@ public class Console {
     public void run() {
         while (calculatorProcess) {
             view.printSelection();
-            Optional<SelectTypeView> selectType = view.select();
-            selectOption(selectType.orElse(null));
+            SelectTypeView selectType = view.select();
+            selectOption(selectType);
         }
     }
 

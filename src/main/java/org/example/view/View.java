@@ -11,16 +11,12 @@ public class View implements Input,Output{
     private static final Pattern REGEX_EXPRESSION = Pattern.compile("\\d+(\\s[+\\-*/]\\s\\d+)*");
 
     @Override
-    public Optional<SelectTypeView> select() {
+    public SelectTypeView select() {
         int selection = sc.nextInt();
+        Optional<SelectTypeView> selectType = SelectTypeView.findByNum(selection);
+        sc.nextLine();
 
-        if (validateSelection(selection)) {
-            Optional<SelectTypeView> selectType = SelectTypeView.findByNum(selection);
-            sc.nextLine();
-            return selectType;
-        }
-
-        throw new IllegalArgumentException("원하는 요청을 찾을 수 없습니다.");
+        return selectType.orElseThrow(()->new IllegalArgumentException("잘못된 요청입니다."));
     }
 
     @Override
@@ -53,15 +49,6 @@ public class View implements Input,Output{
         for(String record : arithmeticRecords){
             System.out.println(record);
         }
-    }
-
-    private boolean validateSelection(int selection) {
-        for(SelectTypeView stv : SelectTypeView.values()){
-            if(stv.getNum() == selection){
-                return true;
-            }
-        }
-        return false;
     }
 
     public boolean validateExpression(String expression) {
