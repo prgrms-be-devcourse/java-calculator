@@ -7,23 +7,23 @@ import java.util.Stack;
 
 public class SimpleComputer {
 
-    public double compute(List<String> expression) {
+    public double compute(List<String> expressions) {
         Stack<Double> stack = new Stack<>();
-        for (String exp : expression) {
-            branchIsOperator(exp, stack);
+        for (String expression : expressions) {
+            branchIsOperator(expression, stack);
         }
         return stack.pop();
     }
 
-    private void branchIsOperator(String exp, Stack<Double> stack) {
-        if (Operator.isOperator(exp)) {
+    private void branchIsOperator(String expression, Stack<Double> stack) {
+        if (Operator.isOperator(expression)) {
             stack.push(
-                    Operator.getOperator(exp).calculate(
+                    Operator.getOperator(expression).calculate(
                             stack.pop(), stack.pop()
                     )
             );
             return;
         }
-        stack.push(Double.parseDouble(exp));
+        stack.push(Double.parseDouble(expression));
     }
 }

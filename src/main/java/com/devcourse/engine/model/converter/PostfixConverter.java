@@ -8,59 +8,59 @@ import java.util.Stack;
 
 public class PostfixConverter {
 
-    public List<String> convert(List<String> expression) {
-        List<String> postfixExpression = new ArrayList<>();
-        Stack<Operator> temp = new Stack<>();
+    public List<String> convert(List<String> expressions) {
+        List<String> postfixExpressions = new ArrayList<>();
+        Stack<Operator> tempStack = new Stack<>();
 
-        for (String exp: expression) {
-            convertByOperator(exp, postfixExpression, temp);
+        for (String expression: expressions) {
+            convertByOperator(expression, postfixExpressions, tempStack);
         }
-        takeRemainExpression(postfixExpression, temp);
+        takeRemainExpression(postfixExpressions, tempStack);
 
-        return postfixExpression;
+        return postfixExpressions;
     }
 
-    private void convertByOperator(String exp, List<String> postfixExpression, Stack<Operator> temp) {
-        if (Operator.isOperator(exp)) {
-            Operator operator = Operator.getOperator(exp);
+    private void convertByOperator(String expression, List<String> postfixExpressions, Stack<Operator> tempStack) {
+        if (Operator.isOperator(expression)) {
+            Operator operator = Operator.getOperator(expression);
 
-            if (convertByBranket(operator, postfixExpression, temp))
+            if (convertByBranket(operator, postfixExpressions, tempStack))
                 return;
-            convertWithOperandPriority(operator, postfixExpression, temp);
+            convertWithOperandPriority(operator, postfixExpressions, tempStack);
 
-            temp.add(operator);
+            tempStack.add(operator);
             return;
         }
-        postfixExpression.add(exp);
+        postfixExpressions.add(expression);
     }
 
-    private void convertWithOperandPriority(Operator operator, List<String> postfixExpression, Stack<Operator> temp) {
-        while (!temp.isEmpty() && temp.peek().getOperatorPriority() >= operator.getOperatorPriority()) {
-            postfixExpression.add(temp.pop().getOperatorString());
+    private void convertWithOperandPriority(Operator operator, List<String> postfixExpressions, Stack<Operator> tempStack) {
+        while (!tempStack.isEmpty() && tempStack.peek().getOperatorPriority() >= operator.getOperatorPriority()) {
+            postfixExpressions.add(tempStack.pop().getOperatorString());
         }
     }
 
-    private boolean convertByBranket(Operator operator, List<String> postfixExpression, Stack<Operator> temp) {
+    private boolean convertByBranket(Operator operator, List<String> postfixExpressions, Stack<Operator> tempStack) {
         if (operator.getOperatorString().equals("(")) {
-            temp.push(operator);
+            tempStack.push(operator);
             return true;
         } else if (operator.getOperatorString().equals(")")) {
-            convertWithBranketPriority(operator, postfixExpression, temp);
+            convertWithBranketPriority(operator, postfixExpressions, tempStack);
             return true;
         }
         return false;
     }
 
-    private void convertWithBranketPriority(Operator operator, List<String> postfixExpression, Stack<Operator> temp) {
-        while (!temp.isEmpty() && !temp.peek().getOperatorString().equals("(")) {
-            postfixExpression.add(temp.pop().getOperatorString());
+    private void convertWithBranketPriority(Operator operator, List<String> postfixExpressions, Stack<Operator> tempStack) {
+        while (!tempStack.isEmpty() && !tempStack.peek().getOperatorString().equals("(")) {
+            postfixExpressions.add(tempStack.pop().getOperatorString());
         }
-        if (!temp.isEmpty()) temp.pop();
+        if (!tempStack.isEmpty()) tempStack.pop();
     }
 
-    private void takeRemainExpression(List<String> expression, Stack<Operator> stack) {
+    private void takeRemainExpression(List<String> expressions, Stack<Operator> stack) {
         while (!stack.isEmpty()) {
-            expression.add(stack.pop().getOperatorString());
+            expressions.add(stack.pop().getOperatorString());
         }
     }
 }

@@ -18,7 +18,7 @@ public class ExpressionValidator {
     int branketCount;
 
     public List<String> validate(String userInput) throws InvalidInputException {
-        List<String> expression = new ArrayList<>();
+        List<String> expressions = new ArrayList<>();
         Matcher matcher = pattern.matcher(userInput);
 
         operandCount = 0;
@@ -29,10 +29,10 @@ public class ExpressionValidator {
             if (token.isBlank())
                 continue;
             branchIsBranketCondition(token);
-            expression.add(token);
+            expressions.add(token);
         }
         checkCountValidation(operandCount, cnt -> cnt < 1);
-        return expression;
+        return expressions;
     }
 
     private void branchIsBranketCondition(String token) {

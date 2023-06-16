@@ -69,15 +69,15 @@ public class Calculator implements Runnable {
 
     private void calculate() {
         String userInput = input.inputExpression();
-        List<String> infixExpression = validator.validate(userInput);
+        List<String> infixExpressions = validator.validate(userInput);
         double result = computer.compute(
-                converter.convert(infixExpression)
+                converter.convert(infixExpressions)
         );
-        saveAndPrint(infixExpression, result);
+        saveAndPrint(infixExpressions, result);
     }
 
-    private void saveAndPrint(List<String> infixExpression, double result) {
-        histories.saveHistory(infixExpression, result);
+    private void saveAndPrint(List<String> infixExpressions, double result) {
+        histories.saveHistory(infixExpressions, result);
         output.showResult(result);
     }
 
