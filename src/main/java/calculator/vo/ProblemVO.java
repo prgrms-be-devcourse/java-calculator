@@ -8,7 +8,7 @@ public class ProblemVO {
 
 
     public ProblemVO(String problem) {
-        validateProblem(problem);
+        validate(problem);
         this.problem = problem;
     }
 
@@ -16,7 +16,7 @@ public class ProblemVO {
         return problem;
     }
 
-    private void validateProblem(String input) {
+    private void validate(String input) {
         if (!input.matches(MATH_PROBLEM_PATTERN)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_MATH_PROBLEM);
         }

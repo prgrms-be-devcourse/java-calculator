@@ -47,12 +47,12 @@ public class Calculator {
 
                 switch (optionInput) {
                     case "1":
-                        executeLookupHandler(param, model);
+                        handlerManager.execute(optionInput, new HashMap<>(param), model);
                         output.print((List<Object>) model.get(ModelKey.LIST));
                         break;
                     case "2":
                         param.put(ParamKey.PROBLEM, getProblemInput());
-                        executeCalculateHandler(param, model);
+                        handlerManager.execute(optionInput, new HashMap<>(param), model);
                         output.print(String.valueOf(model.get(ModelKey.ANSWER)));
                         break;
                     default:
@@ -72,14 +72,6 @@ public class Calculator {
 
     private String getOptionInput() {
         return new OptionVO(input.read()).get();
-    }
-
-    private void executeLookupHandler(Map<String, String> param, Map<String, Object> model) {
-        handlerManager.execute("1", new HashMap<>(param), model);
-    }
-
-    private void executeCalculateHandler(Map<String, String> param, Map<String, Object> model) {
-        handlerManager.execute("2", new HashMap<>(param), model);
     }
 
 }
