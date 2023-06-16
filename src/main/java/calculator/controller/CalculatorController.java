@@ -28,7 +28,7 @@ public class CalculatorController {
     private boolean eachExecute() {
         Menu select = userInput(()->{
             outputView.printMenu();
-            return inputView.getMenuNumber();
+            return inputView.getMenuNumberAfterCheckException();
         });
 
         return executeMenu(select);
@@ -51,7 +51,7 @@ public class CalculatorController {
     private void executeCalc() {
         Double result = userInput(()->{
             outputView.printEmptyMsg();
-            return this.calculatorService.calculate(inputView.getEquation());
+            return this.calculatorService.calculate(inputView.getEquationAfterCheckException());
         });
         outputView.printResult(result);
     }

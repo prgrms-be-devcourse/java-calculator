@@ -15,13 +15,13 @@ public class InputView {
         return this.scanner.nextLine().trim();
     }
 
-    public Menu getMenuNumber() {
+    public Menu getMenuNumberAfterCheckException() {
         String userInput = readLine();
         ValidationInput.isEmpty(userInput);
         return Menu.getMenu(userInput);
     }
 
-    public String getEquation() {
+    public String getEquationAfterCheckException() {
         String userInput = readLine();
         ValidationInput.isEmpty(userInput);
 
