@@ -7,7 +7,7 @@ public class CalOrderImpl implements CalOrder {
     Stack<String> expressionStack = new Stack<>();
 
     @Override
-    public void calMultiplyDivide() {
+    public String calculateMultiplyDivide() {
         for (int i = 1; i < expressionStack.size(); i += 2) {
             if (expressionStack.get(i).equals("*")) {
                 multiply(i);
@@ -17,10 +17,11 @@ public class CalOrderImpl implements CalOrder {
                 i -= 2;
             }
         }
+        return expressionStack.toString();
     }
 
     @Override
-    public int calPlusMinus() {
+    public int calculatePlusMinus() {
         result = Integer.parseInt(expressionStack.get(0));
         for (int i = 1; i < expressionStack.size(); i += 2) {
             if (expressionStack.get(i).equals("+")) {
@@ -37,16 +38,17 @@ public class CalOrderImpl implements CalOrder {
         this.expressionStack = expressionStack;
     }
 
-    public void multiply(int idx) {
+    private void multiply(int idx) {
         result = Integer.parseInt(expressionStack.get(idx - 1)) * Integer.parseInt(expressionStack.get(idx + 1));
-        expressionStack.add(idx - 1, String.valueOf(result));
-        expressionStack.remove(idx);
-        expressionStack.remove(idx);
-        expressionStack.remove(idx);
+        replaceNumOperatorNumWithResult(idx);
     }
 
-    public void divide(int idx) {
+    private void divide(int idx) {
         result = Integer.parseInt(expressionStack.get(idx - 1)) / Integer.parseInt(expressionStack.get(idx + 1));
+        replaceNumOperatorNumWithResult(idx);
+    }
+
+    private void replaceNumOperatorNumWithResult(int idx) {
         expressionStack.add(idx - 1, String.valueOf(result));
         expressionStack.remove(idx);
         expressionStack.remove(idx);
