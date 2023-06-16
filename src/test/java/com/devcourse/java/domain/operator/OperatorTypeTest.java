@@ -7,11 +7,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.devcourse.java.domain.operator.Operators.*;
+import static com.devcourse.java.domain.operator.OperatorType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
-class OperatorsTest {
+class OperatorTypeTest {
 
     @ParameterizedTest
     @DisplayName("연산자의 우선순위가 맞게 출력되야 한다.")

@@ -1,7 +1,5 @@
 package com.devcourse.java.domain.operator;
 
-import com.devcourse.java.domain.factory.Factory;
-import com.devcourse.java.domain.factory.OperatorFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class OperatorTest {
-    private final Factory<Operator, String> factory = new OperatorFactory();
+    private final OperatorMapper factory = new OperatorMapper();
 
     @Nested
     @DisplayName("덧셈 연산자 테스트")
@@ -26,7 +24,7 @@ class OperatorTest {
         @MethodSource("plusData")
         void plusTest(double x, double y, double result) {
             // given
-            Operator operator = factory.create("+");
+            Operator operator = factory.toOperator("+");
 
             // when
             double operated = operator.operate(x, y);
@@ -53,7 +51,7 @@ class OperatorTest {
         @MethodSource("minusData")
         void minusTest(double x, double y, double result) {
             // given
-            Operator operator = factory.create("-");
+            Operator operator = factory.toOperator("-");
 
             // when
             double operated = operator.operate(x, y);
@@ -80,7 +78,7 @@ class OperatorTest {
         @MethodSource("multiplyData")
         void multiplyTest(double x, double y, double result) {
             // given
-            Operator operator = factory.create("*");
+            Operator operator = factory.toOperator("*");
 
             // when
             double operated = operator.operate(x, y);
@@ -102,7 +100,7 @@ class OperatorTest {
     @Nested
     @DisplayName("나눗셈 연산자 테스트")
     class divideOperator {
-        private final Operator operator = factory.create("/");
+        private final Operator operator = factory.toOperator("/");
 
         @ParameterizedTest
         @DisplayName("[성공] 입력에 맞게 결과가 출력되어야 한다.")

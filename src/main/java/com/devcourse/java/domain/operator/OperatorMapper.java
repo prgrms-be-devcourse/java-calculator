@@ -1,26 +1,22 @@
-package com.devcourse.java.domain.factory;
-
-import com.devcourse.java.domain.operator.Operator;
-import com.devcourse.java.domain.operator.Operators;
+package com.devcourse.java.domain.operator;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OperatorFactory implements Factory<Operator, String> {
+public class OperatorMapper {
     private static final Map<String, Operator> operators = new HashMap<>();
 
-    public OperatorFactory() {
+    public OperatorMapper() {
         initMap();
     }
 
-    @Override
-    public Operator create(String symbol) {
+    public Operator toOperator(String symbol) {
         return operators.get(symbol);
     }
 
     private void initMap() {
-        Arrays.stream(Operators.values())
+        Arrays.stream(OperatorType.values())
                 .forEach(operator -> operators.put(operator.getSymbol(), operator.getOperator()));
     }
 }

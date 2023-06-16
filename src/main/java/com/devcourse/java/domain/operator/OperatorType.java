@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
-public enum Operators {
+public enum OperatorType {
     PLUS("+", Priority.LOW, Plus.getInstance()),
     MINUS("-", Priority.LOW, Minus.getInstance()),
     MULTIPLY("*", Priority.HIGH, Multiply.getInstance()),
@@ -21,7 +21,7 @@ public enum Operators {
     private final int priority;
     private final Operator operator;
 
-    Operators(String symbol, int priority, Operator operator) {
+    OperatorType(String symbol, int priority, Operator operator) {
         this.symbol = symbol;
         this.priority = priority;
         this.operator = operator;
@@ -41,7 +41,7 @@ public enum Operators {
     }
 
     public static int evaluatePriority(String symbol) {
-        return Arrays.stream(Operators.values())
+        return Arrays.stream(OperatorType.values())
                 .filter(operator -> StringUtils.equals(operator.symbol, symbol))
                 .findFirst()
                 .map(operator -> operator.priority)

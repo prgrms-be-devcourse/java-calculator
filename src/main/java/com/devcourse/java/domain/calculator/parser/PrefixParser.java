@@ -1,6 +1,6 @@
 package com.devcourse.java.domain.calculator.parser;
 
-import com.devcourse.java.domain.operator.Operators;
+import com.devcourse.java.domain.operator.OperatorType;
 import com.devcourse.java.common.Validator;
 
 import java.util.ArrayDeque;
@@ -47,7 +47,7 @@ public class PrefixParser {
     }
 
     private boolean isPeekHigherPriority(Deque<String> stack, String character) {
-        return Operators.evaluatePriority(character) <= Operators.evaluatePriority(stack.peek());
+        return OperatorType.evaluatePriority(character) <= OperatorType.evaluatePriority(stack.peek());
     }
 
     private void clearLeftsToResult(Deque<String> stack, List<String> result) {

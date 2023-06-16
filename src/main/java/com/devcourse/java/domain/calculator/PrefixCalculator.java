@@ -1,9 +1,9 @@
 package com.devcourse.java.domain.calculator;
 
 import com.devcourse.java.common.Validator;
-import com.devcourse.java.domain.factory.Factory;
-import com.devcourse.java.domain.operator.Operator;
 import com.devcourse.java.domain.calculator.parser.PrefixParser;
+import com.devcourse.java.domain.operator.Operator;
+import com.devcourse.java.domain.operator.OperatorMapper;
 import com.devcourse.java.domain.storage.CalculateResult;
 
 import java.util.ArrayDeque;
@@ -12,11 +12,11 @@ import java.util.List;
 
 public class PrefixCalculator implements Calculator {
     private final PrefixParser parser;
-    private final Factory<Operator, String> factory;
+    private final OperatorMapper mapper;
 
-    public PrefixCalculator(PrefixParser parser, Factory<Operator, String> factory) {
+    public PrefixCalculator(PrefixParser parser, OperatorMapper mapper) {
         this.parser = parser;
-        this.factory = factory;
+        this.mapper = mapper;
     }
 
     public CalculateResult run(String expression) {
@@ -45,7 +45,7 @@ public class PrefixCalculator implements Calculator {
         double operandY = stack.pop();
         double operandX = stack.pop();
         
-        Operator operator = factory.create(current);
+        Operator operator = mapper.toOperator(current);
         return operator.operate(operandX, operandY);
     }
 }

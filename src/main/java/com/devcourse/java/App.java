@@ -2,20 +2,16 @@ package com.devcourse.java;
 
 import com.devcourse.java.domain.calculator.Calculator;
 import com.devcourse.java.domain.calculator.PrefixCalculator;
+import com.devcourse.java.domain.calculator.parser.PrefixParser;
 import com.devcourse.java.domain.console.Console;
-import com.devcourse.java.domain.console.io.Reader;
-import com.devcourse.java.domain.console.io.Writer;
 import com.devcourse.java.domain.console.io.ConsoleReader;
 import com.devcourse.java.domain.console.io.ConsoleWriter;
-import com.devcourse.java.domain.factory.Factory;
-import com.devcourse.java.domain.factory.MenuFactory;
-import com.devcourse.java.domain.factory.OperatorFactory;
+import com.devcourse.java.domain.console.io.Reader;
+import com.devcourse.java.domain.console.io.Writer;
+import com.devcourse.java.domain.operator.OperatorMapper;
 import com.devcourse.java.domain.menu.Calculate;
-import com.devcourse.java.domain.menu.Menu;
-import com.devcourse.java.domain.menu.Menus;
+import com.devcourse.java.domain.menu.MenuMapper;
 import com.devcourse.java.domain.menu.Query;
-import com.devcourse.java.domain.operator.Operator;
-import com.devcourse.java.domain.calculator.parser.PrefixParser;
 import com.devcourse.java.domain.runner.CalculatorRunner;
 import com.devcourse.java.domain.storage.CalculateResult;
 import com.devcourse.java.domain.storage.MemoryStorage;
@@ -26,8 +22,8 @@ public class App {
         Storage<CalculateResult> resultStorage = new MemoryStorage();
 
         PrefixParser prefixParser = new PrefixParser();
-        Factory<Operator, String> operatorFactory = new OperatorFactory();
-        Calculator prefixCalculator = new PrefixCalculator(prefixParser, operatorFactory);
+        OperatorMapper operatorMapper = new OperatorMapper();
+        Calculator prefixCalculator = new PrefixCalculator(prefixParser, operatorMapper);
 
         Query query = new Query(resultStorage);
         Calculate calculate = new Calculate(prefixCalculator, resultStorage);
@@ -35,9 +31,9 @@ public class App {
         Reader reader = new ConsoleReader();
         Writer writer = new ConsoleWriter();
         Console console = new Console(reader, writer);
-        Factory<Menu, Menus> menuFactory = new MenuFactory(query, calculate);
+        MenuMapper menuMapper = new MenuMapper(query, calculate);
 
-        CalculatorRunner calculatorRunner = new CalculatorRunner(menuFactory, console);
+        CalculatorRunner calculatorRunner = new CalculatorRunner(menuMapper, console);
         calculatorRunner.run();
     }
 }

@@ -1,32 +1,32 @@
 package com.devcourse.java.domain.runner;
 
-import com.devcourse.java.domain.factory.Factory;
 import com.devcourse.java.domain.console.Console;
 import com.devcourse.java.domain.menu.Menu;
-import com.devcourse.java.domain.menu.Menus;
+import com.devcourse.java.domain.menu.MenuMapper;
+import com.devcourse.java.domain.menu.MenuType;
 import org.apache.commons.lang3.StringUtils;
 
 public class CalculatorRunner {
     private static final String EXIT = "Y";
     private static boolean power = true;
-    private final Factory<Menu, Menus> factory;
+    private final MenuMapper mapper;
     private final Console console;
 
-    public CalculatorRunner(Factory<Menu, Menus> factory, Console console) {
-        this.factory = factory;
+    public CalculatorRunner(MenuMapper mapper, Console console) {
+        this.mapper = mapper;
         this.console = console;
     }
 
     public void run() {
         while (power) {
             String selectedMenu = console.selectMenu();
-            Menus menus = Menus.from(selectedMenu);
+            MenuType menuType = MenuType.from(selectedMenu);
 
-            if (menus.isNotOnMenu() && confirmExit()) {
+            if (menuType.isNotOnMenu() && confirmExit()) {
                 continue;
             }
 
-            Menu menu = factory.create(menus);
+            Menu menu = mapper.toMenu(menuType);
             power = menu.execute(console);
         }
     }

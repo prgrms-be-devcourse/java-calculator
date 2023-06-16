@@ -1,8 +1,6 @@
 package com.devcourse.java.domain.calculator;
 
-import com.devcourse.java.domain.factory.Factory;
-import com.devcourse.java.domain.factory.OperatorFactory;
-import com.devcourse.java.domain.operator.Operator;
+import com.devcourse.java.domain.operator.OperatorMapper;
 import com.devcourse.java.domain.calculator.parser.PrefixParser;
 import com.devcourse.java.domain.storage.CalculateResult;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +15,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class CalculatorTest {
     private final PrefixParser parser = new PrefixParser();
-    private final Factory<Operator, String> factory = new OperatorFactory();
+    private final OperatorMapper factory = new OperatorMapper();
     private final PrefixCalculator prefixCalculator = new PrefixCalculator(parser, factory);
 
     @ParameterizedTest

@@ -1,9 +1,10 @@
-package com.devcourse.java.domain.factory;
+package com.devcourse.java.domain.mapper;
 
 import com.devcourse.java.domain.operator.Division;
 import com.devcourse.java.domain.operator.Minus;
 import com.devcourse.java.domain.operator.Multiply;
 import com.devcourse.java.domain.operator.Operator;
+import com.devcourse.java.domain.operator.OperatorMapper;
 import com.devcourse.java.domain.operator.Plus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,8 +16,8 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class OperatorFactoryTest {
-    private final Factory<Operator, String> factory = new OperatorFactory();
+class OperatorMapperTest {
+    private OperatorMapper factory = new OperatorMapper();
 
     @ParameterizedTest
     @DisplayName("연산자 symbol에 맞게 연산자를 리턴해야 한다.")
@@ -25,7 +26,7 @@ class OperatorFactoryTest {
         // given
 
         // when
-        Operator createdOperator = factory.create(symbol);
+        Operator createdOperator = factory.toOperator(symbol);
 
         // then
         assertThat(createdOperator).isInstanceOf(Operator.class);

@@ -8,11 +8,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MenusTest {
+class MenuTypeTest {
 
     @Nested
     @DisplayName("Menus 테스트")
-    class createMenusTest {
+    class createMenuTypeTest {
         @ParameterizedTest
         @DisplayName("조회, 계산 생성 테스트")
         @ValueSource(strings = {"1", "2"})
@@ -20,10 +20,10 @@ class MenusTest {
             // given
 
             // when
-            Menus menus = Menus.from(type);
+            MenuType menuType = MenuType.from(type);
 
             // then
-            assertThat(menus.isNotOnMenu()).isFalse();
+            assertThat(menuType.isNotOnMenu()).isFalse();
         }
 
         @Test
@@ -33,11 +33,11 @@ class MenusTest {
             final String notOnMenu = "3";
 
             // when
-            Menus menus = Menus.from(notOnMenu);
+            MenuType menuType = MenuType.from(notOnMenu);
 
             // then
-            assertThat(menus).isEqualTo(Menus.NONE);
-            assertThat(menus.isNotOnMenu()).isTrue();
+            assertThat(menuType).isEqualTo(MenuType.NONE);
+            assertThat(menuType.isNotOnMenu()).isTrue();
         }
     }
 }
