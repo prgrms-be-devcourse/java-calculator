@@ -1,5 +1,7 @@
 package org.example.io;
 
+import java.util.List;
+
 public class ConsoleOutput implements Output{
     @Override
     public void printAction() {
@@ -16,10 +18,8 @@ public class ConsoleOutput implements Output{
     }
 
     @Override
-    public void printFindAll(String[] strings) {
-        for (String str : strings){
-            System.out.println(str);
-        }
+    public void printFindAll(List<String> history) {
+        history.stream().forEach(System.out::println);
         System.out.println();
     }
 

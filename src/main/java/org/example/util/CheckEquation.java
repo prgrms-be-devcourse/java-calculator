@@ -14,11 +14,8 @@ public class CheckEquation {
 //    입력값의 첫번째와 마지막이 연산자인 경우, 연산자가 연속으로 나오는 경우,
 //    0으로 나누는 경우 예외처리
     private static boolean validateEquation(String[] inputStrArr){
-        if (Operator.isOperator(inputStrArr[0])){
-            return false;
-        } else if (Operator.isOperator(inputStrArr[inputStrArr.length-1])){
-            return false;
-        }
+        if (Operator.isOperator(inputStrArr[0])) return false;
+        if (Operator.isOperator(inputStrArr[inputStrArr.length-1])) return false;
 
         Optional<String> preStr = Optional.empty();
         for (String str : inputStrArr){

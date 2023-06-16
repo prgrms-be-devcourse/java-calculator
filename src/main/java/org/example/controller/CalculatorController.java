@@ -9,6 +9,7 @@ import org.example.repository.EquationRepository;
 import org.example.util.Menu;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.example.util.Menu.CALCULATE;
 import static org.example.util.Menu.EXIT;
@@ -34,18 +35,9 @@ public class CalculatorController implements Runnable{
                 output.printAction();
                 Menu curMenu = Menu.getMenu(input.selectAction());
 
-                if(curMenu == QUERY) {
-                    String[] findStrArr = equationRepository.findAll();
-                    output.printFindAll(findStrArr);
-
-                }else if (curMenu == CALCULATE){
-                    String curInput = input.getUserEquation();
-                    CheckEquation.validate(curInput);
-                    double resultNum = compute.operate(curInput);
-                    output.printCalculatedResult(resultNum);
-                    equationRepository.save(curInput, resultNum);
-
-                }else if (curMenu == EXIT) break;
+                if(curMenu == QUERY) queryAction();
+                else if (curMenu == CALCULATE) calculateAction();
+                else if (curMenu == EXIT) break;
                 else output.printIoError();
 
             }catch (IOException IOe){
@@ -54,6 +46,19 @@ public class CalculatorController implements Runnable{
                 output.printEquationError();
             }
         }
+    }
+
+    private void calculateAction() throws IOException {
+        String curInput = input.getUserEquation();
+        CheckEquation.validate(curInput);
+        double resultNum = compute.operate(curInput);
+        output.printCalculatedResult(resultNum);
+        equationRepository.save(curInput, resultNum);
+    }
+
+    private void queryAction() {
+        List<String> history = equationRepository.findAll();
+        output.printFindAll(history);
     }
 
 }
