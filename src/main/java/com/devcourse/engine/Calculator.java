@@ -2,6 +2,7 @@ package com.devcourse.engine;
 
 import com.devcourse.engine.io.InputConsole;
 import com.devcourse.engine.io.OutputConsole;
+import com.devcourse.engine.model.accepter.Accepter;
 import com.devcourse.engine.model.computer.Computer;
 import com.devcourse.engine.model.converter.Converter;
 import com.devcourse.engine.model.exception.InvalidInputException;
@@ -22,6 +23,7 @@ public class Calculator implements Runnable {
     private final OutputConsole output;
     private final Histories histories;
     private final Validator validator;
+    private final Accepter accepter;
     private final Converter converter;
     private final Computer computer;
 
@@ -30,6 +32,7 @@ public class Calculator implements Runnable {
             OutputConsole output,
             Histories histories,
             Validator validator,
+            Accepter accepter,
             Converter converter,
             Computer computer
             ) {
@@ -37,6 +40,7 @@ public class Calculator implements Runnable {
         this.output = output;
         this.histories = histories;
         this.validator = validator;
+        this.accepter = accepter;
         this.converter = converter;
         this.computer = computer;
     }
@@ -80,7 +84,8 @@ public class Calculator implements Runnable {
 
     private void calculate() {
         String userInput = input.inputExpression();
-        List<String> infixExpressions = validator.validate(userInput);
+        validator.validate(userInput);
+        List<String> infixExpressions = accepter.accept(userInput);
         double result = computer.compute(
                 converter.convert(infixExpressions)
         );

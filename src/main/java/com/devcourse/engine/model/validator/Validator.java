@@ -13,12 +13,10 @@ public class Validator {
     private static final String REGEXP = "(?:^\\.[0-9]+)|(?:^[0-9]?\\.[\\s+\\-*/]$)|([0-9]+\\.[0-9]+)|([+\\-*/)(])|([0-9]+)|(s*)";
     private static final Pattern pattern = Pattern.compile(REGEXP);
 
-
     int operandCount;
     int branketCount;
 
-    public List<String> validate(String userInput) throws InvalidInputException {
-        List<String> expressions = new ArrayList<>();
+    public void validate(String userInput) throws InvalidInputException {
         Matcher matcher = pattern.matcher(userInput);
 
         operandCount = 0;
@@ -30,10 +28,8 @@ public class Validator {
                 continue;
             }
             branchIsBranketCondition(token);
-            expressions.add(token);
         }
         checkCountValidation(operandCount, cnt -> cnt < 1);
-        return expressions;
     }
 
     private void branchIsBranketCondition(String token) {

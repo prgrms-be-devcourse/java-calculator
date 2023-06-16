@@ -1,5 +1,6 @@
 package com.devcourse;
 
+import com.devcourse.engine.model.accepter.Accepter;
 import com.devcourse.engine.model.computer.Computer;
 import com.devcourse.engine.Calculator;
 import com.devcourse.engine.model.converter.Converter;
@@ -16,6 +17,7 @@ public class App {
                 new OutputConsole(),
                 new Histories(),
                 new Validator(),
+                new Accepter(),
                 new Converter(),
                 new Computer()
         ).run();
