@@ -2,11 +2,9 @@ package com.programmers.java.calculator.model;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Operator {
 
@@ -25,9 +23,15 @@ public enum Operator {
         this.function = function;
     }
 
-    private static final Map<String, Operator> OPERATOR_MAP =
-            Collections.unmodifiableMap(Stream.of(values()).collect(
-                    Collectors.toMap(Operator::getSymbol, Function.identity())));
+    private static final Map<String, Operator> OPERATOR_MAP;
+
+    static {
+        Map<String, Operator> map = new HashMap<>();
+        for (Operator operator : values()) {
+            map.put(operator.getSymbol(), operator);
+        }
+        OPERATOR_MAP = Collections.unmodifiableMap(map);
+    }
 
     public String getSymbol() {
         return symbol;

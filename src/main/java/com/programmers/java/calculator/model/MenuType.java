@@ -3,9 +3,6 @@ package com.programmers.java.calculator.model;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum MenuType {
 
@@ -22,13 +19,15 @@ public enum MenuType {
         this.name = name;
     }
 
-    private static final Map<String, MenuType> MENU_TYPE_MAP =
-            Collections.unmodifiableMap(Stream.of(values()).collect(
-                    Collectors.toMap(MenuType::getNumber,
-                            Function.identity(),
-                            (x, y) -> y,
-                            LinkedHashMap::new)
-            ));
+    private static final Map<String, MenuType> MENU_TYPE_MAP;
+
+    static {
+        Map<String, MenuType> map = new LinkedHashMap<>();
+        for (MenuType menuType : values()) {
+            map.put(menuType.getNumber(), menuType);
+        }
+        MENU_TYPE_MAP = Collections.unmodifiableMap(map);
+    }
 
     public String getNumber() {
         return number;
