@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,5 +27,8 @@ public class CalculatorRepositoryTest {
     void 계산식저장소에_Calculator_저장() {
         Calculator calculator = new Calculator("1 + 2 + 3", 6);
         assertThat(calculatorRepository.add(calculator)).isEqualTo(true);
+
+        List<Calculator> c = calculatorRepository.findAll();
+        assertThat(c.get(0)).isEqualTo(calculator);
     }
 }

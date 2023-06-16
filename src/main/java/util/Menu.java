@@ -8,8 +8,7 @@ import java.util.InputMismatchException;
 public enum Menu {
     SEARCH("1", "1. 조회"),
     CALC("2", "2. 계산"),
-    END("3", "3. 종료"),
-    EMPTY("", "");
+    END("3", "3. 종료");
 
     private final String number;
     private final String printMsg;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculatorRepository {
-    private List<Calculator> calculators;
+    private List<Calculator> calculators; // DB
 
     public CalculatorRepository() {
         this.calculators = new ArrayList<>();
@@ -15,7 +15,7 @@ public class CalculatorRepository {
 
     public List<Calculator> findAll() {
         return calculators.stream()
-                .map(Calculator::getCalculator)
+               .map(Calculator::getCalculator)
                 .collect(Collectors.toList());
     }
 
