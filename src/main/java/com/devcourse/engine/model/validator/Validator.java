@@ -21,7 +21,7 @@ public class Validator {
         this.branketCount = 0;
     }
 
-    public void validate(String userInput) throws InvalidInputException {
+    public boolean validate(String userInput) throws InvalidInputException {
         Matcher matcher = pattern.matcher(userInput);
         while (matcher.find()) {
             String token = matcher.group();
@@ -31,6 +31,7 @@ public class Validator {
             branchIsBranketCondition(token);
         }
         checkCountValidation(operandCount, cnt -> cnt < 1);
+        return true;
     }
 
     private void branchIsBranketCondition(String token) {

@@ -10,11 +10,9 @@ import com.devcourse.engine.model.histories.Histories;
 import com.devcourse.engine.model.validator.Validator;
 import com.devcourse.engine.model.unit.Menu;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static com.devcourse.engine.model.exception.InvalidInputException.INVALID_MENU;
 import static com.devcourse.engine.model.exception.InvalidInputException.NO_HISTORY;
 
 public class Calculator implements Runnable {
