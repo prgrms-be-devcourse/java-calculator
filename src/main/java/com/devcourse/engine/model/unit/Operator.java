@@ -3,9 +3,7 @@ package com.devcourse.engine.model.unit;
 import com.devcourse.engine.model.exception.InvalidInputException;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 import static com.devcourse.engine.model.exception.InvalidInputException.ZERO_DIVIDE;
 

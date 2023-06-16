@@ -1,6 +1,5 @@
 package com.devcourse.engine.model.converter;
 
-import com.devcourse.engine.model.exception.InvalidInputException;
 import com.devcourse.engine.model.unit.Operator;
 
 import java.util.ArrayList;
