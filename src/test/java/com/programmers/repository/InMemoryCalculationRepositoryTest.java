@@ -1,6 +1,6 @@
 package com.programmers.repository;
 
-import com.programmers.model.CalculationResult;
+import com.programmers.core.data.CalculationResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,17 +15,14 @@ class InMemoryCalculationRepositoryTest {
     @DisplayName("계산이력 저장 테스트")
     void 계산이력저장() throws Exception {
         //given
-        CalculationResult result1 = new CalculationResult("1 + 2 * 3 ", 7);
-        CalculationResult result2 = new CalculationResult("2 + 4 * 3 - 5 * 2 ", 4);
+        CalculationResult[] results = {new CalculationResult("1 + 2 * 3 ", 7), new CalculationResult("2 + 4 * 3 - 5 * 2 ", 4)};
         //when
-        repository.save(result1);
-        repository.save(result2);
+        for (CalculationResult result : results) {
+            repository.save(result);
+        }
         //then
         List<CalculationResult> record = repository.findAll();
-        System.out.println(record.get(0));
-        assertThat(record.size()).isEqualTo(2);
-        assertThat(record).contains(result1, result2);
-        assertThat(record.get(0)).isEqualTo(result1);
-        assertThat(record.get(1)).isEqualTo(result2);
+        assertThat(record.size()).isEqualTo(results.length);
+        assertThat(record).containsExactlyInAnyOrder(results);
     }
 }
