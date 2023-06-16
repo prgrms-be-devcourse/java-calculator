@@ -10,27 +10,29 @@ public class Operation {
 
         StringTokenizer st = new StringTokenizer(inputString);
 
-        classify(st);
+        classifyOperatorAndNumber(st);
 
-        return cal();
+        return calculate();
     }
-    private void classify(StringTokenizer st){
+    private void classifyOperatorAndNumber(StringTokenizer st){
 
         while(st.hasMoreTokens()){
             String word = st.nextToken();
-
+            Operator operator = null;
             if(!(Operator.getOperator(word).isEmpty())){
-                word = Operator.getOperator(word).get().name();
+                operator = Operator.getOperator(word).get();
             }
 
-            switch (word){
-                case "MULTIPLY" : case "DIVIDE":
-                    calPriority(word,Integer.parseInt(st.nextToken()));
+            switch (operator != null ? operator : operator.NULL){
+                case MULTIPLY : case DIVIDE:
+                    numberStack.push(Integer.parseInt(st.nextToken()));
+                    calculateMultiplyOrDivide(operator.toString());
                     break;
-                case "PLUS" : case "MINUS":
-                    operStack.add(word);
+                case PLUS : case MINUS:
+                    operStack.add(operator.toString());
                     break;
-                default:
+                case NULL:
+
                     if(operStack.isEmpty() || operStack.pop().equals("PLUS")){
                         numberStack.push(Integer.parseInt(word));
                         break;
@@ -44,7 +46,7 @@ public class Operation {
 
     }
 
-    private Integer cal(){
+    private Integer calculate(){
         while(true){
             if(numberStack.size() == 1) break;
 
@@ -52,20 +54,17 @@ public class Operation {
             int num1 = numberStack.pop();
 
             numberStack.push(num1 + num2);
-
-
         }
 
         return numberStack.pop();
     }
 
-    private void calPriority(String word,int num2) {
+    private void calculateMultiplyOrDivide(String word) {
+        int num2 = numberStack.pop();
         int num1 = numberStack.pop();
 
         if(word.equals("MULTIPLY")) numberStack.push(num1*num2);
 
         else numberStack.push(num1/num2);
-
-
     }
 }

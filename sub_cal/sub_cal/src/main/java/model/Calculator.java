@@ -8,9 +8,7 @@ public class Calculator {
 
         int result = operation.operate(inputString);
 
-
-
-         return result;
+        return result;
     }
 
 
