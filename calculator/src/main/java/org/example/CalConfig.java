@@ -10,7 +10,7 @@ import org.example.Repository.Repository;
 
 public class CalConfig {
     public Calculate calculate(){
-        return new CalculateImpl(new CalOrderImpl());
+        return new Calculator(new CalOrderImpl());
     }
     public Repository repository(){
         return new ExpressionRepository();

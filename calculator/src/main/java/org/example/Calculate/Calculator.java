@@ -2,10 +2,10 @@ package org.example.Calculate;
 
 import java.util.Stack;
 
-public class CalculateImpl implements Calculate {
+public class Calculator implements Calculate {
     CalOrder calOrder;
 
-    public CalculateImpl(CalOrder calOrder) {
+    public Calculator(CalOrder calOrder) {
         this.calOrder = calOrder;
     }
 
