@@ -24,7 +24,7 @@ public class PostfixConverter {
             nextOperator = Operator.findByOperator(token);
 
             while (!operatorStack.isEmpty()
-                    && Operator.evaluatePriority(prevOperator, nextOperator) > 0) {
+                    && prevOperator.isBiggerPriority(nextOperator)) {
                 postfixExpression.append(operatorStack.pop()).append(" ");
             }
             operatorStack.push(nextOperator);
