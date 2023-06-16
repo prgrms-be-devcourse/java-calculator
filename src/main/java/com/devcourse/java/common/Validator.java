@@ -14,8 +14,8 @@ public class Validator {
         return !target.isEmpty();
     }
 
-    public static boolean isValidExpression(String expression) {
-        return validateExpression(expression);
+    public static boolean isNotValidExpression(String expression) {
+        return !validateExpression(expression);
     }
 
     public static boolean isNumber(String character) {

@@ -36,10 +36,10 @@ class ValidatorTest {
             // given
 
             // when
-            boolean validExpression = Validator.isValidExpression(expression);
+            boolean isNotValid = Validator.isNotValidExpression(expression);
 
             // then
-            assertThat(validExpression).isTrue();
+            assertThat(isNotValid).isFalse();
         }
 
         @ParameterizedTest
@@ -54,10 +54,10 @@ class ValidatorTest {
             // given
 
             // when
-            boolean validExpression = Validator.isValidExpression(expression);
+            boolean isNotValid = Validator.isNotValidExpression(expression);
 
             // then
-            assertThat(validExpression).isFalse();
+            assertThat(isNotValid).isTrue();
         }
     }
 

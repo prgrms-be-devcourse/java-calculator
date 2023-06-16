@@ -33,9 +33,10 @@ public class Console {
     public <T> void write(T message) {
         if (isCollection(message)) {
             writeCollection(message);
-        } else {
-            writer.write(message);
+            return;
         }
+        
+        writer.write(message);
     }
 
     private <T> boolean isCollection(T message) {

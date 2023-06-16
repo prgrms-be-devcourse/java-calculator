@@ -25,12 +25,13 @@ public class Calculate implements Menu {
     }
 
     private void calculateExpression(Console console, String expression) {
-        if (Validator.isValidExpression(expression)) {
-            CalculateResult calculateResult = calculator.run(expression);
-            console.write(calculateResult.getResult());
-            storage.save(calculateResult);
-        } else { // todo: change
+        if (Validator.isNotValidExpression(expression)) {
             console.write(BAD_EXPRESSION);
+            return;
         }
+
+        CalculateResult calculateResult = calculator.run(expression);
+        console.write(calculateResult.getResult());
+        storage.save(calculateResult);
     }
 }

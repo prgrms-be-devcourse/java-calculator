@@ -27,9 +27,10 @@ public class Query implements Menu {
         if (Validator.isNotEmpty(calculateResults)) {
             List<String> resultStrings = toString(calculateResults);
             console.write(resultStrings);
-        } else { // todo: change
-            console.write(EMPTY_STORAGE);
+            return;
         }
+
+        console.write(EMPTY_STORAGE);
     }
 
     private List<String> toString(List<CalculateResult> calculateResults) {
