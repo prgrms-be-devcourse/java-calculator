@@ -16,6 +16,8 @@ public class PostfixConverter implements Converter {
     @Override
     public List<String> convert(CalculationRequest request) {
         String formula = request.getFormula();
+        Validator.checkNull(formula);
+
         String[] splitFormula = formula.split(SEPARATOR);
         Validator.checkEmpty(splitFormula);
 

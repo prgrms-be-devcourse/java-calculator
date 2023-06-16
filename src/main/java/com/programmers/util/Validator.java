@@ -19,4 +19,13 @@ public final class Validator {
         return list != null && list.length == 0;
     }
 
+    public static void checkNull(String input) {
+        if (isNull(input)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static boolean isNull(String input) {
+        return input == null;
+    }
 }
