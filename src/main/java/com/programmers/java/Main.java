@@ -20,16 +20,16 @@ public class Main {
     static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
     static PostfixConverter postfixConverter = new PostfixConverter();
 
-    public static void main(String[] args) throws IOException {
-        AtomicBoolean isRunning = new AtomicBoolean(true);
+    static boolean isRunning = true;
 
-        while (isRunning.get()) {
+    public static void main(String[] args) throws IOException {
+        while (isRunning) {
             output.viewMenu();
 
             input.enterMenu().ifPresentOrElse(
                     Main::runCalculator,
                     () -> {
-                        isRunning.set(false);
+                        isRunning = false;
                         output.viewEndMessage();
                     }
             );
