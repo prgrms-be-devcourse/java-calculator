@@ -24,6 +24,7 @@ public class Computer {
     }
 
     private Double getCalculationResult(String expression, Stack<Double> stack) {
-        return Operator.getOperator(expression).calculate(stack.pop(), stack.pop());
+        double operand1 = stack.pop(), operand2 = stack.pop();
+        return Operator.getOperator(expression).calculate(operand1, operand2);
     }
 }
