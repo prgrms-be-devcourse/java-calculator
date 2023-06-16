@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ValidatorTest {
+
     @Test
     @DisplayName("올바른 위치에 연산자 유무 체크")
     void testOperatorPositionCheck() throws Exception {
@@ -30,6 +31,5 @@ class ValidatorTest {
     void testCheckNull() throws Exception {
         assertThrows(IllegalArgumentException.class, () -> Validator.checkNull(null));
         assertDoesNotThrow(() -> Validator.checkNull("1 + 2"));
-
     }
 }

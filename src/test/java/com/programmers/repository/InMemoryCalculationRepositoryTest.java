@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InMemoryCalculationRepositoryTest {
+
     CalculationRepository repository = new InMemoryCalculationRepository();
 
     @Test

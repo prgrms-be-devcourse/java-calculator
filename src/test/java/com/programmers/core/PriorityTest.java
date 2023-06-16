@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PriorityTest {
+
     @Test
     @DisplayName("올바른 수식의 우선순위 확인")
     void validOperator() {

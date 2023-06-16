@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StringUtilTest {
+
     @Test
     @DisplayName("숫자인지 확인")
     void testValidNumber() throws Exception {
