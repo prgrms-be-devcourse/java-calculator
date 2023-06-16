@@ -9,7 +9,7 @@ public class CalculatorSystem {
     private CalculatorView calculatorView;
 
     public CalculatorSystem() {
-        this.calculator = Calculator.getInstance();
+        this.calculator = new Calculator();
         this.calculatorView = new CalculatorView();
     }
 
