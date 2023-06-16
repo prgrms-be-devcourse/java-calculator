@@ -1,4 +1,4 @@
-package ui;
+package util;
 
 import exception.NotEquationFormatException;
 import exception.NotMenuFormatExcpetion;

@@ -1,12 +1,5 @@
 package calculator.domain;
 
-import calculator.exception.NotSolveEquationException;
-import calculator.exception.ValidationEquation;
-import util.OperatorMap;
-
-import java.util.List;
-import java.util.Stack;
-
 public class Calculator {
     private static final String EQUALS = " = ";
 

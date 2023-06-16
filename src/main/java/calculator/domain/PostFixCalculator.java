@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import calculator.exception.NotSolveEquationException;
-import calculator.exception.ValidationEquation;
+import util.ValidationEquation;
 import util.Brackets;
 import util.OperatorMap;
 
