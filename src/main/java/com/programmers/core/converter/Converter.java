@@ -5,5 +5,5 @@ import com.programmers.core.data.CalculationRequest;
 import java.util.List;
 
 public interface Converter {
-    List<String> convert(CalculationRequest formula);
+    List<String> convert(CalculationRequest request);
 }
