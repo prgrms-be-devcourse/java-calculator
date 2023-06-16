@@ -88,12 +88,14 @@ public class Calculator implements Runnable {
     }
 
     private void checkHasHistory() {
-        if (histories.getLastIndex() < 1)
+        if (histories.getLastIndex() < 1) {
             throw new InvalidInputException(NO_HISTORY);
+        }
     }
 
     private void validMenuCheck(String menu) throws InvalidInputException {
-        if (menu.length() > 1 || !Arrays.asList("0", "1", "2").contains(menu))
+        if (menu.length() > 1 || !Arrays.asList("0", "1", "2").contains(menu)) {
             throw new InvalidInputException(INVALID_MENU);
+        }
     }
 }

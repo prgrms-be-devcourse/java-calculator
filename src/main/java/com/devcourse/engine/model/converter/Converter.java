@@ -24,8 +24,9 @@ public class Converter {
         if (Operator.isOperator(expression)) {
             Operator operator = Operator.getOperator(expression);
 
-            if (convertByBranket(operator, postfixExpressions, tempStack))
+            if (convertByBranket(operator, postfixExpressions, tempStack)) {
                 return;
+            }
             convertWithOperandPriority(operator, postfixExpressions, tempStack);
 
             tempStack.add(operator);
@@ -55,7 +56,9 @@ public class Converter {
         while (!tempStack.isEmpty() && !tempStack.peek().getOperatorString().equals("(")) {
             postfixExpressions.add(tempStack.pop().getOperatorString());
         }
-        if (!tempStack.isEmpty()) tempStack.pop();
+        if (!tempStack.isEmpty()) {
+            tempStack.pop();
+        }
     }
 
     private void takeRemainExpression(List<String> expressions, Stack<Operator> stack) {

@@ -26,8 +26,9 @@ public class Validator {
 
         while (matcher.find()) {
             String token = matcher.group();
-            if (token.isBlank())
+            if (token.isBlank()) {
                 continue;
+            }
             branchIsBranketCondition(token);
             expressions.add(token);
         }
@@ -63,8 +64,9 @@ public class Validator {
 
 
     private void checkCountValidation(int count, Predicate<Integer> predicate) {
-        if (predicate.test(count))
+        if (predicate.test(count)) {
             throw new InvalidInputException(InvalidInputException.INVALID_EXPRESSION);
+        }
     }
 
 
