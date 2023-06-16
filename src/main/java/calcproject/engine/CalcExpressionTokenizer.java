@@ -8,7 +8,7 @@ public class CalcExpressionTokenizer {
 		List<String> tokens = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
 
-		for (char element: expression.toCharArray()) {
+		for (char element : expression.toCharArray()) {
 			if (Character.isDigit(element)) {
 				sb.append(element);
 			} else {
