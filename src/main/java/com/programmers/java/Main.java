@@ -9,6 +9,8 @@ import com.programmers.java.view.Input;
 import com.programmers.java.view.Output;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
     static Output output = new Output();
@@ -19,14 +21,16 @@ public class Main {
     static PostfixConverter postfixConverter = new PostfixConverter();
 
     public static void main(String[] args) throws IOException {
-        while (true) {
+        AtomicBoolean isRunning = new AtomicBoolean(true);
+
+        while (isRunning.get()) {
             output.viewMenu();
 
             input.enterMenu().ifPresentOrElse(
                     Main::runCalculator,
                     () -> {
+                        isRunning.set(false);
                         output.viewEndMessage();
-                        System.exit(0);
                     }
             );
         }
@@ -52,9 +56,9 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        Double result = calculator.
-                calculate(postfixConverter.postfixConvert
-                        (expressionTokenizer.expressionSplit(expression)));
+        List<String> tokenList = expressionTokenizer.expressionSplit(expression);
+
+        Double result = calculator.calculate((postfixConverter.postfixConvert(tokenList)));
         output.viewCalculateResult(result);
         calculationRecord.save(expression, Double.toString(result));
     }
