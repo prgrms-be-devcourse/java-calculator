@@ -1,6 +1,7 @@
 package calculator.engine;
 
 import calculator.constant.ErrorMessage;
+import calculator.constant.Operator;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -8,10 +9,10 @@ import java.util.function.BiFunction;
 
 public enum CalculatorEngine {
 
-    ADD("+", (o1, o2) -> o1 + o2),
-    SUB("-", (o1, o2) -> o1 - o2),
-    MUL("*", (o1, o2) -> o1 * o2),
-    DIV("/", (o1, o2) -> {
+    ADD(Operator.ADD, (o1, o2) -> o1 + o2),
+    SUB(Operator.SUB, (o1, o2) -> o1 - o2),
+    MUL(Operator.MUL, (o1, o2) -> o1 * o2),
+    DIV(Operator.DIV, (o1, o2) -> {
         if (o2 == 0) {
             throw new ArithmeticException(ErrorMessage.DIVISION_BY_ZERO);
         }
