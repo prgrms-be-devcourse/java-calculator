@@ -1,12 +1,12 @@
 package model;
 
 public class Calculator {
-    private Operator operator = new Operator();
+    private Operation operation = new Operation();
 
     public Integer cal(String inputString) {
 
 
-        int result = operator.operate(inputString);
+        int result = operation.operate(inputString);
 
 
 
