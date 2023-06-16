@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostfixConverter {
+public class Converter {
 
     public List<String> convert(List<String> expressions) {
         List<String> postfixExpressions = new ArrayList<>();

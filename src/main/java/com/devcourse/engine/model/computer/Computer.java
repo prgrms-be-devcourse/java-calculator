@@ -5,7 +5,7 @@ import com.devcourse.engine.model.Operator;
 import java.util.List;
 import java.util.Stack;
 
-public class SimpleComputer {
+public class Computer {
 
     public double compute(List<String> expressions) {
         Stack<Double> stack = new Stack<>();
