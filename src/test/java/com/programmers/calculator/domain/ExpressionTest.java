@@ -16,7 +16,7 @@ class ExpressionTest {
         // when
         Expression result = new Expression(expression);
         // then
-        assertThat(result.getExpression()).isEqualTo("2 + 30 / 3");
+        assertThat(result.getValue()).isEqualTo("2 + 30 / 3");
     }
 
     @Test

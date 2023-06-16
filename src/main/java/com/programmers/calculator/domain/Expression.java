@@ -12,20 +12,20 @@ public class Expression {
     private static final String WHITESPACE_REGEX = "\\s+";
     private static final String EXPRESSION_VALIDATION_REGEX = "([0-9]+)\\s*([+\\-*/]\\s*[0-9]+\\s*)*";
 
-    private final String expression;
+    private final String value;
 
     public Expression(String expression) {
-        this.expression = formatExpression(expression);
+        this.value = formatExpression(expression);
         validateWrongFormat();
         validateDivisionByZero();
     }
 
-    public String getExpression() {
-        return expression;
+    public String getValue() {
+        return value;
     }
 
     public String toPostfix() {
-        return PostfixConverter.convert(expression);
+        return PostfixConverter.convert(value);
     }
 
     private String formatExpression(String expression) {
@@ -42,13 +42,13 @@ public class Expression {
     }
 
     private void validateWrongFormat() {
-        if (!expression.matches(EXPRESSION_VALIDATION_REGEX)) {
+        if (!value.matches(EXPRESSION_VALIDATION_REGEX)) {
             throw new InvalidExpressionException(ErrorMessage.INVALID_EXPRESSION);
         }
     }
 
     private void validateDivisionByZero() {
-        if (expression.contains("/ 0")) {
+        if (value.contains("/ 0")) {
             throw new InvalidExpressionException(ErrorMessage.DIVISION_BY_ZERO);
         }
     }

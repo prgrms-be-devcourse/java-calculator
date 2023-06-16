@@ -44,7 +44,7 @@ public class CalculatorController implements Runnable {
         Expression expression = input.readExpression();
         double result = calculator.calculate(expression.toPostfix());
 
-        CalculationResult calculationResult = new CalculationResult(expression.getExpression(), result);
+        CalculationResult calculationResult = new CalculationResult(expression.getValue(), result);
         calculator.saveCalculationResult(calculationResult);
 
         output.displayResult(result);
