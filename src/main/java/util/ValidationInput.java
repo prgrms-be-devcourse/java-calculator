@@ -1,19 +1,11 @@
 package util;
 
-import exception.NotEquationFormatException;
-import exception.NotMenuFormatExcpetion;
-import util.Brackets;
-import util.Menu;
-import util.OperatorMap;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class ValidationInput {
     public static void isEmpty(String userInput) {
         if (userInput == null || userInput.isBlank()) {
-            throw new NotMenuFormatExcpetion();
+            throw new IllegalException(ExceptionMsg.NotMenuFormatException);
         }
     }
 
@@ -21,7 +13,7 @@ public class ValidationInput {
         String[] inputDatas = userInput.split(" ");
 
         if (!isOddNumber(inputDatas.length)) {
-            throw new NotEquationFormatException();
+            throw new IllegalException(ExceptionMsg.NotSolveEquationException);
         }
 
         checkCorrectBracket(inputDatas);
@@ -37,7 +29,7 @@ public class ValidationInput {
         }
 
         if (!correctBracket.isEmpty()) {
-            throw new NotEquationFormatException();
+            throw new IllegalException(ExceptionMsg.NotEquationFormatException);
         }
     }
     private static boolean isBracket(String input) {
@@ -82,7 +74,7 @@ public class ValidationInput {
         }
 
         if (!haveNumber) {
-            throw new NotEquationFormatException();
+            throw new IllegalException(ExceptionMsg.NotEquationFormatException);
         }
 
         return startIndex;
@@ -110,13 +102,13 @@ public class ValidationInput {
         try {
             Double.parseDouble(input);
         } catch (NumberFormatException exception) {
-            throw new NotEquationFormatException(exception.getMessage());
+            throw new IllegalException(ExceptionMsg.NotEquationFormatException);
         }
     }
 
     private static void checkOperation(String input) {
         if (!OperatorMap.contains(input)) {
-            throw new NotEquationFormatException();
+            throw new IllegalException(ExceptionMsg.NotEquationFormatException);
         }
     }
 }

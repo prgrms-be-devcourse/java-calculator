@@ -1,9 +1,6 @@
 package util;
 
-import calculator.exception.NotSolveEquationException;
-
 import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 public enum OperatorMap {
     MINUS("-", 2, (num1, num2)->num1-num2),
@@ -36,7 +33,7 @@ public enum OperatorMap {
                 return oper.bifunction.apply(num1, num2);
             }
         }
-        throw new NotSolveEquationException();
+        throw new IllegalException(ExceptionMsg.NotSolveEquationException);
     }
 
     public String getOperator() {

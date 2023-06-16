@@ -1,9 +1,9 @@
 package calculator.domain;
 
-import calculator.exception.NotSolveEquationException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import util.IllegalException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,7 +16,7 @@ public class PostCalculatorTest {
     })
     void 계산식_0으로_나누면_에러반환(String equation) {
         assertThatThrownBy(()->PostFixCalculator.parseCalculator(equation))
-                .isInstanceOf(NotSolveEquationException.class);
+                .isInstanceOf(IllegalException.class);
     }
 
     @ParameterizedTest

@@ -1,9 +1,6 @@
 package calculator.domain;
 
-import calculator.exception.NotSolveEquationException;
-import util.ValidationEquation;
-import util.Brackets;
-import util.OperatorMap;
+import util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,7 @@ public class PostFixCalculator {
 
     private static void validate(String equation) {
         if (ValidationEquation.isDivByZero(equation)) {
-            throw new NotSolveEquationException();
+            throw new IllegalException(ExceptionMsg.NotSolveEquationException);
         }
     }
 

@@ -1,9 +1,6 @@
 package util;
 
-import exception.NotMenuFormatExcpetion;
-
 import java.util.Arrays;
-import java.util.InputMismatchException;
 
 public enum Menu {
     SEARCH("1", "1. 조회"),
@@ -22,7 +19,7 @@ public enum Menu {
         return Arrays.stream(Menu.values())
                 .filter(menu -> value.equals(menu.getNumber()))
                 .findAny()
-                .orElseThrow(NotMenuFormatExcpetion::new);
+                .orElseThrow(()->new IllegalException(ExceptionMsg.NotMenuFormatException));
     }
 
     public String getNumber() {

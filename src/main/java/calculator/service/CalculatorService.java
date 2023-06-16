@@ -2,8 +2,9 @@ package calculator.service;
 
 import calculator.domain.Calculator;
 import calculator.domain.PostFixCalculator;
-import calculator.exception.NotSaveException;
 import calculator.repository.CalculatorRepository;
+import util.ExceptionMsg;
+import util.IllegalException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class CalculatorService {
             return calculator.getResult();
         }
 
-       throw new NotSaveException();
+       throw new IllegalException(ExceptionMsg.NotSaveException);
     }
 
     public List<String> getCalculateList() {
