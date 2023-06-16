@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class UserInput implements Input {
     Scanner scanner = new Scanner(System.in);
     @Override
-    public int inputChoice() {
+    public int inputNumber() {
         return scanner.nextInt();
     }
 

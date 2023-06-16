@@ -11,7 +11,7 @@ public class CalculateImpl implements Calculate {
 
     public int calculate(Stack<String> expressionStack) {
         calOrder.setStack(expressionStack);
-        calOrder.calMultiplyDivide();
-        return calOrder.calPlusMinus();
+        calOrder.calculateMultiplyDivide();
+        return calOrder.calculatePlusMinus();
     }
 }

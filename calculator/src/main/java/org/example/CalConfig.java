@@ -4,7 +4,7 @@ import org.example.Calculate.*;
 import org.example.Input.Input;
 import org.example.Input.UserInput;
 import org.example.Output.Show;
-import org.example.Output.ShowText;
+import org.example.Output.ShowingText;
 import org.example.Repository.ExpressionRepository;
 import org.example.Repository.Repository;
 
@@ -19,7 +19,7 @@ public class CalConfig {
         return new UserInput();
     }
     public Show show(){
-        return new ShowText();
+        return new ShowingText();
     }
     public PreProcess preProcess() {
         return new PreProcessImpl();
