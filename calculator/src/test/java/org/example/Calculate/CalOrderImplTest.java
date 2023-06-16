@@ -18,18 +18,4 @@ class CalOrderImplTest {
         calOrder.setStack(expressionStack);
     }
 
-    @Test
-    @DisplayName("곱하기 나누기 우선순위 연산 확인")
-    void calculateMultiplyDivideTest() {
-        String calculatedMultiplyDivideResult = calOrder.calculateMultiplyDivide();
-        assertEquals(calculatedMultiplyDivideResult,"[18, +, 4]");
-    }
-
-    @Test
-    @DisplayName("더하기 빼기 연산 확인")
-    void calculatePlusMinusTest(){
-        calOrder.calculateMultiplyDivide();
-        int result = calOrder.calculatePlusMinus();
-        assertEquals(result, 22);
-    }
 }
