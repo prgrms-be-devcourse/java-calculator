@@ -24,10 +24,7 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 		int choiceNum = this.scanner.nextInt();
 		this.scanner.nextLine();
 
-		System.out.println(choiceNum);
-		Command command = Command.valueOf(choiceNum);
-		System.out.println(command);
-		return command;
+		return Command.valueOf(choiceNum);
 	}
 
 	@Override
@@ -53,8 +50,7 @@ public class CalcConsoleView implements CalcInput, CalcOutput {
 	private String calcRecordToFormattedStr(CalcResultRecordModel calcRecord) {
 		String expression = calcRecord.getExpression();
 		double calcResult = calcRecord.getCalcResult();
-		String formattedStr = expression + " = " + calcResult;
-		return formattedStr;
+		return expression + " = " + calcResult;
 	}
 
 	@Override

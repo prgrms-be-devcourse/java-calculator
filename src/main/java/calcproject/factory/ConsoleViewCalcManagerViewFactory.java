@@ -13,8 +13,7 @@ public class ConsoleViewCalcManagerViewFactory implements CalcManagerViewFactory
 	}
 
 	public CalcConsoleView createCalcConsoleView() {
-		CalcConsoleView calcConsoleView = new CalcConsoleView();
-		return calcConsoleView;
+		return new CalcConsoleView();
 	}
 
 	@Override

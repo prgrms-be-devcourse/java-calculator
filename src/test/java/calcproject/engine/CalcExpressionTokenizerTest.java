@@ -14,15 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class CalcExpressionTokenizerTest {
 
 	private CalcExpressionTokenizer calcExpressionTokenizer;
-
-	private static Stream<Arguments> expressionProvider() {
-		return Stream.of(
-			Arguments.of("1 + 2 * 3 / 4", Arrays.asList("1", "+", "2", "*", "3", "/", "4")),
-			Arguments.of("10 * 4 / 1", Arrays.asList("10", "*", "4", "/", "1")),
-			Arguments.of("4 * 3 / 2 - 1", Arrays.asList("4", "*", "3", "/", "2", "-", "1"))
-		);
-	}
-
+	
 	@BeforeEach
 	void beforeEach() {
 		this.calcExpressionTokenizer = new CalcExpressionTokenizer();
@@ -38,5 +30,13 @@ class CalcExpressionTokenizerTest {
 		//then
 		Assertions.assertThat(resultTokens)
 			.containsExactlyInAnyOrderElementsOf(expectedTokens);
+	}
+
+	private static Stream<Arguments> expressionProvider() {
+		return Stream.of(
+			Arguments.of("1 + 2 * 3 / 4", Arrays.asList("1", "+", "2", "*", "3", "/", "4")),
+			Arguments.of("10 * 4 / 1", Arrays.asList("10", "*", "4", "/", "1")),
+			Arguments.of("4 * 3 / 2 - 1", Arrays.asList("4", "*", "3", "/", "2", "-", "1"))
+		);
 	}
 }

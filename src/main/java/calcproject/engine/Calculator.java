@@ -11,29 +11,29 @@ public class Calculator {
 		this.calcExpressionTokenizer = calcExpressionTokenizer;
 	}
 
-	private boolean isNumber(String token) {
-		for (int i = 0; i < token.length(); i++) {
-			if (!Character.isDigit(token.charAt(i)))
-				return false;
-		}
-		return true;
+	public double calculateExpression(String expression) {
+		List<String> tokens = calcExpressionTokenizer.tokenizeExpression(expression);
+		List<String> postfixTokens = toPostfixNotation(tokens);
+		double calcResult = calculatePostfixNotation(postfixTokens);
+
+		return calcResult;
 	}
 
-	public List<String> tokensToPostfixNotation(List<String> tokens) {
+	public List<String> toPostfixNotation(List<String> tokens) {
 		Stack<String> stack = new Stack<>();
 		List<String> postFixNotationTokens = new ArrayList<>();
+
 		for (String currentToken : tokens) {
 			if (isNumber(currentToken)) {
 				postFixNotationTokens.add(currentToken);
 				continue;
 			}
-
 			while (!stack.empty()) {
 				Operator currentOperator = Operator.opValueOf(currentToken);
 				Operator stackPeekOPerator = Operator.opValueOf(stack.peek());
 
 				if (stackPeekOPerator == Operator.UnSupportedOp) {
-					return null;
+					return List.of();
 				}
 
 				if (currentOperator.getPriority() > stackPeekOPerator.getPriority()) {
@@ -56,8 +56,7 @@ public class Calculator {
 	public double calculatePostfixNotation(List<String> postFixNotationTokens) {
 		Stack<Double> stack = new Stack<>();
 
-		for (int i = 0; i < postFixNotationTokens.size(); i++) {
-			String token = postFixNotationTokens.get(i);
+		for (String token : postFixNotationTokens) {
 
 			if (isNumber(token)) {
 				double num = Double.valueOf(token);
@@ -75,11 +74,11 @@ public class Calculator {
 		return stack.pop();
 	}
 
-	public double calculateExpression(String expression) {
-		List<String> tokens = calcExpressionTokenizer.tokenizeExpression(expression);
-		List<String> postfixTokens = tokensToPostfixNotation(tokens);
-		double calcResult = calculatePostfixNotation(tokens);
-
-		return calcResult;
+	private boolean isNumber(String token) {
+		for (int i = 0; i < token.length(); i++) {
+			if (!Character.isDigit(token.charAt(i)))
+				return false;
+		}
+		return true;
 	}
 }

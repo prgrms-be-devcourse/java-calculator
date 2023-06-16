@@ -8,21 +8,15 @@ public class CalcExpressionTokenizer {
 		List<String> tokens = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
 
-		for (int i = 0; i < expression.length(); i++) {
-			char ch = expression.charAt(i);
-
-			if (ch == ' ') {
-				continue;
-			}
-
-			if (Character.isDigit(ch)) {
-				sb.append(ch);
+		for (char element: expression.toCharArray()) {
+			if (Character.isDigit(element)) {
+				sb.append(element);
 			} else {
 				String numberString = sb.toString();
 				tokens.add(numberString);
-				sb.setLength(0);
 
-				tokens.add(Character.toString(ch));
+				sb.setLength(0);
+				tokens.add(Character.toString(element));
 			}
 		}
 

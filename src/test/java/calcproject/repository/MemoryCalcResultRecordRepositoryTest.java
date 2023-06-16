@@ -44,9 +44,9 @@ class MemoryCalcResultRecordRepositoryTest {
 		List<CalcResultRecordModel> expectedCalcRecords = new ArrayList<>();
 		for (int i = 0; i < expressionList.size(); i++) {
 			String expression = expressionList.get(i);
-			Double calcRsult = calcResultList.get(i);
+			Double calcResult = calcResultList.get(i);
 
-			CalcResultRecordModel calcResultRecord = new CalcResultRecordModel(expression, calcRsult);
+			CalcResultRecordModel calcResultRecord = new CalcResultRecordModel(expression, calcResult);
 			this.calcResultRecordRepository.saveCalcResultRecord(calcResultRecord);
 			expectedCalcRecords.add(calcResultRecord);
 		}

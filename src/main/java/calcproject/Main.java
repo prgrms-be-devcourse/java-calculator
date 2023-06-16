@@ -6,7 +6,7 @@ import calcproject.engine.Calculator;
 import calcproject.factory.CalcManagerViewFactory;
 import calcproject.factory.CalcResultRecordRepositoryFactory;
 import calcproject.factory.ConsoleViewCalcManagerViewFactory;
-import calcproject.factory.InMemoryCalcResultRecordRepositoryFacotry;
+import calcproject.factory.InMemoryCalcResultRecordRepositoryFactory;
 import calcproject.service.CalcManager;
 
 public class Main {
@@ -15,7 +15,7 @@ public class Main {
 		Calculator calculator = new Calculator(calcExpressionTokenizer);
 
 		CalcManagerViewFactory calcManagerViewFactory = new ConsoleViewCalcManagerViewFactory();
-		CalcResultRecordRepositoryFactory calcResultRecordRepositoryFactory = new InMemoryCalcResultRecordRepositoryFacotry();
+		CalcResultRecordRepositoryFactory calcResultRecordRepositoryFactory = new InMemoryCalcResultRecordRepositoryFactory();
 
 		CalcManagerDependencyInjectionContainer calcManagerDependencyInjectionContainer =
 			new CalcManagerDependencyInjectionContainer(calcResultRecordRepositoryFactory, calcManagerViewFactory,

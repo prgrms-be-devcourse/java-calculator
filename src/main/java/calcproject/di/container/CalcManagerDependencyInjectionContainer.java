@@ -18,7 +18,9 @@ public class CalcManagerDependencyInjectionContainer {
 
 	public CalcManagerDependencyInjectionContainer(
 		CalcResultRecordRepositoryFactory calcResultRecordRepositoryFactory,
-		CalcManagerViewFactory calcManagerViewFactory, Calculator calculator) {
+		CalcManagerViewFactory calcManagerViewFactory,
+		Calculator calculator
+	) {
 		this.calcResultRecordRepositoryFactory = calcResultRecordRepositoryFactory;
 		this.calcManagerViewFactory = calcManagerViewFactory;
 		this.calculator = calculator;

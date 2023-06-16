@@ -22,6 +22,10 @@ class CalculatorTest {
 		calculator = new Calculator(tokenizer);
 	}
 
+
+
+
+
 	private static Stream<Arguments> tokensToPostfixNotationProvider() {
 		return Stream.of(
 			Arguments.of(Arrays.asList("1", "+", "2", "*", "3", "/", "4"),
@@ -32,20 +36,12 @@ class CalculatorTest {
 		);
 	}
 
-	private static Stream<Arguments> calculateExpressionProvider() {
-		return Stream.of(
-			Arguments.of("1 + 2 * 3 / 4", "2.5"),
-			Arguments.of("10 * 4 / 1", "40"),
-			Arguments.of("4 * 3 / 2 - 1", "5")
-		);
-	}
-
 	@ParameterizedTest
 	@DisplayName("후위 표기법 변환 테스트")
 	@MethodSource("tokensToPostfixNotationProvider")
 	void tokensToPostfixNotation(List<String> tokens, List<String> expectedTokens) {
 		//when
-		List<String> resultTokens = calculator.tokensToPostfixNotation(tokens);
+		List<String> resultTokens = calculator.toPostfixNotation(tokens);
 
 		//then
 		Assertions.assertThat(resultTokens)
@@ -58,7 +54,7 @@ class CalculatorTest {
 	void calculateExpression(String expression, double expectedResult) {
 		//given
 		List<String> tokens = tokenizer.tokenizeExpression(expression);
-		List<String> postfixNotationTokens = calculator.tokensToPostfixNotation(tokens);
+		List<String> postfixNotationTokens = calculator.toPostfixNotation(tokens);
 
 		//when
 		double calcResult = calculator.calculatePostfixNotation(postfixNotationTokens);
@@ -66,5 +62,13 @@ class CalculatorTest {
 		//then
 		Assertions.assertThat(calcResult)
 			.isEqualTo(expectedResult);
+	}
+
+	private static Stream<Arguments> calculateExpressionProvider() {
+		return Stream.of(
+			Arguments.of("1 + 2 * 3 / 4", "2.5"),
+			Arguments.of("10 * 4 / 1", "40"),
+			Arguments.of("4 * 3 / 2 - 1", "5")
+		);
 	}
 }
