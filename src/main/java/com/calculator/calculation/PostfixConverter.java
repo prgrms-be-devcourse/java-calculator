@@ -17,9 +17,7 @@ public class PostfixConverter {
     }
 
     public void convertToPostfix(String expression){
-        System.out.println(expression);
         String infixExpression[] = expression.split(" ");
-        System.out.println(Arrays.toString(infixExpression));
         Stack<String> stack = new Stack<>();
 
         for(String cur: infixExpression){

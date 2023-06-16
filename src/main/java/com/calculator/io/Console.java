@@ -13,7 +13,6 @@ public class Console implements Input, Output{
     @Override
     public String getMenuOption() {
         String menuOption = scanner.nextLine();
-        System.out.println(menuOption);
 
         return menuOption;
     }
@@ -21,7 +20,6 @@ public class Console implements Input, Output{
     @Override
     public String getExpression(){
         String expression = scanner.nextLine();
-        System.out.println(expression);
         return expression;
     }
 }

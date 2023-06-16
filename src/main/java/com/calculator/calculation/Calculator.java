@@ -18,8 +18,6 @@ public class Calculator {
                     PostfixConverter postfixConverter = new PostfixConverter();
                     postfixConverter.convertToPostfix(expression);
 
-                    postfixConverter.printPostfix();
-
                     PostfixCalculator postfixCalculator = new PostfixCalculator();
                     int result = postfixCalculator.calculatePostfix(postfixConverter.getPostfix());
 
