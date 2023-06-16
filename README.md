@@ -86,9 +86,21 @@ TDD 활용
 
 **실행결과**
 
+<img width="202" alt="스크린샷 2023-06-16 오후 1 32 34" src="https://github.com/seongHyun-Min/java-calculator/assets/112048126/9816cc9c-ea95-4caf-8349-bb114ffc2977">
 
 ## ✅ 피드백 반영사항
 
+- boolean isRunning 캡슐화
+- Validator 의존성 주입 리팩토링
+- Enum 타입 반환을 Optional로 변경하는 리팩토링
+- Validator의 Console 의존성 분리
+- Console 인터페이스 분리 (Input, Output)
+- Repository 객체 캡슐화
+- ExpressionEvaluator 클래스명을 Calculate로 리팩토링
+- Calculator Console의존성 제거
 
 ## ✅ PR 포인트 & 궁금한 점
+- 리팩토링한 코드에 대한 성능 이슈나 부작용이 있는지 확인하였는지 궁금합니다.
+- 리팩토링한 코드의 테스트 커버리지가 충분한지 궁금합니다.
+- 코드 리팩토링의 가독성과 유지보수성을 개선하기 위한 추가적인 개선 사항이 있는지 궁굼합니다.
 
