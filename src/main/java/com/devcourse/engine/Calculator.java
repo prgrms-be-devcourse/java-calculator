@@ -5,7 +5,7 @@ import com.devcourse.engine.computer.SimpleComputer;
 import com.devcourse.engine.converter.Converter;
 import com.devcourse.engine.converter.PostfixConverter;
 import com.devcourse.engine.io.Input;
-import com.devcourse.engine.io.Output;
+import com.devcourse.engine.model.histories.Histories;
 import com.devcourse.engine.exception.InvalidInputException;
 import com.devcourse.engine.historian.Historian;
 import com.devcourse.engine.validator.SimpleValidator;
@@ -22,7 +22,7 @@ public class Calculator implements Runnable {
 
     private final Input input;
     private final Output output;
-    private final Historian historian;
+    private final Histories histories;
     private final Validator validator;
     private final Converter converter;
     private final Computer computer;
@@ -30,14 +30,14 @@ public class Calculator implements Runnable {
     public Calculator(
             Input input,
             Output output,
-            Historian historian,
+            Histories histories,
             Validator validator,
             Converter converter,
             Computer computer
             ) {
         this.input = input;
         this.output = output;
-        this.historian = historian;
+        this.histories = histories;
         this.validator = validator;
         this.converter = converter;
         this.computer = computer;
@@ -80,18 +80,18 @@ public class Calculator implements Runnable {
     }
 
     private void saveAndPrint(List<String> infixExpression, double result) {
-        historian.saveHistory(infixExpression, result);
+        histories.saveHistory(infixExpression, result);
         output.showResult(result);
     }
 
     private void printHistory() {
-        IntStream.rangeClosed(1, historian.getLastIndex())
-                .forEach(i -> output.showHistory(historian.getHistory(i)));
+        IntStream.rangeClosed(1, histories.getLastIndex())
+                .forEach(i -> output.showHistory(histories.getHistory(i)));
         output.showHistory("");
     }
 
     private void checkHasHistory() {
-        if (historian.getLastIndex() < 1)
+        if (histories.getLastIndex() < 1)
             throw new InvalidInputException(NO_HISTORY);
     }
 

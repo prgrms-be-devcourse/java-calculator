@@ -1,9 +1,9 @@
-package com.devcourse.engine.historian;
+package com.devcourse.engine.model.histories;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class Historian {
+public class Histories {
 
     private HashMap<Integer, String> history = new HashMap<>();
     private int lastIndex = 0;
