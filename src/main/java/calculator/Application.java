@@ -11,8 +11,7 @@ public class Application {
         Output output = new ConsoleOutput();
         Input input = new ConsoleInput();
         ICalculatorHandlerManager handlerManager = new CalculatorHandlerManager();
-//        new Calculator(input, output, handlerManager).run();
-        System.out.println(CalculatorEngine.DIV.equals("DIV"));
+        new Calculator(input, output, handlerManager).run();
     }
 
 }

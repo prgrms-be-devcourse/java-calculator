@@ -2,7 +2,6 @@ package calculator;
 
 import calculator.constant.ErrorMessage;
 import calculator.constant.ModelKey;
-import calculator.constant.Option;
 import calculator.constant.ParamKey;
 import calculator.handler.CalculateHandler;
 import calculator.handler.LookupHandler;
@@ -31,8 +30,8 @@ public class Calculator {
     }
 
     private void registerHandlers() {
-        handlerManager.registerHandler(Option.LOOKUP, new LookupHandler());
-        handlerManager.registerHandler(Option.CALCULATE, new CalculateHandler());
+        handlerManager.registerHandler("1", new LookupHandler());
+        handlerManager.registerHandler("2", new CalculateHandler());
     }
 
     public void run() {
@@ -47,11 +46,11 @@ public class Calculator {
                 Map<String, Object> model = new HashMap<>();
 
                 switch (optionInput) {
-                    case Option.LOOKUP:
+                    case "1":
                         executeLookupHandler(param, model);
                         output.print((List<Object>) model.get(ModelKey.LIST));
                         break;
-                    case Option.CALCULATE:
+                    case "2":
                         param.put(ParamKey.PROBLEM, getProblemInput());
                         executeCalculateHandler(param, model);
                         output.print(String.valueOf(model.get(ModelKey.ANSWER)));
@@ -76,11 +75,11 @@ public class Calculator {
     }
 
     private void executeLookupHandler(Map<String, String> param, Map<String, Object> model) {
-        handlerManager.execute(Option.LOOKUP, new HashMap<>(param), model);
+        handlerManager.execute("1", new HashMap<>(param), model);
     }
 
     private void executeCalculateHandler(Map<String, String> param, Map<String, Object> model) {
-        handlerManager.execute(Option.CALCULATE, new HashMap<>(param), model);
+        handlerManager.execute("2", new HashMap<>(param), model);
     }
 
 }
