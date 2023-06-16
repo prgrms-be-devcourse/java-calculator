@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.NoSuchElementException;
 
-import static global.ErrorMessage.EMPTY_INPUT_STRING;
-
-
 public class Index implements Runnable{
     private final Input input;
     private final Output output;
@@ -60,7 +57,7 @@ public class Index implements Runnable{
                         history.addHistory(inputString,result);
 
                     } catch (Exception e) {
-                        output.inputEmptyError(EMPTY_INPUT_STRING);
+                        output.inputEmptyError("수식을 입력해주세요!");
                         break;
                     }
 
