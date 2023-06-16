@@ -2,10 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 
-public class History {
+public class HistoryEntity {
     private List<String> log = new ArrayList<>();
 
     public List<String> getHistory() {

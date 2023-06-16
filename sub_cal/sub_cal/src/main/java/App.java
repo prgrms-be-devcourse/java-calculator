@@ -2,7 +2,7 @@
 import io.Input;
 import io.Output;
 import model.Calculator;
-import model.History;
+import model.HistoryEntity;
 import option.Option;
 
 import java.io.IOException;
@@ -11,13 +11,13 @@ import java.util.NoSuchElementException;
 public class App implements Runnable{
     private final Input input;
     private final Output output;
-        private final History history;
+    private final HistoryEntity historyEntity;
     private final Calculator calculator;
 
-    public App(Console console, History history, Calculator calculator) {
+    public App(Console console, HistoryEntity historyEntity, Calculator calculator) {
         this.input = console;
         this.output = console;
-        this.history = history;
+        this.historyEntity = historyEntity;
         this.calculator = calculator;
     }
 
@@ -38,7 +38,7 @@ public class App implements Runnable{
 
             switch (select) {
                 case HISTORY:
-                    if (!(output.showResultHistory(history.getHistory()))) output.historyEmptyError();
+                    if (!(output.showResultHistory(historyEntity.getHistory()))) output.historyEmptyError();
                     break;
                 case CALCULATE:
                     System.out.print("계산식을 입력해주세요 : ");
@@ -52,7 +52,7 @@ public class App implements Runnable{
 
                         output.printResult(result);
 
-                        history.addHistory(inputString,result);
+                        historyEntity.addHistory(inputString,result);
 
                     } catch (Exception e) {
                         output.inputEmptyError("수식을 입력해주세요!");
