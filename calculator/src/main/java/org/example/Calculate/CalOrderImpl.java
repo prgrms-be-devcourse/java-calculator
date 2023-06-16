@@ -6,8 +6,12 @@ public class CalOrderImpl implements CalOrder {
     private int result = 0;
     Stack<String> expressionStack = new Stack<>();
 
-    @Override
-    public String calculateMultiplyDivide() {
+    public int calculate() {
+        calculateMultiplyDivide();
+        return calculatePlusMinus();
+    }
+
+    private void calculateMultiplyDivide() {
         for (int i = 1; i < expressionStack.size(); i += 2) {
             if (expressionStack.get(i).equals("*")) {
                 multiply(i);
@@ -17,11 +21,9 @@ public class CalOrderImpl implements CalOrder {
                 i -= 2;
             }
         }
-        return expressionStack.toString();
     }
 
-    @Override
-    public int calculatePlusMinus() {
+    private int calculatePlusMinus() {
         result = Integer.parseInt(expressionStack.get(0));
         for (int i = 1; i < expressionStack.size(); i += 2) {
             if (expressionStack.get(i).equals("+")) {
