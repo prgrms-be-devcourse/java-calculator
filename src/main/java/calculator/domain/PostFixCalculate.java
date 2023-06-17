@@ -90,7 +90,9 @@ public class PostFixCalculate implements Calculate{
         if (OperatorMap.contains(data)) {
             double back = result.pop();
             double front = result.pop();
-            result.add(OperatorMap.calculate(data, front, back));
+
+            OperatorMap operatorMap = OperatorMap.getOperator(data);
+            result.add(operatorMap.calculate(front, back));
             return;
         }
 
