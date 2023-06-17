@@ -6,31 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostFixCalculator {
-    public static Calculator parseCalculator(String equation) {
-        validate(equation);
+public class PostFixCalculate implements Calculate{
 
-        double result = makeResult(equation);
-        return new Calculator(equation, result);
+    @Override
+    public double calculate(String equation) {
+        return makeResult(equation);
     }
 
-    private static void validate(String equation) {
-        if (ValidationEquation.isDivByZero(equation)) {
-            throw new IllegalException(ExceptionMsg.NotSolveEquationException);
-        }
-    }
-
-    private static double makeResult(String equation) {
+    private double makeResult(String equation) {
         String[] equations = equation.split(" ");
         if (equations.length == 1) {
             return Double.parseDouble(equations[0]);
         }
 
         List<String> postFix = parseEquationToPostFix(equations);
-        return calculate(postFix);
+        return solve(postFix);
     }
 
-    private static List<String> parseEquationToPostFix(String[] equations) {
+    private List<String> parseEquationToPostFix(String[] equations) {
         List<String> postFix = new ArrayList<>();
         Stack<String> operationList = new Stack<>();
 
@@ -44,7 +37,7 @@ public class PostFixCalculator {
         return postFix;
     }
 
-    private static void eachInput(String input, List<String> postFix, Stack<String> operationList) {
+    private void eachInput(String input, List<String> postFix, Stack<String> operationList) {
         if (Brackets.isCloseBrackets(input)) {
             popOperates(postFix, operationList);
             return;
@@ -72,7 +65,7 @@ public class PostFixCalculator {
         operationList.add(input);
     }
 
-    private static void popOperates(List<String> postFix, Stack<String> operationList) {
+    private void popOperates(List<String> postFix, Stack<String> operationList) {
         while (!operationList.isEmpty()) {
             String operate = operationList.pop();
 
@@ -84,7 +77,7 @@ public class PostFixCalculator {
         }
     }
 
-    private static double calculate(List<String> postFix) {
+    private double solve(List<String> postFix) {
         Stack<Double> result = new Stack<>();
 
         for (String data : postFix) {
@@ -103,4 +96,6 @@ public class PostFixCalculator {
 
         result.add(Double.parseDouble(data));
     }
+
+
 }
