@@ -18,7 +18,7 @@ public class Calculator {
     }
 
     public String calculate(String expression) throws RuntimeException {
-        if (expression == null || expression.equals("")) {
+        if (expression == null || "".equals(expression)) {
             throw new IllegalExpressionException("[ERROR] 비어있는 식이 들어왔습니다.");
         }
 
