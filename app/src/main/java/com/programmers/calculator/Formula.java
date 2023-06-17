@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Formula {
 	
-	private static final Pattern FORMULA_REGEX = Pattern.compile("([0-9] [+|-|*|/] )+[0-9]");
+	private static final Pattern FORMULA_REGEX = Pattern.compile("([0-9] [+|\\-|*|/] )+[0-9]");
 	private static final String EQUAL = " = ";
 	
 	private final Calculator calculator;
