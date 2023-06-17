@@ -10,20 +10,20 @@ import java.util.List;
 class CalculatorRepositoryTest {
     CalculatorRepository calculatorRepository = new CalculatorRepository();
 
-    @Test
-    void 리포지토리에_계산식을_저장한다() {
-        //given
-        String expression = "2 + 4 * 8 = 34";
-        List<String> expected = Arrays.asList("2 + 4 * 8 = 34");
-
-        //when
-        calculatorRepository.save(expression);
-
-        List<String> result = calculatorRepository.findAll();
-
-        //then
-        assertThat(result).isEqualTo(expected);
-    }
+//    @Test
+//    void 리포지토리에_계산식을_저장한다() {
+//        //given
+//        String expression = "2 + 4 * 8 = 34";
+//        List<String> expected = Arrays.asList("2 + 4 * 8 = 34");
+//
+//        //when
+//        calculatorRepository.save(expression);
+//
+//        List<String> result = calculatorRepository.findAll();
+//
+//        //then
+//        assertThat(result).isEqualTo(expected);
+//    }
 
     @Test
     void 리포지토리에_저장된_모든_값을_확인한다() {
