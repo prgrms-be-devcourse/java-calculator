@@ -3,7 +3,7 @@ package org.example.domain;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Processor {
+public class CalculateExecuter {
     public Integer calculate(String[] str) {
         Deque<Integer> stack = new ArrayDeque<>();
 

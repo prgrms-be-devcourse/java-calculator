@@ -1,23 +1,21 @@
 package org.example.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Calculator {
 
     private ExpressionConvertor expressionConvertor;
-    private Processor processor;
+    private CalculateExecuter calculateExecuter;
     private History history;
 
     public Calculator() {
         this.expressionConvertor = new ExpressionConvertor();
-        this.processor = new Processor();
+        this.calculateExecuter = new CalculateExecuter();
         this.history = new History();
     }
 
     public Integer execute(String expression) {
-        Integer result = processor.calculate(expressionConvertor.convertToPostfix(expression));
+        Integer result = calculateExecuter.calculate(expressionConvertor.convertToPostfix(expression));
 
         history.save(expression, result);
         return result;
