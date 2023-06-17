@@ -1,26 +1,31 @@
 package org.example.util;
 
+import org.example.validate.Validater;
+
 import java.util.Arrays;
+import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 
 public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/"),
-    OPEN_BRACKET("("),
-    CLOSE_BRACKET(")");
+    PLUS("+", (num1, num2) -> num1 + num2),
+    MINUS("-", (num1, num2) -> num1 - num2),
+    MULTIPLY("*", (num1, num2) -> num1 * num2),
+    DIVIDE("/", (num1, num2) -> num1 / num2),
+    OPEN_BRACKET("(", null),
+    CLOSE_BRACKET(")", null);
 
-    private static final Pattern OPERATOR = Pattern.compile("[+-/*()]");
+    private final String operator;
+    private BiFunction<Integer, Integer, Integer> biFunction;
 
-    private String operator;
-    Operator(String operator) {
+    Operator(String operator, BiFunction<Integer, Integer, Integer> biFunction) {
         this.operator = operator;
+        this.biFunction = biFunction;
     }
 
     public static boolean isOperator(String input) {
-        return OPERATOR.matcher(input).matches();
+        return Validater.isOperator(input);
     }
+
     public static Operator getOperator(String input) {
         return Arrays.stream(Operator.values())
                 .filter(o -> o.operator.equals(input))
@@ -30,6 +35,10 @@ public enum Operator {
 
     public String getOperator() {
         return operator;
+    }
+
+    public Integer doCalculate(int num1, int num2) {
+        return biFunction.apply(num1, num2);
     }
 
     public int getPriority() {
