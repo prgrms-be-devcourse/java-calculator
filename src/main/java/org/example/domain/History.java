@@ -8,7 +8,7 @@ public class History {
     private List<String> history = new ArrayList<>();
 
 
-    void save(String infixExpression, Integer result) {
+    public void save(String infixExpression, Integer result) {
         history.add(String.format("%s = %d", infixExpression, result));
     }
 
