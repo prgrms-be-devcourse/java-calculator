@@ -1,5 +1,6 @@
 package com.programmers.util;
 
+import com.programmers.calculator.Formula;
 import com.programmers.exception.InvalidFormulaException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class FormulaTest {
 		
 		// when
 		Formula formula = new Formula(strExpression);
-		List<String> listExpression = formula.getInfixFormula();
+		List<String> listExpression = formula.getInfixListFormula();
 		
 		// then
 		assertThat(listExpression)
@@ -28,17 +29,17 @@ class FormulaTest {
 	}
 	
 	@Test
-	@DisplayName("리스트 연산을 문자열 연산으로 변환한다.")
+	@DisplayName("수식을 계산한 결과와 함께 문자열로 만든다.")
 	void changeListFormulaToStrFormula() {
 		// given
 		Formula formula = new Formula("3 * 4 / 2");
-		Integer result = 6;
+		Integer result = formula.calcualteFormula();
 		
 		// when
-		String strExpression = formula.toString(result);
+		String formulaOfString = formula.toString();
 		
 		// then
-		assertThat(strExpression)
+		assertThat(formulaOfString)
 				.isEqualTo("3 * 4 / 2 = 6");
 	}
 	
