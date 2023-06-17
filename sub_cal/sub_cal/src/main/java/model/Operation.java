@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 public class Operation {
     private Stack<Double> numberStack = new Stack<>();
     private Stack<String> operStack = new Stack<>();
+    private static final int CONVERTTONEGATIVE = -1;
 
     public String operate(String expression) {
 
@@ -39,7 +40,7 @@ public class Operation {
                         break;
                     }
 
-                    numberStack.push(-1*Double.parseDouble(word));
+                    numberStack.push(CONVERTTONEGATIVE*Double.parseDouble(word));
                     break;
             }
         }
