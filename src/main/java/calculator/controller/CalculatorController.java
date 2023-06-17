@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public class CalculatorController {
     private InputView inputView;
     private OutputView outputView;
-    private CalculatorService calculatorService;
+    private final CalculatorService calculatorService;
 
     public CalculatorController(InputView inputView, OutputView outputView, CalculatorService calculatorService) {
         this.inputView = inputView;

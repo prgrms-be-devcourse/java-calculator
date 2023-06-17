@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculatorService {
-    private CalculatorRepository calculatorRepository;
+    private final CalculatorRepository calculatorRepository;
     public CalculatorService(CalculatorRepository calculatorRepository) {
         this.calculatorRepository = calculatorRepository;
     }

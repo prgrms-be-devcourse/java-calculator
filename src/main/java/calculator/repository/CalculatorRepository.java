@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculatorRepository {
-    private List<Calculator> calculators; // DB
+    private final List<Calculator> calculators; // DB
 
     public CalculatorRepository() {
         this.calculators = new ArrayList<>();
