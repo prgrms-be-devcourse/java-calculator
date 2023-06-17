@@ -2,12 +2,12 @@ package calculator.vo;
 
 import calculator.constant.ErrorMessage;
 
-public class OptionVO {
+public class Option {
     private final String option;
     private final String OPTION_PATTERN = "^(1|2)$";
 
-    public OptionVO(String option) {
-        validateOption(option);
+    public Option(String option) {
+        validate(option);
         this.option = option;
     }
 
@@ -15,7 +15,7 @@ public class OptionVO {
         return option;
     }
 
-    private void validateOption(String input) {
+    private void validate(String input) {
         if (!input.matches(OPTION_PATTERN)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_OPTION);
         }

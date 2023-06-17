@@ -2,13 +2,12 @@ package calculator.vo;
 
 import calculator.constant.ErrorMessage;
 
-public class ProblemVO {
+public class Problem {
     private final String problem;
     private final String MATH_PROBLEM_PATTERN = "^\\d+(\\s[+\\-*/]\\s\\d+)+$";
 
-
-    public ProblemVO(String problem) {
-        validateProblem(problem);
+    public Problem(String problem) {
+        validate(problem);
         this.problem = problem;
     }
 
@@ -16,7 +15,7 @@ public class ProblemVO {
         return problem;
     }
 
-    private void validateProblem(String input) {
+    private void validate(String input) {
         if (!input.matches(MATH_PROBLEM_PATTERN)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_MATH_PROBLEM);
         }
