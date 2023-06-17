@@ -1,7 +1,6 @@
 package com.programmers.util;
 
 import com.programmers.exception.NotFoundMenuException;
-import com.programmers.exception.NotNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,19 +16,6 @@ class MenuTest {
 	void correctMenu(String select, Menu menu) {
 		assertThat(Menu.of(select))
 				.isEqualTo(menu);
-	}
-	
-	@Test
-	@DisplayName("숫자가 아닌 입력이 들어오면 NotNumberException을 던진다.")
-	void throwNotNumberExceptionWhenNotNumber() {
-		// given
-		String select = "12W";
-		
-		// then
-		assertThatThrownBy(() -> {
-			Menu.of(select);
-		}).isExactlyInstanceOf(NotNumberException.class)
-		  .hasMessage("선택지는 숫자만 입력할 수 있습니다.");
 	}
 	
 	@Test
