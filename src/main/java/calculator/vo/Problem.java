@@ -6,7 +6,6 @@ public class Problem {
     private final String problem;
     private final String MATH_PROBLEM_PATTERN = "^\\d+(\\s[+\\-*/]\\s\\d+)+$";
 
-
     public Problem(String problem) {
         validate(problem);
         this.problem = problem;

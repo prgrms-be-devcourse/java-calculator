@@ -1,37 +1,25 @@
 package calculator;
 
 import calculator.constant.ErrorMessage;
-import calculator.constant.ModelKey;
-import calculator.constant.ParamKey;
-import calculator.handler.CalculateHandler;
-import calculator.handler.LookupHandler;
-import calculator.handlermanager.ICalculatorHandlerManager;
+import calculator.handler.ICalculateHandler;
+import calculator.handler.ILookupHandler;
 import calculator.io.Input;
 import calculator.io.Output;
 import calculator.vo.Option;
 import calculator.vo.Problem;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Calculator {
 
     private final Input input;
     private final Output output;
-    private final ICalculatorHandlerManager handlerManager;
+    private final ILookupHandler lookupHandler;
+    private final ICalculateHandler calculateHandler;
 
-    public Calculator(Input input, Output output, ICalculatorHandlerManager handlerManager) {
+    public Calculator(Input input, Output output, ILookupHandler lookupHandler, ICalculateHandler calculateHandler) {
         this.input = input;
         this.output = output;
-        this.handlerManager = handlerManager;
-
-        registerHandlers();
-    }
-
-    private void registerHandlers() {
-        handlerManager.registerHandler("1", new LookupHandler());
-        handlerManager.registerHandler("2", new CalculateHandler());
+        this.lookupHandler = lookupHandler;
+        this.calculateHandler = calculateHandler;
     }
 
     public void run() {
@@ -42,18 +30,12 @@ public class Calculator {
             try {
                 String optionInput = getOptionInput();
 
-                Map<String, String> param = new HashMap<>();
-                Map<String, Object> model = new HashMap<>();
-
                 switch (optionInput) {
                     case "1":
-                        handlerManager.execute(optionInput, new HashMap<>(param), model);
-                        output.print((List<Object>) model.get(ModelKey.LIST));
+                        output.print(lookupHandler.lookup());
                         break;
                     case "2":
-                        param.put(ParamKey.PROBLEM, getProblemInput());
-                        handlerManager.execute(optionInput, new HashMap<>(param), model);
-                        output.print(String.valueOf(model.get(ModelKey.ANSWER)));
+                        output.print(String.valueOf(calculateHandler.calculate(getProblemInput())));
                         break;
                     default:
                         output.print(ErrorMessage.INVALID_OPTION);

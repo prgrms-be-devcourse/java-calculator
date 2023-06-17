@@ -27,9 +27,13 @@ public enum CalculatorEngine {
     }
 
     public static Optional<Integer> execute(int o1, int o2, String operator) {
-        return Arrays.stream(values())
-                .filter(engine -> engine.operator.equals(operator))
-                .findFirst()
+        return findEngine(operator)
                 .map(engine -> engine.handler.apply(o1, o2));
+    }
+
+    private static Optional<CalculatorEngine> findEngine(String symbol) {
+        return Arrays.stream(values())
+                .filter(engine -> engine.operator.equals(symbol))
+                .findFirst();
     }
 }

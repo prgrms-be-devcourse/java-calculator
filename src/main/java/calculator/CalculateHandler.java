@@ -1,30 +1,24 @@
-package calculator.handler;
+package calculator;
 
 import calculator.constant.ErrorMessage;
-import calculator.constant.ModelKey;
-import calculator.constant.ParamKey;
 import calculator.engine.CalculatorEngine;
+import calculator.handler.ICalculateHandler;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
 
-public class CalculateHandler implements CalculatorHandler {
+public class CalculateHandler implements ICalculateHandler {
 
     @Override
-    public void process(Map<String, String> param, Map<String, Object> model) {
-        int answer = calculate(parseRawProblem(param.get(ParamKey.PROBLEM)));
-        model.put(ModelKey.ANSWER, answer);
+    public int calculate(String problem) {
+        String[] parsedProblem = parseRawProblem(problem);
+        return basicCalculate(priorityCalculate(parsedProblem));
     }
 
     private String[] parseRawProblem(String problem) {
         return problem.split(" ");
-    }
-
-    private int calculate(String[] problem) {
-        return basicCalculate(priorityCalculate(problem));
     }
 
     private int basicCalculate(String[] problem) {
