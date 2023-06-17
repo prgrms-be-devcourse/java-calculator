@@ -66,10 +66,10 @@ public class PostfixCalculator {
                     continue;
                 }
 
-                if (compareOperatorPriority(opStack.peek(), cur) > 0) {
+                if (getOperatorPriority(opStack.peek(), cur) > 0) {
                     opStack.push(cur);
                 } else {
-                    popOperator(postfix, (Integer data) -> data > 0, compareOperatorPriority(opStack.peek(), cur));
+                    popOperator(postfix, (Integer data) -> data > 0, getOperatorPriority(opStack.peek(), cur));
                     opStack.push(cur);
                 }
             }
@@ -109,13 +109,14 @@ public class PostfixCalculator {
         return false;
     }
 
-    
-    // 팀 미팅 질문
-    private int compareOperatorPriority(char target, char cur) {
+    private int getOperatorPriority(char target, char cur) {
         int targetOperator = Operator.getPriority(target);
         int curOperator = Operator.getPriority(cur);
-        
-        // 여기를 분리할 수도
+
+        return compareTo(targetOperator, curOperator);
+    }
+
+    private int compareTo(int targetOperator, int curOperator) {
         if (targetOperator < curOperator) {
             return 1;
         } else if (targetOperator == curOperator) {
