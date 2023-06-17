@@ -1,14 +1,15 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Stack;
 import java.util.StringTokenizer;
 public class Operation {
-    private Stack<Integer> numberStack = new Stack<>();
+    private Stack<Double> numberStack = new Stack<>();
     private Stack<String> operStack = new Stack<>();
 
-    public Integer operate(String inputString) {
+    public String operate(String expression) {
 
-        StringTokenizer st = new StringTokenizer(inputString);
+        StringTokenizer st = new StringTokenizer(expression);
 
         classifyOperatorAndNumber(st);
 
@@ -25,7 +26,7 @@ public class Operation {
 
             switch (operator != null ? operator : operator.NULL){
                 case MULTIPLY : case DIVIDE:
-                    numberStack.push(Integer.parseInt(st.nextToken()));
+                    numberStack.push(Double.parseDouble(st.nextToken()));
                     calculateMultiplyOrDivide(operator.toString());
                     break;
                 case PLUS : case MINUS:
@@ -34,11 +35,11 @@ public class Operation {
                 case NULL:
 
                     if(operStack.isEmpty() || operStack.pop().equals("PLUS")){
-                        numberStack.push(Integer.parseInt(word));
+                        numberStack.push(Double.parseDouble(word));
                         break;
                     }
 
-                    numberStack.push(-1*Integer.parseInt(word));
+                    numberStack.push(-1*Double.parseDouble(word));
                     break;
             }
         }
@@ -46,22 +47,23 @@ public class Operation {
 
     }
 
-    private Integer calculate(){
+    private String calculate(){
         while(true){
             if(numberStack.size() == 1) break;
 
-            int num2 = numberStack.pop();
-            int num1 = numberStack.pop();
+            Double num2 = numberStack.pop();
+            Double num1 = numberStack.pop();
 
             numberStack.push(num1 + num2);
         }
 
-        return numberStack.pop();
+
+        return String.valueOf(new BigDecimal(numberStack.pop()).setScale(1).stripTrailingZeros());
     }
 
     private void calculateMultiplyOrDivide(String word) {
-        int num2 = numberStack.pop();
-        int num1 = numberStack.pop();
+        Double num2 = numberStack.pop();
+        Double num1 = numberStack.pop();
 
         if(word.equals("MULTIPLY")) numberStack.push(num1*num2);
 

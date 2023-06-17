@@ -8,6 +8,6 @@ public interface Output {
     void historyEmptyError();
     boolean showResultHistory(List<String> history);
     void printMenuList();
-    void printResult(Integer result);
+    void printResult(String result);
 
 }

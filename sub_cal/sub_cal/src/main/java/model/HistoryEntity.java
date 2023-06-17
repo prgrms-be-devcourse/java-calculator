@@ -11,7 +11,7 @@ public class HistoryEntity {
         return log;
     }
 
-    public void addHistory(String expression,int result){
+    public void addHistory(String expression,String result){
         StringBuilder sb = new StringBuilder();
         log.add(sb.append(expression).append(" = ").append(result).toString());
     }

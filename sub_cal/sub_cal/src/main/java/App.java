@@ -48,7 +48,7 @@ public class App implements Runnable{
                     try {
                         inputString = input.inputString();
 
-                        int result = calculator.cal(inputString);
+                        String result = calculator.calculate(inputString);
 
                         output.printResult(result);
 

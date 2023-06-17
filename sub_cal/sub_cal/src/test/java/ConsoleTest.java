@@ -8,20 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConsoleTest {
 
-    static Calculator cal;
+    static Calculator calculator;
 
     @BeforeAll
     static void beforeAll() {
-        cal = new Calculator();
+        calculator = new Calculator();
     }
 
     @ParameterizedTest
     @DisplayName("결과값 확인")
     @CsvSource(value = {"1 + 3,4","1 * 3 + 6,9","1 + 3 * 9 - 7 * 8 * 2 / 8,14","1 + 2 - 1 * 3 - 2,-2"})
-    public void input(String input,int expected) {
+    public void input(String input,String expected) {
 
-        int result;
-        result = cal.cal(input);
+        String result;
+        result = calculator.calculate(input);
         assertEquals(expected,result);
 
     }

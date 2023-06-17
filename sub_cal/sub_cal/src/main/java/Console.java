@@ -52,7 +52,7 @@ public class Console implements Input,  Output {
 
 
     @Override
-    public void printResult(Integer result) {
+    public void printResult(String result) {
         System.out.println(result);
     }
 }
