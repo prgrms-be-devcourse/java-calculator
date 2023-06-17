@@ -20,10 +20,12 @@ public class ExpressionConvertor {
                 case "-":
                 case "*":
                 case "/":
-                case "(":
                     while (!stack.isEmpty() && priority(stack.peek()) >= priority(now)) {
                         sb.add(stack.pop());
                     }
+                    stack.push(now);
+                    break;
+                case "(":
                     stack.push(now);
                     break;
                 case ")":
