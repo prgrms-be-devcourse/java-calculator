@@ -18,9 +18,11 @@ public class ConverterWithBracket extends Converter {
 
         if (operator.isFinishBracket()) {
             operatorStack.pop();
+
             while (!operatorStack.peek().isOpenBracket()) {
                 result.add(operatorStack.pop());
             }
+
             operatorStack.pop();
         }
     }

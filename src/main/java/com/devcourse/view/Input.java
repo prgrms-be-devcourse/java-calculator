@@ -14,19 +14,23 @@ public class Input {
     private Input() {
     }
 
-    public static int selectMenu() {
+    public static int selectMenuNumber() {
         String menuNumber = getUserInput();
+
         if (MenuValidator.valid(menuNumber)) {
             return Integer.parseInt(menuNumber);
         }
+
         throw new RuntimeException("1, 2 두개의 메뉴 중 하나를 입력해 주세요");
     }
 
     public static String getFormula() {
         String formula = getUserInput();
+
         if (FormulaValidator.valid(formula)) {
             return formula;
         }
+
         throw new RuntimeException("잘못된 식 양식입니다 (ex : 1 + 2 / 3)");
     }
 
