@@ -1,9 +1,8 @@
 package com.devcourse.calc.model;
 
-import com.devcourse.calc.Calculator;
-import com.devcourse.view.Input;
-
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.function.Function.identity;
@@ -29,8 +28,8 @@ public enum Menu {
         return menus.get(selectedNumber);
     }
 
-    public String execute(Calculator calculator) {
-        return action.apply(calculator).toString();
+    public static List<Menu> allMenus() {
+        return new ArrayList<>(menus.values());
     }
 
     @Override

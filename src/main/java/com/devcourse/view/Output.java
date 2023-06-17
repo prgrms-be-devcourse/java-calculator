@@ -8,8 +8,9 @@ public class Output {
     }
 
     public static void showMenus() {
-        Menu.menus.values()
-                .forEach(System.out::println);
+        for (Menu menu : Menu.allMenus()) {
+            System.out.println(menu);
+        }
         System.out.print("\n선택 : ");
     }
 
