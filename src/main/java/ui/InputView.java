@@ -25,8 +25,6 @@ public class InputView {
     public String getEquationAfterCheckException() {
         String userInput = readLine();
         ValidationInput.isEmpty(userInput);
-
-        ValidationInput.checkEquation(userInput);
         return userInput;
     }
 }

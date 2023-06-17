@@ -1,9 +1,5 @@
 package calculator.domain;
 
-import util.ExceptionMsg;
-import util.IllegalException;
-import util.ValidationEquation;
-
 public class Calculator {
     private static final String EQUALS = " = ";
 
@@ -21,14 +17,7 @@ public class Calculator {
         this.result = result;
     }
 
-    private static void validate(String equation) {
-        if (ValidationEquation.isDivByZero(equation)) {
-            throw new IllegalException(ExceptionMsg.NotSolveEquationException);
-        }
-    }
-
     public void calculate(String equation) {
-        validate(equation);
         this.result = this.calculate.calculate(equation);
     }
 

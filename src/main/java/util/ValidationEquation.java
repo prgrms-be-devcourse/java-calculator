@@ -3,6 +3,7 @@ package util;
 public class ValidationEquation {
     private static final String ZERO = "0";
 
+    @Deprecated
     public static boolean isDivByZero(String equation) {
         String[] equationArray = equation.split(" ");
 

@@ -18,6 +18,16 @@ public enum OperatorMap {
         this.bifunction = bifunction;
     }
 
+    private static void validate(String operator, double num2) {
+        if (!DIV.operator.equals(operator)) {
+            return;
+        }
+
+        if (num2 == 0) {
+            throw new IllegalException(ExceptionMsg.NotSolveEquationException);
+        }
+    }
+
     public static boolean contains(String operator) {
         for (OperatorMap oper : OperatorMap.values()) {
             if (operator.equals(oper.operator)) {
@@ -30,6 +40,7 @@ public enum OperatorMap {
     public static double calculate(String operator, double num1, double num2) {
         for (OperatorMap oper : OperatorMap.values()) {
             if (operator.equals(oper.operator)) {
+                validate(operator, num2);
                 return oper.bifunction.apply(num1, num2);
             }
         }

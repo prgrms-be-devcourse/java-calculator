@@ -4,7 +4,6 @@ import util.Menu;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class OutputView {
     private static final String SELECT_MSG = "선택 : ";

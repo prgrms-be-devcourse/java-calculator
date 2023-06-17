@@ -51,10 +51,10 @@ public class CalculatorController {
     }
 
     private void executeCalc() {
-        outputView.printResult(this.calculatorService.calculate(getUserEquation()));
+        outputView.printResult(this.calculatorService.calculate(getCalculateRequest()));
     }
 
-    private CalculateRequest getUserEquation() {
+    private CalculateRequest getCalculateRequest() {
         return userInput(()->{
             outputView.printEmptyMsg();
             return new CalculateRequest(inputView.getEquationAfterCheckException());
