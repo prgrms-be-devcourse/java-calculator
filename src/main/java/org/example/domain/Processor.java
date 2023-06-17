@@ -1,10 +1,11 @@
 package org.example.domain;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Processor {
     public Integer calculate(String[] str) {
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
 
         for (String x : str) {
 

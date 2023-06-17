@@ -1,7 +1,8 @@
 package org.example.domain;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Deque;
 
 public class ExpressionConvertor {
     public String[] convertToPostfix(String infix) {
@@ -9,7 +10,7 @@ public class ExpressionConvertor {
         String[] str = splitBySpaces(infix);
 
         ArrayList<String> sb = new ArrayList<>();
-        Stack<String> stack = new Stack<>();
+        Deque<String> stack = new ArrayDeque<>();
 
         for (int i = 0; i < str.length; i++) {
             String now = str[i];
