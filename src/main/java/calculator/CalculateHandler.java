@@ -3,6 +3,8 @@ package calculator;
 import calculator.constant.ErrorMessage;
 import calculator.engine.CalculatorEngine;
 import calculator.handler.ICalculateHandler;
+import calculator.model.Result;
+import calculator.respository.Repository;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -11,10 +13,19 @@ import java.util.stream.IntStream;
 
 public class CalculateHandler implements ICalculateHandler {
 
+    private final Repository repository;
+    public CalculateHandler(Repository repository) {
+        this.repository = repository;
+    }
+
     @Override
     public int calculate(String problem) {
         String[] parsedProblem = parseRawProblem(problem);
-        return basicCalculate(priorityCalculate(parsedProblem));
+        int answer = basicCalculate(priorityCalculate(parsedProblem));
+
+        repository.save(new Result(problem, answer));
+
+        return answer;
     }
 
     private String[] parseRawProblem(String problem) {
