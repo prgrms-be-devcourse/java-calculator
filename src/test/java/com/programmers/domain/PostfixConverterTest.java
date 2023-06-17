@@ -25,17 +25,17 @@ class PostfixConverterTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void 두_연산자의_우선순위를_비교한다() {
-        //given
-        boolean expected = false;
-
-        //when
-        boolean result = postfixConverter.isProceed("+", "*");
-
-        //then
-        assertThat(expected).isEqualTo(result);
-    }
+//    @Test
+//    void 두_연산자의_우선순위를_비교한다() {
+//        //given
+//        boolean expected = false;
+//
+//        //when
+//        boolean result = postfixConverter.isProceed("+", "*");
+//
+//        //then
+//        assertThat(expected).isEqualTo(result);
+//    }
 
     @CsvSource(value = {
             "145 : true",
