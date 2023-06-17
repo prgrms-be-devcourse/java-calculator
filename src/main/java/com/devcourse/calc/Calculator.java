@@ -1,41 +1,13 @@
 package com.devcourse.calc;
 
-import com.devcourse.calc.converter.Converter;
-import com.devcourse.calc.model.*;
-import com.devcourse.calc.repo.CalcHistoryRepository;
+import com.devcourse.calc.model.Token;
 
 import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
 
-    private final CalcHistoryRepository repository;
-    private final Converter converter;
-
-    public Calculator(CalcHistoryRepository repository, Converter converter) {
-        this.repository = repository;
-        this.converter = converter;
-    }
-
-    public String run(int menuNumber) {
-        Menu selectedMenu = Menu.find(menuNumber);
-
-        return selectedMenu.execute(this);
-    }
-
-    public CalculateRecord showHistory() {
-        return repository.getAllHistories();
-    }
-
-    public Result calculate(String formula) {
-        List<Token> tokens = converter.convertFormula(formula);
-        int result = calculate(tokens);
-        saveCalculateHistory(formula, result);
-
-        return new Result(result);
-    }
-
-    private int calculate(List<Token> mathSymbols) {
+    public int calculate(List<Token> mathSymbols) {
         Stack<Integer> calculationResult = new Stack<>();
         for (Token mathSymbol : mathSymbols) {
             if (mathSymbol.isDigit()) {
@@ -51,8 +23,4 @@ public class Calculator {
         return calculationResult.pop();
     }
 
-    private void saveCalculateHistory(String formula, int result) {
-        History history = new History(formula, result);
-        repository.saveHistory(history);
-    }
 }

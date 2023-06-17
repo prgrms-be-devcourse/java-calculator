@@ -5,27 +5,24 @@ import com.devcourse.view.Input;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Function;
 
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum Menu {
-    HISTORY(1, "조회", Calculator::showHistory),
-    CALC(2, "계산", calculator -> calculator.calculate(Input.getFormula()));
+    HISTORY(1, "조회"),
+    CALC(2, "계산");
 
     private static final String TO_STRING_TEMPLATE = "%d. %s";
-    public static final Map<Integer, Menu> menus = Arrays.stream(values())
+    private static final Map<Integer, Menu> menus = Arrays.stream(values())
             .collect(toMap(menu -> menu.number, identity()));
 
     private final int number;
     private final String description;
-    private final Function<Calculator, Result> action;
 
-    Menu(int number, String description, Function<Calculator, Result> action) {
+    Menu(int number, String description) {
         this.number = number;
         this.description = description;
-        this.action = action;
     }
 
     public static Menu find(int selectedNumber) {
