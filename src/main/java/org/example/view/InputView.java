@@ -13,8 +13,6 @@ public class InputView {
     String readExpression() {
         String expression = sc.nextLine();
 
-        inputValidater.validateExpression(expression);
-
         return expression;
     }
 
