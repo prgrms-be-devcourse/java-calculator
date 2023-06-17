@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.handler.ICalculateHandler;
+import calculator.respository.Repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculateHandlerTest {
 
-    ICalculateHandler calculateHandler = new CalculateHandler();
+    Repository repository = new MemoryResultRepository();
+    ICalculateHandler calculateHandler = new CalculateHandler(repository);
 
     @Test
     @DisplayName("사칙 연산이 정상적으로 동작한다.")
