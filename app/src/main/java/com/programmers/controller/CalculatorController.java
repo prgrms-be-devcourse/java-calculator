@@ -26,9 +26,11 @@ public class CalculatorController {
 				outputView.init();
 				String select = inputView.select();
 				Menu menu = Menu.of(select);
-				if (menu == Menu.VIEW) view();
-				else if (menu == Menu.CALCULATE) calculate();
-				else if (menu == Menu.EXIT) {
+				if (menu == Menu.VIEW) {
+					view();
+				} else if (menu == Menu.CALCULATE) {
+					calculate();
+				} else if (menu == Menu.EXIT) {
 					exit();
 					break;
 				}
