@@ -2,10 +2,12 @@ package com.programmers.io;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.programmers.domain.CalculatorRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayInputStream;
@@ -66,16 +68,73 @@ class ConsoleTest {
         }
     }
 
+    @CsvSource(value = {
+            "1 + 2 + 3 : 1+2+3",
+            "2 * 44 - 5 : 2*44-5",
+            "3 * 3 / 4 : 3*3/4"}, delimiter = ':')
+    @ParameterizedTest
+    void 계산식을_입력받고_빈_칸을_제거한_후_반환한다(String input, String expected) {
+        //given
+        //when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        //then
+        try {
+            String result = console.getExpressionSpaceRemoved();
+
+            assertThat(result).isEqualTo(expected);
+        } catch (NoSuchElementException ignore) {
+        }
+    }
+
+    @CsvSource(value = {
+            "1 + 2       + 3 : 1+2+3",
+            "2 *   44 - 5 : 2*44-5",
+            "3 *    3 / 4 : 3*3/4"}, delimiter = ':')
+    @ParameterizedTest
+    void 빈_칸을_제거한다(String input, String expected) {
+        //given
+        //when
+        //then
+        String result = console.removeSpace(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
     @Test
     void 종료_메시지를_출력한다() {
         //given
         //when
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
         console.printTermination();
 
         //then
         assertThat(outputStream.toString()).contains(TERMINATION_MESSAGE);
+    }
+
+    @Test
+    void 결과를_출력한다() {
+        //given
+        //when
+        console.printResult(30);
+
+        //then
+        assertThat(outputStream.toString()).contains("30");
+    }
+
+    @Test
+    void 저장된_계산_결과들을_출력한다() {
+        //given
+        CalculatorRepository calculatorRepository = new CalculatorRepository();
+        calculatorRepository.save("1 + 1 * 2 = 3");
+        calculatorRepository.save("1 + 9 * 5 = 46");
+        calculatorRepository.save("4 * 2 + 6 = 14");
+
+        //when
+        console.getResults();
+
+        //then
+        assertThat(outputStream.toString()).contains("1 + 1 * 2 = 3");
+        assertThat(outputStream.toString()).contains("1 + 9 * 5 = 46");
+        assertThat(outputStream.toString()).contains("4 * 2 + 6 = 14");
     }
 }
