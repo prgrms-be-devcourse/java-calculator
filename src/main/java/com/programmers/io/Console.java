@@ -1,5 +1,6 @@
 package com.programmers.io;
 
+import com.programmers.model.UserEquation;
 import com.programmers.util.Menu;
 import com.programmers.validator.InputValidator;
 
@@ -20,11 +21,11 @@ public class Console implements Input, Output{
     }
 
     @Override
-    public String getEquation() {
+    public UserEquation getEquation() {
         String userInput = scanner.nextLine();
         String equation = userInput.replaceAll(" ", "");
-        InputValidator.checkEquation(equation);
-        return equation;
+        UserEquation userEquation = new UserEquation(equation);
+        return userEquation;
     }
 
     @Override

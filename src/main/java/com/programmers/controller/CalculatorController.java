@@ -1,9 +1,10 @@
 package com.programmers.controller;
 
 import com.programmers.io.Console;
+import com.programmers.model.UserEquation;
 import com.programmers.service.CalculatorService;
 import com.programmers.util.Menu;
-import com.programmers.model.Request;
+import com.programmers.model.UserRequest;
 
 public class CalculatorController {
 
@@ -20,8 +21,8 @@ public class CalculatorController {
         while (isRunning) {
             try {
                 console.getMenu();
-                Request request = new Request(console.getRequest());
-                response(request);
+                UserRequest userRequest = new UserRequest(console.getRequest());
+                response(userRequest);
             } catch (RuntimeException e) {
                 console.printErrorMsg(e.getMessage());
             }
@@ -31,8 +32,8 @@ public class CalculatorController {
     // 사용자 요청에 응답하기
     // 새로운 객체로 감싸기 (Request)
     // 형변환에 대한 자유
-    private void response(Request request) throws RuntimeException {
-        Menu menu = Menu.getMenu(request);
+    private void response(UserRequest userRequest) throws RuntimeException {
+        Menu menu = Menu.getMenu(userRequest);
 
         //저장된 값 조회
         if (menu == Menu.HISTORY) {
@@ -53,9 +54,9 @@ public class CalculatorController {
     }
 
     private void doCalculate() {
-        String equation = console.getEquation();
+        UserEquation equation = console.getEquation();
         double answer = calculatorService.calculate(equation);
-        calculatorService.save(equation, answer);
+        calculatorService.save(equation.getEquation(), answer);
         console.println(answer);
     }
 

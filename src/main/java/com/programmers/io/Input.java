@@ -1,9 +1,11 @@
 package com.programmers.io;
 
+import com.programmers.model.UserEquation;
+
 public interface Input {
     String getRequest();
 
-    String getEquation();
+    UserEquation getEquation();
 
     void getMenu();
 

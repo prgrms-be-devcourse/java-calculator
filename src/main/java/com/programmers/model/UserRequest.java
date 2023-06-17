@@ -1,9 +1,9 @@
 package com.programmers.model;
 
-public class Request {
-    String request;
+public class UserRequest {
+    private String request;
 
-    public Request(String request) {
+    public UserRequest(String request) {
         this.request = request;
     }
 

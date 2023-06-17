@@ -2,6 +2,7 @@ package com.programmers.engine;
 
 import com.programmers.exception.DivideByZeroException;
 import com.programmers.exception.EquationFormatException;
+import com.programmers.model.UserEquation;
 import com.programmers.util.Operator;
 
 import java.util.*;
@@ -30,8 +31,8 @@ public class PostfixCalculator {
         return deque.pop();
     }
 
-    public double infixToPostfix(String infix) {
-
+    public double infixToPostfix(UserEquation equation) {
+        String infix = equation.getEquation();
         List<String> postfix = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
 
@@ -48,8 +49,7 @@ public class PostfixCalculator {
                 addAndReset(postfix, sb);
                 opStack.push(cur);
                 continue;
-            }
-            else {
+            } else {
                 addAndReset(postfix, sb);
                 if (cur == '(') {
                     opStack.push(cur);

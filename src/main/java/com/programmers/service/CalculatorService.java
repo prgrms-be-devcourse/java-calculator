@@ -1,6 +1,7 @@
 package com.programmers.service;
 
 import com.programmers.engine.PostfixCalculator;
+import com.programmers.model.UserEquation;
 import com.programmers.repository.CalculatorHistory;
 
 import java.util.Map;
@@ -14,7 +15,7 @@ public class CalculatorService {
         this.postfixCalculator = postfixCalculator;
     }
 
-    public double calculate(String equation) {
+    public double calculate(UserEquation equation) {
         return postfixCalculator.infixToPostfix(equation);
     }
 
