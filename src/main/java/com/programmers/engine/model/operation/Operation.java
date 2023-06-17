@@ -1,15 +1,16 @@
-package com.programmers.engine.model;
+package com.programmers.engine.model.operation;
 
-import com.programmers.engine.util.Confirmation;
+import com.programmers.engine.model.command.CalculationCommand;
+import com.programmers.engine.model.confirmation.Confirmation;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 public class Operation {
 
     public static Integer calculate(String command) {
-        List<String> operatorsAndOperands = splitOperatorsAndOperands(command);
+        CalculationCommand calculationCommand = new CalculationCommand(command);
+        List<String> operatorsAndOperands = calculationCommand.splitOperatorsAndOperands();
         Stack<String> operatorsStack = new Stack<>();
         Stack<Integer> operandsStack = new Stack<>();
         for (String element : operatorsAndOperands) {
@@ -18,10 +19,6 @@ public class Operation {
         }
         calculateRemainingValues(operatorsStack, operandsStack);
         return operandsStack.pop();
-    }
-
-    private static List<String> splitOperatorsAndOperands(String command) {
-        return Arrays.asList(command.split(" "));
     }
 
     private static void calculateRemainingValues(Stack<String> operatorsStack, Stack<Integer> operandsStack) {

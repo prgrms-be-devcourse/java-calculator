@@ -1,4 +1,4 @@
-package com.programmers.engine.model;
+package com.programmers.engine.model.operation;
 
 import java.util.Arrays;
 import java.util.Objects;

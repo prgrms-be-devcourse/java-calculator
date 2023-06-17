@@ -1,6 +1,7 @@
 package com.programmers.engine;
 
-import com.programmers.engine.model.Storage;
+import com.programmers.engine.model.storage.MapStorage;
+import com.programmers.engine.model.storage.Storage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

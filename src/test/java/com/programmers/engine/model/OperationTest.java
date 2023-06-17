@@ -1,5 +1,6 @@
 package com.programmers.engine.model;
 
+import com.programmers.engine.model.operation.Operation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package com.programmers.engine.model;
 
+import com.programmers.engine.model.operation.Operator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

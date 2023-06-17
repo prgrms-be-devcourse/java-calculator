@@ -1,4 +1,4 @@
-package com.programmers.engine.model;
+package com.programmers.engine.model.storage;
 
 import java.util.List;
 

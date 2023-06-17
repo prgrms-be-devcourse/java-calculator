@@ -1,6 +1,4 @@
-package com.programmers.engine;
-
-import com.programmers.engine.model.Storage;
+package com.programmers.engine.model.storage;
 
 import java.util.HashMap;
 import java.util.List;
