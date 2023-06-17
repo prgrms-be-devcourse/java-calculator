@@ -1,6 +1,8 @@
 package org.example.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Calculator {
 
@@ -21,7 +23,7 @@ public class Calculator {
         return result;
     }
 
-    public HashMap<String, Integer> getMap() {
-        return history.getMap();
+    public List<String> getHistory() {
+        return history.getHistory();
     }
 }

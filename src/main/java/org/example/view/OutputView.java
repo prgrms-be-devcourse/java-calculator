@@ -4,6 +4,7 @@ import org.example.domain.Calculator;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -23,15 +24,10 @@ public class OutputView {
     }
 
     public void printHistory(Calculator calculator) {
-        HashMap<String, Integer> map = calculator.getMap();
+        List<String> history = calculator.getHistory();
 
-        Iterator<Map.Entry<String, Integer>> entry = map.entrySet().iterator();
-
-        while (entry.hasNext()) {
-            Map.Entry<String, Integer> element = entry.next();
-
-            System.out.print(element.getKey() + " = ");
-            System.out.println(element.getValue());
+        for (int i = 0; i < history.size(); i++) {
+            System.out.println(history.get(i));
         }
     }
 }
