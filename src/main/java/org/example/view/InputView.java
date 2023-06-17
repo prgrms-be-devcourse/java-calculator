@@ -1,13 +1,13 @@
 package org.example.view;
 
-import org.example.validate.InputValidater;
+import org.example.validate.Validater;
 
 import java.util.Scanner;
 
 public class InputView {
     private static final String MESSAGE_CHOICE = "선택 : ";
 
-    private final InputValidater inputValidater = new InputValidater();
+    private final Validater validater = new Validater();
     private final Scanner sc = new Scanner(System.in);
 
     String readExpression() {
@@ -21,7 +21,7 @@ public class InputView {
         String command = sc.nextLine();
         System.out.println();
 
-        inputValidater.validateCommand(command);
+        Validater.validateCommand(command);
 
         return command;
     }

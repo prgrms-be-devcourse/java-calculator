@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.validate.Validater;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -9,7 +11,7 @@ public class CalculateExecuter {
 
         for (String x : str) {
 
-            if (!x.equals("+") && !x.equals("-") && !x.equals("*") && !x.equals("/")) {
+            if (Validater.isNumber(x)) {
                 stack.push(Integer.parseInt(x));
             } else {
 
