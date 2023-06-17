@@ -7,12 +7,12 @@ import org.example.io.Output;
 import org.example.calculator.Calculator;
 
 public class CalculatorController {
-  Calculator calculator = new Calculator();
-  History history = new History();
+  private Calculator calculator = new Calculator();
+  private History history = new History();
 
-  public static final int HISTORY = 1;
-  public static final int CALCULATE = 2;
-  public static final int EXIT = 3;
+  private static final int HISTORY = 1;
+  private static final int CALCULATE = 2;
+  private static final int EXIT = 3;
 
   public void run() {
     while (true) {
