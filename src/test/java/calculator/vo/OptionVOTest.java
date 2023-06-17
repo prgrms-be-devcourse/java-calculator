@@ -11,7 +11,7 @@ class OptionVOTest {
     @DisplayName("옵션이 1~2가 아닐 경우 예외가 발생한다.")
     @Test
     void 옵션_입력_예외() {
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new OptionVO("3"));
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new Option("3"));
         assertThat(e.getMessage()).isEqualTo("유효하지 않은 옵션입니다");
     }
 
@@ -21,7 +21,7 @@ class OptionVOTest {
         String[] options = {"1", "2"};
 
         for (String option : options) {
-            OptionVO optionVO = new OptionVO(option);
+            Option optionVO = new Option(option);
 
             String result = optionVO.get();
 
