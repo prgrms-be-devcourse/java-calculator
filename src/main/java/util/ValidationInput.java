@@ -60,7 +60,6 @@ public class ValidationInput {
     }
 
     private static int inputLoop(String[] inputDatas, int startIndex) {
-        boolean haveNumber = false;
         int curIndex=0;
 
         while (startIndex < inputDatas.length) {
@@ -71,10 +70,6 @@ public class ValidationInput {
             startIndex = eachInput(inputDatas, startIndex, curIndex);
 
             startIndex++; curIndex++;
-        }
-
-        if (!haveNumber) {
-            throw new IllegalException(ExceptionMsg.NotEquationFormatException);
         }
 
         return startIndex;
