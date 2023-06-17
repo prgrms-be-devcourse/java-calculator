@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class History {
-    private List<String> history = new ArrayList<>();
-
+    private final List<String> history = new ArrayList<>();
 
     public void save(String infixExpression, Integer result) {
         history.add(String.format("%s = %d", infixExpression, result));

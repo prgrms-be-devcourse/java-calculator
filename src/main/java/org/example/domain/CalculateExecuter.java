@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class CalculateExecuter {
     public Integer calculate(String[] str) {
-        Deque<Integer> stack = new ArrayDeque<>();
+        final Deque<Integer> stack = new ArrayDeque<>();
 
         for (String x : str) {
 
