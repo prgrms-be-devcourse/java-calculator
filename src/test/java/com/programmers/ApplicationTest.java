@@ -2,7 +2,7 @@ package com.programmers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.programmers.domain.Calculator;
+import com.programmers.controller.CalculatorController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 
 class ApplicationTest {
 
-    private final Calculator calculator = new Calculator();
+    private final CalculatorController calculatorController = new CalculatorController();
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private final InputStream inputStream = System.in;
     private final PrintStream printStream = System.out;
@@ -37,7 +37,7 @@ class ApplicationTest {
         System.setIn(new ByteArrayInputStream(String.join("\n", inputs).getBytes()));
 
         try {
-            calculator.run();
+            calculatorController.run();
 
             String output = outputStream.toString();
 
@@ -67,7 +67,7 @@ class ApplicationTest {
         System.setIn(new ByteArrayInputStream(String.join("\n", inputs).getBytes()));
 
         try {
-            calculator.run();
+            calculatorController.run();
             String output = outputStream.toString();
 
             assertTrue(output.contains("1. 조회"));

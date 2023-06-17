@@ -1,7 +1,8 @@
-package com.programmers.domain;
+package com.programmers.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.programmers.controller.CalculatorController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +13,9 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
 
-class CalculatorTest {
+class CalculatorControllerTest {
 
-    private final Calculator calculator = new Calculator();
+    private final CalculatorController calculatorController = new CalculatorController();
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private final InputStream inputStream = System.in;
     private final PrintStream printStream = System.out;
@@ -36,7 +37,7 @@ class CalculatorTest {
         System.setIn(new ByteArrayInputStream(String.join("\n", inputs).getBytes()));
 
         try {
-            calculator.run();
+            calculatorController.run();
             String output = outputStream.toString();
 
             assertTrue(output.contains("1. 조회"));
@@ -58,7 +59,7 @@ class CalculatorTest {
         System.setIn(new ByteArrayInputStream(String.join("\n", inputs).getBytes()));
 
         try {
-            calculator.run();
+            calculatorController.run();
             String output = outputStream.toString();
 
             assertTrue(output.contains("1. 조회"));
@@ -78,7 +79,7 @@ class CalculatorTest {
         System.setIn(new ByteArrayInputStream(String.join("\n", inputs).getBytes()));
 
         try {
-            calculator.run();
+            calculatorController.run();
             String output = outputStream.toString();
 
             assertTrue(output.contains("1. 조회"));

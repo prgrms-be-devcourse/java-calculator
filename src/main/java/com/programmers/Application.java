@@ -1,11 +1,11 @@
 package com.programmers;
 
 
-import com.programmers.domain.Calculator;
+import com.programmers.controller.CalculatorController;
 
 public class Application {
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
-        calculator.run();
+        CalculatorController calculatorController = new CalculatorController();
+        calculatorController.run();
     }
 }
