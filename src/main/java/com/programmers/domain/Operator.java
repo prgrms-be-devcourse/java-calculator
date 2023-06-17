@@ -24,7 +24,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter(op -> Objects.equals(op.operator, input))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("연산자를 찾을 수 없습니다. = " + input));
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 연산자를 찾을 수 없습니다. = " + input));
     }
 
     public static int findImportance(String operator) {
@@ -32,7 +32,7 @@ public enum Operator {
                 .filter(op -> Objects.equals(op.operator, operator))
                 .map(op -> op.importance)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("우선순위를 찾을 수 없습니다. = " + operator));
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 우선순위를 찾을 수 없습니다. = " + operator));
     }
 
     public int calculate(int num1, int num2) {
