@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.calculate;
+package com.programmers.java.calculator;
 
 import com.programmers.java.util.OperandChecker;
 

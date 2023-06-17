@@ -1,16 +1,15 @@
 package com.programmers.java;
 
-import com.programmers.java.calculator.calculate.Calculator;
-import com.programmers.java.calculator.calculate.PostfixConverter;
+import com.programmers.java.calculator.Calculator;
+import com.programmers.java.calculator.PostfixConverter;
 import com.programmers.java.record.CalculationRecord;
-import com.programmers.java.util.ExpressionTokenizer;
+import com.programmers.java.calculator.ExpressionTokenizer;
 import com.programmers.java.view.Menu;
 import com.programmers.java.view.Input;
 import com.programmers.java.view.Output;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
     static Output output = new Output();
@@ -19,10 +18,10 @@ public class Main {
     static CalculationRecord calculationRecord = new CalculationRecord();
     static ExpressionTokenizer expressionTokenizer = new ExpressionTokenizer();
     static PostfixConverter postfixConverter = new PostfixConverter();
-
     static boolean isRunning = true;
 
     public static void main(String[] args) throws IOException {
+
         while (isRunning) {
             output.viewMenu();
 

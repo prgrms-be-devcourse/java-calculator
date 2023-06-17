@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.calculate;
+package com.programmers.java.calculator;
 
 import com.programmers.java.util.OperandChecker;
 
@@ -34,7 +34,6 @@ public class PostfixConverter {
         for (Operator remainOperator : operatorStack) {
             postfixExpression.append(remainOperator).append(" ");
         }
-
         return postfixExpression.toString();
     }
 }

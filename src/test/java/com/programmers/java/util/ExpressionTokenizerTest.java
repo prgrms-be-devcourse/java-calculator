@@ -1,14 +1,12 @@
 package com.programmers.java.util;
 
-import com.programmers.java.record.CalculationRecord;
+import com.programmers.java.calculator.ExpressionTokenizer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ExpressionTokenizerTest {
 

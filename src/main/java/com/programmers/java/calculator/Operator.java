@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.calculate;
+package com.programmers.java.calculator;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;

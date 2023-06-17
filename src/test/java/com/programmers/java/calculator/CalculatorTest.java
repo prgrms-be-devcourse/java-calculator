@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.calculate;
+package com.programmers.java.calculator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
