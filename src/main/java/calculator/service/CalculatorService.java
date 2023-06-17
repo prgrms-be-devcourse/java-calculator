@@ -27,7 +27,7 @@ public class CalculatorService {
        throw new IllegalException(ExceptionMsg.NotSaveException);
     }
 
-    public List<String> getCalculateList() {
+    public List<String> getCalculateResults() {
         List<Calculator> calculators = this.calculatorRepository.findAll();
         return calculators.stream()
                 .map(Calculator::toString)

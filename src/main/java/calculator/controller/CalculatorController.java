@@ -72,6 +72,6 @@ public class CalculatorController {
     }
 
     private void executeSearch() {
-        outputView.printCalculators(this.calculatorService.getCalculateList());
+        outputView.printCalculators(this.calculatorService.getCalculateResults());
     }
 }

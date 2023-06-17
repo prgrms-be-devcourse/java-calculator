@@ -48,7 +48,7 @@ public class CalculatorServiceTest {
         CalculateRequest calculateRequest = new CalculateRequest(userInput);
         calculatorService.calculate(calculateRequest);
 
-        assertThat(calculatorService.getCalculateList().stream()
+        assertThat(calculatorService.getCalculateResults().stream()
                 .anyMatch(calc -> make.equals(calc)))
                 .isTrue();
     }
