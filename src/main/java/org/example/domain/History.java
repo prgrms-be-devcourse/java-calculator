@@ -2,7 +2,7 @@ package org.example.domain;
 
 import java.util.HashMap;
 
-public class Memory {
+public class History {
     private HashMap<String, Integer> map = new HashMap<>();
 
     void save(String infixExpression, Integer result) {
