@@ -114,7 +114,8 @@ public class PostfixCalculator {
     private int compareOperatorPriority(char target, char cur) {
         int targetOperator = Operator.getPriority(target);
         int curOperator = Operator.getPriority(cur);
-
+        
+        // 여기를 분리할 수도
         if (targetOperator < curOperator) {
             return 1;
         } else if (targetOperator == curOperator) {

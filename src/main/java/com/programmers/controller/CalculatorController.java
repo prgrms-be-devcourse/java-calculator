@@ -1,10 +1,9 @@
 package com.programmers.controller;
 
-import com.programmers.exception.MenuFormatException;
 import com.programmers.io.Console;
 import com.programmers.service.CalculatorService;
 import com.programmers.util.Menu;
-import com.programmers.util.Request;
+import com.programmers.model.Request;
 
 public class CalculatorController {
 

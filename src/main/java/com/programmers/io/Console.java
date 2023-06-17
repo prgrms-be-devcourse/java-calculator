@@ -14,15 +14,15 @@ public class Console implements Input, Output{
 
     @Override
     public String getRequest() {
-        String _request = scanner.nextLine();
-        String request = _request.replaceAll(" ", "");
+        String userInput = scanner.nextLine();
+        String request = userInput.replaceAll(" ", "");
         return request;
     }
 
     @Override
     public String getEquation() {
-        String _equation = scanner.nextLine();
-        String equation = _equation.replaceAll(" ", "");
+        String userInput = scanner.nextLine();
+        String equation = userInput.replaceAll(" ", "");
         InputValidator.checkEquation(equation);
         return equation;
     }

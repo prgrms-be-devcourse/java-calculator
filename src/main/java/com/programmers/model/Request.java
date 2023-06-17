@@ -1,4 +1,4 @@
-package com.programmers.util;
+package com.programmers.model;
 
 public class Request {
     String request;
