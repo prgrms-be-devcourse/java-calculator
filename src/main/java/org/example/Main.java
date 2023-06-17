@@ -7,11 +7,12 @@ import org.example.view.CalculatorView;
 public class Main {
     public static void main(String[] args) {
         CalculatorSystem calculatorSystem = new CalculatorSystem();
+        CalculatorView calculatorView = new CalculatorView();
 
         try {
             calculatorSystem.run();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            calculatorView.printExceptionMessage(e.getMessage());
         }
     }
 }

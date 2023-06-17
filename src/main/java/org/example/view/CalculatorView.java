@@ -30,4 +30,8 @@ public class CalculatorView {
     public void printHistory(Calculator calculator) {
         outputView.printHistory(calculator);
     }
+
+    public void printExceptionMessage(String message) {
+        outputView.printExceptionMessage(message);
+    }
 }

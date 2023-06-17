@@ -30,4 +30,8 @@ public class OutputView {
             System.out.println(history.get(i));
         }
     }
+
+    public void printExceptionMessage(String message) {
+        System.out.println(message);
+    }
 }
