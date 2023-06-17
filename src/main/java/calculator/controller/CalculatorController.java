@@ -4,7 +4,9 @@ import calculator.service.CalculatorService;
 import ui.InputView;
 import ui.OutputView;
 import util.Menu;
+import util.model.CalculateRequest;
 
+import java.net.CacheRequest;
 import java.util.function.Supplier;
 
 public class CalculatorController {
@@ -49,11 +51,14 @@ public class CalculatorController {
     }
 
     private void executeCalc() {
-        Double result = userInput(()->{
+        outputView.printResult(this.calculatorService.calculate(getUserEquation()));
+    }
+
+    private CalculateRequest getUserEquation() {
+        return userInput(()->{
             outputView.printEmptyMsg();
-            return this.calculatorService.calculate(inputView.getEquationAfterCheckException());
+            return new CalculateRequest(inputView.getEquationAfterCheckException());
         });
-        outputView.printResult(result);
     }
 
     private <T> T userInput(Supplier<T> input) {

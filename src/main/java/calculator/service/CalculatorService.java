@@ -5,6 +5,7 @@ import calculator.domain.PostFixCalculate;
 import calculator.repository.CalculatorRepository;
 import util.ExceptionMsg;
 import util.IllegalException;
+import util.model.CalculateRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,10 +16,9 @@ public class CalculatorService {
         this.calculatorRepository = calculatorRepository;
     }
 
-    public double calculate(String userInput) {
-        //Calculator calculator = PostFixCalculator.parseCalculator(userInput);
+    public double calculate(CalculateRequest calculateRequest) {
         Calculator calculator = new Calculator(new PostFixCalculate());
-        calculator.calculate(userInput);
+        calculator.calculate(calculateRequest.getEquation());
 
         if (this.calculatorRepository.add(calculator)) {
             return calculator.getResult();

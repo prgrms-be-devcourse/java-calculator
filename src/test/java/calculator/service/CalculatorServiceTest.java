@@ -5,6 +5,7 @@ import calculator.repository.CalculatorRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import util.model.CalculateRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +29,8 @@ public class CalculatorServiceTest {
             ,"3 / 4 - 1 / 4, 0.5"
     })
     void 계산식_통합_test(String userInput, double result) {
-        assertThat(result).isEqualTo(calculatorService.calculate(userInput));
+        CalculateRequest calculateRequest = new CalculateRequest(userInput);
+        assertThat(result).isEqualTo(calculatorService.calculate(calculateRequest));
     }
 
 
@@ -43,7 +45,8 @@ public class CalculatorServiceTest {
     })
     void 저장소에_데이터추가_확인_test(String userInput, double result) {
         String make = userInput+" = "+result;
-        calculatorService.calculate(userInput);
+        CalculateRequest calculateRequest = new CalculateRequest(userInput);
+        calculatorService.calculate(calculateRequest);
 
         assertThat(calculatorService.getCalculateList().stream()
                 .anyMatch(calc -> make.equals(calc)))
