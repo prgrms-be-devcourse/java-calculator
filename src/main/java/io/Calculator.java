@@ -69,13 +69,13 @@ public class Calculator {
             }
 
             int choice = Integer.parseInt(getChoice);
-            if (choice == 1) {
+            if (choice == Menu.QUERY.getMenuNumber()) {
                 // 조회
                 runInquiry();
-            } else if (choice == 2) {
+            } else if (choice == Menu.CALCULATE.getMenuNumber()) {
                 // 계산
                 runCalculator();
-            } else if (choice == 3) {
+            } else if (choice == Menu.EXIT.getMenuNumber()) {
                 // 종료
                 System.exit(0);
             } else {
