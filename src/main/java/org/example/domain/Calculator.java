@@ -6,7 +6,7 @@ public class Calculator {
 
     final private ExpressionConvertor expressionConvertor;
     final private CalculateExecuter calculateExecuter;
-    final private History history;
+    final private HistoryInterface history;
 
     public Calculator() {
         this.expressionConvertor = new ExpressionConvertor();

@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.util.Operator;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -13,43 +15,53 @@ public class ExpressionConvertor {
         Deque<String> stack = new ArrayDeque<>();
 
         for (int i = 0; i < str.length; i++) {
-            String now = str[i];
+            String token = str[i];
 
-            switch (now) {
-                case "+":
-                case "-":
-                case "*":
-                case "/":
-                    while (!stack.isEmpty() && priority(stack.peek()) >= priority(now)) {
+            if (!Operator.isOperator(token)) {
+                sb.add(token);
+                continue;
+            }
+
+            Operator op = Operator.getOperator(token);
+
+            switch (op) {
+                case PLUS:
+                case MINUS:
+                case MULTIPLY:
+                case DIVIDE:
+                    while (hasValueInStack(stack) && shouldPopOperator(stack, token)) {
                         sb.add(stack.pop());
                     }
-                    stack.push(now);
+                    stack.push(token);
                     break;
-                case "(":
-                    stack.push(now);
+                case OPEN_BRACKET:
+                    stack.push(token);
                     break;
-                case ")":
-                    while (!stack.isEmpty() && !stack.peek().equals("(")) {
+                case CLOSE_BRACKET:
+                    while (hasValueInStack(stack) && !stack.peek().equals("(")) {
                         sb.add(stack.pop());
                     }
                     stack.pop();
                     break;
                 default:
-                    sb.add(now);
+                    throw new RuntimeException("[ERROR] 정상적인 계산식이 아닙니다.");
             }
         }
 
-        while (!stack.isEmpty()) {
+        while (hasValueInStack(stack)) {
             sb.add(stack.pop());
         }
 
-        String[] result = new String[sb.size()];
-
-        for (int i = 0; i < sb.size(); i++) {
-            result[i] = sb.get(i);
-        }
-
+        String[] result = sb.stream().toArray(String[]::new);
         return result;
+    }
+
+    private boolean shouldPopOperator(Deque<String> stack, String token) {
+        return getOperatorPriority(stack.peek()) >= getOperatorPriority(token);
+    }
+
+    private boolean hasValueInStack(Deque<String> stack) {
+        return !stack.isEmpty();
     }
 
     private String removeSpaces(String infix) {
@@ -69,16 +81,7 @@ public class ExpressionConvertor {
         return infix.split(" ");
     }
 
-    private int priority(String operator) {
-
-        if (operator.equals("(") || operator.equals(")")) {
-            return 0;
-        } else if (operator.equals("+") || operator.equals("-")) {
-            return 1;
-        } else if (operator.equals("*") || operator.equals("/")) {
-            return 2;
-        }
-
-        return -1;
+    private int getOperatorPriority(String operator) {
+        return Operator.getOperator(operator).getPriority();
     }
 }
