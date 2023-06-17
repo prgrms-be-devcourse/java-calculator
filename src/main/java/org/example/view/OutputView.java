@@ -1,7 +1,5 @@
 package org.example.view;
 
-import org.example.domain.Calculator;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -23,9 +21,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printHistory(Calculator calculator) {
-        List<String> history = calculator.getHistory();
-
+    public void printHistory(List<String> history) {
         for (int i = 0; i < history.size(); i++) {
             System.out.println(history.get(i));
         }

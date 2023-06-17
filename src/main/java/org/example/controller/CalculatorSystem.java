@@ -20,7 +20,7 @@ public class CalculatorSystem {
             Command command = Command.getCommand(calculatorView.readCommand());
 
             if (command == Command.HISTORY) {
-                calculatorView.printHistory(calculator);
+                calculatorView.printHistory(calculator.getHistory());
             }
             if (command == Command.CALCULATE) {
                 String expression = calculatorView.readExpression();

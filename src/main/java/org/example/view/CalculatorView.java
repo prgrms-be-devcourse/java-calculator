@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.domain.Calculator;
+import java.util.List;
 
 public class CalculatorView {
     final private InputView inputView;
@@ -26,9 +26,8 @@ public class CalculatorView {
         outputView.printCalcResult(result);
     }
 
-    //Controller에서 주입
-    public void printHistory(Calculator calculator) {
-        outputView.printHistory(calculator);
+    public void printHistory(List<String> history) {
+        outputView.printHistory(history);
     }
 
     public void printExceptionMessage(String message) {
