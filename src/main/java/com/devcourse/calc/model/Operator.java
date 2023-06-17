@@ -8,32 +8,32 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum Operator implements Token {
-    OPEN("(", 1, null),
-    CLOSE(")", 1, null),
-    PLUS("+", 2, (number1, number2) -> number1 + number2),
-    MINUS("-", 2, (number1, number2) -> number1 - number2),
-    MULTIPLE("*", 3, (number1, number2) -> number1 * number2),
-    DIVISION("/", 3, (number1, number2) -> {
+    OPEN('(', 1, null),
+    CLOSE(')', 1, null),
+    PLUS('+', 2, (number1, number2) -> number1 + number2),
+    MINUS('-', 2, (number1, number2) -> number1 - number2),
+    MULTIPLE('*', 3, (number1, number2) -> number1 * number2),
+    DIVISION('/', 3, (number1, number2) -> {
         checkDivideZero(number2);
         return number1 / number2;
     });
 
-    private static final Map<String, Operator> operators = Arrays.stream(values())
+    private static final Map<Character, Operator> operators = Arrays.stream(values())
             .collect(toMap(operator -> operator.sign, identity()));
 
-    private final String sign;
+    private final char sign;
 
     private final int priority;
     private final BiFunction<Integer, Integer, Integer> action;
 
-    Operator(String sign, int priority, BiFunction<Integer, Integer, Integer> action) {
+    Operator(char sign, int priority, BiFunction<Integer, Integer, Integer> action) {
         this.sign = sign;
         this.priority = priority;
         this.action = action;
     }
 
     public static Operator find(char sign) {
-        return operators.get(Character.toString(sign));
+        return operators.get(sign);
     }
 
     public boolean isLowerPriority(Operator other) {
@@ -60,7 +60,7 @@ public enum Operator implements Token {
 
     @Override
     public String toString() {
-        return sign;
+        return Character.toString(sign);
     }
 
     private static void checkDivideZero(int denominator) {
