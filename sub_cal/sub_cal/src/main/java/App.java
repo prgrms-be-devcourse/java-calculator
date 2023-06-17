@@ -41,7 +41,7 @@ public class App implements Runnable{
                     if (!(output.showResultHistory(historyEntity.getHistory()))) output.historyEmptyError();
                     break;
                 case CALCULATE:
-                    System.out.print("계산식을 입력해주세요 : ");
+                    output.printInputExpressionMessage();
 
                     String inputString = null;
 
@@ -55,7 +55,7 @@ public class App implements Runnable{
                         historyEntity.addHistory(inputString,result);
 
                     } catch (Exception e) {
-                        output.inputEmptyError("수식을 입력해주세요!");
+                        output.printEmptyInputExpressionMessage();
                         break;
                     }
 

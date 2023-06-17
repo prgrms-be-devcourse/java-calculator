@@ -34,7 +34,6 @@ public class Operation {
                     operStack.add(operator.toString());
                     break;
                 case NULL:
-
                     if(operStack.isEmpty() || operStack.pop().equals("PLUS")){
                         numberStack.push(Double.parseDouble(word));
                         break;

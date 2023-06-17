@@ -1,4 +1,3 @@
-
 import io.Input;
 import io.Output;
 import option.Option;
@@ -13,7 +12,7 @@ public class Console implements Input,  Output {
     public Option selectOption() throws NoSuchElementException, IOException {
         Optional<Option> userOption = Option.getMenu(br.readLine());
         if(userOption.isEmpty()) {
-            System.out.println("존재하지 않는 메뉴입니다.");
+            printInvalidMenuErrorMessage();
         }
 
         return userOption.get();
@@ -50,9 +49,24 @@ public class Console implements Input,  Output {
         Arrays.stream(Option.values()).forEach(o -> System.out.println(o));
     }
 
+    @Override
+    public void printInvalidMenuErrorMessage() {
+        System.out.println("존재하지 않는 메뉴입니다.");
+    }
+
 
     @Override
     public void printResult(String result) {
         System.out.println(result);
+    }
+
+    @Override
+    public void printInputExpressionMessage() {
+        System.out.print("계산식을 입력해주세요:");
+    }
+
+    @Override
+    public void printEmptyInputExpressionMessage() {
+        System.out.println("수식을 입력해주세요.");
     }
 }
