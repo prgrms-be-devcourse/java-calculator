@@ -16,26 +16,29 @@ class PostfixConverterTest {
     void 중위표기식을_후위표기식으로_변환한다() {
         //given
         List<String> tokens = Arrays.asList("5", "+", "2", "/", "7");
-        List<String> expected = Arrays.asList("5", "2", "7", "/", "+");
 
         //when
         List<String> result = postfixConverter.convertInfixToPostfix(tokens);
 
         //then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).containsExactly("5", "2", "7", "/", "+");
     }
 
-//    @Test
-//    void 두_연산자의_우선순위를_비교한다() {
-//        //given
-//        boolean expected = false;
-//
-//        //when
-//        boolean result = postfixConverter.isProceed("+", "*");
-//
-//        //then
-//        assertThat(expected).isEqualTo(result);
-//    }
+    @CsvSource(value = {
+            "+ : * : false",
+            "+ : - : true",
+            "* : / : true",
+            "* : - : true"
+    }, delimiter = ':')
+    @ParameterizedTest
+    void 두_연산자의_우선순위를_비교한다(String op1, String op2, boolean expected) {
+        //given
+        //when
+        boolean result = postfixConverter.compareOperators(op1, op2);
+
+        //then
+        assertThat(result).isEqualTo(expected);
+    }
 
     @CsvSource(value = {
             "145 : true",
