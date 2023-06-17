@@ -5,15 +5,13 @@ import com.programmers.engine.model.confirmation.Confirmation;
 import java.util.Arrays;
 import java.util.List;
 
-public class CalculationCommand {
 
-    private final Confirmation confirmation;
+public class CalculationCommand {
 
     private String calculationCommand;
 
-    public CalculationCommand(String calculationCommand) {
+    public CalculationCommand(String calculationCommand, Confirmation confirmation) {
         this.calculationCommand = calculationCommand;
-        this.confirmation = new Confirmation();
         confirmation.validateCalculationCommand(calculationCommand);
     }
 

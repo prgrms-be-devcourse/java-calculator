@@ -12,6 +12,7 @@ public class Calculator implements Runnable {
     private final Input input;
     private final Output output;
     private final Storage storage;
+    private final Operation operation;
 
     @Override
     public void run() {
@@ -50,7 +51,7 @@ public class Calculator implements Runnable {
 
     private void calculate(String calculationCommand) {
         try {
-            Integer calculationResult = Operation.calculate(calculationCommand);
+            Integer calculationResult = operation.calculate(calculationCommand);
             save(calculationCommand, calculationResult);
             printCalculationResult(calculationResult);
         } catch (IllegalArgumentException e) {
