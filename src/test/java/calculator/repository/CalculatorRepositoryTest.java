@@ -2,6 +2,7 @@ package calculator.repository;
 
 import calculator.domain.Calculator;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorRepositoryTest {
-    private static CalculatorRepository calculatorRepository;
-    @BeforeAll
-    static void initRepository() {
+    private CalculatorRepository calculatorRepository;
+    @BeforeEach
+    void initRepository() {
         calculatorRepository = new CalculatorRepository();
     }
 
