@@ -1,34 +1,28 @@
 package com.programmers.controller;
 
+import com.programmers.domain.Calculator;
+import com.programmers.domain.Menu;
 import com.programmers.io.Console;
-import com.programmers.service.CalculatorService;
 
 public class CalculatorController {
 
-    private static int GET_RESULT = 1;
-    private static int TERMINATE = 3;
-
     private final Console console = new Console();
-    private final CalculatorService calculatorService = new CalculatorService(console);
+    private final Calculator calculator = new Calculator(console);
 
     public void run() {
-        int menuSelection = calculatorService.getValidatedMenuSelection();
+        boolean activated = true;
 
-        while (true) {
-            if (menuSelection == TERMINATE) {
-                console.printTermination();
-                break;
+        while (activated) {
+            Menu menu = console.getValidatedMenuSelection();
+
+            switch (menu) {
+                case TERMINATE -> {
+                    console.printTermination();
+                    activated = false;
+                }
+                case GET_RESULT -> console.getResults();
+                case CALCULATE -> calculator.calculate();
             }
-
-            if (menuSelection == GET_RESULT) {
-                calculatorService.getResult();
-                menuSelection = calculatorService.getValidatedMenuSelection();
-                continue;
-            }
-
-            System.out.println();
-            calculatorService.calculate();
-            menuSelection = calculatorService.getValidatedMenuSelection();
         }
     }
 }
