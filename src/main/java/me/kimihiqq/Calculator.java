@@ -44,20 +44,22 @@ public class Calculator {
 
     public void calculate() {
         while (true) {
+            try {
+                String formula = scanner.nextLine();
+                Pretreatment.validateFormula(formula);
 
-            String formula = scanner.nextLine();
-            if (!Pretreatment.validateFormula(formula)) continue;
+                List<String> terms = Pretreatment.parseFormula(formula);
 
-            List<String> terms = Pretreatment.parseFormula(formula);
+                terms = executeOperation(terms, Arrays.asList("*", "/"));
+                terms = executeOperation(terms, Arrays.asList("+", "-"));
 
-            terms = executeOperation(terms, Arrays.asList("*", "/"));
-            terms = executeOperation(terms, Arrays.asList("+", "-"));
+                printResult(terms.get(0));
+                saveHistory(formula, terms.get(0));
 
-            printResult(terms.get(0));
-            saveHistory(formula, terms.get(0));
-
-            break;
-
+                break;
+            } catch (IllegalArgumentException e) {
+                printer.println(e.getMessage());
+            }
         }
     }
 
@@ -88,8 +90,10 @@ public class Calculator {
                 return leftHandSide / rightHandSide;
             case "+":
                 return leftHandSide + rightHandSide;
-            default :
+            case "-":
                 return leftHandSide - rightHandSide;
+            default:
+                throw new IllegalArgumentException("Invalid operator");
         }
     }
 

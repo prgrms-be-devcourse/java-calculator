@@ -11,11 +11,9 @@ public class Pretreatment {
         return Arrays.stream(arr).collect(Collectors.toList());
     }
 
-    public static boolean validateFormula(String formula) {
+    public static void validateFormula(String formula) {
         if (!formula.matches("^(-*\\d+\\s[+\\-*/]\\s)+\\d+$")) {
-            System.out.println("Invalid formula!");
-            return false;
+            throw new IllegalArgumentException("Invalid formula! Please enter again.");
         }
-        return true;
     }
 }
