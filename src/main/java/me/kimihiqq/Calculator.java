@@ -9,6 +9,7 @@ import me.kimihiqq.options.Option;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class Calculator {
@@ -20,12 +21,14 @@ public class Calculator {
     public boolean run() {
         printer.println("1. 조회\n2. 계산\n3. 종료\n");
         String selectPage = scanner.nextLine("선택 : ");
-        Option option = Option.from(selectPage);
+        Optional<Option> optionalOption = Option.from(selectPage);
 
-        if (option == null) {
+        if (!optionalOption.isPresent()) {
             printer.println("Invalid page!");
             return true;
         }
+
+        Option option = optionalOption.get();
 
         switch (option) {
             case LIST:

@@ -1,5 +1,7 @@
 package me.kimihiqq.options;
 
+import java.util.Optional;
+
 public enum Option {
     LIST("1"),
     CALCULATE("2"),
@@ -15,12 +17,12 @@ public enum Option {
         return value;
     }
 
-    public static Option from(String value) {
+    public static Optional<Option> from(String value) {
         for (Option option : Option.values()) {
             if (option.getValue().equals(value)) {
-                return option;
+                return Optional.of(option);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }
