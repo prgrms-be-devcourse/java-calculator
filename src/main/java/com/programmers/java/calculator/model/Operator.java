@@ -47,6 +47,10 @@ public enum Operator {
         return pattern.matcher(strNum).matches();
     }
 
+    public static boolean isOperator(String strNum) {
+        return OPERATOR_MAP.containsKey(strNum);
+    }
+
     public int comparePriority(Operator newOperator) {
         return Integer.compare(this.getPriority(), newOperator.getPriority());
     }
