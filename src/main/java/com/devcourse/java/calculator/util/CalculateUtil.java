@@ -6,13 +6,13 @@ import java.util.Stack;
 
 public class CalculateUtil {
 
-    public String calculateAndReturnEquationWithAnswer(String equation) {
+    public static String calculateAndReturnEquationWithAnswer(String equation) {
         String postfix = changeToPostfix(equation);
         String calculateAnswer = calculatePostfix(postfix);
         return equation + " = " + calculateAnswer;
     }
 
-    private int getPriority(char ch) {
+    private static int getPriority(char ch) {
         switch (ch) {
             case '+':
             case '-':
@@ -25,7 +25,7 @@ public class CalculateUtil {
         }
     }
 
-    public String changeToPostfix(String equation) {
+    public static String changeToPostfix(String equation) {
         StringBuilder stringBuilder = new StringBuilder();
         Stack<Character> stack = new Stack<>();
 
@@ -53,7 +53,7 @@ public class CalculateUtil {
         return stringBuilder.toString().replaceAll("  ", " ");
     }
 
-    public String calculatePostfix(String postfix) {
+    public static String calculatePostfix(String postfix) {
         Stack<Integer> operandStack = new Stack<>();
         String[] splitPostfix = postfix.split(" ");
 

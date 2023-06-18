@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 
 public class InputValidator {
 
-    public void checkCommandInput(String input) {
+    public static void checkCommandInput(String input) {
         if (!isInteger(input)) {
             throw new InputMismatchException(ExceptionConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
         }
@@ -19,26 +19,26 @@ public class InputValidator {
         }
     }
 
-    private boolean isInteger(String input) {
+    public static boolean isInteger(String input) {
         return input.matches("^?\\d*$");
     }
 
-    private boolean isInBoundary(String input) {
+    public static boolean isInBoundary(String input) {
         int command = Integer.parseInt(input);
         return (command >= 1 && command <= 3);
     }
 
-    public boolean isOperator(String token) {
+    public static boolean isOperator(String token) {
         return token.matches("^[\\+\\-\\*\\/]$");
     }
 
-    public void checkCalculateHistoryLength(LinkedHashMap<Integer, String> calculateHistory) {
+    public static void checkCalculateHistoryLength(LinkedHashMap<Integer, String> calculateHistory) {
         if (calculateHistory.isEmpty()) {
             throw new IllegalArgumentException(ExceptionConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
         }
     }
 
-    public void checkEquationInput(String equation) {
+    public static void checkEquationInput(String equation) {
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(equation.split(" ")));
 
         throwIfEquationIsEmpty(equation);
@@ -46,19 +46,19 @@ public class InputValidator {
         throwIfEquationIsWrong(tokens);
     }
 
-    public void throwIfEquationIsEmpty(String equation) {
+    public static void throwIfEquationIsEmpty(String equation) {
         if (equation.length() == 0) {
             throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }
 
-    public void throwIfEquationStartOrEndWithNoInteger(ArrayList<String> tokens) {
+    public static void throwIfEquationStartOrEndWithNoInteger(ArrayList<String> tokens) {
         if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
             throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }
 
-    public void throwIfEquationIsWrong(ArrayList<String> tokens) {
+    public static void throwIfEquationIsWrong(ArrayList<String> tokens) {
         int digit = 0;
         int operation = 0;
         boolean continuedOperation = true;

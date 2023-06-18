@@ -1,20 +1,19 @@
 package com.devcourse.java.calculator;
 
-import com.devcourse.java.calculator.constant.MenuConstant;
+import com.devcourse.java.calculator.constant.Menu;
 import com.devcourse.java.calculator.io.Input;
 import com.devcourse.java.calculator.io.Output;
 import com.devcourse.java.calculator.repository.CalculatorRepository;
 import com.devcourse.java.calculator.util.CalculateUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Calculator implements Runnable{
 
     private final Input input;
     private final Output output;
     private final CalculatorRepository calculatorRepository;
-    private final CalculateUtil calculateUtil;
-    private int command;
+    private Menu command;
 
     @Override
     public void run() {
@@ -23,27 +22,23 @@ public class Calculator implements Runnable{
             output.printCommandMenu();
 
             try {
-                command = input.getCommand();
+                command = Menu.getCommandMenu(input.getCommand());
             } catch (RuntimeException e) {
                 output.printExceptionMessage(e.getMessage());
                 continue;
             }
 
-            if (command == MenuConstant.SELECTED_EXIT_COMMAND) {
-                return;
+            switch (command) {
+                case SELECTED_EXIT:
+                    return;
+                case SELECTED_PRINT_HISTORY:
+                    printHistoryCommand();
+                    break;
+                case SELECTED_CALCULATE:
+                    calculateCommand();
+                    break;
             }
 
-            runCommand(command);
-        }
-    }
-
-    public void runCommand(int command) {
-        if (command == MenuConstant.SELECTED_PRINT_HISTORY_COMMAND) {
-            printHistoryCommand();
-        }
-
-        else if (command == MenuConstant.SELECTED_CALCULATE_COMMAND) {
-            calculateCommand();
         }
     }
 
@@ -60,7 +55,7 @@ public class Calculator implements Runnable{
         try {
             output.printRequestEquationInput();
             String equation = input.getEquation();
-            String equationWithAnswer = calculateUtil.calculateAndReturnEquationWithAnswer(equation);
+            String equationWithAnswer = CalculateUtil.calculateAndReturnEquationWithAnswer(equation);
             output.printAnswerFromEquation(equationWithAnswer);
             calculatorRepository.storeHistory(equationWithAnswer);
 
