@@ -5,25 +5,31 @@ import java.util.Optional;
 
 
 public enum Option {
-    HISTORY("1","조회"),
-    CALCULATE("2","계산");
+    HISTORY("1","조회","HISTORY"),
+    CALCULATE("2","계산","CALCULATE");
 
-    private final String option;
     private final String index;
+    private final String option;
+    private final String menuName;
 
-    Option(String option,String index) {
-        this.option = option;
+    Option(String index,String option,String menuName) {
         this.index = index;
+        this.option = option;
+        this.menuName = menuName;
+    }
+
+    public String getMenuName() {
+        return menuName;
     }
 
     @Override
     public String toString() {
-        return option + '.' + index ;
+        return index + '.' + option ;
     }
 
     public static Optional<Option> getMenu(String option) {
         return Arrays.stream(values())
-                .filter(o -> o.option.equals(option))
+                .filter(o -> o.index.equals(option))
                 .findFirst();
     }
 }

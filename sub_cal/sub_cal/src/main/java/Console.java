@@ -12,9 +12,14 @@ public class Console implements Input,  Output {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     @Override
     public Option selectOption() throws NoSuchElementException, IOException {
-        Optional<Option> userOption = Option.getMenu(br.readLine());
+        return selectOptionValue(br.readLine());
+    }
+
+    private Option selectOptionValue(String inputNumber) throws IOException {
+        Optional<Option> userOption = Option.getMenu(inputNumber);
         if(InputValidation.isValidMenuNumber(userOption)) {
             printInvalidMenuErrorMessage();
+            throw new IOException();
         }
 
         return userOption.get();
@@ -22,11 +27,12 @@ public class Console implements Input,  Output {
 
     @Override
     public String inputExpression() throws IOException {
-        String input = br.readLine();
-        if(InputValidation.isEmptyInputExpression(input)){
+        String Expression = br.readLine();
+        if(InputValidation.isEmptyInputExpression(Expression)){
             printEmptyInputExpressionMessage();
+            throw new IOException();
         }
-        return input;
+        return Expression;
     }
 
     @Override
@@ -49,8 +55,8 @@ public class Console implements Input,  Output {
         Arrays.stream(Option.values()).forEach(o -> System.out.println(o));
     }
 
-    @Override
-    public void printInvalidMenuErrorMessage() {
+
+    private void printInvalidMenuErrorMessage() {
         System.out.println("존재하지 않는 메뉴입니다.");
     }
 
@@ -65,8 +71,8 @@ public class Console implements Input,  Output {
         System.out.print("계산식을 입력해주세요:");
     }
 
-    @Override
-    public void printEmptyInputExpressionMessage() {
+
+    private void printEmptyInputExpressionMessage() {
         System.out.println("수식을 입력해주세요.");
     }
 }

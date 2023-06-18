@@ -41,7 +41,6 @@ public class App implements Runnable{
                     if (!(output.showResultHistory(historyEntity.getHistory()))) output.historyEmptyError();
                     break;
                 case CALCULATE:
-                    output.printInputExpressionMessage();
 
                     String inputString = null;
 
