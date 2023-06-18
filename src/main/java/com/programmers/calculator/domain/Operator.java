@@ -42,15 +42,15 @@ public enum Operator {
                 .orElseThrow(() -> new InvalidOperatorException(ErrorMessage.INVALID_OPERATOR));
     }
 
-    public boolean equals(String symbol) {
-        return this.symbol.equals(symbol);
-    }
-
     public boolean isHigherPriorityThan(Operator operator) {
         return this.priority >= operator.priority;
     }
 
     public double calculate(double operand1, double operand2) {
         return this.operation.apply(operand1, operand2);
+    }
+
+    private boolean equals(String symbol) {
+        return this.symbol.equals(symbol);
     }
 }

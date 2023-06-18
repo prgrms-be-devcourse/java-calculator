@@ -33,7 +33,7 @@ public enum Menu {
                 .orElseThrow(() -> new InvalidMenuException(ErrorMessage.INVALID_MENU_NUMBER));
     }
 
-    public boolean equals(String menuNumber) {
+    private boolean equals(String menuNumber) {
         return this.menuNumber.equals(menuNumber);
     }
 }
