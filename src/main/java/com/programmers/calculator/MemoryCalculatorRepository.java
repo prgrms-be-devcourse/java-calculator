@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CalculatorMemory {
+public class MemoryCalculatorRepository implements CalculatorRepository {
     private static final Map<Long, CalculationResult> store = new HashMap<>();
     private static long sequence = 0L;
 

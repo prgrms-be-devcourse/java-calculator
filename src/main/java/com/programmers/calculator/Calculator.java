@@ -9,10 +9,10 @@ import java.util.Deque;
 import java.util.List;
 
 public class Calculator {
-    private final CalculatorMemory calculatorMemory;
+    private final CalculatorRepository calculatorRepository;
 
-    public Calculator(CalculatorMemory calculatorMemory) {
-        this.calculatorMemory = calculatorMemory;
+    public Calculator(CalculatorRepository calculatorRepository) {
+        this.calculatorRepository = calculatorRepository;
     }
 
     public double calculate(String postfixExpression) {
@@ -32,11 +32,11 @@ public class Calculator {
     }
 
     public void saveCalculationResult(CalculationResult calculationResult) {
-        calculatorMemory.save(calculationResult);
+        calculatorRepository.save(calculationResult);
     }
 
     public List<CalculationResult> findCalculationHistory() {
-        return calculatorMemory.findAll();
+        return calculatorRepository.findAll();
     }
 
     private void handleDigit(Deque<Double> operandStack, String digit) {

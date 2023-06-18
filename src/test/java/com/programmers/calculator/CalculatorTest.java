@@ -8,12 +8,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorTest {
     Calculator calculator;
-    CalculatorMemory calculatorMemory;
+    CalculatorRepository calculatorRepository;
 
     @BeforeEach
     void beforeEach() {
-        calculatorMemory = new CalculatorMemory();
-        calculator = new Calculator(calculatorMemory);
+        calculatorRepository = new MemoryCalculatorRepository();
+        calculator = new Calculator(calculatorRepository);
     }
 
     @Test

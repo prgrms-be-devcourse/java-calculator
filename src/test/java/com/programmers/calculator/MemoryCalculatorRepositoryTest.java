@@ -9,12 +9,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CalculatorMemoryTest {
-    CalculatorMemory calculatorMemory = new CalculatorMemory();
+class MemoryCalculatorRepositoryTest {
+    MemoryCalculatorRepository repository = new MemoryCalculatorRepository();
 
     @AfterEach
     void afterEach() {
-        calculatorMemory.clear();
+        repository.clear();
     }
 
     @Test
@@ -23,9 +23,9 @@ class CalculatorMemoryTest {
         // given
         CalculationResult calculationResult = new CalculationResult("1 + 2", 3);
         // when
-        calculatorMemory.save(calculationResult);
+        repository.save(calculationResult);
         // then
-        int size = calculatorMemory.findAll().size();
+        int size = repository.findAll().size();
         assertThat(size).isEqualTo(1);
     }
 
@@ -34,12 +34,12 @@ class CalculatorMemoryTest {
     void 계산_결과_리스트_조회() {
         // given
         CalculationResult calculationResult1 = new CalculationResult("1 + 2", 3);
-        calculatorMemory.save(calculationResult1);
+        repository.save(calculationResult1);
 
         CalculationResult calculationResult2 = new CalculationResult("2 * 3", 6);
-        calculatorMemory.save(calculationResult2);
+        repository.save(calculationResult2);
         // when
-        List<CalculationResult> result = calculatorMemory.findAll();
+        List<CalculationResult> result = repository.findAll();
         // then
         assertThat(result.size()).isEqualTo(2);
     }
