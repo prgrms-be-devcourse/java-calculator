@@ -30,6 +30,11 @@ public enum Operator {
         return " " + symbol + " ";
     }
 
+    public static boolean isOperator(String symbol) {
+        return Arrays.stream(Operator.values())
+                .anyMatch(operator -> operator.equals(symbol));
+    }
+
     public static Operator findBySymbol(String symbol) {
         return Arrays.stream(Operator.values())
                 .filter(operator -> operator.equals(symbol))

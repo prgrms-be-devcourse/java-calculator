@@ -22,7 +22,8 @@ public class Calculator {
                 .forEach(token -> {
                     if (Character.isDigit(token.charAt(0))) {
                         handleDigit(operandStack, token);
-                    } else {
+                    }
+                    if (Operator.isOperator(token)) {
                         handleOperator(operandStack, token);
                     }
                 });

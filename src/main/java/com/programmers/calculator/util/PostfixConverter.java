@@ -15,7 +15,8 @@ public class PostfixConverter {
                 .forEach(token -> {
                     if (Character.isDigit(token.charAt(0))) {
                         appendToken(postfixExpression, token);
-                    } else {
+                    }
+                    if (Operator.isOperator(token)) {
                         handleOperator(postfixExpression, operatorStack, token);
                     }
                 });
