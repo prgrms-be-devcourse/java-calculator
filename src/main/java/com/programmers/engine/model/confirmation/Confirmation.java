@@ -1,5 +1,8 @@
 package com.programmers.engine.model.confirmation;
 
+import com.programmers.engine.exception.CalculatorErrorCode;
+import com.programmers.engine.exception.CalculatorException;
+
 import java.util.regex.Pattern;
 
 public class Confirmation {
@@ -18,7 +21,7 @@ public class Confirmation {
                 .filter(e -> !(isOperator(e) || isOperand(e)))
                 .findAny()
                 .isPresent() || !calculationCommand.contains(" ")) {
-            throw new IllegalArgumentException("잘못된 계산식 입니다.");
+            throw new CalculatorException(CalculatorErrorCode.COMMAND_ERROR);
         }
     }
 }

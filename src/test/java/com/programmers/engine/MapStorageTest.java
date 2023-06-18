@@ -9,16 +9,17 @@ import java.util.List;
 
 class MapStorageTest {
 
+    public static final String CALCULATION_COMMAND = "1 + 2";
+    public static final Integer CALCULATION_RESULT = 3;
     Storage storage = new MapStorage();
 
     @Test
     void 계산_결과_저장_및_조회_테스트() {
-        String calculationCommand = "1 + 2";
-        Integer calculationResult = 3;
 
-        storage.save(calculationCommand, calculationResult);
+        storage.save(CALCULATION_COMMAND, CALCULATION_RESULT);
         List<List<String>> searchResult = storage.findAll();
 
-        Assertions.assertThat(searchResult.get(0)).containsExactly("1 + 2", "3");
+        Assertions.assertThat(searchResult.get(0))
+                .containsExactly(CALCULATION_COMMAND, CALCULATION_RESULT+"");
     }
 }

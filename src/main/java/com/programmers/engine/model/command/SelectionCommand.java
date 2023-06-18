@@ -1,5 +1,8 @@
 package com.programmers.engine.model.command;
 
+import com.programmers.engine.exception.CalculatorErrorCode;
+import com.programmers.engine.exception.CalculatorException;
+
 public enum SelectionCommand {
     HISTORY("1"), CALCULATION("2");
 
@@ -17,7 +20,7 @@ public enum SelectionCommand {
         return switch (number) {
             case "1" -> HISTORY;
             case "2" -> CALCULATION;
-            default -> throw new IllegalArgumentException("1 또는 2 를 입력해 주세요");
+            default -> throw new CalculatorException(CalculatorErrorCode.SELECTION_ERROR);
         };
     }
 }

@@ -1,5 +1,6 @@
 package com.programmers.engine.controller;
 
+import com.programmers.engine.exception.CalculatorException;
 import com.programmers.engine.io.Input;
 import com.programmers.engine.io.Output;
 import com.programmers.engine.model.command.SelectionCommand;
@@ -29,7 +30,7 @@ public class Calculator implements Runnable {
     private boolean canNotOperation(String selectionResult) {
         try {
             return operate(selectionResult);
-        } catch (IllegalArgumentException e) {
+        } catch (CalculatorException e) {
             System.out.println(e.getMessage());
         }
         return true;
@@ -54,7 +55,7 @@ public class Calculator implements Runnable {
             Integer calculationResult = operation.calculate(calculationCommand);
             save(calculationCommand, calculationResult);
             printCalculationResult(calculationResult);
-        } catch (IllegalArgumentException e) {
+        } catch (CalculatorException e) {
             System.out.println(e.getMessage());
         }
     }

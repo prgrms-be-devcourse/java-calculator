@@ -1,5 +1,7 @@
 package com.programmers.engine.model;
 
+import com.programmers.engine.exception.CalculatorErrorCode;
+import com.programmers.engine.exception.CalculatorException;
 import com.programmers.engine.model.operation.Operator;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +39,7 @@ class OperatorTest {
     void 잘못된_연산자_입력시_예외_테스트() {
         String input = "=";
         assertThatThrownBy(()->Operator.getOperator(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(CalculatorErrorCode.OPERATOR_ERROR.getErrorMessage());
     }
 }

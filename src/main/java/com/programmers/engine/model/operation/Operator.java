@@ -1,5 +1,8 @@
 package com.programmers.engine.model.operation;
 
+import com.programmers.engine.exception.CalculatorErrorCode;
+import com.programmers.engine.exception.CalculatorException;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.BiFunction;
@@ -26,7 +29,7 @@ public enum Operator {
         return Arrays.stream(Operator.values())
                 .filter(o -> Objects.equals(o.operator, input))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 연산자 입니다."));
+                .orElseThrow(() -> new CalculatorException(CalculatorErrorCode.OPERATOR_ERROR));
     }
 
     public Integer calculate(Integer operand1, Integer operand2) {
