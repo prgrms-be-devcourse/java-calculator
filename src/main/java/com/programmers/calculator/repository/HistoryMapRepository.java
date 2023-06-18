@@ -13,7 +13,7 @@ public class HistoryMapRepository implements HistoryRepository {
     @Override
     public void save(CalculationHistory calculationHistory) {
         calculationHistory.setId(++sequence);
-        store.put(calculationHistory.getId(), calculationHistory);
+        store.put(calculationHistory.getId(), calculationHistory.saveHistory());
     }
 
     @Override

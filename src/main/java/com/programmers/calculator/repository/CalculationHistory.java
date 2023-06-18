@@ -22,8 +22,7 @@ public class CalculationHistory {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return id + " : " + expression + " = " + result;
+    public CalculationHistory saveHistory() {
+        return this;
     }
 }
