@@ -9,6 +9,7 @@ public class Console {
 
     private final Input input;
     private final Output output;
+    private final String newLine = System.getProperty("line.separator");
 
     public Console(Input input, Output output) {
         this.input = input;
@@ -16,7 +17,7 @@ public class Console {
     }
 
     public String inputOption() {
-        output.write("\n\n선택 : ");
+        output.write(newLine + newLine + "선택 : ");
         return input.read();
     }
 
@@ -25,9 +26,9 @@ public class Console {
     }
 
     public void outputOption() {
-        output.write("\n0. 종료");
-        output.write("\n1. 조회");
-        output.write("\n2. 계산");
+        output.write(newLine + "0. 종료");
+        output.write(newLine + "1. 조회");
+        output.write(newLine + "2. 계산");
     }
 
     public void outputExit() {
