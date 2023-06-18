@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import programmers.java.calulator.common.command.factory.CommandType;
 import programmers.java.calulator.common.command.impl.PrintHistoryCommand;
 import programmers.java.calulator.common.repository.History;
 import programmers.java.calulator.common.repository.Repository;
@@ -11,6 +12,7 @@ import programmers.java.calulator.common.writer.Writer;
 import programmers.java.calulator.console.repository.MapHistory;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class PrintHistoryCommandTest {
@@ -36,5 +38,21 @@ public class PrintHistoryCommandTest {
         // then
         verify(mockWriter, times(1)).write(history1.toString());
         verify(mockWriter, times(1)).write(history2.toString());
+    }
+
+    @Test
+    @DisplayName("PrintHistoryCommand의 CommandType 반환 테스트")
+    public void CommandType_반환_테스트() {
+        // given
+        Writer mockWriter = Mockito.mock(Writer.class);
+        Repository mockRepository = Mockito.mock(Repository.class);
+
+        PrintHistoryCommand command = new PrintHistoryCommand(mockWriter, mockRepository);
+
+        // when
+        CommandType commandType = command.getCommandType();
+
+        // then
+        assertEquals(CommandType.PRINT_HISTORY, commandType);
     }
 }

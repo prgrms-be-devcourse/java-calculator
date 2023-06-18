@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import programmers.java.calulator.common.calculator.Calculator;
 import programmers.java.calulator.common.command.Command;
+import programmers.java.calulator.common.command.factory.CommandType;
 import programmers.java.calulator.common.reader.Reader;
 import programmers.java.calulator.common.repository.Repository;
 import programmers.java.calulator.common.writer.Writer;
@@ -13,7 +14,6 @@ import programmers.java.calulator.common.command.impl.ExecuteCalculationCommand;
 import programmers.java.calulator.common.command.impl.PrintHistoryCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class MenuHandlerTest {
@@ -22,6 +22,7 @@ public class MenuHandlerTest {
     private Reader reader;
     private Repository repository;
     private MenuHandler menuHandler;
+    private static final String MENU_ITEM_SEPARATOR = ". ";
 
     @BeforeEach
     void setUp() {
@@ -36,12 +37,14 @@ public class MenuHandlerTest {
     @DisplayName("메뉴 출력 테스트")
     void 메뉴_출력_테스트() {
         //given
+        int expectedMenuItems = CommandType.values().length;
 
         //when
         menuHandler.printMenu();
 
         //then
-        verify(writer, times(3)).write(anyString());
+        verify(writer, times(expectedMenuItems)).write(contains(MENU_ITEM_SEPARATOR));
+        verify(writer, times(1)).write("선택 : ");
     }
 
     @Test

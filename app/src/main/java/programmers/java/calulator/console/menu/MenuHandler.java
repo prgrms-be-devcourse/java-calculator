@@ -7,12 +7,13 @@ import programmers.java.calulator.common.repository.Repository;
 import programmers.java.calulator.common.writer.Writer;
 import programmers.java.calulator.common.command.factory.CommandType;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MenuHandler {
+    private static final String MENU_ITEM_SEPARATOR = ". ";
     private final Writer writer;
     private final Map<String, Command> commands;
     private final Reader reader;
@@ -21,22 +22,22 @@ public class MenuHandler {
 
     public MenuHandler(Writer writer, Calculator calculator, Reader reader, Repository repository) {
         this.writer = writer;
-        this.commands = new HashMap<>();
         this.reader = reader;
         this.calculator = calculator;
         this.repository = repository;
-        initializeCommands();
+        this.commands = initializeCommands();
     }
 
-    private void initializeCommands() {
-        Stream.of(CommandType.values()).forEach(commandType ->
-                commands.put(commandType.getCommand(), commandType.createCommand(writer, calculator, reader, repository))
-        );
+    private Map<String, Command> initializeCommands() {
+        return Stream.of(CommandType.values())
+                .collect(Collectors.toMap(CommandType::getCommand, commandType -> commandType.createCommand(writer, calculator, reader, repository)));
     }
 
     public void printMenu() {
-        writer.write("1. 조회");
-        writer.write("2. 계산");
+        commands.values().forEach(command -> {
+            CommandType commandType = command.getCommandType();
+            writer.write(commandType.getCommand() + MENU_ITEM_SEPARATOR + commandType.getDescription());
+        });
         writer.write("선택 : ");
     }
 

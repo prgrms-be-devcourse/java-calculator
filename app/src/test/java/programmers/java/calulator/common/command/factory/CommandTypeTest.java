@@ -18,25 +18,29 @@ public class CommandTypeTest {
     private final Calculator calculator = Mockito.mock(Calculator.class);
     private final Reader reader = Mockito.mock(Reader.class);
     private final Repository repository = Mockito.mock(Repository.class);
+
     @Test
-    @DisplayName("PrintHistory 커맨드 생성 테스트")
+    @DisplayName("PRINT_HISTORY Command 생성 및 값 확인 테스트")
     public void printHistoryCommandTest() {
         // given
         String expectedCommand = "1";
+        String expectedDescription = "조회";
 
         // when
         Command command = CommandType.PRINT_HISTORY.createCommand(writer, calculator, reader, repository);
 
         // then
         assertEquals(expectedCommand, CommandType.PRINT_HISTORY.getCommand());
+        assertEquals(expectedDescription, CommandType.PRINT_HISTORY.getDescription());
         assertTrue(command instanceof PrintHistoryCommand);
     }
 
     @Test
-    @DisplayName("ExecuteCalculation 커맨드 생성 테스트")
+    @DisplayName("EXECUTE_CALCULATION Command 생성 및 값 확인 테스트")
     public void executeCalculationCommandTest() {
         // given
         String expectedCommand = "2";
+        String expectedDescription = "계산";
 
         // when
         Command command = CommandType.EXECUTE_CALCULATION.createCommand(writer, calculator, reader, repository);
