@@ -21,10 +21,10 @@ class HistoryMapRepositoryTest {
             "1 + 2 * 3, 7",
             "3 + 2 * 3 / 3, 5"
     })
-    void repository_right_work(String testExpression, BigDecimal expectedResult) {
+    void repository_right_work(String inputExpression, BigDecimal expectedResult) {
 
         // given
-        Expression expression = new Expression(testExpression);
+        Expression expression = new Expression(inputExpression);
         CalculationResult calculationResult = new CalculationResult(expectedResult);
         CalculationHistory result = new CalculationHistory(expression, calculationResult);
 

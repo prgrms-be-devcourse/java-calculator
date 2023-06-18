@@ -7,7 +7,8 @@ import com.programmers.calculator.domain.component.PostfixEvaluator;
 import com.programmers.calculator.domain.vo.CalculationResult;
 import com.programmers.calculator.domain.vo.Expression;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
 
@@ -20,17 +21,21 @@ class FourArithmeticCalculatorTest {
     FourArithmeticCalculator calculator = new FourArithmeticCalculator(converter, evaluator);
 
     @DisplayName("사칙연산 계산기의 계산이 잘 되는지 확인")
-    @Test
-    void right_calculate() {
+    @ParameterizedTest
+    @CsvSource({
+            "1 + 5 * 3 - 8, 8",
+            "1 + 2 * 9 - 6, 13"
+    })
+    void right_calculate(String inputExpression, BigDecimal expectedResult) {
 
         // given
-        Expression expression = new Expression("1 + 5 * 3 - 8");
+        Expression expression = new Expression(inputExpression);
 
         // when
         CalculationResult result = calculator.calculate(expression);
 
         // then
-        assertThat(result.getValue()).isEqualTo(new BigDecimal(8));
+        assertThat(result.getValue()).isEqualTo(expectedResult);
 
     }
 

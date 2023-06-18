@@ -2,8 +2,8 @@ package com.programmers.calculator.domain.core;
 
 import com.programmers.calculator.domain.vo.CalculationResult;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
@@ -14,14 +14,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class OperatorTest {
 
     @DisplayName("0으로 나눴을 때 예외를 던지는지 확인")
-    @Test
-    void division_by_zero_throw_exception() {
+    @ParameterizedTest
+    @CsvSource({"5, 0", "13, 0"})
+    void division_by_zero_throw_exception(BigDecimal testOperand1, BigDecimal testOperand2) {
 
         // given
         Operator division = Operator.DIVISION;
 
-        CalculationResult operand1 = new CalculationResult(new BigDecimal(5));
-        CalculationResult operand2 = new CalculationResult(new BigDecimal(0));
+        CalculationResult operand1 = new CalculationResult(testOperand1);
+        CalculationResult operand2 = new CalculationResult(testOperand2);
 
         // when
         assertThatThrownBy(() -> division.getFunction()
