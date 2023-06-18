@@ -5,6 +5,7 @@ import me.kimihiqq.io.Input;
 import me.kimihiqq.io.Output;
 import me.kimihiqq.model.History;
 import me.kimihiqq.options.Option;
+import me.kimihiqq.utils.FormulaProcessor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,9 +50,9 @@ public class Calculator {
         while (true) {
             try {
                 String formula = scanner.nextLine();
-                Pretreatment.validateFormula(formula);
+                FormulaProcessor.isValidFormula(formula);
 
-                List<String> terms = Pretreatment.parseFormula(formula);
+                List<String> terms = FormulaProcessor.parseFormula(formula);
 
                 terms = executeOperation(terms, Arrays.asList("*", "/"));
                 terms = executeOperation(terms, Arrays.asList("+", "-"));
