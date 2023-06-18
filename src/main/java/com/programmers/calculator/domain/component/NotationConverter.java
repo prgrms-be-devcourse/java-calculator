@@ -2,6 +2,6 @@ package com.programmers.calculator.domain.component;
 
 import java.util.List;
 
-public interface Converter {
+public interface NotationConverter {
     List<String> convert(List<String> tokens);
 }

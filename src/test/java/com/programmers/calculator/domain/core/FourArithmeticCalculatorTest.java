@@ -1,7 +1,7 @@
 package com.programmers.calculator.domain.core;
 
-import com.programmers.calculator.domain.component.Converter;
 import com.programmers.calculator.domain.component.Evaluator;
+import com.programmers.calculator.domain.component.NotationConverter;
 import com.programmers.calculator.domain.component.PostfixConverter;
 import com.programmers.calculator.domain.component.PostfixEvaluator;
 import com.programmers.calculator.domain.vo.CalculationResult;
@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class FourArithmeticCalculatorTest {
 
-    Converter converter = new PostfixConverter();
+    NotationConverter converter = new PostfixConverter();
     Evaluator evaluator = new PostfixEvaluator();
     FourArithmeticCalculator calculator = new FourArithmeticCalculator(converter, evaluator);
 

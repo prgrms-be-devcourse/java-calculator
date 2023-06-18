@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class PostfixConverter implements Converter {
+public class PostfixConverter implements NotationConverter {
 
     @Override
     public List<String> convert(List<String> tokens) {

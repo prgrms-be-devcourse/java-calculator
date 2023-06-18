@@ -1,8 +1,8 @@
 package com.programmers.calculator.domain.core;
 
 import com.programmers.calculator.constant.RegexEnum;
-import com.programmers.calculator.domain.component.Converter;
 import com.programmers.calculator.domain.component.Evaluator;
+import com.programmers.calculator.domain.component.NotationConverter;
 import com.programmers.calculator.domain.vo.CalculationResult;
 import com.programmers.calculator.domain.vo.Expression;
 
@@ -10,10 +10,10 @@ import java.util.List;
 
 public class FourArithmeticCalculator implements Calculator {
 
-    private final Converter converter;
+    private final NotationConverter converter;
     private final Evaluator evaluator;
 
-    public FourArithmeticCalculator(Converter converter, Evaluator evaluator) {
+    public FourArithmeticCalculator(NotationConverter converter, Evaluator evaluator) {
         this.converter = converter;
         this.evaluator = evaluator;
     }
