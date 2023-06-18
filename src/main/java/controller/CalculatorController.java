@@ -50,7 +50,6 @@ public class CalculatorController {
 
     private CalculationResult calculatePostfixExpression(Expression expression) {
         List<String> postfixExpression = converter.convert(expression);
-        CalculationResult calculationResult = calculation.calculate(postfixExpression);
-        return calculationResult;
+        return calculation.calculate(postfixExpression);
     }
 }

@@ -8,13 +8,13 @@ import static model.calculation.CalculationImpl.ZERO_DIVIDE;
 
 public enum Operator {
     PLUS("+", 1, Integer::sum),
-    MINUS("-", 1, (operand1, operand2) -> operand2 - operand1),
-    MULTIPLY("*", 2, (operand1, operand2) -> operand2 * operand1),
-    DIVIDE("/", 2, (operand1, operand2) -> {
-        if (operand1 == 0) {
+    MINUS("-", 1, (now, prev) -> prev - now),
+    MULTIPLY("*", 2, (now, prev) -> prev * now),
+    DIVIDE("/", 2, (now, prev) -> {
+        if (now == 0) {
             throw new ArithmeticException(ZERO_DIVIDE);
         }
-        return operand2 / operand1;
+        return prev / now;
     });
 
     private final String signature;
@@ -41,8 +41,8 @@ public enum Operator {
                     .anyMatch(textSegment::equals);
     }
 
-    public static Integer calculateArithmetic(Operator operator, Integer operand1, Integer operand2) {
-        return operator.operation.apply(operand1, operand2);
+    public static Integer calculateArithmetic(Operator operator, Integer now, Integer prev) {
+        return operator.operation.apply(now, prev);
     }
 
     public static Operator findOperator(String signature) {

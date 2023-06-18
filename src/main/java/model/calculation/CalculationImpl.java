@@ -33,15 +33,15 @@ public class CalculationImpl implements Calculation {
         return s.matches(IS_NUMBER_PATTERN);
     }
 
-    private void pushNumberToStack(Integer number) {
-        numberStack.push(number);
+    private Integer calculatePostfixOperation(String textSegment) {
+        Integer nowNumber = numberStack.pop();
+        Integer prevNumber = numberStack.pop();
+        Operator operator = findOperator(textSegment);
+        Integer operationResult = calculateArithmetic(operator, nowNumber, prevNumber);
+        return operationResult;
     }
 
-    private Integer calculatePostfixOperation(String textSegment) {
-        Integer number1 = numberStack.pop();
-        Integer number2 = numberStack.pop();
-        Operator operator = findOperator(textSegment);
-        Integer operationResult = calculateArithmetic(operator, number1, number2);
-        return operationResult;
+    private void pushNumberToStack(Integer number) {
+        numberStack.push(number);
     }
 }
