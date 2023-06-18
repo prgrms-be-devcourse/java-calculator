@@ -34,7 +34,7 @@ public enum RegexEnum {
 
     public static List<String> parseToTokens(Expression expression) {
         List<String> tokens = new ArrayList<>();
-        Matcher matcher = RegexEnum.FOUR_ARITHMETIC.getPattern().matcher(expression);
+        Matcher matcher = RegexEnum.FOUR_ARITHMETIC.getPattern().matcher(expression.toString());
 
         while (matcher.find()) {
             tokens.add(matcher.group());
