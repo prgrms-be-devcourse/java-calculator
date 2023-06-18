@@ -29,14 +29,14 @@ public class PostfixConverter implements Converter {
         return postfix;
     }
 
-    private static void compareOperatorPriority(List<String> postfix, Stack<Character> operatorStack, char tokenChar) {
+    private void compareOperatorPriority(List<String> postfix, Stack<Character> operatorStack, char tokenChar) {
         while (!operatorStack.isEmpty() && (Operator.of(tokenChar).getPriority() <= Operator.of(operatorStack.peek()).getPriority())) {
             char popOperator = operatorStack.pop();
             postfix.add(String.valueOf(popOperator));
         }
     }
 
-    private static void pushUntilEmptyStack(List<String> postfix, Stack<Character> operatorStack) {
+    private void pushUntilEmptyStack(List<String> postfix, Stack<Character> operatorStack) {
         while (!operatorStack.isEmpty()) {
             postfix.add(operatorStack.pop().toString());
         }

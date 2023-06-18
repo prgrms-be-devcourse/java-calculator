@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class HistoryMapRepository implements HistoryRepository {
 
-    private static Map<Long, CalculationHistory> store = new HashMap<>();
-    private static long sequence = 0L;
+    private final Map<Long, CalculationHistory> store = new HashMap<>();
+    private long sequence = 0L;
 
     @Override
     public void save(CalculationHistory calculationHistory) {
