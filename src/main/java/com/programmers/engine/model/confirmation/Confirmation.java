@@ -17,7 +17,7 @@ public class Confirmation {
                 .splitAsStream(calculationCommand)
                 .filter(e -> !(isOperator(e) || isOperand(e)))
                 .findAny()
-                .isPresent()) {
+                .isPresent() || !calculationCommand.contains(" ")) {
             throw new IllegalArgumentException("잘못된 계산식 입니다.");
         }
     }
