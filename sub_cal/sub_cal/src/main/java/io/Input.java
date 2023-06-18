@@ -8,5 +8,5 @@ public interface Input {
 
     Option selectOption() throws IOException;
 
-    String inputString() throws IOException;
+    String inputExpression() throws IOException;
 }

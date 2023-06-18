@@ -46,7 +46,7 @@ public class App implements Runnable{
                     String inputString = null;
 
                     try {
-                        inputString = input.inputString();
+                        inputString = input.inputExpression();
 
                         String result = calculator.calculate(inputString);
 
@@ -55,7 +55,6 @@ public class App implements Runnable{
                         historyEntity.addHistory(inputString,result);
 
                     } catch (Exception e) {
-                        output.printEmptyInputExpressionMessage();
                         break;
                     }
 

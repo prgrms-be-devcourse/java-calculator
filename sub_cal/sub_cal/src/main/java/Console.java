@@ -1,6 +1,8 @@
 import io.Input;
 import io.Output;
 import option.Option;
+import validation.InputValidation;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +13,7 @@ public class Console implements Input,  Output {
     @Override
     public Option selectOption() throws NoSuchElementException, IOException {
         Optional<Option> userOption = Option.getMenu(br.readLine());
-        if(userOption.isEmpty()) {
+        if(InputValidation.isValidMenuNumber(userOption)) {
             printInvalidMenuErrorMessage();
         }
 
@@ -19,14 +21,12 @@ public class Console implements Input,  Output {
     }
 
     @Override
-    public String inputString() throws IOException {
+    public String inputExpression() throws IOException {
         String input = br.readLine();
+        if(InputValidation.isEmptyInputExpression(input)){
+            printEmptyInputExpressionMessage();
+        }
         return input;
-    }
-
-    @Override
-    public void inputEmptyError(String inputString) {
-        System.out.println(inputString);
     }
 
     @Override
