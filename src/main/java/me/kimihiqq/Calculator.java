@@ -6,6 +6,7 @@ import me.kimihiqq.io.Output;
 import me.kimihiqq.model.History;
 import me.kimihiqq.options.Option;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -42,31 +43,32 @@ public class Calculator {
     }
 
     public void calculate() {
-        String formula = scanner.nextLine();
-        if (!Pretreatment.validateFormula(formula)) return;
-        List<String> terms = Pretreatment.parseFormula(formula);
+        while (true) {
 
-        terms = executeMultiplicationAndDivision(terms);
+            String formula = scanner.nextLine();
+            if (!Pretreatment.validateFormula(formula)) continue;
 
-        terms = executeAdditionAndSubtraction(terms);
+            List<String> terms = Pretreatment.parseFormula(formula);
 
-        printResult(terms.get(0));
+            terms = executeOperation(terms, Arrays.asList("*", "/"));
+            terms = executeOperation(terms, Arrays.asList("+", "-"));
 
-        saveHistory(formula, terms.get(0));
+            printResult(terms.get(0));
+            saveHistory(formula, terms.get(0));
+
+            break;
+
+        }
     }
 
-    private List<String> executeMultiplicationAndDivision(List<String> terms) {
+    private List<String> executeOperation(List<String> terms, List<String> operators) {
         int i = 0;
         while (i < terms.size()) {
-            if (terms.get(i).equals("*") || terms.get(i).equals("/")) {
+            if (operators.contains(terms.get(i))) {
                 long leftHandSide = Long.parseLong(terms.get(i - 1));
                 long rightHandSide = Long.parseLong(terms.get(i + 1));
-                long result = 0;
-                if (terms.get(i).equals("*")) {
-                    result = leftHandSide * rightHandSide;
-                } else if (terms.get(i).equals("/")) {
-                    result = leftHandSide / rightHandSide;
-                }
+                long result = calculateOperation(terms.get(i), leftHandSide, rightHandSide);
+
                 for (int j = 0; j < 3; j++) {
                     terms.remove(i - 1);
                 }
@@ -78,27 +80,17 @@ public class Calculator {
         return terms;
     }
 
-    private List<String> executeAdditionAndSubtraction(List<String> terms) {
-        int i = 0;
-        while (i < terms.size()) {
-            if (terms.get(i).equals("+") || terms.get(i).equals("-")) {
-                long leftHandSide = Long.parseLong(terms.get(i - 1));
-                long rightHandSide = Long.parseLong(terms.get(i + 1));
-                long result = 0;
-                if (terms.get(i).equals("+")) {
-                    result = leftHandSide + rightHandSide;
-                } else if (terms.get(i).equals("-")) {
-                    result = leftHandSide - rightHandSide;
-                }
-                for (int j = 0; j < 3; j++) {
-                    terms.remove(i - 1);
-                }
-                terms.add(i - 1, String.valueOf(result));
-            } else {
-                i++;
-            }
+    private long calculateOperation(String operator, long leftHandSide, long rightHandSide) {
+        switch (operator) {
+            case "*":
+                return leftHandSide * rightHandSide;
+            case "/":
+                return leftHandSide / rightHandSide;
+            case "+":
+                return leftHandSide + rightHandSide;
+            default :
+                return leftHandSide - rightHandSide;
         }
-        return terms;
     }
 
     private void printResult(String result) {
