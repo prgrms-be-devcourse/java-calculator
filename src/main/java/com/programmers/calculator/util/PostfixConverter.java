@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Deque;
 
 public class PostfixConverter {
+    private PostfixConverter() {}
+
     public static String convert(String expression) {
         StringBuilder postfixExpression = new StringBuilder();
         Deque<Operator> operatorStack = new ArrayDeque<>();
