@@ -25,25 +25,30 @@ public class CalculatorController {
     public void run() {
 
         while (true) {
-            console.outputOption();
-            OptionType inputValue = OptionType.of(console.inputOption());
 
-            switch (inputValue) {
-                case EXIT:
-                    exitCalculator();
-                    break;
-                case HISTORY:
-                    loadCalculationHistory();
-                    break;
-                case CALCULATION:
-                    processCalculation();
-                    break;
-                default:
-                    errorDetection();
+            try {
+                console.outputOption();
+                OptionType inputValue = OptionType.of(console.inputOption());
+
+                switch (inputValue) {
+                    case EXIT:
+                        exitCalculator();
+                        break;
+                    case HISTORY:
+                        loadCalculationHistory();
+                        break;
+                    case CALCULATION:
+                        processCalculation();
+                        break;
+                    default:
+                        errorDetection();
+                }
+            } catch (IllegalArgumentException | ArithmeticException e) {
+                e.printStackTrace();
             }
+
         }
     }
-
 
     private void exitCalculator() {
         console.outputExit();
@@ -58,9 +63,13 @@ public class CalculatorController {
     private void processCalculation() {
         Expression expression = new Expression(console.inputExpression());
         CalculationResult calculationResult = calculator.calculate(expression);
-        console.outputCalculation(calculationResult);
 
+        printCalculationResult(calculationResult);
         saveCalculationResult(expression, calculationResult);
+    }
+
+    private void printCalculationResult(CalculationResult calculationResult) {
+        console.outputCalculation(calculationResult);
     }
 
     private void saveCalculationResult(Expression expression, CalculationResult calculationResult) {
