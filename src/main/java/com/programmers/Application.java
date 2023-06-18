@@ -10,7 +10,7 @@ public class Application {
     public static void main(String[] args) {
         CalculatorController calculatorController = new CalculatorController(
                 new Console(),
-                new CalculatorService(new CalculatorHistory(), new PostfixCalculator())
+                new CalculatorService(CalculatorHistory.getInstance(), new PostfixCalculator())
         );
         calculatorController.run();
     }

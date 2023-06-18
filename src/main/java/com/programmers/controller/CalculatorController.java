@@ -35,16 +35,15 @@ public class CalculatorController {
     private void response(UserRequest userRequest) throws RuntimeException {
         Menu menu = Menu.getMenu(userRequest);
 
-        //저장된 값 조회
         if (menu == Menu.HISTORY) {
             showHistory();
+        }
 
-            // 연산
-        } else if (menu == Menu.CALCULATE) {
-            doCalculate();
+        if (menu == Menu.CALCULATE) {
+            executeCalculate();
+        }
 
-            // 종료
-        } else {
+        if (menu == Menu.END) {
             stop();
         }
     }
@@ -53,7 +52,7 @@ public class CalculatorController {
         console.printResult(calculatorService.showHistory());
     }
 
-    private void doCalculate() {
+    private void executeCalculate() {
         UserEquation equation = console.getEquation();
         double answer = calculatorService.calculate(equation);
         calculatorService.save(equation.getEquation(), answer);

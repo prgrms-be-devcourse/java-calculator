@@ -1,7 +1,5 @@
 package com.programmers.engine;
 
-import com.programmers.exception.DivideByZeroException;
-import com.programmers.exception.EquationFormatException;
 import com.programmers.model.UserEquation;
 import com.programmers.util.Operator;
 
@@ -49,7 +47,8 @@ public class PostfixCalculator {
                 addAndReset(postfix, sb);
                 opStack.push(cur);
                 continue;
-            } else {
+            }
+            if (!opStack.isEmpty()) {
                 addAndReset(postfix, sb);
                 if (cur == '(') {
                     opStack.push(cur);
@@ -57,19 +56,17 @@ public class PostfixCalculator {
                 }
                 // 열린 소괄호를 만날때까지 모든 연산자 pop();
                 if (cur == ')') {
-                    boolean flag = true;
-                    while (flag) {
-                        if (!popOperator(postfix, (Character c) -> c == '(', opStack.peek())) {
-                            flag = false;
-                        }
-                    }
+                    popUntilMeetOpenBracket(postfix);
                     continue;
                 }
 
                 if (getOperatorPriority(opStack.peek(), cur) > 0) {
                     opStack.push(cur);
-                } else {
-                    popOperator(postfix, (Integer data) -> data > 0, getOperatorPriority(opStack.peek(), cur));
+                    continue;
+                }
+
+                if (getOperatorPriority(opStack.peek(), cur) <= 0){
+                    popLowerPriorityOperator(postfix, (Integer data) -> data > 0, getOperatorPriority(opStack.peek(), cur));
                     opStack.push(cur);
                 }
             }
@@ -94,7 +91,16 @@ public class PostfixCalculator {
         }
     }
 
-    private <T> boolean popOperator(List<String> list, Predicate<T> predicate, T data) {
+    private void popUntilMeetOpenBracket(List<String> postfix) {
+        boolean flag = true;
+        while (flag) {
+            if (!popLowerPriorityOperator(postfix, (Character c) -> c == '(', opStack.peek())) {
+                flag = false;
+            }
+        }
+    }
+
+    private <T> boolean popLowerPriorityOperator(List<String> list, Predicate<T> predicate, T data) {
         while (!opStack.isEmpty()) {
             if (predicate.test(data)) {
                 opStack.pop();
