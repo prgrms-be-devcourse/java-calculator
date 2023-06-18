@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class CalculationResult {
-    private BigDecimal value;
+    private final BigDecimal value;
 
     public CalculationResult(BigDecimal value) {
         this.value = value;
