@@ -33,6 +33,9 @@ public class PostfixExpressionConverter implements Converter<String, String> {
     }
 
     private void insertOperator(String str) {
+        if (!Operator.isOperator(str)) {
+            return;
+        }
         Operator newOperator = Operator.of(str);
 
         while (compareOperator(stack, newOperator)) {
