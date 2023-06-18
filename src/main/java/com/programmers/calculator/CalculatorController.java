@@ -6,6 +6,7 @@ import com.programmers.calculator.domain.Menu;
 import com.programmers.calculator.io.Input;
 import com.programmers.calculator.io.Output;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CalculatorController implements Runnable {
@@ -28,25 +29,30 @@ public class CalculatorController implements Runnable {
             Menu menu = input.selectMenu();
 
             switch (menu) {
-                case HISTORY -> getHistory();
-                case CALCULATE -> calculate();
+                case HISTORY -> {
+                    getHistory()
+                            .forEach(output::displayResult);
+                }
+                case CALCULATE -> {
+                    Expression expression = input.readExpression();
+                    double result = calculate(expression);
+                    output.displayResult(result);
+                }
                 case EXIT -> running.set(false);
             }
         }
     }
 
-    private void getHistory() {
-        calculator.findCalculationHistory()
-                .forEach(output::displayResult);
+    private List<CalculationResult> getHistory() {
+        return calculator.findCalculationHistory();
     }
 
-    private void calculate() {
-        Expression expression = input.readExpression();
+    private double calculate(Expression expression) {
         double result = calculator.calculate(expression.toPostfix());
 
         CalculationResult calculationResult = new CalculationResult(expression.getValue(), result);
         calculator.saveCalculationResult(calculationResult);
 
-        output.displayResult(result);
+        return result;
     }
 }
