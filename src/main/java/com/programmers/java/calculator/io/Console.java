@@ -10,7 +10,7 @@ public class Console implements Input, Output {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String input(String prompt) {
+    public String selectMenu(String prompt) {
         System.out.print(prompt);
         String inputValue = scanner.nextLine();
         System.out.println();
@@ -18,7 +18,7 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public String input() {
+    public String inputExpression() {
         return scanner.nextLine();
     }
 

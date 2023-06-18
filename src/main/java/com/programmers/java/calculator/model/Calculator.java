@@ -27,7 +27,7 @@ public class Calculator {
 
         while (!exit) {
             try {
-                String inputMenuType = input.input(MenuType.getMenu());
+                String inputMenuType = input.selectMenu(MenuType.getMenu());
                 MenuType selecedtMenuType = MenuType.of(inputMenuType);
                 exit = handleMenu(exit, selecedtMenuType);
 
@@ -43,7 +43,7 @@ public class Calculator {
             case CALCULATE -> performCalculation();
             case END -> exit = true;
         }
-        
+
         return exit;
     }
 
@@ -53,7 +53,7 @@ public class Calculator {
     }
 
     private void performCalculation() {
-        String expression = input.input();
+        String expression = input.inputExpression();
         validator.validate(expression);
         String result = calculatorService.calculate(expression);
         output.print(result);
