@@ -1,11 +1,12 @@
 package com.programmers.calculator.constant;
 
 import com.programmers.calculator.domain.vo.Expression;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RegexEnumTest {
 
@@ -23,20 +24,20 @@ class RegexEnumTest {
         List<String> expectedTokens = List.of("1", "+", "2", "*", "4", "/", "6");
 
         // then
-        Assertions.assertThat(result1).isEqualTo(expectedTokens);
-        Assertions.assertThat(result2).isEqualTo(expectedTokens);
+        assertThat(result1).isEqualTo(expectedTokens);
+        assertThat(result2).isEqualTo(expectedTokens);
     }
 
     @DisplayName("숫자가 숫자 정규식에 체크 되는지 확인")
     @Test
     void numeric_regex() {
-        Assertions.assertThat(RegexEnum.isNumeric("1")).isTrue();
+        assertThat(RegexEnum.isNumeric("1")).isTrue();
     }
 
     @DisplayName("숫자 아닌 것이 숫자 정규식에 체크가 안되는지 확인")
     @Test
     void not_numeric_regex() {
-        Assertions.assertThat(RegexEnum.isNumeric("a")).isFalse();
+        assertThat(RegexEnum.isNumeric("a")).isFalse();
     }
 
 }

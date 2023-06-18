@@ -1,12 +1,14 @@
 package com.programmers.calculator.domain.component;
 
 import com.programmers.calculator.domain.vo.CalculationResult;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class PostfixEvaluatorTest {
 
@@ -23,7 +25,7 @@ class PostfixEvaluatorTest {
         CalculationResult result = postfixEvaluator.evaluate(postfix);
 
         // then
-        Assertions.assertThat(result.getValue()).isEqualTo(new BigDecimal(49));
+        assertThat(result.getValue()).isEqualTo(new BigDecimal(49));
     }
 
     @DisplayName("잘못된 후위표기식이 예외를 던지는지 확인")
@@ -34,7 +36,7 @@ class PostfixEvaluatorTest {
         List<String> postfix = List.of("1", "+", "+");
 
         // then
-        Assertions.assertThatThrownBy(() -> postfixEvaluator.evaluate(postfix))
+        assertThatThrownBy(() -> postfixEvaluator.evaluate(postfix))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 수식입니다.");
 

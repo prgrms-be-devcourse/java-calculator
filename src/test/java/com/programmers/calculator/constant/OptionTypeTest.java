@@ -1,9 +1,11 @@
 package com.programmers.calculator.constant;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class OptionTypeTest {
 
@@ -16,7 +18,7 @@ class OptionTypeTest {
         OptionType optionType = OptionType.of(inputOption);
 
         // then
-        Assertions.assertThat(optionType.getInputOption()).isEqualTo(inputOption);
+        assertThat(optionType.getInputOption()).isEqualTo(inputOption);
 
     }
 
@@ -26,7 +28,7 @@ class OptionTypeTest {
     void wrong_option_menu(String notInputOption) {
 
         // then
-        Assertions.assertThatThrownBy(() -> OptionType.of(notInputOption))
+        assertThatThrownBy(() -> OptionType.of(notInputOption))
                         .isInstanceOf(IllegalArgumentException.class)
                                 .hasMessage("유효하지 않은 메뉴입니다.");
 

@@ -1,7 +1,6 @@
 package com.programmers.calculator.domain.core;
 
 import com.programmers.calculator.domain.vo.CalculationResult;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +24,7 @@ class OperatorTest {
         CalculationResult operand2 = new CalculationResult(new BigDecimal(0));
 
         // when
-        Assertions.assertThatThrownBy(() -> division.getFunction()
+        assertThatThrownBy(() -> division.getFunction()
                 .apply(operand1, operand2))
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessage("0으로 나눌 수 없습니다.");

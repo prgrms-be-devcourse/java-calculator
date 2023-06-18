@@ -1,10 +1,11 @@
 package com.programmers.calculator.domain.component;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class PostfixConverterTest {
 
@@ -21,7 +22,7 @@ class PostfixConverterTest {
         List<String> result = postfixConverter.convert(tokens);
 
         // then
-        Assertions.assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
 }
