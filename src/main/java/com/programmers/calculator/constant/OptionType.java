@@ -1,5 +1,7 @@
 package com.programmers.calculator.constant;
 
+import java.util.Arrays;
+
 public enum OptionType {
     EXIT("0"),
     HISTORY("1"),
@@ -18,13 +20,10 @@ public enum OptionType {
     }
 
     public static OptionType of(String inputOption) {
-        for (OptionType optionType : OPTION_TYPES) {
-            if (optionType.inputOption.equals(inputOption)) {
-                return optionType;
-            }
-        }
-
-        throw new IllegalArgumentException("유효하지 않은 메뉴입니다.");
+        return Arrays.stream(OPTION_TYPES)
+                .filter(optionType -> optionType.inputOption.equals(inputOption))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 메뉴입니다."));
     }
 
 }
