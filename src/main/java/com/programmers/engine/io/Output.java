@@ -7,5 +7,5 @@ public interface Output {
 
     void printResult(Integer calculate);
 
-    void printHistory(List<String> history);
+    void printHistory(List<List<String>> history);
 }

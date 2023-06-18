@@ -1,12 +1,13 @@
 package com.programmers.engine.model.storage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MapStorage implements Storage {
 
-    private Map<Integer, String> mapStorage;
+    private Map<Integer, List<String>> mapStorage;
     private int id;
 
     public MapStorage() {
@@ -14,7 +15,7 @@ public class MapStorage implements Storage {
     }
 
     @Override
-    public List<String> findAll() {
+    public List<List<String>> findAll() {
         return mapStorage.keySet()
                 .stream()
                 .sorted()
@@ -24,12 +25,9 @@ public class MapStorage implements Storage {
 
     @Override
     public void save(String calculationCommand, Integer calculationResult) {
-        StringBuilder calculationResultBuilder = new StringBuilder();
-        String result = calculationResultBuilder
-                .append(calculationCommand)
-                .append(" = ")
-                .append(calculationResult)
-                .toString();
+        List<String> result = new ArrayList<>();
+        result.add(calculationCommand);
+        result.add(calculationResult + "");
         mapStorage.put(id++, result);
     }
 }

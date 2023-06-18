@@ -34,8 +34,15 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void printHistory(List<String> history) {
-        history.forEach(System.out::println);
+    public void printHistory(List<List<String>> history) {
+        history.forEach(e -> {
+            String result = new StringBuilder()
+                    .append(e.get(0))
+                    .append(" = ")
+                    .append(e.get(1))
+                    .toString();
+            System.out.println(result);
+        });
         System.out.println();
     }
 }

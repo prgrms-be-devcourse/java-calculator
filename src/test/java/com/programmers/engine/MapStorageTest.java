@@ -17,8 +17,8 @@ class MapStorageTest {
         Integer calculationResult = 3;
 
         storage.save(calculationCommand, calculationResult);
-        List<String> searchResult = storage.findAll();
+        List<List<String>> searchResult = storage.findAll();
 
-        Assertions.assertThat(searchResult).containsExactly("1 + 2 = 3");
+        Assertions.assertThat(searchResult.get(0)).containsExactly("1 + 2", "3");
     }
 }
