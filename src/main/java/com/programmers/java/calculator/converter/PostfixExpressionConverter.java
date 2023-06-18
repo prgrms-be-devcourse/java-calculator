@@ -5,34 +5,18 @@ import com.programmers.java.calculator.model.Operator;
 import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.regex.Pattern;
 
 public class PostfixExpressionConverter implements Converter<String, String> {
 
-    private static final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-
-    private static boolean isNumeric(String strNum) {
-        return pattern.matcher(strNum).matches();
-    }
+    Deque<Operator> stack = new ArrayDeque<>();
+    Deque<String> postfix = new ArrayDeque<>();
 
     public String convert(String expression) {
         String[] exp = expression.split(" ");
-        Deque<Operator> stack = new ArrayDeque<>();
-        Deque<String> postfix = new ArrayDeque<>();
 
         for (String str : exp) {
-            if (isNumeric(str)) {
-                postfix.add(str);
-                continue;
-            }
-
-            Operator newOperator = Operator.of(str);
-
-            while (compareOperator(stack, newOperator)) {
-                postfix.add(stack.pop().getSymbol());
-            }
-
-            stack.push(newOperator);
+            insertOperand(str);
+            insertOperator(str);
         }
 
         while (!stack.isEmpty()) {
@@ -42,20 +26,40 @@ public class PostfixExpressionConverter implements Converter<String, String> {
         return calculatePostfix(postfix);
     }
 
+    private void insertOperand(String str) {
+        if (Operator.isNumeric(str)) {
+            postfix.add(str);
+        }
+    }
+
+    private void insertOperator(String str) {
+        Operator newOperator = Operator.of(str);
+
+        while (compareOperator(stack, newOperator)) {
+            postfix.add(stack.pop().getSymbol());
+        }
+
+        stack.push(newOperator);
+    }
+
     private static boolean compareOperator(Deque<Operator> stack, Operator newOperator) {
         if (stack.isEmpty()) {
             return false;
         }
 
         Operator preOperator = stack.peek();
-        return preOperator.comparePriority(newOperator) != 1;
+        if (preOperator.comparePriority(newOperator) == 1) {
+            return false;
+        }
+
+        return true;
     }
 
     private String calculatePostfix(Deque<String> postfix) {
         Deque<String> stack = new ArrayDeque<>();
 
         while (!postfix.isEmpty()) {
-            if (isNumeric(postfix.peek())) {
+            if (Operator.isNumeric(postfix.peek())) {
                 stack.push(postfix.poll());
                 continue;
             }

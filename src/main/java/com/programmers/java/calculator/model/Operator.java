@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BinaryOperator;
+import java.util.regex.Pattern;
 
 public enum Operator {
 
@@ -16,6 +17,7 @@ public enum Operator {
     private final String symbol;
     private final int priority;
     private final BinaryOperator<BigDecimal> function;
+    private static final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     Operator(String symbol, int priority, BinaryOperator<BigDecimal> function) {
         this.symbol = symbol;
@@ -39,6 +41,10 @@ public enum Operator {
 
     public int getPriority() {
         return priority;
+    }
+
+    public static boolean isNumeric(String strNum) {
+        return pattern.matcher(strNum).matches();
     }
 
     public int comparePriority(Operator newOperator) {
