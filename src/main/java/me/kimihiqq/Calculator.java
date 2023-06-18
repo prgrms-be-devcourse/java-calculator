@@ -56,7 +56,7 @@ public class Calculator {
                 terms = executeOperation(terms, Arrays.asList("*", "/"));
                 terms = executeOperation(terms, Arrays.asList("+", "-"));
 
-                printResult(terms.get(0));
+                printer.printResult(terms.get(0));
                 saveHistory(formula, terms.get(0));
 
                 break;
@@ -98,10 +98,6 @@ public class Calculator {
             default:
                 throw new IllegalArgumentException("Invalid operator");
         }
-    }
-
-    private void printResult(String result) {
-        printer.println(result);
     }
 
     private void saveHistory(String formula, String result) {

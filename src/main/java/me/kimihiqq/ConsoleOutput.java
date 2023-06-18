@@ -12,4 +12,8 @@ public class ConsoleOutput implements Output {
     public void println(String prompt) {
         System.out.println(prompt);
     }
+
+    public void printResult(String result) {
+        System.out.println("= " + result);
+    }
 }

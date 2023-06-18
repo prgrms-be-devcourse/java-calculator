@@ -5,4 +5,6 @@ public interface Output {
 
     void println(String prompt);
 
+    void printResult(String result);
+
 }
