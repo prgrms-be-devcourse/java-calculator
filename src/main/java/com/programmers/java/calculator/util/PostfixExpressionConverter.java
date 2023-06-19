@@ -37,7 +37,7 @@ public class PostfixExpressionConverter implements Converter<String, Deque<Strin
         }
         Operator newOperator = Operator.of(str);
 
-        while (compareOperator(stack, newOperator)) {
+        while (!stack.isEmpty() && compareOperator(stack, newOperator)) {
             postfix.add(stack.pop().getSymbol());
         }
 
@@ -45,10 +45,6 @@ public class PostfixExpressionConverter implements Converter<String, Deque<Strin
     }
 
     private static boolean compareOperator(Deque<Operator> stack, Operator newOperator) {
-        if (stack.isEmpty()) {
-            return false;
-        }
-
         Operator preOperator = stack.peek();
         if (preOperator.comparePriority(newOperator) == 1) {
             return false;

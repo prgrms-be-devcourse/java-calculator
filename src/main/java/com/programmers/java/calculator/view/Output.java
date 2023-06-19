@@ -8,7 +8,7 @@ public interface Output {
 
     void printError(String message);
 
-    void print(String message);
+    void printResult(String message);
 
     void printHistoryList(List<CalculationHistory> history);
 }

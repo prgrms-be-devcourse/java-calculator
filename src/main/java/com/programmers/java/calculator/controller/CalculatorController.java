@@ -53,6 +53,6 @@ public class CalculatorController {
     private void performCalculation() {
         String expression = input.inputExpression();
         String result = calculatorService.calculate(expression);
-        output.print(result);
+        output.printResult(result);
     }
 }

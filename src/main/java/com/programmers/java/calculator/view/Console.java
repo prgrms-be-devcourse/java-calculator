@@ -28,8 +28,8 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void print(String message) {
-        System.out.println(message);
+    public void printResult(String result) {
+        System.out.println(result);
         System.out.println();
     }
 
