@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.calculator;
+package com.programmers.java.calculator.domain.calculator;
 
 public interface Calculator<T, U> {
 

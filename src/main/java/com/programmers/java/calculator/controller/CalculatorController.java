@@ -1,7 +1,7 @@
 package com.programmers.java.calculator.controller;
 
+import com.programmers.java.calculator.domain.CalculationHistory;
 import com.programmers.java.calculator.domain.MenuType;
-import com.programmers.java.calculator.dto.CalculationHistory;
 import com.programmers.java.calculator.service.CalculatorService;
 import com.programmers.java.calculator.view.Input;
 import com.programmers.java.calculator.view.Output;

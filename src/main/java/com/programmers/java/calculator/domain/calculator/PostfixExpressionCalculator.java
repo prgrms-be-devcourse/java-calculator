@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.calculator;
+package com.programmers.java.calculator.domain.calculator;
 
 import com.programmers.java.calculator.domain.Operator;
 
@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class PostfixExpressionCalculator implements Calculator<Deque<String>, String> {
+public class PostfixExpressionCalculator implements com.programmers.java.calculator.domain.calculator.Calculator<Deque<String>, String> {
 
     @Override
     public String calculate(Deque<String> postfix) {

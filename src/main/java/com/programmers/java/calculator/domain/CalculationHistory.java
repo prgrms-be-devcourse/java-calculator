@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.dto;
+package com.programmers.java.calculator.domain;
 
 public final class CalculationHistory {
 

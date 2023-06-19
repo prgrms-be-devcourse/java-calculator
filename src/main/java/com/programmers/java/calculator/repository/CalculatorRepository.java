@@ -1,6 +1,6 @@
 package com.programmers.java.calculator.repository;
 
-import com.programmers.java.calculator.dto.CalculationHistory;
+import com.programmers.java.calculator.domain.CalculationHistory;
 
 import java.util.List;
 

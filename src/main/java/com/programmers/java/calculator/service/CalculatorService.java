@@ -1,7 +1,7 @@
 package com.programmers.java.calculator.service;
 
-import com.programmers.java.calculator.calculator.Calculator;
-import com.programmers.java.calculator.dto.CalculationHistory;
+import com.programmers.java.calculator.domain.CalculationHistory;
+import com.programmers.java.calculator.domain.calculator.Calculator;
 import com.programmers.java.calculator.repository.CalculatorRepository;
 import com.programmers.java.calculator.util.Converter;
 
