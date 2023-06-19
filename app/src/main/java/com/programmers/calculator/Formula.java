@@ -33,7 +33,7 @@ public class Formula {
 	}
 	
 	public Integer calcualteFormula() {
-		result = calculator.calculate(getInfixListFormula());
+		result = calculator.calculate(this);
 		return result;
 	}
 	

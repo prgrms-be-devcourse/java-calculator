@@ -12,8 +12,8 @@ public class Calculator {
 		postfixCalculator = new PostfixCalculator();
 	}
 	
-	public Integer calculate(List<String> infix) {
-		List<String> postfix = postfixConversion.changeInfixToPostfix(infix);
+	public Integer calculate(Formula formula) {
+		List<String> postfix = postfixConversion.changeInfixToPostfix(formula.getInfixListFormula());
 		return postfixCalculator.calculatePostfix(postfix);
 	}
 	
