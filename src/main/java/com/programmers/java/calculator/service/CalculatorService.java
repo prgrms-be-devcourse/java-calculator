@@ -31,8 +31,8 @@ public class CalculatorService {
     }
 
     public void validate(Object expression) {
-        if (EXPRESSION_PATTERN.matcher(expression.toString()).matches()) {
-            throw new IllegalArgumentException("계산할 수 없는 식입니다.");
+        if (!EXPRESSION_PATTERN.matcher(expression.toString()).matches()) {
+            throw new IllegalArgumentException("잘못 입력되었습니다");
         }
     }
 
