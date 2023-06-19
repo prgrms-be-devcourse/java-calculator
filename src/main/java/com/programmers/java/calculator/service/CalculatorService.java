@@ -14,7 +14,7 @@ public class CalculatorService {
     private final Converter<String, Deque<String>> converter;
     private final Calculator<Deque<String>, String> calculator;
     private final CalculatorRepository calculatorRepository;
-    private static final Pattern EXPRESSION_PATTERN = Pattern.compile("\"^[-+*/()\\\\d\\\\s]+$\";");
+    private static final Pattern EXPRESSION_PATTERN = Pattern.compile("^[\\d+\\-*/().\\s]+$");
 
     public CalculatorService(Converter<String, Deque<String>> converter, Calculator<Deque<String>, String> calculator, CalculatorRepository calculatorRepository) {
         this.converter = converter;
