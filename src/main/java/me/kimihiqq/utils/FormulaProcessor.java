@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 public class FormulaProcessor {
 
+    private FormulaProcessor() {
+    }
+
     public static List<String> parseFormula(String formula) {
         String[] arr = formula.split(" ");
         return Arrays.stream(arr).collect(Collectors.toList());
