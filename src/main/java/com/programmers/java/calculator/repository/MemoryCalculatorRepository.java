@@ -1,6 +1,6 @@
 package com.programmers.java.calculator.repository;
 
-import com.programmers.java.calculator.entity.CalculationHistory;
+import com.programmers.java.calculator.dto.CalculationHistory;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

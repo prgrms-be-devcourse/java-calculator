@@ -1,6 +1,6 @@
-package com.programmers.java.calculator.io;
+package com.programmers.java.calculator.view;
 
-import com.programmers.java.calculator.entity.CalculationHistory;
+import com.programmers.java.calculator.dto.CalculationHistory;
 
 import java.util.List;
 

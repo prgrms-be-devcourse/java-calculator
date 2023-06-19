@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.io;
+package com.programmers.java.calculator.view;
 
 public interface Input {
 

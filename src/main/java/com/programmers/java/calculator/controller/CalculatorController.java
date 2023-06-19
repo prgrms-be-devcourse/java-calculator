@@ -1,25 +1,23 @@
-package com.programmers.java.calculator.model;
+package com.programmers.java.calculator.controller;
 
-import com.programmers.java.calculator.entity.CalculationHistory;
-import com.programmers.java.calculator.io.Input;
-import com.programmers.java.calculator.io.Output;
+import com.programmers.java.calculator.domain.MenuType;
+import com.programmers.java.calculator.dto.CalculationHistory;
 import com.programmers.java.calculator.service.CalculatorService;
-import com.programmers.java.calculator.validation.Validator;
+import com.programmers.java.calculator.view.Input;
+import com.programmers.java.calculator.view.Output;
 
 import java.util.List;
 
-public class Calculator {
+public class CalculatorController {
 
     private final Input input;
     private final Output output;
     private final CalculatorService calculatorService;
-    private final Validator validator;
 
-    public Calculator(Input input, Output output, CalculatorService calculatorService, Validator validator) {
+    public CalculatorController(Input input, Output output, CalculatorService calculatorService) {
         this.input = input;
         this.output = output;
         this.calculatorService = calculatorService;
-        this.validator = validator;
     }
 
     public void run() {
@@ -54,7 +52,6 @@ public class Calculator {
 
     private void performCalculation() {
         String expression = input.inputExpression();
-        validator.validate(expression);
         String result = calculatorService.calculate(expression);
         output.print(result);
     }

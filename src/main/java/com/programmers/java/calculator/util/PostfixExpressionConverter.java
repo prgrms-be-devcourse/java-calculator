@@ -1,17 +1,16 @@
-package com.programmers.java.calculator.converter;
+package com.programmers.java.calculator.util;
 
-import com.programmers.java.calculator.model.Operator;
+import com.programmers.java.calculator.domain.Operator;
 
-import java.math.BigDecimal;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class PostfixExpressionConverter implements Converter<String, String> {
+public class PostfixExpressionConverter implements Converter<String, Deque<String>> {
 
     Deque<Operator> stack = new ArrayDeque<>();
     Deque<String> postfix = new ArrayDeque<>();
 
-    public String convert(String expression) {
+    public Deque<String> convert(String expression) {
         String[] exp = expression.split(" ");
 
         for (String str : exp) {
@@ -23,7 +22,7 @@ public class PostfixExpressionConverter implements Converter<String, String> {
             postfix.add(stack.pop().getSymbol());
         }
 
-        return calculatePostfix(postfix);
+        return postfix;
     }
 
     private void insertOperand(String str) {
@@ -56,24 +55,5 @@ public class PostfixExpressionConverter implements Converter<String, String> {
         }
 
         return true;
-    }
-
-    private String calculatePostfix(Deque<String> postfix) {
-        Deque<String> stack = new ArrayDeque<>();
-
-        while (!postfix.isEmpty()) {
-            if (Operator.isNumeric(postfix.peek())) {
-                stack.push(postfix.poll());
-                continue;
-            }
-
-            Operator operator = Operator.of(postfix.poll());
-            BigDecimal a = new BigDecimal(stack.pop());
-            BigDecimal b = new BigDecimal(stack.pop());
-            stack.push(String.valueOf(operator.calculate(b, a)));
-        }
-
-        BigDecimal result = new BigDecimal(stack.pop());
-        return result.toString();
     }
 }

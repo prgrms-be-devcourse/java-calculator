@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.converter;
+package com.programmers.java.calculator.util;
 
 public interface Converter<T, U> {
 

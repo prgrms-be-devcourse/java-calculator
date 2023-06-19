@@ -1,9 +1,9 @@
 package com.programmers.java.calculator;
 
-import com.programmers.java.calculator.converter.PostfixExpressionConverter;
+import com.programmers.java.calculator.calculator.PostfixExpressionCalculator;
 import com.programmers.java.calculator.repository.MemoryCalculatorRepository;
 import com.programmers.java.calculator.service.CalculatorService;
-import com.programmers.java.calculator.service.CalculatorServiceImpl;
+import com.programmers.java.calculator.util.PostfixExpressionConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,8 +15,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculationTest {
 
-    CalculatorService calculatorService = new CalculatorServiceImpl(
+    CalculatorService calculatorService = new CalculatorService(
             new PostfixExpressionConverter(),
+            new PostfixExpressionCalculator(),
             new MemoryCalculatorRepository());
 
     @Nested

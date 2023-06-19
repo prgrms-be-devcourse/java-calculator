@@ -1,4 +1,4 @@
-package com.programmers.java.calculator.entity;
+package com.programmers.java.calculator.dto;
 
 public final class CalculationHistory {
 
