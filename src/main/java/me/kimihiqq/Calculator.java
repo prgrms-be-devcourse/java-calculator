@@ -75,9 +75,7 @@ public class Calculator {
                 long rightHandSide = Long.parseLong(terms.get(i + 1));
                 long result = calculateOperation(terms.get(i), leftHandSide, rightHandSide);
 
-                for (int j = 0; j < 3; j++) {
-                    terms.remove(i - 1);
-                }
+                terms.subList(i - 1, i + 2).clear();
                 terms.add(i - 1, String.valueOf(result));
             } else {
                 i++;
@@ -102,7 +100,7 @@ public class Calculator {
     }
 
     private void saveHistory(String formula, String result) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String historyItem = sb.append(formula)
                 .append(" = ")
                 .append(result)
