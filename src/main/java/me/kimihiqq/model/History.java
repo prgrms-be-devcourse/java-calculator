@@ -12,6 +12,6 @@ public class History {
     }
 
     public Map<Integer, String> getAll() {
-        return history;
+        return new HashMap<>(history);
     }
 }
