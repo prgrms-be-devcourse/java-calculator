@@ -1,6 +1,6 @@
 package com.devcourse.java.calculator.util;
 
-import com.devcourse.java.calculator.constant.ExceptionConstant;
+import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CalculateUtilTest {
-
-    CalculateUtil calculateUtil = new CalculateUtil();
 
     @Test
     @DisplayName("식 계산 결과 확인")
@@ -22,11 +20,11 @@ class CalculateUtilTest {
         String equation5 = "5 * 10 / 2 + 10";
 
         //when
-        String equationWithAnswer = calculateUtil.calculateAndReturnEquationWithAnswer(equation1);
-        String equationWithAnswer2 = calculateUtil.calculateAndReturnEquationWithAnswer(equation2);
-        String equationWithAnswer3 = calculateUtil.calculateAndReturnEquationWithAnswer(equation3);
-        String equationWithAnswer4 = calculateUtil.calculateAndReturnEquationWithAnswer(equation4);
-        String equationWithAnswer5 = calculateUtil.calculateAndReturnEquationWithAnswer(equation5);
+        String equationWithAnswer = CalculateUtil.calculateAndReturnEquationWithAnswer(equation1);
+        String equationWithAnswer2 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation2);
+        String equationWithAnswer3 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation3);
+        String equationWithAnswer4 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation4);
+        String equationWithAnswer5 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation5);
 
 
         //then
@@ -46,13 +44,13 @@ class CalculateUtilTest {
         String equation2 = "5 / 0";
 
         //when, then
-        assertThatThrownBy(() -> calculateUtil.calculateAndReturnEquationWithAnswer(equation1))
+        assertThatThrownBy(() -> CalculateUtil.calculateAndReturnEquationWithAnswer(equation1))
                 .isInstanceOf(ArithmeticException.class)
-                .hasMessageContaining(ExceptionConstant.DIVIDE_BY_ZERO_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.DIVIDE_BY_ZERO_EXCEPTION);
 
-        assertThatThrownBy(() -> calculateUtil.calculateAndReturnEquationWithAnswer(equation2))
+        assertThatThrownBy(() -> CalculateUtil.calculateAndReturnEquationWithAnswer(equation2))
                 .isInstanceOf(ArithmeticException.class)
-                .hasMessageContaining(ExceptionConstant.DIVIDE_BY_ZERO_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.DIVIDE_BY_ZERO_EXCEPTION);
 
     }
 }

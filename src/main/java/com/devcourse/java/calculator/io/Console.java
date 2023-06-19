@@ -1,17 +1,15 @@
-package com.devcourse.java.calculator;
+package com.devcourse.java.calculator.io;
 
+import com.devcourse.java.calculator.InputValidator;
 import com.devcourse.java.calculator.constant.Menu;
-import com.devcourse.java.calculator.io.Input;
-import com.devcourse.java.calculator.io.Output;
 
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
-public class Console implements Input, Output {
+public class Console {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    @Override
     public void printCommandMenu() {
         System.out.println();
         System.out.println("1. 조회");
@@ -21,29 +19,24 @@ public class Console implements Input, Output {
         System.out.print("선택 : ");
     }
 
-    @Override
     public void printCalculateHistory(LinkedHashMap<Integer, String> calculateHistory) {
         InputValidator.checkCalculateHistoryLength(calculateHistory);
         calculateHistory.values().forEach(System.out::println);
     }
 
-    @Override
     public void printExceptionMessage(String message) {
         System.out.println(message);
     }
 
-    @Override
     public void printRequestEquationInput() {
         System.out.print("식을 입력하세요: ");
     }
 
-    @Override
     public void printAnswerFromEquation(String answer) {
         String[] splitAnswer = answer.split(" ");
         System.out.println(splitAnswer[splitAnswer.length - 1]);
     }
 
-    @Override
     public int getCommand() {
         String command = scanner.nextLine();
         Menu.checkCommandInput(command);
@@ -51,7 +44,6 @@ public class Console implements Input, Output {
         return Integer.parseInt(command);
     }
 
-    @Override
     public String getEquation() {
         String equation = scanner.nextLine();
         InputValidator.checkEquationInput(equation);

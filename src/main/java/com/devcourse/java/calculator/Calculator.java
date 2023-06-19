@@ -1,8 +1,7 @@
 package com.devcourse.java.calculator;
 
 import com.devcourse.java.calculator.constant.Menu;
-import com.devcourse.java.calculator.io.Input;
-import com.devcourse.java.calculator.io.Output;
+import com.devcourse.java.calculator.io.Console;
 import com.devcourse.java.calculator.repository.CalculatorRepository;
 import com.devcourse.java.calculator.util.CalculateUtil;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +9,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Calculator implements Runnable{
 
-    private final Input input;
-    private final Output output;
+    private final Console console;
     private final CalculatorRepository calculatorRepository;
     private Menu command;
 
@@ -19,12 +17,12 @@ public class Calculator implements Runnable{
     public void run() {
 
         while (true) {
-            output.printCommandMenu();
+            console.printCommandMenu();
 
             try {
-                command = Menu.getCommandMenu(input.getCommand());
+                command = Menu.getCommandMenu(console.getCommand());
             } catch (RuntimeException e) {
-                output.printExceptionMessage(e.getMessage());
+                console.printExceptionMessage(e.getMessage());
                 continue;
             }
 
@@ -44,23 +42,23 @@ public class Calculator implements Runnable{
 
     public void printHistoryCommand() {
         try {
-            output.printCalculateHistory(calculatorRepository.getHistory());
+            console.printCalculateHistory(calculatorRepository.getHistory());
 
         } catch (RuntimeException e) {
-            output.printExceptionMessage(e.getMessage());
+            console.printExceptionMessage(e.getMessage());
         }
     }
 
     public void calculateCommand() {
         try {
-            output.printRequestEquationInput();
-            String equation = input.getEquation();
+            console.printRequestEquationInput();
+            String equation = console.getEquation();
             String equationWithAnswer = CalculateUtil.calculateAndReturnEquationWithAnswer(equation);
-            output.printAnswerFromEquation(equationWithAnswer);
+            console.printAnswerFromEquation(equationWithAnswer);
             calculatorRepository.storeHistory(equationWithAnswer);
 
         } catch (RuntimeException e) {
-            output.printExceptionMessage(e.getMessage());
+            console.printExceptionMessage(e.getMessage());
         }
     }
 }

@@ -1,10 +1,14 @@
 package com.devcourse.java.calculator.util;
 
-import com.devcourse.java.calculator.constant.ExceptionConstant;
+import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 public class CalculateUtil {
+
+    private CalculateUtil() {}
 
     public static String calculateAndReturnEquationWithAnswer(String equation) {
         String postfix = changeToPostfix(equation);
@@ -27,12 +31,12 @@ public class CalculateUtil {
 
     public static String changeToPostfix(String equation) {
         StringBuilder stringBuilder = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> stack = new ArrayDeque<>();
 
         for (char each: equation.toCharArray()) {
             int priority = getPriority(each);
 
-            if (each == '+' || each == '-' || each == '*' || each == '/') {
+            if (isOperator(each)) {
                 while (!stack.isEmpty() && getPriority(stack.peek()) >= priority) {
                     stringBuilder.append(stack.pop());
                     stringBuilder.append(' ');
@@ -50,7 +54,11 @@ public class CalculateUtil {
             stringBuilder.append(stack.pop());
         }
 
-        return stringBuilder.toString().replaceAll("  ", " ");
+        return stringBuilder.toString().replace("  ", " ");
+    }
+
+    private static boolean isOperator(char each) {
+        return each == '+' || each == '-' || each == '*' || each == '/';
     }
 
     public static String calculatePostfix(String postfix) {
@@ -78,7 +86,7 @@ public class CalculateUtil {
                         break;
                     case '/':
                         if (operand2 == 0) {
-                            throw new ArithmeticException(ExceptionConstant.DIVIDE_BY_ZERO_EXCEPTION);
+                            throw new ArithmeticException(ExceptionMessageConstant.DIVIDE_BY_ZERO_EXCEPTION);
                         }
                         result = operand1 / operand2;
                         break;

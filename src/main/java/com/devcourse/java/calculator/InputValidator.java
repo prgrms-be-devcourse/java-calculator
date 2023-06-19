@@ -1,6 +1,6 @@
 package com.devcourse.java.calculator;
 
-import com.devcourse.java.calculator.constant.ExceptionConstant;
+import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,13 +9,15 @@ import java.util.LinkedHashMap;
 
 public class InputValidator {
 
+    private InputValidator() {}
+
     public static void checkCommandInput(String input) {
         if (!isInteger(input)) {
-            throw new InputMismatchException(ExceptionConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
+            throw new InputMismatchException(ExceptionMessageConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
         }
 
         if (!isInBoundary(input)) {
-            throw new InputMismatchException(ExceptionConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
+            throw new InputMismatchException(ExceptionMessageConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
         }
     }
 
@@ -34,7 +36,7 @@ public class InputValidator {
 
     public static void checkCalculateHistoryLength(LinkedHashMap<Integer, String> calculateHistory) {
         if (calculateHistory.isEmpty()) {
-            throw new IllegalArgumentException(ExceptionConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
+            throw new IllegalArgumentException(ExceptionMessageConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
         }
     }
 
@@ -47,14 +49,14 @@ public class InputValidator {
     }
 
     public static void throwIfEquationIsEmpty(String equation) {
-        if (equation.length() == 0) {
-            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+        if (equation.isEmpty()) {
+            throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }
 
     public static void throwIfEquationStartOrEndWithNoInteger(ArrayList<String> tokens) {
         if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
-            throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+            throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }
 
@@ -64,25 +66,22 @@ public class InputValidator {
         boolean continuedOperation = true;
 
         for (String eachToken: tokens) {
-
             if (isInteger(eachToken)) {
                 if (!continuedOperation) {
-                    throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                    throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
                 }
                 digit += 1;
                 continuedOperation = false;
             } else if (isOperator(eachToken)) {
                 if (continuedOperation) {
-                    throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                    throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
                 }
                 operation += 1;
                 continuedOperation = true;
             } else {
-                throw new InputMismatchException(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
             }
-
         }
-        
     }
 
 }

@@ -1,6 +1,7 @@
 package com.devcourse.java.calculator;
 
-import com.devcourse.java.calculator.constant.ExceptionConstant;
+import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
+import com.devcourse.java.calculator.io.Console;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ConsoleTest {
 
     Console console = new Console();
-    InputValidator inputValidator = new InputValidator();
 
     @Test
     @DisplayName("메뉴 선택 입력이 정수가 아닐 경우 InputMismatchException 확인")
@@ -26,13 +26,13 @@ public class ConsoleTest {
         String command2 = ".~!,=";
 
         //when, then
-        assertThatThrownBy(() -> inputValidator.checkCommandInput(command1))
+        assertThatThrownBy(() -> InputValidator.checkCommandInput(command1))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
 
-        assertThatThrownBy(() -> inputValidator.checkCommandInput(command2))
+        assertThatThrownBy(() -> InputValidator.checkCommandInput(command2))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
     }
 
     @Test
@@ -43,13 +43,13 @@ public class ConsoleTest {
         String command2 = "30";
 
         //when, then
-        assertThatThrownBy(() -> inputValidator.checkCommandInput(command1))
+        assertThatThrownBy(() -> InputValidator.checkCommandInput(command1))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
 
-        assertThatThrownBy(() -> inputValidator.checkCommandInput(command2))
+        assertThatThrownBy(() -> InputValidator.checkCommandInput(command2))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ConsoleTest {
         //when, then
         assertThatThrownBy(() -> console.printCalculateHistory(history))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ExceptionConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
 
     }
 
@@ -95,9 +95,9 @@ public class ConsoleTest {
         String test3 = "+*";
 
         //when
-        boolean result1 = inputValidator.isOperator(test1);
-        boolean result2 = inputValidator.isOperator(test2);
-        boolean result3 = inputValidator.isOperator(test3);
+        boolean result1 = InputValidator.isOperator(test1);
+        boolean result2 = InputValidator.isOperator(test2);
+        boolean result3 = InputValidator.isOperator(test3);
 
         //then
         assertThat(result1).isEqualTo(true);
@@ -116,21 +116,21 @@ public class ConsoleTest {
         String input4 = "1 2 3";
 
         //when, then
-        assertThatThrownBy(() -> inputValidator.checkEquationInput(input))
+        assertThatThrownBy(() -> InputValidator.checkEquationInput(input))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> inputValidator.checkEquationInput(input2))
+        assertThatThrownBy(() -> InputValidator.checkEquationInput(input2))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> inputValidator.checkEquationInput(input3))
+        assertThatThrownBy(() -> InputValidator.checkEquationInput(input3))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> inputValidator.checkEquationInput(input4))
+        assertThatThrownBy(() -> InputValidator.checkEquationInput(input4))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
     }
 
     @Test
@@ -140,7 +140,7 @@ public class ConsoleTest {
         String input = "3 + 4 * 5";
 
         //when, then
-        assertThatCode(() -> inputValidator.checkEquationInput(input))
+        assertThatCode(() -> InputValidator.checkEquationInput(input))
                 .doesNotThrowAnyException();
     }
 
