@@ -1,9 +1,7 @@
 package com.programmers.java.calculator.engine;
 
 import com.programmers.java.calculator.Console;
-import com.programmers.java.calculator.engine.exception.NumberIndexException;
-import com.programmers.java.calculator.engine.io.Input;
-import com.programmers.java.calculator.engine.io.Output;
+import com.programmers.java.calculator.engine.model.MenuNums;
 
 import java.util.Scanner;
 
@@ -11,40 +9,33 @@ import java.util.Scanner;
 public class Calculator implements Runnable{
 
     private final Scanner scanner = new Scanner(System.in);
+    private CalculatorEngine calculation = new CalculatorEngine();
+    private History history = new History();
+    private MenuNums menuNums;
 
-    private Calculation calculation = new Calculation();
-    private Input input;
-    private Output output;
-    private Lookup lookup = new Lookup();
-
+    //TODO : 콘솔 리팩토링 필요
     @Override
     public void run() {
         while(true){
             Console.printMenu();
-            int num = scanner.nextInt();
+            int menuNum = scanner.nextInt();
 
-            if(!validCheck(num)){
-                throw new NumberIndexException("잘못된 입력입니다.");
-            }
-            else{
-                if(num == 1) {  // 조회
-                   lookup.printRecords();
-                }
-                else if(num == 2){ // 계산
+            switch (MenuNums.getSelectedNum(menuNum)){
+                case RECORD:
+                    history.printRecords();
+                    break;
+                case CALCULATE:
                     scanner.nextLine();
                     String form = scanner.nextLine();
                     calculation.start(form);
-                }
-                else if(num == 9){
                     break;
-                }
+                case EXIT:
+                    return;
+                case NOTVALID:
+                    System.out.println("잘못된 범위의 선택입니다.");
+                    continue;
             }
-
         }
     }
 
-    private boolean validCheck(int num) {
-        if(num != 1 && num!=2 && num != 9) return false;
-        else return true;
-    }
 }
