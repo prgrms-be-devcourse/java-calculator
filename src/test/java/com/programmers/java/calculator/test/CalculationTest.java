@@ -15,7 +15,7 @@ public class CalculationTest {
         int result = 5;
 
         //when
-        int answer = calculation.calPostfix(calculation.infixTopostfic(oper));
+        double answer = calculation.calPostfix(calculation.infixTopostfic(oper));
 
         //then
         assertEquals(result, answer);
@@ -28,7 +28,7 @@ public class CalculationTest {
         int result = 14;
 
         //when
-        int answer = calculation.calPostfix(calculation.infixTopostfic(oper));
+        double answer = calculation.calPostfix(calculation.infixTopostfic(oper));
 
         //then
         assertEquals(result, answer);
@@ -41,7 +41,7 @@ public class CalculationTest {
         int result = -1;
 
         //when
-        int answer = calculation.calPostfix(calculation.infixTopostfic(oper));
+        double answer = calculation.calPostfix(calculation.infixTopostfic(oper));
 
         //then
         assertEquals(result, answer);
@@ -54,7 +54,7 @@ public class CalculationTest {
         int result = 4;
 
         //when
-        int answer = calculation.calPostfix(calculation.infixTopostfic(oper));
+        double answer = calculation.calPostfix(calculation.infixTopostfic(oper));
 
         //then
         assertEquals(result, answer);
@@ -68,7 +68,7 @@ public class CalculationTest {
         int result = 70;
 
         //when
-        int answer = calculation.calPostfix(calculation.infixTopostfic(oper));
+        double answer = calculation.calPostfix(calculation.infixTopostfic(oper));
 
         //then
         assertEquals(result, answer);
