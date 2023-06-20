@@ -34,9 +34,7 @@ public class ArithmeticCompute implements Compute {
     }
 
     private boolean isLowerThenStack(String str1, String str2) {
-        Operator curOperator = Operator.getOperator(str1);
-        Operator peekOperator = Operator.getOperator(str2);
-        return peekOperator.getPriority() >= curOperator.getPriority();
+        return Operator.compareOperatorPriority(str1, str2);
     }
 
     public double calculate(String[] input){

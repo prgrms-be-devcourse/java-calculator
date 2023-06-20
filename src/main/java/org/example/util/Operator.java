@@ -33,6 +33,12 @@ public enum Operator {
                 .anyMatch((a) -> a.operater.equals(str));
     }
 
+    public static boolean compareOperatorPriority(String strOperator1, String strOperator2){
+        Operator operator1 = getOperator(strOperator1);
+        Operator operator2 = getOperator(strOperator2);
+        return operator2.getPriority() >= operator1.getPriority();
+    }
+
     public int getPriority(){
         return priority;
     }
@@ -40,7 +46,4 @@ public enum Operator {
     public double calculateByOperator(double num1, double num2){
         return calculateFunction.apply(num1, num2);
     }
-
-
-
 }
