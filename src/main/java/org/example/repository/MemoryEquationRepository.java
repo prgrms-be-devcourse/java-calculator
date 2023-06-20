@@ -17,6 +17,6 @@ public class MemoryEquationRepository implements EquationRepository {
 
     @Override
     public List<String> findAll() {
-        return new ArrayList<>(savedEquations);
+        return List.copyOf(savedEquations);
     }
 }
