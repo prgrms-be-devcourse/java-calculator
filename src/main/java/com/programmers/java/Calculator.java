@@ -1,22 +1,19 @@
 package com.programmers.java;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class Calculator {
     static int index;
-    static ArrayList<String> history = new ArrayList<>();
-    public static BigDecimal calculate(String expression) throws Exception {
+    public BigDecimal calculate(String expression) throws Exception {
         index = 0;
         String postExp = toPostfix(expression);
         index = 0;
-        BigDecimal answer = postfixCalculator(postExp);
-        history.add(expression+" = "+answer);
-        return answer;
+
+        return postfixCalculator(postExp);
     }
 
-    public static BigDecimal postfixCalculator(String postExp) throws Exception {
+    public BigDecimal postfixCalculator(String postExp) throws Exception {
         Stack<BigDecimal> numberStack = new Stack<>();
         while (index < postExp.length()) {
             char ch = postExp.charAt(index);
@@ -30,7 +27,7 @@ public class Calculator {
         return numberStack.pop();
     }
 
-    private static String toPostfix(String expression) throws Exception {
+    private String toPostfix(String expression) throws Exception {
         Stack<Character> operatorStack = new Stack<>();
         StringBuilder intermediateBuilder = new StringBuilder();
         while(index < expression.length()) {
@@ -61,7 +58,7 @@ public class Calculator {
         return intermediateBuilder.toString();
     }
 
-    private static String tokenizer(String exp) {
+    private String tokenizer(String exp) {
         StringBuilder decimalBuilder = new StringBuilder();
         while (index < exp.length() && (Character.isDigit(exp.charAt(index)) || exp.charAt(index) == '.')) {
             decimalBuilder.append(exp.charAt(index));
@@ -70,7 +67,7 @@ public class Calculator {
         index--;
         return decimalBuilder.toString();
     }
-    private static BigDecimal performOperation(Character operator, BigDecimal popLast, BigDecimal popSecondLast) {
+    private BigDecimal performOperation(Character operator, BigDecimal popLast, BigDecimal popSecondLast) {
         switch (operator) {
             case '+':
                 return popSecondLast.add(popLast);
@@ -84,16 +81,12 @@ public class Calculator {
         return BigDecimal.ZERO;
     }
 
-    public static boolean isOperator(char ch) {
+    public boolean isOperator(char ch) {
         return (ch == '+' || ch == '-' || ch == '*' || ch == '/');
     }
 
-    public static int getPriority(char ch) {
+    public int getPriority(char ch) {
         return (ch == '+' || ch == '-') ? 1 : (ch == '*' || ch == '/') ? 2 : 0;
     }
 
-    public static void showHistory() throws Exception {
-        if(history.size() == 0) throw new Exception();
-        history.stream().forEach(System.out::println);
-    }
 }
