@@ -11,16 +11,6 @@ public class InputValidator {
 
     private InputValidator() {}
 
-    public static void checkCommandInput(String input) {
-        if (!isInteger(input)) {
-            throw new InputMismatchException(ExceptionMessageConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
-        }
-
-        if (!isInBoundary(input)) {
-            throw new InputMismatchException(ExceptionMessageConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
-        }
-    }
-
     public static boolean isInteger(String input) {
         return input.matches("^?\\d*$");
     }

@@ -2,6 +2,8 @@ package com.devcourse.java.calculator.constant;
 
 import com.devcourse.java.calculator.InputValidator;
 
+import java.util.InputMismatchException;
+
 public enum Menu {
     START_CALCULATOR_NO(0),
     SELECTED_PRINT_HISTORY(1),
@@ -28,6 +30,12 @@ public enum Menu {
     }
 
     public static void checkCommandInput(String input) {
-        InputValidator.checkCommandInput(input);
+        if (!InputValidator.isInteger(input)) {
+            throw new InputMismatchException(ExceptionMessageConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
+        }
+
+        if (!InputValidator.isInBoundary(input)) {
+            throw new InputMismatchException(ExceptionMessageConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
+        }
     }
 }
