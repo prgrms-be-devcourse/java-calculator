@@ -5,14 +5,14 @@ import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.LinkedHashMap;
+import java.util.List;
 
 public class InputValidator {
 
     private InputValidator() {}
 
     public static boolean isInteger(String input) {
-        return input.matches("^?\\d*$");
+        return input.matches("^(0|[-]?[1-9]\\d*)$");
     }
 
     public static boolean isInBoundary(String input) {
@@ -24,8 +24,8 @@ public class InputValidator {
         return token.matches("^[\\+\\-\\*\\/]$");
     }
 
-    public static void checkCalculateHistoryLength(LinkedHashMap<Integer, String> calculateHistory) {
-        if (calculateHistory.isEmpty()) {
+    public static void checkCalculateHistoryLength(List<String> history) {
+        if (history.isEmpty()) {
             throw new IllegalArgumentException(ExceptionMessageConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
         }
     }

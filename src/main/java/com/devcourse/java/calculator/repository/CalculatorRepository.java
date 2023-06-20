@@ -1,16 +1,18 @@
 package com.devcourse.java.calculator.repository;
 
-import lombok.Getter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import java.util.LinkedHashMap;
-
-@Getter
 public class CalculatorRepository {
 
-    private Integer historyNumber = 0;
-    private final LinkedHashMap<Integer, String> history = new LinkedHashMap<>();
+    private final List<String> history = new ArrayList<>();
 
     public void storeHistory(String equationWithAnswer) {
-        this.history.put(historyNumber++, equationWithAnswer);
+        this.history.add(equationWithAnswer);
+    }
+
+    public List<String> getHistory() {
+        return Collections.unmodifiableList(history);
     }
 }

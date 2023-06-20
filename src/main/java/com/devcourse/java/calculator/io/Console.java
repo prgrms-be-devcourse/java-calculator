@@ -3,7 +3,7 @@ package com.devcourse.java.calculator.io;
 import com.devcourse.java.calculator.InputValidator;
 import com.devcourse.java.calculator.constant.Menu;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -19,9 +19,9 @@ public class Console {
         System.out.print("선택 : ");
     }
 
-    public void printCalculateHistory(LinkedHashMap<Integer, String> calculateHistory) {
-        InputValidator.checkCalculateHistoryLength(calculateHistory);
-        calculateHistory.values().forEach(System.out::println);
+    public void printCalculateHistory(List<String> history) {
+        InputValidator.checkCalculateHistoryLength(history);
+        history.forEach(System.out::println);
     }
 
     public void printExceptionMessage(String message) {

@@ -47,17 +47,17 @@ public class CalculateUtil {
     }
 
     public static String calculatePostfix(String postfix) {
-        Deque<Integer> operandStack = new ArrayDeque<>();
+        Deque<Double> operandStack = new ArrayDeque<>();
         String[] splitPostfix = postfix.split(" ");
 
         for (String each: splitPostfix) {
 
             if (each.matches("^?\\d*$")) {
-                operandStack.push(Integer.parseInt(each));
+                operandStack.push(Double.parseDouble(each));
             } else {
-                int operand2 = operandStack.pop();
-                int operand1 = operandStack.pop();
-                int result = 0;
+                double operand2 = operandStack.pop();
+                double operand1 = operandStack.pop();
+                double result = 0;
 
                 switch (each.charAt(0)) {
                     case '+':

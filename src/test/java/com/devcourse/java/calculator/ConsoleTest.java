@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.LinkedHashMap;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -22,7 +23,7 @@ public class ConsoleTest {
     @DisplayName("비어있는 계산 내역 조회할때 IllegalArgumentException 확인")
     void PrintCalculateHistory_Empty_Exception() {
         //given
-        LinkedHashMap<Integer, String> history = new LinkedHashMap<>();
+        List<String> history = new ArrayList<>();
 
         //when, then
         assertThatThrownBy(() -> console.printCalculateHistory(history))
@@ -38,9 +39,9 @@ public class ConsoleTest {
         System.setOut(new PrintStream(outputStream));
 
         //given
-        LinkedHashMap<Integer, String> history = new LinkedHashMap<>();
-        history.put(1, "1 + 2 = 3");
-        history.put(2, "5 + 10 * 2 = 25");
+        List<String> history = new ArrayList<>();
+        history.add("1 + 2 = 3");
+        history.add( "5 + 10 * 2 = 25");
 
         //when
         console.printCalculateHistory(history);
