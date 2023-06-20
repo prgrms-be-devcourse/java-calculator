@@ -1,7 +1,6 @@
 package com.devcourse.java.calculator;
 
 import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
-import com.devcourse.java.calculator.constant.Menu;
 import com.devcourse.java.calculator.io.Console;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

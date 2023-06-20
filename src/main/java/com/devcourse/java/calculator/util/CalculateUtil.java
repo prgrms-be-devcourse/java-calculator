@@ -4,7 +4,6 @@ import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 
 public class CalculateUtil {
 
@@ -16,28 +15,14 @@ public class CalculateUtil {
         return equation + " = " + calculateAnswer;
     }
 
-    private static int getPriority(char ch) {
-        switch (ch) {
-            case '+':
-            case '-':
-                return 1;
-            case '*':
-            case '/':
-                return 2;
-            default:
-                return 0;
-        }
-    }
-
     public static String changeToPostfix(String equation) {
         StringBuilder stringBuilder = new StringBuilder();
         Deque<Character> stack = new ArrayDeque<>();
 
         for (char each: equation.toCharArray()) {
-            int priority = getPriority(each);
-
             if (isOperator(each)) {
-                while (!stack.isEmpty() && getPriority(stack.peek()) >= priority) {
+
+                while (!stack.isEmpty() && Operation.getOperationPriority(stack.peek()) >= Operation.getOperationPriority(each)) {
                     stringBuilder.append(stack.pop());
                     stringBuilder.append(' ');
                 }
@@ -62,7 +47,7 @@ public class CalculateUtil {
     }
 
     public static String calculatePostfix(String postfix) {
-        Stack<Integer> operandStack = new Stack<>();
+        Deque<Integer> operandStack = new ArrayDeque<>();
         String[] splitPostfix = postfix.split(" ");
 
         for (String each: splitPostfix) {
