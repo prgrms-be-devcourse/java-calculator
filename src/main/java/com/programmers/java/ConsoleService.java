@@ -20,7 +20,7 @@ public class ConsoleService {
     }
 
     public void run() {
-        while(continueRunning) {
+        while (continueRunning) {
             ask();
             String option = getInput();
             continueRunning = interpret(option);
@@ -40,7 +40,7 @@ public class ConsoleService {
     }
 
     public boolean interpret(String option) {
-        switch(option) {
+        switch (option) {
             case "1":
                 Map<String, BigDecimal> history = repository.showAll();
                 history.entrySet().stream().forEach(entry -> {

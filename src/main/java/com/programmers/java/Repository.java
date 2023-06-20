@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Repository {
     private HashMap<String, BigDecimal> history = new HashMap<>();
+
     public Map<String, BigDecimal> showAll() {
         return history;
     }

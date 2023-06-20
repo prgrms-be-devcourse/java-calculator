@@ -5,11 +5,11 @@ import java.util.Stack;
 
 public class Calculator {
     static int index;
+
     public BigDecimal calculate(String expression) throws Exception {
         index = 0;
         String postExp = toPostfix(expression);
         index = 0;
-
         return postfixCalculator(postExp);
     }
 
@@ -30,18 +30,18 @@ public class Calculator {
     private String toPostfix(String expression) throws Exception {
         Stack<Character> operatorStack = new Stack<>();
         StringBuilder intermediateBuilder = new StringBuilder();
-        while(index < expression.length()) {
+        while (index < expression.length()) {
             char ch = expression.charAt(index);
-            if(Character.isDigit(ch)) {
-                intermediateBuilder.append(tokenizer(expression)+ " ");
+            if (Character.isDigit(ch)) {
+                intermediateBuilder.append(tokenizer(expression)).append(" ");
             } else if (isOperator(ch)) {
-                while(!operatorStack.isEmpty() && getPriority(operatorStack.peek()) >= getPriority(ch)) {
+                while (!operatorStack.isEmpty() && getPriority(operatorStack.peek()) >= getPriority(ch)) {
                     intermediateBuilder.append(operatorStack.pop());
                 }
                 operatorStack.push(ch);
-            } else if( expression.charAt(index) == '(') {
+            } else if (expression.charAt(index) == '(') {
                 operatorStack.push(ch);
-            } else if( expression.charAt(index) == ')') {
+            } else if (expression.charAt(index) == ')') {
                 while (operatorStack.peek() != '(') {
                     intermediateBuilder.append(operatorStack.pop());
                 }
@@ -67,6 +67,7 @@ public class Calculator {
         index--;
         return decimalBuilder.toString();
     }
+
     private BigDecimal performOperation(Character operator, BigDecimal popLast, BigDecimal popSecondLast) {
         switch (operator) {
             case '+':
@@ -82,11 +83,23 @@ public class Calculator {
     }
 
     public boolean isOperator(char ch) {
-        return (ch == '+' || ch == '-' || ch == '*' || ch == '/');
+        if (ch == '+')
+            return true;
+        if (ch == '-')
+            return true;
+        if (ch == '*')
+            return true;
+        if (ch == '/')
+            return true;
+        return false;
     }
 
     public int getPriority(char ch) {
-        return (ch == '+' || ch == '-') ? 1 : (ch == '*' || ch == '/') ? 2 : 0;
+        if (ch == '+' || ch == '-')
+            return 1;
+        if (ch == '*' || ch == '/')
+            return 2;
+        return 0;
     }
 
 }
