@@ -1,12 +1,12 @@
 package com.programmers.java.calculator.test;
 
-import com.programmers.java.calculator.engine.Calculation;
+import com.programmers.java.calculator.engine.CalculatorEngine;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculationTest {
-    Calculation calculation = new Calculation();
+    CalculatorEngine calculation = new CalculatorEngine();
 
     @Test
     void testCalculator() {

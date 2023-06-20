@@ -1,37 +1,26 @@
 package com.programmers.java.calculator.engine;
 
+import com.programmers.java.calculator.engine.model.Operator;
 import com.programmers.java.calculator.engine.model.Result;
-import java.util.Stack;
-import static com.programmers.java.calculator.engine.Lookup.records;
+import static com.programmers.java.calculator.engine.History.records;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 // 계산
-public class Calculation {
+public class CalculatorEngine {
     public void start(String form) {
-        int answer = calPostfix(infixTopostfic(form));
+        double answer = calPostfix(infixTopostfic(form)); // 후위 연산식으로 변경 후 계산
         System.out.println(answer);
         records.add(new Result(form, answer));
         System.out.println();
     }
 
-    // 연산자 우선순위 반환
-    private int getPrecedence(char operator){
-        if(operator == '+' || operator == '-'){
-            return 1;
-        }
-        else if(operator == '*' || operator == '/'){
-            return 2;
-        }
-        else {
-            return -1;
-        }
-    }
 
     // 중위 표기식 -> 후위 표기식 변환
-    public String
-    infixTopostfic(String s){
-        // StringTokenizer tokenizer = new StringTokenizer(s, "+-*/()");
+    public String infixTopostfic(String s){
         StringBuilder postFix = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> stack = new ArrayDeque<>();
 
         for(char c : s.toCharArray()){
             if(Character.isDigit(c)){
@@ -41,7 +30,7 @@ public class Calculation {
                 stack.push(c);
             }
             else if(c == ')'){
-                while (!stack.empty() && stack.peek() != '('){
+                while (stack.size() != 0 && stack.peek() != '('){
                     postFix.append(stack.pop());
                 }
                 if (!stack.isEmpty() && stack.peek() != '(') {
@@ -50,7 +39,7 @@ public class Calculation {
                 stack.pop(); // ( 제거
             }
             else{
-                while(!stack.isEmpty() && getPrecedence(c) <= getPrecedence(stack.peek())){
+                while(!stack.isEmpty() && Operator.getPriority(c) <= Operator.getPriority(stack.peek())){
                     postFix.append(stack.pop());
                 }
                 stack.push(c);
@@ -68,19 +57,19 @@ public class Calculation {
     }
 
     // 후위 표기식으로 계산 결과 return
-    public int calPostfix(String postFix){
-        Stack<Integer> stack = new Stack<>();
+    public double calPostfix(String postFix){
+        Deque<Double> stack = new ArrayDeque<>();
 
         for(char c : postFix.toCharArray()){
             if(Character.isDigit(c)){
-                stack.push(Integer.valueOf(c-48));
+                stack.push((double)c-48);
             }
             else{
                 if(stack.size() < 2){
                     throw new IllegalArgumentException("잘못된 postFix");
                 }
-                int op1 = stack.pop();
-                int op2 = stack.pop();
+                double op1 = stack.pop();
+                double op2 = stack.pop();
 
                 switch (c){
                     case '+':

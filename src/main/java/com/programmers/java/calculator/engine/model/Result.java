@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Result {
-    String oper;
-    int answer;
+    private String oper;
+    private double answer;
     @Override
     public String toString() {
         return oper + " = " + answer;
