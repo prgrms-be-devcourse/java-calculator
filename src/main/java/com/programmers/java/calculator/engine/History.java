@@ -8,7 +8,7 @@ import java.util.List;
 
 @NoArgsConstructor
 public class History {
-    public static List<Result> records = new ArrayList<>();
+    public static List<Result> records = new ArrayList<>();  //TODO: 일급컬렉션으로 변경
 
     public History(List<Result> records) {
         this.records = records;

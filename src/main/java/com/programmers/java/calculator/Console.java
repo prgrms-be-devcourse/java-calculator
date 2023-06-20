@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Console implements Input, Output {
     private final Scanner scanner = new Scanner(System.in);
 
+    //TODO : 콘솔리팩토링
+
     public static void printMenu(){
         System.out.println("1. 조회");
         System.out.println("2. 계산");
