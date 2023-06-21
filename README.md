@@ -1,39 +1,65 @@
 # java_calculator
-자바 계산기 구현 미션 Repository입니다.
 
-### 이곳은 공개 Repo입니다.
-1. 여러분의 포트폴리오로 사용하셔도 됩니다.
-2. 때문에 이 repo를 fork한 뒤
-3. 여러분의 개인 Repo에 작업하며 
-4. 이 Repo에 PR을 보내어 멘토의 코드 리뷰와 피드백을 받으세요.
 
-### Branch 명명 규칙 + 팀의 PR규칙 정하기
-1. 여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
-2. prgrms-be-devcourse/spring-board 레포로 PR시 branch는 gituser_id을 적어주세요 :)  
-    - base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`또는 `github_id`
-3. 실제 진행할 PR규칙은 멘토+팀원들과 정하여 진행해주세요 :) 
-    - ← head repo : `여러분repo` compare : `main`로 할지
-    - 또는 ← head repo : `여러분repo` compare : `github_id`로 할지
-- 참고 : [Github 위치 및 피드백 기준 가이드](https://www.notion.so/backend-devcourse/Github-e1a0908a6bbf4aeaa5a62981499bb215)
+## 2차 pr에서 수정한 부분
 
-### 과제를 통해 기대하는 역량
+### 1. Util 클래스 최소화 및 도메인에 책임 넘기기
+- Operator 도메인 클래스(Enum)를 만들어 +,-,*,/ 연산 책임 넘기기 
+- Coverter 함수 삭제 후 계산식(String expression)의 연산 과정을 CalculatorProcessor에서 모두 처리할 수 있도록 수정
 
-- 깃허브를 통한 코드리뷰를 경험해보자
-- 기본적인 테스트 코드 작성 및 활용하는 능력해보자
-- 스스로 OOP를 생각하고 코드로 옮길 수 있는 능력해보자
+### 2. 사칙연산 계산 방식 변경
+
+- 기존방식
+  - 식(후위표기식)을 입력 받고 -> 중위표기식으로 변환 -> 중위표기식을 Stack을 이용해 계산
+- 수정 후 방식
+  - operators, operands 각각 Deque을 사용해 우선순위 비교하여 사칙연산 계산 
+
+### 3. repository 확장성 고려
+- 추후 Map이 아닌 다른 DB를 사용할 수 있는 점을 고려하여 Interface 추가
+- LinkedHashMap을 데이터 저장소로 사용하는 사용하는 구현체 MapCalculatorRepository로 생성
+
+### 4. 사용자 정의 에러 사용하여 예외 고려
+
+- CalculatorException으로 발생하는 예외 처리 
+- ErrorMessage : 발생할 수 있는 예외 모아놓은 Enum 클래스
+- ConsoleMessage : 이 계산기에서는 입력값이 잘못된 경우 다시 입력 받도록 출력하는 안내 메시지 Enum 클래스
+
+### 5. 테스트 코드 작성
+
+### 6. 피드백 수정 
+```- 적절한 변수 사용해서 Main 함수의 Controller 생성 코드 수정```
+
+```- 모든 출력문은 Output 메소드를 이용하도록 코드 수정```
+
+```
+- 메소드 명, 클래스 명 수정
+  - CalculatorDto -> model 패키지의 ExpressionResult로 수정
+  - CalculationHelper -> CalculationProcessor로 클래스 명 수정
+  ```
+
+```- IdGenerator Static 하게 수정```
+
+```- Pattern 객체 static 변수로 수정```
+
+```- Input 클래스에서 입력 함수(inputLine()), 처리 함수(processMenu(),processExpression()) 구분하는 것으로 수정```
+
+```- 반복시 try-catch문 -> while문 사용하여 코드 수정```
+
+---
+
+  
 
 ### 요구사항
-- 콘솔로 구현입니다.(스윙으로 구현하시는 분들 계실까봐) 
 - 객체지향적인 코드로 계산기 구현하기
-    - [ ]  더하기
-    - [ ]  빼기
-    - [ ]  곱하기
-    - [ ]  나누기
-    - [ ]  우선순위(사칙연산)
-- [ ]  테스트 코드 구현하기
-- [ ]  계산 이력을 맵으로 데이터 저장기능 만들기
+    - [x]  더하기
+    - [x]  빼기
+    - [x]  곱하기
+    - [x]  나누기
+    - [x]  우선순위(사칙연산)
+- [x]  테스트 코드 구현하기
+- [x]  계산 이력을 맵으로 데이터 저장기능 만들기
     - 애플리케이션이 동작하는 동안 데이터베이스 외에 데이터를 저장할 수 있는 방법을 고안해보세요.
-- (선택) 정규식 사용
+- [x] 정규식 사용
 
 ### 실행결과(콘솔)
 ```
