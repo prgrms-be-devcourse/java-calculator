@@ -8,8 +8,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 // 계산
-public class CalculatorEngine {
-    public void start(String form) {
+public class CalculatorEngine  {
+    public void start(String form) throws IllegalArgumentException {
         double answer = calPostfix(infixTopostfic(form)); // 후위 연산식으로 변경 후 계산
         System.out.println(answer);
         records.add(new Result(form, answer)); //TODO: 일급컬렉션으로 변경
@@ -34,7 +34,7 @@ public class CalculatorEngine {
                     postFix.append(stack.pop());
                 }
                 if (!stack.isEmpty() && stack.peek() != '(') {
-                    throw new IllegalArgumentException("잘못된 괄호입니다."); // TODO: try/catch
+                    throw new IllegalArgumentException("잘못된 괄호 입니다.");
                 }
                 stack.pop(); // ( 제거
             }
@@ -48,7 +48,7 @@ public class CalculatorEngine {
 
         while(!stack.isEmpty()){
             if(stack.peek() == '('){
-                throw new IllegalArgumentException("잘못된 괄호입니다."); // TODO: try/catch
+                throw new IllegalArgumentException("잘못된 괄호 입니다.");
             }
             postFix.append(stack.pop());
         }
@@ -66,8 +66,9 @@ public class CalculatorEngine {
             }
             else{
                 if(stack.size() < 2){
-                    throw new IllegalArgumentException("잘못된 postFix");
+                    throw new IllegalArgumentException("잘못된 postFix 입니다.");
                 }
+
                 double op1 = stack.pop();
                 double op2 = stack.pop();
 
@@ -88,8 +89,10 @@ public class CalculatorEngine {
             }
         }
 
-        if(stack.size() != 1)
-            throw new IllegalArgumentException("잘못된 postFix, 사유:stack.size!=1"); // TODO: try/catch
+        if(stack.size() != 1){
+            throw new IllegalArgumentException("잘못된 postFix, 사유:stack.size!=1");
+        }
+
 
         return stack.pop();
     }

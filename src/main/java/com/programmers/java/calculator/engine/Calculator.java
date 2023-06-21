@@ -27,7 +27,14 @@ public class Calculator implements Runnable{
                 case CALCULATE:
                     scanner.nextLine();
                     String form = scanner.nextLine();
-                    calculation.start(form);
+
+                    try{
+                        calculation.start(form);
+                    }
+                    catch (IllegalArgumentException ie){
+                        System.out.println(ie.getMessage());
+                    }
+
                     break;
                 case EXIT:
                     return;
