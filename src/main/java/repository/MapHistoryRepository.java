@@ -9,13 +9,13 @@ public class MapHistoryRepository implements HistoryRepository {
     private int historyCount;
     private Map<Integer, History> MapHistoryRepository;
     public MapHistoryRepository() {
-        this.MapHistoryRepository = new LinkedHashMap<>();
-        this.historyCount = 0;
+        MapHistoryRepository = new LinkedHashMap<>();
+        historyCount = 0;
     }
 
     @Override
     public void saveHistory(History history) {
-        this.MapHistoryRepository.put(historyCount, history);
+        MapHistoryRepository.put(historyCount, history);
         historyCount++;
     }
 
@@ -24,4 +24,8 @@ public class MapHistoryRepository implements HistoryRepository {
         return new ArrayList<>(MapHistoryRepository.values());
     }
 
+    @Override
+    public boolean isEmpty() {
+        return MapHistoryRepository.isEmpty();
+    }
 }
