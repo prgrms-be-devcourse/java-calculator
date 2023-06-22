@@ -50,7 +50,7 @@ public class Calculator {
         while (true) {
             try {
                 String formula = scanner.nextLine();
-                FormulaProcessor.isValidFormula(formula);
+                FormulaProcessor.validateFormula(formula);
 
                 List<String> terms = FormulaProcessor.parseFormula(formula);
 
