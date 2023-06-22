@@ -26,15 +26,12 @@ public enum MenuType {
 
     public static boolean hasMenu(int menuNum) throws MenuTypeException {
 
-        boolean isPresent = Arrays.stream(MenuType.values())
-                .anyMatch(menuType -> (menuType.menuNum == menuNum));
+        Arrays.stream(MenuType.values())
+                .filter(menuType -> (menuType.menuNum == menuNum))
+                .findAny()
+                .orElseThrow(() -> new MenuTypeException("존재하지 않는 메뉴입니다. 메뉴 번호를 숫자로 정확히 입력해주세요. [1, 2, 3]"));
 
-        if(!isPresent) {
-            throw new MenuTypeException("존재하지 않는 메뉴입니다. 메뉴 번호를 숫자로 정확히 입력해주세요. [1, 2, 3]");
-        } else {
-            return true;
-        }
-
+        return true;
     }
 
 
