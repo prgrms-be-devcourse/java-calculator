@@ -76,7 +76,7 @@ public class Calculator {
                 }
                 operatorStack.pop();
             } else {
-                throw new WrongExpressionException();
+                throw new WrongExpressionException("잘못된 기호입니다.");
             }
 
             index++;
