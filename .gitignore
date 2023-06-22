@@ -1,0 +1,16 @@
+*.class
+*.jar
+
+.idea
+
+
+.gradle
+build
+!src/**/build/
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
