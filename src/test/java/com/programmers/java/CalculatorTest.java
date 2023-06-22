@@ -1,5 +1,6 @@
 package com.programmers.java;
 
+import com.programmers.java.logic.Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class CalculatorTest {
         calculator = new Calculator();
     }
     @Test
-    void testCalculate1() {
+    void nomralCalculationTest() {
         String expression1 = "2+3*4";
         BigDecimal expected1 = new BigDecimal("14");
         try {
@@ -28,7 +29,7 @@ class CalculatorTest {
     }
 
 //    @Test
-//    void testCalculate2() {
+//    void negativeNumberCalculationTest() {
 //        String expression2 = "7-(5/2.5)+3";
 //        BigDecimal expected2 = new BigDecimal("8");
 //        try {

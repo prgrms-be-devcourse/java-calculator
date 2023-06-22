@@ -1,7 +1,12 @@
-package com.programmers.java;
+package com.programmers.java.io;
+
+import com.programmers.java.exception.WrongExpressionException;
+import com.programmers.java.logic.Calculator;
+import com.programmers.java.repository.Repository;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ConsoleService {
@@ -43,6 +48,9 @@ public class ConsoleService {
         switch (option) {
             case "1":
                 Map<String, BigDecimal> history = repository.showAll();
+                if(history.isEmpty()) {
+                    System.out.println("조회 할 기록이 없습니다.");
+                }
                 history.entrySet().stream().forEach(entry -> {
                     String key = entry.getKey();
                     BigDecimal value = entry.getValue();
@@ -57,13 +65,16 @@ public class ConsoleService {
                     BigDecimal result = calculator.calculate(expression);
                     repository.save(expression, result);
                     System.out.println(result);
-                } catch (Exception e) {
-                    System.out.println("올바르지 않은 수식입니다.");
+                } catch (WrongExpressionException se) {
+                    System.out.println("올바르지 않은 기호입니다.");
+                } catch (NoSuchElementException ne) {
+                    System.out.println("올바르지 않은 계산식입니다.");
                 }
                 break;
             case "3":
                 return false;
             default:
+                System.out.println("올바르지 않은 메뉴입니다.");
                 break;
         }
         return true;

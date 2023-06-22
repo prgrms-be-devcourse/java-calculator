@@ -1,4 +1,4 @@
-package com.programmers.java;
+package com.programmers.java.repository;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
