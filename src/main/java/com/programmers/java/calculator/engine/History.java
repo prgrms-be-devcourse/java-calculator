@@ -1,5 +1,6 @@
 package com.programmers.java.calculator.engine;
 
+import com.programmers.java.calculator.engine.io.Console;
 import com.programmers.java.calculator.engine.model.Result;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 public class History {
     public static List<Result> records = new ArrayList<>();  //TODO: 일급컬렉션으로 변경
+    private Console console = new Console();
 
     public History(List<Result> records) {
         this.records = records;
@@ -20,13 +22,13 @@ public class History {
 
     public void printRecords() {
         if (records.isEmpty()) {
-            System.out.println("기록이 존재하지 않습니다.");
+            console.printError("기록이 존재하지 않습니다.");
         }
 
         if(notEmpty(records)){
-            System.out.println("---History---");
+            console.printMsg("---History---");
             records.forEach(result -> {
-                System.out.println(result.toString());
+                console.printMsg(result.toString());
             });
         }
     }

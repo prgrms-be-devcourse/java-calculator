@@ -1,5 +1,6 @@
 package com.programmers.java.calculator.engine;
 
+import com.programmers.java.calculator.engine.io.Console;
 import com.programmers.java.calculator.engine.model.Operator;
 import com.programmers.java.calculator.engine.model.Result;
 import static com.programmers.java.calculator.engine.History.records;
@@ -9,11 +10,13 @@ import java.util.Deque;
 
 // 계산
 public class CalculatorEngine  {
+
+    private Console console = new Console();
+
     public void start(String form) throws IllegalArgumentException {
         double answer = calPostfix(infixTopostfic(form)); // 후위 연산식으로 변경 후 계산
-        System.out.println(answer);
+        console.printAnswer(answer);
         records.add(new Result(form, answer)); //TODO: 일급컬렉션으로 변경
-        System.out.println();
     }
 
 
