@@ -9,10 +9,9 @@ public class CalculateUtil {
 
     private CalculateUtil() {}
 
-    public static String calculateAndReturnEquationWithAnswer(String equation) {
+    public static String calculateAndReturnAnswer(String equation) {
         String postfix = changeToPostfix(equation);
-        String calculateAnswer = calculatePostfix(postfix);
-        return equation + " = " + calculateAnswer;
+        return calculatePostfix(postfix);
     }
 
     public static String changeToPostfix(String equation) {

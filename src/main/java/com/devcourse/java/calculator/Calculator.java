@@ -3,8 +3,12 @@ package com.devcourse.java.calculator;
 import com.devcourse.java.calculator.constant.Menu;
 import com.devcourse.java.calculator.io.Console;
 import com.devcourse.java.calculator.repository.CalculatorRepository;
+import com.devcourse.java.calculator.repository.History;
 import com.devcourse.java.calculator.util.CalculateUtil;
+import com.devcourse.java.calculator.validator.equationValidator;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class Calculator implements Runnable{
@@ -49,14 +53,22 @@ public class Calculator implements Runnable{
     }
 
     public void calculateCommand() {
+        Optional<String> equation = Optional.empty();
         try {
             console.printRequestEquationInput();
-            String equation = console.getEquation();
-            String equationWithAnswer = CalculateUtil.calculateAndReturnEquationWithAnswer(equation);
-            console.printAnswerFromEquation(equationWithAnswer);
-            calculatorRepository.storeHistory(equationWithAnswer);
+            equation = console.getEquation();
+            equationValidator.checkEquationInput(equation);
+            String answer = CalculateUtil.calculateAndReturnAnswer(equation.get());
+            console.printAnswerFromEquation(answer);
+            History history = new History(equation, Optional.of(answer));
+            calculatorRepository.storeHistory(history);
 
         } catch (RuntimeException e) {
+            if (equation.isPresent()) {
+                History history = new History(equation, Optional.empty());
+                calculatorRepository.storeHistory(history);
+            }
+
             console.printExceptionMessage(e.getMessage());
         }
     }

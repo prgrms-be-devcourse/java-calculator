@@ -1,9 +1,12 @@
 package com.devcourse.java.calculator.io;
 
+import com.devcourse.java.calculator.repository.History;
 import com.devcourse.java.calculator.validator.equationValidator;
 import com.devcourse.java.calculator.validator.repositoryValidator;
 
+import java.text.MessageFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Console {
@@ -19,9 +22,17 @@ public class Console {
         System.out.print("선택 : ");
     }
 
-    public void printCalculateHistory(List<String> history) {
+    public void printCalculateHistory(List<History> history) {
         repositoryValidator.checkCalculateHistoryLength(history);
-        history.forEach(System.out::println);
+        for (History eachHistory: history) {
+            if (eachHistory.getAnswer().isEmpty()) {
+                System.out.println(eachHistory.getEquation().get());
+            } else {
+                System.out.println(MessageFormat.
+                        format("{0} = {1}", eachHistory.getEquation().get(), eachHistory.getAnswer().get()));
+            }
+        }
+
     }
 
     public void printExceptionMessage(String message) {
@@ -41,10 +52,11 @@ public class Console {
         return scanner.nextLine();
     }
 
-    public String getEquation() {
+    public Optional<String> getEquation() {
         String equation = scanner.nextLine();
-        equationValidator.checkEquationInput(equation);
-
-        return equation;
+        if (equation.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(equation);
     }
 }

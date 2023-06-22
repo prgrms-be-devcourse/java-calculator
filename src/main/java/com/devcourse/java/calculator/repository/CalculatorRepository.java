@@ -6,13 +6,13 @@ import java.util.List;
 
 public class CalculatorRepository {
 
-    private final List<String> history = new ArrayList<>();
+    private final List<History> historyStorage = new ArrayList<>();
 
-    public void storeHistory(String equationWithAnswer) {
-        this.history.add(equationWithAnswer);
+    public void storeHistory(History history) {
+        this.historyStorage.add(history);
     }
 
-    public List<String> getHistory() {
-        return Collections.unmodifiableList(history);
+    public List<History> getHistory() {
+        return Collections.unmodifiableList(historyStorage);
     }
 }

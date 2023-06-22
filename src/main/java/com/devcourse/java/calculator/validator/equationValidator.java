@@ -5,22 +5,25 @@ import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.Optional;
 
 public final class equationValidator {
 
     private equationValidator() {}
 
-    public static void checkEquationInput(String equation) {
+    public static void checkEquationInput(Optional<String> input) {
+        throwIfEquationIsEmpty(input);
+        String equation = input.get();
+
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(equation.split(" ")));
 
-        throwIfEquationIsEmpty(equation);
         throwIfTokenIsEmpty(tokens);
         throwIfEquationStartWithNoInteger(tokens);
         throwIfEquationEndWithNoInteger(tokens);
         throwIfEquationIsWrong(tokens);
     }
 
-    public static void throwIfEquationIsEmpty(String equation) {
+    public static void throwIfEquationIsEmpty(Optional<String> equation) {
         if (equation.isEmpty()) {
             throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }

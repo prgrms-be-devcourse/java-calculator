@@ -20,19 +20,19 @@ class CalculateUtilTest {
         String equation5 = "5 * 10 / 2 + 10";
 
         //when
-        String equationWithAnswer = CalculateUtil.calculateAndReturnEquationWithAnswer(equation1);
-        String equationWithAnswer2 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation2);
-        String equationWithAnswer3 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation3);
-        String equationWithAnswer4 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation4);
-        String equationWithAnswer5 = CalculateUtil.calculateAndReturnEquationWithAnswer(equation5);
+        String Answer = CalculateUtil.calculateAndReturnAnswer(equation1);
+        String Answer2 = CalculateUtil.calculateAndReturnAnswer(equation2);
+        String Answer3 = CalculateUtil.calculateAndReturnAnswer(equation3);
+        String Answer4 = CalculateUtil.calculateAndReturnAnswer(equation4);
+        String Answer5 = CalculateUtil.calculateAndReturnAnswer(equation5);
 
 
         //then
-        assertThat(equationWithAnswer).isEqualTo("5 + 10 = 15.0");
-        assertThat(equationWithAnswer2).isEqualTo("10 + 2 * 50 + 30 = 140.0");
-        assertThat(equationWithAnswer3).isEqualTo("1 + 2 + 3 + 4 + 5 = 15.0");
-        assertThat(equationWithAnswer4).isEqualTo("6 + 10 / 2 + 4 = 15.0");
-        assertThat(equationWithAnswer5).isEqualTo("5 * 10 / 2 + 10 = 35.0");
+        assertThat(Answer).isEqualTo("15.0");
+        assertThat(Answer2).isEqualTo("140.0");
+        assertThat(Answer3).isEqualTo("15.0");
+        assertThat(Answer4).isEqualTo("15.0");
+        assertThat(Answer5).isEqualTo("35.0");
 
     }
 
@@ -44,11 +44,11 @@ class CalculateUtilTest {
         String equation2 = "5 / 0";
 
         //when, then
-        assertThatThrownBy(() -> CalculateUtil.calculateAndReturnEquationWithAnswer(equation1))
+        assertThatThrownBy(() -> CalculateUtil.calculateAndReturnAnswer(equation1))
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessageContaining(ExceptionMessageConstant.DIVIDE_BY_ZERO_EXCEPTION);
 
-        assertThatThrownBy(() -> CalculateUtil.calculateAndReturnEquationWithAnswer(equation2))
+        assertThatThrownBy(() -> CalculateUtil.calculateAndReturnAnswer(equation2))
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessageContaining(ExceptionMessageConstant.DIVIDE_BY_ZERO_EXCEPTION);
 
