@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.kimihiqq.io.Input;
 import me.kimihiqq.io.Output;
 import me.kimihiqq.model.History;
+import me.kimihiqq.options.Operator;
 import me.kimihiqq.options.Option;
 import me.kimihiqq.utils.FormulaProcessor;
 
@@ -71,9 +72,9 @@ public class Calculator {
         int i = 0;
         while (i < terms.size()) {
             if (operators.contains(terms.get(i))) {
-                long leftHandSide = Long.parseLong(terms.get(i - 1));
-                long rightHandSide = Long.parseLong(terms.get(i + 1));
-                long result = calculateOperation(terms.get(i), leftHandSide, rightHandSide);
+                double leftHandSide = Double.parseDouble(terms.get(i - 1));
+                double rightHandSide = Double.parseDouble(terms.get(i + 1));
+                double result = calculateOperation(terms.get(i), leftHandSide, rightHandSide);
 
                 terms.subList(i - 1, i + 2).clear();
                 terms.add(i - 1, String.valueOf(result));
@@ -84,19 +85,14 @@ public class Calculator {
         return terms;
     }
 
-    private long calculateOperation(String operator, long leftHandSide, long rightHandSide) {
-        switch (operator) {
-            case "*":
-                return leftHandSide * rightHandSide;
-            case "/":
-                return leftHandSide / rightHandSide;
-            case "+":
-                return leftHandSide + rightHandSide;
-            case "-":
-                return leftHandSide - rightHandSide;
-            default:
-                throw new IllegalArgumentException("Invalid operator");
+    private double calculateOperation(String operatorString, double leftHandSide, double rightHandSide) {
+        Optional<Operator> optionalOperator = Operator.from(operatorString);
+        if (!optionalOperator.isPresent()) {
+            throw new IllegalArgumentException("Invalid operator");
         }
+
+        Operator operator = optionalOperator.get();
+        return operator.calculate(leftHandSide, rightHandSide);
     }
 
     private void saveHistory(String formula, String result) {
