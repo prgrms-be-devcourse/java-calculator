@@ -12,7 +12,7 @@ import static constant.Operator.*;
 public class PostfixConverter implements Converter {
     private static final String IS_NUMBER_PATTERN = "^[0-9]+$";
     private static final String WHITESPACE = " ";
-    private static final Stack<Operator> operatorStack = new Stack<>();
+    private final Stack<Operator> operatorStack = new Stack<>();
 
     @Override
     public List<String> convert(Expression expression) {

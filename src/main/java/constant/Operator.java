@@ -8,9 +8,9 @@ import static model.calculation.CalculationImpl.ZERO_DIVIDE;
 
 public enum Operator {
     PLUS("+", 1, Integer::sum),
-    MINUS("-", 1, (now, prev) -> prev - now),
-    MULTIPLY("*", 2, (now, prev) -> prev * now),
-    DIVIDE("/", 2, (now, prev) -> {
+    MINUS("-", 1, (prev, now) -> prev - now),
+    MULTIPLY("*", 2, (prev, now) -> prev * now),
+    DIVIDE("/", 2, (prev, now) -> {
         if (now == 0) {
             throw new ArithmeticException(ZERO_DIVIDE);
         }

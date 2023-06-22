@@ -11,7 +11,7 @@ import static constant.Operator.*;
 public class CalculationImpl implements Calculation {
     private static final String IS_NUMBER_PATTERN = "^[0-9]+$";
     public static final String ZERO_DIVIDE = "0으로 나눌 수 없습니다.";
-    private static final Stack<Integer> numberStack = new Stack<>();
+    private final Stack<Integer> numberStack = new Stack<>();
 
     @Override
     public CalculationResult calculate(List<String> postfixExpression) {
@@ -37,7 +37,7 @@ public class CalculationImpl implements Calculation {
         Integer nowNumber = numberStack.pop();
         Integer prevNumber = numberStack.pop();
         Operator operator = findOperator(textSegment);
-        Integer operationResult = calculateArithmetic(operator, nowNumber, prevNumber);
+        Integer operationResult = calculateArithmetic(operator, prevNumber, nowNumber);
         return operationResult;
     }
 
