@@ -73,12 +73,9 @@ public class Calculator {
                     break;
 
 
-
                 case HISTORY:
                     ioDevice.outputList(repository.findAll());
                     break;
-
-
 
                 case EXIT:
                     ioDevice.outputSingleResult("계산기가 종료됩니다.");
@@ -86,24 +83,19 @@ public class Calculator {
                     break;
 
             }
-
         }
-
     }
 
 
     private String calculate(List<String> postfix) throws ArithmeticException {
 
         Stack<Double> stack = new Stack<>();
-
         for (String term : postfix) {
 
             if (DigitChecker.isDigit(term)) {
-
                 stack.push(Double.parseDouble(term));
 
             } else {
-
                 Double operand1 = stack.pop();
                 Double operand2 = stack.pop();
 
@@ -112,11 +104,9 @@ public class Calculator {
             }
         }
 
-
         Double res = stack.pop();
         if (DigitChecker.isInteger(res)) {
             return String.valueOf(Math.round(res));
-
         } else {
             return String.valueOf(res);
 
@@ -125,32 +115,28 @@ public class Calculator {
 
     private Double operation(Double operand1, Double operand2, String operator) throws ArithmeticException {
 
-
+        Double res = 0.0;
         switch (operator) {
 
             case "+":
-                return operand1 + operand2;
+                res = operand1 + operand2;
+                break;
 
             case "*":
-                return operand1 * operand2;
+                res = operand1 * operand2;
+                break;
 
             case "-":
-                return operand1 - operand2;
+                res = operand1 - operand2;
+                break;
 
-            default:
-
-
-                if(operand2 == 0) {
-                    throw new ArithmeticException("0으로 나눌 수 없습니다.");
-                } else {
-                    return operand1 / operand2;
-                }
-
-
-
-
-
+            case "/":
+                res = operand1 / operand2;
+                break;
         }
+
+        return res;
+
     }
 }
 

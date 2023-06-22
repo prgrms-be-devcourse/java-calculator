@@ -9,12 +9,9 @@ public class MenuValidator<T> implements Validator<T> {
     public boolean validate(T menuType) {
 
         try {
-
             if (menuType instanceof String) {
-
                 int menuNum = Integer.parseInt((String) menuType);
                 return MenuType.hasMenu(menuNum);
-
             }
 
         } catch (NumberFormatException e) {

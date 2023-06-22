@@ -59,21 +59,16 @@ public class ExpressionConverter {
                     }
                 }
 
-
                 li = ri+1;
 
             }
-
             ri++;
-
         }
 
         if(li < exp.length())
             expressionList.add(exp.substring(li, ri));
 
-
         return expressionList;
-
     }
 
 
@@ -90,22 +85,18 @@ public class ExpressionConverter {
                 case "*":
                 case "/":
                     if (stack.isEmpty() || stack.peek().equals("(")) {
-
                         stack.push(term);
 
                     } else if (stack.peek().equals("+") || stack.peek().equals("-")) {
-
                         stack.push(term);
 
                     } else if (stack.peek().equals("*") || stack.peek().equals("/")) {
-
                         postfix.add(stack.pop());
                         stack.push(term);
 
                     }
 
                     break;
-
 
                 case "+":
                 case "-":
@@ -150,19 +141,13 @@ public class ExpressionConverter {
                 postfix.add(c);
         }
 
-
         return postfix;
-
     }
 
 
     // 연산결과 출력 양식으로 변환
     public static String convertToResult(String expression, String result) {
-
         return expression + " = " + result;
     }
-
-
-
 
 }
