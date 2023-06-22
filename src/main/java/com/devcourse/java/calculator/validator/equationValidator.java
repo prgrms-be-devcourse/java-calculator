@@ -1,40 +1,22 @@
-package com.devcourse.java.calculator;
+package com.devcourse.java.calculator.validator;
 
 import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
-public class InputValidator {
+public final class equationValidator {
 
-    private InputValidator() {}
-
-    public static boolean isInteger(String input) {
-        return input.matches("^(0|[-]?[1-9]\\d*)$");
-    }
-
-    public static boolean isInBoundary(String input) {
-        int command = Integer.parseInt(input);
-        return (command >= 1 && command <= 3);
-    }
-
-    public static boolean isOperator(String token) {
-        return token.matches("^[\\+\\-\\*\\/]$");
-    }
-
-    public static void checkCalculateHistoryLength(List<String> history) {
-        if (history.isEmpty()) {
-            throw new IllegalArgumentException(ExceptionMessageConstant.EMPTY_CALCULATE_HISTORY_EXCEPTION);
-        }
-    }
+    private equationValidator() {}
 
     public static void checkEquationInput(String equation) {
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(equation.split(" ")));
 
         throwIfEquationIsEmpty(equation);
-        throwIfEquationStartOrEndWithNoInteger(tokens);
+        throwIfTokenIsEmpty(tokens);
+        throwIfEquationStartWithNoInteger(tokens);
+        throwIfEquationEndWithNoInteger(tokens);
         throwIfEquationIsWrong(tokens);
     }
 
@@ -44,8 +26,20 @@ public class InputValidator {
         }
     }
 
-    public static void throwIfEquationStartOrEndWithNoInteger(ArrayList<String> tokens) {
-        if (!isInteger(tokens.get(0)) || !isInteger(tokens.get(tokens.size() - 1))) {
+    private static void throwIfTokenIsEmpty(ArrayList<String> tokens) {
+        if (tokens.isEmpty()) {
+            throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+        }
+    }
+
+    private static void throwIfEquationStartWithNoInteger(ArrayList<String> tokens) {
+        if (!typeValidator.isInteger(tokens.get(0))) {
+            throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
+        }
+    }
+
+    private static void throwIfEquationEndWithNoInteger(ArrayList<String> tokens) {
+        if (!typeValidator.isInteger(tokens.get(tokens.size() - 1))) {
             throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
         }
     }
@@ -56,13 +50,13 @@ public class InputValidator {
         boolean continuedOperation = true;
 
         for (String eachToken: tokens) {
-            if (isInteger(eachToken)) {
+            if (typeValidator.isInteger(eachToken)) {
                 if (!continuedOperation) {
                     throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
                 }
                 digit += 1;
                 continuedOperation = false;
-            } else if (isOperator(eachToken)) {
+            } else if (!typeValidator.isInteger(eachToken)) {
                 if (continuedOperation) {
                     throw new InputMismatchException(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
                 }

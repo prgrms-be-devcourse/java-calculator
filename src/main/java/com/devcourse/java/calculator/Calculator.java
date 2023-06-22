@@ -36,7 +36,6 @@ public class Calculator implements Runnable{
                     calculateCommand();
                     break;
             }
-
         }
     }
 

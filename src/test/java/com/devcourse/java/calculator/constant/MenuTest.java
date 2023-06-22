@@ -17,13 +17,13 @@ class MenuTest {
         String command2 = ".~!,=";
 
         //when, then
-        assertThatThrownBy(() -> Menu.checkCommandInput(command1))
+        assertThatThrownBy(() -> Menu.getCommandMenu(command1))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> Menu.checkCommandInput(command2))
+        assertThatThrownBy(() -> Menu.getCommandMenu(command2))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_INTEGER_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_EXCEPTION);
     }
 
     @Test
@@ -34,13 +34,13 @@ class MenuTest {
         String command2 = "30";
 
         //when, then
-        assertThatThrownBy(() -> Menu.checkCommandInput(command1))
+        assertThatThrownBy(() -> Menu.getCommandMenu(command1))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> Menu.checkCommandInput(command2))
+        assertThatThrownBy(() -> Menu.getCommandMenu(command2))
                 .isInstanceOf(InputMismatchException.class)
-                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_NOT_IN_BOUNDARY_EXCEPTION);
+                .hasMessageContaining(ExceptionMessageConstant.COMMAND_INPUT_EXCEPTION);
     }
 
 }

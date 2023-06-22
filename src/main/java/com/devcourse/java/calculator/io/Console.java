@@ -1,7 +1,7 @@
 package com.devcourse.java.calculator.io;
 
-import com.devcourse.java.calculator.InputValidator;
-import com.devcourse.java.calculator.constant.Menu;
+import com.devcourse.java.calculator.validator.equationValidator;
+import com.devcourse.java.calculator.validator.repositoryValidator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class Console {
     }
 
     public void printCalculateHistory(List<String> history) {
-        InputValidator.checkCalculateHistoryLength(history);
+        repositoryValidator.checkCalculateHistoryLength(history);
         history.forEach(System.out::println);
     }
 
@@ -37,16 +37,13 @@ public class Console {
         System.out.println(splitAnswer[splitAnswer.length - 1]);
     }
 
-    public int getCommand() {
-        String command = scanner.nextLine();
-        Menu.checkCommandInput(command);
-
-        return Integer.parseInt(command);
+    public String getCommand() {
+        return scanner.nextLine();
     }
 
     public String getEquation() {
         String equation = scanner.nextLine();
-        InputValidator.checkEquationInput(equation);
+        equationValidator.checkEquationInput(equation);
 
         return equation;
     }

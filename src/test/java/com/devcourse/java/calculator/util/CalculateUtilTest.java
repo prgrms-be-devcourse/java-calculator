@@ -28,11 +28,11 @@ class CalculateUtilTest {
 
 
         //then
-        assertThat(equationWithAnswer).isEqualTo("5 + 10 = 15");
-        assertThat(equationWithAnswer2).isEqualTo("10 + 2 * 50 + 30 = 140");
-        assertThat(equationWithAnswer3).isEqualTo("1 + 2 + 3 + 4 + 5 = 15");
-        assertThat(equationWithAnswer4).isEqualTo("6 + 10 / 2 + 4 = 15");
-        assertThat(equationWithAnswer5).isEqualTo("5 * 10 / 2 + 10 = 35");
+        assertThat(equationWithAnswer).isEqualTo("5 + 10 = 15.0");
+        assertThat(equationWithAnswer2).isEqualTo("10 + 2 * 50 + 30 = 140.0");
+        assertThat(equationWithAnswer3).isEqualTo("1 + 2 + 3 + 4 + 5 = 15.0");
+        assertThat(equationWithAnswer4).isEqualTo("6 + 10 / 2 + 4 = 15.0");
+        assertThat(equationWithAnswer5).isEqualTo("5 * 10 / 2 + 10 = 35.0");
 
     }
 
