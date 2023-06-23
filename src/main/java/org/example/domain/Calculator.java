@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Calculator {
 
-    final private ExpressionConvertor expressionConvertor;
-    final private CalculateExecuter calculateExecuter;
-    final private HistoryInterface history;
+    private final ExpressionConvertor expressionConvertor;
+    private final CalculateExecuter calculateExecuter;
+    private final HistoryInterface history;
 
     public Calculator() {
         this.expressionConvertor = new ExpressionConvertor();
