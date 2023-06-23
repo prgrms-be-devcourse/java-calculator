@@ -1,7 +1,6 @@
 package org.example.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class History implements HistoryInterface {
@@ -13,7 +12,7 @@ public class History implements HistoryInterface {
     }
 
     @Override
-    public List<String> getHistory() {
+    public List<String> getHistories() {
         return new ArrayList<>(history);
     }
 }

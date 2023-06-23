@@ -21,7 +21,7 @@ public class Calculator {
         return result;
     }
 
-    public List<String> getHistory() {
-        return history.getHistory();
+    public List<String> getHistories() {
+        return history.getHistories();
     }
 }
