@@ -18,35 +18,17 @@ public class ExpressionConvertor {
         for (int i = 0; i < str.length; i++) {
             String token = str[i];
 
-            if (!Operator.isOperator(token)) {
-                sb.add(token);
+            if (isOperand(token)) {
+                operandToPostfix(sb, token);
                 continue;
             }
 
-            Operator op = Operator.getOperator(token);
-
-            switch (op) {
-                case PLUS:
-                case MINUS:
-                case MULTIPLY:
-                case DIVIDE:
-                    while (hasValueInStack(stack) && shouldPopOperator(stack, token)) {
-                        sb.add(stack.pop());
-                    }
-                    stack.push(token);
-                    break;
-                case OPEN_BRACKET:
-                    stack.push(token);
-                    break;
-                case CLOSE_BRACKET:
-                    while (hasValueInStack(stack) && !stack.peek().equals("(")) {
-                        sb.add(stack.pop());
-                    }
-                    stack.pop();
-                    break;
-                default:
-                    throw new RuntimeException("[ERROR] 정상적인 계산식이 아닙니다.");
+            if (isOperator(token)) {
+                operatorToPostfix(sb, stack, token);
+                continue;
             }
+
+            bracketToPostfix(sb, stack, token);
         }
 
         while (hasValueInStack(stack)) {
@@ -55,6 +37,39 @@ public class ExpressionConvertor {
 
         String[] result = sb.stream().toArray(String[]::new);
         return result;
+    }
+
+    private void bracketToPostfix(List<String> sb, Deque<String> stack, String token) {
+        Operator op = Operator.getOperator(token);
+        if (op == Operator.OPEN_BRACKET) {
+            stack.push(token);
+        } else {
+            while (hasValueInStack(stack) && !stack.peek().equals("(")) {
+                sb.add(stack.pop());
+            }
+            stack.pop();
+        }
+    }
+
+    private void operatorToPostfix(List<String> sb, Deque<String> stack, String token) {
+        while (hasValueInStack(stack) && shouldPopOperator(stack, token)) {
+            sb.add(stack.pop());
+        }
+        stack.push(token);
+        return;
+    }
+
+    private void operandToPostfix(List<String> sb, String token) {
+        sb.add(token);
+        return;
+    }
+
+    private boolean isOperator(String token) {
+        return Operator.isOperator(token);
+    }
+
+    private boolean isOperand(String token) {
+        return !Operator.isOperatorOrBracket(token);
     }
 
     private boolean shouldPopOperator(Deque<String> stack, String token) {

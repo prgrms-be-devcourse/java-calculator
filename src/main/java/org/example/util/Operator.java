@@ -4,7 +4,6 @@ import org.example.validate.Validater;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
-import java.util.regex.Pattern;
 
 public enum Operator {
     PLUS("+", (num1, num2) -> num1 + num2),
@@ -20,6 +19,10 @@ public enum Operator {
     Operator(String operator, BiFunction<Integer, Integer, Integer> biFunction) {
         this.operator = operator;
         this.biFunction = biFunction;
+    }
+
+    public static boolean isOperatorOrBracket(String input) {
+        return Validater.isOperatorOrBracket(input);
     }
 
     public static boolean isOperator(String input) {
