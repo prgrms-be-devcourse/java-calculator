@@ -5,13 +5,14 @@ import org.example.util.Operator;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class ExpressionConvertor {
     public String[] convertToPostfix(String infix) {
         infix = removeSpaces(infix);
         String[] str = splitBySpaces(infix);
 
-        ArrayList<String> sb = new ArrayList<>();
+        List<String> sb = new ArrayList<>();
         Deque<String> stack = new ArrayDeque<>();
 
         for (int i = 0; i < str.length; i++) {
