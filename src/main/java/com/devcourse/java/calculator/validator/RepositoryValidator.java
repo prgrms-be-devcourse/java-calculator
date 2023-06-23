@@ -5,9 +5,9 @@ import com.devcourse.java.calculator.repository.History;
 
 import java.util.List;
 
-public final class repositoryValidator {
+public final class RepositoryValidator {
 
-    private repositoryValidator() {}
+    private RepositoryValidator() {}
 
     public static void checkCalculateHistoryLength(List<History> history) {
         if (history.isEmpty()) {

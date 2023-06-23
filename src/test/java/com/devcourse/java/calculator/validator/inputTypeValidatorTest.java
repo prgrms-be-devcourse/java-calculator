@@ -16,9 +16,9 @@ class inputTypeValidatorTest {
         String test3 = "+*";
 
         //when
-        boolean result1 = typeValidator.isOperator(test1);
-        boolean result2 = typeValidator.isOperator(test2);
-        boolean result3 = typeValidator.isOperator(test3);
+        boolean result1 = TypeValidator.isOperator(test1);
+        boolean result2 = TypeValidator.isOperator(test2);
+        boolean result3 = TypeValidator.isOperator(test3);
 
         //then
         assertThat(result1).isEqualTo(true);

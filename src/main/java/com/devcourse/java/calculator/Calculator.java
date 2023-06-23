@@ -5,7 +5,7 @@ import com.devcourse.java.calculator.io.Console;
 import com.devcourse.java.calculator.repository.CalculatorRepository;
 import com.devcourse.java.calculator.repository.History;
 import com.devcourse.java.calculator.util.CalculateUtil;
-import com.devcourse.java.calculator.validator.equationValidator;
+import com.devcourse.java.calculator.validator.EquationValidator;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
@@ -57,7 +57,7 @@ public class Calculator implements Runnable{
         try {
             console.printRequestEquationInput();
             equation = console.getEquation();
-            equationValidator.checkEquationInput(equation);
+            EquationValidator.checkEquationInput(equation);
             String answer = CalculateUtil.calculateAndReturnAnswer(equation.get());
             console.printAnswerFromEquation(answer);
             History history = new History(equation, Optional.of(answer));

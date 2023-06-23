@@ -18,15 +18,15 @@ public enum Operation {
         return this.priority;
     }
 
-    public static int getOperationPriority(char operation) {
+    public static int getOperationPriority(String operation) {
         switch (operation) {
-            case '+':
+            case "+":
                 return PLUS.getPriority();
-            case '-':
+            case "-":
                 return MINUS.getPriority();
-            case '*':
+            case "*":
                 return MULTIPLY.getPriority();
-            case '/':
+            case "/":
                 return DIVIDE.getPriority();
             default:
                 return NOTHING.getPriority();

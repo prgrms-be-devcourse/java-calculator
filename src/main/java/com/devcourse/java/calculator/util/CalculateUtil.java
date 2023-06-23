@@ -1,6 +1,7 @@
 package com.devcourse.java.calculator.util;
 
 import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
+import com.devcourse.java.calculator.validator.TypeValidator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -16,33 +17,30 @@ public class CalculateUtil {
 
     public static String changeToPostfix(String equation) {
         StringBuilder stringBuilder = new StringBuilder();
-        Deque<Character> stack = new ArrayDeque<>();
+        Deque<String> stack = new ArrayDeque<>();
 
-        for (char each: equation.toCharArray()) {
-            if (isOperator(each)) {
+        for (String each: equation.split(" ")) {
+            if (TypeValidator.isOperator(each)) {
 
                 while (!stack.isEmpty() && Operation.getOperationPriority(stack.peek()) >= Operation.getOperationPriority(each)) {
                     stringBuilder.append(stack.pop());
-                    stringBuilder.append(' ');
+                    stringBuilder.append(" ");
                 }
                 stack.push(each);
             } else {
                 stringBuilder.append(each);
+                stringBuilder.append(" ");
             }
         }
 
         while (!stack.isEmpty()) {
-            if (!Character.isDigit(stack.peek())) {
-                stringBuilder.append(' ');
+            if (!TypeValidator.isInteger(stack.peek())) {
+                stringBuilder.append(" ");
             }
             stringBuilder.append(stack.pop());
         }
 
         return stringBuilder.toString().replace("  ", " ");
-    }
-
-    private static boolean isOperator(char each) {
-        return each == '+' || each == '-' || each == '*' || each == '/';
     }
 
     public static String calculatePostfix(String postfix) {
@@ -51,7 +49,7 @@ public class CalculateUtil {
 
         for (String each: splitPostfix) {
 
-            if (each.matches("^?\\d*$")) {
+            if (TypeValidator.isInteger(each)) {
                 operandStack.push(Double.parseDouble(each));
             } else {
                 double operand2 = operandStack.pop();

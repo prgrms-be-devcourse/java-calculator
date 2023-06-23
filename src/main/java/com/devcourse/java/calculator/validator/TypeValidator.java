@@ -1,8 +1,8 @@
 package com.devcourse.java.calculator.validator;
 
-public final class typeValidator {
+public final class TypeValidator {
 
-    private typeValidator() {}
+    private TypeValidator() {}
 
     public static boolean isInteger(String input) {
         return input.matches("^(0|[-]?[1-9]\\d*)$");

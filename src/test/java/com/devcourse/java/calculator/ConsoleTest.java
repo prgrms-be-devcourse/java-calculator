@@ -3,7 +3,7 @@ package com.devcourse.java.calculator;
 import com.devcourse.java.calculator.constant.ExceptionMessageConstant;
 import com.devcourse.java.calculator.io.Console;
 import com.devcourse.java.calculator.repository.History;
-import com.devcourse.java.calculator.validator.equationValidator;
+import com.devcourse.java.calculator.validator.EquationValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -70,19 +70,19 @@ public class ConsoleTest {
         Optional<String> input4 = Optional.of("1 2 3");
 
         //when, then
-        assertThatThrownBy(() -> equationValidator.checkEquationInput(input))
+        assertThatThrownBy(() -> EquationValidator.checkEquationInput(input))
                 .isInstanceOf(InputMismatchException.class)
                 .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> equationValidator.checkEquationInput(input2))
+        assertThatThrownBy(() -> EquationValidator.checkEquationInput(input2))
                 .isInstanceOf(InputMismatchException.class)
                 .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> equationValidator.checkEquationInput(input3))
+        assertThatThrownBy(() -> EquationValidator.checkEquationInput(input3))
                 .isInstanceOf(InputMismatchException.class)
                 .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
 
-        assertThatThrownBy(() -> equationValidator.checkEquationInput(input4))
+        assertThatThrownBy(() -> EquationValidator.checkEquationInput(input4))
                 .isInstanceOf(InputMismatchException.class)
                 .hasMessageContaining(ExceptionMessageConstant.WRONG_EQUATION_INPUT_EXCEPTION);
     }
@@ -94,7 +94,7 @@ public class ConsoleTest {
         Optional<String> input = Optional.of("3 + 4 * 5");
 
         //when, then
-        assertThatCode(() -> equationValidator.checkEquationInput(input))
+        assertThatCode(() -> EquationValidator.checkEquationInput(input))
                 .doesNotThrowAnyException();
     }
 

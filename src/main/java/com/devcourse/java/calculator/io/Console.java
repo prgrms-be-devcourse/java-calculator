@@ -1,8 +1,7 @@
 package com.devcourse.java.calculator.io;
 
 import com.devcourse.java.calculator.repository.History;
-import com.devcourse.java.calculator.validator.equationValidator;
-import com.devcourse.java.calculator.validator.repositoryValidator;
+import com.devcourse.java.calculator.validator.RepositoryValidator;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -23,7 +22,7 @@ public class Console {
     }
 
     public void printCalculateHistory(List<History> history) {
-        repositoryValidator.checkCalculateHistoryLength(history);
+        RepositoryValidator.checkCalculateHistoryLength(history);
         for (History eachHistory: history) {
             if (eachHistory.getAnswer().isEmpty()) {
                 System.out.println(eachHistory.getEquation().get());
