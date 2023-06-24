@@ -27,6 +27,6 @@ public enum Operator {
     }
 
     public static boolean isMultiply(String operator) {
-        return operator.equals("Multiply");
+        return operator.equals("MULTIPLY");
     }
 }

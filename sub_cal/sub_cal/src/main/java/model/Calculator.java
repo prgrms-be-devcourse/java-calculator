@@ -72,7 +72,7 @@ public class Calculator {
         Double num2 = numberStack.pop();
         Double num1 = numberStack.pop();
 
-        if(word.equals("MULTIPLY")) numberStack.push(num1*num2);
+        if(Operator.isMultiply(word)) numberStack.push(num1*num2);
 
         else numberStack.push(num1/num2);
     }

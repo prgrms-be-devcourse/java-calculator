@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HistoryEntityTest {
-    private static HistoryEntity historyEntity = new HistoryEntity();
+    private HistoryEntity historyEntity = new HistoryEntity();
 
     @BeforeEach
     void setHistoryEntity(){
