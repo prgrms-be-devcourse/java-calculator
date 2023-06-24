@@ -13,7 +13,7 @@ public class InputValidation {
     }
 
     public static boolean isEmptyInputExpression(String expression){
-        if(expression.isEmpty()){
+        if(expression.isBlank()){
             return true;
         }
         return false;

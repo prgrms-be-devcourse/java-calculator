@@ -54,9 +54,7 @@ public class Calculator {
     }
 
     private String calculate(){
-        while(true){
-            if(numberStack.size() == 1) break;
-
+        while(numberStack.size() > 1){
             Double num2 = numberStack.pop();
             Double num1 = numberStack.pop();
 
