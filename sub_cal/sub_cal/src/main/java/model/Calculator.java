@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 public class Calculator {
     private Stack<Double> numberStack = new Stack<>();
     private Stack<String> operStack = new Stack<>();
-    private static final int CONVERTTONEGATIVE = -1;
+    private static final int CONVERT_TO_NEGATIVE = -1;
 
     public String calculate(String expression) {
 
@@ -47,7 +47,7 @@ public class Calculator {
                         break;
                     }
 
-                    numberStack.push(CONVERTTONEGATIVE*Double.parseDouble(word));
+                    numberStack.push(CONVERT_TO_NEGATIVE *Double.parseDouble(word));
                     break;
             }
         }
