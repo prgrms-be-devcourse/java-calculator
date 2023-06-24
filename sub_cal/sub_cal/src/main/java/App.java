@@ -38,10 +38,11 @@ public class App implements Runnable{
             }
 
             switch (select) {
-                case HISTORY:
+                case HISTORY -> {
                     if (!(output.showResultHistory(historyEntity.getHistory()))) output.historyEmptyError();
                     break;
-                case CALCULATE:
+                }
+                case CALCULATE -> {
 
                     String inputString = null;
 
@@ -57,7 +58,10 @@ public class App implements Runnable{
                     } catch (Exception e) {
                         break;
                     }
-
+                }
+                case EXIT -> {
+                    System.exit(0);
+                }
             }
         }
     }

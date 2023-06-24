@@ -6,7 +6,8 @@ import java.util.Optional;
 
 public enum Option {
     HISTORY("1","조회","HISTORY"),
-    CALCULATE("2","계산","CALCULATE");
+    CALCULATE("2","계산","CALCULATE"),
+    EXIT("3","종료","EXIT");
 
     private final String index;
     private final String option;
