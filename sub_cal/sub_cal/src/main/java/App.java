@@ -13,6 +13,7 @@ public class App implements Runnable{
     private final Output output;
     private final HistoryEntity historyEntity;
     private final Calculator calculator;
+    private final boolean IS_RUNNING = true;
 
     public App(Console console, HistoryEntity historyEntity, Calculator calculator) {
         this.input = console;
@@ -24,7 +25,7 @@ public class App implements Runnable{
     @Override
     public void run(){
 
-        while (true) {
+        while (IS_RUNNING) {
 
             output.printMenuList();
             Option select = null;
