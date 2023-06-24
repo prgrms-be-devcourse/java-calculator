@@ -78,7 +78,7 @@ public class Console implements Input,  Output {
 
     @Override
     public void printInputExpressionMessage() {
-        System.out.println("계산식을 입력해주세요:");
+        System.out.print("계산식을 입력해주세요:");
     }
 
 

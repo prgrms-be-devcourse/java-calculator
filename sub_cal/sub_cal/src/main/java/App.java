@@ -43,10 +43,8 @@ public class App implements Runnable {
 
                 }
                 case CALCULATE -> {
-
-                    String inputString = null;
-
-                    inputString = input.inputExpression();
+                    output.printInputExpressionMessage();
+                    String inputString = input.inputExpression();
 
                     if (inputString == null) {
                         continue;
