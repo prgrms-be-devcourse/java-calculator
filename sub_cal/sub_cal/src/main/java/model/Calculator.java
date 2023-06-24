@@ -19,13 +19,12 @@ public class Calculator {
 
     public String operate(String expression) {
 
-        StringTokenizer st = new StringTokenizer(expression);
-
-        classifyOperatorAndNumber(st);
+        classifyOperatorAndNumber(expression);
 
         return calculate();
     }
-    private void classifyOperatorAndNumber(StringTokenizer st){
+    private void classifyOperatorAndNumber(String expression){
+        StringTokenizer st = new StringTokenizer(expression);
 
         while(st.hasMoreTokens()){
             String word = st.nextToken();
