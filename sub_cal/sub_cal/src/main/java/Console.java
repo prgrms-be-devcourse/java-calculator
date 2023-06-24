@@ -11,8 +11,13 @@ import java.util.*;
 public class Console implements Input,  Output {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     @Override
-    public Option selectOption() throws NoSuchElementException, IOException {
-        return selectOptionValue(br.readLine());
+    public Option selectOption() {
+        try{
+            return selectOptionValue(br.readLine());
+        }catch (IOException e){
+            return Option.EXIT;
+        }
+
     }
 
     private Option selectOptionValue(String inputNumber) throws IOException {
@@ -26,13 +31,18 @@ public class Console implements Input,  Output {
     }
 
     @Override
-    public String inputExpression() throws IOException {
-        String Expression = br.readLine();
-        if(InputValidation.isEmptyInputExpression(Expression)){
-            printEmptyInputExpressionMessage();
-            throw new IOException();
+    public String inputExpression(){
+        try {
+            String Expression = br.readLine();
+            if(InputValidation.isEmptyInputExpression(Expression)){
+                printEmptyInputExpressionMessage();
+                throw new IOException();
+            }
+            return Expression;
+        }catch (IOException e){
+            return null;
         }
-        return Expression;
+
     }
 
     @Override
@@ -68,7 +78,7 @@ public class Console implements Input,  Output {
 
     @Override
     public void printInputExpressionMessage() {
-        System.out.print("계산식을 입력해주세요:");
+        System.out.println("계산식을 입력해주세요:");
     }
 
 

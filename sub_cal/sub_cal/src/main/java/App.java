@@ -29,13 +29,9 @@ public class App implements Runnable{
 
             output.printMenuList();
             Option select = null;
-            try{
-             select = input.selectOption();
-            } catch (NoSuchElementException e1){
-                continue;
-            } catch (IOException e2){
-                continue;
-            }
+            select = input.selectOption();
+
+
 
             switch (select) {
                 case HISTORY -> {
@@ -46,18 +42,19 @@ public class App implements Runnable{
 
                     String inputString = null;
 
-                    try {
-                        inputString = input.inputExpression();
+                    inputString = input.inputExpression();
 
-                        String result = calculator.calculate(inputString);
-
-                        output.printResult(result);
-
-                        historyEntity.addHistory(inputString,result);
-
-                    } catch (Exception e) {
-                        break;
+                    if(inputString == null){
+                        continue;
                     }
+
+                    String result = calculator.calculate(inputString);
+
+                    output.printResult(result);
+
+                    historyEntity.addHistory(inputString,result);
+
+
                 }
                 case EXIT -> {
                     System.exit(0);

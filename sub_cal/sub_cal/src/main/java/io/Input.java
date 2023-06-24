@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public interface Input {
 
-    Option selectOption() throws IOException;
+    Option selectOption();
 
-    String inputExpression() throws IOException;
+    String inputExpression();
 }
