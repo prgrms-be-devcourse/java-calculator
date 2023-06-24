@@ -25,7 +25,6 @@ class HistoryEntityTest {
 
     @Test
     void getHistory() {
-        historyEntity.getHistory();
         List<String> historyList = new ArrayList<>();
         historyList.add("1 + 1 = 2");
         historyList.add("1 * 3 + 6 = 9");

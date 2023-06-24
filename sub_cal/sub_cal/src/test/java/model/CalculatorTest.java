@@ -18,8 +18,7 @@ class CalculatorTest {
     @DisplayName("결과값 확인")
     @MethodSource("testData")
     void calculate(String expression,String expected) {
-        String result;
-        result = calculator.calculate(expression);
+        String result = calculator.calculate(expression);
         assertEquals(expected,result);
     }
 
