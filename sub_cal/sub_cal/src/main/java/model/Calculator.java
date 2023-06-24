@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -29,19 +30,17 @@ public class Calculator {
         while(st.hasMoreTokens()){
             String word = st.nextToken();
             Operator operator = null;
-            if(!(Operator.getOperator(word).isEmpty())){
-                operator = Operator.getOperator(word).get();
-            }
 
-            switch (operator != null ? operator : operator.NULL){
+            switch (operator = Operator.getOperator(word)){
                 case MULTIPLY : case DIVIDE:
+
                     numberStack.push(Double.parseDouble(st.nextToken()));
                     calculateMultiplyOrDivide(operator.toString());
                     break;
                 case PLUS : case MINUS:
                     operStack.add(operator.toString());
                     break;
-                case NULL:
+                default:
                     if(operStack.isEmpty() || operStack.pop().equals("PLUS")){
                         numberStack.push(Double.parseDouble(word));
                         break;

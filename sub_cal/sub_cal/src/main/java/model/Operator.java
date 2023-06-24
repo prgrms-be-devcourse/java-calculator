@@ -12,10 +12,10 @@ public enum Operator {
 
     private String operator;
 
-    public static Optional<Operator> getOperator(String inputOperator) {
+    public static Operator getOperator(String inputOperator) {
         return Arrays.stream(values())
                 .filter(o -> o.operator.equals(inputOperator))
-                .findFirst();
+                .findFirst().orElse(Operator.NULL);
     }
 
      Operator(String operator) {
