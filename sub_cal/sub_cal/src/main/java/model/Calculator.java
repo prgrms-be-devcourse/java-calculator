@@ -41,7 +41,7 @@ public class Calculator {
                     operStack.add(operator.toString());
                     break;
                 default:
-                    if(operStack.isEmpty() || operStack.pop().equals("PLUS")){
+                    if(operStack.isEmpty() || Operator.isPlus(operStack.pop())){
                         numberStack.push(Double.parseDouble(word));
                         break;
                     }

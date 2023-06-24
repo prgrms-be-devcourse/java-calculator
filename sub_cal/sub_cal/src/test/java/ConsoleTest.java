@@ -60,7 +60,7 @@ class ConsoleTest {
     void printMenuList() {
         console.printMenuList();
 
-        assertEquals("1.조회"+NEW_LINE+"2.계산",outputMessage.toString().strip());
+        assertEquals("1.조회"+NEW_LINE+"2.계산"+NEW_LINE+"3.종료",outputMessage.toString().strip());
     }
 
     @ParameterizedTest

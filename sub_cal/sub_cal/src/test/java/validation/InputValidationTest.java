@@ -20,7 +20,7 @@ class InputValidationTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3,","4"})
+    @CsvSource(value = {"4,","5"})
     void isValidMenuNumberTrue(String inputNumber) {
         Optional<Option> userOption = Option.getMenu(inputNumber);
         Assertions.assertTrue(InputValidation.isValidMenuNumber(userOption));

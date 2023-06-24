@@ -21,4 +21,8 @@ public enum Operator {
      Operator(String operator) {
         this.operator = operator;
     }
+
+    public static boolean isPlus(String operator) {
+        return operator.equals("PLUS");
+    }
 }
