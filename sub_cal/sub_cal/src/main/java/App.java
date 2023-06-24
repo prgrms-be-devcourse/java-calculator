@@ -8,7 +8,7 @@ import option.Option;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class App implements Runnable{
+public class App implements Runnable {
     private final Input input;
     private final Output output;
     private final HistoryEntity historyEntity;
@@ -23,7 +23,7 @@ public class App implements Runnable{
     }
 
     @Override
-    public void run(){
+    public void run() {
 
         while (IS_RUNNING) {
 
@@ -32,11 +32,15 @@ public class App implements Runnable{
             select = input.selectOption();
 
 
-
             switch (select) {
                 case HISTORY -> {
-                    if (!(output.showResultHistory(historyEntity.getHistory()))) output.historyEmptyError();
-                    break;
+                    try {
+                        output.showResultHistory(historyEntity.getHistory());
+                    } catch (RuntimeException e) {
+                        output.historyEmptyError();
+                    }
+
+
                 }
                 case CALCULATE -> {
 
@@ -44,7 +48,7 @@ public class App implements Runnable{
 
                     inputString = input.inputExpression();
 
-                    if(inputString == null){
+                    if (inputString == null) {
                         continue;
                     }
 
@@ -52,7 +56,7 @@ public class App implements Runnable{
 
                     output.printResult(result);
 
-                    historyEntity.addHistory(inputString,result);
+                    historyEntity.addHistory(inputString, result);
 
 
                 }

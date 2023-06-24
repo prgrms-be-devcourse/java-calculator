@@ -51,8 +51,8 @@ public class Console implements Input,  Output {
     }
 
     @Override
-    public boolean showResultHistory(List<String> historyList) {
-        if(historyList.isEmpty()) return false;
+    public boolean showResultHistory(List<String> historyList) throws RuntimeException{
+        if(historyList.isEmpty()) throw new RuntimeException();
         for (String s : historyList) {
             System.out.println(s);
         }
