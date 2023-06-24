@@ -22,11 +22,11 @@ public enum Operator {
         this.operator = operator;
     }
 
-    public static boolean isPlus(String operator) {
-        return operator.equals("PLUS");
+    public static boolean isPlus(Operator operator) {
+        return operator.equals(PLUS);
     }
 
-    public static boolean isMultiply(String operator) {
-        return operator.equals("MULTIPLY");
+    public static boolean isMultiply(Operator operator) {
+        return operator.equals(MULTIPLY);
     }
 }

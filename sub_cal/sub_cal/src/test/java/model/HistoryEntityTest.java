@@ -25,10 +25,16 @@ class HistoryEntityTest {
 
     @Test
     void getHistory() {
+        //given
         List<String> historyList = new ArrayList<>();
         historyList.add("1 + 1 = 2");
         historyList.add("1 * 3 + 6 = 9");
-        assertEquals(historyList,historyEntity.getHistory());
+
+        //when
+        List<String> result = historyEntity.getHistory();
+
+        //then
+        assertEquals(historyList,result);
     }
 
     private static Stream<Arguments> testData(){

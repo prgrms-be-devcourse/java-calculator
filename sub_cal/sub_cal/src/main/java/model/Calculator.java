@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Calculator {
     private Stack<Double> numberStack = new Stack<>();
-    private Stack<String> operStack = new Stack<>();
+    private Stack<Operator> operStack = new Stack<>();
     private static final int CONVERT_TO_NEGATIVE = -1;
 
     public String calculate(String expression) {
@@ -34,10 +34,10 @@ public class Calculator {
                 case MULTIPLY : case DIVIDE:
 
                     numberStack.push(Double.parseDouble(st.nextToken()));
-                    calculateMultiplyOrDivide(operator.toString());
+                    calculateMultiplyOrDivide(operator);
                     break;
                 case PLUS : case MINUS:
-                    operStack.add(operator.toString());
+                    operStack.add(operator);
                     break;
                 default:
                     if(operStack.isEmpty() || Operator.isPlus(operStack.pop())){
@@ -65,11 +65,11 @@ public class Calculator {
         return String.valueOf(new BigDecimal(numberStack.pop()).setScale(1).stripTrailingZeros());
     }
 
-    private void calculateMultiplyOrDivide(String word) {
+    private void calculateMultiplyOrDivide(Operator operator) {
         Double num2 = numberStack.pop();
         Double num1 = numberStack.pop();
 
-        if(Operator.isMultiply(word)) numberStack.push(num1*num2);
+        if(Operator.isMultiply(operator)) numberStack.push(num1*num2);
 
         else numberStack.push(num1/num2);
     }
