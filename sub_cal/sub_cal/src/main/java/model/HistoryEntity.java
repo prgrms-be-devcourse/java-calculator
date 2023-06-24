@@ -8,7 +8,7 @@ public class HistoryEntity {
     private List<String> log = new ArrayList<>();
 
     public List<String> getHistory() {
-        return log;
+        return new ArrayList<>(log);
     }
 
     public void addHistory(String expression,String result){
