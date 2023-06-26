@@ -6,7 +6,12 @@ import java.util.function.BiFunction;
 
 public enum Operator {
     MULTIPLY("*", (a, b) -> a * b),
-    DIVIDE("/", (a, b) -> a / b),
+    DIVIDE("/", (a, b) -> {
+        if(b == 0) {
+            throw new IllegalArgumentException("Cannot divide by zero!");
+        }
+        return a / b;
+    }),
     ADD("+", (a, b) -> a + b),
     SUBTRACT("-", (a, b) -> a - b);
 
