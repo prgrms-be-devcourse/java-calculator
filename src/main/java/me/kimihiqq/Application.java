@@ -11,7 +11,11 @@ public class Application {
 
         boolean running = true;
         while (running) {
-            running = calculator.run();
+            try {
+                running = calculator.run();
+            } catch (IllegalArgumentException e) {
+                consoleOutput.println(e.getMessage());
+            }
         }
     }
 }

@@ -23,12 +23,10 @@ public class Calculator {
     public boolean run() {
         printer.println("1. 조회\n2. 계산\n3. 종료\n");
         String selectPage = scanner.nextLine("선택 : ");
-        Optional<Option> optionalOption = Option.from(selectPage);
-
-        if (!optionalOption.isPresent()) {
-            printer.println("Invalid page!");
-            return true;
+        if(selectPage == null || !selectPage.matches("[1-3]")) {
+            throw new IllegalArgumentException("Invalid page!");
         }
+        Optional<Option> optionalOption = Option.from(selectPage);
 
         Option option = optionalOption.get();
 
