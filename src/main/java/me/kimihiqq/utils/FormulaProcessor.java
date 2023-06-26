@@ -15,7 +15,7 @@ public class FormulaProcessor {
     }
 
     public static void validateFormula(String formula) {
-        if (!formula.matches("^(-?\\d+(\\.\\d+)?\\s[+\\-*/]\\s)+\\d+(\\.\\d+)?$")) {
+        if (!formula.matches("^(-?\\d+(\\.\\d+)?\\s[+\\-*/]\\s)*-?\\d+(\\.\\d+)?$")) {
             throw new IllegalArgumentException("Invalid formula! Please enter again.");
         }
     }
