@@ -1,5 +1,6 @@
 package io;
 
+import model.entity.Calculator;
 import model.vo.CalculationResult;
 
 public interface CalculatorOutput {
@@ -9,5 +10,5 @@ public interface CalculatorOutput {
 
     void printExpression(CalculationResult expression);
 
-    void printRecords(String record, int result);
+    void printRecords(Calculator calculator);
 }

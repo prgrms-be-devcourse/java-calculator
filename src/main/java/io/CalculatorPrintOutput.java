@@ -1,5 +1,6 @@
 package io;
 
+import model.entity.Calculator;
 import model.vo.CalculationResult;
 
 public class CalculatorPrintOutput implements CalculatorOutput {
@@ -23,7 +24,8 @@ public class CalculatorPrintOutput implements CalculatorOutput {
     }
 
     @Override
-    public void printRecords(String record, int result) {
-        System.out.printf(RECORD_MESSAGE, record, result);
+    public void printRecords(Calculator calculator) {
+        System.out.printf(RECORD_MESSAGE, calculator.getExpression(),
+                calculator.getCalculationResult());
     }
 }
