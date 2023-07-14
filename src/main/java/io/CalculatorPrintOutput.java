@@ -1,17 +1,25 @@
 package io;
 
+import model.vo.CalculationResult;
+
 public class CalculatorPrintOutput implements CalculatorOutput {
-    private static final String BUTTON_INIT_MESSAGE = "1. 조회\n2. 계산\n\n선택 : ";
+    private static final String MENU_INIT_MESSAGE = "1. 조회\n2. 계산\n\n선택 : ";
+    private static final String SELECT_OTHER_BUTTON = "1번 또는 2번만 눌럿!!";
     private static final String RECORD_MESSAGE = "%s = %d\n";
 
     @Override
     public void printMenuMessage() {
-        System.out.print(BUTTON_INIT_MESSAGE);
+        System.out.print(MENU_INIT_MESSAGE);
     }
 
     @Override
-    public void printExpression(int expression) {
-        System.out.println(expression);
+    public void printSelectOtherMenu() {
+        System.out.println(SELECT_OTHER_BUTTON);
+    }
+
+    @Override
+    public void printExpression(CalculationResult expression) {
+        System.out.println(expression.getCalculationResult());
     }
 
     @Override
